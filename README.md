@@ -1,24 +1,19 @@
-# README
+# Collectif Objets
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Generate models
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+rails g model Objet \
+  ref_pop:string \
+  ref_memoire:string \
+  nom:string \
+  categorie:string \
+  commune:string \
+  commune_code_insee:string \
+  departement:string \
+  crafted_at:string \
+  last_recolement_at:datetime \
+  nom_dossier:string \
+  edifice_nom:string \
+  emplacement:string \
+  recolement_status:string
+  <!-- materiaux: -->
