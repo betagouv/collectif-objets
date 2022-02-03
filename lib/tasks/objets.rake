@@ -29,6 +29,7 @@ namespace :objets do
     end
   end
 
+  # rake objets:import_images[../collectif-objets-files/pop-export-custom-marne-51.csv]
   task :import_images, [:path] => :environment do |_, args|
     puts "before: #{Objet.where("cardinality(image_urls) >= 1").count} objets have photos"
     for row in CSV.read(args[:path], headers: true, col_sep: ";") do
@@ -43,5 +44,19 @@ namespace :objets do
       objet.save!
     end
     puts "after: #{Objet.where("cardinality(image_urls) >= 1").count} objets have photos"
+  end
+
+  # rake objets:import_insee[../collectif-objets-files/pop-export-custom-marne-51.csv]
+  task :import_insee, [:path] => :environment do |_, args|
+    puts "before: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
+    for row in CSV.read(args[:path], headers: true, col_sep: ";") do
+      row_parameterized = row.to_h.transform_keys(&:parameterize)
+      next if row_parameterized["ref"].blank? || row_parameterized["insee"].blank?
+      objet = Objet.find_by(ref_pop: row_parameterized["ref"])
+      next unless objet
+      objet.commune_code_insee = row_parameterized["insee"]
+      objet.save!
+    end
+    puts "after: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
   end
 end
