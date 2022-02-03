@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code_insee: MyString
+  nom: MyString
+  email: MyString
+  phone_number: MyString
+  population: 1
+  departement: MyString
+
+two:
+  code_insee: MyString
+  nom: MyString
+  email: MyString
+  phone_number: MyString
+  population: 1
+  departement: MyString

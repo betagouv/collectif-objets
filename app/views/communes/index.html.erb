@@ -1,0 +1,16 @@
+<main class="fr-container fr-py-4w">
+  <h2>Liste des communes</h2>
+  <% @communes_by_dpt.each do |departement, communes| %>
+    <h2><%= departement %></h2>
+    <ul class="co-liste-communes">
+      <% communes.each do |commune| %>
+        <li>
+          <%= commune.nom %> -
+          <%= link_to "#{commune.objets_count} objets", objets_path(commune_code_insee: commune.code_insee) %>
+        </li>
+      <% end %>
+    </ul>
+    <hr class="fr-pb-10w" />
+  <% end %>
+</div>
+</main>

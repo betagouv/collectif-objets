@@ -1,5 +1,14 @@
 require 'csv'
 
+def iterate_files(glob_path)
+  Dir.glob(glob_path) do |csv_path|
+    puts "reading file #{csv_path}..."
+    for row in CSV.read(csv_path, headers: true, col_sep: ";") do
+      yield(row.to_h.transform_keys(&:parameterize))
+    end
+  end
+end
+
 namespace :objets do
   desc "imports objets from airtable CSV"
   task :import, [:path] => :environment do |_, args|
@@ -29,16 +38,15 @@ namespace :objets do
     end
   end
 
-  # rake objets:import_images[../collectif-objets-files/pop-export-custom-marne-51.csv]
+  # rake objets:import_images[../collectif-objets-files/pop-exports-custom]
   task :import_images, [:path] => :environment do |_, args|
     puts "before: #{Objet.where("cardinality(image_urls) >= 1").count} objets have photos"
-    for row in CSV.read(args[:path], headers: true, col_sep: ";") do
-      row_parameterized = row.to_h.transform_keys(&:parameterize)
-      next if row_parameterized["ref"].blank? || row_parameterized["video"].blank?
-      image_urls = row_parameterized["video"].split(";").map do |video_ref|
+    iterate_files("#{args[:path]}/*.csv") do |row|
+      next if row["ref"].blank? || row["video"].blank?
+      image_urls = row["video"].split(";").map do |video_ref|
         "http://www2.culture.gouv.fr/Wave/image/memoire/" + video_ref.sub(/^mem\//, "")
       end
-      objet = Objet.find_by(ref_pop: row_parameterized["ref"])
+      objet = Objet.find_by(ref_pop: row["ref"])
       next unless objet
       objet.image_urls = image_urls
       objet.save!
@@ -46,15 +54,14 @@ namespace :objets do
     puts "after: #{Objet.where("cardinality(image_urls) >= 1").count} objets have photos"
   end
 
-  # rake objets:import_insee[../collectif-objets-files/pop-export-custom-marne-51.csv]
+  # rake objets:import_insee[../collectif-objets-files/pop-exports-custom]
   task :import_insee, [:path] => :environment do |_, args|
     puts "before: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
-    for row in CSV.read(args[:path], headers: true, col_sep: ",") do
-      row_parameterized = row.to_h.transform_keys(&:parameterize)
-      next if row_parameterized["ref"].blank? || row_parameterized["insee"].blank?
-      objet = Objet.find_by(ref_pop: row_parameterized["ref"])
+    iterate_files("#{args[:path]}/*.csv") do |row|
+      next if row["ref"].blank? || row["insee"].blank?
+      objet = Objet.find_by(ref_pop: row["ref"])
       next unless objet
-      objet.commune_code_insee = row_parameterized["insee"]
+      objet.commune_code_insee = row["insee"]
       objet.save!
     end
     puts "after: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"

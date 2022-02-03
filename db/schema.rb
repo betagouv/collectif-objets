@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_153039) do
+ActiveRecord::Schema.define(version: 2022_02_03_110706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "communes", force: :cascade do |t|
+    t.string "nom"
+    t.string "code_insee"
+    t.string "departement"
+    t.string "email"
+    t.string "phone_number"
+    t.integer "population"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
+    t.index ["departement"], name: "index_communes_on_departement"
+  end
 
   create_table "objets", force: :cascade do |t|
     t.string "ref_pop"
