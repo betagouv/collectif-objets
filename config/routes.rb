@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root "pages#home"
 
-  resources :objets, only: [:index]
+  resources :objets, only: [:index, :show]
 end

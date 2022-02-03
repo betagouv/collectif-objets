@@ -1,0 +1,9 @@
+.co-objet-show .co-image-container {
+  height: 400px;
+}
+
+.co-objet-show .co-objet-image {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,45 @@
+<main class="fr-container fr-py-4w co-objet-show">
+  <h2><%= @objet.nom %></h2>
+  <p>📍 <%= @objet.commune %> (<%= @objet.departement %>) - ⛪️ <%= @objet.edifice_nom %></p>
+  <div class="fr-grid-row fr-py-4w fr-grid-row--gutters">
+    <div class="fr-col-md-4">
+      <p>
+        <b>Références</b><br />
+        POP (Base Palissy) :
+        <%= link_to(
+          @objet.ref_pop,
+          "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.ref_pop}",
+          target: "_blank",
+          rel: "noopener"
+        ) %>
+        <br />
+        <%# POP (Mémoire) : <%= @objet.ref_memoire %>
+      </p>
+      <p>
+        <b>Catégorie</b><br />
+        <%= @objet.categorie %>
+      </p>
+      <p>
+        <b>Époque</b><br />
+        <%= @objet.crafted_at || "N/A" %>
+      </p>
+      <p>
+        <b>Récolement</b><br />
+        Dernier récolement : <%= @objet.last_recolement_at || "N/A" %><br />
+        Statut actuel : <%= @objet.recolement_status || "N/A" %>
+      </p>
+      <p>
+        <b>Emplacement</b><br />
+        Se situe dans l'édifice <b><%= @objet.edifice_nom %></b><br />
+        <i><%= @objet.emplacement %></i>
+      </p>
+    </div>
+    <div class="fr-col-md-8">
+      <div class="co-image-container">
+        <% if @objet.image_urls.any? %>
+          <img src="<%= @objet.image_urls[0] %>" class="co-objet-image" alt="">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

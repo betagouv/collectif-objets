@@ -6,4 +6,8 @@ class ObjetsController < ApplicationController
       .where("cardinality(image_urls) >= 1")
       .first(20)
   end
+
+  def show
+    @objet = Objet.find(params[:id])
+  end
 end

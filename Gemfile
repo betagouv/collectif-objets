@@ -19,6 +19,7 @@ end
 
 group :development do
   gem "web-console"
+  gem "htmlbeautifier"
 end
 
 group :test do
