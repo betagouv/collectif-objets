@@ -4,6 +4,7 @@
     Il y a des objets monuments historiques dans votre commune ? Vous êtes Elu ? Responsable du patrimoine de votre
     commune ? La commune est responsable de ces objets. Aidez-nous à vérifier leur présence et leur état
   </p>
+  <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
   <div class="fr-grid-row fr-py-4w fr-grid-row--gutters">
     <% @objets.each do |objet| %>
       <div class="fr-col-md-3">
@@ -28,4 +29,5 @@
       </div>
     <% end %>
   </div>
+  <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
 </main>

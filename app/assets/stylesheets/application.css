@@ -19,3 +19,8 @@
     filter: invert(1);
   }
 }
+
+.co-pagination-wrapper {
+  display: flex;
+  justify-content: space-around;
+}

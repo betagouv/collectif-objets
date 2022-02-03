@@ -1,10 +1,12 @@
 class ObjetsController < ApplicationController
   def index
-    @objets = Objet
-      .where.not(nom: nil)
-      .where.not(commune: nil)
-      .where("cardinality(image_urls) >= 1")
-      .first(20)
+    @pagy, @objets = pagy(
+      Objet
+        .where.not(nom: nil)
+        .where.not(commune: nil)
+        .where("cardinality(image_urls) >= 1")
+    )
+
   end
 
   def show
