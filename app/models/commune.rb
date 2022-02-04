@@ -1,4 +1,6 @@
 class Commune < ApplicationRecord
+  has_many :objets, foreign_key: :commune_code_insee, primary_key: :code_insee
+
   def self.include_objets_count
     joins(
      %{

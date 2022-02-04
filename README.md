@@ -10,7 +10,7 @@
 Create local dump
 
 ```sh
-pg_dump --format c --data-only --table=objets --dbname collectif_objets_dev --file tmp/dump.pgsql
+pg_dump --format c --data-only --table=objets --table=communes --dbname collectif_objets_dev --file tmp/dump.pgsql
 ```
 
 

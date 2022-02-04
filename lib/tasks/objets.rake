@@ -40,7 +40,7 @@ namespace :objets do
 
   # rake objets:import_images[../collectif-objets-files/pop-exports-custom]
   task :import_images, [:path] => :environment do |_, args|
-    puts "before: #{Objet.where("cardinality(image_urls) >= 1").count} objets have photos"
+    puts "before: #{Objet.with_images.count} objets have photos"
     iterate_files("#{args[:path]}/*.csv") do |row|
       next if row["ref"].blank? || row["video"].blank?
       image_urls = row["video"].split(";").map do |video_ref|
@@ -51,7 +51,7 @@ namespace :objets do
       objet.image_urls = image_urls
       objet.save!
     end
-    puts "after: #{Objet.where("cardinality(image_urls) >= 1").count} objets have photos"
+    puts "after: #{Objet.with_images.count} objets have photos"
   end
 
   # rake objets:import_insee[../collectif-objets-files/pop-exports-custom]
