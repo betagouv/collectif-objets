@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :objet do
-    ref_pop { "PM51001252" }
+    sequence(:ref_pop) { |n| "PM#{51001252 + n }" }
     ref_memoire { "AP80L043503" }
     nom { "Sainte-Famille (La)" }
     categorie { "Peinture" }

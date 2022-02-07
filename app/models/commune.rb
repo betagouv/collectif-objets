@@ -17,13 +17,13 @@ class Commune < ApplicationRecord
     @main_objet ||= begin
       objets_filtered = objets.where.not(nom: nil).to_a
       if objets_filtered.any?
-        main_objet = optional_filter(objets_filtered) { !_1.image_urls.any? }
-        main_objet = optional_filter(objets_filtered) { !_1.nom.include?(";") }
-        main_objet = optional_filter(objets_filtered) { !_1.nom.match?(/[A-Z]/) }
-        main_objet = optional_filter(objets_filtered) { _1.edifice_nom.present? }
-        main_objet = optional_filter(objets_filtered) { _1.edifice_nom&.match?(/[A-Z]/) }
-        main_objet = optional_filter(objets_filtered) { !_1.emplacement.present? }
-        objets_filtered.first
+        main_objet = objets_filtered.optional_filter { _1.image_urls.any? }
+          .optional_filter { !_1.nom.include?(";") }
+          .optional_filter { !_1.nom.match?(/[A-Z]/) }
+          .optional_filter { _1.edifice_nom.present? }
+          .optional_filter { _1.edifice_nom&.match?(/[A-Z]/) }
+          .optional_filter { !_1.emplacement.present? }
+          .first
       else
         nil
       end

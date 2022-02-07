@@ -22,6 +22,7 @@ group :development do
   gem "htmlbeautifier"
   gem "rspec-rails", "~> 5.1"
   gem "factory_bot_rails"
+  gem "pry"
 end
 
 group :test do

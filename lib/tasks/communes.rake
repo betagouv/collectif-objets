@@ -30,7 +30,8 @@ namespace :communes do
     ]
     CSV.open(args[:path], "wb", headers: true) do |csv|
       csv << headers
-      Commune.includes(:objets).find_each do |commune|
+      communes = Commune.includes(:objets).to_a.sort_by { _1.objets.count }.reverse
+      communes.each do |commune|
         csv << [
           commune.nom,
           commune.code_insee,
