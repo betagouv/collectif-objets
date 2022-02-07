@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_110706) do
+ActiveRecord::Schema.define(version: 2022_02_07_085639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_110706) do
     t.string "ref_memoire"
     t.string "nom"
     t.string "categorie"
-    t.string "commune"
+    t.string "commune_nom"
     t.string "commune_code_insee"
     t.string "departement"
     t.string "crafted_at"
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 2022_02_03_110706) do
     t.string "image_urls", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["commune"], name: "index_objets_on_commune"
     t.index ["commune_code_insee"], name: "index_objets_on_commune_code_insee"
+    t.index ["commune_nom"], name: "index_objets_on_commune_nom"
     t.index ["departement"], name: "index_objets_on_departement"
     t.index ["ref_pop"], name: "objets_unique_ref_pop", unique: true
   end

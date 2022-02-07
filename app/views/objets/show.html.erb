@@ -1,6 +1,6 @@
 <main class="fr-container fr-py-4w co-objet-show">
   <h2><%= @objet.nom %></h2>
-  <p>📍 <%= @objet.commune %> (<%= @objet.departement %>) - ⛪️ <%= @objet.edifice_nom %></p>
+  <p>📍 <%= @objet.commune.nom %> (<%= @objet.departement %>) - ⛪️ <%= @objet.edifice_nom %></p>
   <div class="fr-grid-row fr-py-4w fr-grid-row--gutters">
     <div class="fr-col-md-4">
       <p>
