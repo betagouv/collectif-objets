@@ -13,8 +13,8 @@ RSpec.describe Commune, type: :model do
       it { should eq objet_with_image }
     end
     context "none objets has image" do
-      let!(:objet_without_image1) { create(:objet, :without_image, commune:) }
-      let!(:objet_without_image2) { create(:objet, :without_image, commune:) }
+      let!(:objet_without_image1) { create(:objet, :without_image, commune:, nom: "Statue de Jules Verne") }
+      let!(:objet_without_image2) { create(:objet, :without_image, commune:, nom: "nom; pas terrible") }
       it { should eq objet_without_image1 }
     end
     context "no objets at all" do
