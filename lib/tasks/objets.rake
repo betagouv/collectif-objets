@@ -38,7 +38,7 @@ namespace :objets do
     end
   end
 
-  # rake objets:import_images[../collectif-objets-files/pop-exports-custom]
+  # rake objets:import_images[../collectif-objets-data/pop-exports-custom]
   task :import_images, [:path] => :environment do |_, args|
     puts "before: #{Objet.with_images.count} objets have photos"
     iterate_files("#{args[:path]}/*.csv") do |row|
@@ -54,7 +54,7 @@ namespace :objets do
     puts "after: #{Objet.with_images.count} objets have photos"
   end
 
-  # rake objets:import_insee[../collectif-objets-files/pop-exports-custom]
+  # rake objets:import_insee[../collectif-objets-data/pop-exports-custom]
   task :import_insee, [:path] => :environment do |_, args|
     puts "before: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
     iterate_files("#{args[:path]}/*.csv") do |row|
@@ -65,5 +65,18 @@ namespace :objets do
       objet.save!
     end
     puts "after: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
+  end
+
+  # rake "objets:import_nom_courant[../collectif-objets-data/pop-exports-custom]"
+  task :import_nom_courant, [:path] => :environment do |_, args|
+    puts "after: #{Objet.where.not(nom_courant: nil).count}/#{Objet.count} objets have nom courant"
+    iterate_files("#{args[:path]}/*.csv") do |row|
+      next if row["ref"].blank? || row["tico"].blank?
+      objet = Objet.find_by(ref_pop: row["ref"])
+      next unless objet
+      objet.nom_courant = row["tico"]
+      objet.save!
+    end
+    puts "after: #{Objet.where.not(nom_courant: nil).count}/#{Objet.count} objets have nom courant"
   end
 end

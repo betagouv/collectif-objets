@@ -41,8 +41,8 @@ namespace :communes do
           commune.population,
           commune.objets.count,
           commune.main_objet&.image_urls&.first,
-          commune.main_objet&.nom,
-          commune.main_objet&.edifice_nom,
+          commune.main_objet&.nom_formatted,
+          commune.main_objet&.edifice_nom_formatted,
           commune.main_objet&.emplacement
         ]
       end

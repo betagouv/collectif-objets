@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_085639) do
+ActiveRecord::Schema.define(version: 2022_02_07_103636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_085639) do
     t.string "image_urls", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "nom_courant"
     t.index ["commune_code_insee"], name: "index_objets_on_commune_code_insee"
     t.index ["commune_nom"], name: "index_objets_on_commune_nom"
     t.index ["departement"], name: "index_objets_on_departement"
