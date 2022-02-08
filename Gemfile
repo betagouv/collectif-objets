@@ -24,6 +24,7 @@ end
 
 group :development do
   gem "htmlbeautifier"
+  gem "overcommit"
   gem "pry"
   gem "web-console"
 end

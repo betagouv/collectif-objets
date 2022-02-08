@@ -4,7 +4,16 @@
 
 ## Dev
 
-`rails server`
+Setup:
+
+- install rbenv & make sure you have the correct ruby-version installed and selected
+
+```sh
+bundle install
+bundle exec overcommit --install
+```
+
+Dev: `rails server`
 
 
 ## Dumps

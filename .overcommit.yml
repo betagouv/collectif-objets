@@ -1,0 +1,7 @@
+PreCommit:
+  RuboCop:
+    enabled: true
+    command: ["bundle", "exec", "rubocop", "--parallel"]
+CommitMsg:
+  ALL:
+    enabled: false
