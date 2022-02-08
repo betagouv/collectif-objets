@@ -35,3 +35,5 @@ group :test do
 end
 
 gem "pagy", "~> 5.10"
+
+gem "devise", "~> 4.8"
