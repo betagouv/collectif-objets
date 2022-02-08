@@ -96,6 +96,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.1)
+      devise (>= 4.8.0)
     diff-lcs (1.5.0)
     digest (3.1.0)
     erubi (1.10.0)
@@ -117,6 +119,10 @@ GEM
     io-wait (0.2.1)
     irb (1.4.1)
       reline (>= 0.3.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -288,9 +294,11 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.8)
+  devise-i18n (~> 1.10)
   factory_bot_rails
   htmlbeautifier
   importmap-rails
+  letter_opener
   overcommit
   pagy (~> 5.10)
   pg (~> 1.3)

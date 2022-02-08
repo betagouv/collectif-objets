@@ -24,6 +24,7 @@ end
 
 group :development do
   gem "htmlbeautifier"
+  gem "letter_opener"
   gem "overcommit"
   gem "pry"
   gem "web-console"
@@ -38,3 +39,5 @@ end
 gem "pagy", "~> 5.10"
 
 gem "devise", "~> 4.8"
+
+gem "devise-i18n", "~> 1.10"

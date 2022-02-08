@@ -1,7 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: "users/sessions"
+  }
+
+  devise_scope :user do
+    get 'sign_in_with_token', to: 'users/sessions#sign_in_with_token'
+  end
+
   root "pages#home"
 
   resources :objets, only: [:index, :show]

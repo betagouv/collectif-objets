@@ -7,7 +7,8 @@
             <div class="fr-header__logo">
               <p class="fr-logo">
                 Ministère
-                <br>de la Culture
+                <br>
+                de la Culture
               </p>
             </div>
             <div class="fr-header__navbar">
@@ -29,9 +30,15 @@
               <li>
                 <a class="fr-link" href="#">Comment ça marche ?</a>
               </li>
-              <li>
-                <a class="fr-link fr-fi-lock-line" href="#">Connexion</a>
-              </li>
+              <% if current_user %>
+                <li>
+                  <%= link_to "Déconnexion", destroy_user_session_path, class: "fr-link fr-fi-unlock-line", data: { turbo_method: :delete } %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to "Connexion", new_user_session_path, class: "fr-link fr-fi-lock-line" %>
+                </li>
+              <% end %>
               <li>
                 <%= link_to "Voir les objets dans ma commune" , objets_path, class: "fr-btn" %>
               </li>

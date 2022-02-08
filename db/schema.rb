@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 2022_02_08_145318) do
     t.datetime "reset_password_sent_at", precision: 6
     t.datetime "remember_created_at", precision: 6
     t.datetime "last_sign_in_at", precision: 6
+    t.string "login_token"
+    t.datetime "login_token_valid_until", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
