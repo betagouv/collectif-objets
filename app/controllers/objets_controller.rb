@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ObjetsController < ApplicationController
   def index
     @filters = {
@@ -8,7 +10,6 @@ class ObjetsController < ApplicationController
         .where.not(nom: nil)
         .where.not(commune: nil)
         .where(@filters[:commune] ? { commune_code_insee: @filters[:commune].code_insee } : nil)
-        .where(@filters.any? ? nil : "cardinality(image_urls) >= 1")
     )
   end
 

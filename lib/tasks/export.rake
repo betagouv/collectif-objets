@@ -1,4 +1,6 @@
-require 'csv'
+# frozen_string_literal: true
+
+require "csv"
 
 HTML = <<~HTML
   <h3 style="padding:0 0 10px 0; margin: 0;">Jésus sur la croix</h3><i>Objet présent à <b>Martigues</b><br />dans l'Église du centre, nef droite</i>

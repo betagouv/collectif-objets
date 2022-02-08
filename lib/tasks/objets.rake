@@ -1,4 +1,6 @@
-require 'csv'
+# frozen_string_literal: true
+
+require "csv"
 
 def iterate_files(glob_path)
   Dir.glob(glob_path) do |csv_path|
@@ -34,6 +36,7 @@ namespace :objets do
       if missing_cols.any?
         raise StandardError.new "missing cols: #{missing_cols}"
       end
+
       Objet.create!(mapping.transform_values { row_parameterized[_1.parameterize] })
     end
   end
@@ -43,11 +46,13 @@ namespace :objets do
     puts "before: #{Objet.with_images.count} objets have photos"
     iterate_files("#{args[:path]}/*.csv") do |row|
       next if row["ref"].blank? || row["video"].blank?
+
       image_urls = row["video"].split(";").map do |video_ref|
         "http://www2.culture.gouv.fr/Wave/image/memoire/" + video_ref.sub(/^mem\//, "")
       end
       objet = Objet.find_by(ref_pop: row["ref"])
       next unless objet
+
       objet.image_urls = image_urls
       objet.save!
     end
@@ -59,8 +64,10 @@ namespace :objets do
     puts "before: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
     iterate_files("#{args[:path]}/*.csv") do |row|
       next if row["ref"].blank? || row["insee"].blank?
+
       objet = Objet.find_by(ref_pop: row["ref"])
       next unless objet
+
       objet.commune_code_insee = row["insee"]
       objet.save!
     end
@@ -72,8 +79,10 @@ namespace :objets do
     puts "after: #{Objet.where.not(nom_courant: nil).count}/#{Objet.count} objets have nom courant"
     iterate_files("#{args[:path]}/*.csv") do |row|
       next if row["ref"].blank? || row["tico"].blank?
+
       objet = Objet.find_by(ref_pop: row["ref"])
       next unless objet
+
       objet.nom_courant = row["tico"]
       objet.save!
     end
