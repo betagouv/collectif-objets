@@ -23,5 +23,10 @@ Restore dump on scalingo:
 scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL
 
 # terminal 2
-pg_restore --clean --if-exists --no-owner --no-privileges --no-comments --dbname `scalingo --app collectif-objets-staging env-get SCALINGO_POSTGRESQL_URL` tmp/dump.pgsql
+scalingo --app collectif-objets-staging env-get SCALINGO_POSTGRESQL_URL
+# DB_URL=[[ MANUALLY SET IT ]]
+psql --command "TRUNCATE objets; TRUNCATE communes;" $DB_URL
+pg_restore --clean --if-exists --no-owner --no-privileges --no-comments --dbname $DB_URL tmp/dump.pgsql
+
+# don't forget to switch back to terminal 1 and enter SSH password if necessary
 ```
