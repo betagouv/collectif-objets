@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   root "pages#home"
+  get "permanence", to: "pages#permanence"
 
   resources :objets, only: [:index, :show]
   resources :communes, only: [:index]

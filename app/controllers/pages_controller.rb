@@ -2,4 +2,5 @@
 
 class PagesController < ApplicationController
   def home; end
+  def permanence; end
 end
