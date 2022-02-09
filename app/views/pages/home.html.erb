@@ -1,7 +1,18 @@
 <main>
-  <div class="home-section-1">
+  <div class="co-home-section-permanence">
     <div class="fr-container fr-grid-row fr-py-4w fr-grid-row--middle">
-      <div class="fr-col-md-6">
+      <div class="fr-col-md-9">
+        <div><b>Vous avez des questions ? Vous avez besoin d'aide ?</b></div>
+        <div>Rejoignez nos permanences en visioconférence ou par téléphone du lundi au vendredi de 10h30 à 11h</div>
+      </div>
+      <div class="fr-col-md-3">
+        <%= link_to "Rejoindre la permanence", "#", class: "fr-btn fr-btn--secondary" %>
+      </div>
+    </div>
+  </div>
+  <div class="co-home-section-intro fr-py-12w">
+    <div class="fr-container fr-grid-row fr-grid-row--middle">
+      <div class="fr-col-md-6 fr-pr-4w">
         <h3>
           Recenser notre patrimoine pour le protéger
         </h3>
@@ -19,8 +30,194 @@
         </p>
       </div>
       <div class="fr-col-md-6">
-        <%= image_tag "home-hero-1.png" , class: "home-hero" %>
+        <%= image_tag "home-hero-1.png" , class: "co-home-hero-image" %>
       </div>
     </div>
   </div>
+  <div class="co-home-section-pourquoi fr-py-12w">
+    <div class="fr-container fr-grid-row fr-grid-row--center">
+      <div class="fr-col-md-6">
+        <h3 class="co-text--blue">
+          Pourquoi participer au recensement ?
+        </h3>
+        <p>
+          Les objets classés monuments historiques sont l'histoire de nos territoires. Un recensement régulier permet d'identifier à temps les situations qui nécessitent une intervention et d'apporter des solutions adaptées aux singularités de votre commune.
+        </p>
+      </div>
+    </div>
+    <div class="fr-container fr-grid-row fr-grid-row--gutters fr-mt-4w co-home-hero-columns">
+      <div class="fr-col-md-4 fr-px-4w">
+        <%= image_tag "illustrations/woman-magnifier.jpg", class: "fr-mb-2w" %>
+        <div>
+          <b>(Re) Découvrez les objets</b>
+          classés ou inscrits au monument historique qui font la richesse de votre commune
+        </div>
+      </div>
+      <div class="fr-col-md-4 fr-px-4w">
+        <%= image_tag "illustrations/people-clap.jpg", class: "fr-mb-2w" %>
+        <div>
+          <b>Bénéficiez des conseils</b>
+          et de l'expertise des conservateurs des monuments historiques
+        </div>
+      </div>
+      <div class="fr-col-md-4 fr-px-4w">
+        <%= image_tag "illustrations/woman-going-up-stairs.jpg", class: "fr-mb-2w" %>
+        <div>
+          <b>Obtenez des co-financements</b>
+          pour des opérations de restauration, de sécurisation ou de valorisation de votre patrimoine
+        </div>
+      </div>
+    </div>
+    <div class="fr-container fr-grid-row fr-grid-row--center fr-my-8w">
+      <div class="fr-col-md-6">
+        <%= link_to "Je découvre les objets monuments historiques de ma commune" , objets_path, class: "fr-btn" %>
+      </div>
+    </div>
+  </div>
+  <div class="co-home-section-steps">
+    <div class="fr-container fr-grid-row fr-grid-row-gutters fr-grid-row--middle fr-my-4w">
+      <div class="fr-col-md-5 fr-px-4w">
+        <%= image_tag "illustrations/counter-01.jpg" , class: "co-home-hero-image" %>
+      </div>
+      <div class="fr-col-md-7">
+        <h3 class="co-text--blue">
+          Je (re)découvre les objets de ma commune
+        </h3>
+        <p>
+          Pour chaque objet, je dispose d'une fiche avec ses informations et sa dernière localisation connue.
+        </p>
+        <p>
+          <%= link_to "Voir les objets de ma commune" , objets_path, class: "fr-link fr-fi-arrow-right-line fr-link--icon-right" %>
+        </p>
+      </div>
+    </div>
+    <div class="fr-container fr-grid-row fr-grid-row-gutters fr-grid-row--middle fr-my-4w">
+      <div class="fr-col-md-7">
+        <h3 class="co-text--blue">
+          Je remplis le questionnaire
+        </h3>
+        <p>
+          Je me rends auprès des objets de ma commune pour répondre à 3 questions très simples à l'aide d'un guide :<br />
+          L'objet est-il présent ? Est-il en bon état ? Est-il sécurisé ?
+        </p>
+        <p>
+          <%= link_to "Télécharger le guide" , "#", class: "fr-link fr-fi-arrow-right-line fr-link--icon-right" %>
+        </p>
+      </div>
+      <div class="fr-col-md-5 fr-px-4w">
+        <%= image_tag "illustrations/counter-02.jpg" , class: "co-home-hero-image" %>
+      </div>
+    </div>
+    <div class="fr-container fr-grid-row fr-grid-row-gutters fr-grid-row--middle fr-my-4w">
+      <div class="fr-col-md-5 fr-px-4w">
+        <%= image_tag "illustrations/counter-03.png" , class: "co-home-hero-image" %>
+      </div>
+      <div class="fr-col-md-7">
+        <h3 class="co-text--blue">
+          Je reçois des conseils
+        </h3>
+        <p>
+          Les conservateurs en charge de mon territoire reviennent vers moi pour valider mon recensement et m'apporter leurs conseils pour sécuriser et valoriser mes objets.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="co-home-section-stats fr-py-12w">
+    <div class="fr-container fr-grid-row fr-grid-row-gutters">
+      <div class="fr-col-12 fr-pb-4w co-text--center">
+        <h3 class="co-text--blue" id="stats">Ils ont participé</h3>
+      </div>
+      <div class="fr-col-md-6 fr-px-8w co-text--center">
+        <div class="fr-display-xl co-text--blue">502</div>
+        <div class="co-text--blue">
+          objets classés monuments historiques déjà recensés
+          depuis le début de l'opération
+        </div>
+      </div>
+      <div class="fr-col-md-6 fr-px-8w co-text--center">
+        <div class="fr-display-xl co-text--blue">+85%</div>
+        <div class="co-text--blue">
+          de communes participantes
+          lors de la première campagne réalisée en Haute-Marne
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="co-home-section-testimonials fr-py-12w" id="testimonials">
+    <div class="fr-container">
+      <div class="fr-grid-row fr-grid-row-gutters">
+        <div class="fr-col-12 fr-pb-4w co-text--center">
+          <h3 class="co-text--blue">Ils témoignent</h3>
+        </div>
+        <div class="fr-col-md-6 fr-p-4w">
+          <div class="co-testimonial-wrapper">
+            <%= image_tag "illustrations/head-circle-man-blue.png", class: "co-testimonial-avatar" %>
+            <p>
+              « Je n'avais pas connaissance de la valeur ou de ce que pouvaient représenter mes objets au niveau du patrimoine »
+            </p>
+          </div>
+          <div class="co-text--center">
+            Maire d'une commune de 545 habitants
+            <span class="co-text--muted">Haute-Marne</span>
+          </div>
+        </div>
+        <div class="fr-col-md-6 fr-p-4w">
+          <div class="co-testimonial-wrapper">
+            <%= image_tag "illustrations/head-circle-woman-red.png", class: "co-testimonial-avatar" %>
+            <p>
+              « Le recensement s'est bien passé, le guide fourni était super. Je ne connaissais pas tout cela ! »
+            </p>
+          </div>
+          <div class="co-text--center">
+            Conseillère Municipale d'une commune de 729 habitants
+            <span class="co-text--muted">Haute-Marne</span>
+          </div>
+        </div>
+        <div class="fr-col-md-6 fr-p-4w">
+          <div class="co-testimonial-wrapper">
+            <%= image_tag "illustrations/head-circle-man-glasses.png", class: "co-testimonial-avatar" %>
+            <p>
+              « Ça prend 5 minutes, rien de compliqué, c'est simple. C'est la patrimoine de la France, il est chez nous, c'est notre devoir. »
+            </p>
+          </div>
+          <div class="co-text--center">
+            Maire d'une commune de 518 habitants
+            <span class="co-text--muted">Haute-Marne</span>
+          </div>
+        </div>
+        <div class="fr-col-md-6 fr-p-4w">
+          <div class="co-testimonial-wrapper">
+            <%= image_tag "illustrations/head-circle-man-beard.png", class: "co-testimonial-avatar" %>
+            <p>
+              « La démarche permet de mieux connaitre l'histoire de sa commune et d'échanger avec les habitants, et les anciens, sur ce qui fait notre commune »
+            </p>
+          </div>
+          <div class="co-text--center">
+            Maire d'une commune de 789 habitants
+            <span class="co-text--muted">Haute-Marne</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="co-home-section-help fr-py-12w" id="help">
+    <div class="fr-container co-text--center">
+      <h3 class="co-text--blue">Vous avez besoin d'aide ?</h3>
+      <p>
+        Nous sommes là pour vous répondre et vous accompagner dans cette démarche
+      </p>
+      <p>
+        <%= image_tag "romuald.jpg", class: "co-home-help-avatar" %>
+        <h5 class="fr-mb-2w">Romuald Goudeseune</h5>
+        <div class="co-text--muted fr-mb-2w">
+          Conservateur des monuments historiques <br />
+          en charge de l'expérimentation.
+        </div>
+        <div>
+          <%= link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-link fr-fi-mail-line fr-link--icon-left" %>
+        </div>
+      </p>
+    </div>
+  </div>
+</div>
 </main>

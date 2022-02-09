@@ -1,7 +1,59 @@
-img.home-hero {
+img.co-home-hero-image {
   max-width: 80%;
 }
 
-.home-section-1 {
+.co-home-section-permanence {
+  background-color: rgb(185, 185, 251);
+}
+
+.co-home-section-intro {
   background-color: #F9F8F6;
+}
+
+.co-home-hero-columns img {
+  max-width: 100%;
+}
+
+.co-home-section-steps a.fr-link {
+  margin-left: -12px;
+}
+
+.co-home-section-stats {
+  background-color: #F9F8F6;
+}
+
+.co-text--blue {
+  color: rgb(0,0,145) !important;
+}
+
+.co-text--center {
+  text-align: center;
+}
+
+.co-testimonial-wrapper {
+  position: relative;
+  background-color: rgb(248, 247, 251);
+  border-radius: 12px;
+  padding: 2rem 2rem 1rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.co-testimonial-wrapper img.co-testimonial-avatar {
+  position: absolute;
+  top: -19px;
+  left: 30px;
+  width: 40px;
+}
+
+.co-text--muted {
+  color: rgb(166, 165, 166);
+}
+
+.co-home-section-help {
+  background-color: #F9F8F6;
+}
+
+.co-home-help-avatar {
+  width: 160px;
+  border-radius: 80px;
 }
