@@ -1,22 +1,26 @@
-<main class="fr-container">
-  <div class="fr-grid-row fr-py-4w fr-grid-row--middle">
-    <div class="fr-col-md-6">
-      <h3>
-        420 communes de la Marne abritent des objets classés ou inscrits aux monuments historiques.
-      </h3>
-      <p>
-        <b>Ensemble, protégeons notre patrimoine.</b>
-        <br />
-        La DRAC Grand-Est lance une opération de recensement participatif pour accompagner les communes Marnaises dans la
-        protection et la valorisation de leur patrimoine mobilier. Vous êtes en charge du patrimoine de votre commune ?
-        Votre territoire détient peut-être certains de ces objets.
-      </p>
-      <p>
-        <%= link_to "Je découvre les objets de ma commune" , objets_path, class: "fr-btn" %>
-      </p>
-    </div>
-    <div class="fr-col-md-6">
-      <%= image_tag "home-hero-1.png" , class: "home-hero" %>
+<main>
+  <div class="home-section-1">
+    <div class="fr-container fr-grid-row fr-py-4w fr-grid-row--middle">
+      <div class="fr-col-md-6">
+        <h3>
+          Recenser notre patrimoine pour le protéger
+        </h3>
+        <p>
+          En France,  <b>1 commune sur 2</b> est propriétaire d'<b>objets classés ou inscrits aux monuments historiques</b>.
+        </p>
+        <p>
+          A travers <b>Collectif Objet</b>, le ministère de la Culture lance une opération de <b> recensement participatif </b> pour accompagner les communes propriétaires dans la protection et la valorisation de ce patrimoine.
+        </p>
+        <p>
+          Pour lutter contre les vols et les dégradations des objets classés monuments historiques de votre commune, <b>votre rôle d'élu local est essentiel. </b>
+        </p>
+        <p>
+          <%= link_to "Voir les objets de ma commune" , objets_path, class: "fr-btn" %>
+        </p>
+      </div>
+      <div class="fr-col-md-6">
+        <%= image_tag "home-hero-1.png" , class: "home-hero" %>
+      </div>
     </div>
   </div>
 </main>
