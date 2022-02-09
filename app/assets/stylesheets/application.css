@@ -26,3 +26,11 @@ html[data-fr-scheme="dark"] .logo-atelier-numerique {
 .hide {
   display: none;
 }
+
+.co-section--light-grey {
+  background-color: #F9F8F6;
+}
+
+.co-image--max-100 {
+  max-width: 100%;
+}

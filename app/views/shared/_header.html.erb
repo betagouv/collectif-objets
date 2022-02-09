@@ -28,7 +28,7 @@
           <div class="fr-header__tools-links">
             <ul class="fr-links-group">
               <li>
-                <a class="fr-link" href="#">Comment ça marche ?</a>
+                <%= link_to "Comment ça marche ?", aide_path, class: "fr-link" %>
               </li>
               <% if current_user %>
                 <li>
