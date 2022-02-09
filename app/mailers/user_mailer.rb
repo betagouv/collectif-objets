@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class UserMailer < ApplicationMailer
-  def validate_email(user, url)
+  def validate_email(user)
     @user = user
-    @url  = url
     mail to: @user.email, subject: "Collectif Objets - Votre lien de connexion"
   end
 end

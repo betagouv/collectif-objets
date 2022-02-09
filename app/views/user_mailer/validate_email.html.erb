@@ -1,2 +1,2 @@
 <p><%= @user.email  %></p>
-<%= link_to "Confirm", @url %>
+<%= link_to "Confirm", sign_in_with_token_url(login_token: @user.login_token) %>

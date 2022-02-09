@@ -1,21 +1,43 @@
-<main class="fr-container fr-py-4w fr-grid-row">
+<main class="fr-container fr-py-4w fr-grid-row" data-controller="devise--sessions">
   <div class="fr-col-12 fr-col-md-6">
     <h2><%= t('.sign_in') %></h2>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), builder: FormBuilderDsfr) do |f| %>
-      <div class="fr-input-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-      <% if devise_mapping.rememberable? %>
-        <div class="fr-checkbox-group">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
+    <% if @success %>
+      <p>Veuillez cliquer sur le lien que vous avez reçu par mail pour vous connecter</p>
+      <p>Si vous n'avez pas reçu le lien ou que vous n'arrivez pas à vous connecter, vous pouvez :</p>
+      <p>
+        <button class="fr-btn" data-action="devise--sessions#toggleMagicLinkForm">
+          Demander un nouveau lien
+        </button>
+        ou
+        <a class="fr-btn fr-btn--secondary" href="mailto:collectifobjets@beta.gouv.fr">
+          Nous contacter
+        </a>
+      </p>
+    <% end %>
+    <% if @error == "no_user_found" %>
+      <p>Assurez vous de bien utiliser l'adresse mail sur laquelle vous avez reçu des messages de notre part.</p>
+      <p>
+        <button class="fr-btn" data-action="devise--sessions#toggleMagicLinkForm">
+          Ré-essayer avec une autre adresse email
+        </button>
+        ou
+      </p>
+      <p>
+        <a class="fr-btn fr-btn--secondary" href="mailto:collectifobjets@beta.gouv.fr">
+          Nous contacter pour résoudre le problème
+        </a>
+      </p>
+    <% end %>
+    <div data-devise--sessions-target="magicLinkForm" class="<%= "hide" if @success || @error %>">
+      <%= form_for(resource, as: resource_name, url: users_magic_links_path, builder: FormBuilderDsfr) do |f| %>
+        <div class="fr-input-group">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Recevoir un lien de connexion" %>
         </div>
       <% end %>
-      <div class="actions">
-        <%= f.submit t('.sign_in') %>
-      </div>
-    <% end %>
-    <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %><br />
+    </div>
   </div>
 </main>
