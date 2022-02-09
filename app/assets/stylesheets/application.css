@@ -31,6 +31,22 @@ html[data-fr-scheme="dark"] .logo-atelier-numerique {
   background-color: #F9F8F6;
 }
 
-.co-image--max-100 {
+.co-section--teal {
+  background-color: rgb(185, 185, 251);
+}
+
+.co--width-max-100 {
   max-width: 100%;
+}
+
+.co-text--blue {
+  color: rgb(0,0,145) !important;
+}
+
+.co-text--center {
+  text-align: center;
+}
+
+.co-text--muted {
+  color: rgb(166, 165, 166);
 }
