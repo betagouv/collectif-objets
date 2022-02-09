@@ -32,7 +32,7 @@
               </li>
               <% if current_user %>
                 <li>
-                  <%= link_to "Déconnexion", destroy_user_session_path, class: "fr-link fr-fi-unlock-line", data: { turbo_method: :delete } %>
+                  <%= link_to "Mon compte", edit_user_registration_path, class: "fr-link fr-fi-user-line" %>
                 </li>
               <% else %>
                 <li>
@@ -40,7 +40,11 @@
                 </li>
               <% end %>
               <li>
-                <%= link_to "Voir les objets dans ma commune" , objets_path, class: "fr-btn" %>
+                <% if current_user&.commune %>
+                  <%= link_to "Voir les objets de #{current_user.commune.nom}" , objets_path(commune_code_insee: current_user.commune.code_insee), class: "fr-btn" %>
+                <% else %>
+                  <%= link_to "Voir les objets dans ma commune" , objets_path, class:   "fr-btn" %>
+                <% end %>
               </li>
             </ul>
           </div>
