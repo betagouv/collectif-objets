@@ -14,10 +14,8 @@
  *= require_self
  */
 
-@media (prefers-color-scheme: dark) {
-  .logo-atelier-numerique {
-    filter: invert(1);
-  }
+html[data-fr-scheme="dark"] .logo-atelier-numerique {
+  filter: invert(1);
 }
 
 .co-pagination-wrapper {
