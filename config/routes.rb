@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "permanence", to: "pages#permanence"
   get "comment-ca-marche", to: "pages#aide", as: "aide"
   get "inscription", to: "pages#inscription"
+  get "confirmation-de-participation", to: "pages#confirmation_inscription"
 
   resources :objets, only: [:index, :show]
   resources :communes, only: [:index]
