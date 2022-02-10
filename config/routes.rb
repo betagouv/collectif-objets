@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   root "pages#home"
   get "permanence", to: "pages#permanence"
   get "comment-ca-marche", to: "pages#aide", as: "aide"
+  get "inscription", to: "pages#inscription"
 
   resources :objets, only: [:index, :show]
   resources :communes, only: [:index]

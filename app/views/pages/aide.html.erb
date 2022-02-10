@@ -1,23 +1,27 @@
 <main>
-  <section class="fr-container co-section--light-grey">
-    <div class="fr-grid-row fr-py-8w fr-grid-row--center">
-      <div class="fr-col-md-6">
-        <h2 class="co-text--blue">Préparez votre recensement</h2>
-        <p>
-          Mener un recensement, c'est aller vérifier la présence d'un objet au sein de son édifice et constater son état en répondant à un questionnaire simplifié. C'est une opération rapide à mener (5 à 10 min par objet) et qui ne demande aucune expertise ou formation particulière. Les données collectées permettent aux conservateurs en charge de votre territoire de mieux connaître votre patrimoine, de vous aider à le valoriser et d'intervenir à temps pour le protéger.
-        </p>
+  <!-- SECTION PREPAREZ -->
+  <section class="co-section--light-grey">
+    <div class="fr-container">
+      <div class="fr-grid-row fr-py-8w fr-grid-row--center">
+        <div class="fr-col-md-6">
+          <h2 class="co-text--blue">Préparez votre recensement</h2>
+          <p>
+            Mener un recensement, c'est aller vérifier la présence d'un objet au sein de son édifice et constater son état en répondant à un questionnaire simplifié. C'est une opération rapide à mener (5 à 10 min par objet) et qui ne demande aucune expertise ou formation particulière. Les données collectées permettent aux conservateurs en charge de votre territoire de mieux connaître votre patrimoine, de vous aider à le valoriser et d'intervenir à temps pour le protéger.
+          </p>
+        </div>
       </div>
     </div>
   </section>
+  <!-- SECTION ETAPE 1 -->
   <section class="fr-container">
     <div class="fr-grid-row fr-py-8w fr-grid-row--middle">
       <div class="fr-col-md-5">
-        <h3 class="co-text--blue">Étape 1 - J'indique ma participation</h3>
+        <h2 class="co-text--blue">Étape 1 - J'indique ma participation</h2>
         <p>
           Vous êtes ou agent municipal ? Vous êtes en charge du patrimoine de votre commune ? Vous pouvez nous indiquer que vous participez au recensement pour accéder aux conseils et à l’aide de Collectif Objets dans votre démarche. Le recensement des objets peut également être réalisé par une association si elle bénéficie de l’aval de la commune.
         </p>
         <p>
-          <%= link_to "J'indique que je participe pour obtenir une aide supplémenaire", "#", class: "fr-btn" %>
+          <%= link_to "J'indique que je participe pour obtenir une aide supplémenaire", inscription_path, class: "fr-btn" %>
         </p>
       </div>
       <div class="fr-col-md-7 fr-px-12w">
@@ -25,26 +29,30 @@
       </div>
     </div>
   </section>
-  <section class="fr-container co-section--light-grey">
-    <div class="fr-grid-row fr-py-12w fr-grid-row--middle">
-      <div class="fr-col-md-7 fr-px-12w">
-        <%= image_tag "guide-recensement.png", class: "co--width-max-100" %>
-      </div>
-      <div class="fr-col-md-5">
-        <h3 class="co-text--blue">Étape 2 - Je prépare mon recensement</h3>
-        <p>
-          Nous vous guidons étape par étape. Comment s'organiser ? Quel matériel faut-il prévoir ? Comment évaluer l'état d'un objet ? Retrouvez dans cette liste les clés pour préparer votre recensement, mais aussi les astuces de nos conservateurs pour répondre aux questionnaires de recensement.
-        </p>
-        <p>
-          <%= link_to "Télécharger le guide de recensement", "https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf", class: "fr-btn fr-btn--icon-right fr-fi-file-download-line", target: "_blank", rel: "noopener" %>
-        </p>
+  <!-- SECTION ETAPE 2 -->
+  <section class="co-section--light-grey">
+    <div class="fr-container ">
+      <div class="fr-grid-row fr-py-12w fr-grid-row--middle">
+        <div class="fr-col-md-7 fr-px-12w">
+          <%= image_tag "guide-recensement.png", class: "co--width-max-100" %>
+        </div>
+        <div class="fr-col-md-5">
+          <h2 class="co-text--blue">Étape 2 - Je prépare mon recensement</h2>
+          <p>
+            Nous vous guidons étape par étape. Comment s'organiser ? Quel matériel faut-il prévoir ? Comment évaluer l'état d'un objet ? Retrouvez dans cette liste les clés pour préparer votre recensement, mais aussi les astuces de nos conservateurs pour répondre aux questionnaires de recensement.
+          </p>
+          <p>
+            <%= link_to "Télécharger le guide de recensement", "https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf", class: "fr-btn fr-btn--icon-right fr-fi-file-download-line", target: "_blank", rel: "noopener" %>
+          </p>
+        </div>
       </div>
     </div>
   </section>
+  <!-- SECTION ETAPE 3 -->
   <section class="fr-container">
     <div class="fr-grid-row fr-py-8w fr-grid-row--middle">
       <div class="fr-col-md-5">
-        <h3 class="co-text--blue">Étape 3 - Je réponds aux questionnaires</h3>
+        <h2 class="co-text--blue">Étape 3 - Je réponds aux questionnaires</h2>
         <p>
           Il est maintenant temps de visiter vos objets. Vous pouvez accéder aux questionnaires en utilisant les identifiants reçu lors l’inscription de votre commune. Pour chaque objet, trois questions très simple :
         </p>
@@ -68,79 +76,84 @@
       <%= image_tag "questionnaire.jpg", class: "co--width-max-100" %>
     </div>
   </section>
-  <section class="fr-container co-section--light-grey fr-py-8w co-text--center" id="faq">
-    <h3 class="co-text--blue">Les questions les plus fréquentes</h3>
-    <div class="fr-grid-row  fr-grid-row--center">
-      <div class="fr-col-md-8">
-        <ul class="fr-accordions-group">
-          <li>
-            <section class="fr-accordion">
-              <div class="fr-accordion__title">
-                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-1">
-                  Quelles sont les obligations des propriétaires d'objets protégés / inscrits / classés ?
-                </button>
-              </div>
-              <div class="fr-collapse" id="faq-1">
-                Le code du patrimoine ne crée pas d'obligation particulière pour le propriétaire dans la gestion quotidienne. En en faisant un trésor national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention.
-              </div>
-            </section>
-          </li>
-          <li>
-            <section class="fr-accordion">
-              <div class="fr-accordion__title">
-                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-2">
-                  Que se passe-t-il après l'envoi de mes réponses ?
-                </button>
-              </div>
-              <div class="fr-collapse" id="faq-2">
-                Vos réponses seront traitées par la CAOA et le CMH. Un compte-rendu vous sera adressé. Un récolement sera reconnu officiel après signatures des trois parties : la paroisse, la commune et la CAOA.
-              </div>
-            </section>
-          </li>
-          <li>
-            <section class="fr-accordion">
-              <div class="fr-accordion__title">
-                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-3">
-                  Comment lancer un projet de restauration ?
-                </button>
-              </div>
-              <div class="fr-collapse" id="faq-3">
-                Veuillez consulter cette page dédiée du site du Ministère de la Culture :
-                <%= link_to "Intervenir sur un objet mobilier classé ou inscrit", "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank" %>
-              </div>
-            </section>
-          </li>
-          <li>
-            <section class="fr-accordion">
-              <div class="fr-accordion__title">
-                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-4">
-                  Comment entretenir mes objets ?
-                </button>
-              </div>
-              <div class="fr-collapse" id="faq-4">
-                <p>
-                  Au delà de l'entretien courant qui consiste à nettoyer l'espace autour des objets, il convient de ne pas toucher aux objets protégés. Seul un professionnel habilité assurera une prise en charge optimale.
-                </p>
-                <p>
-                  Pour plus d'informations, veuillez consulter cette page du site du Ministère de la Culture :
+    <!-- SECTION FAQ -->
+  <section class="co-section--light-grey fr-py-8w">
+    <div class="fr-container co-text--center" id="faq">
+      <h2 class="co-text--blue">Les questions les plus fréquentes</h2>
+      <div class="fr-grid-row  fr-grid-row--center">
+        <div class="fr-col-md-8">
+          <ul class="fr-accordions-group">
+            <li>
+              <section class="fr-accordion">
+                <div class="fr-accordion__title">
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-1">
+                    Quelles sont les obligations des propriétaires d'objets protégés / inscrits / classés ?
+                  </button>
+                </div>
+                <div class="fr-collapse" id="faq-1">
+                  Le code du patrimoine ne crée pas d'obligation particulière pour le propriétaire dans la gestion quotidienne. En en faisant un trésor national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention.
+                </div>
+              </section>
+            </li>
+            <li>
+              <section class="fr-accordion">
+                <div class="fr-accordion__title">
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-2">
+                    Que se passe-t-il après l'envoi de mes réponses ?
+                  </button>
+                </div>
+                <div class="fr-collapse" id="faq-2">
+                  Vos réponses seront traitées par la CAOA et le CMH. Un compte-rendu vous sera adressé. Un récolement sera reconnu officiel après signatures des trois parties : la paroisse, la commune et la CAOA.
+                </div>
+              </section>
+            </li>
+            <li>
+              <section class="fr-accordion">
+                <div class="fr-accordion__title">
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-3">
+                    Comment lancer un projet de restauration ?
+                  </button>
+                </div>
+                <div class="fr-collapse" id="faq-3">
+                  Veuillez consulter cette page dédiée du site du Ministère de la Culture :
                   <%= link_to "Intervenir sur un objet mobilier classé ou inscrit", "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank" %>
-                </p>
-              </div>
-            </section>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section class="co-section--light-grey fr-py-8w">
-      <div class="fr-container">
-        <div class="fr-grid-row fr-grid-row--middle">
-          <div class="fr-col-md-8 fr-text--lg co-text--blue fr-px-4w">
-            Vous avez une question qui n'est pas dans la liste ? N'hésitez pas à nous contacter.
-          </div>
-          <div class="fr-col-md-4">
-            <%= link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-fi-mail-line fr-btn--icon-right" %>
-          </div>
+                </div>
+              </section>
+            </li>
+            <li>
+              <section class="fr-accordion">
+                <div class="fr-accordion__title">
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-4">
+                    Comment entretenir mes objets ?
+                  </button>
+                </div>
+                <div class="fr-collapse" id="faq-4">
+                  <p>
+                    Au delà de l'entretien courant qui consiste à nettoyer l'espace autour des objets, il convient de ne pas toucher aux objets protégés. Seul un professionnel habilité assurera une prise en charge optimale.
+                  </p>
+                  <p>
+                    Pour plus d'informations, veuillez consulter cette page du site du Ministère de la Culture :
+                    <%= link_to "Intervenir sur un objet mobilier classé ou inscrit", "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank" %>
+                  </p>
+                </div>
+              </section>
+            </li>
+          </ul>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+  <!-- SECTION QUESTION -->
+  <section class="fr-py-8w">
+    <div class="fr-container">
+      <div class="fr-grid-row fr-grid-row--middle">
+        <div class="fr-col-md-8 fr-text--lg co-text--blue fr-px-4w">
+          Vous avez une question qui n'est pas dans la liste ? N'hésitez pas à nous contacter.
+        </div>
+        <div class="fr-col-md-4">
+          <%= link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-fi-mail-line fr-btn--icon-right" %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

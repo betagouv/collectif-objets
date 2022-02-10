@@ -4,4 +4,5 @@ class PagesController < ApplicationController
   def home; end
   def permanence; end
   def aide; end
+  def inscription; end
 end
