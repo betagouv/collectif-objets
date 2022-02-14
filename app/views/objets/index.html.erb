@@ -1,21 +1,27 @@
 <main class="fr-container fr-py-4w">
-  <h2>Je découvre les objets de ma commune</h2>
-  <p>
-    Il y a des objets monuments historiques dans votre commune ? Vous êtes Elu ? Responsable du patrimoine de votre
-    commune ? La commune est responsable de ces objets. Aidez-nous à vérifier leur présence et leur état
-  </p>
-  <p>
-    <%= link_to "Liste des communes", communes_path %>
-  </p>
-  <p>
-    <% if @filters[:commune] %>
-      Voici les <%= @pagy.count %> objets de la commune <%= @filters[:commune].nom %>
-    <% else %>
+  <% if @filters[:commune] %>
+    <h2>
+      Liste des <%= @pagy.count %> objets classés de <%= @filters[:commune].nom %>
+    </h2>
+  <% else %>
+    <h2>Je découvre les objets de ma commune</h2>
+  <% end %>
+  <% if !current_user || @filters[:commune].blank? %>
+    <p>
+      Il y a des objets monuments historiques dans votre commune ? Vous êtes Elu ? Responsable du patrimoine de votre
+      commune ? La commune est responsable de ces objets. Aidez-nous à vérifier leur présence et leur état
+    </p>
+  <% end %>
+  <% if @filters[:commune].blank? %>
+    <p>
       Voici les <%= @pagy.count %> objets présents dans Collectif Objets
-    <% end %>
-  </p>
-  <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
-  <div class="fr-grid-row fr-py-4w fr-grid-row--gutters">
+    </p>
+    <p><%= link_to "Filtrer les objets d'une commune en particulier", communes_path %></p>
+  <% end %>
+  <div class="fr-mt-8w">
+    <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
+  </div>
+  <div class="fr-grid-row fr-py-2w fr-grid-row--gutters">
     <% @objets.each do |objet| %>
       <div class="fr-col-md-3">
         <div class="fr-card fr-enlarge-link">
@@ -33,6 +39,8 @@
           <div class="fr-card__img">
             <% if objet.image_urls.any? %>
               <img src="<%= objet.image_urls[0] %>" class="fr-responsive-img" alt="">
+            <% else %>
+              <%= image_tag "illustrations/photo-manquante.png", class: "fr-responsive-img co-image-transparent" %>
             <% end %>
           </div>
         </div>
@@ -40,4 +48,7 @@
     <% end %>
   </div>
   <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
+  <% if @filters[:commune] %>
+    <p class="fr-my-4w"><%= link_to "Découvrir les objets d'autres communes", communes_path %></p>
+  <% end %>
 </main>

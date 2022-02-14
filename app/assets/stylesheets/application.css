@@ -50,3 +50,7 @@ html[data-fr-scheme="dark"] .logo-atelier-numerique {
 .co-text--muted {
   color: rgb(166, 165, 166);
 }
+
+.co-image-transparent {
+  filter: opacity(0.4)
+}
