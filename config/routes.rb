@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   get "objets/ref_pop/:ref_pop", to: "objets#show_by_ref_pop"
 
   resources :communes, only: [:index]
+
+  get "health/raise_on_purpose", to: "health#raise_on_purpose"
 end
