@@ -33,11 +33,19 @@
         Se situe dans l'édifice <b><%= @objet.edifice_nom %></b><br />
         <i><%= @objet.emplacement %></i>
       </p>
+      <div>
+        <%= link_to "Répondre au questionnaire", @objet.airtable_questionnaire_link, class: "fr-btn fr-fi-external-link-line fr-btn--icon-right", target: "_blank" %>
+      </div>
+      <div class="fr-py-2w">
+        <%= link_to "Revenir à la liste des objets", objets_path(commune_code_insee: @objet.commune_code_insee), class: "fr-btn fr-btn--secondary" %>
+      </div>
     </div>
     <div class="fr-col-md-8">
       <div class="co-image-container">
         <% if @objet.image_urls.any? %>
           <img src="<%= @objet.image_urls[0] %>" class="co-objet-image" alt="">
+        <% else %>
+          <%= image_tag "illustrations/photo-manquante.png", class: "co-objet-image" %>
         <% end %>
       </div>
     </div>

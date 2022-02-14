@@ -15,4 +15,14 @@ class Objet < ApplicationRecord
       edifice_nom&.capitalize
     end
   end
+
+  def airtable_questionnaire_link
+    get_params = {
+      "prefill_Nom de l'objet": nom_formatted,
+      "prefill_Référence Palissy de l'objet": ref_pop,
+      "prefill_⛪ Liste propriétaires 2": commune&.nom,
+      "prefill_Édifice concerné": edifice_nom_formatted
+    }
+    "https://airtable.com/shrHSC6DqdqkzBQjF?#{get_params.to_query}"
+  end
 end
