@@ -1,0 +1,25 @@
+{
+  "name": "collectif-objets",
+  "version": "0.0.1",
+  "description": "![CI](https://github.com/adipasquale/collectif-objets/actions/workflows/ci.yml/badge.svg)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adipasquale/collectif-objets.git"
+  },
+  "author": "adipasquale",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adipasquale/collectif-objets/issues"
+  },
+  "homepage": "https://github.com/adipasquale/collectif-objets#readme",
+  "dependencies": {
+    "mjml": "^4.12.0"
+  }
+}

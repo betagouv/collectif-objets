@@ -1,0 +1,29 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column vertical-align="middle">
+        <mj-image width="100px" src="https://i.imgur.com/cTmcBil.png" align="left"></mj-image>
+      </mj-column>
+      <mj-column vertical-align="middle">
+        <mj-text align="left" font-size="20px">Collectif Objets</mj-text>
+        <mj-text align="left" font-size="14px" color="#444">Préservez votre patrimoine mobilier</mj-text>
+      </mj-column>
+      <mj-column>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="rgb(0,0,145)"></mj-divider>
+        <mj-text>
+          Voici votre lien de connexion à Collectif Objets :
+        </mj-text>
+        <mj-button background-color="rgb(0,0,145)" color="#fff" align="left" href="<%= @login_url %>">
+          Connexion
+        </mj-button>
+        <mj-text>
+          Ce lien est valide une heure. Vous pouvez en demander un nouveau depuis <a href="<%= new_user_session_url %>">la page de connexion</a>.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

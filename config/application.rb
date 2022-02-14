@@ -32,5 +32,7 @@ module CollectifObjets
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
   end
 end
