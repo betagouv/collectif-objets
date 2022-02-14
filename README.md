@@ -18,24 +18,10 @@ Dev: `rails server`
 
 ## Dumps
 
-Create local dump
+- Create a local dump with `make dump`
 
-```sh
-pg_dump --format c --data-only --table=objets --table=communes --dbname collectif_objets_dev --file tmp/dump.pgsql
-```
+To restore dump on staging:
 
-
-Restore dump on scalingo:
-
-```sh
-# terminal 1
-scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL
-
-# terminal 2
-scalingo --app collectif-objets-staging env-get SCALINGO_POSTGRESQL_URL
-# DB_URL=[[ MANUALLY SET IT ]]
-psql --command "TRUNCATE objets; TRUNCATE communes;" $DB_URL
-pg_restore --clean --if-exists --no-owner --no-privileges --no-comments --dbname $DB_URL tmp/dump.pgsql
-
-# don't forget to switch back to terminal 1 and enter SSH password if necessary
-```
+- in one terminal : `scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL`
+- in another terminal : `./bin/restore_to_staging.sh`
+- ⚠️ you may have to enter the SSH password multiple times in the first terminal
