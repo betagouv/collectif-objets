@@ -51,6 +51,20 @@
         </div>
       </div>
     </div>
+    <% if notice || alert %>
+      <div class="fr-container fr-pb-2w">
+        <% if notice %>
+          <div class="fr-alert fr-alert--success">
+            <p><%= notice %></p>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="fr-alert fr-alert--error">
+            <p><%= alert %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="fr-header__menu fr-modal" id="modal-833" aria-labelledby="fr-btn-menu-mobile">
     <div class="fr-container">

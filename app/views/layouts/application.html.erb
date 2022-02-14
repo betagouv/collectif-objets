@@ -16,20 +16,6 @@
   </head>
   <body>
     <%= render "shared/header" %>
-    <% if notice || alert %>
-      <div class="fr-container fr-pt-4w">
-        <% if notice %>
-          <div class="fr-alert fr-alert--success">
-            <p><%= notice %></p>
-          </div>
-        <% end %>
-        <% if alert %>
-          <div class="fr-alert fr-alert--error">
-            <p><%= alert %></p>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
     <%= yield %>
     <%= render "shared/footer" %>
     <script type="module" src="/dsfr_1_3/dsfr/dsfr.module.min.js"></script>
