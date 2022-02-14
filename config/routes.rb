@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   get "confirmation-de-participation", to: "pages#confirmation_inscription"
 
   resources :objets, only: [:index, :show]
+  get "objets/ref_pop/:ref_pop", to: "objets#show_by_ref_pop"
+
   resources :communes, only: [:index]
 end

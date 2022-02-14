@@ -16,4 +16,9 @@ class ObjetsController < ApplicationController
   def show
     @objet = Objet.find(params[:id])
   end
+
+  def show_by_ref_pop
+    @objet = Objet.find_by_ref_pop(params[:ref_pop])
+    render :show
+  end
 end
