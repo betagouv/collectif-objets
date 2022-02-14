@@ -8,7 +8,7 @@ ruby "3.1.0"
 gem "bootsnap", require: false
 gem "importmap-rails"
 gem "pg", "~> 1.3"
-gem "puma", "~> 5.0"
+gem "puma", "~> 5.6"
 gem "rails", "~> 7.0.1"
 gem "sprockets-rails"
 gem "stimulus-rails"
