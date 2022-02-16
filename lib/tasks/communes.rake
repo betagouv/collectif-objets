@@ -15,6 +15,7 @@ namespace :communes do
     end
   end
 
+  # rake "communes:export[../collectif-objets-data/rails-communes.csv]"
   desc "export communes"
   task :export, [:path] => :environment do |_, args|
     headers = [
@@ -50,5 +51,4 @@ namespace :communes do
       end
     end
   end
-
 end

@@ -59,6 +59,19 @@ namespace :objets do
     puts "after: #{Objet.with_images.count} objets have photos"
   end
 
+  # rake "objets:import_images_custom[../collectif-objets-data/tmp-146-objets-image-urls-to-import-in-rails.csv]"
+  task :import_images_custom, [:path] => :environment do |_, args|
+    puts "before: #{Objet.with_images.count} objets have photos"
+    for row in CSV.read(args[:path], headers: true) do
+      objet = Objet.find_by(ref_pop: row["ref_pop"])
+      next unless objet
+
+      objet.image_urls = JSON.parse(row["scrapped_image_urls"].gsub("'", '"'))
+      objet.save!
+    end
+    puts "after: #{Objet.with_images.count} objets have photos"
+  end
+
   # rake objets:import_insee[../collectif-objets-data/pop-exports-custom]
   task :import_insee, [:path] => :environment do |_, args|
     puts "before: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
@@ -87,5 +100,18 @@ namespace :objets do
       objet.save!
     end
     puts "after: #{Objet.where.not(nom_courant: nil).count}/#{Objet.count} objets have nom courant"
+  end
+
+  # rake "objets:export[../collectif-objets-data/rails-objets-wrong-images.csv]"
+  desc "export wrong images"
+  task :export_wrong_images, [:path] => :environment do |_, args|
+    headers = ["ref", "image_urls"]
+    CSV.open(args[:path], "wb", headers: true) do |csv|
+      csv << headers
+      objets = Objets.
+      objets.each do |objet|
+        csv << [objet.ref, objet.image_urls]
+      end
+    end
   end
 end
