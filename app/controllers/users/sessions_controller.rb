@@ -20,5 +20,17 @@ module Users
         redirect_to new_user_session_path
       end
     end
+
+    def sign_in_with_magic_token
+      # the magic token is never rotated
+      user = User.find_by(magic_token: params["magic-token"])
+      if user.present?
+        sign_in(user)
+        redirect_to root_path, notice: "Vous êtes maintenant connecté(e)"
+      else
+        flash[:alert] = "Erreur lors de votre connexion, veuillez réessayer"
+        redirect_to new_user_session_path
+      end
+    end
   end
 end

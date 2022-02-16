@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get 'sign_in_with_token', to: 'users/sessions#sign_in_with_token'
+    get 'magic-authentication', to: "users/sessions#sign_in_with_magic_token"
     namespace :users do
       resources :magic_links, only: [:create]
     end
