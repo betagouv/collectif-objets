@@ -65,8 +65,7 @@
       </div>
     <% end %>
   </div>
-  <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
-  <% if @filters[:commune] %>
-    <p class="fr-my-4w"><%= link_to "Découvrir les objets d'autres communes", communes_path %></p>
+  <% if @pagy.count > 4 %>
+    <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
   <% end %>
 </main>

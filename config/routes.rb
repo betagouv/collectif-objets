@@ -16,8 +16,7 @@ Rails.application.routes.draw do
   root "pages#home"
   get "permanence", to: "pages#permanence"
   get "comment-ca-marche", to: "pages#aide", as: "aide"
-  get "inscription", to: "pages#inscription"
-  get "confirmation-de-participation", to: "pages#confirmation_inscription"
+  get "confirmation-de-participation", to: "pages#confirmation_inscription", as: "enrollment_success"
 
   resources :objets, only: [:index, :show] do
     collection do
@@ -27,6 +26,9 @@ Rails.application.routes.draw do
   get "objets/ref_pop/:ref_pop", to: "objets#show_by_ref_pop"
 
   resources :communes, only: [:index]
+
+  resources :enrollments, only: [:new, :create]
+  get "inscription", to: "enrollments#new"
 
   get "health/raise_on_purpose", to: "health#raise_on_purpose"
 end

@@ -45,3 +45,5 @@ gem "devise-i18n", "~> 1.10"
 gem "sentry-ruby", "~> 5.1"
 
 gem "sentry-rails", "~> 5.1"
+
+gem "airtable"

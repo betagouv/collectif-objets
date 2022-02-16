@@ -11,16 +11,35 @@
           <p>
             <b>Vous recevrez un accompagnement supplémentaire</b> si vous en avez besoin lors de votre recensement
           </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- SECTION FORMULAIRE -->
-  <section>
-    <div class="fr-container">
-      <div class="fr-grid-row fr-py-8w">
-        <div class="fr-col-md-8">
-          <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe class="airtable-embed airtable-dynamic-height" src="https://airtable.com/embed/shrwvzNXuf73l3d9L?backgroundColor=gray" frameborder="0" onmousewheel="" width="100%" height="1142" style="background: transparent; border: 1px solid #ccc;"></iframe>
+          <%= form_for(@enrollment, as: "enrollment", url: enrollments_path, builder: FormBuilderDsfr) do |f| %>
+            <div class="fr-input-group">
+              <%= f.label :name, "Nom" %>
+              <%= f.text_field :name, required: true, autofocus: true %>
+            </div>
+            <div class="fr-input-group">
+              <%= f.label :role, "Votre fonction" %>
+              <%= f.text_field :role %>
+            </div>
+            <div class="fr-input-group">
+              <%= f.label :email, "E-mail" %>
+              <%= f.email_field :email, autocomplete: "email", required: true %>
+            </div>
+            <div class="fr-input-group">
+              <%= f.label :phone, "Numéro de téléphone" %>
+              <%= f.text_field :phone, type: "tel" %>
+            </div>
+            <div class="fr-input-group">
+              <%= f.label :commune %>
+              <%= f.text_field :commune, required: true %>
+            </div>
+            <div class="fr-input-group">
+              <%= f.label :notes %>
+              <%= f.text_area :notes %>
+            </div>
+            <div class="actions">
+              <%= f.submit "J'inscris ma commune à la campagne de recensement" %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

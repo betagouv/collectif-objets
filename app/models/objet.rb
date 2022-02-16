@@ -4,6 +4,15 @@ class Objet < ApplicationRecord
   scope :with_images, -> { where("cardinality(image_urls) >= 1") }
   belongs_to :commune, foreign_key: :commune_code_insee, primary_key: :code_insee, optional: true
 
+  scope :with_photos_first, -> { order("cardinality(image_urls) DESC, LOWER(nom) ASC") }
+
+  def self.displayable
+    in_str = Commune::DISPLAYABLE_DEPARTEMENTS.map { "'#{_1}'" }.join(", ")
+    where.not(nom: nil)
+      .where.not(commune: nil)
+      .where("SUBSTR(commune_code_insee, 0, 3) IN (#{in_str})")
+  end
+
   def nom_formatted
     (nom_courant || nom).capitalize
   end
