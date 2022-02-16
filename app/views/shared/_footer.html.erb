@@ -2,18 +2,22 @@
 <footer class="fr-footer" role="contentinfo" id="footer">
   <div class="fr-container">
     <div class="fr-footer__body fr-footer__body--operator">
-      <div class="fr-footer__brand fr-enlarge-link">
+      <div class="fr-footer__brand">
         <p class="fr-logo" title="république française">
           Ministère
           <br>
           de la Culture
         </p>
-        <a class="fr-footer__brand-link" href="/" title="Retour à l’accueil">
-          <!-- L'alternative de l'image (attribut alt) doit impérativement être renseignée et reprendre le texte visible dans l’image -->
-          <%= image_tag "logo-atelier-numerique.svg" , class: "fr-footer__logo logo-atelier-numerique" ,
+        <a class="fr-footer__brand-link" href="https://beta.gouv.fr/communaute/#/incubators/culture" title="Incubateur Atelier Numérique">
+          <%= image_tag "logo-atelier-numerique.svg" , class: "fr-footer__logo co-logo-invertable" ,
+            alt: "Logo Atelier Numérique" %>
+        </a>
+        <a class="fr-footer__brand-link co-footer-brand-link" href="https://beta.gouv.fr" title="beta.gouv.fr">
+          <%= image_tag "logo-beta-gouv.png" , class: "fr-footer__logo co-logo-beta-gouv co-logo-invertable" ,
             alt: "Logo Atelier Numérique" %>
         </a>
       </div>
+      <!--
       <div class="fr-footer__content">
         <p class="fr-footer__content-desc">Lorem [...] elit ut.</p>
         <ul class="fr-footer__content-list">
@@ -31,8 +35,10 @@
           </li>
         </ul>
       </div>
+      -->
     </div>
     <div class="fr-footer__bottom">
+      <!--
       <ul class="fr-footer__bottom-list">
         <li class="fr-footer__bottom-item">
           <a class="fr-footer__bottom-link" href="#">Plan du site</a>
@@ -53,6 +59,7 @@
           <button class="fr-footer__bottom-link fr-fi-theme-fill fr-link--icon-left" aria-controls="fr-theme-modal" data-fr-opened="false">Paramètres d'affichage</button>
         </li>
       </ul>
+      -->
       <div class="fr-footer__bottom-copy">
         <p>Sauf mention contraire, tous les contenus de ce site sont sous <a
             href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" target="_blank">licence etalab-2.0</a>

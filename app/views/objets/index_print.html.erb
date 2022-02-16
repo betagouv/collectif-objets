@@ -1,0 +1,48 @@
+<main class="fr-container fr-py-4w">
+  <h2 class="co-text-blue">
+    Liste imprimable des <%= @objets.count %> objets classés de <%= @commune.nom %>
+  </h2>
+
+  <div class="fr-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Noms</th>
+          <th>Edifice</th>
+          <th>Emplacement</th>
+          <th>Catégorie</th>
+          <th>Époque</th>
+          <th>Références</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @objets.each do |objet| %>
+          <tr>
+            <td>
+              <% if objet.image_urls.any? %>
+                <img src="<%= objet.image_urls[0] %>" class="fr-responsive-img" alt="">
+              <% end %>
+            </td>
+            <td>
+              <div><%= link_to objet.nom, objet_path(objet) %></div>
+              <div class="co-text--muted"><%= objet.nom_courant %></div>
+            </td>
+            <td><%= objet.edifice_nom %></td>
+            <td><%= objet.emplacement %></td>
+            <td><%= objet.categorie %></td>
+            <td><%= objet.crafted_at %></td>
+            <td>
+              <%= link_to(
+                objet.ref_pop,
+                "https://www.pop.culture.gouv.fr/notice/palissy/#{objet.ref_pop}",
+                target: "_blank",
+                rel: "noopener"
+              ) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</main>

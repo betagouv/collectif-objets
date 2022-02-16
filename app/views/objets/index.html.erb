@@ -1,23 +1,41 @@
 <main class="fr-container fr-py-4w">
-  <% if @filters[:commune] %>
-    <h2>
-      Liste des <%= @pagy.count %> objets classés de <%= @filters[:commune].nom %>
-    </h2>
-  <% else %>
-    <h2>Je découvre les objets de ma commune</h2>
-  <% end %>
-  <% if !current_user || @filters[:commune].blank? %>
-    <p>
-      Il y a des objets monuments historiques dans votre commune ? Vous êtes Elu ? Responsable du patrimoine de votre
-      commune ? La commune est responsable de ces objets. Aidez-nous à vérifier leur présence et leur état
-    </p>
-  <% end %>
-  <% if @filters[:commune].blank? %>
-    <p>
-      Voici les <%= @pagy.count %> objets présents dans Collectif Objets
-    </p>
-    <p><%= link_to "Filtrer les objets d'une commune en particulier", communes_path %></p>
-  <% end %>
+  <div class="fr-grid-row fr-py-2w fr-grid-row--center">
+    <div class="fr-col-md-8 co-text--center">
+      <% if @filters[:commune] %>
+        <h2 class="co-text-blue">
+          Les <%= @pagy.count %> objets classés de <%= @filters[:commune].nom %>
+        </h2>
+      <% else %>
+        <h2>Je découvre les objets de ma commune</h2>
+      <% end %>
+      <p>
+        Il y a des objets monuments historiques dans votre commune ? Vous êtes Elu ? Responsable du patrimoine de votre commune ?
+        La commune est responsable de ces objets.
+        <b>Aidez-nous à vérifier leur présence et leur état</b>
+      </p>
+      <p>
+        Vous avez besoin d'aide ? Nous vous guidons étape par étape:
+      </p>
+      <p>
+        <%= link_to "Je confirme la participation de ma commune", inscription_path, class: "fr-btn" %>
+      </p>
+      <% if current_user %>
+        <p>
+          Si vous n'avez pas de connexion internet pendant le recensement, vous pouvez :
+        </p>
+        <p>
+          <%= link_to "Imprimer la liste d'objets", printable_list_objets_path(commune_code_insee: current_user.commune.code_insee), class: "fr-btn fr-btn--secondary" %>
+          <%= link_to "Imprimer le questionnaire", "https://fichiers.collectif-objets.beta.gouv.fr/questionnaire.pdf", class: "fr-btn fr-btn--secondary", target: "_blank", rel: "noopener" %>
+        </p>
+      <% end %>
+      <% if @filters[:commune].blank? %>
+        <p>
+          Voici les <%= @pagy.count %> objets présents dans Collectif Objets
+        </p>
+        <p><%= link_to "Filtrer les objets d'une commune en particulier", communes_path %></p>
+      <% end %>
+    </div>
+  </div>
   <div class="fr-mt-8w">
     <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
   </div>

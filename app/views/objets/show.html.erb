@@ -4,16 +4,13 @@
   <div class="fr-grid-row fr-py-4w fr-grid-row--gutters">
     <div class="fr-col-md-4">
       <p>
-        <b>Références</b><br />
-        POP (Base Palissy) :
-        <%= link_to(
-          @objet.ref_pop,
-          "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.ref_pop}",
-          target: "_blank",
-          rel: "noopener"
-        ) %>
-        <br />
-        <%# POP (Mémoire) : <%= @objet.ref_memoire %>
+        <b>Nom courant</b><br />
+        <%= @objet.nom_courant %>
+      </p>
+      <p>
+        <b>Emplacement</b><br />
+        Se situe dans l'édifice <b><%= @objet.edifice_nom %></b><br />
+        <i><%= @objet.emplacement %></i>
       </p>
       <p>
         <b>Catégorie</b><br />
@@ -29,9 +26,17 @@
         Statut actuel : <%= @objet.recolement_status || "N/A" %>
       </p>
       <p>
-        <b>Emplacement</b><br />
-        Se situe dans l'édifice <b><%= @objet.edifice_nom %></b><br />
-        <i><%= @objet.emplacement %></i>
+        <b>Références</b><br />
+        POP (Base Palissy) : <%= @objet.ref_pop%>
+      </p>
+      <p>
+        <%= link_to(
+          "Voir plus de détails sur la Plateforme Ouverte du Patrimoine",
+          "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.ref_pop}",
+          target: "_blank",
+          rel: "noopener",
+          class: "co-text--blue"
+        ) %>
       </p>
       <div>
         <%= link_to "Répondre au questionnaire", @objet.airtable_questionnaire_link, class: "fr-btn fr-fi-external-link-line fr-btn--icon-right", target: "_blank" %>

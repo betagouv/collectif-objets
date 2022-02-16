@@ -14,8 +14,16 @@
  *= require_self
  */
 
-html[data-fr-scheme="dark"] .logo-atelier-numerique {
+html[data-fr-scheme="dark"] .co-logo-invertable {
   filter: invert(1);
+}
+
+.fr-footer__logo.co-logo-beta-gouv {
+  width: 150px;
+}
+
+.co-footer-brand-link {
+  margin-left: 3rem;
 }
 
 .co-pagination-wrapper {
@@ -48,7 +56,7 @@ html[data-fr-scheme="dark"] .logo-atelier-numerique {
 }
 
 .co-text--muted {
-  color: rgb(166, 165, 166);
+  color: rgb(103, 103, 103);
 }
 
 .co-image-transparent {

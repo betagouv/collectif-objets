@@ -19,7 +19,11 @@ Rails.application.routes.draw do
   get "inscription", to: "pages#inscription"
   get "confirmation-de-participation", to: "pages#confirmation_inscription"
 
-  resources :objets, only: [:index, :show]
+  resources :objets, only: [:index, :show] do
+    collection do
+      get "liste-imprimable", to: "objets#index_print", as: :printable_list
+    end
+  end
   get "objets/ref_pop/:ref_pop", to: "objets#show_by_ref_pop"
 
   resources :communes, only: [:index]
