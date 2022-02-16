@@ -3,8 +3,8 @@
     <div class="fr-mb-6w">
       <h3>Mon compte</h3>
       <p>
-        <b>Email</b>: <%= current_user.email %><br />
-        <b>Commune</b>: <%= current_user.commune&.nom || "N/A" %>
+        <b>Email&#8239;</b>: <%= current_user.email %><br />
+        <b>Commune&#8239;</b>: <%= current_user.commune&.nom || "N/A" %>
       </p>
       <p>
         <%= link_to "Déconnexion", destroy_user_session_path, class: "fr-btn fr-btn--secondary fr-fi-logout-box-r-line fr-btn--icon-left", data: { turbo_method: :delete } %>
