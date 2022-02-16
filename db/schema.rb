@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_103307) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_02_16_075329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,8 +21,8 @@ ActiveRecord::Schema.define(version: 2022_02_09_103307) do
     t.string "email"
     t.string "phone_number"
     t.integer "population"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement"], name: "index_communes_on_departement"
   end
@@ -37,14 +36,14 @@ ActiveRecord::Schema.define(version: 2022_02_09_103307) do
     t.string "commune_code_insee"
     t.string "departement"
     t.string "crafted_at"
-    t.datetime "last_recolement_at", precision: 6
+    t.datetime "last_recolement_at"
     t.string "nom_dossier"
     t.string "edifice_nom"
     t.string "emplacement"
     t.string "recolement_status"
     t.string "image_urls", default: [], array: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "nom_courant"
     t.index ["commune_code_insee"], name: "index_objets_on_commune_code_insee"
     t.index ["commune_nom"], name: "index_objets_on_commune_nom"
@@ -56,14 +55,15 @@ ActiveRecord::Schema.define(version: 2022_02_09_103307) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: 6
-    t.datetime "remember_created_at", precision: 6
-    t.datetime "last_sign_in_at", precision: 6
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "last_sign_in_at"
     t.string "login_token"
-    t.datetime "login_token_valid_until", precision: 6
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "login_token_valid_until"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "commune_id"
+    t.string "magic_token"
     t.index ["commune_id"], name: "index_users_on_commune_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
