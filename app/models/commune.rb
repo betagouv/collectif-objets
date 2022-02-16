@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Commune < ApplicationRecord
-  DISPLAYABLE_DEPARTEMENTS = %w[51 52 65 72].freeze
+  DISPLAYABLE_DEPARTEMENTS = %w[51 52 65 72 26 30].freeze
 
   has_many :objets, foreign_key: :commune_code_insee, primary_key: :code_insee
 

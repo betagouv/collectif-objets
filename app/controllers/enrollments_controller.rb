@@ -12,7 +12,6 @@ class EnrollmentsController < ApplicationController
 
   def create
     res = Co::Airtable::CreateEnrollmentRecord.new(@enrollment).perform
-    puts "res is #{@enrollment.to_h}"
     return redirect_to enrollment_success_path if res
 
     flash[:alert] = "Une erreur s'est produite, veuillez vérifiez vos
