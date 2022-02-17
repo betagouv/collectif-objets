@@ -38,9 +38,11 @@
           class: "co-text--blue"
         ) %>
       </p>
-      <div>
-        <%= link_to "Répondre au questionnaire", @objet.airtable_questionnaire_link, class: "fr-btn fr-fi-external-link-line fr-btn--icon-right", target: "_blank" %>
-      </div>
+      <% if @objet.commune == current_user&.commune %>
+        <div>
+          <%= link_to "Répondre au questionnaire", @objet.airtable_questionnaire_link, class: "fr-btn fr-fi-external-link-line fr-btn--icon-right", target: "_blank" %>
+        </div>
+      <% end %>
       <div class="fr-py-2w">
         <%= link_to "Revenir à la liste des objets", objets_path(commune_code_insee: @objet.commune_code_insee), class: "fr-btn fr-btn--secondary" %>
       </div>
