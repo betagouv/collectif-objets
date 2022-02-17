@@ -114,4 +114,16 @@ namespace :objets do
       end
     end
   end
+
+  # rake "objets:import_scle[../collectif-objets-data/pop-scle-column.csv]"
+  task :import_scle, [:path] => :environment do |_, args|
+    puts "before: #{Objet.where.not(crafted_at: nil).count} objets have SCLE"
+    for row in CSV.read(args[:path], headers: true) do
+      objet = Objet.find_by(ref_pop: row["REF"])
+      next unless objet
+
+      objet.update!(crafted_at: row["SCLE"])
+    end
+    puts "after: #{Objet.where.not(crafted_at: nil).count} objets have SCLE"
+  end
 end
