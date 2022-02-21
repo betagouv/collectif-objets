@@ -1,4 +1,9 @@
 name: "CI"
+
+defaults:
+  run:
+    working-directory: ./www
+
 on:
   push:
     branches: [ main ]
@@ -26,6 +31,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          working-directory: ./www
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Run tests
@@ -40,6 +46,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          working-directory: ./www
 #       - name: Security audit dependencies
 #         run: bin/bundler-audit --update
 #       - name: Security audit application code
