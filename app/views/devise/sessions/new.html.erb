@@ -32,7 +32,7 @@
       <%= form_for(resource, as: resource_name, url: users_magic_links_path, builder: FormBuilderDsfr) do |f| %>
         <div class="fr-input-group">
           <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
         </div>
         <div class="actions">
           <%= f.submit "Recevoir un lien de connexion" %>

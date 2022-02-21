@@ -4,7 +4,9 @@ module Users
   class MagicLinksController < ApplicationController
     def create
       email = params.dig(:user, :email)
-      raise unless email.present?
+      if email.blank?
+        return redirect_to(new_user_session_path, alert: "Veuillez renseigner votre email")
+      end
 
       Users::CreateMagicLinkService.new(email).perform => {success:, error:}
 
