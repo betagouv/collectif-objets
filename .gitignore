@@ -35,3 +35,5 @@
 /www/config/master.key
 
 /www/node_modules/*
+
+/tmp
