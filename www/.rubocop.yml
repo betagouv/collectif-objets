@@ -5,10 +5,10 @@ inherit_mode:
 AllCops:
   NewCops: enable
   Exclude:
-    - "bin/**/*"
-    - "db/**/*"
-    - "config/**/*"
-    - "lib/tasks/**/*"
+    - "www/bin/**/*"
+    - "www/db/**/*"
+    - "www/config/**/*"
+    - "www/lib/tasks/**/*"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

@@ -5,33 +5,33 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+/www/.bundle
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-*
+/www/db/*.sqlite3
+/www/db/*.sqlite3-*
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+/www/log/*
+/www/tmp/*
+!/www/log/.keep
+!/www/tmp/.keep
 
 # Ignore pidfiles, but keep the directory.
-/tmp/pids/*
-!/tmp/pids/
-!/tmp/pids/.keep
+/www/tmp/pids/*
+!/www/tmp/pids/
+!/www/tmp/pids/.keep
 
 # Ignore uploaded files in development.
-/storage/*
-!/storage/.keep
-/tmp/storage/*
-!/tmp/storage/
-!/tmp/storage/.keep
+/www/storage/*
+!/www/storage/.keep
+/www/tmp/storage/*
+!/www/tmp/storage/
+!/www/tmp/storage/.keep
 
-/public/assets
+/www/public/assets
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+/www/config/master.key
 
-/node_modules/*
+/www/node_modules/*
