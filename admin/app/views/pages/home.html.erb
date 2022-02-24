@@ -1,0 +1,8 @@
+<h1>Collectif Objets - Admin</h1>
+
+<% if current_user %>
+  <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete } %>
+  <%= link_to "Admin", avo_path %>
+<% else %>
+  <%= link_to "connexion", new_user_session_path %>
+<% end %>
