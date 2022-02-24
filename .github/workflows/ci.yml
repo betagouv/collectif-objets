@@ -84,7 +84,7 @@ jobs:
       - name: Deploy www to prod
         run: ./scripts/deploy.sh www prod
 
-deploy_admin_staging:
+  deploy_admin_staging:
     runs-on: ubuntu-latest
     needs: test
     if: ${{ github.ref == 'refs/heads/main' && contains(github.event.commits[0].message, '[admin]') }}
@@ -99,7 +99,7 @@ deploy_admin_staging:
         run: scalingo login --api-token $SCALINGO_TOKEN
       - name: Deploy admin to staging
         run: ./scripts/deploy.sh admin admin-staging
-
+        
   deploy_admin_prod:
     runs-on: ubuntu-latest
     needs: test
