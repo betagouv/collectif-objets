@@ -1,9 +1,5 @@
 name: "CI"
 
-defaults:
-  run:
-    working-directory: ./www
-
 on:
   push:
     branches: [ main ]
@@ -33,8 +29,10 @@ jobs:
           working-directory: ./www
       - name: Set up database schema
         run: bin/rails db:schema:load
+        working-directory: ./www
       - name: Run tests
         run: bundle exec rspec
+        working-directory: ./www
 
   lint:
     runs-on: ubuntu-latest
@@ -52,19 +50,68 @@ jobs:
 #         run: bin/brakeman -q -w2
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
+        working-directory: ./www
 
-  deploy:
+  deploy_www_staging:
     runs-on: ubuntu-latest
     needs: test
-    # if: github.ref == 'refs/heads/main'
+    if: ${{ github.ref == 'refs/heads/main' && !contains(github.event.commits[0].message, '[admin]') }}
     env:
       SCALINGO_TOKEN: ${{ secrets.SCALINGO_TOKEN }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Install Scalingo CLI
         run: curl -O https://cli-dl.scalingo.com/install && bash install
       - name: Scalingo login api token
         run: scalingo login --api-token $SCALINGO_TOKEN
+      - name: Deploy www to staging
+        run: ./scripts/deploy.sh www staging
+
+  deploy_www_prod:
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.ref == 'refs/heads/main' && !contains(github.event.commits[0].message, '[admin]') }}
+    env:
+      SCALINGO_TOKEN: ${{ secrets.SCALINGO_TOKEN }}
+    steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Deploy www to staging
-        run: ./deploy_script.sh www staging
+      - name: Install Scalingo CLI
+        run: curl -O https://cli-dl.scalingo.com/install && bash install
+      - name: Scalingo login api token
+        run: scalingo login --api-token $SCALINGO_TOKEN
+      - name: Deploy www to prod
+        run: ./scripts/deploy.sh www prod
+
+deploy_admin_staging:
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.ref == 'refs/heads/main' && contains(github.event.commits[0].message, '[admin]') }}
+    env:
+      SCALINGO_TOKEN: ${{ secrets.SCALINGO_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Scalingo CLI
+        run: curl -O https://cli-dl.scalingo.com/install && bash install
+      - name: Scalingo login api token
+        run: scalingo login --api-token $SCALINGO_TOKEN
+      - name: Deploy admin to staging
+        run: ./scripts/deploy.sh admin admin-staging
+
+  deploy_admin_prod:
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ github.ref == 'refs/heads/main' && contains(github.event.commits[0].message, '[admin]') }}
+    env:
+      SCALINGO_TOKEN: ${{ secrets.SCALINGO_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Scalingo CLI
+        run: curl -O https://cli-dl.scalingo.com/install && bash install
+      - name: Scalingo login api token
+        run: scalingo login --api-token $SCALINGO_TOKEN
+      - name: Deploy admin to prod
+        run: ./scripts/deploy.sh admin admin-prod

@@ -33,4 +33,4 @@ rm -rf $WWW_OR_ADMIN
 gzip archive.tar
 cd $ROOT_PATH
 echo "deploying archive $SLUG_PATH_GZ"
-# scalingo --app collectif-objets-${SCALINGO_APP} deploy $SLUG_PATH_GZ
+scalingo --app collectif-objets-${SCALINGO_APP} deploy $SLUG_PATH_GZ
