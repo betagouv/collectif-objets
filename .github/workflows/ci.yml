@@ -8,7 +8,6 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -53,3 +52,19 @@ jobs:
 #         run: bin/brakeman -q -w2
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/feature/admin'
+    env:
+      SCALINGO_TOKEN: ${{ secrets.SCALINGO_TOKEN }}
+    steps:
+      - name: Install Scalingo CLI
+        run: curl -O https://cli-dl.scalingo.com/install && bash install
+      - name: Scalingo login api token
+        run: scalingo login --api-token $SCALINGO_TOKEN
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deploy www to staging
+        run: ./deploy_script.sh www staging
