@@ -1,1 +1,1 @@
-../../shared/db/schema.rb
+../shared/db/schema.rb

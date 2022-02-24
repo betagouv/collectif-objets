@@ -1,8 +1,8 @@
-rm admin_avo/db/schema.rb
-rm admin_avo/config/database.yml
-rm -r admin_avo/app/models
+rm www/db/schema.rb
+rm www/config/database.yml
+rm -r www/app/models
 
-ln -s ../shared admin_avo/shared
-ln -s ../shared/db/schema.rb admin_avo/db/schema.rb
-ln -s ../shared/config/database.yml admin_avo/config/database.yml
-ln -s ../shared/models admin_avo/app/models
+ln -s ../shared www/shared
+ln -s ../shared/db/schema.rb www/db/schema.rb
+ln -s ../shared/config/database.yml www/config/database.yml
+ln -s ../shared/models www/app/models
