@@ -56,7 +56,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/feature/admin'
+    # if: github.ref == 'refs/heads/main'
     env:
       SCALINGO_TOKEN: ${{ secrets.SCALINGO_TOKEN }}
     steps:
