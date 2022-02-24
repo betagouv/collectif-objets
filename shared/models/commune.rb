@@ -3,7 +3,8 @@
 class Commune < ApplicationRecord
   DISPLAYABLE_DEPARTEMENTS = %w[51 52 65 72 26 30].freeze
 
-  has_many :objets, foreign_key: :commune_code_insee, primary_key: :code_insee
+  has_many :users
+  has_many :objets, foreign_key: :commune_code_insee, primary_key: :code_insee, inverse_of: :commune
 
   def self.include_objets_count
     joins(
@@ -28,6 +29,10 @@ class Commune < ApplicationRecord
       .optional_filter { !_1.emplacement.present? }
   end
   # rubocop:enable Metrics/AbcSize
+
+  def nom_with_code_insee
+    "#{nom} (#{code_insee})"
+  end
 
   def main_objet
     @main_objet ||=
