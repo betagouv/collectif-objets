@@ -1,3 +1,11 @@
+install:
+	cd www
+	bundle install
+	cd ../admin
+	bundle install
+	cd ..
+	brew install overmind
+
 dev:
 	overmind start -f Procfile.dev
 

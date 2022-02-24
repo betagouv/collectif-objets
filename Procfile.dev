@@ -1,1 +1,2 @@
-www_web: cd www && rails server
+www_web: cd www && rails server -p 3010
+admin_web: cd admin && rails server -p 3011
