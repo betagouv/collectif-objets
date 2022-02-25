@@ -12,9 +12,9 @@ class CommuneResource < Avo::BaseResource
   end
 
   field :id, as: :id, link_to_resource: true
-  field :nom, as: :text, sortable: true, link_to_resource: true
-  field :code_insee, as: :text, sortable: true
-  field :departement, sortable: true, as: :text
+  field :nom, as: :text, sortable: true, link_to_resource: true, readonly: true
+  field :code_insee, as: :text, sortable: true, readonly: true
+  field :departement, sortable: true, as: :text, readonly: true
   # field :email, sortable: true, as: :text
   field :phone_number, sortable: true, as: :text
   field :population, sortable: true, as: :number

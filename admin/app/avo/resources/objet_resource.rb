@@ -12,21 +12,21 @@ class ObjetResource < Avo::BaseResource
   end
 
   field :id, as: :id
-  field :ref_pop, as: :text, sortable: true, link_to_resource: true
-  field :nom_courant, as: :text, sortable: true
-  field :first_image_url, as: :external_image
-  field :nom, as: :text, hide_on: [:index]
-  field :commune, as: :belongs_to, searchable: true
-  field :categorie, as: :text, sortable: true
-  field :crafted_at, as: :text, sortable: true
-  field :departement, as: :text, sortable: true, hide_on: [:index]
+  field :ref_pop, as: :text, sortable: true, link_to_resource: true, readonly: true
+  field :nom_courant, as: :text, sortable: true, readonly: true
+  field :first_image_url, as: :external_image, readonly: true
+  field :nom, as: :text, hide_on: [:index], readonly: true
+  field :commune, as: :belongs_to, searchable: true, readonly: true
+  field :categorie, as: :text, sortable: true, readonly: true
+  field :crafted_at, as: :datetime, sortable: true, readonly: true
+  field :departement, as: :text, sortable: true, hide_on: [:index], readonly: true
   field :recolement_status, as: :text, sortable: true
-  field :edifice_nom, as: :text, sortable: true
-  field :emplacement, as: :text, sortable: true, hide_on: [:index]
-  field :nom_dossier, as: :text, sortable: true, hide_on: [:index]
-  field :last_recolement_at, as: :text, sortable: true, hide_on: [:index]
-  field :image_urls, as: :text, sortable: true, hide_on: [:index]
-  field :created_at, as: :text, sortable: true
+  field :edifice_nom, as: :text, sortable: true, readonly: true
+  field :emplacement, as: :text, sortable: true, hide_on: [:index], readonly: true
+  field :nom_dossier, as: :text, sortable: true, hide_on: [:index], readonly: true
+  field :last_recolement_at, as: :datetime, sortable: true, hide_on: [:index], readonly: true
+  field :image_urls, as: :text, sortable: true, hide_on: [:index], readonly: true
+  field :created_at, as: :datetime, sortable: true
   # field :ref_memoire, as: :text, sortable: true,
   # field :commune_nom, as: :text, sortable: true,
   # field :commune_code_insee, as: :text, sortable: true
