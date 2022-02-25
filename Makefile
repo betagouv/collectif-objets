@@ -1,9 +1,6 @@
 install:
-	cd www
-	bundle install
-	cd ../admin
-	bundle install
-	cd ..
+	cd www && bundle install
+	cd admin && bundle install
 	brew install overmind
 
 dev:
