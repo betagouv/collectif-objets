@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
+  devise_for :users, :skip => [:registrations], controllers: {
     sessions: "users/sessions"
   }
 
   devise_scope :user do
+    # we've disabled registrations to avoid sign ups, but we still want editable users
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    put 'users' => 'devise/registrations#update', :as => 'user_registration'
+
     get 'sign_in_with_token', to: 'users/sessions#sign_in_with_token'
     get 'magic-authentication', to: "users/sessions#sign_in_with_magic_token"
     namespace :users do

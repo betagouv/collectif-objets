@@ -5,7 +5,7 @@ class User < ApplicationRecord
   ROLE_MAIRIE = "mairie"
   ROLES = [ROLE_ADMIN, ROLE_MAIRIE].freeze
 
-  devise :database_authenticatable, :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :registerable
 
   belongs_to :commune, optional: true
   validates :role, presence: true, inclusion: { in: ROLES }
