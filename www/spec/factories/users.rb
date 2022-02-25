@@ -3,5 +3,6 @@
 FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "user-#{n + 1}@mairie-tests.fr" }
+    role { "mairie" }
   end
 end

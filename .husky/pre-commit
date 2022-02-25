@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+cd www
+bundle exec rubocop
+bundle exec rspec spec

@@ -8,6 +8,7 @@ They share models code in `/shared`
 
 ## Usage
 
+- install rbenv & make sure you have the correct ruby-versions installed and selected
 - `make install`
 - `make dev`
 

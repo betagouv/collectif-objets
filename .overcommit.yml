@@ -1,7 +1,0 @@
-PreCommit:
-  RuboCop:
-    enabled: true
-    command: ["cd www && bundle exec rubocop --parallel"]
-CommitMsg:
-  ALL:
-    enabled: false
