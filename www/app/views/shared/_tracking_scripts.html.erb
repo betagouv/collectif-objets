@@ -1,0 +1,56 @@
+<input id="current-user-email" type="hidden" value="<%= current_user&.email %>">
+
+<% if Rails.env.production? && !ENV["HOST"]&.match(/staging/) %>
+
+  <!-- Send In Blue -->
+  <script type="text/javascript">
+    (function() {
+        window.sib = {
+            equeue: [],
+            client_key: "n6ht9j1e3m9owl2lbsm78q1d"
+        };
+        var emailElt = document.getElementById("current-user-email")
+        if (emailElt && emailElt.value) {
+          console.log(`got email ${emailElt.value}`)
+          window.sib.email_id = emailElt.value;
+        } else {
+          console.log(`no got email`)
+        }
+        window.sendinblue = {};
+        for (var j = ['track', 'identify', 'trackLink', 'page'], i = 0; i < j.length; i++) {
+        (function(k) {
+            window.sendinblue[k] = function() {
+                var arg = Array.prototype.slice.call(arguments);
+                (window.sib[k] || function() {
+                        var t = {};
+                        t[k] = arg;
+                        window.sib.equeue.push(t);
+                    })(arg[0], arg[1], arg[2], arg[3]);
+                };
+            })(j[i]);
+        }
+        var n = document.createElement("script"),
+            i = document.getElementsByTagName("script")[0];
+        n.type = "text/javascript", n.id = "sendinblue-js", n.async = !0, n.src = "https://sibautomation.com/sa.js?key=" + window.sib.client_key, i.parentNode.insertBefore(n, i), window.sendinblue.page();
+    })();
+  </script>
+  <!-- End Send In Blue -->
+
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['disableCookies']);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://stats.data.gouv.fr/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '237']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+
+<% end %>
