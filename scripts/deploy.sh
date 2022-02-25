@@ -10,6 +10,7 @@ die () {
 
 WWW_OR_ADMIN=$1
 SCALINGO_APP=$2
+[[ $SCALINGO_APP =~ "prod" ]] && SCALINGO_REGION="osc-secnum-fr1" || SCALINGO_REGION="osc-fr1"
 BRANCH=`git rev-parse --abbrev-ref HEAD`
 ROOT_PATH=$PWD
 SLUG_DIR=$PWD/tmp/slug
@@ -33,4 +34,4 @@ rm -rf $WWW_OR_ADMIN
 gzip archive.tar
 cd $ROOT_PATH
 echo "deploying archive $SLUG_PATH_GZ"
-scalingo --app collectif-objets-${SCALINGO_APP} deploy $SLUG_PATH_GZ
+scalingo --app collectif-objets-$SCALINGO_APP --region $SCALINGO_REGION deploy $SLUG_PATH_GZ
