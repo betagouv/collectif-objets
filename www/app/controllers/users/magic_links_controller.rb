@@ -21,8 +21,12 @@ module Users
       params.dig(:user, :email)
     end
 
+    def user
+      @user ||= User.find_by_email(email)
+    end
+
     def prevent_admin
-      return true if User.find_by_email(email)&.mairie?
+      return true if user.nil? || user&.mairie?
 
       redirect_to(new_user_session_path, alert: "Impossible de se connecter avec un compte d'administrateur")
     end
