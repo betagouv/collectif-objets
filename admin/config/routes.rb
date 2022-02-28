@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "pages#home"
   devise_for :users, :skip => [:registrations], controllers: {
     sessions: "users/sessions",
-
+    passwords: "users/passwords",
   }
 
   devise_scope :user do
