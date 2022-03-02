@@ -5,7 +5,7 @@ die () {
 
 [ "$#" -eq 2 ] || die "2 arguments required, $# provided"
 [[ $1 = "www" || $1 = "admin" ]] || die "first argument should be www or admin"
-[[ $2 = "staging" || $2 = "prod" || $2 = "admin-prod" || $2 = "admin-staging" ]] || die "second argument should be scalingo app suffix"
+[[ $2 =~ ^staging || $2 = "prod" || $2 = "admin-prod" || $2 = "admin-staging" ]] || die "second argument should be scalingo app suffix"
 [[ $1 != "admin" || ($2 = "admin-prod" || $2 = "admin-staging") ]] || die "admin should be deployed to admin app"
 
 WWW_OR_ADMIN=$1
