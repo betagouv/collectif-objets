@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     collection do
       get "liste-imprimable", to: "objets#index_print", as: :printable_list
     end
+    resources :recensements, except: [:index, :show, :destroy]
   end
   get "objets/ref_pop/:ref_pop", to: "objets#show_by_ref_pop"
 

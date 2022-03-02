@@ -48,11 +48,14 @@
               <%= link_to objet.nom, objet_path(objet), class: "fr-card__link" %>
             </h4>
             <p class="fr-card__desc">
-              <%= objet.commune.nom %>
-            </p>
-            <p class="fr-card__detail">
+              <%= objet.commune.nom %><br />
               <%= objet.edifice_nom %>
             </p>
+            <% if objet.commune == current_user&.commune %>
+              <p class="fr-card__detail">
+                <%= render "objets/recensement_badge", objet: %>
+              </p>
+            <% end %>
           </div>
           <div class="fr-card__img">
             <% if objet.image_urls.any? %>

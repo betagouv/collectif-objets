@@ -34,5 +34,7 @@ module CollectifObjets
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
+
+    config.x.environment = ENV["HOST"]&.match(/staging\./) ? "staging" : Rails.env
   end
 end

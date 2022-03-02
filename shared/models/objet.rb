@@ -3,6 +3,7 @@
 class Objet < ApplicationRecord
   scope :with_images, -> { where("cardinality(image_urls) >= 1") }
   belongs_to :commune, foreign_key: :commune_code_insee, primary_key: :code_insee, optional: true, inverse_of: :objets
+  has_many :recensements
 
   scope :with_photos_first, -> { order("cardinality(image_urls) DESC, LOWER(nom) ASC") }
 
@@ -41,5 +42,9 @@ class Objet < ApplicationRecord
 
   def nom_with_ref_pop
     "#{ref_pop} #{nom}"
+  end
+
+  def current_recensement
+    recensements.first
   end
 end

@@ -1,6 +1,14 @@
 <main class="fr-container fr-py-4w co-objet-show">
   <h2><%= @objet.nom %></h2>
   <p>📍 <%= @objet.commune.nom %> (<%= @objet.departement %>) - ⛪️ <%= @objet.edifice_nom %></p>
+  <% if @objet.commune == current_user&.commune %>
+    <p>
+      <%= render "objets/recensement_badge", objet: @objet %>
+      <% if @objet.current_recensement.present? %>
+        <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-link fr-fi-edit-line fr-link--icon-right" %>
+      <% end %>
+    </p>
+  <% end %>
   <div class="fr-grid-row fr-py-4w fr-grid-row--gutters">
     <div class="fr-col-md-4">
       <p>
@@ -22,8 +30,7 @@
       </p>
       <p>
         <b>Récolement</b><br />
-        Dernier récolement : <%= @objet.last_recolement_at || "N/A" %><br />
-        Statut actuel : <%= @objet.recolement_status || "N/A" %>
+        Dernier récolement : <%= @objet.last_recolement_at || "N/A" %>
       </p>
       <p>
         <b>Références</b><br />
@@ -38,9 +45,9 @@
           class: "co-text--blue"
         ) %>
       </p>
-      <% if @objet.commune == current_user&.commune %>
+      <% if @objet.commune == current_user&.commune && @objet.current_recensement.nil? %>
         <div>
-          <%= link_to "Répondre au questionnaire", @objet.airtable_questionnaire_link, class: "fr-btn fr-fi-external-link-line fr-btn--icon-right", target: "_blank" %>
+          <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
         </div>
       <% elsif !current_user %>
         <div>
