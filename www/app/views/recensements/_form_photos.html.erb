@@ -1,0 +1,75 @@
+<% error_message = f.object.errors.messages_for(:photos)&.first %>
+
+<div data-controller="recensement-form--uploader">
+  <div
+    class="fr-fieldset <%= "fr-fieldset--error" if error_message %>"
+    data-recensement-target="photos"
+  >
+    <legend class="fr-fieldset__legend">Photos <span class="co-text--blue">*</span></legend>
+    <div class="fr-fieldset__content">
+      <% f.object.photos.each do |photo| %>
+        <div
+          class="co-flex co-flex--align-items-center fr-mb-2w"
+          data-controller="recensement-form--existing-photo"
+        >
+          <div class="co-recensement-form-photo-wrapper">
+            <span
+              class="co-delete-icon fr-fi-delete-line hide" aria-hidden="true"
+              data-recensement-form--existing-photo-target="deleteIcon"
+            ></span>
+            <img
+              src="<%= url_for(photo) %>"
+              data-recensement-form--existing-photo-target="img"
+            />
+          </div>
+          <div class="fr-checkbox-group fr-ml-2w">
+            <input
+              type="checkbox"
+              name="remove_photo"
+              id="remove_photo_<%= photo.signed_id %>"
+              data-recensement-form--existing-photo-target="removeCheckbox"
+              data-action="change->recensement-form--existing-photo#update"
+            >
+            <label class="fr-label" for="remove_photo_<%= photo.signed_id %>">
+              Supprimer cette photo
+            </label>
+          </div>
+          <%= f.hidden_field :photos, multiple: true, value: photo.signed_id, "data-recensement-form--existing-photo-target": "hiddenInput" %>
+        </div>
+      <% end %>
+
+      <div data-recensement-form--uploader-target="inputsWrapper">
+        <%= render "form_upload_photo", f: %>
+      </div>
+
+      <% if error_message %>
+        <p class="fr-error-text">
+          <%= error_message %>
+        </p>
+      <% end %>
+
+      <div class="hide">
+        <%# this seems required for Turbo to send the form as multipart %>
+        <%= f.file_field :photos, multiple: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="fr-mt-6w" data-recensement-target="skipPhotos">
+    <div class="fr-checkbox-group">
+      <input
+        type="checkbox"
+        id="recensement[skip_photos]"
+        name="recensement[skip_photos]"
+        <%= "checked" if f.object.skip_photos %>
+      >
+      <label class="fr-label" for="recensement[skip_photos]">
+        Je ne peux pas prendre cet objet en photo
+      </label>
+    </div>
+  </div>
+
+  <template data-recensement-form--uploader-target="template">
+    <%= render "form_upload_photo", f: %>
+  </template>
+</div>

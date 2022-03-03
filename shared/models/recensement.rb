@@ -25,8 +25,9 @@ class Recensement < ApplicationRecord
   validates :etat_sanitaire_edifice, presence: true, if: -> { !absent? && recensable? }
   validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { !absent? && recensable? }
   validates :securisation, presence: true, inclusion: { in: SECURISATIONS }, if: -> { !absent? && recensable? }
+  validates :photos, presence: true, if: -> { !absent? && recensable? && !skip_photos }
 
-  attr_accessor :confirmation
+  attr_accessor :confirmation, :skip_photos
 
   def absent?
     localisation == LOCALISATION_ABSENT

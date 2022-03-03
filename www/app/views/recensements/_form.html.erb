@@ -1,5 +1,4 @@
 <div data-controller="recensement">
-
   <% if recensement.errors.any? %>
     <div class="fr-alert fr-alert--error fr-mb-6w">
       <p>
@@ -59,7 +58,7 @@
             type="checkbox"
             id="recensement[confirmation]"
             name="recensement[confirmation]"
-            <%= "checked" if recensement.confirmation || recensement.persisted? %>
+            <%= "checked" if recensement.confirmation %>
             <%= "disabled" if recensement.persisted? %>
           >
           <label class="fr-label" for="recensement[confirmation]">
@@ -197,55 +196,9 @@ nature des objets page 15 et 16 du guide", "https://fichiers.collectif-objets.be
       </div>
     </div>
 
-    <div class="fr-grid-row fr-my-12w" data-recensement-target="photos">
-      <div class="fr-col-md-6" data-controller="recensement-form--uploader">
-        <div class="fr-fieldset">
-          <legend class="fr-fieldset__legend">Photos</legend>
-          <div class="fr-fieldset__content">
-            <% @recensement.photos.each do |photo| %>
-              <div
-                class="co-flex co-flex--align-items-center fr-mb-2w"
-                data-controller="recensement-form--existing-photo"
-              >
-                <div class="co-recensement-form-photo-wrapper">
-                  <span
-                    class="co-delete-icon fr-fi-delete-line hide" aria-hidden="true"
-                    data-recensement-form--existing-photo-target="deleteIcon"
-                  ></span>
-                  <img
-                    src="<%= url_for(photo) %>"
-                    data-recensement-form--existing-photo-target="img"
-                  />
-                </div>
-                <div class="fr-checkbox-group fr-ml-2w">
-                  <input
-                    type="checkbox"
-                    name="remove_photo"
-                    id="remove_photo_<%= photo.signed_id %>"
-                    data-recensement-form--existing-photo-target="removeCheckbox"
-                    data-action="change->recensement-form--existing-photo#update"
-                  >
-                  <label class="fr-label" for="remove_photo_<%= photo.signed_id %>">
-                    Supprimer cette photo
-                  </label>
-                </div>
-                <%= f.hidden_field :photos, multiple: true, value: photo.signed_id, "data-recensement-form--existing-photo-target": "hiddenInput" %>
-              </div>
-            <% end %>
-            <div data-recensement-form--uploader-target="inputsWrapper">
-              <%= render "form_upload_photo", f: %>
-            </div>
-
-            <div class="hide">
-              <%# this seems required for Turbo to send the form as multipart %>
-              <%= f.file_field :photos, multiple: true %>
-            </div>
-          </div>
-        </div>
-
-        <template data-recensement-form--uploader-target="template">
-          <%= render "form_upload_photo", f: %>
-        </template>
+    <div class="fr-grid-row fr-my-12w">
+      <div class="fr-col-md-6">
+        <%= render "form_photos", f: %>
       </div>
       <div class="fr-col-md-6 co-text--muted co-form-explanations">
         <p>

@@ -4,15 +4,17 @@ class RecensementsController < ApplicationController
   before_action :restrict_access
 
   def new
-    @recensement = Recensement.new(objet:, recensable: true)
+    @recensement = Recensement.new(objet:, recensable: "true")
   end
 
   def edit
     @recensement = Recensement.find(params[:id])
+    @recensement.confirmation = true
+    @recensement.skip_photos = true if @recensement.photos.empty?
   end
 
   def create
-    @recensement = Recensement.new(objet:, **recensement_params_parsed)
+    @recensement = Recensement.new(recensable: "true", **recensement_params_parsed, objet:)
     @recensement.confirmation = recensement_params[:confirmation].present?
     if @recensement.save
       redirect_to objet_path(objet), notice: "Le recensement a bien été enregistré !"
@@ -23,6 +25,7 @@ class RecensementsController < ApplicationController
 
   def update
     @recensement = Recensement.find(params[:id])
+    @recensement.confirmation = true
     if @recensement.update(recensement_params_parsed)
       redirect_to objet_path(objet), notice: "Le recensement a bien été mis à jour"
     else
@@ -41,12 +44,14 @@ class RecensementsController < ApplicationController
       .require(:recensement)
       .permit(
         :confirmation, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
-        :etat_sanitaire_edifice, :securisation, :notes, photos: []
+        :etat_sanitaire_edifice, :securisation, :notes, :skip_photos, photos: []
       )
   end
 
   def recensement_params_parsed
-    recensement_params.merge(recensable: recensement_params[:recensable] == "true")
+    recensement_params.merge(recensable:
+        recensement_params[:recensable].blank? ||
+        recensement_params[:recensable] == "true")
   end
 
   def restrict_access

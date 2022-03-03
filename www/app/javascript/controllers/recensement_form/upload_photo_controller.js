@@ -27,4 +27,8 @@ export default class extends Controller {
     this.wrapperTarget.remove()
     event.preventDefault()
   }
+
+  disconnect() {
+    document.dispatchEvent(new Event("refreshFields"))
+  }
 }

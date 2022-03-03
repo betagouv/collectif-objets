@@ -22,3 +22,5 @@ fr:
               inclusion: "L'état sanitaire de l'édifice est invalide"
             recensable:
               inclusion: "Vous devez préciser si l'objet peut être recensé"
+            photos:
+              blank: "Les photos sont fortement recommandées. Si vous ne pouvez pas en prendre, merci de le signaler."

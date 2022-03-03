@@ -10,6 +10,7 @@ FactoryBot.define do
     etat_sanitaire_edifice { Recensement::ETAT_CORRECT }
     securisation { Recensement::SECURISATION_CORRECTE }
     notes { "objet très doux" }
+    skip_photos { true }
 
     trait :without_image do
       # do nothing
