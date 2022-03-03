@@ -88,7 +88,7 @@
             <%= f.label :edifice_nom,
               'Précisez le nom de l’édifice dans lequel se trouve l’objet <span class="co-text--blue">*</span>'.html_safe
             %>
-            <%= f.text_field :edifice_nom, required: true, "aria-describedby": ("edifice-nom-desc-error" if has_error) %>
+            <%= f.text_field :edifice_nom, "aria-describedby": ("edifice-nom-desc-error" if has_error) %>
             <% if has_error %>
               <p id="edifice-nom-desc-error" class="fr-error-text">
                 <%= recensement.errors.messages_for(:edifice_nom).first %>

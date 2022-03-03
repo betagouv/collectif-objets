@@ -8,6 +8,7 @@ export default class extends Controller {
     "etatSanitaireEdifice",
     "etatSanitaire",
     "securisation",
+    "photos",
     "notes",
     "form"
   ]
@@ -33,9 +34,9 @@ export default class extends Controller {
   toggleSection(sectionElt, enabled) {
     sectionElt.querySelector("legend")?.classList?.
       toggle("co-legend--disabled", !enabled)
-    sectionElt.querySelectorAll('input[type=radio], input[type=text], textarea')
+    sectionElt.querySelectorAll('input[type=radio], input[type=text], input[type=file], textarea')
       .forEach(elt => elt.toggleAttribute("disabled", !enabled))
-    sectionElt.querySelectorAll('.fr-input-group')
+    sectionElt.querySelectorAll('.fr-input-group, .fr-upload-group')
       .forEach(elt => elt.classList.toggle("fr-input-group--disabled", !enabled))
   }
 
@@ -44,9 +45,11 @@ export default class extends Controller {
     this.toggleSection(this.localisationTarget, confirmation)
     this.toggleSection(this.edificeNomTarget, confirmation && localisation == "autre_edifice")
     this.toggleSection(this.recensableTarget, confirmation && ["edifice_initial", "autre_edifice"].includes(localisation))
-    this.toggleSection(this.etatSanitaireEdificeTarget, confirmation && localisation != "absent" && recensable)
-    this.toggleSection(this.etatSanitaireTarget, confirmation && localisation != "absent" && recensable)
-    this.toggleSection(this.securisationTarget, confirmation && localisation != "absent" && recensable)
+    const mainFieldsCondition = confirmation && ["edifice_initial", "autre_edifice"].includes(localisation) && recensable
+    this.toggleSection(this.etatSanitaireEdificeTarget, mainFieldsCondition)
+    this.toggleSection(this.etatSanitaireTarget, mainFieldsCondition)
+    this.toggleSection(this.securisationTarget, mainFieldsCondition)
+    this.toggleSection(this.photosTarget, mainFieldsCondition)
     this.toggleSection(this.notesTarget, confirmation && recensable)
     document.querySelector("input[type=submit]")
       .toggleAttribute("disabled", !confirmation)
