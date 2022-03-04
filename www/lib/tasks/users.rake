@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "csv"
+require 'securerandom'
 
 namespace :users do
 
@@ -31,5 +32,28 @@ namespace :users do
       user.update!(commune:, magic_token: )
     end
     puts "done!"
+  end
+
+  # rake "users:create_missing[65]"
+  desc "create missing users"
+  task :create_missing, [:dpt] => :environment do |_, args|
+    communes = Commune.where(departement: args[:dpt]).where.not(email: [nil, ""]).includes(:users)
+    communes.each do |commune|
+      if commune.users.count == 0
+        user = commune.users.build(
+          email: commune.email,
+          role: :mairie,
+          magic_token: SecureRandom.hex(10)
+        )
+        user.save
+        if user.errors
+          puts user.attributes
+          puts user.errors.full_messages
+        end
+      elsif commune.users.first.email != commune.email
+        puts "commune #{commune.nom} has different existing email:"
+        puts "commune #{commune.users.first.email} vs new #{commune.email}"
+      end
+    end
   end
 end
