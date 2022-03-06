@@ -12,7 +12,8 @@ def iterate_files(glob_path)
 end
 
 namespace :objets do
-  desc "imports objets from airtable CSV"
+  # rake objets:import[../tmp-pop-custom-export-filtered-65.csv]
+  desc "imports objets from custom export POP CSV"
   task :import, [:path] => :environment do |_, args|
     mapping = {
       ref_memoire: "Référence de l’illustration (Mémoire)",

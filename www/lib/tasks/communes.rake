@@ -15,7 +15,7 @@ namespace :communes do
     end
   end
 
-  # rake "communes:export[../collectif-objets-data/rails-communes.csv]"
+  # rake "communes:export[../../collectif-objets-data/rails-communes.csv]"
   desc "export communes"
   task :export, [:path] => :environment do |_, args|
     headers = [
@@ -23,6 +23,7 @@ namespace :communes do
       "code_insee",
       "departement",
       "email",
+      "magic_token",
       "phone_number",
       "population",
       "nombre_objets",
@@ -40,6 +41,7 @@ namespace :communes do
           commune.code_insee,
           commune.departement,
           commune.email,
+          commune.users.first&.magic_token,
           commune.phone_number,
           commune.population,
           commune.objets.count,
