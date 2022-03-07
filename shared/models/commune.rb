@@ -64,4 +64,10 @@ class Commune < ApplicationRecord
   def completed?
     status == STATUS_COMPLETED
   end
+
+  def start!
+    return true unless status.nil?
+
+    update!(status: STATUS_STARTED)
+  end
 end

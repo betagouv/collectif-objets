@@ -6,6 +6,7 @@ class Objet < ApplicationRecord
   has_many :recensements
 
   scope :with_photos_first, -> { order("cardinality(image_urls) DESC, LOWER(nom) ASC") }
+  scope :without_recensement, -> { includes(:recensements).where(recensements: { objet_id: nil }) }
 
   def self.displayable
     in_str = Commune::DISPLAYABLE_DEPARTEMENTS.map { "'#{_1}'" }.join(", ")

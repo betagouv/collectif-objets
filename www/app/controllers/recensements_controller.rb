@@ -18,7 +18,8 @@ class RecensementsController < ApplicationController
     @recensement = Recensement.new(recensable: "true", **recensement_params_parsed, objet: @objet)
     @recensement.confirmation = recensement_params[:confirmation].present?
     if @recensement.save
-      redirect_to objet_path(@objet), notice: "Le recensement a bien été enregistré !"
+      @recensement.objet.commune.start!
+      redirect_to commune_objets_path(@objet.commune, recensement_saved: true)
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +28,7 @@ class RecensementsController < ApplicationController
   def update
     @recensement.confirmation = true
     if @recensement.update(recensement_params_parsed)
-      redirect_to objet_path(@objet), notice: "Le recensement a bien été mis à jour !"
+      redirect_to commune_objets_path(@objet.commune, recensement_saved: true)
     else
       render :edit, status: :unprocessable_entity
     end

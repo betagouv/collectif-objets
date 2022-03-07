@@ -1,51 +1,91 @@
-<main class="fr-container fr-py-4w">
-  <div class="fr-grid-row fr-py-2w fr-grid-row--center">
-    <div class="fr-col-md-8 co-text--center">
-      <h2 class="co-text-blue">
-        Les <%= @objets.count %> objets classés de <%= @commune.nom %>
-      </h2>
-      <% if @commune.status.nil? %>
+<% if @recensement_saved %>
+  <main class="fr-container fr-py-12w">
+    <div class="fr-grid-row fr-mb-4w fr-grid-row--middle">
+      <div class="fr-col-md-6">
+        <h2 class="fr-display--xl co-text--blue">Votre recensement a bien été enregistré</h2>
         <p>
-          Il y a des objets monuments historiques dans votre commune ? Vous êtes élu·e ? Responsable du patrimoine de votre commune ?
-          La commune est charge de veiller sur ces objets.
-          <b>Aidez-nous à vérifier leur présence et leur état</b>
+          Vous pourrez revenir sur la fiche de cet objet pour modifier votre recensement.
         </p>
-        <p>
-          Vous avez besoin d'aide ? Nous vous guidons étape par étape:
-        </p>
-        <p>
-          <%= link_to "Je confirme la participation de ma commune", new_commune_enrollment_path, class: "fr-btn" %>
-        </p>
-      <% end %>
-      <% if @commune.enrolled? %>
-        <p>
-          <% if @objets.all?(&:recensement?) %>
+        <% if @objets.any? %>
+          <p>
+            <%= link_to "Revenir à la liste d'objets de ma commune", commune_objets_path(@commune), class: "fr-btn" %>
+          </p>
+        <% else %>
+          <p>Vous avez recensé tous les objets de votre commune !</p>
+          <p>
             <%= link_to "Finaliser le recensement", new_commune_completion_path(@commune), class: "fr-btn" %>
-          <% else %>
-            <button class="fr-btn" disabled>Finaliser le recensement</button>
-            Il vous reste <%= @objets.reject(&:recensement?).count %> objets à recenser
-          <% end %>
-        </p>
-      <% elsif @commune.completed? %>
-        <p>
-          Le recensement de vos objets est terminé, merci !
-          Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
-        </p>
-      <% end %>
-    </div>
-  </div>
-  <%= render "objets/list", objets: @objets %>
-  <% if @commune.objets_recensable? %>
-    <div class="fr-grid-row fr-pt-8w fr-pb-8w fr-grid-row--center">
-      <div class="fr-col-md-8 co-text--center">
-        <p>
-          Si vous n'avez pas de connexion internet pendant le recensement, vous pouvez :
-        </p>
-        <p>
-          <%= link_to "Imprimer la liste d'objets", printable_list_commune_objets_path(@commune), class: "fr-btn fr-btn--secondary" %>
-          <%= link_to "Imprimer le questionnaire", "https://fichiers.collectif-objets.beta.gouv.fr/questionnaire.pdf", class: "fr-btn fr-btn--secondary", target: "_blank", rel: "noopener" %>
-        </p>
+            ou
+          </p>
+          <p><%= link_to "Revenir à la liste d'objets de ma commune", commune_objets_path(@commune), class: "fr-btn fr-btn--secondary" %></p>
+        <% end %>
+      </div>
+      <div class="fr-col-md-6">
+        <%= image_tag "illustrations/man-ok-screen.svg", class: "co--width-max-100" %>
       </div>
     </div>
+  </main>
+
+  <% if @objets.any? %>
+    <div class="co-section--teal">
+      <div class="fr-container fr-py-8w">
+        <h3 class="co-text--blue">
+          Ces objets sont encore à recenser:
+        </h3>
+        <%= render "objets/list", objets: @objets %>
+        <%= link_to "Revenir à la liste de tous les objets de ma commune", commune_objets_path(@commune), class: "fr-link" %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <main class="fr-container fr-py-4w">
+    <div class="fr-grid-row fr-py-2w fr-grid-row--center">
+      <div class="fr-col-md-8 co-text--center">
+        <h2 class="co-text--blue">
+          Les <%= @objets.count %> objets classés de <%= @commune.nom %>
+        </h2>
+        <% if @commune.status.nil? %>
+          <p>
+            Il y a des objets monuments historiques dans votre commune ? Vous êtes élu·e ? Responsable du patrimoine de votre commune ?
+            La commune est charge de veiller sur ces objets.
+            <b>Aidez-nous à vérifier leur présence et leur état</b>
+          </p>
+          <p>
+            Vous avez besoin d'aide ? Nous vous guidons étape par étape:
+          </p>
+          <p>
+            <%= link_to "Je confirme la participation de ma commune", new_commune_enrollment_path, class: "fr-btn" %>
+          </p>
+        <% end %>
+        <% if @commune.enrolled_or_started? %>
+          <p>
+            <% if @objets.all?(&:recensement?) %>
+              <%= link_to "Finaliser le recensement", new_commune_completion_path(@commune), class: "fr-btn" %>
+            <% else %>
+              <button class="fr-btn" disabled>Finaliser le recensement</button>
+              Il vous reste <%= @objets.reject(&:recensement?).count %> objets à recenser
+            <% end %>
+          </p>
+        <% elsif @commune.completed? %>
+          <p>
+            Le recensement de vos objets est terminé, merci !
+            Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <%= render "objets/list", objets: @objets %>
+    <% if @commune.objets_recensable? %>
+      <div class="fr-grid-row fr-pt-8w fr-pb-8w fr-grid-row--center">
+        <div class="fr-col-md-8 co-text--center">
+          <p>
+            Si vous n'avez pas de connexion internet pendant le recensement, vous pouvez :
+          </p>
+          <p>
+            <%= link_to "Imprimer la liste d'objets", printable_list_commune_objets_path(@commune), class: "fr-btn fr-btn--secondary" %>
+            <%= link_to "Imprimer le questionnaire", "https://fichiers.collectif-objets.beta.gouv.fr/questionnaire.pdf", class: "fr-btn fr-btn--secondary", target: "_blank", rel: "noopener" %>
+          </p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </main>

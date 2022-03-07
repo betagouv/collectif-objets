@@ -56,13 +56,11 @@ RSpec.feature "Recensement", type: :feature, js: true do
     fill_in "Commentaires", with: "C'est un superbe pépito bleu"
 
     click_on "Enregistrer ce recensement"
-    expect(page).to have_content("Le recensement a bien été enregistré !")
+    expect(page).to have_content("Votre recensement a bien été enregistré")
 
     # DEUXIEME OBJET
-    click_on "Revenir à la liste des objets"
-    expect(page).to have_text("Il vous reste 1 objets à recenser")
-    expect(page).to have_button("Finaliser le recensement", disabled: true)
-
+    expect(page).not_to have_button("Finaliser le recensement")
+    expect(page).not_to have_content("Bouquet d'Autel")
     click_on "Ciboire des malades"
     expect(page).to have_text("PAS ENCORE RECENSÉ")
     expect(page).to have_text("Musée")
@@ -87,20 +85,22 @@ RSpec.feature "Recensement", type: :feature, js: true do
     find("label", text: "Je ne peux pas prendre cet objet en photo").click
 
     click_on "Enregistrer ce recensement"
-    expect(page).to have_content("Le recensement a bien été enregistré !")
+    expect(page).to have_content("Votre recensement a bien été enregistré")
 
     # EDIT du deuxieme
-
+    expect(page).to have_link("Finaliser le recensement")
+    expect(page).not_to have_content("Bouquet d'Autel")
+    expect(page).not_to have_content("Ciboire des malades")
+    click_on "Revenir à la liste d'objets de ma commune"
+    click_on "Ciboire des malades"
     click_on "modifier le recensement"
     within("[data-recensement-target=etatSanitaire]") do
       find("label", text: "En péril").click
     end
     click_on "Enregistrer ce recensement"
-    expect(page).to have_content("Le recensement a bien été mis à jour !")
+    expect(page).to have_content("Votre recensement a bien été enregistré")
 
     # CONFIRMATION
-
-    click_on "Revenir à la liste des objets"
     click_on "Finaliser le recensement"
     expect(page).to have_content("Finalisation du recensement de Albon")
     fill_in("Commentaires", with: "Beau voyage")
