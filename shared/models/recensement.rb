@@ -4,6 +4,8 @@ class Recensement < ApplicationRecord
   belongs_to :objet
   has_many_attached :photos
 
+  delegate :commune, to: :objet
+
   LOCALISATION_EDIFICE_INITIAL = "edifice_initial"
   LOCALISATION_AUTRE_EDIFICE = "autre_edifice"
   LOCALISATION_ABSENT = "absent"
@@ -26,6 +28,7 @@ class Recensement < ApplicationRecord
   validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { !absent? && recensable? }
   validates :securisation, presence: true, inclusion: { in: SECURISATIONS }, if: -> { !absent? && recensable? }
   validates :photos, presence: true, if: -> { !absent? && recensable? && !skip_photos }
+  validates :objet_id, uniqueness: true
 
   attr_accessor :confirmation, :skip_photos
 
@@ -35,5 +38,9 @@ class Recensement < ApplicationRecord
 
   def autre_edifice?
     localisation == LOCALISATION_AUTRE_EDIFICE
+  end
+
+  def editable?
+    commune.objets_recensable?
   end
 end

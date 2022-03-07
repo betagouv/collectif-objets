@@ -1,5 +1,5 @@
 <% if current_user&.commune %>
-  <%= link_to "Voir les objets de #{current_user.commune.nom}" , objets_path(commune_code_insee: current_user.commune.code_insee), class: "fr-btn" %>
+  <%= link_to "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), class: "fr-btn" %>
 <% else %>
   <%= link_to "Voir les objets dans ma commune" , objets_path, class: "fr-btn" %>
 <% end %>

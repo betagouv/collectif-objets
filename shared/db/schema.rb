@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_03_143829) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_06_083538) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_03_143829) do
     t.integer "population"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
+    t.string "notes_from_enrollment"
+    t.string "notes_from_completion"
+    t.datetime "enrolled_at"
+    t.datetime "completed_at"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement"], name: "index_communes_on_departement"
   end
@@ -68,7 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_03_143829) do
     t.string "nom_dossier"
     t.string "edifice_nom"
     t.string "emplacement"
-    t.string "recolement_status"
     t.string "image_urls", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -107,6 +111,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_03_143829) do
     t.bigint "commune_id"
     t.string "magic_token"
     t.string "role", null: false
+    t.string "nom"
+    t.string "job_title"
+    t.string "email_personal"
+    t.string "phone_number"
     t.index ["commune_id"], name: "index_users_on_commune_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["magic_token"], name: "index_users_on_magic_token", unique: true

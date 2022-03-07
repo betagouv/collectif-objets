@@ -28,7 +28,7 @@ namespace :objets do
       nom_dossier: "DOSS",
       edifice_nom: "Edifice",
       emplacement: "Emplacement",
-      recolement_status: "Statut recensement"
+      # recolement_status: "Statut recensement"
     }
     for row in CSV.read(args[:path], headers: true) do
       row_parameterized = row.to_h.transform_keys(&:parameterize)

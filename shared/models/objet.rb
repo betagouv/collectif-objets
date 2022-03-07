@@ -26,16 +26,6 @@ class Objet < ApplicationRecord
     end
   end
 
-  def airtable_questionnaire_link
-    get_params = {
-      "prefill_Nom de l'objet": nom_formatted,
-      "prefill_Référence Palissy de l'objet": ref_pop,
-      "prefill_⛪ Liste propriétaires 2": commune&.nom,
-      "prefill_Édifice concerné": edifice_nom_formatted
-    }
-    "https://airtable.com/shrHSC6DqdqkzBQjF?#{get_params.to_query}"
-  end
-
   def first_image_url
     image_urls&.first
   end
@@ -46,5 +36,13 @@ class Objet < ApplicationRecord
 
   def current_recensement
     recensements.first
+  end
+
+  def recensement?
+    current_recensement.present?
+  end
+
+  def recensable?
+    current_recensement.nil? && commune.objets_recensable?
   end
 end

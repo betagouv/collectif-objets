@@ -4,7 +4,7 @@
   <% if @objet.commune == current_user&.commune %>
     <p>
       <%= render "objets/recensement_badge", objet: @objet %>
-      <% if @objet.current_recensement.present? %>
+      <% if @objet.current_recensement&.editable? %>
         <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-link fr-fi-edit-line fr-link--icon-right" %>
       <% end %>
     </p>
@@ -45,18 +45,23 @@
           class: "co-text--blue"
         ) %>
       </p>
-      <% if @objet.commune == current_user&.commune && @objet.current_recensement.nil? %>
-        <div>
-          <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
+      <% if @objet.commune == current_user&.commune %>
+        <% if @objet.recensable? %>
+          <div>
+            <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
+          </div>
+        <% end %>
+        <div class="fr-py-2w">
+          <%= link_to "Revenir à la liste des objets", commune_objets_path(@objet.commune), class: "fr-btn fr-btn--secondary" %>
         </div>
       <% elsif !current_user %>
-        <div>
-          <%= link_to "Inscrire ma commune pour le recensement", inscription_path, class: "fr-btn" %>
+        <%# <div> %>
+          <%# link_to "Inscrire ma commune pour le recensement", inscription_path, class: "fr-btn" %>
+        <%# </div> %>
+        <div class="fr-py-2w">
+          <%= link_to "Revenir à la liste des objets", objets_path(commune_code_insee: @objet.commune_code_insee), class: "fr-btn fr-btn--secondary" %>
         </div>
       <% end %>
-      <div class="fr-py-2w">
-        <%= link_to "Revenir à la liste des objets", objets_path(commune_code_insee: @objet.commune_code_insee), class: "fr-btn fr-btn--secondary" %>
-      </div>
     </div>
     <div class="fr-col-md-8">
       <div class="co-image-container">

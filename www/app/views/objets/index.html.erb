@@ -13,21 +13,12 @@
         La commune est charge de veiller sur ces objets.
         <b>Aidez-nous à vérifier leur présence et leur état</b>
       </p>
-      <p>
-        Vous avez besoin d'aide ? Nous vous guidons étape par étape:
-      </p>
-      <p>
-        <%= link_to "Je confirme la participation de ma commune", inscription_path, class: "fr-btn" %>
-      </p>
-      <% if current_user %>
-        <p>
-          Si vous n'avez pas de connexion internet pendant le recensement, vous pouvez :
-        </p>
-        <p>
-          <%= link_to "Imprimer la liste d'objets", printable_list_objets_path(commune_code_insee: current_user.commune.code_insee), class: "fr-btn fr-btn--secondary" %>
-          <%= link_to "Imprimer le questionnaire", "https://fichiers.collectif-objets.beta.gouv.fr/questionnaire.pdf", class: "fr-btn fr-btn--secondary", target: "_blank", rel: "noopener" %>
-        </p>
-      <% end %>
+      <%# <p> %>
+        <%# Vous avez besoin d'aide ? Nous vous guidons étape par étape: %>
+      <%# </p> %>
+      <%# <p> %>
+        <%# link_to "Je confirme la participation de ma commune", new_commune_enrollment_path, class: "fr-btn" %>
+      <%# </p> %>
       <% if @filters[:commune].blank? %>
         <p>
           Voici les <%= @pagy.count %> objets présents dans Collectif Objets
@@ -36,39 +27,13 @@
       <% end %>
     </div>
   </div>
-  <div class="fr-mt-8w">
-    <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
-  </div>
-  <div class="fr-grid-row fr-py-2w fr-grid-row--gutters">
-    <% @objets.each do |objet| %>
-      <div class="fr-col-md-3">
-        <div class="fr-card fr-enlarge-link">
-          <div class="fr-card__body">
-            <h4 class="fr-card__title">
-              <%= link_to objet.nom, objet_path(objet), class: "fr-card__link" %>
-            </h4>
-            <p class="fr-card__desc">
-              <%= objet.commune.nom %><br />
-              <%= objet.edifice_nom %>
-            </p>
-            <% if objet.commune == current_user&.commune %>
-              <p class="fr-card__detail">
-                <%= render "objets/recensement_badge", objet: %>
-              </p>
-            <% end %>
-          </div>
-          <div class="fr-card__img">
-            <% if objet.image_urls.any? %>
-              <img src="<%= objet.image_urls[0] %>" class="fr-responsive-img" alt="">
-            <% else %>
-              <%= image_tag "illustrations/photo-manquante.png", class: "fr-responsive-img co-image-transparent" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <% if @pagy.count > 4 %>
+  <% if @pagy.pages > 1 %>
+    <div class="fr-mt-8w">
+      <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
+    </div>
+  <% end %>
+  <%= render "list", objets: @objets %>
+  <% if @pagy.pages > 1 %>
     <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
   <% end %>
 </main>

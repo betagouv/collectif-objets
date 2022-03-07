@@ -2,9 +2,15 @@
 
 class Commune < ApplicationRecord
   DISPLAYABLE_DEPARTEMENTS = %w[51 52 65 72 26 30].freeze
+  STATUS_ENROLLED = "enrolled"
+  STATUS_STARTED = "started"
+  STATUS_COMPLETED = "completed"
+  STATUSES = [STATUS_ENROLLED, STATUS_COMPLETED, STATUS_STARTED].freeze
 
   has_many :users
   has_many :objets, foreign_key: :commune_code_insee, primary_key: :code_insee, inverse_of: :commune
+
+  validates :status, inclusion: { in: STATUSES + [nil] }
 
   def self.include_objets_count
     joins(
@@ -37,5 +43,25 @@ class Commune < ApplicationRecord
   def main_objet
     @main_objet ||=
       Commune.select_best_objets(objets.where.not(nom: nil).to_a).first
+  end
+
+  def enrolled?
+    status == STATUS_ENROLLED
+  end
+
+  def started?
+    status == STATUS_STARTED
+  end
+
+  def enrolled_or_started?
+    [STATUS_ENROLLED, STATUS_STARTED].include?(status)
+  end
+
+  def objets_recensable?
+    status.nil? || enrolled_or_started?
+  end
+
+  def completed?
+    status == STATUS_COMPLETED
   end
 end

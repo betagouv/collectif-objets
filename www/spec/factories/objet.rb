@@ -14,7 +14,6 @@ FactoryBot.define do
     nom_dossier { "Dossier individuel" }
     edifice_nom { "Eglise Notre-Dame-en-Vaux" }
     emplacement { "dans la nef droite" }
-    recolement_status { "" }
 
     association :commune
 
