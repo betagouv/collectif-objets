@@ -27,7 +27,7 @@ class RecensementsController < ApplicationController
   def update
     @recensement.confirmation = true
     if @recensement.update(recensement_params_parsed)
-      redirect_to objet_path(@objet), notice: "Le recensement a bien été mis à jour"
+      redirect_to objet_path(@objet), notice: "Le recensement a bien été mis à jour !"
     else
       render :edit, status: :unprocessable_entity
     end
