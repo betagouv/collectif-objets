@@ -18,6 +18,7 @@
       data-direct-upload-url="<%= rails_direct_uploads_url %>"
       name="recensement[photos][]"
       id="recensement_photos"
+      accept="image/*"
       data-recensement-form--upload-photo-target="input"
       data-recensement-form--uploader-target="input"
       data-action="change->recensement-form--upload-photo#refreshPreview change->recensement-form--uploader#addInput change->recensement#refreshFields"
@@ -34,6 +35,9 @@
       <img data-recensement-form--upload-photo-target="img" />
     </div>
     <div class="fr-ml-2w">
+      <div class="fr-mb-2w">
+        <span class="co-text--muted" data-recensement-form--upload-photo-target="metadata"></span>
+      </div>
       <button
         class="fr-btn fr-btn--secondary fr-fi-delete-line fr-btn--icon-right"
         data-action="click->recensement-form--upload-photo#remove"

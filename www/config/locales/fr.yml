@@ -24,3 +24,4 @@ fr:
               inclusion: "Vous devez préciser si l'objet peut être recensé"
             photos:
               blank: "Les photos sont fortement recommandées. Si vous ne pouvez pas en prendre, merci de le signaler."
+              max_size_error: "Les photos doivent faire moins de 20MB"

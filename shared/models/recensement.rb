@@ -27,7 +27,15 @@ class Recensement < ApplicationRecord
   validates :etat_sanitaire_edifice, presence: true, if: -> { !absent? && recensable? }
   validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { !absent? && recensable? }
   validates :securisation, presence: true, inclusion: { in: SECURISATIONS }, if: -> { !absent? && recensable? }
-  validates :photos, presence: true, if: -> { !absent? && recensable? && !skip_photos }
+  validates(
+    :photos,
+    presence: true,
+    if: -> { !absent? && recensable? && !skip_photos },
+    blob: {
+      content_type: ["image/jpg", "image/jpeg", "image/png"],
+      size_range: 0..(20.megabytes)
+    }
+  )
   validates :objet_id, uniqueness: true
 
   attr_accessor :confirmation, :skip_photos
