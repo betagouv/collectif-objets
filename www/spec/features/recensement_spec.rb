@@ -23,7 +23,7 @@ RSpec.feature "Recensement", type: :feature, js: true do
     fill_in "Nom", with: "Inès Rose"
     fill_in "Votre fonction", with: "Maire"
     fill_in "Numéro de téléphone", with: "01 01 01 01 01"
-    fill_in "Notes", with: "J'ai super hâte"
+    fill_in "Commentaires", with: "J'ai super hâte"
 
     click_on "J'inscris Albon"
     expect(page).to have_text("Votre commune a bien été inscrite !")
@@ -53,7 +53,7 @@ RSpec.feature "Recensement", type: :feature, js: true do
       find("label", text: "Oui, il est difficile de le voler").click
     end
     find("label", text: "Je ne peux pas prendre cet objet en photo").click
-    fill_in "Notes", with: "C'est un superbe pépito bleu"
+    fill_in "Commentaires", with: "C'est un superbe pépito bleu"
 
     click_on "Enregistrer ce recensement"
     expect(page).to have_content("Le recensement a bien été enregistré !")
@@ -103,7 +103,7 @@ RSpec.feature "Recensement", type: :feature, js: true do
     click_on "Revenir à la liste des objets"
     click_on "Finaliser le recensement"
     expect(page).to have_content("Finalisation du recensement de Albon")
-    fill_in("Notes", with: "Beau voyage")
+    fill_in("Commentaires", with: "Beau voyage")
     click_on "Je valide le recensement des objets de ma commune"
     expect(page).to have_content("Le recensement de votre commune est terminé !")
     click_on "Ciboire des malades"

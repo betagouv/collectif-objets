@@ -28,7 +28,7 @@
 
           <%= form_for(@commune, url: commune_completions_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
             <div class="fr-input-group">
-              <%= f.label :notes_from_completion, "Notes" %>
+              <%= f.label :notes_from_completion, "Commentaires" %>
               <%= f.text_area :notes_from_completion %>
             </div>
             <div class="actions">

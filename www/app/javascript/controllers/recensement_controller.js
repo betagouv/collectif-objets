@@ -69,7 +69,7 @@ export default class extends Controller {
     this.toggleSection(this.securisationTarget, mainFieldsCondition)
     this.toggleSection(this.photosTarget, mainFieldsCondition && !skipPhotos)
     this.toggleSection(this.skipPhotosTarget, mainFieldsCondition && !photosUploaded)
-    this.toggleSection(this.notesTarget, confirmation && recensable)
+    this.toggleSection(this.notesTarget, confirmation)
     document.querySelector("input[type=submit]")
       .toggleAttribute("disabled", !confirmation)
   }

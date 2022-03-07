@@ -67,7 +67,8 @@
         </div>
       </div>
       <div class="fr-col-md-6 co-text--muted co-form-explanations">
-        L'intérêt de ce recensement est de constater l'état de l'objet à un instant. Il est donc nécessaire de vous déplacer pour faire vos observations. Vous ne pouvez pas vous baser sur des documents déjà établis auparavant.
+        L'intérêt de ce recensement est de constater l'état de l'objet à un instant.
+        Il est donc nécessaire de vous déplacer pour faire vos observations.
       </div>
     </div>
 
@@ -103,6 +104,10 @@
           habitués, un représentant de la paroisse ou le curé lui-même, la
           personne en charge des accès à l’édifice, etc.
         </p>
+        <p>
+          Le recensement vise à mettre à jour les données de localisation.
+          Ne vous étonnez pas d'une mauvaise localisation dans les fiches qui vous sont fournies.
+        </p>
         <%= link_to "Voir la page 12 du guide", "https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf", target: "_blank", rel: "noopener" %>
       </div>
     </div>
@@ -119,7 +124,7 @@
       </div>
       <div class="fr-col-md-6 co-text--muted co-form-explanations">
         <p>
-          Les objets ne sont parfois physiquement pas recensables, par exemple si vous n’avez pas accès à l'édifice.
+          Si l’objet ne peut pas être recensé, merci de nous en indiquer les raisons en commentaire.
         </p>
       </div>
     </div>
@@ -136,11 +141,9 @@
       </div>
       <div class="fr-col-md-6 co-text--muted co-form-explanations">
         <p>
-        À cette étape, il s’agit d’abord de regarder l'édifice dans son ensemble. Très
-        souvent, les objets souffrent parce que le bâtiment qui les abrite est dans
-        un état préoccupant. Ensuite, renseignez pour chaque objet votre
-        impression sur l'état sanitaire de la partie de l’immeuble qui abrite l’objet,
-        sur une échelle à 4 niveaux : bon, moyen, mauvais, péril.
+        Souvent, les objets souffrent parce que le bâtiment qui les abrite est dans
+        un état préoccupant. Renseignez pour chaque objet votre
+        impression sur l'état sanitaire de la partie de l’immeuble qui abrite l’objet.
         </p>
         <%= link_to "Voir la page 13 du guide", "https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf", target: "_blank", rel: "noopener" %>
       </div>
@@ -161,12 +164,12 @@
           Pour vous aider à estimer cet état sanitaire et la vitesse de dégradation,
           deux points sont à observer:
           <ul>
-            <li>L'environnement immédiat de l'objet : remarquez-vous des
-              déjections, des tas de poussières amoncelés au pied de l'objet, des
-              éclats ou morceaux tombés</li>
-            <li>L'objet lui-même : son intégrité est-elle bonne, la peinture qui le
-                recouvre est-elle homogène, a-t-il l'air contaminé par un champignon,
-                un ver, une mousse ?</li>
+            <li>
+              L'environnement immédiat de l'objet (déjections, poussières amoncelés, éclats ou morceaux tombés)
+            </li>
+            <li>
+              L'objet lui-même (son intégrité est-elle bonne, la peinture qui le recouvre est-elle homogène, a-t-il l'air contaminé par un champignon, un ver, une mousse ?)
+            </li>
         </p>
         <%= link_to "Voir les points d'attention en fonction de la
 nature des objets page 15 et 16 du guide", "https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf", target: "_blank", rel: "noopener" %>
@@ -184,14 +187,6 @@ nature des objets page 15 et 16 du guide", "https://fichiers.collectif-objets.be
         </div>
       </div>
       <div class="fr-col-md-6 co-text--muted co-form-explanations">
-        <p>
-          Si l'objet est très lourd, accroché en hauteur, dans une niche
-          inaccessible, vous pouvez cocher oui. On considère qu'il est sécurisé
-          par sa nature ou son emplacement<br />
-          Si l'objet se trouve dans une armoire, assurez-vous que la clef ne reste
-          pas sur la serrure ou que le coffre soit déverrouillé. Si c'est le cas et que
-          vous ne pouvez rien faire, cochez non, l'objet n'est pas sécurisé.
-        </p>
         <%= link_to "Voir la page 18 du guide", "https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf", target: "_blank", rel: "noopener" %>
       </div>
     </div>
@@ -202,14 +197,13 @@ nature des objets page 15 et 16 du guide", "https://fichiers.collectif-objets.be
       </div>
       <div class="fr-col-md-6 co-text--muted co-form-explanations">
         <p>
-          Il ne s’agit pas ici de prises de vue artistiques. Ces photos doivent nous aider à mieux appréhender votre évaluation. <br />
+          Vos photos permettent aux conservateurs d’appréhender votre évaluation. <br />
           Les prises de vue contiennent idéalement :
           <ul>
             <li>Une vue de l’objet entier de face</li>
             <li>Une vue de l’objet entier de côté</li>
             <li>Une ou plusieurs photos de détails sur les points d’attention signalés dans ce questionnaire de l’objet</li>
           </ul>
-          Vous pouvez glisser vos fichiers photos depuis votre ordinateur en dessous de ce texte dans l'emplacement "Drop files here".
         </p>
         <%= link_to "Voir la page 19 du guide", "https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf", target: "_blank", rel: "noopener" %>
       </div>
@@ -218,19 +212,19 @@ nature des objets page 15 et 16 du guide", "https://fichiers.collectif-objets.be
     <div class="fr-grid-row fr-my-12w" data-recensement-target="notes">
       <div class="fr-col-md-6">
         <div class="fr-input-group">
-          <%= f.label :notes, "Notes" %>
+          <%= f.label :notes, "Commentaires" %>
           <%= f.text_area :notes %>
         </div>
       </div>
 
       <div class="fr-col-md-6 co-text--muted co-form-explanations">
         <p>
-          Vous pouvez ajouter ici vos remarques sur la localisation, l'état sanitaire, la sécurisation, les dégradations…
+          Vous pouvez ajouter ici vos remarques sur la localisation, l'état sanitaire, la sécurisation, les dégradations toute information utile à partager aux conservateurs.
         </p>
       </div>
     </div>
 
     <%= f.submit "Enregistrer ce recensement" %>
-    <span>Vous pourrez toujours le modifier avant la validation</span>
+    <span class="fr-ml-2w">Vous pourrez toujours le modifier avant la validation</span>
   <% end %>
 </main>
