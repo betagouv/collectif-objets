@@ -4,7 +4,9 @@ module Communes
   class CompletionsController < BaseController
     before_action :restrict_not_started, :restrict_already_completed
 
-    def new; end
+    def new
+      @objets = @commune.objets.includes(:recensements)
+    end
 
     def create
       if @commune.update(commune_params)

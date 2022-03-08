@@ -47,3 +47,19 @@ label.fr-label.co-label--disabled,
   left: 63px;
   top: 63px;
 }
+
+
+/* completion page */
+.co-recensement-completion-summary img {
+  max-width: 100px;
+}
+
+.co-recensement-completion-summary .co-recensement-photos {
+  display: flex;
+  max-width: 150px;
+  overflow: scroll;
+}
+
+.co-recensement-completion-summary .co-recensement-photos img {
+  margin-left: 5px;
+}

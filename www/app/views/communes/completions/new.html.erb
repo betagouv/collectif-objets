@@ -1,43 +1,88 @@
 <main>
-  <section>
-    <div class="fr-container fr-py-8w">
-      <% if @commune.errors.any? %>
-        <div class="fr-grid-row">
-          <div class="fr-col-md-6">
-            <div class="fr-alert fr-alert--error fr-mb-6w">
-              <p>
-                Votre recensement n'a pas pu être confirmé :
-                <ul>
-                  <% @commune.errors.attribute_names.each do |attribute| %>
-                    <li><%= @commune.errors.messages_for(attribute).first %></li>
-                  <% end %>
-                </ul>
-              </p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
+  <div class="fr-container fr-py-8w">
+    <% if @commune.errors.any? %>
       <div class="fr-grid-row">
         <div class="fr-col-md-6">
-          <h2 class="co-text--blue">Finalisation du recensement de <%= @commune.nom %></h2>
-          <p>
-            Veuillez vérifier la complétion et l'exactitude de vos recensements.
-            Une fois que vous aurez finalisé, un conservateur sera prévenu, validera vos recensements et reviendra vers vous.
-          </p>
-
-          <%= form_for(@commune, url: commune_completions_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
-            <div class="fr-input-group">
-              <%= f.label :notes_from_completion, "Commentaires" %>
-              <%= f.text_area :notes_from_completion %>
-            </div>
-            <div class="actions">
-              <%= f.submit "Je valide le recensement des objets de ma commune" %>
-            </div>
-          <% end %>
+          <div class="fr-alert fr-alert--error fr-mb-6w">
+            <p>
+              Votre recensement n'a pas pu être confirmé :
+              <ul>
+                <% @commune.errors.attribute_names.each do |attribute| %>
+                  <li><%= @commune.errors.messages_for(attribute).first %></li>
+                <% end %>
+              </ul>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    <% end %>
 
+    <div class="fr-grid-row">
+      <div class="fr-col-md-6">
+        <h2 class="co-text--blue">Finalisation du recensement de <%= @commune.nom %></h2>
+        <p>
+          Veuillez vérifier la complétion et l'exactitude de vos recensements.
+          Une fois que vous aurez finalisé, un conservateur sera prévenu, validera vos recensements et reviendra vers vous.
+        </p>
+      </div>
+    </div>
+
+  <div class="fr-table co-recensement-completion-summary">
+    <table>
+      <thead>
+        <tr>
+          <th>Objet</th>
+          <th>Localisation</th>
+          <th>Recensable</th>
+          <th>État sanitaire de l'édifice</th>
+          <th>État sanitaire de l'objet</th>
+          <th>Sécurisation</th>
+          <th>Photos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @objets.each do |objet| %>
+          <% recensement = objet.current_recensement %>
+          <% presenter = RecensementPresenter.new(recensement) %>
+          <tr>
+            <td>
+              <div>
+                <div>
+                  <% if recensement.objet.image_urls.any? %>
+                    <img src="<%= recensement.objet.image_urls[0] %>" alt="" class="co--width-max-100">
+                  <% else %>
+                    <%= image_tag "illustrations/photo-manquante.png" %>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to recensement.objet.nom_courant, objet_path(recensement.objet) %>
+                </div>
+              </div>
+            </td>
+            <td><%= presenter.localisation %></td>
+            <td><%= presenter.recensable %></td>
+            <td><%= presenter.etat_sanitaire_edifice %></td>
+            <td><%= presenter.etat_sanitaire %></td>
+            <td><%= presenter.securisation %></td>
+            <td><%= presenter.photos %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+    <div class="fr-grid-row">
+      <div class="fr-col-md-6">
+        <%= form_for(@commune, url: commune_completions_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
+          <div class="fr-input-group">
+            <%= f.label :notes_from_completion, "Commentaires" %>
+            <%= f.text_area :notes_from_completion %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Je valide le recensement des objets de ma commune" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </main>
