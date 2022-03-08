@@ -22,7 +22,7 @@
         </p>
         <% if current_user %>
           <p>
-            <%= link_to "J'indique que je participe pour obtenir une aide supplémenaire", new_commune_enrollment_path(@commune), class: "fr-btn" %>
+            <%= link_to "J'indique que je participe pour obtenir une aide supplémenaire", new_commune_enrollment_path(current_user.commune), class: "fr-btn" %>
           </p>
         <% end %>
       </div>
