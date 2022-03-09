@@ -1,4 +1,4 @@
-<div class="fr-grid-row fr-py-2w fr-grid-row--gutters fr-grid-row--center">
+<div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if objets.count <= 4 %> ">
   <% objets.each do |objet| %>
     <div class="fr-col-md-3">
       <div class="fr-card fr-enlarge-link">

@@ -1,16 +1,24 @@
 <main class="fr-container fr-py-4w co-objet-show">
   <h2><%= @objet.nom %></h2>
   <p>📍 <%= @objet.commune.nom %> (<%= @objet.departement %>) - ⛪️ <%= @objet.edifice_nom %></p>
-  <% if @objet.commune == current_user&.commune %>
-    <p>
-      <%= render "objets/recensement_badge", objet: @objet %>
-      <% if @objet.current_recensement&.editable? %>
-        <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-link fr-fi-edit-line fr-link--icon-right" %>
-      <% end %>
-    </p>
-  <% end %>
-  <div class="fr-grid-row fr-py-4w fr-grid-row--gutters">
+
+  <div class="fr-pb-8w">
+    <% if @objet.commune == current_user&.commune %>
+      <%= link_to "← Revenir à la liste des objets", commune_objets_path(@objet.commune) %>
+    <% elsif !current_user %>
+      <%= link_to "← Revenir à la liste des objets", objets_path(commune_code_insee: @objet.commune_code_insee) %>
+    <% end %>
+  </div>
+  <div class="fr-grid-row fr-pb-4w fr-grid-row--gutters">
     <div class="fr-col-md-4">
+      <% if @objet.commune == current_user&.commune %>
+        <p>
+          <%= render "objets/recensement_badge", objet: @objet %>
+          <% if @objet.current_recensement&.editable? %>
+            <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-link fr-fi-edit-line fr-link--icon-right" %>
+          <% end %>
+        </p>
+      <% end %>
       <p>
         <b>Nom courant</b><br />
         <%= @objet.nom_courant %>
@@ -51,16 +59,6 @@
             <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
           </div>
         <% end %>
-        <div class="fr-py-2w">
-          <%= link_to "Revenir à la liste des objets", commune_objets_path(@objet.commune), class: "fr-btn fr-btn--secondary" %>
-        </div>
-      <% elsif !current_user %>
-        <%# <div> %>
-          <%# link_to "Inscrire ma commune pour le recensement", inscription_path, class: "fr-btn" %>
-        <%# </div> %>
-        <div class="fr-py-2w">
-          <%= link_to "Revenir à la liste des objets", objets_path(commune_code_insee: @objet.commune_code_insee), class: "fr-btn fr-btn--secondary" %>
-        </div>
       <% end %>
     </div>
     <div class="fr-col-md-8">
