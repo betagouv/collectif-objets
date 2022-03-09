@@ -1,2 +1,1 @@
-web: bundle exec puma -C config/puma.rb
-postdeploy: curl https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf > public/guide.pdf
+web: curl https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf > public/guide.pdf && bundle exec puma -C config/puma.rb
