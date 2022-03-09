@@ -9,5 +9,5 @@ dev:
 	overmind start -f Procfile.dev
 
 dump:
-	pg_dump --format c --data-only --table=objets --table=communes --table=users --dbname collectif_objets_dev --file tmp/dump.pgsql
+	pg_dump --format c --data-only --table=objets --table=communes --table=users --file tmp/dump.pgsql collectif_objets_dev
 	echo "DB dumped to tmp/dump.pgsql !"
