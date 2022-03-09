@@ -79,3 +79,8 @@ html[data-fr-scheme="dark"] .co-logo-invertable {
 .co-flex--align-items-center {
   align-items: center;
 }
+
+.co-guide-embed {
+  min-height: 600px;
+  height: 70vh;
+}

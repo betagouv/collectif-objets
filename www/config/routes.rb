@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   root "pages#home"
   get "permanence", to: "pages#permanence"
   get "comment-ca-marche", to: "pages#aide", as: "aide"
+  get "guide-de-recensement", to: "pages#guide", as: "guide"
   get "confirmation-de-participation", to: "pages#confirmation_inscription", as: "enrollment_success"
 
   resources :objets, only: [:index, :show] do
