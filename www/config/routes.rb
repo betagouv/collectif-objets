@@ -41,4 +41,5 @@ Rails.application.routes.draw do
   # get "inscription", to: "/"
 
   get "health/raise_on_purpose", to: "health#raise_on_purpose"
+  get "health/js_error", to: "health#js_error"
 end

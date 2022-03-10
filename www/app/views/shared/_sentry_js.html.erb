@@ -1,0 +1,13 @@
+<% if Rails.env.production? %>
+  <script type="module">
+    import * as Sentry from "@sentry/browser";
+    import { BrowserTracing } from "@sentry/tracing";
+
+    Sentry.init({
+      dsn: "https://237e1d839be54111a07b79c618d6f0fe@o103100.ingest.sentry.io/6252304",
+      integrations: [new BrowserTracing()],
+      tracesSampleRate: 1,
+      environment: "<%= Rails.configuration.x.environment %>"
+    });
+  </script>
+<% end %>
