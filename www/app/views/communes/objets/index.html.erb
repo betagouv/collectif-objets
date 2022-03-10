@@ -41,7 +41,7 @@
     <div class="fr-grid-row fr-py-2w fr-grid-row--center">
       <div class="fr-col-md-8 co-text--center">
         <h2 class="co-text--blue">
-          Les <%= @objets.count %> objets classés de <%= @commune.nom %>
+          <%= t(".title", count: @objets.count, commune: @commune.nom) %>
         </h2>
         <% if @commune.status.nil? %>
           <p>

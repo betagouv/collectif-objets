@@ -1,6 +1,10 @@
 fr:
-  hello: "Coucou"
-
+  communes:
+    objets:
+      index:
+        title:
+          one: "%{commune} abrite un objet protégé"
+          other: "Les %{count} objets protégés de %{commune}"
   activerecord:
     errors:
       models:
