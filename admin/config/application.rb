@@ -33,5 +33,7 @@ module AdminAvo
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.x.environment = ENV["HOST"]&.match(/staging/) ? "staging" : Rails.env
   end
 end

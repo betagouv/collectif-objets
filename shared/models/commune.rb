@@ -9,6 +9,7 @@ class Commune < ApplicationRecord
 
   has_many :users
   has_many :objets, foreign_key: :commune_code_insee, primary_key: :code_insee, inverse_of: :commune
+  has_many :recensements, through: :objets
 
   validates :status, inclusion: { in: STATUSES + [nil] }
 

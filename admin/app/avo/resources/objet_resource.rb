@@ -31,4 +31,6 @@ class ObjetResource < Avo::BaseResource
   # field :commune_nom, as: :text, sortable: true,
   # field :commune_code_insee, as: :text, sortable: true
   # field :updated_at, as: :text, sortable: true
+
+  field :recensements, as: :has_many
 end

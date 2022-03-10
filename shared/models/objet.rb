@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Objet < ApplicationRecord
+  include ActionView::Helpers::TextHelper # for truncate
+
   scope :with_images, -> { where("cardinality(image_urls) >= 1") }
   belongs_to :commune, foreign_key: :commune_code_insee, primary_key: :code_insee, optional: true, inverse_of: :objets
   has_many :recensements
@@ -32,7 +34,7 @@ class Objet < ApplicationRecord
   end
 
   def nom_with_ref_pop
-    "#{ref_pop} #{nom}"
+    truncate("#{ref_pop} #{nom}", length: 40)
   end
 
   def current_recensement
