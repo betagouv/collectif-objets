@@ -20,9 +20,11 @@
         <p>
           Vous êtes élu·e ou agent municipal ? Vous êtes en charge du patrimoine de votre commune ? Vous pouvez nous indiquer que vous participez au recensement pour accéder aux conseils et à l’aide de Collectif Objets dans votre démarche. Le recensement des objets peut également être réalisé par une association si elle bénéficie de l’aval de la commune.
         </p>
-        <p>
-          <%= link_to "J'indique que je participe pour obtenir une aide supplémenaire", inscription_path, class: "fr-btn" %>
-        </p>
+        <% if current_user %>
+          <p>
+            <%= link_to "J'indique que je participe pour obtenir une aide supplémenaire", new_commune_enrollment_path(current_user.commune), class: "fr-btn" %>
+          </p>
+        <% end %>
       </div>
       <div class="fr-col-md-7 fr-px-12w">
         <%= image_tag "home-hero-1.png", class: "co--width-max-100" %>
@@ -42,7 +44,7 @@
             Nous vous guidons étape par étape. Comment s'organiser ? Quel matériel faut-il prévoir ? Comment évaluer l'état d'un objet ? Retrouvez dans cette liste les clés pour préparer votre recensement, mais aussi les astuces de nos conservateurs pour répondre aux questionnaires de recensement.
           </p>
           <p>
-            <%= link_to "Télécharger le guide de recensement", "https://fichiers.collectif-objets.beta.gouv.fr/Guidederecensement.pdf", class: "fr-btn fr-btn--icon-right fr-fi-file-download-line", target: "_blank", rel: "noopener" %>
+            <%= link_to "Voir le guide de recensement", guide_path, class: "fr-btn" %>
           </p>
         </div>
       </div>

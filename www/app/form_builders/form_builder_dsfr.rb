@@ -2,7 +2,7 @@
 
 class FormBuilderDsfr < ActionView::Helpers::FormBuilder
   def label(method, name = nil, options = {})
-    super(method, name, options.merge(class: "fr-label"))
+    super(method, name, options.merge(class: "#{options.fetch(:class, '')} fr-label"))
   end
 
   def text_field(method, options = {})
@@ -19,6 +19,10 @@ class FormBuilderDsfr < ActionView::Helpers::FormBuilder
 
   def text_area(method, options = {})
     super(method, options.merge(class: "fr-input"))
+  end
+
+  def select(method, choices, options = {}, html_options = {})
+    super(method, choices, options, html_options.merge(class: "fr-select"))
   end
 
   def submit(value, options = {})

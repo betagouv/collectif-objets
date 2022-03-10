@@ -63,7 +63,15 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include Warden::Test::Helpers
 end
+
+Capybara.register_driver :headless_firefox do |app|
+  options = Selenium::WebDriver::Firefox::Options.new.tap(&:headless!)
+  Capybara::Selenium::Driver.new app, browser: :firefox, options:
+end
+Capybara.javascript_driver = :headless_firefox
 
 # rubocop:disable Lint/SuppressedException
 begin

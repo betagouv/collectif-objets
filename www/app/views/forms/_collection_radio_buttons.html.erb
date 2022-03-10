@@ -1,0 +1,29 @@
+<% error_message = f.object.errors.messages_for(field_name)&.first %>
+<div class="fr-form-group">
+  <fieldset
+    class="fr-fieldset <%= "fr-fieldset--error" if error_message %>"
+    <% if error_message %>
+      aria-labelledby="<%= field_name.to_s.parameterize %>-legend <%= field_name.to_s.parameterize %>-desc-error"
+      role="group"
+    <% end %>
+  >
+    <legend class="fr-fieldset__legend" id="<%= field_name.to_s.parameterize %>-legend">
+      <%= legend.html_safe %>
+    </legend>
+    <div class="fr-fieldset__content">
+      <%= f.collection_radio_buttons field_name, options, :value, :label, {required: true} do |b| %>
+        <div class="fr-radio-group">
+          <%= b.radio_button %>
+          <%= b.label(class: "fr-label") do %>
+            <%= b.text.html_safe %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <% if error_message %>
+      <p id="<%= field_name.to_s.parameterize %>-desc-error" class="fr-error-text">
+        <%= error_message %>
+      </p>
+    <% end %>
+  </fieldset>
+</div>

@@ -32,7 +32,7 @@ html[data-fr-scheme="dark"] .co-logo-invertable {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .co-section--light-grey {
@@ -61,4 +61,26 @@ html[data-fr-scheme="dark"] .co-logo-invertable {
 
 .co-image-transparent {
   filter: opacity(0.4)
+}
+
+
+.fr-input-group--disabled .fr-error-text {
+  display: none;
+}
+
+.co-semi-transparent {
+  opacity: 0.5;
+}
+
+.co-flex {
+  display: flex;
+}
+
+.co-flex--align-items-center {
+  align-items: center;
+}
+
+.co-guide-embed {
+  min-height: 600px;
+  height: 70vh;
 }

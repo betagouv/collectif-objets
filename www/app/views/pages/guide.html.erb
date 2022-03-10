@@ -1,0 +1,16 @@
+<main class="fr-py-8w">
+  <div class="fr-container">
+    <h2 class="co-text--blue">
+      Guide de recensement
+    </h2>
+    <p>
+      <%= link_to "Télécharger", "/guide.pdf", class: "fr-link fr-link--icon-right fr-fi-file-download-line", download: "guide.pdf" %>
+    </p>
+    <embed
+      title="Guide du recensement"
+      src="<%= @guide_url %>"
+      type="application/pdf"
+      width="100%"
+      class="co-guide-embed" />
+  </div>
+</main>

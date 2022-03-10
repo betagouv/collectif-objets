@@ -1,0 +1,65 @@
+.co-objet-summary-wrapper {
+  display: flex;
+}
+
+.co-objet-summary {
+  display: flex;
+  padding: 1rem;
+  background: #ededed;
+}
+
+.co-objet-summary .co-objet-desc {
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.co-objet-summary .co-objet-thumb img {
+  max-height: 8rem;
+}
+
+
+.co-form-explanations {
+  border-left: 1px solid;
+  padding-left: 1rem;
+}
+
+label.fr-label.co-label--disabled,
+.fr-fieldset__legend.co-legend--disabled {
+  color: #999;
+}
+
+.co-recensement-form-photo-wrapper {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  position: relative;
+}
+.co-recensement-form-photo-wrapper img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+.co-recensement-form-photo-wrapper .co-delete-icon {
+  position: absolute;
+  left: 63px;
+  top: 63px;
+}
+
+
+/* completion page */
+.co-recensement-completion-summary img {
+  max-width: 100px;
+}
+
+.co-recensement-completion-summary .co-recensement-photos {
+  display: flex;
+  max-width: 150px;
+  overflow: scroll;
+}
+
+.co-recensement-completion-summary .co-recensement-photos img {
+  margin-left: 5px;
+}

@@ -1,2 +1,27 @@
 fr:
   hello: "Coucou"
+
+  activerecord:
+    errors:
+      models:
+        recensement:
+          attributes:
+            localisation:
+              blank: "La localisation doit être indiquée"
+              inclusion: "La localisation est invalide"
+            edifice_nom:
+              blank: "Le nom de l'édifice dans lequel se trouve maintenant l'objet doit être indiqué"
+            etat_sanitaire:
+              blank: "L'état sanitaire doit être rempli"
+              inclusion: "L'état sanitaire est invalide"
+            securisation:
+              blank: "La sécurisation de l'objet doit être remplie"
+              inclusion: "La sécurisation de l'objet est invalide"
+            etat_sanitaire_edifice:
+              blank: "L'état sanitaire de l'édifice doit être rempli"
+              inclusion: "L'état sanitaire de l'édifice est invalide"
+            recensable:
+              inclusion: "Vous devez préciser si l'objet peut être recensé"
+            photos:
+              blank: "Les photos sont fortement recommandées. Si vous ne pouvez pas en prendre, merci de le signaler."
+              max_size_error: "Les photos doivent faire moins de 20MB"

@@ -56,4 +56,12 @@ namespace :users do
       end
     end
   end
+
+  task :random_tokens, [] => :environment do |_, args|
+    commune_ids = User.select(:commune_id).distinct.map(&:commune_id)
+    (0..100).each do |i|
+      commune = Commune.where(id: commune_ids).include_objets_count.where("objets_count > 0").order(Arel.sql('RANDOM()')).first
+      commune.users.first.update!(magic_token: "test#{i}")
+    end
+  end
 end

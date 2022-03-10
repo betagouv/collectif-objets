@@ -13,15 +13,6 @@ class ObjetsController < ApplicationController
     )
   end
 
-  def index_print
-    raise unless params[:commune_code_insee].present?
-
-    @commune = Commune.find_by_code_insee(params[:commune_code_insee])
-    raise unless @commune.present?
-
-    @objets = Objet.where(commune: @commune)
-  end
-
   def show
     @objet = Objet.find(params[:id])
   end

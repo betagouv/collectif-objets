@@ -1,0 +1,49 @@
+<div
+  data-controller="recensement-form--upload-photo"
+  data-recensement-form--upload-photo-target="wrapper"
+>
+  <div
+    class="fr-upload-group"
+    data-recensement-form--upload-photo-target="uploadGroup"
+  >
+    <label class="fr-label" for="recensement_photos">
+      Ajouter une photo
+      <span class="fr-hint-text">
+      Taille maximale : 10 Mo. Formats supportés : jpg, png, pdf.
+      Vous pouvez ajouter plusieurs photos une par une.</span>
+    </label>
+    <input name="recensement[photos][]" type="hidden" value="" autocomplete="off">
+    <input
+      type="file"
+      data-direct-upload-url="<%= rails_direct_uploads_url %>"
+      name="recensement[photos][]"
+      id="recensement_photos"
+      accept="image/*"
+      data-recensement-form--upload-photo-target="input"
+      data-recensement-form--uploader-target="input"
+      data-action="change->recensement-form--upload-photo#refreshPreview change->recensement-form--uploader#addInput change->recensement#refreshFields"
+    >
+  </div>
+  <div
+    class="hide co-flex co-flex--align-items-center fr-mb-2w"
+    data-recensement-form--upload-photo-target="preview"
+  >
+    <div
+      class="co-recensement-form-photo-wrapper"
+      data-recensement-form--upload-photo-target="photoWrapper"
+    >
+      <img data-recensement-form--upload-photo-target="img" />
+    </div>
+    <div class="fr-ml-2w">
+      <div class="fr-mb-2w">
+        <span class="co-text--muted" data-recensement-form--upload-photo-target="metadata"></span>
+      </div>
+      <button
+        class="fr-btn fr-btn--secondary fr-fi-delete-line fr-btn--icon-right"
+        data-action="click->recensement-form--upload-photo#remove"
+      >
+        Retirer cette photo
+      </button>
+    </div>
+  </div>
+</div>

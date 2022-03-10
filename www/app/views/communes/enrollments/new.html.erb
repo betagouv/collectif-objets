@@ -1,43 +1,57 @@
 <main>
-  <!-- SECTION INTRO -->
   <section>
-    <div class="fr-container">
-      <div class="fr-grid-row fr-py-8w">
+    <div class="fr-container fr-py-8w">
+      <% if @user.errors.any? %>
+        <div class="fr-grid-row">
+          <div class="fr-col-md-6">
+            <div class="fr-alert fr-alert--error fr-mb-6w">
+              <p>
+                Votre inscription n'a pas pu être confirmée :
+                <ul>
+                  <% @user.errors.attribute_names.each do |attribute| %>
+                    <li><%= @user.errors.messages_for(attribute).first %></li>
+                  <% end %>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="fr-grid-row">
         <div class="fr-col-md-6">
-          <h2 class="co-text--blue">Votre commune souhaite participer ?</h2>
+          <h2 class="co-text--blue">Inscription de <%= @commune.nom %></h2>
           <p>
             En répondant à ce questionnaire, vous portez votre commune volontaire pour participer à l’opération de recensement des objets classés ou inscrits aux monument historique dont elle a la charge.
           </p>
           <p>
             <b>Vous recevrez un accompagnement supplémentaire</b> si vous en avez besoin lors de votre recensement
           </p>
-          <%= form_for(@enrollment, as: "enrollment", url: enrollments_path, builder: FormBuilderDsfr) do |f| %>
+          <%= form_for(@user, url: commune_enrollments_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
             <div class="fr-input-group">
-              <%= f.label :name, "Nom" %>
-              <%= f.text_field :name, required: true, autofocus: true %>
+              <%= f.label :nom, "Nom" %>
+              <%= f.text_field :nom, required: true, autofocus: true %>
             </div>
             <div class="fr-input-group">
-              <%= f.label :role, "Votre fonction" %>
-              <%= f.text_field :role %>
+              <%= f.label :job_title, "Votre fonction" %>
+              <%= f.text_field :job_title %>
             </div>
             <div class="fr-input-group">
-              <%= f.label :email, "E-mail" %>
-              <%= f.email_field :email, autocomplete: "email", required: true %>
+              <%= f.label :email_personal, "E-mail" %>
+              <%= f.email_field :email_personal, autocomplete: "email", required: true %>
             </div>
             <div class="fr-input-group">
-              <%= f.label :phone, "Numéro de téléphone" %>
-              <%= f.text_field :phone, type: "tel" %>
+              <%= f.label :phone_number, "Numéro de téléphone" %>
+              <%= f.text_field :phone_number, type: "tel" %>
             </div>
-            <div class="fr-input-group">
-              <%= f.label :commune %>
-              <%= f.text_field :commune, required: true %>
-            </div>
-            <div class="fr-input-group">
-              <%= f.label :notes %>
-              <%= f.text_area :notes %>
-            </div>
+            <%= f.fields_for :commune do |f_commune| %>
+              <div class="fr-input-group">
+                <%= f_commune.label :notes_from_enrollment, "Commentaires" %>
+                <%= f_commune.text_area :notes_from_enrollment %>
+              </div>
+            <% end %>
             <div class="actions">
-              <%= f.submit "J'inscris ma commune à la campagne de recensement" %>
+              <%= f.submit "J'inscris #{@user.commune.nom} à la campagne de recensement" %>
             </div>
           <% end %>
         </div>

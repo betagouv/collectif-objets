@@ -10,6 +10,8 @@ class User < ApplicationRecord
   belongs_to :commune, optional: true
   validates :role, presence: true, inclusion: { in: ROLES }
 
+  accepts_nested_attributes_for :commune
+
   def password_required?
     false
   end
