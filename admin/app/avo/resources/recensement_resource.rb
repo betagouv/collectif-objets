@@ -22,6 +22,7 @@ class RecensementResource < Avo::BaseResource
   field :id, as: :id
 
   field :objet, as: :belongs_to
+  field :created_at, as: :text, sortable: true, format_using: ->(t) { I18n.l(t, locale: :fr, format: :short)  }, readonly: true
 
   field(
     :localisation,

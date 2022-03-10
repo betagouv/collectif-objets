@@ -47,12 +47,13 @@ class CommuneResource < Avo::BaseResource
   field :population, sortable: true, as: :number
   field :notes_from_enrollment, as: :text, hide_on: [:index]
   field :notes_from_completion, as: :text, hide_on: [:index]
-  field :enrolled_at, as: :datetime, hide_on: [:index]
-  field :completed_at, as: :datetime, hide_on: [:index]
+  field :enrolled_at, as: :text, sortable: true, format_using: ->(t) { t && I18n.l(t, locale: :fr, format: :short)  }, readonly: true
+  field :completed_at, as: :text, sortable: true, format_using: ->(t) { t && I18n.l(t, locale: :fr, format: :short)  }, readonly: true
 
   field :users, as: :has_many
   field :objets, as: :has_many
   field :recensements, as: :has_many, through: :objets
 
   filter CommuneStatusFilter
+  filter DepartementFilter
 end
