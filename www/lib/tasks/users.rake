@@ -59,9 +59,11 @@ namespace :users do
 
   task :random_tokens, [] => :environment do |_, args|
     commune_ids = User.select(:commune_id).distinct.map(&:commune_id)
-    (0..100).each do |i|
-      commune = Commune.where(id: commune_ids).include_objets_count.where("objets_count > 0").order(Arel.sql('RANDOM()')).first
-      commune.users.first.update!(magic_token: "test#{i}")
+    (0..30).each do |i|
+      commune = Commune.where(id: commune_ids).where(departement: "65").include_objets_count.where("objets_count > 0").order(Arel.sql('RANDOM()')).first
+      user = commune.users.first
+      user.update!(magic_token: "test-#{commune.code_insee}")
+      puts "#{commune.nom} : http://localhost:3010/magic-authentication?magic-token=#{user.magic_token}"
     end
   end
 end
