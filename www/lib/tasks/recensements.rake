@@ -8,7 +8,6 @@ namespace :recensements do
 
   # rake "recensements:import[../../collectif-objets-data/airtable-recensements-reformatted.csv]"
   task :import, [:path] => :environment do |_, args|
-    Recensement.destroy_all
     for row in CSV.read(args[:path], headers: true) do
       puts "processing #{row["ref_pop"]}.."
       objet = Objet.find_by_ref_pop(row["ref_pop"])

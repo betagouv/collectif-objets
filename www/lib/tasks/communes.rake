@@ -78,4 +78,41 @@ namespace :communes do
     end
   end
 
+  # rake "communes:import_statuses[../../collectif-objets-data/airtable-communes-statuses.csv]"
+  task :import_statuses, [:path] => :environment do |_, args|
+    for row in CSV.read(args[:path], headers: true) do
+      commune = Commune.find_by_code_insee(row["code_insee"])
+      if commune.nil?
+        puts "⚠️ no commune found for #{row["code_insee"]} : #{row["nom"]}"
+        next
+      end
+
+      if row["user_nom"].present?
+        user = commune.users.first
+        raise "no user found for #{row["code_insee"]}" if user.nil?
+      end
+
+      updates = row.to_h.slice("enrolled_at", "notes_from_enrollment").compact
+      if commune.status.nil? ||
+        (commune.enrolled? && ["started", "completed"].include?(row["status"])) ||
+        (commune.started? && row["status"] == "completed")
+        updates["status"] = row["status"]
+      end
+      puts "updating #{row["code_insee"]} with #{updates}"
+      commune.update!(updates)
+
+      if row["user_nom"].present?
+        user = commune.users.first
+        updates = {
+          "job_title": row["user_job_title"],
+          "nom": row["user_nom"],
+          "email_personal": row["user_email_personal"],
+          "phone_number": row["user_phone_number"],
+        }.compact
+        puts "updating #{user["email"]} with #{updates}"
+        user.update!(updates)
+      end
+    end
+  end
+
 end
