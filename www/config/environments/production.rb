@@ -102,4 +102,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.force_ssl = true
+  config.x.admin_host = ENV["ADMIN_HOST"]
 end

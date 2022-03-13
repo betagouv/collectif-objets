@@ -1,2 +1,3 @@
 www_web: cd www && rails server -p 3010
+www_worker: cd www && bundle exec sidekiq
 admin_web: cd admin && rails server -p 3011
