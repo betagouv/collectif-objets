@@ -5,7 +5,7 @@ class Objet < ApplicationRecord
 
   scope :with_images, -> { where("cardinality(image_urls) >= 1") }
   belongs_to :commune, foreign_key: :commune_code_insee, primary_key: :code_insee, optional: true, inverse_of: :objets
-  has_many :recensements
+  has_many :recensements, dependent: :restrict_with_exception
 
   scope :with_photos_first, -> { order("cardinality(image_urls) DESC, LOWER(nom) ASC") }
   scope :without_recensement, -> { includes(:recensements).where(recensements: { objet_id: nil }) }

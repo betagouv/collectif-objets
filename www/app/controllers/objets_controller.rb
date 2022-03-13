@@ -3,7 +3,7 @@
 class ObjetsController < ApplicationController
   def index
     @filters = {
-      commune: params[:commune_code_insee].present? ? Commune.find_by_code_insee(params[:commune_code_insee]) : nil
+      commune: params[:commune_code_insee].present? ? Commune.find_by(code_insee: params[:commune_code_insee]) : nil
     }.compact
     @pagy, @objets = pagy(
       Objet
@@ -18,7 +18,7 @@ class ObjetsController < ApplicationController
   end
 
   def show_by_ref_pop
-    @objet = Objet.find_by_ref_pop(params[:ref_pop])
+    @objet = Objet.find_by(ref_pop: params[:ref_pop])
     render :show
   end
 end

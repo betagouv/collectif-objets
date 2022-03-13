@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Rails/OutputSafety
+
 class RecensementPresenter
   include Rails.application.routes.url_helpers
 
@@ -81,3 +83,5 @@ class RecensementPresenter
     ".html_safe
   end
 end
+
+# rubocop:enable Rails/OutputSafety

@@ -7,8 +7,14 @@ class Commune < ApplicationRecord
   STATUS_COMPLETED = "completed"
   STATUSES = [STATUS_ENROLLED, STATUS_COMPLETED, STATUS_STARTED].freeze
 
-  has_many :users
-  has_many :objets, foreign_key: :commune_code_insee, primary_key: :code_insee, inverse_of: :commune
+  has_many :users, dependent: :restrict_with_exception
+  has_many(
+    :objets,
+    foreign_key: :commune_code_insee,
+    primary_key: :code_insee,
+    inverse_of: :commune,
+    dependent: :restrict_with_exception
+  )
   has_many :recensements, through: :objets
 
   validates :status, inclusion: { in: STATUSES + [nil] }
@@ -29,11 +35,11 @@ class Commune < ApplicationRecord
   def self.select_best_objets(objets_arr)
     objets_arr
       .optional_filter { _1.image_urls.any? }
-      .optional_filter { !_1.nom.include?(";") }
+      .optional_filter { _1.nom.exclude?(";") }
       .optional_filter { !_1.nom.match?(/[A-Z]/) }
       .optional_filter { _1.edifice_nom.present? }
       .optional_filter { _1.edifice_nom&.match?(/[A-Z]/) }
-      .optional_filter { !_1.emplacement.present? }
+      .optional_filter { _1.emplacement.blank? }
   end
   # rubocop:enable Metrics/AbcSize
 

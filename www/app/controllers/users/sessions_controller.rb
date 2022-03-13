@@ -19,7 +19,7 @@ module Users
       user = User.find_by(login_token: params[:login_token])
 
       if user.present?
-        user.update!(last_sign_in_at: Time.now, login_token: nil, login_token_valid_until: 1.year.ago)
+        user.update!(last_sign_in_at: Time.zone.now, login_token: nil, login_token_valid_until: 1.year.ago)
         return unless sign_in(user)
 
         redirect_to root_path, notice: "Vous êtes maintenant connecté(e)"
@@ -33,7 +33,7 @@ module Users
       # the magic token is never rotated
       user = User.find_by(magic_token: params["magic-token"])
       if user.present?
-        user.update!(last_sign_in_at: Time.now)
+        user.update!(last_sign_in_at: Time.zone.now)
         return unless sign_in(user)
 
         redirect_to root_path, notice: "Vous êtes maintenant connecté(e)"

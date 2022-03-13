@@ -4,6 +4,7 @@ class RecensementsController < ApplicationController
   before_action :set_objet, :restrict_commune
   before_action :restrict_recensable, only: %i[new create]
   before_action :set_recensement, :restrict_editable, only: %i[edit update]
+  before_action :restrict_already_recensed, only: [:create]
 
   def new
     @recensement = Recensement.new(objet: @objet, recensable: "true")
@@ -75,5 +76,9 @@ class RecensementsController < ApplicationController
     return true if @recensement.editable?
 
     redirect_to objet_path(@objet), alert: "Ce recensement ne peut plus être édité."
+  end
+
+  def restrict_already_recensed
+    raise "Objet déjà recensé" if @objet.recensements.any?
   end
 end

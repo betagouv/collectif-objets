@@ -34,7 +34,7 @@ module Communes
       ).to_h.deep_merge(
         commune_attributes: {
           status: Commune::STATUS_ENROLLED,
-          enrolled_at: Time.now
+          enrolled_at: Time.zone.now
         }
       )
     end

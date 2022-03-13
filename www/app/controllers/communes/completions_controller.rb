@@ -32,7 +32,7 @@ module Communes
 
     def commune_params
       params.require(:commune).permit(:notes_from_completion).to_h
-          .deep_merge(status: Commune::STATUS_COMPLETED, completed_at: Time.now)
+          .deep_merge(status: Commune::STATUS_COMPLETED, completed_at: Time.zone.now)
     end
   end
 end

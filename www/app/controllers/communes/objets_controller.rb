@@ -13,7 +13,7 @@ module Communes
     end
 
     def index_print
-      raise unless @commune.present?
+      raise if @commune.blank?
 
       @objets = Objet.where(commune: @commune)
     end

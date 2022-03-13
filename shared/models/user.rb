@@ -19,7 +19,7 @@ class User < ApplicationRecord
   def rotate_login_token(valid_for: 60.minutes)
     update(
       login_token: SecureRandom.hex(10),
-      login_token_valid_until: Time.now + valid_for
+      login_token_valid_until: Time.zone.now + valid_for
     )
   end
 

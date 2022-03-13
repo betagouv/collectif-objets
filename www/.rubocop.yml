@@ -1,3 +1,6 @@
+require:
+  - rubocop-rails
+
 inherit_mode:
   merge:
     - Exclude
@@ -10,6 +13,7 @@ AllCops:
     - "shared/db/**/*"
     - "config/**/*"
     - "lib/tasks/**/*"
+  SuggestExtensions: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

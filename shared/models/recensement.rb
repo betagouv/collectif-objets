@@ -36,7 +36,6 @@ class Recensement < ApplicationRecord
       size_range: 0..(20.megabytes)
     }
   )
-  validates :objet_id, uniqueness: true
 
   attr_accessor :confirmation, :skip_photos
 
