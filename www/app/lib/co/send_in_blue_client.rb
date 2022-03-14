@@ -24,7 +24,16 @@ module Co
         }
       },
       "development" => {
-        "51" => {
+        "65" => {
+          "cold" => 119,
+          "enrolled" => 120,
+          "opt-out" => 121,
+          "started" => 122,
+          "missing-photos" => 123
+        }
+      },
+      "staging" => {
+        "65" => {
           "cold" => 119,
           "enrolled" => 120,
           "opt-out" => 121,
@@ -55,6 +64,22 @@ module Co
 
     def contacts_client
       @contacts_client ||= SibApiV3Sdk::ContactsApi.new
+    end
+
+    def remove_contact_from_list(email, departement, list_name)
+      contact = contacts_client.get_contact_info(email)
+      list_id = get_list_id!(departement, list_name)
+      return if contact.list_ids.exclude?(list_id)
+
+      contacts_client.remove_contact_from_list(list_id, { emails: [email] })
+    end
+
+    def add_contact_to_list(email, departement, list_name)
+      contact = contacts_client.get_contact_info(email)
+      list_id = get_list_id!(departement, list_name)
+      return if contact.list_ids.include?(list_id)
+
+      contacts_client.add_contact_to_list(get_list_id!(departement, list_name), { emails: [email] })
     end
 
     private

@@ -69,7 +69,7 @@ class Commune < ApplicationRecord
   end
 
   def start!
-    return true unless status.nil?
+    return true if completed? || started?
 
     update!(status: STATUS_STARTED)
   end

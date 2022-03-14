@@ -4,7 +4,7 @@ class RecensementsController < ApplicationController
   before_action :set_objet, :restrict_commune
   before_action :restrict_recensable, only: %i[new create]
   before_action :set_recensement, :restrict_editable, only: %i[edit update]
-  before_action :restrict_already_recensed, only: [:create]
+  before_action :restrict_already_recensed, :set_new_recensement, only: [:create]
 
   def new
     @recensement = Recensement.new(objet: @objet, recensable: "true")
@@ -16,10 +16,9 @@ class RecensementsController < ApplicationController
   end
 
   def create
-    @recensement = Recensement.new(recensable: "true", **recensement_params_parsed, objet: @objet)
-    @recensement.confirmation = recensement_params[:confirmation].present?
     if @recensement.save
       @recensement.objet.commune.start!
+      TriggerSibContactEventJob.perform_async(@objet.commune.id, "started")
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true)
     else
       render :new, status: :unprocessable_entity
@@ -43,6 +42,11 @@ class RecensementsController < ApplicationController
 
   def set_recensement
     @recensement = Recensement.find(params[:id])
+  end
+
+  def set_new_recensement
+    @recensement = Recensement.new(recensable: "true", **recensement_params_parsed, objet: @objet)
+    @recensement.confirmation = recensement_params[:confirmation].present?
   end
 
   def recensement_params

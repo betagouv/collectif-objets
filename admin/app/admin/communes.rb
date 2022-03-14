@@ -83,4 +83,15 @@ ActiveAdmin.register Commune do
       end
     end
   end
+
+  form do |f|
+    f.semantic_errors # shows errors on :base
+    f.inputs do
+      f.input :nom, input_html: { disabled: true }
+      f.input :code_insee, input_html: { disabled: true }
+      f.input :departement, input_html: { disabled: true }
+      f.input :status, as: :select, collection: Commune::STATUSES
+    end
+    f.actions         # adds the 'Submit' and 'Cancel' buttons
+  end
 end

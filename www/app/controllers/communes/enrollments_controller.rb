@@ -8,6 +8,7 @@ module Communes
 
     def create
       if @user.update(user_params)
+        TriggerSibContactEventJob.perform_async(@commune.id, "enrolled")
         redirect_to commune_objets_path(@commune), notice: "Votre commune a bien été inscrite !"
       else
         render :new
