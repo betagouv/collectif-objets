@@ -34,7 +34,7 @@
           · commune <%= user_data["commune_status"] %>
           · <%= user_data["recensements_count"] %> recensements
           · dont <%= user_data["recensements_with_photos_count"] %> avec photos
-          · <a href="<%= Rails.configuration.x.admin_host %>/admin/resources/communes/<%= user_data["commune_id"] %>">
+          · <a href="<%= Rails.configuration.x.admin_host %>/admin/communes/<%= user_data["commune_id"] %>">
             voir dans l'admin ↗️
           </a>
         </li>
