@@ -34,5 +34,6 @@ module Admin
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.default_locale = :fr
+    config.x.environment = ENV["HOST"]&.match(/staging/) ? "staging" : Rails.env
   end
 end
