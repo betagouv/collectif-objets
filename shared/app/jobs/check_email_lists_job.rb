@@ -22,19 +22,20 @@ class CheckEmailListsJob
     }
   }.freeze
 
-  def perform(departement = nil)
-    @departement = departement
-    report_data = departements.map { [_1, check_departement(_1)] }.to_h
-    AdminMailer.emails_report(report_data).deliver_now
+  def perform(email)
+    report_data = departements.map { [_1, check_departement(_1)] }.to_h.compact
+    AdminMailer.emails_report(email, report_data).deliver_now
   end
 
   protected
 
   def departements
-    @departement ? [@departement] : Commune.select(:departement).distinct.map(&:departement).compact
+    Commune.select(:departement).distinct.map(&:departement).compact
   end
 
   def check_departement(departement)
+    return nil if Co::SendInBlueClient::SIB_LISTS.dig(Rails.env, departement).nil?
+
     CHECKS.to_h do |list_key, check_data|
       list = Co::SendInBlueClient.instance.get_list(departement, list_key)
       [list_key, {

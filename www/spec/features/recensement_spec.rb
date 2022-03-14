@@ -21,7 +21,7 @@ RSpec.feature "Recensement", type: :feature, js: true do
           add_contact_to_list: true
         )
       )
-    allow_any_instance_of(Co::SendInBlueClient).to receive(:get_list_id!).and_return(42)
+    allow_any_instance_of(Co::SendInBlueClient).to receive(:get_list_id).and_return(42)
   end
 
   scenario "full recensement" do

@@ -1,0 +1,26 @@
+
+<div class="panel">
+  <h3>Jobs</h3>
+  <div class="panel_contents">
+    <%= form_tag admin_tools_enqueue_emails_report_path, method: :post do %>
+    <fieldset class="inputs">
+      <ol>
+        <li class="string input optional stringish">
+          <%= label_tag :email, "Email" %>
+          <%= text_field_tag :email, current_admin_user.email %>
+        </li>
+        <li>
+          <%= submit_tag "Envoyer le rapport d'emails" %>
+        </li>
+      </ol>
+    </fieldset>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel">
+  <h3>External Tools</h3>
+  <div class="panel_contents">
+    <%= link_to "Sidekiq Monitoring", "/sidekiq" %>
+  </div>
+</div>

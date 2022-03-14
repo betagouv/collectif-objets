@@ -31,15 +31,6 @@ module Co
           "started" => 122,
           "missing-photos" => 123
         }
-      },
-      "staging" => {
-        "65" => {
-          "cold" => 119,
-          "enrolled" => 120,
-          "opt-out" => 121,
-          "started" => 122,
-          "missing-photos" => 123
-        }
       }
     }.freeze
 
@@ -47,9 +38,37 @@ module Co
 
     def initialize; end
 
-    def get_list_contacts(departement, name)
-      get_list_id_contacts(get_list_id!(departement, name))
+    # BY DEPARTEMENT AND LIST KEY
+
+    def get_list_contacts(departement, list_key)
+      list_id = get_list_id(departement, list_key)
+      return if list_id.blank?
+
+      get_list_id_contacts(list_id)
     end
+
+    def get_list(departement, list_key)
+      list_id = get_list_id(departement, list_key)
+      return if list_id.blank?
+
+      contacts_client.get_list(list_id)
+    end
+
+    def remove_contact_from_list(email, departement, list_key)
+      list_id = get_list_id(departement, list_key)
+      return if list_id.blank?
+
+      remove_contact_from_list_id(email, list_id)
+    end
+
+    def add_contact_to_list(email, departement, list_key)
+      list_id = get_list_id(departement, list_key)
+      return if list_id.blank?
+
+      add_contact_to_list_id(email, list_id)
+    end
+
+    # BY LIST IDS
 
     def get_list_id_contacts(list_id, acc = [])
       res = contacts_client.get_contacts_from_list(
@@ -57,25 +76,8 @@ module Co
         limit: PER_PAGE, # does not seem to be respected
         offset: acc.count
       )
-      sleep(1)
       acc += res.contacts
       res.count == PER_PAGE ? get_list_id_contacts(list_id, acc) : acc
-    end
-
-    def get_list(departement, name)
-      contacts_client.get_list(get_list_id!(departement, name))
-    end
-
-    def contacts_client
-      @contacts_client ||= SibApiV3Sdk::ContactsApi.new
-    end
-
-    def remove_contact_from_list(email, departement, list_name)
-      remove_contact_from_list_id(email, get_list_id!(departement, list_name))
-    end
-
-    def add_contact_to_list(email, departement, list_name)
-      add_contact_to_list_id(email, get_list_id!(departement, list_name))
     end
 
     def remove_contact_from_list_id(email, list_id)
@@ -94,8 +96,12 @@ module Co
 
     private
 
-    def get_list_id!(departement, name)
-      SIB_LISTS.dig(Rails.env, departement, name) || raise("missing list #{Rails.env} #{departement} - #{name}")
+    def get_list_id(departement, list_key)
+      SIB_LISTS.dig(Rails.env, departement, list_key)
+    end
+
+    def contacts_client
+      @contacts_client ||= SibApiV3Sdk::ContactsApi.new
     end
   end
 end

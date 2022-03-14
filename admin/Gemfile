@@ -16,6 +16,7 @@ gem "activeadmin", "~> 2.11"
 gem 'devise-i18n'
 gem "draper", "~> 4.0"
 gem "aws-sdk-s3", require: false
+gem "sidekiq"
 
 
 group :development, :test do
