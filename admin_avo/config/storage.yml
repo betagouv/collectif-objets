@@ -1,0 +1,15 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+scaleway:
+  service: S3
+  endpoint: https://s3.fr-par.scw.cloud
+  access_key_id: <%= Rails.application.credentials.dig(:scaleway, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:scaleway, :secret_access_key) %>
+  region: fr-par
+  bucket: collectif-objets-<%= Rails.configuration.x.environment %>
