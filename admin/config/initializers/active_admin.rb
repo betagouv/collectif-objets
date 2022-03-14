@@ -1,22 +1,6 @@
 ActiveAdmin.setup do |config|
-  # == Site Title
-  #
-  # Set the title that is displayed on the main layout
-  # for each of the active admin pages.
-  #
-  config.site_title = "Admin"
-
-  # Set the link url for the title. For example, to take
-  # users to your main site. Defaults to no link.
-  #
-  # config.site_title_link = "/"
-
-  # Set an optional image to be displayed for the header
-  # instead of a string (overrides :site_title)
-  #
-  # Note: Aim for an image that's 21px high so it fits in the header.
-  #
-  # config.site_title_image = "logo.png"
+  config.site_title = "Collectif Objets"
+  config.site_title_link = Rails.configuration.x.www_base_url
 
   # == Default Namespace
   #
@@ -134,7 +118,7 @@ ActiveAdmin.setup do |config|
   # config.comments_order = 'created_at ASC'
   #
   # You can disable the menu item for the comments index page:
-  # config.comments_menu = false
+  config.comments_menu = false
   #
   # You can customize the comment menu:
   # config.comments_menu = { parent: 'Admin', priority: 1 }
@@ -168,7 +152,7 @@ ActiveAdmin.setup do |config|
   # You can run `bin/rails runner 'puts I18n.t("date.formats")'` to see the
   # available formats in your application.
   #
-  config.localize_format = :long
+  config.localize_format = :short
 
   # == Setting a Favicon
   #
@@ -332,4 +316,6 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+
+  config.footer = "Collectif Objets"
 end

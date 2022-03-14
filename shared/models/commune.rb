@@ -43,10 +43,6 @@ class Commune < ApplicationRecord
   end
   # rubocop:enable Metrics/AbcSize
 
-  def nom_with_code_insee
-    "#{nom} (#{code_insee})"
-  end
-
   def main_objet
     @main_objet ||=
       Commune.select_best_objets(objets.where.not(nom: nil).to_a).first
