@@ -12,14 +12,14 @@ module Co
           "cold" => 95,
           "enrolled" => 94,
           "opt-out" => 98,
-          "completed" => 99,
+          "started" => 99,
           "missing-photos" => 117
         },
         "65" => {
           "cold" => 112,
           "enrolled" => 111,
           "opt-out" => 113,
-          "completed" => 114,
+          "started" => 114,
           "missing-photos" => 118
         }
       },
@@ -28,7 +28,7 @@ module Co
           "cold" => 119,
           "enrolled" => 120,
           "opt-out" => 121,
-          "completed" => 122,
+          "started" => 122,
           "missing-photos" => 123
         }
       }

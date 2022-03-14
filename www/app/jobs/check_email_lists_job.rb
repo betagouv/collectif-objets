@@ -10,9 +10,9 @@ class CheckEmailListsJob
     "enrolled" => {
       user_func: ->(user) { user.commune.enrolled? }
     },
-    "completed" => {
+    "started" => {
       user_func: lambda { |user|
-        user.commune.completed? && user.commune.objets.where_assoc_exists(%i[recensements photos_attachments]).any?
+        user.commune.completed? || user.commune.started?
       }
     },
     "missing-photos" => {
