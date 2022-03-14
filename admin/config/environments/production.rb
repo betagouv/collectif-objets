@@ -1,6 +1,6 @@
 require "active_support/core_ext/integer/time"
 
-Rails.application.default_url_options = { host: ENV["HOST"] }
+Rails.application.default_url_options = { host: ENV["HOST"], protocol: "https" }
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -64,7 +64,6 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "admin_production"
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV["HOST"] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address => "smtp-relay.sendinblue.com",
