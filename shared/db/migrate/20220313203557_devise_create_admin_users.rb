@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DeviseCreateAdminUsers < ActiveRecord::Migration[7.0]
-  def change
+  def up
     create_table :admin_users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -38,7 +38,14 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration[7.0]
 
     add_index :admin_users, :email,                unique: true
     add_index :admin_users, :reset_password_token, unique: true
-    # add_index :admin_users, :confirmation_token,   unique: true
-    # add_index :admin_users, :unlock_token,         unique: true
+
+    User.where(role: :admin).each do |user|
+      AdminUser.create!(email: user.email, password: SecureRandom.hex(20))
+      user.destroy!
+    end
+  end
+
+  def down
+    drop_table :admin_users
   end
 end
