@@ -60,6 +60,7 @@
             name="recensement[confirmation]"
             <%= "checked" if recensement.confirmation %>
             <%= "disabled" if recensement.persisted? %>
+            data-action="change->recensement#refreshFields"
           >
           <label class="fr-label" for="recensement[confirmation]">
             Je confirme m'être déplacé voir l'objet pour ce recensement
@@ -79,7 +80,8 @@
             "forms/collection_radio_buttons",
             f: f, legend: 'Où se trouve l’objet ? <span class="co-text--blue">*</span>',
             field_name: :localisation,
-            options: localisation_options(recensement)
+            options: localisation_options(recensement),
+            radio_button_options: {"data-action": "change->recensement#refreshFields"}
           ) %>
         </div>
         <div data-recensement-target="edificeNom">
@@ -118,7 +120,9 @@
           <%= render(
             "forms/collection_radio_buttons",
             f: f, legend: 'L’objet peut-il être recensé ? <span class="co-text--blue">*</span>',
-            field_name: :recensable, options: recensable_options
+            field_name: :recensable,
+            options: recensable_options,
+            radio_button_options: {"data-action": "change->recensement#refreshFields"}
           ) %>
         </div>
       </div>
@@ -135,7 +139,8 @@
           <%= render(
             "forms/collection_radio_buttons",
             f: f, legend: 'Comment évaluez-vous l’état sanitaire de l’édifice à proximité de l’objet ? <span class="co-text--blue">*</span>',
-            field_name: :etat_sanitaire_edifice, options: etat_sanitaire_options
+            field_name: :etat_sanitaire_edifice,
+            options: etat_sanitaire_options
           ) %>
         </div>
       </div>
@@ -155,7 +160,8 @@
           <%= render(
             "forms/collection_radio_buttons",
             f: f, legend: 'Comment évaluez-vous l’état sanitaire de l’objet ? <span class="co-text--blue">*</span>',
-            field_name: :etat_sanitaire, options: etat_sanitaire_options
+            field_name: :etat_sanitaire,
+            options: etat_sanitaire_options
           ) %>
         </div>
       </div>
@@ -224,7 +230,7 @@ nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank"
       </div>
     </div>
 
-    <%= f.submit "Enregistrer ce recensement" %>
+    <%= f.submit "Enregistrer ce recensement", "data-recensement-target": "submit" %>
     <span class="fr-ml-2w">Vous pourrez toujours le modifier après l'avoir enregistré</span>
   <% end %>
 </main>

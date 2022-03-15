@@ -28,7 +28,7 @@
               name="remove_photo"
               id="remove_photo_<%= photo.signed_id %>"
               data-recensement-form--existing-photo-target="removeCheckbox"
-              data-action="change->recensement-form--existing-photo#update"
+              data-action="change->recensement-form--existing-photo#update change->recensement#refreshFields"
             >
             <label class="fr-label" for="remove_photo_<%= photo.signed_id %>">
               Supprimer cette photo
@@ -62,6 +62,7 @@
         id="recensement[skip_photos]"
         name="recensement[skip_photos]"
         <%= "checked" if f.object.skip_photos %>
+        data-action="change->recensement#refreshFields"
       >
       <label class="fr-label" for="recensement[skip_photos]">
         Je ne peux pas prendre cet objet en photo

@@ -11,20 +11,19 @@ export default class extends Controller {
     "photos",
     "skipPhotos",
     "notes",
-    "form"
+    "form",
+    "submit"
   ]
 
   connect() {
-    document.querySelectorAll(`
-      input[name="recensement[confirmation]"],
-      input[name="recensement[localisation]"],
-      input[name="recensement[recensable]"],
-      input[name="recensement[skip_photos]"],
-      input[name="remove_photo"]
-    `)
-      .forEach(elt => elt.addEventListener("change", _e => this.refreshFields()))
     this.refreshFields()
-    document.addEventListener("refreshFields", () => this.refreshFields())
+    const refreshListener = this.refreshFields
+    this.refreshListener = refreshListener
+    document.addEventListener("refreshFields", refreshListener)
+  }
+
+  disconnect() {
+    document.removeEventListener("refreshFields", this.refreshListener)
   }
 
   getCurrentValues() {
@@ -70,7 +69,6 @@ export default class extends Controller {
     this.toggleSection(this.photosTarget, mainFieldsCondition && !skipPhotos)
     this.toggleSection(this.skipPhotosTarget, mainFieldsCondition && !photosUploaded)
     this.toggleSection(this.notesTarget, confirmation)
-    document.querySelector("input[type=submit]")
-      .toggleAttribute("disabled", !confirmation)
+    this.submitTarget.toggleAttribute("disabled", !confirmation)
   }
 }

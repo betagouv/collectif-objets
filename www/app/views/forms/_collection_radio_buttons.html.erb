@@ -13,7 +13,7 @@
     <div class="fr-fieldset__content">
       <%= f.collection_radio_buttons field_name, options, :value, :label, {required: true} do |b| %>
         <div class="fr-radio-group">
-          <%= b.radio_button %>
+          <%= b.radio_button(local_assigns[:radio_button_options] || {}) %>
           <%= b.label(class: "fr-label") do %>
             <%= b.text.html_safe %>
           <% end %>
