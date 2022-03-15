@@ -59,10 +59,6 @@ html[data-fr-scheme="dark"] .co-logo-invertable {
   color: rgb(103, 103, 103);
 }
 
-.co-image-transparent {
-  filter: opacity(0.4)
-}
-
 
 .fr-input-group--disabled .fr-error-text {
   display: none;

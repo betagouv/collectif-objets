@@ -17,11 +17,7 @@
           <% end %>
         </div>
         <div class="fr-card__img">
-          <% if objet.image_urls.any? %>
-            <img src="<%= objet.image_urls[0] %>" class="fr-responsive-img" alt="">
-          <% else %>
-            <%= image_tag "illustrations/photo-manquante.png", class: "fr-responsive-img co-image-transparent" %>
-          <% end %>
+          <%= image_tag objet_first_image_or_recensement_photo_url(objet), class: "fr-responsive-img" %>
         </div>
       </div>
     </div>

@@ -63,11 +63,7 @@
     </div>
     <div class="fr-col-md-8">
       <div class="co-image-container">
-        <% if @objet.image_urls.any? %>
-          <img src="<%= @objet.image_urls[0] %>" class="co-objet-image" alt="">
-        <% else %>
-          <%= image_tag "illustrations/photo-manquante.png", class: "co-objet-image" %>
-        <% end %>
+        <%= image_tag objet_first_image_or_recensement_photo_url(@objet), class: "co-objet-image" %>
       </div>
     </div>
   </div>
