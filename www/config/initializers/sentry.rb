@@ -12,4 +12,6 @@ Sentry.init do |config|
   if ENV["HOST"] =~ /staging/
     config.environment = 'staging'
   end
+
+  config.sidekiq.report_after_job_retries = true
 end
