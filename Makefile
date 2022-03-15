@@ -3,7 +3,7 @@ install:
 	cd admin && bundle install
 	npm install --global husky
 	npx husky install
-	brew install overmind
+	brew install overmind mailhog
 
 dev:
 	overmind start -f Procfile.dev
