@@ -276,6 +276,9 @@ GEM
       sentry-ruby-core (= 5.1.0)
     sentry-ruby-core (5.1.0)
       concurrent-ruby
+    sentry-sidekiq (5.1.0)
+      sentry-ruby-core (~> 5.1.0)
+      sidekiq (>= 3.0)
     sib-api-v3-sdk (8.1.0)
       addressable (~> 2.3, >= 2.3.0)
       json (~> 2.1, >= 2.1.0)
@@ -349,6 +352,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails (~> 5.1)
   sentry-ruby (~> 5.1)
+  sentry-sidekiq
   sib-api-v3-sdk
   sidekiq
   sprockets-rails
