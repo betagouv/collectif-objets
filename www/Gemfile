@@ -34,7 +34,7 @@ end
 
 group :development do
   gem "htmlbeautifier"
-  gem "letter_opener"
+  gem "mailcatcher"
   gem "pry"
   gem "web-console"
 end
