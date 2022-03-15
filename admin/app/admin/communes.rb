@@ -1,4 +1,5 @@
 ActiveAdmin.register Commune do
+  menu label: "📍 Communes", priority: 1
   decorate_with CommuneDecorator
 
   actions :all, except: [:destroy, :new, :create]
@@ -31,25 +32,35 @@ ActiveAdmin.register Commune do
   show do
     div class: "show-container" do
       div do
-        attributes_table do
+        attributes_table title: "📍 Commune ##{commune.id}" do
+          row :id
           row :nom
           row :departement
           row :code_insee
           row :status
           row :enrolled_at
+          row :notes_from_enrollment
           row :completed_at
+          row :notes_from_completion
         end
 
-        panel "Users" do
-          table_for commune.users.map(&:decorate) do
-            column :id
-            column :email
-            column :role
-            column :magic_token
+        commune.users.map(&:decorate).each do |user|
+          panel "👤 User ##{user.id}" do
+            attributes_table_for user do
+              row(:id) { link_to _1.id, admin_user_path(_1) }
+              row :email
+              row :role
+              row :magic_token
+              row :role
+              row :nom
+              row :job_title
+              row :email_personal
+              row :phone_number
+            end
           end
         end
 
-        panel "Objets" do
+        panel "🖼 Objets" do
           table_for commune.objets.map(&:decorate) do
             column(:id) { link_to _1.id, admin_objet_path(_1) }
             column :ref_pop
@@ -63,7 +74,7 @@ ActiveAdmin.register Commune do
           end
         end
 
-        panel "Recensements" do
+        panel "✍️ Recensements" do
           table_for commune.recensements.map(&:decorate) do
             column(:id) { link_to _1.id, admin_recensement_path(_1) }
             column :created_at

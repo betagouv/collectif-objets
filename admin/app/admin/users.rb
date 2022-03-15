@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  menu label: "👤 Utilisateurs", priority: 2
   decorate_with UserDecorator
 
   actions :all, except: [:destroy]
@@ -20,14 +21,32 @@ ActiveAdmin.register User do
   show do
     div class: "show-container" do
       div do
-        attributes_table do
+        attributes_table title: "👤 Utilisateur ##{user.id}" do
           row :id
           row :email
           row :role
           row :magic_token
           row :login_token
-          row :commune
           row :encrypted_password
+          row :role
+          row :nom
+          row :job_title
+          row :email_personal
+          row :phone_number
+        end
+
+        panel "📍 Commune ##{user.commune.id}" do
+          attributes_table_for user.commune.decorate do
+            row(:id) { link_to _1.id, admin_commune_path(_1) }
+            row :nom
+            row :departement
+            row :code_insee
+            row :status
+            row :enrolled_at
+            row :notes_from_enrollment
+            row :completed_at
+            row :notes_from_completion
+          end
         end
       end
       div do

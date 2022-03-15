@@ -1,4 +1,5 @@
 ActiveAdmin.register Recensement do
+  menu label: "✍️ Recensements", priority: 4
   actions :all, except: [:destroy, :new, :create, :edit, :update]
   decorate_with RecensementDecorator
 
@@ -30,7 +31,7 @@ ActiveAdmin.register Recensement do
   show do
     div class: "show-container" do
       div do
-        attributes_table do
+        attributes_table title: "✍️ Recensement ##{recensement.id}" do
           row :id
           row :objet
           row :commune

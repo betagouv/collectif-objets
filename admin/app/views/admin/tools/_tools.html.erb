@@ -1,6 +1,6 @@
 
 <div class="panel">
-  <h3>Jobs</h3>
+  <h3>Send In Blue Debug</h3>
   <div class="panel_contents">
     <%= form_tag admin_tools_enqueue_emails_report_path, method: :post do %>
     <fieldset class="inputs">
@@ -10,7 +10,7 @@
           <%= text_field_tag :email, current_admin_user.email %>
         </li>
         <li>
-          <%= submit_tag "Envoyer le rapport d'emails" %>
+          <%= submit_tag "Envoyer le rapport sur les contacts des listes Send In Blue" %>
         </li>
       </ol>
     </fieldset>
@@ -19,8 +19,15 @@
 </div>
 
 <div class="panel">
-  <h3>External Tools</h3>
+  <h3>Outils externes</h3>
   <div class="panel_contents">
-    <%= link_to "Sidekiq Monitoring", "/sidekiq" %>
+    <p>
+      <%= link_to "⚙️ Sidekiq - Suivi des tâches asynchrones", "/sidekiq" %>
+    </p>
+    <% if Rails.env.development? %>
+      <p>
+        <%= link_to "📬 Mailcatcher", "http://localhost:1080" %>
+      </p>
+    <% end %>
   </div>
 </div>

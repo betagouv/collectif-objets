@@ -1,4 +1,5 @@
 ActiveAdmin.register Objet do
+  menu label: "🖼 Objets", priority: 3
   decorate_with ObjetDecorator
 
   actions :all, except: [:destroy, :new, :create, :edit, :update]
@@ -30,8 +31,8 @@ ActiveAdmin.register Objet do
   show do
     div class: "show-container" do
       div do
-        attributes_table do
-          row :ref_pop
+        attributes_table title: "🖼 Objet ##{objet.id}" do
+        row :ref_pop
           row :ref_memoire
           row :nom
           row :nom_courant
@@ -46,7 +47,7 @@ ActiveAdmin.register Objet do
           row :created_at
         end
 
-        panel "Recensements" do
+        panel "✍️ Recensements" do
           table_for objet.recensements.map(&:decorate) do
             column(:id) { link_to _1.id, admin_recensement_path(_1) }
             column :created_at
