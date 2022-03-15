@@ -18,7 +18,7 @@ module Communes
         TriggerSibContactEventJob.perform_async(@commune.id, "completed")
         redirect_to commune_objets_path(@commune), notice: "Le recensement de votre commune est terminé !"
       else
-        render :new
+        render :new, status: :unprocessable_entity
       end
     end
 

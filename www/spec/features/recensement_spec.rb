@@ -34,12 +34,9 @@ RSpec.feature "Recensement", type: :feature, js: true do
     expect(page).to have_text("Ciboire des malades")
 
     click_on "Je confirme la participation de ma commune"
-    fill_in "Nom", with: "Inès Rose"
-    fill_in "Votre fonction", with: "Maire"
-    fill_in "Numéro de téléphone", with: "01 01 01 01 01"
-    fill_in "Commentaires", with: "J'ai super hâte"
+    find("label", text: "Je confirme l'inscription de Albon à la campagne de recensement").click
 
-    click_on "J'inscris Albon"
+    click_on "Inscription"
     expect(page).to have_text("Votre commune a bien été inscrite !")
     expect(page).to have_text("Il vous reste 2 objets à recenser")
     expect(page).to have_button("Finaliser le recensement", disabled: true)
