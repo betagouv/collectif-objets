@@ -1,0 +1,21 @@
+<main>
+  <div class="fr-container fr-py-8w">
+    <h2 class="co-text--blue">Recensements de <%= @commune.nom %></h2>
+    <div class="fr-grid-row">
+      <div class="fr-col-md-6">
+        <p>
+          <%= link_to "← Revenir à la liste des objets", commune_objets_path(@commune) %>
+        </p>
+        <p>
+          Merci d'avoir participé et validé le recensement des objets de votre commune !
+          Un conservateur a été prévenu et reviendra vers vous.
+        </p>
+      </div>
+    </div>
+
+    <%= render "summary", objets: @objets %>
+    <p>
+      <%= link_to "← Revenir à la liste des objets", commune_objets_path(@commune) %>
+    </p>
+  </div>
+</main>

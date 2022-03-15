@@ -1,0 +1,43 @@
+<div class="fr-table co-recensement-completion-summary">
+  <table>
+    <thead>
+      <tr>
+        <th>Objet</th>
+        <th>Localisation</th>
+        <th>Recensable</th>
+        <th>État sanitaire de l'édifice</th>
+        <th>État sanitaire de l'objet</th>
+        <th>Sécurisation</th>
+        <th>Photos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% objets.each do |objet| %>
+        <% recensement = objet.current_recensement %>
+        <% presenter = RecensementPresenter.new(recensement) %>
+        <tr>
+          <td>
+            <div>
+              <div>
+                <% if recensement.objet.image_urls.any? %>
+                  <img src="<%= recensement.objet.image_urls[0] %>" alt="" class="co--width-max-100">
+                <% else %>
+                  <%= image_tag "illustrations/photo-manquante.png" %>
+                <% end %>
+              </div>
+              <div>
+                <%= link_to recensement.objet.nom_courant, objet_path(recensement.objet) %>
+              </div>
+            </div>
+          </td>
+          <td><%= presenter.localisation %></td>
+          <td><%= presenter.recensable %></td>
+          <td><%= presenter.etat_sanitaire_edifice %></td>
+          <td><%= presenter.etat_sanitaire %></td>
+          <td><%= presenter.securisation %></td>
+          <td><%= presenter.photos %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resources :communes, only: [:index] do
     resources :enrollments, only: [:new, :create], controller: "communes/enrollments"
-    resources :completions, only: [:new, :create], controller: "communes/completions"
+    resource :completion, only: [:new, :create, :show], controller: "communes/completions"
     resources :objets, only: [:index], controller: "communes/objets" do
       collection do
         get "liste-imprimable", to: "communes/objets#index_print", as: :printable_list
