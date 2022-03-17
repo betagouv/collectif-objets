@@ -97,4 +97,5 @@ RSpec.configure do |config|
     Sidekiq::Worker.clear_all
   end
   Sidekiq::Testing.inline!
+  Sidekiq.logger.level = Logger::ERROR
 end
