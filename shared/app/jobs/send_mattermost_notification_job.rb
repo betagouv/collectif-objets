@@ -7,7 +7,7 @@ class SendMattermostNotificationJob
   include ActionView::Helpers
   include Rails.application.routes.url_helpers
 
-  HOOKS_URL = "https://mattermost.incubateur.net/hooks/#{Rails.application.credentials.mattermost.hook_id}".freeze
+  HOOKS_URL = "https://mattermost.incubateur.net/hooks/#{Rails.application.credentials.mattermost&.hook_id}".freeze
 
   def perform(event, payload)
     @payload = payload.with_indifferent_access
