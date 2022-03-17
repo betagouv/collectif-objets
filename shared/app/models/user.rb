@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  ROLE_ADMIN = "admin"
   ROLE_MAIRIE = "mairie"
-  ROLES = [ROLE_ADMIN, ROLE_MAIRIE].freeze
+  ROLES = [ROLE_MAIRIE].freeze
 
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, :registerable
 
@@ -21,10 +20,6 @@ class User < ApplicationRecord
       login_token: SecureRandom.hex(10),
       login_token_valid_until: Time.zone.now + valid_for
     )
-  end
-
-  def admin?
-    role == ROLE_ADMIN
   end
 
   def mairie?
