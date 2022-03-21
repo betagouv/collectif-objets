@@ -55,4 +55,13 @@ ActiveAdmin.register User do
     end
   end
 
+  member_action :rotate_magic_token, method: :put do
+    resource.update!(magic_token: SecureRandom.hex(10))
+    redirect_to resource_path, notice: "Lien magique mis à jour !"
+  end
+
+  action_item :view, only: :show do
+    link_to 'Rafraîchir le lien magique', rotate_magic_token_admin_user_path(user), method: "PUT", data: { confirm: user.magic_token.present? ? "⚠️ Attention ! un lien magique existe déjà pour cet utilisateur. S'il a déjà été partagé avec l'utilisateur, l'ancien ne fonctionnera plus une fois que vous l'aurez rafraîchi. êtes-vous sûr.e ?" : nil  }
+  end
+
 end
