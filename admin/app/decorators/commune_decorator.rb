@@ -17,4 +17,12 @@ class CommuneDecorator < Draper::Decorator
       "Recensement Terminé"
     end
   end
+
+  def recensement_ratio
+    "#{super}%" if super.present?
+  end
+
+  def first_user_email
+    users.first&.email
+  end
 end

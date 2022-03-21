@@ -6,14 +6,29 @@ ActiveAdmin.register Commune do
   permit_params :status, :notes_from_enrollment, :notes_from_completion
 
   index do
+    # selectable_column
     id_column
     column :nom
     column :departement
     column :code_insee
     column :status
+    column :first_user_email
+    column :recensement_ratio
     column :enrolled_at
     column :completed_at
     actions
+  end
+
+  csv do
+    column :id
+    column :nom
+    column :departement
+    column :code_insee
+    column :status
+    column :first_user_email
+    column :recensement_ratio
+    column :enrolled_at
+    column :completed_at
   end
 
   filter :departement, :as => :check_boxes, collection: Commune.select(:departement).distinct.pluck(:departement).compact.sort
@@ -28,6 +43,7 @@ ActiveAdmin.register Commune do
       ["Recensement terminé", Commune::STATUS_COMPLETED],
     ]
   )
+  filter :recensement_ratio
 
   show do
     div class: "show-container" do
@@ -38,6 +54,7 @@ ActiveAdmin.register Commune do
           row :departement
           row :code_insee
           row :status
+          row :recensement_ratio
           row :enrolled_at
           row :notes_from_enrollment
           row :completed_at
