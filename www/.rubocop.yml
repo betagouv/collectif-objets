@@ -23,3 +23,6 @@ Layout/MultilineMethodCallIndentation:
 
 Style/Documentation:
   Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false

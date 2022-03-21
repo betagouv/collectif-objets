@@ -37,6 +37,9 @@ class Recensement < ApplicationRecord
     }
   )
 
+  after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
+  after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
+
   attr_accessor :confirmation, :skip_photos
 
   def absent?

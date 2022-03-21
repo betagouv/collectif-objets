@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_13_203558) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_21_125537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,9 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_13_203558) do
     t.string "nom"
     t.string "code_insee"
     t.string "departement"
-    t.string "email"
     t.string "phone_number"
-    t.integer "population"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
@@ -82,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_13_203558) do
     t.string "notes_from_completion"
     t.datetime "enrolled_at"
     t.datetime "completed_at"
+    t.integer "recensement_ratio"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement"], name: "index_communes_on_departement"
   end

@@ -10,6 +10,9 @@ class Objet < ApplicationRecord
   scope :with_photos_first, -> { order("cardinality(image_urls) DESC, LOWER(nom) ASC") }
   scope :without_recensement, -> { includes(:recensements).where(recensements: { objet_id: nil }) }
 
+  after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
+  after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
+
   def self.displayable
     in_str = Commune::DISPLAYABLE_DEPARTEMENTS.map { "'#{_1}'" }.join(", ")
     where.not(nom: nil)
