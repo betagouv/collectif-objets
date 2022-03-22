@@ -33,7 +33,7 @@ class SendMattermostNotificationJob
   end
 
   def attachments
-    return [{ image_url: photo_url(recensement.photos.first) }] \
+    return [{ image_url: url_for(recensement.photos.first) }] \
       if @event == :recensement_created && recensement.photos.any?
 
     []
@@ -46,10 +46,6 @@ class SendMattermostNotificationJob
     when :commune_enrolled
       "round_pushpin"
     end
-  end
-
-  def photo_url(attachment)
-    "https://#{Rails.application.default_url_options[:host]}#{rails_blob_path(attachment)}"
   end
 
   def message
