@@ -18,9 +18,19 @@ class CommuneDecorator < Draper::Decorator
     end
   end
 
-  def recensement_ratio
-    "#{super}%" if super.present?
+  def recensements_summary
+    return nil if recensement_ratio.nil?
+
+    html = "#{recensement_ratio}%"
+    html += recensement_ratio == 0 || recensements_photos_present? ? "" : "<br /><span class='status_tag warning'>photos manquantes</span>"
+    html.html_safe
   end
+
+  def recensements_photos_present
+    recensements.any? && recensements.missing_photos.empty?
+  end
+
+  def recensements_photos_present?; recensements_photos_present; end
 
   def first_user_email
     users.first&.email

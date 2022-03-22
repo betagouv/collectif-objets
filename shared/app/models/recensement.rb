@@ -42,6 +42,21 @@ class Recensement < ApplicationRecord
 
   attr_accessor :confirmation, :skip_photos
 
+  scope :present_and_recensable, lambda {
+    where(
+      recensable: true,
+      localisation: [LOCALISATION_EDIFICE_INITIAL, LOCALISATION_AUTRE_EDIFICE]
+    )
+  }
+  scope :missing_photos, lambda {
+    present_and_recensable.where.missing(:photos_attachments)
+  }
+  scope :photos_presence_in, ->(presence) { presence ? all : missing_photos }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    [:photos_presence_in]
+  end
+
   def absent?
     localisation == LOCALISATION_ABSENT
   end
@@ -50,7 +65,15 @@ class Recensement < ApplicationRecord
     localisation == LOCALISATION_AUTRE_EDIFICE
   end
 
+  def edifice_initial?
+    localisation == LOCALISATION_EDIFICE_INITIAL
+  end
+
   def editable?
     commune.objets_recensable?
+  end
+
+  def missing_photos?
+    recensable? && (edifice_initial? || autre_edifice?) && photos.empty?
   end
 end

@@ -42,6 +42,7 @@ ActiveAdmin.register User do
             row :departement
             row :code_insee
             row :status
+            row :recensements_summary
             row :enrolled_at
             row :notes_from_enrollment
             row :completed_at

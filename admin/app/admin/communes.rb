@@ -13,7 +13,7 @@ ActiveAdmin.register Commune do
     column :code_insee
     column :status
     column :first_user_email
-    column :recensement_ratio
+    column :recensements_summary, label: "Recensements"
     column :enrolled_at
     column :completed_at
     actions
@@ -27,6 +27,7 @@ ActiveAdmin.register Commune do
     column :status
     column :first_user_email
     column :recensement_ratio
+    column :recensements_photos_present
     column :enrolled_at
     column :completed_at
   end
@@ -43,6 +44,13 @@ ActiveAdmin.register Commune do
       ["Recensement terminé", Commune::STATUS_COMPLETED],
     ]
   )
+  filter(
+    :recensements_photos_presence,
+    as: :check_boxes,
+    collection: [
+      ["Manquantes", false]
+    ]
+  )
   filter :recensement_ratio
 
   show do
@@ -54,7 +62,7 @@ ActiveAdmin.register Commune do
           row :departement
           row :code_insee
           row :status
-          row :recensement_ratio
+          row :recensements_summary, label: "Recensements"
           row :enrolled_at
           row :notes_from_enrollment
           row :completed_at

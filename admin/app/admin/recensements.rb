@@ -27,6 +27,7 @@ ActiveAdmin.register Recensement do
   filter :etat_sanitaire, as: :check_boxes, collection: Recensement::ETATS
   filter :securisation, as: :check_boxes, collection: Recensement::SECURISATIONS
   filter :notes
+  filter :photos_presence, as: :check_boxes, collection: [["Manquantes", false]]
 
   show do
     div class: "show-container" do

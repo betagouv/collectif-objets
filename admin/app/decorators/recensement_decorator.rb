@@ -24,6 +24,8 @@ class RecensementDecorator < Draper::Decorator
   end
 
   def photos_imgs(limit: 100)
+    return '<span class="status_tag warning">manquantes</span>'.html_safe if missing_photos?
+
     return nil if photos.empty?
 
     photos[0..limit].map do |photo|
