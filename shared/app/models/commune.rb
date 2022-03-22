@@ -20,7 +20,7 @@ class Commune < ApplicationRecord
   validates :status, inclusion: { in: STATUSES + [nil] }
 
   scope :has_recensements_with_missing_photos, lambda {
-    joins(:recensements).merge(Recensement.missing_photos)
+    joins(:recensements).merge(Recensement.missing_photos).group(:id)
   }
   scope :recensements_photos_presence_in, lambda { |presence|
     presence ? all : has_recensements_with_missing_photos
