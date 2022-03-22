@@ -73,4 +73,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.x.admin_host = "http://localhost:3011/"
+
+  config.hosts << /.*\.ngrok\.io/
 end

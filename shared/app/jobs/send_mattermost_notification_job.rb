@@ -40,12 +40,11 @@ class SendMattermostNotificationJob
   end
 
   def icon_emoji
-    case @event
-    when :recensement_created
-      "writing_hand"
-    when :commune_enrolled
-      "round_pushpin"
-    end
+    {
+      recensement_created: "writing_hand",
+      commune_enrolled: "round_pushpin",
+      chatwoot_message: "left_speech_bubble"
+    }[@event]
   end
 
   def message
@@ -54,6 +53,8 @@ class SendMattermostNotificationJob
       recensement_created_message
     when :commune_enrolled
       commune_enrolled_message
+    when :chatwoot_message
+      chatwoot_message
     end
   end
 
@@ -74,6 +75,11 @@ class SendMattermostNotificationJob
     "Commune inscrite ! " \
       "#{commune.nom} (#{commune.code_insee}) " \
       "· [voir dans l'admin](#{admin_url(commune)})" \
+  end
+
+  def chatwoot_message
+    "[Message reçu sur Chatwoot](#{@payload['url']}) " \
+      "de #{@payload[:sender_email]} : #{truncate(@payload[:content], length: 100)}"
   end
 
   def recensement
