@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   root "pages#home"
+  get "/stats", to: "pages#stats"
   get "comment-ca-marche", to: "pages#aide", as: "aide"
   get "guide-de-recensement", to: "pages#guide", as: "guide"
   get "confirmation-de-participation", to: "pages#confirmation_inscription", as: "enrollment_success"

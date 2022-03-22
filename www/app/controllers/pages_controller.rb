@@ -3,6 +3,7 @@
 class PagesController < ApplicationController
   def home; end
   def aide; end
+  def stats; end
 
   def guide
     page = params[:page]&.to_i
