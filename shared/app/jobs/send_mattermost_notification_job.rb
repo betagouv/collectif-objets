@@ -33,7 +33,7 @@ class SendMattermostNotificationJob
   end
 
   def attachments
-    return [{ image_url: url_for(recensement.photos.first) }] \
+    return [{ image_url: recensement.photos.first.url(expires_in: 1.day) }] \
       if @event == :recensement_created && recensement.photos.any?
 
     []
