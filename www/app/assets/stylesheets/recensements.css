@@ -63,3 +63,14 @@ label.fr-label.co-label--disabled,
 .co-recensement-completion-summary .co-recensement-photos img {
   margin-left: 5px;
 }
+
+.direct-upload__progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0.2;
+  background: #0076ff;
+  transition: width 120ms ease-out, opacity 60ms 60ms ease-in;
+  transform: translate3d(0, 0, 0);
+}

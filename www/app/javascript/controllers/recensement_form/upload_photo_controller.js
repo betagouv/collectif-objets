@@ -17,7 +17,8 @@ export default class extends Controller {
     "input",
     "img",
     "preview",
-    "metadata"
+    "metadata",
+    "progress"
   ]
 
   connect() {
@@ -42,5 +43,9 @@ export default class extends Controller {
 
   disconnect() {
     document.dispatchEvent(new Event("refreshFields"))
+  }
+
+  setProgress(event) {
+    this.progressTarget.style.width = `${event.detail.progress}%`
   }
 }

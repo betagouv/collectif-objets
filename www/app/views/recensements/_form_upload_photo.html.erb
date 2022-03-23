@@ -21,7 +21,7 @@
       accept="image/*"
       data-recensement-form--upload-photo-target="input"
       data-recensement-form--uploader-target="input"
-      data-action="change->recensement-form--upload-photo#refreshPreview change->recensement-form--uploader#addInput change->recensement#refreshFields"
+      data-action="change->recensement-form--upload-photo#refreshPreview change->recensement-form--uploader#addInput change->recensement#refreshFields direct-upload:progress->recensement-form--upload-photo#setProgress"
     >
   </div>
   <div
@@ -32,6 +32,9 @@
       class="co-recensement-form-photo-wrapper"
       data-recensement-form--upload-photo-target="photoWrapper"
     >
+      <div
+        class="direct-upload__progress"
+        data-recensement-form--upload-photo-target="progress"></div>
       <img data-recensement-form--upload-photo-target="img" />
     </div>
     <div class="fr-ml-2w">
