@@ -70,4 +70,8 @@ export default class extends Controller {
     this.toggleSection(this.notesTarget, confirmation)
     this.submitTarget.toggleAttribute("disabled", !confirmation)
   }
+
+  disableSubmit() {
+    this.submitTarget.toggleAttribute("disabled", true)
+  }
 }

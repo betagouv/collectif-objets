@@ -48,7 +48,10 @@
     recensement,
     url: recensement.persisted? ? objet_recensement_path(recensement.objet, recensement) : objet_recensements_path(recensement.objet),
     builder: FormBuilderDsfr,
-    html: { "data-recensement-target": "form" }
+    html: {
+      "data-recensement-target": "form",
+      "data-action": "direct-uploads:start->recensement#disableSubmit"
+    }
     ) do |f|
   %>
     <div class="fr-grid-row fr-mb-12w fr-grid-row--gutters">
