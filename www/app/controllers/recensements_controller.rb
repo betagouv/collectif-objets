@@ -46,7 +46,12 @@ class RecensementsController < ApplicationController
   end
 
   def set_new_recensement
-    @recensement = Recensement.new(recensable: "true", **recensement_params_parsed, objet: @objet)
+    @recensement = Recensement.new(
+      recensable: "true",
+      **recensement_params_parsed,
+      objet: @objet,
+      user: current_user
+    )
     @recensement.confirmation = recensement_params[:confirmation].present?
   end
 
