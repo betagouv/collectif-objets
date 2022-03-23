@@ -2,6 +2,7 @@
 
 class Recensement < ApplicationRecord
   belongs_to :objet
+  belongs_to :user
   has_many_attached :photos
 
   delegate :commune, to: :objet
