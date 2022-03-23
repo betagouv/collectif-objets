@@ -50,7 +50,7 @@
     builder: FormBuilderDsfr,
     html: {
       "data-recensement-target": "form",
-      "data-action": "direct-uploads:start->recensement#disableSubmit"
+      "data-action": "direct-uploads:start->recensement#disableSubmit submit->recensement#showLoader direct-upload:error->hideLoader"
     }
     ) do |f|
   %>
@@ -233,7 +233,9 @@ nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank"
       </div>
     </div>
 
-    <%= f.submit "Enregistrer ce recensement", "data-recensement-target": "submit" %>
+    <button type="submit" data-recensement-target="submit" class="fr-btn">
+      Enregistrer ce recensement
+    </button>
     <span class="fr-ml-2w">Vous pourrez toujours le modifier après l'avoir enregistré</span>
   <% end %>
 </main>
