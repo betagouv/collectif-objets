@@ -17,9 +17,8 @@ export default class extends Controller {
 
   connect() {
     this.refreshFields()
-    const refreshListener = this.refreshFields
-    this.refreshListener = refreshListener
-    document.addEventListener("refreshFields", refreshListener)
+    this.refreshListener = () => { this.refreshFields(); }
+    document.addEventListener("refreshFields", this.refreshListener)
   }
 
   disconnect() {
