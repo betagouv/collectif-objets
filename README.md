@@ -37,3 +37,8 @@ To restore dump on staging:
 - in another terminal : `./bin/restore_to_staging.sh`
 - ⚠️ you may have to enter the SSH password multiple times in the first terminal
 
+## Documentation
+
+### Communes status state machine
+
+![](doc/communes%20status%20diagram.png)
