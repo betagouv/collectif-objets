@@ -2,10 +2,11 @@
 
 class Commune < ApplicationRecord
   DISPLAYABLE_DEPARTEMENTS = %w[51 52 65 72 26 30].freeze
+  STATUS_INACTIVE = "inactive"
   STATUS_ENROLLED = "enrolled"
   STATUS_STARTED = "started"
   STATUS_COMPLETED = "completed"
-  STATUSES = [STATUS_ENROLLED, STATUS_COMPLETED, STATUS_STARTED].freeze
+  STATUSES = [STATUS_INACTIVE, STATUS_ENROLLED, STATUS_COMPLETED, STATUS_STARTED].freeze
 
   has_many :users, dependent: :restrict_with_exception
   has_many(
@@ -17,7 +18,7 @@ class Commune < ApplicationRecord
   )
   has_many :recensements, through: :objets
 
-  validates :status, inclusion: { in: STATUSES + [nil] }
+  validates :status, inclusion: { in: STATUSES }
 
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)
@@ -59,6 +60,10 @@ class Commune < ApplicationRecord
       Commune.select_best_objets(objets.where.not(nom: nil).to_a).first
   end
 
+  def inactive?
+    status == STATUS_INACTIVE
+  end
+
   def enrolled?
     status == STATUS_ENROLLED
   end
@@ -71,12 +76,12 @@ class Commune < ApplicationRecord
     [STATUS_ENROLLED, STATUS_STARTED].include?(status)
   end
 
-  def objets_recensable?
-    status.nil? || enrolled_or_started?
-  end
-
   def completed?
     status == STATUS_COMPLETED
+  end
+
+  def objets_recensable?
+    inactive? || enrolled_or_started?
   end
 
   def start!

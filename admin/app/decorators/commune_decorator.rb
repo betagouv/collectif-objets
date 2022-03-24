@@ -7,14 +7,14 @@ class CommuneDecorator < Draper::Decorator
 
   def status
     case super
-    when nil
-      ""
+    when Commune::STATUS_INACTIVE
+      "Commune inactive"
     when Commune::STATUS_ENROLLED
-      "Commune Inscrite"
+      "Commune inscrite"
     when Commune::STATUS_STARTED
-      "Recensement Démarré"
+      "Recensement démarré"
     when Commune::STATUS_COMPLETED
-      "Recensement Terminé"
+      "Recensement terminé"
     end
   end
 

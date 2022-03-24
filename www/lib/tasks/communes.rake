@@ -93,7 +93,7 @@ namespace :communes do
       end
 
       updates = row.to_h.slice("enrolled_at", "notes_from_enrollment").compact
-      if commune.status.nil? ||
+      if commune.inactive? ||
         (commune.enrolled? && ["started", "completed"].include?(row["status"])) ||
         (commune.started? && row["status"] == "completed")
         updates["status"] = row["status"]

@@ -39,6 +39,7 @@ ActiveAdmin.register Commune do
     :status,
     as: :check_boxes,
     collection: [
+      ["Commune inactive", Commune::STATUS_INACTIVE],
       ["Commune Inscrite", Commune::STATUS_ENROLLED],
       ["Recensement démarré", Commune::STATUS_STARTED],
       ["Recensement terminé", Commune::STATUS_COMPLETED],

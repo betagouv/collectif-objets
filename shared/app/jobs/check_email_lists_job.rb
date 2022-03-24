@@ -5,7 +5,7 @@ class CheckEmailListsJob
 
   CHECKS = {
     "cold" => {
-      user_func: ->(user) { user.commune.status.blank? }
+      user_func: ->(user) { user.commune.inactive? }
     },
     "enrolled" => {
       user_func: ->(user) { user.commune.enrolled? }
@@ -56,7 +56,7 @@ class CheckEmailListsJob
       .reject { user_cond.call(_1[:user]) }
       .map { serialize_pair(_1) }
     # missing_from_list = User.includes(:commune)
-    #   .where(commune: { departement:, status: nil })
+    #   .where(commune: { departement:, status: "inactive" })
     #   .exclude { contacts.includes(_1.email) }
     #   .map { serialize_user(_1) }
     { not_found_in_db:, should_not_be_in_list: }

@@ -23,7 +23,7 @@ module Communes
     protected
 
     def restrict_already_enrolled
-      return true if @commune.status.nil?
+      return true if @commune.inactive?
 
       redirect_to root_path, alert: "Votre commune est déjà inscrite"
     end

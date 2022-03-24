@@ -43,7 +43,7 @@
         <h2 class="co-text--blue">
           <%= t(".title", count: @objets.count, commune: @commune.nom) %>
         </h2>
-        <% if @commune.status.nil? %>
+        <% if @commune.inactive? %>
           <p>
             Il y a des objets monuments historiques dans votre commune ? Vous êtes élu·e ? Responsable du patrimoine de votre commune ?
             La commune est charge de veiller sur ces objets.
