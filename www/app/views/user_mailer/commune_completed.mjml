@@ -1,0 +1,47 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column vertical-align="middle">
+        <mj-image width="100px" src="https://naais.fr/admin/wp-content/uploads/2020/11/1200px-Ministere_de_la_culture.svg_.png" align="left"></mj-image>
+      </mj-column>
+      <mj-column vertical-align="middle">
+        <mj-text align="left" font-size="20px">Collectif Objets</mj-text>
+        <mj-text align="left" font-size="14px" color="#444">Préservez votre patrimoine mobilier</mj-text>
+      </mj-column>
+      <mj-column>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="rgb(0,0,145)"></mj-divider>
+        <mj-text>
+          Madame, Monsieur le Maire,<br /><br />
+
+          Comme de nombreuses communes de votre département, vous avez participé à l’opération de recensement participatif des objets monuments historiques.<br /><br />
+
+          <b>Nous vous remercions pour votre engagement.</b><br />
+
+          Ce recensement nous permet d’avoir une plus grande visibilité sur le parc d’objets monuments historiques du département et d’assurer un meilleur suivi de notre patrimoine.<br /><br />
+
+          Au cours des prochains mois, les conservateurs de votre département vont procéder à l’analyse de l’ensemble des données collectées. Nous reviendrons vers vous avec un rapport de recensement qui validera vos observations et — le cas échéant — vous proposera des recommandations sur la marche à suivre pour assurer une meilleure conservation des objets monuments historiques de votre commune.<br /><br />
+
+          En attendant, nous restons à votre disposition pour toute information complémentaire,<br /><br />
+
+          Bien cordialement,
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://naais.fr/admin/wp-content/uploads/2020/11/1200px-Ministere_de_la_culture.svg_.png" align="left"></mj-image>
+      </mj-column>
+      <mj-column>
+        <mj-text>
+          <b>L'équipe Collectif Objets</b>,<br /><br />
+          <b>Romuald Goudeseune</b><br />
+          <i>Conservateur des monuments historiques en charge de l'expérimentation</i>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
