@@ -112,7 +112,7 @@
         <h2 class="co-text--blue" id="stats">Ils ont participé</h2>
       </div>
       <div class="fr-col-md-6 fr-px-8w co-text--center">
-        <div class="fr-display-xl co-text--blue">502</div>
+        <div class="fr-display-xl co-text--blue"><%= Recensement.count %></div>
         <div class="co-text--blue">
           objets classés monuments historiques déjà recensés
           depuis le début de l'opération
@@ -125,6 +125,10 @@
           lors de la première campagne réalisée en Haute-Marne
         </div>
       </div>
+      <div class="fr-col-12 fr-mt-8w co-text--center">
+        <%= link_to "Voir plus de statistiques", stats_path, class: "fr-link" %>
+      </div>
+
     </div>
   </div>
   <!-- SECTION TESTIMONIALS -->
