@@ -4,14 +4,15 @@ class MattermostApiError < StandardError; end
 
 class SendMattermostNotificationJob
   include Sidekiq::Job
-  include ActionView::Helpers
-  include Rails.application.routes.url_helpers
 
   HOOKS_URL = "https://mattermost.incubateur.net/hooks/#{Rails.application.credentials.mattermost&.hook_id}".freeze
+  HANDLED_EVENTS = %w[chatwoot_message commune_enrolled commune_completed recensement_created].freeze
 
   def perform(event, payload)
-    @payload = payload.with_indifferent_access
+    raise "unsupported event type #{event}" unless HANDLED_EVENTS.include?(event)
+
     @event = event.to_sym
+    @payload = payload.with_indifferent_access
     return send_notification if Rails.configuration.x.environment == "production"
 
     Sidekiq.logger.info { "would have sent mattermost notification #{body}" }
@@ -29,64 +30,18 @@ class SendMattermostNotificationJob
   end
 
   def body
-    { text: message, attachments:, icon_emoji: }.to_json
-  end
-
-  def attachments
-    return [{ image_url: recensement.photos.first.url(expires_in: 1.day) }] \
-      if @event == :recensement_created && recensement.photos.any?
-
-    []
-  end
-
-  def icon_emoji
     {
-      recensement_created: "writing_hand",
-      commune_enrolled: "round_pushpin",
-      chatwoot_message: "left_speech_bubble"
-    }[@event]
+      text: notification.message,
+      attachments: notification.attachments,
+      icon_emoji: notification.icon_emoji
+    }.to_json
   end
 
-  def message
-    case @event
-    when :recensement_created
-      recensement_created_message
-    when :commune_enrolled
-      commune_enrolled_message
-    when :chatwoot_message
-      chatwoot_message
-    end
+  def notification
+    @notification ||= notification_class_name.constantize.new(@payload)
   end
 
-  # rubocop:disable Metrics/AbcSize
-  def recensement_created_message
-    "Nouveau recensement " \
-      "· [admin](#{admin_url(recensement)}) ! " \
-      "Commune #{recensement.commune.nom} (#{recensement.commune.code_insee}) " \
-      "· [admin](#{admin_url(recensement.commune)}) " \
-      "- Objet #{truncate(recensement.objet.nom, length: 30)} " \
-      "· [admin](#{admin_url(recensement.objet)}) " \
-      "- #{recensement.photos.any? ? "#{recensement.photos.count} photos" : '❌ Photos absentes'}"
-  end
-  # rubocop:enable Metrics/AbcSize
-
-  def commune_enrolled_message
-    commune = Commune.find(@payload[:commune_id])
-    "Commune inscrite ! " \
-      "#{commune.nom} (#{commune.code_insee}) " \
-      "· [voir dans l'admin](#{admin_url(commune)})" \
-  end
-
-  def chatwoot_message
-    "[Message reçu sur Chatwoot](#{@payload['url']}) " \
-      "de #{@payload[:sender_email]} : #{truncate(@payload[:content], length: 100)}"
-  end
-
-  def recensement
-    @recensement ||= Recensement.find(@payload[:recensement_id])
-  end
-
-  def admin_url(resource)
-    "#{Rails.configuration.x.admin_host}admin/#{resource.class.table_name}/#{resource.id}"
+  def notification_class_name
+    "Co::AdminNotifications::#{ActiveSupport::Inflector.classify(@event)}Notification"
   end
 end

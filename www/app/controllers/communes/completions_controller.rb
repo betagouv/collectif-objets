@@ -16,6 +16,7 @@ module Communes
     def create
       if @commune.update(commune_params)
         TriggerSibContactEventJob.perform_async(@commune.id, "completed")
+        SendMattermostNotificationJob.perform_async("commune_completed", { "commune_id" => @commune.id })
         redirect_to commune_objets_path(@commune), notice: "Le recensement de votre commune est terminé !"
       else
         render :new, status: :unprocessable_entity
