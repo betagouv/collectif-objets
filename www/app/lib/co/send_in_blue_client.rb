@@ -21,6 +21,11 @@ module Co
           "opt-out" => 113,
           "started" => 114,
           "missing-photos" => 118
+        },
+        "72" => {
+          "enrolled" => 135,
+          "opt-out" => 136,
+          "started" => 137
         }
       },
       "development" => {
