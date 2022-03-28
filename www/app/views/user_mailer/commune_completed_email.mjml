@@ -2,7 +2,7 @@
   <mj-body>
     <mj-section>
       <mj-column vertical-align="middle">
-        <mj-image width="100px" src="https://naais.fr/admin/wp-content/uploads/2020/11/1200px-Ministere_de_la_culture.svg_.png" align="left"></mj-image>
+        <mj-image width="100px" src="<%= png_base64('logo-ministere-de-la-culture.png') %>" align="left"></mj-image>
       </mj-column>
       <mj-column vertical-align="middle">
         <mj-text align="left" font-size="20px">Collectif Objets</mj-text>
@@ -25,7 +25,7 @@
 
           Au cours des prochains mois, les conservateurs de votre département vont procéder à l’analyse de l’ensemble des données collectées. Nous reviendrons vers vous avec un rapport de recensement qui validera vos observations et — le cas échéant — vous proposera des recommandations sur la marche à suivre pour assurer une meilleure conservation des objets monuments historiques de votre commune.<br /><br />
 
-          En attendant, nous restons à votre disposition pour toute information complémentaire,<br /><br />
+          En attendant, nous restons à votre disposition pour toute information complémentaire. Vous pouvez consulter les recensements que vous nous avez envoyés sur <a href="<%= @login_url %>">le site Collectif Objets</a>.<br /><br />
 
           Bien cordialement,
         </mj-text>
@@ -33,7 +33,7 @@
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-image width="100px" src="https://naais.fr/admin/wp-content/uploads/2020/11/1200px-Ministere_de_la_culture.svg_.png" align="left"></mj-image>
+        <mj-image width="100px" src="<%= png_base64('logo-ministere-de-la-culture.png') %>" align="left"></mj-image>
       </mj-column>
       <mj-column>
         <mj-text>

@@ -17,6 +17,7 @@ module Communes
       if @commune.update(commune_params)
         TriggerSibContactEventJob.perform_async(@commune.id, "completed")
         SendMattermostNotificationJob.perform_async("commune_completed", { "commune_id" => @commune.id })
+        UserMailer.with(user_id: current_user.id, commune_id: @commune.id).commune_completed_email.deliver_later
         redirect_to commune_objets_path(@commune), notice: "Le recensement de votre commune est terminé !"
       else
         render :new, status: :unprocessable_entity
