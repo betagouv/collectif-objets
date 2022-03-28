@@ -10,7 +10,7 @@ module Co
       end
 
       def admin_url(resource)
-        "#{Rails.configuration.x.admin_host}admin/#{resource.class.table_name}/#{resource.id}"
+        "#{Rails.configuration.x.admin_base_url}admin/#{resource.class.table_name}/#{resource.id}"
       end
     end
   end

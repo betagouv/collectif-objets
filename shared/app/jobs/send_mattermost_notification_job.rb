@@ -13,7 +13,7 @@ class SendMattermostNotificationJob
 
     @event = event.to_sym
     @payload = payload.with_indifferent_access
-    return send_notification if Rails.configuration.x.environment == "production"
+    return send_notification if Rails.configuration.x.environment_specific_name == "production"
 
     Sidekiq.logger.info { "would have sent mattermost notification #{body}" }
   end

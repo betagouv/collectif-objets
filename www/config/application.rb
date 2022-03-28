@@ -35,6 +35,6 @@ module CollectifObjets
 
     config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
 
-    config.x.environment = ENV["HOST"]&.match(/staging/) ? "staging" : Rails.env
+    config.x.environment = ENV["HOST"] =~ /staging/ ? "staging" : Rails.env
   end
 end

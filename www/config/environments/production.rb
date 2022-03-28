@@ -2,7 +2,7 @@
 
 require "active_support/core_ext/integer/time"
 
-Rails.application.default_url_options = { host: ENV["HOST"]&.sub(/https:\/\//, ""), protocol: "https" }
+Rails.application.default_url_options = { host: ENV["BASE_URL"]&.sub(/https:\/\//, ""), protocol: "https" }
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -67,7 +67,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: ENV["HOST"] }
+  config.action_mailer.default_url_options = { host: ENV["BASE_URL"] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address => "smtp-relay.sendinblue.com",
@@ -102,5 +102,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.force_ssl = true
-  config.x.admin_host = ENV["ADMIN_HOST"]
+  config.x.admin_base_url = ENV["ADMIN_BASE_URL"]
+  config.x.www_base_url = ENV["HOST"] # used in mailers
+  config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
 end
