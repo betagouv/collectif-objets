@@ -3,17 +3,42 @@
   <h3>Send In Blue Debug</h3>
   <div class="panel_contents">
     <%= form_tag admin_tools_enqueue_emails_report_path, method: :post do %>
-    <fieldset class="inputs">
-      <ol>
-        <li class="string input optional stringish">
-          <%= label_tag :email, "Email" %>
-          <%= text_field_tag :email, current_admin_user.email %>
-        </li>
-        <li>
-          <%= submit_tag "Envoyer le rapport sur les contacts des listes Send In Blue" %>
-        </li>
-      </ol>
-    </fieldset>
+      <fieldset class="inputs">
+        <ol>
+          <li class="string input optional stringish">
+            <%= label_tag :email, "Email" %>
+            <%= text_field_tag :email, current_admin_user.email %>
+          </li>
+          <li>
+            <%= submit_tag "Envoyer le rapport sur les contacts des listes Send In Blue" %>
+          </li>
+        </ol>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="panel">
+  <h3>Send In Blue ✉️</h3>
+  <div class="panel_contents">
+    Cet outil permet de <b>copier</b> des contacts d'une liste vers une autre en <b>déclenchant les mécanismes des automatisations</b> Send In Blue (entrées et sorties des scénarios). Ce n'est malheureusement pas le cas via leur interface web.
+    <%= form_tag admin_tools_enqueue_move_sib_contacts_path, method: :post do %>
+      <fieldset class="inputs">
+        <ol>
+          <li class="number input">
+            <%= label_tag :list_from_id, "Numéro de la liste d'origine" %>
+            <%= number_field_tag :list_from_id %>
+          </li>
+          <li class="number input">
+            <%= label_tag :list_to_id, "Numéro de la liste de destination" %>
+            <%= number_field_tag :list_to_id %>
+          </li>
+          <li>
+            <%= submit_tag "Copier les contacts" %>
+          </li>
+        </ol>
+      </fieldset>
     <% end %>
   </div>
 </div>
