@@ -103,4 +103,5 @@ Rails.application.configure do
 
   config.force_ssl = true
   config.x.admin_host = ENV["ADMIN_HOST"]
+  config.action_mailer.show_previews = true if ENV["HOST"] =~ /staging/
 end
