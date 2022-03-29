@@ -3,7 +3,7 @@ ActiveAdmin.register Commune do
   decorate_with CommuneDecorator
 
   actions :all, except: [:destroy, :new, :create]
-  permit_params :status, :notes_from_enrollment, :notes_from_completion
+  permit_params :status, :notes_from_enrollment, :notes_from_completion, :enrolled_at, :completed_at
 
   index do
     # selectable_column
@@ -128,6 +128,10 @@ ActiveAdmin.register Commune do
       f.input :code_insee, input_html: { disabled: true }
       f.input :departement, input_html: { disabled: true }
       f.input :status, as: :select, collection: Commune::STATUSES
+      f.input :enrolled_at, label: "Date d'inscription"
+      f.input :notes_from_enrollment, as: :text, input_html: { rows: 2 }
+      f.input :completed_at, label: "Date de fin de recensement"
+      f.input :notes_from_completion, as: :text, input_html: { rows: 2 }
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end
