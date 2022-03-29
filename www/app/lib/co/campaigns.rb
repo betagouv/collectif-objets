@@ -5,7 +5,7 @@ module Co
     DEADLINES = {
       "51" => Date.new(2022, 4, 15),
       "65" => Date.new(2022, 5, 15),
-      "72" => Date.new(2022, 6, 28)
+      "72" => Date.new(2022, 5, 28)
     }.freeze
   end
 end
