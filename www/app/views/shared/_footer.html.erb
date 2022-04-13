@@ -1,19 +1,23 @@
 <!-- pied de page avec logo opérateur -->
 <footer class="fr-footer" role="contentinfo" id="footer">
   <div class="fr-container">
-    <div class="fr-footer__body fr-footer__body--operator">
-      <div class="fr-footer__brand">
-        <p class="fr-logo" title="république française">
-          Ministère
-          <br>
-          de la Culture
-        </p>
-        <a class="fr-footer__brand-link" href="https://beta.gouv.fr/communaute/#/incubators/culture" title="Incubateur Atelier Numérique">
-          <%= image_tag "logo-atelier-numerique.svg" , class: "fr-footer__logo co-logo-invertable" ,
+    <div class="fr-footer__body">
+      <div class="fr-footer__brand fr-enlarge-link">
+        <a href="/" title="Retour à l’accueil">
+          <p class="fr-logo" title="Ministère de la Culture">
+            Ministère<br>de la Culture
+          </p>
+        </a>
+      </div>
+      <div class="fr-footer__brand fr-enlarge-link">
+        <a class="co-footer-logo" href="https://beta.gouv.fr/communaute/#/incubators/culture" title="Incubateur Atelier Numérique">
+          <%= image_tag "logo-atelier-numerique.svg" , class: " co-logo-invertable" ,
             alt: "Logo Atelier Numérique" %>
         </a>
-        <a class="fr-footer__brand-link co-footer-brand-link" href="https://beta.gouv.fr" title="beta.gouv.fr">
-          <%= image_tag "logo-beta-gouv.png" , class: "fr-footer__logo co-logo-beta-gouv co-logo-invertable" ,
+        </div>
+      <div class="fr-footer__brand fr-enlarge-link">
+        <a class="co-footer-logo" href="https://beta.gouv.fr" title="beta.gouv.fr">
+          <%= image_tag "logo-beta-gouv.png" , class: "co-logo-invertable" ,
             alt: "Logo Atelier Numérique" %>
         </a>
       </div>

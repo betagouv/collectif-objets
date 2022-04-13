@@ -18,12 +18,13 @@ html[data-fr-scheme="dark"] .co-logo-invertable {
   filter: invert(1);
 }
 
-.fr-footer__logo.co-logo-beta-gouv {
-  width: 150px;
+.fr-footer__brand {
+  margin-right: 1rem;
+  padding-right: none !important;
 }
 
-.co-footer-brand-link {
-  margin-left: 3rem;
+a.co-footer-logo img {
+  width: 150px;
 }
 
 .co-pagination-wrapper {
@@ -48,7 +49,7 @@ html[data-fr-scheme="dark"] .co-logo-invertable {
 }
 
 .co-text--blue {
-  color: rgb(0,0,145) !important;
+  color: rgb(0, 0, 145) !important;
 }
 
 .co-text--center {
@@ -89,6 +90,7 @@ html[data-fr-scheme="dark"] .co-logo-invertable {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }
