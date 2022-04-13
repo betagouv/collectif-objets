@@ -102,4 +102,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.x.www_base_url = ENV["WWW_BASE_URL"]
+  config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
 end

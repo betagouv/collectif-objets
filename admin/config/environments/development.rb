@@ -74,4 +74,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.x.www_base_url = "http://localhost:3010"
+  config.x.environment_specific_name = "development"
 end
