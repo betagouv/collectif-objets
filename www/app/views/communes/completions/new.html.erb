@@ -1,3 +1,5 @@
+<% content_for(:head_title) { "Finalisation du recensement de #{@commune.nom}" } %>
+
 <main>
   <div class="fr-container fr-py-8w">
     <% if @commune.errors.any? %>

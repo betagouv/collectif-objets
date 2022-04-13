@@ -1,3 +1,5 @@
+<% content_for(:head_title) { truncate(@objet.nom, length: 20) } %>
+
 <main class="fr-container fr-py-4w co-objet-show">
   <h2><%= @objet.nom %></h2>
   <p>📍 <%= @objet.commune.nom %> (<%= @objet.departement %>) - ⛪️ <%= @objet.edifice_nom %></p>

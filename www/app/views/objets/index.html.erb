@@ -1,9 +1,17 @@
+<% content_for :head_title do %>
+  <% if @filters[:commune] %>
+    Objets protégés de <%= @filters[:commune].nom %>
+  <% else %>
+    Objets protégés de ma commune
+  <% end %>
+<% end %>
+
 <main class="fr-container fr-py-4w">
   <div class="fr-grid-row fr-py-2w fr-grid-row--center">
     <div class="fr-col-md-8 co-text--center">
       <% if @filters[:commune] %>
         <h2 class="co-text--blue">
-          Les <%= @pagy.count %> objets classés de <%= @filters[:commune].nom %>
+          Les <%= @pagy.count %> objets protégés de <%= @filters[:commune].nom %>
         </h2>
       <% else %>
         <h2>Je découvre les objets de ma commune</h2>

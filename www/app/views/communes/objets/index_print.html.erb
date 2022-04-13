@@ -1,6 +1,8 @@
+<% content_for(:head_title) { "Liste imprimable des objets protégés de #{@commune.nom}" } %>
+
 <main class="fr-container fr-py-4w">
   <h2 class="co-text--blue">
-    Liste imprimable des <%= @objets.count %> objets classés de <%= @commune.nom %>
+    Liste imprimable des <%= @objets.count %> objets protégés de <%= @commune.nom %>
   </h2>
 
   <div class="fr-table">

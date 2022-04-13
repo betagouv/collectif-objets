@@ -1,3 +1,5 @@
+<% content_for(:head_title) { "Recensement · #{truncate(@recensement.objet.nom, length: 20)}" } %>
+
 <main class="fr-container fr-py-8w">
   <%= render "recensements/form", recensement: @recensement %>
 </main>
