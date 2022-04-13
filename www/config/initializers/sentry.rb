@@ -9,9 +9,7 @@ Sentry.init do |config|
   # We recommend adjusting this value in production
   config.traces_sample_rate = 0.005
 
-  if ENV["HOST"] =~ /staging/
-    config.environment = 'staging'
-  end
+  config.environment = Rails.configuration.x.environment_specific_name
 
   config.sidekiq.report_after_job_retries = true
 end

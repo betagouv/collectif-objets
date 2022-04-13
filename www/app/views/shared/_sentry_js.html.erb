@@ -7,7 +7,7 @@
       dsn: "https://237e1d839be54111a07b79c618d6f0fe@o103100.ingest.sentry.io/6252304",
       integrations: [new BrowserTracing()],
       tracesSampleRate: 1,
-      environment: "<%= Rails.configuration.x.environment %>"
+      environment: "<%= Rails.configuration.x.environment_specific_name %>"
     });
   </script>
 <% end %>
