@@ -25,6 +25,7 @@ class Recensement < ApplicationRecord
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }
   validates :edifice_nom, presence: true, if: -> { autre_edifice? }
   validates :recensable, inclusion: { in: [true, false] }, unless: -> { absent? }
+  validates :recensable, inclusion: { in: [false] }, if: -> { absent? }
   validates :etat_sanitaire_edifice, presence: true, if: -> { !absent? && recensable? }
   validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { !absent? && recensable? }
   validates :securisation, presence: true, inclusion: { in: SECURISATIONS }, if: -> { !absent? && recensable? }
@@ -53,6 +54,9 @@ class Recensement < ApplicationRecord
     present_and_recensable.where.missing(:photos_attachments)
   }
   scope :photos_presence_in, ->(presence) { presence ? all : missing_photos }
+  scope :absent, -> { where(localisation: LOCALISATION_ABSENT) }
+  scope :recensable, -> { where(recensable: true) }
+  scope :not_recensable, -> { where.not(recensable: true) }
 
   def self.ransackable_scopes(_auth_object = nil)
     [:photos_presence_in]

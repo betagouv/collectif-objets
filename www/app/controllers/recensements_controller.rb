@@ -47,7 +47,6 @@ class RecensementsController < ApplicationController
 
   def set_new_recensement
     @recensement = Recensement.new(
-      recensable: "true",
       **recensement_params_parsed,
       objet: @objet,
       user: current_user
@@ -65,9 +64,7 @@ class RecensementsController < ApplicationController
   end
 
   def recensement_params_parsed
-    recensement_params.merge(recensable:
-        recensement_params[:recensable].blank? ||
-        recensement_params[:recensable] == "true")
+    recensement_params.merge(recensable: recensement_params[:recensable] == "true")
   end
 
   def restrict_commune
