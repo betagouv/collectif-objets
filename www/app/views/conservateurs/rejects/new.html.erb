@@ -1,0 +1,97 @@
+<% content_for(:head_title) { t(".head_title", commune: @commune.nom) } %>
+
+<main>
+  <div class="fr-container fr-grid-row fr-my-6w fr-grid-row--center">
+    <div class="fr-col-md-8">
+      <%= render(
+        "shared/breadcrumbs",
+        links: [
+          ["Départements", conservateurs_departements_path],
+          [
+            nom_departement(@commune.departement),
+            conservateurs_departement_path(@commune.departement)
+          ],
+          [@commune.nom, conservateurs_commune_path(@commune)]
+        ],
+        current_page_label: "Renvoi du dossier"
+      ) %>
+
+      <h2><%= t(".title", commune: @commune.nom) %></h2>
+
+      <div class="fr-callout fr-fi-information-line">
+        <p class="fr-callout__text">
+          <%= t(".instructions_html") %>
+        </p>
+      </div>
+
+      <% if @dossier.analyse_overrides? %>
+        <div class="fr-callout fr-fi-information-line">
+          <p class="fr-callout__text">
+            <%= t(".instructions_overrides_html", count: @dossier.analyse_overrides_count) %>
+          </p>
+        </div>
+      <% end %>
+
+      <% if @dossier.errors.any? %>
+        <div class="fr-alert fr-alert--error fr-mt-3w">
+          <p>
+            <%= t(".error") %>
+            <ul>
+              <% @dossier.errors.attribute_names.each do |attribute| %>
+                <li><%= attribute %> <%= @dossier.errors.messages_for(attribute).first %></li>
+              <% end %>
+            </ul>
+          </p>
+        </div>
+      <% end %>
+
+      <%= form_for(
+        @dossier,
+        url: conservateurs_dossier_reject_path(@dossier),
+        method: "POST",
+        builder: FormBuilderDsfr,
+        html: { "data-controller": "reject-messages" }
+      ) do |f| %>
+        <div class="fr-input-group">
+          <%= f.label :notes_conservateur do %>
+            <%= t("activerecord.attributes.dossier.interface_conservateurs.notes_conservateur") %>
+            <button
+              class="fr-link fr-icon-arrow-go-back-line hide"
+              data-action="reject-messages#restore"
+              data-reject-messages-target="undo"
+              disabled="disabled"
+            >
+              <%= t(".notes_conservateur.undo") %>
+            </button>
+          <% end %>
+          <%= f.text_area :notes_conservateur, "data-reject-messages-target": "textarea" %>
+        </div>
+
+        <div class="co-flex co-flex--gap-1rem">
+          <div><%= t(".default_messages.label") %></div>
+          <div>
+            <ul class="fr-btns-group fr-btns-group--inline">
+              <% [:missing_photos, :blurry_photos, :mauvais_objets, :suspicious].each do |key| %>
+                <li>
+                  <button
+                    class="fr-btn fr-btn--tertiary fr-btn--sm"
+                    data-content="<%= t(".default_messages.#{key}.message") %>"
+                    data-action="reject-messages#usePredefined"
+                    data-reject-messages-target="button"
+                    disabled="disabled"
+                  >
+                    <%= t(".default_messages.#{key}.button") %>
+                  </button>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+
+        <div class="co-text--right">
+          <%= f.submit t(".submit")  %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>

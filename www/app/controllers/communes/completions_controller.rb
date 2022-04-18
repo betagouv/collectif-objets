@@ -2,7 +2,7 @@
 
 module Communes
   class CompletionsController < BaseController
-    before_action :restrict_not_started, :restrict_already_completed, except: [:show]
+    before_action :restrict_not_started, except: [:show]
     before_action :restrict_completed, only: [:show]
     before_action :set_objets
 
@@ -24,21 +24,21 @@ module Communes
     protected
 
     def restrict_not_started
-      return true if @commune.enrolled_or_started?
-
-      redirect_to root_path, alert: "Le recensement de votre commune n'a pas commencé !"
-    end
-
-    def restrict_already_completed
-      return true unless @commune.completed?
-
-      redirect_to root_path, alert: "Le recensement de votre commune est déjà terminé !"
+      if @commune.inactive? || @commune.enrolled?
+        redirect_with_alert "Vous devez recenser tous les objets avant de finaliser le dossier"
+      elsif @commune.completed?
+        redirect_with_alert "Votre dossier de recensement a déjà été envoyé"
+      end
     end
 
     def restrict_completed
       return true if @commune.completed?
 
-      redirect_to root_path, alert: "Le recensement de votre commune n'est pas encore terminé !"
+      redirect_with_alert "Le recensement de votre commune n'est pas encore terminé !"
+    end
+
+    def redirect_with_alert(alert)
+      redirect_to commune_objets_path(@commune), alert:
     end
 
     def set_objets
@@ -47,7 +47,7 @@ module Communes
     end
 
     def commune_params
-      params.require(:commune).permit(:notes_from_completion).to_h
+      params.require(:commune).permit(dossier_attributes: %i[notes_commune id]).to_h
           .deep_merge(status: Commune::STATUS_COMPLETED, completed_at: Time.zone.now)
     end
   end

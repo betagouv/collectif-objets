@@ -1,0 +1,13 @@
+<div class="fr-header__tools-links">
+  <ul class="fr-links-group">
+    <li>
+      <%= link_to "Comment ça marche ?", aide_path, class: "fr-link fr-fi-question-line" %>
+    </li>
+    <li>
+      <%= link_to "Mon compte", edit_user_registration_path, class: "fr-link fr-fi-user-line" %>
+    </li>
+    <li>
+      <%= link_to "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), class: "fr-link fr-fi-image-line" %>
+    </li>
+  </ul>
+</div>

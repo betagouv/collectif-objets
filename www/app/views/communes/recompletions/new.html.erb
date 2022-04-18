@@ -1,0 +1,64 @@
+<% content_for(:head_title) { t(".head_title", commune_nom: @commune.nom) } %>
+
+<main>
+  <div class="fr-container fr-py-8w">
+    <% if @commune.errors.any? %>
+      <div class="fr-grid-row">
+        <div class="fr-col-md-6">
+          <div class="fr-alert fr-alert--error fr-mb-6w">
+            <p>
+              <%= t(".error") %>
+              <ul>
+                <% @commune.errors.attribute_names.each do |attribute| %>
+                  <li><%= @commune.errors.messages_for(attribute).first %></li>
+                <% end %>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="fr-grid-row">
+      <div class="fr-col-md-6">
+        <h2 class="co-text--blue">
+          <%= t(".title", commune_nom: @commune.nom) %>
+        </h2>
+        <p>
+          Le dossier de recensement sera retourné au conservateur pour validation avec les informations de recensements que vous avez mises à jour.
+        </p>
+        <p>
+          <b>Commentaire du conservateur lors du renvoi</b>
+        </p>
+        <blockquote class="fr-callout__text fr-my-2w co-blockquote fr-text--alt">
+          <%= @dossier.notes_conservateur %>
+        </blockquote>
+        <p>
+          <%= t(
+            ".notes_conservateur",
+            date: l(@dossier.rejected_at.to_date),
+            conservateur: @dossier.conservateur.to_s
+          ) %>
+        </p>
+      </div>
+    </div>
+
+    <%= render "communes/completions/summary", objets: @objets %>
+
+    <div class="fr-grid-row">
+      <div class="fr-col-md-6">
+        <%= form_for(@commune, url: commune_recompletion_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
+          <%= f.fields_for :dossier do |ff| %>
+            <div class="fr-input-group">
+              <%= ff.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
+              <%= ff.text_area :notes_commune %>
+            </div>
+          <% end %>
+          <div class="actions">
+            <%= f.submit t(".cta") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Commune < ApplicationRecord
+  include Communes::IncludeCountsConcern
+
   DISPLAYABLE_DEPARTEMENTS = %w[51 52 65 72 26 30].freeze
   STATUS_INACTIVE = "inactive"
   STATUS_ENROLLED = "enrolled"
@@ -17,6 +19,8 @@ class Commune < ApplicationRecord
     dependent: :restrict_with_exception
   )
   has_many :recensements, through: :objets
+  has_many :past_dossiers, class_name: "Dossier", dependent: :nullify
+  belongs_to :dossier, optional: true
 
   validates :status, inclusion: { in: STATUSES }
 
@@ -26,21 +30,14 @@ class Commune < ApplicationRecord
   scope :recensements_photos_presence_in, lambda { |presence|
     presence ? all : has_recensements_with_missing_photos
   }
+  scope :completed, -> { where(status: STATUS_COMPLETED) }
+
+  include PgSearch::Model
+  pg_search_scope :search_by_nom, against: :nom, using: { tsearch: { prefix: true } }
+  accepts_nested_attributes_for :dossier
 
   def self.ransackable_scopes(_auth_object = nil)
     [:recensements_photos_presence_in]
-  end
-
-  def self.include_objets_count
-    joins(
-      %{
-       LEFT OUTER JOIN (
-         SELECT commune_code_insee, COUNT(*) objets_count
-         FROM   objets
-         GROUP BY commune_code_insee
-       ) a ON a.commune_code_insee = communes.code_insee
-     }
-    ).select("communes.*, COALESCE(a.objets_count, 0) AS objets_count")
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -54,6 +51,13 @@ class Commune < ApplicationRecord
       .optional_filter { _1.emplacement.blank? }
   end
   # rubocop:enable Metrics/AbcSize
+
+  def self.status_value_counts
+    group(:status)
+      .select("status, count(id) as communes_count")
+      .map { [_1.status, _1.communes_count] }
+      .to_h
+  end
 
   def main_objet
     @main_objet ||=
@@ -81,7 +85,7 @@ class Commune < ApplicationRecord
   end
 
   def objets_recensable?
-    inactive? || enrolled_or_started?
+    !completed? || dossier&.rejected?
   end
 
   def start!

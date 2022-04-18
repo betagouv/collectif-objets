@@ -1,0 +1,31 @@
+<%= form_for(
+  objet,
+  url: conservateurs_objet_notes_path(objet),
+  method: "PATCH",
+  builder: FormBuilderDsfr,
+  html: { data: { controller: "turbo-form-badge" }}
+) do |f| %>
+  <div class="fr-input-group">
+    <%= f.label :notes_conservateur, t(".label") %>
+    <%= f.text_area(
+      :notes_conservateur,
+      data: { action: "input->turbo-form-badge#throttledHideBadge" }
+    ) %>
+  </div>
+  <div class="co-flex co-flex--align-items-center co-flex--gap-1rem">
+    <div>
+      <%= f.submit t(".submit") %>
+    </div>
+    <div>
+      <% if local_assigns[:saved] %>
+        <span
+          class="fr-badge fr-badge--sm fr-badge--success co-transition--fade"
+          data-turbo-form-badge-target="badge"
+        >
+          sauvegardé
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>

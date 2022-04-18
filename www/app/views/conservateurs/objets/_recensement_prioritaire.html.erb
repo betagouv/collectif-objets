@@ -1,0 +1,32 @@
+<div class="co-flex co-flex--align-items-center co-flex--gap-05rem">
+  <% if recensement.analyse_prioritaire? %>
+    <p class="fr-badge fr-badge--sm fr-badge--warning">
+      <%= t("conservateurs.objets.show.analyse_prioritaire.tag") %>
+    </p>
+    <input
+      type="hidden"
+      name="recensement[analyse_prioritaire]"
+      value="false"
+      form="prioritaireForm"
+    />
+    <button class= "fr-link" form="prioritaireForm">
+      <span class="fr-text--sm">
+        <%= t("conservateurs.objets.show.analyse_prioritaire.disable") %>
+      </span>
+      <span class="fr-icon-close-circle-line fr-icon--sm"></span>
+    </button>
+  <% else %>
+    <input
+      type="hidden"
+      name="recensement[analyse_prioritaire]"
+      value="true"
+      form="prioritaireForm"
+    />
+    <button
+      class="fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-error-warning-line"
+      form="prioritaireForm"
+    >
+      <%= t("conservateurs.objets.show.analyse_prioritaire.enable") %>
+    </button>
+  <% end %>
+</div>

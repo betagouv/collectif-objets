@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.2.0)
+      concurrent-ruby (~> 1.0)
     actioncable (7.0.2.4)
       actionpack (= 7.0.2.4)
       activesupport (= 7.0.2.4)
@@ -46,6 +48,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_model_validates_intersection_of (3.0.1)
+      activemodel (>= 5.0.0)
     activejob (7.0.2.4)
       activesupport (= 7.0.2.4)
       globalid (>= 0.3.6)
@@ -187,7 +191,16 @@ GEM
     parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
+    pdf-core (0.9.0)
     pg (1.3.1)
+    pg_search (2.3.6)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
+    prawn (2.4.0)
+      pdf-core (~> 0.9.0)
+      ttfunk (~> 1.7)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
     progressbar (1.11.0)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -308,6 +321,7 @@ GEM
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
+    ttfunk (1.7.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -316,6 +330,9 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
+    view_component (2.53.0)
+      activesupport (>= 5.0.0, < 8.0)
+      method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -340,6 +357,9 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aasm
+  actioncable
+  active_model_validates_intersection_of
   activerecord_where_assoc
   aws-sdk-s3
   bootsnap
@@ -352,8 +372,12 @@ DEPENDENCIES
   image_processing
   importmap-rails
   launchy
+  matrix
   pagy (~> 5.10)
   pg (~> 1.3)
+  pg_search
+  prawn
+  prawn-table
   progressbar
   pry
   puma (~> 5.6)
@@ -372,6 +396,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  view_component
   web-console
   webdrivers
 

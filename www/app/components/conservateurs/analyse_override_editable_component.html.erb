@@ -1,0 +1,63 @@
+<div
+  data-controller="analyse-override"
+  class="co-flex co-flex--align-items-center co-flex--gap-1rem"
+>
+  <span
+    data-analyse-override-target="original"
+    class="<%= "co-text--strikethrough co-semi-transparent" if overrode? %>"
+  >
+    <%= recensement_presenter.send(original_attribute_name) %>
+  </span>
+
+  <% if overrode? %>
+    <span data-analyse-override-target="analyse">
+      <%= recensement_presenter.send(analyse_attribute_name) %>
+    </span>
+  <% end %>
+
+  <%= form_builder.select(
+    analyse_attribute_name,
+    attribute_options_for_select,
+    {},
+    disabled: true,
+    data: { "analyse-override-target": "select" },
+    class: "hide co--width-auto"
+  ) %>
+
+  <a
+    href="#"
+    class="fr-link fr-link--icon-left fr-icon-check-line fr-text--light fr-text--sm hide"
+    data-action="analyse-override#validate"
+    data-analyse-override-target="validate"
+  >
+    Choisir
+  </a>
+
+  <% Recensement.possible_values_for(analyse_attribute_name).each do |value| %>
+    <%= send(
+      "#{analyse_attribute_name}_badge",
+      value,
+      "data-analyse-override-target": "previewBadge",
+      "data-value": value,
+      class: "hide"
+    ) %>
+  <% end %>
+
+  <a
+    href="#"
+    class="fr-link fr-link--icon-left fr-icon-pencil-line fr-text--light fr-text--sm"
+    data-analyse-override-target="override"
+    data-action="analyse-override#override"
+  >
+    Modifier
+  </a>
+
+  <a
+    href="#"
+    class="fr-link fr-link--icon-left fr-icon-arrow-go-back-line fr-text--light fr-text--sm hide"
+    data-action="analyse-override#cancel"
+    data-analyse-override-target="cancel"
+  >
+    Annuler
+  </a>
+</div>

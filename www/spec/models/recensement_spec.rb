@@ -2,6 +2,8 @@
 
 require "rails_helper"
 
+# rubocop:disable Metrics/BlockLength
+
 RSpec.describe Recensement, type: :model do
   describe "validations" do
     subject { recensement.valid? }
@@ -28,4 +30,44 @@ RSpec.describe Recensement, type: :model do
       it { should eq false }
     end
   end
+
+  describe "prevent analyse override equal to original" do
+    let!(:recensement) do
+      build(:recensement, etat_sanitaire:, analyse_etat_sanitaire:)
+    end
+
+    subject do
+      recensement.update!(analyse_etat_sanitaire: new_analyse_etat_sanitaire)
+      recensement.reload.analyse_etat_sanitaire
+    end
+
+    context "trying to set initial override value" do
+      let(:etat_sanitaire) { Recensement::ETAT_BON }
+      let(:analyse_etat_sanitaire) { nil }
+      let(:new_analyse_etat_sanitaire) { Recensement::ETAT_MAUVAIS }
+      it { should eq Recensement::ETAT_MAUVAIS }
+    end
+
+    context "trying to set initial override value to same as original" do
+      let(:etat_sanitaire) { Recensement::ETAT_BON }
+      let(:analyse_etat_sanitaire) { nil }
+      let(:new_analyse_etat_sanitaire) { Recensement::ETAT_BON }
+      it { should eq nil }
+    end
+
+    context "trying to change override value" do
+      let(:etat_sanitaire) { Recensement::ETAT_BON }
+      let(:analyse_etat_sanitaire) { Recensement::ETAT_MOYEN }
+      let(:new_analyse_etat_sanitaire) { Recensement::ETAT_MAUVAIS }
+      it { should eq Recensement::ETAT_MAUVAIS }
+    end
+
+    context "trying to change override value to same as original" do
+      let(:etat_sanitaire) { Recensement::ETAT_BON }
+      let(:analyse_etat_sanitaire) { Recensement::ETAT_MAUVAIS }
+      let(:new_analyse_etat_sanitaire) { Recensement::ETAT_BON }
+      it { should eq nil }
+    end
+  end
 end
+# rubocop:enable Metrics/BlockLength

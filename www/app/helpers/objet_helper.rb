@@ -4,10 +4,16 @@ module ObjetHelper
   def objet_first_image_or_recensement_photo_url(objet)
     return objet.image_urls.first if objet.image_urls.any?
 
-    if objet.commune == current_user&.commune && objet.current_recensement&.photos&.attached?
-      return url_for(objet.current_recensement.photos.first)
+    if objet.current_recensement&.photos&.attached? && can_see_recensement_for(objet)
+      return objet.current_recensement.photos.first.variant(:medium)
     end
 
     "illustrations/photo-manquante.png"
+  end
+
+  private
+
+  def can_see_recensement_for(objet)
+    current_user&.commune == objet.commune
   end
 end

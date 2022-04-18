@@ -39,6 +39,19 @@
 
   <h2 class="co-text--blue fr-mt-6w fr-mb-3w">Recensement</h2>
 
+  <% if recensement.analyse_notes.present? %>
+    <div class="fr-callout fr-icon-info-line">
+      <h4 class="fr-callout__title">Commentaire du conservateur</h4>
+      <blockquote class="fr-callout__text fr-my-2w co-blockquote fr-text--alt">
+        <%= recensement.analyse_notes %>
+      </blockquote>
+      <p class="fr-callout__text">
+        le <%= l(recensement.analysed_at.to_date) %>
+        par <%= recensement.conservateur %>
+      </p>
+  </div>
+  <% end %>
+
   <p class="co-text--muted fr-mb-6w">
     Tous les champs marqués d’un astérisque <span class="co-text--blue">*</span>
   sont obligatoires
@@ -79,10 +92,9 @@
     <div class="fr-grid-row fr-grid-row--gutters fr-my-12w" >
       <div class="fr-col-md-6">
         <div data-recensement-target="localisation">
-          <%= render(
-            "forms/collection_radio_buttons",
-            f: f, legend: 'Où se trouve l’objet ? <span class="co-text--blue">*</span>',
-            field_name: :localisation,
+          <%= render Communes::RecensementFormRadioComponent.new(
+            form_builder: f,
+            attribute_name: :localisation,
             options: localisation_options(recensement),
             radio_button_options: {"data-action": "change->recensement#refreshFields"}
           ) %>
@@ -90,9 +102,10 @@
         <div data-recensement-target="edificeNom">
           <% has_error = recensement.errors.attribute_names.include?(:edifice_nom) %>
           <div class="fr-input-group <%= "fr-input-group--error" if has_error %>">
-            <%= f.label :edifice_nom,
-              'Précisez le nom de l’édifice dans lequel se trouve l’objet <span class="co-text--blue">*</span>'.html_safe
-            %>
+            <%= f.label :edifice_nom do %>
+              <%= t("activerecord.attributes.recensement.edifice_nom") %>
+              <span class="co-text--blue">*</span>
+            <% end %>
             <%= f.text_field :edifice_nom, "aria-describedby": ("edifice-nom-desc-error" if has_error) %>
             <% if has_error %>
               <p id="edifice-nom-desc-error" class="fr-error-text">
@@ -120,10 +133,9 @@
     <div class="fr-grid-row fr-my-12w" data-recensement-target="recensable">
       <div class="fr-col-md-6">
         <div>
-          <%= render(
-            "forms/collection_radio_buttons",
-            f: f, legend: 'L’objet peut-il être recensé ? <span class="co-text--blue">*</span>',
-            field_name: :recensable,
+          <%= render Communes::RecensementFormRadioComponent.new(
+            form_builder: f,
+            attribute_name: :recensable,
             options: recensable_options,
             radio_button_options: {"data-action": "change->recensement#refreshFields"}
           ) %>
@@ -139,10 +151,9 @@
     <div class="fr-grid-row fr-my-12w" data-recensement-target="etatSanitaireEdifice">
       <div class="fr-col-md-6">
         <div>
-          <%= render(
-            "forms/collection_radio_buttons",
-            f: f, legend: 'Comment évaluez-vous l’état sanitaire de l’édifice à proximité de l’objet ? <span class="co-text--blue">*</span>',
-            field_name: :etat_sanitaire_edifice,
+          <%= render Communes::RecensementFormRadioComponent.new(
+            form_builder: f,
+            attribute_name: :etat_sanitaire_edifice,
             options: etat_sanitaire_options
           ) %>
         </div>
@@ -160,10 +171,9 @@
     <div class="fr-grid-row fr-my-12w" data-recensement-target="etatSanitaire">
       <div class="fr-col-md-6">
         <div>
-          <%= render(
-            "forms/collection_radio_buttons",
-            f: f, legend: 'Comment évaluez-vous l’état sanitaire de l’objet ? <span class="co-text--blue">*</span>',
-            field_name: :etat_sanitaire,
+          <%= render Communes::RecensementFormRadioComponent.new(
+            form_builder: f,
+            attribute_name: :etat_sanitaire,
             options: etat_sanitaire_options
           ) %>
         </div>
@@ -188,10 +198,10 @@ nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank"
     <div class="fr-grid-row fr-my-12w" data-recensement-target="securisation">
       <div class="fr-col-md-6">
         <div>
-          <%= render(
-            "forms/collection_radio_buttons",
-            f: f, legend: 'L’objet est-il en sécurité ? <span class="co-text--blue">*</span>',
-            field_name: :securisation, options: securisation_options
+          <%= render Communes::RecensementFormRadioComponent.new(
+            form_builder: f,
+            attribute_name: :securisation,
+            options: securisation_options
           ) %>
         </div>
       </div>
@@ -221,7 +231,7 @@ nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank"
     <div class="fr-grid-row fr-my-12w" data-recensement-target="notes">
       <div class="fr-col-md-6">
         <div class="fr-input-group">
-          <%= f.label :notes, "Commentaires" %>
+          <%= f.label :notes %>
           <%= f.text_area :notes %>
         </div>
       </div>

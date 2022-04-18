@@ -16,7 +16,7 @@ RSpec.feature "Sign in with token", type: :feature, js: true do
 
     expect(page).to have_text("Veuillez cliquer sur le lien que vous avez reçu par mail pour vous connecter")
     email = ActionMailer::Base.deliveries.last
-    res = email.body.match(%r{/sign_in_with_token\?login_token=([a-z0-9]+)})
+    res = email.body.match(%r{/users/sign_in_with_token\?login_token=([a-z0-9]+)})
     expect(res).not_to be_nil
     sign_in_path = res[0]
 

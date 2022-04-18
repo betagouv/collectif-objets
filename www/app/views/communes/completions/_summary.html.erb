@@ -26,16 +26,37 @@
                 <% end %>
               </div>
               <div>
-                <%= link_to recensement.objet.nom_courant, objet_path(recensement.objet) %>
+                <%= link_to truncate(recensement.objet.nom, length: 30), objet_path(recensement.objet) %>
               </div>
             </div>
           </td>
           <td><%= presenter.localisation %></td>
           <td><%= presenter.recensable %></td>
-          <td><%= presenter.etat_sanitaire_edifice %></td>
-          <td><%= presenter.etat_sanitaire %></td>
-          <td><%= presenter.securisation %></td>
-          <td><%= presenter.photos %></td>
+          <% [
+            :etat_sanitaire_edifice,
+            :etat_sanitaire,
+            :securisation
+          ].each do |original_attribute_name| %>
+            <td>
+              <%= render Conservateurs::AnalyseOverrideComponent.new(
+                recensement: recensement,
+                recensement_presenter: presenter,
+                original_attribute_name:
+              ) %>
+            </td>
+          <% end %>
+          <td>
+            <% if recensement.photos.empty? %>
+              <%= badge("warning") { "Aucune photo" } %>
+            <% else %>
+              <div><%= recensement.photos.count %> photo<%= recensement.photos.count > 1 ? 's' : ""  %></div>
+              <div class="co-recensement-photos">
+                <% recensement.photos.map do |photo| %>
+                  <%= image_tag photo.variant(:medium) %>
+                <% end %>
+              </div>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

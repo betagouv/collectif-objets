@@ -12,7 +12,12 @@
               </p>
             </div>
             <div class="fr-header__navbar">
-              <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-833" aria-haspopup="menu" title="Menu" id="fr-btn-menu-mobile">
+              <% if current_conservateur %>
+                <button class="fr-btn--search fr-btn" data-fr-opened="false" aria-controls="modal-menu-search" title="Rechercher">
+                    Rechercher
+                </button>
+              <% end %>
+              <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-menu-links" aria-haspopup="menu" title="Menu" id="fr-btn-menu-mobile">
                 Menu
               </button>
             </div>
@@ -25,29 +30,13 @@
           </div>
         </div>
         <div class="fr-header__tools">
-          <div class="fr-header__tools-links">
-            <ul class="fr-btns-group">
-              <li>
-                <%= link_to "Comment ça marche ?", aide_path, class: "fr-btn fr-fi-question-line" %>
-              </li>
-              <% if current_user %>
-                <li>
-                  <%= link_to "Mon compte", edit_user_registration_path, class: "fr-btn fr-fi-user-line" %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to "Connexion", new_user_session_path, class: "fr-btn fr-fi-lock-line" %>
-                </li>
-              <% end %>
-              <li>
-                <% if current_user&.commune %>
-                  <%= link_to "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), class: "fr-btn fr-fi-image-line" %>
-                <% else %>
-                  <%= link_to "Voir les objets dans ma commune" , objets_path, class: "fr-btn fr-fi-image-line" %>
-                <% end %>
-              </li>
-            </ul>
-          </div>
+          <% if current_conservateur %>
+            <%= render "shared/header/header_tools_conservateur" %>
+          <% elsif current_user %>
+            <%= render "shared/header/header_tools_user" %>
+          <% else %>
+            <%= render "shared/header/header_tools_guest" %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -66,9 +55,9 @@
       </div>
     <% end %>
   </div>
-  <div class="fr-header__menu fr-modal" id="modal-833" aria-labelledby="fr-btn-menu-mobile">
+  <div class="fr-header__menu fr-modal" id="modal-menu-links" aria-labelledby="fr-btn-menu-mobile">
     <div class="fr-container">
-      <button class="fr-link--close fr-link" aria-controls="modal-833">Fermer</button>
+      <button class="fr-link--close fr-link" aria-controls="modal-menu-links">Fermer</button>
       <div class="fr-header__menu-links"></div>
     </div>
   </div>

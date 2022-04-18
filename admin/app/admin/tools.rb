@@ -1,5 +1,5 @@
 ActiveAdmin.register_page "Tools" do
-  menu label: "⚙️ Outils", priority: 6
+  menu label: "⚙️ Outils", priority: 8
 
   content do
     render partial: 'tools'

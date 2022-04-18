@@ -22,7 +22,10 @@ class FormBuilderDsfr < ActionView::Helpers::FormBuilder
   end
 
   def select(method, choices, options = {}, html_options = {})
-    super(method, choices, options, html_options.merge(class: "fr-select"))
+    html_options = html_options.with_indifferent_access
+    html_options[:class] ||= ""
+    html_options[:class] += " fr-select"
+    super(method, choices, options, html_options)
   end
 
   def submit(value, options = {})

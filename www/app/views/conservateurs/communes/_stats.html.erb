@@ -1,0 +1,27 @@
+<div class="co-background--light-teal fr-py-12w">
+  <div class="fr-container fr-grid-row fr-grid-row--center fr-grid-row--middle">
+    <div class="fr-col-md-4">
+      <% if commune.completed? %>
+        <div class="fr-text--lg fr-mb-2w">
+          <%= t("dossier.recensements_pending_count_html", count: stats.recensements_pending_count) %>
+        </div>
+      <% else %>
+        <div class="fr-h4 fr-mb-2w">
+          <%= stats.objets_recenses_percentage %>%
+          <span class="fr-text--lg fr-text--regular">des objets ont été recensés</span>
+        </div>
+        <div><b><%= stats.objets_recenses_count %> objets</b> sur <%= stats.objets_count %></div>
+      <% end %>
+    </div>
+    <% if stats.objets_recenses_count > 0 %>
+      <div class="fr-col-md-4 co-text--center">
+        <b><%= t("conservateurs.communes.stats.etats_sanitaires_distribution_title") %></b>
+        <div
+          data-controller="chart"
+          data-chart-target="wrapper"
+          data-type="etats-sanitaires"
+          data-values="<%= stats.etats_sanitaires_chart_values.to_json %>"></div>
+      </div>
+    <% end %>
+  </div>
+</div>

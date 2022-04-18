@@ -1,0 +1,59 @@
+<% content_for(:head_title) { t(".head_title", departement: @departement) } %>
+
+<main>
+  <div class="fr-container fr-grid-row fr-py-6w fr-grid-row--center">
+    <div class="fr-col-md-8">
+      <%= render(
+        "shared/breadcrumbs",
+        links: [["Départements", conservateurs_departements_path]],
+        current_page_label: nom_departement(@departement)
+      ) %>
+      <h2>
+        <span class="fr-icon-france-fill" aria-hidden="true"></span>
+        <%= nom_departement(@departement) %>
+      </h2>
+      <% if @campaign %>
+        <p><%= t(".campaign", begin: l(@campaign.begin), end: l(@campaign.end)) %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="co-background--light-teal fr-py-12w">
+    <div class="fr-container fr-grid-row fr-grid-row--center fr-grid-row--middle">
+      <div class="fr-col-md-5">
+        <div class="fr-h4 fr-mb-2w">
+          <%= @stats.objets_recenses_percentage %>%
+          <span class="fr-text--lg fr-text--regular">des objets ont été recensés</span>
+        </div>
+        <div><b><%= @stats.objets_recenses_count %> objets</b> sur <%= @stats.objets_count %></div>
+
+        <div class="fr-h4 fr-mt-4w fr-mb-2w">
+          <%= @stats.communes_completed_percentage %>%
+          <span class="fr-text--lg fr-text--regular">
+            <%= t(".stats.completed") %>
+          </span>
+        </div>
+        <div><b><%= @stats.communes_completed_count %> communes</b> sur <%= @stats.communes_count %></div>
+      </div>
+      <div class="fr-col-md-3 co-text--center">
+        <b>
+          <%= t(".stats.etats_sanitaires_distribution_title") %>
+        </b>
+        <div
+          data-controller="chart"
+          data-chart-target="wrapper"
+          data-type="etats-sanitaires"
+          data-values="<%= @stats.etats_sanitaires_chart_values.to_json %>"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fr-container fr-grid-row fr-py-6w fr-grid-row--center" id="communes">
+    <div class="fr-col-md-8">
+      <%= turbo_frame_tag "communes-search" do %>
+        <%# "data-turbo-action": "advance" %>
+        <%= render Conservateurs::CommunesSearchComponent.new(communes_search: @communes_search) %>
+      <% end %>
+    </div>
+  </div>
+</main>

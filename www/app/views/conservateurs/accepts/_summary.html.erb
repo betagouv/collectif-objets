@@ -1,0 +1,46 @@
+<div class="fr-table">
+  <table>
+    <thead>
+      <tr>
+        <th><%= t(".headers.objet") %></th>
+        <th><%= t(".headers.etat_sanitaire") %></th>
+        <th><%= t(".headers.actions") %></th>
+        <th><%= t(".headers.fiches") %></th>
+        <th><%= t(".headers.updated") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recensements.each do |recensement| %>
+        <tr>
+          <% presenter = RecensementPresenter.new(recensement) %>
+          <td>
+            <%= link_to(
+              truncate(recensement.objet.nom, length: 30),
+              conservateurs_objet_path(recensement.objet)
+            ) %>
+          </td>
+          <td><%= render Recensements::AttributeBadgeComponent.new(recensement, :etat_sanitaire) %></td>
+          <td>
+            <% if recensement.analyse_actions.empty? %>
+              <i><%= t(".no_actions") %></i>
+            <% end %>
+            <% recensement.analyse_actions.each do |action| %>
+              <%= badge { t("recensement.analyse_actions.#{action}") } %>
+            <% end %>
+          </td>
+          <td>
+            <% if recensement.analyse_fiches.empty? %>
+              <%= t(".no_fiches") %>
+            <% end %>
+            <% recensement.analyse_fiches.each do |guide| %>
+              <%= badge { t("recensement.analyse_fiches.#{guide}") } %>
+            <% end %>
+          </td>
+          <td>
+            <%= recensement.analyse_overrides? ? "Oui" : "Non" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

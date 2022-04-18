@@ -1,0 +1,64 @@
+# frozen_string_literal: true
+
+module Communes
+  class ObjetCardComponent < ViewComponent::Base
+    include ObjetHelper
+    attr_reader :objet
+
+    with_collection_parameter :objet
+
+    delegate :nom, :nom_courant, :commune, :edifice_nom, :current_recensement, :image_urls, to: :objet
+    delegate :dossier, to: :current_recensement, allow_nil: true
+
+    def initialize(objet:)
+      @objet = objet
+      super
+    end
+
+    def badges
+      @badges = [recensement_badge, analyse_notes_badge].compact
+    end
+
+    def path
+      return edit_objet_recensement_path(objet, current_recensement) \
+        if current_recensement&.editable?
+
+      objet_path(objet)
+    end
+
+    def truncated_nom
+      truncate(nom || nom_courant, length: 30)
+    end
+
+    def first_image_or_recensement_photo_url(_objet)
+      return current_recensement.photos.first.variant(:medium) \
+        if current_recensement&.photos&.attached?
+
+      return image_urls.first if image_urls.any?
+
+      "illustrations/photo-manquante.png"
+    end
+
+    protected
+
+    def badge_struct
+      Struct.new(:color, :text)
+    end
+
+    def recensement_badge
+      return nil if dossier&.rejected? || dossier&.accepted?
+
+      if current_recensement.present?
+        badge_struct.new("success", "Recensé")
+      else
+        badge_struct.new("", "Pas encore recensé")
+      end
+    end
+
+    def analyse_notes_badge
+      return nil unless dossier&.rejected?
+
+      badge_struct.new("info", "Commentaires") if current_recensement&.analyse_notes.present?
+    end
+  end
+end

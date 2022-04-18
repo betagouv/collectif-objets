@@ -36,16 +36,35 @@ a.co-footer-logo img {
   display: none !important;
 }
 
-.co-section--light-grey {
+.co-opacity--0 {
+  opacity: 0;
+}
+
+.co-background--light-grey {
   background-color: #F9F8F6;
 }
 
-.co-section--teal {
+.co-background--teal {
   background-color: rgb(185, 185, 251);
+}
+
+.co-background--light-teal {
+  background-color: #F5F5FE;
 }
 
 .co--width-max-100 {
   max-width: 100%;
+}
+
+.co--width-auto,
+.fr-select.co--width-auto {
+  width: auto;
+}
+
+
+.co-text--black,
+.co-text--black.fr-input:disabled {
+  color: rgb(58, 58, 58);
 }
 
 .co-text--blue {
@@ -56,8 +75,37 @@ a.co-footer-logo img {
   text-align: center;
 }
 
+.co-text--right {
+  text-align: right;
+}
+
 .co-text--muted {
   color: rgb(103, 103, 103);
+}
+
+.co-text--italic {
+  font-style: italic;
+}
+
+.co-text--strikethrough,
+.co-text--strikethrough .fr-badge {
+  text-decoration: line-through;
+}
+
+.co-warning-text,
+.fr-error-text.co-warning-text {
+  color: orange;
+}
+
+.co-warning-text::before,
+.fr-error-text.co-warning-text::before {
+  mask-image: url(/dsfr_1_5_1/icons/system/fr--info-line.svg);
+}
+
+.co-blockquote {
+  border-left: 1px solid #ccc;
+  margin-left: .2rem;
+  padding-left: 1rem;
 }
 
 
@@ -77,10 +125,81 @@ a.co-footer-logo img {
   align-items: center;
 }
 
+.co-flex--align-items-end {
+  align-items: end;
+}
+
+.co-flex--space-between {
+  justify-content: space-between;
+}
+
+.co-flex--gap-05rem {
+  gap: .5rem;
+}
+
+.co-flex--gap-1rem {
+  gap: 1rem;
+}
+
+.co-flex--gap-2rem {
+  gap: 2rem;
+}
+
+.co-flex--wrap {
+  flex-wrap: wrap;
+}
+
+.co-flex--column {
+  flex-direction: column;
+}
+
 .co-guide-embed {
   min-height: 600px;
   height: 70vh;
 }
+
+
+.co-width-20rem {
+  width: 20rem;
+}
+
+/* hide DSFR arrow */
+a.co-link--no-arrow[href] {
+  background-image: none;
+}
+
+a.co-link--no-arrow[target="_blank"]::after {
+  content: none;
+}
+
+.co-position-absolute {
+  position: absolute;
+}
+
+.co-position-relative {
+  position: relative;
+}
+
+.co-top-50pct {
+  top: 50%;
+}
+
+.co-left-50pct {
+  left: 50%;
+}
+
+/* IMAGES */
+
+.co-spinner-bg {
+  background: url(/spinner-blue.gif) no-repeat center;
+}
+
+.co-object-fit-cover {
+  object-fit: cover;
+}
+
+
+/* ANIMATIONS */
 
 .co-btn--icon-spinning::before {
   animation: rotation 2s linear infinite;
@@ -94,4 +213,8 @@ a.co-footer-logo img {
   to {
     transform: rotate(359deg);
   }
+}
+
+.co-transition--fade {
+  transition: opacity 2s linear;
 }

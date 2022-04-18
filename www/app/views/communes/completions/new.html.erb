@@ -34,10 +34,12 @@
     <div class="fr-grid-row">
       <div class="fr-col-md-6">
         <%= form_for(@commune, url: commune_completion_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
-          <div class="fr-input-group">
-            <%= f.label :notes_from_completion, "Commentaires" %>
-            <%= f.text_area :notes_from_completion %>
-          </div>
+          <%= f.fields_for :dossier do |ff| %>
+            <div class="fr-input-group">
+              <%= ff.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
+              <%= ff.text_area :notes_commune %>
+            </div>
+          <% end %>
           <div class="actions">
             <%= f.submit "Je valide le recensement des objets de ma commune" %>
           </div>

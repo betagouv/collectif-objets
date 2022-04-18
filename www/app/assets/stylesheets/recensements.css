@@ -37,11 +37,13 @@ label.fr-label.co-label--disabled,
   padding: 10px;
   position: relative;
 }
+
 .co-recensement-form-photo-wrapper img {
   object-fit: contain;
   height: 100%;
   width: 100%;
 }
+
 .co-recensement-form-photo-wrapper .co-delete-icon {
   position: absolute;
   left: 63px;
@@ -73,4 +75,21 @@ label.fr-label.co-label--disabled,
   background: #0076ff;
   transition: width 120ms ease-out, opacity 60ms 60ms ease-in;
   transform: translate3d(0, 0, 0);
+}
+
+
+.co-recensement-photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
+}
+
+.co-recensement-photos-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+img.co-recensement-analyse-photo {
+  max-height: 400px;
 }

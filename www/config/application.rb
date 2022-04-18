@@ -13,7 +13,7 @@ require "action_mailer/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
 require "action_view/railtie"
-# require "action_cable/engine"
+require "action_cable/engine"
 require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -34,5 +34,7 @@ module CollectifObjets
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

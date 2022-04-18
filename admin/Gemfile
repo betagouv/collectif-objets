@@ -17,7 +17,9 @@ gem 'devise-i18n'
 gem "draper", "~> 4.0"
 gem "aws-sdk-s3", require: false
 gem "sidekiq"
-
+gem "pg_search"
+gem "active_model_validates_intersection_of"
+gem "aasm"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

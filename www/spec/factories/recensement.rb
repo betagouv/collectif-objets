@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :recensement do
     association :objet
     association :user
+    association :dossier
     localisation { Recensement::LOCALISATION_EDIFICE_INITIAL }
     recensable { true }
     edifice_nom { nil }

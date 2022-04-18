@@ -1,10 +1,213 @@
 fr:
+  menu:
+    conservateurs:
+      departements:
+        one: Mon département
+        other: Mes départements
   communes:
     objets:
       index:
         title:
           one: "%{commune} abrite un objet protégé"
           other: "Les %{count} objets protégés de %{commune}"
+        rejected_callout:
+          explanation:
+            one: "Le recensement de '%{objet_name}' que vous avez envoyé le %{date_submitted_at} n'a pas pu être analysé par les conservateurs en l'état."
+            other: "Le dossier de recensement de %{count} objets que vous avez envoyé le %{date_submitted_at} n'a pas pu être analysé par les conservateurs en l'état."
+          note: "Voici le commentaire laissé à votre intention par %{conservateur} le %{date_rejected_at} :"
+          action: Vous pouvez modifier les informations de recensements et renvoyer le dossier au conservateur.
+        accepted_callout:
+          title: Dossier accepté par le conservateur
+          content: "%{conservateur} a analysé votre dossier le %{date}. Vous trouverez son rapport ci-dessous."
+      recensement_saved_after_reject:
+        title: Votre recensement a bien été mis à jour
+        cta: Renvoyer le dossier…
+        back: Revenir à la liste d'objets de ma commune
+      recensement_saved:
+        head_title: Recensement enregistré
+        title: Votre recensement a bien été enregistré
+        instructions: Vous pourrez revenir sur la fiche de cet objet pour modifier votre recensement.
+        finished: Vous avez recensé tous les objets de votre commune !
+        leftover: "Ces objets sont encore à recenser:"
+        cta: Finaliser le recensement…
+        back: Revenir à la liste d'objets de ma commune
+    recompletions:
+      new:
+        head_title: "Renvoi du dossier de recensement de %{commune_nom}"
+        title: "Renvoi du dossier de recensement de %{commune_nom}"
+        notes_conservateur: "%{conservateur} - le %{date} "
+        error: "Votre dossier n'a pas pu être renvoyé :"
+        cta: Renvoyer le dossier au conservateur
+  conservateurs:
+    communes:
+      no_results: Aucune commune trouvée
+      stats:
+        etats_sanitaires_distribution_title: États sanitaires des objets recensés
+      index:
+        title: "Communes dans le %{departement}"
+      analyse_saved:
+        success: Votre analyse a bien été sauvegardée
+        all_done: "Vous avez analysé tous les recensements de %{commune}"
+        updatable: Vous pouvez modifier votre analyse de ce dossier de recensement autant que vous le souhaitez avant l'envoi du rapport.
+        back: Retour à la liste des recensements de la commune
+        send: Envoyer le rapport …
+      show:
+        can_generate_rapport:
+          content: Vous avez revu l'ensemble des %{recensements_count} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
+          send: Envoyer le rapport …
+        rejected:
+          content: Ce dossier a été renvoyé à la commune le %{date} par %{conservateur} avec le commentaire suivant
+          content_end_html: Tant que la commune ne retourne pas le dossier, <b>vous ne pouvez pas l'analyser</b>
+        actions:
+          send: Envoyer le rapport …
+          reject: Renvoyer le dossier à la commune …
+          reject_desc: pour demander des informations manquantes
+        notes_conservateur:
+          not_completed: Vous ne pouvez pas laisser de commentaire tant que la commune n'a pas commencé à recenser
+        contact:
+          title: Contacter la commune
+    communes_search_component:
+      status_options:
+        all: Toutes les communes
+        inactive: Communes inactive
+        enrolled: Communes inscrites
+        started: Recensement démarré
+        completed: Recensement terminé
+    objet_card_component:
+      analysed_badge: Analysé
+      prioritaire_badge: Prioritaire
+      introuvable_badge: Introuvable
+    accepts:
+      form:
+        submit: Envoyer le rapport à la commune
+      new:
+        head_title: "Rapport de recensement pour %{commune}"
+        title: "📄 Rapport de recensement pour %{commune}"
+      summary:
+        headers:
+          objet: Objet
+          etat_sanitaire: État sanitaire
+          actions: Actions
+          fiches: Fiches
+          updated: Modifications conservateur
+        no_actions: Aucune action
+        no_fiches: Aucune fiche
+    rejects:
+      new:
+        head_title: "Renvoyer le dossier de recensement de %{commune}"
+        title: "Renvoyer le dossier de recensement de %{commune}"
+        instructions_html: "Une fois le dossier renvoyé, la commune pourra modifier ses recensements : par exemple rajouter des photos ou déclarer des objets retrouvés. En contrepartie, le dossier sera bloqué pour vous : <b>vous ne pourrez plus analyser les recensements déjà soumis</b>. Il faudra alors attendre que la commune vous retourne le dossier une nouvelle fois pour l'analyser."
+        instructions_overrides_html: Vous avez modifié des informations de recensement renseignées par la commune sur %{count} objets. Il s'agit d'états sanitaires ou d'évaluations de sécurité que vous avez corrigées. <b>La commune ne pourra plus modifier ces champs</b>, votre évaluation prime.<br />Si vous souhaitez rendre la main à la commune, vous pouvez retirer vos modifications sur ces recensements.
+        error: "Une erreur s'est produite :"
+        notes_conservateur:
+          undo: Restaurer le message précédent
+        default_messages:
+          label: "Messages prédéfinis :"
+          missing_photos:
+            button: Photos non disponibles
+            message: "Veuillez rajouter les photos manquantes\n Cordialement"
+          blurry_photos:
+            button: Photos floues
+            message: "Une partie des photos que vous avez envoyées sont trop floues pour être acceptées. Pouvez-vous en prendre de nouvelles ?\n Cordialement"
+          mauvais_objets:
+            button: Mauvais objets
+            message: ""
+          suspicious:
+            button: Recensement suspect
+            message: ""
+        submit: Renvoyer le dossier
+    rapports:
+      form:
+        submit: Mettre à jour le rapport PDF
+    departements:
+      index:
+        head_title: Départements
+        title: Départements
+        empty: Vous n'avez accès à aucun département pour l'instant
+        contact: Contactez-nous pour accéder à d'autres départements
+      show:
+        head_title: Communes du %{departement}
+        campaign: Campagne de recensement du %{begin} au %{end}
+        stats:
+          completed: des communes ont complété le recensement
+          etats_sanitaires_distribution_title: États sanitaires des objets recensés
+    objets:
+      show:
+        analyse_prioritaire:
+          tag: Prioritaire
+          enable: Marquer comme prioritaire
+          disable: retirer
+        not_recensed: Pas encore recensé
+        pop_card:
+          edifice_nom: Édifice
+          emplacement: Emplacement
+          categorie: Catégorie
+          crafted_at: Époque
+          link: ouvrir dans POP
+        recensement:
+          title: Recensement
+        analyse:
+          error: "Votre analyse n'a pas pu être enregistrée :"
+          submit: "Sauvegarder"
+          submit_desc: Ces informations ne seront pas envoyées à la mairie tout de suite. Vous pourrez les modifier avant de valider votre rapport dans son ensemble.
+        notes:
+          title: Notes internes sur l'objet
+      notes:
+        form:
+          label: "Commentaire partagé uniquement aux conservateurs"
+          submit: "Sauvegarder les notes"
+
+    recensements:
+      analyse_actions:
+        hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
+      analyse_fiches:
+        hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
+  recensement:
+    photos:
+      taken_count:
+        zero: "aucune photo de recensement"
+        one: "1 photo prise lors du recensement"
+        other: "%{count} photos prises lors du recensement"
+    analyse:
+      not_completed: L'analyse ne peut se faire que pour les communes ayant terminé et confirmé leur recensement
+      remaining_count:
+        one: "Il reste 1 recensement à analyser à %{commune}"
+        other: "Il reste %{count} recensements à analyser à %{commune}"
+    analyse_actions:
+      securiser: Sécuriser
+      entretenir: Entretenir
+      restaurer: Restaurer
+      identifier: Identifier
+      localiser: Localiser
+    analyse_fiches:
+      vol: Comment porter plainte ?
+      securisation: Comment sécuriser mon édifice et mes objets ?
+      insectes: Comment évaluer le danger des insectes xylophages ?
+  dossier:
+    recensements_pending_count_html:
+      zero: Vous avez revu <span class='fr-h4'>100%</span> des recensements de cette commune
+      one: Il vous reste <span class='fr-h4'>1</span> recensement de cette commune à analyser
+      other: "Il vous reste <span class='fr-h4'>%{count}</span> recensements de cette commune à analyser"
+    status_badge:
+      construction: Recensement en cours
+      submitted: À analyser
+      rejected: Dossier renvoyé à la commune
+      accepted: Rapport envoyé à la commune
+    rapport:
+      recensement:
+        localisation: Où se trouve l’objet ?
+        edifice_nom: Précisez le nom de l’édifice dans lequel se trouve l’objet
+        recensable: L’objet peut-il être recensé ?
+        etat_sanitaire_edifice: Comment évaluez-vous l’état sanitaire de l’édifice à proximité de l’objet ?
+        etat_sanitaire: Comment évaluez-vous l’état sanitaire de l’objet ?
+        securisation: L’objet est-il en sécurité ?
+        notes: Commentaires de la commune
+        analyse_notes: Commentaires du conservateur
+        analyse_fiches: Conseils du conservateur
+  dossiers:
+    pdf_embed:
+      embed_title: Rapport de recensement
+      download: Télécharger le fichier PDF
   activerecord:
     errors:
       models:
@@ -29,6 +232,37 @@ fr:
             photos:
               blank: "Les photos sont fortement recommandées. Si vous ne pouvez pas en prendre, merci de le signaler."
               max_size_error: "Les photos doivent faire moins de 20MB"
+            analyse_actions:
+              inclusion: "La ou les actions choisies ne sont pas valides"
+            analyse_fiches:
+              inclusion: "La ou les fiches choisies ne sont pas valides"
+    attributes:
+      recensement:
+        localisation: Où se trouve l’objet ?
+        edifice_nom: Précisez le nom de l’édifice dans lequel se trouve l’objet
+        recensable: L’objet peut-il être recensé ?
+        etat_sanitaire_edifice: Comment évaluez-vous l’état sanitaire de l’édifice à proximité de l’objet ?
+        etat_sanitaire: Comment évaluez-vous l’état sanitaire de l’objet ?
+        securisation: L’objet est-il en sécurité ?
+        notes: Commentaires
+        analyse_actions: Actions à mener
+        analyse_fiches: Fiches à associer
+        analyse_notes: Commentaires pour la mairie
+      dossier:
+        notes_commune: Commentaires de la commune à destination des conservateurs
+        notes_conservateur: Commentaires des conservateurs à destination de la commune
+        interface_communes:
+          notes_commune: Vos commentaires à destination des conservateurs
+        interface_conservateurs:
+          notes_commune: Commentaires de la commune à votre intention
+          notes_conservateur: Vos retours pour la commune
+          notes_conservateur_private: Notes internes (uniquement visible par les conservateurs)
+      commune:
+        statuses:
+          inactive: Commune inactive
+          enrolled: Commune inscrite
+          started: Recensement démarré
+          completed: Recensement terminé
   date:
     abbr_day_names:
       - dim

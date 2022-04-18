@@ -1,20 +1,23 @@
-<% content_for(:head_title) { "Recensement enregistré" } %>
+<% content_for(:head_title) { t(".head_title") } %>
 
 <main class="fr-container fr-py-12w">
   <div class="fr-grid-row fr-mb-4w fr-grid-row--middle">
     <div class="fr-col-md-6">
-      <h2 class="co-text--blue">Votre recensement a bien été enregistré</h2>
+      <h2 class="co-text--blue">
+        <%= t(".title") %></h2>
       <p>
-        Vous pourrez revenir sur la fiche de cet objet pour modifier votre recensement.
+        <%= t(".instructions") %>
       </p>
       <% if @objets.any? %>
         <p>
           <%= link_to "Revenir à la liste d'objets de ma commune", commune_objets_path(@commune), class: "fr-btn" %>
         </p>
       <% else %>
-        <p>Vous avez recensé tous les objets de votre commune !</p>
+        <% if @dossier.construction? %>
+          <p><%= t(".finished") %></p>
+        <% end %>
         <p>
-          <%= link_to "Finaliser le recensement", new_commune_completion_path(@commune), class: "fr-btn" %>
+          <%= link_to t(".cta"), new_commune_completion_path(@commune), class: "fr-btn" %>
           ou
         </p>
         <p><%= link_to "Revenir à la liste d'objets de ma commune", commune_objets_path(@commune), class: "fr-btn fr-btn--secondary" %></p>
@@ -27,12 +30,15 @@
 </main>
 
 <% if @objets.any? %>
-  <div class="co-section--teal">
+  <div class="co-background--teal">
     <div class="fr-container fr-py-8w">
       <h3 class="co-text--blue">
-        Ces objets sont encore à recenser:
+        <%= t(".leftover") %>
       </h3>
-      <%= render "objets/list", objets: @objets %>
+      <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
+        <%= render(Communes::ObjetCardComponent.with_collection(@objets)) %>
+      </div>
+
       <%= link_to "Revenir à la liste de tous les objets de ma commune", commune_objets_path(@commune), class: "fr-link" %>
     </div>
   </div>

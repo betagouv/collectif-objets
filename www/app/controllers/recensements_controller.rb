@@ -17,7 +17,7 @@ class RecensementsController < ApplicationController
 
   def create
     if @recensement.save
-      @recensement.objet.commune.start!
+      @recensement.commune.start!
       TriggerSibContactEventJob.perform_async(@objet.commune.id, "started")
       SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => @recensement.id })
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true)
@@ -29,7 +29,7 @@ class RecensementsController < ApplicationController
   def update
     @recensement.confirmation = true
     if @recensement.update(recensement_params_parsed)
-      redirect_to commune_objets_path(@objet.commune, recensement_saved: true)
+      redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,7 +49,8 @@ class RecensementsController < ApplicationController
     @recensement = Recensement.new(
       **recensement_params_parsed,
       objet: @objet,
-      user: current_user
+      user: current_user,
+      **dossier_params
     )
     @recensement.confirmation = recensement_params[:confirmation].present?
   end
@@ -87,5 +88,12 @@ class RecensementsController < ApplicationController
 
   def restrict_already_recensed
     raise "Objet déjà recensé" if @objet.recensements.any?
+  end
+
+  def dossier_params
+    existing_dossier = @objet.commune.dossier
+    return { dossier_id: existing_dossier.id } if existing_dossier.present?
+
+    { dossier_attributes: { commune_id: @objet.commune.id, status: "construction" } }
   end
 end

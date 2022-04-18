@@ -10,4 +10,23 @@ module ApplicationHelper
       "Collectif Objets"
     end
   end
+
+  def badge(color = "", **html_opts)
+    html_opts[:class] ||= ""
+    html_opts[:class] += " fr-badge fr-badge--sm fr-badge--#{color}"
+    content_tag("p", yield, **html_opts)
+  end
+
+  def link_to_button(content, path, **kwargs)
+    content_tag("form", method: "GET", action: path) do
+      content_tag("button", **kwargs) { content }
+    end
+  end
+
+  def blockquote(content, html_options = {})
+    html_options = html_options.with_indifferent_access
+    html_options[:class] ||= ""
+    html_options[:class] += " fr-callout__text co-blockquote fr-text--alt"
+    content_tag("blockquote", content, **html_options)
+  end
 end

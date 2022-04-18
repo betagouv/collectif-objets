@@ -3,7 +3,7 @@ ActiveAdmin.register Commune do
   decorate_with CommuneDecorator
 
   actions :all, except: [:destroy, :new, :create]
-  permit_params :status, :notes_from_enrollment, :notes_from_completion, :enrolled_at, :completed_at
+  permit_params :status, :notes_from_enrollment, :enrolled_at, :completed_at
 
   index do
     # selectable_column
@@ -67,7 +67,6 @@ ActiveAdmin.register Commune do
           row :enrolled_at
           row :notes_from_enrollment
           row :completed_at
-          row :notes_from_completion
         end
 
         commune.users.map(&:decorate).each do |user|
@@ -103,6 +102,7 @@ ActiveAdmin.register Commune do
         panel "✍️ Recensements" do
           table_for commune.recensements.map(&:decorate) do
             column(:id) { link_to _1.id, admin_recensement_path(_1) }
+            column :dossier_id
             column :created_at
             column :localisation
             column :edifice_nom
@@ -131,7 +131,6 @@ ActiveAdmin.register Commune do
       f.input :enrolled_at, label: "Date d'inscription"
       f.input :notes_from_enrollment, as: :text, input_html: { rows: 2 }
       f.input :completed_at, label: "Date de fin de recensement"
-      f.input :notes_from_completion, as: :text, input_html: { rows: 2 }
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end

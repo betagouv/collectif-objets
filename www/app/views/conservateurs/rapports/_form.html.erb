@@ -1,0 +1,44 @@
+<%= turbo_frame_tag("#{dossier.id}_rapport_form") do %>
+  <% if dossier.errors.any? %>
+    <div class="fr-alert fr-alert--error fr-mt-3w">
+      <p>
+        <%= t(".error") %>
+        <ul>
+          <% dossier.errors.attribute_names.each do |attribute| %>
+            <li><%= attribute %> <%= dossier.errors.messages_for(attribute).first %></li>
+          <% end %>
+        </ul>
+      </p>
+    </div>
+  <% end %>
+
+  <%= form_for(
+    dossier,
+    url: conservateurs_dossier_rapport_path(dossier),
+    method: "PUT",
+    builder: FormBuilderDsfr,
+    html: { data: { controller: "rapport-notes-form" } }
+  ) do |f| %>
+    <div class="fr-input-group">
+      <%= f.label(
+        :notes_conservateur,
+        t("activerecord.attributes.dossier.interface_conservateurs.notes_conservateur")
+      ) %>
+      <%= f.text_area(
+        :notes_conservateur,
+        data: {
+          "rapport-notes-form-target": "textarea",
+          "original-value": @dossier.notes_conservateur,
+          "action": "rapport-notes-form#toggleDisabled",
+        }
+      ) %>
+    </div>
+    <div class="co-text--right">
+      <%= f.submit(
+        t(".submit"),
+        disabled: true,
+        data: { "rapport-notes-form-target": "submit" }
+      ) %>
+    </div>
+  <% end %>
+<% end %>

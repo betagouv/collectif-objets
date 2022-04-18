@@ -2,45 +2,92 @@
 
 <main class="fr-container fr-py-4w">
   <div class="fr-grid-row fr-py-2w fr-grid-row--center">
-    <div class="fr-col-md-8 co-text--center">
-      <h2 class="co-text--blue">
+    <div class="fr-col-md-8">
+      <h2 class="co-text--blue co-text--center">
         <%= t(".title", count: @objets.count, commune: @commune.nom) %>
       </h2>
       <% if @commune.inactive? %>
-        <p>
-          Il y a des objets monuments historiques dans votre commune ? Vous êtes élu·e ? Responsable du patrimoine de votre commune ?
-          La commune est charge de veiller sur ces objets.
-          <b>Aidez-nous à vérifier leur présence et leur état</b>
-        </p>
-        <p>
-          Vous avez besoin d'aide ? Nous vous guidons étape par étape:
-        </p>
-        <p>
-          <%= link_to "Je confirme la participation de ma commune", new_commune_enrollment_path, class: "fr-btn" %>
-        </p>
+        <div class="co-text--center">
+          <p>
+            Il y a des objets monuments historiques dans votre commune ? Vous êtes élu·e ? Responsable du patrimoine de votre commune ?
+            La commune est charge de veiller sur ces objets.
+            <b>Aidez-nous à vérifier leur présence et leur état</b>
+          </p>
+          <p>
+            Vous avez besoin d'aide ? Nous vous guidons étape par étape:
+          </p>
+          <p>
+            <%= link_to "Je confirme la participation de ma commune", new_commune_enrollment_path, class: "fr-btn" %>
+          </p>
+        </div>
       <% end %>
       <% if @commune.enrolled_or_started? %>
-        <p>
-          <% if @objets.all?(&:recensement?) %>
-            <%= link_to "Finaliser le recensement", new_commune_completion_path(@commune), class: "fr-btn" %>
-          <% else %>
-            <button class="fr-btn" disabled>Finaliser le recensement</button>
-            Il vous reste <%= @objets.reject(&:recensement?).count %> objets à recenser
-          <% end %>
-        </p>
-      <% elsif @commune.completed? %>
-        <p>
-          Le recensement de vos objets est terminé, merci !
-          Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
-        </p>
-        <p>
-          <%= link_to "Voir les données envoyées", commune_completion_path(@commune), class: "fr-btn" %>
-        </p>
+        <div class="co-text--center">
+          <p>
+            <% if @objets.all?(&:recensement?) %>
+              <%= link_to "Finaliser le recensement", new_commune_completion_path(@commune), class: "fr-btn" %>
+            <% else %>
+              <button class="fr-btn" disabled>Finaliser le recensement</button>
+              Il vous reste <%= @objets.reject(&:recensement?).count %> objets à recenser
+            <% end %>
+          </p>
+        </div>
+      <% elsif @commune.completed? && @dossier.submitted? %>
+        <div class="co-text--center">
+          <p>
+            Le recensement de vos objets est terminé, merci !
+            Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
+          </p>
+          <p>
+            <%= link_to "Voir les données envoyées", commune_completion_path(@commune), class: "fr-btn" %>
+          </p>
+        </div>
+      <% elsif @commune.completed? && @dossier.rejected? %>
+        <div class="fr-callout fr-icon-info-line">
+          <h4 class="fr-callout__title">Dossier renvoyé par le conservateur</h4>
+          <p class="fr-callout__text">
+            <%= t(
+              ".rejected_callout.explanation",
+              count: @dossier.recensements.count,
+              objet_name: truncate(@dossier.recensements.first&.objet.nom, length: 30),
+              date_submitted_at: l(@dossier.submitted_at.to_date)
+            ) %>
+            <%= t(
+              ".rejected_callout.note",
+              date_rejected_at: l(@dossier.rejected_at.to_date),
+              conservateur: @dossier.conservateur.to_s
+            ) %>
+          </p>
+          <blockquote class="fr-callout__text fr-my-2w co-blockquote fr-text--alt">
+            <%= @dossier.notes_conservateur %>
+          </blockquote>
+          <p class="fr-callout__text"><%= t(".rejected_callout.action")  %></p>
+        </div>
+      <% elsif @commune.completed? && @dossier.accepted? %>
+        <div class="fr-callout fr-icon-success-line fr-callout--green-emeraude">
+          <h4 class="fr-callout__title">
+            <%= t(".accepted_callout.title") %>
+          </h4>
+          <p class="fr-callout__text">
+            <%= t(
+              ".accepted_callout.content",
+              date: l(@dossier.accepted_at.to_date),
+              conservateur: @dossier.conservateur.to_s
+            ) %>
+          </p>
+        </div>
+        <div class="fr-mb-8w">
+          <%= render "dossiers/pdf_embed", dossier: @dossier %>
+        </div>
       <% end %>
     </div>
   </div>
-  <%= render "objets/list", objets: @objets %>
-  <% if @commune.objets_recensable? %>
+
+  <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
+    <%= render(Communes::ObjetCardComponent.with_collection(@objets)) %>
+  </div>
+
+  <% if @commune.objets_recensable? && !@dossier&.rejected? %>
     <div class="fr-grid-row fr-pt-8w fr-pb-8w fr-grid-row--center">
       <div class="fr-col-md-8 co-text--center">
         <p>
@@ -52,5 +99,15 @@
         </p>
       </div>
     </div>
+  <% end %>
+
+  <% if @dossier&.rejected? %>
+    <p class="co-text--center fr-mt-4w">
+      <%= link_to(
+        "Renvoyer le dossier au conservateur…",
+        new_commune_recompletion_path(@commune),
+        class: "fr-btn"
+      ) %>
+    </p>
   <% end %>
 </main>

@@ -1,5 +1,5 @@
 ActiveAdmin.register Recensement do
-  menu label: "✍️ Recensements", priority: 4
+  menu label: "✍️ Recensements", priority: 5
   actions :all, except: [:destroy, :new, :create, :edit, :update]
   decorate_with RecensementDecorator
 

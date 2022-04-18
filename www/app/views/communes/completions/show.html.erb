@@ -16,6 +16,18 @@
     </div>
 
     <%= render "summary", objets: @objets %>
+
+    <% if @commune.dossier.notes_commune.present? %>
+      <p>
+        <%= t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
+      </p>
+      <%= blockquote(@commune.dossier.notes_commune) %>
+    <% else %>
+      <p class="co-text--italic">
+        Aucun commentaire à destination des conservateurs
+      </p>
+    <% end %>
+
     <p>
       <%= link_to "← Revenir à la liste des objets", commune_objets_path(@commune) %>
     </p>
