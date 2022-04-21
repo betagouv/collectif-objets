@@ -1,0 +1,7 @@
+{
+  "jobs": [
+    {
+      "command": "0 3 * * * rails runner \"RefreshCommuneRecensementRatioJob.perform_async('all')\""
+    }
+  ]
+}
