@@ -4,14 +4,11 @@ module Communes
   class CompletionsController < BaseController
     before_action :restrict_not_started, :restrict_already_completed, except: [:show]
     before_action :restrict_completed, only: [:show]
+    before_action :set_objets
 
-    def new
-      @objets = @commune.objets.includes(:recensements)
-    end
+    def new; end
 
-    def show
-      @objets = @commune.objets.includes(:recensements)
-    end
+    def show; end
 
     def create
       if @commune.update(commune_params)
@@ -42,6 +39,11 @@ module Communes
       return true if @commune.completed?
 
       redirect_to root_path, alert: "Le recensement de votre commune n'est pas encore terminé !"
+    end
+
+    def set_objets
+      @objets = @commune.objets.joins(:recensements)
+        .includes(:commune, recensements: %i[photos_attachments photos_blobs])
     end
 
     def commune_params
