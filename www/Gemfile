@@ -37,6 +37,7 @@ end
 group :development do
   gem "htmlbeautifier"
   gem "pry"
+  gem "rubocop-daemon", require: false
   gem "web-console"
 end
 

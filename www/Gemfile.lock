@@ -258,6 +258,8 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.15.1)
       parser (>= 3.0.1.1)
+    rubocop-daemon (0.3.2)
+      rubocop
     rubocop-rails (2.13.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -349,6 +351,7 @@ DEPENDENCIES
   rails (~> 7.0.1)
   rspec-rails (~> 5.1)
   rubocop
+  rubocop-daemon
   rubocop-rails
   selenium-webdriver
   sentry-rails
