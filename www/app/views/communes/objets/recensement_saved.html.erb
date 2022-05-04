@@ -1,0 +1,39 @@
+<% content_for(:head_title) { "Recensement enregistré" } %>
+
+<main class="fr-container fr-py-12w">
+  <div class="fr-grid-row fr-mb-4w fr-grid-row--middle">
+    <div class="fr-col-md-6">
+      <h2 class="co-text--blue">Votre recensement a bien été enregistré</h2>
+      <p>
+        Vous pourrez revenir sur la fiche de cet objet pour modifier votre recensement.
+      </p>
+      <% if @objets.any? %>
+        <p>
+          <%= link_to "Revenir à la liste d'objets de ma commune", commune_objets_path(@commune), class: "fr-btn" %>
+        </p>
+      <% else %>
+        <p>Vous avez recensé tous les objets de votre commune !</p>
+        <p>
+          <%= link_to "Finaliser le recensement", new_commune_completion_path(@commune), class: "fr-btn" %>
+          ou
+        </p>
+        <p><%= link_to "Revenir à la liste d'objets de ma commune", commune_objets_path(@commune), class: "fr-btn fr-btn--secondary" %></p>
+      <% end %>
+    </div>
+    <div class="fr-col-md-6">
+      <%= image_tag "illustrations/man-ok-screen.svg", class: "co--width-max-100" %>
+    </div>
+  </div>
+</main>
+
+<% if @objets.any? %>
+  <div class="co-section--teal">
+    <div class="fr-container fr-py-8w">
+      <h3 class="co-text--blue">
+        Ces objets sont encore à recenser:
+      </h3>
+      <%= render "objets/list", objets: @objets %>
+      <%= link_to "Revenir à la liste de tous les objets de ma commune", commune_objets_path(@commune), class: "fr-link" %>
+    </div>
+  </div>
+<% end %>

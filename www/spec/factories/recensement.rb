@@ -8,7 +8,7 @@ FactoryBot.define do
     recensable { true }
     edifice_nom { nil }
     etat_sanitaire { Recensement::ETAT_BON }
-    etat_sanitaire_edifice { Recensement::ETAT_CORRECT }
+    etat_sanitaire_edifice { Recensement::ETAT_MOYEN }
     securisation { Recensement::SECURISATION_CORRECTE }
     notes { "objet très doux" }
     skip_photos { true }

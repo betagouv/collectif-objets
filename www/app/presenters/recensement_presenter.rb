@@ -40,8 +40,8 @@ class RecensementPresenter
     case @recensement.etat_sanitaire_edifice
     when Recensement::ETAT_BON
       badge("success") { "Bon" }
-    when Recensement::ETAT_CORRECT
-      badge("info") { "Correct" }
+    when Recensement::ETAT_MOYEN
+      badge("info") { "Moyen" }
     when Recensement::ETAT_MAUVAIS
       badge("new") { "Mauvais" }
     when Recensement::ETAT_PERIL
@@ -53,8 +53,8 @@ class RecensementPresenter
     case @recensement.etat_sanitaire
     when Recensement::ETAT_BON
       badge("success") { "Bon" }
-    when Recensement::ETAT_CORRECT
-      badge("info") { "Correct" }
+    when Recensement::ETAT_MOYEN
+      badge("info") { "Moyen" }
     when Recensement::ETAT_MAUVAIS
       badge("new") { "Mauvais" }
     when Recensement::ETAT_PERIL

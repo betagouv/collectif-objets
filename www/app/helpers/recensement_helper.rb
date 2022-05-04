@@ -28,7 +28,7 @@ module RecensementHelper
         "Bon"
       ),
       Option.new(
-        Recensement::ETAT_CORRECT,
+        Recensement::ETAT_MOYEN,
         "Moyen"
       ),
       Option.new(
