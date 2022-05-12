@@ -6,6 +6,8 @@ module Recensements
   module AnalyseConcern
     extend ActiveSupport::Concern
 
+    OVERRIDABLE_FIELDS = %i[etat_sanitaire etat_sanitaire_edifice securisation].freeze
+
     ANALYSE_ACTION_SECURISER = "securiser"
     ANALYSE_ACTION_ENTRETENIR = "entretenir"
     ANALYSE_ACTION_RESTAURER = "restaurer"
@@ -36,7 +38,7 @@ module Recensements
     end
 
     def prevent_dull_analyse_override
-      %i[etat_sanitaire etat_sanitaire_edifice securisation].each do |original_attribute_name|
+      OVERRIDABLE_FIELDS.each do |original_attribute_name|
         original_value = send(original_attribute_name)
         next if original_value.blank?
 
@@ -56,6 +58,16 @@ module Recensements
 
     def analysable?
       objet.commune.completed? && dossier.submitted?
+    end
+
+    def analyse_or_original_value(original_attribute_name)
+      raise if OVERRIDABLE_FIELDS.exclude?(original_attribute_name.to_sym)
+
+      analyse_attribute_name = "analyse_#{original_attribute_name}"
+      analyse_attribute_value = send(analyse_attribute_name)
+      return analyse_attribute_value if analyse_attribute_value.present?
+
+      send(original_attribute_name)
     end
   end
 end

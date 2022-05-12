@@ -16,7 +16,8 @@ class CreateDossiersAndAnalyses < ActiveRecord::Migration[7.0]
     end
 
     add_column :objets, :notes_conservateur, :string
-    add_reference :objets, :conservateurs
+    add_column :objets, :notes_conservateur_at, :datetime
+    add_reference :objets, :conservateur
 
     add_column :recensements, :analyse_etat_sanitaire, :string
     add_column :recensements, :analyse_etat_sanitaire_edifice, :string
@@ -68,7 +69,8 @@ class CreateDossiersAndAnalyses < ActiveRecord::Migration[7.0]
     drop_table :dossiers
 
     remove_column :objets, :notes_conservateur
-    remove_reference :objets, :conservateurs
+    remove_column :objets, :notes_conservateur_at
+    remove_reference :objets, :conservateur
 
     remove_column :recensements, :dossier_id
     remove_column :recensements, :conservateur_id

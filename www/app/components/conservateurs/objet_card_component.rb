@@ -40,7 +40,8 @@ module Conservateurs
     end
 
     def peril_badge
-      badge_struct.new("warning", "En péril") if recensement&.en_peril?
+      badge_struct.new("warning", "En péril") \
+        if recensement&.analyse_or_original_value(:etat_sanitaire) == Recensement::ETAT_PERIL
     end
 
     def missing_photos_badge

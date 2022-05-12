@@ -136,10 +136,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_111225) do
     t.datetime "updated_at", null: false
     t.string "nom_courant"
     t.string "notes_conservateur"
-    t.bigint "conservateurs_id"
+    t.datetime "notes_conservateur_at"
+    t.bigint "conservateur_id"
     t.index ["commune_code_insee"], name: "index_objets_on_commune_code_insee"
     t.index ["commune_nom"], name: "index_objets_on_commune_nom"
-    t.index ["conservateurs_id"], name: "index_objets_on_conservateurs_id"
+    t.index ["conservateur_id"], name: "index_objets_on_conservateur_id"
     t.index ["departement"], name: "index_objets_on_departement"
     t.index ["ref_pop"], name: "objets_unique_ref_pop", unique: true
   end

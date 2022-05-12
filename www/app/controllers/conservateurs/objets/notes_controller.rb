@@ -34,7 +34,10 @@ module Conservateurs
       end
 
       def objet_params
-        params.require(:objet).permit(:notes_conservateur)
+        params.require(:objet).permit(:notes_conservateur).merge(
+          conservateur_id: current_conservateur.id,
+          notes_conservateur_at: Time.zone.now
+        )
       end
     end
   end
