@@ -47,8 +47,15 @@ module Communes
     end
 
     def commune_params
-      params.require(:commune).permit(dossier_attributes: %i[notes_commune id]).to_h
-          .deep_merge(status: Commune::STATUS_COMPLETED, completed_at: Time.zone.now)
+      params
+        .require(:commune)
+        .permit(dossier_attributes: %i[notes_commune id])
+        .to_h
+        .deep_merge(
+          status: Commune::STATUS_COMPLETED,
+          completed_at: Time.zone.now,
+          dossier_attributes: { status: "submitted" }
+        )
     end
   end
 end
