@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :commune do
     nom { "Châlons-en-Champagne" }
-    code_insee { "51108" }
+    sequence(:code_insee) { |n| (51_108 + n).to_s }
     departement { "51" }
     phone_number { "01 01 01 01 01" }
   end

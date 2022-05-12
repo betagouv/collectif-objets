@@ -1,0 +1,13 @@
+<div class="co-flex co-flex--column co-flex--gap-1rem">
+  <span
+    class="<%= "co-text--strikethrough co-semi-transparent" if overrode? %>"
+  >
+    <%= recensement_presenter.send(original_attribute_name) %>
+  </span>
+
+  <% if overrode? %>
+    <span>
+      <%= recensement_presenter.send(analyse_attribute_name) %>
+    </span>
+  <% end %>
+</div>

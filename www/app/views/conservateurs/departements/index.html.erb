@@ -1,0 +1,32 @@
+<% content_for(:head_title) { t(".head_title") } %>
+
+<main class="fr-container fr-py-4w">
+  <div class="fr-grid-row fr-py-2w fr-grid-row--center">
+    <div class="fr-col-md-8">
+      <h2><%= t("conservateurs.departements.index.title") %></h2>
+      <% if @departements.empty? %>
+        <p>
+          <%= t("conservateurs.departements.index.empty") %>
+        </p>
+      <% else %>
+        <ul>
+          <% @departements.each do |departement| %>
+            <li>
+              <%= link_to(
+                nom_departement(departement),
+                conservateurs_departement_path(departement)
+              ) %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <div class="fr-my-4w">
+        <%= link_to(
+          t("conservateurs.departements.index.contact"),
+          "mailto:support@collectif-objets.beta.gouv.fr"
+        ) %>
+      </div>
+    </div>
+  </div>
+</main>

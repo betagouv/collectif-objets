@@ -1,0 +1,14 @@
+production:
+  adapter: redis
+  url: <%= ENV["SCALINGO_REDIS_URL"] %>
+  channel_prefix: actioncable
+
+development:
+  adapter: redis
+  url: redis://localhost:6379/2
+  channel_prefix: actioncable
+
+test:
+  adapter: redis
+  url: redis://localhost:<%= ENV["REDIS_PORT"] || "6379" %>/3
+  channel_prefix: actioncable

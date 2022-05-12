@@ -55,17 +55,15 @@
           class: "co-text--blue"
         ) %>
       </p>
-      <% if @objet.commune == current_user&.commune %>
-        <% if @objet.recensable? %>
-          <div>
-            <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
-          </div>
-        <% end %>
+      <% if @objet.commune == current_user&.commune && @objet.recensable? %>
+        <div>
+          <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
+        </div>
       <% end %>
     </div>
     <div class="fr-col-md-8">
       <div class="co-image-container">
-        <%= image_tag objet_first_image_or_recensement_photo_url(@objet), class: "co-objet-image" %>
+        <%= image_tag objet_first_image_or_recensement_photo_url(@objet), class: "co-objet-image co-spinner-bg" %>
       </div>
     </div>
   </div>

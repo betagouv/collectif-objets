@@ -1,0 +1,97 @@
+<%= turbo_frame_tag "communes-search" do %>
+  <%= form_for(
+    filters,
+    url: conservateurs_departement_communes_path(departement),
+    method: "GET",
+    builder: FormBuilderDsfr,
+    as: "",
+  ) do |f| %>
+    <%= f.hidden_field :order, value: order %>
+    <div class="co-flex co-flex--align-items-end">
+      <div>
+        <%= f.label :nom, "Nom de commune" %>
+        <%= f.text_field :nom, onchange: "this.form.requestSubmit()" %>
+      </div>
+      <div>
+        <button class="fr-btn fr-btn--tertiary fr-icon-search-line"></button>
+      </div>
+      <div class="fr-pl-3w">
+        <%= f.label :status, "État du recensement" %>
+        <%= f.select :status, status_options_for_select, {}, onchange: "this.form.requestSubmit()" %>
+      </div>
+    </div>
+
+    <% if pagy_obj.count == 0 %>
+      <p class="co-text--italic fr-py-8w">
+        Aucune commune trouvée
+      </p>
+    <% else %>
+
+      <div class="fr-table">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <%= link_to(
+                  "Commune #{order_link_arrow("nom")}",
+                  order_link_path("nom")
+
+                ) %>
+              </th>
+              <th>
+                <%= link_to(
+                  "Objets #{order_link_arrow("objets_count")}",
+                  order_link_path("objets_count")
+                ) %>
+              </th>
+              <th>
+                <%= link_to(
+                  "Objets Prioritaires #{order_link_arrow("recensements_prioritaires_count")}",
+                  order_link_path("recensements_prioritaires_count")
+                ) %>
+              </th>
+              <th>
+                <%= link_to(
+                  "Recensement #{order_link_arrow("communes.status")}",
+                  order_link_path("communes.status")
+                ) %>
+              </th>
+              <th>
+                <%= link_to(
+                  "Analyse #{order_link_arrow("dossiers.status")}",
+                  order_link_path("dossiers.status")
+                ) %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% communes.each do |commune| %>
+              <tr>
+                <td>
+                  <%= link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top" %>
+                </td>
+                <td><%= commune.objets_count %></td>
+                <td><%= commune.recensements_prioritaires_count %></td>
+                <td>
+                  <%= t("activerecord.attributes.commune.statuses.#{commune.status}") %><br />
+                </td>
+                <td>
+                  <% if commune.dossier %>
+                    <%= dossier_status_badge(commune.dossier) %><br />
+                    <%= commune.recensements_analysed_percentage.round %>% des recensements revus
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if pagy_obj.pages > 1 %>
+    <div class="fr-mt-8w">
+      <%== render partial: 'shared/pagy_nav', locals: {pagy: pagy_obj} %>
+    </div>
+  <% end %>
+<% end %>

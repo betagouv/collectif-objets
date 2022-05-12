@@ -1,0 +1,189 @@
+<% content_for(:head_title) { @commune.nom } %>
+
+<main>
+  <div class="fr-container fr-grid-row fr-my-4w fr-grid-row--center">
+    <div class="fr-col-md-8">
+      <%= render(
+        "shared/breadcrumbs",
+        links: [
+          ["Départements", conservateurs_departements_path],
+          [
+            nom_departement(@commune.departement),
+            conservateurs_departement_path(@commune.departement)
+          ]
+        ],
+        current_page_label: @commune.nom
+      ) %>
+
+      <div class="co-flex co-flex--align-items-center co-flex--gap-1rem fr-mb-1w">
+        <h2 class="fr-my-0">
+          <span class="fr-icon-map-pin-2-fill" aria-hidden="true"></span>
+          <%= @commune.nom %> (<%= @commune.code_insee %>)
+        </h2>
+        <div style="flex-shrink: 0">
+          <% if @dossier %>
+            <div><%= dossier_status_badge(@dossier) %></div>
+          <% end %>
+        </div>
+      </div>
+      <span><%= t("activerecord.attributes.commune.statuses.#{@commune.status}") %></span>
+    </div>
+  </div>
+
+  <% if @commune.completed? && @dossier&.can_generate_rapport? %>
+    <div class="co-background--light-teal fr-my-4w fr-py-4w">
+      <div class="fr-container fr-grid-row fr-grid-row--center">
+        <div class="fr-col-md-8">
+          <p>
+            <%= t(
+              ".can_generate_rapport.content",
+              recensements_count: @commune.recensements.count
+            ) %>
+          </p>
+          <p>
+            <%= link_to(
+              t(".can_generate_rapport.send"),
+              new_conservateurs_dossier_accept_path(@dossier),
+              class: "fr-btn"
+            ) %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @dossier&.rejected? %>
+    <div class="co-background--light-teal fr-my-4w fr-py-4w">
+      <div class="fr-container fr-grid-row fr-grid-row--center ">
+        <div class="fr-col-md-8">
+          <p>
+            <%= t(".rejected.content", date: @dossier.rejected_at.to_date, conservateur: @dossier.conservateur) %>
+          </p>
+          <%= blockquote(@dossier.notes_conservateur) %>
+          <p class="fr-mt-4w">
+            <%= t(".rejected.content_end_html") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @dossier&.accepted? %>
+    <div class="fr-container fr-grid-row fr-grid-row--center fr-mb-4w">
+      <div class="fr-col-md-8">
+        <%= render "dossiers/pdf_embed", dossier: @dossier %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @commune.completed? && !@dossier.accepted? %>
+    <div class="fr-container fr-grid-row fr-grid-row--center fr-mb-4w">
+      <div class="fr-col-md-8">
+        <% if @dossier.notes_commune.present? %>
+          <p>
+            <%= t("activerecord.attributes.dossier.notes_commune") %>
+          </p>
+          <%= blockquote(@dossier.notes_commune) %>
+        <% else %>
+          <i>Aucun commentaire laissé par la commune</i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="fr-container fr-grid-row fr-grid-row--center">
+    <div class="fr-col-md-10">
+      <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
+        <% @objets.each do |objet| %>
+          <%= render Conservateurs::ObjetCardComponent.new(objet:)  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="fr-container fr-grid-row fr-mt-4w">
+    <div class="fr-col-md-10 co-text--right">
+      <% if @dossier && !@dossier&.accepted? %>
+        <div>
+          <%= link_to_button(
+            t(".actions.send"),
+            new_conservateurs_dossier_accept_path(@dossier),
+            class: "fr-btn",
+            disabled: !@dossier.can_generate_rapport?
+           ) %>
+        </div>
+      <% end %>
+      <% if @dossier&.submitted? %>
+        <div>ou</div>
+        <div>
+          <%= link_to(
+            t(".actions.reject"),
+            new_conservateurs_dossier_reject_path(@dossier),
+            class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-error-warning-line"
+          ) %>
+          <p class="text-muted co-text--italic fr-text--sm">
+            <%= t(".actions.reject_desc") %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="co-background--light-grey fr-my-6w fr-py-6w">
+    <div class="fr-container fr-grid-row fr-grid-row--center">
+      <div class="fr-col-md-8">
+        <h3>Notes</h3>
+        <% if @dossier.present? %>
+          <div id="js-dossier-notes-conservateur-private-form">
+            <%= render "conservateurs/dossiers/private_notes/form", dossier: @dossier %>
+          </div>
+        <% else %>
+          <div class="fr-alert fr-alert--error fr-mb-4w">
+            <p>
+              <%= t(".notes_conservateur.not_completed") %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="co-background--light-grey fr-my-6w fr-py-6w">
+    <div class="fr-container fr-grid-row fr-grid-row--center">
+      <div class="fr-col-md-4">
+        <h3>
+          <%= t(".contact.title") %>
+        </h3>
+      </div>
+      <div class="fr-col-md-4">
+        <div>
+          <%= link_to(
+            @commune.users.first.email,
+            "mailto:#{@commune.users.first.email}",
+            class: "fr-link fr-fi-mail-line fr-link--icon-left"
+          ) %>
+        </div>
+        <% if @commune.phone_number %>
+          <div class="fr-mt-1w">
+            <%= link_to(
+              @commune.phone_number,
+              "tel:#{@commune.phone_number}",
+              class: "fr-link fr-fi-phone-line fr-link--icon-left"
+            ) %>
+          </div>
+        <% end %>
+        <% sp_prefix = Co::Departements::SERVICE_PUBLIC_PREFIX[@commune.departement] %>
+        <% if sp_prefix %>
+          <div class="fr-mt-1w">
+            <%= link_to(
+              "Service-Public.fr",
+              "https://lannuaire.service-public.fr/#{sp_prefix}/mairie-#{@commune.code_insee}-01",
+              class: "fr-link fr-fi-information-line fr-link--icon-left",
+              target: "_blank"
+            ) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

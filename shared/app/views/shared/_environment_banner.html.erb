@@ -1,6 +1,7 @@
 <% if ["development", "staging"].include?(Rails.configuration.x.environment_specific_name) %>
   <div class="co-environment-banner co-environment-banner-<%= Rails.configuration.x.environment_specific_name %>">
     <%= Rails.configuration.x.environment_specific_name %>
+    <%= link_to "✉️", "http://localhost:8025" if Rails.env.development? %>
   </div>
   <style>
     .co-environment-banner {

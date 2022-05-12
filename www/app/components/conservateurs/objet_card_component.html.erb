@@ -1,0 +1,30 @@
+<div class="fr-col-md-3">
+  <div class="fr-card fr-enlarge-link">
+    <div class="fr-card__body">
+      <div class="fr-card__content">
+        <h4 class="fr-card__title">
+          <%= link_to truncate(objet.nom || objet.nom_courant, length: 30), conservateurs_objet_path(objet), class: "fr-card__link" %>
+        </h4>
+
+        <p class="fr-card__desc">
+          <%= objet.edifice_nom %>
+        </p>
+
+        <div class="fr-card__start">
+          <ul class="fr-tags-group">
+            <%= render partial: "shared/badge_li", collection: desc_badges, as: :badge %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="fr-card__header">
+      <div class="fr-card__img">
+        <%= image_tag main_photo_url, class: "fr-responsive-img co-spinner-bg co-object-fit-cover" %>
+      </div>
+      <ul class="fr-badges-group">
+        <%= render partial: "shared/badge_li", collection: floating_badges, as: :badge %>
+      </ul>
+    </div>
+  </div>
+</div>

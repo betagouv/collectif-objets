@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_sentry_context
 
+  def render_turbo_stream_update(*args, **kwargs)
+    render(turbo_stream: [turbo_stream.update(*args, **kwargs)])
+  end
+
   protected
 
   def set_sentry_context
@@ -21,5 +25,13 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = I18n.default_locale
+  end
+
+  def after_sign_in_path_for(resource)
+    return commune_objets_path(resource.commune) if resource.is_a?(User)
+
+    return conservateurs_departements_path if resource.is_a?(Conservateur)
+
+    super
   end
 end

@@ -1,0 +1,22 @@
+ <div id="js-rapport-pdf-embed-and-form-<%= dossier.id %>">
+  <%= render "dossiers/pdf_embed", dossier: %>
+
+  <div class="fr-mt-4w">
+    <%= form_for(
+      dossier,
+      url: conservateurs_dossier_accept_path(dossier),
+      method: "POST",
+      builder: FormBuilderDsfr,
+      html: {
+        "data-turbo-frame": "_top"
+      }
+    ) do |f| %>
+      <div class="co-text--right">
+        <%= f.submit(
+          t(".submit"),
+          disabled: !dossier.pdf.attached?
+        ) %>
+      </div>
+    <% end %>
+  </div>
+</div>

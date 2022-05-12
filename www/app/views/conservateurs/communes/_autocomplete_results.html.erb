@@ -1,0 +1,17 @@
+<% if search_query.present? %>
+  <div class="co-header-search-results">
+    <% if communes.empty? %>
+      <span><i><%= t("conservateurs.communes.no_results") %></i></span>
+    <% else %>
+      <ul>
+        <% communes.each do |commune| %>
+          <li>
+            <%= link_to conservateurs_commune_path(commune) do %>
+              <%= highlight("#{commune.nom} (#{commune.departement})", search_query) %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>

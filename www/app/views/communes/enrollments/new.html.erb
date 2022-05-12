@@ -25,8 +25,8 @@
           <h2 class="co-text--blue">Inscription de <%= @commune.nom %></h2>
           <p>
             Vous pouvez indiquer que votre commune est volontaire pour participer à l’opération de recensement des objets monuments historiques dont elle a la charge.
-            <% if Co::Campaigns::DEADLINES.keys.include?(@commune.departement) %>
-              Vous aurez jusqu'au <%= l(Co::Campaigns::DEADLINES[@commune.departement]) %> pour effectuer les recensements.
+            <% if Co::Campaign::DEADLINES.keys.include?(@commune.departement) %>
+              Vous aurez jusqu'au <%= l(Co::Campaign::DEADLINES[@commune.departement]) %> pour effectuer les recensements.
             <% end %>
           </p>
           <p>

@@ -37,6 +37,11 @@ To restore dump on staging:
 - in another terminal : `./bin/restore_to_staging.sh`
 - ⚠️ you may have to enter the SSH password multiple times in the first terminal
 
+## Review Apps
+
+- create it manually from https://dashboard.scalingo.com/apps/osc-fr1/collectif-objets-staging/review-apps/manual
+- run `./scripts/deploy.sh www staging-prXX`
+
 ## Documentation
 
 ### Communes status state machine

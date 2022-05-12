@@ -1,0 +1,44 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column vertical-align="middle">
+        <mj-image width="100px" src="<%= png_base64('logo-ministere-de-la-culture.png') %>" align="left"></mj-image>
+      </mj-column>
+      <mj-column vertical-align="middle">
+        <mj-text align="left" font-size="20px">Collectif Objets</mj-text>
+        <mj-text align="left" font-size="14px" color="#444">Préservez votre patrimoine mobilier</mj-text>
+      </mj-column>
+      <mj-column>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="rgb(0,0,145)"></mj-divider>
+        <mj-text>
+          Madame, Monsieur le Maire,<br /><br />
+
+          Vous avez envoyé un dossier de recensements des objets protégés de <%= @commune.nom %>. Vous trouverez en pièce jointe de ce mail notre rapport contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils pour chaque objet que nous avons ajoutés.
+
+          <br /><br />
+
+          <br /><br />
+          Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
+
+          <br /><br />
+          Bien cordialement,
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="<%= png_base64('logo-ministere-de-la-culture.png') %>" align="left"></mj-image>
+      </mj-column>
+      <mj-column>
+        <mj-text>
+          <b><%= @conservateur %></b><br />
+          <i>Conservateur des monuments historiques</i>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

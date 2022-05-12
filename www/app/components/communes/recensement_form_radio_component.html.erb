@@ -1,0 +1,45 @@
+<div class="fr-form-group">
+  <fieldset
+    class="fr-fieldset <%= "fr-fieldset--error" if error_message %>"
+    <% if error_message %>
+      aria-labelledby="<%= attribute_name.to_s.parameterize %>-legend <%= attribute_name.to_s.parameterize %>-desc-error"
+      role="group"
+    <% end %>
+  >
+    <legend
+      class="fr-fieldset__legend"
+      id="<%= attribute_name.to_s.parameterize %>-legend"
+    >
+      <%= t("activerecord.attributes.recensement.#{attribute_name}") %>
+      <span class="co-text--blue">*</span>
+    </legend>
+
+    <div class="fr-fieldset__content">
+      <% form_builder.collection_radio_buttons(
+        attribute_name,
+        options,
+        :value,
+        :label,
+        { required: true }
+      ) do |b| %>
+        <div class="fr-radio-group">
+          <%= b.radio_button(radio_button_options) %>
+          <%= b.label(class: "fr-label") { b.text } %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if error_message %>
+      <p id="<%= attribute_name.to_s.parameterize %>-desc-error"
+        class="fr-error-text">
+        <%= error_message %>
+      </p>
+    <% end %>
+
+    <% if analyse_override? %>
+      <p class="fr-error-text co-warning-text">
+        Cette évaluation a été modifiée par le conservateur, vous ne pouvez pas la modifier.
+      </p>
+    <% end %>
+  </fieldset>
+</div>

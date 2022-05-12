@@ -2,12 +2,16 @@
 
 module Communes
   class BaseController < ApplicationController
-    before_action :set_commune, :restrict_access
+    before_action :set_commune, :set_dossier, :restrict_access
 
     protected
 
     def set_commune
       @commune = Commune.find(params[:commune_id])
+    end
+
+    def set_dossier
+      @dossier = @commune.dossier # can be nil
     end
 
     def restrict_access

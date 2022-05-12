@@ -1,0 +1,36 @@
+<% content_for(:head_title) { "Recensement enregistré" } %>
+
+<main class="fr-container fr-py-12w">
+  <div class="fr-grid-row fr-mb-4w fr-grid-row--middle">
+    <div class="fr-col-md-6">
+      <h2 class="co-text--blue">
+        <%= t(".title") %>
+      </h2>
+      <p>
+        <%= link_to t(".cta"), new_commune_recompletion_path(@commune), class: "fr-btn" %>
+        ou
+      </p>
+      <p>
+        <%= link_to(
+          t(".back"),
+          commune_objets_path(@commune),
+          class: "fr-btn fr-btn--secondary"
+        ) %>
+      </p>
+    </div>
+    <div class="fr-col-md-6">
+      <%= image_tag "illustrations/man-ok-screen.svg", class: "co--width-max-100" %>
+    </div>
+  </div>
+</main>
+
+<% if @objets.any? %>
+  <div class="co-background--teal">
+    <div class="fr-container fr-py-8w">
+      <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
+        <%= render(Communes::ObjetCardComponent.with_collection(@objets)) %>
+      </div>
+      <%= link_to t(".back"), commune_objets_path(@commune), class: "fr-link" %>
+    </div>
+  </div>
+<% end %>

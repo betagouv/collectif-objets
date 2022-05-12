@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_04_084458) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_04_111225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,12 +77,45 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_084458) do
     t.datetime "updated_at", null: false
     t.string "status", default: "inactive", null: false
     t.string "notes_from_enrollment"
-    t.string "notes_from_completion"
     t.datetime "enrolled_at"
     t.datetime "completed_at"
     t.integer "recensement_ratio"
+    t.bigint "dossier_id"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement"], name: "index_communes_on_departement"
+    t.index ["dossier_id"], name: "index_communes_on_dossier_id"
+  end
+
+  create_table "conservateurs", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "departements", default: [], array: true
+    t.datetime "last_sign_in_at"
+    t.string "login_token"
+    t.datetime "login_token_valid_until"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_conservateurs_on_email", unique: true
+  end
+
+  create_table "dossiers", force: :cascade do |t|
+    t.bigint "commune_id", null: false
+    t.string "status", default: "construction", null: false
+    t.datetime "submitted_at"
+    t.datetime "rejected_at"
+    t.datetime "accepted_at"
+    t.datetime "pdf_updated_at"
+    t.string "notes_commune"
+    t.string "notes_conservateur"
+    t.string "notes_conservateur_private"
+    t.bigint "conservateur_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commune_id"], name: "dossiers_unique_commune_id", unique: true
+    t.index ["conservateur_id"], name: "index_dossiers_on_conservateur_id"
   end
 
   create_table "objets", force: :cascade do |t|
@@ -102,8 +135,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_084458) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "nom_courant"
+    t.string "notes_conservateur"
+    t.datetime "notes_conservateur_at"
+    t.bigint "conservateur_id"
     t.index ["commune_code_insee"], name: "index_objets_on_commune_code_insee"
     t.index ["commune_nom"], name: "index_objets_on_commune_nom"
+    t.index ["conservateur_id"], name: "index_objets_on_conservateur_id"
     t.index ["departement"], name: "index_objets_on_departement"
     t.index ["ref_pop"], name: "objets_unique_ref_pop", unique: true
   end
@@ -120,6 +157,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_084458) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.string "analyse_etat_sanitaire"
+    t.string "analyse_etat_sanitaire_edifice"
+    t.string "analyse_securisation"
+    t.string "analyse_actions", default: [], array: true
+    t.string "analyse_fiches", default: [], array: true
+    t.text "analyse_notes"
+    t.boolean "analyse_prioritaire"
+    t.datetime "analysed_at"
+    t.bigint "conservateur_id"
+    t.bigint "dossier_id", null: false
+    t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
+    t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id"
     t.index ["user_id"], name: "index_recensements_on_user_id"
   end
@@ -150,6 +199,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_084458) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "dossiers", "communes"
   add_foreign_key "recensements", "objets"
   add_foreign_key "recensements", "users"
 end

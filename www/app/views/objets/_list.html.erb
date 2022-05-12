@@ -4,20 +4,15 @@
       <div class="fr-card fr-enlarge-link">
         <div class="fr-card__body">
           <h4 class="fr-card__title">
-            <%= link_to objet.nom, objet_path(objet), class: "fr-card__link" %>
+            <%= link_to truncate(objet.nom || objet.nom_courant, length: 30), objet_path(objet), class: "fr-card__link" %>
           </h4>
           <p class="fr-card__desc">
             <%= objet.commune.nom %><br />
             <%= objet.edifice_nom %>
           </p>
-          <% if objet.commune == current_user&.commune %>
-            <p class="fr-card__detail">
-              <%= render "objets/recensement_badge", objet: %>
-            </p>
-          <% end %>
         </div>
         <div class="fr-card__img">
-          <%= image_tag objet_first_image_or_recensement_photo_url(objet), class: "fr-responsive-img" %>
+          <%= image_tag objet_first_image_or_recensement_photo_url(objet), class: "fr-responsive-img co-spinner-bg" %>
         </div>
       </div>
     </div>

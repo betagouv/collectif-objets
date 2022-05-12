@@ -26,7 +26,7 @@ module Co
       def attachments
         return [] if @recensement.photos.empty?
 
-        [{ image_url: @recensement.photos.first.url(expires_in: 1.day) }]
+        [{ image_url: @recensement.photos.first.variant(:medium).processed.url(expires_in: 1.day) }]
       end
     end
   end

@@ -7,13 +7,26 @@ module Users
     end
 
     def perform
-      user = User.find_by(email: @email)
-      return { success: false, error: :no_user_found } if user.nil?
+      return { success: false, error: :no_user_found } if user_or_conservateur.nil?
 
-      return { success: false, error: :rotate_failed } unless user&.rotate_login_token
+      return { success: false, error: :rotate_failed } unless user_or_conservateur&.rotate_login_token
 
-      UserMailer.validate_email(user).deliver_now
+      UserMailer.validate_email(user_or_conservateur).deliver_now
       { success: true, error: nil }
+    end
+
+    protected
+
+    def user_or_conservateur
+      @user_or_conservateur ||= find_user_or_conservateur
+    end
+
+    def find_user_or_conservateur
+      if @email.match(Conservateur::EMAIL_REGEX)
+        Conservateur.find_by(email: @email)
+      else
+        User.find_by(email: @email)
+      end
     end
   end
 end

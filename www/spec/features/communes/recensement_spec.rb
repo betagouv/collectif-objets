@@ -4,7 +4,7 @@
 
 require "rails_helper"
 
-RSpec.feature "Recensement", type: :feature, js: true do
+RSpec.feature "Communes - Recensement", type: :feature, js: true do
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement: "26") }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
   let!(:objet_bouquet) { create(:objet, nom: "Bouquet d'Autel", edifice_nom: "Eglise st Jean", commune:) }
@@ -104,7 +104,6 @@ RSpec.feature "Recensement", type: :feature, js: true do
     expect(page).not_to have_content("Ciboire des malades")
     click_on "Revenir à la liste d'objets de ma commune"
     click_on "Ciboire des malades"
-    click_on "modifier le recensement"
     within("[data-recensement-target=etatSanitaire]") do
       find("label", text: "En péril").click
     end
@@ -114,7 +113,7 @@ RSpec.feature "Recensement", type: :feature, js: true do
     # CONFIRMATION
     click_on "Finaliser le recensement"
     expect(page).to have_content("Finalisation du recensement de Albon")
-    fill_in("Commentaires", with: "Beau voyage")
+    fill_in("Vos commentaires à destination des conservateurs", with: "Beau voyage")
     click_on "Je valide le recensement des objets de ma commune"
     expect(page).to have_content("Le recensement de votre commune est terminé !")
     click_on "Ciboire des malades"
