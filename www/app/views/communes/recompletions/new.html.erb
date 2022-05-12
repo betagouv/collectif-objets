@@ -30,9 +30,7 @@
         <p>
           <b>Commentaire du conservateur lors du renvoi</b>
         </p>
-        <blockquote class="fr-callout__text fr-my-2w co-blockquote fr-text--alt">
-          <%= @dossier.notes_conservateur %>
-        </blockquote>
+        <%= blockquote(@dossier.notes_conservateur, class: "fr-my-2w") %>
         <p>
           <%= t(
             ".notes_conservateur",
