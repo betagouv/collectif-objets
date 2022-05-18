@@ -29,6 +29,7 @@ fr:
         instructions: Vous pourrez revenir sur la fiche de cet objet pour modifier votre recensement.
         finished: Vous avez recensé tous les objets de votre commune !
         leftover: "Ces objets sont encore à recenser:"
+        leftover_in_edifice: "Ces objets sont encore à recenser dans l'édifice %{nom}:"
         cta: Finaliser le recensement…
         back: Revenir à la liste d'objets de ma commune
     recompletions:

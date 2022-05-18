@@ -24,15 +24,18 @@ module Communes
     end
 
     def set_objets
-      @objets = begin
-        objets = Objet
-          .where(commune: @commune)
-          .with_photos_first
-          .includes(:commune, recensements: %i[photos_attachments photos_blobs])
-        objets = objets.where.missing(:recensements) if recensement_saved? && @dossier.construction?
-        objets = objets.where.not(id: params[:objet_id]) if recensement_saved? && @dossier.rejected?
-        objets
-      end
+      @objets_list = Co::Communes::ObjetsList.new(
+        @commune,
+        exclude_recensed: recensement_saved?,
+        exclude_ids: [previous_objet&.id].compact,
+        edifice_nom: previous_objet&.edifice_nom
+      )
+    end
+
+    def previous_objet
+      return nil if params[:objet_id].blank?
+
+      @previous_objet ||= Objet.find(params[:objet_id])
     end
   end
 end

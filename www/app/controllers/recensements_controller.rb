@@ -20,7 +20,7 @@ class RecensementsController < ApplicationController
       @recensement.commune.start!
       TriggerSibContactEventJob.perform_async(@objet.commune.id, "started")
       SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => @recensement.id })
-      redirect_to commune_objets_path(@objet.commune, recensement_saved: true)
+      redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
       render :new, status: :unprocessable_entity
     end

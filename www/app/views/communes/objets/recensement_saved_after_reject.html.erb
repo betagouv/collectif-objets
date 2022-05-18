@@ -23,14 +23,3 @@
     </div>
   </div>
 </main>
-
-<% if @objets.any? %>
-  <div class="co-background--teal">
-    <div class="fr-container fr-py-8w">
-      <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
-        <%= render(Communes::ObjetCardComponent.with_collection(@objets)) %>
-      </div>
-      <%= link_to t(".back"), commune_objets_path(@commune), class: "fr-link" %>
-    </div>
-  </div>
-<% end %>

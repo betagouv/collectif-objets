@@ -16,7 +16,7 @@
       <p>
         <%= t(".instructions") %>
       </p>
-      <% if @objets.any? %>
+      <% if @commune.objets.where.missing(:recensements).any? %>
         <p>
           <%= link_to "Revenir à la liste d'objets de ma commune", commune_objets_path(@commune), class: "fr-btn" %>
         </p>
@@ -37,15 +37,17 @@
   </div>
 </main>
 
-<% if @objets.any? %>
+<% if @objets_list.any? %>
   <div class="co-background--teal">
     <div class="fr-container fr-py-8w">
       <h3 class="co-text--blue">
-        <%= t(".leftover") %>
+        <% if @objets_list.group_by_edifice? && @objets_list.edifice_nom.present? %>
+          <%= t(".leftover_in_edifice", nom: @objets_list.edifice_nom) %>
+        <% else %>
+          <%= t(".leftover") %>
+        <% end %>
       </h3>
-      <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
-        <%= render(Communes::ObjetCardComponent.with_collection(@objets)) %>
-      </div>
+      <%= render "cards", objets: @objets_list.objets %>
 
       <%= link_to "Revenir à la liste de tous les objets de ma commune", commune_objets_path(@commune), class: "fr-link" %>
     </div>

@@ -153,6 +153,10 @@ a.co-footer-logo img {
   flex-direction: column;
 }
 
+.co-columns--3 {
+  columns: 3;
+}
+
 .co-guide-embed {
   min-height: 600px;
   height: 70vh;

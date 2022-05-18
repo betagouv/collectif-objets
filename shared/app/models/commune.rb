@@ -93,4 +93,8 @@ class Commune < ApplicationRecord
 
     update!(status: STATUS_STARTED)
   end
+
+  def can_complete?
+    enrolled_or_started? && objets.all?(&:recensement?)
+  end
 end

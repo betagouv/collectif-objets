@@ -9,7 +9,7 @@
   <div class="fr-grid-row fr-py-2w fr-grid-row--center">
     <div class="fr-col-md-8">
       <h2 class="co-text--blue co-text--center">
-        <%= t(".title", count: @objets.count, commune: @commune.nom) %>
+        <%= t(".title", count: @objets_list.count, commune: @commune.nom) %>
       </h2>
       <% if @commune.inactive? %>
         <div class="co-text--center">
@@ -25,15 +25,14 @@
             <%= link_to "Je confirme la participation de ma commune", new_commune_enrollment_path, class: "fr-btn" %>
           </p>
         </div>
-      <% end %>
-      <% if @commune.enrolled_or_started? %>
+      <% elsif @commune.enrolled_or_started? %>
         <div class="co-text--center">
           <p>
-            <% if @objets.all?(&:recensement?) %>
+            <% if @commune.can_complete? %>
               <%= link_to "Finaliser le recensement", new_commune_completion_path(@commune), class: "fr-btn" %>
             <% else %>
               <button class="fr-btn" disabled>Finaliser le recensement</button>
-              Il vous reste <%= @objets.reject(&:recensement?).count %> objets à recenser
+              Il vous reste <%= @commune.objets.where.missing(:recensements).count %> objets à recenser
             <% end %>
           </p>
         </div>
@@ -88,9 +87,32 @@
     </div>
   </div>
 
-  <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
-    <%= render(Communes::ObjetCardComponent.with_collection(@objets)) %>
-  </div>
+  <% if @objets_list.group_by_edifice? %>
+    <h4>Liste des <%= @objets_list.edifices.count %> édifices</h4>
+    <ul class="co-columns--3 fr-mb-8w">
+      <% @objets_list.edifices.each do |edifice_group| %>
+        <li>
+          <%= link_to(
+            "#{edifice_nom(edifice_group[:nom])}".html_safe,
+            "##{edifice_group[:nom_parameterized]}"
+          ) %>
+          · <%= edifice_group[:objets].count %> objets
+        </li>
+      <% end %>
+    </ul>
+
+    <% @objets_list.edifices.each do |edifice_group| %>
+      <div class="fr-my-4w">
+        <h4 id="<%= edifice_group[:nom_parameterized] %>">
+          <%= edifice_nom(edifice_group[:nom]) %>
+          · <%= edifice_group[:objets].count %> objets
+        </h4>
+        <%= render "cards", objets: edifice_group[:objets] %>
+      </div>
+    <% end %>
+  <% else %>
+    <%= render "cards", objets: @objets_list.objets %>
+  <% end %>
 
   <% if @commune.objets_recensable? && !@dossier&.rejected? %>
     <div class="fr-grid-row fr-pt-8w fr-pb-8w fr-grid-row--center">
