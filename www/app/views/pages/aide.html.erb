@@ -3,8 +3,15 @@
 <main>
   <!-- SECTION PREPAREZ -->
   <section class="co-background--light-grey">
-    <div class="fr-container">
-      <div class="fr-grid-row fr-py-8w">
+    <div class="fr-container fr-pt-2w">
+      <%= render(
+        "shared/breadcrumbs",
+        links: [
+          ["Accueil", root_path],
+        ],
+        current_page_label: "Comment ça marche ?"
+      ) %>
+      <div class="fr-grid-row fr-pb-8w">
         <div class="fr-col-md-5">
           <h2 class="co-text--blue">Préparez votre recensement</h2>
           <p>

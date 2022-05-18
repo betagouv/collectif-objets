@@ -1,6 +1,14 @@
 <% content_for(:head_title) { t(".head_title") } %>
 
-<main class="fr-container fr-py-12w">
+<main class="fr-container fr-pt-2w fr-pb-12w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Objets de #{@commune.nom}", commune_objets_path(@commune)]
+    ],
+    current_page_label: "Confirmation"
+  ) %>
   <div class="fr-grid-row fr-mb-4w fr-grid-row--middle">
     <div class="fr-col-md-6">
       <h2 class="co-text--blue">

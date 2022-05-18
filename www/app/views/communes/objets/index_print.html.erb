@@ -1,6 +1,16 @@
 <% content_for(:head_title) { "Liste imprimable des objets protégés de #{@commune.nom}" } %>
 
-<main class="fr-container fr-py-4w">
+<main class="fr-container fr-pt-2w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Objets de #{@commune.nom}", commune_objets_path(@commune)]
+    ],
+    current_page_label: "Liste imprimable"
+  ) %>
+
+
   <h2 class="co-text--blue">
     Liste imprimable des <%= @objets.count %> objets protégés de <%= @commune.nom %>
   </h2>

@@ -1,59 +1,63 @@
 <% content_for(:head_title) { "Connexion" } %>
 
-<main class="fr-container fr-py-4w fr-grid-row" data-controller="devise--sessions">
-  <div class="fr-col-md-6">
-    <h2><%= t('.sign_in') %></h2>
-    <% if @success %>
-      <p>Veuillez cliquer sur le lien que vous avez reçu par mail pour vous connecter</p>
-      <p>Si vous n'avez pas reçu le lien ou que vous n'arrivez pas à vous connecter, vous pouvez :</p>
-      <p>
-        <button class="fr-btn" data-action="devise--sessions#toggleMagicLinkForm">
-          Demander un nouveau lien
-        </button>
-        ou
-        <a class="fr-btn fr-btn--secondary" href="mailto:collectifobjets@beta.gouv.fr">
-          Nous contacter
-        </a>
-      </p>
-    <% end %>
-    <% if @error == "no_user_found" %>
-      <p>Assurez vous de bien utiliser l'adresse mail sur laquelle vous avez reçu des messages de notre part.</p>
-      <p>
-        <button class="fr-btn" data-action="devise--sessions#toggleMagicLinkForm">
-          Ré-essayer avec une autre adresse email
-        </button>
-        ou
-      </p>
-      <p>
-        <a class="fr-btn fr-btn--secondary" href="mailto:collectifobjets@beta.gouv.fr">
-          Nous contacter pour résoudre le problème
-        </a>
-      </p>
-    <% end %>
-    <div data-devise--sessions-target="magicLinkForm" class="<%= "hide" if @success || @error %>">
-      <%= form_for(resource, as: resource_name, url: users_magic_links_path, builder: FormBuilderDsfr) do |f| %>
-        <div class="fr-input-group">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
-        </div>
-        <div class="actions">
-          <%= f.submit "Recevoir un lien de connexion" %>
-        </div>
+<main class="fr-container fr-pt-2w fr-pb-4w" data-controller="devise--sessions">
+  <%= render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Connexion") %>
+
+  <div class="fr-grid-row">
+    <div class="fr-col-md-6">
+      <h2><%= t('.sign_in') %></h2>
+      <% if @success %>
+        <p>Veuillez cliquer sur le lien que vous avez reçu par mail pour vous connecter</p>
+        <p>Si vous n'avez pas reçu le lien ou que vous n'arrivez pas à vous connecter, vous pouvez :</p>
+        <p>
+          <button class="fr-btn" data-action="devise--sessions#toggleMagicLinkForm">
+            Demander un nouveau lien
+          </button>
+          ou
+          <a class="fr-btn fr-btn--secondary" href="mailto:collectifobjets@beta.gouv.fr">
+            Nous contacter
+          </a>
+        </p>
       <% end %>
-    </div>
-    <div class="fr-mt-6w">
-      <ul class="fr-accordions-group">
-        <li>
-            <section class="fr-accordion">
-                <h3 class="fr-accordion__title">
-                    <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-89">Où sont les mots de passe ?</button>
-                </h3>
-                <div class="fr-collapse" id="accordion-89">
-                  Pour plus de sécurité et de simplicité, Collectif Objets ne vous demande pas de mot de passe. Pour vous identifier, vous devez renseigner votre email puis cliquer sur le lien de connexion reçu par mail.
-                </div>
-            </section>
-        </li>
-      </ul>
+      <% if @error == "no_user_found" %>
+        <p>Assurez vous de bien utiliser l'adresse mail sur laquelle vous avez reçu des messages de notre part.</p>
+        <p>
+          <button class="fr-btn" data-action="devise--sessions#toggleMagicLinkForm">
+            Ré-essayer avec une autre adresse email
+          </button>
+          ou
+        </p>
+        <p>
+          <a class="fr-btn fr-btn--secondary" href="mailto:collectifobjets@beta.gouv.fr">
+            Nous contacter pour résoudre le problème
+          </a>
+        </p>
+      <% end %>
+      <div data-devise--sessions-target="magicLinkForm" class="<%= "hide" if @success || @error %>">
+        <%= form_for(resource, as: resource_name, url: users_magic_links_path, builder: FormBuilderDsfr) do |f| %>
+          <div class="fr-input-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Recevoir un lien de connexion" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="fr-mt-6w">
+        <ul class="fr-accordions-group">
+          <li>
+              <section class="fr-accordion">
+                  <h3 class="fr-accordion__title">
+                      <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-89">Où sont les mots de passe ?</button>
+                  </h3>
+                  <div class="fr-collapse" id="accordion-89">
+                    Pour plus de sécurité et de simplicité, Collectif Objets ne vous demande pas de mot de passe. Pour vous identifier, vous devez renseigner votre email puis cliquer sur le lien de connexion reçu par mail.
+                  </div>
+              </section>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </main>

@@ -1,50 +1,56 @@
 <% content_for(:head_title) { "Finalisation du recensement de #{@commune.nom}" } %>
 
-<main>
-  <div class="fr-container fr-py-8w">
-    <% if @commune.errors.any? %>
-      <div class="fr-grid-row">
-        <div class="fr-col-md-6">
-          <div class="fr-alert fr-alert--error fr-mb-6w">
-            <p>
-              Votre recensement n'a pas pu être confirmé :
-              <ul>
-                <% @commune.errors.attribute_names.each do |attribute| %>
-                  <li><%= @commune.errors.messages_for(attribute).first %></li>
-                <% end %>
-              </ul>
-            </p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
+<main class="fr-container fr-pt-2w fr-pb-8w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Objets de #{@commune.nom}", commune_objets_path(@commune)]
+    ],
+    current_page_label: "Finalisation"
+  ) %>
+  <% if @commune.errors.any? %>
     <div class="fr-grid-row">
       <div class="fr-col-md-6">
-        <h2 class="co-text--blue">Finalisation du recensement de <%= @commune.nom %></h2>
-        <p>
-          Veuillez vérifier la complétion et l'exactitude de vos recensements.
-          Une fois que vous aurez finalisé, un conservateur sera prévenu, validera vos recensements et reviendra vers vous.
-        </p>
+        <div class="fr-alert fr-alert--error fr-mb-6w">
+          <p>
+            Votre recensement n'a pas pu être confirmé :
+            <ul>
+              <% @commune.errors.attribute_names.each do |attribute| %>
+                <li><%= @commune.errors.messages_for(attribute).first %></li>
+              <% end %>
+            </ul>
+          </p>
+        </div>
       </div>
     </div>
+  <% end %>
+
+  <div class="fr-grid-row">
+    <div class="fr-col-md-6">
+      <h2 class="co-text--blue">Finalisation du recensement de <%= @commune.nom %></h2>
+      <p>
+        Veuillez vérifier la complétion et l'exactitude de vos recensements.
+        Une fois que vous aurez finalisé, un conservateur sera prévenu, validera vos recensements et reviendra vers vous.
+      </p>
+    </div>
+  </div>
 
   <%= render "summary", objets: @objets %>
 
-    <div class="fr-grid-row">
-      <div class="fr-col-md-6">
-        <%= form_for(@commune, url: commune_completion_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
-          <%= f.fields_for :dossier do |ff| %>
-            <div class="fr-input-group">
-              <%= ff.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
-              <%= ff.text_area :notes_commune %>
-            </div>
-          <% end %>
-          <div class="actions">
-            <%= f.submit "Je valide le recensement des objets de ma commune" %>
+  <div class="fr-grid-row">
+    <div class="fr-col-md-6">
+      <%= form_for(@commune, url: commune_completion_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
+        <%= f.fields_for :dossier do |ff| %>
+          <div class="fr-input-group">
+            <%= ff.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
+            <%= ff.text_area :notes_commune %>
           </div>
         <% end %>
-      </div>
+        <div class="actions">
+          <%= f.submit "Je valide le recensement des objets de ma commune" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </main>

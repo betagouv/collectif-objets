@@ -4,6 +4,8 @@
 <% if current_conservateur %>
   <main class="fr-container fr-py-4w fr-grid-row fr-grid-row--center" data-controller="devise--sessions">
     <div class="fr-col-md-8">
+      <%= render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Mon compte") %>
+
       <div class="fr-mb-6w">
         <h3>Mon compte</h3>
         <ul>
@@ -19,6 +21,8 @@
 <% elsif current_user %>
   <main class="fr-container fr-py-4w fr-grid-row fr-grid-row--center" data-controller="devise--sessions">
     <div class="fr-col-md-8">
+      <%= render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Mon compte") %>
+
       <div class="fr-mb-6w">
         <h3>Mon compte</h3>
         <p>

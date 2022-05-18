@@ -1,6 +1,16 @@
 <% content_for(:head_title) { "Recensement · #{truncate(@recensement.objet.nom, length: 20)}" } %>
 
 <main class="fr-container fr-py-8w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Objets de #{current_user.commune.nom}", commune_objets_path(current_user.commune)],
+      [@recensement.objet.nom, objet_path(@recensement.objet)],
+    ],
+    current_page_label: "Recensement"
+  ) %>
+
   <%= render "recensements/form", recensement: @recensement %>
 </main>
 

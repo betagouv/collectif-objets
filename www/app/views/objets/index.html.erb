@@ -6,7 +6,21 @@
   <% end %>
 <% end %>
 
-<main class="fr-container fr-py-4w">
+<main class="fr-container fr-pt-2w fr-pb-4w">
+
+  <% if @filters[:commune] %>
+    <%= render(
+      "shared/breadcrumbs",
+      links: [
+        ["Accueil", root_path],
+        ["Tous les objets", objets_path]
+      ],
+      current_page_label: "Objets de #{@filters[:commune].nom}"
+    ) %>
+  <% else %>
+    <%= render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Tous les objets") %>
+  <% end %>
+
   <div class="fr-grid-row fr-py-2w fr-grid-row--center">
     <div class="fr-col-md-8 co-text--center">
       <% if @filters[:commune] %>
