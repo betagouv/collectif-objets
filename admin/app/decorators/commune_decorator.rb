@@ -6,16 +6,7 @@ class CommuneDecorator < Draper::Decorator
   end
 
   def status
-    case super
-    when Commune::STATUS_INACTIVE
-      "Commune inactive"
-    when Commune::STATUS_ENROLLED
-      "Commune inscrite"
-    when Commune::STATUS_STARTED
-      "Recensement démarré"
-    when Commune::STATUS_COMPLETED
-      "Recensement terminé"
-    end
+    aasm.human_state
   end
 
   def recensements_summary

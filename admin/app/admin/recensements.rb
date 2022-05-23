@@ -34,8 +34,6 @@ ActiveAdmin.register Recensement do
       div do
         attributes_table title: "✍️ Recensement ##{recensement.id}" do
           row :id
-          row :objet
-          row :commune
           row :localisation
           row :edifice_nom
           row :recensable
@@ -47,6 +45,51 @@ ActiveAdmin.register Recensement do
           row :created_at
           row :updated_at
         end
+
+        panel "🖼 Objet ##{recensement.objet.id}" do
+          attributes_table_for recensement.objet.decorate do
+            row(:id) { link_to _1.id, admin_objet_path(_1) }
+            row :ref_pop
+            row :nom_courant
+            row :edifice_nom
+            row :emplacement
+            row :image_urls
+            row :categorie
+            row :crafted_at
+            row :created_at
+          end
+        end
+
+        panel "📍 Commune ##{recensement.commune.id}" do
+          attributes_table_for recensement.commune do
+            row(:id) { link_to _1.id, admin_commune_path(_1) }
+            row :nom
+            row :departement
+            row :code_insee
+            row :status
+            row :recensements_summary, label: "Recensements"
+            row :enrolled_at
+            row :notes_from_enrollment
+            row :completed_at
+          end
+        end
+
+        panel "📂 Dossier ##{recensement.dossier.id}" do
+          attributes_table_for recensement.dossier do
+            row(:id) { link_to _1.id, admin_dossier_path(_1) }
+            row :status
+            row :submitted_at
+            row :rejected_at
+            row :accepted_at
+            row :pdf_updated_at
+            row :notes_commune
+            row :notes_conservateur
+            row :notes_conservateur_private
+            row :created_at
+            row :updated_at
+          end
+        end
+
       end
       div do
         active_admin_comments

@@ -39,10 +39,10 @@ ActiveAdmin.register Commune do
     :status,
     as: :check_boxes,
     collection: [
-      ["Commune inactive", Commune::STATUS_INACTIVE],
-      ["Commune Inscrite", Commune::STATUS_ENROLLED],
-      ["Recensement démarré", Commune::STATUS_STARTED],
-      ["Recensement terminé", Commune::STATUS_COMPLETED],
+      ["Commune inactive", Commune::STATE_INACTIVE],
+      ["Commune Inscrite", Commune::STATE_ENROLLED],
+      ["Recensement démarré", Commune::STATE_STARTED],
+      ["Recensement terminé", Commune::STATE_COMPLETED],
     ]
   )
   filter(
@@ -64,8 +64,9 @@ ActiveAdmin.register Commune do
           row :code_insee
           row :status
           row :recensements_summary, label: "Recensements"
-          row :enrolled_at
           row :notes_from_enrollment
+          row :started_at
+          row :enrolled_at
           row :completed_at
         end
 
@@ -99,6 +100,14 @@ ActiveAdmin.register Commune do
           end
         end
 
+        panel "📂 Dossiers" do
+          table_for commune.past_dossiers do
+            column(:id) { link_to _1.id, admin_dossier_path(_1) }
+            column :status
+            column :created_at
+          end
+        end
+
         panel "✍️ Recensements" do
           table_for commune.recensements.map(&:decorate) do
             column(:id) { link_to _1.id, admin_recensement_path(_1) }
@@ -127,7 +136,7 @@ ActiveAdmin.register Commune do
       f.input :nom, input_html: { disabled: true }
       f.input :code_insee, input_html: { disabled: true }
       f.input :departement, input_html: { disabled: true }
-      f.input :status, as: :select, collection: Commune::STATUSES
+      f.input :status, as: :select, collection: Commune.aasm.states_for_select
       f.input :enrolled_at, label: "Date d'inscription"
       f.input :notes_from_enrollment, as: :text, input_html: { rows: 2 }
       f.input :completed_at, label: "Date de fin de recensement"

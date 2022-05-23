@@ -83,6 +83,9 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    after_commit_everywhere (1.2.0)
+      activerecord (>= 4.2)
+      activesupport
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -294,6 +297,7 @@ DEPENDENCIES
   aasm
   active_model_validates_intersection_of
   activeadmin (~> 2.11)
+  after_commit_everywhere
   aws-sdk-s3
   bootsnap
   debug
