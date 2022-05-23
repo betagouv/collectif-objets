@@ -17,7 +17,7 @@ class RecensementsController < ApplicationController
 
   def create
     if @recensement.save
-      @recensement.commune.start!
+      @recensement.commune.start! if @recensement.commune.may_start?
       TriggerSibContactEventJob.perform_async(@objet.commune.id, "started")
       SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => @recensement.id })
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)

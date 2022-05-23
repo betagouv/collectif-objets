@@ -4,11 +4,21 @@ class Commune < ApplicationRecord
   include Communes::IncludeCountsConcern
 
   DISPLAYABLE_DEPARTEMENTS = %w[51 52 65 72 26 30].freeze
-  STATUS_INACTIVE = "inactive"
-  STATUS_ENROLLED = "enrolled"
-  STATUS_STARTED = "started"
-  STATUS_COMPLETED = "completed"
-  STATUSES = [STATUS_INACTIVE, STATUS_ENROLLED, STATUS_COMPLETED, STATUS_STARTED].freeze
+
+  include AASM
+  aasm(column: :status, timestamps: true) do
+    state :inactive, initial: true, display: "Commune inactive"
+    state :enrolled, display: "Commune inscrite"
+    state :started, display: "Recensement démarré"
+    state :completed, display: "Recensement terminé"
+
+    event(:enroll) { transitions from: :inactive, to: :enrolled }
+    event(:start) do
+      transitions from: :inactive, to: :started
+      transitions from: :enrolled, to: :started
+    end
+    event(:complete) { transitions from: :started, to: :completed }
+  end
 
   has_many :users, dependent: :restrict_with_exception
   has_many(
@@ -22,15 +32,13 @@ class Commune < ApplicationRecord
   has_many :past_dossiers, class_name: "Dossier", dependent: :nullify
   belongs_to :dossier, optional: true
 
-  validates :status, inclusion: { in: STATUSES }
-
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)
   }
   scope :recensements_photos_presence_in, lambda { |presence|
     presence ? all : has_recensements_with_missing_photos
   }
-  scope :completed, -> { where(status: STATUS_COMPLETED) }
+  scope :completed, -> { where(status: STATE_COMPLETED) }
 
   include PgSearch::Model
   pg_search_scope :search_by_nom, against: :nom, using: { tsearch: { prefix: true } }
@@ -64,34 +72,12 @@ class Commune < ApplicationRecord
       Commune.select_best_objets(objets.where.not(nom: nil).to_a).first
   end
 
-  def inactive?
-    status == STATUS_INACTIVE
-  end
-
-  def enrolled?
-    status == STATUS_ENROLLED
-  end
-
-  def started?
-    status == STATUS_STARTED
-  end
-
   def enrolled_or_started?
-    [STATUS_ENROLLED, STATUS_STARTED].include?(status)
-  end
-
-  def completed?
-    status == STATUS_COMPLETED
+    enrolled? || started?
   end
 
   def objets_recensable?
     !completed? || dossier&.rejected?
-  end
-
-  def start!
-    return true if completed? || started?
-
-    update!(status: STATUS_STARTED)
   end
 
   def can_complete?

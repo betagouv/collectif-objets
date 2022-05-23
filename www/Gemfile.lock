@@ -74,6 +74,9 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    after_commit_everywhere (1.2.0)
+      activerecord (>= 4.2)
+      activesupport
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.561.0)
@@ -361,6 +364,7 @@ DEPENDENCIES
   actioncable
   active_model_validates_intersection_of
   activerecord_where_assoc
+  after_commit_everywhere
   aws-sdk-s3
   bootsnap
   capybara

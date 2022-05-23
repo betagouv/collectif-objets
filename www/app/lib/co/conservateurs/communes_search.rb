@@ -10,7 +10,7 @@ module Co
         "communes.status", "dossiers.status"
       ].freeze
       VALID_ORDER_DIRS = %w[ASC DESC].freeze
-      VALID_STATUS_FILTERS = (Commune::STATUSES + ["all", nil]).freeze
+      VALID_STATUS_FILTERS = (Commune.aasm.states.map(&:name) + ["all", nil]).freeze
 
       def initialize(departement, params)
         @departement = departement

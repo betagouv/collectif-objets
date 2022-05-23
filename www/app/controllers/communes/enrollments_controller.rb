@@ -12,7 +12,7 @@ module Communes
         return render :new, status: :unprocessable_entity
       end
 
-      if @commune.update(status: Commune::STATUS_ENROLLED, enrolled_at: Time.zone.now)
+      if @commune.enroll!
         enqueue_jobs
         redirect_to commune_objets_path(@commune), notice: "Votre commune a bien été inscrite !"
       else

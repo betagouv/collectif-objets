@@ -11,10 +11,8 @@ module Communes
     def show; end
 
     def create
-      if @commune.update(commune_params)
-        TriggerSibContactEventJob.perform_async(@commune.id, "completed")
-        SendMattermostNotificationJob.perform_async("commune_completed", { "commune_id" => @commune.id })
-        UserMailer.with(user_id: current_user.id, commune_id: @commune.id).commune_completed_email.deliver_later
+      if @dossier.submit!(notes_commune: params[:commune][:dossier_attributes][:notes_commune])
+        after_create
         redirect_to commune_objets_path(@commune), notice: "Le recensement de votre commune est terminé !"
       else
         render :new, status: :unprocessable_entity
@@ -46,16 +44,10 @@ module Communes
         .includes(:commune, recensements: %i[photos_attachments photos_blobs])
     end
 
-    def commune_params
-      params
-        .require(:commune)
-        .permit(dossier_attributes: %i[notes_commune id])
-        .to_h
-        .deep_merge(
-          status: Commune::STATUS_COMPLETED,
-          completed_at: Time.zone.now,
-          dossier_attributes: { status: "submitted" }
-        )
+    def after_create
+      TriggerSibContactEventJob.perform_async(@commune.id, "completed")
+      SendMattermostNotificationJob.perform_async("commune_completed", { "commune_id" => @commune.id })
+      UserMailer.with(user_id: current_user.id, commune_id: @commune.id).commune_completed_email.deliver_later
     end
   end
 end

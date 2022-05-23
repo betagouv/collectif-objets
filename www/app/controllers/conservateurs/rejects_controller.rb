@@ -7,7 +7,7 @@ module Conservateurs
     def new; end
 
     def create
-      if @dossier.update(dossier_params)
+      if @dossier.reject!(**dossier_params.to_h)
         UserMailer.with(dossier: @dossier).dossier_rejected_email.deliver_later
         redirect_to conservateurs_commune_path(@commune, warning: "Le dossier a été renvoyé à la commune")
       else
@@ -58,11 +58,7 @@ module Conservateurs
       params
         .require(:dossier)
         .permit(:notes_conservateur)
-        .merge(
-          status: :rejected,
-          conservateur_id: current_conservateur.id,
-          rejected_at: Time.zone.now
-        )
+        .merge(conservateur_id: current_conservateur.id)
     end
   end
 end

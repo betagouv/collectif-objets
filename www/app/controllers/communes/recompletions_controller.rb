@@ -8,7 +8,7 @@ module Communes
     def new; end
 
     def create
-      if @commune.update(commune_params)
+      if @dossier.submit!(notes_commune: params[:commune][:dossier_attributes][:notes_commune])
         ConservateurMailer.with(dossier: @dossier)
           .commune_recompleted_email.deliver_later
         redirect_to commune_objets_path(@commune), notice: "Votre dossier a été renvoyé au conservateur"
@@ -36,12 +36,6 @@ module Communes
     def set_objets
       @objets = @commune.objets.joins(:recensements)
         .includes(:commune, recensements: %i[photos_attachments photos_blobs])
-    end
-
-    def commune_params
-      now = Time.zone.now
-      params.require(:commune).permit(dossier_attributes: %i[notes_commune id]).to_h
-          .deep_merge(completed_at: now, dossier_attributes: { status: :submitted, submitted_at: now })
     end
   end
 end

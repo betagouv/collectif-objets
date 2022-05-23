@@ -31,6 +31,34 @@ RSpec.describe Dossier, type: :model do
       end
     end
 
+    context "dossier gets submitted with notes" do
+      let!(:dossier) { create(:dossier) }
+      it "should set the notes" do
+        dossier.submit!(notes_commune: "blah blah")
+        expect(dossier.reload.notes_commune).to eq("blah blah")
+      end
+    end
+
+    context "dossier gets submitted for started commune" do
+      let!(:commune) { create(:commune, status: Commune::STATE_STARTED) }
+      let!(:dossier) { create(:dossier, commune:) }
+      it "should complete the commune" do
+        dossier.submit!
+        expect(commune.status.to_sym).to eq(Commune::STATE_COMPLETED)
+        expect(commune.completed_at).to be_within(2.seconds).of(Time.zone.now)
+      end
+    end
+
+    context "dossier gets submitted for completed commune" do
+      let!(:commune) { create(:commune, status: Commune::STATE_COMPLETED, completed_at: 2.days.ago) }
+      let!(:dossier) { create(:dossier, commune:) }
+      it "should not re-complete the commune" do
+        dossier.submit!
+        expect(commune.status.to_sym).to eq(Commune::STATE_COMPLETED)
+        expect(commune.completed_at).not_to be_within(2.seconds).of(Time.zone.now)
+      end
+    end
+
     context "dossier gets rejected" do
       let!(:dossier) { create(:dossier, :submitted) }
       it "should set timestamps" do

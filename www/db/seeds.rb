@@ -19,7 +19,7 @@ def seed_commune(commune)
   )
   dossier.save
   raise dossier.errors.full_messages.join unless dossier.valid?
-  commune.update!(dossier:, status: Commune::STATUS_COMPLETED, completed_at: Time.zone.now)
+  commune.update!(dossier:, status: Commune::STATE_COMPLETED, completed_at: Time.zone.now)
   commune.objets.each { seed_objet(_1, dossier, commune) }
 end
 

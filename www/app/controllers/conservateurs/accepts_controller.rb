@@ -11,11 +11,7 @@ module Conservateurs
     end
 
     def create
-      if @dossier.update(
-        status: :accepted,
-        conservateur_id: current_conservateur.id,
-        accepted_at: Time.zone.now
-      )
+      if @dossier.accept!(conservateur_id: current_conservateur.id)
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
         redirect_to conservateurs_commune_path(@commune), notice: "Le rapport a été envoyé à la commune"
       else

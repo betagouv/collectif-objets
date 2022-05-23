@@ -9,6 +9,7 @@ gem "aasm"
 gem "actioncable"
 gem "active_model_validates_intersection_of"
 gem "activerecord_where_assoc"
+gem "after_commit_everywhere"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false
 gem "devise", "~> 4.8"

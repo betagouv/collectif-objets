@@ -20,6 +20,7 @@ gem "sidekiq"
 gem "pg_search"
 gem "active_model_validates_intersection_of"
 gem "aasm"
+gem "after_commit_everywhere"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

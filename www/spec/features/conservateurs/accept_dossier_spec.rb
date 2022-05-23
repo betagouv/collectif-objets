@@ -6,7 +6,7 @@ require "rails_helper"
 RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
   let!(:conservateur) { create(:conservateur, email: "jeanne@culture.gouv.fr", departements: ["26"]) }
   let!(:commune) do
-    create(:commune, nom: "Albon", code_insee: "26002", departement: "26", status: Commune::STATUS_COMPLETED)
+    create(:commune, nom: "Albon", code_insee: "26002", departement: "26", status: Commune::STATE_COMPLETED)
   end
   let!(:dossier) { create(:dossier, :submitted, commune:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:) }
