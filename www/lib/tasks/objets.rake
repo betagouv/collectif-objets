@@ -127,4 +127,19 @@ namespace :objets do
     end
     puts "after: #{Objet.where.not(crafted_at: nil).count} objets have SCLE"
   end
+
+  # rake "objets:destroy_without_communes"
+  task :destroy_without_communes, [:path] => :environment do |_, args|
+    objets = Objet.where(commune_code_insee: [nil, ""])
+    puts "before: #{objets.count} objets don't have a commune code insee"
+    objets.each do |objet|
+      puts "- https://www.pop.culture.gouv.fr/notice/palissy/#{objet.ref_pop} (id #{objet.id})"
+      if objet.recensements.any?
+        puts "has recensements, skipping!"
+        next
+      end
+      objet.destroy!
+      puts "destroyed!"
+    end
+  end
 end

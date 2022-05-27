@@ -10,8 +10,8 @@ class Objet < ApplicationRecord
 
   scope :with_photos_first, -> { order("cardinality(image_urls) DESC, LOWER(objets.nom) ASC") }
 
-  after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
+  after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
+  after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
 
   def self.displayable
     in_str = Commune::DISPLAYABLE_DEPARTEMENTS.map { "'#{_1}'" }.join(", ")
