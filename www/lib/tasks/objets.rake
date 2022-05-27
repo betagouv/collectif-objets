@@ -16,18 +16,18 @@ namespace :objets do
   desc "imports objets from custom export POP CSV"
   task :import, [:path] => :environment do |_, args|
     mapping = {
-      ref_memoire: "Référence de l’illustration (Mémoire)",
-      ref_pop: "Référence de la notice Palissy",
-      nom: "Nom de l'objet",
-      categorie: "CATE",
-      commune: "COM",
+      memoire_REF: "Référence de l’illustration (Mémoire)",
+      palissy_REF: "Référence de la notice Palissy",
+      palissy_DENO "Nom de l'objet",
+      palissy_CATE: "CATE",
+      palissy_COM: "COM",
       # commune_code_insee:
-      departement: "DPT",
-      crafted_at: "SOUR",
-      last_recolement_at: "DENQ",
-      nom_dossier: "DOSS",
-      edifice_nom: "Edifice",
-      emplacement: "Emplacement",
+      palissy_DPT: "DPT",
+      palissy_SCLE: "SOUR",
+      palissy_DENQ: "DENQ",
+      palissy_DOSS: "DOSS",
+      palissy_EDIF: "Edifice",
+      palissy_EMPL: "Emplacement",
       # recolement_status: "Statut recensement"
     }
     for row in CSV.read(args[:path], headers: true) do
@@ -51,7 +51,7 @@ namespace :objets do
       image_urls = row["video"].split(";").map do |video_ref|
         "http://www2.culture.gouv.fr/Wave/image/memoire/" + video_ref.sub(/^mem\//, "")
       end
-      objet = Objet.find_by(ref_pop: row["ref"])
+      objet = Objet.find_by(palissy_REF: row["ref"])
       next unless objet
 
       objet.image_urls = image_urls
@@ -64,7 +64,7 @@ namespace :objets do
   task :import_images_custom, [:path] => :environment do |_, args|
     puts "before: #{Objet.with_images.count} objets have photos"
     for row in CSV.read(args[:path], headers: true) do
-      objet = Objet.find_by(ref_pop: row["ref_pop"])
+      objet = Objet.find_by(palissy_REF: row["palissy_REF"])
       next unless objet
 
       objet.image_urls = JSON.parse(row["scrapped_image_urls"].gsub("'", '"'))
@@ -79,7 +79,7 @@ namespace :objets do
     iterate_files("#{args[:path]}/*.csv") do |row|
       next if row["ref"].blank? || row["insee"].blank?
 
-      objet = Objet.find_by(ref_pop: row["ref"])
+      objet = Objet.find_by(palissy_REF: row["ref"])
       next unless objet
 
       objet.commune_code_insee = row["insee"]
@@ -90,17 +90,17 @@ namespace :objets do
 
   # rake "objets:import_nom_courant[../collectif-objets-data/pop-exports-custom]"
   task :import_nom_courant, [:path] => :environment do |_, args|
-    puts "after: #{Objet.where.not(nom_courant: nil).count}/#{Objet.count} objets have nom courant"
+    puts "after: #{Objet.where.not(palissy_TICO: nil).count}/#{Objet.count} objets have nom courant"
     iterate_files("#{args[:path]}/*.csv") do |row|
       next if row["ref"].blank? || row["tico"].blank?
 
-      objet = Objet.find_by(ref_pop: row["ref"])
+      objet = Objet.find_by(palissy_REF: row["ref"])
       next unless objet
 
-      objet.nom_courant = row["tico"]
+      objet.palissy_TICO = row["tico"]
       objet.save!
     end
-    puts "after: #{Objet.where.not(nom_courant: nil).count}/#{Objet.count} objets have nom courant"
+    puts "after: #{Objet.where.not(palissy_TICO: nil).count}/#{Objet.count} objets have nom courant"
   end
 
   # rake "objets:export[../collectif-objets-data/rails-objets-wrong-images.csv]"
@@ -118,14 +118,14 @@ namespace :objets do
 
   # rake "objets:import_scle[../collectif-objets-data/pop-scle-column.csv]"
   task :import_scle, [:path] => :environment do |_, args|
-    puts "before: #{Objet.where.not(crafted_at: nil).count} objets have SCLE"
+    puts "before: #{Objet.where.not(palissy_SCLE: nil).count} objets have SCLE"
     for row in CSV.read(args[:path], headers: true) do
-      objet = Objet.find_by(ref_pop: row["REF"])
+      objet = Objet.find_by(palissy_REF: row["palissy_REF"])
       next unless objet
 
-      objet.update!(crafted_at: row["SCLE"])
+      objet.update!(palissy_SCLE: row["SCLE"])
     end
-    puts "after: #{Objet.where.not(crafted_at: nil).count} objets have SCLE"
+    puts "after: #{Objet.where.not(palissy_SCLE: nil).count} objets have SCLE"
   end
 
   # rake "objets:destroy_without_communes"
@@ -133,7 +133,7 @@ namespace :objets do
     objets = Objet.where(commune_code_insee: [nil, ""])
     puts "before: #{objets.count} objets don't have a commune code insee"
     objets.each do |objet|
-      puts "- https://www.pop.culture.gouv.fr/notice/palissy/#{objet.ref_pop} (id #{objet.id})"
+      puts "- https://www.pop.culture.gouv.fr/notice/palissy/#{objet.palissy_REF} (id #{objet.id})"
       if objet.recensements.any?
         puts "has recensements, skipping!"
         next

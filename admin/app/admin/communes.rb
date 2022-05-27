@@ -89,13 +89,13 @@ ActiveAdmin.register Commune do
         panel "🖼 Objets" do
           table_for commune.objets.map(&:decorate) do
             column(:id) { link_to _1.id, admin_objet_path(_1) }
-            column :ref_pop
-            column :nom_courant
-            column :edifice_nom
-            column :emplacement
+            column :palissy_REF
+            column :palissy_TICO
+            column :palissy_EDIF
+            column :palissy_EMPL
             column :image_urls
-            column :categorie
-            column :crafted_at
+            column :palissy_CATE
+            column :palissy_SCLE
             column :created_at
           end
         end

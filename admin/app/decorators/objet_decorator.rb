@@ -3,7 +3,7 @@ class ObjetDecorator < Draper::Decorator
   delegate_all
 
   def display_name
-    "#{ref_pop} · #{truncate(nom, length: 30)}"
+    "#{palissy_REF} · #{truncate(nom, length: 30)}"
   end
 
   def commune

@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   resources :objets, only: [:index, :show] do
     resources :recensements, except: [:index, :show, :destroy]
   end
-  get "objets/ref_pop/:ref_pop", to: "objets#show_by_ref_pop"
+  get "objets/ref_pop/:palissy_REF", to: "objets#show_by_ref_pop"
 
   resources :communes, only: [:index] do
     resources :enrollments, only: [:new, :create], controller: "communes/enrollments"

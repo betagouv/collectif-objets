@@ -48,9 +48,9 @@ module Co
         text "<b><u>#{objet.nom}</b></u>", inline_format: true, size: 18
         text ""
         text(
-          "objet #{objet.ref_pop} · " \
+          "objet #{objet.palissy_REF} · " \
           "recensé le #{I18n.l(recensement.updated_at.to_date)} · " \
-          "<link href=\"https://www.pop.culture.gouv.fr/notice/palissy/#{objet.ref_pop}\">" \
+          "<link href=\"https://www.pop.culture.gouv.fr/notice/palissy/#{objet.palissy_REF}\">" \
           "<u>Voir sur POP →</u></link>",
           inline_format: true
         )

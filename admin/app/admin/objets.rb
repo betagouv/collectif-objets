@@ -6,27 +6,27 @@ ActiveAdmin.register Objet do
 
   index do
     id_column
-    column :ref_pop
-    column :nom
-    column :nom_courant
+    column :palissy_REF
+    column :palissy_DENO
+    column :palissy_TICO
     column :commune
-    column :edifice_nom
-    column :emplacement
+    column :palissy_EDIF
+    column :palissy_EMPL
     column :image_urls
-    column :categorie
-    column :crafted_at
+    column :palissy_CATE
+    column :palissy_SCLE
     column :created_at
     actions
   end
 
   filter :commune_departement, :as => :check_boxes, collection: Commune.select(:departement).distinct.pluck(:departement).compact.sort
   filter :commune
-  filter :ref_pop_equals
-  filter :nom
-  filter :nom_courant
-  filter :categorie
-  filter :edifice_nom
-  filter :emplacement
+  filter :palissy_REF_equals
+  filter :palissy_DENO
+  filter :palissy_TICO
+  filter :palissy_CATE
+  filter :palissy_EDIF
+  filter :palissy_EMPL
 
   show do
     div class: "show-container" do
@@ -34,16 +34,16 @@ ActiveAdmin.register Objet do
         attributes_table title: "🖼 Objet ##{objet.id}" do
         row :ref_pop
           row :ref_memoire
-          row :nom
-          row :nom_courant
+          row :palissy_DENO
+          row :palissy_TICO
           row :commune
-          row :edifice_nom
-          row :emplacement
+          row :palissy_EDIF
+          row :palissy_EMPL
           row :image_urls
-          row :categorie
-          row :crafted_at
+          row :palissy_CATE
+          row :palissy_SCLE
           row :image_urls
-          row :nom_dossier
+          row :palissy_DOSS
           row :created_at
         end
 

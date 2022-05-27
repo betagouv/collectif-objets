@@ -49,13 +49,13 @@ ActiveAdmin.register Recensement do
         panel "🖼 Objet ##{recensement.objet.id}" do
           attributes_table_for recensement.objet.decorate do
             row(:id) { link_to _1.id, admin_objet_path(_1) }
-            row :ref_pop
-            row :nom_courant
-            row :edifice_nom
-            row :emplacement
+            row :palissy_REF
+            row :palissy_TICO
+            row :palissy_EDIF
+            row :palissy_EMPL
             row :image_urls
-            row :categorie
-            row :crafted_at
+            row :palissy_CATE
+            row :palissy_SCLE
             row :created_at
           end
         end

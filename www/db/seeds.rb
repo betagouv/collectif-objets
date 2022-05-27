@@ -24,7 +24,7 @@ def seed_commune(commune)
 end
 
 def seed_objet(objet, dossier, commune)
-  puts "    creating recensement for #{objet.ref_pop} #{objet.nom}"
+  puts "    creating recensement for #{objet.palissy_REF} #{objet.nom}"
   recensement = Recensement.new(
     objet:,
     dossier:,

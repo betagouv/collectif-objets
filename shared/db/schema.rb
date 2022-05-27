@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_23_055955) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_073436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -120,30 +120,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_23_055955) do
   end
 
   create_table "objets", force: :cascade do |t|
-    t.string "ref_pop"
-    t.string "ref_memoire"
-    t.string "nom"
-    t.string "categorie"
-    t.string "commune_nom"
-    t.string "commune_code_insee"
-    t.string "departement"
-    t.string "crafted_at"
-    t.datetime "last_recolement_at"
-    t.string "nom_dossier"
-    t.string "edifice_nom"
-    t.string "emplacement"
+    t.string "palissy_REF"
+    t.string "memoire_REF"
+    t.string "palissy_DENO"
+    t.string "palissy_CATE"
+    t.string "palissy_COM"
+    t.string "palissy_INSEE"
+    t.string "palissy_DPT"
+    t.string "palissy_SCLE"
+    t.datetime "palissy_DENQ"
+    t.string "palissy_DOSS"
+    t.string "palissy_EDIF"
+    t.string "palissy_EMPL"
     t.string "image_urls", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "nom_courant"
+    t.string "palissy_TICO"
     t.string "notes_conservateur"
     t.datetime "notes_conservateur_at"
     t.bigint "conservateur_id"
-    t.index ["commune_code_insee"], name: "index_objets_on_commune_code_insee"
-    t.index ["commune_nom"], name: "index_objets_on_commune_nom"
     t.index ["conservateur_id"], name: "index_objets_on_conservateur_id"
-    t.index ["departement"], name: "index_objets_on_departement"
-    t.index ["ref_pop"], name: "objets_unique_ref_pop", unique: true
+    t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
+    t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
+    t.index ["palissy_INSEE"], name: "index_objets_on_palissy_INSEE"
+    t.index ["palissy_REF"], name: "objets_unique_ref_pop", unique: true
   end
 
   create_table "recensements", force: :cascade do |t|

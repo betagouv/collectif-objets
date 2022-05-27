@@ -20,7 +20,7 @@ module Co
 
       def edifices
         @edifices ||= objets
-          .group_by(&:edifice_nom)
+          .group_by(&:palissy_EDIF)
           .sort_by { |k, _v| k.presence&.parameterize || "zzz" }
           .map { edifice_group_hash(*_1) }
       end
@@ -33,13 +33,13 @@ module Co
             .includes(:commune, recensements: %i[photos_attachments photos_blobs])
           objets = objets.where.missing(:recensements) if @exclude_recensed
           objets = objets.where.not(id: @exclude_ids) if @exclude_ids.any?
-          objets = objets.where(edifice_nom: @edifice_nom) if group_by_edifice? && @edifice_nom.present?
+          objets = objets.where(palissy_EDIF: @edifice_nom) if group_by_edifice? && @edifice_nom.present?
           objets
         end
       end
 
       def edifices_count
-        @edifices_count ||= @commune.objets.group(:edifice_nom).count.keys.count
+        @edifices_count ||= @commune.objets.group(:palissy_EDIF).count.keys.count
       end
 
       delegate :count, to: :objets

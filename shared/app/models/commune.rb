@@ -23,7 +23,7 @@ class Commune < ApplicationRecord
   has_many :users, dependent: :restrict_with_exception
   has_many(
     :objets,
-    foreign_key: :commune_code_insee,
+    foreign_key: :palissy_INSEE,
     primary_key: :code_insee,
     inverse_of: :commune,
     dependent: :restrict_with_exception
@@ -69,7 +69,7 @@ class Commune < ApplicationRecord
 
   def main_objet
     @main_objet ||=
-      Commune.select_best_objets(objets.where.not(nom: nil).to_a).first
+      Commune.select_best_objets(objets.where.not(palissy_DENO: nil).to_a).first
   end
 
   def enrolled_or_started?

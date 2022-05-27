@@ -10,7 +10,7 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
   end
   let!(:dossier) { create(:dossier, :submitted, commune:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:) }
-  let!(:objet_bouquet) { create(:objet, nom: "Bouquet d'Autel", edifice_nom: "Eglise st Jean", commune:) }
+  let!(:objet_bouquet) { create(:objet, palissy_DENO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:) }
   let!(:recensement_bouquet) do
     create(
       :recensement,
@@ -21,7 +21,7 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
       notes: "objet très doux"
     )
   end
-  let!(:objet_ciboire) { create(:objet, nom: "Ciboire des malades", edifice_nom: "Musée", commune:) }
+  let!(:objet_ciboire) { create(:objet, palissy_DENO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
   let!(:recensement_ciboire) do
     create(
       :recensement,

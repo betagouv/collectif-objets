@@ -18,7 +18,7 @@ class ObjetsController < ApplicationController
   end
 
   def show_by_ref_pop
-    @objet = Objet.find_by(ref_pop: params[:ref_pop])
+    @objet = Objet.find_by(palissy_REF: params[:palissy_REF])
     render :show
   end
 end

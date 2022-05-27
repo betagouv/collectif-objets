@@ -2,18 +2,18 @@
 
 FactoryBot.define do
   factory :objet do
-    sequence(:ref_pop) { |n| "PM#{51_001_252 + n}" }
-    ref_memoire { "AP80L043503" }
-    nom { "Sainte-Famille (La)" }
-    categorie { "Peinture" }
-    # commune_code_insee { "" }
-    # commune_nom { "" }
-    # departement { "" }
-    crafted_at { "16e siècle" }
-    # last_recolement_at { "" }
-    nom_dossier { "Dossier individuel" }
-    edifice_nom { "Eglise Notre-Dame-en-Vaux" }
-    emplacement { "dans la nef droite" }
+    sequence(:palissy_REF) { |n| "PM#{51_001_252 + n}" }
+    memoire_REF { "AP80L043503" }
+    palissy_DENO { "Sainte-Famille (La)" }
+    palissy_CATE { "Peinture" }
+    # palissy_INSEE { "" }
+    # palissy_COM { "" }
+    # palissy_DPT { "" }
+    palissy_SCLE { "16e siècle" }
+    # palissy_DENQ { "" }
+    palissy_DOSS { "Dossier individuel" }
+    palissy_EDIF { "Eglise Notre-Dame-en-Vaux" }
+    palissy_EMPL { "dans la nef droite" }
 
     association :commune
 

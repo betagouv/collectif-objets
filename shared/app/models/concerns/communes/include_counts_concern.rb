@@ -14,10 +14,10 @@ module Communes
         joins(
           %{
           LEFT OUTER JOIN (
-            SELECT commune_code_insee, COUNT(*) objets_count
+            SELECT "palissy_INSEE", COUNT(*) objets_count
             FROM objets
-            GROUP BY commune_code_insee
-          ) a ON a.commune_code_insee = communes.code_insee
+            GROUP BY "palissy_INSEE"
+          ) a ON a."palissy_INSEE" = communes.code_insee
         }
         ).select("communes.*, COALESCE(a.objets_count, 0) AS objets_count")
       end
@@ -26,27 +26,27 @@ module Communes
         joins(
           %{
           LEFT OUTER JOIN (
-            SELECT commune_code_insee, COUNT(*) objets_recenses_count
+            SELECT "palissy_INSEE", COUNT(*) objets_recenses_count
             FROM objets
             WHERE exists (SELECT id FROM recensements WHERE recensements.objet_id = objets.id)
-            GROUP BY commune_code_insee
-          ) b ON b.commune_code_insee = communes.code_insee
+            GROUP BY "palissy_INSEE"
+          ) b ON b."palissy_INSEE" = communes.code_insee
 
           LEFT OUTER JOIN (
-            SELECT objets.commune_code_insee, COUNT(*) recensements_analysed_count
+            SELECT objets."palissy_INSEE", COUNT(*) recensements_analysed_count
             FROM recensements
             INNER JOIN objets ON objets.id = recensements.objet_id
             WHERE recensements.analysed_at IS NOT NULL
-            GROUP BY objets.commune_code_insee
-          ) c ON c.commune_code_insee = communes.code_insee
+            GROUP BY objets."palissy_INSEE"
+          ) c ON c."palissy_INSEE" = communes.code_insee
 
           LEFT OUTER JOIN (
-            SELECT objets.commune_code_insee, COUNT(*) recensements_prioritaires_count
+            SELECT objets."palissy_INSEE", COUNT(*) recensements_prioritaires_count
             FROM recensements
             INNER JOIN objets ON objets.id = recensements.objet_id
             WHERE recensements.analyse_prioritaire IS TRUE
-            GROUP BY objets.commune_code_insee
-          ) d ON d.commune_code_insee = communes.code_insee
+            GROUP BY objets."palissy_INSEE"
+          ) d ON d."palissy_INSEE" = communes.code_insee
         }
         ).select(
           "communes.*," \

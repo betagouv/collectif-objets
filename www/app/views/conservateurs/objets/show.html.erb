@@ -33,7 +33,7 @@
           <div class="fr-card__body">
             <div class="fr-card__content">
               <h4 class="fr-card__title">
-                <%= @objet.ref_pop %>
+                <%= @objet.palissy_REF %>
               </h4>
               <p class="fr-card__desc">
                 <% [:edifice_nom, :emplacement, :categorie, :crafted_at].each do |att| %>
@@ -44,7 +44,7 @@
                 <br />
                 <%= link_to(
                   t(".pop_card.link"),
-                  "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.ref_pop}",
+                  "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.palissy_REF}",
                   target: "_blank",
                   rel: "noopener"
                 ) %>
@@ -56,7 +56,7 @@
               <%= image_tag(
                 @objet.image_urls.any? ? @objet.image_urls.first : "illustrations/photo-manquante-pop.png",
                 class: "fr-responsive-img",
-                alt: "illustration POP de l'objet #{@objet.ref_pop}"
+                alt: "illustration POP de l'objet #{@objet.palissy_REF}"
               ) %>
             </div>
           </div>
