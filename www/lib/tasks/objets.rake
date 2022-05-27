@@ -42,33 +42,31 @@ namespace :objets do
     end
   end
 
-  # rake objets:import_images[../collectif-objets-data/pop-exports-custom]
+  # rake "objets:import_images[../../pop-scraper/exports/palissy/palissy_dpt_52.csv]"
   task :import_images, [:path] => :environment do |_, args|
     puts "before: #{Objet.with_images.count} objets have photos"
-    iterate_files("#{args[:path]}/*.csv") do |row|
-      next if row["ref"].blank? || row["video"].blank?
-
-      image_urls = row["video"].split(";").map do |video_ref|
-        "http://www2.culture.gouv.fr/Wave/image/memoire/" + video_ref.sub(/^mem\//, "")
-      end
-      objet = Objet.find_by(palissy_REF: row["ref"])
-      next unless objet
-
-      objet.image_urls = image_urls
-      objet.save!
-    end
-    puts "after: #{Objet.with_images.count} objets have photos"
-  end
-
-  # rake "objets:import_images_custom[../collectif-objets-data/tmp-146-objets-image-urls-to-import-in-rails.csv]"
-  task :import_images_custom, [:path] => :environment do |_, args|
-    puts "before: #{Objet.with_images.count} objets have photos"
+    pop_s3_url = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
     for row in CSV.read(args[:path], headers: true) do
-      objet = Objet.find_by(palissy_REF: row["palissy_REF"])
+      next if row["MEMOIRE_URLS"].blank?
+
+      objet = Objet.find_by(palissy_REF: row["REF"])
       next unless objet
 
-      objet.image_urls = JSON.parse(row["scrapped_image_urls"].gsub("'", '"'))
-      objet.save!
+      new_image_urls = row["MEMOIRE_URLS"].split(";").map { "#{pop_s3_url}/#{_1}" }
+      next if objet.image_urls == new_image_urls
+
+      if objet.image_urls.present?
+        puts "updating image urls for #{objet.palissy_REF} : "
+        puts "before: "
+        objet.image_urls.each { puts(_1) }
+        puts "after: "
+        new_image_urls.each { puts(_1) }
+      else
+        puts "adding #{new_image_urls.count} new images for #{objet.palissy_REF}"
+      end
+      puts
+
+      objet.update!(image_urls: new_image_urls)
     end
     puts "after: #{Objet.with_images.count} objets have photos"
   end
