@@ -18,7 +18,7 @@ namespace :objets do
     mapping = {
       memoire_REF: "Référence de l’illustration (Mémoire)",
       palissy_REF: "Référence de la notice Palissy",
-      palissy_DENO "Nom de l'objet",
+      palissy_DENO: "Nom de l'objet",
       palissy_CATE: "CATE",
       palissy_COM: "COM",
       # commune_code_insee:
