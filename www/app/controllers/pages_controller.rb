@@ -13,4 +13,8 @@ class PagesController < ApplicationController
   end
 
   def confirmation_inscription; end
+
+  def cgu; end
+  def mentions_legales; end
+  def confidentialite; end
 end
