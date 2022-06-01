@@ -3,7 +3,7 @@
 class Commune < ApplicationRecord
   include Communes::IncludeCountsConcern
 
-  DISPLAYABLE_DEPARTEMENTS = %w[51 52 65 72 26 30].freeze
+  DISPLAYABLE_DEPARTEMENTS = %w[13 26 30 51 52 58 65 72].freeze
 
   include AASM
   aasm(column: :status, timestamps: true) do
@@ -42,34 +42,24 @@ class Commune < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_nom, against: :nom, using: { tsearch: { prefix: true } }
-  accepts_nested_attributes_for :dossier
+  accepts_nested_attributes_for :dossier, :users
+
+  validates :departement, presence: true
+  validate do |commune|
+    next if commune.nom.blank? || commune.nom == commune.nom.strip
+
+    errors.add(:nom, :invalid, message: "le nom contient des espaces en trop")
+  end
 
   def self.ransackable_scopes(_auth_object = nil)
     [:recensements_photos_presence_in]
   end
-
-  # rubocop:disable Metrics/AbcSize
-  def self.select_best_objets(objets_arr)
-    objets_arr
-      .optional_filter { _1.image_urls.any? }
-      .optional_filter { _1.nom.exclude?(";") }
-      .optional_filter { !_1.nom.match?(/[A-Z]/) }
-      .optional_filter { _1.edifice_nom.present? }
-      .optional_filter { _1.edifice_nom&.match?(/[A-Z]/) }
-      .optional_filter { _1.emplacement.blank? }
-  end
-  # rubocop:enable Metrics/AbcSize
 
   def self.status_value_counts
     group(:status)
       .select("status, count(id) as communes_count")
       .map { [_1.status, _1.communes_count] }
       .to_h
-  end
-
-  def main_objet
-    @main_objet ||=
-      Commune.select_best_objets(objets.where.not(palissy_DENO: nil).to_a).first
   end
 
   def enrolled_or_started?
@@ -82,5 +72,9 @@ class Commune < ApplicationRecord
 
   def can_complete?
     enrolled_or_started? && objets.all?(&:recensement?)
+  end
+
+  def to_s
+    "#{nom} (#{code_insee})"
   end
 end

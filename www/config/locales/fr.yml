@@ -212,6 +212,10 @@ fr:
   activerecord:
     errors:
       models:
+        user:
+          attributes:
+            email:
+              invalid: "invalide"
         recensement:
           attributes:
             localisation:

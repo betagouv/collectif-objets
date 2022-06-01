@@ -34,7 +34,7 @@ class Objet < ApplicationRecord
   end
 
   def nom_formatted
-    (TICO || DENO).capitalize
+    (palissy_TICO || palissy_DENO).capitalize
   end
 
   def edifice_nom_formatted

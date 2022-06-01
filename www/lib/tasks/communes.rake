@@ -15,43 +15,6 @@ namespace :communes do
     end
   end
 
-  # rake "communes:export[../../collectif-objets-data/rails-communes.csv]"
-  desc "export communes"
-  task :export, [:path] => :environment do |_, args|
-    headers = [
-      "nom",
-      "code_insee",
-      "departement",
-      "email",
-      "magic_token",
-      "phone_number",
-      "nombre_objets",
-      "main_objet_img_url",
-      "main_objet_nom",
-      "main_objet_edifice",
-      "main_objet_emplacement",
-    ]
-    CSV.open(args[:path], "wb", headers: true) do |csv|
-      csv << headers
-      communes = Commune.includes(:objets).to_a.sort_by { _1.objets.count }.reverse
-      communes.each do |commune|
-        csv << [
-          commune.nom,
-          commune.code_insee,
-          commune.departement,
-          commune.users.first&.email,
-          commune.users.first&.magic_token,
-          commune.phone_number,
-          commune.objets.count,
-          commune.main_objet&.image_urls&.first,
-          commune.main_objet&.nom_formatted,
-          commune.main_objet&.edifice_nom_formatted,
-          commune.main_objet&.emplacement
-        ]
-      end
-    end
-  end
-
   # rake "communes:fix_noms[../collectif-objets-data/mairies.from_service_public.csv]"
   task :fix_noms, [:path] => :environment do |_, args|
     puts "code_insee\tnom_db_formatted\tnom_insee"

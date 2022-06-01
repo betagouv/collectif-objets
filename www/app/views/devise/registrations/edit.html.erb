@@ -27,7 +27,7 @@
         <h3>Mon compte</h3>
         <p>
           <b>Email&#8239;</b>: <%= current_user.email %><br />
-          <b>Commune&#8239;</b>: <%= current_user.commune&.nom || "N/A" %>
+          <b>Commune&#8239;</b>: <%= current_user.commune || "N/A" %>
         </p>
         <p>
           <%= link_to "Déconnexion", destroy_user_session_path, class: "fr-btn fr-btn--secondary fr-fi-logout-box-r-line fr-btn--icon-left", data: { turbo_method: :delete } %>
