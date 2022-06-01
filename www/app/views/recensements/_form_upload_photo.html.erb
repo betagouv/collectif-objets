@@ -7,22 +7,41 @@
     data-recensement-form--upload-photo-target="uploadGroup"
   >
     <label class="fr-label" for="recensement_photos">
-      Ajouter une photo
       <span class="fr-hint-text">
-      Taille maximale : 10 Mo. Formats supportés : jpg ou png.
-      Vous pouvez ajouter plusieurs photos une par une.</span>
+        Taille maximale : 10 Mo. Formats supportés : jpg ou png.
+      </span>
     </label>
     <input name="recensement[photos][]" type="hidden" value="" autocomplete="off">
     <input
       type="file"
       data-direct-upload-url="<%= rails_direct_uploads_url %>"
       name="recensement[photos][]"
-      id="recensement_photos"
       accept="image/*"
       data-recensement-form--upload-photo-target="input"
       data-recensement-form--uploader-target="input"
       data-action="change->recensement-form--upload-photo#refreshPreview change->recensement-form--uploader#addInput change->recensement#refreshFields direct-upload:progress->recensement-form--upload-photo#setProgress"
+      class="hide"
     >
+
+    <div
+      class="hide"
+      data-recensement-form--upload-photo-target="capturePhotoButton"
+    >
+      <button
+        class="fr-btn fr-btn--secondary fr-icon-camera-line fr-btn--icon-right"
+        data-action="recensement-form--upload-photo#triggerCapture"
+      >
+        Prendre une photo avec mon smartphone
+      </button>
+      <p>Ou</p>
+    </div>
+
+    <button
+      class="fr-btn fr-btn--secondary fr-icon-attachment-line fr-btn--icon-right"
+      data-action="recensement-form--upload-photo#triggerBrowse"
+    >
+      Ajouter une photo déjà prise
+    </button>
   </div>
   <div
     class="hide co-flex co-flex--align-items-center fr-mb-2w"
