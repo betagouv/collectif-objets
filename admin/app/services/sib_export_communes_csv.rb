@@ -22,18 +22,17 @@ class SibExportCommunesCsv
       csv << csv_headers
       communes.each do |commune|
         main_objet = main_objet(commune)
+        magic_token = commune.users.first&.magic_token
+        magic_link = "https://collectif-objets.beta.gouv.fr/magic-authentication?magic-token=#{magic_token}" if magic_token
+        objet_desc_html = "<h3 style=\"padding:0 0 10px 0; margin: 0;\">#{main_objet.nom_formatted}</h3>Objet présent à #{commune.nom}<br /><b>#{main_objet.edifice_nom_formatted}</b>#{main_objet.emplacement}" if main_objet
         csv << [
           commune.nom,
-          commune.code_insee,
           commune.departement,
           commune.users.first&.email,
-          commune.users.first&.magic_token,
-          commune.phone_number,
+          magic_link,
           commune.objets.count,
           main_objet&.image_urls&.first,
-          main_objet&.nom_formatted,
-          main_objet&.edifice_nom_formatted,
-          main_objet&.emplacement
+          objet_desc_html
         ]
       end
     end
@@ -43,17 +42,13 @@ class SibExportCommunesCsv
 
   def csv_headers
     headers = [
-      "nom",
-      "code_insee",
-      "departement",
-      "email",
-      "magic_token",
-      "phone_number",
-      "nombre_objets",
-      "main_objet_img_url",
-      "main_objet_nom",
-      "main_objet_edifice",
-      "main_objet_emplacement",
+      "NOM",
+      "DEPARTEMENT",
+      "EMAIL",
+      "TMP_MAGIC_LINK",
+      "OBJETS_COMMUNE",
+      "TMP_OBJET_IMG_URL",
+      "TMP_OBJET_DESC_HTML",
     ]
   end
 

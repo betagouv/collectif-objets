@@ -31,7 +31,7 @@
         <ol>
           <li class="string input stringish">
             <%= label_tag :departement, "Département" %>
-            <%= text_field_tag :departement %>
+            <%= select_tag :departement, options_for_select(Commune.select(:departement).distinct.pluck(:departement).compact.sort) %>
           </li>
           <li>
             <%= submit_tag "Télécharger l'export CSV" %>
