@@ -18,9 +18,33 @@
   </div>
 </div>
 
+<div class="panel">
+  <h3>Send In Blue Export CSV Communes</h3>
+  <div class="panel_contents">
+    <p>
+      Génère un export CSV reconnu par SIB pour importer des contacts.
+      Contient une ligne par commune, avec les informations des objets utilisées dans les templates de campagnes.
+      Exclut les communes spécifiées manuellement par les CAOA
+    </p>
+    <%= form_tag export_sib_admin_communes_path, method: :get do %>
+      <fieldset class="inputs">
+        <ol>
+          <li class="string input stringish">
+            <%= label_tag :departement, "Département" %>
+            <%= text_field_tag :departement %>
+          </li>
+          <li>
+            <%= submit_tag "Télécharger l'export CSV" %>
+          </li>
+        </ol>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+
 
 <div class="panel">
-  <h3>Send In Blue ✉️</h3>
+  <h3>Send In Blue Copie Contacts✉️</h3>
   <div class="panel_contents">
     Cet outil permet de <b>copier</b> des contacts d'une liste vers une autre en <b>déclenchant les mécanismes des automatisations</b> Send In Blue (entrées et sorties des scénarios). Ce n'est malheureusement pas le cas via leur interface web.
     <%= form_tag admin_tools_enqueue_move_sib_contacts_path, method: :post do %>

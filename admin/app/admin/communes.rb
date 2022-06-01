@@ -5,6 +5,15 @@ ActiveAdmin.register Commune do
   actions :all, except: [:destroy, :new, :create]
   permit_params :status, :notes_from_enrollment, :enrolled_at, :completed_at
 
+  collection_action :export_sib, method: :get do
+    send_data(
+      SibExportCommunesCsv.new(params[:departement]).perform,
+      filename: "export.csv",
+      type: "text/csv",
+      disposition: "attachment; filename=export.csv"
+    )
+  end
+
   index do
     # selectable_column
     id_column
@@ -13,6 +22,7 @@ ActiveAdmin.register Commune do
     column :code_insee
     column :status
     column :first_user_email
+    column :objets_count
     column :recensements_summary, label: "Recensements"
     column :enrolled_at
     column :completed_at

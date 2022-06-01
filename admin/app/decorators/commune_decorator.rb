@@ -17,6 +17,10 @@ class CommuneDecorator < Draper::Decorator
     html.html_safe
   end
 
+  def objets_count
+    objets.count
+  end
+
   def recensements_photos_present
     recensements.any? && recensements.missing_photos.empty?
   end
