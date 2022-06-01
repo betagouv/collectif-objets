@@ -51,6 +51,10 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(etat_sanitaire_group) do
       click_on "Modifier"
+      expect(etat_sanitaire_group).to have_selector(
+        "select[name=\"recensement[analyse_etat_sanitaire]\"]",
+        visible: true
+      )
       select "En péril", from: "recensement[analyse_etat_sanitaire]"
     end
     click_on "Sauvegarder"
