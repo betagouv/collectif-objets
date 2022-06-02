@@ -57,13 +57,16 @@ namespace :users do
     end
   end
 
-  task :random_tokens, [] => :environment do |_, args|
-    commune_ids = User.select(:commune_id).distinct.map(&:commune_id)
-    (0..30).each do |i|
-      commune = Commune.where(id: commune_ids).where(departement: "65").include_objets_count.where("objets_count > 0").order(Arel.sql('RANDOM()')).first
-      user = commune.users.first
-      user.update!(magic_token: "test-#{commune.code_insee}")
-      puts "#{commune.nom} : http://localhost:3010/magic-authentication?magic-token=#{user.magic_token}"
+  task :simple_magic_tokens_and_mailcatch_mails, [] => :environment do |_, args|
+    raise if Rails.configuration.x.environment_specific_name == "production"
+
+    User.includes(:commune).each do |user|
+      user.update(
+        magic_token: user.commune.code_insee,
+        email: "commune-#{user.commune.code_insee}@mailcatch.com"
+      )
+    rescue ActiveRecord::RecordNotUnique
     end
   end
+
 end
