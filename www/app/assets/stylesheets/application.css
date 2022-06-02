@@ -56,6 +56,10 @@ a.co-footer-logo img {
   max-width: 100%;
 }
 
+.co--width-100 {
+  width: 100%;
+}
+
 .co--width-auto,
 .fr-select.co--width-auto {
   width: auto;
@@ -133,6 +137,10 @@ a.co-footer-logo img {
   justify-content: space-between;
 }
 
+.co-flex--justify-content-center {
+  justify-content: center;
+}
+
 .co-flex--gap-05rem {
   gap: .5rem;
 }
@@ -151,6 +159,10 @@ a.co-footer-logo img {
 
 .co-flex--column {
   flex-direction: column;
+}
+
+.co-flex--grow {
+  flex-grow: 1;
 }
 
 @media only screen and (min-width:780px) {
@@ -223,4 +235,14 @@ a.co-link--no-arrow[target="_blank"]::after {
 
 .co-transition--fade {
   transition: opacity 2s linear;
+}
+
+
+.co-button--high {
+  height: 6rem;
+}
+
+
+.fr-btn--icon-left.co-button--big-icon[class*=" fr-icon-"]::before {
+  --icon-size: 2rem;
 }

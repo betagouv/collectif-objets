@@ -8,7 +8,7 @@
   >
     <label class="fr-label" for="recensement_photos">
       <span class="fr-hint-text">
-        Taille maximale : 10 Mo. Formats supportés : jpg ou png.
+        Taille maximale : 10 Mo. Formats supportés : jpg ou png. Vous pouvez ajouter plusieurs photos.
       </span>
     </label>
     <input name="recensement[photos][]" type="hidden" value="" autocomplete="off">
@@ -17,31 +17,46 @@
       data-direct-upload-url="<%= rails_direct_uploads_url %>"
       name="recensement[photos][]"
       accept="image/*"
+      multiple
+      value=""
+      autocomplete="off"
       data-recensement-form--upload-photo-target="input"
       data-recensement-form--uploader-target="input"
-      data-action="change->recensement-form--upload-photo#refreshPreview change->recensement-form--uploader#addInput change->recensement#refreshFields direct-upload:progress->recensement-form--upload-photo#setProgress"
+      data-action="change->recensement-form--upload-photo#refreshPreview change->recensement-form--uploader#onInputChange change->recensement#refreshFields direct-upload:progress->recensement-form--upload-photo#setProgress"
       class="hide"
     >
 
     <div
       class="hide"
-      data-recensement-form--upload-photo-target="capturePhotoButton"
+      data-recensement-form--upload-photo-target="ctaWithCapture"
     >
       <button
-        class="fr-btn fr-btn--secondary fr-icon-camera-line fr-btn--icon-right"
+        class="fr-btn fr-btn--primary fr-icon-camera-line fr-btn--icon-left co-button--high co-button--big-icon co--width-100 co-flex--justify-content-center"
         data-action="recensement-form--upload-photo#triggerCapture"
       >
-        Prendre une photo avec mon smartphone
+        Prendre une photo
       </button>
-      <p>Ou</p>
+      <p class="co-text--center fr-mt-2w fr-mb-1w">
+        Ou
+      </p>
+      <button
+        class="fr-btn fr-btn--tertiary-no-outline fr-icon-attachment-line fr-btn--icon-right co--width-100 co-flex--justify-content-center"
+        data-action="recensement-form--upload-photo#triggerBrowse"
+      >
+        Ajouter une photo enregistrée
+      </button>
     </div>
 
-    <button
-      class="fr-btn fr-btn--secondary fr-icon-attachment-line fr-btn--icon-right"
-      data-action="recensement-form--upload-photo#triggerBrowse"
+    <div
+      data-recensement-form--upload-photo-target="ctaWithoutCapture"
     >
-      Ajouter une photo déjà prise
-    </button>
+      <button
+        class="fr-btn fr-btn--primary fr-icon-attachment-line fr-btn--icon-right"
+        data-action="recensement-form--upload-photo#triggerBrowse"
+      >
+        Ajouter une photo
+      </button>
+    </div>
   </div>
   <div
     class="hide co-flex co-flex--align-items-center fr-mb-2w"

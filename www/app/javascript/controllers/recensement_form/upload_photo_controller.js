@@ -19,19 +19,19 @@ export default class extends Controller {
     "preview",
     "metadata",
     "progress",
-    "capturePhotoButton"
+    "ctaWithCapture",
+    "ctaWithoutCapture"
   ]
 
   connect() {
     const tmpElt = document.createElement('input')
     this.captureSupported = tmpElt.capture != undefined
-    console.log('capture supported: ' + this.captureSupported)
     this.refreshPreview()
   }
 
   refreshPreview() {
-    if (this.captureSupported)
-      this.capturePhotoButtonTarget.classList.remove("hide")
+    this.ctaWithCaptureTarget.classList.toggle("hide", !this.captureSupported)
+    this.ctaWithoutCaptureTarget.classList.toggle("hide", this.captureSupported)
     if (this.inputTarget.files.length === 0) {
     } else {
       const file = this.inputTarget.files[0]
@@ -63,7 +63,6 @@ export default class extends Controller {
   triggerCapture(e) {
     e.preventDefault()
     this.inputTarget.setAttribute("capture", "environment")
-    // accept="image/*"
     this.inputTarget.click()
     this.inputTarget.removeAttribute("capture")
   }
