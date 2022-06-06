@@ -15,8 +15,8 @@ class UserMailerPreview < ActionMailer::Preview
 
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/AbcSize
-  def dossier_accepted_email
-    dossier =  Dossier.new(
+  def dossier_accepted_email(dossier = nil)
+    dossier = dossier&.clone || Dossier.new(
       commune: Commune.new(
         nom: "Martigues",
         users: [
@@ -47,8 +47,8 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(dossier:).dossier_accepted_email
   end
 
-  def dossier_rejected_email
-    dossier =  Dossier.new(
+  def dossier_rejected_email(dossier = nil)
+    dossier = dossier&.clone || Dossier.new(
       commune: Commune.new(
         nom: "Martigues",
         users: [

@@ -115,6 +115,10 @@
 
   </style>
   <style type="text/css">
+    .co-pre-line {
+      white-space: pre-line;
+    }
+
   </style>
 </head>
 
@@ -196,7 +200,7 @@
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Madame, Monsieur le Maire,<br /><br /> Merci pour le dossier de recensements des objets protégés de <%= @commune.nom %> que vous avez envoyé. Malheureusement, les conservateurs ne sont pas en mesure de l'analyser en l'état.</div>
+                        <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">Madame, Monsieur le Maire,<br /><br /> Merci pour le dossier de recensement des objets protégés de <%= @commune.nom %> que vous avez envoyé. Malheureusement, les conservateurs ne sont pas en mesure de l'analyser en l'état.</div>
                       </td>
                     </tr>
                   </tbody>
@@ -219,7 +223,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-left:2px solid rgb(0,0,145);vertical-align:top;" width="100%">
                   <tbody>
                     <tr>
-                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                      <td align="left" class="co-pre-line" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                         <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;font-style:italic;line-height:1;text-align:left;color:#000000;"><%= @dossier.notes_conservateur %></div>
                       </td>
                     </tr>

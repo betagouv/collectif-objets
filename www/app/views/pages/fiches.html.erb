@@ -1,0 +1,13 @@
+<main class="fr-container fr-pb-16w fr-pt-2w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [["Accueil", root_path]],
+    current_page_label: "Fiches"
+  ) %>
+  <h1>Fiches</h1>
+  <ul>
+    <% [:vol, :securisation, :nuisibles].each do |key| %>
+      <li><%= link_to t("pages.pdf_embed.title.fiche_#{key}"), fiche_path(pdf: "fiche_#{key}") %></li>
+    <% end %>
+  </ul>
+</main>

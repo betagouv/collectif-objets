@@ -18,7 +18,9 @@ class FormBuilderDsfr < ActionView::Helpers::FormBuilder
   end
 
   def text_area(method, options = {})
-    super(method, options.merge(class: "fr-input"))
+    options[:class] ||= ""
+    options[:class] += " fr-input"
+    super(method, options)
   end
 
   def select(method, choices, options = {}, html_options = {})

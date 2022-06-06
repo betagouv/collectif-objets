@@ -6,8 +6,19 @@ module Conservateurs
 
     def new; end
 
+    def update
+      @dossier.update(**dossier_params.to_h)
+      if @dossier.notes_conservateur.blank?
+        @dossier.errors.add(
+          :notes_conservateur,
+          "Vous devez renseigner des retours pour la commune"
+        )
+      end
+      render partial: "form", locals: { dossier: @dossier }
+    end
+
     def create
-      if @dossier.reject!(**dossier_params.to_h)
+      if @dossier.reject!
         UserMailer.with(dossier: @dossier).dossier_rejected_email.deliver_later
         redirect_to conservateurs_commune_path(@commune, warning: "Le dossier a été renvoyé à la commune")
       else
