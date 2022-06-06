@@ -210,8 +210,8 @@ nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank"
       </div>
     </div>
 
-    <div class="fr-grid-row fr-my-12w">
-      <div class="fr-col-md-6">
+    <div class="fr-grid-row fr-grid-row--gutters fr-my-12w">
+      <div class="fr-col-md-6 fr-mb-2w">
         <%= render "form_photos", f: %>
       </div>
       <div class="fr-col-md-6 co-text--muted co-form-explanations">
@@ -229,8 +229,8 @@ nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank"
     </div>
 
     <div class="fr-grid-row fr-my-12w" data-recensement-target="notes">
-      <div class="fr-col-md-6">
-        <div class="fr-input-group">
+      <div class="fr-col-md-6 co-flex--grow">
+        <div class="fr-form-group">
           <%= f.label :notes %>
           <%= f.text_area :notes %>
         </div>
@@ -243,9 +243,16 @@ nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank"
       </div>
     </div>
 
-    <button type="submit" data-recensement-target="submit" class="fr-btn">
-      Enregistrer ce recensement
-    </button>
-    <span class="fr-ml-2w">Vous pourrez toujours le modifier après l'avoir enregistré</span>
+    <div class="fr-grid-row">
+      <div class="col-md-6">
+        <button type="submit" data-recensement-target="submit" class="fr-btn">
+        Enregistrer ce recensement
+        </button>
+        <br />
+        <span class="co-text--italic">
+          Vous pourrez toujours le modifier après l'avoir enregistré
+        </span>
+      </div>
+    </div>
   <% end %>
 </main>

@@ -22,6 +22,7 @@ class RecensementsController < ApplicationController
       SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => @recensement.id })
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
+      @recensement.photos = []
       render :new, status: :unprocessable_entity
     end
   end

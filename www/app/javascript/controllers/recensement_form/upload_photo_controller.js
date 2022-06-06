@@ -18,14 +18,20 @@ export default class extends Controller {
     "img",
     "preview",
     "metadata",
-    "progress"
+    "progress",
+    "ctaWithCapture",
+    "ctaWithoutCapture"
   ]
 
   connect() {
+    const tmpElt = document.createElement('input')
+    this.captureSupported = tmpElt.capture != undefined
     this.refreshPreview()
   }
 
   refreshPreview() {
+    this.ctaWithCaptureTarget.classList.toggle("hide", !this.captureSupported)
+    this.ctaWithoutCaptureTarget.classList.toggle("hide", this.captureSupported)
     if (this.inputTarget.files.length === 0) {
     } else {
       const file = this.inputTarget.files[0]
@@ -47,5 +53,17 @@ export default class extends Controller {
 
   setProgress(event) {
     this.progressTarget.style.width = `${event.detail.progress}%`
+  }
+
+  triggerBrowse(e) {
+    e.preventDefault()
+    this.inputTarget.click()
+  }
+
+  triggerCapture(e) {
+    e.preventDefault()
+    this.inputTarget.setAttribute("capture", "environment")
+    this.inputTarget.click()
+    this.inputTarget.removeAttribute("capture")
   }
 }

@@ -48,7 +48,7 @@ export default class extends Controller {
   toggleSection(sectionElt, enabled) {
     sectionElt.querySelector("legend")?.classList?.
       toggle("co-legend--disabled", !enabled)
-    sectionElt.querySelectorAll('input:not([type=hidden]):not([data-force-disabled]), textarea:not([data-force-disabled])')
+    sectionElt.querySelectorAll('input:not([type=hidden]):not([data-force-disabled]), textarea:not([data-force-disabled]),button:not([data-force-disabled])')
       .forEach(elt => elt.toggleAttribute("disabled", !enabled))
     sectionElt.querySelectorAll('.fr-input-group:not([data-force-disabled]), .fr-upload-group:not([data-force-disabled])')
       .forEach(elt => elt.classList.toggle("fr-input-group--disabled", !enabled))
