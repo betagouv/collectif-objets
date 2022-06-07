@@ -33,12 +33,6 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
     )
   end
 
-  before do
-    dbl = instance_double(UserMailer)
-    expect(UserMailer).to receive(:with).and_return(dbl)
-    expect(dbl).to receive(:dossier_rejected_email).and_return(double(deliver_later: true))
-  end
-
   scenario "full" do
     login_as(conservateur, scope: :conservateur)
     visit "/conservateurs/departements"
@@ -66,6 +60,11 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
     click_on "Photos floues"
     expect(find_field("dossier[notes_conservateur]").value).to \
       include("Une partie des photos que vous avez envoyées sont trop floues pour être acceptées")
+    click_on "Préparer le mail de renvoi"
+    iframe = find("iframe.co-mail-preview-iframe")
+    within_frame(iframe) do
+      expect(page).to have_content(/Monsieur le Maire/i)
+    end
     click_on "Renvoyer le dossier"
     expect(page).to have_content(/Dossier renvoyé à la commune/i)
   end

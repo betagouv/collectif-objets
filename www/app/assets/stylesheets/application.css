@@ -237,11 +237,15 @@ a.co-link--no-arrow[target="_blank"]::after {
   transition: opacity 2s linear;
 }
 
+/* FORMS */
+
+.co-textarea--high.fr-input {
+  min-height: 10rem;
+}
 
 .co-button--high {
   height: 6rem;
 }
-
 
 .fr-btn--icon-left.co-button--big-icon[class*=" fr-icon-"]::before {
   --icon-size: 2rem;

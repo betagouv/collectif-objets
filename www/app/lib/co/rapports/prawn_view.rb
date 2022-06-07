@@ -55,11 +55,29 @@ module Co
         start_new_page
         display_dossier_notes
         start_new_page
-        @dossier.recensements.each_with_index do |recensement, index|
+        @dossier.recensements.each do |recensement|
           Co::Rapports::RecensementPrawn.new(recensement, self).display
-          start_new_page unless index == (@dossier.recensements.count - 1)
+          start_new_page
         end
+        display_last_page
       end
+
+      # rubocop:disable Metrics/MethodLength
+      def display_last_page
+        move_down 100
+        text(
+          "Fin du dossier de recensement analysé le #{I18n.l(@dossier.pdf_updated_at.to_date)}" \
+          " par #{@dossier.conservateur} (#{@dossier.conservateur.email})",
+          align: :center
+        )
+        return unless @dossier.recensements.any?(&:analyse_fiches?)
+
+        move_down 100
+        fiches_url = "https://collectif-objets.beta.gouv.fr/fiches"
+        text("Vous pouvez retrouver toutes les fiches conseil sur", align: :center)
+        text("<u><link href='#{fiches_url}'>#{fiches_url}</link></u>", align: :center, inline_format: true)
+      end
+      # rubocop:enable Metrics/MethodLength
 
       def display_footer
         number_pages(

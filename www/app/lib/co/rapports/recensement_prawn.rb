@@ -122,7 +122,8 @@ module Co
       def display_analyse_fiches
         text "<b>#{I18n.t('dossier.rapport.recensement.analyse_fiches')}</b>", inline_format: true
         recensement.analyse_fiches.each do |fiche|
-          text "· voir la fiche associée : <b>#{fiche}</b>", inline_format: true
+          fiche_url = "https://collectif-objets.beta.gouv.fr/fiche?pdf=fiche_#{fiche}"
+          text "· <u><link href='#{fiche_url}'>voir la fiche #{fiche}</link></u>", inline_format: true
         end
         move_down 20
       end

@@ -32,8 +32,8 @@
             <% if recensement.analyse_fiches.empty? %>
               <%= t(".no_fiches") %>
             <% end %>
-            <% recensement.analyse_fiches.each do |guide| %>
-              <%= badge { t("recensement.analyse_fiches.#{guide}") } %>
+            <% recensement.analyse_fiches.each do |fiche| %>
+              <%= badge { t(".fiche_#{fiche}") } %>
             <% end %>
           </td>
           <td>

@@ -1,0 +1,26 @@
+<div class="co-mail-preview-wrapper">
+  <table class="co-mail-preview-header fr-px-4w fr-mb-2w fr-text--sm">
+    <tr>
+      <th>Émetteur&nbsp;:</th>
+      <td><%= mail.header['from'] %></td>
+    </tr>
+    <tr>
+      <th>Répondre&nbsp;à&nbsp;:</th>
+      <td><%= mail.header['reply-to'] %></td>
+    </tr>
+    <tr>
+      <th>Destinataire&nbsp;:</th>
+      <td><%= mail.header['to'] %></td>
+    </tr>
+    <tr>
+      <th>Sujet&nbsp;:</th>
+      <td><%= mail.subject %></td>
+    </tr>
+  </table>
+  <hr />
+  <iframe
+    class="co-mail-preview-iframe"
+    srcdoc="<%= (mail.body.to_s.presence || mail.html_part.body.to_s) + render("conservateurs/mail_preview_css") %>"
+  >
+  </iframe>
+</div>

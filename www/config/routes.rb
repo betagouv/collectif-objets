@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   get "/confidentialite", to: "pages#confidentialite"
   get "comment-ca-marche", to: "pages#aide", as: "aide"
   get "guide-de-recensement", to: "pages#guide", as: "guide"
+  get "/fiches", to: "pages#fiches"
+  get "/fiche", to: "pages#pdf_embed"
+  get "/pdf", to: "pages#pdf_download", as: "pdf_download"
 
   resources :objets, only: [:index, :show] do
     resources :recensements, except: [:index, :show, :destroy]
@@ -65,7 +68,7 @@ Rails.application.routes.draw do
     resources :dossiers, only: [] do
       resource :rapport, only: [:update]
       resource :accept, only: [:new, :create]
-      resource :reject, only: [:new, :create]
+      resource :reject, only: [:new, :create, :update]
       resource :private_notes, only: [:update], controller: "dossiers/private_notes"
     end
   end

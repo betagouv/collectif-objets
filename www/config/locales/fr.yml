@@ -93,12 +93,16 @@ fr:
           updated: Modifications conservateur
         no_actions: Aucune action
         no_fiches: Aucune fiche
+        fiche_vol: "Fiche Vol"
+        fiche_securisation: "Fiche Sécurisation"
+        fiche_nuisibles: "Fiche Nuisibles"
     rejects:
       new:
         head_title: "Renvoyer le dossier de recensement de %{commune}"
         title: "Renvoyer le dossier de recensement de %{commune}"
         instructions_html: "Une fois le dossier renvoyé, la commune pourra modifier ses recensements : par exemple rajouter des photos ou déclarer des objets retrouvés. En contrepartie, le dossier sera bloqué pour vous : <b>vous ne pourrez plus analyser les recensements déjà soumis</b>. Il faudra alors attendre que la commune vous retourne le dossier une nouvelle fois pour l'analyser."
         instructions_overrides_html: Vous avez modifié des informations de recensement renseignées par la commune sur %{count} objets. Il s'agit d'états sanitaires ou d'évaluations de sécurité que vous avez corrigées. <b>La commune ne pourra plus modifier ces champs</b>, votre évaluation prime.<br />Si vous souhaitez rendre la main à la commune, vous pouvez retirer vos modifications sur ces recensements.
+      form:
         error: "Une erreur s'est produite :"
         notes_conservateur:
           undo: Restaurer le message précédent
@@ -106,16 +110,18 @@ fr:
           label: "Messages prédéfinis :"
           missing_photos:
             button: Photos non disponibles
-            message: "Veuillez rajouter les photos manquantes\n Cordialement"
+            message: "Veuillez rajouter les photos manquantes\nCordialement"
           blurry_photos:
             button: Photos floues
-            message: "Une partie des photos que vous avez envoyées sont trop floues pour être acceptées. Pouvez-vous en prendre de nouvelles ?\n Cordialement"
+            message: "Une partie des photos que vous avez envoyées sont trop floues pour être acceptées. Pouvez-vous en prendre de nouvelles ?\nCordialement"
           mauvais_objets:
             button: Mauvais objets
             message: ""
           suspicious:
             button: Recensement suspect
             message: ""
+        submit_preview_initial: Préparer le mail de renvoi
+        submit_preview: Rafraîchir la prévisualisation du mail
         submit: Renvoyer le dossier
     rapports:
       form:
@@ -181,9 +187,9 @@ fr:
       identifier: Identifier
       localiser: Localiser
     analyse_fiches:
-      vol: Comment porter plainte ?
-      securisation: Comment sécuriser mon édifice et mes objets ?
-      insectes: Comment évaluer le danger des insectes xylophages ?
+      vol: "Comment porter plainte ?&nbsp;<a href=\"/fiche?pdf=fiche_vol\">voir la fiche</a>"
+      securisation: "Comment sécuriser mon édifice et mes objets ?&nbsp;<a href=\"/fiche?pdf=fiche_securisation\">voir la fiche</a>"
+      nuisibles: "Comment évaluer le danger des insectes xylophages ?&nbsp;<a href=\"/fiche?pdf=fiche_nuisibles\">voir la fiche</a>"
   dossier:
     recensements_pending_count_html:
       zero: Vous avez revu <span class='fr-h4'>100%</span> des recensements de cette commune
@@ -209,6 +215,13 @@ fr:
     pdf_embed:
       embed_title: Rapport de recensement
       download: Télécharger le fichier PDF
+  pages:
+    pdf_embed:
+      title:
+        guide: "Guide de Recensement"
+        fiche_vol: "Fiche Signaler un vol"
+        fiche_securisation: "Fiche Sécurisation"
+        fiche_nuisibles: "Fiche Nuisibles"
   activerecord:
     errors:
       models:

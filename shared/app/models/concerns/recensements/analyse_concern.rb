@@ -23,11 +23,11 @@ module Recensements
 
     ANALYSE_FICHE_VOL = "vol"
     ANALYSE_FICHE_SECURISATION = "securisation"
-    ANALYSE_FICHE_INSECTES = "insectes"
+    ANALYSE_FICHE_NUISIBLES = "nuisibles"
     ANALYSE_FICHES = [
       ANALYSE_FICHE_VOL,
       ANALYSE_FICHE_SECURISATION,
-      ANALYSE_FICHE_INSECTES
+      ANALYSE_FICHE_NUISIBLES
     ].freeze
 
     included do

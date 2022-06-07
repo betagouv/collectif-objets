@@ -1,4 +1,11 @@
 <mjml>
+  <mj-head>
+    <mj-style>
+      .co-pre-line {
+        white-space: pre-line;
+      }
+    </mj-style>
+  </mj-head>
   <mj-body>
     <mj-section>
       <mj-column vertical-align="middle">
@@ -17,15 +24,13 @@
         <mj-text>
           Madame, Monsieur le Maire,<br /><br />
 
-          Merci pour le dossier de recensements des objets protégés de <%= @commune.nom %> que vous avez envoyé. Malheureusement, les conservateurs ne sont pas en mesure de l'analyser en l'état.
+          Merci pour le dossier de recensement des objets protégés de <%= @commune.nom %> que vous avez envoyé. Malheureusement, les conservateurs ne sont pas en mesure de l'analyser en l'état.
         </mj-text>
       </mj-column>
     </mj-section>
     <mj-section padding-left="20px">
       <mj-column border-left="2px solid rgb(0,0,145)">
-        <mj-text font-style="italic">
-          <%= @dossier.notes_conservateur %>
-        </mj-text>
+        <mj-text font-style="italic" css-class="co-pre-line"><%= @dossier.notes_conservateur %></mj-text>
       </mj-column>
     </mj-section>
     <mj-section>
