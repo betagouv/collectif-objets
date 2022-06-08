@@ -66,9 +66,36 @@
       <% end %>
     </div>
     <div class="fr-col-md-8">
-      <div class="co-image-container">
-        <%= image_tag objet_first_image_or_recensement_photo_url(@objet), class: "co-objet-image co-spinner-bg" %>
+      <div data-controller="photo-gallery">
+        <p class="co-text--center">
+          <b>
+            <%= t(".pop_photos_count", count: @objet.image_urls.count) %>
+          </b>
+          <a href="#" data-action="photo-gallery#show" class="fr-ml-2w">
+            Voir la galerie <%= "complète" if @objet.image_urls.count > 6 %>
+          </a>
+        </p>
+        <div
+          data-photo-gallery-target="photos"
+          class="co-photos-grid"
+          style="--max-height: <%= @objet.image_urls.count > 2 ? 250 : 500 %>px;"
+        >
+          <% @objet.image_urls.each_with_index do |image_url, index| %>
+            <%= link_to image_url, "data-action": "photo-gallery#show", class: (index >= 6 ? "hide" : "") do %>
+              <%= image_tag image_url %>
+            <% end %>
+          <% end %>
+        </div>
+        <% if @objet.image_urls.count > 6 %>
+          <p class="fr-ml-2w fr-mt-2w co-text--center">
+            <a href="#" data-action="photo-gallery#show">
+              Voir les <%= @objet.image_urls.count - 6 %> autres photos dans la galerie
+            </a>
+          </p>
+        <% end %>
       </div>
     </div>
   </div>
 </main>
+
+<script src="/spotlight.bundle.js"></script>

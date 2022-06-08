@@ -389,3 +389,9 @@ fr:
       long: "%A %d %B %Y %Hh%M"
       short: "%d/%m/%Y %Hh%M"
     pm: pm
+  objets:
+    show:
+      pop_photos_count:
+        zero: Aucune photo recensée pour cet objet
+        one: 1 photo recensée pour cet objet
+        other: "%{count} photos recensées pour cet objet"
