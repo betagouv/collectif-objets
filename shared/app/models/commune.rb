@@ -3,7 +3,7 @@
 class Commune < ApplicationRecord
   include Communes::IncludeCountsConcern
 
-  DISPLAYABLE_DEPARTEMENTS = %w[13 26 30 51 52 58 65 72].freeze
+  DISPLAYABLE_DEPARTEMENTS = %w[08 13 26 30 51 52 58 65 72 88].freeze
 
   include AASM
   aasm(column: :status, timestamps: true) do
