@@ -7,28 +7,3 @@
   height: 100%;
   width: 100%;
 }
-
-.co-photos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-template-rows: repeat(auto-fit, var(--max-height));
-  grid-gap: .5rem;
-  align-items: center;
-}
-
-.co-photos-grid>a {
-  text-align: center;
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  text-decoration: none !important;
-  background-image: none !important;
-  cursor: zoom-in;
-}
-
-.co-photos-grid img {
-  object-fit: contain;
-  max-height: 100%;
-  max-width: 100%;
-}

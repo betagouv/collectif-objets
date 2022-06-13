@@ -104,5 +104,8 @@ Rails.application.configure do
   config.force_ssl = true
   config.x.admin_host = ENV["ADMIN_HOST"]
   config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
-  config.action_mailer.show_previews = true if config.x.environment_specific_name == "staging"
+  if config.x.environment_specific_name
+    config.action_mailer.show_previews = true
+    config.view_component.show_previews = true
+  end
 end

@@ -36,5 +36,8 @@ module CollectifObjets
     config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.view_component.preview_paths << "#{Rails.root}/spec/components/previews"
+    config.view_component.default_preview_layout = "component_preview"
   end
 end

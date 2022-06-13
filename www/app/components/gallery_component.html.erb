@@ -1,4 +1,7 @@
-<div data-controller="photo-gallery" class="fr-mb-4w">
+<div
+  data-controller="photo-gallery"
+  class="fr-mb-4w co-gallery"
+>
   <p class="co-text--center">
     <b>
       <%= title %>
@@ -9,20 +12,141 @@
   </p>
   <div
     data-photo-gallery-target="photos"
-    class="co-photos-grid"
-    style="--max-height: <%= count > 2 ? 250 : 500 %>px;"
+    class="co-photos"
+    data-urls-json="<%= photo_urls.to_json %>"
   >
-    <% photo_urls.each_with_index do |image_url, index| %>
-      <%= link_to image_url, "data-action": "photo-gallery#show", class: (index >= 6 ? "hide" : "") do %>
-        <%= image_tag image_url %>
+    <div class="co-first">
+      <%= link_to(
+        photo_urls.first,
+        "data-action": "photo-gallery#show",
+        "data-index": "1",
+        class: "co-cursor--zoom-in",
+       ) do %>
+        <%= image_tag photo_urls.first %>
+        <span class="fr-icon-zoom-in-line co-gallery-magnifier-icon" aria-hidden="true"></span>
       <% end %>
+    </div>
+
+    <% if count > 1 %>
+      <div class="co-thumbs">
+        <% photo_urls.from(1).to(thumbs_count - 1).each_with_index do |image_url, index| %>
+          <div class="co-gallery-thumb">
+            <%= link_to(
+              image_url,
+              "data-action": "photo-gallery#show",
+              "data-index": index + 2,
+              class: "co-cursor--zoom-in"
+            ) do %>
+              <%= image_tag image_url %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="co-gallery-others">
+          <a
+            href="#"
+            data-action="photo-gallery#show"
+            data-index="5"
+            class="co-flex co-flex--align-items-center"
+          >
+            <span class="co-flex--grow" >
+              <% if hidden_photos_count > 0 %>
+                +<%= hidden_photos_count %> autres …
+              <% else %>
+                voir en grand
+              <% end %>
+            </span>
+          </a>
+        </div>
+      </div>
     <% end %>
   </div>
-  <% if count > 6 %>
-    <p class="fr-ml-2w fr-mt-2w co-text--center">
-      <a href="#" data-action="photo-gallery#show">
-        Voir les <%= count - 6 %> autres photos dans la galerie
-      </a>
-    </p>
-  <% end %>
 </div>
+
+<style>
+.co-gallery {
+  text-align: center;
+}
+
+.co-gallery .co-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-rows: repeat(auto-fit, var(--max-height));
+  grid-gap: .5rem;
+  align-items: center;
+  overflow: hidden;
+}
+
+.co-gallery .co-grid img {
+  padding: 1rem;
+}
+
+/* display: block;
+width: 100%;
+height: 100%; */
+
+.co-gallery .co-photos a {
+  overflow: hidden;
+  text-decoration: none !important;
+  background-image: none !important;
+}
+
+.co-gallery .co-first {
+  padding: 1rem;
+}
+
+.co-gallery .co-first > a {
+  position: relative;
+}
+
+.co-gallery .co-first img {
+  max-width: 500px;
+  max-height: 400px;
+}
+
+.co-gallery .co-thumbs {
+  display: flex;
+  height: 150px;
+  overflow: hidden;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.co-gallery .co-thumbs > div {
+  border: 1px solid #ccc;
+  height: 100%;
+  width: 150px;
+  padding: 5px;
+}
+
+.co-gallery .co-thumbs img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.co-cursor--zoom-in {
+  cursor: zoom-in;
+}
+
+.co-gallery-magnifier-icon {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: white;
+}
+
+.co-gallery-others {
+  border: 1px solid #ccc;
+}
+
+.co-gallery-others > a {
+  height: 100%;
+}
+
+.co-thumbs>div:hover {
+  background-color: #eee;
+}
+</style>
+
+<script src="/spotlight.bundle.js"></script>

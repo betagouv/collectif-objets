@@ -5,11 +5,11 @@ export default class extends Controller {
 
   show(e) {
     e.preventDefault()
+    const urls = JSON.parse(this.photosTarget.dataset.urlsJson)
+    const index = e.currentTarget.dataset.index ? Number(e.currentTarget.dataset.index) : null
     Spotlight.show(
-      Array.from(this.photosTarget.querySelectorAll("img")).map(e => ({
-        src: e.getAttribute("src"),
-        thumb: e.getAttribute("src"),
-      }))
+      urls.map(url => ({ src: url })),
+      { index: index }
     )
   }
 }
