@@ -17,7 +17,9 @@
         <mj-text>
           Madame, Monsieur le Maire,<br /><br />
 
-          Vous avez envoyé un dossier de recensement des objets protégés de <%= @commune.nom %>. Vous trouverez en pièce jointe de ce mail notre rapport contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils pour chaque objet que nous avons ajoutés.
+          Vous avez envoyé un dossier de recensement des objets protégés de <%= @commune.nom %> et je vous en remercie.<br />
+
+          Vous trouverez en pièce jointe de ce mail notre rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
 
           <br /><br />
 
