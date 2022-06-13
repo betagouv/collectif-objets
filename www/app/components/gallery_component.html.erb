@@ -1,0 +1,28 @@
+<div data-controller="photo-gallery" class="fr-mb-4w">
+  <p class="co-text--center">
+    <b>
+      <%= title %>
+    </b>
+    <a href="#" data-action="photo-gallery#show" class="fr-ml-2w">
+      <%= t(".open", count:) %>
+    </a>
+  </p>
+  <div
+    data-photo-gallery-target="photos"
+    class="co-photos-grid"
+    style="--max-height: <%= count > 2 ? 250 : 500 %>px;"
+  >
+    <% photo_urls.each_with_index do |image_url, index| %>
+      <%= link_to image_url, "data-action": "photo-gallery#show", class: (index >= 6 ? "hide" : "") do %>
+        <%= image_tag image_url %>
+      <% end %>
+    <% end %>
+  </div>
+  <% if count > 6 %>
+    <p class="fr-ml-2w fr-mt-2w co-text--center">
+      <a href="#" data-action="photo-gallery#show">
+        Voir les <%= count - 6 %> autres photos dans la galerie
+      </a>
+    </p>
+  <% end %>
+</div>

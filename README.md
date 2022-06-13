@@ -40,9 +40,9 @@ To restore dump on staging:
 ## Review Apps
 
 - create it manually from https://dashboard.scalingo.com/apps/osc-fr1/collectif-objets-staging/review-apps/manual
+- run `./scripts/deploy.sh www staging-prXX`
 - restore a safe dump (without recensements and attachments) to that new app's db
 - prevent erroneous mails with `scalingo --app collectif-objets-staging-prXXX run rake users:simple_magic_tokens_and_mailcatch_mails`
-- run `./scripts/deploy.sh www staging-prXX`
 
 ## Documentation
 

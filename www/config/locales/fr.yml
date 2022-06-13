@@ -395,6 +395,11 @@ fr:
         zero: Aucune photo connue pour cet objet
         one: 1 photo connue pour cet objet
         other: "%{count} photos connues pour cet objet"
-      open_gallery_count:
-        one: Agrandir
-        other: Voir la galerie
+  gallery_component:
+    open:
+      one: Agrandir
+      other: Voir la galerie
+    title:
+      zero: Aucune photo
+      one: 1 photo
+      other: "%{count} photos"
