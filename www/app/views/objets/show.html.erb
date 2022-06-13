@@ -72,7 +72,7 @@
             <%= t(".pop_photos_count", count: @objet.image_urls.count) %>
           </b>
           <a href="#" data-action="photo-gallery#show" class="fr-ml-2w">
-            Voir la galerie <%= "complète" if @objet.image_urls.count > 6 %>
+            <%= t(".open_gallery_count", count: @objet.image_urls.count) %>
           </a>
         </p>
         <div

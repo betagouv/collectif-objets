@@ -392,6 +392,9 @@ fr:
   objets:
     show:
       pop_photos_count:
-        zero: Aucune photo recensée pour cet objet
-        one: 1 photo recensée pour cet objet
-        other: "%{count} photos recensées pour cet objet"
+        zero: Aucune photo connue pour cet objet
+        one: 1 photo connue pour cet objet
+        other: "%{count} photos connues pour cet objet"
+      open_gallery_count:
+        one: Agrandir
+        other: Voir la galerie
