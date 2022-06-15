@@ -12,27 +12,39 @@
     ],
     current_page_label: @objet.nom
   ) %>
-  <h2><%= @objet.nom %></h2>
-  <p>📍 <%= @objet.commune.nom %> (<%= @objet.departement %>) - ⛪️ <%= @objet.edifice_nom %></p>
+  <div class="co-flex co-flex--align-items-center co-flex--gap-1rem co-flex--wrap fr-mb-8w">
+    <h2 class="fr-mb-0"><%= @objet.nom %></h2>
+    <%= render "objets/recensement_badge", objet: @objet %>
+  </div>
 
   <div class="fr-grid-row fr-pb-4w fr-grid-row--gutters">
-    <div class="fr-col-md-4">
-      <% if @objet.commune == current_user&.commune %>
+    <div class="fr-col-md-6">
+      <% if @objet.commune == current_user&.commune && @objet.current_recensement&.editable?%>
         <p>
-          <%= render "objets/recensement_badge", objet: @objet %>
-          <% if @objet.current_recensement&.editable? %>
-            <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-link fr-fi-edit-line fr-link--icon-right" %>
-          <% end %>
+          <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-btn fr-btn--secondary fr-fi-edit-line fr-btn--icon-right" %>
         </p>
       <% end %>
-      <p>
-        <b>Nom courant</b><br />
-        <%= @objet.nom_courant %>
-      </p>
+
+      <% if @objet.commune == current_user&.commune && @objet.recensable? %>
+        <div class="fr-mb-4w">
+          <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
+        </div>
+      <% end %>
+
+      <%= render(GalleryComponent.new(
+        photos: @objet.image_urls,
+        title: t(".pop_photos_count", count: @objet.image_urls.count),
+        responsive_versions: [:small]
+      )) %>
+
       <p>
         <b>Emplacement</b><br />
         Se situe dans l'édifice <b><%= @objet.edifice_nom %></b><br />
         <i><%= @objet.emplacement %></i>
+      </p>
+      <p>
+        <b>Nom courant</b><br />
+        <%= @objet.nom_courant %>
       </p>
       <p>
         <b>Catégorie</b><br />
@@ -59,16 +71,13 @@
           class: "co-text--blue"
         ) %>
       </p>
-      <% if @objet.commune == current_user&.commune && @objet.recensable? %>
-        <div>
-          <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
-        </div>
-      <% end %>
     </div>
-    <div class="fr-col-md-8">
-      <div class="co-image-container">
-        <%= image_tag objet_first_image_or_recensement_photo_url(@objet), class: "co-objet-image co-spinner-bg" %>
-      </div>
+    <div class="fr-col-md-6">
+      <%= render(GalleryComponent.new(
+        photos: @objet.image_urls,
+        title: t(".pop_photos_count", count: @objet.image_urls.count),
+        responsive_versions: [:full]
+      )) %>
     </div>
   </div>
 </main>

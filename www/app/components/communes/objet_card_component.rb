@@ -2,7 +2,6 @@
 
 module Communes
   class ObjetCardComponent < ViewComponent::Base
-    include ObjetHelper
     attr_reader :objet
 
     with_collection_parameter :objet
@@ -17,13 +16,6 @@ module Communes
 
     def badges
       @badges = [recensement_badge, analyse_notes_badge].compact
-    end
-
-    def path
-      return edit_objet_recensement_path(objet, current_recensement) \
-        if current_recensement&.editable?
-
-      objet_path(objet)
     end
 
     def truncated_nom

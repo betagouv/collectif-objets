@@ -91,6 +91,10 @@ a.co-footer-logo img {
   font-style: italic;
 }
 
+.co-text--bold {
+  font-weight: bold;
+}
+
 .co-text--strikethrough,
 .co-text--strikethrough .fr-badge {
   text-decoration: line-through;
@@ -249,4 +253,16 @@ a.co-link--no-arrow[target="_blank"]::after {
 
 .fr-btn--icon-left.co-button--big-icon[class*=" fr-icon-"]::before {
   --icon-size: 2rem;
+}
+
+/* RESPONSIVE */
+
+@media only screen and (max-width:768px) {
+  .co-hide--md {
+    display: none;
+  }
+
+  .co-display--md.hide {
+    display: block !important;
+  }
 }

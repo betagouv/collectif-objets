@@ -79,4 +79,10 @@ Rails.application.routes.draw do
   get "health/js_error", to: "health#js_error"
 
   post "webhooks/chatwoot", to: "webhooks#chatwoot"
+
+  Rails.application.routes.draw do
+    unless Rails.configuration.x.environment_specific_name == "production"
+      mount Lookbook::Engine, at: "/lookbook"
+    end
+  end
 end
