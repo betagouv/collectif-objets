@@ -59,7 +59,7 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
     fill_in "dossier[notes_conservateur]", with: "Veuillez renseigner les photos please"
     click_on "Photos floues"
     expect(find_field("dossier[notes_conservateur]").value).to \
-      include("Une partie des photos que vous avez envoyées sont trop floues pour être acceptées")
+      include("Une partie des photos que vous avez envoyées sont trop floues")
     click_on "Préparer le mail de renvoi"
     iframe = find("iframe.co-mail-preview-iframe")
     within_frame(iframe) do

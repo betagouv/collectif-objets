@@ -110,16 +110,13 @@ fr:
           label: "Messages prédéfinis :"
           missing_photos:
             button: Photos non disponibles
-            message: "Veuillez rajouter les photos manquantes\nCordialement"
+            message: "Pour analyser votre recensement, le conservateur a absolument besoin d'une photo de l'objet. Or, il semblerait qu'aucune photo n'ait été soumise pour cet objet. Pourriez-vous s'il-vous-plaît en prendre et les ajouter à votre recensement ?"
           blurry_photos:
             button: Photos floues
-            message: "Une partie des photos que vous avez envoyées sont trop floues pour être acceptées. Pouvez-vous en prendre de nouvelles ?\nCordialement"
-          mauvais_objets:
+            message: "Une partie des photos que vous avez envoyées sont trop floues pour permettre l'analyse du conservateur. Pourriez-vous s'il-vous-plaît en prendre de nouvelles et les ajouter à votre recensement ?"
+          wrong_objects:
             button: Mauvais objets
-            message: ""
-          suspicious:
-            button: Recensement suspect
-            message: ""
+            message: "Les photos soumises ne semblent pas correspondre à l'objet mentionné. Si elles existent, vous pouvez vous référer aux photographies présentes dans la base nationale pour retrouver l'objet. Elles vous sont présentées juste avant le questionnaire."
         submit_preview_initial: Préparer le mail de renvoi
         submit_preview: Rafraîchir la prévisualisation du mail
         submit: Renvoyer le dossier
