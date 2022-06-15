@@ -5,9 +5,10 @@ class GalleryComponent < ViewComponent::Base
 
   MAX_PHOTOS_SHOWN = 4
 
-  def initialize(photos:, title: nil)
+  def initialize(photos:, title: nil, responsive_versions: %i[full small])
     @photo_urls = photos
     @title = title
+    @responsive_versions = responsive_versions
     super
   end
 
@@ -25,6 +26,26 @@ class GalleryComponent < ViewComponent::Base
     return 0 if count <= MAX_PHOTOS_SHOWN
 
     count - MAX_PHOTOS_SHOWN
+  end
+
+  def responsive_version_full?
+    @responsive_versions.include?(:full)
+  end
+
+  def responsive_version_small?
+    @responsive_versions.include?(:small)
+  end
+
+  def first_photo_url
+    return photo_urls.first if photo_urls.any?
+
+    "illustrations/photo-manquante.png"
+  end
+
+  def last_thumb_open_index
+    return 1 if count < MAX_PHOTOS_SHOWN
+
+    5
   end
 
   delegate :count, to: :photo_urls

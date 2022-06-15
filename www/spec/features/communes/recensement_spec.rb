@@ -104,6 +104,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).not_to have_content("Ciboire des malades")
     click_on "Revenir à la liste d'objets de ma commune"
     click_on "Ciboire des malades"
+    click_on "modifier le recensement"
     within("[data-recensement-target=etatSanitaire]") do
       find("label", text: "En péril").click
     end

@@ -1,178 +1,97 @@
-<div
-  data-controller="photo-gallery"
-  class="fr-mb-4w co-gallery"
->
-  <p class="co-text--center">
-    <b>
-      <%= title %>
-    </b>
-    <a href="#" data-action="photo-gallery#show" class="fr-ml-2w">
-      <%= t(".open", count:) %>
-    </a>
-  </p>
+
+<% if responsive_version_full? %>
   <div
+    data-controller="photo-gallery"
+    class="co-gallery co-gallery--full co-hide--md fr-mb-4w"
     data-photo-gallery-target="photos"
-    class="co-photos"
     data-urls-json="<%= photo_urls.to_json %>"
   >
-    <div class="co-hide--md">
-      <div class="co-first">
-        <%= link_to(
-          photo_urls.first,
-          "data-action": "photo-gallery#show",
-          "data-index": "1",
-          class: "co-cursor--zoom-in",
-        ) do %>
-          <%= image_tag photo_urls.first %>
-          <span class="fr-icon-zoom-in-line co-gallery-magnifier-icon" aria-hidden="true"></span>
-        <% end %>
-      </div>
-
-      <% if count > 1 %>
-        <div class="co-thumbs">
-          <% photo_urls.from(1).to(thumbs_count - 1).each_with_index do |image_url, index| %>
-            <div class="co-gallery-thumb">
-              <%= link_to(
-                image_url,
-                "data-action": "photo-gallery#show",
-                "data-index": index + 2,
-                class: "co-cursor--zoom-in"
-              ) do %>
-                <%= image_tag image_url %>
-              <% end %>
-            </div>
-          <% end %>
-          <div class="co-gallery-others">
-            <a
-              href="#"
-              data-action="photo-gallery#show"
-              data-index="5"
-              class="co-flex co-flex--align-items-center"
-            >
-              <span class="co-flex--grow" >
-                <% if hidden_photos_count > 0 %>
-                  +<%= hidden_photos_count %> autres …
-                <% else %>
-                  voir en grand
-                <% end %>
-              </span>
-            </a>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="co-hide co-display--md">
-      <% photo_urls.to(GalleryComponent::MAX_PHOTOS_SHOWN).each_with_index do |image_url, index| %>
-        <div class="fr-my-2w">
-          <%= link_to(
-            image_url,
-            "data-action": "photo-gallery#show",
-            "data-index": index + 1,
-            class: "co-cursor--zoom-in"
-          ) do %>
-            <%= image_tag image_url %>
-          <% end %>
-        </div>
-      <% end %>
-      <% if count > GalleryComponent::MAX_PHOTOS_SHOWN %>
-        <a
-          href="#"
-          data-action="photo-gallery#show"
-          data-index="5"
-          class="co-text--center fr-btn fr-btn--secondary"
-        >
-          voir toutes les photos
+    <p>
+      <b><%= title %></b>
+      <% if count > 0 %>
+        <a href="#" data-action="photo-gallery#show" class="fr-ml-2w">
+          <%= t(".open", count:) %>
         </a>
       <% end %>
+    </p>
+
+    <div class="co-first">
+      <%= link_to(
+        first_photo_url,
+        "data-action": "photo-gallery#show",
+        "data-index": "1",
+        class: "co-gallery--photo co-cursor--zoom-in",
+      ) do %>
+        <%= image_tag first_photo_url %>
+        <span class="fr-icon-zoom-in-line co-gallery-magnifier-icon" aria-hidden="true"></span>
+      <% end %>
     </div>
+
+    <% if count > 1 %>
+      <div class="co-thumbs">
+        <% photo_urls.from(1).to(thumbs_count - 1).each_with_index do |image_url, index| %>
+          <div class="co-gallery-thumb">
+            <%= link_to(
+              image_url,
+              "data-action": "photo-gallery#show",
+              "data-index": index + 2,
+              class: "co-gallery--photo co-cursor--zoom-in"
+            ) do %>
+              <%= image_tag image_url %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="co-gallery-others">
+          <a
+            href="#"
+            data-action="photo-gallery#show"
+            data-index="<%= last_thumb_open_index %>"
+            class="co-gallery--photo co-flex co-flex--align-items-center"
+          >
+            <span class="co-flex--grow" >
+              <%= t(".last_thumb", count: hidden_photos_count) %>
+            </span>
+          </a>
+        </div>
+      </div>
+    <% end %>
   </div>
-</div>
+<% end %>
 
-<style>
-.co-gallery {
-  text-align: center;
-}
-
-.co-gallery .co-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-template-rows: repeat(auto-fit, var(--max-height));
-  grid-gap: .5rem;
-  align-items: center;
-  overflow: hidden;
-}
-
-.co-gallery .co-photos img {
-  padding: 1rem;
-}
-
-.co-gallery .co-photos a {
-  overflow: hidden;
-  text-decoration: none !important;
-  background-image: none !important;
-}
-
-.co-gallery .co-first {
-  padding: 1rem;
-}
-
-.co-gallery .co-first > a {
-  position: relative;
-}
-
-.co-gallery .co-first img {
-  max-width: 500px;
-  max-height: 400px;
-}
-
-.co-gallery .co-thumbs {
-  display: flex;
-  height: 150px;
-  overflow: hidden;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.co-gallery .co-thumbs > div {
-  border: 1px solid #ccc;
-  height: 100%;
-  width: 150px;
-  padding: 5px;
-}
-
-.co-gallery .co-thumbs img {
-  object-fit: contain;
-  height: 100%;
-  width: 100%;
-}
-
-.co-cursor--zoom-in {
-  cursor: zoom-in;
-}
-
-.co-gallery-magnifier-icon {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  color: white;
-}
-
-.co-gallery-others {
-  border: 1px solid #ccc;
-}
-
-.co-gallery-others > a {
-  height: 100%;
-}
-
-.co-thumbs>div:hover {
-  background-color: #eee;
-}
-
-.co-gallery .co-display--md img {
-  max-width: 100%;
-}
-</style>
+<% if responsive_version_small? %>
+  <div
+    data-controller="photo-gallery"
+    class="co-gallery co-gallery--small hide co-display--md fr-mb-4w"
+    data-photo-gallery-target="photos"
+    data-urls-json="<%= photo_urls.to_json %>"
+  >
+    <div class="co-text--bold">
+      <%= title %>
+      <% if count == 0 %>
+        <span class="fr-icon-image-line" aria-hidden="true"></span>
+      <% end %>
+    </div>
+    <% if count > 0 %>
+      <div class="fr-my-2w">
+        <%= link_to(
+          first_photo_url,
+          "data-action": "photo-gallery#show",
+          class: "co-gallery--photo co-cursor--zoom-in"
+        ) do %>
+          <%= image_tag first_photo_url %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if count > 1 %>
+      <a
+        href="#"
+        data-action="photo-gallery#show"
+        class="fr-link fr-link--icon-right fr-icon-zoom-in-line"
+      >
+        Voir la galerie de <%= count %> photos
+      </a>
+    <% end %>
+  </div>
+<% end %>
 
 <script src="/spotlight.bundle.js"></script>

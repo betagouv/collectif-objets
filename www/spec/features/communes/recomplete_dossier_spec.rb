@@ -55,6 +55,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text(/Jean Lobo/i)
     expect(page).to have_text("Veuillez prendre de meilleures photos")
     click_on "Bouquet d'Autel"
+    click_on "modifier le recensement"
     expect(page).to have_field("recensement[etat_sanitaire_edifice]", disabled: false, visible: false)
     expect(page).to have_field("recensement[etat_sanitaire]", disabled: true, visible: false)
     etat_sanitaire_group = all(:xpath, "//input[@name='recensement[etat_sanitaire]']", visible: false)[0]

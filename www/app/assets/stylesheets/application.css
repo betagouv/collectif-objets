@@ -91,6 +91,10 @@ a.co-footer-logo img {
   font-style: italic;
 }
 
+.co-text--bold {
+  font-weight: bold;
+}
+
 .co-text--strikethrough,
 .co-text--strikethrough .fr-badge {
   text-decoration: line-through;
@@ -259,6 +263,6 @@ a.co-link--no-arrow[target="_blank"]::after {
   }
 
   .co-display--md.hide {
-    display: none;
+    display: block !important;
   }
 }

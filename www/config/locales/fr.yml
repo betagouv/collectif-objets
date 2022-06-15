@@ -403,3 +403,7 @@ fr:
       zero: Aucune photo
       one: 1 photo
       other: "%{count} photos"
+    last_thumb:
+      zero: "voir la gallerie"
+      one: "1 autre photo …"
+      other: "%{count} autres photos …"
