@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_07_100706) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_15_093906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_07_100706) do
     t.integer "recensement_ratio"
     t.bigint "dossier_id"
     t.datetime "started_at"
+    t.datetime "recensement_forms_pdf_updated_at"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement"], name: "index_communes_on_departement"
     t.index ["dossier_id"], name: "index_communes_on_dossier_id"

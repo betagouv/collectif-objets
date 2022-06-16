@@ -31,6 +31,7 @@ class Commune < ApplicationRecord
   has_many :recensements, through: :objets
   has_many :past_dossiers, class_name: "Dossier", dependent: :nullify
   belongs_to :dossier, optional: true
+  has_one_attached :recensement_forms_pdf
 
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)
