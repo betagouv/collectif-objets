@@ -1,0 +1,17 @@
+<div id="<%= "js-recensement-forms-pdf-download-commune-#{commune.id}" %>">
+  <% if downloadable? %>
+    <%= link_to(
+      "Imprimer les formulaires de recensements",
+      rails_blob_path(pdf),
+      class: "fr-btn fr-btn--secondary",
+      disposition: "attachment"
+    ) %>
+  <% else %>
+    <%= link_to(
+      "Imprimer les formulaires de recensements x",
+      commune_recensement_forms_pdf_path(commune.id),
+      class: "fr-btn fr-btn--secondary",
+      data: { "turbo-method": "POST" }
+    ) %>
+  <% end %>
+</div>

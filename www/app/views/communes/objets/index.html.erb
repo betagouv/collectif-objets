@@ -121,8 +121,8 @@
           Si vous n'avez pas de connexion internet pendant le recensement, vous pouvez :
         </p>
         <p>
-          <%= link_to "Imprimer la liste d'objets", printable_list_commune_objets_path(@commune), class: "fr-btn fr-btn--secondary" %>
-          <%= link_to "Imprimer le questionnaire", "https://fichiers.collectif-objets.beta.gouv.fr/questionnaire.pdf", class: "fr-btn fr-btn--secondary", target: "_blank", rel: "noopener" %>
+          <%= turbo_stream_from(@commune, "recensement-forms-pdf-download") %>
+          <%= render Communes::RecensementFormsPdfDownloadComponent.new(@commune) %>
         </p>
       </div>
     </div>

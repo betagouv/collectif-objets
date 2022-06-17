@@ -10,7 +10,7 @@ class GenerateRecensementFormsPdfJob
     prawn_view.render_file "hello.pdf"
     commune.recensement_forms_pdf.attach(io: file_io, filename:, content_type: "application/pdf")
     commune.update!(recensement_forms_pdf_updated_at: Time.zone.now)
-    # BroadcastDossierRapportUpdateJob.perform_in(0.5.seconds, dossier.id)
+    BroadcastRecensementFormsPdfUpdateJob.perform_in(0.5.seconds, commune_id)
   end
 
   private
