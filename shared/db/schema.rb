@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_15_093906) do
     t.integer "recensement_ratio"
     t.bigint "dossier_id"
     t.datetime "started_at"
-    t.datetime "recensement_forms_pdf_updated_at"
+    t.datetime "formulaire_updated_at"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement"], name: "index_communes_on_departement"
     t.index ["dossier_id"], name: "index_communes_on_dossier_id"

@@ -5,10 +5,10 @@ require "open-uri"
 # rubocop:disable Metrics/AbcSize
 module Co
   module Pdf
-    module RecensementForms
+    module Formulaire
       class PrawnView
         include Co::Pdf::BasePrawnViewConcern
-        include Co::Pdf::RecensementForms::QuestionsConcern
+        include Co::Pdf::Formulaire::QuestionsConcern
 
         LEFT_LINE_COLOR = "6777c7"
 
@@ -66,8 +66,7 @@ module Co
         def pop_photo_io(objet)
           return URI.parse(objet.image_urls.first).open if objet.image_urls.any?
 
-          StringIO.open("#{Rails.root}/app/assets/images/illustrations/photo-ma
-    nquante.png")
+          Rails.root.join "/app/assets/images/illustrations/photo-manquante.png"
         end
 
         def display_title

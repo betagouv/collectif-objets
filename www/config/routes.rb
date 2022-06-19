@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     resource :completion, only: [:new, :create, :show], controller: "communes/completions"
     resource :recompletion, only: [:new, :create], controller: "communes/recompletions"
     resources :objets, only: [:index], controller: "communes/objets"
-    resource :recensement_forms_pdf, only: [:create], controller: "communes/recensement_forms_pdf"
+    resource :formulaire, only: [:show], controller: "communes/formulaires"
   end
 
   namespace :conservateurs do

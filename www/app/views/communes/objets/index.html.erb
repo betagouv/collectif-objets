@@ -81,7 +81,7 @@
           </p>
         </div>
         <div class="fr-mb-8w">
-          <%= render "dossiers/pdf_embed", dossier: @dossier %>
+          <%= render PdfEmbedComponent.new(@dossier.pdf, title: t("dossier.rapport.pdf_title")) %>
         </div>
       <% end %>
     </div>
@@ -121,8 +121,7 @@
           Si vous n'avez pas de connexion internet pendant le recensement, vous pouvez :
         </p>
         <p>
-          <%= turbo_stream_from(@commune, "recensement-forms-pdf-download") %>
-          <%= render Communes::RecensementFormsPdfDownloadComponent.new(@commune) %>
+          <%= link_to "Imprimer le formulaire de recensement", commune_formulaire_path %>
         </p>
       </div>
     </div>

@@ -1,0 +1,18 @@
+<main class="fr-container fr-pt-2w fr-pb-4w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Objets de #{@commune.nom}", commune_objets_path(@commune)]
+    ],
+    current_page_label: "Formulaire de recensement"
+  ) %>
+  <h1>Formulaire de recensement</h1>
+  <div class="fr-callout fr-icon-info-line">
+    <p class="fr-callout__text">
+      Si vous le pouvez, nous vous conseillons de vous rendre sur place avec un smartphone et remplir directement les informations et les photos sur le site. Sinon, vous pouvez imprimer ce formulaire, le remplir sur place, et revenir sur votre ordinateur pour reporter les informations et photos sur le site.
+    </p>
+  </div>
+  <%= turbo_stream_from(@commune, "formulaire") %>
+  <%= render "pdf", commune: @commune %>
+</main>

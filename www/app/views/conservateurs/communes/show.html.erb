@@ -71,7 +71,12 @@
   <% if @dossier&.accepted? %>
     <div class="fr-container fr-grid-row fr-grid-row--center fr-mb-4w">
       <div class="fr-col-md-8">
-        <%= render "dossiers/pdf_embed", dossier: @dossier %>
+        <%= render(
+          PdfEmbedComponent.new(
+            @dossier.pdf,
+            title: t("dossier.rapport.pdf_title")
+          )
+        ) %>
       </div>
     </div>
   <% end %>

@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-class BroadcastRecensementFormsPdfUpdateJob
+class BroadcastFormulaireUpdateJob
   include Sidekiq::Job
 
   def perform(commune_id)
     @commune_id = commune_id
     commune.broadcast_replace_to(
       commune,
-      "recensement-forms-pdf-download",
-      target: "js-recensement-forms-pdf-download-commune-#{commune.id}",
+      "formulaire",
+      target: "js-formulaire-commune-#{commune.id}",
       html: ApplicationController.render(
-        Communes::RecensementFormsPdfDownloadComponent.new(commune),
+        PdfEmbedComponent.new(commune.formulaire),
         layout: false
       )
     )

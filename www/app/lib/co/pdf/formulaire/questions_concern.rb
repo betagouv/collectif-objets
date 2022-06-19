@@ -3,7 +3,7 @@
 # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
 module Co
   module Pdf
-    module RecensementForms
+    module Formulaire
       module QuestionsConcern
         extend ActiveSupport::Concern
 

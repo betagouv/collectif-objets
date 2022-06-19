@@ -1,7 +1,12 @@
 <% mail = UserMailerPreview.new.dossier_accepted_email(dossier) %>
 
 <div id="js-rapport-pdf-embed-and-form-<%= dossier.id %>">
-  <%= render "dossiers/pdf_embed", dossier: %>
+  <%= render(
+    PdfEmbedComponent.new(
+      dossier.pdf,
+      title: t("dossier.rapport.pdf_title")
+    )
+  ) %>
 
   <h3 class="fr-mt-8w">Prévisualisation du mail</h3>
   <%= render "conservateurs/mail_preview", mail: %>

@@ -1,0 +1,8 @@
+<div id="<%= "js-formulaire-commune-#{commune.id}" %>">
+  <%= render(
+    PdfEmbedComponent.new(
+      commune.formulaire,
+      title: t("activerecord.attributes.commune.formulaire.title")
+    )
+  ) %>
+</div>
