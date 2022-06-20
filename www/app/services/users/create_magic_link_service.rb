@@ -22,11 +22,7 @@ module Users
     end
 
     def find_user_or_conservateur
-      if @email.match(Conservateur::EMAIL_REGEX)
-        Conservateur.find_by(email: @email)
-      else
-        User.find_by(email: @email)
-      end
+      Conservateur.find_by(email: @email) || User.find_by(email: @email)
     end
   end
 end

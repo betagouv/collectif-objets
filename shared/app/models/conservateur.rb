@@ -1,16 +1,7 @@
 # frozen_string_literal: true
 
 class Conservateur < ApplicationRecord
-  EMAIL_REGEX = \
-    if Rails.configuration.x.environment_specific_name == "production"
-      /culture\.gouv\.fr\z/
-    else
-      /((culture)|(beta))\.gouv\.fr\z/
-    end
-
   devise :rememberable
-
-  validates :email, format: { with: EMAIL_REGEX, message: "Seuls les emails en culture.gouv.fr sont acceptés" }
 
   scope :with_departement, ->(d) { where("departements @> ARRAY[?]::varchar[]", d) }
 
