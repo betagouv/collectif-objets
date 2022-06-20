@@ -3,13 +3,11 @@
 class PdfEmbedComponent < ViewComponent::Base
   attr_reader :attachment, :title
 
+  DEFAULT_TITLE = "Fichier PDF"
+
   def initialize(attachment, title: nil)
     @attachment = attachment
-    @title = title || "Fichier PDF"
+    @title = title || DEFAULT_TITLE
     super
-  end
-
-  def download_filename
-    "generated.pdf"
   end
 end

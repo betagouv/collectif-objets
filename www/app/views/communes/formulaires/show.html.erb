@@ -8,11 +8,19 @@
     current_page_label: "Formulaire de recensement"
   ) %>
   <h1>Formulaire de recensement</h1>
-  <div class="fr-callout fr-icon-info-line">
+  <div class="fr-callout">
     <p class="fr-callout__text">
-      Si vous le pouvez, nous vous conseillons de vous rendre sur place avec un smartphone et remplir directement les informations et les photos sur le site. Sinon, vous pouvez imprimer ce formulaire, le remplir sur place, et revenir sur votre ordinateur pour reporter les informations et photos sur le site.
+      Si vous le pouvez, nous vous conseillons de vous rendre sur place avec un smartphone pour répondre aux questions et prendre les photos de chaque objet directement dans les formulaires de recensement en ligne (cette option nécessite une connexion internet dans l'édifice).<br />
+      Sinon, vous pouvez imprimer la version papier des formulaires ci-dessous, les remplir sur place, et revenir sur votre ordinateur pour reporter les informations et photos dans le formulaire en ligne.
     </p>
   </div>
   <%= turbo_stream_from(@commune, "formulaire") %>
-  <%= render "pdf", commune: @commune %>
+  <div id="<%= "js-formulaire-commune-#{@commune.id}" %>">
+    <%= render(
+      PdfEmbedComponent.new(
+        @commune.formulaire,
+        title: t("activerecord.attributes.commune.formulaire.title")
+      )
+    ) %>
+  </div>
 </main>

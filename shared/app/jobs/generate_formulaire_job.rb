@@ -7,7 +7,7 @@ class GenerateFormulaireJob
   def perform(commune_id)
     @commune_id = commune_id
     generate
-    saved = commune.update(formulaire_updated_at: Time.zone.now)
+    saved = commune.update_columns(formulaire_updated_at: Time.zone.now) # skip updated_at
     raise commune.errors.full_messages.join unless saved
 
     BroadcastFormulaireUpdateJob.perform_in(0.5.seconds, commune_id)
@@ -29,7 +29,7 @@ class GenerateFormulaireJob
   end
 
   def filename
-    @filename ||= "collectif-objets-recensements-#{commune.code_insee}.pdf"
+    @filename ||= "collectif-objets-formulaire-recensements-#{commune.code_insee}.pdf"
   end
 
   def file_io

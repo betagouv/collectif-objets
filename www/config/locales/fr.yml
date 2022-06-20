@@ -79,8 +79,6 @@ fr:
       prioritaire_badge: Prioritaire
       introuvable_badge: Introuvable
     accepts:
-      form:
-        submit: Envoyer le rapport à la commune
       new:
         head_title: "Rapport de recensement pour %{commune}"
         title: "📄 Rapport de recensement pour %{commune}"
@@ -166,6 +164,8 @@ fr:
         hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
+    accept_preview_component:
+      submit: Envoyer le rapport à la commune
   recensement:
     photos:
       taken_count:
@@ -404,5 +404,4 @@ fr:
       one: "1 autre photo …"
       other: "%{count} autres photos …"
   pdf_embed_component:
-    title: "Fichier PDF"
     download: Télécharger le fichier PDF

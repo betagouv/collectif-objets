@@ -66,7 +66,7 @@ module Co
         def pop_photo_io(objet)
           return URI.parse(objet.image_urls.first).open if objet.image_urls.any?
 
-          Rails.root.join "/app/assets/images/illustrations/photo-manquante.png"
+          Rails.root.join "app/assets/images/illustrations/photo-manquante.png"
         end
 
         def display_title

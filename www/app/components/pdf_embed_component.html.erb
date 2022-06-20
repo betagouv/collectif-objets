@@ -1,7 +1,7 @@
 <% if attachment.attached? %>
   <div class="co-pdf-embed-wrapper">
     <embed
-      title="<%= t(".title") %>"
+      title="<%= title %>"
       src="<%= rails_blob_path(attachment) %>"
       type="application/pdf"
       />
@@ -11,7 +11,7 @@
       t(".download"),
       rails_blob_path(attachment, disposition: "attachment"),
       class: "fr-link fr-link--icon-right fr-fi-file-download-line",
-      download: download_filename
+      download: true
     ) %>
   </p>
 <% else %>
@@ -31,7 +31,7 @@
     <div class="co-position-relative">
       <embed
         title="<%= title %>"
-        src="/rapport-loading.pdf"
+        src="/pdf-en-cours-de-generation.pdf"
         type="application/pdf"
         class="co-semi-transparent" />
       <div class="co-position-absolute co-top-50pct co-left-50pct">
