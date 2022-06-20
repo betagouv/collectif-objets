@@ -40,12 +40,12 @@ ActiveAdmin.register Conservateur do
     end
   end
 
-  permit_params :first_name, :last_name, :phone_number, departements: []
+  permit_params :email, :first_name, :last_name, :phone_number, departements: []
 
   form do |f|
     f.semantic_errors # shows errors on :base
     f.inputs do
-      f.input :email, input_html: { disabled: true }
+      f.input(:email, (f.object.new_record? ? {} : { input_html: { disabled: true } }))
       f.input :first_name
       f.input :last_name
       f.input :phone_number
@@ -59,8 +59,17 @@ ActiveAdmin.register Conservateur do
   end
 
   controller do
-    def update
+    def sanitize_params
       params[:conservateur][:departements] = params[:conservateur][:departements]&.map(&:presence)&.compact
+    end
+
+    def update
+      sanitize_params
+      super
+    end
+
+    def create
+      sanitize_params
       super
     end
   end
