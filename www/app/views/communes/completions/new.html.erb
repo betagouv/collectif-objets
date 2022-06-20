@@ -40,7 +40,13 @@
 
   <div class="fr-grid-row">
     <div class="fr-col-md-6">
-      <%= form_for(@commune, url: commune_completion_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
+      <%= form_for(
+        @commune,
+        url: commune_completion_path(@commune),
+        method: "POST",
+        builder: FormBuilderDsfr,
+        data: { turbo_confirm: "Un recensement d'objet sans photo vous sera probablement renvoyé par les conservateurs. Êtes-vous sûr de vouloir valider votre recensement en l'état ?" }
+      ) do |f| %>
         <%= f.fields_for :dossier do |ff| %>
           <div class="fr-input-group">
             <%= ff.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>

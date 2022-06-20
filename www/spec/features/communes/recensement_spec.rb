@@ -115,7 +115,9 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Finaliser le recensement"
     expect(page).to have_content("Finalisation du recensement de Albon")
     fill_in("Vos commentaires à destination des conservateurs", with: "Beau voyage")
-    click_on "Je valide le recensement des objets de ma commune"
+    accept_confirm do
+      click_on "Je valide le recensement des objets de ma commune"
+    end
     expect(page).to have_content("Le recensement de votre commune est terminé !")
     click_on "Ciboire des malades"
     expect(page).not_to have_link("Recenser cet objet")
