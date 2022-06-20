@@ -45,7 +45,7 @@
         url: commune_completion_path(@commune),
         method: "POST",
         builder: FormBuilderDsfr,
-        data: { turbo_confirm: "Un recensement d'objet sans photo est refusé par les conservateurs dans la majorité des cas. Êtes-vous sûr de vouloir valider ces recensements sans photos ?" }
+        data: { turbo_confirm: "Un recensement d'objet sans photo vous sera probablement renvoyé par les conservateurs. Êtes-vous sûr de vouloir valider votre recensement en l'état ?" }
       ) do |f| %>
         <%= f.fields_for :dossier do |ff| %>
           <div class="fr-input-group">
