@@ -39,7 +39,7 @@ class UserMailerPreview < ActionMailer::Preview
       def pdf
         Struct.new(:filename, :download).new(
           "rapport.pdf",
-          File.read(Rails.root.join("public/rapport-loading.pdf"))
+          File.read(Rails.root.join("public/pdf-en-cours-de-generation.pdf"))
         )
       end
     end

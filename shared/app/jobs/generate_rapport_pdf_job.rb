@@ -20,7 +20,7 @@ class GenerateRapportPdfJob
   end
 
   def prawn_view
-    @prawn_view ||= Co::Rapports::PrawnView.new(dossier)
+    @prawn_view ||= Co::Pdf::Rapport::PrawnView.new(dossier)
   end
 
   def filename

@@ -45,11 +45,8 @@ Rails.application.routes.draw do
     resources :enrollments, only: [:new, :create], controller: "communes/enrollments"
     resource :completion, only: [:new, :create, :show], controller: "communes/completions"
     resource :recompletion, only: [:new, :create], controller: "communes/recompletions"
-    resources :objets, only: [:index], controller: "communes/objets" do
-      collection do
-        get "liste-imprimable", to: "communes/objets#index_print", as: :printable_list
-      end
-    end
+    resources :objets, only: [:index], controller: "communes/objets"
+    resource :formulaire, only: [:show], controller: "communes/formulaires"
   end
 
   namespace :conservateurs do

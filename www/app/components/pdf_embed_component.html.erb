@@ -1,17 +1,17 @@
-<% if dossier.pdf.attached? %>
-  <div class="co-rapport-embed-wrapper">
+<% if attachment.attached? %>
+  <div class="co-pdf-embed-wrapper">
     <embed
-      title="<%= t(".embed_title") %>"
-      src="<%= rails_blob_path(dossier.pdf) %>"
+      title="<%= title %>"
+      src="<%= rails_blob_path(attachment) %>"
       type="application/pdf"
       />
   </div>
   <p class="co-text--center">
     <%= link_to(
       t(".download"),
-      rails_blob_path(dossier.pdf, disposition: "attachment"),
+      rails_blob_path(attachment, disposition: "attachment"),
       class: "fr-link fr-link--icon-right fr-fi-file-download-line",
-      download: "guide.pdf"
+      download: true
     ) %>
   </p>
 <% else %>
@@ -27,11 +27,11 @@
     </p>
   </div>
 
-  <div class="co-rapport-embed-wrapper">
+  <div class="co-pdf-embed-wrapper">
     <div class="co-position-relative">
       <embed
-        title="<%= t(".embed_title") %>"
-        src="/rapport-loading.pdf"
+        title="<%= title %>"
+        src="/pdf-en-cours-de-generation.pdf"
         type="application/pdf"
         class="co-semi-transparent" />
       <div class="co-position-absolute co-top-50pct co-left-50pct">

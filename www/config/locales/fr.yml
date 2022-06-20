@@ -79,8 +79,6 @@ fr:
       prioritaire_badge: Prioritaire
       introuvable_badge: Introuvable
     accepts:
-      form:
-        submit: Envoyer le rapport à la commune
       new:
         head_title: "Rapport de recensement pour %{commune}"
         title: "📄 Rapport de recensement pour %{commune}"
@@ -166,6 +164,8 @@ fr:
         hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
+    accept_preview_component:
+      submit: Envoyer le rapport à la commune
   recensement:
     photos:
       taken_count:
@@ -198,6 +198,7 @@ fr:
       rejected: Dossier renvoyé à la commune
       accepted: Rapport envoyé à la commune
     rapport:
+      pdf_title: Rapport de recensement
       recensement:
         localisation: Où se trouve l’objet ?
         edifice_nom: Précisez le nom de l’édifice dans lequel se trouve l’objet
@@ -208,10 +209,6 @@ fr:
         notes: Commentaires de la commune
         analyse_notes: Commentaires du conservateur
         analyse_fiches: Conseils du conservateur
-  dossiers:
-    pdf_embed:
-      embed_title: Rapport de recensement
-      download: Télécharger le fichier PDF
   pages:
     pdf_embed:
       title:
@@ -278,6 +275,8 @@ fr:
           enrolled: Commune inscrite
           started: Recensement démarré
           completed: Recensement terminé
+        formulaire:
+          title: Formulaires de recensement
   date:
     abbr_day_names:
       - dim
@@ -404,3 +403,5 @@ fr:
       zero: "voir la gallerie"
       one: "1 autre photo …"
       other: "%{count} autres photos …"
+  pdf_embed_component:
+    download: Télécharger le fichier PDF
