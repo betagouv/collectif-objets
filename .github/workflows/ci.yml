@@ -31,10 +31,13 @@ jobs:
         with:
           bundler-cache: true
           working-directory: ./www
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v1
         with:
           cache: "npm"
+          working-directory: ./www
+          node-version: 16
       - run: npm ci
+        working-directory: ./www
       - name: Set up database schema
         run: bin/rails db:schema:load
         working-directory: ./www
@@ -50,6 +53,7 @@ jobs:
           CYPRESS_RAILS_CYPRESS_OPTS: "--e2e --browser chrome"
           CYPRESS_RAILS_PORT: "3090"
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+          RAILS_ENV: test
 
 
   lint:
