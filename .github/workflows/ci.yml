@@ -31,14 +31,26 @@ jobs:
         with:
           bundler-cache: true
           working-directory: ./www
+      - uses: actions/setup-node@v3
+        with:
+          cache: "npm"
+      - run: npm ci
       - name: Set up database schema
         run: bin/rails db:schema:load
         working-directory: ./www
-      - name: Run tests
+      - name: Run rspec tests
         run: bundle exec rspec
         working-directory: ./www
         env:
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+      - name: Run Cypress E2E tests
+        run: bin/rake cypress:run
+        working-directory: ./www
+        env:
+          CYPRESS_RAILS_CYPRESS_OPTS: "--e2e --browser chrome"
+          CYPRESS_RAILS_PORT: "3090"
+          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+
 
   lint:
     runs-on: ubuntu-latest

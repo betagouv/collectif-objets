@@ -21,5 +21,8 @@
   "homepage": "https://github.com/adipasquale/collectif-objets#readme",
   "dependencies": {
     "mjml": "^4.12.0"
+  },
+  "devDependencies": {
+    "cypress": "^10.1.0"
   }
 }
