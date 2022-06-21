@@ -23,7 +23,7 @@ ActiveAdmin.register Recensement do
   end
 
   filter :objet_commune_departement, as: :check_boxes,
-                                     collection: Commune.select(:departement).distinct.pluck(:departement).compact.sort
+                                     collection: -> { Commune.select(:departement).distinct.pluck(:departement).compact.sort }
   filter :localisation, as: :check_boxes, collection: Recensement::LOCALISATIONS
   filter :edifice_nom
   filter :recensable

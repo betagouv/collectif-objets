@@ -20,7 +20,7 @@ ActiveAdmin.register User do
   filter :email
   filter :role, as: :check_boxes, collection: ["mairie"]
   filter :commune_departement, as: :check_boxes,
-                               collection: Commune.select(:departement).distinct.pluck(:departement).compact.sort
+                               collection: -> { Commune.select(:departement).distinct.pluck(:departement).compact.sort }
 
   show do
     div class: "show-container" do

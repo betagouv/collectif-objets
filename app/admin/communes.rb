@@ -46,7 +46,7 @@ ActiveAdmin.register Commune do
   end
 
   filter :departement, as: :check_boxes,
-                       collection: Commune.select(:departement).distinct.pluck(:departement).compact.sort
+                       collection: -> { Commune.select(:departement).distinct.pluck(:departement).compact.sort }
   filter :nom
   filter :code_insee_equals
   filter(
