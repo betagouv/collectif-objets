@@ -19,10 +19,8 @@
     "url": "https://github.com/adipasquale/collectif-objets/issues"
   },
   "homepage": "https://github.com/adipasquale/collectif-objets#readme",
-  "dependencies": {
-    "mjml": "^4.12.0"
-  },
   "devDependencies": {
+    "mjml": "^4.12.0",
     "cypress": "^10.1.0"
   }
 }
