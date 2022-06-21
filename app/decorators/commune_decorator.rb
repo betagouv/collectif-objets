@@ -32,7 +32,7 @@ class CommuneDecorator < Draper::Decorator
     recensements.any? && recensements.missing_photos.empty?
   end
 
-  def recensements_photos_present?() = recensements_photos_present
+  def recensements_photos_present? = recensements_photos_present
 
   def first_user_email
     users.first&.email
