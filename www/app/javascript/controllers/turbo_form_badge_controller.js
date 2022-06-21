@@ -10,6 +10,8 @@ export default class extends Controller {
   }
 
   hideBadge() {
+    if (!this.hasBadgeTarget) return
+
     this.badgeTarget.classList.toggle("co-opacity--0", true)
   }
 }
