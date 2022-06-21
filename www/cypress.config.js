@@ -1,13 +1,9 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  screenshotsFolder: "tmp/cypress_screenshots",
-  videosFolder: "tmp/cypress_videos",
-  trashAssetsBeforeRuns: false,
-
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
-  },
-});
+    baseUrl: "http://localhost:5017",
+    defaultCommandTimeout: 10000,
+    supportFile: "cypress/support/index.js",
+  }
+})

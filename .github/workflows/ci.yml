@@ -31,13 +31,6 @@ jobs:
         with:
           bundler-cache: true
           working-directory: ./www
-      - uses: actions/setup-node@v1
-        with:
-          cache: "npm"
-          working-directory: ./www
-          node-version: 16
-      - run: npm ci
-        working-directory: ./www
       - name: Set up database schema
         run: bin/rails db:schema:load
         working-directory: ./www
@@ -47,13 +40,14 @@ jobs:
         env:
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
       - name: Run Cypress E2E tests
-        run: bin/rake cypress:run
-        working-directory: ./www
+        uses: cypress-io/github-action@v2
+        with:
+          project: ./cypress
+          start: RAILS_ENV=test bundle exec rails server -p 5017
+          wait-on: http://localhost:5017
+          working-directory: ./www
         env:
-          CYPRESS_RAILS_CYPRESS_OPTS: "--e2e --browser chrome"
-          CYPRESS_RAILS_PORT: "3090"
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
-          RAILS_ENV: test
 
 
   lint:
