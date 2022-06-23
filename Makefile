@@ -1,6 +1,5 @@
 install:
-	cd www && bundle install
-	cd admin && bundle install
+	bundle install
 	npm install --global husky
 	npx husky install
 	brew install overmind mailhog redis entr
