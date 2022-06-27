@@ -53,7 +53,6 @@
       <mj-column>
         <mj-text>
           <b><%= @conservateur %></b><br />
-          <i>Conservateur des monuments historiques</i>
         </mj-text>
       </mj-column>
     </mj-section>

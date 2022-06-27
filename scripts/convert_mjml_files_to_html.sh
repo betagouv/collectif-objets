@@ -6,4 +6,4 @@ function convert_mjml() {
   echo "recompiled $FILEPATH_HTML"
 }
 
-find ./www/app/views/*_mailer -iname '*.mjml' | while read file; do convert_mjml "$file"; done
+find ./app/views/*_mailer -iname '*.mjml' | while read file; do convert_mjml "$file"; done
