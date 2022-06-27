@@ -37,10 +37,9 @@ jobs:
         env:
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
       - name: Run Cypress E2E tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4.1.0
         with:
-          project: ./cypress
-          start: ./scripts/start_test_server.sh
+          start: sh ./scripts/start_test_server.sh
           wait-on: http://localhost:5017
         env:
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
