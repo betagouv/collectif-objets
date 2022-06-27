@@ -40,6 +40,8 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "view_component"
 
 group :development, :test do
+  gem "cypress-on-rails", "~> 1.0"
+  gem "database_cleaner-active_record"
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "launchy"
@@ -54,10 +56,4 @@ group :development do
   gem "pry"
   gem "rubocop-daemon", require: false
   gem "web-console"
-end
-
-group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
 end

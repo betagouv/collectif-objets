@@ -10,7 +10,6 @@ AllCops:
   Exclude:
     - "bin/**/*"
     - "db/**/*"
-    - "shared/db/**/*"
     - "config/**/*"
     - "lib/tasks/**/*"
   SuggestExtensions: false

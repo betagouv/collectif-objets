@@ -32,8 +32,16 @@ jobs:
           bundler-cache: true
       - name: Set up database schema
         run: bin/rails db:schema:load
-      - name: Run tests
+      - name: Run RSpec tests
         run: bundle exec rspec
+        env:
+          REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+      - name: Run Cypress E2E tests
+        uses: cypress-io/github-action@v2
+        with:
+          project: ./cypress
+          start: ./scripts/start_test_server.sh
+          wait-on: http://localhost:5017
         env:
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
 

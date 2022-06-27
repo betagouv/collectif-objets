@@ -67,16 +67,6 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
 end
 
-Capybara.register_driver :headless_firefox do |app|
-  options = Selenium::WebDriver::Firefox::Options.new.tap(&:headless!)
-  Capybara::Selenium::Driver.new app, browser: :firefox, options:
-end
-Capybara.register_driver :firefox do |app|
-  options = Selenium::WebDriver::Firefox::Options.new
-  Capybara::Selenium::Driver.new app, browser: :firefox, options:
-end
-Capybara.javascript_driver = :selenium_headless
-
 # rubocop:disable Lint/SuppressedException
 begin
   require "pry"

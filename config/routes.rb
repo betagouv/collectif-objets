@@ -90,4 +90,11 @@ Rails.application.routes.draw do
       mount Lookbook::Engine, at: "/lookbook"
     end
   end
+
+  if Rails.env.test? || ENV['CYPRESS']
+    namespace :cypress do
+      resources :fixtures, only: [:create]
+      get "mails/last", to: "mails#last"
+    end
+  end
 end

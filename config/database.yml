@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: collectif_objets_dev
+  database: <%= ENV['CYPRESS'] ? 'collectif_objets_test' : 'collectif_objets_dev' %>
 
 test:
   <<: *default
