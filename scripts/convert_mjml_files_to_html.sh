@@ -7,3 +7,4 @@ function convert_mjml() {
 }
 
 find ./app/views/*_mailer -iname '*.mjml' | while read file; do convert_mjml "$file"; done
+find ./app/views/devise/mailer -iname '*.mjml' | while read file; do convert_mjml "$file"; done

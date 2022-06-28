@@ -24,11 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :conservateurs, only: [:sessions], controllers: {
-    sessions: "conservateurs/sessions"
-  }
+  devise_for :conservateurs, only: [:sessions, :passwords]
   devise_scope :conservateur do
-    get 'conservateurs/sign_in_with_token', to: 'conservateurs/sessions#sign_in_with_token'
     # we've disabled registrations to avoid sign ups, but we still want editable conservateurs
     get 'conservateurs/edit' => 'devise/registrations#edit', :as => 'edit_conservateur_registration'
   end
@@ -43,6 +40,7 @@ Rails.application.routes.draw do
   get "/fiches", to: "pages#fiches"
   get "/fiche", to: "pages#pdf_embed"
   get "/pdf", to: "pages#pdf_download", as: "pdf_download"
+  get "/connexion", to: "pages#connexion", as: "connexion"
 
   resources :objets, only: [:index, :show] do
     resources :recensements, except: [:index, :show, :destroy]

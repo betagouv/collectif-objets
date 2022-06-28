@@ -1,0 +1,84 @@
+<% content_for(:head_title) { "Connexion" } %>
+
+<main class="fr-container fr-pt-2w fr-pb-4w" data-controller="devise--sessions">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Connexion", connexion_path]
+    ],
+    current_page_label: "Connexion conservateur / conservatrice") %>
+
+  <h2>Connexion conservateur / conservatrice</h2>
+
+  <div class="fr-grid-row">
+    <div class="fr-col-md-6">
+      <%= form_for(
+        resource,
+        as: resource_name,
+        url: session_path(resource_name),
+        builder: FormBuilderDsfr,
+        data: { turbo: false }
+      ) do |f| %>
+        <div class="fr-input-group">
+          <%= f.label :email do %>
+            Email
+            <span class="fr-hint-text">Utilisez votre email de conservateur ou conservatrice</span>
+          <% end %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+        </div>
+        <div class="fr-input-group">
+          <%= f.label :password, "Mot de passe" %>
+          <%= f.password_field :password, required: true %>
+          <div class="fr-mt-1w">
+            <%= link_to "Réinitialiser mon mot de passe", new_conservateur_password_path %>
+          </div>
+        </div>
+        <div class="co-flex co-flex--space-between fr-mt-4w">
+          <div>
+            <div class="fr-checkbox-group">
+              <%= f.check_box :remember_me, checked: true %>
+              <%= f.label "Rester connecté" %>
+            </div>
+          </div>
+          <div class="actions">
+            <%= f.submit "Connexion" %>
+          </div>
+        </div>
+      <% end %>
+      <div class="fr-mt-6w">
+        <ul class="fr-accordions-group">
+          <li>
+            <section class="fr-accordion">
+              <h3 class="fr-accordion__title">
+                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq1">
+                  Comment créer mon compte ?
+                </button>
+              </h3>
+              <div class="fr-collapse" id="faq1">
+                Tous les conservateurs de France ont normalement déjà un compte sur la plateforme. Nous avons créé des comptes à partir des informations présentes dans l'annuaire des conservateurs (nom, email et rôle). Lors de votre première connexion, vous avez seulement à créer un mot de passe ici :
+                <%= link_to "Réinitialiser mon mot de passe", new_conservateur_password_path %>
+                <div class="fr-mt-2w">
+                  Si votre email n'est pas reconnu, veuillez nous contacter par mail à <a href="mailto:support@collectif-objets.beta.gouv.fr">support@collectif-objets.beta.gouv.fr</a>
+                </div>
+              </div>
+            </section>
+          </li>
+          <li>
+            <section class="fr-accordion">
+              <h3 class="fr-accordion__title">
+                <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq2">
+                  Première connexion / Je n'ai pas de mot de passe
+                </button>
+              </h3>
+              <div class="fr-collapse" id="faq2">
+                Vous pouvez créer un mot de passe ici :
+                <%= link_to "Réinitialiser mon mot de passe", new_conservateur_password_path %>
+              </div>
+            </section>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.feature "Sign in with token", type: :feature, js: true do
+RSpec.feature "Sign in with token", type: :feature, js: true, skip: true do
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement: "26") }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
 
