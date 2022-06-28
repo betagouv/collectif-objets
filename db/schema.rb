@@ -166,7 +166,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_152116) do
     t.string "analyse_actions", default: [], array: true
     t.string "analyse_fiches", default: [], array: true
     t.text "analyse_notes"
-    t.boolean "analyse_prioritaire"
     t.datetime "analysed_at"
     t.bigint "conservateur_id"
     t.bigint "dossier_id", null: false
