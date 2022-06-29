@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
 module RecensementHelper
   Option = Struct.new :value, :label, :badge_color
 
@@ -21,44 +22,57 @@ module RecensementHelper
     ]
   end
 
-  def etat_sanitaire_options
-    [
-      Option.new(
-        Recensement::ETAT_BON,
-        "Bon",
-        "success"
-      ),
-      Option.new(
-        Recensement::ETAT_MOYEN,
-        "Moyen",
-        "info"
-      ),
-      Option.new(
-        Recensement::ETAT_MAUVAIS,
-        "Mauvais",
-        "new"
-      ),
-      Option.new(
-        Recensement::ETAT_PERIL,
-        "En péril",
-        "warning"
-      )
-    ]
+  def etat_badge_color(etat)
+    {
+      Recensement::ETAT_BON => "success",
+      Recensement::ETAT_MOYEN => "info",
+      Recensement::ETAT_MAUVAIS => "new",
+      Recensement::ETAT_PERIL => "warning"
+    }[etat]
   end
-  alias etat_sanitaire_edifice_options etat_sanitaire_options
+
+  def etat_sanitaire_options
+    Recensement::ETATS.map do |etat|
+      Option.new(
+        etat,
+        t("recensement.etat_sanitaire_choices.#{etat}"),
+        etat_badge_color(etat)
+      )
+    end
+  end
 
   def etat_sanitaire_options_for_select
     etat_sanitaire_options.map { [_1.label, _1.value] }
   end
-  alias etat_sanitaire_edifice_options_for_select etat_sanitaire_options_for_select
+
+  def etat_sanitaire_edifice_options
+    Recensement::ETATS.map do |etat|
+      Option.new(
+        etat,
+        t("recensement.etat_sanitaire_edifice_choices.#{etat}"),
+        etat_badge_color(etat)
+      )
+    end
+  end
+
+  def etat_sanitaire_edifice_options_for_select
+    etat_sanitaire_edifice_options.map { [_1.label, _1.value] }
+  end
 
   def etat_sanitaire_badge(value, **html_opts)
-    opt = etat_sanitaire_options.find { _1.value == value }
-    badge(opt.badge_color, **html_opts) { opt.label }
+    badge(etat_badge_color(value), **html_opts) do
+      t("recensement.etat_sanitaire_choices.#{value}")
+    end
   end
-  alias etat_sanitaire_edifice_badge etat_sanitaire_badge
+
+  def etat_sanitaire_edifice_badge(value, **html_opts)
+    badge(etat_badge_color(value), **html_opts) do
+      t("recensement.etat_sanitaire_edifice_choices.#{value}")
+    end
+  end
+
   alias analyse_etat_sanitaire_badge etat_sanitaire_badge
-  alias analyse_etat_sanitaire_edifice_badge etat_sanitaire_badge
+  alias analyse_etat_sanitaire_edifice_badge etat_sanitaire_edifice_badge
 
   def securisation_options
     [
@@ -113,3 +127,4 @@ module RecensementHelper
 
   # rubocop:enable Metrics/MethodLength
 end
+# rubocop:enable Metrics/ModuleLength

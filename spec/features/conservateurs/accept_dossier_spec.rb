@@ -57,11 +57,11 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
 
     # analyse first recensement
     click_on "Bouquet d'Autel"
-    etat_sanitaire_group = find("b", text: "Comment évaluez-vous l’état sanitaire de l’objet ?")
+    etat_sanitaire_group = find("b", text: "Dans quel état est l’objet ?")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(etat_sanitaire_group) do
       click_on "Modifier"
-      select "En péril", from: "recensement[analyse_etat_sanitaire]"
+      select "L'objet est en péril", from: "recensement[analyse_etat_sanitaire]"
     end
     find("label", text: "Entretenir").click
     find("label", text: "Comment porter plainte ?").click
@@ -88,7 +88,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(bouquet_row).to have_text(/fiche vol/i)
     expect(bouquet_row).to have_text(/entretenir/i)
     expect(bouquet_row.all("td")[1]).to have_text(/Bon/i)
-    expect(bouquet_row.all("td")[1]).to have_text(/En péril/i)
+    expect(bouquet_row.all("td")[1]).to have_text(/L'objet est en péril/i)
     ciboire_row = find_link("Ciboire des malades").find(:xpath, "ancestor::tr")
     expect(ciboire_row).not_to have_text(/fiche vol/i)
     expect(ciboire_row).not_to have_text(/Entretenir/i)

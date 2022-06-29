@@ -84,8 +84,10 @@ module Co
           if value_analyse
             presentable_analyse = presenter.send(name_analyse)
             presentable_original[:content] = "<strikethrough>#{presentable_original[:content]}</strikethrough>"
-            badges = [presentable_original, presentable_analyse].map { make_badge(**_1) }
-            table([badges], cell_style: { borders: [], padding: [0, 5, 0, 5] })
+            # badges = [presentable_original, presentable_analyse].map { make_badge(**_1) }
+            display_badge(**presentable_original)
+            move_down 5
+            display_badge(**presentable_analyse)
           else
             display_badge(**presentable_original)
           end

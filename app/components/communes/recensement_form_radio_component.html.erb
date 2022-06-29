@@ -10,13 +10,13 @@
       class="fr-fieldset__legend"
       id="<%= attribute_name.to_s.parameterize %>-legend"
     >
-      <%= t("activerecord.attributes.recensement.#{attribute_name}") %>
+      <%= t("activerecord.attributes.recensement.#{attribute_name}").html_safe %>
       <span class="co-text--blue">*</span>
     </legend>
 
     <div class="fr-fieldset__content">
       <% form_builder.collection_radio_buttons(
-        attribute_name,
+        analyse_override? ? analyse_attribute_name : attribute_name,
         options,
         :value,
         :label,

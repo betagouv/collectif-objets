@@ -188,6 +188,16 @@ fr:
       vol: "Comment porter plainte ?&nbsp;<a href=\"/fiche?pdf=fiche_vol\">voir la fiche</a>"
       securisation: "Comment sécuriser mon édifice et mes objets ?&nbsp;<a href=\"/fiche?pdf=fiche_securisation\">voir la fiche</a>"
       nuisibles: "Comment évaluer le danger des insectes xylophages ?&nbsp;<a href=\"/fiche?pdf=fiche_nuisibles\">voir la fiche</a>"
+    etat_sanitaire_choices:
+      bon: L'objet est en bon état
+      moyen: L'objet est en état moyen
+      mauvais: L'objet est en mauvais état
+      peril: L'objet est en péril
+    etat_sanitaire_edifice_choices:
+      bon: L'édifice est en bon état
+      moyen: L'édifice est en état moyen
+      mauvais: L'édifice est en mauvais état
+      peril: L'édifice est en péril
   dossier:
     recensements_pending_count_html:
       zero: Vous avez revu <span class='fr-h4'>100%</span> des recensements de cette commune
@@ -262,8 +272,8 @@ fr:
         localisation: Où se trouve l’objet ?
         edifice_nom: Précisez le nom de l’édifice dans lequel se trouve l’objet
         recensable: L’objet peut-il être recensé ?
-        etat_sanitaire_edifice: Comment évaluez-vous l’état sanitaire de l’édifice à proximité de l’objet ?
-        etat_sanitaire: Comment évaluez-vous l’état sanitaire de l’objet ?
+        etat_sanitaire_edifice: Dans quel état est <u>l’édifice</u> à proximité de l’objet ?
+        etat_sanitaire: Dans quel état est <u>l’objet</u> ?
         securisation: L’objet est-il en sécurité ?
         notes: Commentaires
         analyse_actions: Actions à mener
