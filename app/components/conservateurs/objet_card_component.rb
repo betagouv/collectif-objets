@@ -14,7 +14,7 @@ module Conservateurs
     end
 
     def floating_badges
-      @floating_badges ||= [analysed_badge, prioritaire_badge, introuvable_badge].compact
+      @floating_badges ||= [analysed_badge, introuvable_badge].compact
     end
 
     def recensement
@@ -58,15 +58,6 @@ module Conservateurs
       badge_struct.new(
         "success",
         I18n.t("conservateurs.objet_card_component.analysed_badge")
-      )
-    end
-
-    def prioritaire_badge
-      return nil unless recensement&.analyse_prioritaire?
-
-      badge_struct.new(
-        "warning",
-        I18n.t("conservateurs.objet_card_component.prioritaire_badge")
       )
     end
 

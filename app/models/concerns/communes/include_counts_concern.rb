@@ -41,10 +41,11 @@ module Communes
           ) c ON c."palissy_INSEE" = communes.code_insee
 
           LEFT OUTER JOIN (
-            SELECT objets."palissy_INSEE", COUNT(*) recensements_prioritaires_count
+            SELECT objets."palissy_INSEE", COUNT(*) recensements_peril_count
             FROM recensements
             INNER JOIN objets ON objets.id = recensements.objet_id
-            WHERE recensements.analyse_prioritaire IS TRUE
+            WHERE recensements.analyse_etat_sanitaire = 'peril'
+            OR (recensements.analyse_etat_sanitaire IS NULL AND recensements.etat_sanitaire = 'peril')
             GROUP BY objets."palissy_INSEE"
           ) d ON d."palissy_INSEE" = communes.code_insee
         }
@@ -55,7 +56,7 @@ module Communes
           "AS objets_recenses_percentage, "\
           "(COALESCE(100 * c.recensements_analysed_count, 0)::float / COALESCE(a.objets_count, 1)) " \
           "AS recensements_analysed_percentage,"\
-          "COALESCE(d.recensements_prioritaires_count, 0) as recensements_prioritaires_count"
+          "COALESCE(d.recensements_peril_count, 0) as recensements_peril_count"
         )
       end
     end
