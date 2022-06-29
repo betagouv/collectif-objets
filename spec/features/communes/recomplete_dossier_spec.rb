@@ -57,8 +57,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Bouquet d'Autel"
     click_on "modifier le recensement"
     expect(page).to have_field("recensement[etat_sanitaire_edifice]", disabled: false, visible: false)
-    expect(page).to have_field("recensement[etat_sanitaire]", disabled: true, visible: false)
-    etat_sanitaire_group = all(:xpath, "//input[@name='recensement[etat_sanitaire]']", visible: false)[0]
+    expect(page).to have_field("recensement[analyse_etat_sanitaire]", disabled: true, visible: false)
+    etat_sanitaire_group = all(:xpath, "//input[@name='recensement[analyse_etat_sanitaire]']", visible: false)[0]
       .find(:xpath, "ancestor::div[@class='fr-form-group']")
     expect(etat_sanitaire_group).to \
       have_content "Cette évaluation a été modifiée par le conservateur, vous ne pouvez pas la modifier"

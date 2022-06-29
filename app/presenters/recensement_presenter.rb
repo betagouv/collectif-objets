@@ -4,6 +4,7 @@
 
 class RecensementPresenter
   include Rails.application.routes.url_helpers
+  include RecensementHelper
 
   def initialize(recensement)
     @recensement = recensement
@@ -52,19 +53,31 @@ class RecensementPresenter
   end
 
   def etat_sanitaire_edifice
-    generic_etat_sanitaire(@recensement.etat_sanitaire_edifice)
+    value = @recensement.etat_sanitaire_edifice
+    return if value.blank?
+
+    badge(etat_badge_color(value)) { I18n.t("recensement.etat_sanitaire_edifice_choices.#{value}") }
   end
 
   def etat_sanitaire
-    generic_etat_sanitaire(@recensement.etat_sanitaire)
+    value = @recensement.etat_sanitaire
+    return if value.blank?
+
+    badge(etat_badge_color(value)) { I18n.t("recensement.etat_sanitaire_choices.#{value}") }
   end
 
   def analyse_etat_sanitaire_edifice
-    generic_etat_sanitaire(@recensement.analyse_etat_sanitaire_edifice)
+    value = @recensement.analyse_etat_sanitaire_edifice
+    return if value.blank?
+
+    badge(etat_badge_color(value)) { I18n.t("recensement.etat_sanitaire_edifice_choices.#{value}") }
   end
 
   def analyse_etat_sanitaire
-    generic_etat_sanitaire(@recensement.analyse_etat_sanitaire)
+    value = @recensement.analyse_etat_sanitaire
+    return if value.blank?
+
+    badge(etat_badge_color(value)) { I18n.t("recensement.etat_sanitaire_choices.#{value}") }
   end
 
   def securisation
@@ -86,19 +99,6 @@ class RecensementPresenter
   end
 
   protected
-
-  def generic_etat_sanitaire(value)
-    case value
-    when Recensement::ETAT_BON
-      badge("success") { "Bon" }
-    when Recensement::ETAT_MOYEN
-      badge("info") { "Moyen" }
-    when Recensement::ETAT_MAUVAIS
-      badge("new") { "Mauvais" }
-    when Recensement::ETAT_PERIL
-      badge("warning") { "En péril" }
-    end
-  end
 
   def generic_securisation(value)
     case value

@@ -55,10 +55,10 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
       find("label", text: "Oui").click
     end
     within("[data-recensement-target=etatSanitaireEdifice]") do
-      find("label", text: "Moyen").click
+      find("label", text: "L'édifice est en état moyen").click
     end
     within("[data-recensement-target=etatSanitaire]") do
-      find("label", text: "Bon").click
+      find("label", text: "L'objet est en bon état").click
     end
     within("[data-recensement-target=securisation]") do
       find("label", text: "Oui, il est difficile de le voler").click
@@ -85,10 +85,10 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
       find("label", text: "Oui").click
     end
     within("[data-recensement-target=etatSanitaireEdifice]") do
-      find("label", text: "Bon").click
+      find("label", text: "L'édifice est en bon état").click
     end
     within("[data-recensement-target=etatSanitaire]") do
-      find("label", text: "Mauvais").click
+      find("label", text: "L'objet est en mauvais état").click
     end
     within("[data-recensement-target=securisation]") do
       find("label", text: "Oui, il est difficile de le voler").click
@@ -106,7 +106,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Ciboire des malades"
     click_on "modifier le recensement"
     within("[data-recensement-target=etatSanitaire]") do
-      find("label", text: "En péril").click
+      find("label", text: "L'objet est en péril").click
     end
     click_on "Enregistrer ce recensement"
     expect(page).to have_content("Votre recensement a bien été enregistré")

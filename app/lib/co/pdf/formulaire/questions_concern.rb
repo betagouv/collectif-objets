@@ -68,7 +68,7 @@ module Co
         def display_question_etat_edifice
           grid([7, 1], [7, 8]).bounding_box do
             text(
-              "<b>Comment évaluez-vous l'état sanitaire de l'édifice à proximité de l'objet ?</b>",
+              "<b>#{I18n.t('activerecord.attributes.recensement.etat_sanitaire_edifice')}</b>",
               inline_format: true
             )
             display_etats_checkboxes
@@ -78,7 +78,7 @@ module Co
         def display_question_etat_objet
           grid([8, 1], [8, 8]).bounding_box do
             text(
-              "<b>Comment évaluez-vous l'état sanitaire de l'objet ?</b>",
+              "<b>#{I18n.t('activerecord.attributes.recensement.etat_sanitaire')}</b>",
               inline_format: true
             )
             display_etats_checkboxes
