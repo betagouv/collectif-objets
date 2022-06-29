@@ -251,7 +251,11 @@ fr:
         conservateur:
           attributes:
             reset_password_token:
-              invalid: "Ce lien de réinitailisation a expiré. Veuillez refaire la demande de réinitialisation de mot de passe depuis le début."
+              expired: "Ce lien de réinitialisation a expiré. Veuillez refaire la demande de réinitialisation de mot de passe depuis le début."
+            password_confirmation:
+              confirmation: "Les deux mots de passe ne correspondent pas, veuillez réessayer"
+            password:
+              too_short: "Le mot de passe doit contenir au minimum 20 caractères"
     attributes:
       recensement:
         localisation: Où se trouve l’objet ?

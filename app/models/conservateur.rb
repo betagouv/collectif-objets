@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Conservateur < ApplicationRecord
-  devise :database_authenticatable, :recoverable, :rememberable
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable, password_length: 20..128
 
   scope :with_departement, ->(d) { where("departements @> ARRAY[?]::varchar[]", d) }
 
