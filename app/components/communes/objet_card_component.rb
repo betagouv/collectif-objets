@@ -22,7 +22,7 @@ module Communes
       truncate(nom || nom_courant, length: 30)
     end
 
-    def first_image_or_recensement_photo_url(_objet)
+    def main_photo_url
       return current_recensement.photos.first.variant(:medium) \
         if current_recensement&.photos&.attached?
 
