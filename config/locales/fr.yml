@@ -158,7 +158,6 @@ fr:
         form:
           label: "Commentaire partagé uniquement aux conservateurs"
           submit: "Sauvegarder les notes"
-
     recensements:
       analyse_actions:
         hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
@@ -166,6 +165,8 @@ fr:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
     accept_preview_component:
       submit: Envoyer le rapport à la commune
+    password:
+      hint: 20 caractères minimum (tous les caractères sont autorisés y compris les espaces)
   recensement:
     photos:
       taken_count:

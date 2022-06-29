@@ -28,7 +28,10 @@
           <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
         </div>
         <div class="fr-input-group">
-          <%= f.label :password, "Mot de passe" %>
+          <%= f.label :password do %>
+            Mot de passe
+            <span class="fr-hint-text"><%= t("conservateurs.password.hint") %></span>
+          <% end %>
           <%= f.password_field :password, required: true %>
           <div class="fr-mt-1w">
             <%= link_to "Réinitialiser mon mot de passe", new_conservateur_password_path %>
