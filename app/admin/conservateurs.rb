@@ -42,7 +42,7 @@ ActiveAdmin.register Conservateur do
     end
   end
 
-  permit_params :email, :first_name, :last_name, :phone_number, departements: []
+  permit_params :email, :first_name, :last_name, :phone_number, :password, :password_confirmation, departements: []
 
   form do |f|
     f.semantic_errors # shows errors on :base
@@ -72,6 +72,9 @@ ActiveAdmin.register Conservateur do
 
     def create
       sanitize_params
+      password = SecureRandom.hex(25)
+      params[:conservateur][:password] = password
+      params[:conservateur][:password_confirmation] = password
       super
     end
   end
