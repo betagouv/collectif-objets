@@ -1,30 +1,83 @@
-<div class="fr-mb-3w">
-  <div class="fr-pb-1w">
-    <b><%= t("activerecord.attributes.recensement.localisation") %></b>
+
+<div class="fr-grid-row fr-pb-2w">
+  <div class="fr-col-md-4">
+    <h4>Recensement fait par la commune</h4>
   </div>
-  <div class="fr-mb-1w">
-    <%= recensement_presenter.localisation_sentence %>
+  <div class="fr-col-md-8">
+    <h4>Vos retours</h4>
   </div>
-  <% if recensement.autre_edifice? %>
-    <div class="fr-pb-1w">
-      <b><%= t("activerecord.attributes.recensement.edifice_nom") %></b>
-    </div>
-    <div class="fr-mb-1w">
-      <input
-        class="fr-input co-text--black"
-        type="text"
-        disabled
-        value="<%= recensement.edifice_nom %>" />
-    </div>
-  <% end %>
 </div>
 
-<div class="fr-my-3w">
-  <div class="fr-pb-1w">
+
+<div class="fr-grid-row">
+  <div class="fr-col-md-4 fr-pt-3w fr-pb-1w">
+    <b><%= t("activerecord.attributes.recensement.localisation") %></b>
+  </div>
+</div>
+<div class="fr-grid-row">
+  <div class="fr-col-md-4">
+    <div class="fr-mb-1w">
+      <%= recensement_presenter.localisation_sentence %>
+    </div>
+    <% if recensement.autre_edifice? %>
+      <div class="fr-pb-1w">
+        <b><%= t("activerecord.attributes.recensement.edifice_nom") %></b>
+      </div>
+      <div class="fr-mb-1w">
+        <input
+          class="fr-input co-text--black"
+          type="text"
+          disabled
+          value="<%= recensement.edifice_nom %>" />
+      </div>
+    <% end %>
+  </div>
+  <div class="fr-col-md-6 co-background--input-grey">
+    <textarea class="fr-input co-textarea--not-resizable co-textarea--border-light"></textarea>
+  </div>
+  <div class="fr-col-md-2 fr-pl-1w">
+    <ul class="fr-btns-group fr-btns-group--inline">
+      <% [:cherchez_mieux, :sacristie].each do |key| %>
+        <li>
+          <button
+            class="fr-btn fr-btn--tertiary fr-btn--sm"
+            data-content="<%= t("conservateurs.recensements.analyse_localisation_messages.#{key}.title") %>"
+          >
+            <%= t("conservateurs.recensements.analyse_localisation_messages.#{key}.title") %>
+          </button>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="fr-grid-row">
+  <div class="fr-col-md-4 fr-pt-3w fr-pb-1w">
     <b><%= t("activerecord.attributes.recensement.recensable") %></b>
   </div>
-  <div>
+  <div class="fr-col-md-6 co-background--input-grey">
+  </div>
+</div>
+<div class="fr-grid-row">
+  <div class="fr-col-md-4">
     <%= recensement_presenter.recensable %>
+  </div>
+  <div class="fr-col-md-6 co-background--input-grey">
+    <textarea class="fr-input co-textarea--not-resizable co-textarea--border-light"></textarea>
+  </div>
+  <div class="fr-col-md-2 fr-pl-1w">
+    <ul class="fr-btns-group fr-btns-group--inline">
+      <% [:details, :sur].each do |key| %>
+        <li>
+          <button
+            class="fr-btn fr-btn--tertiary fr-btn--sm"
+            data-content="<%= t("conservateurs.recensements.recensable_messages.#{key}.title") %>"
+          >
+            <%= t("conservateurs.recensements.recensable_messages.#{key}.title") %>
+          </button>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
 

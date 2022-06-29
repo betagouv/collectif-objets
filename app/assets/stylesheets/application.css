@@ -44,6 +44,10 @@ a.co-footer-logo img {
   background-color: #F9F8F6;
 }
 
+.co-background--input-grey {
+  background-color: #eeeeee;
+}
+
 .co-background--teal {
   background-color: rgb(185, 185, 251);
 }
@@ -253,6 +257,15 @@ a.co-link--no-arrow[target="_blank"]::after {
 
 .fr-btn--icon-left.co-button--big-icon[class*=" fr-icon-"]::before {
   --icon-size: 2rem;
+}
+
+.co-textarea--not-resizable {
+  resize: none;
+}
+
+textarea.fr-input.co-textarea--border-light {
+  box-shadow: inset 0 -1px 0 0 #ccc;
+  min-height: 8rem;
 }
 
 /* RESPONSIVE */

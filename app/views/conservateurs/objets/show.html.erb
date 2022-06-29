@@ -73,49 +73,42 @@
       builder: FormBuilderDsfr
     ) do |f| %>
       <div class="fr-container fr-mb-6w" id="recensement">
-        <div class="co-background--light-teal fr-py-6w fr-px-6w">
-          <h3><%= t(".recensement.title") %></h3>
-          <div class="fr-grid-row fr-pb-6w">
-            <div class="fr-col-md-12">
-              <div class="fr-pb-1w">
-                <% if @recensement.missing_photos? %>
-                  <p class="fr-badge fr-badge--sm fr-badge--warning">
-                    <%= t("recensement.photos.taken_count", count: 0) %>
-                  </p>
-                <% else %>
-                  <b>
-                    <%= t("recensement.photos.taken_count", count: @recensement.photos.count) %>
-                  </b>
+        <div class="fr-grid-row fr-pb-6w">
+          <div class="fr-col-md-12">
+            <div class="fr-pb-1w">
+              <% if @recensement.missing_photos? %>
+                <p class="fr-badge fr-badge--sm fr-badge--warning">
+                  <%= t("recensement.photos.taken_count", count: 0) %>
+                </p>
+              <% else %>
+                <b>
+                  <%= t("recensement.photos.taken_count", count: @recensement.photos.count) %>
+                </b>
+              <% end %>
+            </div>
+            <div class="co-recensement-photos-grid">
+              <% @recensement.photos.map do |photo| %>
+                <% url = photo.variant(:medium) %>
+                <%= link_to url, target: "_blank", class: "co-link--no-arrow" do %>
+                  <%= image_tag url, class: "co-recensement-analyse-photo" %>
                 <% end %>
-              </div>
-              <div class="co-recensement-photos-grid">
-                <% @recensement.photos.map do |photo| %>
-                  <% url = photo.variant(:medium) %>
-                  <%= link_to url, target: "_blank", class: "co-link--no-arrow" do %>
-                    <%= image_tag url, class: "co-recensement-analyse-photo" %>
-                  <% end %>
-                <% end %>
-              </div>
+              <% end %>
             </div>
           </div>
-          <div class="fr-grid-row">
-            <div class="fr-col-md-8">
-              <%= render(
-                "recensement_attributes",
-                recensement_presenter: @recensement_presenter,
-                recensement: @recensement,
-                f:
-              ) %>
+        </div>
+        <%= render(
+          "recensement_attributes",
+          recensement_presenter: @recensement_presenter,
+          recensement: @recensement,
+          f:
+        ) %>
+        <div class="fr-grid-row">
+          <div class="fr-col-md-8">
+            <div class="fr-pb-1w">
+              <b><%= t("activerecord.attributes.recensement.notes") %></b>
             </div>
-          </div>
-          <div class="fr-grid-row">
-            <div class="fr-col-md-8">
-              <div class="fr-pb-1w">
-                <b><%= t("activerecord.attributes.recensement.notes") %></b>
-              </div>
-              <div>
-                <%= blockquote(@recensement.notes, class: "fr-my-2w") %>
-              </div>
+            <div>
+              <%= blockquote(@recensement.notes, class: "fr-my-2w") %>
             </div>
           </div>
         </div>
@@ -144,34 +137,6 @@
                 </p>
               </div>
             <% end %>
-            <%= render(
-              "forms/collection_check_boxes",
-              f: f,
-              field_name: :analyse_actions,
-              options: analyse_action_options,
-              disabled: !@recensement.objet.commune.completed?,
-              hint: t("conservateurs.recensements.analyse_actions.hint")
-            ) %>
-          </div>
-          <div class="fr-col-md-6 fr-my-2w">
-            <%= render(
-              "forms/collection_check_boxes",
-              f: f,
-              field_name: :analyse_fiches,
-              options: analyse_fiche_options,
-              disabled: !@recensement.objet.commune.completed?,
-              hint: t("conservateurs.recensements.analyse_fiches.hint")
-            ) %>
-          </div>
-        </div>
-
-        <div class="fr-grid-row fr-mb-4w">
-          <div class="fr-col-md-6">
-            <%= f.label :analyse_notes %>
-            <%= f.text_area(
-              :analyse_notes,
-              disabled: !@recensement.objet.commune.completed?
-            ) %>
           </div>
         </div>
 
@@ -188,16 +153,5 @@
         </div>
       </div>
     <% end %>
-
-    <div class="co-background--light-grey fr-my-6w fr-py-6w">
-      <div class="fr-container fr-grid-row">
-        <div class="fr-col-md-8">
-          <h3><%= t(".notes.title") %></h3>
-          <div id="js-objet-notes-conservateur-form">
-            <%= render "conservateurs/objets/notes/form", objet: @objet %>
-          </div>
-        </div>
-      </div>
-    </div>
   <% end %>
 </main>
