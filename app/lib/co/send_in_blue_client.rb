@@ -8,12 +8,26 @@ module Co
 
     SIB_LISTS = {
       "production" => {
+        "08" => {
+          "cold" => 194,
+          "enrolled" => 193,
+          "opt-out" => 195,
+          "started" => 196,
+          "missing-photos" => 199
+        },
         "51" => {
           "cold" => 95,
           "enrolled" => 94,
           "opt-out" => 98,
           "started" => 99,
           "missing-photos" => 117
+        },
+        "58" => {
+          "cold" => 188,
+          "enrolled" => 189,
+          "opt-out" => 187,
+          "started" => 186,
+          "missing-photos" => 183
         },
         "65" => {
           "cold" => 112,
