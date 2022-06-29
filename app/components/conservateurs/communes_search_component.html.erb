@@ -46,8 +46,8 @@
               </th>
               <th>
                 <%= link_to(
-                  "Objets Prioritaires #{order_link_arrow("recensements_prioritaires_count")}",
-                  order_link_path("recensements_prioritaires_count")
+                  "Objets en péril #{order_link_arrow("recensements_peril_count")}",
+                  order_link_path("recensements_peril_count")
                 ) %>
               </th>
               <th>
@@ -71,7 +71,7 @@
                   <%= link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top" %>
                 </td>
                 <td><%= commune.objets_count %></td>
-                <td><%= commune.recensements_prioritaires_count %></td>
+                <td><%= commune.recensements_peril_count %></td>
                 <td>
                   <%= t("activerecord.attributes.commune.statuses.#{commune.status}") %><br />
                 </td>

@@ -282,3 +282,9 @@ a.co-link--no-arrow[target="_blank"]::after {
   width: 100%;
   height: 100%;
 }
+
+/* CARDS */
+
+.fr-card__body .fr-tags-group {
+  gap: 5px;
+}

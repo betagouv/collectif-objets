@@ -8,7 +8,6 @@ module Conservateurs
 
     def show
       @objets = @commune.objets
-        .order("recensements.analyse_prioritaire")
         .with_photos_first
         .includes(:commune, recensements: %i[photos_attachments photos_blobs])
       return true if params[:analyse_saved].blank?

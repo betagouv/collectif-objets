@@ -5,25 +5,12 @@ module Conservateurs
     before_action :set_recensement, :set_objet, :restrict_access, :prevent_not_completed
 
     def update
-      return update_prioritaire if params[:recensement][:analyse_prioritaire].present?
-
       if @recensement.update(recensement_params)
         dossier.pdf.purge_later
         redirect_to conservateurs_commune_path(@objet.commune, analyse_saved: true)
       else
         render "conservateurs/objets/show", status: :unprocessable_entity
       end
-    end
-
-    def update_prioritaire
-      res = @recensement.update(recensement_params_prioritaire)
-      raise "Error on save: #{@recensement.errors.full_messages.first}" unless res
-
-      render_turbo_stream_update(
-        "js-recensement-prioritaire",
-        partial: "conservateurs/objets/recensement_prioritaire",
-        locals: { recensement: @recensement }
-      )
     end
 
     protected
@@ -74,15 +61,6 @@ module Conservateurs
           :analyse_securisation, :analyse_notes,
           analyse_actions: [], analyse_fiches: []
         )
-    end
-
-    def recensement_params_prioritaire
-      params
-        .require(:recensement)
-        .permit(:analyse_prioritaire)
-        .merge(confirmation: true)
-        .merge(@recensement.photos.empty? ? { skip_photos: true } : {})
-        .transform_values { |v| v.to_s == "true" }
     end
   end
 end

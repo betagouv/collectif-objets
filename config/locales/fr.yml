@@ -76,7 +76,6 @@ fr:
         completed: Recensement terminé
     objet_card_component:
       analysed_badge: Analysé
-      prioritaire_badge: Prioritaire
       introuvable_badge: Introuvable
     accepts:
       new:
@@ -135,10 +134,6 @@ fr:
           etats_sanitaires_distribution_title: États sanitaires des objets recensés
     objets:
       show:
-        analyse_prioritaire:
-          tag: Prioritaire
-          enable: Marquer comme prioritaire
-          disable: retirer
         not_recensed: Pas encore recensé
         pop_card:
           edifice_nom: Édifice

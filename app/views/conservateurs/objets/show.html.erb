@@ -70,22 +70,11 @@
     <%= form_for(
       @recensement,
       url: conservateurs_recensement_path(@recensement),
-      html: { onsubmit: "Turbo.navigator.submitForm(this)", id: "prioritaireForm" }
-    ) { } %>
-    <%# this nested form is declared here empty and linked to within the bigger form %>
-    <%= form_for(
-      @recensement,
-      url: conservateurs_recensement_path(@recensement),
       builder: FormBuilderDsfr
     ) do |f| %>
       <div class="fr-container fr-mb-6w" id="recensement">
         <div class="co-background--light-teal fr-py-6w fr-px-6w">
-          <div class="co-flex co-flex--space-between">
-            <h3><%= t(".recensement.title") %></h3>
-            <div id="js-recensement-prioritaire">
-              <%= render "recensement_prioritaire", recensement: @recensement %>
-            </div>
-          </div>
+          <h3><%= t(".recensement.title") %></h3>
           <div class="fr-grid-row fr-pb-6w">
             <div class="fr-col-md-12">
               <div class="fr-pb-1w">

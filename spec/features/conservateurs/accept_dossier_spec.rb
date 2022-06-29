@@ -45,16 +45,6 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(page).to have_text("Bouquet d'Autel")
     expect(page).to have_text("Ciboire des malades")
 
-    # mark as prioritaire and come back to list
-    click_on "Bouquet d'Autel"
-    click_on "Marquer comme prioritaire"
-    expect(page).to have_text("PRIORITAIRE")
-
-    click_on "Albon"
-    expect(recensement_bouquet.reload.analyse_prioritaire?).to be true
-    card_autel = find_link("Bouquet d'Autel").find(:xpath, "ancestor::div[contains(@class, 'fr-card ')]")
-    expect(card_autel).to have_text("PRIORITAIRE")
-
     # analyse first recensement
     click_on "Bouquet d'Autel"
     etat_sanitaire_group = find("b", text: "Dans quel état est l’objet ?")

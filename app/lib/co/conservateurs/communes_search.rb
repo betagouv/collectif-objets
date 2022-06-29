@@ -6,7 +6,7 @@ module Co
       attr_reader :filters, :order, :departement
 
       VALID_ORDER_KEYS = [
-        "nom", "objets_count", "recensements_prioritaires_count",
+        "nom", "objets_count", "recensements_peril_count",
         "communes.status", "dossiers.status"
       ].freeze
       VALID_ORDER_DIRS = %w[ASC DESC].freeze
