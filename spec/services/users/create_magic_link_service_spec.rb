@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 require "rails_helper"
 
 RSpec.describe Users::CreateMagicLinkService, type: :service do
@@ -31,31 +29,5 @@ RSpec.describe Users::CreateMagicLinkService, type: :service do
       end
       it { should eq({ success: false, error: :no_user_found }) }
     end
-
-    context "conservateur found" do
-      let(:email) { "jean.framboise@culture.gouv.fr" }
-      let!(:conservateur) { create(:conservateur, email:) }
-
-      before do
-        expect(Conservateur).to receive(:find_by).with(email:).and_return(conservateur)
-        expect(conservateur).to receive(:rotate_login_token).and_return(true)
-        mailer_double = double(deliver_now: true)
-        # expect(mailer_double).to receive(:deliver_now)
-        expect(UserMailer).to receive(:validate_email).with(conservateur).and_return(mailer_double)
-      end
-      it { should eq({ success: true, error: nil }) }
-    end
-
-    context "conservateur not found" do
-      let(:email) { "jean.framboise@culture.gouv.fr" }
-      let!(:conservateur) { create(:conservateur, email: "patrick.kiwi@culture.gouv.fr") }
-
-      before do
-        expect(UserMailer).not_to receive(:validate_email)
-      end
-      it { should eq({ success: false, error: :no_user_found }) }
-    end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

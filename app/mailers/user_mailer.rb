@@ -3,8 +3,7 @@
 class UserMailer < ApplicationMailer
   def validate_email(user)
     @user = user
-    @login_url = send(
-      "#{user.class.table_name}_sign_in_with_token_url",
+    @login_url = users_sign_in_with_token_url(
       login_token: @user.login_token
     )
     mail to: @user.email, subject: "Collectif Objets - Votre lien de connexion"
