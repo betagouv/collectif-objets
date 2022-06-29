@@ -1,0 +1,12 @@
+<main class="fr-container fr-pb-16w fr-pt-2w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [["Accueil", root_path]],
+    current_page_label: "Connexion"
+  ) %>
+  <h1>Connexion</h1>
+  <ul>
+    <li><%= link_to "Je suis maire ou délégué·e d'une commune", new_user_session_path %></li>
+    <li><%= link_to "Je suis conservateur ou conservatrice", new_conservateur_session_path %></li>
+  </ul>
+</main>

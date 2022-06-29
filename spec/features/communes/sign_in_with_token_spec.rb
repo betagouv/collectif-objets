@@ -8,8 +8,8 @@ RSpec.feature "Sign in with token", type: :feature, js: true do
 
   scenario "sign in with token" do
     visit "/"
-    # save_and_open_screenshot
     click_on "Connexion"
+    click_on("Je suis maire ou délégué·e d'une commune")
     expect(page).to have_text("Connexion")
     fill_in "Email", with: "mairie-albon@test.fr"
     click_on "Recevoir un lien de connexion"

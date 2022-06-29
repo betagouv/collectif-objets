@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_15_093906) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_28_152116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -95,11 +95,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_15_093906) do
     t.string "phone_number"
     t.string "departements", default: [], array: true
     t.datetime "last_sign_in_at"
-    t.string "login_token"
-    t.datetime "login_token_valid_until"
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.index ["email"], name: "index_conservateurs_on_email", unique: true
   end
 

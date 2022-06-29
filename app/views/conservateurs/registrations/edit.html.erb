@@ -1,0 +1,18 @@
+<% content_for(:head_title) { "Mon compte" } %>
+
+<main class="fr-container fr-py-4w fr-grid-row fr-grid-row--center" data-controller="devise--sessions">
+  <div class="fr-col-md-8">
+    <%= render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Mon compte") %>
+
+    <div class="fr-mb-6w">
+      <h3>Mon compte</h3>
+      <ul>
+        <li>Prénom: <b><%= current_conservateur.first_name %></b></li>
+        <li>Nom: <b><%= current_conservateur.last_name %></b></li>
+      </ul>
+      <p>
+        <%= link_to "Déconnexion", destroy_user_session_path, class: "fr-btn fr-btn--secondary fr-fi-logout-box-r-line fr-btn--icon-left", data: { turbo_method: :delete } %>
+      </p>
+    </div>
+  </div>
+</main>

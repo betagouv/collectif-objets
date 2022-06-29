@@ -34,7 +34,6 @@ ActiveAdmin.register Conservateur do
           row :last_name
           row :departements
           row :phone_number
-          row :login_token
         end
       end
       div do
