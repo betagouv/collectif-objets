@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     return commune_objets_path(resource.commune) if resource.is_a?(User)
 
+    if resource.is_a?(Conservateur) && resource.departements.count == 1
+      return conservateurs_departement_path(resource.departements.first)
+    end
+
     return conservateurs_departements_path if resource.is_a?(Conservateur)
 
     super
