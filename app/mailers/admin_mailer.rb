@@ -10,4 +10,13 @@ class AdminMailer < ApplicationMailer
       subject: "Admin - Contacts SIB - Rapport"
     )
   end
+
+  def sanity_check_alert(email, commune, text)
+    @text = text
+    @commune = commune
+    mail(
+      to: email,
+      subject: "Admin - Sanity Check Alert - #{commune}"
+    )
+  end
 end

@@ -2,6 +2,9 @@
   "jobs": [
     {
       "command": "0 3 * * * rails runner \"RefreshCommuneRecensementRatioJob.perform_async('all')\""
+    },
+    {
+      "command": "0 * * * * rails runner SanityChecksJob.perform_inline"
     }
   ]
 }
