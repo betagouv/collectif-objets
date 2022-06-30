@@ -55,7 +55,7 @@
             <div class="fr-card__img">
               <%= image_tag(
                 @objet.image_urls.any? ? @objet.image_urls.first : "illustrations/photo-manquante-pop.png",
-                class: "fr-responsive-img",
+                class: "fr-responsive-img co-object-fit-contain",
                 alt: "illustration POP de l'objet #{@objet.palissy_REF}"
               ) %>
             </div>

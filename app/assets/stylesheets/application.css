@@ -216,8 +216,9 @@ a.co-link--no-arrow[target="_blank"]::after {
   background: url(/spinner-blue.gif) no-repeat center;
 }
 
-.co-object-fit-cover {
-  object-fit: cover;
+img.co-object-fit-contain,
+.fr-card--horizontal .fr-card__img img.co-object-fit-contain {
+  object-fit: contain;
 }
 
 
