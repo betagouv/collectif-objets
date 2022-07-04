@@ -136,25 +136,6 @@
 
   <div class="co-background--light-grey fr-my-6w fr-py-6w">
     <div class="fr-container fr-grid-row fr-grid-row--center">
-      <div class="fr-col-md-8">
-        <h3>Notes</h3>
-        <% if @dossier.present? %>
-          <div id="js-dossier-notes-conservateur-private-form">
-            <%= render "conservateurs/dossiers/private_notes/form", dossier: @dossier %>
-          </div>
-        <% else %>
-          <div class="fr-alert fr-alert--error fr-mb-4w">
-            <p>
-              <%= t(".notes_conservateur.not_completed") %>
-            </p>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="co-background--light-grey fr-my-6w fr-py-6w">
-    <div class="fr-container fr-grid-row fr-grid-row--center">
       <div class="fr-col-md-4">
         <h3>
           <%= t(".contact.title") %>

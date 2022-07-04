@@ -5,7 +5,7 @@ ActiveAdmin.register Dossier do
   menu label: "📂 Dossiers", priority: 4
 
   actions :all, except: %i[destroy new create]
-  permit_params :status, :notes_commune, :notes_conservateur, :notes_conservateur_private
+  permit_params :status, :notes_commune, :notes_conservateur
 
   index do
     id_column
@@ -14,7 +14,6 @@ ActiveAdmin.register Dossier do
     column :status
     column :notes_commune
     column :notes_conservateur
-    column :notes_conservateur_private
     column :created_at
     column :updated_at
     column :pending_at
@@ -35,7 +34,6 @@ ActiveAdmin.register Dossier do
           row :pdf_updated_at
           row :notes_commune
           row :notes_conservateur
-          row :notes_conservateur_private
           row :created_at
           row :updated_at
         end
@@ -92,7 +90,6 @@ ActiveAdmin.register Dossier do
       f.input :status, as: :select, collection: Dossier.aasm.states_for_select
       f.input :notes_commune
       f.input :notes_conservateur
-      f.input :notes_conservateur_private
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end

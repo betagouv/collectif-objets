@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_28_152116) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_092310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -113,7 +113,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_152116) do
     t.datetime "pdf_updated_at"
     t.string "notes_commune"
     t.string "notes_conservateur"
-    t.string "notes_conservateur_private"
     t.bigint "conservateur_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -138,10 +137,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_152116) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "palissy_TICO"
-    t.string "notes_conservateur"
-    t.datetime "notes_conservateur_at"
-    t.bigint "conservateur_id"
-    t.index ["conservateur_id"], name: "index_objets_on_conservateur_id"
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
     t.index ["palissy_INSEE"], name: "index_objets_on_palissy_INSEE"

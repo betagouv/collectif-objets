@@ -63,8 +63,6 @@ fr:
           send: Envoyer le rapport …
           reject: Renvoyer le dossier à la commune …
           reject_desc: pour demander des informations manquantes
-        notes_conservateur:
-          not_completed: Vous ne pouvez pas laisser de commentaire tant que la commune n'a pas commencé à recenser
         contact:
           title: Contacter la commune
     communes_search_component:
@@ -147,12 +145,6 @@ fr:
           error: "Votre analyse n'a pas pu être enregistrée :"
           submit: "Sauvegarder"
           submit_desc: Ces informations ne seront pas envoyées à la mairie tout de suite. Vous pourrez les modifier avant de valider votre rapport dans son ensemble.
-        notes:
-          title: Notes internes sur l'objet
-      notes:
-        form:
-          label: "Commentaire partagé uniquement aux conservateurs"
-          submit: "Sauvegarder les notes"
     recensements:
       analyse_actions:
         hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
@@ -282,7 +274,6 @@ fr:
         interface_conservateurs:
           notes_commune: Commentaires de la commune à votre intention
           notes_conservateur: Vos retours pour la commune
-          notes_conservateur_private: Notes internes (uniquement visible par les conservateurs)
       commune:
         statuses:
           inactive: Commune inactive

@@ -6,7 +6,6 @@ class Objet < ApplicationRecord
   scope :with_images, -> { where("cardinality(image_urls) >= 1") }
   belongs_to :commune, foreign_key: :palissy_INSEE, primary_key: :code_insee, optional: true, inverse_of: :objets
   has_many :recensements, dependent: :restrict_with_exception
-  belongs_to :conservateur, optional: true # for notes_conservateur
 
   scope :with_photos_first, -> { order('cardinality(image_urls) DESC, LOWER(objets."palissy_DENO") ASC') }
 

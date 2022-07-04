@@ -91,7 +91,6 @@ ActiveAdmin.register Recensement do
             row :pdf_updated_at
             row :notes_commune
             row :notes_conservateur
-            row :notes_conservateur_private
             row :created_at
             row :updated_at
           end
