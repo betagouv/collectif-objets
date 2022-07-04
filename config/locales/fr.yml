@@ -154,10 +154,31 @@ fr:
           label: "Commentaire partagé uniquement aux conservateurs"
           submit: "Sauvegarder les notes"
     recensements:
-      analyse_actions:
-        hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
-      analyse_fiches:
-        hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
+      analyse_localisation_messages:
+        cherchez_mieux:
+          title: Cherchez mieux
+        sacristie:
+          title: vérifiez la sacristie
+      recensable_messages:
+        sur:
+          title: Êtes-vous sûr·e ?
+        details:
+          title: Besoin de détails
+      etat_sanitaire_edifice_messages:
+        opt1:
+          title: Réparez la fuite
+        opt2:
+          title: Repeignez le mur
+      etat_sanitaire_messages:
+        opt1:
+          title: Demandez une restauration
+        opt2:
+          title: Mettez en valeur
+      securisation_messages:
+        opt1:
+          title: Fermez à clé
+        opt2:
+          title: Limitez les visites
     accept_preview_component:
       submit: Envoyer le rapport à la commune
     password:
