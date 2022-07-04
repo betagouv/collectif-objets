@@ -19,9 +19,7 @@
     </div>
 
     <div class="fr-card__header">
-      <div class="fr-card__img">
-        <%= image_tag main_photo_url, class: "fr-responsive-img co-spinner-bg co-object-fit-contain" %>
-      </div>
+      <%= render("shared/card_img", url: main_photo_url) %>
       <ul class="fr-badges-group">
         <%= render partial: "shared/badge_li", collection: floating_badges, as: :badge %>
       </ul>
