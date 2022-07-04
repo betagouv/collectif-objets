@@ -52,13 +52,10 @@
             </div>
           </div>
           <div class="fr-card__header">
-            <div class="fr-card__img">
-              <%= image_tag(
-                @objet.image_urls.any? ? @objet.image_urls.first : "illustrations/photo-manquante-pop.png",
-                class: "fr-responsive-img",
-                alt: "illustration POP de l'objet #{@objet.palissy_REF}"
-              ) %>
-            </div>
+            <%= render(
+              "shared/card_img",
+              url: @objet.image_urls.any? ? @objet.image_urls.first : "illustrations/photo-manquante-pop.png"
+            ) %>
           </div>
         </div>
       </div>

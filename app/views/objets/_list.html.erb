@@ -11,9 +11,10 @@
             <%= objet.edifice_nom %>
           </p>
         </div>
-        <div class="fr-card__img">
-          <%= image_tag objet_first_image_or_recensement_photo_url(objet), class: "fr-responsive-img co-spinner-bg" %>
-        </div>
+        <%= render(
+          "shared/card_img",
+          url: objet_first_image_or_recensement_photo_url(objet)
+        ) %>
       </div>
     </div>
   <% end %>

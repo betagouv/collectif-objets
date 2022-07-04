@@ -88,4 +88,8 @@ Rails.application.routes.draw do
       mount Lookbook::Engine, at: "/lookbook"
     end
   end
+
+  if Rails.env.development?
+    get "health/slow_image", to: "health#slow_image", as: "slow_image"
+  end
 end

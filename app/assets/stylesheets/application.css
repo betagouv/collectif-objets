@@ -212,12 +212,33 @@ a.co-link--no-arrow[target="_blank"]::after {
 
 /* IMAGES */
 
-.co-spinner-bg {
-  background: url(/spinner-blue.gif) no-repeat center;
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.co-object-fit-cover {
-  object-fit: cover;
+.co-spinner-bg:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  border-top-color: #07d;
+  animation: spinner .6s linear infinite;
+  z-index: 0;
+}
+
+
+img.co-object-fit-contain,
+.fr-card--horizontal .fr-card__img img.co-object-fit-contain {
+  object-fit: contain;
 }
 
 
