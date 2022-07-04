@@ -7,7 +7,6 @@ module Conservateurs
 
     def new
       @dossier.update!(conservateur_id: current_conservateur.id)
-      GenerateRapportPdfJob.perform_async(@dossier.id) unless @dossier.pdf.attached?
     end
 
     def create

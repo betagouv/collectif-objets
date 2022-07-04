@@ -4,7 +4,6 @@ class Dossier < ApplicationRecord
   belongs_to :commune
   has_many :recensements, dependent: :nullify
   belongs_to :conservateur, optional: true
-  has_one_attached :pdf
 
   include AASM
   aasm column: :status, timestamps: true do

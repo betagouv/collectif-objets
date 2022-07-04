@@ -196,7 +196,6 @@ fr:
       rejected: Dossier renvoyé à la commune
       accepted: Rapport envoyé à la commune
     rapport:
-      pdf_title: Rapport de recensement
       recensement:
         localisation: Où se trouve l’objet ?
         edifice_nom: Précisez le nom de l’édifice dans lequel se trouve l’objet

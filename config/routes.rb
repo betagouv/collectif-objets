@@ -67,7 +67,6 @@ Rails.application.routes.draw do
     resources :objets, only: [:show]
     resources :recensements, only: [:update]
     resources :dossiers, only: [] do
-      resource :rapport, only: [:update]
       resource :accept, only: [:new, :create]
       resource :reject, only: [:new, :create, :update]
     end

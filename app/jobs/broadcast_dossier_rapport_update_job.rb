@@ -8,7 +8,7 @@ class BroadcastDossierRapportUpdateJob
     dossier.broadcast_replace_to(
       dossier,
       "rapport-pdf-embed-and-form",
-      target: "js-rapport-pdf-embed-and-form-#{dossier.id}",
+      target: "js-accept-preview--#{dossier.id}",
       html: ApplicationController.render(
         Conservateurs::AcceptPreviewComponent.new(dossier:),
         layout: false
