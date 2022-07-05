@@ -10,7 +10,7 @@ module Co
       end
 
       def admin_url(resource)
-        "#{Rails.configuration.x.admin_host}admin/#{resource.class.table_name}/#{resource.id}"
+        send("admin_#{resource.class.to_s.parameterize}_url", resource)
       end
     end
   end
