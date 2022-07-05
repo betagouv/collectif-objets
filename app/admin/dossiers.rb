@@ -87,7 +87,7 @@ ActiveAdmin.register Dossier do
   form do |f|
     f.semantic_errors # shows errors on :base
     f.inputs do
-      f.input :status, as: :select, collection: Dossier.aasm.states_for_select
+      f.input :status, as: :select, collection: Dossier.aasm.states_for_select, input_html: { disabled: true }
       f.input :notes_commune
       f.input :notes_conservateur
     end

@@ -6,7 +6,7 @@ ActiveAdmin.register Commune do
   decorate_with CommuneDecorator
 
   actions :all, except: %i[destroy new create]
-  permit_params :status, :notes_from_enrollment, :enrolled_at, :completed_at
+  permit_params :notes_from_enrollment
 
   collection_action :export_sib, method: :get do
     send_data(
@@ -150,12 +150,25 @@ ActiveAdmin.register Commune do
       f.input :nom, input_html: { disabled: true }
       f.input :code_insee, input_html: { disabled: true }
       f.input :departement, input_html: { disabled: true }
-      f.input :status, as: :select, collection: Commune.aasm.states_for_select
-      f.input :enrolled_at, label: "Date d'inscription"
+      f.input :status, as: :select, collection: Commune.aasm.states_for_select, input_html: { disabled: true }
       f.input :notes_from_enrollment, as: :text, input_html: { rows: 2 }
-      f.input :completed_at, label: "Date de fin de recensement"
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
+  end
+
+  member_action :return_dossier_to_construction, method: :post do
+    resource.dossier.return_to_construction!
+    redirect_to resource_path
+  end
+
+  action_item :return_dossier_to_construction_action, only: :show do
+    next unless resource.dossier&.can_return_to_construction?
+
+    link_to(
+      "Repasser en recensement démarré",
+      return_dossier_to_construction_admin_commune_path(resource),
+      method: "POST"
+    )
   end
 end
 # rubocop:enable Metrics/BlockLength

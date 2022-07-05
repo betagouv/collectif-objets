@@ -18,6 +18,7 @@ class Commune < ApplicationRecord
       transitions from: :enrolled, to: :started
     end
     event(:complete) { transitions from: :started, to: :completed }
+    event(:return_to_started) { transitions from: :completed, to: :started }
   end
 
   has_many :users, dependent: :restrict_with_exception

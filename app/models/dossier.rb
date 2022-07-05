@@ -7,7 +7,7 @@ class Dossier < ApplicationRecord
   has_one_attached :pdf
 
   include AASM
-  aasm(column: :status, timestamps: true) do
+  aasm column: :status, timestamps: true do
     state :construction, initial: true, display: "En construction"
     state :submitted, display: "En attente d'analyse"
     state :rejected, display: "Renvoyé à la commune"
@@ -17,11 +17,16 @@ class Dossier < ApplicationRecord
       transitions from: :construction, to: :submitted
       transitions from: :rejected, to: :submitted
     end
-    event(:reject, after_commit: :aasm_after_commit_update) do
+    event :reject, after_commit: :aasm_after_commit_update do
       transitions from: :submitted, to: :rejected
     end
-    event(:accept, after_commit: :aasm_after_commit_update) do
+    event :accept, after_commit: :aasm_after_commit_update do
       transitions from: :submitted, to: :accepted
+    end
+    event :return_to_construction, after_commit: :aasm_after_commit_return_to_started_commune do
+      transitions from: :submitted, to: :construction do
+        guard { not_analysed? }
+      end
     end
   end
 
@@ -38,6 +43,14 @@ class Dossier < ApplicationRecord
     submitted? && all_recensements_analysed?
   end
 
+  def not_analysed?
+    recensements.where.not(analysed_at: nil).empty?
+  end
+
+  def can_return_to_construction?
+    submitted? && not_analysed?
+  end
+
   def analyse_overrides?
     recensements.any?(&:analyse_overrides?)
   end
@@ -49,5 +62,10 @@ class Dossier < ApplicationRecord
   def aasm_after_commit_complete_commune(*args, **kwargs)
     aasm_after_commit_update(*args, **kwargs)
     commune.complete! if commune.may_complete?
+  end
+
+  def aasm_after_commit_return_to_started_commune(*args, **kwargs)
+    aasm_after_commit_update(*args, **kwargs)
+    commune.return_to_started!
   end
 end
