@@ -26,7 +26,20 @@ To restore dump on staging:
 
 ## Documentation
 
-![](doc/communes%20status%20diagram.png)
+To regenerate diagrams : `bundle exec rake diagrams:generate`
+
+**Database Schema - Entity relationship diagram**
+
+![](/doc/entity-relationship-diagram.svg)
+
+**Communes state machine diagram**
+
+![](/doc/commune_state_machine_diagram.png)
+
+**Dossiers state machine diagram**
+
+![](/doc/dossier_state_machine_diagram.png)
+
 
 ## Mails & MJML
 

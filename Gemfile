@@ -49,9 +49,11 @@ group :development, :test do
 end
 
 group :development do
+  gem "aasm-diagram", require: false
   gem "htmlbeautifier"
   gem "progressbar"
   gem "pry"
+  gem "rails-erd", require: false
   gem "rubocop-daemon", require: false
   gem "web-console"
 end
