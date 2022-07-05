@@ -18,14 +18,14 @@
 
       <h2><%= t(".title", commune: @commune.nom) %></h2>
 
-      <div class="fr-callout fr-fi-information-line">
+      <div class="fr-callout fr-icon-information-line">
         <p class="fr-callout__text">
           <%= t(".instructions_html") %>
         </p>
       </div>
 
       <% if @dossier.analyse_overrides? %>
-        <div class="fr-callout fr-fi-information-line">
+        <div class="fr-callout fr-icon-information-line">
           <p class="fr-callout__text">
             <%= t(".instructions_overrides_html", count: @dossier.analyse_overrides_count) %>
           </p>
