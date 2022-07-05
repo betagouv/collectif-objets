@@ -64,15 +64,12 @@ Rails.application.routes.draw do
         post :autocomplete
       end
     end
-    resources :objets, only: [:show] do
-      resource :notes, only: [:update], controller: "objets/notes"
-    end
+    resources :objets, only: [:show]
     resources :recensements, only: [:update]
     resources :dossiers, only: [] do
       resource :rapport, only: [:update]
       resource :accept, only: [:new, :create]
       resource :reject, only: [:new, :create, :update]
-      resource :private_notes, only: [:update], controller: "dossiers/private_notes"
     end
   end
 
