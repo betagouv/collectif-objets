@@ -9,7 +9,7 @@ RSpec.feature "Sign in with token", type: :feature, js: true do
   scenario "sign in with token" do
     visit "/"
     click_on "Connexion"
-    click_on("Je suis maire ou délégué·e d'une commune")
+    click_on("Je suis élu(e) d'une commune ou je suis mandaté(e) par elle")
     expect(page).to have_text("Connexion")
     fill_in "Email", with: "mairie-albon@test.fr"
     click_on "Recevoir un lien de connexion"
