@@ -32,7 +32,8 @@ class RecensementDecorator < Draper::Decorator
     return nil if photos.empty?
 
     photos[0..limit].map do |photo|
-      "<img src=\"#{url_for(photo)}\" style=\"max-width: 150px; max-height: 150px;\" />".html_safe
+      url = (Rails.env.production? ? "/rails" : "") + url_for(photo)
+      "<img src=\"#{url}\" style=\"max-width: 150px; max-height: 150px;\" />".html_safe
     end
   end
   # rubocop:enable Rails/OutputSafety
