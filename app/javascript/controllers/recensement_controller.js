@@ -77,12 +77,12 @@ export default class extends Controller {
   }
 
   showLoader() {
-    for (const className of ["fr-fi-refresh-line", "fr-btn--icon-right", "co-btn--icon-spinning"])
+    for (const className of ["fr-icon-refresh-line", "fr-btn--icon-right", "co-btn--icon-spinning"])
       this.submitTarget.classList.toggle(className, true)
   }
 
   hideLoader() {
-    for (const className of ["fr-fi-refresh-line", "fr-btn--icon-right", "co-btn--icon-spinning"])
+    for (const className of ["fr-icon-refresh-line", "fr-btn--icon-right", "co-btn--icon-spinning"])
       this.submitTarget.classList.toggle(className, false)
   }
 }

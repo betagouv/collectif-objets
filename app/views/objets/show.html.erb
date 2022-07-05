@@ -21,7 +21,7 @@
     <div class="fr-col-md-6">
       <% if @objet.commune == current_user&.commune && @objet.current_recensement&.editable?%>
         <p>
-          <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-btn fr-btn--secondary fr-fi-edit-line fr-btn--icon-right" %>
+          <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right" %>
         </p>
       <% end %>
 
