@@ -5,6 +5,7 @@ module Communes
     before_action :restrict_not_started, except: [:show]
     before_action :restrict_completed, only: [:show]
     before_action :set_objets
+    before_action :set_missing_photos, only: %i[new create]
 
     def new; end
 
@@ -48,6 +49,10 @@ module Communes
       TriggerSibContactEventJob.perform_async(@commune.id, "completed")
       SendMattermostNotificationJob.perform_async("commune_completed", { "commune_id" => @commune.id })
       UserMailer.with(user_id: current_user.id, commune_id: @commune.id).commune_completed_email.deliver_later
+    end
+
+    def set_missing_photos
+      @missing_photos = @dossier.recensements.any?(&:missing_photos?)
     end
   end
 end
