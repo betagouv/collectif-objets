@@ -29,4 +29,11 @@ module ApplicationHelper
     html_options[:class] += " fr-callout__text co-blockquote fr-text--alt"
     content_tag("blockquote", content, **html_options)
   end
+
+  def t_fallback(key)
+    return I18n.t(key) if I18n.exists?(key)
+
+    scope = key.split(".").tap(&:pop).join(".")
+    I18n.t("#{scope}.other")
+  end
 end
