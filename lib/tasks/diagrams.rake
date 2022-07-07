@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'aasm-diagram'
+require 'aasm-diagram' if Rails.env.development?
 
 namespace :diagrams do
   task :generate, [:path] => :environment do |_, args|
