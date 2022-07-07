@@ -79,10 +79,11 @@
               conservateur: @dossier.conservateur.to_s
             ) %>
           </p>
+          <p>
+            <%= link_to "Voir le rapport", commune_dossier_path(@commune, @dossier), class: "fr-btn" %>
+          </p>
         </div>
-        <div class="fr-mb-8w">
-          <%= render PdfEmbedComponent.new(@dossier.pdf, title: t("dossier.rapport.pdf_title")) %>
-        </div>
+        <%# TODO %>
       <% end %>
     </div>
   </div>

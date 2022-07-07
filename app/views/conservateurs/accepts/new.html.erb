@@ -21,11 +21,8 @@
       <%= render "summary", recensements: @dossier.recensements %>
 
       <div class="fr-mb-4w">
-        <%= render "conservateurs/rapports/form", dossier: @dossier %>
+        <%= render "form", dossier: @dossier %>
       </div>
-
-      <%= turbo_stream_from(@dossier, "rapport-pdf-embed-and-form") %>
-      <%= render Conservateurs::AcceptPreviewComponent.new(dossier: @dossier) %>
     </div>
   </div>
 </main>

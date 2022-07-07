@@ -17,10 +17,11 @@ class UserMailer < ApplicationMailer
   end
 
   def dossier_accepted_email
-    dossier = params[:dossier]
-    @commune = dossier.commune
-    @conservateur = dossier.conservateur
-    attachments[dossier.pdf.filename.to_s] = dossier.pdf.download
+    @dossier = params[:dossier]
+    @commune = @dossier.commune
+    @user = @commune.users.first
+    @conservateur = @dossier.conservateur || params[:conservateur]
+    set_login_url
     subject = "Rapport de recensement des objets protégés de #{@commune.nom}"
     dossier_mail(user: @commune.users.first, conservateur: @conservateur, subject:)
   end

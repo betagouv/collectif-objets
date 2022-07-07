@@ -286,6 +286,10 @@ img.co-object-fit-contain,
   .co-display--md.hide {
     display: block !important;
   }
+
+  .co-flex-md-reverse-order {
+    order: -1;
+  }
 }
 
 /* PDF EMBED */

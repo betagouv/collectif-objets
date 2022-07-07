@@ -83,7 +83,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(ciboire_row).not_to have_text(/fiche vol/i)
     expect(ciboire_row).not_to have_text(/Entretenir/i)
     fill_in("dossier[notes_conservateur]", with: "Merci pour ce joli dossier")
-    click_on "Mettre à jour le rapport PDF"
+    click_on "Mettre à jour mes retours"
     click_on "Envoyer le rapport à la commune"
   end
 end

@@ -14,7 +14,7 @@
 
   <%= form_for(
     dossier,
-    url: conservateurs_dossier_rapport_path(dossier),
+    url: conservateurs_dossier_accept_path(dossier),
     method: "PUT",
     builder: FormBuilderDsfr,
     html: { data: { controller: "rapport-notes-form" } }
@@ -36,10 +36,28 @@
     </div>
     <div class="co-text--right">
       <%= f.submit(
-        t(".submit"),
-        disabled: true,
+        t(".submit_preview"),
         data: { "rapport-notes-form-target": "submit" }
       ) %>
     </div>
   <% end %>
+
+  <h3 class="fr-mt-8w">Prévisualisation du mail</h3>
+  <%= render "conservateurs/mail_preview", mail: UserMailerPreview.new.dossier_accepted_email(dossier, current_conservateur) %>
+
+  <div class="fr-mt-4w">
+    <%= form_for(
+      dossier,
+      url: conservateurs_dossier_accept_path(dossier),
+      method: "POST",
+      builder: FormBuilderDsfr,
+      html: {
+        "data-turbo-frame": "_top"
+      }
+    ) do |f| %>
+      <div class="co-text--right">
+        <%= f.submit t(".submit") %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
