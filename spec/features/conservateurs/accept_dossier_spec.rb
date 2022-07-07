@@ -87,9 +87,9 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     click_on "Envoyer le rapport à la commune"
 
     # visualisation rapport
-    expect(page).to have_text(/Rapport envoyé à la commune/)
+    expect(page).to have_text(/Rapport envoyé à la commune/i)
     click_on "Voir le rapport"
-    expect(page).to have_text(/Ciboire des malades/)
+    expect(page).to have_text(/Ciboire des malades/i)
   end
 end
 # rubocop:enable Metrics/BlockLength
