@@ -85,6 +85,11 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     fill_in("dossier[notes_conservateur]", with: "Merci pour ce joli dossier")
     click_on "Mettre à jour mes retours"
     click_on "Envoyer le rapport à la commune"
+
+    # visualisation rapport
+    expect(page).to have_text(/Rapport envoyé à la commune/)
+    click_on "Voir le rapport"
+    expect(page).to have_text(/Ciboire des malades/)
   end
 end
 # rubocop:enable Metrics/BlockLength

@@ -29,14 +29,7 @@
     <mj-section>
       <mj-column>
         <mj-text>
-          Vous trouverez sur votre espace mairie sur Collectif Objets le rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
-        </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-text>
-          Vous pouvez vous connecter à Collectif Objets pour modifier ou compléter les recensements des objets en suivant ce lien :
+          Vous trouverez sur Collectif Objets le rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
         </mj-text>
         <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= @login_url %>">
           Voir le rapport de recensement
