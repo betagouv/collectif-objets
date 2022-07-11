@@ -21,7 +21,7 @@ ActiveAdmin.register Conservateur do
   filter(
     :with_departement,
     as: :select,
-    collection: -> { Conservateur.select(:departements).pluck(:departements).flatten.uniq.compact.sort }
+    collection: Co::Departements.admin_select_options
   )
 
   show do

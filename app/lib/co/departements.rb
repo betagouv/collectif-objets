@@ -114,6 +114,11 @@ module Co
       "65" => "occitanie/hautes-pyrenees",
       "72" => "pays-de-la-loire/sarthe"
     }.freeze
+
+    def self.admin_select_options
+      Commune.select(:departement).distinct
+        .pluck(:departement).compact.sort.map { ["#{_1} - #{NAMES[_1]}", _1] }
+    end
   end
 end
 
