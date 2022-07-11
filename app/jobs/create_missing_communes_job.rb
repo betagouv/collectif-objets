@@ -43,32 +43,43 @@ class CreateMissingCommunesJob
     parsed
   end
 
-  def create_new_commune(raw_commune)
-    return if should_skip_commune?(raw_commune)
+  def create_new_commune(raw_mairie)
+    return if should_skip_commune?(raw_mairie)
 
-    logger.info "saving new commune #{raw_commune}"
-    commune = build_commune(raw_commune)
-    return if commune.save
+    logger.info "saving new commune #{raw_mairie}"
+    commune = find_or_build_commune(raw_mairie)
+    unless commune.persisted?
+      logger.info "error when saving commune : #{commune.errors.full_messages.join} (#{raw_mairie})"
+      return
+    end
 
-    logger.info "error when saving commune : #{commune.errors.full_messages.join} (#{raw_commune})"
+    create_user(raw_mairie, commune)
   end
 
-  # rubocop:disable Metrics/MethodLength
-  def build_commune(raw_commune)
-    users_attributes = [
-      email: raw_commune["email"],
-      magic_token: SecureRandom.hex(10),
-      role: User::ROLE_MAIRIE
-    ]
+  def find_or_build_commune(raw_mairie)
+    existing = Commune.find_by(code_insee: raw_mairie["code_insee"])
+    return existing if existing.present?
+
     Commune.new(
-      nom: raw_commune["nom"],
-      code_insee: raw_commune["code_insee"],
+      nom: raw_mairie["nom"],
+      code_insee: raw_mairie["code_insee"],
       departement: @departement,
-      phone_number: raw_commune["telephone"],
-      users_attributes: raw_commune["email"].present? ? users_attributes : []
-    )
+      phone_number: raw_mairie["telephone"]
+    ).tap(&:save)
   end
-  # rubocop:enable Metrics/MethodLength
+
+  def create_user(raw_mairie, commune)
+    return if raw_mairie["email"].blank? || commune.users.any?
+
+    attributes = {
+      email: raw_mairie["email"],
+      magic_token: SecureRandom.hex(10),
+      role: User::ROLE_MAIRIE,
+      commune_id: commune.id
+    }
+    user = User.new(attributes).tap(&:save)
+    logger.info "error when saving user : #{user.errors.full_messages.join} (#{attributes})" if user.errors.any?
+  end
 
   def trigger_next_query(parsed)
     return unless parsed["next_url"]
@@ -77,8 +88,7 @@ class CreateMissingCommunesJob
     api_query(parsed["next_url"])
   end
 
-  def should_skip_commune?(raw_commune)
-    Commune.where(code_insee: raw_commune["code_insee"]).any? || # we don't override existing communes at all for now
-      Objet.where(commune_code_insee: raw_commune["code_insee"]).empty? # we only create communes when there are objets
+  def should_skip_commune?(raw_mairie)
+    Objet.where(commune_code_insee: raw_mairie["code_insee"]).empty? # we only create communes when there are objets
   end
 end
