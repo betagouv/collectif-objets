@@ -15,6 +15,7 @@ class RecensementsController < ApplicationController
     @recensement.skip_photos = true if @recensement.photos.empty?
   end
 
+  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   def create
     if @recensement.save
       @recensement.commune.start! if @recensement.commune.may_start?
@@ -22,10 +23,16 @@ class RecensementsController < ApplicationController
       SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => @recensement.id })
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
+      begin
+        @recensement.save!
+      rescue StandardError => e
+        Sentry.capture_exception(e)
+      end
       @recensement.photos = []
       render :new, status: :unprocessable_entity
     end
   end
+  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
   def update
     @recensement.confirmation = true
