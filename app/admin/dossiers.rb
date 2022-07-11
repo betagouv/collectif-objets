@@ -54,7 +54,7 @@ ActiveAdmin.register Dossier do
 
         if dossier.conservateur.present?
           panel "👷‍♀️ Conservateur #{dossier.conservateur}" do
-            attributes_table_for dossier.conservateur.decorate do
+            attributes_table_for dossier.conservateur do
               row(:id) { link_to _1.id, admin_conservateur_path(_1) }
               row :email
               row :first_name

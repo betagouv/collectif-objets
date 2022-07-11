@@ -60,21 +60,23 @@
           <%= presenter.recensable %>
         </p>
 
-        <% [
-          :etat_sanitaire_edifice,
-          :etat_sanitaire,
-          :securisation
-        ].each do |original_attribute_name| %>
-          <p>
-            <div class="co-text--bold">
-              <%= t("activerecord.attributes.recensement.#{original_attribute_name}").html_safe %>
-            </div>
-            <%= render Conservateurs::AnalyseOverrideComponent.new(
-              recensement: recensement,
-              recensement_presenter: presenter,
-              original_attribute_name:
-            ) %>
-          </p>
+        <% if recensement.recensable? %>
+          <% [
+            :etat_sanitaire_edifice,
+            :etat_sanitaire,
+            :securisation
+          ].each do |original_attribute_name| %>
+            <p>
+              <div class="co-text--bold">
+                <%= t("activerecord.attributes.recensement.#{original_attribute_name}").html_safe %>
+              </div>
+              <%= render Conservateurs::AnalyseOverrideComponent.new(
+                recensement: recensement,
+                recensement_presenter: presenter,
+                original_attribute_name:
+              ) %>
+            </p>
+          <% end %>
         <% end %>
 
         <p>

@@ -4,7 +4,7 @@
 
 require "rails_helper"
 
-RSpec.feature "Communes - Recensement", type: :feature, js: true do
+RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
   let!(:commune) { create(:commune, status: "completed", nom: "Albon", code_insee: "26002", departement: "26") }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
   let!(:conservateur) do
@@ -47,7 +47,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(dbl).to receive(:commune_recompleted_email).and_return(double(deliver_later: true))
   end
 
-  scenario "full recensement" do
+  scenario "recomplete and resubmit rejected dossier" do
     login_as(user, scope: :user)
     visit "/"
     within("header") { click_on "Voir les objets de Albon" }

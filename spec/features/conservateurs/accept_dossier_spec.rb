@@ -90,6 +90,8 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(page).to have_text(/Rapport envoyé à la commune/i)
     click_on "Voir le rapport"
     expect(page).to have_text(/Ciboire des malades/i)
+    expect(page).to have_text(/Merci pour ce joli dossier/i)
+    expect(page).to have_text(/pepito bleu/i)
   end
 end
 # rubocop:enable Metrics/BlockLength

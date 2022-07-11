@@ -17,5 +17,11 @@ FactoryBot.define do
       notes_conservateur { "Veuillez prendre de meilleures photos" }
       association :conservateur
     end
+
+    trait :accepted do
+      status { "accepted" }
+      accepted_at { 2.days.ago }
+      notes_conservateur { "Quels beaux tableaux" }
+    end
   end
 end
