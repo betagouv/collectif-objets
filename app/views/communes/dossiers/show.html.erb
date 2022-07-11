@@ -1,0 +1,15 @@
+<div class="fr-container fr-my-4w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      [
+        "Objets de #{current_user.commune.nom}",
+        commune_objets_path(current_user.commune)
+      ]
+    ],
+    current_page_label: "Rapport"
+  ) %>
+
+  <%= render "shared/dossier_rapport", dossier: @dossier %>
+</div>

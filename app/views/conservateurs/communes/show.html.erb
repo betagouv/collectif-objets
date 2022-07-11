@@ -71,12 +71,7 @@
   <% if @dossier&.accepted? %>
     <div class="fr-container fr-grid-row fr-grid-row--center fr-mb-4w">
       <div class="fr-col-md-8">
-        <%= render(
-          PdfEmbedComponent.new(
-            @dossier.pdf,
-            title: t("dossier.rapport.pdf_title")
-          )
-        ) %>
+        <%= link_to "Voir le rapport", conservateurs_dossier_path(@dossier), class: "fr-btn" %>
       </div>
     </div>
   <% end %>

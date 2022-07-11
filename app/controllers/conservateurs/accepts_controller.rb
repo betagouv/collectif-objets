@@ -5,13 +5,15 @@ module Conservateurs
     before_action :set_dossier, :set_commune, :restrict_access, :restrict_commune_completed,
                   :restrict_dossier_submitted, :prevent_pending_recensements
 
-    def new
-      @dossier.update!(conservateur_id: current_conservateur.id)
-      GenerateRapportPdfJob.perform_async(@dossier.id) unless @dossier.pdf.attached?
+    def new; end
+
+    def update
+      @dossier.update(**dossier_params)
+      render partial: "form", locals: { dossier: @dossier }
     end
 
     def create
-      if @dossier.accept!(conservateur_id: current_conservateur.id)
+      if @dossier.accept!
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
         redirect_to conservateurs_commune_path(@commune), notice: "Le rapport a été envoyé à la commune"
       else
@@ -41,22 +43,21 @@ module Conservateurs
     def restrict_commune_completed
       return true if @commune.completed?
 
-      redirect_with_alert("Le rapport ne peut pas être généré car la commune n'a pas terminé le recensement")
+      redirect_with_alert("La commune n'a pas encore terminé le recensement")
     end
 
     def prevent_pending_recensements
       return true if @dossier.recensements.not_analysed.empty?
 
-      redirect_with_alert("Le rapport ne peut pas être généré car il reste des recensements à analyser")
+      redirect_with_alert("Il reste des recensements à analyser")
     end
 
     def restrict_dossier_submitted
       return true if @dossier.submitted?
 
       alert = {
-        construction: "Le rapport ne peut pas être généré car la commune n'a pas terminé le recensement",
-        rejected: "Le rapport ne peut pas être généré car le dossier a été renvoyé à la commune,"\
-                  " il faut attendre son retour",
+        construction: "La commune n'a pas terminé le recensement",
+        rejected: "L dossier a été renvoyé à la commune, il faut attendre son retour",
         accepted: "Le rapport a déjà été envoyé"
       }[@dossier.status.to_sym]
       redirect_with_alert(alert)
@@ -64,6 +65,13 @@ module Conservateurs
 
     def redirect_with_alert(alert)
       redirect_to conservateurs_commune_path(@commune), alert:
+    end
+
+    def dossier_params
+      params
+        .require(:dossier)
+        .permit(:notes_conservateur)
+        .merge(conservateur_id: current_conservateur.id)
     end
   end
 end

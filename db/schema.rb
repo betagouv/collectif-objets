@@ -110,7 +110,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_092310) do
     t.datetime "submitted_at"
     t.datetime "rejected_at"
     t.datetime "accepted_at"
-    t.datetime "pdf_updated_at"
     t.string "notes_commune"
     t.string "notes_conservateur"
     t.bigint "conservateur_id"

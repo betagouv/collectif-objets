@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     resource :recompletion, only: [:new, :create], controller: "communes/recompletions"
     resources :objets, only: [:index], controller: "communes/objets"
     resource :formulaire, only: [:show], controller: "communes/formulaires"
+    resources :dossiers, only: [:show], controller: "communes/dossiers"
   end
 
   namespace :conservateurs do
@@ -66,9 +67,8 @@ Rails.application.routes.draw do
     end
     resources :objets, only: [:show]
     resources :recensements, only: [:update]
-    resources :dossiers, only: [] do
-      resource :rapport, only: [:update]
-      resource :accept, only: [:new, :create]
+    resources :dossiers, only: [:show] do
+      resource :accept, only: [:new, :create, :update]
       resource :reject, only: [:new, :create, :update]
     end
   end

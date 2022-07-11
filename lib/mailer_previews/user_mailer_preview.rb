@@ -14,8 +14,7 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/AbcSize
-  def dossier_accepted_email(dossier = nil)
+  def dossier_accepted_email(dossier = nil, conservateur = nil)
     dossier = dossier&.clone || Dossier.new(
       commune: Commune.new(
         nom: "Martigues",
@@ -34,17 +33,7 @@ class UserMailerPreview < ActionMailer::Preview
         email: "lea-dupond@drac-de-la-france.gouv.fr"
       ).tap(&:readonly!)
     ).tap(&:readonly!)
-
-    class << dossier
-      def pdf
-        Struct.new(:filename, :download).new(
-          "rapport.pdf",
-          File.read(Rails.root.join("public/pdf-en-cours-de-generation.pdf"))
-        )
-      end
-    end
-
-    UserMailer.with(dossier:).dossier_accepted_email
+    UserMailer.with(dossier:, conservateur:).dossier_accepted_email
   end
 
   def dossier_rejected_email(dossier = nil)
@@ -69,5 +58,4 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(dossier:).dossier_rejected_email
   end
   # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/AbcSize
 end

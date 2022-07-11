@@ -18,7 +18,7 @@ fr:
           action: Vous pouvez modifier les informations de recensements et renvoyer le dossier au conservateur.
         accepted_callout:
           title: Dossier accepté par le conservateur
-          content: "%{conservateur} a analysé votre dossier le %{date}. Vous trouverez son rapport ci-dessous."
+          content: "%{conservateur} a analysé votre dossier le %{date}."
       recensement_saved_after_reject:
         title: Votre recensement a bien été mis à jour
         cta: Renvoyer le dossier…
@@ -91,6 +91,9 @@ fr:
         fiche_vol: "Fiche Vol"
         fiche_securisation: "Fiche Sécurisation"
         fiche_nuisibles: "Fiche Nuisibles"
+      form:
+        submit_preview: Mettre à jour mes retours
+        submit: Envoyer le rapport à la commune
     rejects:
       new:
         head_title: "Renvoyer le dossier de recensement de %{commune}"
@@ -115,9 +118,6 @@ fr:
         submit_preview_initial: Préparer le mail de renvoi
         submit_preview: Rafraîchir la prévisualisation du mail
         submit: Renvoyer le dossier
-    rapports:
-      form:
-        submit: Mettre à jour le rapport PDF
     departements:
       index:
         head_title: Départements
@@ -150,8 +150,6 @@ fr:
         hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
-    accept_preview_component:
-      submit: Envoyer le rapport à la commune
     password:
       hint: 20 caractères minimum (tous les caractères sont autorisés y compris les espaces)
   recensement:
@@ -196,17 +194,11 @@ fr:
       rejected: Dossier renvoyé à la commune
       accepted: Rapport envoyé à la commune
     rapport:
-      pdf_title: Rapport de recensement
       recensement:
-        localisation: Où se trouve l’objet ?
-        edifice_nom: Précisez le nom de l’édifice dans lequel se trouve l’objet
-        recensable: L’objet peut-il être recensé ?
-        etat_sanitaire_edifice: Comment évaluez-vous l’état sanitaire de l’édifice à proximité de l’objet ?
-        etat_sanitaire: Comment évaluez-vous l’état sanitaire de l’objet ?
-        securisation: L’objet est-il en sécurité ?
         notes: Commentaires de la commune
         analyse_notes: Commentaires du conservateur
         analyse_fiches: Conseils du conservateur
+        analyse_actions: Actions à mener (seulement visibles par les conservateurs)
   pages:
     pdf_embed:
       title:

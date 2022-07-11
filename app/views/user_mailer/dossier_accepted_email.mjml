@@ -17,16 +17,27 @@
         <mj-text>
           Madame, Monsieur le Maire,<br /><br />
 
-          Vous avez envoyé un dossier de recensement des objets protégés de <%= @commune.nom %> et je vous en remercie.<br />
-
-          Vous trouverez en pièce jointe de ce mail notre rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
-
-          <br /><br />
-
-          <br /><br />
+          Vous avez envoyé un dossier de recensement des objets protégés de <%= @commune.nom %> et je vous en remercie.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-left="20px">
+      <mj-column border-left="2px solid rgb(0,0,145)">
+        <mj-text font-style="italic" css-class="co-pre-line"><%= @dossier.notes_conservateur %></mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Vous trouverez sur Collectif Objets le rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
+        </mj-text>
+        <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= @login_url %>">
+          Voir le rapport de recensement
+        </mj-button>
+        <mj-text>
           Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
-
           <br /><br />
+
           Bien cordialement,
         </mj-text>
       </mj-column>

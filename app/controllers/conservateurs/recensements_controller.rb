@@ -6,7 +6,6 @@ module Conservateurs
 
     def update
       if @recensement.update(recensement_params)
-        dossier.pdf.purge_later
         redirect_to conservateurs_commune_path(@objet.commune, analyse_saved: true)
       else
         render "conservateurs/objets/show", status: :unprocessable_entity

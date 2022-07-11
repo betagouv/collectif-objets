@@ -1,12 +1,23 @@
 # frozen_string_literal: true
 
 class GalleryComponent < ViewComponent::Base
-  attr_reader :photo_urls
-
   MAX_PHOTOS_SHOWN = 4
+  PHOTO_STRUCT = Struct.new(:original_url, :thumb_url)
 
-  def initialize(photos:, title: nil, responsive_versions: %i[full small])
-    @photo_urls = photos
+  attr_reader :photos_structs
+
+  delegate :count, to: :photos_structs
+
+  def self.from_attachments(attachments, **kwargs)
+    new(attachments.map { PHOTO_STRUCT.new(_1.url, _1.variant(:medium).url) }, **kwargs)
+  end
+
+  def self.from_urls(original_urls, **kwargs)
+    new(original_urls.map { PHOTO_STRUCT.new(_1, _1) }, **kwargs)
+  end
+
+  def initialize(photos_structs, title: nil, responsive_versions: %i[full small])
+    @photos_structs = photos_structs
     @title = title
     @responsive_versions = responsive_versions
     super
@@ -36,10 +47,13 @@ class GalleryComponent < ViewComponent::Base
     @responsive_versions.include?(:small)
   end
 
-  def first_photo_url
-    return photo_urls.first if photo_urls.any?
+  def first_photo_struct
+    return photos_structs.first if photos_structs.any?
 
-    "illustrations/photo-manquante.png"
+    PHOTO_STRUCT.new(
+      "illustrations/photo-manquante.png",
+      "illustrations/photo-manquante.png"
+    )
   end
 
   def last_thumb_open_index
@@ -47,6 +61,4 @@ class GalleryComponent < ViewComponent::Base
 
     5
   end
-
-  delegate :count, to: :photo_urls
 end
