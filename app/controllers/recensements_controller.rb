@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+class RecensementSaveError < StandardError; end
+
 class RecensementsController < ApplicationController
   before_action :set_objet, :restrict_commune
   before_action :restrict_recensable, only: %i[new create]
@@ -15,6 +17,7 @@ class RecensementsController < ApplicationController
     @recensement.skip_photos = true if @recensement.photos.empty?
   end
 
+  # rubocop:disable Metrics/AbcSize
   def create
     if @recensement.save
       @recensement.commune.start! if @recensement.commune.may_start?
@@ -22,10 +25,12 @@ class RecensementsController < ApplicationController
       SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => @recensement.id })
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
+      capture_debug_exception
       @recensement.photos = []
       render :new, status: :unprocessable_entity
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def update
     @recensement.confirmation = true
@@ -47,13 +52,17 @@ class RecensementsController < ApplicationController
   end
 
   def set_new_recensement
-    @recensement = Recensement.new(
+    @recensement = Recensement.new(new_recensement_attributes)
+    @recensement.confirmation = recensement_params[:confirmation].present?
+  end
+
+  def new_recensement_attributes
+    {
       **recensement_params_parsed,
       objet: @objet,
       user: current_user,
       **dossier_params
-    )
-    @recensement.confirmation = recensement_params[:confirmation].present?
+    }
   end
 
   def recensement_params
@@ -96,5 +105,13 @@ class RecensementsController < ApplicationController
     return { dossier_id: existing_dossier.id } if existing_dossier.present?
 
     { dossier_attributes: { commune_id: @objet.commune.id, status: "construction" } }
+  end
+
+  def capture_debug_exception
+    Sentry.configure_scope { _1.set_context("new_recensement_attributes", new_recensement_attributes) }
+    message = "recensement.save failed" \
+              "with #{@recensement.errors.count} errors : #{@recensement.errors.full_messages.join("\n")}"
+    Sentry.capture_message message, level: :info
+    Rails.logger.warn "#{message} - #{new_recensement_attributes}"
   end
 end
