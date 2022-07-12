@@ -13,13 +13,30 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_sentry_context
-    return true unless current_user
+    if current_user
+      set_sentry_current_user_context
+    elsif current_conservateur
+      set_sentry_current_conservateur_context
+    end
+  end
 
+  def set_sentry_current_user_context
     Sentry.set_user(
       id: current_user.id,
       email: current_user.email,
       username: current_user.commune&.nom || current_user.email,
-      ip: "{{auto}}"
+      ip_address: "{{auto}}",
+      user_type: "user"
+    )
+  end
+
+  def set_sentry_current_conservateur_context
+    Sentry.set_user(
+      id: current_conservateur.id,
+      email: current_conservateur.email,
+      username: current_conservateur.to_s,
+      ip_address: "{{auto}}",
+      user_type: "conservateur"
     )
   end
 
