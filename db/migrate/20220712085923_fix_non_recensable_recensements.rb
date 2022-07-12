@@ -24,7 +24,7 @@ class FixNonRecensableRecensements < ActiveRecord::Migration[7.0]
     not_recensable_but_photos_attached = Recensement.where(recensable: false).where_assoc_exists(:photos_attachments)
     puts "will truncate photos filled on #{not_recensable_but_photos_attached.count} recensements not recensable but with photos ..."
     not_recensable_but_photos_attached.to_a.each do |recensement|
-      # recensement.photos.purge
+      recensement.photos.purge
     end
     puts "there are now #{not_recensable_but_photos_attached.count} recensements not recensable but with photos"
   end
