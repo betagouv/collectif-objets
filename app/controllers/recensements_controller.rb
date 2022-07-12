@@ -17,7 +17,6 @@ class RecensementsController < ApplicationController
     @recensement.skip_photos = true if @recensement.photos.empty?
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create
     if @recensement.save
       @recensement.commune.start! if @recensement.commune.may_start?
@@ -25,16 +24,14 @@ class RecensementsController < ApplicationController
       SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => @recensement.id })
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
-      capture_debug_exception
       @recensement.photos = []
       render :new, status: :unprocessable_entity
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   def update
     @recensement.confirmation = true
-    if @recensement.update(recensement_params_parsed)
+    if @recensement.update(recensement_params_prepared)
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
       render :edit, status: :unprocessable_entity
@@ -75,7 +72,25 @@ class RecensementsController < ApplicationController
   end
 
   def recensement_params_parsed
-    recensement_params.merge(recensable: recensement_params[:recensable] == "true")
+    recensable =
+      if recensement_params[:localisation] == Recensement::LOCALISATION_ABSENT
+        false
+      else
+        recensement_params[:recensable] == "true"
+      end
+    recensement_params.merge(recensable:)
+  end
+
+  def recensement_params_prepared
+    return recensement_params_parsed if recensement_params_parsed[:recensable]
+
+    recensement_params_parsed.merge(
+      etat_sanitaire: nil,
+      etat_sanitaire_edifice: nil,
+      securisation: nil,
+      edifice_nom: nil,
+      photos: []
+    )
   end
 
   def restrict_commune
@@ -105,13 +120,5 @@ class RecensementsController < ApplicationController
     return { dossier_id: existing_dossier.id } if existing_dossier.present?
 
     { dossier_attributes: { commune_id: @objet.commune.id, status: "construction" } }
-  end
-
-  def capture_debug_exception
-    Sentry.configure_scope { _1.set_context("new_recensement_attributes", new_recensement_attributes) }
-    message = "recensement.save failed" \
-              "with #{@recensement.errors.count} errors : #{@recensement.errors.full_messages.join("\n")}"
-    Sentry.capture_message message, level: :info
-    Rails.logger.warn "#{message} - #{new_recensement_attributes}"
   end
 end

@@ -29,6 +29,84 @@ RSpec.describe Recensement, type: :model do
       let(:recensement) { build(:recensement, localisation: Recensement::LOCALISATION_AUTRE_EDIFICE, edifice_nom: nil) }
       it { should eq false }
     end
+
+    context "recensement introuvable" do
+      let(:attributes) do
+        {
+          localisation: Recensement::LOCALISATION_ABSENT, recensable: false,
+          etat_sanitaire: nil, etat_sanitaire_edifice: nil, securisation: nil
+        }
+      end
+
+      context "other fields empty" do
+        let(:recensement) { build(:recensement, attributes) }
+        it do
+          expect(recensement.valid?).to eq true
+        end
+      end
+
+      context "recensable true" do
+        let(:recensement) { build(:recensement, attributes.merge(recensable: true)) }
+        it { should eq false }
+      end
+
+      context "etat_sanitaire filled" do
+        let(:recensement) { build(:recensement, attributes.merge(etat_sanitaire: Recensement::ETAT_BON)) }
+        it { should eq false }
+      end
+
+      context "with existing photo" do
+        let(:recensement) { build(:recensement, :with_photo, attributes) }
+        it { should eq false }
+      end
+
+      context "trouvable with existing photo, updating to introuvable without removing photos" do
+        let!(:recensement) { create(:recensement, :with_photo) }
+        before { recensement.assign_attributes(attributes) }
+        it { should eq false }
+      end
+
+      context "with existing photo, updating to remove it" do
+        let!(:recensement) { create(:recensement, :with_photo) }
+        before { recensement.assign_attributes(attributes.merge(photos: [])) }
+        it { should eq true }
+      end
+    end
+
+    context "recensement non recensable" do
+      let(:attributes) do
+        { recensable: false, etat_sanitaire: nil, etat_sanitaire_edifice: nil, securisation: nil }
+      end
+
+      context "other fields empty" do
+        let(:recensement) { build(:recensement, attributes) }
+        it do
+          expect(recensement.valid?).to eq true
+        end
+      end
+
+      context "etat_sanitaire filled" do
+        let(:recensement) { build(:recensement, attributes.merge(etat_sanitaire: Recensement::ETAT_BON)) }
+        it { should eq false }
+      end
+
+      context "with existing photo" do
+        let(:recensement) { build(:recensement, :with_photo, attributes) }
+        it { should eq false }
+      end
+
+      context "recensable with existing photo, updating to non recensable without removing photos" do
+        let!(:recensement) { create(:recensement, :with_photo) }
+        before { recensement.assign_attributes(attributes) }
+        it { should eq false }
+      end
+
+      context "with existing photo, updating to remove it" do
+        let!(:recensement) { create(:recensement, :with_photo) }
+        before { recensement.assign_attributes(attributes.merge(photos: [])) }
+        it { should eq true }
+      end
+    end
   end
 
   describe "prevent analyse override equal to original" do
