@@ -17,7 +17,7 @@ module Conservateurs
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
         redirect_to conservateurs_commune_path(@commune), notice: "Le rapport a été envoyé à la commune"
       else
-        render "conservateurs/analyses/new", status: :unprocessable_entity
+        render "conservateurs/accepts/new", status: :unprocessable_entity
       end
     end
 
