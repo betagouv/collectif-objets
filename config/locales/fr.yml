@@ -233,7 +233,8 @@ fr:
               inclusion: "Vous devez préciser si l'objet peut être recensé"
             photos:
               blank: "Les photos sont fortement recommandées. Si vous ne pouvez pas en prendre, merci de le signaler."
-              max_size_error: "Les photos doivent faire moins de 20MB"
+              file_size_out_of_range: "Les photos doivent faire moins de 20MB"
+              content_type_invalid: "Les photos doivent être au format JPG ou PNG"
             analyse_actions:
               inclusion: "La ou les actions choisies ne sont pas valides"
             analyse_fiches:
