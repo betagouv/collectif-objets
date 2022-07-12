@@ -46,9 +46,9 @@
             </td>
           <% end %>
           <td>
-            <% if recensement.photos.empty? %>
+            <% if recensement.missing_photos? %>
               <%= badge("warning") { "Aucune photo" } %>
-            <% else %>
+            <% elsif recensement.photos.any? %>
               <div><%= recensement.photos.count %> photo<%= recensement.photos.count > 1 ? 's' : ""  %></div>
               <div class="co-recensement-photos">
                 <% recensement.photos.map do |photo| %>
