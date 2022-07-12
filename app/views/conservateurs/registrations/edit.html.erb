@@ -11,8 +11,13 @@
         <li>Nom: <b><%= current_conservateur.last_name %></b></li>
       </ul>
       <p>
-        <%= link_to "Déconnexion", destroy_user_session_path, class: "fr-btn fr-btn--secondary fr-icon-logout-box-r-line fr-btn--icon-left", data: { turbo_method: :delete } %>
-      </p>
+
+      <%# using a DELETE form without turbo because https://github.com/heartcombo/devise/issues/5458 %>
+      <%= form_tag destroy_conservateur_session_path, method: :delete, data: { turbo: false } do %>
+        <button type="submit" class="fr-btn fr-btn--secondary fr-icon-logout-box-r-line fr-btn--icon-left">
+          Déconnexion
+        </button>
+      <% end %>
     </div>
   </div>
 </main>

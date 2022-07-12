@@ -11,7 +11,12 @@
         <b>Commune&#8239;</b>: <%= current_user.commune || "N/A" %>
       </p>
       <p>
-        <%= link_to "Déconnexion", destroy_user_session_path, class: "fr-btn fr-btn--secondary fr-icon-logout-box-r-line fr-btn--icon-left", data: { turbo_method: :delete } %>
+        <%# using a DELETE form without turbo because https://github.com/heartcombo/devise/issues/5458 %>
+        <%= form_tag destroy_user_session_path, method: :delete, data: { turbo: false } do %>
+          <button type="submit" class="fr-btn fr-btn--secondary fr-icon-logout-box-r-line fr-btn--icon-left">
+            Déconnexion
+          </button>
+        <% end %>
       </p>
     </div>
     <div class="fr-mb-6w">
