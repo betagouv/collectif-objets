@@ -14,12 +14,14 @@ FactoryBot.define do
     notes { "objet très doux" }
     skip_photos { true }
 
-    trait :without_image do
-      # do nothing
-    end
-
-    trait :with_image do
-      # image_urls { ["https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L043503/sap04_80l043503_p.jpg"] }
+    trait :with_photo do
+      after(:build) do |recensement|
+        recensement.photos.attach(
+          io: File.open(Rails.root.join("spec/fixture_files/tableau1.jpg")),
+          filename: "tableau1.jpg",
+          content_type: "image/jpeg"
+        )
+      end
     end
   end
 end

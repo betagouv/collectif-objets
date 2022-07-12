@@ -50,6 +50,18 @@ module Conservateurs
           conservateur_id: current_conservateur.id
         )
         .merge(@recensement.photos.empty? ? { skip_photos: true } : {})
+        .merge(
+          if @recensement.recensable?
+            {}
+          else
+            {
+              etat_sanitaire: nil,
+              etat_sanitaire_edifice: nil,
+              securisation: nil,
+              photos: []
+            }
+          end
+        )
     end
 
     def recensement_params_permitted

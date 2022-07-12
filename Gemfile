@@ -10,6 +10,7 @@ gem "actioncable"
 gem "activeadmin", "~> 2.11"
 gem "active_model_validates_intersection_of"
 gem "activerecord_where_assoc"
+gem "active_storage_validations"
 gem "after_commit_everywhere"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false

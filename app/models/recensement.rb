@@ -31,17 +31,22 @@ class Recensement < ApplicationRecord
   validates :edifice_nom, presence: true, if: -> { autre_edifice? }
   validates :recensable, inclusion: { in: [true, false] }, unless: -> { absent? }
   validates :recensable, inclusion: { in: [false] }, if: -> { absent? }
-  validates :etat_sanitaire_edifice, presence: true, if: -> { !absent? && recensable? }
-  validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { !absent? && recensable? }
-  validates :securisation, presence: true, inclusion: { in: SECURISATIONS }, if: -> { !absent? && recensable? }
+  validates :etat_sanitaire_edifice, presence: true, if: -> { recensable? }
+  validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { recensable? }
+  validates :securisation, presence: true, inclusion: { in: SECURISATIONS }, if: -> { recensable? }
+
+  validates :etat_sanitaire_edifice, inclusion: { in: [nil] }, if: -> { !recensable? }
+  validates :etat_sanitaire, inclusion: { in: [nil] }, if: -> { !recensable? }
+  validates :securisation, inclusion: { in: [nil] }, if: -> { !recensable? }
+  # validates :skip_photos, inclusion: { in: [true] }, if: -> { !recensable? }
+  validates :photos, inclusion: { in: [] }, if: -> { !recensable? && photos.attached? }
+
   validates(
     :photos,
-    presence: true,
-    if: -> { !absent? && recensable? && !skip_photos },
-    blob: {
-      content_type: ["image/jpg", "image/jpeg", "image/png"],
-      size_range: 0..(20.megabytes)
-    }
+    if: -> { recensable? && !skip_photos },
+    attached: true,
+    content_type: ["image/jpg", "image/jpeg", "image/png"],
+    size: { less_than: 20.megabytes }
   )
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
