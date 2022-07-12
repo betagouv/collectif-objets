@@ -22,7 +22,7 @@ ActiveAdmin.register Objet do
     actions
   end
 
-  filter :commune_departement, as: :check_boxes, collection: Co::Departements.admin_select_options
+  filter :commune_departement, as: :check_boxes, collection: -> { Co::Departements.admin_select_options }
   filter :commune
   filter :palissy_REF_equals
   filter :palissy_DENO

@@ -45,7 +45,7 @@ ActiveAdmin.register Commune do
     column :completed_at
   end
 
-  filter :departement, as: :check_boxes, collection: Co::Departements.admin_select_options
+  filter :departement, as: :check_boxes, collection: -> { Co::Departements.admin_select_options }
   filter :nom
   filter :code_insee_equals
   filter(

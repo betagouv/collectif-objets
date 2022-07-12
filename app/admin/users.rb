@@ -19,7 +19,7 @@ ActiveAdmin.register User do
 
   filter :email
   filter :role, as: :check_boxes, collection: ["mairie"]
-  filter :commune_departement, as: :check_boxes, collection: Co::Departements.admin_select_options
+  filter :commune_departement, as: :check_boxes, collection: -> { Co::Departements.admin_select_options }
 
   show do
     div class: "show-container" do
