@@ -14,7 +14,7 @@ RSpec.feature "Sign in with password", type: :feature, js: true do
     click_on "Je suis conservateur ou conservatrice"
     fill_in "Email", with: "jeanne.michel@culture.gouv.fr"
     fill_in "Mot de passe", with: "super-long-mot-de-passe-du-futur"
-    find_button("Connexion").click
+    find_button("Se connecter").click
     expect(page).to have_text("Connecté(e)")
   end
 
@@ -24,7 +24,7 @@ RSpec.feature "Sign in with password", type: :feature, js: true do
     click_on "Je suis conservateur ou conservatrice"
     fill_in "Email", with: "jeanne.michel@culture.gouv.fr"
     fill_in "Mot de passe", with: "abcdef"
-    find_button("Connexion").click
+    find_button("Se connecter").click
     expect(page).not_to have_text("Connecté(e)")
     expect(page).to have_text("Email ou mot de passe incorrect")
   end
@@ -35,7 +35,7 @@ RSpec.feature "Sign in with password", type: :feature, js: true do
     click_on "Je suis conservateur ou conservatrice"
     fill_in "Email", with: "michel.jean@culture.gouv.fr"
     fill_in "Mot de passe", with: "super-long-mot-de-passe-du-futur"
-    find_button("Connexion").click
+    find_button("Se connecter").click
     expect(page).not_to have_text("Connecté(e)")
     expect(page).to have_text("Email ou mot de passe incorrect")
   end

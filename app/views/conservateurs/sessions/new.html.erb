@@ -28,24 +28,20 @@
           <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
         </div>
         <div class="fr-input-group">
-          <%= f.label :password do %>
-            Mot de passe
-            <span class="fr-hint-text"><%= t("conservateurs.password.hint") %></span>
-          <% end %>
-          <%= f.password_field :password, required: true %>
+          <%= render PasswordInputComponent.new(name: "conservateur[password]" ) %>
           <div class="fr-mt-1w">
-            <%= link_to "Réinitialiser mon mot de passe", new_conservateur_password_path %>
+            <%= link_to "Mot de passe oublié ?", new_conservateur_password_path, class: "fr-link" %>
           </div>
         </div>
         <div class="co-flex co-flex--space-between fr-mt-4w">
           <div>
             <div class="fr-checkbox-group">
               <%= f.check_box :remember_me, checked: true %>
-              <%= f.label "Rester connecté" %>
+              <%= f.label "Se souvenir de moi" %>
             </div>
           </div>
           <div class="actions">
-            <%= f.submit "Connexion" %>
+            <%= f.submit "Se connecter" %>
           </div>
         </div>
       <% end %>

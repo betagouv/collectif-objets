@@ -16,7 +16,7 @@ RSpec.feature "Reset password", type: :feature, js: true do
     visit "/"
     click_on "Connexion"
     click_on "Je suis conservateur ou conservatrice"
-    click_on "Réinitialiser mon mot de passe"
+    click_on "Mot de passe oublié ?"
     fill_in "Email", with: "jeanne.michel@culture.gouv.fr"
     click_on "Recevoir un lien de réinitialisation du mot de passe"
     expect(page).to have_text(
@@ -41,7 +41,7 @@ RSpec.feature "Reset password", type: :feature, js: true do
     visit "/"
     click_on "Connexion"
     click_on "Je suis conservateur ou conservatrice"
-    click_on "Réinitialiser mon mot de passe"
+    click_on "Mot de passe oublié ?"
     fill_in "Email", with: "jean.marc@culture.gouv.fr"
     click_on "Recevoir un lien de réinitialisation du mot de passe"
     expect(page).to have_text(

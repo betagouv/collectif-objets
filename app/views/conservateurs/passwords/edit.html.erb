@@ -35,17 +35,21 @@
         data: { turbo: false }
       ) do |f| %>
         <%= f.hidden_field :reset_password_token %>
-
         <div class="fr-input-group">
-          <%= f.label :password do %>
-            Nouveau mot de passe
-            <span class="fr-hint-text"><%= t("conservateurs.password.hint") %></span>
-          <% end %>
-          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", required: true %>
+          <%= render PasswordInputComponent.new(
+            name: "conservateur[password]",
+            autofocus: true,
+            autocomplete: "new-password",
+            label: "Nouveau mot de passe"
+          ) %>
         </div>
         <div class="fr-input-group">
-          <%= f.label :password_confirmation, "Confirmation du nouveau mot de passe" %>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
+          <%= render PasswordInputComponent.new(
+            name: "conservateur[password_confirmation]",
+            autocomplete: "new-password",
+            label: "Confirmation du nouveau mot de passe",
+            hint: false
+          ) %>
         </div>
         <div class="actions">
           <%= f.submit "Changer le mot de passe" %>
