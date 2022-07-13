@@ -54,7 +54,7 @@ ActiveAdmin.register Conservateur do
       f.input(
         :departements,
         as: :check_boxes,
-        collection: (Range.new(1, 99).map(&:to_s).map{ _1.rjust(2, "0") } + %w[2A 2B 971 972 973]).sort
+        collection: Co::Departements.admin_select_options(restrict_communes: false)
       )
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
