@@ -73,40 +73,18 @@
         <div class="co-background--light-teal fr-py-6w fr-px-6w">
           <h3><%= t(".recensement.title") %></h3>
           <div class="fr-grid-row fr-pb-6w">
-            <div class="fr-col-md-12">
-              <div class="fr-pb-1w">
-                <% if @recensement.missing_photos? %>
-                  <p class="fr-badge fr-badge--sm fr-badge--warning">
-                    <%= t("recensement.photos.taken_count", count: 0) %>
-                  </p>
-                <% else %>
-                  <b>
-                    <%= t("recensement.photos.taken_count", count: @recensement.photos.count) %>
-                  </b>
-                <% end %>
-              </div>
-              <div class="co-recensement-photos-grid">
-                <% @recensement.photos.map do |photo| %>
-                  <% url = photo.variant(:medium) %>
-                  <%= link_to url, target: "_blank", class: "co-link--no-arrow" do %>
-                    <%= image_tag url, class: "co-recensement-analyse-photo" %>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="fr-grid-row">
-            <div class="fr-col-md-8">
+            <div class="fr-col-md-6">
+              <% if @recensement.missing_photos? %>
+                <p class="fr-badge fr-badge--sm fr-badge--warning fr-mb-4w">
+                  <%= t("recensement.photos.taken_count", count: 0) %>
+                </p>
+              <% end %>
               <%= render(
                 "conservateurs/objets/recensement_attributes",
                 recensement_presenter: @recensement_presenter,
                 recensement: @recensement,
                 f:
               ) %>
-            </div>
-          </div>
-          <div class="fr-grid-row">
-            <div class="fr-col-md-8">
               <div class="fr-pb-1w">
                 <b><%= t("activerecord.attributes.recensement.notes") %></b>
               </div>
@@ -114,6 +92,14 @@
                 <%= blockquote(@recensement.notes, class: "fr-my-2w") %>
               </div>
             </div>
+            <% if @recensement.photos.any? %>
+              <div class="fr-col-md-6 co-flex-md-reverse-order">
+                <%= render GalleryComponent.from_attachments(
+                  @recensement.photos,
+                  title: t("recensement.photos.taken_count", count: @recensement.photos.count)
+                ) %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
