@@ -115,9 +115,18 @@ module Co
       "72" => "pays-de-la-loire/sarthe"
     }.freeze
 
-    def self.admin_select_options
-      Commune.select(:departement).distinct
-        .pluck(:departement).compact.sort.map { ["#{_1} - #{NAMES[_1]}", _1] }
+    def self.admin_select_options(restrict_communes: true)
+      departements = \
+        if restrict_communes
+          Commune.select(:departement).distinct.pluck(:departement).compact
+        else
+          NAMES.keys
+        end
+      departements.sort.map { [number_and_name(_1), _1] }
+    end
+
+    def self.number_and_name(number)
+      [number, NAMES[number]].join(" - ")
     end
   end
 end

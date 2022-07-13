@@ -37,4 +37,8 @@ class CommuneDecorator < Draper::Decorator
   def first_user_email
     users.first&.email
   end
+
+  def departement_with_name
+    Co::Departements.number_and_name(departement)
+  end
 end

@@ -42,7 +42,7 @@ ActiveAdmin.register Dossier do
           attributes_table_for dossier.commune do
             row(:id) { link_to _1.id, admin_commune_path(_1) }
             row :nom
-            row :departement
+            row :departement_with_name
             row :code_insee
             row :status
             row :recensements_summary, label: "Recensements"

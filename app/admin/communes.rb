@@ -73,7 +73,7 @@ ActiveAdmin.register Commune do
         attributes_table title: "📍 Commune ##{commune.id}" do
           row :id
           row :nom
-          row :departement
+          row :departement_with_name
           row :code_insee
           row :status
           row :recensements_summary, label: "Recensements"

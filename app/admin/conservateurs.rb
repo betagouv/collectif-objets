@@ -3,7 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Conservateur do
   menu label: "👷‍♀️ Conservateurs", priority: 6
-  # decorate_with UserDecorator
+  decorate_with ConservateurDecorator
 
   actions :all, except: [:destroy]
 
@@ -21,7 +21,7 @@ ActiveAdmin.register Conservateur do
   filter(
     :with_departement,
     as: :select,
-    collection: -> { Co::Departements.admin_select_options }
+    collection: -> { Co::Departements.admin_select_options(restrict_communes: false) }
   )
 
   show do
@@ -32,7 +32,7 @@ ActiveAdmin.register Conservateur do
           row :email
           row :first_name
           row :last_name
-          row :departements
+          row :departements_with_names
           row :phone_number
         end
       end
