@@ -243,6 +243,7 @@ fr:
           attributes:
             reset_password_token:
               expired: "Ce lien de réinitialisation a expiré. Veuillez refaire la demande de réinitialisation de mot de passe depuis le début."
+              invalid: "Ce lien de réinitialisation n'est pas valide. Veuillez refaire la demande de réinitialisation de mot de passe depuis le début."
             password_confirmation:
               confirmation: "Les deux mots de passe ne correspondent pas, veuillez réessayer"
             password:
