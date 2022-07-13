@@ -3,6 +3,7 @@
 module Co
   class Campaign
     DEADLINES = {
+      "26" => Date.new(2022, 10, 13),
       "51" => Date.new(2022, 4, 15),
       "65" => Date.new(2022, 5, 15),
       "72" => Date.new(2022, 5, 28),

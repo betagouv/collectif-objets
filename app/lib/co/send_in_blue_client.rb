@@ -2,6 +2,7 @@
 
 require "singleton"
 
+# rubocop:disable Metrics/ClassLength
 module Co
   class SendInBlueClient
     include Singleton
@@ -14,6 +15,13 @@ module Co
           "opt-out" => 195,
           "started" => 196,
           "missing-photos" => 199
+        },
+        "26" => {
+          "cold" => 232,
+          "enrolled" => 234,
+          "opt-out" => 235,
+          "started" => 233,
+          "missing-photos" => 229
         },
         "51" => {
           "cold" => 95,
@@ -124,3 +132,4 @@ module Co
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
