@@ -13,6 +13,7 @@ module Conservateurs
     end
 
     def create
+      @dossier.update!(conservateur: current_conservateur) if @dossier.conservateur != current_conservateur
       if @dossier.accept!
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
         redirect_to conservateurs_commune_path(@commune), notice: "Le rapport a été envoyé à la commune"
