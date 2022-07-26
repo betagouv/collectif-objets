@@ -9,7 +9,7 @@ class GalleryComponent < ViewComponent::Base
   delegate :count, to: :photos_structs
 
   def self.from_attachments(attachments, **kwargs)
-    new(attachments.map { PHOTO_STRUCT.new(_1.url, _1.variant(:medium).url) }, **kwargs)
+    new(attachments.map { PHOTO_STRUCT.new(_1, _1.variant(:medium)) }, **kwargs)
   end
 
   def self.from_urls(original_urls, **kwargs)
