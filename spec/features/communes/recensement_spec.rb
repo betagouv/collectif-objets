@@ -122,6 +122,37 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Ciboire des malades"
     expect(page).not_to have_link("Recenser cet objet")
   end
+
+  context "commune has validation error" do
+    before { commune.update_columns(nom: " Albon ") }
+    scenario "recensement cannot save but doesn't explode" do
+      login_as(user, scope: :user)
+      visit "/"
+      within("header") { click_on "Voir les objets de Albon" }
+      click_on "Bouquet d'Autel"
+      click_on "Recenser cet objet"
+      find("label", text: "Je confirme m'être déplacé voir l'objet pour ce recensement").click
+      find("label", text: "L'objet est bien présent dans l'édifice Eglise st Jean").click
+      within("[data-recensement-target=recensable]") do
+        find("label", text: "Oui").click
+      end
+      within("[data-recensement-target=etatSanitaireEdifice]") do
+        find("label", text: "L'édifice est en état moyen").click
+      end
+      within("[data-recensement-target=etatSanitaire]") do
+        find("label", text: "L'objet est en bon état").click
+      end
+      within("[data-recensement-target=securisation]") do
+        find("label", text: "Oui, il est difficile de le voler").click
+      end
+      find("label", text: "Je ne peux pas prendre cet objet en photo").click
+      fill_in "Commentaires", with: "C'est un superbe pépito bleu"
+
+      click_on "Enregistrer ce recensement"
+      save_and_open_screenshot
+      expect(page).to have_content(/erreur 500/i)
+    end
+  end
 end
 
 # rubocop: enable Metrics/BlockLength
