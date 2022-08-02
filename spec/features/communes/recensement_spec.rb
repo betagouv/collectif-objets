@@ -152,6 +152,34 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
       expect(page).to have_content(/erreur 500/i)
     end
   end
+
+  scenario "recensement with missing photos" do
+    login_as(user, scope: :user)
+    visit "/"
+    within("header") { click_on "Voir les objets de Albon" }
+    click_on "Bouquet d'Autel"
+    click_on "Recenser cet objet"
+    find("label", text: "Je confirme m'être déplacé voir l'objet pour ce recensement").click
+    find("label", text: "L'objet est bien présent dans l'édifice Eglise st Jean").click
+    within("[data-recensement-target=recensable]") do
+      find("label", text: "Oui").click
+    end
+    within("[data-recensement-target=etatSanitaireEdifice]") do
+      find("label", text: "L'édifice est en état moyen").click
+    end
+    within("[data-recensement-target=etatSanitaire]") do
+      find("label", text: "L'objet est en bon état").click
+    end
+    within("[data-recensement-target=securisation]") do
+      find("label", text: "Oui, il est difficile de le voler").click
+    end
+    # find("label", text: "Je ne peux pas prendre cet objet en photo").click
+    fill_in "Commentaires", with: "C'est un superbe pépito bleu"
+
+    click_on "Enregistrer ce recensement"
+    expect(page).to have_content(/Votre recensement n'a pas pu être enregistré/i)
+    expect(page).to have_content(/Les photos sont fortement recommandées/i)
+  end
 end
 
 # rubocop: enable Metrics/BlockLength
