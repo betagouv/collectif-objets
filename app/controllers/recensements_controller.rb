@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-class RecensementSaveError < StandardError; end
-
 class RecensementsController < ApplicationController
   before_action :set_objet, :restrict_commune
   before_action :restrict_recensable, only: %i[new create]
   before_action :set_recensement, :restrict_editable, only: %i[edit update]
-  before_action :restrict_already_recensed, :set_new_recensement, only: [:create]
+  before_action :restrict_already_recensed, only: [:create]
 
   def new
     @recensement = Recensement.new(objet: @objet, recensable: "true")
@@ -18,12 +16,13 @@ class RecensementsController < ApplicationController
   end
 
   def create
-    if @recensement.save
-      @recensement.commune.start! if @recensement.commune.may_start?
-      TriggerSibContactEventJob.perform_async(@objet.commune.id, "started")
-      SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => @recensement.id })
+    result = Communes::CreateRecensementService
+      .new(params: recensement_params_prepared, objet: @objet, user: current_user)
+      .perform
+    if result.success?
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
+      @recensement = result.recensement
       @recensement.photos = []
       render :new, status: :unprocessable_entity
     end
@@ -48,20 +47,6 @@ class RecensementsController < ApplicationController
     @recensement = Recensement.find(params[:id])
   end
 
-  def set_new_recensement
-    @recensement = Recensement.new(new_recensement_attributes)
-    @recensement.confirmation = recensement_params[:confirmation].present?
-  end
-
-  def new_recensement_attributes
-    {
-      **recensement_params_parsed,
-      objet: @objet,
-      user: current_user,
-      **dossier_params
-    }
-  end
-
   def recensement_params
     params
       .require(:recensement)
@@ -72,13 +57,14 @@ class RecensementsController < ApplicationController
   end
 
   def recensement_params_parsed
-    recensable =
-      if recensement_params[:localisation] == Recensement::LOCALISATION_ABSENT
-        false
-      else
-        recensement_params[:recensable] == "true"
-      end
-    recensement_params.merge(recensable:)
+    recensement_params.merge(
+      confirmation: recensement_params[:confirmation].present?,
+      recensable: if recensement_params[:localisation] == Recensement::LOCALISATION_ABSENT
+                    false
+                  else
+                    recensement_params[:recensable] == "true"
+                  end
+    )
   end
 
   def recensement_params_prepared
@@ -113,12 +99,5 @@ class RecensementsController < ApplicationController
 
   def restrict_already_recensed
     raise "Objet déjà recensé" if @objet.recensements.any?
-  end
-
-  def dossier_params
-    existing_dossier = @objet.commune.dossier
-    return { dossier_id: existing_dossier.id } if existing_dossier.present?
-
-    { dossier_attributes: { commune_id: @objet.commune.id, status: "construction" } }
   end
 end
