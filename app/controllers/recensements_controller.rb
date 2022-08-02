@@ -16,11 +16,13 @@ class RecensementsController < ApplicationController
   end
 
   def create
-    if Communes::CreateRecensementService
-        .new(params: recensement_params_prepared, objet:, user: current_user)
-        .perform
-      redirect_to commune_objets_path(commune, recensement_saved: true, objet_id: objet.id)
+    result = Communes::CreateRecensementService
+      .new(params: recensement_params_prepared, objet: @objet, user: current_user)
+      .perform
+    if result.success?
+      redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
+      @recensement = result.recensement
       @recensement.photos = []
       render :new, status: :unprocessable_entity
     end

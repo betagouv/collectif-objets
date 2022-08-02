@@ -9,6 +9,7 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
     create(:commune, nom: "Albon", code_insee: "26002", departement: "26", status: Commune::STATE_COMPLETED)
   end
   let!(:dossier) { create(:dossier, :submitted, commune:) }
+  before { commune.update!(dossier:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:) }
   let!(:objet_bouquet) { create(:objet, palissy_DENO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:) }
   let!(:recensement_bouquet) do

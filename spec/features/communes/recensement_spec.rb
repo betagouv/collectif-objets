@@ -149,7 +149,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
       fill_in "Commentaires", with: "C'est un superbe pépito bleu"
 
       click_on "Enregistrer ce recensement"
-      save_and_open_screenshot
       expect(page).to have_content(/erreur 500/i)
     end
   end

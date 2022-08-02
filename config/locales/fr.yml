@@ -248,6 +248,10 @@ fr:
               confirmation: "Les deux mots de passe ne correspondent pas, veuillez réessayer"
             password:
               too_short: "Le mot de passe doit contenir au minimum 20 caractères"
+        dossier:
+          attributes:
+            commune_id:
+              taken: "Un dossier de recensement existe déjà pour la commune, veuillez nous contacter pour résoudre le problème"
     attributes:
       recensement:
         localisation: Où se trouve l’objet ?

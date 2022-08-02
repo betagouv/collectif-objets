@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+class CommuneStartError < StandardError
+  def initialize(commune)
+    super("commune #{commune} could not start: #{commune.errors.full_messages.join(', ')}")
+  end
+end
+
 module Communes
   class CreateRecensementService
     RESULT = Struct.new(:success?, :recensement)
@@ -23,13 +29,18 @@ module Communes
     delegate :commune, to: :objet
 
     def post_create_actions
-      if commune.may_start?
-        commune.start!
-        TriggerSibContactEventJob.perform_async(commune.id, "started")
-      end
+      start_commune! if commune.inactive? || commune.enrolled?
       SendMattermostNotificationJob.perform_async(
         "recensement_created", { "recensement_id" => recensement.id }
       )
+    end
+
+    def start_commune!
+      raise CommuneStartError, commune unless
+        commune.start! &&
+        commune.update!(dossier: recensement.dossier)
+
+      TriggerSibContactEventJob.perform_async(commune.id, "started")
     end
 
     def recensement

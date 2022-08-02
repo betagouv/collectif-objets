@@ -50,7 +50,6 @@ class Recensement < ApplicationRecord
   )
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
-  after_create_commit :set_commune_dossier
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
 
   attr_accessor :confirmation, :skip_photos
@@ -117,9 +116,5 @@ class Recensement < ApplicationRecord
 
   def en_peril?
     [analyse_etat_sanitaire, etat_sanitaire].compact.first == ETAT_PERIL
-  end
-
-  def set_commune_dossier
-    commune.update!(dossier:) if commune.dossier.nil?
   end
 end
