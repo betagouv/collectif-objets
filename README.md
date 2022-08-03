@@ -6,17 +6,15 @@
 
 - install rbenv & make sure you have the correct ruby-versions installed and selected
 - `make install`
+- ask someone else from the team for the master key and store it in `config/master.key`
 - `make dev`
 
 ## Dumps
 
-- Create a local dump with `make dump`
-
-To restore dump on staging:
-
 - in one terminal : `scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL`
-- in another terminal : `./bin/restore_to_staging.sh`
+- in another terminal `pg_dump --format c -f tmp/dump.pgsql postgres://collectif_o_9999:XXXXX@localhost:10000/collectif_o_9999`
 - ⚠️ you may have to enter the SSH password multiple times in the first terminal
+- then `./scripts/restore_to_local.sh tmp/dump.pgsql`
 
 ## Review Apps
 
