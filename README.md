@@ -7,6 +7,7 @@
 - install rbenv & make sure you have the correct ruby-versions installed and selected
 - `make install`
 - ask someone else from the team for the master key and store it in `config/master.key`
+- optional: for faster auto-format locally, see https://github.com/fohte/rubocop-daemon#more-speed
 - `make dev`
 
 ## Dumps

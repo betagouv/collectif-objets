@@ -7,7 +7,11 @@ module Communes
     def show; end
 
     def enqueue_generate_pdf
-      return true if @commune.formulaire.attached? && @commune.formulaire_updated_at >= @commune.updated_at
+      if @commune.formulaire.attached? &&
+         @commune.formulaire_updated_at &&
+         @commune.formulaire_updated_at >= @commune.updated_at
+        return true
+      end
 
       @commune.formulaire&.purge
       GenerateFormulaireJob.perform_async(@commune.id)

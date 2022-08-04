@@ -78,13 +78,15 @@
         <p>
           Vous n'avez pas accès à internet dans l'édifice ? Nous avons préparé une version imprimable de la liste de vos objets et des questionnaires à emporter lors de vos déplacements que vous n’aurez plus qu’à reporter en ligne à votre retour.
         </p>
-        <p>
-          <%= link_to "Télécharger le questionnaire imprimable", "https://fichiers.collectif-objets.beta.gouv.fr/questionnaire.pdf", class: "fr-btn fr-btn--icon-right fr-icon-file-download-line", target: "_blank", rel: "noopener" %>
-        </p>
+        <% if current_user.present? %>
+          <p>
+            <%= link_to "Télécharger le questionnaire imprimable", commune_formulaire_path(current_user.commune), class: "fr-btn" %>
+          </p>
+        <% end %>
       </p>
     </div>
     <div class="fr-col-md-7 fr-px-12w">
-      <%= image_tag "questionnaire.jpg", class: "co--width-max-100" %>
+      <%= image_tag "formulaire.png", class: "co--width-max-100" %>
     </div>
   </section>
     <!-- SECTION FAQ -->
