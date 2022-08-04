@@ -1,6 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 import { throttle } from 'throttle-debounce';
 
+// TODO: delete this deprecated file
+
 export default class extends Controller {
   static targets = ["badge"]
 
