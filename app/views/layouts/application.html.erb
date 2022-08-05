@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="/dsfr_1_5_1/dsfr/dsfr.min.css">
     <link rel="stylesheet" href="/dsfr_1_5_1/utility/utility.min.css">
     <link rel="apple-touch-icon" href="/dsfr_1_5_1/favicon/apple-touch-icon.png"><!-- 180×180 -->
@@ -16,6 +15,7 @@
     <%= render "shared/sentry_js" %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
+    <%= vite_stylesheet_tag 'application' %>
   </head>
   <body>
     <%= render "shared/environment_banner" %>

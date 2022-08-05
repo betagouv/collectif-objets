@@ -13,7 +13,7 @@
   <h2>Liste des communes</h2>
   <% @communes_by_dpt.each do |departement, communes| %>
     <h2><%= departement %></h2>
-    <ul class="co-liste-communes">
+    <ul class="co-columns--3">
       <% communes.each do |commune| %>
         <li>
           <%= commune.nom %> -
