@@ -38,7 +38,7 @@ module Co
 
         def display_logos
           grid([0, 0], [1, 1]).bounding_box do
-            image "app/assets/images/logo-ministere-de-la-culture.png", width: 100
+            image "app/frontend/images/logo-ministere-de-la-culture.png", width: 100
             move_down 10
             text "<b>Collectif Objets</b>", size: 12, inline_format: true
           end
@@ -66,7 +66,7 @@ module Co
         def pop_photo_io(objet)
           return URI.parse(objet.image_urls.first).open if objet.image_urls.any?
 
-          Rails.root.join "app/assets/images/illustrations/photo-manquante.png"
+          Rails.root.join "app/frontend/images/illustrations/photo-manquante.png"
         end
 
         def display_title

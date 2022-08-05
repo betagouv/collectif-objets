@@ -8,7 +8,7 @@ module ObjetHelper
       return objet.current_recensement.photos.first.variant(:medium)
     end
 
-    "illustrations/photo-manquante.png"
+    "images/illustrations/photo-manquante.png"
   end
 
   def edifice_nom(nom)

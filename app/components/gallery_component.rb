@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class GalleryComponent < ViewComponent::Base
+  include ApplicationHelper # for vite_or_raw_image_tag
+
   MAX_PHOTOS_SHOWN = 4
   PHOTO_STRUCT = Struct.new(:original_url, :thumb_url)
 
@@ -59,8 +61,8 @@ class GalleryComponent < ViewComponent::Base
     return photos_structs.first if photos_structs.any?
 
     PHOTO_STRUCT.new(
-      "illustrations/photo-manquante.png",
-      "illustrations/photo-manquante.png"
+      "images/illustrations/photo-manquante.png",
+      "images/illustrations/photo-manquante.png"
     )
   end
 
