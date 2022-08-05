@@ -1,3 +1,4 @@
 web: bundle exec rails server -p 3010
 worker: bundle exec sidekiq
 mailhog: mailhog
+vite: bin/vite dev

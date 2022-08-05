@@ -26,7 +26,7 @@ module Conservateurs
 
       return objet.image_urls.first if objet.image_urls.any?
 
-      "illustrations/photo-manquante.png"
+      "images/illustrations/photo-manquante.png"
     end
 
     private

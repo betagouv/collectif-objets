@@ -1,0 +1,16 @@
+@import url(../../../node_modules/@gouvfr/dsfr/dist/dsfr.min.css);
+@import url(../../../node_modules/@gouvfr/dsfr/dist/utility/utility.min.css);
+
+@import url(../stylesheets/layout.css);
+@import url(../stylesheets/utilities.css);
+
+/* PAGES */
+
+@import url(../stylesheets/views/conservateurs.css);
+@import url(../stylesheets/views/home.css);
+@import url(../stylesheets/views/objets-show.css);
+@import url(../stylesheets/views/recensements.css);
+
+/* COMPONENTS */
+
+@import url(../stylesheets/components/gallery_component.css);

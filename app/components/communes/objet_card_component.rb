@@ -28,7 +28,7 @@ module Communes
 
       return image_urls.first if image_urls.any?
 
-      "illustrations/photo-manquante.png"
+      "images/illustrations/photo-manquante.png"
     end
 
     protected

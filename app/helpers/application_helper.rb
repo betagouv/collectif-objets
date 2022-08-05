@@ -36,4 +36,10 @@ module ApplicationHelper
     scope = key.split(".").tap(&:pop).join(".")
     I18n.t("#{scope}.other")
   end
+
+  def vite_or_raw_image_tag(src, **kwargs)
+    return vite_image_tag(src, **kwargs) if src.is_a?(String) && src.start_with?("images/")
+
+    image_tag(src, **kwargs)
+  end
 end

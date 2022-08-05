@@ -1,0 +1,90 @@
+html[data-fr-scheme="dark"] .co-logo-invertable {
+  filter: invert(1);
+}
+
+.fr-footer__brand {
+  margin-right: 1rem;
+  padding-right: none !important;
+}
+
+a.co-footer-logo img {
+  width: 150px;
+}
+
+.co-pagination-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.co-blockquote {
+  border-left: 1px solid #ccc;
+  margin-left: .2rem;
+  padding-left: 1rem;
+}
+
+/* FORMS */
+
+.fr-input-group--disabled .fr-error-text {
+  display: none;
+}
+
+.co-warning-text,
+.fr-error-text.co-warning-text {
+  color: orange;
+}
+
+.co-warning-text::before,
+.fr-error-text.co-warning-text::before {
+  mask-image: url(/dsfr_1_5_1/icons/system/fr--info-line.svg);
+}
+
+.co-textarea--high.fr-input {
+  min-height: 10rem;
+}
+
+.co-button--high {
+  height: 6rem;
+}
+
+.fr-btn--icon-left.co-button--big-icon[class*=" fr-icon-"]::before {
+  --icon-size: 2rem;
+}
+
+/* DSFR OVERRIDES */
+
+/* hide DSFR arrow */
+
+a.co-link--no-arrow[href] {
+  background-image: none;
+}
+
+a.co-link--no-arrow[target="_blank"]::after {
+  content: none;
+}
+
+
+.fr-card__body .fr-tags-group {
+  gap: 5px;
+}
+
+/* PDF EMBED */
+
+.co-pdf-embed-wrapper {
+  height: 600px;
+  max-height: 70vh;
+}
+
+.co-pdf-embed-wrapper>div {
+  height: 100%;
+}
+
+.co-pdf-embed-wrapper embed {
+  width: 100%;
+  height: 100%;
+}
+
+.co-pdf-embed {
+  min-height: 600px;
+  height: 70vh;
+}

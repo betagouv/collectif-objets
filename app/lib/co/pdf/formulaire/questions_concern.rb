@@ -25,7 +25,7 @@ module Co
           grid([4, 1], [4, 8]).bounding_box do
             top = cursor
             image(
-              "app/assets/images/camera-fill.png",
+              "app/frontend/images/camera-fill.png",
               width: 25,
               at: [0, top]
             )

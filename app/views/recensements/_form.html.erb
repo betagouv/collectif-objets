@@ -19,7 +19,7 @@
           <% if recensement.objet.image_urls.any? %>
             <img src="<%= recensement.objet.image_urls[0] %>" alt="">
           <% else %>
-            <%= image_tag "illustrations/photo-manquante.png" %>
+            <%= vite_image_tag "images/illustrations/photo-manquante.png" %>
           <% end %>
         </div>
         <div class="co-objet-desc">

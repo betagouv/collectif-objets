@@ -1,0 +1,74 @@
+/* HEADER SEARCH */
+
+.fr-label+.co-header-search-input-wrap.fr-input-wrap {
+  width: 100%;
+  margin: 0;
+}
+
+.co-header-search-results {
+  background: #fff;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  text-align: left;
+  z-index: 10;
+}
+
+@media only screen and (min-width:991px) {
+  .co-header-search-results {
+    position: absolute;
+    top: 100%;
+    right: 0;
+  }
+}
+
+.co-header-search-results ul {
+  margin: 0;
+  padding: 0;
+}
+
+.co-header-search-results li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.co-header-search-results a[href] {
+  width: 100%;
+  display: block;
+  padding: .3rem 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.co-header-search-results li:last-child a[href] {
+  border-bottom: none;
+}
+
+.co-header-search-results a[href]:hover {
+  background-color: #eee;
+}
+
+.fr-header__search>.fr-container {
+  position: relative;
+}
+
+/* MAIL PREVIEW */
+
+.co-mail-preview-wrapper {
+  border: 1px solid #ccc;
+  padding: .5rem;
+}
+
+.co-mail-preview-header th {
+  text-align: right;
+  color: #7f7f7f;
+  padding-right: .5rem;
+}
+
+.co-mail-preview-iframe {
+  width: 100%;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 510px;
+}
