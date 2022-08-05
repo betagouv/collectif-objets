@@ -1,6 +1,5 @@
-console.log('Vite ⚡️ Rails')
-
 import "@hotwired/turbo-rails"
+import "@gouvfr/dsfr/dist/dsfr.module"
 
 import { Application } from '@hotwired/stimulus'
 const application = Application.start()

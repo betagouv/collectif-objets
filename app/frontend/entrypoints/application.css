@@ -1,3 +1,6 @@
+@import url(../../../node_modules/@gouvfr/dsfr/dist/dsfr.min.css);
+@import url(../../../node_modules/@gouvfr/dsfr/dist/utility/utility.min.css);
+
 @import url(../stylesheets/layout.css);
 @import url(../stylesheets/utilities.css);
 
