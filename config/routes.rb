@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   end
   get "objets/ref_pop/:palissy_REF", to: "objets#show_by_ref_pop"
 
-  resources :communes, only: [:index] do
+  resources :communes, only: [] do
     resources :enrollments, only: [:new, :create], controller: "communes/enrollments"
     resource :completion, only: [:new, :create, :show], controller: "communes/completions"
     resource :recompletion, only: [:new, :create], controller: "communes/recompletions"
@@ -55,6 +55,8 @@ Rails.application.routes.draw do
     resource :formulaire, only: [:show], controller: "communes/formulaires"
     resources :dossiers, only: [:show], controller: "communes/dossiers"
   end
+
+  resources :departements, only: [:index, :show]
 
   namespace :conservateurs do
     resources :departements, only: [:index, :show] do

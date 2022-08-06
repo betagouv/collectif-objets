@@ -7,7 +7,6 @@ class ObjetsController < ApplicationController
     }.compact
     @pagy, @objets = pagy(
       Objet
-        .displayable
         .where(@filters[:commune] ? { commune_code_insee: @filters[:commune].code_insee } : nil)
         .with_photos_first
     )
