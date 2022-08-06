@@ -1,0 +1,23 @@
+<% content_for(:head_title) { "Liste des communes" } %>
+
+<main class="fr-container fr-pt-2w fr-pb-4w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Tous les objets", objets_path]
+    ],
+    current_page_label: "Liste des communes")
+  %>
+
+  <h2>Liste des communes par département</h2>
+
+  <ul class="co-columns--3 fr-mb-8w">
+    <% @departements.each do |departement| %>
+      <li>
+        <%= link_to(departement, departement_path(departement.number)) %>
+        <span class="fr-text--sm">(<%=departement.communes_count %> communes)</span>
+    <% end %>
+  </ul>
+</div>
+</main>

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class CreateMissingCommunesJob
+class SynchronizeCommunesJob
   include Sidekiq::Job
 
-  API_URL = "https://collectif-objets-datasette-g67bg74vua-uc.a.run.app/collectif-objets/mairies.json"
+  API_URL = "https://collectif-objets-datasette.fly.dev/collectif-objets/mairies.json"
   BASE_PARAMS = {
     _size: "1000",
     _sort: "code_insee",
@@ -11,17 +11,24 @@ class CreateMissingCommunesJob
     _nofacet: "1"
   }.freeze
 
-  def perform(departement)
-    @departement = departement
-    logger.info "before: #{Commune.where(departement:).count} communes in #{departement}"
-
-    initial_url = "#{API_URL}?#{URI.encode_www_form(BASE_PARAMS.merge(code_insee__startswith: @departement))}"
-    api_query(initial_url, initial: true)
-
-    logger.info "after: #{Commune.where(departement:).count} communes in #{departement}"
+  def perform(departement = nil)
+    if departement.present?
+      synchronize_departement(departement)
+    else
+      Co::Departements.numbers.each { synchronize_departement(_1) }
+    end
   end
 
   private
+
+  def synchronize_departement(departement)
+    logger.info "before: #{Commune.where(departement:).count} communes in #{departement}"
+
+    initial_url = "#{API_URL}?#{URI.encode_www_form(BASE_PARAMS.merge(code_insee__startswith: departement))}"
+    api_query(initial_url, initial: true)
+
+    logger.info "after: #{Commune.where(departement:).count} communes in #{departement}\n"
+  end
 
   def api_query(url, initial: false)
     parsed = fetch_and_parse(url)
@@ -63,7 +70,7 @@ class CreateMissingCommunesJob
     Commune.new(
       nom: raw_mairie["nom"],
       code_insee: raw_mairie["code_insee"],
-      departement: @departement,
+      departement: raw_mairie["departement"],
       phone_number: raw_mairie["telephone"]
     ).tap(&:save)
   end

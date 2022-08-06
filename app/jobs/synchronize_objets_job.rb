@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class SynchronizeWithPopJob
+class SynchronizeObjetsJob
   include Sidekiq::Job
 
-  API_URL = "https://collectif-objets-datasette-g67bg74vua-uc.a.run.app/collectif-objets/palissy.json"
+  API_URL = "https://collectif-objets-datasette.fly.dev/collectif-objets/palissy.json"
   BASE_PARAMS = {
     _size: "1000",
     _sort: "REF",
@@ -16,17 +16,24 @@ class SynchronizeWithPopJob
   }.freeze
   MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
 
-  def perform(departement)
-    @departement = departement
-    logger.info "before: #{Objet.where(departement:).count} objets in #{departement}"
-
-    initial_url = "#{API_URL}?#{URI.encode_www_form(BASE_PARAMS.merge(DPT: @departement))}"
-    api_query(initial_url, initial: true)
-
-    logger.info "after: #{Objet.where(departement:).count} objets in #{departement}"
+  def perform(departement = nil)
+    if departement.present?
+      synchronize_departement(departement)
+    else
+      Co::Departements.numbers.each { synchronize_departement(_1) }
+    end
   end
 
   private
+
+  def synchronize_departement(departement)
+    logger.info "before: #{Objet.where(departement:).count} objets in #{departement}"
+
+    initial_url = "#{API_URL}?#{URI.encode_www_form(BASE_PARAMS.merge(DPT: departement))}"
+    api_query(initial_url, initial: true)
+
+    logger.info "after: #{Objet.where(departement:).count} objets in #{departement}\n"
+  end
 
   def api_query(url, initial: false)
     parsed = fetch_and_parse(url)

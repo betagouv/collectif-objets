@@ -25,13 +25,6 @@ class Objet < ApplicationRecord
   alias_attribute :emplacement, :palissy_EMPL
   alias_attribute :nom_courant, :palissy_TICO
 
-  def self.displayable
-    in_str = Commune::DISPLAYABLE_DEPARTEMENTS.map { "'#{_1}'" }.join(", ")
-    where.not(palissy_DENO: nil)
-      .where("SUBSTR(\"palissy_INSEE\", 0, 3) IN (#{in_str})")
-      .joins(:commune)
-  end
-
   def nom_formatted
     (palissy_TICO || palissy_DENO).capitalize
   end

@@ -128,6 +128,19 @@ module Co
     def self.number_and_name(number)
       [number, NAMES[number]].join(" - ")
     end
+
+    def self.numbers
+      NAMES.keys
+    end
+
+    def self.models(include_communes_count: false)
+      counts = include_communes_count ? Commune.group(:departement).count : {}
+      NAMES.keys.map do |number|
+        attributes = { number:, name: NAMES[number] }
+        attributes[:communes_count] = counts[number] if include_communes_count
+        Co::Departement.new(**attributes)
+      end
+    end
   end
 end
 
