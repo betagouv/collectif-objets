@@ -12,7 +12,6 @@ class DepartementsController < ApplicationController
 
     @communes = Commune
       .where(departement: params[:id])
-      .where.not(nom: nil)
       .include_objets_count
       .order(:nom)
   end

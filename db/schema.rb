@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_12_085923) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_06_141807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,6 +83,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_085923) do
     t.bigint "dossier_id"
     t.datetime "started_at"
     t.datetime "formulaire_updated_at"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement"], name: "index_communes_on_departement"
     t.index ["dossier_id"], name: "index_communes_on_dossier_id"

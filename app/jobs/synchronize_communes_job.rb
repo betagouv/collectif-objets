@@ -53,26 +53,24 @@ class SynchronizeCommunesJob
   def create_new_commune(raw_mairie)
     return if should_skip_commune?(raw_mairie)
 
-    logger.info "saving new commune #{raw_mairie}"
-    commune = find_or_build_commune(raw_mairie)
+    logger.info "upserting commune #{raw_mairie}"
+    commune = upsert_commune(raw_mairie)
     unless commune.persisted?
-      logger.info "error when saving commune : #{commune.errors.full_messages.join} (#{raw_mairie})"
+      logger.info "error when upserting commune : #{commune.errors.full_messages.join} (#{raw_mairie})"
       return
     end
 
     create_user(raw_mairie, commune)
   end
 
-  def find_or_build_commune(raw_mairie)
-    existing = Commune.find_by(code_insee: raw_mairie["code_insee"])
-    return existing if existing.present?
+  def upsert_commune(raw_mairie)
+    commune = Commune.find_or_initialize_by(code_insee: raw_mairie["code_insee"])
 
-    Commune.new(
-      nom: raw_mairie["nom"],
-      code_insee: raw_mairie["code_insee"],
-      departement: raw_mairie["departement"],
+    commune.assign_attributes(
+      **raw_mairie.slice("nom", "departement", "latitude", "longitude"),
       phone_number: raw_mairie["telephone"]
-    ).tap(&:save)
+    )
+    commune.tap(&:save)
   end
 
   def create_user(raw_mairie, commune)
