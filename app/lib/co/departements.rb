@@ -133,12 +133,16 @@ module Co
       NAMES.keys
     end
 
-    def self.models(include_communes_count: false)
-      counts = include_communes_count ? Commune.group(:departement).count : {}
+    def self.models(include_communes_count: false, include_objets_count: false)
+      communes_counts = include_communes_count ? Commune.group(:departement).count : {}
+      objets_counts = include_objets_count ? Objet.group(:palissy_DPT).count : {}
       NAMES.keys.map do |number|
-        attributes = { number:, name: NAMES[number] }
-        attributes[:communes_count] = counts[number] if include_communes_count
-        Co::Departement.new(**attributes)
+        Co::Departement.new(
+          number:,
+          name: NAMES[number],
+          communes_count: include_communes_count ? communes_counts.fetch(number, 0) : nil,
+          objets_count: include_objets_count ? objets_counts.fetch(number, 0) : nil
+        )
       end
     end
   end
