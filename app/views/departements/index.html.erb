@@ -1,7 +1,6 @@
 <% content_for(:head_title) { "Liste des communes" } %>
 
-<script src='/maplibre-gl.js'></script>
-<link href='/maplibre-gl.css' rel='stylesheet' />
+<%= vite_javascript_tag "objets_map" %>
 
 <main class="fr-container fr-pt-2w fr-pb-4w">
   <%= render(
@@ -20,7 +19,7 @@
       <div
         data-controller="objets-map"
         data-objets-map-target="container"
-        style="height: 400px; width: 100%;">
+        style="height: 600px; max-height: 50vh; width: 100%;">
       </div>
       <p class="co-text--italic co-text--center">
         Nombre dʼobjets protégés par département et par commune

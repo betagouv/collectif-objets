@@ -1,3 +1,6 @@
+import maplibregl from "maplibre-gl"
+import "maplibre-gl/dist/maplibre-gl.css"
+
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -8,8 +11,8 @@ export default class extends Controller {
       container: this.containerTarget,
       style: '/objets-map/style.json',
       center: [2.087, 46],
-      zoom: 5,
-      zoomMobile: 4
+      zoom: 4,
+      zoomMobile: 3
     });
     this.map.on('load', () => this.fetchDepartements())
     this.map.on('load', () => this.fetchCommunes())
