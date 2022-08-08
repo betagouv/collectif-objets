@@ -49,13 +49,19 @@
       <% end %>
     </div>
   </div>
-  <% if @pagy.pages > 1 %>
-    <div class="fr-mt-8w">
-      <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
-    </div>
+
+  <% if @filters[:commune].blank? %>
+    <% if @pagy.pages > 1 %>
+      <div class="fr-mt-8w">
+        <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
+      </div>
+    <% end %>
+    <%= render "communes/objets/cards", objets: @objets, cards_options: { badges: [], display_recensement_photos: false } %>
+    <% if @pagy.pages > 1 %>
+      <%= render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
+    <% end %>
+  <% else %>
+    <%= render "communes/objets/list", objets_list: @objets_list, cards_options: { badges: [], display_recensement_photos: false } %>
   <% end %>
-  <%= render "list", objets: @objets %>
-  <% if @pagy.pages > 1 %>
-    <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
-  <% end %>
+
 </main>

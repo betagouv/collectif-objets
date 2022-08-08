@@ -9,13 +9,15 @@ module Communes
     delegate :nom, :nom_courant, :commune, :edifice_nom, :current_recensement, :image_urls, to: :objet
     delegate :dossier, to: :current_recensement, allow_nil: true
 
-    def initialize(objet:)
+    def initialize(objet:, badges: nil, display_recensement_photos: true)
       @objet = objet
+      @badges = badges
+      @display_recensement_photos = display_recensement_photos
       super
     end
 
     def badges
-      @badges = [recensement_badge, analyse_notes_badge].compact
+      @badges ||= [recensement_badge, analyse_notes_badge].compact
     end
 
     def truncated_nom
@@ -24,7 +26,7 @@ module Communes
 
     def main_photo_url
       return current_recensement.photos.first.variant(:medium) \
-        if current_recensement&.photos&.attached?
+        if @display_recensement_photos && current_recensement&.photos&.attached?
 
       return image_urls.first if image_urls.any?
 

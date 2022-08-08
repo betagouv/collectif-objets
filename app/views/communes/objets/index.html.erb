@@ -88,32 +88,7 @@
     </div>
   </div>
 
-  <% if @objets_list.group_by_edifice? %>
-    <h4>Liste des <%= @objets_list.edifices.count %> édifices</h4>
-    <ul class="co-columns--3 fr-mb-8w">
-      <% @objets_list.edifices.each do |edifice_group| %>
-        <li>
-          <%= link_to(
-            "#{edifice_nom(edifice_group[:nom])}".html_safe,
-            "##{edifice_group[:nom_parameterized]}"
-          ) %>
-          · <%= edifice_group[:objets].count %> objets
-        </li>
-      <% end %>
-    </ul>
-
-    <% @objets_list.edifices.each do |edifice_group| %>
-      <div class="fr-my-4w">
-        <h4 id="<%= edifice_group[:nom_parameterized] %>">
-          <%= edifice_nom(edifice_group[:nom]) %>
-          · <%= edifice_group[:objets].count %> objets
-        </h4>
-        <%= render "cards", objets: edifice_group[:objets] %>
-      </div>
-    <% end %>
-  <% else %>
-    <%= render "cards", objets: @objets_list.objets %>
-  <% end %>
+  <%= render "list", objets_list: @objets_list %>
 
   <% if @commune.objets_recensable? && !@dossier&.rejected? %>
     <div class="fr-grid-row fr-pt-8w fr-pb-8w fr-grid-row--center">
