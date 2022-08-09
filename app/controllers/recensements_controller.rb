@@ -23,7 +23,6 @@ class RecensementsController < ApplicationController
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
       @recensement = result.recensement
-      @recensement.photos = []
       render :new, status: :unprocessable_entity
     end
   end
