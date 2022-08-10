@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "first-deploy": "scripts/restore_seed_db.sh"
+  }
+}
