@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "first-deploy": "scripts/restore_seed_db.sh && bundle exec rake db:migrate"
+    "first-deploy": "scripts/restore_seed_db.sh"
   }
 }
