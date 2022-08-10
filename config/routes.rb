@@ -86,9 +86,7 @@ Rails.application.routes.draw do
   end
 
   Rails.application.routes.draw do
-    unless Rails.configuration.x.environment_specific_name == "production"
-      mount Lookbook::Engine, at: "/lookbook"
-    end
+    mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
   end
 
   if Rails.env.development?
