@@ -13,15 +13,17 @@
 ## Dumps
 
 - in one terminal : `scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL`
-- in another terminal `pg_dump --format c -f tmp/dump.pgsql postgres://collectif_o_9999:XXXXX@localhost:10000/collectif_o_9999`
+- in another terminal `pg_dump --data-only --format c -f tmp/dump.pgsql --exclude-table recensements --exclude-table active_storage_attachments --exclude-table active_storage_blobs --exclude-table active_storage_variant_records postgres://collectif_o_9999:XXXXX@localhost:10000/collectif_o_9999`
 - ⚠️ you may have to enter the SSH password multiple times in the first terminal
 - then `./scripts/restore_to_local.sh tmp/dump.pgsql`
 
-## Review Apps
+## Prepare new seeds.pgsql for review apps
 
-- create it manually from https://dashboard.scalingo.com/apps/osc-fr1/collectif-objets-staging/review-apps/manual
-- restore a safe dump (without recensements and attachments) to that new app's db
-- prevent erroneous mails with `scalingo --app collectif-objets-staging-prXXX run rake users:simple_magic_tokens_and_mailcatch_mails`
+- create a staging dump (cf section before)
+- import it locally with `rake db:schema:load && pg_restore --data-only --no-owner --no-privileges --no-comments --dbname collectif_objets_dev tmp/seeds.pgsql`
+- run `rails runner "Commune.where(status: [:started, :completed]).update_all(status: :inactive)"`
+- re-dump with `pg_dump --data-only --format c -f tmp/seeds.pgsql --exclude-table recensements --exclude-table active_storage_attachments --exclude-table active_storage_blobs --exclude-table active_storage_variant_records collectif_objets_dev`
+- upload `tmp/seeds.pgsql` to the `collectif-objets-public` S3 bucket using cyberduck
 
 ## Documentation
 
