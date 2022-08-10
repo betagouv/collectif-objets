@@ -19,7 +19,6 @@ gem "devise-i18n", "~> 1.10"
 gem "draper", "~> 4.0"
 gem "image_processing"
 gem "importmap-rails"
-gem "lookbook"
 gem "matrix"
 gem "pagy", "~> 5.10"
 gem "pg", "~> 1.3"
@@ -54,6 +53,7 @@ end
 group :development do
   gem "aasm-diagram", require: false
   gem "htmlbeautifier"
+  gem "lookbook"
   gem "progressbar"
   gem "pry"
   gem "rails-erd", require: false
