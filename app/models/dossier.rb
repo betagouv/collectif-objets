@@ -3,6 +3,7 @@
 class Dossier < ApplicationRecord
   belongs_to :commune
   has_many :recensements, dependent: :nullify
+  has_many :objets, through: :recensements
   belongs_to :conservateur, optional: true
 
   include AASM

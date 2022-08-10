@@ -2,12 +2,12 @@
 
 module Conservateurs
   class CommunesController < ApplicationController
-    before_action :set_commune, :set_dossier, :restrict_access, only: [:show]
+    before_action :set_commune, :restrict_access, :set_dossier, only: [:show]
     before_action :restrict_access_autocomplete, only: :autocomplete
     before_action :set_departement, only: [:index]
 
     def show
-      @objets = @commune.objets
+      @objets = @dossier.objets
         .with_photos_first
         .includes(:commune, recensements: %i[photos_attachments photos_blobs])
       return true if params[:analyse_saved].blank?
