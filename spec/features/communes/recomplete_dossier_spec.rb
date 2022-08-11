@@ -5,10 +5,13 @@
 require "rails_helper"
 
 RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
-  let!(:commune) { create(:commune, status: "completed", nom: "Albon", code_insee: "26002", departement: "26") }
+  let!(:departement) { create(:departement, code: "26", name: "Drôme") }
+  let!(:commune) { create(:commune, status: "completed", nom: "Albon", code_insee: "26002", departement:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
   let!(:conservateur) do
-    create(:conservateur, first_name: "Jean", last_name: "Lobo", email: "jeanne@culture.gouv.fr", departements: ["26"])
+    create(:conservateur,
+           first_name: "Jean", last_name: "Lobo", email: "jeanne@culture.gouv.fr",
+           departements: [departement])
   end
   let!(:dossier) do
     create(:dossier, :rejected, commune:, conservateur:, notes_conservateur: "Veuillez prendre de meilleures photos")

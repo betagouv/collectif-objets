@@ -4,7 +4,7 @@ module Api
   module V1
     class DepartementsController < Api::V1::BaseController
       def index
-        @departements = Co::Departements.models(include_communes_count: true, include_objets_count: true)
+        @departements = Departement.all.include_communes_count.include_objets_count
         render json: @departements.map(&:to_h), cached: true
       end
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register AdminUser do
-  menu label: "👩‍✈️ Admins", priority: 7
+  menu label: "👩‍✈️ Admins", priority: 8
   permit_params :email, :password, :password_confirmation
 
   index do

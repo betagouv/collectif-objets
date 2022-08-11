@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Commune < ApplicationRecord
-  include Communes::IncludeCountsConcern
+  belongs_to :departement, foreign_key: :departement_code, inverse_of: :communes
 
-  DISPLAYABLE_DEPARTEMENTS = %w[08 13 26 30 51 52 58 65 72 88].freeze
+  include Communes::IncludeCountsConcern
 
   include AASM
   aasm(column: :status, timestamps: true) do
@@ -46,7 +46,6 @@ class Commune < ApplicationRecord
   pg_search_scope :search_by_nom, against: :nom, using: { tsearch: { prefix: true } }
   accepts_nested_attributes_for :dossier, :users
 
-  validates :departement, presence: true
   validate do |commune|
     next if commune.nom.blank? || commune.nom == commune.nom.strip
 

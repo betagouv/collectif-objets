@@ -21,7 +21,7 @@ ActiveAdmin.register Commune do
     # selectable_column
     id_column
     column :nom
-    column :departement
+    column :departement_code
     column :code_insee
     column :status
     column :first_user_email
@@ -35,7 +35,7 @@ ActiveAdmin.register Commune do
   csv do
     column :id
     column :nom
-    column :departement
+    column :departement_code
     column :code_insee
     column :status
     column :first_user_email
@@ -45,7 +45,7 @@ ActiveAdmin.register Commune do
     column :completed_at
   end
 
-  filter :departement, as: :check_boxes, collection: -> { Co::Departements.admin_select_options }
+  filter :departement_code, as: :check_boxes, collection: -> { Departement.all }
   filter :nom
   filter :code_insee_equals
   filter(
@@ -73,7 +73,7 @@ ActiveAdmin.register Commune do
         attributes_table title: "📍 Commune ##{commune.id}" do
           row :id
           row :nom
-          row :departement_with_name
+          row :departement
           row :code_insee
           row :status
           row :recensements_summary, label: "Recensements"

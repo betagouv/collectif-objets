@@ -30,7 +30,7 @@
       <ul class="fr-mb-8w">
         <% @departements.each do |departement| %>
           <li>
-            <%= link_to(departement, departement_path(departement.number)) %>
+            <%= link_to(departement, departement_path(departement.code)) %>
             <span class="fr-text--sm">(<%=departement.communes_count %> communes)</span>
         <% end %>
       </ul>

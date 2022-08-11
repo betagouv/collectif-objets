@@ -2,14 +2,15 @@
 
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Dossier do
-  menu label: "📂 Dossiers", priority: 4
+  menu label: "📂 Dossiers", priority: 5
 
   actions :all, except: %i[destroy new create]
   permit_params :status, :notes_commune, :notes_conservateur
 
   index do
     id_column
-    column :commune_id
+    column :commune
+    column :departement
     column :conservateur
     column :status
     column :notes_commune
@@ -22,11 +23,16 @@ ActiveAdmin.register Dossier do
     actions
   end
 
+  filter :commune_departement_code, as: :check_boxes, collection: -> { Departement.all }
+  filter :status, as: :check_boxes, collection: %i[construction submitted rejected accepted]
+
   show do
     div class: "show-container" do
       div do
         attributes_table title: "📂 Dossier ##{dossier.id}" do
           row :id
+          row :commune
+          row :departement
           row :status
           row :submitted_at
           row :rejected_at
@@ -42,7 +48,7 @@ ActiveAdmin.register Dossier do
           attributes_table_for dossier.commune do
             row(:id) { link_to _1.id, admin_commune_path(_1) }
             row :nom
-            row :departement_with_name
+            row :departement
             row :code_insee
             row :status
             row :recensements_summary, label: "Recensements"

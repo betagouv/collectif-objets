@@ -2,7 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register User do
-  menu label: "👤 Utilisateurs", priority: 2
+  menu label: "👤 Utilisateurs", priority: 3
   decorate_with UserDecorator
 
   actions :all, except: [:destroy]
@@ -19,7 +19,7 @@ ActiveAdmin.register User do
 
   filter :email
   filter :role, as: :check_boxes, collection: ["mairie"]
-  filter :commune_departement, as: :check_boxes, collection: -> { Co::Departements.admin_select_options }
+  filter :commune_departement_code, as: :check_boxes, collection: -> { Departement.all }
 
   show do
     div class: "show-container" do
@@ -42,7 +42,7 @@ ActiveAdmin.register User do
           attributes_table_for user.commune.decorate do
             row(:id) { link_to _1.id, admin_commune_path(_1) }
             row :nom
-            row :departement_with_name
+            row :departement
             row :code_insee
             row :status
             row :recensements_summary

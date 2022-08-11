@@ -4,9 +4,10 @@ require "rails_helper"
 
 # rubocop:disable Metrics/BlockLength
 RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
-  let!(:conservateur) { create(:conservateur, email: "jeanne@culture.gouv.fr", departements: ["26"]) }
+  let!(:departement) { create(:departement, code: "26", name: "Drôme") }
+  let!(:conservateur) { create(:conservateur, email: "jeanne@culture.gouv.fr", departements: [departement]) }
   let!(:commune) do
-    create(:commune, nom: "Albon", code_insee: "26002", departement: "26", status: Commune::STATE_COMPLETED)
+    create(:commune, nom: "Albon", code_insee: "26002", departement:, status: Commune::STATE_COMPLETED)
   end
   let!(:dossier) { create(:dossier, :submitted, commune:) }
   before { commune.update!(dossier:) }
@@ -37,7 +38,7 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
   scenario "full" do
     login_as(conservateur, scope: :conservateur)
     visit "/conservateurs/departements"
-    click_on "Drôme (26)"
+    click_on "26 - Drôme"
     click_on "Albon"
 
     # override field on first recensement

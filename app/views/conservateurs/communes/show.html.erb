@@ -8,7 +8,7 @@
         links: [
           ["Départements", conservateurs_departements_path],
           [
-            nom_departement(@commune.departement),
+            @commune.departement.name,
             conservateurs_departement_path(@commune.departement)
           ]
         ],
@@ -153,7 +153,7 @@
             ) %>
           </div>
         <% end %>
-        <% sp_prefix = Co::Departements::SERVICE_PUBLIC_PREFIX[@commune.departement] %>
+        <% sp_prefix = @commune.departement.service_public_prefix %>
         <% if sp_prefix %>
           <div class="fr-mt-1w">
             <%= link_to(

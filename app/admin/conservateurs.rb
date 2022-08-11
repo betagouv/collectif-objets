@@ -2,7 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Conservateur do
-  menu label: "👷‍♀️ Conservateurs", priority: 6
+  menu label: "👷‍♀️ Conservateurs", priority: 7
   decorate_with ConservateurDecorator
 
   actions :all, except: [:destroy]
@@ -18,11 +18,7 @@ ActiveAdmin.register Conservateur do
   end
 
   filter :email
-  filter(
-    :with_departement,
-    as: :select,
-    collection: -> { Co::Departements.admin_select_options(restrict_communes: false) }
-  )
+  filter :departements, as: :check_boxes, collection: -> { Departement.all }
 
   show do
     div class: "show-container" do
@@ -32,7 +28,7 @@ ActiveAdmin.register Conservateur do
           row :email
           row :first_name
           row :last_name
-          row :departements_with_names
+          row :departements
           row :phone_number
         end
       end
@@ -51,11 +47,7 @@ ActiveAdmin.register Conservateur do
       f.input :first_name
       f.input :last_name
       f.input :phone_number
-      f.input(
-        :departements,
-        as: :check_boxes,
-        collection: Co::Departements.admin_select_options(restrict_communes: false)
-      )
+      f.input :departements, as: :check_boxes, collection: -> { Departement.all }
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end

@@ -280,9 +280,7 @@ fr:
           completed: Recensement terminé
         formulaire:
           title: Formulaires de recensement
-        departement_with_name: Département # admin
-      conservateur:
-        departements_with_names: Départements # admin
+        departement_code: Département
   date:
     abbr_day_names:
       - dim

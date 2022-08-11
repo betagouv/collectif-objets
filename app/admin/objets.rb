@@ -2,7 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Objet do
-  menu label: "🖼 Objets", priority: 3
+  menu label: "🖼 Objets", priority: 4
   decorate_with ObjetDecorator
 
   actions :all, except: %i[destroy new create edit update]
@@ -22,7 +22,7 @@ ActiveAdmin.register Objet do
     actions
   end
 
-  filter :commune_departement, as: :check_boxes, collection: -> { Co::Departements.admin_select_options }
+  filter :commune_departement_code, as: :check_boxes, collection: -> { Departement.all }
   filter :commune
   filter :palissy_REF_equals
   filter :palissy_DENO

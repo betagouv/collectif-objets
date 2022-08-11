@@ -20,7 +20,7 @@ class SynchronizeObjetsJob
     if departement.present?
       synchronize_departement(departement)
     else
-      Co::Departements.numbers.each { synchronize_departement(_1) }
+      Departement.all.each { synchronize_departement(_1.code) }
     end
   end
 
