@@ -1,5 +1,4 @@
 <% if Rails.env.production? %>
-  <%# ./bin/importmap @sentry/browser --download causes 404s %>
   <script src="/sentry.bundle.tracing.6_19_6.min.js"></script>
   <script>
     Sentry.init({
