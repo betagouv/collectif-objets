@@ -10,10 +10,10 @@
     <link rel="icon" href="/dsfr/favicon/favicon.svg" type="image/svg+xml">
     <link rel="shortcut icon" href="/dsfr/favicon/favicon.ico" type="image/x-icon"><!-- 32×32 -->
     <link rel="manifest" href="/dsfr/favicon/manifest.webmanifest" crossorigin="use-credentials">
-    <%= render "shared/sentry_js" %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
     <%= vite_stylesheet_tag 'application' %>
+    <meta name="environment-specific-name" content="<%= Rails.configuration.x.environment_specific_name %>">
   </head>
   <body>
     <%= render "shared/environment_banner" %>
