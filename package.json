@@ -28,6 +28,7 @@
     "maplibre-gl": "^2.1.9",
     "mjml": "^4.12.0",
     "nanobar": "^0.4.2",
+    "spotlight.js": "^0.7.8",
     "stimulus-vite-helpers": "^3.0.0",
     "throttle-debounce": "^5.0.0"
   },
