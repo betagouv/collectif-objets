@@ -1,0 +1,19 @@
+.co-photo-upload-wrapper {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  position: relative;
+}
+
+.co-photo-upload-wrapper img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.co-photo-upload-wrapper .co-delete-icon {
+  position: absolute;
+  left: 63px;
+  top: 63px;
+}

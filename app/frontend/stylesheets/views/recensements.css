@@ -30,27 +30,6 @@ label.fr-label.co-label--disabled,
   color: #999;
 }
 
-.co-recensement-form-photo-wrapper {
-  width: 150px;
-  height: 150px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  position: relative;
-}
-
-.co-recensement-form-photo-wrapper img {
-  object-fit: contain;
-  height: 100%;
-  width: 100%;
-}
-
-.co-recensement-form-photo-wrapper .co-delete-icon {
-  position: absolute;
-  left: 63px;
-  top: 63px;
-}
-
-
 /* completion page */
 .co-recensement-completion-summary img {
   max-width: 100px;
@@ -66,13 +45,7 @@ label.fr-label.co-label--disabled,
   margin-left: 5px;
 }
 
-.direct-upload__progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  opacity: 0.2;
-  background: #0076ff;
-  transition: width 120ms ease-out, opacity 60ms 60ms ease-in;
-  transform: translate3d(0, 0, 0);
+.co-nanobar .bar {
+  background: green;
+  transition: height .3s;
 }

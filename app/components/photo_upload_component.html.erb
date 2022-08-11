@@ -1,10 +1,10 @@
 <div
-  data-controller="recensement-form--upload-photo"
-  data-recensement-form--upload-photo-target="wrapper"
+  data-controller="photo-upload"
+  data-photo-upload-target="wrapper"
 >
   <div
     class="fr-upload-group"
-    data-recensement-form--upload-photo-target="uploadGroup"
+    data-photo-upload-target="uploadGroup"
   >
     <label class="fr-label" for="recensement_photos">
       <span class="fr-hint-text">
@@ -20,19 +20,27 @@
       multiple
       value=""
       autocomplete="off"
-      data-recensement-form--upload-photo-target="input"
-      data-recensement-form--uploader-target="input"
-      data-action="change->recensement-form--upload-photo#refreshPreview change->recensement-form--uploader#onInputChange change->recensement#refreshFields direct-upload:progress->recensement-form--upload-photo#setProgress"
+      data-photo-upload-target="input"
+      data-photos-upload-group-target="input"
+      data-action="
+        change->photo-upload#refreshPreview
+        change->photo-upload#triggerUpload
+        change->photos-upload-group#onInputChange
+        change->recensement#refreshFields
+      "
       class="hide"
     >
 
     <div
       class="hide"
-      data-recensement-form--upload-photo-target="ctaWithCapture"
+      data-photo-upload-target="ctaWithCapture"
     >
       <button
         class="fr-btn fr-btn--primary fr-icon-camera-line fr-btn--icon-left co-button--high co-button--big-icon co--width-100 co-flex--justify-content-center"
-        data-action="recensement-form--upload-photo#triggerCapture"
+        data-photo-upload-target="uploadButton"
+        data-action="photo-upload#triggerCapture"
+        disabled="disabled"
+        data-force-disabled="true"
       >
         Prendre une photo
       </button>
@@ -41,18 +49,22 @@
       </p>
       <button
         class="fr-btn fr-btn--tertiary-no-outline fr-icon-attachment-line fr-btn--icon-right co--width-100 co-flex--justify-content-center"
-        data-action="recensement-form--upload-photo#triggerBrowse"
+        data-photo-upload-target="uploadButton"
+        data-action="photo-upload#triggerBrowse"
+        disabled="disabled"
+        data-force-disabled="true"
       >
         Ajouter une photo enregistrée
       </button>
     </div>
 
-    <div
-      data-recensement-form--upload-photo-target="ctaWithoutCapture"
-    >
+    <div data-photo-upload-target="ctaWithoutCapture">
       <button
         class="fr-btn fr-btn--primary fr-icon-attachment-line fr-btn--icon-right"
-        data-action="recensement-form--upload-photo#triggerBrowse"
+        data-action="photo-upload#triggerBrowse"
+        data-photo-upload-target="uploadButton"
+        disabled="disabled"
+        data-force-disabled="true"
       >
         Ajouter une photo
       </button>
@@ -60,24 +72,22 @@
   </div>
   <div
     class="hide co-flex co-flex--align-items-center fr-mb-2w"
-    data-recensement-form--upload-photo-target="preview"
+    data-photo-upload-target="preview"
   >
-    <div
-      class="co-recensement-form-photo-wrapper"
-      data-recensement-form--upload-photo-target="photoWrapper"
-    >
-      <div
-        class="direct-upload__progress"
-        data-recensement-form--upload-photo-target="progress"></div>
-      <img data-recensement-form--upload-photo-target="img" />
+    <div class="co-photo-upload-wrapper" data-photo-upload-target="photoWrapper">
+      <img data-photo-upload-target="img" />
     </div>
     <div class="fr-ml-2w">
       <div class="fr-mb-2w">
-        <span class="co-text--muted" data-recensement-form--upload-photo-target="metadata"></span>
+        <div class="co-nanobar" data-photo-upload-target="nanobar"></div>
+        <div class="co-text--muted" data-photo-upload-target="progress"></div>
+        <span class="co-text--muted" data-photo-upload-target="metadata"></span>
       </div>
       <button
         class="fr-btn fr-btn--secondary fr-icon-delete-line fr-btn--icon-right"
-        data-action="click->recensement-form--upload-photo#remove"
+        data-action="click->photo-upload#remove"
+        data-photo-upload-target="removeButton"
+        disabled="disabled"
       >
         Retirer cette photo
       </button>
