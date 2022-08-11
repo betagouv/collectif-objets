@@ -34,7 +34,6 @@ gem "sib-api-v3-sdk"
 gem "sidekiq"
 gem "skylight"
 gem "sprockets-rails"
-gem "stimulus-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "view_component"
