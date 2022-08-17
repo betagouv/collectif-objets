@@ -69,6 +69,7 @@ ActiveAdmin.register Recensement do
             row :nom
             row :departement_with_name
             row :code_insee
+            row :phone_number
             row :status
             row :recensements_summary, label: "Recensements"
             row :enrolled_at

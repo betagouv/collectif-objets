@@ -43,6 +43,7 @@ ActiveAdmin.register Commune do
     column :recensements_photos_present
     column :enrolled_at
     column :completed_at
+    column :phone_number
   end
 
   filter :departement, as: :check_boxes, collection: -> { Co::Departements.admin_select_options }
@@ -75,6 +76,7 @@ ActiveAdmin.register Commune do
           row :nom
           row :departement_with_name
           row :code_insee
+          row :phone_number
           row :status
           row :recensements_summary, label: "Recensements"
           row :notes_from_enrollment
@@ -91,10 +93,6 @@ ActiveAdmin.register Commune do
               row :role
               row :magic_token
               row :role
-              row :nom
-              row :job_title
-              row :email_personal
-              row :phone_number
             end
           end
         end
