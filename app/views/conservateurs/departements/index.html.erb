@@ -11,11 +11,13 @@
       <% else %>
         <ul>
           <% @departements.each do |departement| %>
-            <li>
-              <%= link_to(
-                nom_departement(departement),
-                conservateurs_departement_path(departement)
-              ) %>
+            <li class="fr-mb-1w">
+              <%= link_to(departement, conservateurs_departement_path(departement)) %>
+              <br />
+              <span class="fr-text--sm">
+                <%= departement.objets_count %> objets protégés dans
+                <%= departement.communes_count %> communes
+              </span>
             </li>
           <% end %>
         </ul>

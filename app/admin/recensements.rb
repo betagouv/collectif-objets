@@ -2,7 +2,7 @@
 
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Recensement do
-  menu label: "✍️ Recensements", priority: 5
+  menu label: "✍️ Recensements", priority: 6
   actions :all, except: %i[destroy new create edit update]
   decorate_with RecensementDecorator
 
@@ -22,7 +22,7 @@ ActiveAdmin.register Recensement do
     actions
   end
 
-  filter :objet_commune_departement, as: :check_boxes, collection: -> { Co::Departements.admin_select_options }
+  filter :objet_commune_departement_code, as: :check_boxes, collection: -> { Departement.all }
   filter :localisation, as: :check_boxes, collection: Recensement::LOCALISATIONS
   filter :edifice_nom
   filter :recensable
@@ -67,7 +67,7 @@ ActiveAdmin.register Recensement do
           attributes_table_for recensement.commune do
             row(:id) { link_to _1.id, admin_commune_path(_1) }
             row :nom
-            row :departement_with_name
+            row :departement
             row :code_insee
             row :phone_number
             row :status

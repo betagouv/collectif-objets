@@ -30,7 +30,7 @@ export default class extends Controller {
     const parsedCounts = await resCounts.json()
     const joined = parsed.features.map(feature => {
       const rowCount = parsedCounts
-        .find(row => row.number == feature.properties.code) || {}
+        .find(row => row.code == feature.properties.code) || {}
       return {
         ...feature,
         properties: {

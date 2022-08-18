@@ -9,7 +9,7 @@
           links: [
             ["Départements", conservateurs_departements_path],
             [
-              nom_departement(@objet.commune.departement),
+              @objet.commune.departement.name,
               conservateurs_departement_path(@objet.commune.departement)
             ],
             [@objet.commune.nom, conservateurs_commune_path(@objet.commune)]

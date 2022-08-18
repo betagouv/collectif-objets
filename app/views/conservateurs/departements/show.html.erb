@@ -6,11 +6,11 @@
       <%= render(
         "shared/breadcrumbs",
         links: [["Départements", conservateurs_departements_path]],
-        current_page_label: nom_departement(@departement)
+        current_page_label: @departement.name
       ) %>
       <h2>
         <span class="fr-icon-france-fill" aria-hidden="true"></span>
-        <%= nom_departement(@departement) %>
+        <%= @departement.name %>
       </h2>
       <% if @campaign %>
         <p><%= t(".campaign", begin: l(@campaign.begin), end: l(@campaign.end)) %></p>

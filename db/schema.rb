@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_06_141807) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_11_121727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,7 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_141807) do
   create_table "communes", force: :cascade do |t|
     t.string "nom"
     t.string "code_insee"
-    t.string "departement"
+    t.string "departement_code"
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -86,8 +86,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_141807) do
     t.float "latitude"
     t.float "longitude"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
-    t.index ["departement"], name: "index_communes_on_departement"
+    t.index ["departement_code"], name: "index_communes_on_departement_code"
     t.index ["dossier_id"], name: "index_communes_on_dossier_id"
+  end
+
+  create_table "conservateur_roles", force: :cascade do |t|
+    t.bigint "conservateur_id"
+    t.string "departement_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conservateur_id"], name: "index_conservateur_roles_on_conservateur_id"
+    t.index ["departement_code"], name: "index_conservateur_roles_on_departement_code"
   end
 
   create_table "conservateurs", force: :cascade do |t|
@@ -95,7 +104,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_141807) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
-    t.string "departements", default: [], array: true
     t.datetime "last_sign_in_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
@@ -104,6 +112,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_141807) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.index ["email"], name: "index_conservateurs_on_email", unique: true
+  end
+
+  create_table "departements", primary_key: "code", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "service_public_prefix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dossiers", force: :cascade do |t|

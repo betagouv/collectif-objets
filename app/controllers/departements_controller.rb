@@ -2,17 +2,11 @@
 
 class DepartementsController < ApplicationController
   def index
-    @departements = Co::Departements.models(include_communes_count: true)
+    @departements = Departement.all.include_objets_count.include_communes_count
   end
 
   def show
-    raise unless Co::Departements.numbers.include?(params[:id])
-
-    @departement = Co::Departement.from_number(params[:id])
-
-    @communes = Commune
-      .where(departement: params[:id])
-      .include_objets_count
-      .order(:nom)
+    @departement = Departement.find(params[:id])
+    @communes = @departement.communes.include_objets_count.order(:nom)
   end
 end
