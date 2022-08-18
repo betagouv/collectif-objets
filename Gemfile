@@ -64,3 +64,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "mjml-rails", "~> 4.7"
