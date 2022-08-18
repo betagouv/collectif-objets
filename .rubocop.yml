@@ -26,3 +26,6 @@ Style/Documentation:
 
 Rails/SkipsModelValidations:
   Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
