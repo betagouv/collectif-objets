@@ -73,8 +73,8 @@ ActiveAdmin.register User do
         confirm: (
           if user.magic_token.present?
             "⚠️ Attention ! un lien magique existe déjà pour cet utilisateur. " \
-              "S'il a déjà été partagé avec l'utilisateur, l'ancien ne fonctionnera plus une fois" \
-              " que vous l'aurez rafraîchi. êtes-vous sûr.e ?"
+              "S'il a déjà été partagé avec l'utilisateur, l'ancien ne fonctionnera plus une fois " \
+              "que vous l'aurez rafraîchi. êtes-vous sûr.e ?"
           end
         )
       }
