@@ -79,7 +79,7 @@ GEM
     activerecord (7.0.3.1)
       activemodel (= 7.0.3.1)
       activesupport (= 7.0.3.1)
-    activerecord_where_assoc (1.1.2)
+    activerecord_where_assoc (1.1.3)
       activerecord (>= 4.1.0)
     activestorage (7.0.3.1)
       actionpack (= 7.0.3.1)
