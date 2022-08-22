@@ -53,9 +53,9 @@ module Communes
           "communes.*," \
           "COALESCE(b.objets_recenses_count, 0) AS objets_recenses_count, " \
           "(COALESCE(100 * b.objets_recenses_count, 0)::float / COALESCE(a.objets_count, 1)) " \
-          "AS objets_recenses_percentage, "\
+          "AS objets_recenses_percentage, " \
           "(COALESCE(100 * c.recensements_analysed_count, 0)::float / COALESCE(a.objets_count, 1)) " \
-          "AS recensements_analysed_percentage,"\
+          "AS recensements_analysed_percentage," \
           "COALESCE(d.recensements_peril_count, 0) as recensements_peril_count"
         )
       end
