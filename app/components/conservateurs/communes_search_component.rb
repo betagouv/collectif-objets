@@ -9,7 +9,7 @@ module Conservateurs
     include DossierHelper
 
     delegate(
-      :departement, :departement, :order, :filters, :arel,
+      :departement, :order, :filters, :arel,
       to: :communes_search
     )
 
@@ -37,7 +37,7 @@ module Conservateurs
     def status_label(status_filter_key)
       [
         I18n.t("conservateurs.communes_search_component.status_options.#{status_filter_key}"),
-        "(#{status_counts[status_filter_key]})"
+        "(#{status_counts[status_filter_key] || 0})"
       ].join(" ")
     end
 
