@@ -1,4 +1,4 @@
-# ./scripts/pg_dump_data.sh collectif_objets_dev tmp/seeds.pgsql
+# ./scripts/pg_dump_data_anonymous.sh collectif_objets_dev tmp/seeds.pgsql
 pg_dump \
   --data-only \
   --format c \
