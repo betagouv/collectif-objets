@@ -1,0 +1,30 @@
+<% content_for(:head_title) { "Campagne #{@campaign}" } %>
+
+<main class="fr-container fr-pt-2w fr-pb-4w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Campagnes", campaigns_path],
+      [@campaign.human_id, campaign_path(@campaign)]
+    ],
+    current_page_label: "Statistiques"
+  ) %>
+
+  <h2>
+    <span class="fr-icon-pie-chart-2-line" aria-hidden="true"></span>
+    Statistiques de la campagne
+    <%= @campaign %>
+    <%= campaign_status_badge(@campaign) %>
+  </h2>
+
+  <% ([:all] + @campaign.past_steps).each do |step| %>
+    <div class="fr-mb-4w">
+      <h4>
+        <%= t("campaigns.mail_names.#{step}") %> -
+        <%= @campaign.stats[:mails][step][:count] %> mails déclenchés
+      </h4>
+      <%= render Campaigns::EmailsStatsComponent.new(@campaign.stats[:mails][step]) %>
+    </div>
+  <% end %>
+</main>

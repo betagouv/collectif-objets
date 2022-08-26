@@ -1,0 +1,20 @@
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("campaign_v1_mailer.rappel1_email.intro", nom_commune: @commune.nom, count: @commune.objets.count, nom_drac: @campaign.nom_drac) %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.shared.role_elu_html") %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.rappel1_email.conseils") %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.rappel1_email.decouvrez", nom_commune: @commune.nom, count: @commune.objets.count) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<%= render partial: "cta", locals: { user: @user, commune: @commune } %>
+
+<%= render partial: "objet_photo", locals: { objet: @commune.highlighted_objet, commune: @commune } %>

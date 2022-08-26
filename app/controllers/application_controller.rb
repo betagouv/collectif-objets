@@ -45,14 +45,22 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    return commune_objets_path(resource.commune) if resource.is_a?(User)
+    return params[:after_sign_in_path] if params[:after_sign_in_path].present?
 
-    if resource.is_a?(Conservateur) && resource.departements.count == 1
-      return conservateurs_departement_path(resource.departements.first)
+    if resource.is_a?(User) || resource.is_a?(Conservateur)
+      return send("after_sign_in_path_for_#{resource.class.name.downcase}", resource)
     end
 
-    return conservateurs_departements_path if resource.is_a?(Conservateur)
-
     super
+  end
+
+  def after_sign_in_path_for_user(user)
+    commune_objets_path(user.commune)
+  end
+
+  def after_sign_in_path_for_conservateur(conservateur)
+    return conservateurs_departement_path(conservateur.departements.first) if conservateur.departements.count == 1
+
+    conservateurs_departements_path
   end
 end

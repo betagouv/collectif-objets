@@ -56,4 +56,22 @@ class Objet < ApplicationRecord
   def recensable?
     current_recensement.nil? && commune.objets_recensable?
   end
+
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def self.select_best_objet_in_list(objets_arr)
+    current_arr = objets_arr
+    [
+      ->(obj) { obj.image_urls.any? },
+      ->(obj) { obj.nom.exclude?(";") },
+      ->(obj) { obj.nom.match?(/[A-Z]/) },
+      ->(obj) { obj.edifice_nom.present? },
+      ->(obj) { obj.edifice_nom&.match?(/[A-Z]/) },
+      ->(obj) { obj.emplacement.blank? }
+    ].each do |filter_fun|
+      filtered_arr = current_arr.filter { filter_fun.call(_1) }
+      current_arr = filtered_arr if filtered_arr.any?
+    end
+    current_arr.first
+  end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end

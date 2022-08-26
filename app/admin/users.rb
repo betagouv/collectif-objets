@@ -5,8 +5,13 @@ ActiveAdmin.register User do
   menu label: "👤 Utilisateurs", priority: 3
   decorate_with UserDecorator
 
-  actions :all, except: [:destroy]
-  permit_params :magic_token, :role, :nom, :job_title, :email_personal, :phone_number
+  if Rails.configuration.x.environment_specific_name == "production"
+    actions :index, :show
+    permit_params [] # cannot update in prod
+  else
+    actions :index, :show, :edit, :update
+    permit_params :magic_token, :role, :nom, :job_title, :email_personal, :phone_number, :email
+  end
 
   index do
     id_column
@@ -79,6 +84,17 @@ ActiveAdmin.register User do
         )
       }
     )
+  end
+
+  form do |f|
+    f.semantic_errors
+    f.inputs do
+      # f.input :commune, input_html: { disabled: true }
+      f.input :email, input_html: { disabled: Rails.configuration.x.environment_specific_name == "production" }
+      f.input :role, input_html: { disabled: true }
+      f.input :magic_token, input_html: { disabled: true }
+    end
+    f.actions
   end
 end
 # rubocop:enable Metrics/BlockLength

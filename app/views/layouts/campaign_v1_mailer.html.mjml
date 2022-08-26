@@ -1,0 +1,54 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column vertical-align="middle">
+        <mj-image width="100px" src="<%= png_base64('logo-ministere-de-la-culture.png') %>" align="left"></mj-image>
+      </mj-column>
+      <mj-column vertical-align="middle">
+        <mj-text align="left" font-size="20px">Collectif Objets</mj-text>
+        <mj-text align="left" font-size="14px" color="#444">Préservez votre patrimoine mobilier</mj-text>
+      </mj-column>
+      <mj-column></mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="rgb(0,0,145)"></mj-divider>
+        <mj-text>
+          <%= t("campaign_v1_mailer.shared.madame_monsieur_le_maire") %>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <%= yield %>
+
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          Cordiales Salutations,
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="<%= png_base64('logo-ministere-de-la-culture.png') %>" align="left"></mj-image>
+      </mj-column>
+      <mj-column>
+        <mj-text>
+          <%= @campaign.signature.gsub("\n", "<br/>").html_safe %>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <% url = magic_authentication_url("magic-token": @user.magic_token, "after_sign_in_path": "/users/edit") %>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <a href="<%= url %>">
+            Suivez ce lien pour ne plus recevoir d'emails de Collectif Objets
+          </a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

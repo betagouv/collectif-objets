@@ -329,6 +329,7 @@ GEM
       ffi (~> 1.0)
     redcarpet (3.5.1)
     redis (4.8.0)
+    redis-prescription (1.0.0)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -412,6 +413,10 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.5.0)
+    sidekiq-throttled (0.16.2)
+      concurrent-ruby
+      redis-prescription
+      sidekiq
     skylight (5.3.3)
       activesupport (>= 5.2.0)
     sprockets (4.0.2)
@@ -516,6 +521,7 @@ DEPENDENCIES
   sentry-sidekiq
   sib-api-v3-sdk
   sidekiq
+  sidekiq-throttled
   skylight
   sprockets-rails
   turbo-rails

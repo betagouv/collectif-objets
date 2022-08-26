@@ -1,0 +1,18 @@
+<div data-controller="unfold">
+  <div
+    class="co-overflow--hidden co-position-relative"
+    data-unfold-target="content"
+    data-max-height="<%= max_height_px %>"
+  >
+    <%= content %>
+  </div>
+  <div class="co-text--center">
+    <button
+      class="fr-link hide fr-mt-1w"
+      data-unfold-target="button"
+      data-action="unfold#displayAll"
+    >
+      <%= button_text %>
+    </button>
+  </div>
+</div>

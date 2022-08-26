@@ -1,0 +1,50 @@
+<% if recipient.errors.any? %>
+  <div class="fr-alert fr-alert--error fr-mb-4w">
+    <p>
+      <ul>
+        <% recipient.errors.attribute_names.each do |attribute| %>
+          <li><%= recipient.errors.messages_for(attribute).first %></li>
+        <% end %>
+      </ul>
+    </p>
+  </div>
+<% end %>
+
+<div class="fr-grid-row fr-mb-8w">
+  <div class="fr-col-md-6">
+    <%= form_for(
+      recipient,
+      builder: FormBuilderDsfr,
+      data: { controller: "dependent-fields" },
+      url: url,
+      method: :patch
+    ) do |f| %>
+      <div class="fr-checkbox-group">
+        <%= f.check_box(
+          :opt_out,
+          data: {
+            action: "change->dependent-fields#refresh",
+            "dependent-fields-target": "toggler"
+          },
+          autocomplete: "off"
+        ) %>
+        <%= f.label :opt_out, "Ne plus envoyer de mails de cette campagne ⛔️" %>
+      </div>
+      <div class="fr-input-group">
+        <%= f.label :opt_out_reason, "Raison" %>
+        <%= f.select(
+          :opt_out_reason,
+          CampaignRecipient::OPT_OUT_REASONS.map do |key|
+            [t("activerecord.attributes.campaign_recipient.opt_out_reason.#{key}"), key]
+          end,
+          {},
+          data: {
+            "dependent-fields-target": "dependent"
+          },
+          autocomplete: "off"
+        ) %>
+      </div>
+      <%= f.submit "Sauvegarder" %>
+    <% end %>
+  </div>
+</div>

@@ -29,3 +29,6 @@ window.Stimulus.register("photo-upload", PhotoUploadComponent)
 
 import PhotosUploadGroupComponent from "../stimulus_controllers_components/photos_upload_group_controller"
 window.Stimulus.register("photos-upload-group", PhotosUploadGroupComponent)
+
+import UnfoldComponent from "../stimulus_controllers_components/unfold_controller"
+window.Stimulus.register("unfold", UnfoldComponent)

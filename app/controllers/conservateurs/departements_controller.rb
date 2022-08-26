@@ -10,7 +10,7 @@ module Conservateurs
     end
 
     def show
-      @campaign = Co::Campaign.for_departement(@departement.code)
+      @campaign = @departement.current_campaign
       @stats = Co::DepartementStats.new(@departement.code)
       @communes_search = Co::Conservateurs::CommunesSearch.new(@departement.code, params)
     end
