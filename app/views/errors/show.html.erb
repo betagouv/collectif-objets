@@ -15,15 +15,9 @@
     <% if @status_code.to_s.start_with?("4") %>
       <a href="/" class="fr-btn">Page dʼaccueil</a>
     <% else %>
-      <a
-        href="mailto:support@collectif-objets.beta.gouv.fr"
-        class="fr-btn fr-btn--secondary"
-      >
-        Contactez-nous
-      </a>
+
     <% end %>
   </div>
   <div class="fr-col-md-5 co-text--center">
-    <%= vite_image_tag "images/illustrations/technical-error.svg", style: "width: 200px;" %>
   </div>
 </main>
