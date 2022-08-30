@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_11_121727) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_11_173938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,57 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_121727) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "campaign_emails", force: :cascade do |t|
+    t.bigint "campaign_recipient_id"
+    t.string "step"
+    t.string "sib_message_id"
+    t.boolean "sent"
+    t.boolean "delivered"
+    t.boolean "opened"
+    t.boolean "clicked"
+    t.string "error"
+    t.string "error_reason"
+    t.string "subject"
+    t.string "raw_html"
+    t.json "headers"
+    t.json "sib_events"
+    t.datetime "last_sib_synchronization_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_recipient_id"], name: "index_campaign_emails_on_campaign_recipient_id"
+  end
+
+  create_table "campaign_recipients", force: :cascade do |t|
+    t.bigint "campaign_id"
+    t.bigint "commune_id"
+    t.string "current_step"
+    t.boolean "opt_out", default: false
+    t.string "opt_out_reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id", "commune_id"], name: "index_campaign_recipients_on_campaign_id_and_commune_id", unique: true
+    t.index ["campaign_id"], name: "index_campaign_recipients_on_campaign_id"
+    t.index ["commune_id"], name: "index_campaign_recipients_on_commune_id"
+  end
+
+  create_table "campaigns", force: :cascade do |t|
+    t.string "status", default: "draft", null: false
+    t.string "departement_code", null: false
+    t.date "date_lancement"
+    t.date "date_rappel1"
+    t.date "date_rappel2"
+    t.date "date_rappel3"
+    t.date "date_fin"
+    t.string "sender_name"
+    t.string "signature"
+    t.string "nom_drac"
+    t.boolean "imported", default: false
+    t.json "stats"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["departement_code"], name: "index_campaigns_on_departement_code"
+  end
+
   create_table "communes", force: :cascade do |t|
     t.string "nom"
     t.string "code_insee"
@@ -115,10 +166,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_121727) do
   end
 
   create_table "departements", primary_key: "code", id: :string, force: :cascade do |t|
-    t.string "name", null: false
+    t.string "nom", null: false
     t.string "service_public_prefix"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "dans_nom"
   end
 
   create_table "dossiers", force: :cascade do |t|

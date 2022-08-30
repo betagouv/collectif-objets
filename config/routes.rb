@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 require 'sidekiq/web'
+require "sidekiq/throttled/web"
 
 Rails.application.routes.draw do
+  # Replace Sidekiq Queues with enhanced version!
+  Sidekiq::Throttled::Web.enhance_queues_tab!
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   authenticate :admin_user do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -54,6 +59,7 @@ Rails.application.routes.draw do
     resources :objets, only: [:index], controller: "communes/objets"
     resource :formulaire, only: [:show], controller: "communes/formulaires"
     resources :dossiers, only: [:show], controller: "communes/dossiers"
+    resources :campaign_recipients, only: [:update], controller: "communes/campaign_recipients"
   end
 
   resources :departements, only: [:index, :show]
@@ -72,6 +78,23 @@ Rails.application.routes.draw do
     resources :dossiers, only: [:show] do
       resource :accept, only: [:new, :create, :update]
       resource :reject, only: [:new, :create, :update]
+    end
+  end
+
+  resources :campaigns do
+    get :show_statistics
+    get :edit_recipients
+    patch :update_recipients
+    patch :update_status
+    get :mail_previews
+    if Rails.configuration.x.environment_specific_name != "production"
+      post :force_start
+      post :force_step_up
+    end
+    post :refresh_delivery_infos
+    post :refresh_stats
+    resources :recipients, controller: "campaign_recipients", only: [:show, :update] do
+      get :mail_preview
     end
   end
 

@@ -6,14 +6,14 @@
       <%= render(
         "shared/breadcrumbs",
         links: [["Départements", conservateurs_departements_path]],
-        current_page_label: @departement.name
+        current_page_label: @departement.nom
       ) %>
       <h2>
         <span class="fr-icon-france-fill" aria-hidden="true"></span>
-        <%= @departement.name %>
+        <%= @departement.nom %>
       </h2>
       <% if @campaign %>
-        <p><%= t(".campaign", begin: l(@campaign.begin), end: l(@campaign.end)) %></p>
+        <p><%= t(".campaign", lancement: l(@campaign.lancement), fin: l(@campaign.end)) %></p>
       <% end %>
     </div>
   </div>
@@ -40,8 +40,8 @@
           <%= t(".stats.etats_sanitaires_distribution_title") %>
         </b>
         <div
-          data-controller="chart"
-          data-chart-target="wrapper"
+          data-controller="objets-chart"
+          data-objets-chart-target="wrapper"
           data-type="etats-sanitaires"
           data-values="<%= @stats.etats_sanitaires_chart_values.to_json %>"></div>
       </div>

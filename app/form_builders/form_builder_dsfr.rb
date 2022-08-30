@@ -31,6 +31,9 @@ class FormBuilderDsfr < ActionView::Helpers::FormBuilder
   end
 
   def submit(value, options = {})
-    super(value, options.merge(class: "fr-btn"))
+    options = options.with_indifferent_access
+    options[:class] ||= ""
+    options[:class] += " fr-btn"
+    super(value, options)
   end
 end

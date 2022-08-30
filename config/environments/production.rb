@@ -72,7 +72,8 @@ Rails.application.configure do
     :user_name => Rails.application.credentials.sendinblue.smtp.username,
     :password => Rails.application.credentials.sendinblue.smtp.password,
     :authentication => 'login',
-    :enable_starttls_auto => true
+    :enable_starttls_auto => true,
+    :return_response => true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

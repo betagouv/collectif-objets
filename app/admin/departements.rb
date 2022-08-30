@@ -10,7 +10,8 @@ ActiveAdmin.register Departement do
 
   index do
     id_column
-    column :name
+    column :nom
+    column :dans_nom
     column :communes_count
     column :objets_count
     actions
@@ -20,7 +21,8 @@ ActiveAdmin.register Departement do
     div class: "show-container" do
       div do
         attributes_table title: "🧩 Département ##{departement}" do
-          row :name
+          row :nom
+          row :dans_nom
           row :communes_count
           row :objets_count
         end

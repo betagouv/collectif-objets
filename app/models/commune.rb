@@ -33,6 +33,7 @@ class Commune < ApplicationRecord
   has_many :past_dossiers, class_name: "Dossier", dependent: :nullify
   belongs_to :dossier, optional: true
   has_one_attached :formulaire
+  has_many :campaign_recipients, dependent: :destroy
 
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)
@@ -67,6 +68,10 @@ class Commune < ApplicationRecord
     enrolled? || started?
   end
 
+  def active?
+    !inactive?
+  end
+
   def objets_recensable?
     !completed? || dossier&.rejected?
   end
@@ -77,5 +82,14 @@ class Commune < ApplicationRecord
 
   def to_s
     "#{nom} (#{code_insee})"
+  end
+
+  def highlighted_objet
+    # used in campaigns
+    Objet.select_best_objet_in_list(objets.where.not(palissy_DENO: nil).to_a)
+  end
+
+  def ongoing_campaign_recipient
+    campaign_recipients.joins(:campaign).where(campaigns: { status: "ongoing" }).first
   end
 end

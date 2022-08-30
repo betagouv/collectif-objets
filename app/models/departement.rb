@@ -5,6 +5,7 @@ class Departement < ApplicationRecord
   has_many :objets, through: :communes
   has_many :conservateur_roles, dependent: :destroy, foreign_key: :departement_code, inverse_of: :departement
   has_many :conservateurs, through: :conservateur_roles
+  has_many :campaigns, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
 
   def self.include_communes_count
     joins(
@@ -31,20 +32,22 @@ class Departement < ApplicationRecord
     ).select("departements.*, COALESCE(b.objets_count, 0) AS objets_count")
   end
 
-  default_scope { order(code: :asc) }
-
   def self.admin_select_options
     all.map { [_1.to_s] }
   end
 
   def to_s
-    [code, name].join(" - ")
+    [code, nom].join(" - ")
   end
 
   def to_h
     # DEPRECATE
-    %i[code name communes_count objets_count].map { [_1, send(_1)] }.to_h
+    %i[code nom communes_count objets_count].map { [_1, send(_1)] }.to_h
   end
 
   alias display_name to_s
+
+  def current_campaign
+    campaigns.where("date_lancement <= ? AND date_fin >= ?", Time.zone.now.to_date, Time.zone.now.to_date).first
+  end
 end

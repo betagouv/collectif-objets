@@ -1,0 +1,37 @@
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("campaign_v1_mailer.lancement_email.commune_abrite_objets_html", nom_commune: @commune.nom, count: @commune.objets.count) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<%= render partial: "objet_photo", locals: { objet: @commune.highlighted_objet, commune: @commune } %>
+
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("campaign_v1_mailer.lancement_email.invitation_html", nom_drac: @campaign.nom_drac, count: @commune.objets.count, dans_nom_departement: @departement.dans_nom) %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.shared.role_elu_html") %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.lancement_email.simple_html") %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.lancement_email.simple_html") %>
+      <%= t("campaign_v1_mailer.lancement_email.conseils") %>
+      <ul>
+        <li><%= t("campaign_v1_mailer.lancement_email.conseil1_html") %></li>
+        <li><%= t("campaign_v1_mailer.lancement_email.conseil2_html") %></li>
+        <li><%= t("campaign_v1_mailer.lancement_email.conseil3_html") %></li>
+      </ul>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.lancement_email.decouvrez_html") %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<%= render partial: "cta", locals: { user: @user, commune: @commune } %>

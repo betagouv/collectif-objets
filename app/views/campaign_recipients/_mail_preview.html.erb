@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "#{step}_email" do %>
+  <%= form_with(
+    url: campaign_recipient_mail_preview_path(campaign, recipient),
+    builder: FormBuilderDsfr,
+    method: :get
+  ) do |f| %>
+    <%= f.hidden_field :step, value: step %>
+    <div class="fr-checkbox-group">
+      <%= f.check_box :enrolled, checked: enrolled, id: "#{step}_enrolled" %>
+      <%= f.label "Version commune inscrite", for: "#{step}_enrolled" %>
+    </div>
+    <div class="fr-input-group">
+      <%= f.submit "Générer l'aperçu de l'email…", class: "fr-btn--tertiary" %>
+    </div>
+  <% end %>
+  <% if local_assigns[:mail] %>
+    <%= render "conservateurs/mail_preview", mail: %>
+  <% end %>
+<% end %>

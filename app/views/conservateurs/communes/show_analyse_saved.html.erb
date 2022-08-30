@@ -7,7 +7,7 @@
         "shared/breadcrumbs",
         links: [
           ["Départements", conservateurs_departements_path],
-          [@commune.departement.name, conservateurs_departement_path(@commune.departement)]
+          [@commune.departement.nom, conservateurs_departement_path(@commune.departement)]
         ],
         current_page_label: @commune.nom
       ) %>

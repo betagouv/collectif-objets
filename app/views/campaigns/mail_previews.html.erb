@@ -1,0 +1,59 @@
+<% content_for(:head_title) { "Campagne #{@campaign}" } %>
+
+<main class="fr-container fr-pt-2w fr-pb-4w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Campagnes", campaigns_path],
+      [@campaign.human_id, campaign_path(@campaign)]
+    ],
+    current_page_label: "Prévisualisation des mails de lancement"
+  ) %>
+
+  <h2>Prévisualisation des mails de lancement</h2>
+
+  <h4>Campagne <%= @campaign.human_id %> <%= campaign_status_badge(@campaign) %></h4>
+
+  <div class="fr-grid-row fr-mb-8w">
+    <div class="fr-col-md-6">
+      <%= form_with url: campaign_mail_previews_path(@campaign), method: :get, builder: FormBuilderDsfr do |f| %>
+        <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
+          <div class="fr-col-md-6">
+            <div class="fr-input-group">
+              <%= f.label :step, "Mail à prévisualiser" %>
+              <%= f.select :step, Campaign::STEPS.map { [t("campaign_v1_mailer.#{_1}_email.title"), _1] }, value: @step, autocomplete: "off" %>
+            </div>
+          </div>
+          <div class="fr-col-md-6">
+            <%= f.label :count, "Nombre de mails max (peut être lent)" %>
+            <%= f.text_field :count, value: @count, type: :number, autocomplete: "off" %>
+          </div>
+        </div>
+        <div class="co-text--right">
+          <%= f.submit "Prévisualiser les mails" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% @campaign.recipients.includes(:commune).first(@count).each_slice(2) do |recipients| %>
+    <div class="fr-grid-row fr-mb-2w fr-grid-row--gutters">
+      <% recipients.each do |recipient| %>
+        <div class="fr-col-md-6">
+          <b><%= recipient.commune %></b>
+          <%= render(
+            "conservateurs/mail_preview",
+            mail: CampaignV1Mailer.with(
+              user: recipient.commune.users.first,
+              commune: recipient.commune,
+              campaign: recipient.campaign
+            ).send("#{@step}_email"),
+            headers: false,
+            fit: true
+          ) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</main>

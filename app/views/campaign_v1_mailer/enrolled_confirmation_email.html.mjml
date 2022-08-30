@@ -1,0 +1,26 @@
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t(
+        "campaign_v1_mailer.enrolled_confirmation_email.intro",
+        communes_count: @campaign.communes.count,
+        nom_drac: @campaign.nom_drac,
+        dans_departement: @departement.dans_nom
+      ) %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.enrolled_confirmation_email.deadline", date_fin: l(@campaign.date_fin, format: :long_with_weekday)) %>
+      <%= t("campaign_v1_mailer.shared.commune_abrite_objets", nom_commune: @commune.nom, count: @commune.objets.count) %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.enrolled_confirmation_email.vous_avez_des_questions_html") %>
+      <ul>
+        <li><%= t("campaign_v1_mailer.enrolled_confirmation_email.guide_html") %></li>
+        <li><%= t("campaign_v1_mailer.enrolled_confirmation_email.visio_html") %></li>
+      </ul>
+      <%= t("campaign_v1_mailer.enrolled_confirmation_email.cta_title") %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<%= render partial: "cta", locals: { user: @user, commune: @commune } %>

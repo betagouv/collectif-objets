@@ -1,0 +1,99 @@
+<% content_for(:head_title) { "#{@commune.nom} - Campagne #{@campaign}" } %>
+
+<main class="fr-container fr-pt-2w fr-pb-4w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+      ["Campagnes", campaigns_path],
+      [@campaign.human_id, campaign_path(@campaign)]
+    ],
+    current_page_label: @commune.nom
+  ) %>
+
+  <h2>
+    <span class="fr-icon-community-line" aria-hidden="true"></span>
+    <%= @commune.nom %>
+  </h2>
+
+  <div class="fr-mb-8w">
+    <p class="fr-text--sm">
+      Commune <%= @commune.code_insee %>
+      destinataire de la campagne <%= link_to @campaign, campaign_path(@campaign) %>
+    </p>
+
+    <p class="co-text--monospace fr-text--sm">
+      <%= @user.email %>
+    </p>
+
+    <% if @recipient.status.present? %>
+      <p>
+        <%= campaign_recipient_status_badge(@recipient) %>
+        <%= t("activerecord.attributes.campaign_recipient.statuses.#{@recipient.status}") %>
+      </p>
+    <% end %>
+
+    <% if current_admin_user && @user.magic_token.present? %>
+      <span class="fr-icon-lock-line fr-text--sm" aria-hidden="true"></span>
+      Actions réservées aux admins :
+      <%= link_to(
+        "Se connecter en tant que cette commune",
+        "/magic-authentication?magic-token=#{@user.magic_token}",
+        class: "fr-btn fr-btn--tertiary fr-btn--sm"
+      ) %>
+    <% end %>
+  </div>
+
+  <% if @campaign.ongoing? %>
+    <div class="fr-mb-8w">
+      <h3>Sortie manuelle de la campagne</h3>
+      <%= render(
+        "shared/campaign_recipient_opt_out_form",
+        recipient: @recipient,
+        url: campaign_recipient_path(@campaign, @recipient)
+      ) %>
+    </div>
+  <% end %>
+
+  <h3>Mails</h3>
+
+  <% if @campaign.imported? %>
+    <p>
+      Les mails envoyés ne sont pas visibles pour les anciennes campagnes ayant été importées
+    </p>
+  <% else %>
+    <% Campaign::STEPS.each do |step| %>
+      <% existing_campaign_email = @recipient.email_for_step(step) %>
+      <h4><%= t("campaign_v1_mailer.#{step}_email.title") %></h4>
+      <div class="fr-grid-row fr-mb-4w">
+        <div class="fr-col-md-8">
+          <p>
+            <% if existing_campaign_email %>
+              L'envoi a été déclenché le <%= l(existing_campaign_email.created_at, format: :long_with_weekday) %>
+              <% campaign_email_badges(existing_campaign_email).each do |badge| %>
+                <%= badge %>
+              <% end %>
+              <% if existing_campaign_email.error_reason.present? %>
+                <div>
+                  Erreur:
+                  <span class="co-text--italic">
+                    <%= existing_campaign_email.error_reason %>
+                  </span>
+                </div>
+              <% end %>
+            <% else %>
+              Ce mail sera envoyé le <%= l(@campaign.send("date_#{step}"), format: :long_with_weekday) %>
+            <% end %>
+          </p>
+          <% if existing_campaign_email %>
+            <%= render UnfoldComponent.new(max_height_px: 40, button_text: "Voir le mail…") do %>
+              <%= render("conservateurs/mail_preview", mail: existing_campaign_email.as_action_mailer_message) %>
+            <% end %>
+          <% else %>
+            <%= render "mail_preview", campaign: @campaign, recipient: @recipient, step: step, enrolled: @recipient.commune.enrolled? %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</main>

@@ -8,15 +8,6 @@ ActiveAdmin.register Commune do
   actions :all, except: %i[destroy new create]
   permit_params :notes_from_enrollment
 
-  collection_action :export_sib, method: :get do
-    send_data(
-      SibExportCommunesCsv.new(params[:departement]).perform,
-      filename: "export.csv",
-      type: "text/csv",
-      disposition: "attachment; filename=export.csv"
-    )
-  end
-
   index do
     # selectable_column
     id_column

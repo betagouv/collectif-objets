@@ -87,9 +87,28 @@
             href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" target="_blank">licence etalab-2.0</a>
         </p>
       </div>
+      <% if current_admin_user.present? %>
+        <ul class="fr-footer__bottom-list">
+          <li class="fr-footer__bottom-item fr-footer__bottom-copy fr-text--sm">
+            <span class="fr-icon-lock-line fr-text--sm" aria-hidden="true"></span>
+            Réservé aux admins
+          </li>
+          <li class="fr-footer__bottom-item">
+            <a class="fr-footer__bottom-link fr-link--icon-left fr-icon-lock-line" href="/campaigns">
+              Interface d'admin
+            </a>
+          </li>
+          <li class="fr-footer__bottom-item">
+            <a class="fr-footer__bottom-link fr-link--icon-left fr-icon-france-line" href="/campaigns">
+              Campagnes
+            </a>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </div>
 </footer>
+
 <dialog id="fr-theme-modal" class="fr-modal" role="dialog" aria-labelledby="fr-theme-modal-title">
   <div class="fr-container fr-container--fluid fr-container-md">
     <div class="fr-grid-row fr-grid-row--center">

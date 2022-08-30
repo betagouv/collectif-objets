@@ -5,7 +5,7 @@
 require "rails_helper"
 
 RSpec.feature "Communes - Read rapport", type: :feature, js: true do
-  let!(:departement) { create(:departement, code: "26", name: "Drôme") }
+  let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, status: "completed", nom: "Albon", code_insee: "26002", departement:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
   let!(:conservateur) do

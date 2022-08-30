@@ -1,0 +1,18 @@
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <b>
+        <%= t("campaign_v1_mailer.fin_email.intro") %>
+      </b>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.fin_email.intro", nom_drac: @campaign.nom_drac) %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.fin_email.contact") %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.fin_email.a_votre_disposition") %>
+    </mj-text>
+  </mj-column>
+</mj-section>
