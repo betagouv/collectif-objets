@@ -108,11 +108,12 @@ Rails.application.routes.draw do
     end
   end
 
-  Rails.application.routes.draw do
-    mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
-  end
-
   if Rails.env.development?
     get "health/slow_image", to: "health#slow_image", as: "slow_image"
+    mount Lookbook::Engine, at: "/lookbook"
+  end
+
+  if Rails.configuration.x.environment_specific_name != "production"
+    resources :mail_previews, only: [:index]
   end
 end
