@@ -39,8 +39,5 @@ module CollectifObjets
 
     config.view_component.preview_paths << "#{Rails.root}/spec/components/previews"
     config.view_component.default_preview_layout = "component_preview"
-
-    config.exceptions_app = ->(env) { ErrorsController.action(:show).call(env)}
-    config.action_dispatch.show_exceptions = true
   end
 end

@@ -466,17 +466,6 @@ fr:
       other: "%{count} autres photos …"
   pdf_embed_component:
     download: Télécharger le fichier PDF
-  errors:
-    show:
-      title:
-        "404": Page non trouvée
-        other: Erreur inattendue
-      content:
-        "404": La page que vous cherchez est introuvable. Excusez-nous pour la gêne occasionnée.
-        other: Désolé, le service rencontre un problème, nous travaillons pour le résoudre le plus rapidement possible
-      help:
-        "404": Si vous avez tapé lʼadresse web dans le navigateur, vérifiez quʼelle est correcte. La page nʼest peut-être plus disponible.<br/>Dans ce cas, pour continuer votre visite, vous pouvez consulter notre page dʼaccueil.
-        other: Essayez de rafraîchir la page ou bien réessayez plus tard.<br />Si vous avez besoin dʼune aide immédiate, merci de nous contacter
   campaign_v1_mailer:
     lancement_email:
       title: Mail de lancement
