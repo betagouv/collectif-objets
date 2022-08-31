@@ -17,6 +17,7 @@ gem "bootsnap", require: false
 gem "devise", "~> 4.8"
 gem "devise-i18n", "~> 1.10"
 gem "draper", "~> 4.0"
+gem "factory_bot_rails"
 gem "image_processing"
 gem "matrix"
 gem "pagy", "~> 5.10"
@@ -42,7 +43,6 @@ gem "vite_rails"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
-  gem "factory_bot_rails"
   gem "launchy"
   gem "rspec-rails", "~> 5.1"
   gem "rubocop", require: false
