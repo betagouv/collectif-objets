@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class OnPurposeError < StandardError; end
+class OnPurposePostDeployError < StandardError; end
 
 class HealthController < ApplicationController
   def raise_on_purpose
+    raise OnPurposePostDeployError, "should happen after each deploy" if params[:post_deploy].present?
+
     raise OnPurposeError, "this is no good"
   end
 
