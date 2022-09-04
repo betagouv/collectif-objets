@@ -23,7 +23,7 @@ ActiveAdmin.register Dossier do
     actions
   end
 
-  filter :commune_departement_code, as: :check_boxes, collection: -> { Departement.all }
+  filter :commune_departement_code, as: :select, collection: -> { Departement.all }
   filter :status, as: :check_boxes, collection: %i[construction submitted rejected accepted]
 
   show do
