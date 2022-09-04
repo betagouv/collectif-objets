@@ -122,7 +122,7 @@ RSpec.describe Campaign, type: :model do
     end
 
     context "lancement date is in the past" do
-      let(:date_lancement) { Time.zone.today - 2.weeks }
+      let(:date_lancement) { Time.zone.today.prev_occurring(:monday) }
       it { should eq false }
     end
 
@@ -132,10 +132,13 @@ RSpec.describe Campaign, type: :model do
     end
 
     context "lancement date is in the past for finished campaign" do
-      let(:date_lancement) { Time.zone.today - 2.weeks }
+      let(:date_lancement) { Time.zone.today.prev_occurring(:monday) }
       let(:campaign) do
-        build(:campaign, status: :finished, date_lancement:, date_rappel1:, date_rappel2:, date_rappel3:,
-                         date_fin:)
+        build(
+          :campaign,
+          status: :finished, date_lancement:, date_rappel1:, date_rappel2:,
+          date_rappel3:, date_fin:
+        )
       end
       it { should eq true }
     end
