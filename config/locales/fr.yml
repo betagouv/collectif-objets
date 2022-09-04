@@ -128,7 +128,7 @@ fr:
         head_title: Communes du %{departement}
         campaign: Campagne de recensement du %{lancement} au %{end}
         stats:
-          completed: des communes ont complété le recensement
+          completed: des communes ont finalisé le recensement
           etats_sanitaires_distribution_title: États sanitaires des objets recensés
     objets:
       show:
