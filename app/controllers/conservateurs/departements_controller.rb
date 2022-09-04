@@ -20,7 +20,7 @@ module Conservateurs
     def restrict_access_index
       return true if current_conservateur.present?
 
-      redirect_to root_path, alert: "Veuillez vous connecter"
+      redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
     end
 
     def set_departement
@@ -30,7 +30,7 @@ module Conservateurs
     def restrict_access_show
       return true if current_conservateur&.departements&.include?(@departement)
 
-      redirect_to root_path, alert: "Veuillez vous connecter"
+      redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
     end
   end
 end

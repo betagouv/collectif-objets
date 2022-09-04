@@ -2,6 +2,7 @@
 
 module Conservateurs
   class DossiersController < ApplicationController
+    before_action :restrict_access
     before_action :set_dossier, :set_commune, :restrict_accepted, only: [:show]
 
     def show; end
@@ -16,6 +17,12 @@ module Conservateurs
 
     def set_commune
       @commune = @dossier.commune
+    end
+
+    def restrict_access
+      return true if current_conservateur&.departements&.include?(@commune.departement)
+
+      redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
     end
 
     def restrict_accepted

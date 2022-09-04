@@ -3,7 +3,7 @@
 module Conservateurs
   class CommunesController < ApplicationController
     before_action :set_commune, :restrict_access, :set_dossier, only: [:show]
-    before_action :restrict_access_autocomplete, only: :autocomplete
+    before_action :restrict_access_autocomplete, only: %i[autocomplete index]
     before_action :set_departement, only: [:index]
 
     def show
@@ -44,7 +44,7 @@ module Conservateurs
 
     def restrict_access
       if current_conservateur.nil?
-        redirect_to root_path, alert: "Veuillez vous connecter"
+        redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
       elsif current_conservateur.departements.exclude?(@commune.departement)
         redirect_to root_path, alert: "Vous n'avez pas accès au département de cette commune"
       end
@@ -53,7 +53,7 @@ module Conservateurs
     def restrict_access_autocomplete
       return true if current_conservateur.present?
 
-      redirect_to root_path, alert: "Veuillez vous connecter"
+      redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
     end
 
     def communes_autocomplete_arel

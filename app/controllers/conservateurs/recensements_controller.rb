@@ -29,7 +29,7 @@ module Conservateurs
 
     def restrict_access
       if current_conservateur.nil?
-        redirect_to root_path, alert: "Veuillez vous connecter"
+        redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
       elsif current_conservateur.departements.exclude?(@recensement.objet.commune.departement)
         redirect_to root_path, alert: "Vous n'avez pas accès au département de cet objet"
       end
