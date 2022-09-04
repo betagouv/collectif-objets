@@ -2,8 +2,7 @@
 
 module Conservateurs
   class DossiersController < ApplicationController
-    before_action :restrict_access
-    before_action :set_dossier, :set_commune, :restrict_accepted, only: [:show]
+    before_action :set_dossier, :set_commune, :restrict_access, :restrict_accepted
 
     def show; end
 
