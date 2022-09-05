@@ -10,9 +10,9 @@ module Co
       end
 
       MARIANNE_FONT = {
-        normal: Rails.root.join("app/frontend/fonts/Marianne-Regular.ttf"),
-        bold: Rails.root.join("app/frontend/fonts/Marianne-Bold.ttf"),
-        italic: Rails.root.join("app/frontend/fonts/Marianne-Regular_Italic.ttf")
+        normal: Rails.public_path.join("dsfr/fonts_ttf/Marianne-Regular.ttf"),
+        bold: Rails.public_path.join("dsfr/fonts_ttf/Marianne-Bold.ttf"),
+        italic: Rails.public_path.join("dsfr/fonts_ttf/Marianne-Regular_Italic.ttf")
       }.freeze
 
       def set_default_font
