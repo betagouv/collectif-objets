@@ -42,8 +42,6 @@ class PagesController < ApplicationController
     send_data(pdf_body, content_type: "application/pdf", filename:, disposition: :inline)
   end
 
-  def confirmation_inscription; end
-
   def cgu; end
   def mentions_legales; end
   def confidentialite; end

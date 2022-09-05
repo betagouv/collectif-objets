@@ -16,9 +16,6 @@ RSpec.describe Campaigns::RunCampaignJob, type: :job do
     let!(:recipient6) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "rappel1") }
     let!(:recipient7) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "rappel3") }
     let!(:recipient8) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "fin") }
-    let!(:recipient9) do
-      create(:campaign_recipient, campaign:, commune: build(:commune, status: "enrolled"), current_step: nil)
-    end
     let!(:recipient10) do
       create(
         :campaign_recipient,
@@ -39,8 +36,6 @@ RSpec.describe Campaigns::RunCampaignJob, type: :job do
         expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async).with(recipient1.id, "lancement")
         expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient2.id, "lancement")
         expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient5.id, "lancement")
-        expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async).with(recipient9.id, "lancement")
-        # not inactive
         expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async).with(recipient10.id, "lancement")
         # opted out
         Campaigns::RunCampaignJob.new.perform(campaign.id)

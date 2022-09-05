@@ -28,7 +28,7 @@ module Conservateurs
 
     def status_options_for_select
       options_for_select(
-        %w[all inactive enrolled started completed]
+        %w[all inactive started completed]
           .map { [status_label(_1), _1] },
         filters.status
       )

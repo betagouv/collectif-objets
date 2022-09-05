@@ -72,8 +72,6 @@ ActiveAdmin.register Recensement do
             row :phone_number
             row :status
             row :recensements_summary, label: "Recensements"
-            row :enrolled_at
-            row :notes_from_enrollment
             row :completed_at
           end
         end

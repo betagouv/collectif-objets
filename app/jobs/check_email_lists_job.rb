@@ -7,9 +7,6 @@ class CheckEmailListsJob
     "cold" => {
       user_func: ->(user) { user.commune.inactive? }
     },
-    "enrolled" => {
-      user_func: ->(user) { user.commune.enrolled? }
-    },
     "started" => {
       user_func: lambda { |user|
         user.commune.completed? || user.commune.started?

@@ -51,8 +51,6 @@ ActiveAdmin.register User do
             row :phone_number
             row :status
             row :recensements_summary
-            row :enrolled_at
-            row :notes_from_enrollment
             row :completed_at
             row :notes_from_completion
           end

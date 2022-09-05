@@ -5,7 +5,6 @@ module CampaignHelper
   RECIPIENT_STATUSES_BADGES_DATA = {
     completed: %w[checkbox-circle green],
     started: %w[checkbox-circle blue],
-    enrolled: %w[check blue],
     step_fin: %w[close red]
   }.freeze
 

@@ -11,7 +11,7 @@ class CampaignV1Mailer < ApplicationMailer
 
   MAIL_NAMES = (
     Campaign::STEPS +
-    %w[enrolled_confirmation rappel1_enrolled rappel2_enrolled rappel3_enrolled]
+    %w[rappel1_enrolled rappel2_enrolled rappel3_enrolled]
   ).freeze
 
   MAIL_NAMES.each do |name|
