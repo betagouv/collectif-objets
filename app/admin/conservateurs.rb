@@ -38,7 +38,7 @@ ActiveAdmin.register Conservateur do
     end
   end
 
-  permit_params :email, :first_name, :last_name, :phone_number, :password, :password_confirmation, departements: []
+  permit_params :email, :first_name, :last_name, :phone_number, :password, :password_confirmation, departement_ids: []
 
   form do |f|
     f.semantic_errors # shows errors on :base
@@ -47,9 +47,9 @@ ActiveAdmin.register Conservateur do
       f.input :first_name
       f.input :last_name
       f.input :phone_number
-      f.input :departements, as: :check_boxes, collection: -> { Departement.all }
+      f.input :departements, label: "Départements (choix multiples avec shift ou alt !)"
     end
-    f.actions         # adds the 'Submit' and 'Cancel' buttons
+    f.actions # adds the 'Submit' and 'Cancel' buttons
   end
 
   controller do
