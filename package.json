@@ -27,7 +27,7 @@
     "@sentry/browser": "^7.10.0",
     "@sentry/tracing": "^7.10.0",
     "frappe-charts": "^1.6.2",
-    "maplibre-gl": "^2.1.9",
+    "maplibre-gl": "^2.4.0",
     "mjml": "^4.13.0",
     "nanobar": "^0.4.2",
     "spotlight.js": "^0.7.8",
