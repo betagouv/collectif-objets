@@ -14,7 +14,7 @@ class CampaignRecipientsController < ApplicationController
   end
 
   def mail_preview
-    mail_name = params[:step] + (params[:enrolled] == "1" ? "_enrolled" : "")
+    mail_name = params[:step]
     raise unless CampaignV1Mailer::MAIL_NAMES.include?(mail_name)
 
     mail = CampaignV1Mailer
@@ -22,8 +22,7 @@ class CampaignRecipientsController < ApplicationController
       .send("#{mail_name}_email")
     render(
       partial: "mail_preview",
-      locals: { campaign: @campaign, recipient: @recipient, step: params[:step],
-                enrolled: params[:enrolled] == "1", mail: }
+      locals: { campaign: @campaign, recipient: @recipient, step: params[:step], mail: }
     )
   end
 

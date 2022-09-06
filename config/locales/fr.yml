@@ -69,7 +69,6 @@ fr:
       status_options:
         all: Toutes les communes
         inactive: Communes inactive
-        enrolled: Communes inscrites
         started: Recensement démarré
         completed: Recensement terminé
     objet_card_component:
@@ -302,7 +301,6 @@ fr:
       commune:
         statuses:
           inactive: Commune inactive
-          enrolled: Commune inscrite
           started: Recensement démarré
           completed: Recensement terminé
         formulaire:
@@ -325,7 +323,6 @@ fr:
           finished: Terminée
       campaign_recipient:
         statuses:
-          enrolled: Commune inscrite
           started: Recensement démarré
           completed: Recensement terminé
           step_lancement: Mail de lancement envoyé
@@ -513,14 +510,6 @@ fr:
       prochaines_campagnes: "Sachez qu’il sera possible de participer aux prochaines campagnes, afin de pouvoir bénéficier de l’accompagnement de la DRAC %{nom_drac} pour la sauvegarde et la valorisation de votre patrimoine."
       contact: "Vous pouvez toujours nous contacter à l'adresse collectifobjets@beta.gouv.fr."
       a_votre_disposition: "Nous restons à votre disposition pour toute information complémentaire,"
-    enrolled_confirmation_email:
-      title: "Mail de confirmation d'inscription"
-      subject: "%{nom_commune}, vous êtes bien inscrit à la campagne de recensement Collectif Objets"
-      intro: "Vous êtes inscrit à la campagne de recensement des objets monuments historiques lancée par la DRAC %{nom_drac} sur %{communes_count} communes %{dans_departement}. Merci d’être acteur dans la préservation du patrimoine local !"
-      deadline: "Vous avez jusqu’au %{date_fin} pour recenser les objets de votre commune."
-      vous_avez_des_questions_html: "<b>Vous avez des questions ?</b> Nous vous guidons étape par étape :"
-      guide_html: "Retrouvez les astuces des conservateurs dans notre <a href=\"https://collectif-objets.beta.gouv.fr/guide-de-recensement\">guide de recensement</a>"
-      visio_html: "Vous avez besoin d’aide ? <a href=\"https://cal.com/collectifobjets/20min\">Réservez un créneau</a> pour échanger avec nous par téléphone ou en visioconférence"
     rappel1_enrolled_email:
       title: "Mail de première relance pour les communes inscrites"
       subject:

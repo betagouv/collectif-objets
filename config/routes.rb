@@ -53,7 +53,6 @@ Rails.application.routes.draw do
   get "objets/ref_pop/:palissy_REF", to: "objets#show_by_ref_pop"
 
   resources :communes, only: [] do
-    resources :enrollments, only: [:new, :create], controller: "communes/enrollments"
     resource :completion, only: [:new, :create, :show], controller: "communes/completions"
     resource :recompletion, only: [:new, :create], controller: "communes/recompletions"
     resources :objets, only: [:index], controller: "communes/objets"

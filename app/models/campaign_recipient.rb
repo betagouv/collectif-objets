@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CampaignRecipient < ApplicationRecord
-  STATUSES = %w[completed started enrolled step_lancement step_rappel1 step_rappel2 step_rappel3 step_fin].freeze
+  STATUSES = %w[completed started step_lancement step_rappel1 step_rappel2 step_rappel3 step_fin].freeze
   OPT_OUT_REASONS = %w[postponed other].freeze
 
   belongs_to :campaign

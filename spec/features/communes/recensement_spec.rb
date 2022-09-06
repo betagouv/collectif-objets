@@ -34,14 +34,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Bouquet d'Autel")
     expect(page).to have_text("Ciboire des malades")
 
-    click_on "Je confirme la participation de ma commune"
-    find("label", text: "Je confirme l'inscription de Albon à la campagne de recensement").click
-
-    click_on "Inscription"
-    expect(page).to have_text("Votre commune a bien été inscrite !")
-    expect(page).to have_text("Il vous reste 2 objets à recenser")
-    expect(page).to have_button("Finaliser le recensement", disabled: true)
-
     # PREMIER OBJET
 
     click_on "Bouquet d'Autel"

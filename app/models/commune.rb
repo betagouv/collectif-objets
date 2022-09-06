@@ -8,15 +8,10 @@ class Commune < ApplicationRecord
   include AASM
   aasm(column: :status, timestamps: true) do
     state :inactive, initial: true, display: "Commune inactive"
-    state :enrolled, display: "Commune inscrite"
     state :started, display: "Recensement démarré"
     state :completed, display: "Recensement terminé"
 
-    event(:enroll) { transitions from: :inactive, to: :enrolled }
-    event(:start) do
-      transitions from: :inactive, to: :started
-      transitions from: :enrolled, to: :started
-    end
+    event(:start) { transitions from: :inactive, to: :started }
     event(:complete) { transitions from: :started, to: :completed }
     event(:return_to_started) { transitions from: :completed, to: :started }
   end
@@ -64,10 +59,6 @@ class Commune < ApplicationRecord
       .to_h
   end
 
-  def enrolled_or_started?
-    enrolled? || started?
-  end
-
   def active?
     !inactive?
   end
@@ -77,7 +68,7 @@ class Commune < ApplicationRecord
   end
 
   def can_complete?
-    enrolled_or_started? && objets.all?(&:recensement?)
+    started? && objets.all?(&:recensement?)
   end
 
   def to_s

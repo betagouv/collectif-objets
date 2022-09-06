@@ -6,7 +6,6 @@ ActiveAdmin.register Commune do
   decorate_with CommuneDecorator
 
   actions :all, except: %i[destroy new create]
-  permit_params :notes_from_enrollment
 
   index do
     # selectable_column
@@ -18,7 +17,6 @@ ActiveAdmin.register Commune do
     column :first_user_email
     column :objets_count
     column :recensements_summary, label: "Recensements"
-    column :enrolled_at
     column :completed_at
     actions
   end
@@ -32,7 +30,6 @@ ActiveAdmin.register Commune do
     column :first_user_email
     column :recensement_ratio
     column :recensements_photos_present
-    column :enrolled_at
     column :completed_at
     column :phone_number
   end
@@ -45,7 +42,6 @@ ActiveAdmin.register Commune do
     as: :check_boxes,
     collection: [
       ["Commune inactive", Commune::STATE_INACTIVE],
-      ["Commune Inscrite", Commune::STATE_ENROLLED],
       ["Recensement démarré", Commune::STATE_STARTED],
       ["Recensement terminé", Commune::STATE_COMPLETED]
     ]
@@ -70,9 +66,7 @@ ActiveAdmin.register Commune do
           row :phone_number
           row :status
           row :recensements_summary, label: "Recensements"
-          row :notes_from_enrollment
           row :started_at
-          row :enrolled_at
           row :completed_at
         end
 
@@ -139,7 +133,6 @@ ActiveAdmin.register Commune do
       f.input :code_insee, input_html: { disabled: true }
       f.input :departement, input_html: { disabled: true }
       f.input :status, as: :select, collection: Commune.aasm.states_for_select, input_html: { disabled: true }
-      f.input :notes_from_enrollment, as: :text, input_html: { rows: 2 }
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end

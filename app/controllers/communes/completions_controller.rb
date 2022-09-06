@@ -23,7 +23,7 @@ module Communes
     protected
 
     def restrict_not_started
-      if @commune.inactive? || @commune.enrolled?
+      if @commune.inactive?
         redirect_with_alert "Vous devez recenser tous les objets avant de finaliser le dossier"
       elsif @commune.completed?
         redirect_with_alert "Votre dossier de recensement a déjà été envoyé"

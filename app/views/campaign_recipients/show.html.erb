@@ -90,7 +90,7 @@
               <%= render("conservateurs/mail_preview", mail: existing_campaign_email.as_action_mailer_message) %>
             <% end %>
           <% else %>
-            <%= render "mail_preview", campaign: @campaign, recipient: @recipient, step: step, enrolled: @recipient.commune.enrolled? %>
+            <%= render "mail_preview", campaign: @campaign, recipient: @recipient, step: step %>
           <% end %>
         </div>
       </div>

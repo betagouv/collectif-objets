@@ -5,10 +5,6 @@
     method: :get
   ) do |f| %>
     <%= f.hidden_field :step, value: step %>
-    <div class="fr-checkbox-group">
-      <%= f.check_box :enrolled, checked: enrolled, id: "#{step}_enrolled" %>
-      <%= f.label "Version commune inscrite", for: "#{step}_enrolled" %>
-    </div>
     <div class="fr-input-group">
       <%= f.submit "Générer l'aperçu de l'email…", class: "fr-btn--tertiary" %>
     </div>

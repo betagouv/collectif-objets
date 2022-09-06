@@ -29,10 +29,8 @@ module Communes
     delegate :commune, to: :objet
 
     def post_create_actions
-      start_commune! if commune.inactive? || commune.enrolled?
-      SendMattermostNotificationJob.perform_async(
-        "recensement_created", { "recensement_id" => recensement.id }
-      )
+      start_commune! if commune.inactive?
+      SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => recensement.id })
     end
 
     def start_commune!

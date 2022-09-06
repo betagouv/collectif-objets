@@ -18,14 +18,8 @@
             La commune est charge de veiller sur ces objets.
             <b>Aidez-nous à vérifier leur présence et leur état</b>
           </p>
-          <p>
-            Vous avez besoin d'aide ? Nous vous guidons étape par étape:
-          </p>
-          <p>
-            <%= link_to "Je confirme la participation de ma commune", new_commune_enrollment_path, class: "fr-btn" %>
-          </p>
         </div>
-      <% elsif @commune.enrolled_or_started? %>
+      <% elsif @commune.started? %>
         <div class="co-text--center">
           <p>
             <% if @commune.can_complete? %>

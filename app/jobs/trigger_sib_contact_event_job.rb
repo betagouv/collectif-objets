@@ -6,11 +6,8 @@ class TriggerSibContactEventJob
   def perform(commune_id, event_name)
     @commune_id = commune_id
     case event_name
-    when "enrolled"
-      remove_from_lists("cold")
-      add_to_lists("enrolled")
     when "started", "completed"
-      remove_from_lists("cold", "enrolled")
+      remove_from_lists("cold")
       add_to_lists("started")
     end
   end
