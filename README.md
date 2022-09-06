@@ -41,6 +41,10 @@ To regenerate diagrams : `bundle exec rake diagrams:generate`
 
 ![](/doc/dossier_state_machine_diagram.png)
 
+**Campaigns state machine diagram**
+
+![](/doc/campaign_state_machine_diagram.png)
+
 
 ## Mails & MJML
 
