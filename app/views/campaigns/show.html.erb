@@ -222,15 +222,15 @@
           </li>
         <% end %>
         <li>
-          <%= button_to(
-            "Supprimer ce brouillon de campagne…",
-            campaign_path(@campaign),
-            class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-delete-line",
+          <%= form_with(
+            url: campaign_path(@campaign),
+            method: :delete,
             data: {
-              turbo_confirm: "Êtes-vous sûr.e  de vouloir supprimer ce brouillon ? C'est irréversible.",
-              turbo_method: :delete
+              "turbo_confirm": "Êtes-vous sûr.e  de vouloir supprimer ce brouillon ? C'est irréversible.",
             }
-          ) %>
+          ) do |f| %>
+            <%= f.submit "Supprimer ce brouillon de campagne…", class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-delete-line" %>
+          <% end %>
         </li>
       </ul>
     </div>
