@@ -1,9 +1,25 @@
 <mj-section>
   <mj-column>
-    <mj-text>
-      <!-- htmlmin:ignore --><%= t("campaign_v1_mailer.lancement_email.commune_abrite_objets_html", nom_commune: @commune.nom, count: @commune.objets.count) %>
-      <!-- htmlmin:ignore -->
-      </mj-raw>
-    </mj-text>
+    <mj-text><%= ct("lancement.invitation") %></mj-text>
+    <mj-text><%= ct("lancement.abrite_n_objets") %></mj-text>
   </mj-column>
 </mj-section>
+
+<%= render partial: "objet_photo", locals: { objet: @commune.highlighted_objet, commune: @commune } %>
+
+<mj-section>
+  <mj-column>
+    <mj-text><%= ct("lancement.simple") %></mj-text>
+    <mj-text><%= ct("lancement.conseils") %></mj-text>
+    <mj-text>
+      <ul>
+        <li><%= ct("lancement.conseil1") %></li>
+        <li><%= ct("lancement.conseil2") %></li>
+        <li><%= ct("lancement.conseil3") %></li>
+      </ul>
+    </mj-text>
+    <mj-text><%= ct("lancement.decouvrez") %></mj-text>
+  </mj-column>
+</mj-section>
+
+<%= render partial: "cta", locals: { variant: "inactive", user: @user, commune: @commune } %>

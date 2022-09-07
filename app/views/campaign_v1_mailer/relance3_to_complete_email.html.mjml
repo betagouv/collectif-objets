@@ -1,0 +1,9 @@
+<mj-section>
+  <mj-column>
+    <mj-text><%= ct("relance3_to_complete.intro") %></mj-text>
+    <mj-text><%= ct("relance3_to_complete.finalisez") %></mj-text>
+    <mj-text><%= ct("shared.cliquez") %></mj-text>
+  </mj-column>
+</mj-section>
+
+<%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>

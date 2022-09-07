@@ -5,6 +5,7 @@
 class CampaignV1MailerPreview < ActionMailer::Preview
   CampaignV1Mailer::MAIL_NAMES.each do |name|
     define_method "#{name}_email" do
+      @commune_status = name.include?("started") || name.include?("to_complete") ? "started" : "inactive"
       CampaignV1Mailer.with(user:, commune:, campaign:).send("#{name}_email")
     end
   end
@@ -17,7 +18,7 @@ class CampaignV1MailerPreview < ActionMailer::Preview
 
   def commune
     commune ||= Commune.new(
-      nom: "Thoiry", code_insee: "23300", departement_code: "23"
+      nom: "Thoiry", code_insee: "23300", departement_code: "23", status: @commune_status
     ).tap(&:readonly!)
 
     def commune.objets

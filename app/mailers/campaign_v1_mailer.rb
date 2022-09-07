@@ -10,28 +10,28 @@ class CampaignV1Mailer < ApplicationMailer
   )
 
   MAIL_NAMES = (
-    Campaign::STEPS +
-    %w[relance1_enrolled relance2_enrolled relance3_enrolled]
+    %w[lancement] +
+    %w[relance1_inactive relance2_inactive relance3_inactive fin_inactive] +
+    %w[relance2_started relance3_started fin_started] +
+    %w[relance2_to_complete relance3_to_complete fin_to_complete]
   ).freeze
 
   MAIL_NAMES.each do |name|
     define_method "#{name}_email" do
-      mail_with_subject(
-        t(
-          "campaign_v1_mailer.#{name}_email.subject",
-          nom_commune: @commune.nom,
-          dans_departement: @departement.dans_nom,
-          count: @commune.objets.count
-        )
-      )
+      mail(subject: "[#{@campaign.nom_drac}] #{t("campaign_v1_mailer.#{name}.subject", **i18n_args)}")
     end
   end
 
+  # rubocop:disable Rails/OutputSafety
+  def ct(key, **kwargs)
+    I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**kwargs)).html_safe
+  end
+  helper_method :ct
+  # rubocop:enable Rails/OutputSafety
+
   private
 
-  def mail_with_subject(subject)
-    mail(subject: "[#{@campaign.nom_drac}] #{subject}")
-  end
+  def mail_with_subject(subject); end
 
   def set_campaign_commune_and_user
     @campaign = params[:campaign]
@@ -39,4 +39,20 @@ class CampaignV1Mailer < ApplicationMailer
     @user = params[:user]
     @departement = @campaign.departement
   end
+
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def i18n_args
+    @i18n_args ||= {
+      nom_drac: @campaign.nom_drac,
+      dans_departement: @departement.dans_nom,
+      nom_commune: @commune.nom,
+      count: @commune.objets.count,
+      nombre_communes: @commune.objets.count,
+      date_lancement: I18n.l(@campaign.date_lancement, format: :long_with_weekday),
+      date_fin: I18n.l(@campaign.date_fin, format: :long_with_weekday),
+      fin_dans_n_semaines: Time.zone.today.upto(@campaign.date_fin).count / 7,
+      fin_dans_n_jours: Time.zone.today.upto(@campaign.date_fin).count
+    }
+  end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end

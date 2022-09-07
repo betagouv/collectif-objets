@@ -1,0 +1,8 @@
+<mj-section>
+  <mj-column>
+    <mj-text><%= ct("relance2_started.bien_recu") %></mj-text>
+    <mj-text><%= ct("relance2_started.plus_actif") %></mj-text>
+  </mj-column>
+</mj-section>
+
+<%= render partial: "cta", locals: { variant: "started", user: @user, commune: @commune } %>

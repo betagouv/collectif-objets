@@ -24,7 +24,7 @@
     <mj-section>
       <mj-column>
         <mj-text>
-          Cordiales Salutations,
+          <%= t("campaign_v1_mailer.shared.politesse") %>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -40,10 +40,21 @@
       </mj-column>
     </mj-section>
 
+    <mj-section>
+      <mj-column>
+        <mj-text color="#666">
+          ­Cette initiative est portée par le ministère de la Culture et la Direction interministérielle du numérique dans le cadre du programme beta.gouv.
+        </mj-text>
+        <mj-text color="#666">
+          En cas de difficultés pour recenser vous pouvez nous contacter sur <a href="mailto:support@collectif-objets.beta.gouv.fr">support@collectifobjets.beta.gouv.fr</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
     <% url = magic_authentication_url("magic-token": @user.magic_token, "after_sign_in_path": "/users/edit") %>
     <mj-section>
       <mj-column>
-        <mj-text>
+        <mj-text color="#666">
           <a href="<%= url %>">
             Suivez ce lien pour ne plus recevoir d'emails de Collectif Objets
           </a>

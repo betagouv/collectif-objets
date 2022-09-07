@@ -464,90 +464,95 @@ fr:
   pdf_embed_component:
     download: Télécharger le fichier PDF
   campaign_v1_mailer:
-    lancement_email:
+    lancement:
       title: Mail de lancement
       subject: "Lancement du recensement des objets monuments historiques à %{nom_commune}"
-      commune_abrite_objets_html:
-        one: "<b>%{nom_commune} abrite un objet protégé</b> au titre des monuments historiques :"
-        other: "<b>%{nom_commune} abrite %{count} objets protégés</b> au titre des monuments historiques, comme celui-ci :"
-      invitation_html: "La DRAC %{nom_drac} vous invite à participer à <b>une opération de recensement participatif </b> lancée sur %{count} communes %{dans_nom_departement}, afin de vous accompagner dans la protection et la valorisation de votre patrimoine mobilier."
-      simple_html: Le recensement est court et simple. Il consiste à évaluer <b>l’état actuel</b> de l’objet, il se différencie donc des précédents inventaires.
+      invitation: "La DRAC %{nom_drac} vous invite à participer à une campagne de recensement lancée sur %{nombre_communes} communes %{dans_departement} du %{date_lancement} au %{date_fin}, afin de vous accompagner dans la protection et la vlorisation de votre patrimoine mobilier."
+      abrite_n_objets:
+        one: "%{nom_commune} abrite un objet protégé au titre des monuments historiques :"
+        other: "%{nom_commune} abrite %{count} objets protégés au titre des monuments historiques, comme celui-ci :"
+      simple: Le recensement est court et simple. il se fait en ligne sur le site dédié Collectif Objets. Il consiste à vérifier la présence de l’objet, le photographier et répondre à un rapide questionnaire visant à évaluer son état sanitaire. Il se différencie donc des précédents inventaires.
       conseils: "À la lecture de vos réponses, les conservateurs pourront vous conseiller sur :"
-      conseil1_html: "<b>l'entretien de vos objets</b> et leur <b>restauration éventuelle</b>,"
-      conseil2_html: "leur <b>sécurisation</b> et leur <b>valorisation</b>,"
-      conseil3_html: "les <b>possibilités de financement</b> auprès des différents acteurs du patrimoine."
-      decouvrez_html: "<b>Découvrez les objets monuments historiques de votre territoire et commencez votre recensement</b> :"
-    relance1_email:
-      title: "Mail de première relance"
+      conseil1: "l'entretien de vos objets et leur restauration éventuelle,"
+      conseil2: "leur sécurisation et leur valorisation,"
+      conseil3: "les possibilités de financement auprès des différents acteurs du patrimoine."
+      decouvrez: "<b>Découvrez les objets monuments historiques de votre territoire et commencez votre recensement</b> :"
+    relance1_inactive:
+      title: "Mail de première relance - commune inactive"
       subject: "%{nom_commune}, le recensement des objets monuments historiques %{dans_departement} est en cours"
-      intro:
-        one: "Nous vous avons contacté il y a une semaine pour vous proposer de (re)découvrir l'objet protégé à %{nom_commune}, et participer à une campagne de recensement participatif lancée par la DRAC %{nom_drac}."
-        other: "Nous vous avons contacté il y a une semaine pour vous proposer de (re)découvrir les %{count} objets protégés à %{nom_commune}, et participer à une campagne de recensement participatif lancée par la DRAC %{nom_drac}."
+      abrite_n_objets:
+        one: "%{nom_commune} abrite un objet monument historique."
+        other: "%{nom_commune} abrite %{count} objets monuments historiques"
+      accompagnement: Pour vous accompagner dans la préservation et la mise en valeur de votre patrimoine, la DRAC %{nom_drac} vous invite à recenser vos objets protégés sur le site dédié Collectif Objets.
+      simple: Ce recensement est simple et ne vous prendra que quelques minutes par objet.
       conseils: Suite à celui-ci, vous pourrez bénéficier de conseils et de l’expertise des conservateurs pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
       decouvrez:
-        one: "Découvrez l'objets monument historique à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets :"
-        other: "Découvrez les objets monuments historiques à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets :"
-    relance2_email:
-      title: "Mail de seconde relance"
+        one: "<b>Découvrez l'objets monument historique à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
+        other: "Découvrez les objets monuments historiques à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
+      date_fin: Cette campagne de recensement est ouverte jusqu’au %{date_fin}.
+    relance2_inactive:
+      title: "Mail de seconde relance - commune inactive"
       subject: "%{nom_commune}, le recensement des objets monuments historiques %{dans_departement} est en cours"
-      intro: "La DRAC %{nom_drac} organise actuellement une opération de recensement participatif des objets protégés au titre des monuments historiques."
-      conseils: Suite à celui-ci, vous pourrez bénéficier de conseils et de l’expertise des conservateurs pour vous accompagner dans la restauration et la mise en valeur de votre patrimoine.
-      redecouvrez:
-        one: "Je vous invite donc à (re)découvrir l'objet protégé de votre commune %{nom_commune} et à participer à ce recensement :"
-        other: "Je vous invite donc à (re)découvrir les %{count} objets protégés de votre commune %{nom_commune} et à participer à ce recensement :"
-    relance3_email:
-      title: "Mail de dernière relance"
-      subject: "Dernière relance pour recenser le patrimoine de %{nom_commune}"
-      intro_html: Nous nous permettons de vous relancer une dernière fois à propos de la <b>campagne de recensement participatif lancée par la DRAC %{nom_drac}</b> sur %{count} communes %{dans_nom_departement}.
-      protection: Pour les protéger des vols et des dégradations, votre rôle d’élu est essentiel.
+      intro: "La campagne de recensement des objets monuments historiques dans %{dans_departement} se termine dans %{fin_dans_n_semaines} semaines."
       simple: Le recensement est simple et ne vous prendra que quelques minutes par objet.
-      redecouvrir: En plus de (re)découvrir le patrimoine de votre commune, vous pourrez bénéficier de conseils et de l’expertise des conservateurs pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
-      decouvrez_html: <b>Découvrez les objets protégés sur votre territoire ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets :</b>
-    fin_email:
-      title: "Mail de clotûre"
-      subject: "%{nom_commune}, vous n'avez pas souhaité participer"
-      intro: "Vous n’avez pas souhaité participer à la campagne de recensement des objets monuments historiques pour laquelle nous vous avons sollicité il y a quelques semaines."
-      prochaines_campagnes: "Sachez qu’il sera possible de participer aux prochaines campagnes, afin de pouvoir bénéficier de l’accompagnement de la DRAC %{nom_drac} pour la sauvegarde et la valorisation de votre patrimoine."
-      contact: "Vous pouvez toujours nous contacter à l'adresse collectifobjets@beta.gouv.fr."
-      a_votre_disposition: "Nous restons à votre disposition pour toute information complémentaire,"
-    relance1_enrolled_email:
-      title: "Mail de première relance pour les communes inscrites"
-      subject:
-        one: "vous n'avez pas encore recensé l'objet historique de %{nom_commune}"
-        other: "Il vous reste %{count} objets monuments historiques à recenser"
-      intro:
-        one: Vous n’avez pas commencé à recenser l'objet monument historique de %{nom_commune}.
-        other: Vous n’avez pas commencé à recenser les objets monuments historiques de %{nom_commune}.
-    relance2_enrolled_email:
-      title: "Mail de seconde relance pour les communes inscrites"
-      subject: "%{nom_commune}, vous n’avez pas commencé à recenser vos objets monuments historiques"
-      intro: Je me permets de revenir vers vous concernant le recensement des objets monuments historiques.
-      en_abrite:
-        one: "%{nom_commune} en abrite un."
-        other: "%{nom_commune} en abrite %{count}."
-    relance3_enrolled_email:
-      title: "Mail de troisième relance pour les communes inscrites"
-      subject: "%{nom_commune}, avez-vous prévu une date de recensement ?"
-      echeance: "Nous arrivons bientôt à l’échéance (%{date_fin}) de la campagne de recensement des objets monuments historiques lancée par la DRAC %{nom_drac}."
-      avez_vous_prevu_html: "<b>Avez-vous prévu une date de recensement ? Nous vous invitons à prendre contact avec nous pour nous la communiquer :</b>"
-      aide_plus_soutenue: "Ou si vous avez besoin d’une aide plus soutenue :"
-      visio_html: "<b>Pour un entretien avec nous</b>, réservez un créneau horaire à ce lien : <a href=\"https://cal.com/collectifobjets/20min\">cal.com/collectifobjets/20min</a>"
+      conseils: En plus de (re)découvrir le patrimoine de votre commune, vous pourrez bénéficier de conseils et de l’expertise des conservateurs pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
+    relance3_inactive:
+      title: "Mail de dernière relance - commune inactive"
+      subject: "Plus que %{fin_dans_n_jours} jours pour recenser les objets monuments historiques de %{nom_commune}"
+      intro: Nous nous permettons de vous relancer une dernière fois à propos de la campagne de recensement participatif lancée par la DRAC %{nom_drac} sur %{count} communes %{dans_departement}.
+      role_elu: <b>Pour les protéger des vols et des dégradations, votre rôle d’élu est essentiel.</b>
+      simple: Le recensement est simple et ne vous prendra que quelques minutes par objet.
+      contact: À partir de vos informations, les conservateurs prendront directement contact avec vous pour vous guider dans la protection et la mise en valeur de votre patrimoine.
+      meme_si_bon_etat: <b>Nous vous invitons à prendre part à ce recensement même si vous estimez que vos objets protégés sont en bon état</b>
+      operation_nationale: Cette opération nationale doit permettre aux conservateurs d'avoir une vue globale sur l'état du parc mobilier, dans le cadre du récolement quinquennal des objets monuments historiques. 
+      connectez_vous: "<b>Connectez-vous à votre espace dédié sur Collectif Objets</b> pour recenser : "
+    fin_inactive:
+      title: "Mail de clotûre - commune inactive"
+      subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
+      fin_aujourdhui: <b>La campagne de recensement participatif %{dans_departement} prend fin aujourd’hui.</b>
+      vous_navez_pas_souhaite: Sauf erreur de notre part, vous n’avez pas souhaité participer à la campagne de recensement des objets monuments historiques pour laquelle nous vous avons sollicité il y a quelques semaines.
+      raison: "Dans une démarche d’amélioration, nous vous serions reconnaissants de nous expliquer pourquoi :"
+      raison1: Délai trop court
+      raison2: Je ne connais pas Collectif Objets
+      raison3: J'ai d'autres priorités
+      raison4: Autre raison
+      a_votre_disposition: Nous restons à votre disposition pour toute information complémentaire.
+    relance2_started:
+      title: "Mail de seconde relance - commune inscrite"
+      subject: Rencontrez-vous des difficultés dans le recensement de vos objets protégés à %{nom_commune} ?
+      bien_recu: Nous avons bien reçu vos premiers retours concernant les objets protégés de %{nom_commune}. Nous vous remercions de vous investir dans la protection de notre patrimoine mobilier.
+      plus_actif: "Nous avons remarqué que vous n’étiez plus actif depuis quelque temps. <b>Sachez que si vous rencontrez des problèmes pour finaliser le recensement de vos objets protégés, vous pouvez nous contacter à l’adresse suivante</b> : <a href=\"mailto:support@collectif-objets.beta.gouv.fr\">support@collectif-objets.beta.gouv.fr</a>"
+    relance3_started:
+      title: "Mail de troisième relance - commune inscrite"
+      subject: "N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}"
+      merci: Nous vous remercions de contribuer à cette campagne de recensement participatif %{dans_departement}.
+      date_fin: <b>Pour rappel, la campagne prendra fin le %{date_fin}.</b>
+      finalisez: Nous vous invitons donc à finaliser le recensement de l’ensemble de vos objets protégés avant cette échéance, afin que les conservateurs puissent prendre connaissance de vos réponses et vous accompagner au mieux.
+      photos: <b>Il est important d’y joindre des photos récentes pour permettre aux conservateurs d’évaluer l’état sanitaire des objets recensés.</b>
+      besoin_daide: "Si vous avez besoin d’aide pour terminer le recensement, notre équipe se tient à votre disposition : <a href=\"mailto:support@collectif-objets.beta.gouv.fr\">support@collectif-objets.beta.gouv.fr</a>"
+    relance2_to_complete:
+      title: "Mail de deuxième relance - commune doit finaliser"
+      subject: Il reste une dernière étape pour envoyer le dossier de recensement de %{nom_commune}
+      merci: Nous vous remercions d’avoir pris le temps de participer à la campagne de recensement et de vous investir dans la protection de notre patrimoine mobilier.
+      toutefois: Toutefois, <b>il semblerait que vous n’ayez pas encore effectué la dernière étape qui consiste à envoyer le dossier aux conservateurs pour qu’ils puissent l’étudier.</b>
+    relance3_to_complete:
+      title: "Mail de troisième relance - commune doit finaliser"
+      subject: N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}
+      intro: La campagne de recensement des objets monuments historiques pour laquelle vous avez participé prendra fin le %{date_fin}. Nous vous remercions encore pour votre investissement dans la protection du patrimoine mobilier français.
+      finalisez: <b>Pour que les conservateurs reçoivent votre contribution et puissent vous accompagner, n’oubliez pas finaliser votre recensement !</b>
     shared:
       madame_monsieur_le_maire: "Madame, Monsieur le Maire,"
-      role_elu_html: Pour lutter contre les vols et les dégradations des objets monuments historiques de votre commune, <b>votre rôle d'élu local est essentiel</b>.
-      cta:
+      role_elu: Pour lutter contre les vols et les dégradations des objets protégés de votre commune, <b>votre rôle d'élu local est essentiel</b>.
+      cta_inactive:
         one: Commencer le recensement de l'objet protégé à %{nom_commune}
         other: Commencer le recensement des %{count} objets protégés à %{nom_commune}
+      cta_started: Terminer le recensement des %{count} objets protégés à %{nom_commune}
+      cta_complete: Finaliser le recensement
       commune_abrite_objets:
         one: "%{nom_commune} abrite un objet monument historique"
         other: "%{nom_commune} abrite %{count} objets monuments historiques"
-      pour_vous_connecter: "Pour vous connecter à votre compte, il suffit de cliquer sur ce lien :"
-      besoin_daide: "Avez-vous besoin d’aide ?"
-      a_votre_disposition_html: "<b>Si vous rencontrez des difficultés, nous restons à votre disposition :</b>"
-      mail_html: "<b>Par mail</b> : à l'adresse <a href=\"mailto:collectifobjets@beta.gouv.fr\">collectifobjets@beta.gouv.fr</a>"
-      visio_html: "<b>Via un entretien avec nous</b> : en réservant un créneau à l’adresse <a href=\"https://cal.com/collectifobjets/20min\">cal.com/collectifobjets/20min</a>"
-      noubliez_pas_le_guide_html: "De plus, n’oubliez pas que vous pouvez vous appuyer sur <a href=\"https://collectif-objets.beta.gouv.fr/guide-de-recensement\">le guide</a>, ainsi que sur les ressources disponibles sur le site."
-      dans_lattente: "Dans l’attente de vos nouvelles,"
+      cliquez: "Il vous suffit de cliquer ici :"
+      politesse: "Bien cordialement,"
   campaigns:
     edit_recipients_tooltip: Les communes peuvent être éditées uniquement pour les campagnes en brouillon. Une fois planifiées ou démarrées, les communes ne peuvent plus être modifiées.
     mail_names:
