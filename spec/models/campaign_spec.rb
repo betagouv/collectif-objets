@@ -18,9 +18,9 @@ RSpec.describe Campaign, type: :model do
       build(
         :campaign,
         date_lancement: Date.new(2030, 5, 10),
-        date_rappel1: Date.new(2030, 5, 15),
-        date_rappel2: Date.new(2030, 5, 20),
-        date_rappel3: Date.new(2030, 5, 25),
+        date_relance1: Date.new(2030, 5, 15),
+        date_relance2: Date.new(2030, 5, 20),
+        date_relance3: Date.new(2030, 5, 25),
         date_fin: Date.new(2030, 5, 30)
       )
     end
@@ -36,29 +36,29 @@ RSpec.describe Campaign, type: :model do
       it { should eq "lancement" }
     end
 
-    context "date is between lancement and rappel1" do
+    context "date is between lancement and relance1" do
       let(:date) { Date.new(2030, 5, 12) }
       it { should eq "lancement" }
     end
 
-    context "date is rappel1" do
+    context "date is relance1" do
       let(:date) { Date.new(2030, 5, 15) }
-      it { should eq "rappel1" }
+      it { should eq "relance1" }
     end
 
-    context "date is between rappel1 and rappel2" do
+    context "date is between relance1 and relance2" do
       let(:date) { Date.new(2030, 5, 17) }
-      it { should eq "rappel1" }
+      it { should eq "relance1" }
     end
 
-    context "date is rappel2" do
+    context "date is relance2" do
       let(:date) { Date.new(2030, 5, 20) }
-      it { should eq "rappel2" }
+      it { should eq "relance2" }
     end
 
-    context "date is between rappel3 and end" do
+    context "date is between relance3 and end" do
       let(:date) { Date.new(2030, 5, 27) }
-      it { should eq "rappel3" }
+      it { should eq "relance3" }
     end
 
     context "date is date_fin" do
@@ -80,30 +80,30 @@ RSpec.describe Campaign, type: :model do
       it { should eq nil }
     end
 
-    context "step is rappel1" do
-      let(:step) { "rappel1" }
+    context "step is relance1" do
+      let(:step) { "relance1" }
       it { should eq "lancement" }
     end
 
-    context "step is rappel3" do
-      let(:step) { "rappel3" }
-      it { should eq "rappel2" }
+    context "step is relance3" do
+      let(:step) { "relance3" }
+      it { should eq "relance2" }
     end
 
     context "step is end" do
       let(:step) { "fin" }
-      it { should eq "rappel3" }
+      it { should eq "relance3" }
     end
   end
 
   describe "validation coherent dates" do
     let(:date_lancement) { Date.new(2030, 1, 3) }
-    let(:date_rappel1) { date_lancement + 2.weeks }
-    let(:date_rappel2) { date_rappel1 + 2.weeks }
-    let(:date_rappel3) { date_rappel2 + 2.weeks }
-    let(:date_fin) { date_rappel3 + 2.weeks }
+    let(:date_relance1) { date_lancement + 2.weeks }
+    let(:date_relance2) { date_relance1 + 2.weeks }
+    let(:date_relance3) { date_relance2 + 2.weeks }
+    let(:date_fin) { date_relance3 + 2.weeks }
     let(:campaign) do
-      build(:campaign, status: :draft, date_lancement:, date_rappel1:, date_rappel2:, date_rappel3:, date_fin:)
+      build(:campaign, status: :draft, date_lancement:, date_relance1:, date_relance2:, date_relance3:, date_fin:)
     end
     subject { campaign.valid? }
 
@@ -111,13 +111,13 @@ RSpec.describe Campaign, type: :model do
       it { should eq true }
     end
 
-    context "rappel2 is before rappel1" do
-      let(:date_rappel2) { date_rappel1 - 1.week }
+    context "relance2 is before relance1" do
+      let(:date_relance2) { date_relance1 - 1.week }
       it { should eq false }
     end
 
-    context "rappel2 is same day as rappel1" do
-      let(:date_rappel2) { date_rappel1 }
+    context "relance2 is same day as relance1" do
+      let(:date_relance2) { date_relance1 }
       it { should eq false }
     end
 
@@ -136,8 +136,8 @@ RSpec.describe Campaign, type: :model do
       let(:campaign) do
         build(
           :campaign,
-          status: :finished, date_lancement:, date_rappel1:, date_rappel2:,
-          date_rappel3:, date_fin:
+          status: :finished, date_lancement:, date_relance1:, date_relance2:,
+          date_relance3:, date_fin:
         )
       end
       it { should eq true }

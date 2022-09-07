@@ -2,7 +2,7 @@
   <mj-column>
     <mj-text>
       <%= t(
-        "campaign_v1_mailer.rappel3_email.intro_html",
+        "campaign_v1_mailer.relance3_email.intro_html",
         count: @campaign.communes.count,
         nom_drac: @campaign.nom_drac,
         dans_nom_departement: @departement.dans_nom
@@ -10,12 +10,12 @@
     </mj-text>
     <mj-text>
       <%= t("campaign_v1_mailer.shared.commune_abrite_objets", nom_commune: @commune.nom, count: @commune.objets.count) %>
-      <%= t("campaign_v1_mailer.rappel3_email.protection") %>
-      <%= t("campaign_v1_mailer.rappel3_email.simple") %>
+      <%= t("campaign_v1_mailer.relance3_email.protection") %>
+      <%= t("campaign_v1_mailer.relance3_email.simple") %>
     </mj-text>
     <mj-text>
-      <%= t("campaign_v1_mailer.rappel3_email.redecouvrir") %>
-      <%= t("campaign_v1_mailer.rappel3_email.decouvrez_html") %>
+      <%= t("campaign_v1_mailer.relance3_email.redecouvrir") %>
+      <%= t("campaign_v1_mailer.relance3_email.decouvrez_html") %>
     </mj-text>
   </mj-column>
 </mj-section>

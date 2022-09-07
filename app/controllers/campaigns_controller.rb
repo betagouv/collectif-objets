@@ -138,8 +138,8 @@ class CampaignsController < ApplicationController
   def campaign_params
     params.require(:campaign)
       .permit(
-        :departement_code, :date_lancement, :date_rappel1,
-        :date_rappel2, :date_rappel3, :date_fin,
+        :departement_code, :date_lancement, :date_relance1,
+        :date_relance2, :date_relance3, :date_fin,
         :sender_name, :signature, :nom_drac
       )
   end

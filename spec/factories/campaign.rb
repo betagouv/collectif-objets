@@ -9,10 +9,10 @@ FactoryBot.define do
       w, d = offset.divmod(5) # offset until fridays only
       initial_date + w.weeks + d.days
     end
-    date_rappel1 { date_lancement + 2.weeks }
-    date_rappel2 { date_rappel1 + 2.weeks }
-    date_rappel3 { date_rappel2 + 2.weeks }
-    date_fin { date_rappel3 + 2.weeks }
+    date_relance1 { date_lancement + 2.weeks }
+    date_relance2 { date_relance1 + 2.weeks }
+    date_relance3 { date_relance2 + 2.weeks }
+    date_fin { date_relance3 + 2.weeks }
     sender_name { "Jeanine Sloop" }
     nom_drac { "Grand Est" }
     signature do

@@ -1,8 +1,8 @@
 <mj-section>
   <mj-column>
     <mj-text>
-      <%= t("campaign_v1_mailer.rappel2_enrolled_email.intro") %>
-      <%= t("campaign_v1_mailer.rappel2_enrolled_email.en_abrite", nom_commune: @commune.nom, count: @commune.objets.count) %>.
+      <%= t("campaign_v1_mailer.relance2_enrolled_email.intro") %>
+      <%= t("campaign_v1_mailer.relance2_enrolled_email.en_abrite", nom_commune: @commune.nom, count: @commune.objets.count) %>.
       <%= t("campaign_v1_mailer.shared.besoin_daide") %>
     </mj-text>
     <mj-text>

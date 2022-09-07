@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_05_075512) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_124218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -105,9 +105,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_075512) do
     t.string "status", default: "draft", null: false
     t.string "departement_code", null: false
     t.date "date_lancement"
-    t.date "date_rappel1"
-    t.date "date_rappel2"
-    t.date "date_rappel3"
+    t.date "date_relance1"
+    t.date "date_relance2"
+    t.date "date_relance3"
     t.date "date_fin"
     t.string "sender_name"
     t.string "signature"

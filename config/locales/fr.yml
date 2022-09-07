@@ -257,11 +257,11 @@ fr:
               blank: "Le nom de l'émetteur doit être rempli"
             date_lancement:
               blank: "La date de lancement doit être remplie"
-            date_rappel1:
+            date_relance1:
               blank: "La date de la première relance doit être remplie"
-            date_rappel2:
+            date_relance2:
               blank: "La date de la seconde relance doit être remplie"
-            date_rappel3:
+            date_relance3:
               blank: "La date de la troisième relance doit être remplie"
             date_fin:
               blank: "La date de clôture doit être remplie"
@@ -309,9 +309,9 @@ fr:
       campaign:
         departement_code: Département
         date_lancement: Date de lancement
-        date_rappel1: Date de la première relance
-        date_rappel2: Date de la seconde relance
-        date_rappel3: Date de la troisième relance
+        date_relance1: Date de la première relance
+        date_relance2: Date de la seconde relance
+        date_relance3: Date de la troisième relance
         date_fin: Date de clôture
         sender_name: Nom de l'émetteur des mails
         signature: Signature des mails
@@ -326,9 +326,9 @@ fr:
           started: Recensement démarré
           completed: Recensement terminé
           step_lancement: Mail de lancement envoyé
-          step_rappel1: Première relance envoyée
-          step_rappel2: Seconde relance envoyée
-          step_rappel3: Troisième relance envoyée
+          step_relance1: Première relance envoyée
+          step_relance2: Seconde relance envoyée
+          step_relance3: Troisième relance envoyée
           step_fin: Mail de clotûre envoyé, n'a pas participé
         opt_out_reason:
           postponed: La commune s'occupera du recensement à une date ultérieure
@@ -477,7 +477,7 @@ fr:
       conseil2_html: "leur <b>sécurisation</b> et leur <b>valorisation</b>,"
       conseil3_html: "les <b>possibilités de financement</b> auprès des différents acteurs du patrimoine."
       decouvrez_html: "<b>Découvrez les objets monuments historiques de votre territoire et commencez votre recensement</b> :"
-    rappel1_email:
+    relance1_email:
       title: "Mail de première relance"
       subject: "%{nom_commune}, le recensement des objets monuments historiques %{dans_departement} est en cours"
       intro:
@@ -487,7 +487,7 @@ fr:
       decouvrez:
         one: "Découvrez l'objets monument historique à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets :"
         other: "Découvrez les objets monuments historiques à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets :"
-    rappel2_email:
+    relance2_email:
       title: "Mail de seconde relance"
       subject: "%{nom_commune}, le recensement des objets monuments historiques %{dans_departement} est en cours"
       intro: "La DRAC %{nom_drac} organise actuellement une opération de recensement participatif des objets protégés au titre des monuments historiques."
@@ -495,7 +495,7 @@ fr:
       redecouvrez:
         one: "Je vous invite donc à (re)découvrir l'objet protégé de votre commune %{nom_commune} et à participer à ce recensement :"
         other: "Je vous invite donc à (re)découvrir les %{count} objets protégés de votre commune %{nom_commune} et à participer à ce recensement :"
-    rappel3_email:
+    relance3_email:
       title: "Mail de dernière relance"
       subject: "Dernière relance pour recenser le patrimoine de %{nom_commune}"
       intro_html: Nous nous permettons de vous relancer une dernière fois à propos de la <b>campagne de recensement participatif lancée par la DRAC %{nom_drac}</b> sur %{count} communes %{dans_nom_departement}.
@@ -510,7 +510,7 @@ fr:
       prochaines_campagnes: "Sachez qu’il sera possible de participer aux prochaines campagnes, afin de pouvoir bénéficier de l’accompagnement de la DRAC %{nom_drac} pour la sauvegarde et la valorisation de votre patrimoine."
       contact: "Vous pouvez toujours nous contacter à l'adresse collectifobjets@beta.gouv.fr."
       a_votre_disposition: "Nous restons à votre disposition pour toute information complémentaire,"
-    rappel1_enrolled_email:
+    relance1_enrolled_email:
       title: "Mail de première relance pour les communes inscrites"
       subject:
         one: "vous n'avez pas encore recensé l'objet historique de %{nom_commune}"
@@ -518,14 +518,14 @@ fr:
       intro:
         one: Vous n’avez pas commencé à recenser l'objet monument historique de %{nom_commune}.
         other: Vous n’avez pas commencé à recenser les objets monuments historiques de %{nom_commune}.
-    rappel2_enrolled_email:
+    relance2_enrolled_email:
       title: "Mail de seconde relance pour les communes inscrites"
       subject: "%{nom_commune}, vous n’avez pas commencé à recenser vos objets monuments historiques"
       intro: Je me permets de revenir vers vous concernant le recensement des objets monuments historiques.
       en_abrite:
         one: "%{nom_commune} en abrite un."
         other: "%{nom_commune} en abrite %{count}."
-    rappel3_enrolled_email:
+    relance3_enrolled_email:
       title: "Mail de troisième relance pour les communes inscrites"
       subject: "%{nom_commune}, avez-vous prévu une date de recensement ?"
       echeance: "Nous arrivons bientôt à l’échéance (%{date_fin}) de la campagne de recensement des objets monuments historiques lancée par la DRAC %{nom_drac}."
@@ -552,15 +552,15 @@ fr:
     edit_recipients_tooltip: Les communes peuvent être éditées uniquement pour les campagnes en brouillon. Une fois planifiées ou démarrées, les communes ne peuvent plus être modifiées.
     mail_names:
       lancement: Mail de lancement
-      rappel1: Première relance
-      rappel2: Seconde relance
-      rappel3: Troisième relance
+      relance1: Première relance
+      relance2: Seconde relance
+      relance3: Troisième relance
       fin: Mail de clôture
     step_names:
       lancement: Lancement
-      rappel1: Première relance
-      rappel2: Seconde relance
-      rappel3: Troisième relance
+      relance1: Première relance
+      relance2: Seconde relance
+      relance3: Troisième relance
       fin: Clôture
     statistics:
       mails:

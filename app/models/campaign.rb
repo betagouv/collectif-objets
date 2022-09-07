@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Campaign < ApplicationRecord
-  STEPS = %w[lancement rappel1 rappel2 rappel3 fin].freeze
+  STEPS = %w[lancement relance1 relance2 relance3 fin].freeze
   DATE_FIELDS = STEPS.map { "date_#{_1}" }.freeze
 
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :campaigns
@@ -25,7 +25,7 @@ class Campaign < ApplicationRecord
     event(:finish) { transitions from: :ongoing, to: :finished }
   end
 
-  validates :date_lancement, :date_rappel1, :date_rappel2, :date_rappel3, :date_fin, presence: true
+  validates :date_lancement, :date_relance1, :date_relance2, :date_relance3, :date_fin, presence: true
   validates :sender_name, :signature, :nom_drac, presence: true, unless: :draft?
 
   validate :validate_successive_dates, if: :dates_are_present?

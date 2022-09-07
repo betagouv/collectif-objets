@@ -55,7 +55,7 @@ module CampaignHelper
     icon_name, color = RECIPIENT_STATUSES_BADGES_DATA[recipient.status.to_sym]
     return { icon_name:, color: } if icon_name && color
 
-    number = %i[step_lancement step_rappel1 step_rappel2 step_rappel3].index(recipient.status.to_sym)
+    number = %i[step_lancement step_relance1 step_relance2 step_relance3].index(recipient.status.to_sym)
     return unless number
 
     { icon_name: "mail", color: email_color(recipient.email_for_current_step), text: number.to_s }

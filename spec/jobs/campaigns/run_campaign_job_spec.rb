@@ -11,10 +11,10 @@ RSpec.describe Campaigns::RunCampaignJob, type: :job do
     let!(:recipient1) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "lancement") }
     let!(:recipient2) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: nil) }
     let!(:recipient3) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "fin") }
-    let!(:recipient4) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "rappel1") }
+    let!(:recipient4) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "relance1") }
     let!(:recipient5) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: nil) }
-    let!(:recipient6) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "rappel1") }
-    let!(:recipient7) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "rappel3") }
+    let!(:recipient6) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "relance1") }
+    let!(:recipient7) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "relance3") }
     let!(:recipient8) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "fin") }
     let!(:recipient10) do
       create(
@@ -42,13 +42,13 @@ RSpec.describe Campaigns::RunCampaignJob, type: :job do
       end
     end
 
-    context "campaign is in rappel2" do
-      let(:current_step) { "rappel2" }
+    context "campaign is in relance2" do
+      let(:current_step) { "relance2" }
 
-      it "should return recipients in rappel1" do
-        expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async).with(recipient1.id, "rappel2")
-        expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient4.id, "rappel2")
-        expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient6.id, "rappel2")
+      it "should return recipients in relance1" do
+        expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async).with(recipient1.id, "relance2")
+        expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient4.id, "relance2")
+        expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient6.id, "relance2")
         Campaigns::RunCampaignJob.new.perform(campaign.id)
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe Campaigns::RunCampaignJob, type: :job do
     context "campaign is ending" do
       let(:current_step) { "fin" }
 
-      it "should return recipients that are in rappel3" do
+      it "should return recipients that are in relance3" do
         expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async).with(recipient1.id, "fin")
         expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient7.id, "fin")
         Campaigns::RunCampaignJob.new.perform(campaign.id)

@@ -24,14 +24,14 @@ RSpec.describe Campaigns::ComputeCampaignStatsService, type: :service do
         step: "lancement", recipient: campaign_recipient3, sent: true, error: true, error_reason: "whatever"
       )
     end
-    let!(:campaign_email_rappel1) do
+    let!(:campaign_email_relance1) do
       create(:campaign_email, step: "reminder", recipient: campaign_recipient1, sent: true, delivered: true,
                               opened: true)
     end
-    let!(:campaign_email_rappel2) do
+    let!(:campaign_email_relance2) do
       create(:campaign_email, step: "reminder", recipient: campaign_recipient2, sent: true, delivered: true)
     end
-    let!(:campaign_email_rappel3) { create(:campaign_email, step: "reminder", recipient: campaign_recipient3) }
+    let!(:campaign_email_relance3) { create(:campaign_email, step: "reminder", recipient: campaign_recipient3) }
 
     it "should work" do
       stats = subject

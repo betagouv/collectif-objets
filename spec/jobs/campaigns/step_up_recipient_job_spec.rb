@@ -6,81 +6,85 @@ require "rails_helper"
 
 RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
   describe "#perform" do
-    let!(:commune) { create(:commune, status: "inactive") }
     let!(:campaign) { create(:campaign) }
+    let(:campaign_mail_double) do
+      instance_double(
+        Co::Campaigns::Mail,
+        subject: "Thoiry, venez recenser !",
+        headers: { "To" => "mairie-bleue@france.fr" },
+        raw_html: "<html>long text</html>",
+        step: "relance1"
+      )
+    end
 
-    subject { Campaigns::StepUpRecipientJob.new.perform(recipient.id, "rappel1") }
+    subject { Campaigns::StepUpRecipientJob.new.perform(recipient.id, to_step) }
 
     before do
       expect(CampaignRecipient).to receive_message_chain(:includes, :find)
         .with(any_args)
         .with(recipient.id)
         .and_return(recipient)
+      allow(Co::Campaigns::Mail).to receive(:new).and_return(campaign_mail_double)
     end
 
     context "the recipient has opted out" do
+      let!(:commune) { create(:commune, status: "inactive") }
+      let(:to_step) { "relance1" }
       let!(:user) { create(:user, commune:) }
       let!(:recipient) do
-        create(:campaign_recipient, campaign:, commune:, current_step: "lancement", opt_out: true,
-                                    opt_out_reason: "other")
+        create(
+          :campaign_recipient,
+          campaign:, commune:, current_step: "lancement", opt_out: true, opt_out_reason: "other"
+        )
       end
 
       it "should not do anything" do
-        expect(CampaignV1Mailer).not_to receive(:with)
+        expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
         expect(recipient.current_step).to eq("lancement") # should not change
         expect(res).to eq false
       end
     end
 
-    context "safeguard : reminder for active communes are never sent" do
-      let!(:commune) { create(:commune, status: :started) }
+    context "safeguard : never step up for completed communes" do
+      let(:to_step) { "relance1" }
+      let!(:commune) { create(:commune, status: "completed") }
       let!(:user) { create(:user, commune:) }
       let!(:recipient) do
         create(:campaign_recipient, campaign:, commune:, current_step: "lancement")
       end
 
       it "should not do anything" do
-        expect(CampaignV1Mailer).not_to receive(:with)
+        expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
         expect(recipient.current_step).to eq("lancement") # should not change
         expect(res).to eq false
       end
     end
 
-    context "the commune step does not match campaign previous step" do
-      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "rappel1") }
+    context "the commune step does not match previous step" do
+      let(:to_step) { "relance1" }
+      let!(:commune) { create(:commune, status: "inactive") }
+      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
       let!(:user) { create(:user, commune:) }
 
       it "should not do anything" do
-        expect(CampaignV1Mailer).not_to receive(:with)
+        expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
-        expect(recipient.current_step).to eq("rappel1") # should not change
+        expect(recipient.current_step).to eq("relance1") # should not change
         expect(res).to eq false
       end
     end
 
-    context "it calls the mailer" do
+    context "it tries sending an email" do
+      let(:to_step) { "relance1" }
+      let!(:commune) { create(:commune, status: "inactive") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
 
       before do
-        message_delivery_double = instance_double(ActionMailer::MessageDelivery)
-        expect(CampaignV1Mailer).to receive_message_chain(:with, :rappel1_email)
-          .with(user:, commune:, campaign:)
-          .with(no_args)
-          .and_return(message_delivery_double)
         smtp_response_double = instance_double(Net::SMTP::Response, string: smtp_response_text)
-        expect(message_delivery_double).to receive(:deliver_now!).and_return(smtp_response_double)
-        mail_message_double = instance_double(Mail::Message)
-        allow(message_delivery_double).to receive(:message).and_return(mail_message_double)
-        mail_body_double = instance_double(Mail::Body)
-        allow(mail_message_double).to receive(:body).and_return(mail_body_double)
-        allow(mail_body_double).to receive(:raw_source).and_return("<html>long text</html>")
-        allow(mail_message_double).to receive(:header).and_return(
-          [instance_double(Mail::Field, name: "To", value: "mairie-bleue@france.fr")]
-        )
-        allow(mail_message_double).to receive(:subject).and_return("Thoiry, venez recenser !")
+        expect(campaign_mail_double).to receive(:deliver_now!).and_return(smtp_response_double)
       end
 
       context "correct SMTP response" do
@@ -91,10 +95,10 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
           res = subject
           expect(res).to eq true
           recipient.reload
-          expect(recipient.current_step).to eq("rappel1")
+          expect(recipient.current_step).to eq("relance1")
           expect(recipient.emails.count).to eq(1)
           email = recipient.emails.first
-          expect(email.step).to eq("rappel1")
+          expect(email.step).to eq("relance1")
           expect(email.sib_message_id).to eq("<2123@some-host>")
           expect(email.headers["To"]).to eq("mairie-bleue@france.fr")
           expect(email.raw_html).to eq("<html>long text</html>")
@@ -111,11 +115,63 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       end
     end
 
+    context "première relance pour une commune ayant démarré le recensement" do
+      let(:to_step) { "relance1" }
+      let!(:commune) { create(:commune, status: "started") }
+      let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
+      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
+
+      it "should step up recipient without sending an email" do
+        expect(campaign_mail_double).not_to receive(:deliver_now!)
+        res = subject
+        expect(res).to eq true
+        expect(recipient.current_step).to eq("relance1")
+        expect(recipient.emails).to be_empty
+      end
+    end
+
+    context "seconde relance pour une commune ayant recensé recemment" do
+      let(:to_step) { "relance2" }
+      let!(:commune) { create(:commune, status: "started") }
+      let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
+      let!(:objet) { create(:objet, commune:) }
+      let!(:recensement) { create(:recensement, objet:, updated_at: 1.day.ago) }
+      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
+
+      it "should step up recipient without sending an email" do
+        expect(campaign_mail_double).not_to receive(:deliver_now!)
+        res = subject
+        expect(res).to eq true
+        expect(recipient.current_step).to eq("relance2")
+        expect(recipient.emails).to be_empty
+      end
+    end
+
+    context "seconde relance pour une commune ayant recensé il y a plus de 5 jours" do
+      let(:to_step) { "relance2" }
+      let!(:commune) { create(:commune, status: "started") }
+      let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
+      let!(:objet) { create(:objet, commune:) }
+      let!(:recensement) { create(:recensement, objet:, updated_at: 10.days.ago) }
+      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
+
+      it "should step up recipient and send the email" do
+        smtp_response_double = instance_double(Net::SMTP::Response, string: "250 Message queued as <2123@some-host>")
+        expect(campaign_mail_double).to receive(:deliver_now!).and_return(smtp_response_double)
+        res = subject
+        expect(res).to eq true
+        expect(recipient.current_step).to eq("relance2")
+        expect(recipient.emails.count).to eq 1
+      end
+    end
+
     context "there is no user at all" do
+      let(:to_step) { "relance1" }
+      let!(:commune) { create(:commune, status: "inactive") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
 
       it "should not send a mail and update the recipient" do
-        expect(CampaignV1Mailer).not_to receive(:with)
+        expect(campaign_mail_double).not_to receive(:deliver_now!)
         expect { subject }.to raise_exception(/Missing user/)
         expect(recipient.reload.current_step).to eq("lancement")
       end

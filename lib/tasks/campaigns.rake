@@ -41,9 +41,9 @@ namespace :campaigns do
       {
         departement: Departement.find(raw[:departement_code]),
         date_lancement: Date.parse(raw[:date_lancement]),
-        date_rappel1: Date.parse(raw[:date_rappel1]),
-        date_rappel2: Date.parse(raw[:date_rappel2]),
-        date_rappel3: Date.parse(raw[:date_rappel3]),
+        date_relance1: Date.parse(raw[:date_relance1]),
+        date_relance2: Date.parse(raw[:date_relance2]),
+        date_relance3: Date.parse(raw[:date_relance3]),
         date_fin: Date.parse(raw[:date_fin]),
         nom_drac: raw[:nom_drac],
         sender_name: raw[:sender_name],

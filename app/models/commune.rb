@@ -68,7 +68,11 @@ class Commune < ApplicationRecord
   end
 
   def can_complete?
-    started? && objets.all?(&:recensement?)
+    started? && all_objets_recensed?
+  end
+
+  def all_objets_recensed?
+    objets.all?(&:recensement?)
   end
 
   def to_s

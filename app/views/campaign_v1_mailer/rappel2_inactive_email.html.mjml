@@ -1,0 +1,18 @@
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("campaign_v1_mailer.relance2_email.intro", nom_drac: @campaign.nom_drac) %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.shared.role_elu_html") %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.relance2_email.conseils") %>
+    </mj-text>
+    <mj-text>
+      <%= t("campaign_v1_mailer.relance2_email.redecouvrez", nom_commune: @commune.nom, count: @commune.objets.count) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<%= render partial: "cta", locals: { user: @user, commune: @commune } %>
