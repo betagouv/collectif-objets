@@ -20,15 +20,7 @@ module Co
       end
 
       def variant
-        if step == "lancement"
-          nil
-        elsif commune.inactive?
-          "inactive"
-        elsif commune.started? && !commune.all_objets_recensed?
-          "started"
-        elsif commune.started? && commune.all_objets_recensed?
-          "to_complete"
-        end
+        Co::Campaigns::Mail.variant_for(step, commune)
       end
 
       def email
@@ -43,6 +35,22 @@ module Co
 
       def raw_html
         body.raw_source
+      end
+
+      def self.variant_for(step, commune)
+        if step == "lancement"
+          nil
+        elsif commune.inactive?
+          "inactive"
+        elsif commune.started? && !commune.all_objets_recensed?
+          "started"
+        elsif commune.started? && commune.all_objets_recensed?
+          "to_complete"
+        end
+      end
+
+      def self.i18n_name_for(step, commune)
+        [step, variant_for(step, commune)].compact.join("_")
       end
     end
   end

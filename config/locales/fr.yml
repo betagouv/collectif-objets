@@ -518,12 +518,12 @@ fr:
       raison4: Autre raison
       a_votre_disposition: Nous restons à votre disposition pour toute information complémentaire.
     relance2_started:
-      title: "Mail de seconde relance - commune inscrite"
+      title: "Mail de seconde relance - recensement démarré"
       subject: Rencontrez-vous des difficultés dans le recensement de vos objets protégés à %{nom_commune} ?
       bien_recu: Nous avons bien reçu vos premiers retours concernant les objets protégés de %{nom_commune}. Nous vous remercions de vous investir dans la protection de notre patrimoine mobilier.
       plus_actif: "Nous avons remarqué que vous n’étiez plus actif depuis quelque temps. <b>Sachez que si vous rencontrez des problèmes pour finaliser le recensement de vos objets protégés, vous pouvez nous contacter à l’adresse suivante</b> : <a href=\"mailto:support@collectif-objets.beta.gouv.fr\">support@collectif-objets.beta.gouv.fr</a>"
     relance3_started:
-      title: "Mail de troisième relance - commune inscrite"
+      title: "Mail de troisième relance - recensement démarré"
       subject: "N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}"
       merci: Nous vous remercions de contribuer à cette campagne de recensement participatif %{dans_departement}.
       date_fin: <b>Pour rappel, la campagne prendra fin le %{date_fin}.</b>

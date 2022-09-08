@@ -64,11 +64,11 @@
   <% else %>
     <% Campaign::STEPS.each do |step| %>
       <% existing_campaign_email = @recipient.email_for_step(step) %>
-      <h4><%= t("campaign_v1_mailer.#{step}_email.title") %></h4>
-      <div class="fr-grid-row fr-mb-4w">
-        <div class="fr-col-md-8">
-          <p>
-            <% if existing_campaign_email %>
+      <% if existing_campaign_email %>
+        <h4><%= t("campaign_v1_mailer.#{existing_campaign_email.i18n_name}.title") %></h4>
+        <div class="fr-grid-row fr-mb-4w">
+          <div class="fr-col-md-8">
+            <p>
               L'envoi a été déclenché le <%= l(existing_campaign_email.created_at, format: :long_with_weekday) %>
               <% campaign_email_badges(existing_campaign_email).each do |badge| %>
                 <%= badge %>
@@ -81,19 +81,23 @@
                   </span>
                 </div>
               <% end %>
-            <% else %>
-              Ce mail sera envoyé le <%= l(@campaign.send("date_#{step}"), format: :long_with_weekday) %>
-            <% end %>
-          </p>
-          <% if existing_campaign_email %>
+            </p>
             <%= render UnfoldComponent.new(max_height_px: 40, button_text: "Voir le mail…") do %>
               <%= render("conservateurs/mail_preview", mail: existing_campaign_email.as_action_mailer_message) %>
             <% end %>
-          <% else %>
-            <%= render "mail_preview", campaign: @campaign, recipient: @recipient, step: step %>
-          <% end %>
+          </div>
         </div>
-      </div>
+      <% else %>
+        <h4><%= t("campaign_v1_mailer.#{Co::Campaigns::Mail.i18n_name_for(step, @commune)}.title") %></h4>
+        <div class="fr-grid-row fr-mb-4w">
+          <div class="fr-col-md-8">
+            <p>
+              Ce mail sera envoyé le <%= l(@campaign.send("date_#{step}"), format: :long_with_weekday) %>
+            </p>
+            <%= render "mail_preview", campaign: @campaign, recipient: @recipient, step: step %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </main>

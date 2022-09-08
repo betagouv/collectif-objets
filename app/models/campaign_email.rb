@@ -29,4 +29,8 @@ class CampaignEmail < ApplicationRecord
     Struct.new(:header, :subject, :body)
       .new(headers.transform_keys(&:downcase), subject, raw_html)
   end
+
+  def i18n_name
+    email_name.gsub(/_email$/, "")
+  end
 end

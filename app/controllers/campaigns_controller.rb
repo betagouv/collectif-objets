@@ -103,7 +103,7 @@ class CampaignsController < ApplicationController
   def force_step_up
     raise unless @campaign.can_force_step_up?
 
-    @campaign.update_columns("#{@campaign.next_step}_date": Time.zone.today)
+    @campaign.update_columns("date_#{@campaign.next_step}": Time.zone.today)
     enqueue_campaign_jobs
     redirect_to campaign_path(@campaign), notice: "La campagne est en train de passer à l'étape #{@campaign.next_step}…"
   end
