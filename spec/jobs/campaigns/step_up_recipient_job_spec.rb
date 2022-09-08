@@ -13,7 +13,8 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         subject: "Thoiry, venez recenser !",
         headers: { "To" => "mairie-bleue@france.fr" },
         raw_html: "<html>long text</html>",
-        step: "relance1"
+        step: "relance1",
+        email_name:
       )
     end
 
@@ -28,6 +29,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
 
     context "the recipient has opted out" do
+      let(:email_name) { "relance1_inactive_email" }
       let!(:commune) { create(:commune, status: "inactive") }
       let(:to_step) { "relance1" }
       let!(:user) { create(:user, commune:) }
@@ -47,6 +49,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
 
     context "safeguard : never step up for completed communes" do
+      let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
       let!(:commune) { create(:commune, status: "completed") }
       let!(:user) { create(:user, commune:) }
@@ -63,6 +66,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
 
     context "the commune step does not match previous step" do
+      let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
@@ -77,6 +81,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
 
     context "it tries sending an email" do
+      let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
@@ -103,6 +108,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
           expect(email.headers["To"]).to eq("mairie-bleue@france.fr")
           expect(email.raw_html).to eq("<html>long text</html>")
           expect(email.subject).to eq("Thoiry, venez recenser !")
+          expect(email.email_name).to eq("relance1_inactive_email")
         end
       end
 
@@ -116,6 +122,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
 
     context "première relance pour une commune ayant démarré le recensement" do
+      let(:email_name) { "relance1_started_email" }
       let(:to_step) { "relance1" }
       let!(:commune) { create(:commune, status: "started") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
@@ -131,6 +138,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
 
     context "seconde relance pour une commune ayant recensé recemment" do
+      let(:email_name) { "relance2_started_email" }
       let(:to_step) { "relance2" }
       let!(:commune) { create(:commune, status: "started") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
@@ -148,6 +156,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
 
     context "seconde relance pour une commune ayant recensé il y a plus de 5 jours" do
+      let(:email_name) { "relance2_started_email" }
       let(:to_step) { "relance2" }
       let!(:commune) { create(:commune, status: "started") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
@@ -166,6 +175,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
 
     context "there is no user at all" do
+      let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
