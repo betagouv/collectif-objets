@@ -464,6 +464,10 @@ fr:
   pdf_embed_component:
     download: Télécharger le fichier PDF
   campaign_v1_mailer:
+    variants:
+      inactive: Commune inactive
+      started: Recensement démarré
+      to_complete: Commune doit finaliser
     lancement:
       title: Mail de lancement
       subject: "Lancement du recensement des objets monuments historiques à %{nom_commune}"
@@ -522,6 +526,14 @@ fr:
       subject: Rencontrez-vous des difficultés dans le recensement de vos objets protégés à %{nom_commune} ?
       bien_recu: Nous avons bien reçu vos premiers retours concernant les objets protégés de %{nom_commune}. Nous vous remercions de vous investir dans la protection de notre patrimoine mobilier.
       plus_actif: "Nous avons remarqué que vous n’étiez plus actif depuis quelque temps. <b>Sachez que si vous rencontrez des problèmes pour finaliser le recensement de vos objets protégés, vous pouvez nous contacter à l’adresse suivante</b> : <a href=\"mailto:support@collectif-objets.beta.gouv.fr\">support@collectif-objets.beta.gouv.fr</a>"
+    fin_started:
+      title: "Mail de clotûre - recensement démarré"
+      subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
+      objets_restants: <b>Sauf erreur de notre part, nous n’avons enregistré qu’une partie des recensements des objets protégés présents dans votre commune.</b>
+      dossier_complet: Seul un dossier complet pourra être envoyé au conservateur pour qu’il puisse vous faire ses retours.
+      pas_trop_tard: <b>Sachez qu’il n’est pas trop tard pour compléter votre contribution.</b>
+      toujours_accessible: Votre compte reste ouvert si vous souhaitez rajouter les photos ou les recensements d’objets manquants.
+      finalisez: Une fois ces compléments faits, n’oubliez pas de cliquer sur le bouton “finaliser mon recensement”.
     relance3_started:
       title: "Mail de troisième relance - recensement démarré"
       subject: "N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}"
@@ -540,6 +552,14 @@ fr:
       subject: N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}
       intro: La campagne de recensement des objets monuments historiques pour laquelle vous avez participé prendra fin le %{date_fin}. Nous vous remercions encore pour votre investissement dans la protection du patrimoine mobilier français.
       finalisez: <b>Pour que les conservateurs reçoivent votre contribution et puissent vous accompagner, n’oubliez pas finaliser votre recensement !</b>
+    fin_to_complete:
+      title: "Mail de clotûre - commune doit finaliser"
+      subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
+      sauf_erreur: Sauf erreur de notre part, n’avez pas effectué la dernière étape qui permet l’envoi du dossier de recensement.
+      pas_trop_tard: "Il n’est pas trop tard : <b>pour que les conservateurs reçoivent votre contribution et puissent vous accompagner, il suffit de suivre ce lien :</b>"
+    fin_shared:
+      fin_aujourdhui: <b>La campagne de recensement participatif des objets monuments historiques %{dans_departement} prend fin aujourd’hui.</b>
+      merci: Nous vous remercions pour votre engagement en faveur du patrimoine mobilier protégé.
     shared:
       madame_monsieur_le_maire: "Madame, Monsieur le Maire,"
       role_elu: Pour lutter contre les vols et les dégradations des objets protégés de votre commune, <b>votre rôle d'élu local est essentiel</b>.

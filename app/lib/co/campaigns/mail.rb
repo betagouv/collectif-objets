@@ -3,6 +3,8 @@
 module Co
   module Campaigns
     class Mail
+      VARIANTS = %w[inactive started to_complete].freeze
+
       attr_reader :user, :commune, :campaign, :step
 
       delegate :message, :deliver_now!, to: :email
@@ -51,6 +53,14 @@ module Co
 
       def self.i18n_name_for(step, commune)
         [step, variant_for(step, commune)].compact.join("_")
+      end
+
+      def self.possible_variants_for(step, commune)
+        return %w[inactive] if %w[lancement relance1].include?(step)
+
+        return %w[inactive to_complete] if commune.objets.count == 1
+
+        VARIANTS
       end
     end
   end

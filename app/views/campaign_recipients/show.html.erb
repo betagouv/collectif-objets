@@ -88,11 +88,16 @@
           </div>
         </div>
       <% else %>
-        <h4><%= t("campaign_v1_mailer.#{Co::Campaigns::Mail.i18n_name_for(step, @commune)}.title") %></h4>
+        <h4><%= t("campaigns.mail_names.#{step}") %></h4>
         <div class="fr-grid-row fr-mb-4w">
           <div class="fr-col-md-8">
             <p>
               Ce mail sera envoyé le <%= l(@campaign.send("date_#{step}"), format: :long_with_weekday) %>
+              <% if step == "relance1" %>
+                sauf si la commune commence à recenser avant, alors la première relance est sautée
+              <% elsif %w[relance2 relance3].include?(step) %>
+                sauf si la commune a recensé un objet dans les 5 jours précédents
+              <% end %>
             </p>
             <%= render "mail_preview", campaign: @campaign, recipient: @recipient, step: step %>
           </div>

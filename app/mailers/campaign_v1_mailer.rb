@@ -18,7 +18,7 @@ class CampaignV1Mailer < ApplicationMailer
 
   MAIL_NAMES.each do |name|
     define_method "#{name}_email" do
-      mail(subject: "[#{@campaign.nom_drac}] #{t("campaign_v1_mailer.#{name}.subject", **i18n_args)}")
+      mail(subject: "[DRAC #{@campaign.nom_drac}] #{t("campaign_v1_mailer.#{name}.subject", **i18n_args)}")
     end
   end
 
@@ -47,7 +47,7 @@ class CampaignV1Mailer < ApplicationMailer
       dans_departement: @departement.dans_nom,
       nom_commune: @commune.nom,
       count: @commune.objets.count,
-      nombre_communes: @commune.objets.count,
+      nombre_communes: @campaign.communes.count,
       date_lancement: I18n.l(@campaign.date_lancement, format: :long_with_weekday),
       date_fin: I18n.l(@campaign.date_fin, format: :long_with_weekday),
       fin_dans_n_semaines: Time.zone.today.upto(@campaign.date_fin).count / 7,

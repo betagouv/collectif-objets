@@ -1,6 +1,6 @@
 <mj-section>
   <mj-column>
-    <mj-text><%= ct("fin_inactive.fin_aujourdhui") %></mj-text>
+    <mj-text><%= ct("fin_shared.fin_aujourdhui") %></mj-text>
     <mj-text><%= ct("fin_inactive.vous_navez_pas_souhaite") %></mj-text>
     <mj-text><%= ct("fin_inactive.raison") %></mj-text>
     <mj-text>

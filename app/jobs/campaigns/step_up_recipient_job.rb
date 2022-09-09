@@ -54,10 +54,17 @@ module Campaigns
     end
 
     def should_skip_mail?
-      @should_skip_mail ||= \
-        commune.recensements.where("DATE(recensements.updated_at) >= ?", 5.days.ago.to_date).any? \
-        || (to_step == "relance1" && commune.started?)
+      @should_skip_mail ||= compute_should_skip_mail
+    end
+
+    def compute_should_skip_mail
+      return false if to_step == "fin"
+      # le mail de fin doit toujours être envoyé
+
+      return true if to_step == "relance1" && commune.started?
       # pas de premiere relance pour les communes ayant commencé le recensement
+
+      return true if commune.recensements.where("DATE(recensements.updated_at) >= ?", 5.days.ago.to_date).any?
     end
 
     def send_mail!
