@@ -240,6 +240,10 @@ img.co-object-fit-contain,
   object-fit: contain;
 }
 
+.fr-callout .co-callout-cta .fr-btn {
+  margin-top: 0;
+}
+
 
 /* ANIMATIONS */
 

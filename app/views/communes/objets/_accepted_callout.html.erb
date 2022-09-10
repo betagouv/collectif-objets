@@ -1,0 +1,23 @@
+<%= render CalloutWithCtaComponent.new(color: "green-emeraude") do |c| %>
+  <% c.with_text do %>
+    <h4 class="fr-callout__title">
+      <%= t(".title") %>
+    </h4>
+    <p class="fr-callout__text">
+      <%= t(
+        ".content",
+        date: l(dossier.accepted_at.to_date),
+        conservateur: dossier.conservateur.to_s
+      ) %>
+    </p>
+  <% end %>
+  <% c.with_cta do %>
+    <%= link_to(
+      "Voir le rapport",
+      commune_dossier_path(dossier.commune, dossier),
+      class: "fr-btn"
+    ) %>
+  <% end %>
+<% end %>
+
+

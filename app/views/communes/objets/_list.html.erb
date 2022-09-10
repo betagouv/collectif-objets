@@ -18,9 +18,18 @@
         <%= edifice_nom(edifice_group[:nom]) %>
         · <%= edifice_group[:objets].count %> objets
       </h4>
-      <%= render "communes/objets/cards", objets: edifice_group[:objets], cards_options: local_assigns.fetch(:cards_options, {}) %>
+      <%= render(
+        "communes/objets/cards",
+        objets: edifice_group[:objets],
+        cards_options: local_assigns.fetch(:cards_options, {})
+      ) %>
     </div>
   <% end %>
 <% else %>
-  <%= render "communes/objets/cards", objets: objets_list.objets, cards_options: local_assigns.fetch(:cards_options, {}) %>
+  <%= render(
+    "communes/objets/cards",
+    objets: objets_list.objets,
+    cards_options: local_assigns.fetch(:cards_options, {}),
+    extra_card_aide: true
+  ) %>
 <% end %>

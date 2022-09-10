@@ -1,0 +1,20 @@
+<div class="fr-callout fr-icon-info-line">
+  <h4 class="fr-callout__title">Dossier renvoyé par le conservateur</h4>
+  <p class="fr-callout__text">
+    <%= t(
+      ".explanation",
+      count: dossier.recensements.count,
+      objet_name: truncate(dossier.recensements.first&.objet.nom, length: 30),
+      date_submitted_at: l(dossier.submitted_at.to_date)
+    ) %>
+    <%= t(
+      ".note",
+      date_rejected_at: l(dossier.rejected_at.to_date),
+      conservateur: dossier.conservateur.to_s
+    ) %>
+  </p>
+  <blockquote class="fr-callout__text fr-my-2w co-blockquote fr-text--alt">
+    <%= dossier.notes_conservateur %>
+  </blockquote>
+  <p class="fr-callout__text"><%= t(".action")  %></p>
+</div>
