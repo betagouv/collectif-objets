@@ -17,7 +17,7 @@ FactoryBot.define do
     trait :with_photo do
       after(:build) do |recensement|
         recensement.photos.attach(
-          io: File.open(Rails.root.join("spec/fixture_files/tableau1.jpg")),
+          io: Rails.root.join("spec/fixture_files/tableau1.jpg").open,
           filename: "tableau1.jpg",
           content_type: "image/jpeg"
         )
