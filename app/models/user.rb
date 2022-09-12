@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   ROLE_MAIRIE = "mairie"
   ROLES = [ROLE_MAIRIE].freeze
-  SAFE_DOMAINS = ["beta.gouv.fr", "dipasquale.fr", "failfail.fr"].freeze
+  SAFE_DOMAINS = ["beta.gouv.fr", "dipasquale.fr", "failfail.fr", "mailcatch.com"].freeze
 
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, :registerable
 
