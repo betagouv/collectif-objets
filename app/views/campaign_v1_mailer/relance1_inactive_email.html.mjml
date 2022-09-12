@@ -3,7 +3,7 @@
     <mj-text><%= ct("relance1_inactive.abrite_n_objets") %></mj-text>
     <mj-text><%= ct("relance1_inactive.accompagnement") %></mj-text>
     <mj-text>
-      <%= ct("shared.role_elu_html") %>
+      <%= ct("shared.role_elu") %>
       <%= ct("relance1_inactive.simple") %>
     </mj-text>
     <mj-text><%= ct("relance1_inactive.conseils") %></mj-text>

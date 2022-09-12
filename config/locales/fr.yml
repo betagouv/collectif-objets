@@ -471,7 +471,7 @@ fr:
     lancement:
       title: Mail de lancement
       subject: "Lancement du recensement des objets monuments historiques à %{nom_commune}"
-      invitation: "La DRAC %{nom_drac} vous invite à participer à une campagne de recensement lancée sur %{nombre_communes} communes %{dans_departement} du %{date_lancement} au %{date_fin}, afin de vous accompagner dans la protection et la vlorisation de votre patrimoine mobilier."
+      invitation: "La DRAC %{nom_drac} vous invite à participer à une campagne de recensement lancée sur %{nombre_communes} communes %{dans_departement} du %{date_lancement} au %{date_fin}, afin de vous accompagner dans la protection et la valorisation de votre patrimoine mobilier."
       abrite_n_objets:
         one: "%{nom_commune} abrite un objet protégé au titre des monuments historiques :"
         other: "%{nom_commune} abrite %{count} objets protégés au titre des monuments historiques, comme celui-ci :"
@@ -551,7 +551,7 @@ fr:
       title: "Mail de troisième relance - commune doit finaliser"
       subject: N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}
       intro: La campagne de recensement des objets monuments historiques pour laquelle vous avez participé prendra fin le %{date_fin}. Nous vous remercions encore pour votre investissement dans la protection du patrimoine mobilier français.
-      finalisez: <b>Pour que les conservateurs reçoivent votre contribution et puissent vous accompagner, n’oubliez pas finaliser votre recensement !</b>
+      finalisez: <b>Pour que les conservateurs reçoivent votre contribution et l'analysent, n’oubliez pas de finaliser votre recensement !</b>
     fin_to_complete:
       title: "Mail de clotûre - commune doit finaliser"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
