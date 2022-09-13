@@ -475,7 +475,7 @@ fr:
       abrite_n_objets:
         one: "%{nom_commune} abrite un objet protégé au titre des monuments historiques :"
         other: "%{nom_commune} abrite %{count} objets protégés au titre des monuments historiques, comme celui-ci :"
-      simple: Le recensement est court et simple. il se fait en ligne sur le site dédié Collectif Objets. Il consiste à vérifier la présence de l’objet, le photographier et répondre à un rapide questionnaire visant à évaluer son état sanitaire. Il se différencie donc des précédents inventaires.
+      simple: Le recensement est court et simple. Il se fait en ligne sur le site dédié Collectif Objets. Il consiste à vérifier la présence de l’objet, le photographier et répondre à un rapide questionnaire visant à évaluer son état sanitaire. Il se différencie donc des précédents inventaires.
       conseils: "À la lecture de vos réponses, les conservateurs pourront vous conseiller sur :"
       conseil1: "l'entretien de vos objets et leur restauration éventuelle,"
       conseil2: "leur sécurisation et leur valorisation,"

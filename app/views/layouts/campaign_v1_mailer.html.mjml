@@ -46,7 +46,7 @@
           ­Cette initiative est portée par le ministère de la Culture et la Direction interministérielle du numérique dans le cadre du programme beta.gouv.
         </mj-text>
         <mj-text color="#666">
-          En cas de difficultés pour recenser vous pouvez nous contacter sur <a href="mailto:support@collectif-objets.beta.gouv.fr">support@collectifobjets.beta.gouv.fr</a>
+          En cas de difficultés pour recenser vous pouvez nous contacter sur : <a href="mailto:support@collectif-objets.beta.gouv.fr">support@collectifobjets.beta.gouv.fr</a>
         </mj-text>
       </mj-column>
     </mj-section>
