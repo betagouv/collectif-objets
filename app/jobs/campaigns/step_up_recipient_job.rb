@@ -74,7 +74,7 @@ module Campaigns
     def send_mail!
       smtp_response = campaign_mail.deliver_now!
 
-      match_data = smtp_response.string.match(/250 .* (<.*>)/)
+      match_data = smtp_response.respond_to?("string") && smtp_response.string.match(/250 .* (<.*>)/)
       return if match_data.blank? && Rails.env.development?
 
       raise "Unexpected SMTP response : #{smtp_response.string}" unless match_data
