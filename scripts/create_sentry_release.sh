@@ -2,26 +2,28 @@
 
 # build for rails
 NAME="$CONTAINER_VERSION-rails"
-if sentry-cli releases info --project collectif-objets $NAME &>1
+PROJECT=collectif-objets
+if sentry-cli releases info --project $PROJECT $NAME &>1
 then
   echo "using existing sentry release $NAME"
-  sentry-cli releases deploys $NAME new --env "$SENTRY_ENV" --project collectif-objets
+  sentry-cli releases deploys $NAME new --env "$SENTRY_ENV" --project $PROJECT
 else
   echo "building new sentry release $NAME"
-  sentry-cli releases new --project collectif-objets --finalize $NAME
-  sentry-cli releases deploys $NAME new --env "$SENTRY_ENV" --project collectif-objets
+  sentry-cli releases new --project $PROJECT --finalize $NAME
+  sentry-cli releases deploys $NAME new --env "$SENTRY_ENV" --project $PROJECT
 fi
 
 # build for JS
 NAME="$CONTAINER_VERSION-js"
-if sentry-cli releases info --project collectif-objets-js $NAME &>1
+PROJECT=collectif-objets-js
+if sentry-cli releases info --project $PROJECT $NAME &>1
 then
   echo "using existing sentry release $NAME"
-  sentry-cli releases deploys $NAME new --env "$SENTRY_ENV" --project collectif-objets-js
+  sentry-cli releases deploys $NAME new --env "$SENTRY_ENV" --project $PROJECT
 else
   echo "building new sentry release $NAME"
-  sentry-cli releases new --project collectif-objets-js $NAME
-  sentry-cli releases files $NAME upload-sourcemaps --project collectif-objets-js /app/public/vite/assets
-  sentry-cli releases finalize --project collectif-objets-js $NAME
-  sentry-cli releases deploys $NAME new --env "$SENTRY_ENV" --project collectif-objets-js
+  sentry-cli releases new --project $PROJECT $NAME
+  sentry-cli releases files $NAME upload-sourcemaps --project $PROJECT /app/public/vite/assets
+  sentry-cli releases finalize --project $PROJECT $NAME
+  sentry-cli releases deploys $NAME new --env "$SENTRY_ENV" --project $PROJECT
 fi
