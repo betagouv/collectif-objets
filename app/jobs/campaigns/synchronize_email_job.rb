@@ -6,7 +6,7 @@ module Campaigns
     include Sidekiq::Throttled::Worker
 
     sidekiq_throttle(threshold: { limit: 250, period: 1.hour })
-    sidekiq_options retry: 4
+    sidekiq_options queue: "synchronize_emails", retry: 4
 
     delegate :sib_message_id, to: :campaign_email
     attr_reader :campaign_email

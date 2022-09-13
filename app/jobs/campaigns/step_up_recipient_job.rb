@@ -7,7 +7,7 @@ module Campaigns
     include Sidekiq::Throttled::Worker
 
     sidekiq_throttle(threshold: { limit: 10, period: 1.minute })
-    sidekiq_options retry: 0
+    sidekiq_options queue: "step_up_recipients", retry: 0
 
     attr_reader :to_step
 

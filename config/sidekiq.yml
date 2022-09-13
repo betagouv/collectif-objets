@@ -1,1 +1,6 @@
 :max_retries: 10
+
+:queues:
+  - default
+  - synchronize_emails
+  - step_up_recipients
