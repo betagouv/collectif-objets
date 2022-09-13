@@ -19,7 +19,7 @@
                   <%= f.radio_button(
                     :variant,
                     variant,
-                    checked: local_assigns.fetch(:variant, nil) == variant,
+                    checked: local_assigns.fetch(:variant, "inactive") == variant,
                     id: "#{step}_#{variant}"
                   ) %>
                   <%= f.label t("campaign_v1_mailer.variants.#{variant}"), for: "#{step}_#{variant}" %>

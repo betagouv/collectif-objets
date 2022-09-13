@@ -85,9 +85,7 @@ class CampaignsController < ApplicationController
   end
 
   def mail_previews
-    @step = params.fetch(:step, "lancement")
     @count = params.fetch(:count, "10").to_i
-    raise "invalid step" if Campaign::STEPS.exclude?(@step)
     raise "invalid count" if @count.nil? || @count.negative?
     raise "cannot generate more than 100 mails" if @count > 100
   end
