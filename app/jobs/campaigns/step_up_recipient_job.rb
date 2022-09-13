@@ -4,6 +4,7 @@ module Campaigns
   class StepUpRecipientJob
     include Sidekiq::Job
     include ActiveSupport::Rescuable
+    include Sidekiq::Throttled::Worker
 
     sidekiq_throttle(threshold: { limit: 10, period: 1.minute })
     sidekiq_options retry: 0
