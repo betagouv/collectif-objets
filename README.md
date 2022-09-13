@@ -13,7 +13,7 @@
 ## Dumps
 
 - in one terminal : `scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL`
-- in another terminal `./scripts/pg_dump_data.sh postgres://collectif_o_9999:XXXXX@localhost:10000/collectif_o_9999 tmp/dump.pgsql`
+- in another terminal `./scripts/pg_dump_data_anonymous.sh postgres://collectif_o_9999:XXXXX@localhost:10000/collectif_o_9999 tmp/dump.pgsql`
 - ⚠️ you may have to enter the SSH password multiple times in the first terminal
 - then `./scripts/pg_restore_data.sh tmp/dump.pgsql`
 
@@ -22,7 +22,7 @@
 - create a staging dump named `tmp/seeds.pgsql` (cf section before)
 - import it locally with `dropdb collectif_objets_dev && createdb collectif_objets_dev && rake db:schema:load && ./scripts/pg_restore_data.sh collectif_objets_dev tmp/seeds.pgsql`
 - run `rails runner "Commune.where(status: [:started, :completed]).update_all(status: :inactive)"`
-- re-dump with `./scripts/pg_dump_data.sh collectif_objets_dev tmp/seeds.pgsql`
+- re-dump with `./scripts/pg_dump_data_anonymous.sh collectif_objets_dev tmp/seeds.pgsql`
 - upload `tmp/seeds.pgsql` to the `collectif-objets-public` S3 bucket using cyberduck
 
 ## Documentation
