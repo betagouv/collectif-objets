@@ -5,6 +5,9 @@ module Campaigns
     include Sidekiq::Job
     include ActiveSupport::Rescuable
 
+    sidekiq_throttle(threshold: { limit: 10, period: 1.minute })
+    sidekiq_options retry: 0
+
     attr_reader :to_step
 
     def perform(recipient_id, to_step)

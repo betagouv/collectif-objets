@@ -8,20 +8,42 @@ RSpec.describe Campaigns::RunCampaignJob, type: :job do
   describe "#perform" do
     let!(:campaign) { create(:campaign, status: "ongoing") }
 
-    let!(:recipient1) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "lancement") }
-    let!(:recipient2) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: nil) }
-    let!(:recipient3) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "fin") }
-    let!(:recipient4) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "relance1") }
-    let!(:recipient5) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: nil) }
-    let!(:recipient6) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "relance1") }
-    let!(:recipient7) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "relance3") }
-    let!(:recipient8) { create(:campaign_recipient, campaign:, commune: build(:commune), current_step: "fin") }
+    let!(:recipient1) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive"), current_step: "lancement")
+    end
+    let!(:recipient2) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive"), current_step: nil)
+    end
+    let!(:recipient3) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive"), current_step: "fin")
+    end
+    let!(:recipient4) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive"), current_step: "relance1")
+    end
+    let!(:recipient5) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive"), current_step: nil)
+    end
+    let!(:recipient6) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive"), current_step: "relance1")
+    end
+    let!(:recipient7) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive"), current_step: "relance3")
+    end
+    let!(:recipient8) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive"), current_step: "fin")
+    end
+    let!(:recipient9) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "started"), current_step: nil)
+    end
     let!(:recipient10) do
       create(
         :campaign_recipient,
         campaign:, commune: build(:commune), current_step: nil,
         opt_out: true, opt_out_reason: "other"
       )
+    end
+    let!(:recipient11) do
+      create(:campaign_recipient, campaign:, commune: build(:commune, status: "completed"), current_step: nil)
     end
 
     before do
@@ -36,8 +58,12 @@ RSpec.describe Campaigns::RunCampaignJob, type: :job do
         expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async).with(recipient1.id, "lancement")
         expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient2.id, "lancement")
         expect(Campaigns::StepUpRecipientJob).to receive(:perform_async).with(recipient5.id, "lancement")
-        expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async).with(recipient10.id, "lancement")
-        # opted out
+        expect(Campaigns::StepUpRecipientJob).to receive(:perform_async)
+          .with(recipient9.id, "lancement") # started do receive mails
+        expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async)
+          .with(recipient10.id, "lancement") # opted out
+        expect(Campaigns::StepUpRecipientJob).not_to receive(:perform_async)
+          .with(recipient11.id, "lancement") # but completed do not
         Campaigns::RunCampaignJob.new.perform(campaign.id)
       end
     end

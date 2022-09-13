@@ -23,7 +23,7 @@ module Campaigns
       @campaign.recipients.joins(:commune)
         .where(current_step: previous_step)
         .where(opt_out: [nil, false])
-        .where(communes: { status: "inactive" })
+        .where.not(communes: { status: "completed" })
     end
   end
 end
