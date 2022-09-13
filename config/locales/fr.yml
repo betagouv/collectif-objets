@@ -125,7 +125,7 @@ fr:
         contact: Contactez-nous pour accéder à d'autres départements
       show:
         head_title: Communes du %{departement}
-        campaign: Campagne de recensement du %{lancement} au %{end}
+        campaign: Campagne de recensement du %{date_lancement} au %{date_fin}
         stats:
           completed: des communes ont finalisé le recensement
           etats_sanitaires_distribution_title: États sanitaires des objets recensés

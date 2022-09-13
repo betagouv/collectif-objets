@@ -13,7 +13,7 @@
         <%= @departement.nom %>
       </h2>
       <% if @campaign %>
-        <p><%= t(".campaign", lancement: l(@campaign.lancement), fin: l(@campaign.end)) %></p>
+        <p><%= t(".campaign", date_lancement: l(@campaign.date_lancement), date_fin: l(@campaign.date_fin)) %></p>
       <% end %>
     </div>
   </div>
