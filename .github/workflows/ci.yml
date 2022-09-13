@@ -56,3 +56,22 @@ jobs:
 #         run: bin/brakeman -q -w2
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
+
+  sentry_release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [production, staging]
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create Sentry releases
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: betagouv
+          SENTRY_URL: https://sentry.incubateur.net/
+        with:
+          environment: ${{ matrix.environment }}
+          projects: collectif-objets collectif-objets-js
+          sourcemaps: /app/public/vite/assets
