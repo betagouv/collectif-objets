@@ -416,10 +416,10 @@ GEM
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
-    sidekiq-throttled (0.16.2)
+    sidekiq-throttled (0.17.0)
       concurrent-ruby
       redis-prescription
-      sidekiq
+      sidekiq (>= 6.4)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
