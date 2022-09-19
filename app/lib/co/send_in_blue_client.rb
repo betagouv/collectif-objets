@@ -145,6 +145,14 @@ module Co
         .sort_by { _1[:date] }
     end
 
+    def get_transactional_emails(email)
+      get_api_request("/v3/smtp/emails", sort: "desc", limit: 20, email:)["transactionalEmails"]
+    end
+
+    def get_contact(email)
+      get_api_request("/v3/contacts/#{email}")
+    end
+
     private
 
     def parse_email_event(raw)
