@@ -68,8 +68,8 @@ class SynchronizeObjetsJob
     new_attributes = %w[DENO CATE COM INSEE DPT SCLE DENQ DOSS EDIF EMPL TICO].to_h do |pop_column|
       ["palissy_#{pop_column}", raw_objet[pop_column]]
     end
-    new_attributes["image_urls"] = raw_objet["MEMOIRE_URLS"]&.split(";")
-      &.map { "#{MEMOIRE_PHOTOS_BASE_URL}/#{_1}" } || []
+    new_attributes["image_urls"] = objet_overrides_by_ref[raw_objet["REF"]]&.image_urls \
+      || raw_objet["MEMOIRE_URLS"]&.split(";")&.map { "#{MEMOIRE_PHOTOS_BASE_URL}/#{_1}" } || []
     objet.assign_attributes(new_attributes)
     objet
   end
@@ -85,5 +85,9 @@ class SynchronizeObjetsJob
     return false if objet.persisted?
 
     return true if objet.palissy_COM == "Sablé-sur-Sarthe" && objet.palissy_EDIF == "château"
+  end
+
+  def objet_overrides_by_ref
+    @objet_overrides_by_ref ||= ObjetOverride.all.map { [_1.palissy_REF, _1] }.to_h
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_08_075237) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_19_134437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -185,6 +185,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_075237) do
     t.datetime "updated_at", null: false
     t.index ["commune_id"], name: "dossiers_unique_commune_id", unique: true
     t.index ["conservateur_id"], name: "index_dossiers_on_conservateur_id"
+  end
+
+  create_table "objet_overrides", primary_key: "palissy_REF", id: :string, force: :cascade do |t|
+    t.string "plan_objet_id"
+    t.string "image_urls", array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "objets", force: :cascade do |t|

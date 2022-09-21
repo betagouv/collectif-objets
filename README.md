@@ -88,3 +88,12 @@ To regenerate diagrams : `bundle exec rake diagrams:generate`
 - re-dump with `./scripts/pg_dump_data_anonymous.sh collectif_objets_dev tmp/seeds.pgsql`
 - upload `tmp/seeds.pgsql` to the `collectif-objets-public` S3 bucket using cyberduck
 
+## Buckets S3 sur Scaleway
+
+Les buckets de photos uploadés doivent être configurés pour le CORS
+
+TODO
+
+Ouvrir l'accès public à toutes les photos du bucket des overrides
+
+- `aws s3api put-bucket-policy --bucket collectif-objets-photos-overrides --policy file://bucket-policy-objet-overrides.json`
