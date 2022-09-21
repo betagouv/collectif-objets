@@ -4,60 +4,98 @@
 
 Collectif Objets est un site web permettant aux communes françaises de recenser leur patrimoine mobilier monument historiques et aux conservateurs d'analyser ces recensements.
 
-## Interfaces
+## Interfaces & Usagers
 
-Le site se décompose en trois interfaces :
+Le site expose trois interfaces pour trois types d'usagers différents :
 
-- Interface communes : permet aux agents municipaux des communes de réaliser les recensements d'objets. Ces personnes peuvent se connecter et voir la liste des objets de leur commune, évaluer leur état, et envoyer des photos.
-- Interface conservateurs : permet aux conservateurs de voir les recensements réalisés sur leur territoire et de les analyser avec un retour éventuel aux communes
-- Interface administrateurs : permet à l'équipe technique de gérer les accès et les données
+1. **Interface communes** : permet aux agents municipaux des communes de réaliser les recensements d'objets.
 
-Toutes ces interfaces sont servies par la même appli web Rails et sont accessibles sur https://collectif-objets.beta.gouv.fr
+2. **Interface conservateurs** : permet aux conservateurs de voir les recensements réalisés sur leur territoire et de les analyser
 
-## Infrastructure & Écosystème
+3. **Interface administrateurs** : permet à l'équipe technique de gérer les accès et les données
 
-![](/doc/infrastructure.drawio.png)
+Toutes ces interfaces sont accessibles sur https://collectif-objets.beta.gouv.fr
 
-- le site web Rails hébergé sur Scalingo est accessible sur https://collectif-objets.beta.gouv.fr
-- l'appli Datasette hébergée sur Fly.io est disponible sur https://collectif-objets-datasette.fly.dev/. Son code est disponible sur le repo Github [collectif-objets-datasette](https://github.com/adipasquale/collectif-objets-datasette)
-- le repo de notebooks jupyter est privé car il contient des jeux de données non anonymisés
-- le code du scraper POP est disponible sur le repo GitHub [pop-scraper](https://github.com/adipasquale/pop-scraper). Il tourne sur la plateforme SaaS [Zyte](https://app.zyte.com/)
+## Captures d'écran
+
+1. **Interface communes**
+
+| | |
+| - | - |
+| ![](/doc/interface-communes1.png) | ![](/doc/interface-communes2.png) |
+
+2. **Interface conservateurs**
+
+| | |
+| - | - |
+| ![](/doc/interface-conservateurs1.png) | ![](/doc/interface-conservateurs2.png) |
+
+
+3. **Interface administrateurs**
+
+![](/doc/interface-admin1.png)
+
+
+## Briques techniques principales
+
+Les 3 interfaces sont servies par une seule et unique application Ruby On Rails 7.
+
+Les gems principales dont dépend cette application Rails sont :
+
+- `devise` : Authentification des usagers. Il y a trois modèles Devise `User` (Communes), `Conservateur` et `Admin`.
+- `sidekiq` : Gestion des tâches asynchrones - nécessite Redis
+- `activeadmin` : Pour l'interface d'administration
+- `vite_rails` : Compilation des assets JS et images
+- `turbo_rails` : Interactions JS simplifiées
+- `sprockets-rails` : Compilation traditionnelle des assets, utilisée uniquement pour activeadmin
+- `mjml-rails` : Templates de mails en MJML
+- `AASM` : Machines à états finis pour les statuts de certains modèles
+
+Côté Javascript les packages principaux utilisés sont :
+
+- `@gouvfr/dsfr` : Design Système de l'État Français
+- `@rails/activestorage` : Gestion des uploads (avancement, direct uploads etc…)
+- `@hotwired/stimulus` : Simplifie le lien HTML et JS
+- `maplibre-gl` : permet d'afficher une carte des objets en France
+- `frappe-charts` : petits diagrammes SVG
+- `spotlight.js` : galerie de photos d'objets
+
+## Infrastructure, Écosystème et environnements
+
+![](/doc/infrastructure-simple.drawio.svg)
+
+*Diagramme d'infrastructure simplifié* · [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Finfrastructure-simple.drawio.svg)
+
+- Le site web hébergé sur Scalingo est accessible sur https://collectif-objets.beta.gouv.fr
 - C'est le sentry partagé de beta.gouv.fr qui est utilisé, il est accessible sur https://sentry.incubateur.net
-- le compte Scaleway utilisé est celui de l'incubateur du Ministère de la culture.
+- Le compte Scaleway utilisé est celui de l'Atelier Numérique (l'incubateur du Ministère de la Culture)
 
 ## Diagramme d'entités de la base de données
 
-**Version simplifiée**
+![](/doc/erd-simple.drawio.svg)
 
-![](/doc/erd_simplified.drawio.png)
+*Diagramme d'entités simplifié de la base de données* · [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Ferd-simple.drawio.svg)
+
 
 - Les `User` sont les comptes usagers des communes. C'est un modèle Devise. Un `User` a accès à une et une seule commune.
 - Les `Conservateurs` sont les comptes usagers des conservateurs. C'est aussi un modèle Devise. Un Conservateur a accès à un ou plusieurs départements et toutes les communes inclues.
 - Les `Objets` sont les objets monuments historiques. Leurs infos proviennent de Palissy. Leur identifiant unique provient de POP et s'appelle dans notre base `palissy_REF`, il ressemble à `PM00023944`.
 - Un `Recensement` contient les observations sur l'état d'un `Objet` et les photos associées à la visite de l'agent municipal.
 - Un `Dossier` est un ensemble de `Recensements` pour une commune. Il doit être finalisé par la commune pour être analysable par les conservateurs.
-- Une `Campagne` contient les dates et les communes à démarcher pour une campagne mail avec plusieurs relances. Elle est gérée et visible uniquement par les conservateurs.
+- Une `Campagne` contient les dates et les communes à démarcher pour une campagne mail avec plusieurs relances. Elle est gérée et visible uniquement par les administrateurs.
 
-**Version complète**
-
-![](/doc/entity-relationship-diagram.svg)
+La version complète du diagramme d'entités de la base de données est visible ici [doc/entity-relationship-diagram.svg](/doc/entity-relationship-diagram.svg)
 
 ## Diagrammes des machines à état finis
 
-**Communes**
+| Communes | Dossiers | Campaigns |
+| - | - | - |
+| ![](/doc/commune_state_machine_diagram.png) | ![](/doc/dossier_state_machine_diagram.png) | ![](/doc/campaign_state_machine_diagram.png) |
 
-![](/doc/commune_state_machine_diagram.png)
+- Un `Dossier` est d'abord en construction, puis est soumis aux conservateurs et enfin accepté ou rejeté.
+- L'état d'une `Commune` est lié à l'état de son `Dossier`. La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque le dossier est soumis.
 
-**Dossiers**
-
-![](/doc/dossier_state_machine_diagram.png)
-
-**Campaigns**
-
-![](/doc/campaign_state_machine_diagram.png)
-
-
-To regenerate diagrams : `bundle exec rake diagrams:generate`
+`bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
 
 ## Installation
 
@@ -71,28 +109,14 @@ To regenerate diagrams : `bundle exec rake diagrams:generate`
 
 ### Via Docker
 
-À venir
-
-## Dumps
-
-- in one terminal : `scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL`
-- in another terminal `./scripts/pg_dump_data_anonymous.sh postgres://collectif_o_9999:XXXXX@localhost:10000/collectif_o_9999 tmp/dump.pgsql`
-- ⚠️ you may have to enter the SSH password multiple times in the first terminal
-- import it locally with `dropdb collectif_objets_dev && createdb collectif_objets_dev && rake db:schema:load && ./scripts/pg_restore_data.sh collectif_objets_dev tmp/dump.pgsql`
-
-## Prepare new `seeds.pgsql` for review apps
-
-- dump staging and restore locally (cf section before)
-- run `rails runner "Commune.where(status: [:started, :completed]).update_all(status: :inactive)"`
-- re-dump with `./scripts/pg_dump_data_anonymous.sh collectif_objets_dev tmp/seeds.pgsql`
-- upload `tmp/seeds.pgsql` to the `collectif-objets-public` S3 bucket using cyberduck
-
-## Buckets S3 sur Scaleway
-
-Les buckets de photos uploadés doivent être configurés pour le CORS
-
 TODO
 
-Ouvrir l'accès public à toutes les photos du bucket des overrides
+## Autres sujets plus précis
 
-- `aws s3api put-bucket-policy --bucket collectif-objets-photos-overrides --policy file://bucket-policy-objet-overrides.json`
+Dans le [wiki](https://github.com/betagouv/collectif-objets/wiki/) vous trouverez des informations pour les sujets suivants :
+
+- [Dumps et seeds](https://github.com/betagouv/collectif-objets/wiki/Dumps-et-Seeds) : Comment dumper la base de données de staging et préparer le fichier seeds.pgsql pour les Review Apps
+- [Configuration des buckets S3 sur Scaleway](https://github.com/betagouv/collectif-objets/wiki/Configuration-des-buckets-S3-sur-Scaleway)
+- [Origines des données, transformations et stockage](https://github.com/betagouv/collectif-objets/wiki/Origines-des-données,-transformations-et-stockage)
+- [Intégration du Design Système de l'État Français (DSFR)](https://github.com/betagouv/collectif-objets/wiki/Int%C3%A9gration-du-Design-Syst%C3%A8me-de-l'%C3%89tat-Fran%C3%A7ais-(DSFR))
+
