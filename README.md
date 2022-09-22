@@ -119,4 +119,4 @@ Dans le [wiki](https://github.com/betagouv/collectif-objets/wiki/) vous trouvere
 - [Configuration des buckets S3 sur Scaleway](https://github.com/betagouv/collectif-objets/wiki/Configuration-des-buckets-S3-sur-Scaleway)
 - [Origines des données, transformations et stockage](https://github.com/betagouv/collectif-objets/wiki/Origines-des-données,-transformations-et-stockage)
 - [Intégration du Design Système de l'État Français (DSFR)](https://github.com/betagouv/collectif-objets/wiki/Int%C3%A9gration-du-Design-Syst%C3%A8me-de-l'%C3%89tat-Fran%C3%A7ais-(DSFR))
-
+- [Astreinte, autorisations et accès](https://github.com/betagouv/collectif-objets/wiki/Astreinte,-autorisations-et-acc%C3%A8s)
