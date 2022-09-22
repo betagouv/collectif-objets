@@ -1,5 +1,12 @@
 rails db:schema:load
 
-curl https://s3.fr-par.scw.cloud/collectif-objets-public/seeds.pgsql > tmp/seeds.pgsql
+# TODO infer DATABASE_URL from DATABASE_HOST etc
 
-. ${0%/*}/pg_restore_data.sh $SCALINGO_POSTGRESQL_URL tmp/seeds.pgsql
+url=https://s3.fr-par.scw.cloud/collectif-objets-public/seeds.pgsql
+echo "downloading seeds file from $url..."
+curl $url > tmp/seeds.pgsql
+
+echo "restoring data to postgres..."
+. ${0%/*}/pg_restore_data.sh $DATABASE_URL tmp/seeds.pgsql
+
+echo "done"

@@ -1,6 +1,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: <%= ENV.fetch("DATABASE_HOST", "127.0.0.1") %>
+  username: <%= ENV.fetch("DATABASE_USERNAME", "") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "") %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 20 } %>
 
 development:
@@ -12,5 +15,7 @@ test:
   database: collectif_objets_test
 
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 20 } %>
   url: <%= ENV["DATABASE_URL"] %>
