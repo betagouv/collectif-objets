@@ -56,3 +56,14 @@ jobs:
 #         run: bin/brakeman -q -w2
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test, lint]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Install Scalingo CLI
+        run: curl -O https://cli-dl.scalingo.com/install && bash install
+      - run: scalingo --login --api-token ${{ secrets.SCALINGO_TOKEN }}
+      - run: scalingo --app collectif-objets-prod integration-link-manual-deploy --branch main
+      - run: scalingo --app collectif-objets-staging integration-link-manual-deploy --branch main
