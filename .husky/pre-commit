@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 bundle exec rubocop
-bundle exec rspec spec
+# bundle exec rspec spec

@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "first-deploy": "scripts/restore_seed_db.sh"
+    "first-deploy": "rails db:schema:load db:seed"
   }
 }

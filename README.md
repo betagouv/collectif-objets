@@ -105,10 +105,7 @@ La version complète du diagramme d'entités de la base de données est visible 
 docker compose up
 # CTRL-C to break
 
-docker compose run web bash
-# and in bash:
-$ rails db:create
-$ DATABASE_URL=postgresql://postgres:objets@db/collectif_objets_dev ./scripts/restore_seed_db.sh
+docker compose run web rails db:setup
 ```
 
 ### En local avec bundle et overmind
