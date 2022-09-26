@@ -99,7 +99,7 @@ La version complète du diagramme d'entités de la base de données est visible 
 
 ## Installation
 
-### Via Docker
+### Installation via Docker
 
 ```
 docker compose up
@@ -108,7 +108,7 @@ docker compose up
 docker compose run web rails db:setup
 ```
 
-### En local avec bundle et overmind
+### Installation en local via bundle et overmind
 
 - installer [rbenv](https://github.com/rbenv/rbenv#installation)
 - `rbenv install ``cat .ruby-version` `
@@ -121,8 +121,9 @@ docker compose run web rails db:setup
 
 Dans le [wiki](https://github.com/betagouv/collectif-objets/wiki/) vous trouverez des informations pour les sujets suivants :
 
-- [Dumps et seeds](https://github.com/betagouv/collectif-objets/wiki/Dumps-et-Seeds) : Comment dumper la base de données de staging et préparer le fichier seeds.pgsql pour les Review Apps
-- [Configuration des buckets S3 sur Scaleway](https://github.com/betagouv/collectif-objets/wiki/Configuration-des-buckets-S3-sur-Scaleway)
-- [Origines des données, transformations et stockage](https://github.com/betagouv/collectif-objets/wiki/Origines-des-données,-transformations-et-stockage)
-- [Intégration du Design Système de l'État Français (DSFR)](https://github.com/betagouv/collectif-objets/wiki/Int%C3%A9gration-du-Design-Syst%C3%A8me-de-l'%C3%89tat-Fran%C3%A7ais-(DSFR))
-- [Astreinte, autorisations et accès](https://github.com/betagouv/collectif-objets/wiki/Astreinte,-autorisations-et-acc%C3%A8s)
+- [Premiers pas](https://github.com/betagouv/collectif-objets/wiki/premiers-pas) : Découverte des interfaces et des fonctionnalités
+- [Dumps et seeds](https://github.com/betagouv/collectif-objets/wiki/dumps)
+- [Configuration des buckets S3 sur Scaleway](https://github.com/betagouv/collectif-objets/wiki/buckets-s3)
+- [Origines des données, transformations et stockage](https://github.com/betagouv/collectif-objets/wiki/donnees)
+- [Intégration du Design Système de l'État Français (DSFR)](https://github.com/betagouv/collectif-objets/wiki/dsfr)
+- [Astreinte, autorisations et accès](https://github.com/betagouv/collectif-objets/wiki/astreinte)
