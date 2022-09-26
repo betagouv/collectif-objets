@@ -56,6 +56,50 @@ RSpec.describe CampaignRecipient, type: :model do
       end
     end
   end
+
+  describe "should_skip_mail_for_step" do
+    subject { recipient.should_skip_mail_for_step(step) }
+
+    context "première relance pour une commune ayant démarré le recensement" do
+      let(:step) { "relance1" }
+      let!(:commune) { create(:commune, status: "started") }
+      let!(:campaign) { create(:campaign) }
+      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
+
+      it { should eq true }
+    end
+
+    context "première relance pour une commune n'ayant pas démarré le recensement" do
+      let(:step) { "relance1" }
+      let!(:commune) { create(:commune, status: "inactive") }
+      let!(:campaign) { create(:campaign) }
+      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
+
+      it { should eq false }
+    end
+
+    context "seconde relance pour une commune ayant recensé juste avant" do
+      let(:step) { "relance2" }
+      let!(:commune) { create(:commune, status: "started") }
+      let!(:campaign) { create(:campaign) }
+      let!(:objet) { create(:objet, commune:) }
+      let!(:recensement) { create(:recensement, objet:, updated_at: campaign.date_relance2 - 1.day) }
+      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
+
+      it { should eq true }
+    end
+
+    context "seconde relance pour une commune ayant recensé il y a plus de 5 jours" do
+      let(:step) { "relance2" }
+      let!(:commune) { create(:commune, status: "started") }
+      let!(:campaign) { create(:campaign) }
+      let!(:objet) { create(:objet, commune:) }
+      let!(:recensement) { create(:recensement, objet:, updated_at: campaign.date_relance2 - 10.days) }
+      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
+
+      it { should eq false }
+    end
+  end
 end
 
 # rubocop:enable Metrics/BlockLength

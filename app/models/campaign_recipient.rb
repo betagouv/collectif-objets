@@ -36,6 +36,21 @@ class CampaignRecipient < ApplicationRecord
     email_for_step(current_step)
   end
 
+  def should_skip_mail_for_step(step)
+    return false if step == "fin"
+    # le mail de fin doit toujours être envoyé
+
+    return true if step == "relance1" && commune.started?
+    # pas de premiere relance pour les communes ayant commencé le recensement
+
+    return true if commune.recensements.where(
+      "DATE(recensements.updated_at) >= ?",
+      (campaign.send("date_#{step}") - 5.days).to_date
+    ).any?
+
+    false
+  end
+
   private
 
   def validate_inactive

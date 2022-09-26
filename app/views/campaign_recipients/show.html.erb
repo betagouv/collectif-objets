@@ -87,6 +87,15 @@
             <% end %>
           </div>
         </div>
+      <% elsif @recipient.opt_out? || @commune.completed? || @recipient.should_skip_mail_for_step(step) %>
+        <h4><%= t("campaigns.mail_names.#{step}") %></h4>
+        <div class="fr-grid-row fr-mb-4w">
+          <div class="fr-col-md-8">
+            <p>
+              Ce mail ne sera pas envoyé, selon l'une des règles suivantes : commune sortie de la campagne, recensement terminé ou dernier objet recensé récemment.
+            </p>
+          </div>
+        </div>
       <% else %>
         <h4><%= t("campaigns.mail_names.#{step}") %></h4>
         <div class="fr-grid-row fr-mb-4w">

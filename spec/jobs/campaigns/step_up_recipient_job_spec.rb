@@ -25,6 +25,8 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         .with(any_args)
         .with(recipient.id)
         .and_return(recipient)
+      allow(recipient).to receive(:should_skip_mail_for_step)
+        .with(to_step).and_return(should_skip_mail)
       allow(Co::Campaigns::Mail).to receive(:new).and_return(campaign_mail_double)
     end
 
@@ -39,6 +41,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
           campaign:, commune:, current_step: "lancement", opt_out: true, opt_out_reason: "other"
         )
       end
+      let(:should_skip_mail) { false }
 
       it "should not do anything" do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
@@ -56,6 +59,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       let!(:recipient) do
         create(:campaign_recipient, campaign:, commune:, current_step: "lancement")
       end
+      let(:should_skip_mail) { false }
 
       it "should not do anything" do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
@@ -71,6 +75,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
       let!(:user) { create(:user, commune:) }
+      let(:should_skip_mail) { false }
 
       it "should not do anything" do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
@@ -86,6 +91,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
+      let(:should_skip_mail) { false }
 
       before do
         smtp_response_double = instance_double(Net::SMTP::Response, string: smtp_response_text)
@@ -121,12 +127,13 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       end
     end
 
-    context "première relance pour une commune ayant démarré le recensement" do
+    context "mail ne doit pas être envoyé" do
       let(:email_name) { "relance1_started_email" }
       let(:to_step) { "relance1" }
       let!(:commune) { create(:commune, status: "started") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
+      let(:should_skip_mail) { true }
 
       it "should step up recipient without sending an email" do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
@@ -137,48 +144,12 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       end
     end
 
-    context "seconde relance pour une commune ayant recensé recemment" do
-      let(:email_name) { "relance2_started_email" }
-      let(:to_step) { "relance2" }
-      let!(:commune) { create(:commune, status: "started") }
-      let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
-      let!(:objet) { create(:objet, commune:) }
-      let!(:recensement) { create(:recensement, objet:, updated_at: 1.day.ago) }
-      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
-
-      it "should step up recipient without sending an email" do
-        expect(campaign_mail_double).not_to receive(:deliver_now!)
-        res = subject
-        expect(res).to eq true
-        expect(recipient.current_step).to eq("relance2")
-        expect(recipient.emails).to be_empty
-      end
-    end
-
-    context "seconde relance pour une commune ayant recensé il y a plus de 5 jours" do
-      let(:email_name) { "relance2_started_email" }
-      let(:to_step) { "relance2" }
-      let!(:commune) { create(:commune, status: "started") }
-      let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
-      let!(:objet) { create(:objet, commune:) }
-      let!(:recensement) { create(:recensement, objet:, updated_at: 10.days.ago) }
-      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
-
-      it "should step up recipient and send the email" do
-        smtp_response_double = instance_double(Net::SMTP::Response, string: "250 Message queued as <2123@some-host>")
-        expect(campaign_mail_double).to receive(:deliver_now!).and_return(smtp_response_double)
-        res = subject
-        expect(res).to eq true
-        expect(recipient.current_step).to eq("relance2")
-        expect(recipient.emails.count).to eq 1
-      end
-    end
-
     context "there is no user at all" do
       let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
+      let(:should_skip_mail) { false }
 
       it "should not send a mail and update the recipient" do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
