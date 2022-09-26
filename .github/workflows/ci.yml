@@ -59,14 +59,11 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    # needs: [test, lint]
-    # if: github.ref == 'refs/heads/main'
+    needs: [test, lint]
+    if: github.ref == 'refs/heads/main'
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - run: mkdir $HOME/.ssh
-      - run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > $HOME/.ssh/id_rsa
-      - run: echo "#\!/usr/bin/bash\n\nexec ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/path-to-alternative-key \$@" > $HOME/.ssh/custom.sh
-      # - run: cat $HOME/.ssh/known_hosts
-      - run: GIT_SSH=$HOME/.ssh/custom.sh git remote add scalingo "git@ssh.osc-secnum-fr1.scalingo.com:collectif-objets-prod.git"
-      - run: git push scalingo main
+      - name: Install Scalingo CLI
+        run: curl -O https://cli-dl.scalingo.com/install && bash install
+      - run: scalingo --login --api-token ${{ secrets.SCALINGO_TOKEN }}
+      - run: scalingo --app collectif-objets-prod integration-link-manual-deploy --branch main
+      - run: scalingo --app collectif-objets-staging integration-link-manual-deploy --branch main
