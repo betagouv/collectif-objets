@@ -64,6 +64,6 @@ jobs:
     steps:
       - name: Install Scalingo CLI
         run: curl -O https://cli-dl.scalingo.com/install && bash install
-      - run: scalingo --login --api-token ${{ secrets.SCALINGO_TOKEN }}
-      - run: scalingo --app collectif-objets-prod integration-link-manual-deploy --branch main
-      - run: scalingo --app collectif-objets-staging integration-link-manual-deploy --branch main
+      - run: scalingo login --api-token ${{ secrets.SCALINGO_TOKEN }}
+      - run: scalingo --app collectif-objets-prod --region osc-secnum-fr1 integration-link-manual-deploy main
+      - run: scalingo --app collectif-objets-staging integration-link-manual-deploy main
