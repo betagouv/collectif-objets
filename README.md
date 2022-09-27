@@ -4,6 +4,15 @@
 
 Collectif Objets est un site web permettant aux communes françaises de recenser leur patrimoine mobilier monument historiques et aux conservateurs d'analyser ces recensements.
 
+- [Interfaces & Usagers](#interfaces--usagers)
+- [Captures d'écran](#captures-décran)
+- [Frameworks et dépendances](#frameworks-et-dépendances)
+- [Infrastructure, Écosystème et environnements](#infrastructure-écosystème-et-environnements)
+- [Diagramme d'entités de la base de données](#diagramme-dentités-de-la-base-de-données)
+- [Diagrammes des machines à état finis](#diagrammes-des-machines-à-état-finis)
+- [Installation](#installation)
+- [Plus de documentation…](#plus-de-documentation)
+
 ## Interfaces & Usagers
 
 Le site expose trois interfaces pour trois types d'usagers différents :
@@ -36,29 +45,29 @@ Toutes ces interfaces sont accessibles sur https://collectif-objets.beta.gouv.fr
 ![](/doc/interface-admin1.png)
 
 
-## Briques techniques principales
+## Frameworks et dépendances
 
 Les 3 interfaces sont servies par une seule et unique application Ruby On Rails 7.
 
 Les gems principales dont dépend cette application Rails sont :
 
 - `devise` : Authentification des usagers. Il y a trois modèles Devise `User` (Communes), `Conservateur` et `Admin`.
-- `sidekiq` : Gestion des tâches asynchrones - nécessite Redis
-- `activeadmin` : Pour l'interface d'administration
+- `sidekiq` : Gestion des tâches asynchrones via Redis
+- `activeadmin` : Interface d'administration
 - `vite_rails` : Compilation des assets JS et images
 - `turbo_rails` : Interactions JS simplifiées
 - `sprockets-rails` : Compilation traditionnelle des assets, utilisée uniquement pour activeadmin
 - `mjml-rails` : Templates de mails en MJML
-- `AASM` : Machines à états finis pour les statuts de certains modèles
+- `AASM` : Machines à états finis pour les statuts des modèles
 
-Côté Javascript les packages principaux utilisés sont :
+Côté Javascript les principaux packages utilisés sont :
 
 - `@gouvfr/dsfr` : Design Système de l'État Français
-- `@rails/activestorage` : Gestion des uploads (avancement, direct uploads etc…)
-- `@hotwired/stimulus` : Simplifie le lien HTML et JS
+- `@rails/activestorage` : Gestion des uploads de photos
+- `@hotwired/stimulus` : Simplifie le lien entre HTML et JS
 - `maplibre-gl` : permet d'afficher une carte des objets en France
-- `frappe-charts` : petits diagrammes SVG
-- `spotlight.js` : galerie de photos d'objets
+- `frappe-charts` : diagrammes SVG
+- `spotlight.js` : galeries de photos d'objets
 
 ## Infrastructure, Écosystème et environnements
 
@@ -66,9 +75,11 @@ Côté Javascript les packages principaux utilisés sont :
 
 *Diagramme d'infrastructure simplifié* · [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Finfrastructure-simple.drawio.svg)
 
-- Le site web hébergé sur Scalingo est accessible sur https://collectif-objets.beta.gouv.fr
-- C'est le sentry partagé de beta.gouv.fr qui est utilisé, il est accessible sur https://sentry.incubateur.net
-- Le compte Scaleway utilisé est celui de l'Atelier Numérique (l'incubateur du Ministère de la Culture)
+Le site web hébergé sur Scalingo est accessible sur [collectif-objets.beta.gouv.fr](https://)
+
+Un environnement de recette (ou staging) est disponible à l'adresse [staging.collectif-objets.incubateur.net](https://staging.collectif-objets.incubateur.net). Il n'y a pas de données sensible sur cette base de données et elle peut être réinitialisée à tout moment.
+
+Une liste complète d'URLs des environnements et des outils externes est disponible [sur le wiki](https://github.com/betagouv/collectif-objets/wiki/urls).
 
 ## Diagramme d'entités de la base de données
 
@@ -108,22 +119,26 @@ docker compose up
 docker compose run web rails db:setup
 ```
 
-### Installation en local via bundle et overmind
+### Installation en local via rbenv et bundle
 
-- installer [rbenv](https://github.com/rbenv/rbenv#installation)
-- `rbenv install ``cat .ruby-version` `
-- `make install`
-- ask someone else from the team for the master key and store it in `config/master.key`
-- optional: for faster auto-format locally, see https://github.com/fohte/rubocop-daemon#more-speed
-- `make dev`
+```sh
+# installer rbenv : https://github.com/rbenv/rbenv#installation
+rbenv install `cat .ruby-version`
+make install
+make dev
+```
 
-## Autres sujets plus précis
+optionnel: pour une utilisation de rubocop plus rapide en local, voir https://github.com/fohte/rubocop-daemon#more-speed
 
-Dans le [wiki](https://github.com/betagouv/collectif-objets/wiki/) vous trouverez des informations pour les sujets suivants :
+## Plus de documentation…
 
-- [Premiers pas](https://github.com/betagouv/collectif-objets/wiki/premiers-pas) : Découverte des interfaces et des fonctionnalités
+Après l'installation n'hésitez pas à suivre les [Premiers pas](https://github.com/betagouv/collectif-objets/wiki/premiers-pas)dans le wiki pour découvrir les interfaces et les fonctionnalités
+
+Dans le [wiki](https://github.com/betagouv/collectif-objets/wiki/) vous trouverez des informations sur les sujets suivants :
+
+- [URLs des environnements et des services externes](https://github.com/betagouv/collectif-objets/wiki/urls)
+- [Astreinte, autorisations et accès](https://github.com/betagouv/collectif-objets/wiki/astreinte)
 - [Dumps et seeds](https://github.com/betagouv/collectif-objets/wiki/dumps)
 - [Configuration des buckets S3 sur Scaleway](https://github.com/betagouv/collectif-objets/wiki/buckets-s3)
 - [Origines des données, transformations et stockage](https://github.com/betagouv/collectif-objets/wiki/donnees)
 - [Intégration du Design Système de l'État Français (DSFR)](https://github.com/betagouv/collectif-objets/wiki/dsfr)
-- [Astreinte, autorisations et accès](https://github.com/betagouv/collectif-objets/wiki/astreinte)
