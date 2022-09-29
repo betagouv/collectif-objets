@@ -17,6 +17,7 @@ class CampaignRecipient < ApplicationRecord
   # TODO: validate commune belongs to campaign departement
 
   validate :validate_inactive
+  validate :validate_email
 
   def status
     if campaign.draft? || campaign.planned?
@@ -57,5 +58,11 @@ class CampaignRecipient < ApplicationRecord
     return if persisted? || (campaign.ongoing? || campaign.finished?)
 
     errors.add(:commune_id, "Impossible d'intégrer une commune déjà active") unless commune.inactive?
+  end
+
+  def validate_email
+    return if persisted?
+
+    errors.add(:commune_id, "La commune n'a pas d'email associé") unless commune.users.any?
   end
 end

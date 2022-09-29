@@ -52,20 +52,18 @@
               value="<%= commune.id %>"
               <%= "checked=checked" if checked %>
               data-multichecker-target="checkbox"
-              <%= 'disabled="disabled"' if commune.active? && !checked %>
+              <%# 'disabled="disabled"' if !checked && (commune.active? || commune.users.empty?) %>
             >
           <label
             class="fr-label <%= "co-text--red" if commune.active? && checked %>"
             for="campaign_recipients_attributes_commune_<%= commune.id %>"
-            <% if commune.active? && checked %>
-              title="commune déjà engagée"
-            <% end %>
           >
             <span><%= commune.nom %></span>
+            <% if commune.active? %>&nbsp;<span class="co-text--sm">(déjà active)</span><% end %>
+            <% if commune.users.empty? %>&nbsp;<span class="co-text--sm">(pas d'email)</span><% end %>
             &nbsp;
             <span class="co-text--sm"><%= commune.code_insee %></span>
             &nbsp;
-            <%= "⚙" unless commune.inactive? %>
           </label>
         </div>
         <% end %>

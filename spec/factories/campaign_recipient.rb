@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :campaign_recipient do
-    association :commune
+    commune { association(:commune_with_user) }
     association :campaign
     current_step { nil }
 

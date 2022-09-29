@@ -32,7 +32,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
 
     context "the recipient has opted out" do
       let(:email_name) { "relance1_inactive_email" }
-      let!(:commune) { create(:commune, status: "inactive") }
+      let!(:commune) { create(:commune_with_user, status: "inactive") }
       let(:to_step) { "relance1" }
       let!(:user) { create(:user, commune:) }
       let!(:recipient) do
@@ -54,7 +54,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     context "safeguard : never step up for completed communes" do
       let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
-      let!(:commune) { create(:commune, status: "completed") }
+      let!(:commune) { create(:commune_with_user, status: "completed") }
       let!(:user) { create(:user, commune:) }
       let!(:recipient) do
         create(:campaign_recipient, campaign:, commune:, current_step: "lancement")
@@ -72,7 +72,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     context "the commune step does not match previous step" do
       let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
-      let!(:commune) { create(:commune, status: "inactive") }
+      let!(:commune) { create(:commune_with_user, status: "inactive") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
       let!(:user) { create(:user, commune:) }
       let(:should_skip_mail) { false }
@@ -88,7 +88,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     context "it tries sending an email" do
       let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
-      let!(:commune) { create(:commune, status: "inactive") }
+      let!(:commune) { create(:commune_with_user, status: "inactive") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
       let(:should_skip_mail) { false }
@@ -130,7 +130,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     context "mail ne doit pas être envoyé" do
       let(:email_name) { "relance1_started_email" }
       let(:to_step) { "relance1" }
-      let!(:commune) { create(:commune, status: "started") }
+      let!(:commune) { create(:commune_with_user, status: "started") }
       let!(:user) { create(:user, commune:, email: "mairie-bleue@france.fr") }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
       let(:should_skip_mail) { true }
@@ -148,7 +148,10 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       let(:email_name) { "relance1_inactive_email" }
       let(:to_step) { "relance1" }
       let!(:commune) { create(:commune, status: "inactive") }
-      let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
+      let!(:recipient) do
+        build(:campaign_recipient, campaign:, commune:, current_step: "lancement")
+          .tap { _1.save(validate: false) }
+      end
       let(:should_skip_mail) { false }
 
       it "should not send a mail and update the recipient" do

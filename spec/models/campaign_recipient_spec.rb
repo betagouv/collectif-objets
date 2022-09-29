@@ -30,7 +30,7 @@ RSpec.describe CampaignRecipient, type: :model do
       context "inactive communes can be added as recipients" do
         let(:campaign_recipient) do
           build(:campaign_recipient, campaign: build(:campaign, status: "draft"),
-                                     commune: build(:commune, status: "inactive"))
+                                     commune: build(:commune_with_user, status: "inactive"))
         end
         it { should eq true }
       end
@@ -38,14 +38,14 @@ RSpec.describe CampaignRecipient, type: :model do
       context "active communes cannot be added as recipients" do
         let(:campaign_recipient) do
           build(:campaign_recipient, campaign: build(:campaign, status: "draft"),
-                                     commune: build(:commune, status: "started"))
+                                     commune: build(:commune_with_user, status: "started"))
         end
         it { should eq false }
       end
 
       context "active communes can be re-saved as recipients for ongoing campaigns" do
         let!(:campaign) { create(:campaign, status: "draft") }
-        let!(:commune) { create(:commune, status: "inactive") }
+        let!(:commune) { create(:commune_with_user, status: "inactive") }
         let!(:campaign_recipient) { create(:campaign_recipient, campaign:, commune:) }
         before do
           campaign.plan!
@@ -62,7 +62,7 @@ RSpec.describe CampaignRecipient, type: :model do
 
     context "première relance pour une commune ayant démarré le recensement" do
       let(:step) { "relance1" }
-      let!(:commune) { create(:commune, status: "started") }
+      let!(:commune) { create(:commune_with_user, status: "started") }
       let!(:campaign) { create(:campaign) }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
 
@@ -71,7 +71,7 @@ RSpec.describe CampaignRecipient, type: :model do
 
     context "première relance pour une commune n'ayant pas démarré le recensement" do
       let(:step) { "relance1" }
-      let!(:commune) { create(:commune, status: "inactive") }
+      let!(:commune) { create(:commune_with_user, status: "inactive") }
       let!(:campaign) { create(:campaign) }
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "lancement") }
 
@@ -80,7 +80,7 @@ RSpec.describe CampaignRecipient, type: :model do
 
     context "seconde relance pour une commune ayant recensé juste avant" do
       let(:step) { "relance2" }
-      let!(:commune) { create(:commune, status: "started") }
+      let!(:commune) { create(:commune_with_user, status: "started") }
       let!(:campaign) { create(:campaign) }
       let!(:objet) { create(:objet, commune:) }
       let!(:recensement) { create(:recensement, objet:, updated_at: campaign.date_relance2 - 1.day) }
@@ -91,7 +91,7 @@ RSpec.describe CampaignRecipient, type: :model do
 
     context "seconde relance pour une commune ayant recensé il y a plus de 5 jours" do
       let(:step) { "relance2" }
-      let!(:commune) { create(:commune, status: "started") }
+      let!(:commune) { create(:commune_with_user, status: "started") }
       let!(:campaign) { create(:campaign) }
       let!(:objet) { create(:objet, commune:) }
       let!(:recensement) { create(:recensement, objet:, updated_at: campaign.date_relance2 - 10.days) }

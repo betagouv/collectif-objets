@@ -182,8 +182,12 @@ RSpec.describe Campaign, type: :model do
 
   describe "validate_only_invalid_communes" do
     let!(:campaign) { create(:campaign, status: "draft") }
-    let!(:campaign_recipient1) { create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive")) }
-    let!(:campaign_recipient2) { create(:campaign_recipient, campaign:, commune: build(:commune, status: "inactive")) }
+    let!(:campaign_recipient1) do
+      create(:campaign_recipient, campaign:, commune: build(:commune_with_user, status: "inactive"))
+    end
+    let!(:campaign_recipient2) do
+      create(:campaign_recipient, campaign:, commune: build(:commune_with_user, status: "inactive"))
+    end
 
     context "only inactive communes" do
       it "should allow planning the campaign" do

@@ -278,6 +278,8 @@ fr:
           attributes:
             opt_out_reason:
               blank: "La raison de sortie manuelle de la campagne doit être remplie"
+      messages:
+        record_invalid: 'La validation a échoué : %{errors}'
     attributes:
       recensement:
         localisation: Où se trouve l’objet ?

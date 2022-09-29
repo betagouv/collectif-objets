@@ -59,6 +59,11 @@ class CampaignsController < ApplicationController
   def update_recipients
     @campaign.commune_ids = params.fetch(:campaign, {}).fetch(:recipients_attributes, []).pluck(:commune_id)
     redirect_to campaign_path(@campaign), notice: "Les destinataires de la campagne ont été modifiés"
+  rescue ActiveRecord::RecordInvalid => e
+    redirect_to(
+      campaign_edit_recipients_path(@campaign),
+      alert: "#{e.record.commune.nom} : #{e.record.errors.first.message}"
+    )
   end
 
   def update_status
