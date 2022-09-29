@@ -52,7 +52,7 @@
               value="<%= commune.id %>"
               <%= "checked=checked" if checked %>
               data-multichecker-target="checkbox"
-              <%# 'disabled="disabled"' if !checked && (commune.active? || commune.users.empty?) %>
+              <%= 'disabled="disabled"' if !checked && (commune.active? || commune.users.empty?) %>
             >
           <label
             class="fr-label <%= "co-text--red" if commune.active? && checked %>"
