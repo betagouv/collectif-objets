@@ -150,7 +150,7 @@ fr:
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
     password:
-      hint: 20 caractères minimum (tous les caractères sont autorisés y compris les espaces)
+      hint: 8 caractères minimum (tous les caractères sont autorisés y compris les espaces)
   recensement:
     photos:
       taken_count:
@@ -246,7 +246,7 @@ fr:
             password_confirmation:
               confirmation: "Les deux mots de passe ne correspondent pas, veuillez réessayer"
             password:
-              too_short: "Le mot de passe doit contenir au minimum 20 caractères"
+              too_short: "Le mot de passe doit contenir au minimum 8 caractères"
         dossier:
           attributes:
             commune_id:

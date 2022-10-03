@@ -82,10 +82,10 @@ RSpec.feature "Reset password", type: :feature, js: true do
 
     scenario "reset password too short" do
       visit "/conservateurs/password/edit?reset_password_token=#{reset_password_token}"
-      fill_in "Nouveau mot de passe", with: "tropcourt"
-      fill_in "Confirmation du nouveau mot de passe", with: "tropcourt"
+      fill_in "Nouveau mot de passe", with: "court"
+      fill_in "Confirmation du nouveau mot de passe", with: "court"
       click_on "Changer le mot de passe"
-      expect(page).to have_text("Le mot de passe doit contenir au minimum 20 caractères")
+      expect(page).to have_text("Le mot de passe doit contenir au minimum 8 caractères")
     end
   end
 end
