@@ -65,4 +65,4 @@ group :test do
   gem "webdrivers"
 end
 
-gem "mjml-rails", "~> 4.7"
+gem "mjml-rails", "~> 4.8"
