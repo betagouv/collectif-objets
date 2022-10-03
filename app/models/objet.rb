@@ -8,6 +8,7 @@ class Objet < ApplicationRecord
   has_many :recensements, dependent: :restrict_with_exception
 
   scope :with_photos_first, -> { order('cardinality(image_urls) DESC, LOWER(objets."palissy_DENO") ASC') }
+  scope :order_by_recensement_priorite, -> { joins(:recensements).order(Arel.sql(Recensement::SQL_ORDER_PRIORITE)) }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }

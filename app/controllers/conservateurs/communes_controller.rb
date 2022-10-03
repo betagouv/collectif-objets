@@ -7,9 +7,7 @@ module Conservateurs
     before_action :set_departement, only: [:index]
 
     def show
-      @objets = (@dossier&.objets || @commune.objets)
-        .with_photos_first
-        .includes(:commune, recensements: %i[photos_attachments photos_blobs])
+      @objets = compute_objets
       return true if params[:analyse_saved].blank?
 
       @objets = @objets.where(recensements: { analysed_at: nil })
@@ -54,6 +52,17 @@ module Conservateurs
       return true if current_conservateur.present?
 
       redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
+    end
+
+    def compute_objets
+      if @dossier&.full?
+        return @dossier.objets
+          .order_by_recensement_priorite
+          .includes(:commune, recensements: %i[photos_attachments photos_blobs])
+      end
+      @commune.objets
+        .with_photos_first
+        .includes(:commune, recensements: %i[photos_attachments photos_blobs])
     end
 
     def communes_autocomplete_arel

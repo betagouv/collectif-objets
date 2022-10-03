@@ -31,13 +31,23 @@
 <% if recensement.recensable? %>
   <% ["etat_sanitaire_edifice", "etat_sanitaire", "securisation"].each do |attribute_name| %>
     <%= render "conservateurs/objets/recensement_attribute", attribute_name: do %>
-      <%= render(
-        Conservateurs::AnalyseOverrideEditableComponent.new(
-          form_builder: f,
-          original_attribute_name: attribute_name,
-          recensement_presenter:
-        )
-      ) %>
+      <% if recensement.analysable? %>
+        <%= render(
+          Conservateurs::AnalyseOverrideEditableComponent.new(
+            form_builder: f,
+            original_attribute_name: attribute_name,
+            recensement_presenter:
+          )
+        ) %>
+      <% else %>
+        <%= render(
+          Conservateurs::AnalyseOverrideComponent.new(
+            recensement:,
+            original_attribute_name: attribute_name,
+            recensement_presenter:
+          )
+        ) %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

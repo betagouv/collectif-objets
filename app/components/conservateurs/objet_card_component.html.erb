@@ -12,7 +12,13 @@
 
         <div class="fr-card__start">
           <ul class="fr-tags-group">
-            <%= render partial: "shared/badge_li", collection: desc_badges, as: :badge %>
+            <% tags.each do |tag| %>
+              <li>
+                <p class="fr-tag fr-tag--<%= tag.color %> ">
+                  <%= tag.text %>
+                </p>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -21,7 +27,7 @@
     <div class="fr-card__header">
       <%= render("shared/card_img", url: main_photo_url) %>
       <ul class="fr-badges-group">
-        <%= render partial: "shared/badge_li", collection: floating_badges, as: :badge %>
+        <%= render partial: "shared/badge_li", collection: badges, as: :badge %>
       </ul>
     </div>
   </div>

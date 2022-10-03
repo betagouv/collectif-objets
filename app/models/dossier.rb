@@ -35,6 +35,10 @@ class Dossier < ApplicationRecord
 
   delegate :departement, to: :commune
 
+  def full?
+    recensements.count == commune.objets.count
+  end
+
   def all_recensements_analysed?
     recensements.where(analysed_at: nil).empty?
   end
