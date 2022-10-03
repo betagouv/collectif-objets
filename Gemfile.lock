@@ -240,7 +240,7 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.16.3)
-    mjml-rails (4.7.2)
+    mjml-rails (4.8.0)
     msgpack (1.5.6)
     net-imap (0.2.3)
       digest
@@ -502,7 +502,7 @@ DEPENDENCIES
   launchy
   lookbook
   matrix
-  mjml-rails (~> 4.7)
+  mjml-rails (~> 4.8)
   pagy (~> 5.10)
   pg (~> 1.4)
   pg_search
