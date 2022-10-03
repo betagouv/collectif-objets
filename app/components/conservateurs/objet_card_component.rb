@@ -24,7 +24,7 @@ module Conservateurs
     def main_photo_url
       return recensement.photos.first.variant(:medium) if recensement&.photos&.attached?
 
-      return objet.image_urls.first if objet.image_urls.any?
+      return objet.palissy_photos.first["url"] if objet.palissy_photos.any?
 
       "images/illustrations/photo-manquante.png"
     end

@@ -27,7 +27,7 @@ class CampaignV1MailerPreview < ActionMailer::Preview
 
     def commune.highlighted_objet
       OpenStruct.new(
-        image_urls: [],
+        palissy_photos: [],
         nom_formatted: "Grande table Louis XVI",
         edifice_nom_formatted: "Église St-Baptiste",
         emplacement: "Sacristie"

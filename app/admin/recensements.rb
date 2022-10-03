@@ -56,7 +56,7 @@ ActiveAdmin.register Recensement do
             row :palissy_TICO
             row :palissy_EDIF
             row :palissy_EMPL
-            row :image_urls
+            row :palissy_photos_img
             row :palissy_CATE
             row :palissy_SCLE
             row :created_at

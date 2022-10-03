@@ -5,7 +5,7 @@ class GalleryComponentPreview < ViewComponent::Preview
     urls = [
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP51P00156/sap01_51p00156_p.jpg"
     ]
-    render(GalleryComponent.from_urls(urls))
+    render(GalleryComponent.palissy_photos_from_objet(urls))
   end
 
   # @param count number
@@ -18,6 +18,6 @@ class GalleryComponentPreview < ViewComponent::Preview
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L040654/sap04_80l040654_p.jpg",
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L040655/sap04_80l040655_p.jpg"
     ].first(count)
-    render(GalleryComponent.from_urls(urls))
+    render(GalleryComponent.palissy_photos_from_objet(urls))
   end
 end

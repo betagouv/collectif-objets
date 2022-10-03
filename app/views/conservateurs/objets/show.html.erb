@@ -54,7 +54,7 @@
           <div class="fr-card__header">
             <%= render(
               "shared/card_img",
-              url: @objet.image_urls.any? ? @objet.image_urls.first : "images/illustrations/photo-manquante-pop.png"
+              url: @objet.palissy_photos.any? ? @objet.first_palissy_photo_url : "images/illustrations/photo-manquante-pop.png"
             ) %>
           </div>
         </div>

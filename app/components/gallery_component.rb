@@ -4,7 +4,7 @@ class GalleryComponent < ViewComponent::Base
   include ApplicationHelper # for vite_or_raw_image_tag
 
   MAX_PHOTOS_SHOWN = 4
-  PHOTO_STRUCT = Struct.new(:original_url, :thumb_url)
+  PHOTO_STRUCT = Struct.new(:original_url, :thumb_url, :description)
 
   attr_reader :photos_structs
 
@@ -15,15 +15,20 @@ class GalleryComponent < ViewComponent::Base
       attachments.map do |attachment|
         PHOTO_STRUCT.new(
           Rails.application.routes.url_helpers.url_for(attachment),
-          Rails.application.routes.url_helpers.url_for(attachment.variant(:medium))
+          Rails.application.routes.url_helpers.url_for(attachment.variant(:medium)),
+          "© Licence ouverte"
         )
       end,
       **kwargs
     )
   end
 
-  def self.from_urls(original_urls, **kwargs)
-    new(original_urls.map { PHOTO_STRUCT.new(_1, _1) }, **kwargs)
+  def self.palissy_photos_from_objet(objet, **kwargs)
+    new(
+      objet.palissy_photos.map { PHOTO_STRUCT.new(_1["url"], _1["url"], _1["credit"]) },
+      title: I18n.t("objets.palissy_photos_count", count: objet.palissy_photos.count),
+      **kwargs
+    )
   end
 
   def initialize(photos_structs, title: nil, responsive_versions: %i[full small])
@@ -70,5 +75,13 @@ class GalleryComponent < ViewComponent::Base
     return 1 if count < MAX_PHOTOS_SHOWN
 
     5
+  end
+
+  def json_data
+    photos_structs.map { { src: _1.original_url, description: _1.description } }.to_json
+  end
+
+  def first_description
+    photos_structs.first&.description&.presence
   end
 end

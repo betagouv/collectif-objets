@@ -68,10 +68,9 @@ class SynchronizeObjetsJob
 
   def build_objet_from_raw(raw_objet)
     objet = Objet.where(palissy_REF: raw_objet["REF"]).first_or_initialize
-    new_attributes = %w[DENO CATE COM INSEE DPT SCLE DENQ DOSS EDIF EMPL TICO].to_h do |pop_column|
+    new_attributes = %w[DENO CATE COM INSEE DPT SCLE DENQ DOSS EDIF EMPL TICO AUTP].to_h do |pop_column|
       ["palissy_#{pop_column}", raw_objet[pop_column]]
     end
-    new_attributes["image_urls"] = raw_objet.photo_urls
     new_attributes["palissy_photos"] = raw_objet.photo_structs
 
     objet.assign_attributes(new_attributes)
@@ -106,10 +105,6 @@ class RawObjet
 
   def [](key)
     @values[key]
-  end
-
-  def photo_urls
-    override_photo_urls || palissy_photo_urls || []
   end
 
   def photo_structs

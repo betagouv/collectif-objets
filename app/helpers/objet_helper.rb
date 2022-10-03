@@ -2,7 +2,7 @@
 
 module ObjetHelper
   def objet_first_image_or_recensement_photo_url(objet)
-    return objet.image_urls.first if objet.image_urls.any?
+    return objet.palissy_photos.first["url"] if objet.palissy_photos.any?
 
     if objet.current_recensement&.photos&.attached? && can_see_recensement_for(objet)
       return objet.current_recensement.photos.first.variant(:medium)

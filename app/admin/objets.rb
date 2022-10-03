@@ -15,7 +15,7 @@ ActiveAdmin.register Objet do
     column :commune
     column :palissy_EDIF
     column :palissy_EMPL
-    column :image_urls
+    column :palissy_photos_img
     column :palissy_CATE
     column :palissy_SCLE
     column :created_at
@@ -42,10 +42,9 @@ ActiveAdmin.register Objet do
           row :commune
           row :palissy_EDIF
           row :palissy_EMPL
-          row :image_urls
+          row :palissy_photos_img
           row :palissy_CATE
           row :palissy_SCLE
-          row :image_urls
           row :palissy_DOSS
           row :created_at
         end

@@ -16,8 +16,8 @@
     <div class="fr-col-md-6">
       <div class="co-objet-summary">
         <div class="co-objet-thumb">
-          <% if recensement.objet.image_urls.any? %>
-            <img src="<%= recensement.objet.image_urls[0] %>" alt="">
+          <% if recensement.objet.palissy_photos.any? %>
+            <img src="<%= recensement.objet.first_palissy_photo_url %>" alt="">
           <% else %>
             <%= vite_image_tag "images/illustrations/photo-manquante.png" %>
           <% end %>
