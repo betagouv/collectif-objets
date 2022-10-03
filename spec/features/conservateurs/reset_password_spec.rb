@@ -8,7 +8,8 @@ RSpec.feature "Reset password", type: :feature, js: true do
     create(
       :conservateur,
       email: "jeanne.michel@culture.gouv.fr",
-      password: "alexandre-lenoir-a-ete-le-premier-conservateur-sympa"
+      password: "alexandre-lenoir-a-ete-le-premier-conservateur-sympa",
+      last_sign_in_at: 2.days.ago
     )
   end
 
@@ -25,14 +26,14 @@ RSpec.feature "Reset password", type: :feature, js: true do
     )
     email = ActionMailer::Base.deliveries.last
     expect(email.subject).to eq("Instructions pour changer le mot de passe")
-    res = email.body.parts.first.body.match(%r{/conservateurs/password/edit\?reset_password_token=[a-zA-Z0-9\-_]+})
+    res = email.body.raw_source.match(%r{/conservateurs/password/edit\?reset_password_token=[a-zA-Z0-9\-_]+})
     expect(res).not_to be_nil
     reset_password_path = res[0]
     visit(reset_password_path)
-    expect(page).to have_text("Changer votre mot de passe")
+    expect(page).to have_text("(Re-)définir votre mot de passe")
     fill_in "Nouveau mot de passe", with: "le-nouveau-mot-de-passe-est-tres-long"
     fill_in "Confirmation du nouveau mot de passe", with: "le-nouveau-mot-de-passe-est-tres-long"
-    click_on "Changer le mot de passe"
+    click_on "(Re-)définir le mot de passe"
     expect(page).to have_text("Votre mot de passe a bien été modifié. Vous êtes maintenant connecté(e)")
     expect(conservateur.reload.valid_password?("le-nouveau-mot-de-passe-est-tres-long")).to be(true)
   end
@@ -58,7 +59,7 @@ RSpec.feature "Reset password", type: :feature, js: true do
       visit "/conservateurs/password/edit?reset_password_token=#{reset_password_token}"
       fill_in "Nouveau mot de passe", with: "lhistoire-de-lart-est-passionnante-nest-ce-pas"
       fill_in "Confirmation du nouveau mot de passe", with: "lhistoire-de-lart-est-passionnante-nest-ce-pas"
-      click_on "Changer le mot de passe"
+      click_on "(Re-)définir le mot de passe"
       expect(page).to have_text("Ce lien de réinitialisation a expiré")
     end
   end
@@ -76,7 +77,7 @@ RSpec.feature "Reset password", type: :feature, js: true do
       visit "/conservateurs/password/edit?reset_password_token=#{reset_password_token}"
       fill_in "Nouveau mot de passe", with: "lhistoire-de-lart-est-passionnante-nest-ce-pas"
       fill_in "Confirmation du nouveau mot de passe", with: "ca-na-rien-a-voir-cette-confirmation-cest-nul"
-      click_on "Changer le mot de passe"
+      click_on "(Re-)définir le mot de passe"
       expect(page).to have_text("Les deux mots de passe ne correspondent pas, veuillez réessayer")
     end
 
@@ -84,7 +85,7 @@ RSpec.feature "Reset password", type: :feature, js: true do
       visit "/conservateurs/password/edit?reset_password_token=#{reset_password_token}"
       fill_in "Nouveau mot de passe", with: "court"
       fill_in "Confirmation du nouveau mot de passe", with: "court"
-      click_on "Changer le mot de passe"
+      click_on "(Re-)définir le mot de passe"
       expect(page).to have_text("Le mot de passe doit contenir au minimum 8 caractères")
     end
   end

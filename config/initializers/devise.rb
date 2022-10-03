@@ -27,7 +27,7 @@ Devise.setup do |config|
   config.mailer_sender = 'collectifobjets@beta.gouv.fr'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'CustomDeviseMailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
@@ -316,3 +316,9 @@ Devise.add_module(:passwordless_authenticatable, {
   model: 'devise/models/passwordless_authenticatable',
   route: :session
 })
+
+Warden::Manager.after_set_user except: :fetch do |record, warden, options|
+  if record.respond_to?(:last_sign_in_at) && warden.authenticated?(options[:scope])
+    record.update!(last_sign_in_at: Time.zone.now)
+  end
+end

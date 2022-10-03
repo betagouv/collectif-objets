@@ -30,6 +30,7 @@ ActiveAdmin.register Conservateur do
           row :last_name
           row :departements
           row :phone_number
+          row :last_sign_in_at
         end
       end
       div do
@@ -43,11 +44,11 @@ ActiveAdmin.register Conservateur do
   form do |f|
     f.semantic_errors # shows errors on :base
     f.inputs do
-      f.input(:email, (f.object.new_record? ? {} : { input_html: { disabled: true } }))
+      f.input :email
       f.input :first_name
       f.input :last_name
       f.input :phone_number
-      f.input :departements, label: "Départements (choix multiples avec shift ou alt !)"
+      f.input :departements, label: "Départements (choix multiples avec shift ou alt !)", as: :check_boxes
     end
     f.actions # adds the 'Submit' and 'Cancel' buttons
   end
@@ -69,6 +70,28 @@ ActiveAdmin.register Conservateur do
       params[:conservateur][:password_confirmation] = password
       super
     end
+  end
+
+  member_action :reset_password, method: :post do
+    next if resource.last_sign_in_at?
+
+    resource.send_reset_password_instructions
+    redirect_to resource_path(resource), notice: "Mail d'invitation envoyé"
+  end
+
+  action_item :reset_password_action, only: :show do
+    next if resource.last_sign_in_at?
+
+    link_to(
+      "📤 Envoyer mail d'invitation",
+      reset_password_admin_conservateur_path(resource),
+      method: "POST",
+      data: {
+        confirm:
+          "Êtes-vous sûr·e de vouloir envoyer le mail d'invitation pour définir le mot de passe ?" \
+          "Les liens envoyés dans d'éventuels mails précédents seront invalidés."
+      }
+    )
   end
 end
 # rubocop:enable Metrics/BlockLength

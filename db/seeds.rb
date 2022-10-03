@@ -11,12 +11,12 @@ puts "downloading seeds file from ..."
 run("curl https://s3.fr-par.scw.cloud/collectif-objets-public/seeds.pgsql > #{path}")
 
 db = Rails.configuration.database_configuration[Rails.env]
-db_url = "postgresql://#{db["username"]}:#{db["password"]}@#{db["host"]}:#{db["port"]}/#{db["database"]}"
+db_url = db["url"] || "postgresql://#{db["username"]}:#{db["password"]}@#{db["host"]}:#{db["port"]}/#{db["database"]}"
 
 puts "restoring data to postgres db..."
 run("pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=#{db_url} #{path}
 ")
 puts "done"
 
-AdminUser.create!(email: "admin@collectif.local", password: "123456")
-Conservateur.create!(email: "conservateur@collectif.local", password: "123456789 123456789 123456789", departements: Departement.where(code: %w[06 09 12 19 26 51 52 86]))
+AdminUser.create!(email: "admin@collectif.local", password: "123456789")
+Conservateur.create!(email: "conservateur@collectif.local", password: "123456789", departements: Departement.where(code: %w[06 09 12 19 26 51 52 86]))
