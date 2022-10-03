@@ -10,6 +10,7 @@ module Conservateurs
     def initialize(recensement:, original_attribute_name:, recensement_presenter: nil)
       @recensement = recensement
       @original_attribute_name = original_attribute_name
+      @recensement_presenter = recensement_presenter
       super
     end
 

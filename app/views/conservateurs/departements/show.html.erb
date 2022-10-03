@@ -2,7 +2,7 @@
 
 <main>
   <div class="fr-container fr-grid-row fr-py-6w fr-grid-row--center">
-    <div class="fr-col-md-8">
+    <div class="fr-col-md-10">
       <%= render(
         "shared/breadcrumbs",
         links: [["Départements", conservateurs_departements_path]],
@@ -20,7 +20,7 @@
 
   <div class="co-background--light-teal fr-py-12w">
     <div class="fr-container fr-grid-row fr-grid-row--center fr-grid-row--middle">
-      <div class="fr-col-md-5">
+      <div class="fr-col-md-6">
         <div class="fr-h4 fr-mb-2w">
           <%= @stats.objets_recenses_percentage %>%
           <span class="fr-text--lg fr-text--regular">des objets ont été recensés</span>
@@ -35,7 +35,7 @@
         </div>
         <div><b><%= @stats.communes_completed_count %> communes</b> sur <%= @stats.communes_count %></div>
       </div>
-      <div class="fr-col-md-3 co-text--center">
+      <div class="fr-col-md-4 co-text--center">
         <b>
           <%= t(".stats.etats_sanitaires_distribution_title") %>
         </b>
@@ -49,7 +49,7 @@
   </div>
 
   <div class="fr-container fr-grid-row fr-py-6w fr-grid-row--center" id="communes">
-    <div class="fr-col-md-8">
+    <div class="fr-col-md-10">
       <%= turbo_frame_tag "communes-search" do %>
         <%# "data-turbo-action": "advance" %>
         <%= render Conservateurs::CommunesSearchComponent.new(communes_search: @communes_search) %>

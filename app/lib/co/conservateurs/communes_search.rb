@@ -6,7 +6,7 @@ module Co
       attr_reader :filters, :order, :departement
 
       VALID_ORDER_KEYS = [
-        "nom", "objets_count", "recensements_peril_count",
+        "nom", "objets_count", "recensements_prioritaires_count",
         "communes.status", "dossiers.status"
       ].freeze
       VALID_ORDER_DIRS = %w[ASC DESC].freeze
@@ -20,7 +20,7 @@ module Co
       end
 
       def set_order
-        return @order = "nom ASC" if params[:order].blank?
+        return @order = "recensements_prioritaires_count DESC" if params[:order].blank?
 
         @order = params[:order]
         key, dir = @order.split

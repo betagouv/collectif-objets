@@ -71,9 +71,13 @@ fr:
         inactive: Communes inactive
         started: Recensement démarré
         completed: Recensement terminé
+      prioritaires:
+        one: 1 objet prioritaire
+        other: "%{count} objets prioritaires"
+
     objet_card_component:
       analysed_badge: Analysé
-      introuvable_badge: Introuvable
+      prioritaire_badge: Prioritaire
     accepts:
       new:
         head_title: "Rapport de recensement pour %{commune}"
@@ -153,6 +157,7 @@ fr:
       hint: 8 caractères minimum (tous les caractères sont autorisés y compris les espaces)
   recensement:
     photos:
+      missing: photos manquantes
       taken_count:
         zero: "aucune photo de recensement"
         one: "1 photo prise lors du recensement"

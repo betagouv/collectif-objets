@@ -2,6 +2,7 @@
 
 class Recensement < ApplicationRecord
   include Recensements::AnalyseConcern
+  include Recensements::BooleansConcern
 
   belongs_to :objet
   belongs_to :user
@@ -73,6 +74,17 @@ class Recensement < ApplicationRecord
   scope :in_commune, ->(commune) { joins(:objet).where(objets: { commune: }) }
   scope :not_analysed, -> { where(analysed_at: nil) }
 
+  SQL_ORDER_PRIORITE = <<-SQL.squish
+    CASE WHEN (
+      recensements.localisation = 'absent'
+      OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
+      OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
+    ) THEN 0
+    ELSE 1
+    END
+  SQL
+  scope :order_by_priorite, -> { order(Arel.sql(SQL_ORDER_PRIORITE)) }
+
   accepts_nested_attributes_for :dossier
 
   def self.ransackable_scopes(_auth_object = nil)
@@ -94,27 +106,7 @@ class Recensement < ApplicationRecord
     end
   end
 
-  def absent?
-    localisation == LOCALISATION_ABSENT
-  end
-
-  def autre_edifice?
-    localisation == LOCALISATION_AUTRE_EDIFICE
-  end
-
-  def edifice_initial?
-    localisation == LOCALISATION_EDIFICE_INITIAL
-  end
-
-  def editable?
-    commune.objets_recensable?
-  end
-
-  def missing_photos?
-    recensable? && (edifice_initial? || autre_edifice?) && photos.empty?
-  end
-
-  def en_peril?
-    [analyse_etat_sanitaire, etat_sanitaire].compact.first == ETAT_PERIL
+  def analysable?
+    commune.completed?
   end
 end

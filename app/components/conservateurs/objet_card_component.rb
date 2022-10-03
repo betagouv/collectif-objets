@@ -9,12 +9,12 @@ module Conservateurs
       super
     end
 
-    def desc_badges
-      @desc_badges ||= [not_recensed_badge, peril_badge, missing_photos_badge].compact
+    def tags
+      @tags ||= [not_recensed_badge, missing_photos_badge].compact
     end
 
-    def floating_badges
-      @floating_badges ||= [analysed_badge, introuvable_badge].compact
+    def badges
+      @badges ||= [analysed_badge, prioritaire_badge].compact
     end
 
     def recensement
@@ -39,16 +39,11 @@ module Conservateurs
       badge_struct.new("warning", "Pas encore recensé") if recensement.nil?
     end
 
-    def peril_badge
-      badge_struct.new("warning", "En péril") \
-        if recensement&.analyse_or_original_value(:etat_sanitaire) == Recensement::ETAT_PERIL
-    end
-
     def missing_photos_badge
       return nil unless recensement&.missing_photos?
 
       badge_struct.new(
-        "warning", I18n.t("recensement.photos.taken_count", count: 0)
+        "warning", I18n.t("recensement.photos.missing")
       )
     end
 
@@ -61,12 +56,12 @@ module Conservateurs
       )
     end
 
-    def introuvable_badge
-      return nil unless recensement&.absent?
+    def prioritaire_badge
+      return nil unless recensement&.prioritaire?
 
       badge_struct.new(
         "warning",
-        I18n.t("conservateurs.objet_card_component.introuvable_badge")
+        I18n.t("conservateurs.objet_card_component.prioritaire_badge")
       )
     end
   end
