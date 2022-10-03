@@ -15,6 +15,7 @@
     </h5>
     <%= render "aide_callout" %>
     <%= render "list", objets_list: @objets_list %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.can_complete? %>
     <h5 class="co-text--blue">
@@ -22,6 +23,7 @@
     </h5>
     <%= render "complete_callout", dossier: @dossier, commune: @commune %>
     <%= render "list", objets_list: @objets_list %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.started? %>
     <h5 class="co-text--blue">
@@ -29,6 +31,7 @@
     </h5>
     <%= render "list", objets_list: @objets_list %>
     <%= render "aide_callout" %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.completed? && @dossier.submitted? %>
     <div class="co-text--center">
@@ -52,9 +55,11 @@
       ) %>
     </p>
     <%= render "aide_callout" %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.completed? && @dossier.accepted? %>
     <%= render "accepted_callout", dossier: @dossier %>
     <%= render "list", objets_list: @objets_list %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
   <% end %>
 </main>

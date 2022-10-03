@@ -131,6 +131,10 @@
   font-size: 0.8em;
 }
 
+.co-text--underline {
+  text-decoration: underline;
+}
+
 /* FLEX */
 
 .co-flex {

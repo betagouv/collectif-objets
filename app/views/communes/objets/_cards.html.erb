@@ -8,16 +8,16 @@
           <div class="fr-card__content">
             <h4 class="fr-card__title">
               <%= link_to(
-                t(".pourquoi_n_objets", count: objets.count),
+                t("communes.objets.objets_manquants.pourquoi_n_objets", count: objets.count),
                 aide_path,
                 class: "fr-card__link"
               ) %>
             </h4>
             <p class="fr-card__desc">
-              <%= t(".seulement_objets_proteges_html") %>
+              <%= t("communes.objets.objets_manquants.seulement_objets_proteges_html") %>
             </p>
-            <p class="fr-card__desc">
-              <%= t(".en_savoir_plus_html") %>
+            <p class="fr-card__desc co-text--underline">
+              <%= t("communes.objets.objets_manquants.en_savoir_plus") %>
             </p>
           </div>
         </div>

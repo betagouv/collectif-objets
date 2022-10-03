@@ -49,12 +49,12 @@ fr:
         leftover_in_edifice: "Ces objets sont encore à recenser dans l'édifice %{nom}:"
         cta: Finaliser le recensement…
         back: Revenir à la liste d'objets de ma commune
-      cards:
+      objets_manquants:
         pourquoi_n_objets:
           one: Pourquoi cette liste ne contient qu'un objet ?
           other: Pourquoi cette liste ne contient que %{count} objets ?
         seulement_objets_proteges_html: Ce recensement concerne <b>uniquement les objets monuments historiques</b>, dont la responsabilité est partagée entre les pouvoirs publics et les communes propriétaires.
-        en_savoir_plus_html: <u>En savoir plus…</u>
+        en_savoir_plus: En savoir plus…
     recompletions:
       new:
         head_title: "Renvoi du dossier de recensement de %{commune_nom}"

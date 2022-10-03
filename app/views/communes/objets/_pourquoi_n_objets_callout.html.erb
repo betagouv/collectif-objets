@@ -1,0 +1,11 @@
+<div class="fr-callout">
+  <p class="fr-callout__text co-text--blue">
+    <%= t("communes.objets.objets_manquants.pourquoi_n_objets", count: objets_list.count) %>
+  </p>
+  <p class="fr-callout__text">
+    <%= t("communes.objets.objets_manquants.seulement_objets_proteges_html") %>
+  </p>
+  <p class="fr-callout__text">
+    <%= link_to t("communes.objets.objets_manquants.en_savoir_plus"), aide_path %>
+  </p>
+</div>
