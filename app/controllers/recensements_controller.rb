@@ -73,7 +73,6 @@ class RecensementsController < ApplicationController
       etat_sanitaire: nil,
       etat_sanitaire_edifice: nil,
       securisation: nil,
-      edifice_nom: nil,
       photos: []
     )
   end

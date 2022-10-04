@@ -80,9 +80,23 @@ RSpec.describe Recensement, type: :model do
 
       context "other fields empty" do
         let(:recensement) { build(:recensement, attributes) }
-        it do
-          expect(recensement.valid?).to eq true
+        it { should eq true }
+      end
+
+      context "autre edifice with edifice_nom set" do
+        let(:recensement) do
+          build(:recensement,
+                attributes.merge(localisation: Recensement::LOCALISATION_AUTRE_EDIFICE, edifice_nom: "autre eglise"))
         end
+        it { should eq true }
+      end
+
+      context "autre edifice with edifice_nom not set" do
+        let(:recensement) do
+          build(:recensement,
+                attributes.merge(localisation: Recensement::LOCALISATION_AUTRE_EDIFICE, edifice_nom: nil))
+        end
+        it { should eq false }
       end
 
       context "etat_sanitaire filled" do
