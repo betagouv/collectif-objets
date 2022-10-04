@@ -456,11 +456,10 @@ fr:
       long_with_weekday: "%A %e %B %Y à %Hh%M"
     pm: pm
   objets:
-    show:
-      pop_photos_count:
-        zero: Aucune photo connue pour cet objet
-        one: 1 photo connue pour cet objet
-        other: "%{count} photos connues pour cet objet"
+    palissy_photos_count:
+      zero: Aucune photo connue pour cet objet
+      one: 1 photo connue pour cet objet
+      other: "%{count} photos connues pour cet objet"
   gallery_component:
     open:
       one: Agrandir

@@ -1,7 +1,7 @@
-<% image_url = objet.image_urls&.first || "https://i.imgur.com/n9yygdj.jpeg" %>
+<% photo_url = objet.first_palissy_photo_url || "https://i.imgur.com/n9yygdj.jpeg" %>
 <mj-section>
   <mj-column>
-    <mj-image width="300px" src="<%= image_url %>" />
+    <mj-image width="300px" src="<%= photo_url %>" />
     <mj-text align="center">
       <%= objet.nom_formatted %>
       <br />

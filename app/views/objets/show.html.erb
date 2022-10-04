@@ -31,11 +31,7 @@
         </div>
       <% end %>
 
-      <%= render GalleryComponent.from_urls(
-        @objet.image_urls,
-        title: t(".pop_photos_count", count: @objet.image_urls.count),
-        responsive_versions: [:small]
-      ) %>
+      <%= render GalleryComponent.palissy_photos_from_objet(@objet, responsive_versions: [:small]) %>
 
       <p>
         <b>Emplacement</b><br />
@@ -73,11 +69,7 @@
       </p>
     </div>
     <div class="fr-col-md-6">
-      <%= render GalleryComponent.from_urls(
-        @objet.image_urls,
-        title: t(".pop_photos_count", count: @objet.image_urls.count),
-        responsive_versions: [:full]
-      ) %>
+      <%= render GalleryComponent.palissy_photos_from_objet(@objet, responsive_versions: [:full]) %>
     </div>
   </div>
 </main>

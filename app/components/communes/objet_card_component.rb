@@ -6,7 +6,7 @@ module Communes
 
     with_collection_parameter :objet
 
-    delegate :nom, :nom_courant, :commune, :edifice_nom, :current_recensement, :image_urls, to: :objet
+    delegate :nom, :nom_courant, :commune, :edifice_nom, :current_recensement, :palissy_photos, to: :objet
     delegate :dossier, to: :current_recensement, allow_nil: true
 
     def initialize(objet:, badges: nil, display_recensement_photos: true)
@@ -28,7 +28,7 @@ module Communes
       return current_recensement.photos.first.variant(:medium) \
         if @display_recensement_photos && current_recensement&.photos&.attached?
 
-      return image_urls.first if image_urls.any?
+      return palissy_photos.first["url"] if palissy_photos.any?
 
       "images/illustrations/photo-manquante.png"
     end

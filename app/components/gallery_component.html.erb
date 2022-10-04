@@ -1,10 +1,9 @@
-
 <% if responsive_version_full? %>
   <div
     data-controller="photo-gallery"
     class="co-gallery co-gallery--full co-hide--md fr-mb-4w"
     data-photo-gallery-target="photos"
-    data-urls-json="<%= photos_structs.map(&:original_url).to_json %>"
+    data-images-json="<%= json_data %>"
   >
     <p>
       <b><%= title %></b>
@@ -55,6 +54,11 @@
         </div>
       </div>
     <% end %>
+    <% if first_description %>
+      <p class="co-text--italic fr-text--sm fr-mt-2w">
+        <%= first_description %>
+      </p>
+    <% end %>
   </div>
 <% end %>
 
@@ -90,6 +94,11 @@
       >
         Voir la galerie de <%= count %> photos
       </a>
+    <% end %>
+    <% if first_description %>
+      <p class="co-text--italic fr-text--sm fr-mt-2w">
+        <%= first_description %>
+      </p>
     <% end %>
   </div>
 <% end %>

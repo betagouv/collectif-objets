@@ -7,11 +7,8 @@ export default class extends Controller {
 
   show(e) {
     e.preventDefault()
-    const urls = JSON.parse(this.photosTarget.dataset.urlsJson)
+    const data = JSON.parse(this.photosTarget.dataset.imagesJson)
     const index = e.currentTarget.dataset.index ? Number(e.currentTarget.dataset.index) : null
-    Spotlight.show(
-      urls.map(url => ({ src: url })),
-      { index: index }
-    )
+    Spotlight.show(data, { index: index })
   }
 }

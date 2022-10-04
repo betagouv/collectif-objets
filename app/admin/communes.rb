@@ -89,7 +89,7 @@ ActiveAdmin.register Commune do
             column :palissy_TICO
             column :palissy_EDIF
             column :palissy_EMPL
-            column :image_urls
+            column :palissy_photos_img
             column :palissy_CATE
             column :palissy_SCLE
             column :created_at

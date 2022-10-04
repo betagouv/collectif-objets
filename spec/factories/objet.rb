@@ -22,7 +22,14 @@ FactoryBot.define do
     end
 
     trait :with_image do
-      image_urls { ["https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L043503/sap04_80l043503_p.jpg"] }
+      palissy_photos do
+        [
+          {
+            "url" => "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L043503/sap04_80l043503_p.jpg",
+            "credit" => "© Médiathèque Paris"
+          }
+        ]
+      end
     end
   end
 end

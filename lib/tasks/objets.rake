@@ -42,35 +42,6 @@ namespace :objets do
     end
   end
 
-  # rake "objets:import_images[../../pop-scraper/exports/palissy/palissy_dpt_52.csv]"
-  task :import_images, [:path] => :environment do |_, args|
-    puts "before: #{Objet.with_images.count} objets have photos"
-    pop_s3_url = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
-    for row in CSV.read(args[:path], headers: true) do
-      next if row["MEMOIRE_URLS"].blank?
-
-      objet = Objet.find_by(palissy_REF: row["REF"])
-      next unless objet
-
-      new_image_urls = row["MEMOIRE_URLS"].split(";").map { "#{pop_s3_url}/#{_1}" }
-      next if objet.image_urls == new_image_urls
-
-      if objet.image_urls.present?
-        puts "updating image urls for #{objet.palissy_REF} : "
-        puts "before: "
-        objet.image_urls.each { puts(_1) }
-        puts "after: "
-        new_image_urls.each { puts(_1) }
-      else
-        puts "adding #{new_image_urls.count} new images for #{objet.palissy_REF}"
-      end
-      puts
-
-      objet.update!(image_urls: new_image_urls)
-    end
-    puts "after: #{Objet.with_images.count} objets have photos"
-  end
-
   # rake objets:import_insee[../collectif-objets-data/pop-exports-custom]
   task :import_insee, [:path] => :environment do |_, args|
     puts "before: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
@@ -99,19 +70,6 @@ namespace :objets do
       objet.save!
     end
     puts "after: #{Objet.where.not(palissy_TICO: nil).count}/#{Objet.count} objets have nom courant"
-  end
-
-  # rake "objets:export[../collectif-objets-data/rails-objets-wrong-images.csv]"
-  desc "export wrong images"
-  task :export_wrong_images, [:path] => :environment do |_, args|
-    headers = ["ref", "image_urls"]
-    CSV.open(args[:path], "wb", headers: true) do |csv|
-      csv << headers
-      objets = Objets.
-      objets.each do |objet|
-        csv << [objet.ref, objet.image_urls]
-      end
-    end
   end
 
   # rake "objets:import_scle[../collectif-objets-data/pop-scle-column.csv]"

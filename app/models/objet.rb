@@ -3,11 +3,11 @@
 class Objet < ApplicationRecord
   include ActionView::Helpers::TextHelper # for truncate
 
-  scope :with_images, -> { where("cardinality(image_urls) >= 1") }
+  scope :with_images, -> { where("cardinality(palissy_photos) >= 1") }
   belongs_to :commune, foreign_key: :palissy_INSEE, primary_key: :code_insee, optional: true, inverse_of: :objets
   has_many :recensements, dependent: :restrict_with_exception
 
-  scope :with_photos_first, -> { order('cardinality(image_urls) DESC, LOWER(objets."palissy_DENO") ASC') }
+  scope :with_photos_first, -> { order('cardinality(palissy_photos) DESC, LOWER(objets."palissy_DENO") ASC') }
   scope :order_by_recensement_priorite, -> { joins(:recensements).order(Arel.sql(Recensement::SQL_ORDER_PRIORITE)) }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
@@ -38,8 +38,8 @@ class Objet < ApplicationRecord
     end
   end
 
-  def first_image_url
-    image_urls&.first
+  def first_palissy_photo_url
+    palissy_photos.any? && palissy_photos.first["url"]
   end
 
   def nom_with_ref_pop
@@ -62,7 +62,7 @@ class Objet < ApplicationRecord
   def self.select_best_objet_in_list(objets_arr)
     current_arr = objets_arr
     [
-      ->(obj) { obj.image_urls.any? },
+      ->(obj) { obj.palissy_photos.any? },
       ->(obj) { obj.nom.exclude?(";") },
       ->(obj) { obj.nom.match?(/[A-Z]/) },
       ->(obj) { obj.edifice_nom.present? },
@@ -75,4 +75,8 @@ class Objet < ApplicationRecord
     current_arr.first
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+  def credits_photos
+    palissy_AUTP.presence&.split(";")&.map(&:strip) || []
+  end
 end

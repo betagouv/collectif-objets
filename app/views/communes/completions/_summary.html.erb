@@ -19,8 +19,8 @@
           <td>
             <div>
               <div>
-                <% if recensement.objet.image_urls.any? %>
-                  <img src="<%= recensement.objet.image_urls[0] %>" alt="" class="co--width-max-100">
+                <% if recensement.objet.palissy_photos.any? %>
+                  <img src="<%= recensement.objet.first_palissy_photo_url %>" alt="" class="co--width-max-100">
                 <% else %>
                   <%= vite_image_tag "images/illustrations/photo-manquante.png" %>
                 <% end %>
