@@ -9,12 +9,11 @@ class SynchronizeObjetsJob
     _sort: "REF",
     _shape: "objects",
     _nofacet: "1",
-    _col: %w[REF DENO CATE COM INSEE DPT SCLE DENQ DOSS EDIF EMPL TICO MEMOIRE_URLS],
+    _col: %w[REF DENO CATE COM INSEE DPT SCLE DENQ DOSS EDIF EMPL TICO MEMOIRE_URLS AUTP],
     DOSS: "dossier individuel",
     PROT__not: "déclassé",
     STAT__not: ["propriété de l'Etat (?)", "propriété de l'Etat"]
   }.freeze
-  MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
 
   def perform(departement = nil)
     if departement.present?
@@ -40,7 +39,11 @@ class SynchronizeObjetsJob
     logger.info "-- query : #{parsed['query']}" if initial
     logger.info "-- total rows filtered: #{parsed['filtered_table_rows_count']}" if initial
 
-    parsed["rows"].each { synchronize_objet(_1) }
+    parsed["rows"].each do |values|
+      raw_objet = RawObjet.new(values, objet_overrides_by_ref[values["REF"]])
+
+      synchronize_objet(raw_objet)
+    end
 
     trigger_next_query(parsed)
   end
@@ -68,8 +71,9 @@ class SynchronizeObjetsJob
     new_attributes = %w[DENO CATE COM INSEE DPT SCLE DENQ DOSS EDIF EMPL TICO].to_h do |pop_column|
       ["palissy_#{pop_column}", raw_objet[pop_column]]
     end
-    new_attributes["image_urls"] = objet_overrides_by_ref[raw_objet["REF"]]&.image_urls \
-      || raw_objet["MEMOIRE_URLS"]&.split(";")&.map { "#{MEMOIRE_PHOTOS_BASE_URL}/#{_1}" } || []
+    new_attributes["image_urls"] = raw_objet.photo_urls
+    new_attributes["palissy_photos"] = raw_objet.photo_structs
+
     objet.assign_attributes(new_attributes)
     objet
   end
@@ -89,5 +93,46 @@ class SynchronizeObjetsJob
 
   def objet_overrides_by_ref
     @objet_overrides_by_ref ||= ObjetOverride.all.map { [_1.palissy_REF, _1] }.to_h
+  end
+end
+
+class RawObjet
+  MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
+
+  def initialize(values, override_record)
+    @values = values
+    @override_record = override_record
+  end
+
+  def [](key)
+    @values[key]
+  end
+
+  def photo_urls
+    override_photo_urls || palissy_photo_urls || []
+  end
+
+  def photo_structs
+    override_photo_structs || palissy_photo_structs || []
+  end
+
+  protected
+
+  def override_photo_urls
+    @override_record&.image_urls
+  end
+
+  def palissy_photo_urls
+    @values["MEMOIRE_URLS"]&.split(";")&.map { "#{MEMOIRE_PHOTOS_BASE_URL}/#{_1}" }
+  end
+
+  def override_photo_structs
+    override_photo_urls&.map { { url: _1, credit: "Plan Objets" } }
+  end
+
+  def palissy_photo_structs
+    urls = palissy_photo_urls || []
+    credits = @values["AUTP"].presence&.split(";")&.map(&:strip) || []
+    urls.zip(credits).map { |url, credit| { url:, credit: } }
   end
 end

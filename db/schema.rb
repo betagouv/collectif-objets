@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_29_094449) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_04_072055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -211,6 +211,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_094449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "palissy_TICO"
+    t.json "palissy_photos", default: [], array: true
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
     t.index ["palissy_INSEE"], name: "index_objets_on_palissy_INSEE"
