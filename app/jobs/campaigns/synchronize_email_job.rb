@@ -38,15 +38,28 @@ module Campaigns
 
     def update_email!
       @campaign_email.update!(
-        sent: event_occured?("requests"),
-        delivered: event_occured?("delivered"),
-        opened: event_occured?("opened") || event_occured?("clicks"),
-        clicked: event_occured?("clicks"),
+        **events_booleans,
         error: error_event&.error,
         error_reason: error_event&.error_reason,
         last_sib_synchronization_at: Time.zone.now,
         sib_events:
       )
     end
+
+    # rubocop:disable Metrics/MethodLength
+    def events_booleans
+      if event_occured?("clicks")
+        { sent: true, delivered: true, opened: true, clicked: true }
+      elsif event_occured?("opened")
+        { sent: true, delivered: true, opened: true, clicked: false }
+      elsif event_occured?("delivered")
+        { sent: true, delivered: true, opened: false, clicked: false }
+      elsif event_occured?("requests")
+        { sent: true, delivered: false, opened: false, clicked: false }
+      else
+        { sent: false, delivered: false, opened: false, clicked: false }
+      end
+    end
+    # rubocop:enable Metrics/MethodLength
   end
 end

@@ -78,6 +78,26 @@ RSpec.describe Campaigns::SynchronizeEmailJob, type: :job do
       end
     end
 
+    context "opened but not sent nor delivered (!)" do
+      let(:events) do
+        [
+          { event: "opened", date: Date.new(2022, 8, 1) + 12.hours },
+          { event: "clicks", date: Date.new(2022, 8, 1) + 13.hours }
+        ].map { Co::SendInBlueClient::EVENT_STRUCT.new(_1[:event], _1[:date]) }
+      end
+
+      it "should mark it as sent and delivered anyhow" do
+        subject
+        campaign_email.reload
+        expect(campaign_email.sent).to eq true
+        expect(campaign_email.delivered).to eq true
+        expect(campaign_email.opened).to eq true
+        expect(campaign_email.clicked).to eq true
+        expect(campaign_email.error).to be_nil
+        expect(campaign_email.sib_events.count).to eq(2)
+      end
+    end
+
     context "soft bounce error" do
       let(:events) do
         [
