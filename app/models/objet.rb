@@ -75,8 +75,4 @@ class Objet < ApplicationRecord
     current_arr.first
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
-
-  def credits_photos
-    palissy_AUTP.presence&.split(";")&.map(&:strip) || []
-  end
 end
