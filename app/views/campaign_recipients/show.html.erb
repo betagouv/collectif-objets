@@ -83,7 +83,7 @@
               <% end %>
             </p>
             <%= render UnfoldComponent.new(max_height_px: 40, button_text: "Voir le mail…") do %>
-              <%= render("conservateurs/mail_preview", mail: existing_campaign_email.as_action_mailer_message) %>
+              <%= render Conservateurs::MailIframeComponent.from_campaign_email(existing_campaign_email) %>
             <% end %>
           </div>
         </div>

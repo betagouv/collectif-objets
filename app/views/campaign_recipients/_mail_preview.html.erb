@@ -40,7 +40,7 @@
   <% end %>
   <% if local_assigns[:mail] %>
     <div class="fr-mt-2w">
-      <%= render "conservateurs/mail_preview", mail: %>
+      <%= render Conservateurs::MailIframeComponent.new(mail:) %>
     </div>
   <% end %>
 <% end %>

@@ -34,14 +34,13 @@
       <% recipients.each do |recipient| %>
         <div class="fr-col-md-6">
           <b><%= recipient.commune %></b>
-          <%= render(
-            "conservateurs/mail_preview",
+          <%= render Conservateurs::MailIframeComponent.new(
             mail: CampaignV1Mailer.with(
               user: recipient.commune.users.first,
               commune: recipient.commune,
               campaign: recipient.campaign
             ).lancement_email,
-            headers: false,
+            display_headers: false,
             fit: true
           ) %>
         </div>

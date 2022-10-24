@@ -95,6 +95,9 @@ Rails.application.routes.draw do
     resources :recipients, controller: "campaign_recipients", only: [:show, :update] do
       get :mail_preview
     end
+    resources :emails, controller: "campaign_emails", only: [] do
+      get :redirect_to_sib_preview
+    end
   end
 
   get "health/raise_on_purpose", to: "health#raise_on_purpose"

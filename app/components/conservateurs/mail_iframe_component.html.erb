@@ -1,5 +1,5 @@
 <div class="co-mail-preview-wrapper">
-  <% if local_assigns.fetch(:headers, true) %>
+  <% if display_headers %>
     <table class="co-mail-preview-header fr-px-4w fr-mb-2w fr-text--sm">
       <tr>
         <th>Émetteur&nbsp;:</th>
@@ -22,8 +22,8 @@
   <% end %>
   <iframe
     class="co-mail-preview-iframe"
-    srcdoc="<%= (mail.body.to_s.presence || mail.html_part.body.to_s) + render("conservateurs/mail_preview_css") %>"
-    <% if local_assigns.fetch(:fit, false) %>
+    srcdoc="<%= body + IFRAME_CSS %>"
+    <% if fit %>
       data-controller="iframe-fit"
       data-iframe-fit-target="iframe"
     <% end %>

@@ -145,8 +145,16 @@ module Co
         .sort_by { _1[:date] }
     end
 
-    def get_transactional_emails(email)
-      get_api_request("/v3/smtp/emails", sort: "desc", limit: 20, email:)["transactionalEmails"]
+    def get_transactional_emails(email: nil, message_id: nil)
+      filters = { sort: "desc", limit: 20, email:, messageId: message_id }.compact
+      get_api_request("/v3/smtp/emails", **filters)["transactionalEmails"]
+    end
+
+    def get_transactional_email_uuid(message_id:)
+      email = get_transactional_emails(message_id:)&.first
+      return nil unless email
+
+      email["uuid"]
     end
 
     def get_contact(email)

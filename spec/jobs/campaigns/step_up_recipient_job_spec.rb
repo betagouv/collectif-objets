@@ -112,7 +112,6 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
           expect(email.step).to eq("relance1")
           expect(email.sib_message_id).to eq("<2123@some-host>")
           expect(email.headers["To"]).to eq("mairie-bleue@france.fr")
-          expect(email.raw_html).to eq("<html>long text</html>")
           expect(email.subject).to eq("Thoiry, venez recenser !")
           expect(email.email_name).to eq("relance1_inactive_email")
         end
