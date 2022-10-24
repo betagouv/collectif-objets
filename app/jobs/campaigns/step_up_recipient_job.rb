@@ -75,7 +75,7 @@ module Campaigns
 
     def store_recipient_email!
       recipient.emails.create!(
-        %i[step email_name subject raw_html headers]
+        %i[step email_name subject headers]
           .to_h { [_1, campaign_mail.send(_1)] }
           .merge(sib_message_id: @sib_message_id)
       )

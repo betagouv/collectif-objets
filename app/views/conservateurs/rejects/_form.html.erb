@@ -69,7 +69,7 @@
 
   <% unless is_initial %>
     <h3 class="fr-mt-8w">Prévisualisation du mail</h3>
-    <%= render "conservateurs/mail_preview", mail: UserMailerPreview.new.dossier_rejected_email(dossier) %>
+    <%= render Conservateurs::MailIframeComponent.new(mail: UserMailerPreview.new.dossier_rejected_email(dossier)) %>
 
     <%= form_for(
       dossier,

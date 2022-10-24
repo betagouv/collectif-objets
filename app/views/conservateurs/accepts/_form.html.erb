@@ -43,7 +43,7 @@
   <% end %>
 
   <h3 class="fr-mt-8w">Prévisualisation du mail</h3>
-  <%= render "conservateurs/mail_preview", mail: UserMailerPreview.new.dossier_accepted_email(dossier, current_conservateur) %>
+  <%= render Conservateurs::MailIframeComponent.new(mail: UserMailerPreview.new.dossier_accepted_email(dossier, current_conservateur)) %>
 
   <div class="fr-mt-4w">
     <%= form_for(

@@ -27,7 +27,7 @@
             <%= @mailer_preview.preview_name.titleize %> /
             <%= t("#{@mailer_preview.preview_name}.#{@mail_name}.title", default: @mail_name) %>
           </h5>
-          <%= render("conservateurs/mail_preview", mail: @mail, fit: true) %>
+          <%= render Conservateurs::MailIframeComponent.new(mail: @mail, fit: true) %>
         <% end %>
       <% end %>
     </div>
