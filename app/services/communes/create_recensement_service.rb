@@ -37,8 +37,6 @@ module Communes
       raise CommuneStartError, commune unless
         commune.start! &&
         commune.update!(dossier: recensement.dossier)
-
-      TriggerSibContactEventJob.perform_async(commune.id, "started")
     end
 
     def recensement

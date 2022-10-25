@@ -11,20 +11,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   let!(:objet_bouquet) { create(:objet, palissy_DENO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:) }
   let!(:objet_ciboire) { create(:objet, palissy_DENO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
 
-  before do
-    allow_any_instance_of(Co::SendInBlueClient).to receive(:contacts_client)
-      .and_return(
-        double(
-          get_contacts_from_list: true,
-          get_list: true,
-          get_contact_info: double(list_ids: []),
-          remove_contact_from_list: true,
-          add_contact_to_list: true
-        )
-      )
-    allow_any_instance_of(Co::SendInBlueClient).to receive(:get_list_id).and_return(42)
-  end
-
   scenario "full recensement" do
     login_as(user, scope: :user)
     visit "/"
