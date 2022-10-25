@@ -11,14 +11,13 @@
       </div>
       <div class="fr-footer__brand fr-enlarge-link">
         <a class="co-footer-logo" href="https://beta.gouv.fr/communaute/#/incubators/culture" title="Incubateur Atelier Numérique">
-          <%= vite_image_tag "images/logo-atelier-numerique.svg" , class: " co-logo-invertable" ,
+          <%= vite_image_tag "images/logo-atelier-numerique.svg",
             alt: "Logo Atelier Numérique" %>
         </a>
         </div>
       <div class="fr-footer__brand fr-enlarge-link">
         <a class="co-footer-logo" href="https://beta.gouv.fr" title="beta.gouv.fr">
-          <%= vite_image_tag "images/logo-beta-gouv.png" , class: "co-logo-invertable" ,
-            alt: "Logo Atelier Numérique" %>
+          <%= render "shared/picture_tag", filename_without_extension: "logo-beta-gouv", picture_class: "co--width-max-100", alt: "logo beta.gouv.fr" %>
         </a>
       </div>
     </div>

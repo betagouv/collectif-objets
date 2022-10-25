@@ -31,7 +31,12 @@
         </p>
       </div>
       <div class="fr-col-md-7 fr-px-12w">
-        <%= vite_image_tag "images/home-hero-1.png", class: "co--width-max-100" %>
+        <%= render(
+          "shared/picture_tag",
+          filename_without_extension: "home-hero-1",
+          picture_class: "co--width-max-100",
+          alt: "exemples d'objets monuments historiques"
+        ) %>
       </div>
     </div>
   </section>
@@ -40,7 +45,12 @@
     <div class="fr-container ">
       <div class="fr-grid-row fr-py-12w fr-grid-row--middle">
         <div class="fr-col-md-7 fr-px-12w">
-          <%= vite_image_tag "images/guide-recensement.png", class: "co--width-max-100" %>
+        <%= render(
+          "shared/picture_tag",
+          filename_without_extension: "guide-recensement",
+          picture_class: "co--width-max-100",
+          alt: "Guide de recensement"
+        ) %>
         </div>
         <div class="fr-col-md-5">
           <h2 class="co-text--blue">Étape 2 - Je prépare mon recensement</h2>
@@ -81,7 +91,12 @@
       </p>
     </div>
     <div class="fr-col-md-7 fr-px-12w">
-      <%= vite_image_tag "images/formulaire.png", class: "co--width-max-100" %>
+      <%= render(
+        "shared/picture_tag",
+        filename_without_extension: "formulaire",
+        picture_class: "co--width-max-100",
+        alt: "exemple de formulaire de recensement"
+      ) %>
     </div>
   </section>
     <!-- SECTION FAQ -->

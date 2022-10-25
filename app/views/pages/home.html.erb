@@ -18,7 +18,12 @@
         </p>
       </div>
       <div class="fr-col-md-6 fr-px-6w">
-        <%= vite_image_tag "images/home-hero-1.png" , class: "co--width-max-100" %>
+        <%= render(
+          "shared/picture_tag",
+          filename_without_extension: "home-hero-1",
+          picture_class: "co--width-max-100",
+          alt: "exemples d'objets monuments historiques"
+        ) %>
       </div>
     </div>
   </div>
@@ -198,7 +203,12 @@
       </p>
       <div class="fr-grid-row fr-grid-row-gutters fr-grid-row--center fr-grid-row--md-left">
         <div class="fr-col-md-6 fr-py-4w">
-          <%= vite_image_tag "images/romuald.jpg", class: "co-home-help-avatar" %>
+          <%= render(
+            "shared/picture_tag",
+            filename_without_extension: "romuald",
+            img_class: "co-home-help-avatar",
+            alt: "Romuald Goudeseune"
+          ) %>
           <h5 class="fr-mb-2w">Romuald Goudeseune</h5>
           <div class="co-text--muted fr-mb-2w">
             Conservateur des monuments historiques <br />
@@ -209,7 +219,12 @@
           </div>
         </div>
         <div class="fr-col-md-6 fr-py-4w">
-          <%= vite_image_tag "images/elsa.jpg", class: "co-home-help-avatar" %>
+          <%= render(
+            "shared/picture_tag",
+            filename_without_extension: "elsa",
+            img_class: "co-home-help-avatar",
+            alt: "Elsa Le Duigou"
+          ) %>
           <h5 class="fr-mb-2w">Elsa Le Duigou</h5>
           <div class="co-text--muted fr-mb-2w">
             Chargée de déploiement et<br />
