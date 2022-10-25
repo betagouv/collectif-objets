@@ -1,0 +1,15 @@
+<picture class="<%= local_assigns[:picture_class] %>">
+  <source
+    type="image/webp"
+    srcset="<%= vite_asset_path "images/#{filename_without_extension}.webp" %>"
+  >
+  <source
+    type="image/png"
+    srcset="<%= vite_asset_path "images/#{filename_without_extension}.png" %>"
+  >
+  <img
+    src="<%= vite_asset_path "images/#{filename_without_extension}.png" %>"
+    alt="<%= alt %>"
+    class="<%= local_assigns[:img_class] %>"
+  >
+</picture>
