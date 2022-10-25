@@ -6,6 +6,7 @@
 <mj-text>
   Si votre commune n’est pas propriétaire des objets, deux options s’offrent à vous :
 </mj-text>
+
 <mj-text>
   <ul>
     <li>
@@ -15,5 +16,9 @@
       si vous connaissez une personne liée à leur propriétaire qui pourrait les recenser, nous vous invitons à lui transférer ce courriel.
     </li>
   </ul>
+</mj-text>
+
+<mj-text>
+  Pour toute question complémentaire, vous avez la possibilité de répondre à ce courriel.
 </mj-text>
 <% end %>
