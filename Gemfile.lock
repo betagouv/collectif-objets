@@ -162,6 +162,8 @@ GEM
       ruby2_keywords
     dry-cli (0.7.0)
     erubi (1.11.0)
+    ethon (0.15.0)
+      ffi (>= 1.15.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -258,10 +260,6 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
-      racc (~> 1.4)
-    nokogiri (1.13.9-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (5.10.1)
@@ -432,6 +430,8 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    typhoeus (1.4.0)
+      ethon (>= 0.9.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.3.0)
@@ -519,6 +519,7 @@ DEPENDENCIES
   sidekiq-throttled
   sprockets-rails
   turbo-rails
+  typhoeus
   tzinfo-data
   view_component
   vite_rails

@@ -35,6 +35,7 @@ gem "sidekiq"
 gem "sidekiq-throttled"
 gem "sprockets-rails"
 gem "turbo-rails"
+gem "typhoeus"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "view_component"
 gem "vite_rails"
