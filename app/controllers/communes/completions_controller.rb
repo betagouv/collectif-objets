@@ -7,9 +7,9 @@ module Communes
     before_action :set_objets
     before_action :set_missing_photos, only: %i[new create]
 
-    def new; end
-
     def show; end
+
+    def new; end
 
     def create
       if @dossier.submit!(notes_commune: params[:commune][:dossier_attributes][:notes_commune])

@@ -7,11 +7,6 @@ module Conservateurs
 
     def new; end
 
-    def update
-      @dossier.update(**dossier_params)
-      render partial: "form", locals: { dossier: @dossier }
-    end
-
     def create
       @dossier.update!(conservateur: current_conservateur) if @dossier.conservateur != current_conservateur
       if @dossier.accept!
@@ -20,6 +15,11 @@ module Conservateurs
       else
         render "conservateurs/accepts/new", status: :unprocessable_entity
       end
+    end
+
+    def update
+      @dossier.update(**dossier_params)
+      render partial: "form", locals: { dossier: @dossier }
     end
 
     protected
