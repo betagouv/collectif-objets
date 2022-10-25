@@ -15,6 +15,7 @@
 
 <mj-section>
   <mj-column>
+    <%= render partial: "info_concordataires" %>
     <mj-text><%= ct("relance1_inactive.date_fin") %></mj-text>
   </mj-column>
 </mj-section>
