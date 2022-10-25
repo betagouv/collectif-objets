@@ -15,7 +15,7 @@ module Co
     EVENT_STRUCT = Struct.new(:event, :date, :error, :error_reason)
 
     def get_transaction_email_events(message_id)
-      get_api_request("/v3/smtp/statistics/events", limit: 20, messageId: message_id)["events"]
+      get_api_request("/v3/smtp/statistics/events", limit: 20, messageId: message_id).fetch("events", [])
         .map { _1.transform_keys(&:underscore).with_indifferent_access }
         .select { _1[:message_id] == message_id }
         .reject { EMAIL_EVENTS[:ignored].include?(_1[:event]) }
