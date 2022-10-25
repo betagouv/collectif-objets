@@ -27,7 +27,6 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
 
     before do
       expect(commune).to receive(:start!).and_return(true)
-      expect(TriggerSibContactEventJob).to receive(:perform_async)
       expect(SendMattermostNotificationJob).to receive(:perform_async)
     end
 
@@ -61,7 +60,6 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
 
     before do
       expect(commune).not_to receive(:start!)
-      expect(TriggerSibContactEventJob).not_to receive(:perform_async)
       expect(SendMattermostNotificationJob).to receive(:perform_async)
     end
 
@@ -94,7 +92,6 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
 
     before do
       expect(commune).not_to receive(:start!)
-      expect(TriggerSibContactEventJob).not_to receive(:perform_async)
       expect(SendMattermostNotificationJob).not_to receive(:perform_async)
     end
 

@@ -46,7 +46,6 @@ module Communes
     end
 
     def after_create
-      TriggerSibContactEventJob.perform_async(@commune.id, "completed")
       SendMattermostNotificationJob.perform_async("commune_completed", { "commune_id" => @commune.id })
       UserMailer.with(user_id: current_user.id, commune_id: @commune.id).commune_completed_email.deliver_later
     end
