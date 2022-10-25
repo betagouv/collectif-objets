@@ -10,6 +10,7 @@
 <mj-section>
   <mj-column>
     <mj-text><%= ct("lancement.simple") %></mj-text>
+    <%= render partial: "info_concordataires" %>
     <mj-text><%= ct("lancement.conseils") %></mj-text>
     <mj-text>
       <ul>

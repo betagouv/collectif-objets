@@ -1,0 +1,7 @@
+<% if @departement.concordataire? %>
+<mj-section>
+  <mj-column>
+    <%= render partial: "info_concordataires" %>
+  </mj-column>
+</mj-section>
+<% end %>
