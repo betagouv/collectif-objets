@@ -24,6 +24,11 @@
     <div class="fr-footer__bottom">
       <ul class="fr-footer__bottom-list">
         <li class="fr-footer__bottom-item">
+          <span class="fr-footer__bottom-link">
+            Accessibilité : non conforme
+          </span>
+        </li>
+        <li class="fr-footer__bottom-item">
           <a class="fr-footer__bottom-link fr-link--icon-left fr-icon-mail-line" href="mailto:support@collectif-objets.beta.gouv.fr">
             Contact
           </a>
@@ -38,11 +43,13 @@
             Statistiques
           </a>
         </li>
-        <li class="fr-footer__bottom-item">
-          <a class="fr-footer__bottom-link fr-link--icon-left fr-icon-lock-line" href="/admin">
-            Administration
-          </a>
-        </li>
+        <% if current_admin_user.nil? %>
+          <li class="fr-footer__bottom-item">
+            <a class="fr-footer__bottom-link fr-link--icon-left fr-icon-lock-line" href="/admin">
+              Administration
+            </a>
+          </li>
+        <% end %>
         <li class="fr-footer__bottom-item">
           <a class="fr-footer__bottom-link fr-link--icon-left fr-icon-file-text-line" href="/mentions_legales">
             Mentions légales
@@ -70,12 +77,13 @@
       <% if current_admin_user.present? %>
         <ul class="fr-footer__bottom-list">
           <li class="fr-footer__bottom-item fr-footer__bottom-copy fr-text--sm">
-            <span class="fr-icon-lock-line fr-text--sm" aria-hidden="true"></span>
-            Réservé aux admins
+            <span class="fr-footer__bottom-link fr-link--icon-left fr-icon-lock-line">
+              Vous êtes connecté·e en tant qu'administrateur·rice
+            </a>
           </li>
           <li class="fr-footer__bottom-item">
-            <a class="fr-footer__bottom-link fr-link--icon-left fr-icon-lock-line" href="/campaigns">
-              Interface d'admin
+            <a class="fr-footer__bottom-link fr-link--icon-left fr-icon-lock-line" href="/admin">
+              Interface d'administration
             </a>
           </li>
           <li class="fr-footer__bottom-item">
