@@ -6,16 +6,16 @@ module Conservateurs
     before_action :restrict_access_autocomplete, only: %i[autocomplete index]
     before_action :set_departement, only: [:index]
 
+    def index
+      @communes_search = Co::Conservateurs::CommunesSearch.new(@departement, params)
+    end
+
     def show
       @objets = compute_objets
       return true if params[:analyse_saved].blank?
 
       @objets = @objets.where(recensements: { analysed_at: nil })
       render "show_analyse_saved"
-    end
-
-    def index
-      @communes_search = Co::Conservateurs::CommunesSearch.new(@departement, params)
     end
 
     def autocomplete

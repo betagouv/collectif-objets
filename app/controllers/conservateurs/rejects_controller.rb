@@ -6,6 +6,15 @@ module Conservateurs
 
     def new; end
 
+    def create
+      if @dossier.reject!
+        UserMailer.with(dossier: @dossier).dossier_rejected_email.deliver_later
+        redirect_to conservateurs_commune_path(@commune, warning: "Le dossier a été renvoyé à la commune")
+      else
+        render "conservateurs/rejects/new", status: :unprocessable_entity
+      end
+    end
+
     def update
       @dossier.update(**dossier_params.to_h)
       if @dossier.notes_conservateur.blank?
@@ -15,15 +24,6 @@ module Conservateurs
         )
       end
       render partial: "form", locals: { dossier: @dossier }
-    end
-
-    def create
-      if @dossier.reject!
-        UserMailer.with(dossier: @dossier).dossier_rejected_email.deliver_later
-        redirect_to conservateurs_commune_path(@commune, warning: "Le dossier a été renvoyé à la commune")
-      else
-        render "conservateurs/rejects/new", status: :unprocessable_entity
-      end
     end
 
     protected

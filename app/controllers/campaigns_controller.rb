@@ -34,6 +34,8 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.new
   end
 
+  def edit; end
+
   def create
     @campaign = Campaign.new(**campaign_params)
     if @campaign.save
@@ -45,8 +47,6 @@ class CampaignsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-  def edit; end
 
   def update
     if @campaign.update(campaign_params)
