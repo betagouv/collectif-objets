@@ -18,7 +18,7 @@
       <li>
         <%= commune.nom %> -
         <%= link_to \
-          "#{commune.objets_count} objets", \
+          t("objets.count", count: commune.objets_count), \
           objets_path(commune_code_insee: commune.code_insee)
         %>
       </li>

@@ -54,7 +54,9 @@ fr:
         send: Envoyer le rapport …
       show:
         can_generate_rapport:
-          content: Vous avez revu l'ensemble des %{recensements_count} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
+          content:
+            one: "Vous avez analysé l'unique recensement de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune"
+            other: Vous avez analysé l'ensemble des %{count} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
           send: Envoyer le rapport …
         rejected:
           content: Ce dossier a été renvoyé à la commune le %{date} par %{conservateur} avec le commentaire suivant
@@ -188,10 +190,6 @@ fr:
       mauvais: L'édifice est en mauvais état
       peril: L'édifice est en péril
   dossier:
-    recensements_pending_count_html:
-      zero: Vous avez revu <span class='fr-h4'>100%</span> des recensements de cette commune
-      one: Il vous reste <span class='fr-h4'>1</span> recensement de cette commune à analyser
-      other: "Il vous reste <span class='fr-h4'>%{count}</span> recensements de cette commune à analyser"
     status_badge:
       construction: Recensement en cours
       submitted: À analyser
@@ -460,6 +458,10 @@ fr:
       zero: Aucune photo connue pour cet objet
       one: 1 photo connue pour cet objet
       other: "%{count} photos connues pour cet objet"
+    count:
+      zero: aucun objet
+      one: 1 objet
+      other: "%{count} objets"
   gallery_component:
     open:
       one: Agrandir
@@ -469,7 +471,7 @@ fr:
       one: 1 photo
       other: "%{count} photos"
     last_thumb:
-      zero: "voir la gallerie"
+      zero: "voir la galerie"
       one: "1 autre photo …"
       other: "%{count} autres photos …"
   pdf_embed_component:
