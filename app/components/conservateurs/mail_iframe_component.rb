@@ -27,8 +27,12 @@ module Conservateurs
       super
     end
 
-    def body
+    def html_body
       mail_body || mail_html_part_body || redirect_body || "<i>contenu du mail indisponible</i>"
+    end
+
+    def text_body
+      mail_text || "version textuelle non définie"
     end
 
     private
@@ -39,6 +43,10 @@ module Conservateurs
 
     def mail_html_part_body
       mail.respond_to?("html_part") && mail.html_part.body.to_s.presence
+    end
+
+    def mail_text
+      mail.respond_to?("text_part") && mail.text_part.decoded
     end
 
     def redirect_body

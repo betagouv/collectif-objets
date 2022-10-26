@@ -1,0 +1,24 @@
+
+<%= t("campaign_v1_mailer.shared.madame_monsieur_le_maire") %>
+
+<%= yield %>
+
+<%= t("campaign_v1_mailer.shared.politesse") %>
+
+<%= @campaign.signature %>
+
+---
+
+Collectif Objets - Préservez votre patrimoine mobilier
+
+---
+
+­Cette initiative est portée par le ministère de la Culture et la Direction interministérielle du numérique dans le cadre du programme beta.gouv.
+
+En cas de difficultés pour recenser vous pouvez nous contacter à l'adresse support@collectifobjets.beta.gouv.fr
+
+---
+
+<% url = magic_authentication_url("magic-token": @user.magic_token, "after_sign_in_path": "/users/edit") %>
+
+Suivez ce lien pour ne plus recevoir d'emails de Collectif Objets : <%= url %>
