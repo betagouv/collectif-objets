@@ -12,11 +12,10 @@
         current_page_label: "Comment ça marche ?"
       ) %>
       <div class="fr-grid-row fr-pb-8w">
-        <div class="fr-col-md-5">
-          <h2 class="co-text--blue">Préparez votre recensement</h2>
-          <p>
-            Mener un recensement, c'est aller vérifier la présence d'un objet au sein de son édifice et constater son état en répondant à un questionnaire simplifié. C'est une opération rapide à mener (5 à 10 min par objet) et qui ne demande aucune expertise ou formation particulière. Les données collectées permettent aux conservateurs en charge de votre territoire de mieux connaître votre patrimoine, de vous aider à le valoriser et d'intervenir à temps pour le protéger.
-          </p>
+        <div class="fr-col-md-8">
+          <h2 class="co-text--blue"><%= t(".intro.title") %></h2>
+          <p><%= t(".intro.content1") %></p>
+          <p><%= t(".intro.content2") %></p>
         </div>
       </div>
     </div>
@@ -25,15 +24,18 @@
   <section class="fr-container">
     <div class="fr-grid-row fr-py-8w fr-grid-row--middle">
       <div class="fr-col-md-5">
-        <h2 class="co-text--blue">Étape 1 - J'indique ma participation</h2>
+        <h2 class="co-text--blue"><%= t(".etape1.title") %></h2>
+        <p><%= t(".etape1.content1") %></p>
+        <p><%= t(".etape1.content2") %></p>
+        <p><%= t(".etape1.content3") %></p>
         <p>
-          Vous êtes élu·e ou agent municipal ? Vous êtes en charge du patrimoine de votre commune ? Vous pouvez nous indiquer que vous participez au recensement pour accéder aux conseils et à l’aide de Collectif Objets dans votre démarche. Le recensement des objets peut également être réalisé par une association si elle bénéficie de l’aval de la commune.
+          <%= link_to "Voir le guide de recensement", guide_path, class: "fr-btn" %>
         </p>
       </div>
       <div class="fr-col-md-7 fr-px-12w">
         <%= render(
           "shared/picture_tag",
-          filename_without_extension: "home-hero-1",
+          filename_without_extension: "sur-place",
           picture_class: "co--width-max-100",
           alt: "exemples d'objets monuments historiques"
         ) %>
@@ -47,57 +49,47 @@
         <div class="fr-col-md-7 fr-px-12w">
         <%= render(
           "shared/picture_tag",
-          filename_without_extension: "guide-recensement",
+          filename_without_extension: "formulaire",
           picture_class: "co--width-max-100",
           alt: "Guide de recensement"
         ) %>
         </div>
         <div class="fr-col-md-5">
-          <h2 class="co-text--blue">Étape 2 - Je prépare mon recensement</h2>
-          <p>
-            Nous vous guidons étape par étape. Comment s'organiser ? Quel matériel faut-il prévoir ? Comment évaluer l'état d'un objet ? Retrouvez dans cette liste les clés pour préparer votre recensement, mais aussi les astuces de nos conservateurs pour répondre aux questionnaires de recensement.
-          </p>
-          <p>
-            <%= link_to "Voir le guide de recensement", guide_path, class: "fr-btn" %>
-          </p>
+          <h2 class="co-text--blue"><%= t(".etape2.title") %></h2>
+          <p><%= t(".etape2.questions.title") %></p>
+          <ul>
+            <li><%= t(".etape2.questions.question1") %></li>
+            <li><%= t(".etape2.questions.question2") %></li>
+            <li><%= t(".etape2.questions.question3") %></li>
+          </ul>
+          <p><%= t(".etape2.photo") %></p>
+          <p><%= t(".etape2.hors_ligne") %></p>
+          <% if current_user.present? %>
+            <p>
+              <%= link_to "Télécharger le questionnaire imprimable", commune_formulaire_path(current_user.commune), class: "fr-link" %>
+            </p>
+        <% end %>
         </div>
       </div>
     </div>
   </section>
   <!-- SECTION ETAPE 3 -->
   <section class="fr-container">
-    <div class="fr-grid-row fr-py-8w fr-grid-row--middle">
+    <div class="fr-grid-row fr-py-8w fr-grid-row--center">
       <div class="fr-col-md-5">
-        <h2 class="co-text--blue">Étape 3 - Je réponds aux questionnaires</h2>
-        <p>
-          Il est maintenant temps de visiter vos objets. Pour chaque objet, trois questions très simples :
-        </p>
-        <ul>
-          <li>L'objet est-il présent ?</li>
-          <li>En quel état est-il ?</li>
-          <li>Est-il en sécurité ?</li>
-        </ul>
-        <p>
-          Une fois le recensement terminé, le conservateur en charge de votre territoire reviendra vers vous pour valider votre recensement et - si besoin - vous guider vers des opérations d’entretien, de sauvegarde ou de sécurisation de vos objets.
-        </p>
-        <p>
-          Vous n'avez pas accès à internet dans l'édifice ? Nous avons préparé une version imprimable de la liste de vos objets et des questionnaires à emporter lors de vos déplacements que vous n’aurez plus qu’à reporter en ligne à votre retour.
-        </p>
-        <% if current_user.present? %>
-          <p>
-            <%= link_to "Télécharger le questionnaire imprimable", commune_formulaire_path(current_user.commune), class: "fr-btn" %>
-          </p>
-        <% end %>
+        <h2 class="co-text--blue"><%= t(".etape3.title") %></h2>
+        <p><%= t(".etape3.conseils") %></p>
+        <p><%= t(".etape3.fiches") %></p>
       </p>
     </div>
-    <div class="fr-col-md-7 fr-px-12w">
-      <%= render(
+    <%# <div class="fr-col-md-7 fr-px-12w"> %>
+      <%# render(
         "shared/picture_tag",
         filename_without_extension: "formulaire",
         picture_class: "co--width-max-100",
         alt: "exemple de formulaire de recensement"
       ) %>
-    </div>
+    <%# </div> %>
   </section>
     <!-- SECTION FAQ -->
   <section class="co-background--light-grey fr-py-8w">
@@ -175,6 +167,45 @@
                   <p>
                     Cette licence ouverte est automatiquement appliquée lorsque c'est un agent public qui prend la photo. Si c'est une personne externe, il faut recueillir leur cession de droits.
                   </p>
+                </div>
+              </section>
+            </li>
+            <li>
+              <section class="fr-accordion">
+                <div class="fr-accordion__title">
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-introuvable">
+                    <%= t(".faq.introuvable.title") %>
+                  </button>
+                </div>
+                <div class="fr-collapse" id="faq-introuvable">
+                  <p><%= t(".faq.introuvable.verifier") %></p>
+                  <p><%= t(".faq.introuvable.introuvable") %></p>
+                  <p><%= link_to t(".faq.introuvable.voir_la_fiche"), fiche_path(pdf: "fiche_vol") %></p>
+                </div>
+              </section>
+            </li>
+            <li>
+              <section class="fr-accordion">
+                <div class="fr-accordion__title">
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-manquants">
+                    <%= t(".faq.manquants.title") %>
+                  </button>
+                </div>
+                <div class="fr-collapse" id="faq-manquants">
+                  <p><%= t(".faq.manquants.monuments_historiques") %></p>
+                  <p><%= link_to t(".faq.manquants.lien_externe"), "https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques", target: "_blank" %></p>
+                </div>
+              </section>
+            </li>
+            <li>
+              <section class="fr-accordion">
+                <div class="fr-accordion__title">
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-sur-place">
+                    <%= t(".faq.sur_place.title") %>
+                  </button>
+                </div>
+                <div class="fr-collapse" id="faq-sur-place">
+                  <p><%= t(".faq.sur_place.content") %></p>
                 </div>
               </section>
             </li>

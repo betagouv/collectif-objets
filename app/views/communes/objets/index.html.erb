@@ -13,7 +13,7 @@
     <h5 class="co-text--blue">
       <%= t(".n_objets_a_recenser", count: @objets_list.count) %>
     </h5>
-    <%= render "aide_callout" %>
+    <%= render "recensements/etapes" %>
     <%= render "list", objets_list: @objets_list %>
     <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
@@ -29,8 +29,9 @@
     <h5 class="co-text--blue">
       <%= t(".n_objets_restants_a_recenser", count: @commune.objets.where.missing(:recensements).count) %>
     </h5>
+    <%= render "recensements/etapes" %>
     <%= render "list", objets_list: @objets_list %>
-    <%= render "aide_callout" %>
+    <%= render "recensements/etapes" %>
     <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.completed? && @dossier.submitted? %>
@@ -54,7 +55,7 @@
         class: "fr-btn"
       ) %>
     </p>
-    <%= render "aide_callout" %>
+    <%= render "recensements/etapes" %>
     <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.completed? && @dossier.accepted? %>

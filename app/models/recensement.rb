@@ -108,4 +108,8 @@ class Recensement < ApplicationRecord
   def analysable?
     commune.completed?
   end
+
+  def first?
+    commune.recensements.empty?
+  end
 end
