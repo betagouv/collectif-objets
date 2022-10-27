@@ -186,44 +186,34 @@
   </div>
   <!-- SECTION AIDE -->
   <div class="co-background--light-grey fr-py-12w" id="help">
-    <div class="fr-container co-text--center">
-      <h2 class="co-text--blue">Vous avez besoin d'aide ?</h2>
-      <p>
-        Nous sommes là pour vous répondre et vous accompagner dans cette démarche
-      </p>
-      <div class="fr-grid-row fr-grid-row-gutters fr-grid-row--center fr-grid-row--md-left">
-        <div class="fr-col-md-6 fr-py-4w">
-          <%= render(
-            "shared/picture_tag",
-            filename_without_extension: "romuald",
-            img_class: "co-home-help-avatar",
-            alt: "Romuald Goudeseune"
-          ) %>
-          <h5 class="fr-mb-2w">Romuald Goudeseune</h5>
-          <div class="co-text--muted fr-mb-2w">
-            Conservateur des monuments historiques <br />
-            en charge de l'expérimentation.
-          </div>
-          <div>
-            <%= link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-link fr-icon-mail-line fr-link--icon-left" %>
-          </div>
-        </div>
-        <div class="fr-col-md-6 fr-py-4w">
-          <%= render(
-            "shared/picture_tag",
-            filename_without_extension: "elsa",
-            img_class: "co-home-help-avatar",
-            alt: "Elsa Le Duigou"
-          ) %>
-          <h5 class="fr-mb-2w">Elsa Le Duigou</h5>
-          <div class="co-text--muted fr-mb-2w">
-            Chargée de déploiement et<br />
-            de la relation avec les communes
-          </div>
-          <div>
-            <%= link_to "elsa.le-duigou@beta.gouv.fr", "mailto:elsa.le-duigou@beta.gouv.fr", class: "fr-link fr-icon-mail-line fr-link--icon-left" %>
-          </div>
-        </div>
+    <div class="fr-container fr-grid-row">
+      <div class="fr-col-md-6 fr-pr-4w">
+        <h2 class="co-text--blue">
+          L'équipe de Collectif Objets
+        </h2>
+        <p>
+          Nous sommes là pour vous répondre et vous accompagner dans cette démarche
+        </p>
+        <ul>
+          <li><b>Romuald Goudeseune</b> Conservateur des monuments historiques en charge de l'expérimentation</li>
+          <li><b>Elsa Le Duigou</b> Chargée de déploiement</li>
+          <li><b>Fantine Monot</b> Chargée de déploiement</li>
+          <li><b>Sybille de la Raudière</b> Chargée de déploiement</li>
+          <li><b>Enora Bulting</b> Designer</li>
+          <li><b>Raphaëlle Neyton</b> Coach</li>
+          <li><b>Adrien Di Pasquale</b> Développeur</li>
+        </ul>
+        <p>
+          <%= link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-mail-line fr-mt-2w" %>
+        </p>
+      </div>
+      <div class="fr-col-md-6 fr-px-6w">
+        <%= render(
+          "shared/picture_tag",
+          filename_without_extension: "equipe",
+          picture_class: "co--width-max-100",
+          alt: "Équipe de Collectif Objets"
+        ) %>
       </div>
     </div>
   </div>
