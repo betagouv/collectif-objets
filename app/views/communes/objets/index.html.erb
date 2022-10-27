@@ -31,19 +31,10 @@
     </h5>
     <%= render "recensements/etapes" %>
     <%= render "list", objets_list: @objets_list %>
-    <%= render "recensements/etapes" %>
     <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.completed? && @dossier.submitted? %>
-    <div class="co-text--center">
-      <p>
-        Le recensement de vos objets est terminé, merci !
-        Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
-      </p>
-      <p>
-        <%= link_to "Voir les données envoyées", commune_completion_path(@commune), class: "fr-btn" %>
-      </p>
-    </div>
+    <%= render "submitted_callout", commune: @commune %>
     <%= render "list", objets_list: @objets_list %>
   <% elsif @commune.completed? && @dossier.rejected? %>
     <%= render "rejected_callout", dossier: @dossier %>

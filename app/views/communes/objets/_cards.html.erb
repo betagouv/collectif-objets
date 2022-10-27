@@ -9,7 +9,7 @@
             <h4 class="fr-card__title">
               <%= link_to(
                 t("communes.objets.objets_manquants.pourquoi_n_objets", count: objets.count),
-                aide_path,
+                aide_path(anchor: "faq"),
                 class: "fr-card__link"
               ) %>
             </h4>
