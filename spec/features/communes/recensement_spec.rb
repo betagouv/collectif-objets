@@ -8,8 +8,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
-  let!(:objet_bouquet) { create(:objet, palissy_DENO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:) }
-  let!(:objet_ciboire) { create(:objet, palissy_DENO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
+  let!(:objet_bouquet) { create(:objet, palissy_TICO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:) }
+  let!(:objet_ciboire) { create(:objet, palissy_TICO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
 
   scenario "full recensement" do
     login_as(user, scope: :user)

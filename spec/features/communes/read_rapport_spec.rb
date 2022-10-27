@@ -18,10 +18,10 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
   end
   before { commune.update(dossier:) }
   let!(:objet_bouquet) do
-    create(:objet, palissy_REF: "PM51001253", palissy_DENO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:)
+    create(:objet, palissy_REF: "PM51001253", palissy_TICO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:)
   end
   let!(:objet_ciboire) do
-    create(:objet, palissy_REF: "PM51001254", palissy_DENO: "Ciboire des malades", palissy_EDIF: "Musée", commune:)
+    create(:objet, palissy_REF: "PM51001254", palissy_TICO: "Ciboire des malades", palissy_EDIF: "Musée", commune:)
   end
   let!(:recensement_bouquet) do
     create(

@@ -6,7 +6,7 @@ module Communes
 
     with_collection_parameter :objet
 
-    delegate :nom, :nom_courant, :commune, :edifice_nom, :current_recensement, :palissy_photos, to: :objet
+    delegate :nom, :palissy_DENO, :commune, :edifice_nom, :current_recensement, :palissy_photos, to: :objet
     delegate :dossier, to: :current_recensement, allow_nil: true
 
     def initialize(objet:, badges: nil, display_recensement_photos: true)
@@ -21,7 +21,7 @@ module Communes
     end
 
     def truncated_nom
-      truncate(nom || nom_courant, length: 30)
+      truncate(nom || palissy_DENO, length: 30)
     end
 
     def main_photo_url

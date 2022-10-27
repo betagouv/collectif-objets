@@ -10,7 +10,6 @@ ActiveAdmin.register Objet do
   index do
     id_column
     column :palissy_REF
-    column :palissy_DENO
     column :palissy_TICO
     column :commune
     column :palissy_EDIF
@@ -25,7 +24,6 @@ ActiveAdmin.register Objet do
   filter :commune_departement_code, as: :select, collection: -> { Departement.all }
   filter :commune
   filter :palissy_REF_equals
-  filter :palissy_DENO
   filter :palissy_TICO
   filter :palissy_CATE
   filter :palissy_EDIF
@@ -37,8 +35,8 @@ ActiveAdmin.register Objet do
         attributes_table title: "🖼 Objet ##{objet.id}" do
           row :ref_pop
           row :ref_memoire
-          row :palissy_DENO
           row :palissy_TICO
+          row :palissy_DENO
           row :commune
           row :palissy_EDIF
           row :palissy_EMPL

@@ -81,7 +81,7 @@ class Commune < ApplicationRecord
 
   def highlighted_objet
     # used in campaigns
-    Objet.select_best_objet_in_list(objets.where.not(palissy_DENO: nil).to_a)
+    Objet.select_best_objet_in_list(objets.where.not(palissy_TICO: nil).to_a)
   end
 
   def ongoing_campaign_recipient

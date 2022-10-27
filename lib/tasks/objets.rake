@@ -18,7 +18,7 @@ namespace :objets do
     mapping = {
       memoire_REF: "Référence de l’illustration (Mémoire)",
       palissy_REF: "Référence de la notice Palissy",
-      palissy_DENO: "Nom de l'objet",
+      palissy_TICO: "Nom de l'objet",
       palissy_CATE: "CATE",
       palissy_COM: "COM",
       # commune_code_insee:
@@ -55,21 +55,6 @@ namespace :objets do
       objet.save!
     end
     puts "after: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
-  end
-
-  # rake "objets:import_nom_courant[../collectif-objets-data/pop-exports-custom]"
-  task :import_nom_courant, [:path] => :environment do |_, args|
-    puts "after: #{Objet.where.not(palissy_TICO: nil).count}/#{Objet.count} objets have nom courant"
-    iterate_files("#{args[:path]}/*.csv") do |row|
-      next if row["ref"].blank? || row["tico"].blank?
-
-      objet = Objet.find_by(palissy_REF: row["ref"])
-      next unless objet
-
-      objet.palissy_TICO = row["tico"]
-      objet.save!
-    end
-    puts "after: #{Objet.where.not(palissy_TICO: nil).count}/#{Objet.count} objets have nom courant"
   end
 
   # rake "objets:import_scle[../collectif-objets-data/pop-scle-column.csv]"

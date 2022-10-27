@@ -7,14 +7,14 @@ class Objet < ApplicationRecord
   belongs_to :commune, foreign_key: :palissy_INSEE, primary_key: :code_insee, optional: true, inverse_of: :objets
   has_many :recensements, dependent: :restrict_with_exception
 
-  scope :with_photos_first, -> { order('cardinality(palissy_photos) DESC, LOWER(objets."palissy_DENO") ASC') }
+  scope :with_photos_first, -> { order('cardinality(palissy_photos) DESC, LOWER(objets."palissy_TICO") ASC') }
   scope :order_by_recensement_priorite, -> { joins(:recensements).order(Arel.sql(Recensement::SQL_ORDER_PRIORITE)) }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
 
   # old column names still used in code for reads
-  alias_attribute :nom, :palissy_DENO
+  alias_attribute :nom, :palissy_TICO
   alias_attribute :categorie, :palissy_CATE
   alias_attribute :commune_nom, :palissy_COM
   alias_attribute :commune_code_insee, :palissy_INSEE
@@ -24,11 +24,6 @@ class Objet < ApplicationRecord
   alias_attribute :nom_dossier, :palissy_DOSS
   alias_attribute :edifice_nom, :palissy_EDIF
   alias_attribute :emplacement, :palissy_EMPL
-  alias_attribute :nom_courant, :palissy_TICO
-
-  def nom_formatted
-    (palissy_TICO || palissy_DENO).capitalize
-  end
 
   def edifice_nom_formatted
     if edifice_nom == "église" && commune.present?

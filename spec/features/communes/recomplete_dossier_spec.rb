@@ -17,8 +17,8 @@ RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
     create(:dossier, :rejected, commune:, conservateur:, notes_conservateur: "Veuillez prendre de meilleures photos")
   end
   before { commune.update!(dossier:) }
-  let!(:objet_bouquet) { create(:objet, palissy_DENO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:) }
-  let!(:objet_ciboire) { create(:objet, palissy_DENO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
+  let!(:objet_bouquet) { create(:objet, palissy_TICO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:) }
+  let!(:objet_ciboire) { create(:objet, palissy_TICO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
   let!(:recensement_bouquet) do
     create(
       :recensement,
@@ -32,7 +32,7 @@ RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
       analysed_at: 2.days.ago
     )
   end
-  let!(:objet_ciboire) { create(:objet, palissy_DENO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
+  let!(:objet_ciboire) { create(:objet, palissy_TICO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
   let!(:recensement_ciboire) do
     create(
       :recensement,
