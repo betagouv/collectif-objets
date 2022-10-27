@@ -126,30 +126,63 @@
             <li>
               <section class="fr-accordion">
                 <div class="fr-accordion__title">
-                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-3">
-                    Comment lancer un projet de restauration ?
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-restauration">
+                    <%= t(".faq.restauration.title") %>
                   </button>
                 </div>
-                <div class="fr-collapse" id="faq-3">
-                  Veuillez consulter cette page dédiée du site du Ministère de la Culture :
-                  <%= link_to "Intervenir sur un objet mobilier classé ou inscrit", "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank" %>
+                <div class="fr-collapse" id="faq-restauration">
+                  Veuillez consulter ces pages dédiées sur le site du Ministère de la Culture :
+                  <ul>
+                    <li>
+                      <%= link_to t(".faq.restauration.page_intervenir"), "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank" %>
+                    </li>
+                    <li>
+                      <%= link_to t(".faq.restauration.page_marches"), "https://www.culture.gouv.fr/Thematiques/Conservation-restauration/La-conservation-restauration-en-France/Marches-publics-et-conservation-restauration-des-biens-culturels", rel: "noopener", target: "_blank" %>
+                    </li>
+                  </ul>
                 </div>
               </section>
             </li>
             <li>
               <section class="fr-accordion">
                 <div class="fr-accordion__title">
-                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-4">
-                    Comment entretenir mes objets ?
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-entretien">
+                    <%= t(".faq.entretien.title") %>
                   </button>
                 </div>
-                <div class="fr-collapse" id="faq-4">
+                <div class="fr-collapse" id="faq-entretien">
                   <p>
-                    Au delà de l'entretien courant qui consiste à nettoyer l'espace autour des objets, il convient de ne pas toucher aux objets protégés. Seul un professionnel habilité assurera une prise en charge optimale.
+                    <%= t(".faq.entretien.content") %>
                   </p>
-                  <p>
-                    Pour plus d'informations, veuillez consulter cette page du site du Ministère de la Culture :
-                    <%= link_to "Intervenir sur un objet mobilier classé ou inscrit", "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank" %>
+                  <ul>
+                    <li>
+                      <%= link_to t(".faq.entretien.page_intervenir"), "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank" %>
+                    </li>
+                    <li>
+                      <%= link_to t(".faq.entretien.page_plan_sauvegarde"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Plan-de-sauvegarde-des-biens-culturels", rel: "noopener", target: "_blank" %>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </li>
+            <li>
+              <section class="fr-accordion">
+                <div class="fr-accordion__title">
+                  <button class="fr-accordion__btn" aria-expanded="false" aria-controls="faq-securisation">
+                    <%= t(".faq.securisation.title") %>
+                  </button>
+                </div>
+                <div class="fr-collapse" id="faq-securisation">
+                  <ul>
+                    <li>
+                      <%= link_to t(".faq.securisation.voir_la_fiche"), fiche_path(pdf: "fiche_securisation") %>
+                    </li>
+                    <li>
+                      <%= link_to t(".faq.securisation.page_securite"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete", rel: "noopener", target: "_blank" %>
+                    </li>
+                    <li>
+                      <%= link_to t(".faq.securisation.page_vol"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol", rel: "noopener", target: "_blank" %>
+                    </li>
                   </p>
                 </div>
               </section>
@@ -194,7 +227,7 @@
                 </div>
                 <div class="fr-collapse" id="faq-manquants">
                   <p><%= t(".faq.manquants.monuments_historiques") %></p>
-                  <p><%= link_to t(".faq.manquants.lien_externe"), "https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques", target: "_blank" %></p>
+                  <p><%= link_to t(".faq.manquants.page_proteger"), "https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques", target: "_blank" %></p>
                   <p><%= t(".faq.manquants.palissy") %></p>
                 </div>
               </section>

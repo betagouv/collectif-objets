@@ -260,6 +260,11 @@ fr:
         retours:
           title: Que se passe-t-il après lʼenvoi de mes réponses ?
           content: Vos réponses seront traitées par les conservatrices et conservateurs des antiquités et objets dʼart (CAOA). Un rapport vous sera adressé. Il facilitera lʼétablissement du récolement réglementaire. Pour les objets affectés aux cultes, celui-ci doit être signé par le propriétaire, lʼaffectataire et la/le CAOA.
+        restauration:
+          title: Comment lancer un projet de restauration ?
+          veuillez_consulter: "Veuillez consulter ces pages dédiées sur le site du Ministère de la Culture :"
+          page_intervenir: Intervenir sur un objet mobilier classé ou inscrit
+          page_marches: Marchés publics et conservation-restauration des biens culturels
         introuvable:
           title: Je n’arrive pas à localiser un objet qui figure dans Collectif Objets. Que dois-je faire ?
           verifier: Il est important de vérifier auprès des personnes habituées à prendre soin de l’objet qu’il ne s’agit pas d’un déplacement temporaire, par exemple à l’occasion de travaux ou de réaménagements.
@@ -268,11 +273,22 @@ fr:
         manquants:
           title: Pourquoi est-ce que je ne retrouve pas tous les objets de ma commune dans cette liste ?
           monuments_historiques: Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet mobilier concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
-          lien_externe: Voir plus d’informations sur le site du Ministère de la Culture
           palissy: "De plus, une petite partie des objets protégés ayant une fiche Palissy sur POP nʼest volontairement pas importée dans Collectif Objets : il sʼagit des propriétés de lʼÉtat et des sous-dossiers."
+          page_proteger: Protéger des objets mobiliers au titre des monuments historiques
         sur_place:
           title: Pourquoi dois-je me rendre sur place ?
           content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre Conservateur des Antiquités et Objets d’Art (CAOA) puisse réaliser un premier niveau d’analyse et vous guider dans la préservation de ces objets.
+        entretien:
+          title: Comment entretenir mes objets ?
+          content: Au delà de l'entretien courant qui consiste à nettoyer l'espace autour des objets, il convient de ne pas toucher aux objets protégés. Seul un professionnel habilité assurera une prise en charge optimale.
+          page_intervenir: Intervenir sur un objet mobilier protégé
+          page_plan_sauvegarde: Plan de sauvegarde des biens culturels
+        securisation:
+          title: Comment sécuriser mes objets ?
+          voir_la_fiche: Voir la fiche sur la sécurisation
+          page_securite: Sécurisation des objets protégés
+          page_vol: Procédures en cas de vol
+
   activerecord:
     errors:
       models:
