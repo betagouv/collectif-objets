@@ -257,6 +257,9 @@ fr:
         conseils: Une fois le recensement terminé, le conservateur en charge de votre territoire reviendra vers vous pour valider votre recensement et - si besoin - vous guider vers des opérations d’entretien, de sauvegarde ou de sécurisation de vos objets.
         fiches: Des fiches explicatives et/ou des commentaires du conservateur pourront vous être délivrés pour faciliter ces opérations.
       faq:
+        retours:
+          title: Que se passe-t-il après lʼenvoi de mes réponses ?
+          content: Vos réponses seront traitées par les conservatrices et conservateurs des antiquités et objets dʼart (CAOA). Un rapport vous sera adressé. Il facilitera lʼétablissement du récolement réglementaire. Pour les objets affectés aux cultes, celui-ci doit être signé par le propriétaire, lʼaffectataire et la/le CAOA.
         introuvable:
           title: Je n’arrive pas à localiser un objet qui figure dans Collectif Objets. Que dois-je faire ?
           verifier: Il est important de vérifier auprès des personnes habituées à prendre soin de l’objet qu’il ne s’agit pas d’un déplacement temporaire, par exemple à l’occasion de travaux ou de réaménagements.
