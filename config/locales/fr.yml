@@ -253,7 +253,7 @@ fr:
         photo: Il est aussi important de joindre une photo de l’état actuel de l’objet afin de permettre au conservateur en charge de votre dossier de valider votre recensement.
         hors_ligne: Vous n’avez pas accès à internet dans l’édifice ? Nous avons préparé une version imprimable de la liste de vos objets et des questionnaires à emporter lors de vos déplacements que vous n’aurez plus qu’à saisir en ligne à votre retour.
       etape3:
-        title: Étape 3 - Je reçois des recommendations d’un conservateur
+        title: Étape 3 - Je reçois des recommandations d’un conservateur
         conseils: Une fois le recensement terminé, le conservateur en charge de votre territoire reviendra vers vous pour valider votre recensement et - si besoin - vous guider vers des opérations d’entretien, de sauvegarde ou de sécurisation de vos objets.
         fiches: Des fiches explicatives et/ou des commentaires du conservateur pourront vous être délivrés pour faciliter ces opérations.
       faq:
@@ -266,6 +266,7 @@ fr:
           title: Pourquoi est-ce que je ne retrouve pas tous les objets de ma commune dans cette liste ?
           monuments_historiques: Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet mobilier concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
           lien_externe: Voir plus d’informations sur le site du Ministère de la Culture
+          palissy: "De plus, une petite partie des objets protégés ayant une fiche Palissy sur POP nʼest volontairement pas importée dans Collectif Objets : il sʼagit des propriétés de lʼÉtat et des sous-dossiers."
         sur_place:
           title: Pourquoi dois-je me rendre sur place ?
           content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre Conservateur des Antiquités et Objets d’Art (CAOA) puisse réaliser un premier niveau d’analyse et vous guider dans la préservation de ces objets.
