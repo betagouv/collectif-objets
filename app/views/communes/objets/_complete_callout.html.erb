@@ -1,0 +1,13 @@
+<%= render CalloutWithCtaComponent.new(color: "green-emeraude") do |c| %>
+  <% c.with_text do %>
+    <%= t(".hint", count: dossier.recensements.count) %>
+  <% end %>
+  <% c.with_cta do %>
+    <%= link_to(
+      t(".cta", count: dossier.recensements.count),
+      new_commune_completion_path(commune),
+      class: "fr-btn",
+      tabindex: "0"
+    ) %>
+  <% end %>
+<% end %>

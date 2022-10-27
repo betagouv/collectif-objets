@@ -6,98 +6,39 @@
     links: [["Accueil", root_path]],
     current_page_label: "Objets de #{@commune.nom}")
   %>
-  <div class="fr-grid-row fr-py-2w fr-grid-row--center">
-    <div class="fr-col-md-8">
-      <h2 class="co-text--blue co-text--center">
-        <%= t(".title", count: @objets_list.count, commune: @commune.nom) %>
-      </h2>
-      <% if @commune.inactive? %>
-        <div class="co-text--center">
-          <p>
-            Il y a des objets monuments historiques dans votre commune ? Vous êtes élu·e ? Responsable du patrimoine de votre commune ?
-            La commune est charge de veiller sur ces objets.
-            <b>Aidez-nous à vérifier leur présence et leur état</b>
-          </p>
-        </div>
-      <% elsif @commune.started? %>
-        <div class="co-text--center">
-          <p>
-            <% if @commune.can_complete? %>
-              <%= link_to "Finaliser le recensement", new_commune_completion_path(@commune), class: "fr-btn" %>
-            <% else %>
-              <button class="fr-btn" disabled>Finaliser le recensement</button>
-              Il vous reste <%= @commune.objets.where.missing(:recensements).count %> objets à recenser
-            <% end %>
-          </p>
-        </div>
-      <% elsif @commune.completed? && @dossier.submitted? %>
-        <div class="co-text--center">
-          <p>
-            Le recensement de vos objets est terminé, merci !
-            Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
-          </p>
-          <p>
-            <%= link_to "Voir les données envoyées", commune_completion_path(@commune), class: "fr-btn" %>
-          </p>
-        </div>
-      <% elsif @commune.completed? && @dossier.rejected? %>
-        <div class="fr-callout fr-icon-info-line">
-          <h4 class="fr-callout__title">Dossier renvoyé par le conservateur</h4>
-          <p class="fr-callout__text">
-            <%= t(
-              ".rejected_callout.explanation",
-              count: @dossier.recensements.count,
-              objet_name: truncate(@dossier.recensements.first&.objet.nom, length: 30),
-              date_submitted_at: l(@dossier.submitted_at.to_date)
-            ) %>
-            <%= t(
-              ".rejected_callout.note",
-              date_rejected_at: l(@dossier.rejected_at.to_date),
-              conservateur: @dossier.conservateur.to_s
-            ) %>
-          </p>
-          <blockquote class="fr-callout__text fr-my-2w co-blockquote fr-text--alt">
-            <%= @dossier.notes_conservateur %>
-          </blockquote>
-          <p class="fr-callout__text"><%= t(".rejected_callout.action")  %></p>
-        </div>
-      <% elsif @commune.completed? && @dossier.accepted? %>
-        <div class="fr-callout fr-icon-success-line fr-callout--green-emeraude">
-          <h4 class="fr-callout__title">
-            <%= t(".accepted_callout.title") %>
-          </h4>
-          <p class="fr-callout__text">
-            <%= t(
-              ".accepted_callout.content",
-              date: l(@dossier.accepted_at.to_date),
-              conservateur: @dossier.conservateur.to_s
-            ) %>
-          </p>
-          <p>
-            <%= link_to "Voir le rapport", commune_dossier_path(@commune, @dossier), class: "fr-btn" %>
-          </p>
-        </div>
-        <%# TODO %>
-      <% end %>
-    </div>
-  </div>
 
-  <%= render "list", objets_list: @objets_list %>
+  <h2 class="co-text--blue"><%= @commune.nom %></h2>
 
-  <% if @commune.objets_recensable? && !@dossier&.rejected? %>
-    <div class="fr-grid-row fr-pt-8w fr-pb-8w fr-grid-row--center">
-      <div class="fr-col-md-8 co-text--center">
-        <p>
-          Si vous n'avez pas de connexion internet pendant le recensement, vous pouvez :
-        </p>
-        <p>
-          <%= link_to "Imprimer le formulaire de recensement", commune_formulaire_path %>
-        </p>
-      </div>
-    </div>
-  <% end %>
-
-  <% if @dossier&.rejected? %>
+  <% if @commune.inactive? %>
+    <h5 class="co-text--blue">
+      <%= t(".n_objets_a_recenser", count: @objets_list.count) %>
+    </h5>
+    <%= render "recensements/etapes" %>
+    <%= render "list", objets_list: @objets_list %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
+    <%= render "imprimer_callout" %>
+  <% elsif @commune.can_complete? %>
+    <h5 class="co-text--blue">
+      <%= t(".tous_les_objets_recenses") %>
+    </h5>
+    <%= render "complete_callout", dossier: @dossier, commune: @commune %>
+    <%= render "list", objets_list: @objets_list %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
+    <%= render "imprimer_callout" %>
+  <% elsif @commune.started? %>
+    <h5 class="co-text--blue">
+      <%= t(".n_objets_restants_a_recenser", count: @commune.objets.where.missing(:recensements).count) %>
+    </h5>
+    <%= render "recensements/etapes" %>
+    <%= render "list", objets_list: @objets_list %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
+    <%= render "imprimer_callout" %>
+  <% elsif @commune.completed? && @dossier.submitted? %>
+    <%= render "submitted_callout", commune: @commune %>
+    <%= render "list", objets_list: @objets_list %>
+  <% elsif @commune.completed? && @dossier.rejected? %>
+    <%= render "rejected_callout", dossier: @dossier %>
+    <%= render "list", objets_list: @objets_list %>
     <p class="co-text--center fr-mt-4w">
       <%= link_to(
         "Renvoyer le dossier au conservateur…",
@@ -105,5 +46,12 @@
         class: "fr-btn"
       ) %>
     </p>
+    <%= render "recensements/etapes" %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
+    <%= render "imprimer_callout" %>
+  <% elsif @commune.completed? && @dossier.accepted? %>
+    <%= render "accepted_callout", dossier: @dossier %>
+    <%= render "list", objets_list: @objets_list %>
+    <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
   <% end %>
 </main>

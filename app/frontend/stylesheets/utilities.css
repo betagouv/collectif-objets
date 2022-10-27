@@ -131,6 +131,10 @@
   font-size: 0.8em;
 }
 
+.co-text--underline {
+  text-decoration: underline;
+}
+
 /* FLEX */
 
 .co-flex {
@@ -238,6 +242,10 @@
 img.co-object-fit-contain,
 .fr-card--horizontal .fr-card__img img.co-object-fit-contain {
   object-fit: contain;
+}
+
+.fr-callout .co-callout-cta .fr-btn {
+  margin-top: 0;
 }
 
 

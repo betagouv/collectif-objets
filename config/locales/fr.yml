@@ -7,18 +7,33 @@ fr:
   communes:
     objets:
       index:
-        title:
-          one: "%{commune} abrite un objet protégé"
-          other: "Les %{count} objets protégés de %{commune}"
-        rejected_callout:
-          explanation:
-            one: "Le recensement de '%{objet_name}' que vous avez envoyé le %{date_submitted_at} n'a pas pu être analysé par les conservateurs en l'état."
-            other: "Le dossier de recensement de %{count} objets que vous avez envoyé le %{date_submitted_at} n'a pas pu être analysé par les conservateurs en l'état."
-          note: "Voici le commentaire laissé à votre intention par %{conservateur} le %{date_rejected_at} :"
-          action: Vous pouvez modifier les informations de recensements et renvoyer le dossier au conservateur.
-        accepted_callout:
-          title: Dossier accepté par le conservateur
-          content: "%{conservateur} a analysé votre dossier le %{date}."
+        n_objets_a_recenser:
+          one: un objet protégé à recenser
+          other: "%{count} objets protégés à recenser"
+        n_objets_restants_a_recenser:
+          one: Il reste un objet protégé à recenser
+          other: Il reste %{count} objets protégés à recenser
+        tous_les_objets_recenses: Tous les objets ont été recensés
+      rejected_callout:
+        explanation:
+          one: "Le recensement de '%{objet_name}' que vous avez envoyé le %{date_submitted_at} n'a pas pu être analysé par les conservateurs en l'état."
+          other: "Le dossier de recensement de %{count} objets que vous avez envoyé le %{date_submitted_at} n'a pas pu être analysé par les conservateurs en l'état."
+        note: "Voici le commentaire laissé à votre intention par %{conservateur} le %{date_rejected_at} :"
+        action: Vous pouvez modifier les informations de recensements et renvoyer le dossier au conservateur.
+      accepted_callout:
+        title: Dossier accepté par le conservateur
+        content: "%{conservateur} a analysé votre dossier le %{date}."
+      imprimer_callout:
+        pas_de_connexion: Vous n'avez pas de connexion internet pendant le recensement ?
+        vous_pouvez_imprimer: Vous pouvez imprimer le formulaire de recensement. Vous devrez reporter ces informations sur ce site une fois le recensement sur place effectué.
+        cta: Imprimer le formulaire
+      complete_callout:
+        hint:
+          one: Il ne vous reste plus qu'à envoyer le recensement aux conservateurs
+          other: Il ne vous reste plus qu'à envoyer les recensements aux conservateurs
+        cta:
+          one: Envoyer le recensement
+          other: Envoyer les recensements
       recensement_saved_after_reject:
         title: Votre recensement a bien été mis à jour
         cta: Renvoyer le dossier…
@@ -32,6 +47,16 @@ fr:
         leftover_in_edifice: "Ces objets sont encore à recenser dans l'édifice %{nom}:"
         cta: Finaliser le recensement…
         back: Revenir à la liste d'objets de ma commune
+      objets_manquants:
+        pourquoi_n_objets:
+          one: Pourquoi cette liste ne contient qu'un objet ?
+          other: Pourquoi cette liste ne contient que %{count} objets ?
+        seulement_objets_proteges_html: Ce recensement concerne <b>uniquement les objets monuments historiques</b>, dont la responsabilité est partagée entre les pouvoirs publics et les communes propriétaires.
+        en_savoir_plus: En savoir plus…
+      submitted_callout:
+        title: Le recensement de vos objets est terminé, merci !
+        content: Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
+        cta: Voir les données envoyées
     recompletions:
       new:
         head_title: "Renvoi du dossier de recensement de %{commune_nom}"
@@ -208,6 +233,42 @@ fr:
         fiche_vol: "Fiche Signaler un vol"
         fiche_securisation: "Fiche Sécurisation"
         fiche_nuisibles: "Fiche Nuisibles"
+    aide:
+      intro:
+        title: Le recensement
+        content1: Mener un recensement, c’est aller vérifier la présence d’un objet au sein de son édifice et constater son état en répondant à un questionnaire simplifié. C’est une opération rapide à mener (5 à 10 min par objet) et qui ne demande aucune expertise ou formation particulière. Les données collectées permettent aux conservateurs en charge de votre territoire de mieux connaître votre patrimoine, de vous aider à le valoriser et d’intervenir à temps pour le protéger.
+        content2: Vous êtes élu·e ou agent municipal ? Vous êtes en charge du patrimoine de votre commune ? Sur Collectif Objets vous pouvez retrouver la liste des objets classés Monuments Historiques abrités par votre commune à la page “les objets de ma commune” afin de les recenser.
+      etape1:
+        title: Étape 1 - Je me rends sur place
+        content1: Pour évaluer au mieux les conditions de vos objets Monuments Historiques au moment de leur recensement, celui-ci doit être effectué sur place et être accompagné de photos actuelles.
+        content2: Le recensement des objets peut également être réalisé par toute personne de confiance si elle bénéficie de l’aval de la commune.
+        content3: Retrouvez dans notre guide les clés pour préparer votre recensement, mais aussi les astuces de nos conservateurs pour évaluer l’état des objets.
+      etape2:
+        title: Étape 2 - Je remplis le formulaire en ligne
+        questions:
+          title: "Pour chaque objet, répondez à trois questions très simples :"
+          question1: L’objet est-il présent ?
+          question2: Dans quel état est-il ?
+          question3: Est-il en sécurité ?
+        photo: Il est aussi important de joindre une photo de l’état actuel de l’objet afin de permettre au conservateur en charge de votre dossier de valider votre recensement.
+        hors_ligne: Vous n’avez pas accès à internet dans l’édifice ? Nous avons préparé une version imprimable de la liste de vos objets et des questionnaires à emporter lors de vos déplacements que vous n’aurez plus qu’à saisir en ligne à votre retour.
+      etape3:
+        title: Étape 3 - Je reçois des recommendations d’un conservateur
+        conseils: Une fois le recensement terminé, le conservateur en charge de votre territoire reviendra vers vous pour valider votre recensement et - si besoin - vous guider vers des opérations d’entretien, de sauvegarde ou de sécurisation de vos objets.
+        fiches: Des fiches explicatives et/ou des commentaires du conservateur pourront vous être délivrés pour faciliter ces opérations.
+      faq:
+        introuvable:
+          title: Je n’arrive pas à localiser un objet qui figure dans Collectif Objets. Que dois-je faire ?
+          verifier: Il est important de vérifier auprès des personnes habituées à prendre soin de l’objet qu’il ne s’agit pas d’un déplacement temporaire, par exemple à l’occasion de travaux ou de réaménagements.
+          introuvable: Si vous ne parvenez pas à localiser l’objet, indiquez-le comme “introuvable” via la plateforme Collectif Objets.
+          voir_la_fiche: Voir la fiche vol
+        manquants:
+          title: Pourquoi est-ce que je ne retrouve pas tous les objets de ma commune dans cette liste ?
+          monuments_historiques: Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet mobilier concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
+          lien_externe: Voir plus d’informations sur le site du Ministère de la Culture
+        sur_place:
+          title: Pourquoi dois-je me rendre sur place ?
+          content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre Conservateur des Antiquités et Objets d’Art (CAOA) puisse réaliser un premier niveau d’analyse et vous guider dans la préservation de ces objets.
   activerecord:
     errors:
       models:
@@ -614,3 +675,10 @@ fr:
     mailer:
       define_password_instructions:
         subject: "Bienvenue sur Collectif Objets, définissez votre mot de passe pour accéder à votre compte"
+  recensements:
+    etapes:
+      unfold: Comment ça marche ?
+      etape1_html: <b>Je me rends sur place</b> pour recenser mes objets protégés et les prendre en photo
+      etape2_html: <b>Je remplis le formulaire en ligne</b> sur l’emplacement et l’état actuel des objets
+      etape3_html: <b>Je reçois des conseils d’un conservateur</b> pour assurer la pérennité de mes objets
+      cta: En savoir plus…

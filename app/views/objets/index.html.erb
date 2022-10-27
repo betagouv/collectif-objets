@@ -27,14 +27,7 @@
         <h2 class="co-text--blue">
           Les <%= @pagy.count %> objets protégés de <%= @filters[:commune].nom %>
         </h2>
-      <% else %>
-        <h2>Je découvre les objets de ma commune</h2>
       <% end %>
-      <p>
-        Il y a des objets monuments historiques dans votre commune ? Vous êtes élu·e ? Responsable du patrimoine de votre commune ?
-        La commune est charge de veiller sur ces objets.
-        <b>Aidez-nous à vérifier leur présence et leur état</b>
-      </p>
       <% if @filters[:commune].blank? %>
         <p>
           Voici les <%= @pagy.count %> objets présents dans Collectif Objets
@@ -46,7 +39,7 @@
 
   <% if @filters[:commune].blank? %>
     <% if @pagy.pages > 1 %>
-      <div class="fr-mt-8w">
+      <div class="fr-mt-4w">
         <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
       </div>
     <% end %>

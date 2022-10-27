@@ -11,5 +11,7 @@
     current_page_label: "Recensement"
   ) %>
 
+  <%= render "etapes", expanded: @recensement.first? %>
+
   <%= render "recensements/form", recensement: @recensement %>
 </main>

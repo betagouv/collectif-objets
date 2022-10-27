@@ -37,7 +37,7 @@
         </p>
       </div>
     </div>
-    <div class="fr-container fr-grid-row fr-grid-row--center fr-mt-4w co-home-hero-columns">
+    <div class="fr-container fr-grid-row fr-grid-row--center fr-mt-4w">
       <div class="fr-col-md-4 fr-px-4w">
         <%= vite_image_tag "images/illustrations/woman-magnifier.svg", class: "fr-mb-2w  co--width-max-100" %>
         <div>
@@ -70,43 +70,33 @@
   <!-- SECTION ETAPES -->
   <div class="co-home-section-steps">
     <div class="fr-container fr-grid-row fr-grid-row-gutters fr-grid-row--middle fr-grid-row--center fr-my-12w">
-      <div class="fr-col-md-5 fr-px-12w">
-        <%= vite_image_tag "images/illustrations/counter-01.jpg" , class: "co--width-max-100" %>
+      <div class="fr-col-md-5 fr-px-12w co-text--center">
+        <%= vite_image_tag "images/illustrations/counter-01.svg" , class: "co--width-max-100", alt: "étape 1" %>
       </div>
       <div class="fr-col-md-5">
-        <h2 class="co-text--blue">Je (re)découvre les objets de ma commune</h2>
+        <p class="fr-text--lg"><%= t("recensements.etapes.etape1_html") %></p>
         <p>
-          Pour chaque objet, je dispose d'une fiche avec ses informations et sa dernière localisation connue.
-        </p>
-        <p>
-          <%= link_to "Voir les objets de ma commune" , objets_path, class: "fr-link fr-icon-arrow-right-line fr-link--icon-right" %>
+          <%= link_to "Voir les objets de ma commune" , objets_path, class: "fr-icon-arrow-right-line fr-link--icon-right" %>
         </p>
       </div>
     </div>
     <div class="fr-container fr-grid-row fr-grid-row-gutters fr-grid-row--middle fr-grid-row--center fr-my-12w">
       <div class="fr-col-md-5">
-        <h2 class="co-text--blue">Je remplis le questionnaire</h2>
+        <p class="fr-text--lg"><%= t("recensements.etapes.etape2_html") %></p>
         <p>
-          Je me rends auprès des objets de ma commune pour répondre à 3 questions très simples à l'aide d'un guide :<br />
-          L'objet est-il présent ? Est-il en bon état ? Est-il sécurisé ?
-        </p>
-        <p>
-          <%= link_to "Lire le guide" , guide_url, class: "fr-link" %>
+          <%= link_to "Lire le guide" , guide_url %>
         </p>
       </div>
-      <div class="fr-col-md-5 fr-px-12w">
-        <%= vite_image_tag "images/illustrations/counter-02.jpg" , class: "co--width-max-100" %>
+      <div class="fr-col-md-5 fr-px-12w co-text--center">
+        <%= vite_image_tag "images/illustrations/counter-02.svg" , class: "co--width-max-100", alt: "étape 2" %>
       </div>
     </div>
     <div class="fr-container fr-grid-row fr-grid-row-gutters fr-grid-row--middle fr-grid-row--center fr-my-12w">
-      <div class="fr-col-md-5 fr-px-12w">
-        <%= vite_image_tag "images/illustrations/counter-03.png" , class: "co--width-max-100" %>
+      <div class="fr-col-md-5 fr-px-12w co-text--center">
+        <%= vite_image_tag "images/illustrations/counter-03.svg" , class: "co--width-max-100", alt: "étape 3" %>
       </div>
       <div class="fr-col-md-5">
-        <h2 class="co-text--blue">Je reçois des conseils</h2>
-        <p>
-          Les conservateurs en charge de mon territoire reviennent vers moi pour valider mon recensement et m'apporter leurs conseils pour sécuriser et valoriser mes objets.
-        </p>
+        <p class="fr-text--lg"><%= t("recensements.etapes.etape3_html") %></p>
       </div>
     </div>
   </div>
