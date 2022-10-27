@@ -9,7 +9,12 @@ class PagesController < ApplicationController
   }.freeze
   STATIC_FILES_HOST = "fichiers.collectif-objets.beta.gouv.fr"
 
-  def home; end
+  def home
+    @stats = Rails.cache.fetch("homepage_stats", expires_in: 24.hours) do
+      { recensements: Recensement.count, communes: Commune.completed.count }
+    end
+  end
+
   def aide; end
   def stats; end
 

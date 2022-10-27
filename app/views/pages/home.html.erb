@@ -104,20 +104,19 @@
   <div class="co-background--light-grey fr-py-12w">
     <div class="fr-container fr-grid-row fr-grid-row-gutters">
       <div class="fr-col-12 fr-pb-4w co-text--center">
-        <h2 class="co-text--blue" id="stats">Ils ont participé</h2>
+        <h2 class="co-text--blue" id="stats">Elles ont participé</h2>
       </div>
       <div class="fr-col-md-6 fr-px-8w co-text--center">
-        <div class="fr-display--xl co-text--blue"><%= Recensement.count %></div>
+        <div class="fr-display--xl co-text--blue"><%= @stats[:recensements] %></div>
         <div class="co-text--blue">
           objets classés monuments historiques déjà recensés
           depuis le début de l'opération
         </div>
       </div>
       <div class="fr-col-md-6 fr-px-8w co-text--center">
-        <div class="fr-display--xl co-text--blue">+85%</div>
+        <div class="fr-display--xl co-text--blue"><%= @stats[:communes] %></div>
         <div class="co-text--blue">
-          de communes participantes<br/>
-          lors de la première campagne réalisée en Haute-Marne
+          communes engagées dans le recensement
         </div>
       </div>
       <div class="fr-col-12 fr-mt-8w co-text--center">
