@@ -40,7 +40,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
       find("label", text: "L'objet est en bon état").click
     end
     within("[data-recensement-target=securisation]") do
-      find("label", text: "Oui, il est difficile de le voler").click
+      find("label", text: "L’objet est facile à voler").click
     end
     find("label", text: "Je ne peux pas prendre cet objet en photo").click
     fill_in "Commentaires", with: "C'est un superbe pépito bleu"
@@ -70,7 +70,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
       find("label", text: "L'objet est en mauvais état").click
     end
     within("[data-recensement-target=securisation]") do
-      find("label", text: "Oui, il est difficile de le voler").click
+      find("label", text: "L’objet est facile à voler").click
     end
     find("label", text: "Je ne peux pas prendre cet objet en photo").click
 
@@ -122,7 +122,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
         find("label", text: "L'objet est en bon état").click
       end
       within("[data-recensement-target=securisation]") do
-        find("label", text: "Oui, il est difficile de le voler").click
+        find("label", text: "L’objet est facile à voler").click
       end
       find("label", text: "Je ne peux pas prendre cet objet en photo").click
       fill_in "Commentaires", with: "C'est un superbe pépito bleu"
@@ -150,7 +150,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
       find("label", text: "L'objet est en bon état").click
     end
     within("[data-recensement-target=securisation]") do
-      find("label", text: "Oui, il est difficile de le voler").click
+      find("label", text: "L’objet est facile à voler").click
     end
     # find("label", text: "Je ne peux pas prendre cet objet en photo").click
     fill_in "Commentaires", with: "C'est un superbe pépito bleu"

@@ -77,14 +77,14 @@ module RecensementHelper
   def securisation_options
     [
       Option.new(
-        Recensement::SECURISATION_CORRECTE,
-        "Oui, il est difficile de le voler",
-        "success"
+        Recensement::SECURISATION_MAUVAISE,
+        t("recensement.securisation_choices.mauvaise"),
+        "warning"
       ),
       Option.new(
-        Recensement::SECURISATION_MAUVAISE,
-        "Non, il peut être emporté facilement",
-        "warning"
+        Recensement::SECURISATION_CORRECTE,
+        t("recensement.securisation_choices.correcte"),
+        "success"
       )
     ]
   end

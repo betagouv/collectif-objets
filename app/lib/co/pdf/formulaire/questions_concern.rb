@@ -88,7 +88,7 @@ module Co
         def display_question_securisation
           grid([9, 1], [9, 8]).bounding_box do
             text(
-              "<b>L'objet est-il en sécurité ?</b>",
+              "<b>#{I18n.t('activerecord.attributes.recensement.securisation')}</b>",
               inline_format: true
             )
             checkbox("Oui, il est difficile de le voler")

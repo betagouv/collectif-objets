@@ -103,9 +103,9 @@ class RecensementPresenter
   def generic_securisation(value)
     case value
     when Recensement::SECURISATION_CORRECTE
-      badge("success") { "En sécurité" }
+      badge("success") { I18n.t("recensement.securisation_badges.correcte") }
     when Recensement::SECURISATION_MAUVAISE
-      badge("warning") { "En danger" }
+      badge("warning") { I18n.t("recensement.securisation_badges.mauvaise") }
     end
   end
 end
