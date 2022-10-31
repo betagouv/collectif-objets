@@ -95,7 +95,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    after_commit_everywhere (1.2.2)
+    after_commit_everywhere (1.3.0)
       activerecord (>= 4.2)
       activesupport
     arbre (1.5.0)
