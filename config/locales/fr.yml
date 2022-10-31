@@ -51,7 +51,7 @@ fr:
         pourquoi_n_objets:
           one: Pourquoi cette liste ne contient qu'un objet ?
           other: Pourquoi cette liste ne contient que %{count} objets ?
-        seulement_objets_proteges_html: Ce recensement concerne <b>uniquement les objets monuments historiques</b>, dont la responsabilité est partagée entre les pouvoirs publics et les communes propriétaires.
+        seulement_objets_proteges_html: Ce recensement concerne <b>uniquement les objets monuments historiques</b>. Ces trésors nationaux sont concernés par une réglementation particulière.
         en_savoir_plus: En savoir plus…
       submitted_callout:
         title: Le recensement de vos objets est terminé, merci !
