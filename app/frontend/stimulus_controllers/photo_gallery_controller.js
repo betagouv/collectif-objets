@@ -9,6 +9,7 @@ export default class extends Controller {
     e.preventDefault()
     const data = JSON.parse(this.photosTarget.dataset.imagesJson)
     const index = e.currentTarget.dataset.index ? Number(e.currentTarget.dataset.index) : null
+    Spotlight.init({ force: true })
     Spotlight.show(data, { index: index })
   }
 }
