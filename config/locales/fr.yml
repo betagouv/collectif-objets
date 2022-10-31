@@ -214,6 +214,12 @@ fr:
       moyen: L'édifice est en état moyen
       mauvais: L'édifice est en mauvais état
       peril: L'édifice est en péril
+    securisation_choices:
+      correcte: L’objet est difficile à voler
+      mauvaise: L’objet est facile à voler
+    securisation_badges:
+      correcte: Difficile à voler
+      mauvaise: Facile à voler
   dossier:
     status_badge:
       construction: Recensement en cours
@@ -249,7 +255,7 @@ fr:
           title: "Pour chaque objet, répondez à trois questions très simples :"
           question1: L’objet est-il présent ?
           question2: Dans quel état est-il ?
-          question3: Est-il en sécurité ?
+          question3: Est-il facile à voler ?
         photo: Il est aussi important de joindre une photo de l’état actuel de l’objet afin de permettre au conservateur en charge de votre dossier de valider votre recensement.
         hors_ligne: Vous n’avez pas accès à internet dans l’édifice ? Nous avons préparé une version imprimable de la liste de vos objets et des questionnaires à emporter lors de vos déplacements que vous n’aurez plus qu’à saisir en ligne à votre retour.
       etape3:
@@ -371,7 +377,7 @@ fr:
         recensable: L’objet peut-il être recensé ?
         etat_sanitaire_edifice: Dans quel état est <u>l’édifice</u> à proximité de l’objet ?
         etat_sanitaire: Dans quel état est <u>l’objet</u> ?
-        securisation: L’objet est-il en sécurité ?
+        securisation: Est-il facile de voler cet objet ?
         notes: Commentaires
         analyse_actions: Actions à mener
         analyse_fiches: Fiches à associer

@@ -67,11 +67,11 @@ RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
     expect(etat_sanitaire_group).to \
       have_content "Cette évaluation a été modifiée par le conservateur, vous ne pouvez pas la modifier"
     within("[data-recensement-target=securisation]") do
-      find("label", text: "Non, il peut être emporté facilement").click
+      find("label", text: "L’objet est facile à voler").click
     end
     click_on "Enregistrer ce recensement"
     click_on "Renvoyer le dossier…"
-    expect(find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")).to have_text(/en danger/i)
+    expect(find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")).to have_text(/facile à voler/i)
     fill_in "commune[dossier_attributes][notes_commune]", with: "Voila ca devrait aller"
     click_on "Renvoyer le dossier au conservateur"
   end

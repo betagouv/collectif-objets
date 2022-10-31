@@ -64,11 +64,11 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
 
     # analyse second recensement
     click_on "Ciboire des malades"
-    securisation_group = find("b", text: "L’objet est-il en sécurité ?")
+    securisation_group = find("b", text: "Est-il facile de voler cet objet ?")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(securisation_group) do
       click_on "Modifier"
-      select "Non, il peut être emporté facilement", from: "recensement[analyse_securisation]"
+      select "L’objet est facile à voler", from: "recensement[analyse_securisation]"
     end
 
     click_on "Sauvegarder"
