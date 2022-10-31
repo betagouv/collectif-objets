@@ -1,0 +1,73 @@
+
+<div class="calendars">
+  <% month_calendars.each do |calendar| %>
+    <div>
+      <%= calendar.name %>
+      <table class="calendar">
+        <thead>
+          <tr>
+            <th>Lu</th><th>Ma</th><th>Me</th><th>Je</th><th>Ve</th><th>Sa</th><th>Di</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% calendar.weeks.each do |week| %>
+            <tr>
+              <% week.days.each do |day| %>
+                <td class="<%= day.css_classes %>">
+                  <div class="day-number"><%= day.day.day %></div>
+                  <% day.events.each do |event| %>
+                    <div>
+                      <%= link_to "#{event.step} #{event.campaign.departement.nom}", campaign_path(event.campaign) %>
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .calendars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .calendar {
+    border-collapse: collapse;
+    width: auto;
+  }
+
+  .calendar td, th {
+    padding: 4px;
+    border: 1px solid #999;
+  }
+
+  .calendar th {
+    background: #DDD;
+    color: #666;
+    text-align: center;
+  }
+
+  .calendar td {
+    background: #FFF;
+    color: #777;
+    vertical-align: top;
+  }
+
+  .day-number {
+    text-align: right;
+  }
+
+  .calendar .notmonth {
+    opacity: .6;
+  }
+
+  .calendar .today {
+    color: blue;
+  }
+</style>
