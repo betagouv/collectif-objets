@@ -38,7 +38,7 @@ module Co
 
         def display_logos
           grid([0, 0], [1, 1]).bounding_box do
-            image "app/frontend/images/logo-ministere-de-la-culture.png", width: 100
+            image "public/ministere-culture.png", width: 100
             move_down 10
             text "<b>Collectif Objets</b>", size: 12, inline_format: true
           end

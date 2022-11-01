@@ -2,7 +2,7 @@
   <mj-body>
     <mj-section>
       <mj-column vertical-align="middle">
-        <mj-image width="100px" src="<%= png_base64('logo-ministere-de-la-culture.png') %>" align="left"></mj-image>
+        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
       </mj-column>
       <mj-column vertical-align="middle">
         <mj-text align="left" font-size="20px">Collectif Objets</mj-text>
@@ -56,7 +56,7 @@
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-image width="100px" src="<%= png_base64('logo-ministere-de-la-culture.png') %>" align="left"></mj-image>
+        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
       </mj-column>
       <mj-column>
         <mj-text>
