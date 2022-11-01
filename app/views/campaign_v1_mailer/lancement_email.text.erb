@@ -1,0 +1,14 @@
+<%= tt("lancement.invitation") %>
+
+<%= tt("lancement.abrite_n_objets") %> <%= [@commune.highlighted_objet.palissy_TICO.capitalize, @commune.highlighted_objet.edifice_nom_formatted, @commune.highlighted_objet.emplacement].map(&:presence).compact.join(" - ") %>
+
+<%= tt("lancement.simple") %>
+
+<%= render partial: "info_concordataires" %>
+<%= tt("lancement.conseils") %>
+
+- <%= tt("lancement.conseil1") %>
+- <%= tt("lancement.conseil2") %>
+- <%= tt("lancement.conseil3") %>
+
+<%= render partial: "cta", locals: { variant: "inactive", user: @user, commune: @commune } %>

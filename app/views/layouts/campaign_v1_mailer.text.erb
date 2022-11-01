@@ -1,0 +1,21 @@
+<%= t("campaign_v1_mailer.shared.madame_monsieur_le_maire") %>
+
+<%= yield %>
+<%= t("campaign_v1_mailer.shared.politesse") %>
+
+<%= @campaign.signature %>
+
+---
+
+Collectif Objets - <%= t("campaign_v1_mailer.layout.tagline") %>
+
+---
+
+<%= t("campaign_v1_mailer.layout.portage") %>
+
+<%= t("campaign_v1_mailer.layout.contact") %> support@collectifobjets.beta.gouv.fr
+
+---
+
+<%= t("campaign_v1_mailer.layout.desinscription") %>
+<%= magic_authentication_url("magic-token": @user.magic_token, "after_sign_in_path": "/users/edit") %>

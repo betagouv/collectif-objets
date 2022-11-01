@@ -1,0 +1,13 @@
+<%= I18n.t("user_mailer.shared.bonjour") %>
+
+<%= I18n.t("user_mailer.dossier_accepted.submitted", commune_nom: @commune.nom) %>
+
+> <%= @dossier.notes_conservateur %>
+
+<%= I18n.t("user_mailer.dossier_accepted.rapport") %>
+
+<%= I18n.t("user_mailer.dossier_accepted.cta") %> : <%= @login_url %>
+
+
+<%= I18n.t("user_mailer.dossier_accepted.merci") %>
+

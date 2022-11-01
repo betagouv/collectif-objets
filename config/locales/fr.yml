@@ -568,6 +568,11 @@ fr:
       inactive: Commune inactive
       started: Recensement démarré
       to_complete: Commune doit finaliser
+    layout:
+      tagline: Préservez votre patrimoine mobilier
+      portage: Cette initiative est portée par le ministère de la Culture et la Direction interministérielle du numérique dans le cadre du programme beta.gouv.
+      contact: "En cas de difficultés pour recenser vous pouvez nous contacter sur : "
+      desinscription: Suivez ce lien pour ne plus recevoir d'emails de Collectif Objets
     lancement:
       title: Mail de lancement
       subject: "Lancement du recensement des objets monuments historiques à %{nom_commune}"
@@ -673,6 +678,13 @@ fr:
         other: "%{nom_commune} abrite %{count} objets monuments historiques"
       cliquez: "Il vous suffit de cliquer ici :"
       politesse: "Bien cordialement,"
+    concordataires:
+      intro: Nous sommes dans un département concordataire et la propriété de certains objets religieux peut être incorrectement renseignée dans les bases de données du ministère de la Culture. L'objectif premier de ce travail de recensement n'est pas d'établir définitivement la propriété de ces objets mais bien de s'assurer de leur présence et de leur état.
+      intro2: Pour sa bonne organisation, nous vous invitons à vous rapprocher des affectataires (par exemple les établissements publics du culte que sont les fabriques, conseils presbytéraux, consistoires protestants ou le consistoire israélite départemental).
+      pas_proprietaire: "Si votre commune n’est pas propriétaire des objets, deux options s’offrent à vous :"
+      option1: si vous avez la possibilité de les recenser vous-mêmes, avec l'accord du propriétaire, nous vous invitons à le faire ;
+      option2: si vous connaissez une personne liée à leur propriétaire qui pourrait les recenser, nous vous invitons à lui transférer ce courriel.
+      question: Pour toute question complémentaire, vous avez la possibilité de répondre à ce courriel.
   campaigns:
     edit_recipients_tooltip: Les communes peuvent être éditées uniquement pour les campagnes en brouillon. Une fois planifiées ou démarrées, les communes ne peuvent plus être modifiées.
     mail_names:
@@ -708,3 +720,46 @@ fr:
       etape2_html: <b>Je remplis le formulaire en ligne</b> sur l’emplacement et l’état actuel des objets
       etape3_html: <b>Je reçois des conseils d’un conservateur</b> pour assurer la pérennité de mes objets
       cta: En savoir plus…
+  application_mailer_layout:
+    tagline: Préservez votre patrimoine mobilier
+    politesse: Bien cordialement,
+  conservateur_mailer:
+    commune_recompleted:
+      subject: "%{nom_commune} vous a retourné le dossier de recensement"
+      bonjour: Bonjour %{nom},
+      intro: La commune %{nom_commune} a modifié et renvoyé son dossier de recensement de %{objets_count} objet(s) protégé(s).
+      aucun_commentaire: Aucun commentaire
+      rejected_at: "Le dossier avait été retourné à la commune le %{date} avec le commentaire suivant :"
+      cta: Voir le dossier sur Collectif Objets
+  user_mailer:
+    shared:
+      bonjour: Madame, Monsieur le Maire,
+    commune_completed:
+      subject: "%{commune_nom}, merci dʼavoir contribué à Collectif Objets"
+      participation: Comme de nombreuses communes de votre département, vous avez participé à l’opération de recensement participatif des objets monuments historiques.
+      merci: Nous vous remercions pour votre engagement.
+      visibilite: Ce recensement nous permet d’avoir une plus grande visibilité sur le parc d’objets monuments historiques du département et d’assurer un meilleur suivi de notre patrimoine.
+      a_venir: Au cours des prochains mois, les conservateurs de votre département vont procéder à l’analyse de l’ensemble des données collectées. Nous reviendrons vers vous avec un rapport de recensement qui validera vos observations et — le cas échéant — vous proposera des recommandations sur la marche à suivre pour assurer une meilleure conservation des objets monuments historiques de votre commune.
+      contact: En attendant, nous restons à votre disposition pour toute information complémentaire.
+      consulter: Vous pouvez consulter les recensements que vous nous avez envoyés sur le site Collectif Objets.
+      cta: Accéder à Collectif Objets
+    dossier_accepted:
+      subject: "Rapport de recensement des objets protégés de %{commune_nom}"
+      submitted: Vous avez envoyé un dossier de recensement des objets protégés de %{commune_nom} et je vous en remercie.
+      rapport: Vous trouverez sur Collectif Objets le rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
+      cta: Voir le rapport de recensement
+      merci: Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
+    dossier_rejected:
+      subject: "Compléments nécessaires pour le dossier de recensement des objets protégés de %{commune_nom}"
+      merci: Merci pour le dossier de recensement des objets protégés de %{commune_nom} que vous avez envoyé.
+      rejected: Malheureusement, les conservateurs ne sont pas en mesure de lʼanalyser en lʼétat.
+      connexion: "Vous pouvez vous connecter à Collectif Objets pour modifier ou compléter les recensements des objets en suivant ce lien :"
+      cta: Compléter le dossier de recensement
+    validate:
+      subject: Collectif Objets - Votre lien de connexion
+      lien: "Voici votre lien de connexion à Collectif Objets :"
+      cta: Connexion
+      one_hour: Ce lien est valide une heure.
+      nouveau_html: Vous pouvez en demander un nouveau depuis <a href="%{url}">la page de connexion</a>.
+      nouveau: Vous pouvez en demander un nouveau depuis la page de connexion
+

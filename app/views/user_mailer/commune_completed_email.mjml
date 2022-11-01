@@ -1,47 +1,32 @@
-<mjml>
-  <mj-body>
-    <mj-section>
-      <mj-column vertical-align="middle">
-        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
-      </mj-column>
-      <mj-column vertical-align="middle">
-        <mj-text align="left" font-size="20px">Collectif Objets</mj-text>
-        <mj-text align="left" font-size="14px" color="#444">Préservez votre patrimoine mobilier</mj-text>
-      </mj-column>
-      <mj-column>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-divider border-color="rgb(0,0,145)"></mj-divider>
-        <mj-text>
-          Madame, Monsieur le Maire,<br /><br />
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= I18n.t("user_mailer.shared.bonjour") %>
+    </mj-text>
 
-          Comme de nombreuses communes de votre département, vous avez participé à l’opération de recensement participatif des objets monuments historiques.<br /><br />
+    <mj-text>
+      <%= I18n.t("user_mailer.commune_completed.participation") %>
+    </mj-text>
 
-          <b>Nous vous remercions pour votre engagement.</b><br />
+    <mj-text font-weight="800">
+      <%= I18n.t("user_mailer.commune_completed.merci") %>
+    </mj-text>
 
-          Ce recensement nous permet d’avoir une plus grande visibilité sur le parc d’objets monuments historiques du département et d’assurer un meilleur suivi de notre patrimoine.<br /><br />
+    <mj-text>
+      <%= I18n.t("user_mailer.commune_completed.visibilite") %>
+    </mj-text>
 
-          Au cours des prochains mois, les conservateurs de votre département vont procéder à l’analyse de l’ensemble des données collectées. Nous reviendrons vers vous avec un rapport de recensement qui validera vos observations et — le cas échéant — vous proposera des recommandations sur la marche à suivre pour assurer une meilleure conservation des objets monuments historiques de votre commune.<br /><br />
+    <mj-text>
+      <%= I18n.t("user_mailer.commune_completed.a_venir") %>
+    </mj-text>
 
-          En attendant, nous restons à votre disposition pour toute information complémentaire. Vous pouvez consulter les recensements que vous nous avez envoyés sur <a href="<%= @login_url %>">le site Collectif Objets</a>.<br /><br />
+    <mj-text>
+      <%= I18n.t("user_mailer.commune_completed.contact") %>
+      <%= I18n.t("user_mailer.commune_completed.consulter") %>
+    </mj-text>
 
-          Bien cordialement,
-        </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
-      </mj-column>
-      <mj-column>
-        <mj-text>
-          <b>L'équipe Collectif Objets</b>,<br /><br />
-          <b>Romuald Goudeseune</b><br />
-          <i>Conservateur des monuments historiques en charge de l'expérimentation</i>
-        </mj-text>
-      </mj-column>
-    </mj-section>
-  </mj-body>
-</mjml>
+    <mj-button href="<%= root_url %>" background-color="rgb(0,0,145)">
+      <%= I18n.t("user_mailer.commune_completed.ctq") %>
+      </mj-button>
+  </mj-column>
+</mj-section>

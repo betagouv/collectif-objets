@@ -1,24 +1,28 @@
 <% if @departement.concordataire? %>
 <mj-text>
-  Nous sommes dans un département concordataire et la propriété de certains objets religieux peut être incorrectement renseignée dans les bases de données du ministère de la Culture. L'objectif premier de ce travail de recensement n'est pas d'établir définitivement la propriété de ces objets mais bien de s'assurer de leur présence et de leur état. Pour sa bonne organisation, nous vous invitons à vous rapprocher des affectataires (par exemple les établissements publics du culte que sont les fabriques, conseils presbytéraux, consistoires protestants ou le consistoire israélite départemental).
+  <%= ct(".concordataires.intro") %>
 </mj-text>
 
 <mj-text>
-  Si votre commune n’est pas propriétaire des objets, deux options s’offrent à vous :
+  <%= ct(".concordataires.intro2") %>
+</mj-text>
+
+<mj-text>
+  <%= ct(".concordataires.pas_proprietaire") %>
 </mj-text>
 
 <mj-text>
   <ul>
     <li>
-      si vous avez la possibilité de les recenser vous-mêmes, avec l'accord du propriétaire, nous vous invitons à le faire ;
+      <%= ct(".concordataires.option1") %>
     </li>
     <li>
-      si vous connaissez une personne liée à leur propriétaire qui pourrait les recenser, nous vous invitons à lui transférer ce courriel.
+      <%= ct(".concordataires.option2") %>
     </li>
   </ul>
 </mj-text>
 
 <mj-text>
-  Pour toute question complémentaire, vous avez la possibilité de répondre à ce courriel.
+  <%= ct(".concordataires.question") %>
 </mj-text>
 <% end %>

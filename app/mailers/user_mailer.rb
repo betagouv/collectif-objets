@@ -6,14 +6,17 @@ class UserMailer < ApplicationMailer
     @login_url = users_sign_in_with_token_url(
       login_token: @user.login_token
     )
-    mail to: @user.email, subject: "Collectif Objets - Votre lien de connexion"
+    mail to: @user.email, subject: I18n.t("user_mailer.validate.subject")
   end
 
   def commune_completed_email
     @user = User.find(params[:user_id])
-    commune = Commune.find(params[:commune_id])
+    @commune = Commune.find(params[:commune_id])
     set_login_url
-    mail to: @user.email, subject: "#{commune.nom}, merci d'avoir contribué à Collectif Objets"
+    mail(
+      to: @user.email,
+      subject: I18n.t("user_mailer.commune_completed.subject", commune_nom: @commune.nom)
+    )
   end
 
   def dossier_accepted_email
@@ -22,8 +25,11 @@ class UserMailer < ApplicationMailer
     @user = @commune.users.first
     @conservateur = @dossier.conservateur || params[:conservateur]
     set_login_url
-    subject = "Rapport de recensement des objets protégés de #{@commune.nom}"
-    dossier_mail(user: @commune.users.first, conservateur: @conservateur, subject:)
+    dossier_mail(
+      user: @commune.users.first,
+      conservateur: @conservateur,
+      subject: I18n.t("user_mailer.dossier_accepted.subject", commune_nom: @commune.nom)
+    )
   end
 
   def dossier_rejected_email
@@ -32,8 +38,11 @@ class UserMailer < ApplicationMailer
     @conservateur = @dossier.conservateur
     @user = @commune.users.first
     set_login_url
-    subject = "Compléments nécessaires pour le dossier de recensement des objets protégés de #{@commune.nom}"
-    dossier_mail(user: @user, conservateur: @conservateur, subject:)
+    dossier_mail(
+      user: @user,
+      conservateur: @conservateur,
+      subject: I18n.t("user_mailer.dossier_rejected.subject", commune_nom: @commune.nom)
+    )
   end
 
   protected

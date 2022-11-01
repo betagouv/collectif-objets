@@ -20,13 +20,51 @@
     </table>
     <hr />
   <% end %>
-  <iframe
-    class="co-mail-preview-iframe"
-    srcdoc="<%= body + IFRAME_CSS %>"
-    <% if fit %>
-      data-controller="iframe-fit"
-      data-iframe-fit-target="iframe"
-    <% end %>
-  >
-  </iframe>
+  <div class="fr-tabs">
+    <ul class="fr-tabs__list" role="tablist" aria-label="version textuelle ou HTML">
+      <li role="presentation">
+        <button
+          id="tab-nav-html"
+          class="fr-tabs__tab"
+          role="tab"
+          aria-selected="true"
+          aria-controls="tab-html"
+        >
+          Version HTML
+        </button>
+        <button
+          id="tab-nav-text"
+          class="fr-tabs__tab"
+          role="tab"
+          aria-controls="tab-text"
+        >
+          Version Texte
+        </button>
+      </li>
+    </ul>
+    <div
+      id="tab-html"
+      class="fr-tabs__panel fr-tabs__panel--selected"
+      role="tabpanel"
+      aria-labelledby="tab-nav-html"
+    >
+      <iframe
+        class="co-mail-preview-iframe"
+        srcdoc="<%= html_body + IFRAME_CSS %>"
+        <% if fit %>
+          data-controller="iframe-fit"
+          data-iframe-fit-target="iframe"
+        <% end %>
+      >
+      </iframe>
+    </div>
+    <div
+      id="tab-text"
+      class="fr-tabs__panel co-white-space-pre-line"
+      role="tabpanel"
+      aria-labelledby="tab-nav-text"
+    >
+      <%= text_body %>
+    </div>
+  </div>
 </div>

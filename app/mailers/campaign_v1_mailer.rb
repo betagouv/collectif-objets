@@ -29,6 +29,11 @@ class CampaignV1Mailer < ApplicationMailer
   helper_method :ct
   # rubocop:enable Rails/OutputSafety
 
+  def tt(key, **kwargs)
+    I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**kwargs)).gsub("<b>", "").gsub("</b>", "")
+  end
+  helper_method :tt
+
   private
 
   def mail_with_subject(subject); end

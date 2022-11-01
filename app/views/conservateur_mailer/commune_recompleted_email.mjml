@@ -1,68 +1,43 @@
-<mjml>
-  <mj-body>
-    <mj-section>
-      <mj-column vertical-align="middle">
-        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
-      </mj-column>
-      <mj-column vertical-align="middle">
-        <mj-text align="left" font-size="20px">Collectif Objets</mj-text>
-        <mj-text align="left" font-size="14px" color="#444">Préservez votre patrimoine mobilier</mj-text>
-      </mj-column>
-      <mj-column>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-divider border-color="rgb(0,0,145)"></mj-divider>
-        <mj-text>
-          Bonjour <%= @dossier.conservateur %>,<br /><br />
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= I18n.t("conservateur_mailer.commune_recompleted.bonjour", nom: @conservateur.to_s) %>
+    </mj-text>
+    <mj-text>
+      <%= I18n.t("conservateur_mailer.commune_recompleted.intro", nom_commune: @commune.nom, objets_count: @dossier.recensements.count) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
 
-          La commune <%= @commune.nom %> a modifié et renvoyé son dossier de recensement de <%= @dossier.recensements.count %> objet(s) protégé(s).
-        </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section padding-left="20px">
-      <mj-column border-left="2px solid rgb(0,0,145)">
-        <mj-text font-style="italic">
-          <%= @dossier.notes_commune.presence || "Aucun commentaire" %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-text>
-          Le dossier avait été retourné à la commune le <%= l(@dossier.rejected_at.to_date) %> avec le commentaire suivant:
-        </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section padding-left="20px">
-      <mj-column border-left="2px solid rgb(0,0,145)">
-        <mj-text font-style="italic">
-          <%= @dossier.notes_conservateur %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
+<mj-section padding-left="20px">
+  <mj-column border-left="2px solid rgb(0,0,145)">
+    <mj-text font-style="italic">
+      <%= @dossier.notes_commune.presence || I18n.t("conservateur_mailer.commune_recompleted.aucun_commentaire") %>
+    </mj-text>
+  </mj-column>
+</mj-section>
 
-    <mj-section>
-      <mj-column>
-        <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= conservateurs_commune_url(@dossier.commune) %>">
-          Voir le dossier sur Collectif Objets
-        </mj-button>
-        <mj-text>
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= I18n.t("conservateur_mailer.commune_recompleted.rejected_at", date: l(@dossier.rejected_at.to_date)) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
 
-          Bien cordialement,
-        </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
-      </mj-column>
-      <mj-column>
-        <mj-text>
-          <b>Collectif Objets</b>
-        </mj-text>
-      </mj-column>
-    </mj-section>
-  </mj-body>
-</mjml>
+<mj-section padding-left="20px">
+  <mj-column border-left="2px solid rgb(0,0,145)">
+    <mj-text font-style="italic">
+      <%= @dossier.notes_conservateur %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<mj-section>
+  <mj-column>
+    <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= conservateurs_commune_url(@dossier.commune) %>">
+      <%= I18n.t("conservateur_mailer.commune_recompleted.cta") %>
+    </mj-button>
+  </mj-column>
+</mj-section>
+

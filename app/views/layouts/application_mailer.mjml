@@ -1,0 +1,48 @@
+<mjml>
+  <mj-head>
+    <mj-style>
+      .co-pre-line {
+        white-space: pre-line;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column width="25%" vertical-align="middle">
+        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png"></mj-image>
+      </mj-column>
+      <mj-column width="75%" vertical-align="middle">
+        <mj-text font-size="20px">Collectif Objets</mj-text>
+        <mj-text font-size="14px" color="#444">
+          <%= I18n.t("application_mailer_layout.tagline") %>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="rgb(0,0,145)"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+    <%= yield %>
+
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          <%= I18n.t("application_mailer_layout.politesse") %>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
+      </mj-column>
+      <mj-column>
+        <mj-text>
+          <b>Collectif Objets</b>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

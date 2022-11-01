@@ -2,5 +2,5 @@
 
 class ApplicationMailer < ActionMailer::Base
   default from: email_address_with_name("collectifobjets@beta.gouv.fr", "Collectif Objets")
-  layout "mailer"
+  layout "application_mailer"
 end
