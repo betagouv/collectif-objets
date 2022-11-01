@@ -1,14 +1,20 @@
-<% photo_url = objet.first_palissy_photo_url || "https://i.imgur.com/n9yygdj.jpeg" %>
+<% photo = objet.palissy_photos&.first %>
 <mj-section>
   <mj-column>
-    <mj-image width="300px" src="<%= photo_url %>" />
+    <mj-image width="300px" src="<%= photo.fetch("url", nil) || "https://i.imgur.com/n9yygdj.jpeg" %>" />
     <mj-text align="center">
-      <%= objet.nom_formatted %>
+      <%= objet.palissy_TICO %>
       <br />
       Objet présent à <%= commune.nom %>
       <br />
       <b><%= objet.edifice_nom_formatted %></b>
       <%= objet.emplacement %>
+      <% if photo && photo.fetch("credit", nil).present? %>
+        <br />
+        <i>
+          <%= photo["credit"] %>
+        </i>
+      <% end %>
     </mj-text>
   </mj-column>
 </mj-section>
