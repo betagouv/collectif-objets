@@ -27,7 +27,7 @@
     "@rails/activestorage": "^7.0.4",
     "@sentry/browser": "^7.17.2",
     "@sentry/cli": "^2.8.1",
-    "@sentry/tracing": "^7.17.2",
+    "@sentry/tracing": "^7.17.3",
     "frappe-charts": "^1.6.2",
     "maplibre-gl": "^2.4.0",
     "mjml": "^4.13.0",
