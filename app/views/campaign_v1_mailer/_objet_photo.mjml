@@ -1,7 +1,7 @@
 <% photo = objet.palissy_photos&.first %>
 <mj-section>
   <mj-column>
-    <mj-image width="300px" src="<%= photo.fetch("url", nil) || "https://i.imgur.com/n9yygdj.jpeg" %>" />
+    <mj-image width="300px" src="<%= photo.fetch("url", nil) || "https://collectif-objets.beta.gouv.fr/image-non-renseignee.jpeg" %>" />
     <mj-text align="center">
       <%= objet.palissy_TICO %>
       <br />
