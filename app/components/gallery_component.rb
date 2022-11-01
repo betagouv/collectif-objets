@@ -78,7 +78,7 @@ class GalleryComponent < ViewComponent::Base
   end
 
   def json_data
-    photos_structs.map { { src: _1.original_url, description: _1.description } }.to_json
+    photos_structs.map { { src: _1.original_url, description: _1.description.presence }.compact }.to_json
   end
 
   def first_description
