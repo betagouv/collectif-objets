@@ -1,0 +1,15 @@
+<%= tt("fin_shared.fin_aujourdhui") %>
+
+<%= tt("fin_shared.merci") %>
+
+<%= tt("fin_started.objets_restants") %>
+
+<%= tt("fin_started.dossier_complet") %>
+
+<%= tt("fin_started.pas_trop_tard") %>
+
+<%= tt("fin_started.toujours_accessible") %>
+
+<%= tt("fin_started.finalisez") %>
+
+<%= render partial: "cta", locals: { variant: "started", user: @user, commune: @commune } %>
