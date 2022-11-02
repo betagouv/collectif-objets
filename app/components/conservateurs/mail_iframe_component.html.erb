@@ -24,29 +24,30 @@
     <ul class="fr-tabs__list" role="tablist" aria-label="version textuelle ou HTML">
       <li role="presentation">
         <button
-          id="tab-nav-html"
+          id="<%= "tab-nav-html-#{id}" %>"
           class="fr-tabs__tab"
           role="tab"
           aria-selected="true"
-          aria-controls="tab-html"
+          aria-controls="<%= "tab-html-#{id}" %>"
         >
           Version HTML
         </button>
         <button
-          id="tab-nav-text"
+          id="<%= "tab-nav-text-#{id}" %>"
           class="fr-tabs__tab"
           role="tab"
-          aria-controls="tab-text"
+          aria-selected="false"
+          aria-controls="<%= "tab-text-#{id}" %>"
         >
           Version Texte
         </button>
       </li>
     </ul>
     <div
-      id="tab-html"
+      id="<%= "tab-html-#{id}" %>"
       class="fr-tabs__panel fr-tabs__panel--selected"
       role="tabpanel"
-      aria-labelledby="tab-nav-html"
+      aria-labelledby="<%= "tab-nav-html-#{id}" %>"
     >
       <iframe
         class="co-mail-preview-iframe"
@@ -59,10 +60,10 @@
       </iframe>
     </div>
     <div
-      id="tab-text"
+      id="<%= "tab-text-#{id}" %>"
       class="fr-tabs__panel co-white-space-pre-line"
       role="tabpanel"
-      aria-labelledby="tab-nav-text"
+      aria-labelledby="<%= "tab-nav-text-#{id}" %>"
     >
       <%= text_body %>
     </div>

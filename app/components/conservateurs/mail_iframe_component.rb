@@ -35,6 +35,10 @@ module Conservateurs
       mail_text || "version textuelle non définie"
     end
 
+    def id
+      @id ||= @mail.object_id || "mail_#{SecureRandom.hex(4)}"
+    end
+
     private
 
     def mail_body
