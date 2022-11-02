@@ -4,11 +4,13 @@ module Conservateurs
   class RecensementsController < ApplicationController
     before_action :set_recensement, :set_objet, :restrict_access, :prevent_not_completed
 
+    def edit; end
+
     def update
       if @recensement.update(recensement_params)
         redirect_to conservateurs_commune_path(@objet.commune, analyse_saved: true)
       else
-        render "conservateurs/objets/show", status: :unprocessable_entity
+        render :edit, status: :unprocessable_entity
       end
     end
 
@@ -38,7 +40,7 @@ module Conservateurs
     def prevent_not_completed
       return true if @objet.commune.completed?
 
-      redirect_to conservateurs_objet_path(@objet), alert: I18n.t("recensement.analyse.not_completed")
+      redirect_to conservateurs_commune_path(@objet.commune), alert: I18n.t("recensement.analyse.not_completed")
     end
 
     def recensement_params

@@ -95,11 +95,7 @@
     <div class="fr-col-md-10">
       <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
         <% @objets.each do |objet| %>
-          <% if @commune.started? || @commune.completed? %>
-            <%= render Conservateurs::ObjetCardComponent.new(objet:) %>
-          <% else %>
-            <%= render Communes::ObjetCardComponent.new(objet:) %>
-          <% end %>
+          <%= render Conservateurs::ObjetCardComponent.new(objet:) %>
         <% end %>
       </div>
     </div>

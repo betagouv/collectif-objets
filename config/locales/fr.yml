@@ -160,9 +160,12 @@ fr:
         stats:
           completed: des communes ont finalisé le recensement
           etats_sanitaires_distribution_title: États sanitaires des objets recensés
-    objets:
-      show:
-        not_recensed: Pas encore recensé
+    recensements:
+      analyse_actions:
+        hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
+      analyse_fiches:
+        hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
+      edit:
         pop_card:
           edifice_nom: Édifice
           emplacement: Emplacement
@@ -175,11 +178,6 @@ fr:
           error: "Votre analyse n'a pas pu être enregistrée :"
           submit: "Sauvegarder"
           submit_desc: Ces informations ne seront pas envoyées à la mairie tout de suite. Vous pourrez les modifier avant de valider votre rapport dans son ensemble.
-    recensements:
-      analyse_actions:
-        hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
-      analyse_fiches:
-        hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
     password:
       hint: 8 caractères minimum (tous les caractères sont autorisés y compris les espaces)
   recensement:

@@ -29,6 +29,10 @@ module Conservateurs
       "images/illustrations/photo-manquante.png"
     end
 
+    def path
+      recensement ? edit_conservateurs_recensement_path(recensement) : objet_path(objet)
+    end
+
     private
 
     def badge_struct

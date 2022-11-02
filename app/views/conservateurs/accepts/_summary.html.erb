@@ -16,7 +16,7 @@
           <td>
             <%= link_to(
               truncate(recensement.objet.nom, length: 30),
-              conservateurs_objet_path(recensement.objet)
+              edit_conservateurs_recensement_path(recensement.objet)
             ) %>
           </td>
           <td><%= render Recensements::AttributeBadgeComponent.new(recensement, :etat_sanitaire) %></td>
