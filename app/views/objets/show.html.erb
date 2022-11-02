@@ -32,42 +32,9 @@
       <% end %>
 
       <%= render GalleryComponent.palissy_photos_from_objet(@objet, responsive_versions: [:small]) %>
-
-      <p>
-        <b>Emplacement</b><br />
-        Se situe dans l'édifice <b><%= @objet.edifice_nom %></b><br />
-        <i><%= @objet.emplacement %></i>
-      </p>
-      <p>
-        <b>Dénomination</b><br />
-        <%= @objet.palissy_DENO %>
-      </p>
-      <p>
-        <b>Catégorie</b><br />
-        <%= @objet.categorie %>
-      </p>
-      <p>
-        <b>Époque</b><br />
-        <%= @objet.crafted_at || "N/A" %>
-      </p>
-      <p>
-        <b>Récolement</b><br />
-        Dernier récolement : <%= @objet.last_recolement_at || "N/A" %>
-      </p>
-      <p>
-        <b>Références</b><br />
-        POP (Base Palissy) : <%= @objet.palissy_REF%>
-      </p>
-      <p>
-        <%= link_to(
-          "Voir plus de détails sur la Plateforme Ouverte du Patrimoine",
-          "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.palissy_REF}",
-          target: "_blank",
-          rel: "noopener",
-          class: "co-text--blue"
-        ) %>
-      </p>
+      <%= render "objets/attributes", objet: @objet %>
     </div>
+
     <div class="fr-col-md-6">
       <%= render GalleryComponent.palissy_photos_from_objet(@objet, responsive_versions: [:full]) %>
     </div>

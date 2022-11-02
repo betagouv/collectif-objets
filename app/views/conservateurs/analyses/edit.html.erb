@@ -58,7 +58,7 @@
 
   <%= form_for(
     @recensement,
-    url: conservateurs_recensement_path(@recensement),
+    url: conservateurs_objet_recensement_analyse_path(@objet, @recensement),
     builder: FormBuilderDsfr
   ) do |f| %>
     <div class="fr-container fr-mb-6w" id="recensement">

@@ -72,7 +72,11 @@ Rails.application.routes.draw do
         post :autocomplete
       end
     end
-    resources :recensements, only: [:edit, :update]
+    resources :objets, only: [] do
+      resources :recensements, only: [] do
+        resource :analyse, only: [:edit, :update]
+      end
+    end
     resources :dossiers, only: [:show] do
       resource :accept, only: [:new, :create, :update]
       resource :reject, only: [:new, :create, :update]

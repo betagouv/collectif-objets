@@ -59,7 +59,7 @@
 
   <%= form_for(
     recensement,
-    url: recensement.persisted? ? objet_recensement_path(recensement.objet, recensement) : objet_recensements_path(recensement.objet),
+    url: form_url,
     builder: FormBuilderDsfr,
     html: {
       "data-recensement-target": "form",
