@@ -46,7 +46,7 @@ module Communes
     def dossier_params
       return { dossier_id: commune.dossier.id } if commune.dossier.present?
 
-      { dossier_attributes: { commune_id: commune.id, status: "construction" } }
+      { dossier_attributes: { commune_id: commune.id, status: "construction", author_role: "user" } }
     end
   end
 end

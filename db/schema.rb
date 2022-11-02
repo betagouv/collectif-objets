@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_05_093815) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_06_091546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -187,8 +187,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_093815) do
     t.bigint "conservateur_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["commune_id"], name: "dossiers_unique_commune_id", unique: true
+    t.bigint "edifice_id"
+    t.string "author_role", null: false
+    t.index ["commune_id"], name: "index_dossiers_on_commune_id"
     t.index ["conservateur_id"], name: "index_dossiers_on_conservateur_id"
+    t.index ["edifice_id"], name: "index_dossiers_on_edifice_id"
   end
 
   create_table "edifices", force: :cascade do |t|
@@ -248,7 +251,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_093815) do
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.string "analyse_etat_sanitaire"
     t.string "analyse_etat_sanitaire_edifice"
     t.string "analyse_securisation"

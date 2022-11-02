@@ -2,11 +2,12 @@
 
 module Conservateurs
   class ObjetCardComponent < ViewComponent::Base
-    def initialize(objet, commune:, recensement: nil, can_analyse: false)
+    def initialize(objet, commune:, current_conservateur:, recensement: nil, can_analyse: false)
       @objet = objet
       @recensement = recensement
       @can_analyse = can_analyse
       @commune = commune
+      @current_conservateur = current_conservateur
       super
     end
 
@@ -16,24 +17,24 @@ module Conservateurs
 
     private
 
-    attr_reader :objet, :recensement, :can_analyse, :commune
+    attr_reader :objet, :recensement, :can_analyse, :commune, :current_conservateur
 
     def path
-      if can_analyse
+      if can_analyse && recensement&.author.is_a?(User)
         edit_conservateurs_objet_recensement_analyse_path(objet, recensement)
       else
-        objet_path(objet)
+        conservateurs_objet_path(objet)
       end
     end
 
     def badges
-      return [] unless can_analyse
+      return [] if recensement&.author.is_a?(User) && !can_analyse
 
-      @badges ||= [analysed_badge, prioritaire_badge].compact
+      @badges ||= [analysed_badge, prioritaire_badge, recensed_by_current_conservateur_badge].compact
     end
 
     def tags
-      return [] unless can_analyse
+      return [] if recensement&.author.is_a?(User) && !can_analyse
 
       @tags ||= [not_recensed_badge, missing_photos_badge].compact
     end
@@ -73,6 +74,15 @@ module Conservateurs
       badge_struct.new(
         "warning",
         I18n.t("conservateurs.objet_card_component.prioritaire_badge")
+      )
+    end
+
+    def recensed_by_current_conservateur_badge
+      return nil if current_conservateur.nil? || recensement&.author != current_conservateur
+
+      badge_struct.new(
+        "success",
+        I18n.t("conservateurs.objet_card_component.recensed_by_current_conservateur")
       )
     end
   end

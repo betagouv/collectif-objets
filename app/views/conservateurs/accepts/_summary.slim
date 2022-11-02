@@ -1,0 +1,37 @@
+.fr-table
+  table
+    thead
+      tr
+        th Objet
+        th État sanitaire
+        th Actions
+        th Fiches
+        - if dossier.author_user?
+          th Modifications conservateur
+
+    tbody
+      - dossier.recensements.each do |recensement|
+        tr
+          - presenter = RecensementPresenter.new(recensement)
+          td
+            = link_to( \
+              truncate(recensement.objet.nom, length: 30), \
+              edit_conservateurs_objet_recensement_analyse_path(recensement.objet, recensement) \
+            )
+
+          td= render Recensements::AttributeBadgeComponent.new(recensement, :etat_sanitaire)
+          td
+            - if recensement.analyse_actions.empty?
+              i Aucune action
+            - recensement.analyse_actions.each do |action|
+              = badge { t("recensement.analyse_actions.#{action}") }
+
+          td
+            - if recensement.analyse_fiches.empty?
+              i Aucune fiche
+            - recensement.analyse_fiches.each do |fiche|
+              = badge { t("recensement.analyse_fiches_noms.#{fiche}") }
+
+          - if dossier.author_user?
+            td
+              = recensement.analyse_overrides? ? "Oui" : "Non"

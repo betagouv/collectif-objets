@@ -20,7 +20,7 @@ module Conservateurs
       @edifices = @commune
         .edifices
         .ordered_by_nom
-        .includes(objets: { edifice: [], recensements: %i[photos_attachments photos_blobs] })
+        .includes(:dossiers, objets: { recensements: %i[photos_attachments photos_blobs] })
     end
 
     def autocomplete

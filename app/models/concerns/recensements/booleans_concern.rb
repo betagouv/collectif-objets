@@ -33,5 +33,15 @@ module Recensements
     def prioritaire?
       en_mauvais_etat? || en_peril? || absent?
     end
+
+    # others
+
+    def analysable?
+      commune.completed?
+    end
+
+    def first?
+      commune.recensements.empty?
+    end
   end
 end

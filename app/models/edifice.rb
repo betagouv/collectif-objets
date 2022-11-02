@@ -3,6 +3,7 @@
 class Edifice < ApplicationRecord
   belongs_to :commune, foreign_key: :code_insee, primary_key: :code_insee, optional: true, inverse_of: :edifices
   has_many :objets, dependent: :restrict_with_error
+  has_many :dossiers, dependent: :restrict_with_error
 
   validates :merimee_REF, uniqueness: true, if: -> { merimee_REF.present? }
   validates :slug, uniqueness: { scope: :code_insee }, if: -> { code_insee.present? }
@@ -28,5 +29,17 @@ class Edifice < ApplicationRecord
     s = s.sub(/-paroissiale-/, "")
     s.sub(/-paroissiale$/, "")
     s
+  end
+
+  def current_dossier
+    dossiers.order("created_at DESC").limit(1).first
+  end
+
+  def current_dossier?
+    current_dossier.present?
+  end
+
+  def completed?
+    current_dossier&.recensements&.length == objets.length
   end
 end

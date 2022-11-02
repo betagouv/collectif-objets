@@ -1,0 +1,30 @@
+<% content_for(:head_title) { "Recensement · #{truncate(@recensement.objet.nom, length: 20)}" } %>
+
+<main class="fr-container fr-pb-8w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Départements", conservateurs_departements_path],
+      [
+        @objet.commune.departement.nom,
+        conservateurs_departement_path(@objet.commune.departement)
+      ],
+      [
+        @objet.commune.nom,
+        conservateurs_commune_path(@objet.commune)
+      ],
+      [
+        @objet.nom,
+        conservateurs_objet_path(@objet)
+      ]
+    ],
+    current_page_label: "Recensement"
+  ) %>
+
+  <%= render(
+    "recensements/form",
+    recensement: @recensement,
+    form_url: conservateurs_objet_recensements_path(@recensement.objet),
+    back_to_objet_url: conservateurs_objet_path(@recensement.objet)
+  ) %>
+</main>

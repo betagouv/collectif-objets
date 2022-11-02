@@ -30,116 +30,11 @@
     </div>
   </div>
 
-  <% if @commune.completed? && @dossier&.can_generate_rapport? %>
-    <div class="co-background--light-teal fr-my-4w fr-py-4w">
-      <div class="fr-container fr-grid-row fr-grid-row--center">
-        <div class="fr-col-md-10">
-          <p>
-            <%= t(
-              ".can_generate_rapport.content",
-              count: @commune.recensements.count
-            ) %>
-          </p>
-          <p>
-            <%= link_to(
-              t(".can_generate_rapport.send"),
-              new_conservateurs_dossier_accept_path(@dossier),
-              class: "fr-btn"
-            ) %>
-          </p>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render "dossier_infos", commune: @commune, dossier: @dossier  %>
 
-  <% if @dossier&.rejected? %>
-    <div class="co-background--light-teal fr-my-4w fr-py-4w">
-      <div class="fr-container fr-grid-row fr-grid-row--center ">
-        <div class="fr-col-md-10">
-          <p>
-            <%= t(".rejected.content", date: l(@dossier.rejected_at.to_date), conservateur: @dossier.conservateur) %>
-          </p>
-          <%= blockquote(@dossier.notes_conservateur) %>
-          <p class="fr-mt-4w">
-            <%= t(".rejected.content_end_html") %>
-          </p>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render "objets_by_edifices", edifices: @edifices, commune: @commune %>
 
-  <% if @dossier&.accepted? %>
-    <div class="fr-container fr-grid-row fr-grid-row--center fr-mb-4w">
-      <div class="fr-col-md-10">
-        <%= link_to "Voir le rapport", conservateurs_dossier_path(@dossier), class: "fr-btn" %>
-      </div>
-    </div>
-  <% end %>
-
-  <% if @commune.completed? && !@dossier.accepted? %>
-    <div class="fr-container fr-grid-row fr-grid-row--center fr-mb-4w">
-      <div class="fr-col-md-10">
-        <% if @dossier.notes_commune.present? %>
-          <p>
-            <%= t("activerecord.attributes.dossier.notes_commune") %>
-          </p>
-          <%= blockquote(@dossier.notes_commune) %>
-        <% else %>
-          <i>Aucun commentaire laissé par la commune</i>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="fr-container fr-grid-row fr-grid-row--center">
-    <div class="fr-col-md-10">
-      <%= render "edifices/list", edifices: @edifices %>
-      <% @edifices.each do |edifice|  %>
-        <h4 id="<%= edifice.slug %>">
-          <%= edifice_nom(edifice.nom).html_safe %> · <%= edifice.objets.length %> objets
-        </h4>
-        <%= render layout: "objets/cards_grid_layout", locals: { count: edifice.objets.length } do %>
-          <% reordered = @dossier ? Objet::order_by_recensement_priorite_array(edifice.objets) : edifice.objets %>
-          <% reordered.each do |objet| %>
-            <%= render Conservateurs::ObjetCardComponent.new(
-              objet,
-              recensement: objet.current_recensement,
-              can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?,
-              commune: @commune
-            ) %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="fr-container fr-grid-row fr-mt-4w">
-    <div class="fr-col-md-10 co-text--right">
-      <% if @dossier && !@dossier&.accepted? %>
-        <div>
-          <%= link_to_button(
-            t(".actions.send"),
-            new_conservateurs_dossier_accept_path(@dossier),
-            class: "fr-btn",
-            disabled: !@dossier.can_generate_rapport?
-           ) %>
-        </div>
-      <% end %>
-      <% if @dossier&.submitted? %>
-        <div>ou</div>
-        <div>
-          <%= link_to(
-            t(".actions.reject"),
-            new_conservateurs_dossier_reject_path(@dossier),
-            class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-error-warning-line"
-          ) %>
-          <p class="text-muted co-text--italic fr-text--sm">
-            <%= t(".actions.reject_desc") %>
-          </p>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <%= render "dossier_actions", commune: @commune, dossier: @dossier  %>
 
   <div class="co-background--light-grey fr-my-6w fr-py-6w">
     <div class="fr-container fr-grid-row fr-grid-row--center">

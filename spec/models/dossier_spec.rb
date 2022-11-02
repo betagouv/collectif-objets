@@ -8,7 +8,7 @@ RSpec.describe Dossier, type: :model do
 
     context "new dossier" do
       it "should be in construction" do
-        dossier = Dossier.create!(commune:, status: "construction")
+        dossier = Dossier.create!(commune:, status: "construction", author_role: "user")
         expect(dossier.status).to eq("construction")
         expect(dossier.submitted_at).to be_nil
       end

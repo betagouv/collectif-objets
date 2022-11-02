@@ -1,0 +1,20 @@
+.fr-container.fr-grid-row.fr-mt-4w
+  .fr-col-md-10.co-text--right
+    - if dossier && !dossier&.accepted?
+      div
+        = link_to_button( \
+          "Finaliser le rapport …", \
+          new_conservateurs_dossier_accept_path(dossier), \
+          class: "fr-btn", \
+          disabled: !dossier.can_generate_rapport? \
+        )
+      - if dossier&.submitted?
+        div ou
+        div
+          a.fr-btn.fr-btn--secondary.fr-btn--icon-left.fr-icon-error-warning-line[
+            href=new_conservateurs_dossier_reject_path(dossier)
+          ]
+            | Renvoyer le dossier à la commune …
+          p.text-muted.co-text--italic.fr-text--sm
+            | pour demander des informations manquantes
+

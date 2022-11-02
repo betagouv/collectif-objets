@@ -11,12 +11,6 @@ module ObjetHelper
     "images/illustrations/photo-manquante.png"
   end
 
-  def edifice_nom(nom)
-    return nom.upcase_first if nom.present?
-
-    content_tag(:i, "Édifice non renseigné")
-  end
-
   private
 
   def can_see_recensement_for(objet)

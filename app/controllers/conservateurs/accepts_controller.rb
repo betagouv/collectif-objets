@@ -2,7 +2,7 @@
 
 module Conservateurs
   class AcceptsController < BaseController
-    before_action :set_dossier, :set_dossier_accept, :set_commune
+    before_action :set_dossier, :set_dossier_accept
 
     def new; end
 
@@ -11,7 +11,7 @@ module Conservateurs
       @dossier.update!(conservateur: current_conservateur) if @dossier.conservateur != current_conservateur
       if @dossier.accept!
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
-        redirect_to conservateurs_commune_path(@commune), notice: "Le rapport a été envoyé à la commune"
+        redirect_to conservateurs_commune_path(@dossier.commune), notice: "Le rapport a été envoyé à la commune"
       else
         render "conservateurs/accepts/new", status: :unprocessable_entity
       end
@@ -33,13 +33,8 @@ module Conservateurs
       authorize(@dossier_accept)
     end
 
-    def set_commune
-      @commune = @dossier.commune
-      @objets = @commune.objets.with_photos_first.includes(:commune, recensements: %i[photos_attachments photos_blobs])
-    end
-
     def redirect_with_alert(alert)
-      redirect_to conservateurs_commune_path(@commune), alert:
+      redirect_to conservateurs_commune_path(@dossier.commune), alert:
     end
 
     def dossier_params

@@ -1,0 +1,32 @@
+- content_for(:head_title) do
+  - if @dossier.scope_commune?
+    | Rapport de recensement pour #{@dossier.commune.nom}
+  - elsif @dossier.scope_edifice?
+    | Rapport de recensement pour l'édifice #{edifice_nom(@dossier.edifice)} de la commune #{@dossier.commune.nom}
+
+main
+  .fr-container.fr-grid-row.fr-my-6w.fr-grid-row--center
+    .fr-col-md-8
+      = render( \
+        "shared/breadcrumbs", \
+        links: [ \
+          ["Départements", conservateurs_departements_path], \
+          [ \
+            @dossier.commune.departement.nom, \
+            conservateurs_departement_path(@dossier.commune.departement) \
+          ], \
+          [@dossier.commune.nom, conservateurs_commune_path(@dossier.commune)] \
+        ], \
+        current_page_label: "Rapport" \
+      )
+
+      h2 Rapport de recensement pour #{@dossier.commune.nom}
+
+      = render "summary", dossier: @dossier
+
+      .fr-mb-4w
+        = render "form", dossier: @dossier
+
+
+
+

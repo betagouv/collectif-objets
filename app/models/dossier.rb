@@ -5,6 +5,7 @@ class Dossier < ApplicationRecord
   has_many :recensements, dependent: :nullify
   has_many :objets, through: :recensements
   belongs_to :conservateur, optional: true
+  belongs_to :edifice, optional: true
 
   include AASM
   aasm column: :status, timestamps: true do
@@ -22,6 +23,9 @@ class Dossier < ApplicationRecord
     end
     event :accept, after_commit: :aasm_after_commit_update do
       transitions from: :submitted, to: :accepted
+      transitions from: :construction, to: :accepted do
+        guard { author_conservateur? }
+      end
     end
     event :return_to_construction, after_commit: :aasm_after_commit_return_to_started_commune do
       transitions from: :submitted, to: :construction do
@@ -31,9 +35,15 @@ class Dossier < ApplicationRecord
   end
 
   validates :conservateur, presence: true, if: :accepted?
-  validates :commune_id, uniqueness: true # this will be removed with edifices
+  validates :commune_id, uniqueness: true, if: :scope_commune?
+  validates :edifice_id, uniqueness: true, if: :scope_edifice?
+  validates :author_role, inclusion: { in: %w[user conservateur] }
 
   delegate :departement, to: :commune
+
+  def self.current(dossier_arel)
+    dossier_arel.to_a.max_by(&:created_at) # avoids n+1 query
+  end
 
   def full?
     recensements.count == commune.objets.count
@@ -72,4 +82,16 @@ class Dossier < ApplicationRecord
     aasm_after_commit_update(*args, **kwargs)
     commune.return_to_started!
   end
+
+  def author_user? = author_role == "user"
+  def author_conservateur? = author_role == "conservateur"
+
+  def scope
+    edifice_id.present? ? :edifice : :commune
+  end
+
+  def scope_commune? = scope == :commune
+  def scope_edifice? = scope == :edifice
+
+  # def scope_edifice? = scope == :edifice
 end

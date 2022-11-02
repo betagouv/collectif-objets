@@ -1,0 +1,44 @@
+<% content_for(:head_title) { "#{truncate(@objet.nom, length: 20)} - #{@objet.commune.nom}" } %>
+
+<main class="fr-container co-objet-show fr-pt-2w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Départements", conservateurs_departements_path],
+      [
+        @objet.commune.departement.nom,
+        conservateurs_departement_path(@objet.commune.departement)
+      ],
+      [
+        @objet.commune.nom,
+        conservateurs_commune_path(@objet.commune)
+      ]
+    ],
+    current_page_label: @objet.nom
+  ) %>
+
+  <div class="co-flex co-flex--align-items-center co-flex--gap-1rem co-flex--wrap fr-mb-8w">
+    <h2 class="fr-mb-0"><%= @objet.nom %></h2>
+    <%= render "objets/recensement_badge", objet: @objet %>
+  </div>
+
+  <%= render ObjetPageComponent.new(objet: @objet) do |c| %>
+    <% c.with_cta do %>
+      <p>
+        <% if @objet.current_recensement&.author == current_conservateur %>
+          Vous avez vous-même recensé cet objet le <%= l(@objet.current_recensement.created_at) %>.
+        <% elsif @objet.current_recensement&.author.is_a? User %>
+          La commune a recensé cet objet le <%= l(@objet.current_recensement.created_at) %>
+        <% elsif @objet.current_recensement&.author.is_a? Conservateur %>
+          Cet objet a été recensé par un autre conservateur (<%= @objet.current_recensement.author %>) le <%= l(@objet.current_recensement.created_at) %>
+        <% end %>
+      </p>
+
+      <% if @cta %>
+        <p>
+          <%= render "cta_#{@cta}", objet: @objet %>
+        </p>
+      <% end %>
+    <% end %>
+  <% end %>
+</main>

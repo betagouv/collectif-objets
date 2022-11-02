@@ -76,18 +76,6 @@ fr:
         back: Retour à la liste des recensements de la commune
         send: Finaliser le rapport …
       show:
-        can_generate_rapport:
-          content:
-            one: "Vous avez analysé l'unique recensement de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune"
-            other: Vous avez analysé l'ensemble des %{count} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
-          send: Finaliser le rapport …
-        rejected:
-          content: Ce dossier a été renvoyé à la commune le %{date} par %{conservateur} avec le commentaire suivant
-          content_end_html: Tant que la commune ne retourne pas le dossier, <b>vous ne pouvez pas l'analyser</b>
-        actions:
-          send: Finaliser le rapport …
-          reject: Renvoyer le dossier à la commune …
-          reject_desc: pour demander des informations manquantes
         contact:
           title: Contacter la commune
     communes_search_component:
@@ -103,22 +91,8 @@ fr:
     objet_card_component:
       analysed_badge: Analysé
       prioritaire_badge: Prioritaire
+      recensed_by_current_conservateur: Recensé par vous-même
     accepts:
-      new:
-        head_title: "Rapport de recensement pour %{commune}"
-        title: "📄 Rapport de recensement pour %{commune}"
-      summary:
-        headers:
-          objet: Objet
-          etat_sanitaire: État sanitaire
-          actions: Actions
-          fiches: Fiches
-          updated: Modifications conservateur
-        no_actions: Aucune action
-        no_fiches: Aucune fiche
-        fiche_vol: "Fiche Vol"
-        fiche_securisation: "Fiche Sécurisation"
-        fiche_nuisibles: "Fiche Nuisibles"
       form:
         submit_preview: Mettre à jour mes retours
         submit: Envoyer le rapport à la commune
@@ -210,6 +184,10 @@ fr:
       vol: "Comment porter plainte ?&nbsp;<a href=\"/fiche?pdf=fiche_vol\">voir la fiche</a>"
       securisation: "Comment sécuriser mon édifice et mes objets ?&nbsp;<a href=\"/fiche?pdf=fiche_securisation\">voir la fiche</a>"
       nuisibles: "Comment évaluer le danger des insectes xylophages ?&nbsp;<a href=\"/fiche?pdf=fiche_nuisibles\">voir la fiche</a>"
+    analyse_fiches_noms:
+      vol: "Fiche Vol"
+      securisation: "Fiche Sécurisation"
+      nuisibles: "Fiche Nuisibles"
     etat_sanitaire_choices:
       bon: L'objet est en bon état
       moyen: L'objet est en état moyen

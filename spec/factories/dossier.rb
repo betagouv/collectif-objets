@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :dossier do
     association :commune
     status { "construction" }
+    author_role { "user" }
 
     trait :submitted do
       status { "submitted" }

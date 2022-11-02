@@ -69,7 +69,8 @@
               objet,
               recensement: objet.current_recensement,
               can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?,
-              commune: @commune
+              commune: @commune,
+              current_conservateur:
             ) %>
           <% end %>
         <% end %>

@@ -5,7 +5,7 @@ class Recensement < ApplicationRecord
   include Recensements::BooleansConcern
 
   belongs_to :objet
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :dossier
   has_many_attached :photos do |attachable|
     attachable.variant :medium, resize_to_limit: [800, 800]
@@ -113,11 +113,7 @@ class Recensement < ApplicationRecord
     end
   end
 
-  def analysable?
-    commune.completed?
-  end
-
-  def first?
-    commune.recensements.empty?
+  def author
+    (user.presence || conservateur)
   end
 end

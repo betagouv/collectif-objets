@@ -1,0 +1,36 @@
+- if commune.completed? && dossier&.can_generate_rapport?
+  .co-background--light-teal.fr-my-4w.fr-py-4w
+    .fr-container.fr-grid-row.fr-grid-row--center
+      .fr-col-md-10
+        p
+          - if commune.recensements.length == 1
+            | Vous avez analysé l'unique recensement de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune
+          - else
+            | Vous avez analysé l'ensemble des #{commune.recensements.length} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
+        p
+          = link_to new_conservateurs_dossier_accept_path(dossier), class: "fr-btn" do
+            | Finaliser le rapport …
+
+- elsif dossier&.rejected?
+    .co-background--light-teal.fr-my-4w.fr-py-4w
+      .fr-container.fr-grid-row.fr-grid-row--center
+        .fr-col-md-10
+          p Ce dossier a été renvoyé à la commune le #{l(dossier.rejected_at.to_date)} par #{dossier.conservateur} avec le commentaire suivant
+          = blockquote(dossier.notes_conservateur)
+          p.fr-mt-4w
+            markdown:
+              Tant que la commune ne retourne pas le dossier, **vous ne pouvez pas l'analyser**
+
+- elsif dossier&.accepted?
+  .fr-container.fr-grid-row.fr-grid-row--center.fr-mb-4w
+    .fr-col-md-10
+      = link_to "Voir le rapport", conservateurs_dossier_path(dossier), class: "fr-btn"
+
+- elsif commune.completed? && !dossier.accepted?
+  .fr-container fr-grid-row.fr-grid-row--center.fr-mb-4w
+    .fr-col-md-10
+      - if dossier.notes_commune.present?
+        p= t("activerecord.attributes.dossier.notes_commune")
+        = blockquote(dossier.notes_commune)
+      - else
+        i Aucun commentaire laissé par la commune
