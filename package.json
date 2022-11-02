@@ -22,7 +22,7 @@
   "homepage": "https://github.com/adipasquale/collectif-objets#readme",
   "dependencies": {
     "@gouvfr/dsfr": "^1.7.2",
-    "@hotwired/stimulus": "^3.1.0",
+    "@hotwired/stimulus": "^3.1.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@rails/activestorage": "^7.0.4",
     "@sentry/browser": "^7.17.3",
