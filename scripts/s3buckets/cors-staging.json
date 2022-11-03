@@ -1,0 +1,22 @@
+{
+  "CORSRules": [
+    {
+      "AllowedOrigins": [
+        "https://staging.collectif-objets.incubateur.net/"
+      ],
+      "AllowedHeaders": [
+        "*"
+      ],
+      "AllowedMethods": [
+        "GET",
+        "HEAD",
+        "POST",
+        "PUT"
+      ],
+      "MaxAgeSeconds": 3000,
+      "ExposeHeaders": [
+        "Etag"
+      ]
+    }
+  ]
+}
