@@ -13,5 +13,9 @@
 
   <%= render "etapes", expanded: @recensement.first? %>
 
-  <%= render "recensements/form", recensement: @recensement %>
+  <%= render(
+    "recensements/form",
+    recensement: @recensement,
+    form_url: objet_recensements_path(@recensement.objet)
+  ) %>
 </main>

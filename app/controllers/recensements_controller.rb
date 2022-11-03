@@ -17,7 +17,7 @@ class RecensementsController < ApplicationController
 
   def create
     result = Communes::CreateRecensementService
-      .new(params: recensement_params_prepared, objet: @objet, user: current_user)
+      .new(params: recensement_params, objet: @objet, user: current_user)
       .perform
     if result.success?
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
@@ -29,7 +29,7 @@ class RecensementsController < ApplicationController
 
   def update
     @recensement.confirmation = true
-    if @recensement.update(recensement_params_prepared)
+    if @recensement.update(recensement_params)
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else
       render :edit, status: :unprocessable_entity
@@ -47,34 +47,7 @@ class RecensementsController < ApplicationController
   end
 
   def recensement_params
-    params
-      .require(:recensement)
-      .permit(
-        :confirmation, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
-        :etat_sanitaire_edifice, :securisation, :notes, :skip_photos, photos: []
-      )
-  end
-
-  def recensement_params_parsed
-    recensement_params.merge(
-      confirmation: recensement_params[:confirmation].present?,
-      recensable: if recensement_params[:localisation] == Recensement::LOCALISATION_ABSENT
-                    false
-                  else
-                    recensement_params[:recensable] == "true"
-                  end
-    )
-  end
-
-  def recensement_params_prepared
-    return recensement_params_parsed if recensement_params_parsed[:recensable]
-
-    recensement_params_parsed.merge(
-      etat_sanitaire: nil,
-      etat_sanitaire_edifice: nil,
-      securisation: nil,
-      photos: []
-    )
+    @recensement_params ||= Co::Recensements::ParamsParser.new(params).parse
   end
 
   def restrict_commune

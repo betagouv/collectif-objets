@@ -30,7 +30,11 @@ module Conservateurs
     end
 
     def path
-      recensement ? edit_conservateurs_recensement_path(recensement) : objet_path(objet)
+      if recensement
+        edit_conservateurs_objet_recensement_analyse_path(objet, recensement)
+      else
+        objet_path(objet)
+      end
     end
 
     private
