@@ -16,6 +16,7 @@
   <%= render(
     "recensements/form",
     recensement: @recensement,
-    form_url: objet_recensements_path(@recensement.objet)
+    form_url: objet_recensements_path(@recensement.objet),
+    back_to_objet_url: objet_path(@recensement.objet)
   ) %>
 </main>

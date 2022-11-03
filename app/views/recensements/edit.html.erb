@@ -4,6 +4,7 @@
   <%= render(
     "recensements/form",
     recensement: @recensement,
-    form_url: objet_recensement_path(@recensement.objet, @recensement)
+    form_url: objet_recensement_path(@recensement.objet, @recensement),
+    back_to_objet_url: objet_path(@recensement.objet)
   ) %>
 </main>
