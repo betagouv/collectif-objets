@@ -28,6 +28,8 @@ class Recensement < ApplicationRecord
   SECURISATION_MAUVAISE = "en_danger"
   SECURISATIONS = [SECURISATION_CORRECTE, SECURISATION_MAUVAISE].freeze
 
+  validates :objet_id, uniqueness: true
+
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }
   validates :edifice_nom, presence: true, if: -> { autre_edifice? }
   validates :recensable, inclusion: { in: [true, false] }, unless: -> { absent? }
