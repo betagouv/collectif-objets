@@ -99,9 +99,11 @@ Rails.application.configure do
   config.force_ssl = true
   config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
 
-  config.active_storage.service = "scaleway_#{config.x.environment_specific_name}".to_sym
 
   if config.x.environment_specific_name == "staging"
     config.action_mailer.show_previews = true
+    config.active_storage.service = :scaleway_staging
+  else
+    config.active_storage.service = :scaleway
   end
 end

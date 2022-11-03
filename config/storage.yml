@@ -11,12 +11,11 @@ scaleway_defaults: &scaleway_defaults
   endpoint: https://s3.fr-par.scw.cloud
   region: fr-par
 
-# scaleway name needs to be preserved for prod because attachments were saved in prod db with this service name
-scaleway:
+scaleway_development:
   <<: *scaleway_defaults
-  access_key_id: <%= Rails.application.credentials.dig(:scaleway, :project_default, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:scaleway, :project_default, :secret_access_key) %>
-  bucket: collectif-objets-production
+  access_key_id: <%= Rails.application.credentials.dig(:scaleway, :project_co, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:scaleway, :project_co, :secret_access_key) %>
+  bucket: collectif-objets-development2
 
 scaleway_staging:
   <<: *scaleway_defaults
@@ -24,8 +23,12 @@ scaleway_staging:
   secret_access_key: <%= Rails.application.credentials.dig(:scaleway, :project_co, :secret_access_key) %>
   bucket: collectif-objets-staging2
 
-scaleway_development:
+scaleway_production: &scaleway_production
   <<: *scaleway_defaults
-  access_key_id: <%= Rails.application.credentials.dig(:scaleway, :project_co, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:scaleway, :project_co, :secret_access_key) %>
-  bucket: collectif-objets-development2
+  access_key_id: <%= Rails.application.credentials.dig(:scaleway, :project_default, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:scaleway, :project_default, :secret_access_key) %>
+  bucket: collectif-objets-production
+
+# scaleway name needs to be preserved for prod because attachments were saved in prod db with this service name
+scaleway:
+  <<: *scaleway_production
