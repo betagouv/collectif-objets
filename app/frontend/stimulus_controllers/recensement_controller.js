@@ -9,7 +9,7 @@ export default class extends Controller {
     "etatSanitaire",
     "securisation",
     "photos",
-    "skipPhotos",
+    "confirmationPasDePhotos",
     "notes",
     "form",
     "submit"
@@ -27,8 +27,8 @@ export default class extends Controller {
 
   getCurrentValues() {
     return {
-      confirmation: this.formTarget.
-        querySelector('input[name="recensement[confirmation]"]').checked,
+      confirmationSurPlace: this.formTarget.
+        querySelector('input[type=checkbox][name="recensement[confirmation_sur_place]"]').checked,
       localisation: this.formTarget.
         querySelector('input[name="recensement[localisation]"]:checked')?.value,
       recensable: this.formTarget
@@ -39,8 +39,8 @@ export default class extends Controller {
           .querySelectorAll('input[name="recensement[photos][]"][type=hidden]:not([value=""]):not([disabled])').length > 0 ||
         this.formTarget
           .querySelectorAll("input[name=remove_photo]:not(:checked)").length > 0,
-      skipPhotos: this.formTarget.
-        querySelector('input[name="recensement[skip_photos]"]').checked,
+      confirmationPasDePhotos: this.formTarget.
+        querySelector('input[type=checkbox][name="recensement[confirmation_pas_de_photos]"]').checked,
       photosUploading:
         this.formTarget.querySelectorAll('input[name="recensement[photos][]"][data-uploading]').length > 0
     }
@@ -49,7 +49,7 @@ export default class extends Controller {
   toggleSection(sectionElt, enabled) {
     sectionElt.querySelector("legend")?.classList?.
       toggle("co-legend--disabled", !enabled)
-    sectionElt.querySelectorAll('input:not([type=hidden]):not([data-force-disabled]):not([type=file]), textarea:not([data-force-disabled]), button:not([data-force-disabled])')
+    sectionElt.querySelectorAll('input:not([data-force-disabled]):not([type=file]), textarea:not([data-force-disabled]), button:not([data-force-disabled])')
       .forEach(elt => elt.toggleAttribute("disabled", !enabled))
     sectionElt.querySelectorAll('.fr-input-group:not([data-force-disabled]), .fr-upload-group:not([data-force-disabled])')
       .forEach(elt => elt.classList.toggle("fr-input-group--disabled", !enabled))
@@ -57,19 +57,19 @@ export default class extends Controller {
 
   refreshFields() {
     const {
-      confirmation, localisation, recensable, photosUploaded, skipPhotos, photosUploading
+      confirmationSurPlace, localisation, recensable, photosUploaded, confirmationPasDePhotos, photosUploading
     } = this.getCurrentValues()
-    this.toggleSection(this.localisationTarget, confirmation)
-    this.toggleSection(this.edificeNomTarget, confirmation && localisation == "autre_edifice")
-    this.toggleSection(this.recensableTarget, confirmation && ["edifice_initial", "autre_edifice"].includes(localisation))
-    const mainFieldsCondition = confirmation && ["edifice_initial", "autre_edifice"].includes(localisation) && recensable
+    this.toggleSection(this.localisationTarget, confirmationSurPlace)
+    this.toggleSection(this.edificeNomTarget, confirmationSurPlace && localisation == "autre_edifice")
+    this.toggleSection(this.recensableTarget, confirmationSurPlace && ["edifice_initial", "autre_edifice"].includes(localisation))
+    const mainFieldsCondition = confirmationSurPlace && ["edifice_initial", "autre_edifice"].includes(localisation) && recensable
     this.toggleSection(this.etatSanitaireEdificeTarget, mainFieldsCondition)
     this.toggleSection(this.etatSanitaireTarget, mainFieldsCondition)
     this.toggleSection(this.securisationTarget, mainFieldsCondition)
-    this.toggleSection(this.photosTarget, mainFieldsCondition && !skipPhotos)
-    this.toggleSection(this.skipPhotosTarget, mainFieldsCondition && !photosUploaded && !photosUploading)
-    this.toggleSection(this.notesTarget, confirmation)
-    this.submitTarget.toggleAttribute("disabled", !(confirmation && !photosUploading))
+    this.toggleSection(this.photosTarget, mainFieldsCondition && !confirmationPasDePhotos)
+    this.toggleSection(this.confirmationPasDePhotosTarget, mainFieldsCondition && !photosUploaded && !photosUploading)
+    this.toggleSection(this.notesTarget, confirmationSurPlace)
+    this.submitTarget.toggleAttribute("disabled", !(confirmationSurPlace && !photosUploading))
   }
 
   disableSubmit() {

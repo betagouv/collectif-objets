@@ -30,6 +30,7 @@ class Recensement < ApplicationRecord
 
   validates :objet_id, uniqueness: true
 
+  validates :confirmation_sur_place, inclusion: { in: [true] }
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }
   validates :edifice_nom, presence: true, if: -> { autre_edifice? }
   validates :recensable, inclusion: { in: [true, false] }, unless: -> { absent? }
@@ -45,7 +46,7 @@ class Recensement < ApplicationRecord
 
   validates(
     :photos,
-    if: -> { recensable? && !skip_photos },
+    if: -> { recensable? && !confirmation_pas_de_photos },
     attached: true,
     content_type: ["image/jpg", "image/jpeg", "image/png"],
     size: { less_than: 20.megabytes }
@@ -53,8 +54,6 @@ class Recensement < ApplicationRecord
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
-
-  attr_accessor :confirmation, :skip_photos
 
   scope :present_and_recensable, lambda {
     where(

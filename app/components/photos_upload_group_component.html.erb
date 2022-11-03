@@ -58,16 +58,22 @@
     </div>
   </div>
 
-  <div class="fr-mt-6w" data-recensement-target="skipPhotos">
+  <div class="fr-mt-6w" data-recensement-target="confirmationPasDePhotos">
     <div class="fr-checkbox-group">
       <input
-        type="checkbox"
-        id="recensement[skip_photos]"
-        name="recensement[skip_photos]"
-        <%= "checked" if skip_photos_checked %>
-        data-action="change->recensement#refreshFields"
+        type="hidden"
+        name="recensement[confirmation_pas_de_photos]"
+        value="0"
       >
-      <label class="fr-label" for="recensement[skip_photos]">
+      <input
+        type="checkbox"
+        id="recensement[confirmation_pas_de_photos]"
+        name="recensement[confirmation_pas_de_photos]"
+        <%= "checked" if confirmation_pas_de_photos_checked %>
+        data-action="change->recensement#refreshFields"
+        value="1"
+      >
+      <label class="fr-label" for="recensement[confirmation_pas_de_photos]">
         Je ne peux pas prendre cet objet en photo
       </label>
     </div>

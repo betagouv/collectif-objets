@@ -10,8 +10,7 @@ class RecensementsController < ApplicationController
   end
 
   def edit
-    @recensement.confirmation = true
-    @recensement.skip_photos = true if @recensement.photos.empty?
+    @recensement.confirmation_pas_de_photos = true if @recensement.photos.empty?
   end
 
   def create
@@ -27,7 +26,6 @@ class RecensementsController < ApplicationController
   end
 
   def update
-    @recensement.confirmation = true
     if @recensement.update(recensement_params)
       redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
     else

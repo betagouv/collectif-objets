@@ -5,6 +5,7 @@ FactoryBot.define do
     association :objet
     association :user
     association :dossier
+    confirmation_sur_place { true }
     localisation { Recensement::LOCALISATION_EDIFICE_INITIAL }
     recensable { true }
     edifice_nom { nil }
@@ -12,7 +13,7 @@ FactoryBot.define do
     etat_sanitaire_edifice { Recensement::ETAT_MOYEN }
     securisation { Recensement::SECURISATION_CORRECTE }
     notes { "objet très doux" }
-    skip_photos { true }
+    confirmation_pas_de_photos { true }
 
     trait :with_photo do
       after(:build) do |recensement|

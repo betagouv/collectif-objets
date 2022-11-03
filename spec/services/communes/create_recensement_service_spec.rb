@@ -12,6 +12,7 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
 
     let(:params) do
       {
+        confirmation_sur_place: true,
         localisation: Recensement::LOCALISATION_EDIFICE_INITIAL,
         recensable: true,
         edifice_nom: nil,
@@ -19,7 +20,7 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
         etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
         securisation: Recensement::SECURISATION_CORRECTE,
         notes: "objet très doux",
-        skip_photos: true
+        confirmation_pas_de_photos: true
       }
     end
 
@@ -45,6 +46,7 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
 
     let(:params) do
       {
+        confirmation_sur_place: true,
         localisation: Recensement::LOCALISATION_EDIFICE_INITIAL,
         recensable: true,
         edifice_nom: nil,
@@ -52,7 +54,7 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
         etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
         securisation: Recensement::SECURISATION_CORRECTE,
         notes: "objet très doux",
-        skip_photos: true
+        confirmation_pas_de_photos: true
       }
     end
 
@@ -84,7 +86,7 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
         etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
         securisation: Recensement::SECURISATION_CORRECTE,
         notes: "objet très doux",
-        skip_photos: true
+        confirmation_pas_de_photos: true
       }
     end
 
