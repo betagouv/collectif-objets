@@ -30,7 +30,7 @@ module Co
       def set_filters
         raise "invalid status filter" if VALID_STATUS_FILTERS.exclude?(params[:status].presence)
 
-        filter_status = params[:status] == "all" ? "" : (params[:status].presence || "completed")
+        filter_status = params[:status].presence || "completed"
         @filters = Struct.new(:status, :nom).new(filter_status, params[:nom])
       end
 
@@ -40,7 +40,7 @@ module Co
           .include_objets_count
           .include_objets_recenses_count
           .includes(:dossier)
-          .where(@filters.status.present? ? { status: @filters.status } : {})
+          .where(@filters.status == "all" ? {} : { status: @filters.status })
         q = q.search_by_nom(@filters.nom) if @filters.nom&.strip&.present?
         q.order(@order)
       end
