@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe Co::SendInBlueClient do
   let(:client) { Co::SendInBlueClient.instance }
 
@@ -119,5 +117,3 @@ RSpec.describe Co::SendInBlueClient do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

@@ -29,3 +29,11 @@ Rails/SkipsModelValidations:
 
 Rails/I18nLocaleTexts:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - spec/**/*

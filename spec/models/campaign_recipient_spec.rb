@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe CampaignRecipient, type: :model do
   describe "factory" do
     it "should be valid" do
@@ -101,5 +100,3 @@ RSpec.describe CampaignRecipient, type: :model do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe Recensement, type: :model do
   describe "validations" do
     subject { recensement.valid? }
@@ -162,4 +160,3 @@ RSpec.describe Recensement, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

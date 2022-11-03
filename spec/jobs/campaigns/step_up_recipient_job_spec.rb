@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
   describe "#perform" do
     let!(:campaign) { create(:campaign) }
@@ -161,5 +159,3 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

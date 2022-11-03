@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe RefreshCommuneRecensementRatioJob, type: :job do
   describe "#perform" do
     let!(:commune) { create(:commune) }
@@ -39,5 +37,3 @@ RSpec.describe RefreshCommuneRecensementRatioJob, type: :job do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

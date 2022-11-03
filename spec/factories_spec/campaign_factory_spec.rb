@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe "campaign factory", type: :factory do
   it "should work" do
     campaign = build(:campaign)
@@ -41,5 +39,3 @@ RSpec.describe "campaign factory", type: :factory do
     campaign.save!
   end
 end
-
-# rubocop:enable Metrics/BlockLength

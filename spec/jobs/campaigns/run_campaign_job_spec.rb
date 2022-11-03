@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop: disable Metrics/BlockLength
-
 RSpec.describe Campaigns::RunCampaignJob, type: :job do
   describe "#perform" do
     let!(:campaign) { create(:campaign, status: "ongoing") }
@@ -96,5 +94,3 @@ RSpec.describe Campaigns::RunCampaignJob, type: :job do
     end
   end
 end
-
-# rubocop: enable Metrics/BlockLength

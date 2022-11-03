@@ -3,7 +3,6 @@
 require "rails_helper"
 require_relative "shared_examples"
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe UserMailer, type: :mailer do
   describe "validate_email" do
     let(:user) { build(:user, email: "jean@user.fr", login_token: "asdfjk29") }
@@ -82,4 +81,3 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

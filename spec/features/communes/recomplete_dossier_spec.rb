@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop: disable Metrics/BlockLength
-
 require "rails_helper"
 
 RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
@@ -76,4 +74,3 @@ RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
     click_on "Renvoyer le dossier au conservateur"
   end
 end
-# rubocop: enable Metrics/BlockLength

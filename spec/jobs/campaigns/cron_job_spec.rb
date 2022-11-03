@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe Campaigns::CronJob, type: :job do
   describe "for planned campaigns" do
     let!(:campaign1) { create(:campaign, status: "planned", date_lancement: Date.new(2031, 6, 10)) }
@@ -60,5 +58,3 @@ RSpec.describe Campaigns::CronJob, type: :job do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

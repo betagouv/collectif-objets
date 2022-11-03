@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe Campaigns::SynchronizeEmailJob, type: :job do
   describe "#perform" do
     subject { Campaigns::SynchronizeEmailJob.perform_inline(campaign_email.id) }
@@ -126,5 +124,3 @@ RSpec.describe Campaigns::SynchronizeEmailJob, type: :job do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

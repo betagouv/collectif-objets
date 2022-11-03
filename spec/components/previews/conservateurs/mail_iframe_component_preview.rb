@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/MethodLength
-
 module Conservateurs
   class MailIframeComponentPreview < ViewComponent::Preview
     def mail_with_body
@@ -59,5 +57,3 @@ module Conservateurs
     def mail; end
   end
 end
-
-# rubocop:enable Metrics/MethodLength

@@ -41,7 +41,6 @@ RSpec.shared_examples "a campaign email" do |email_name, mail_subject, content|
   end
 end
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe CampaignV1Mailer, type: :mailer do
   let(:departement) { build(:departement, code: "78", nom: "Yvelines", dans_nom: "dans les Yvelines") }
   let(:commune) { build(:commune, departement:, nom: "Joinville") }
@@ -144,4 +143,3 @@ RSpec.describe CampaignV1Mailer, type: :mailer do
     "Sauf erreur de notre part, vous n’avez pas effectué la dernière étape qui permet l’envoi du dossier de recensement"
   )
 end
-# rubocop:enable Metrics/BlockLength

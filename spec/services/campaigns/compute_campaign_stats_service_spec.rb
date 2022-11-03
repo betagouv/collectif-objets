@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe Campaigns::ComputeCampaignStatsService, type: :service do
   subject { Campaigns::ComputeCampaignStatsService.new(campaign).perform }
 
@@ -62,5 +60,3 @@ RSpec.describe Campaigns::ComputeCampaignStatsService, type: :service do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

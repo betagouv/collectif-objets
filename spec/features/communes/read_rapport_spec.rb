@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop: disable Metrics/BlockLength
-
 require "rails_helper"
 
 RSpec.feature "Communes - Read rapport", type: :feature, js: true do
@@ -81,4 +79,3 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
     end
   end
 end
-# rubocop: enable Metrics/BlockLength

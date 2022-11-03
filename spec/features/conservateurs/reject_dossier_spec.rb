@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
 RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:conservateur) { create(:conservateur, email: "jeanne@culture.gouv.fr", departements: [departement]) }
@@ -71,4 +70,3 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
     expect(page).to have_content(/Dossier renvoyé à la commune/i)
   end
 end
-# rubocop:enable Metrics/BlockLength

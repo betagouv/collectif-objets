@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe Co::Campaigns::Mail do
   let(:mail) { Co::Campaigns::Mail.new(user:, commune:, campaign:, step:) }
 
@@ -83,5 +81,3 @@ RSpec.describe Co::Campaigns::Mail do
     end
   end
 end
-
-# rubocop:enable Metrics/BlockLength

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop: disable Metrics/BlockLength
-
 require "rails_helper"
 
 RSpec.feature "Communes - Recensement", type: :feature, js: true do
@@ -160,5 +158,3 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_content(/Les photos sont fortement recommandées/i)
   end
 end
-
-# rubocop: enable Metrics/BlockLength

@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
 RSpec.feature "Sign in with password", type: :feature, js: true do
   let!(:conservateur) do
     create(:conservateur, email: "jeanne.michel@culture.gouv.fr", password: "super-long-mot-de-passe-du-futur")
@@ -40,4 +39,3 @@ RSpec.feature "Sign in with password", type: :feature, js: true do
     expect(page).to have_text("Email ou mot de passe incorrect")
   end
 end
-# rubocop:enable Metrics/BlockLength

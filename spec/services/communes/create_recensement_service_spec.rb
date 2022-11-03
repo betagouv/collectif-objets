@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
-
 RSpec.describe Communes::CreateRecensementService, type: :service do
   subject { Communes::CreateRecensementService.new(params:, objet:, user:).perform }
 
@@ -104,4 +102,3 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

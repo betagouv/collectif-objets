@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/BlockLength
 RSpec.feature "Reset password", type: :feature, js: true do
   let!(:conservateur) do
     create(
@@ -90,4 +89,3 @@ RSpec.feature "Reset password", type: :feature, js: true do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

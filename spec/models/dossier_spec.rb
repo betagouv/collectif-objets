@@ -2,8 +2,6 @@
 
 require "rails_helper"
 
-# rubocop: disable Metrics/BlockLength
-
 RSpec.describe Dossier, type: :model do
   describe "status updates" do
     let(:commune) { build(:commune) }
@@ -96,5 +94,3 @@ RSpec.describe Dossier, type: :model do
     it { should be false }
   end
 end
-
-# rubocop: enable Metrics/BlockLength
