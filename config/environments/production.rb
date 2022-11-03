@@ -38,6 +38,9 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
+  # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.active_storage.service = :scaleway
+
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
@@ -98,9 +101,6 @@ Rails.application.configure do
 
   config.force_ssl = true
   config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
-
-  config.active_storage.service = "scaleway_#{config.x.environment_specific_name}".to_sym
-
   if config.x.environment_specific_name == "staging"
     config.action_mailer.show_previews = true
   end

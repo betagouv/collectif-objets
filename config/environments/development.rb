@@ -38,7 +38,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :scaleway_development
+  config.active_storage.service = :scaleway
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
