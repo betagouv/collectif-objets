@@ -376,8 +376,6 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.23.0)
       parser (>= 3.1.1.0)
-    rubocop-daemon (0.3.2)
-      rubocop
     rubocop-rails (2.17.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -512,7 +510,6 @@ DEPENDENCIES
   rails-erd
   rspec-rails (~> 6.0)
   rubocop
-  rubocop-daemon
   rubocop-rails
   sassc-rails
   selenium-webdriver

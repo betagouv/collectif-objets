@@ -55,7 +55,6 @@ group :development do
   gem "progressbar"
   gem "pry"
   gem "rails-erd", require: false
-  gem "rubocop-daemon", require: false
   gem "web-console"
 end
 

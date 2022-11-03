@@ -128,7 +128,7 @@ make install
 make dev
 ```
 
-optionnel: pour une utilisation de rubocop plus rapide en local, voir https://github.com/fohte/rubocop-daemon#more-speed
+optionnel: pour une utilisation de rubocop plus rapide en local, [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
 
 ## Plus de documentation…
 
