@@ -2,7 +2,7 @@
   "CORSRules": [
     {
       "AllowedOrigins": [
-        "https://staging.collectif-objets.incubateur.net/"
+        "https://staging.collectif-objets.incubateur.net"
       ],
       "AllowedHeaders": [
         "*"
