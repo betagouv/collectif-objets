@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= vite_stylesheet_tag "all" %>
     <%= vite_javascript_tag "application" %>
+    <link rel="stylesheet" href="/dsfr/dsfr.min.css">
+    <link rel="stylesheet" href="/dsfr/utility/utility.min.css">
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class="fr-p-2w">
     <%= yield %>
   </body>
 </html>

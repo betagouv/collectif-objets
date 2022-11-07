@@ -7,36 +7,12 @@
       ["Accueil", root_path],
       [
         "Objets de #{@objet.commune.nom}",
-        current_user ? commune_objets_path(current_user.commune) : objets_path(commune_code_insee: @objet.commune.code_insee)
+        objets_path(commune_code_insee: @objet.commune.code_insee)
       ]
     ],
     current_page_label: @objet.nom
   ) %>
-  <div class="co-flex co-flex--align-items-center co-flex--gap-1rem co-flex--wrap fr-mb-8w">
-    <h2 class="fr-mb-0"><%= @objet.nom %></h2>
-    <%= render "objets/recensement_badge", objet: @objet %>
-  </div>
 
-  <div class="fr-grid-row fr-pb-4w fr-grid-row--gutters">
-    <div class="fr-col-md-6">
-      <% if @objet.commune == current_user&.commune && @objet.current_recensement&.editable?%>
-        <p>
-          <%= link_to "modifier le recensement", edit_objet_recensement_path(@objet, @objet.current_recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right" %>
-        </p>
-      <% end %>
-
-      <% if @objet.commune == current_user&.commune && @objet.recensable? %>
-        <div class="fr-mb-4w">
-          <%= link_to "Recenser cet objet", new_objet_recensement_path(@objet), class: "fr-btn" %>
-        </div>
-      <% end %>
-
-      <%= render GalleryComponent.palissy_photos_from_objet(@objet, responsive_versions: [:small]) %>
-      <%= render "objets/attributes", objet: @objet %>
-    </div>
-
-    <div class="fr-col-md-6">
-      <%= render GalleryComponent.palissy_photos_from_objet(@objet, responsive_versions: [:full]) %>
-    </div>
-  </div>
+  <h2 class="fr-mb-0"><%= @objet.nom %></h2>
+  <%= render ObjetPageComponent.new(objet: @objet) %>
 </main>

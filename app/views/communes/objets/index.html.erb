@@ -14,7 +14,7 @@
       <%= t(".n_objets_a_recenser", count: @objets_list.count) %>
     </h5>
     <%= render "recensements/etapes" %>
-    <%= render "list", objets_list: @objets_list %>
+    <%= render "list", component_class: Communes::ObjetCardComponent, objets_list: @objets_list %>
     <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.can_complete? %>
@@ -22,7 +22,7 @@
       <%= t(".tous_les_objets_recenses") %>
     </h5>
     <%= render "complete_callout", dossier: @dossier, commune: @commune %>
-    <%= render "list", objets_list: @objets_list %>
+    <%= render "list", component_class: Communes::ObjetCardComponent, objets_list: @objets_list %>
     <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.started? %>
@@ -30,15 +30,15 @@
       <%= t(".n_objets_restants_a_recenser", count: @commune.objets.where.missing(:recensements).count) %>
     </h5>
     <%= render "recensements/etapes" %>
-    <%= render "list", objets_list: @objets_list %>
+    <%= render "list", component_class: Communes::ObjetCardComponent, objets_list: @objets_list %>
     <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
     <%= render "imprimer_callout" %>
   <% elsif @commune.completed? && @dossier.submitted? %>
     <%= render "submitted_callout", commune: @commune %>
-    <%= render "list", objets_list: @objets_list %>
+    <%= render "list", component_class: Communes::ObjetCardComponent, objets_list: @objets_list %>
   <% elsif @commune.completed? && @dossier.rejected? %>
     <%= render "rejected_callout", dossier: @dossier %>
-    <%= render "list", objets_list: @objets_list %>
+    <%= render "list", component_class: Communes::ObjetCardComponent, objets_list: @objets_list %>
     <p class="co-text--center fr-mt-4w">
       <%= link_to(
         "Renvoyer le dossier au conservateur…",
@@ -51,7 +51,7 @@
     <%= render "imprimer_callout" %>
   <% elsif @commune.completed? && @dossier.accepted? %>
     <%= render "accepted_callout", dossier: @dossier %>
-    <%= render "list", objets_list: @objets_list %>
+    <%= render "list", component_class: Communes::ObjetCardComponent, objets_list: @objets_list %>
     <%= render("pourquoi_n_objets_callout", objets_list: @objets_list) if @objets_list.group_by_edifice? %>
   <% end %>
 </main>

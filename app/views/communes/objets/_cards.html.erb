@@ -1,28 +1,26 @@
-<div class="fr-grid-row fr-my-4w fr-grid-row--gutters <%= objets.count < 4 ? "fr-grid-row--center" : "" %>">
-  <%= render Communes::ObjetCardComponent.with_collection(objets, **local_assigns.fetch(:cards_options, {})) %>
+<%= render Communes::ObjetCardComponent.with_collection(objets, **local_assigns.fetch(:cards_options, {})) %>
 
-  <% if local_assigns[:extra_card_aide] %>
-    <div class="fr-col-md-3">
-      <div class="fr-card fr-enlarge-link co-background--light-teal">
-        <div class="fr-card__body">
-          <div class="fr-card__content">
-            <h4 class="fr-card__title">
-              <%= link_to(
-                t("communes.objets.objets_manquants.pourquoi_n_objets", count: objets.count),
-                aide_path(anchor: "faq-manquants"),
-                class: "fr-card__link"
-              ) %>
-            </h4>
-            <p class="fr-card__desc">
-              <%= t("communes.objets.objets_manquants.seulement_objets_proteges_html") %>
-            </p>
-            <p class="fr-card__desc co-text--underline">
-              <%= t("communes.objets.objets_manquants.en_savoir_plus") %>
-            </p>
-          </div>
+<% if local_assigns[:extra_card_aide] %>
+  <div class="fr-col-md-3">
+    <div class="fr-card fr-enlarge-link co-background--light-teal">
+      <div class="fr-card__body">
+        <div class="fr-card__content">
+          <h4 class="fr-card__title">
+            <%= link_to(
+              t("communes.objets.objets_manquants.pourquoi_n_objets", count: objets.count),
+              aide_path(anchor: "faq-manquants"),
+              class: "fr-card__link"
+            ) %>
+          </h4>
+          <p class="fr-card__desc">
+            <%= t("communes.objets.objets_manquants.seulement_objets_proteges_html") %>
+          </p>
+          <p class="fr-card__desc co-text--underline">
+            <%= t("communes.objets.objets_manquants.en_savoir_plus") %>
+          </p>
         </div>
       </div>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
-</div>

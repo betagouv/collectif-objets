@@ -26,7 +26,10 @@
                 <% end %>
               </div>
               <div>
-                <%= link_to truncate(recensement.objet.nom, length: 30), objet_path(recensement.objet) %>
+                <%= link_to(
+                  truncate(recensement.objet.nom, length: 30),
+                  commune_objet_path(objet.commune, recensement.objet)
+                ) %>
               </div>
             </div>
           </td>

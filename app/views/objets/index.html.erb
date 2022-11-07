@@ -43,12 +43,14 @@
         <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
       </div>
     <% end %>
-    <%= render "communes/objets/cards", objets: @objets, cards_options: { badges: [], display_recensement_photos: false } %>
+    <%= render layout: "objets/cards_grid_layout", locals: { objets: @objets } do %>
+      <%= render ObjetCardComponent.with_collection(@objets) %>
+    <% end %>
     <% if @pagy.pages > 1 %>
       <%= render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
     <% end %>
   <% else %>
-    <%= render "communes/objets/list", objets_list: @objets_list, cards_options: { badges: [], display_recensement_photos: false } %>
+    <%= render "communes/objets/list", objets_list: @objets_list, component_class: ObjetCardComponent %>
   <% end %>
 
 </main>
