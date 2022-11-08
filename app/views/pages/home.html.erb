@@ -1,6 +1,6 @@
 <main>
   <!-- SECTION INTRO -->
-  <div class="co-background--light-grey fr-py-12w">
+  <div class="co-background--light-grey fr-py-6w">
     <div class="fr-container fr-grid-row">
       <div class="fr-col-md-6 fr-pr-4w">
         <h2>Recenser notre patrimoine pour le protéger</h2>
@@ -38,21 +38,21 @@
       </div>
     </div>
     <div class="fr-container fr-grid-row fr-grid-row--center fr-mt-4w">
-      <div class="fr-col-md-4 fr-px-4w">
+      <div class="fr-col-md-4 fr-px-4w fr-pb-4w">
         <%= vite_image_tag "images/illustrations/woman-magnifier.svg", class: "fr-mb-2w  co--width-max-100" %>
         <div>
           <b>(Re) Découvrez les objets</b>
           classés ou inscrits aux monuments historiques qui font la richesse de votre commune
         </div>
       </div>
-      <div class="fr-col-md-4 fr-px-4w">
+      <div class="fr-col-md-4 fr-px-4w fr-pb-4w">
         <%= vite_image_tag "images/illustrations/people-clap.svg", class: "fr-mb-2w  co--width-max-100" %>
         <div>
           <b>Bénéficiez des conseils</b>
           et de l'expertise des conservatrices et conservateurs
         </div>
       </div>
-      <div class="fr-col-md-4 fr-px-4w">
+      <div class="fr-col-md-4 fr-px-4w fr-pb-4w">
         <%= vite_image_tag "images/illustrations/woman-going-up-stairs.svg", class: "fr-mb-2w  co--width-max-100" %>
         <div>
           Les conservateurs de votre département vous adresseront un <b>rapport sur la conservation et la sécurisation de vos objets</b>, leur valorisation et les possibilités de financement des projets.
@@ -70,7 +70,7 @@
   <!-- SECTION ETAPES -->
   <div class="co-home-section-steps">
     <div class="fr-container fr-grid-row fr-grid-row-gutters fr-grid-row--middle fr-grid-row--center fr-my-12w">
-      <div class="fr-col-md-5 fr-px-12w co-text--center">
+      <div class="fr-col-md-5 fr-px-12w fr-pb-2w co-text--center">
         <%= vite_image_tag "images/illustrations/counter-01.svg" , class: "co--width-max-100", alt: "étape 1" %>
       </div>
       <div class="fr-col-md-5">
@@ -87,12 +87,12 @@
           <%= link_to "Lire le guide" , guide_url %>
         </p>
       </div>
-      <div class="fr-col-md-5 fr-px-12w co-text--center">
+      <div class="fr-col-md-5 fr-px-12w fr-pb-2w co-text--center co-flex-md-reverse-order">
         <%= vite_image_tag "images/illustrations/counter-02.svg" , class: "co--width-max-100", alt: "étape 2" %>
       </div>
     </div>
     <div class="fr-container fr-grid-row fr-grid-row-gutters fr-grid-row--middle fr-grid-row--center fr-my-12w">
-      <div class="fr-col-md-5 fr-px-12w co-text--center">
+      <div class="fr-col-md-5 fr-px-12w fr-pb-2w co-text--center">
         <%= vite_image_tag "images/illustrations/counter-03.svg" , class: "co--width-max-100", alt: "étape 3" %>
       </div>
       <div class="fr-col-md-5">
@@ -101,28 +101,25 @@
     </div>
   </div>
   <!-- SECTION STATS -->
-  <div class="co-background--light-grey fr-py-12w">
-    <div class="fr-container fr-grid-row fr-grid-row-gutters">
-      <div class="fr-col-12 fr-pb-4w co-text--center">
-        <h2 class="co-text--blue" id="stats">Elles ont participé</h2>
+  <div class="co-background--light-grey fr-py-12w co-text--center">
+    <h2 class="co-text--blue" id="stats">Elles ont participé</h2>
+    <div class="fr-container fr-grid-row fr-grid-row--center fr-grid-row-gutters">
+      <div class="fr-col-md-6 fr-px-8w fr-pb-4w">
+        <div class="fr-display--xl co-text--blue"><%= @stats[:communes] %></div>
+        <div class="co-text--blue">
+          communes engagées dans le recensement
+        </div>
       </div>
-      <div class="fr-col-md-6 fr-px-8w co-text--center">
+      <div class="fr-col-md-6 fr-px-8w">
         <div class="fr-display--xl co-text--blue"><%= @stats[:recensements] %></div>
         <div class="co-text--blue">
           objets classés monuments historiques déjà recensés
           depuis le début de l'opération
         </div>
       </div>
-      <div class="fr-col-md-6 fr-px-8w co-text--center">
-        <div class="fr-display--xl co-text--blue"><%= @stats[:communes] %></div>
-        <div class="co-text--blue">
-          communes engagées dans le recensement
-        </div>
-      </div>
-      <div class="fr-col-12 fr-mt-8w co-text--center">
-        <%= link_to "Voir plus de statistiques", stats_path, class: "fr-link" %>
-      </div>
-
+    </div>
+    <div class="fr-mt-8w">
+      <%= link_to "Voir plus de statistiques", stats_path, class: "fr-link" %>
     </div>
   </div>
   <!-- SECTION TESTIMONIALS -->
@@ -186,7 +183,7 @@
   <!-- SECTION AIDE -->
   <div class="co-background--light-grey fr-py-12w" id="help">
     <div class="fr-container fr-grid-row">
-      <div class="fr-col-md-6 fr-pr-4w">
+      <div class="fr-col-md-6 fr-pr-4w fr-pb-4w">
         <h2 class="co-text--blue">
           L'équipe de Collectif Objets
         </h2>
