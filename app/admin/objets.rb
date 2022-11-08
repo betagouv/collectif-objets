@@ -21,7 +21,7 @@ ActiveAdmin.register Objet do
     actions
   end
 
-  filter :commune_departement_code, as: :select, collection: -> { Departement.all }
+  filter :commune_departement_code, as: :select, collection: -> { Departement.order(:code).all }
   filter :commune
   filter :palissy_REF_equals
   filter :palissy_TICO

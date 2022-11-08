@@ -18,7 +18,7 @@ ActiveAdmin.register Conservateur do
   end
 
   filter :email
-  filter :departements, as: :check_boxes, collection: -> { Departement.all }
+  filter :departements, as: :check_boxes, collection: -> { Departement.order(:code).all }
 
   show do
     div class: "show-container" do

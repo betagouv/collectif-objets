@@ -17,7 +17,7 @@
       <h3>Configuration</h3>
       <div class="fr-input-group">
         <%= f.label :departement_code %>
-        <%= f.select :departement_code, Departement.all.map { [_1.to_s, _1.code ] }, {}, disabled: campaign.persisted? %>
+        <%= f.select :departement_code, Departement.order(:code).all.map { [_1.to_s, _1.code ] }, {}, disabled: campaign.persisted? %>
       </div>
       <div class="fr-input-group">
         <%= f.label :sender_name do %>

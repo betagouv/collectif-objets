@@ -24,7 +24,7 @@ ActiveAdmin.register User do
 
   filter :email
   filter :role, as: :check_boxes, collection: ["mairie"]
-  filter :commune_departement_code, as: :select, collection: -> { Departement.all }
+  filter :commune_departement_code, as: :select, collection: -> { Departement.order(:code).all }
 
   show do
     div class: "show-container" do

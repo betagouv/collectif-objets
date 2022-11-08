@@ -22,7 +22,7 @@ ActiveAdmin.register Recensement do
     actions
   end
 
-  filter :objet_commune_departement_code, as: :select, collection: -> { Departement.all }
+  filter :objet_commune_departement_code, as: :select, collection: -> { Departement.order(:code).all }
   filter :localisation, as: :check_boxes, collection: Recensement::LOCALISATIONS
   filter :edifice_nom
   filter :recensable

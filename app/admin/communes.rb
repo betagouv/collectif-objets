@@ -34,7 +34,7 @@ ActiveAdmin.register Commune do
     column :phone_number
   end
 
-  filter :departement_code, as: :select, collection: -> { Departement.all }
+  filter :departement_code, as: :select, collection: -> { Departement.order(:code).all }
   filter :nom
   filter :code_insee_equals
   filter(
