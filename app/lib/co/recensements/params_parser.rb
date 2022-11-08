@@ -4,8 +4,10 @@ module Co
   module Recensements
     class ParamsParser
       PERMITTED_PARAMS = %i[
-        confirmation localisation recensable edifice_nom etat_sanitaire
-        etat_sanitaire_edifice securisation notes skip_photos
+        confirmation_sur_place
+        localisation recensable edifice_nom
+        etat_sanitaire etat_sanitaire_edifice
+        securisation notes confirmation_pas_de_photos
       ].freeze
 
       def initialize(request_params)
@@ -16,8 +18,8 @@ module Co
         @params = @request_params
           .require(:recensement)
           .permit(*PERMITTED_PARAMS, photos: [])
-        @params.merge!(skip_photos: @params[:skip_photos].present?)
-        @params.merge!(confirmation: @params[:confirmation].present?)
+        parse_checkbox(:confirmation_sur_place)
+        parse_checkbox(:confirmation_pas_de_photos)
         @params.merge!(recensable: @params[:recensable] == "true")
         @params.merge!(recensable: false) if absent?
         @params.merge!(not_recensable_overrides) unless @params[:recensable]
@@ -25,6 +27,12 @@ module Co
       end
 
       private
+
+      def parse_checkbox(name)
+        return if @params[name].blank?
+
+        @params.merge!(name => @params[name] == "1")
+      end
 
       def absent?
         @params[:localisation] == Recensement::LOCALISATION_ABSENT

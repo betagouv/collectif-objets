@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_03_143041) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_03_170555) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -238,6 +238,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_143041) do
     t.datetime "analysed_at"
     t.bigint "conservateur_id"
     t.bigint "dossier_id", null: false
+    t.boolean "confirmation_sur_place"
+    t.boolean "confirmation_pas_de_photos"
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true

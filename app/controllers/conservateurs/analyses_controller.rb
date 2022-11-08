@@ -46,7 +46,7 @@ module Conservateurs
     def analyse_recensement_params
       @analyse_recensement_params ||=
         Co::Recensements::AnalyseParamsParser.new(params).parse
-          .merge(@recensement.photos.empty? ? { skip_photos: true } : {})
+          .merge(@recensement.photos.empty? ? { confirmation_pas_de_photos: true } : {})
     end
   end
 end
