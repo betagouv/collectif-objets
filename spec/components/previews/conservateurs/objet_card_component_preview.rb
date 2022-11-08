@@ -11,19 +11,15 @@ module Conservateurs
     def recensed
       commune = FactoryBot.build(:commune, id: 10).tap(&:readonly!)
       objet = FactoryBot.build(:objet, commune:, id: 20).tap(&:readonly!)
-      def objet.current_recensement
-        FactoryBot.build(:recensement).tap(&:readonly!)
-      end
-      render Conservateurs::ObjetCardComponent.new(objet:)
+      recensement = FactoryBot.build(:recensement, id: 30).tap(&:readonly!)
+      render Conservateurs::ObjetCardComponent.new(objet:, recensement:)
     end
 
     def analysed
       commune = FactoryBot.build(:commune, id: 10).tap(&:readonly!)
       objet = FactoryBot.build(:objet, commune:, id: 20).tap(&:readonly!)
-      def objet.current_recensement
-        FactoryBot.build(:recensement, id: 30, analysed_at: 2.days.ago).tap(&:readonly!)
-      end
-      render Conservateurs::ObjetCardComponent.new(objet:)
+      recensement = FactoryBot.build(:recensement, id: 30, analysed_at: 2.days.ago).tap(&:readonly!)
+      render Conservateurs::ObjetCardComponent.new(objet:, recensement:)
     end
   end
 end

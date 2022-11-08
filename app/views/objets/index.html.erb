@@ -49,8 +49,16 @@
     <% if @pagy.pages > 1 %>
       <%= render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
     <% end %>
+  <% elsif @objets_list.group_by_edifice? %>
+    <%= render "edifices/list", edifices: @objets_list.edifices %>
+    <% @objets_list.edifices.each do |edifice| %>
+      <div class="fr-my-4w">
+        <%= render "edifices/title", edifice: %>
+        <%= render "objets/cards", objets: edifice[:objets] %>
+      </div>
+    <% end %>
   <% else %>
-    <%= render "communes/objets/list", objets_list: @objets_list, component_class: ObjetCardComponent %>
+    <%= render "objets/cards", objets: @objets_list.objets, card_objets_manquants: true %>
   <% end %>
 
 </main>

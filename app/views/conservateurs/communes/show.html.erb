@@ -93,10 +93,11 @@
 
   <div class="fr-container fr-grid-row fr-grid-row--center">
     <div class="fr-col-md-10">
-      <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
+      <%= render layout: "objets/cards_grid_layout", locals: { objets: @objets } do %>
         <% @objets.each do |objet| %>
-          <%= render Conservateurs::ObjetCardComponent.new(objet:) %>
+          <%= render Conservateurs::ObjetCardComponent.new(objet:, recensement: objet.current_recensement) %>
         <% end %>
+      <% end %>
       </div>
     </div>
   </div>

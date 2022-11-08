@@ -47,9 +47,8 @@
           <%= t(".leftover") %>
         <% end %>
       </h3>
-      <%= render layout: "objets/cards_grid_layout", locals: { objets: @objets_list.objets } do %>
-        <%= render Communes::ObjetCardComponent.with_collection(@objets_list.objets) %>
-      <% end %>
+
+      <%= render "communes/objets/cards", objets: @objets_list.objets %>
 
       <%= link_to "Revenir à la liste de tous les objets de ma commune", commune_objets_path(@commune), class: "fr-link" %>
     </div>

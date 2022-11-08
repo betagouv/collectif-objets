@@ -11,10 +11,8 @@ module Communes
     def recensed
       commune = FactoryBot.build(:commune, id: 10).tap(&:readonly!)
       objet = FactoryBot.build(:objet, commune:, id: 20).tap(&:readonly!)
-      def objet.current_recensement
-        FactoryBot.build(:recensement).tap(&:readonly!)
-      end
-      render Communes::ObjetCardComponent.new(objet:)
+      recensement = FactoryBot.build(:recensement).tap(&:readonly!)
+      render Communes::ObjetCardComponent.new(objet:, recensement:)
     end
   end
 end

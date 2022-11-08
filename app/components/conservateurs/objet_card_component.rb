@@ -2,8 +2,9 @@
 
 module Conservateurs
   class ObjetCardComponent < ViewComponent::Base
-    def initialize(objet:)
+    def initialize(objet:, recensement: nil)
       @objet = objet
+      @recensement = recensement
       super
     end
 
@@ -11,15 +12,11 @@ module Conservateurs
       render ::ObjetCardComponent.new(objet:, badges:, main_photo_url: recensement_photo_url, path:, tags:)
     end
 
-    attr_reader :objet
-
-    with_collection_parameter :objet
-
-    delegate :current_recensement, to: :objet
+    attr_reader :objet, :recensement
 
     def path
-      if current_recensement
-        edit_conservateurs_objet_recensement_analyse_path(objet, current_recensement)
+      if recensement
+        edit_conservateurs_objet_recensement_analyse_path(objet, recensement)
       else
         objet_path(objet)
       end
@@ -34,7 +31,7 @@ module Conservateurs
     end
 
     def recensement_photo_url
-      current_recensement&.photos&.first&.variant(:medium)
+      recensement&.photos&.first&.variant(:medium)
     end
 
     def badge_struct
@@ -42,11 +39,11 @@ module Conservateurs
     end
 
     def not_recensed_badge
-      badge_struct.new("warning", "Pas encore recensé") if current_recensement.nil?
+      badge_struct.new("warning", "Pas encore recensé") if recensement.nil?
     end
 
     def missing_photos_badge
-      return nil unless current_recensement&.missing_photos?
+      return nil unless recensement&.missing_photos?
 
       badge_struct.new(
         "warning", I18n.t("recensement.photos.missing")
@@ -54,7 +51,7 @@ module Conservateurs
     end
 
     def analysed_badge
-      return nil unless current_recensement&.analysed?
+      return nil unless recensement&.analysed?
 
       badge_struct.new(
         "success",
@@ -63,7 +60,7 @@ module Conservateurs
     end
 
     def prioritaire_badge
-      return nil unless current_recensement&.prioritaire?
+      return nil unless recensement&.prioritaire?
 
       badge_struct.new(
         "warning",

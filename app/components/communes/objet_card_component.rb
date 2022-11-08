@@ -2,8 +2,9 @@
 
 module Communes
   class ObjetCardComponent < ViewComponent::Base
-    def initialize(objet:)
+    def initialize(objet:, recensement: nil)
       @objet = objet
+      @recensement = recensement
       super
     end
 
@@ -13,12 +14,9 @@ module Communes
 
     private
 
-    attr_reader :objet
+    attr_reader :objet, :recensement
 
-    with_collection_parameter :objet
-
-    delegate :current_recensement, to: :objet
-    delegate :dossier, to: :current_recensement, allow_nil: true
+    delegate :dossier, to: :recensement, allow_nil: true
 
     def path
       commune_objet_path(objet.commune, objet)
@@ -29,7 +27,7 @@ module Communes
     end
 
     def recensement_photo_url
-      current_recensement&.photos&.first&.variant(:medium)
+      recensement&.photos&.first&.variant(:medium)
     end
 
     def badge_struct
@@ -39,7 +37,7 @@ module Communes
     def recensement_badge
       return nil if dossier&.rejected? || dossier&.accepted?
 
-      if current_recensement.present?
+      if recensement.present?
         badge_struct.new("success", "Recensé")
       else
         badge_struct.new("", "Pas encore recensé")
@@ -49,7 +47,7 @@ module Communes
     def analyse_notes_badge
       return nil unless dossier&.rejected?
 
-      badge_struct.new("info", "Commentaires") if current_recensement&.analyse_notes.present?
+      badge_struct.new("info", "Commentaires") if recensement&.analyse_notes.present?
     end
   end
 end
