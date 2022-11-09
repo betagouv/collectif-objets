@@ -1,0 +1,39 @@
+<div class="fr-col-md-3">
+  <div class="fr-card fr-enlarge-link">
+    <div class="fr-card__body">
+      <div class="fr-card__content">
+        <h4 class="fr-card__title">
+          <%= link_to(truncated_nom, path, class: "fr-card__link") %>
+        </h4>
+
+        <p class="fr-card__desc">
+          <%= commune.nom %><br />
+          <%= edifice_nom %>
+        </p>
+
+        <% if tags %>
+          <div class="fr-card__start">
+            <ul class="fr-tags-group">
+              <% tags.each do |tag| %>
+                <li>
+                  <p class="fr-tag fr-tag--<%= tag.color %> ">
+                    <%= tag.text %>
+                  </p>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="fr-card__header">
+      <%= render("shared/card_img", url: main_photo_url) %>
+      <% if badges %>
+        <ul class="fr-badges-group">
+          <%= render partial: "shared/badge_li", collection: badges, as: :badge %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

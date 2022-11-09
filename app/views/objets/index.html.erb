@@ -43,12 +43,22 @@
         <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
       </div>
     <% end %>
-    <%= render "communes/objets/cards", objets: @objets, cards_options: { badges: [], display_recensement_photos: false } %>
+    <%= render layout: "objets/cards_grid_layout", locals: { objets: @objets } do %>
+      <%= render ObjetCardComponent.with_collection(@objets) %>
+    <% end %>
     <% if @pagy.pages > 1 %>
       <%= render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
     <% end %>
+  <% elsif @objets_list.group_by_edifice? %>
+    <%= render "edifices/list", edifices: @objets_list.edifices %>
+    <% @objets_list.edifices.each do |edifice| %>
+      <div class="fr-my-4w">
+        <%= render "edifices/title", edifice: %>
+        <%= render "objets/cards", objets: edifice[:objets] %>
+      </div>
+    <% end %>
   <% else %>
-    <%= render "communes/objets/list", objets_list: @objets_list, cards_options: { badges: [], display_recensement_photos: false } %>
+    <%= render "objets/cards", objets: @objets_list.objets, card_objets_manquants: true %>
   <% end %>
 
 </main>

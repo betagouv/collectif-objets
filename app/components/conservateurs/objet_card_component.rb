@@ -2,32 +2,17 @@
 
 module Conservateurs
   class ObjetCardComponent < ViewComponent::Base
-    attr_reader :objet
-
-    def initialize(objet:)
+    def initialize(objet:, recensement: nil)
       @objet = objet
+      @recensement = recensement
       super
     end
 
-    def tags
-      @tags ||= [not_recensed_badge, missing_photos_badge].compact
+    def call
+      render ::ObjetCardComponent.new(objet:, badges:, main_photo_url: recensement_photo_url, path:, tags:)
     end
 
-    def badges
-      @badges ||= [analysed_badge, prioritaire_badge].compact
-    end
-
-    def recensement
-      @recensement ||= objet.current_recensement
-    end
-
-    def main_photo_url
-      return recensement.photos.first.variant(:medium) if recensement&.photos&.attached?
-
-      return objet.palissy_photos.first["url"] if objet.palissy_photos.any?
-
-      "images/illustrations/photo-manquante.png"
-    end
+    attr_reader :objet, :recensement
 
     def path
       if recensement
@@ -37,7 +22,17 @@ module Conservateurs
       end
     end
 
-    private
+    def badges
+      @badges ||= [analysed_badge, prioritaire_badge].compact
+    end
+
+    def tags
+      @tags ||= [not_recensed_badge, missing_photos_badge].compact
+    end
+
+    def recensement_photo_url
+      recensement&.photos&.first&.variant(:medium)
+    end
 
     def badge_struct
       Struct.new(:color, :text)

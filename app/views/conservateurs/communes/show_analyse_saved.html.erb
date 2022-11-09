@@ -63,11 +63,11 @@
         <h3 class="co-text--center">
           <%= t("recensement.analyse.remaining_count", count: @objets.count, commune: @commune.nom) %>
         </h3>
-        <div class="fr-grid-row fr-py-2w fr-grid-row--gutters <%= "fr-grid-row--center" if @objets.count <= 4 %> ">
+        <%= render layout: "objets/cards_grid_layout", locals: { objets: @objets } do %>
           <% @objets.each do |objet| %>
-            <%= render Conservateurs::ObjetCardComponent.new(objet:)  %>
+            <%= render Conservateurs::ObjetCardComponent.new(objet:, recensement: objet.current_recensement) %>
           <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   <% end %>

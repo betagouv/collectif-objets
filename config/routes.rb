@@ -47,15 +47,15 @@ Rails.application.routes.draw do
   get "/pdf", to: "pages#pdf_download", as: "pdf_download"
   get "/connexion", to: "pages#connexion", as: "connexion"
 
-  resources :objets, only: [:index, :show] do
-    resources :recensements, except: [:index, :show, :destroy]
-  end
+  resources :objets, only: [:index, :show]
   get "objets/ref_pop/:palissy_REF", to: "objets#show_by_ref_pop"
 
   resources :communes, only: [] do
     resource :completion, only: [:new, :create, :show], controller: "communes/completions"
     resource :recompletion, only: [:new, :create], controller: "communes/recompletions"
-    resources :objets, only: [:index], controller: "communes/objets"
+    resources :objets, only: [:index, :show], controller: "communes/objets" do
+      resources :recensements, except: [:index, :show, :destroy], controller: "communes/recensements"
+    end
     resource :formulaire, only: [:show], controller: "communes/formulaires"
     resources :dossiers, only: [:show], controller: "communes/dossiers"
     resources :campaign_recipients, only: [:update], controller: "communes/campaign_recipients"

@@ -38,7 +38,11 @@
       <div class="fr-col-md-6">
 
         <p class="fr-text--sm">
-          <%= link_to "voir lʼobjet", objet_path(recensement.objet) %>
+          <% if current_user %>
+            <%= link_to "voir lʼobjet", commune_objet_path(@dossier.commune, recensement.objet) %>
+          <% elsif current_conservateur %>
+            <%= link_to "voir lʼobjet", objet_path(recensement.objet) %>
+          <% end %>
           ·
           Référence POP Palissy : <%= recensement.objet.palissy_REF %>
         </p>

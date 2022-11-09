@@ -1,35 +1,11 @@
-<% if objets_list.group_by_edifice? %>
-  <h4>Liste des <%= objets_list.edifices.count %> édifices</h4>
-  <ul class="co-columns--3 fr-mb-8w">
-    <% objets_list.edifices.each do |edifice_group| %>
-      <li>
-        <%= link_to(
-          "#{edifice_nom(edifice_group[:nom])}".html_safe,
-          "##{edifice_group[:nom_parameterized]}"
-        ) %>
-        · <%= edifice_group[:objets].count %> objets
-      </li>
-    <% end %>
-  </ul>
-
-  <% objets_list.edifices.each do |edifice_group| %>
+<% if @objets_list.group_by_edifice? %>
+  <%= render "edifices/list", edifices: @objets_list.edifices %>
+  <% @objets_list.edifices.each do |edifice| %>
     <div class="fr-my-4w">
-      <h4 id="<%= edifice_group[:nom_parameterized] %>">
-        <%= edifice_nom(edifice_group[:nom]) %>
-        · <%= edifice_group[:objets].count %> objets
-      </h4>
-      <%= render(
-        "communes/objets/cards",
-        objets: edifice_group[:objets],
-        cards_options: local_assigns.fetch(:cards_options, {})
-      ) %>
+      <%= render "edifices/title", edifice: %>
+      <%= render "communes/objets/cards", objets: edifice[:objets] %>
     </div>
   <% end %>
 <% else %>
-  <%= render(
-    "communes/objets/cards",
-    objets: objets_list.objets,
-    cards_options: local_assigns.fetch(:cards_options, {}),
-    extra_card_aide: true
-  ) %>
+  <%= render "communes/objets/cards", objets: @objets_list.objets, card_objets_manquants: true %>
 <% end %>

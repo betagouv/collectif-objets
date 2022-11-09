@@ -2,38 +2,33 @@
 
 module Communes
   class ObjetCardComponent < ViewComponent::Base
-    attr_reader :objet
-
-    with_collection_parameter :objet
-
-    delegate :nom, :palissy_DENO, :commune, :edifice_nom, :current_recensement, :palissy_photos, to: :objet
-    delegate :dossier, to: :current_recensement, allow_nil: true
-
-    def initialize(objet:, badges: nil, display_recensement_photos: true)
+    def initialize(objet:, recensement: nil)
       @objet = objet
-      @badges = badges
-      @display_recensement_photos = display_recensement_photos
+      @recensement = recensement
       super
+    end
+
+    def call
+      render ::ObjetCardComponent.new(objet:, badges:, main_photo_url: recensement_photo_url, path:)
+    end
+
+    private
+
+    attr_reader :objet, :recensement
+
+    delegate :dossier, to: :recensement, allow_nil: true
+
+    def path
+      commune_objet_path(objet.commune, objet)
     end
 
     def badges
       @badges ||= [recensement_badge, analyse_notes_badge].compact
     end
 
-    def truncated_nom
-      truncate(nom || palissy_DENO, length: 30)
+    def recensement_photo_url
+      recensement&.photos&.first&.variant(:medium)
     end
-
-    def main_photo_url
-      return current_recensement.photos.first.variant(:medium) \
-        if @display_recensement_photos && current_recensement&.photos&.attached?
-
-      return palissy_photos.first["url"] if palissy_photos.any?
-
-      "images/illustrations/photo-manquante.png"
-    end
-
-    protected
 
     def badge_struct
       Struct.new(:color, :text)
@@ -42,7 +37,7 @@ module Communes
     def recensement_badge
       return nil if dossier&.rejected? || dossier&.accepted?
 
-      if current_recensement.present?
+      if recensement.present?
         badge_struct.new("success", "Recensé")
       else
         badge_struct.new("", "Pas encore recensé")
@@ -52,7 +47,7 @@ module Communes
     def analyse_notes_badge
       return nil unless dossier&.rejected?
 
-      badge_struct.new("info", "Commentaires") if current_recensement&.analyse_notes.present?
+      badge_struct.new("info", "Commentaires") if recensement&.analyse_notes.present?
     end
   end
 end

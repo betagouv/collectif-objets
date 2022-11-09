@@ -47,7 +47,8 @@
           <%= t(".leftover") %>
         <% end %>
       </h3>
-      <%= render "cards", objets: @objets_list.objets %>
+
+      <%= render "communes/objets/cards", objets: @objets_list.objets %>
 
       <%= link_to "Revenir à la liste de tous les objets de ma commune", commune_objets_path(@commune), class: "fr-link" %>
     </div>
