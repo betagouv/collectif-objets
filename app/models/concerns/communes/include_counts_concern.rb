@@ -9,6 +9,12 @@ module Communes
   module IncludeCountsConcern
     extend ActiveSupport::Concern
 
+    RECENSEMENT_PRIORITAIRE_SQL = <<-SQL.squish
+      recensements.localisation = 'absent'
+      OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
+      OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
+    SQL
+
     included do
       def self.include_objets_count
         joins(
@@ -44,11 +50,7 @@ module Communes
             SELECT objets."palissy_INSEE", COUNT(*) recensements_prioritaires_count
             FROM recensements
             INNER JOIN objets ON objets.id = recensements.objet_id
-            WHERE (
-              recensements.localisation = 'absent'
-              OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
-              OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
-            )
+            WHERE (#{RECENSEMENT_PRIORITAIRE_SQL})
             GROUP BY objets."palissy_INSEE"
           ) d ON d."palissy_INSEE" = communes.code_insee
         }
@@ -61,6 +63,20 @@ module Communes
           "AS recensements_analysed_percentage," \
           "COALESCE(d.recensements_prioritaires_count, 0) as recensements_prioritaires_count"
         )
+      end
+
+      def self.include_recensements_prioritaires_count
+        joins(
+          %{
+            LEFT OUTER JOIN (
+              SELECT objets."palissy_INSEE", COUNT(*) recensements_prioritaires_count
+              FROM recensements
+              LEFT JOIN objets ON recensements.objet_id = objets.id
+              WHERE (#{RECENSEMENT_PRIORITAIRE_SQL})
+              GROUP BY "palissy_INSEE"
+            ) b ON b."palissy_INSEE" = communes.code_insee
+          }
+        ).select("communes.*, COALESCE(b.recensements_prioritaires_count, 0) AS recensements_prioritaires_count")
       end
     end
   end

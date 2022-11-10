@@ -1,59 +1,50 @@
 <% content_for(:head_title) { t(".head_title", departement: @departement) } %>
 
 <main>
-  <div class="fr-container fr-grid-row fr-py-6w fr-grid-row--center">
-    <div class="fr-col-md-10">
-      <%= render(
-        "shared/breadcrumbs",
-        links: [["Départements", conservateurs_departements_path]],
-        current_page_label: @departement.nom
-      ) %>
-      <h2>
-        <span class="fr-icon-france-fill" aria-hidden="true"></span>
-        <%= @departement.nom %>
-      </h2>
-      <% if @campaign %>
-        <p><%= t(".campaign", date_lancement: l(@campaign.date_lancement), date_fin: l(@campaign.date_fin)) %></p>
-      <% end %>
-    </div>
-  </div>
+  <%= render "title", campaign: @campaign, departement: @departement %>
+  <%= render "stats", stats: @stats %>
 
-  <div class="co-background--light-teal fr-py-12w">
-    <div class="fr-container fr-grid-row fr-grid-row--center fr-grid-row--middle">
-      <div class="fr-col-md-6">
-        <div class="fr-h4 fr-mb-2w">
-          <%= @stats.objets_recenses_percentage %>%
-          <span class="fr-text--lg fr-text--regular">des objets ont été recensés</span>
-        </div>
-        <div><b><%= @stats.objets_recenses_count %> objets</b> sur <%= @stats.objets_count %></div>
-
-        <div class="fr-h4 fr-mt-4w fr-mb-2w">
-          <%= @stats.communes_completed_percentage %>%
-          <span class="fr-text--lg fr-text--regular">
-            <%= t(".stats.completed") %>
-          </span>
-        </div>
-        <div><b><%= @stats.communes_completed_count %> communes</b> sur <%= @stats.communes_count %></div>
+  <div class="fr-container fr-py-6w">
+    <div class="fr-tabs">
+      <ul class="fr-tabs__list" role="tablist" aria-label="[A modifier | nom du système d'onglet]">
+        <li role="presentation">
+          <button
+            id="tab-tableau"
+            class="fr-tabs__tab"
+            tabindex="0"
+            role="tab"
+            aria-selected="true"
+            aria-controls="tabpanel-tableau"
+          >
+              Vue Tableau
+            </button>
+        </li>
+        <li role="presentation">
+          <a
+            id="tab-carte"
+            class="fr-tabs__tab"
+            tabindex="1"
+            role="tab"
+            href="<%= conservateurs_departement_path(@departement, vue: "carte") %>"
+            <%# aria-selected="true" %>
+            <%# aria-controls="tabpanel-carte" %>
+          >
+            Vue Carte
+          </a>
+        </li>
+      </ul>
+      <div
+        id="tabpanel-tableau"
+        class="fr-tabs__panel fr-tabs__panel--selected"
+        role="tabpanel"
+        aria-labelledby="tab-tableau"
+        tabindex="0"
+      >
+        <%= turbo_frame_tag "communes-search" do %>
+          <%# "data-turbo-action": "advance" %>
+          <%= render Conservateurs::CommunesSearchComponent.new(communes_search: @communes_search) %>
+        <% end %>
       </div>
-      <div class="fr-col-md-4 co-text--center">
-        <b>
-          <%= t(".stats.etats_sanitaires_distribution_title") %>
-        </b>
-        <div
-          data-controller="objets-chart"
-          data-objets-chart-target="wrapper"
-          data-type="etats-sanitaires"
-          data-values="<%= @stats.etats_sanitaires_chart_values.to_json %>"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="fr-container fr-grid-row fr-py-6w fr-grid-row--center" id="communes">
-    <div class="fr-col-md-10">
-      <%= turbo_frame_tag "communes-search" do %>
-        <%# "data-turbo-action": "advance" %>
-        <%= render Conservateurs::CommunesSearchComponent.new(communes_search: @communes_search) %>
-      <% end %>
     </div>
   </div>
 </main>

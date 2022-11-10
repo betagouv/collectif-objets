@@ -1,0 +1,59 @@
+<% content_for(:head_title) { t(".head_title", departement: @departement) } %>
+
+<main>
+  <div class="fr-container fr-grid-row fr-py-6w fr-grid-row--center">
+    <div class="fr-col-md-10">
+      <%= render "title", campaign: @campaign, departement: @departement %>
+      <%= render "stats", stats: @stats %>
+
+      <div class="fr-container fr-py-6w">
+        <div class="fr-tabs">
+          <ul class="fr-tabs__list" role="tablist" aria-label="[A modifier | nom du système d'onglet]">
+            <li role="presentation">
+              <a
+                id="tab-tableau"
+                class="fr-tabs__tab"
+                tabindex="0"
+                role="tab"
+                href="<%= conservateurs_departement_path(@departement) %>"
+              >
+                Vue Tableau
+              </a>
+            </li>
+            <li role="presentation">
+              <button
+                id="tab-carte"
+                class="fr-tabs__tab"
+                tabindex="1"
+                role="tab"
+                aria-selected="true"
+                aria-controls="tabpanel-carte"
+              >
+                Vue Carte
+              </button>
+            </li>
+          </ul>
+          <div
+            id="tabpanel-carte"
+            class="fr-tabs__panel fr-tabs__panel--selected"
+            role="tabpanel"
+            aria-labelledby="tab-carte"
+            tabindex="0"
+          >
+            <%= render "map", communes: @communes, departement: @departement %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<script>
+  svgPanZoom(document.querySelector(".svg-map svg"), {
+    mouseWheelZoomEnabled: false,
+    controlIconsEnabled: true,
+    maxZoom: 2,
+    minZoom: 1
+  })
+</script>

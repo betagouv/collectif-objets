@@ -1,0 +1,93 @@
+.svg-map {
+  position: relative;
+}
+
+.svg-map svg {
+  width: 100%;
+  position: relative;
+}
+
+.svg-map path {
+  fill: #ccc;
+  stroke: white;
+  position: relative;
+}
+
+.svg-map .tooltip {
+  position: absolute;
+  background-color: white;
+  padding: .5rem;
+  display: none;
+}
+
+.svg-map.tooltip-show:not(.select-overlay) .tooltip {
+  display: block;
+}
+
+.svg-map.select-overlay {
+  background-color: #999999;
+}
+
+.svg-map.select-overlay path:not(.selected) {
+  fill: #8b8b8b;
+  stroke: #999999;
+}
+
+.svg-map.select-overlay path.selected {
+  stroke-width: 2px;
+  box-sizing: border-box
+}
+
+
+.svg-map-legend-icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  display: inline-block;
+  top: 5px;
+  margin-right: .5rem;
+}
+
+.svg-map path.selectable {
+  cursor: pointer;
+}
+
+.svg-map path.commune-completed,
+.svg-map-legend-icon.commune-completed {
+  fill: #6b6af4;
+  background-color: #6b6af4;
+}
+
+.svg-map.select-overlay path.commune-completed:not(.selected) {
+  fill: #69687a;
+}
+
+.svg-map path.commune-prioritaire,
+.svg-map-legend-icon.commune-prioritaire {
+  fill: #b34001;
+  background-color: #b34001;
+}
+
+.svg-map.select-overlay path.commune-prioritaire:not(.selected) {
+  fill: #712a07;
+}
+
+.svg-map-sidebar {
+  position: absolute;
+  left: 0;
+  background-color: #f6f6f6;
+  width: 30%;
+  height: 100%;
+  z-index: 10;
+}
+
+.svg-map-sidebar[data-collapsed="true"] {
+  display: none;
+}
+
+.svg-map-sidebar .sidebar-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+}

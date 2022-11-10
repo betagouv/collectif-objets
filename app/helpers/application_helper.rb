@@ -42,4 +42,18 @@ module ApplicationHelper
 
     image_tag(src, **kwargs)
   end
+
+  # rubocop:disable Rails/OutputSafety
+  def inline_svg(path)
+    path = path[1..] if path[0].start_with? "/"
+    file_path = Rails.root.join(path)
+    if File.exist?(file_path)
+      Rails.cache.fetch("inline-svg-#{path}", expires_in: 24.hours) do
+        File.read(file_path).html_safe
+      end
+    else
+      "(not found)"
+    end
+  end
+  # rubocop:enable Rails/OutputSafety
 end
