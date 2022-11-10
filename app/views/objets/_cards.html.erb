@@ -2,6 +2,6 @@
   <%= render ObjetCardComponent.with_collection(objets) %>
 
   <% if local_assigns[:card_objets_manquants] %>
-    <%= render "card_objets_manquants", objets: %>
+    <%= render "objets/card_objets_manquants", objets: %>
   <% end %>
 <% end %>
