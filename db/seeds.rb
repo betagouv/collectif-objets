@@ -18,5 +18,5 @@ run("pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=#{
 ")
 puts "done"
 
-AdminUser.create!(email: "admin@collectif.local", password: "123456789")
-Conservateur.create!(email: "conservateur@collectif.local", password: "123456789", departements: Departement.where(code: %w[06 09 12 19 26 51 52 86]))
+# AdminUser.create!(email: "admin@collectif.local", password: "123456789")
+# Conservateur.create!(email: "conservateur@collectif.local", password: "123456789", departements: Departement.where(code: %w[06 09 12 19 26 51 52 86]))
