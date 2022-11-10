@@ -1,49 +1,54 @@
 <% content_for(:head_title) { t(".head_title", departement: @departement) } %>
 
 <main>
-  <%= render "title", campaign: @campaign, departement: @departement %>
-  <%= render "stats", stats: @stats %>
+  <div class="fr-container fr-grid-row fr-py-6w fr-grid-row--center">
+    <div class="fr-col-md-10">
 
-  <div class="fr-container fr-py-6w">
-    <div class="fr-tabs">
-      <ul class="fr-tabs__list" role="tablist" aria-label="[A modifier | nom du système d'onglet]">
-        <li role="presentation">
-          <button
-            id="tab-tableau"
-            class="fr-tabs__tab"
+      <%= render "title", campaign: @campaign, departement: @departement %>
+      <%= render "stats", stats: @stats %>
+
+      <div class="fr-container fr-py-6w">
+        <div class="fr-tabs">
+          <ul class="fr-tabs__list" role="tablist" aria-label="[A modifier | nom du système d'onglet]">
+            <li role="presentation">
+              <button
+                id="tab-tableau"
+                class="fr-tabs__tab"
+                tabindex="0"
+                role="tab"
+                aria-selected="true"
+                aria-controls="tabpanel-tableau"
+              >
+                  Vue Tableau
+                </button>
+            </li>
+            <li role="presentation">
+              <a
+                id="tab-carte"
+                class="fr-tabs__tab"
+                tabindex="1"
+                role="tab"
+                href="<%= conservateurs_departement_path(@departement, vue: "carte") %>"
+                <%# aria-selected="true" %>
+                <%# aria-controls="tabpanel-carte" %>
+              >
+                Vue Carte
+              </a>
+            </li>
+          </ul>
+          <div
+            id="tabpanel-tableau"
+            class="fr-tabs__panel fr-tabs__panel--selected"
+            role="tabpanel"
+            aria-labelledby="tab-tableau"
             tabindex="0"
-            role="tab"
-            aria-selected="true"
-            aria-controls="tabpanel-tableau"
           >
-              Vue Tableau
-            </button>
-        </li>
-        <li role="presentation">
-          <a
-            id="tab-carte"
-            class="fr-tabs__tab"
-            tabindex="1"
-            role="tab"
-            href="<%= conservateurs_departement_path(@departement, vue: "carte") %>"
-            <%# aria-selected="true" %>
-            <%# aria-controls="tabpanel-carte" %>
-          >
-            Vue Carte
-          </a>
-        </li>
-      </ul>
-      <div
-        id="tabpanel-tableau"
-        class="fr-tabs__panel fr-tabs__panel--selected"
-        role="tabpanel"
-        aria-labelledby="tab-tableau"
-        tabindex="0"
-      >
-        <%= turbo_frame_tag "communes-search" do %>
-          <%# "data-turbo-action": "advance" %>
-          <%= render Conservateurs::CommunesSearchComponent.new(communes_search: @communes_search) %>
-        <% end %>
+            <%= turbo_frame_tag "communes-search" do %>
+              <%# "data-turbo-action": "advance" %>
+              <%= render Conservateurs::CommunesSearchComponent.new(communes_search: @communes_search) %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

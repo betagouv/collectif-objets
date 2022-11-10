@@ -17,13 +17,13 @@ export default class extends Controller {
       pathTarget.classList.add(`commune-${klass}`)
     })
 
-    const { left, top } = this.svgTarget.getBoundingClientRect()
-    this.svgOffset = { left, top }
+    // const { left, top } = this.svgTarget.getBoundingClientRect()
+    // this.svgOffset = { left, top }
     this.svgTarget.querySelectorAll(`path[data-nom]:not([class*="svg-pan"])`).forEach(pathElt => {
       pathElt.addEventListener("mouseover", () => {
-        const { x: left, y: top } = pathElt.getBBox();
-        this.tooltipTarget.style.left = `${Math.round(left)}px`;
-        this.tooltipTarget.style.top = `${Math.round(top)}px`;
+        // const { x: left, y: top } = pathElt.getBBox();
+        // this.tooltipTarget.style.left = `${Math.round(left)}px`;
+        // this.tooltipTarget.style.top = `${Math.round(top)}px`;
         this.tooltipTarget.innerHTML = pathElt.dataset.nom
         this.wrapperTarget.classList.add("tooltip-show")
       })

@@ -15,7 +15,10 @@
 
 .svg-map .tooltip {
   position: absolute;
+  top: 20px;
+  right: 20px;
   background-color: white;
+  color: black;
   padding: .5rem;
   display: none;
 }
