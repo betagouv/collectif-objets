@@ -8,7 +8,7 @@ def prepare(departement)
   puts "starting departement #{departement}..."
   url = "https://cadastre.data.gouv.fr/data/etalab-cadastre/2022-10-01/geojson/departements/#{departement}/cadastre-#{departement}-communes.json.gz"
 
-  final_path = Rails.root.join("app/frontend/svg-maps/communes-#{departement}.svg")
+  final_path = Rails.root.join("public/svg-maps/communes-#{departement}.svg")
 
   `curl #{url} > tmp/#{departement}.json.gz`
   `gzip -d tmp/#{departement}.json.gz`
