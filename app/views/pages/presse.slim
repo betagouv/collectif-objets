@@ -1,0 +1,35 @@
+- content_for(:head_title) { "Ils parlent de nous" }
+
+main.fr-pt-2w.fr-pb-8w
+  .fr-container
+    == render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Ils parlent de nous")
+
+
+    .fr-grid-row
+      .fr-col-md-8
+        h5
+          a href="https://www.lest-eclair.fr/id424528/article/2022-11-06/un-site-internet-pour-aider-les-maires-gerer-le-patrimoine" target="_blank" rel="noopener"
+            | Un site pour aider les maires à gérer leur patrimoine
+        .fr-my-2w L’Est Eclair, 06.11.2022
+        .fr-my-2w.co-text--bold Collectif Objets, “une interface entre le maire et le conservateur”
+        p Interview par M. Van Houtte avec Remy Marty, Maire de Montaulin, Eric Blanchegorge, Conservateur des Antiquités et Objets d’Arts de l’Aube et Fantine Monot, chargée de déploiement pour Collectif Objets.
+
+        h5.fr-mt-6w
+          a href="https://www.canal32.fr/thematiques/culture/sujet/des-maires-participent-au-recensement-du-patrimoine-du-02-novembre-2022.html" target="_blank" rel="noopener"
+            | Montaulin : quand les maires participent au recensement du patrimoine
+        .fr-my-2w Canal 32, 02.11.2022
+        .fr-my-2w.co-text--bold “Quelques clics suffisent. […] La facilité de mise en oeuvre a suscité une adhésion plus importante que prévue !”
+        p Reportage sur le terrain à Montaulin, avec Remy Marty, Maire de la commune, Eric Blanchegorge, Conservateur des Antiquités et Objets d’Arts de l’Aube et Fantine Monot, chargée de déploiement pour Collectif Objets.
+
+        h5.fr-mt-6w
+          a href="https://www.culture.gouv.fr/Regions/Drac-Occitanie/Actualites/Actualite-a-la-une/Le-ministere-de-la-Culture-invite-les-communes-de-l-Ariege-a-recenser-leurs-objets-proteges" target="_blank" rel="noopener"
+            | Le ministère de la Culture invite les communes de l’Ariège à recenser leurs objets protégés
+        .fr-my-2w culture.gouv.fr, 28.10.2022
+        p Communiqué de presse (DRAC Occitanie) pour le lancement de la première campagne de recensement participatif des objets protégés de l’Ariège.
+
+        h5.fr-mt-6w
+          a href="https://www.culture.gouv.fr/Regions/Drac-Grand-Est/actu/plan-relance/Patrimoine/Cathedrale-Troyes/2022/collectif-Objets" target="_blank" rel="noopener"
+            | Le ministère de la Culture invite les communes auboises, vosgiennes, ardennaises et de Meurthe-et-Moselle à recenser leurs objets protégés
+        .fr-my-2w culture.gouv.fr, 20.10.2022
+        p Communiqué de presse (Drac Grand Est) pour le déploiement du programme Collectif Objets dans la région Grand Est.
+

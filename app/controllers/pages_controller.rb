@@ -17,6 +17,7 @@ class PagesController < ApplicationController
 
   def aide; end
   def stats; end
+  def presse; end
 
   def guide
     params[:pdf] = "guide"
