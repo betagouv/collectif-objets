@@ -2,20 +2,6 @@
   position: relative;
 }
 
-/* .conservateur-map.select-overlay {
-  background-color: #999999;
-} */
-
-/* .conservateur-map.select-overlay path:not(.selected) {
-  fill: #8b8b8b;
-  stroke: #999999;
-} */
-
-/* .conservateur-map.select-overlay path.selected {
-  stroke-width: 2px;
-  box-sizing: border-box
-} */
-
 .conservateur-map-container {
   height: 600px;
   max-height: 80vh;
@@ -31,28 +17,12 @@
   margin-right: .5rem;
 }
 
-/* .conservateur-map path.selectable {
-  cursor: pointer;
-} */
-
-.conservateur-map path.commune-completed,
 .conservateur-map-legend-icon.commune-completed {
-  fill: #6b6af4;
   background-color: #6b6af4;
 }
 
-.conservateur-map.select-overlay path.commune-completed:not(.selected) {
-  fill: #69687a;
-}
-
-.conservateur-map path.commune-prioritaire,
 .conservateur-map-legend-icon.commune-prioritaire {
-  fill: #b34001;
   background-color: #b34001;
-}
-
-.conservateur-map.select-overlay path.commune-prioritaire:not(.selected) {
-  fill: #712a07;
 }
 
 .conservateur-map-sidebar {
