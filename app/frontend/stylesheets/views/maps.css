@@ -1,14 +1,6 @@
-.conservateur-map {
-  position: relative;
-}
+/* COMMON */
 
-.conservateur-map-container {
-  height: 600px;
-  max-height: 80vh;
-  width: 100%;
-}
-
-.conservateur-map-legend-icon {
+.map-legend-icon {
   width: 15px;
   height: 15px;
   border-radius: 10px;
@@ -17,12 +9,20 @@
   margin-right: .5rem;
 }
 
-.conservateur-map-legend-icon.commune-completed {
+.map-legend-icon.commune-completed {
   background-color: #6b6af4;
 }
 
-.conservateur-map-legend-icon.commune-prioritaire {
+.map-legend-icon.commune-prioritaire {
   background-color: #b34001;
+}
+
+/* CONSERVATEURS */
+
+.conservateur-map-container {
+  height: 600px;
+  max-height: 80vh;
+  width: 100%;
 }
 
 .conservateur-map-sidebar {

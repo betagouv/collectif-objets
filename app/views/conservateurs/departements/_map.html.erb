@@ -1,12 +1,12 @@
 <div class="co-flex co-flex--justify-content-center">
   <div>
     <div class="fr-pb-2w">
-      <div class="conservateur-map-legend-icon commune-completed">
+      <div class="map-legend-icon commune-completed">
       </div>
       Commune ayant soumis un dossier de recensement
     </div>
     <div class="fr-pb-2w">
-      <div class="conservateur-map-legend-icon commune-prioritaire">
+      <div class="map-legend-icon commune-prioritaire">
       </div>
       Commune ayant soumis un dossier de recensement avec des objets prioritaires
     </div>
@@ -14,11 +14,11 @@
 </div>
 
 <div
-  class="conservateur-map"
   data-controller="conservateur-map"
   data-conservateur-map-target="wrapper"
   data-communes-json="<%= communes.map { _1.slice(%w[code_insee status objets_count recensements_prioritaires_count]) }.to_json %>"
   data-departement-json="<%= @departement_json %>"
+  class="co-position-relative"
 >
   <div
     class="conservateur-map-sidebar co-position-relative"
