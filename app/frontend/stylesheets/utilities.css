@@ -40,6 +40,10 @@
   background-color: rgb(185, 185, 251);
 }
 
+.co-background-grey {
+  background-color: #f6f6f6;
+}
+
 .co-background--light-teal {
   background-color: #F5F5FE;
 }
@@ -63,6 +67,10 @@
 
 .co--width-100 {
   width: 100%;
+}
+
+.co-height--100 {
+  height: 100%;
 }
 
 .co--width-auto,

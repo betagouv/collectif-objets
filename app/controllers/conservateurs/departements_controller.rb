@@ -12,7 +12,13 @@ module Conservateurs
     def show
       @campaign = @departement.current_campaign
       @stats = Co::DepartementStats.new(@departement.code)
-      @communes_search = Co::Conservateurs::CommunesSearch.new(@departement.code, params)
+      if params[:vue] == "carte"
+        set_communes
+        set_departement_json
+        render "show_map"
+      else
+        @communes_search = Co::Conservateurs::CommunesSearch.new(@departement.code, params)
+      end
     end
 
     protected
@@ -27,10 +33,28 @@ module Conservateurs
       @departement = Departement.find(params[:id])
     end
 
+    def set_departement_json
+      @departement_json = {
+        code: @departement.code,
+        bounding_box_ne: @departement.bounding_box_ne.coordinates,
+        bounding_box_sw: @departement.bounding_box_sw.coordinates
+      }.to_json
+    end
+
     def restrict_access_show
       return true if current_conservateur&.departements&.include?(@departement)
 
       redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
+    end
+
+    def set_communes
+      fields = %w[code_insee nom status objets_count recensements_prioritaires_count latitude longitude]
+      @communes = @departement.communes
+        .includes(:dossier)
+        .include_objets_count
+        .include_recensements_prioritaires_count
+        .select(fields)
+        .to_a
     end
   end
 end

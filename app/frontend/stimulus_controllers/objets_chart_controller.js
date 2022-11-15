@@ -12,12 +12,12 @@ export default class extends Controller {
       this.wrapperTarget,
       {
         data: {
-          labels: ["Bon état", "État moyen", "Mauvais état", "En péril"],
+          labels: ["En péril", "Mauvais état", "État moyen", "Bon état"],
           datasets: [{ values: values }]
         },
         type: 'percentage',
         height: 150,
-        colors: ['#9EF9BE', '#FDE2B5', "#EAC7AD", "#FDDFDB"],
+        colors: ['#b34001', '#8585f7', "#aeadf9", "#cdcefc"],
         // format_tooltip_x: d => `${d} objets`
       }
     )

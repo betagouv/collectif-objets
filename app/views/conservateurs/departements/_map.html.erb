@@ -1,0 +1,72 @@
+<div class="co-flex co-flex--justify-content-center">
+  <div>
+    <div class="fr-pb-2w">
+      <div class="conservateur-map-legend-icon commune-completed">
+      </div>
+      Commune ayant soumis un dossier de recensement
+    </div>
+    <div class="fr-pb-2w">
+      <div class="conservateur-map-legend-icon commune-prioritaire">
+      </div>
+      Commune ayant soumis un dossier de recensement avec des objets prioritaires
+    </div>
+  </div>
+</div>
+
+<div
+  class="conservateur-map"
+  data-controller="conservateur-map"
+  data-conservateur-map-target="wrapper"
+  data-communes-json="<%= communes.map { _1.slice(%w[code_insee status objets_count recensements_prioritaires_count]) }.to_json %>"
+  data-departement-json="<%= @departement_json %>"
+>
+  <div
+    class="conservateur-map-sidebar co-position-relative"
+    data-conservateur-map-target="sidebar"
+    data-collapsed="true"
+  >
+  </div>
+  <div class="co-position-relative">
+    <div
+      data-conservateur-map-target="container"
+      class="conservateur-map-container"
+    >
+    </div>
+
+    <div
+      class="tooltip"
+      data-conservateur-map-target="tooltip"
+    >
+    </div>
+  </div>
+
+  <% communes.select { _1.status == "completed" }.each do |commune| %>
+    <template
+      data-conservateur-map-target="sidebarCommuneTemplate"
+      data-code-insee="<%= commune.code_insee %>"
+    >
+      <div class="co-flex co-flex--column co-flex--justify-content-center co-height--100 fr-p-4w">
+        <div class="fr-mb-6w">
+          <h5><%= commune.nom %></h5>
+          <div><%= dossier_status_badge(commune.dossier) %></div>
+        </div>
+        <div class="fr-mb-6w">
+          <%= commune.objets_count %> objets recensés
+          <% if commune.recensements_prioritaires_count %>
+            dont <%= commune.recensements_prioritaires_count %> prioritaires
+          <% end %>
+        </div>
+        <div class="">
+          <%= link_to "Voir la commune", conservateurs_commune_path(commune), class: "fr-btn" %>
+        </div>
+        <div class="sidebar-close">
+          <button
+            data-action="conservateur-map#closeSidebar"
+          >
+            <span class="fr-icon-close-line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </template>
+  <% end %>
+</div>
