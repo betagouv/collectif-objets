@@ -160,6 +160,13 @@ fr:
         campaign: Campagne de recensement du %{date_lancement} au %{date_fin}
       stats:
         etats_sanitaires_distribution_title: États sanitaires des objets recensés
+      map_sidebar_commune_template:
+        prioritaires_count:
+          one: 1 objet prioritaire
+          other: "%{count} objets prioritaires"
+        recensed_count:
+          one: 1 objet recensé
+          other: "%{count} objets recensés"
     recensements:
       analyse_actions:
         hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
