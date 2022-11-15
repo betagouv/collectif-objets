@@ -285,7 +285,7 @@ fr:
         manquants:
           title: Pourquoi est-ce que je ne retrouve pas tous les objets de ma commune dans cette liste ?
           monuments_historiques: Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet mobilier concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
-          palissy: "De plus, une petite partie des objets protégés ayant une fiche Palissy sur POP nʼest volontairement pas importée dans Collectif Objets : il sʼagit des propriétés de lʼÉtat et des sous-dossiers."
+          palissy: "De plus, une petite partie des objets protégés ayant une fiche Palissy sur POP nʼest volontairement pas importée dans Collectif Objets : il sʼagit des propriétés de lʼÉtat, des sous-dossiers et des objets volés ou disparus."
           page_proteger: Protéger des objets mobiliers au titre des monuments historiques
         sur_place:
           title: Pourquoi dois-je me rendre sur place ?

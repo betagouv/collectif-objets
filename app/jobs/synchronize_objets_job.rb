@@ -12,7 +12,8 @@ class SynchronizeObjetsJob
     _col: %w[REF DENO CATE COM INSEE DPT SCLE DENQ DOSS EDIF EMPL TICO MEMOIRE_URLS AUTP],
     DOSS: "dossier individuel",
     PROT__not: "déclassé",
-    STAT__not: ["propriété de l'Etat (?)", "propriété de l'Etat"]
+    STAT__not: ["propriété de l'Etat (?)", "propriété de l'Etat"],
+    MANQUANT__not: %w[volé manquant]
   }.freeze
 
   def perform(departement = nil)
