@@ -1,6 +1,6 @@
 import maplibregl from "maplibre-gl"
 import "maplibre-gl/dist/maplibre-gl.css"
-import OpenmaptilesLayers from "../lib/openmaptiles_layers"
+import OpenmaptilesStyle from "../lib/openmaptiles_style"
 
 import { Controller } from "@hotwired/stimulus"
 
@@ -8,6 +8,7 @@ export default class extends Controller {
   static targets = ["wrapper", "container", "sidebar", "tooltip", "sidebarCommuneTemplate"]
 
   connect() {
+    const { layers: defaultLayers, ...defaultStyle } = OpenmaptilesStyle
     const departement = JSON.parse(this.wrapperTarget.dataset.departementJson)
     this.map = new maplibregl.Map({
       container: this.containerTarget,
@@ -17,20 +18,7 @@ export default class extends Controller {
       zoom: 8,
       zoomMobile: 3,
       style: {
-        version: 8,
-        glyphs: "https://openmaptiles.geo.data.gouv.fr/fonts/{fontstack}/{range}.pbf",
-        sources: {
-          "decoupage-administratif": {
-            type: "vector",
-            url: "https://openmaptiles.geo.data.gouv.fr/data/decoupage-administratif.json",
-            promoteId: "code"
-          },
-          "openmaptiles": {
-            "type": "vector",
-            "url": "https://openmaptiles.geo.data.gouv.fr/data/france-vector.json"
-          }
-        },
-        "layers": OpenmaptilesLayers.concat([
+        layers: defaultLayers.concat([
           {
             "id": "communes-contours",
             "type": "line",
@@ -79,6 +67,7 @@ export default class extends Controller {
             }
           }
         ]),
+        ...defaultStyle
       },
     });
 

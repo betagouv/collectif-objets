@@ -1,5 +1,4 @@
 /shared
 package-lock.json
 **/*.svg
-public/objets-map
 vendor/javascript

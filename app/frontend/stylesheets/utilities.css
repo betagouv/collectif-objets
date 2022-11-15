@@ -276,3 +276,8 @@ img.co-object-fit-contain,
 .co-transition--fade {
   transition: opacity 2s linear;
 }
+
+.co-list-unstyled {
+  list-style: none;
+  padding: 0;
+}
