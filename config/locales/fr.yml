@@ -93,7 +93,7 @@ fr:
     communes_search_component:
       status_options:
         all: Toutes les communes
-        inactive: Communes inactive
+        inactive: Communes inactives
         started: Recensement démarré
         completed: Recensement terminé
       prioritaires:
