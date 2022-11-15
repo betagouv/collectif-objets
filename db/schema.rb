@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_15_081439) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_15_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -171,6 +171,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_081439) do
     t.datetime "updated_at", null: false
     t.string "dans_nom"
     t.boolean "concordataire"
+    t.geography "bounding_box_sw", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.geography "bounding_box_ne", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
   end
 
   create_table "dossiers", force: :cascade do |t|
