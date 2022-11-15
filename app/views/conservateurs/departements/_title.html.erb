@@ -1,0 +1,12 @@
+<%= render(
+  "shared/breadcrumbs",
+  links: [["Départements", conservateurs_departements_path]],
+  current_page_label: departement.nom
+) %>
+<h2>
+  <span class="fr-icon-france-fill" aria-hidden="true"></span>
+  <%= departement.nom %>
+</h2>
+<% if campaign %>
+  <p><%= t(".campaign", date_lancement: l(campaign.date_lancement), date_fin: l(campaign.date_fin)) %></p>
+<% end %>

@@ -67,8 +67,6 @@ fr:
   conservateurs:
     communes:
       no_results: Aucune commune trouvée
-      stats:
-        etats_sanitaires_distribution_title: États sanitaires des objets recensés
       index:
         title: "Communes dans le %{departement}"
       analyse_saved:
@@ -156,10 +154,19 @@ fr:
         contact: Contactez-nous pour accéder à d'autres départements
       show:
         head_title: Communes du %{departement}
+      show_map:
+        head_title: Carte du %{departement}
+      title:
         campaign: Campagne de recensement du %{date_lancement} au %{date_fin}
-        stats:
-          completed: des communes ont finalisé le recensement
-          etats_sanitaires_distribution_title: États sanitaires des objets recensés
+      stats:
+        etats_sanitaires_distribution_title: États sanitaires des objets recensés
+      map_sidebar_commune_template:
+        prioritaires_count:
+          one: 1 objet prioritaire
+          other: "%{count} objets prioritaires"
+        recensed_count:
+          one: 1 objet recensé
+          other: "%{count} objets recensés"
     recensements:
       analyse_actions:
         hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes

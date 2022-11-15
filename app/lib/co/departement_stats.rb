@@ -36,10 +36,10 @@ module Co
 
     def etats_sanitaires_chart_values
       [
-        Recensement::ETAT_BON,
-        Recensement::ETAT_MOYEN,
+        Recensement::ETAT_PERIL,
         Recensement::ETAT_MAUVAIS,
-        Recensement::ETAT_PERIL
+        Recensement::ETAT_MOYEN,
+        Recensement::ETAT_BON
       ].map { etats_sanitaires_value_counts[_1] }
     end
 

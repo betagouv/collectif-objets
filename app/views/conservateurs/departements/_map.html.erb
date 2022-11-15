@@ -1,0 +1,46 @@
+<div class="co-flex co-flex--justify-content-center">
+  <div>
+    <div class="fr-pb-2w">
+      <div class="map-legend-icon commune-completed">
+      </div>
+      Commune ayant soumis un dossier de recensement
+    </div>
+    <div class="fr-pb-2w">
+      <div class="map-legend-icon commune-prioritaire">
+      </div>
+      Commune ayant soumis un dossier de recensement avec des objets prioritaires
+    </div>
+  </div>
+</div>
+
+<div
+  data-controller="conservateur-map"
+  data-conservateur-map-target="wrapper"
+  data-communes-json="<%= communes.map { _1.slice(%w[code_insee status objets_count recensements_prioritaires_count]) }.to_json %>"
+  data-departement-json="<%= @departement_json %>"
+  class="co-position-relative"
+>
+  <div
+    class="conservateur-map-sidebar co-position-relative"
+    data-conservateur-map-target="sidebar"
+    data-collapsed="true"
+  >
+  </div>
+  <div class="co-position-relative">
+    <div
+      data-conservateur-map-target="container"
+      class="conservateur-map-container"
+    >
+    </div>
+
+    <div
+      class="tooltip"
+      data-conservateur-map-target="tooltip"
+    >
+    </div>
+  </div>
+
+  <% communes.select { _1.status == "completed" }.each do |commune| %>
+    <%= render "map_sidebar_commune_template", commune: %>
+  <% end %>
+</div>

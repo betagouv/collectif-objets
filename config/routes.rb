@@ -106,13 +106,6 @@ Rails.application.routes.draw do
   get "health/raise_on_purpose", to: "health#raise_on_purpose"
   get "health/js_error", to: "health#js_error"
 
-  namespace :api do
-    namespace :v1 do
-      resources :departements, only: [:index]
-      resources :communes, only: [:index]
-    end
-  end
-
   if Rails.env.development?
     get "health/slow_image", to: "health#slow_image", as: "slow_image"
     mount Lookbook::Engine, at: "/lookbook"
