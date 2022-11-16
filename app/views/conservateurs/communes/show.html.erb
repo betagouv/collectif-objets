@@ -57,7 +57,7 @@
       <div class="fr-container fr-grid-row fr-grid-row--center ">
         <div class="fr-col-md-8">
           <p>
-            <%= t(".rejected.content", date: @dossier.rejected_at.to_date, conservateur: @dossier.conservateur) %>
+            <%= t(".rejected.content", date: l(@dossier.rejected_at.to_date), conservateur: @dossier.conservateur) %>
           </p>
           <%= blockquote(@dossier.notes_conservateur) %>
           <p class="fr-mt-4w">

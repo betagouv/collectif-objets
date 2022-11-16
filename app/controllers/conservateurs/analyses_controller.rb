@@ -47,6 +47,7 @@ module Conservateurs
       @analyse_recensement_params ||=
         Co::Recensements::AnalyseParamsParser.new(params).parse
           .merge(@recensement.photos.empty? ? { confirmation_pas_de_photos: true } : {})
+          .merge(conservateur_id: current_conservateur.id)
     end
   end
 end

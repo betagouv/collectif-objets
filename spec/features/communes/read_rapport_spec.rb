@@ -33,7 +33,8 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       analyse_notes: "Ce bouquet va fâner !!!",
       analyse_fiches: [Recensement::ANALYSE_FICHE_NUISIBLES, Recensement::ANALYSE_FICHE_SECURISATION],
       analyse_actions: [Recensement::ANALYSE_ACTION_IDENTIFIER],
-      analysed_at: 2.days.ago
+      analysed_at: 2.days.ago,
+      conservateur:
     )
   end
   let!(:recensement_ciboire) do
@@ -44,7 +45,8 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil,
-      analysed_at: 2.days.ago
+      analysed_at: 2.days.ago,
+      conservateur:
     )
   end
 
