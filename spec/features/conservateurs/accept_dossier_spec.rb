@@ -74,7 +74,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(page).to have_text("Vous avez analysé tous les recensements de Albon")
 
     # envoi rapport
-    click_on "Envoyer le rapport …"
+    click_on "Finaliser le rapport …"
     bouquet_row = find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")
     expect(bouquet_row).to have_text(/fiche vol/i)
     expect(bouquet_row).to have_text(/entretenir/i)
