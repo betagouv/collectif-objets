@@ -26,7 +26,7 @@ module ApplicationHelper
   def blockquote(content, html_options = {})
     html_options = html_options.with_indifferent_access
     html_options[:class] ||= ""
-    html_options[:class] += " fr-callout__text co-blockquote fr-text--alt"
+    html_options[:class] += " fr-callout__text co-white-space-pre-line co-blockquote fr-text--alt"
     content_tag("blockquote", content, **html_options)
   end
 
