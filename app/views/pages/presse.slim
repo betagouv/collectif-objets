@@ -4,13 +4,15 @@ main.fr-pt-2w.fr-pb-8w
   .fr-container
     == render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Ils parlent de nous")
 
-
     .fr-grid-row
       .fr-col-md-8
         h5
           a href="https://www.lest-eclair.fr/id424528/article/2022-11-06/un-site-internet-pour-aider-les-maires-gerer-le-patrimoine" target="_blank" rel="noopener"
             | Un site pour aider les maires à gérer leur patrimoine
         .fr-my-2w L’Est Eclair, 06.11.2022
+        .fr-my-2w
+          = render("shared/video_reportage_canal32")
+
         .fr-my-2w.co-text--bold Collectif Objets, “une interface entre le maire et le conservateur”
         p Interview par M. Van Houtte avec Remy Marty, Maire de Montaulin, Eric Blanchegorge, Conservateur des Antiquités et Objets d’Arts de l’Aube et Fantine Monot, chargée de déploiement pour Collectif Objets.
 
