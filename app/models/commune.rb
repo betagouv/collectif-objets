@@ -63,10 +63,6 @@ class Commune < ApplicationRecord
     !inactive?
   end
 
-  def objets_recensable?
-    !completed? || dossier&.rejected?
-  end
-
   def can_complete?
     started? && all_objets_recensed?
   end

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 module Communes
-  class RecensementsController < ApplicationController
-    before_action :set_objet, :restrict_commune
-    before_action :restrict_recensable, only: %i[new create]
-    before_action :set_recensement, :restrict_editable, only: %i[edit update]
+  class RecensementsController < BaseController
+    before_action :set_objet
+    before_action :set_new_recensement, only: %i[new create]
+    before_action :set_recensement, only: %i[edit update]
+    before_action :authorize_recensement
 
     def new
       @recensement = Recensement.new(objet: @objet, recensable: "true")
@@ -44,26 +45,16 @@ module Communes
       @recensement = Recensement.find(params[:id])
     end
 
+    def set_new_recensement
+      @recensement = Recensement.new(objet: @objet)
+    end
+
     def recensement_params
       @recensement_params ||= Co::Recensements::ParamsParser.new(params).parse
     end
 
-    def restrict_commune
-      return true if current_user&.commune == @objet.commune
-
-      redirect_to commune_objet_path(@objet.commune, @objet), alert: "Vous n'êtes pas autorisé à recenser cet objet"
-    end
-
-    def restrict_recensable
-      return true if @objet.recensable?
-
-      redirect_to commune_objet_path(@objet.commune, @objet), alert: "Le recensement de votre commune est déjà terminé."
-    end
-
-    def restrict_editable
-      return true if @recensement.editable?
-
-      redirect_to commune_objet_path(@objet.commune, @objet), alert: "Ce recensement ne peut plus être édité."
+    def authorize_recensement
+      authorize(@recensement)
     end
   end
 end

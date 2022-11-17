@@ -14,12 +14,14 @@ module Communes
       render(:recensement_saved_after_reject) if @dossier.rejected?
     end
 
-    def show; end
+    def show
+      authorize(@objet)
+    end
 
     def index_print
       raise if @commune.blank?
 
-      @objets = Objet.where(commune: @commune)
+      @objets = policy_scope(Objet).where(commune: @commune)
     end
 
     private
@@ -35,6 +37,7 @@ module Communes
     def objets_list
       @objets_list ||= Co::Communes::ObjetsList.new(
         @commune,
+        scoped_objets: policy_scope(Objet),
         exclude_recensed: recensement_saved?,
         exclude_ids: [previous_objet&.id].compact,
         edifice_nom: previous_objet&.edifice_nom

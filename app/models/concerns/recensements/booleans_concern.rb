@@ -18,10 +18,6 @@ module Recensements
       localisation == Recensement::LOCALISATION_EDIFICE_INITIAL
     end
 
-    def editable?
-      commune.objets_recensable?
-    end
-
     def missing_photos?
       recensable? && (edifice_initial? || autre_edifice?) && photos.empty?
     end
