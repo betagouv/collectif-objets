@@ -2,19 +2,20 @@
 
 module Communes
   class FormulairesController < BaseController
+    before_action :set_formulaire_and_authorize
     before_action :enqueue_generate_pdf
 
     def show; end
 
     def enqueue_generate_pdf
-      if @commune.formulaire.attached? &&
-         @commune.formulaire_updated_at &&
-         @commune.formulaire_updated_at >= @commune.updated_at
-        return true
-      end
+      @formulaire_imprimable.enqueue_generate_pdf
+    end
 
-      @commune.formulaire&.purge
-      GenerateFormulaireJob.perform_async(@commune.id)
+    private
+
+    def set_formulaire_and_authorize
+      @formulaire_imprimable = FormulaireImprimable.new(commune: @commune)
+      authorize(@formulaire_imprimable)
     end
   end
 end
