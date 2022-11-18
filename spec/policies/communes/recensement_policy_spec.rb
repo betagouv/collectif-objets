@@ -9,37 +9,25 @@ describe Communes::RecensementPolicy do
     context "objet n'a pas de recensement + commune inactive" do
       let(:commune) { build(:commune, status: :inactive) }
       let(:objet) { build(:objet, commune:) }
-
-      it "autorise l'acces" do
-        expect(subject).to permit(
-          build(:user, commune:),
-          build(:recensement, objet:)
-        )
-      end
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune:) }
+      it { should permit(user, recensement) }
     end
 
     context "objet n'a pas de recensement + commune inactive MAIS autre commune" do
       let(:commune) { build(:commune, status: :inactive) }
       let(:objet) { build(:objet, commune:) }
-
-      it "autorise l'acces" do
-        expect(subject).not_to permit(
-          build(:user, commune: build(:commune)),
-          build(:recensement, objet:)
-        )
-      end
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune: build(:commune)) }
+      it { should_not permit(user, recensement) }
     end
 
     context "objet n'a pas de recensement + commune completed" do
       let(:commune) { build(:commune, status: :completed) }
       let(:objet) { build(:objet, commune:) }
-
-      it "empeche l'acces" do
-        expect(subject).not_to permit(
-          build(:user, commune:),
-          build(:recensement, objet:)
-        )
-      end
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune:) }
+      it { should_not permit(user, recensement) }
     end
 
     context "objet n'a pas de recensement + commune completed + dossier rejected" do
@@ -47,25 +35,19 @@ describe Communes::RecensementPolicy do
       let(:dossier) { build(:dossier, status: :rejected, commune:) }
       before { commune.dossier = dossier }
       let(:objet) { build(:objet, commune:) }
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune:) }
 
-      it "autorise l'acces" do
-        expect(subject).to permit(
-          build(:user, commune:),
-          build(:recensement, objet:)
-        )
-      end
+      it { should permit(user, recensement) }
     end
 
     context "objet a deja un recensement + commune started" do
       let(:commune) { build(:commune, status: :started) }
       let(:objet) { build(:objet, :with_recensement, commune:) }
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune:) }
 
-      it "empeche l'acces" do
-        expect(subject).not_to permit(
-          build(:user, commune:),
-          build(:recensement, objet:)
-        )
-      end
+      it { should_not permit(user, recensement) }
     end
   end
 
@@ -73,25 +55,19 @@ describe Communes::RecensementPolicy do
     context "commune started" do
       let(:commune) { build(:commune, status: :started) }
       let(:objet) { build(:objet, commune:) }
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune:) }
 
-      it "autorise l'acces" do
-        expect(subject).to permit(
-          build(:user, commune:),
-          build(:recensement, objet:)
-        )
-      end
+      it { should permit(user, recensement) }
     end
 
     context "commune started MAIS autre commune" do
       let(:commune) { build(:commune, status: :started) }
       let(:objet) { build(:objet, commune:) }
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune: build(:commune)) }
 
-      it "autorise l'acces" do
-        expect(subject).not_to permit(
-          build(:user, commune: build(:commune)),
-          build(:recensement, objet:)
-        )
-      end
+      it { should_not permit(user, recensement) }
     end
 
     context "commune completed + dossier submitted" do
@@ -99,13 +75,10 @@ describe Communes::RecensementPolicy do
       let(:dossier) { build(:dossier, status: :submitted, commune:) }
       before { commune.dossier = dossier }
       let(:objet) { build(:objet, commune:) }
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune:) }
 
-      it "autorise l'acces" do
-        expect(subject).not_to permit(
-          build(:user, commune:),
-          build(:recensement, objet:)
-        )
-      end
+      it { should_not permit(user, recensement) }
     end
 
     context "commune completed + dossier rejected" do
@@ -113,13 +86,10 @@ describe Communes::RecensementPolicy do
       let(:dossier) { build(:dossier, status: :rejected, commune:) }
       before { commune.dossier = dossier }
       let(:objet) { build(:objet, commune:) }
+      let(:recensement) { build(:recensement, objet:) }
+      let(:user) { build(:user, commune:) }
 
-      it "autorise l'acces" do
-        expect(subject).to permit(
-          build(:user, commune:),
-          build(:recensement, objet:)
-        )
-      end
+      it { should permit(user, recensement) }
     end
   end
 end
