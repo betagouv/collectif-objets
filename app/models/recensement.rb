@@ -52,6 +52,8 @@ class Recensement < ApplicationRecord
     size: { less_than: 20.megabytes }
   )
 
+  validates :conservateur_id, presence: true, if: -> { analysed? }
+
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
 

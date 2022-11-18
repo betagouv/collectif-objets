@@ -27,7 +27,8 @@ RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: "objet très doux",
       analyse_notes: "Ce bouquet va fâner !!!",
-      analysed_at: 2.days.ago
+      analysed_at: 2.days.ago,
+      conservateur:
     )
   end
   let!(:objet_ciboire) { create(:objet, palissy_TICO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
@@ -39,7 +40,8 @@ RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
       etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil,
-      analysed_at: 2.days.ago
+      analysed_at: 2.days.ago,
+      conservateur:
     )
   end
 
