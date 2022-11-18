@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class CommunesController < ApplicationController
+  class CommunesController < BaseController
     before_action :set_commune, :restrict_access, :set_dossier, only: [:show]
     before_action :restrict_access_autocomplete, only: %i[autocomplete index]
     before_action :set_departement, only: [:index]

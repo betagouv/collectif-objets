@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class AnalysesController < ApplicationController
+  class AnalysesController < BaseController
     before_action :set_recensement, :set_objet, :restrict_access_conservateur, :restrict_not_completed
 
     def edit; end

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class DepartementsController < ApplicationController
+  class DepartementsController < BaseController
     before_action :restrict_access_index, only: [:index]
     before_action :set_departement, :restrict_access_show, only: [:show]
 
     def index
-      @departements = current_conservateur.departements.include_communes_count.include_objets_count
+      @departements = policy_scope(Departement).include_communes_count.include_objets_count
     end
 
     def show

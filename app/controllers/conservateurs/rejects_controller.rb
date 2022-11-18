@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class RejectsController < ApplicationController
+  class RejectsController < BaseController
     before_action :set_dossier, :set_commune, :restrict_access, :restrict_commune_completed, :restrict_dossier_submitted
 
     def new; end

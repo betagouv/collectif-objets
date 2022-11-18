@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class DossiersController < ApplicationController
+  class DossiersController < BaseController
     before_action :set_dossier, :set_commune, :restrict_access, :restrict_accepted
 
     def show; end
