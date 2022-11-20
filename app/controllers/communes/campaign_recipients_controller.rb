@@ -4,8 +4,6 @@ module Communes
   class CampaignRecipientsController < BaseController
     before_action :set_recipient
 
-    def edit; end
-
     def update
       if @recipient.update(recipient_params)
         redirect_to edit_user_registration_path, notice: "Vos préférences de communication ont été mises à jour"
@@ -24,7 +22,7 @@ module Communes
 
     def set_recipient
       @recipient = CampaignRecipient.includes(:campaign, :commune).find(params[:id])
-      raise unless @recipient.commune == current_user.commune
+      authorize(@recipient)
     end
   end
 end
