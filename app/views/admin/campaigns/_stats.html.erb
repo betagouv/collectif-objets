@@ -32,7 +32,7 @@
       <div class="fr-col-md-6">
         <p><%= t("campaigns.statistics.mails.all", count: stats[:mails][:all][:count]) %></p>
         <%= render Campaigns::EmailsStatsComponent.new(stats[:mails][:all]) %>
-        <%= link_to "Voir toutes les statistiques", campaign_show_statistics_path(@campaign), class: "fr-link" %>
+        <%= link_to "Voir toutes les statistiques", admin_campaign_show_statistics_path(@campaign), class: "fr-link" %>
       </div>
     <% end %>
   </div>

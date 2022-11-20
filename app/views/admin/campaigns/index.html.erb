@@ -28,7 +28,7 @@
       <tbody>
         <% @campaigns.each do |campaign| %>
           <tr>
-            <td><%= link_to campaign.human_id, campaign_path(campaign) %></td>
+            <td><%= link_to campaign.human_id, admin_campaign_path(campaign) %></td>
             <td><%= campaign.departement %></td>
             <td><%= campaign_status_badge(campaign) %></span></td>
             <td><%= campaign.communes.count %></td>
@@ -39,5 +39,5 @@
     </table>
   </div>
 
-  <%= link_to "Créer une nouvelle campagne", new_campaign_path, class: "fr-btn" %>
+  <%= link_to "Créer une nouvelle campagne", new_admin_campaign_path, class: "fr-btn" %>
 </main>

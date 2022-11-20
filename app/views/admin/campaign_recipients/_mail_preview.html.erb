@@ -3,7 +3,7 @@
 <%= turbo_frame_tag "#{step}_email" do %>
   <% if local_assigns[:mail].nil? || possible_variants.count > 1 %>
     <%= form_with(
-      url: campaign_recipient_mail_preview_path(campaign, recipient),
+      url: admin_campaign_recipient_mail_previews(campaign, recipient),
       builder: FormBuilderDsfr,
       method: :get
     ) do |f| %>

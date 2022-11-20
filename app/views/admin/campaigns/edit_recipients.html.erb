@@ -5,8 +5,8 @@
     "shared/breadcrumbs",
     links: [
       ["Accueil", root_path],
-      ["Campagnes", campaigns_path],
-      [@campaign.human_id, campaign_path(@campaign)]
+      ["Campagnes", admin_campaigns_path],
+      [@campaign.human_id, admin_campaign_path(@campaign)]
     ],
     current_page_label: "Communes"
   ) %>
@@ -26,7 +26,7 @@
   <b><%= @campaign.communes.count %> communes destinataires</b>
 
   <p>
-    <%= form_for @campaign, builder: FormBuilderDsfr, url: campaign_update_recipients_path(@campaign), data: { controller: "multichecker" } do |f| %>
+    <%= form_for @campaign, builder: FormBuilderDsfr, url: admin_campaign_update_recipients_path(@campaign), data: { controller: "multichecker" } do |f| %>
       <div class="fr-mb-4w">
         <button
           data-action="multichecker#checkAll"

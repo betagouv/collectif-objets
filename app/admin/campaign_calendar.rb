@@ -2,10 +2,10 @@
 
 # rubocop:disable Metrics/BlockLength
 
-ActiveAdmin.register_page "campaigns" do
+ActiveAdmin.register_page "campaign_calendar" do
   menu label: "🚀 Campagnes", priority: 9
   content do
-    render partial: "campaigns"
+    render partial: "campaign_calendars"
   end
 
   controller do

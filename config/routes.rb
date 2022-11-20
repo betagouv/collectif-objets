@@ -84,23 +84,25 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :campaigns do
-    get :show_statistics
-    get :edit_recipients
-    patch :update_recipients
-    patch :update_status
-    get :mail_previews
-    if Rails.configuration.x.environment_specific_name != "production"
-      post :force_start
-      post :force_step_up
-    end
-    post :refresh_delivery_infos
-    post :refresh_stats
-    resources :recipients, controller: "campaign_recipients", only: [:show, :update] do
-      get :mail_preview
-    end
-    resources :emails, controller: "campaign_emails", only: [] do
-      get :redirect_to_sib_preview
+  namespace :admin do
+    resources :campaigns do
+      get :show_statistics
+      get :edit_recipients
+      patch :update_recipients
+      patch :update_status
+      get :mail_previews
+      if Rails.configuration.x.environment_specific_name != "production"
+        post :force_start
+        post :force_step_up
+      end
+      post :refresh_delivery_infos
+      post :refresh_stats
+      resources :recipients, controller: "campaign_recipients", only: [:show, :update] do
+        get :mail_preview
+      end
+      resources :emails, controller: "campaign_emails", only: [] do
+        get :redirect_to_sib_preview
+      end
     end
   end
 

@@ -5,8 +5,8 @@
     "shared/breadcrumbs",
     links: [
       ["Accueil", root_path],
-      ["Campagnes", campaigns_path],
-      [@campaign.human_id, campaign_path(@campaign)]
+      ["Campagnes", admin_campaigns_path],
+      [@campaign.human_id, admin_campaign_path(@campaign)]
     ],
     current_page_label: "Statistiques"
   ) %>

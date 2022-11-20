@@ -5,7 +5,7 @@
     "shared/breadcrumbs",
     links: [
       ["Accueil", root_path],
-      ["Campagnes", campaigns_path]
+      ["Campagnes", admin_campaigns_path]
     ],
     current_page_label: @campaign.human_id
   ) %>
@@ -37,7 +37,7 @@
   <% end %>
 
   <% if @campaign.draft? && @campaign.date_lancement > Time.zone.today %>
-    <%= form_for @campaign, builder: FormBuilderDsfr, url: campaign_update_status_path(@campaign) do |f| %>
+    <%= form_for [:admin, @campaign], builder: FormBuilderDsfr, url: admin_campaign_update_status_path(@campaign) do |f| %>
       <%= f.hidden_field :status_event, value: "plan"  %>
       <div class="fr-callout">
         <p class="fr-callout__text">
@@ -47,7 +47,7 @@
       </div>
     <% end %>
   <% elsif @campaign.planned? && @campaign.date_lancement > Time.zone.today %>
-    <%= form_for @campaign, builder: FormBuilderDsfr, url: campaign_update_status_path(@campaign) do |f| %>
+    <%= form_for @campaign, builder: FormBuilderDsfr, url: admin_campaign_update_status_path(@campaign) do |f| %>
       <%= f.hidden_field :status_event, value: "return_to_draft"  %>
       <div class="fr-callout fr-callout--brown-caramel">
         <p class="fr-callout__text">
@@ -91,7 +91,7 @@
         <div class="fr-mt-2w">
           <%= button_to(
             "Modifier la configuration",
-            edit_campaign_path(@campaign),
+            edit_admin_campaign_path(@campaign),
             class: "fr-btn fr-btn--secondary",
             method: :get,
             disabled: !@campaign.draft?
@@ -114,7 +114,7 @@
               <td colspan="2" class="co-text--center fr-pt-2w">
                 <%= button_to(
                   "Modifier les dates",
-                  edit_campaign_path(@campaign),
+                  edit_admin_campaign_path(@campaign),
                   class: "fr-btn fr-btn--secondary",
                   method: :get,
                   disabled: !@campaign.draft?
@@ -141,7 +141,7 @@
                 title="commune déjà engagée"
               <% end %>
             >
-              <%= link_to recipient.commune.nom, campaign_recipient_path(@campaign, recipient) %>
+              <%= link_to recipient.commune.nom, admin_campaign_recipient_path(@campaign, recipient) %>
               <%= campaign_recipient_status_badge(recipient) %>
               <%= campaign_recipient_opt_out_badge(recipient) %>
               <span class="fr-text--sm co-text--muted"><%= recipient.commune.code_insee %></span>
@@ -173,7 +173,7 @@
     <div class="fr-col-md-6">
       <%= button_to(
         (@campaign.communes.any? ? "Modifier les communes destinataires" : "Définir les communes destinataires"),
-        campaign_edit_recipients_path(@campaign),
+        admin_campaign_edit_recipients_path(@campaign),
         method: :get,
         class: "fr-btn fr-btn--secondary",
         disabled: !@campaign.draft?
@@ -187,7 +187,7 @@
         <h4>Prévisualisation des emails de lancement</h4>
         <%= button_to(
           "Génerer un aperçu des mails qui vont être envoyés",
-          campaign_mail_previews_path(@campaign),
+          admin_campaign_mail_previews_path(@campaign),
           method: :get,
           class: "fr-btn fr-btn--tertiary"
         ) %>
@@ -204,7 +204,7 @@
           <li>
             <%= button_to(
               "Rafraîchir les statistiques",
-              campaign_refresh_stats_path(@campaign),
+              admin_campaign_refresh_stats_path(@campaign),
               class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line",
               method: :post
             ) %>
@@ -214,7 +214,7 @@
           <li>
             <%= button_to(
               "Rafraîchir les informations d'envoi des mails",
-              campaign_refresh_delivery_infos_path(@campaign),
+              admin_campaign_refresh_delivery_infos_path(@campaign),
               class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line",
               method: :post,
               disabled: @campaign.imported?
@@ -223,7 +223,7 @@
         <% end %>
         <li>
           <%= form_with(
-            url: campaign_path(@campaign),
+            url: admin_campaign_path(@campaign),
             method: :delete,
             data: {
               "turbo_confirm": "Êtes-vous sûr.e  de vouloir supprimer ce brouillon ? C'est irréversible.",
@@ -244,7 +244,7 @@
       </p>
       <%= button_to(
         "Lancer tout de suite",
-        campaign_force_start_path(@campaign),
+        admin_campaign_force_start_path(@campaign),
         method: :post,
         class: "fr-btn fr-btn--icon-left fr-icon-warning-line"
       ) %>
@@ -257,7 +257,7 @@
       </p>
       <%= button_to(
         "Passer à l'étape #{t("campaigns.step_names.#{@campaign.next_step}").downcase}",
-        campaign_force_step_up_path(@campaign),
+        admin_campaign_force_step_up_path(@campaign),
         method: :post,
         class: "fr-btn fr-btn--icon-left fr-icon-warning-line"
       ) %>
