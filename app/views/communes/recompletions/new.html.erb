@@ -45,13 +45,11 @@
 
     <div class="fr-grid-row">
       <div class="fr-col-md-6">
-        <%= form_for(@commune, url: commune_recompletion_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
-          <%= f.fields_for :dossier do |ff| %>
-            <div class="fr-input-group">
-              <%= ff.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
-              <%= ff.text_area :notes_commune %>
-            </div>
-          <% end %>
+        <%= form_for(@recompletion, as: :recompletion, url: commune_recompletion_path(@commune), method: "POST", builder: FormBuilderDsfr) do |f| %>
+          <div class="fr-input-group">
+            <%= f.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
+            <%= f.text_area :notes_commune %>
+          </div>
           <div class="actions">
             <%= f.submit t(".cta") %>
           </div>
