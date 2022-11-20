@@ -8,11 +8,5 @@ module Conservateurs
       conservateur.departements.include?(analyse.departement) &&
         analyse.commune.completed?
     end
-
-    class Scope < Scope
-      def resolve
-        # scope.where(departement: conservateur.departements)
-      end
-    end
   end
 end
