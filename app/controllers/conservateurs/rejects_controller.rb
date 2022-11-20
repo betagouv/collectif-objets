@@ -2,7 +2,7 @@
 
 module Conservateurs
   class RejectsController < BaseController
-    before_action :set_dossier, :set_commune, :restrict_access, :restrict_commune_completed, :restrict_dossier_submitted
+    before_action :set_dossier, :set_dossier_reject, :set_commune
 
     def new; end
 
@@ -36,29 +36,9 @@ module Conservateurs
       @commune = @dossier.commune
     end
 
-    def restrict_access
-      if current_conservateur.nil?
-        redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
-      elsif current_conservateur.departements.exclude?(@commune.departement)
-        redirect_to root_path, alert: "Vous n'avez pas accès au département de cet objet"
-      end
-    end
-
-    def restrict_commune_completed
-      return true if @commune.completed?
-
-      redirect_with_alert "La commune n'a pas terminé le recensement"
-    end
-
-    def restrict_dossier_submitted
-      return true if @dossier.submitted?
-
-      alert = {
-        construction: "Le renvoi du dossier n'est pas possible car la commune n'a pas terminé le recensement",
-        rejected: "Le dossier a déjà été renvoyé à la commune, il faut attendre son retour",
-        accepted: "Le renvoi du dossier n'est plus possible car le rapport a déjà été envoyé"
-      }[@dossier.status.to_sym]
-      redirect_with_alert alert
+    def set_dossier_reject
+      @dossier_reject = DossierReject.new(dossier: @dossier)
+      authorize(@dossier_reject)
     end
 
     def redirect_with_alert(alert)

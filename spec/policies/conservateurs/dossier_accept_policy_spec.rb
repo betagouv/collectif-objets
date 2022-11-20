@@ -16,6 +16,16 @@ describe Conservateurs::DossierAcceptPolicy do
       it { should permit(conservateur, dossier_accept) }
     end
 
+    context "acceptation du dossier d'un autre departement" do
+      let(:commune) { build(:commune, status: :completed) }
+      let(:objet) { build(:objet, commune:) }
+      let(:recensement) { build(:recensement, objet:, analysed_at: 2.days.ago) }
+      let(:dossier) { build(:dossier, commune:, status: :submitted, recensements: [recensement]) }
+      let(:dossier_accept) { DossierAccept.new(dossier:) }
+      let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3)) }
+      it { should permit(conservateur, dossier_accept) }
+    end
+
     context "acceptation du dossier d'une commune started" do
       let(:commune) { build(:commune, status: :started) }
       let(:objet) { build(:objet, commune:) }
