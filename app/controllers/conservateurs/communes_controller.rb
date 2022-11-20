@@ -2,12 +2,16 @@
 
 module Conservateurs
   class CommunesController < BaseController
-    before_action :set_commune, :restrict_access, :set_dossier, only: [:show]
-    before_action :restrict_access_autocomplete, only: %i[autocomplete index]
+    before_action :set_commune, :set_dossier, only: [:show]
     before_action :set_departement, only: [:index]
+    skip_after_action :verify_authorized, only: [:autocomplete]
 
     def index
-      @communes_search = Co::Conservateurs::CommunesSearch.new(@departement, params)
+      @communes_search = Co::Conservateurs::CommunesSearch.new(
+        @departement,
+        params,
+        scoped_communes: policy_scope(Commune)
+      )
     end
 
     def show
@@ -30,6 +34,7 @@ module Conservateurs
 
     def set_commune
       @commune = Commune.find(params[:id])
+      authorize(@commune)
     end
 
     def set_dossier
@@ -38,20 +43,6 @@ module Conservateurs
 
     def set_departement
       @departement = params[:departement_id]
-    end
-
-    def restrict_access
-      if current_conservateur.nil?
-        redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
-      elsif current_conservateur.departements.exclude?(@commune.departement)
-        redirect_to root_path, alert: "Vous n'avez pas accès au département de cette commune"
-      end
-    end
-
-    def restrict_access_autocomplete
-      return true if current_conservateur.present?
-
-      redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
     end
 
     def compute_objets
@@ -66,7 +57,7 @@ module Conservateurs
     end
 
     def communes_autocomplete_arel
-      Commune
+      policy_scope(Commune)
         .where(departement: current_conservateur.departements)
         .search_by_nom(params[:nom])
         .order("nom ASC")

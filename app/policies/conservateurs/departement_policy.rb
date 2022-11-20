@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class DepartementPolicy < ApplicationPolicy
-    alias conservateur user
+  class DepartementPolicy < BasePolicy
     alias departement record
 
     def show?
@@ -10,7 +9,6 @@ module Conservateurs
     end
 
     class Scope < Scope
-      alias conservateur user
       def resolve
         scope.where(code: conservateur.departement_ids)
       end
