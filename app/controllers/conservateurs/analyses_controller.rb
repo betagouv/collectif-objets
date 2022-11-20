@@ -2,7 +2,7 @@
 
 module Conservateurs
   class AnalysesController < BaseController
-    before_action :set_recensement, :set_objet, :restrict_access_conservateur, :restrict_not_completed
+    before_action :set_recensement, :set_analyse, :set_objet
 
     def edit; end
 
@@ -17,8 +17,13 @@ module Conservateurs
     protected
 
     def set_recensement
-      @recensement ||= Recensement.find(params[:recensement_id])
+      @recensement = Recensement.find(params[:recensement_id])
       @recensement_presenter = RecensementPresenter.new(@recensement) if @recensement
+    end
+
+    def set_analyse
+      @analyse = Analyse.new(recensement: @recensement)
+      authorize(@analyse)
     end
 
     def set_objet
@@ -27,20 +32,6 @@ module Conservateurs
 
     def dossier
       @dossier ||= @recensement.dossier
-    end
-
-    def restrict_access_conservateur
-      if current_conservateur.nil?
-        redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
-      elsif current_conservateur.departements.exclude?(@recensement.objet.commune.departement)
-        redirect_to root_path, alert: "Vous n'avez pas accès au département de cet objet"
-      end
-    end
-
-    def restrict_not_completed
-      return true if @objet.commune.completed?
-
-      redirect_to conservateurs_commune_path(@objet.commune), alert: I18n.t("recensement.analyse.not_completed")
     end
 
     def analyse_recensement_params

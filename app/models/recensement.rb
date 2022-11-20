@@ -12,6 +12,7 @@ class Recensement < ApplicationRecord
   end
 
   delegate :commune, to: :objet
+  delegate :departement, to: :objet
 
   LOCALISATION_EDIFICE_INITIAL = "edifice_initial"
   LOCALISATION_AUTRE_EDIFICE = "autre_edifice"

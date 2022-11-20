@@ -6,7 +6,7 @@ describe Conservateurs::CommunePolicy do
   subject { described_class }
 
   permissions :show? do
-    context "departement du conservateur" do
+    context "commune d'un departement du conservateur" do
       let(:departements) { build_list(:departement, 3) }
       let(:commune1) { build(:commune, departement: departements[1]) }
       let(:conservateur) { build(:conservateur, departements:) }
