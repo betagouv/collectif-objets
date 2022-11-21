@@ -1,43 +1,85 @@
 <% content_for(:head_title) { "Liste des campagnes" } %>
 
-<main class="fr-container fr-pt-2w fr-pb-4w">
-  <%= render(
-    "shared/breadcrumbs",
-    links: [
-      ["Accueil", root_path],
-    ],
-    current_page_label: "Campagnes")
-  %>
+<main class="fr-container fr-grid-row fr-pt-2w fr-pb-4w">
+  <div class="fr-col-md-10">
+    <%= render(
+      "shared/breadcrumbs",
+      links: [
+        ["Accueil", root_path],
+      ],
+      current_page_label: "Campagnes")
+    %>
 
-  <h2>
-    <span class="fr-icon-question-answer-line" aria-hidden="true"></span>
-    Liste des campagnes
-  </h2>
+    <div class="co-flex co-flex--space-between">
+      <h2>
+        <span class="fr-icon-question-answer-line" aria-hidden="true"></span>
+        Liste des campagnes
+      </h2>
+      <div>
+        <%= link_to "Créer une nouvelle campagne", new_admin_campaign_path, class: "fr-btn" %>
+      </div>
+    </div>
 
-  <div class="fr-table">
-    <table>
-      <thead>
-        <tr>
-          <th>Identifiant</th>
-          <th>Département</th>
-          <th>Statut</th>
-          <th>Nombre de communes</th>
-          <th>Dates</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @campaigns.each do |campaign| %>
-          <tr>
-            <td><%= link_to campaign.human_id, admin_campaign_path(campaign) %></td>
-            <td><%= campaign.departement %></td>
-            <td><%= campaign_status_badge(campaign) %></span></td>
-            <td><%= campaign.communes.count %></td>
-            <td>du <%= l(campaign.date_lancement) %> au <%= l(campaign.date_fin) %></td>
-          </tr>
+    <%= form_for(
+      @campaign_search,
+      as: :campaign_search,
+      url: admin_campaigns_path,
+      method: "GET",
+      builder: FormBuilderDsfr,
+    ) do |f| %>
+      <div class="co-flex co-flex--align-items-center co-flex--justify-content-center fr-mt-2w">
+        <div>Filtres</div>
+        <div class="fr-ml-2w">
+          <%= f.select(
+            :status,
+            [["tous les statuts", nil]] + Campaign::STATUSES.map { [t("activerecord.attributes.campaign.statuses.#{_1}"), _1] },
+            {},
+            onchange: "this.form.submit()"
+          ) %>
+        </div>
+        <div class="fr-ml-2w">
+          <%= f.select(
+            :departement_code,
+            [["tous les départements", nil]] + Departement.all.map { [_1, _1.code] },
+            {},
+            onchange: "this.form.submit()"
+          ) %>
+        </div>
+        <% if @campaign_search.filters? %>
+          <div class="fr-ml-2w">
+            <%= link_to "Réinitialiser", admin_campaigns_path, class: "fr-link" %>
+          </div>
         <% end %>
-      </tbody>
-    </table>
-  </div>
+      </div>
+    <% end %>
 
-  <%= link_to "Créer une nouvelle campagne", new_admin_campaign_path, class: "fr-btn" %>
+    <div class="fr-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Identifiant</th>
+            <th>Département</th>
+            <th>Statut</th>
+            <th>Nombre de communes</th>
+            <th>Dates</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @campaigns.each do |campaign| %>
+            <tr>
+              <td style="min-width: 200px;"><%= link_to campaign.human_id, admin_campaign_path(campaign) %></td>
+              <td style="min-width: 200px;"><%= campaign.departement %></td>
+              <td><%= campaign_status_badge(campaign) %></span></td>
+              <td><%= campaign.communes.count %></td>
+              <td>du&nbsp;<%= l(campaign.date_lancement) %>&nbsp;au&nbsp;<%= l(campaign.date_fin) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <%== render partial: 'shared/pagy_nav', locals: {pagy: @pagy} %>
+    <% end %>
+  </div>
 </main>

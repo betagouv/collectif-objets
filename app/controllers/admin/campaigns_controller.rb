@@ -14,7 +14,8 @@ module Admin
     before_action :set_excluded_communes, only: %i[show update_status]
 
     def index
-      @campaigns = Campaign.all
+      @campaign_search = Co::Conservateurs::CampaignSearch.new(**search_params)
+      @pagy, @campaigns = pagy(@campaign_search.resolve, items: 10)
     end
 
     def show; end
@@ -157,6 +158,12 @@ module Admin
       Campaigns::CronJob.perform_inline
       Campaigns::SynchronizeCampaignEmailsJob.perform_in(2.minutes.from_now, @campaign.id)
       Campaigns::RefreshCampaignStatsJob.perform_in(10.minutes, @campaign.id)
+    end
+
+    def search_params
+      return {} if params[:campaign_search].blank?
+
+      params.require(:campaign_search).permit(:departement_code, :status).to_h.symbolize_keys
     end
   end
 end

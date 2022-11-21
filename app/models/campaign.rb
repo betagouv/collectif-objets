@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Campaign < ApplicationRecord
+  STATUSES = %i[draft planned ongoing finished].freeze
   STEPS = %w[lancement relance1 relance2 relance3 fin].freeze
   DATE_FIELDS = STEPS.map { "date_#{_1}" }.freeze
 
