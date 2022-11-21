@@ -3,7 +3,7 @@
 class Analyse
   attr_reader :recensement
 
-  delegate :commune, :departement, to: :recensement
+  delegate :dossier, :commune, :departement, to: :recensement
 
   def initialize(recensement:)
     @recensement = recensement

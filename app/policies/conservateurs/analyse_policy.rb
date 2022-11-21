@@ -6,7 +6,8 @@ module Conservateurs
 
     def update?
       conservateur.departements.include?(analyse.departement) &&
-        analyse.commune.completed?
+        analyse.commune.completed? &&
+        analyse.dossier.submitted?
     end
   end
 end
