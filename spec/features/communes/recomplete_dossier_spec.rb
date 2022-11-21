@@ -70,7 +70,7 @@ RSpec.feature "Communes - recomplete dossier", type: :feature, js: true do
     click_on "Enregistrer ce recensement"
     click_on "Renvoyer le dossier…"
     expect(find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")).to have_text(/facile à voler/i)
-    fill_in "commune[dossier_attributes][notes_commune]", with: "Voila ca devrait aller"
+    fill_in "recompletion[notes_commune]", with: "Voila ca devrait aller"
     click_on "Renvoyer le dossier au conservateur"
   end
 end
