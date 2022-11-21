@@ -98,7 +98,7 @@
           <%= render Conservateurs::ObjetCardComponent.new(
             objet:,
             recensement: objet.current_recensement,
-            can_analyse: conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?
+            can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?
           ) %>
         <% end %>
       <% end %>
