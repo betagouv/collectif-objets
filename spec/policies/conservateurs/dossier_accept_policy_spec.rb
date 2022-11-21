@@ -51,7 +51,7 @@ describe Conservateurs::DossierAcceptPolicy do
       let!(:objet1) { create(:objet, commune:) }
       let!(:objet2) { create(:objet, commune:) }
       let!(:dossier) { create(:dossier, commune:, status: :submitted) }
-      let!(:recensement1) { create(:recensement, objet: objet1, dossier:, analysed_at: 2.days.ago) }
+      let!(:recensement1) { create(:recensement, objet: objet1, dossier:, analysed_at: 2.days.ago, conservateur:) }
       let!(:recensement2) { create(:recensement, objet: objet2, dossier:, analysed_at: nil) }
       let!(:dossier_accept) { DossierAccept.new(dossier:) }
       let!(:conservateur) { create(:conservateur, departements: build_list(:departement, 3) + [dossier.departement]) }
