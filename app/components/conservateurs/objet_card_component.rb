@@ -26,10 +26,14 @@ module Conservateurs
     end
 
     def badges
+      return [] unless can_analyse
+
       @badges ||= [analysed_badge, prioritaire_badge].compact
     end
 
     def tags
+      return [] unless can_analyse
+
       @tags ||= [not_recensed_badge, missing_photos_badge].compact
     end
 
