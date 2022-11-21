@@ -123,7 +123,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.18)
     bindex (0.8.1)
-    bootsnap (1.13.0)
+    bootsnap (1.14.0)
       msgpack (~> 1.2)
     builder (3.2.4)
     capybara (3.38.0)
@@ -245,7 +245,7 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.16.3)
     mjml-rails (4.8.0)
-    msgpack (1.5.6)
+    msgpack (1.6.0)
     net-imap (0.2.3)
       digest
       net-protocol
