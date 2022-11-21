@@ -79,4 +79,25 @@ RSpec.describe Co::Recensements::AnalyseParamsParser do
       expect(res[:photos]).to eq []
     end
   end
+
+  context "photos with blank values" do
+    before { raw_recensement_params.merge!(photos: ["photo1", "", "photo2"]) }
+    it "should clear blank values" do
+      res = subject
+      expect(res[:photos]).to eq(%w[photo1 photo2])
+    end
+  end
+
+  context "confirmation_pas_de_photos but photos" do
+    before do
+      raw_recensement_params.merge!(
+        photos: ["photo1", "", "photo2"],
+        confirmation_pas_de_photos: "1"
+      )
+    end
+    it "should override confirmation" do
+      res = subject
+      expect(res[:confirmation_pas_de_photos]).to eq(false)
+    end
+  end
 end

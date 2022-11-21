@@ -15,11 +15,11 @@ module Co
       end
 
       def parse
-        @params = @request_params
-          .require(:recensement)
-          .permit(*PERMITTED_PARAMS, photos: [])
+        @params = permitted_params
+        compact_photos
         parse_checkbox(:confirmation_sur_place)
         parse_checkbox(:confirmation_pas_de_photos)
+        @params.merge!(confirmation_pas_de_photos: false) if @params[:photos]&.any?
         @params.merge!(recensable: @params[:recensable] == "true")
         @params.merge!(recensable: false) if absent?
         @params.merge!(not_recensable_overrides) unless @params[:recensable]
@@ -27,6 +27,16 @@ module Co
       end
 
       private
+
+      def permitted_params
+        @request_params
+          .require(:recensement)
+          .permit(*PERMITTED_PARAMS, photos: [])
+      end
+
+      def compact_photos
+        @params[:photos] = @params[:photos]&.map(&:presence)&.compact
+      end
 
       def parse_checkbox(name)
         return if @params[name].blank?
