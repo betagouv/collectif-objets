@@ -13,12 +13,14 @@ class Objet < ApplicationRecord
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
 
+  delegate :departement, to: :commune
+
   # old column names still used in code for reads
   alias_attribute :nom, :palissy_TICO
   alias_attribute :categorie, :palissy_CATE
   alias_attribute :commune_nom, :palissy_COM
   alias_attribute :commune_code_insee, :palissy_INSEE
-  alias_attribute :departement, :palissy_DPT
+  # alias_attribute :departement, :palissy_DPT
   alias_attribute :crafted_at, :palissy_SCLE
   alias_attribute :last_recolement_at, :palissy_DENQ
   alias_attribute :nom_dossier, :palissy_DOSS
@@ -47,10 +49,6 @@ class Objet < ApplicationRecord
 
   def recensement?
     current_recensement.present?
-  end
-
-  def recensable?
-    current_recensement.nil? && commune.objets_recensable?
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength

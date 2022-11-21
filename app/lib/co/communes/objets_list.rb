@@ -7,11 +7,12 @@ module Co
 
       attr_reader :edifice_nom
 
-      def initialize(commune, exclude_recensed: false, exclude_ids: [], edifice_nom: nil)
+      def initialize(commune, scoped_objets: Objet.all, exclude_recensed: false, exclude_ids: [], edifice_nom: nil)
         @commune = commune
         @exclude_ids = exclude_ids
         @exclude_recensed = exclude_recensed
         @edifice_nom = edifice_nom
+        @scoped_objets = scoped_objets
       end
 
       def group_by_edifice?
@@ -27,7 +28,7 @@ module Co
 
       def objets
         @objets ||= begin
-          objets = Objet
+          objets = scoped_objets
             .where(commune: @commune)
             .with_photos_first
             .includes(:commune, recensements: %i[photos_attachments photos_blobs])
@@ -45,6 +46,8 @@ module Co
       delegate :count, to: :objets
 
       protected
+
+      attr_reader :scoped_objets
 
       def edifice_group_hash(nom_edifice, objets)
         {

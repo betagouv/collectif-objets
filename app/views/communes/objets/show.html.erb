@@ -19,7 +19,7 @@
   </div>
 
   <%= render ObjetPageComponent.new(objet: @objet) do |c| %>
-    <% if @objet.current_recensement&.editable? %>
+    <% if @objet.recensement? && communes_policy(@objet.current_recensement).edit? %>
       <% c.with_cta do %>
         <%= link_to(
           "modifier le recensement",
@@ -27,7 +27,7 @@
           class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
         ) %>
       <% end %>
-    <% elsif @objet.recensable? %>
+    <% elsif communes_policy(Recensement.new(objet: @objet)).new? %>
       <% c.with_cta do %>
         <%= link_to(
           "Recenser cet objet",

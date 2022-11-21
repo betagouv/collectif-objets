@@ -21,6 +21,10 @@ FactoryBot.define do
       # do nothing
     end
 
+    trait :with_recensement do
+      recensements { [association(:recensement)] }
+    end
+
     trait :with_image do
       palissy_photos do
         [

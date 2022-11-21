@@ -42,4 +42,8 @@ module ApplicationHelper
 
     image_tag(src, **kwargs)
   end
+
+  def communes_policy(*args)
+    policy([:communes] + args)
+  end
 end

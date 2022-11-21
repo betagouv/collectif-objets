@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class AcceptsController < ApplicationController
-    before_action :set_dossier, :set_commune, :restrict_access, :restrict_commune_completed,
-                  :restrict_dossier_submitted, :prevent_pending_recensements
+  class AcceptsController < BaseController
+    before_action :set_dossier, :set_dossier_accept, :set_commune
 
     def new; end
 
     def create
+      # TODO : move this logic to DossierAccept model
       @dossier.update!(conservateur: current_conservateur) if @dossier.conservateur != current_conservateur
       if @dossier.accept!
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
@@ -28,40 +28,14 @@ module Conservateurs
       @dossier = Dossier.find(params[:dossier_id])
     end
 
+    def set_dossier_accept
+      @dossier_accept = DossierAccept.new(dossier: @dossier)
+      authorize(@dossier_accept)
+    end
+
     def set_commune
       @commune = @dossier.commune
       @objets = @commune.objets.with_photos_first.includes(:commune, recensements: %i[photos_attachments photos_blobs])
-    end
-
-    def restrict_access
-      if current_conservateur.nil?
-        redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
-      elsif current_conservateur.departements.exclude?(@commune.departement)
-        redirect_to root_path, alert: "Vous n'avez pas accès au département de cet objet"
-      end
-    end
-
-    def restrict_commune_completed
-      return true if @commune.completed?
-
-      redirect_with_alert("La commune n'a pas encore terminé le recensement")
-    end
-
-    def prevent_pending_recensements
-      return true if @dossier.recensements.not_analysed.empty?
-
-      redirect_with_alert("Il reste des recensements à analyser")
-    end
-
-    def restrict_dossier_submitted
-      return true if @dossier.submitted?
-
-      alert = {
-        construction: "La commune n'a pas terminé le recensement",
-        rejected: "L dossier a été renvoyé à la commune, il faut attendre son retour",
-        accepted: "Le rapport a déjà été envoyé"
-      }[@dossier.status.to_sym]
-      redirect_with_alert(alert)
     end
 
     def redirect_with_alert(alert)

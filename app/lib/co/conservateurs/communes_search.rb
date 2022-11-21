@@ -3,7 +3,7 @@
 module Co
   module Conservateurs
     class CommunesSearch
-      attr_reader :filters, :order, :departement
+      attr_reader :filters, :order, :departement, :scoped_communes
 
       VALID_ORDER_KEYS = [
         "nom", "objets_count", "recensements_prioritaires_count",
@@ -12,9 +12,10 @@ module Co
       VALID_ORDER_DIRS = %w[ASC DESC].freeze
       VALID_STATUS_FILTERS = (Commune.aasm.states.map(&:name).map(&:to_s) + ["all", nil]).freeze
 
-      def initialize(departement, params)
+      def initialize(departement, params, scoped_communes: Commune.all)
         @departement = departement
         @params = params
+        @scoped_communes = scoped_communes
         set_order
         set_filters
       end
@@ -35,7 +36,7 @@ module Co
       end
 
       def arel
-        q = Commune
+        q = scoped_communes
           .where(departement: @departement)
           .include_objets_count
           .include_objets_recenses_count

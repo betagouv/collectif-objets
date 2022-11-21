@@ -1,0 +1,93 @@
+<% if campaign.errors.any? %>
+  <div class="fr-alert fr-alert--error fr-mb-6w">
+    <p>
+      Votre campagne n'a pas pu être enregistrée :
+      <ul>
+        <% campaign.errors.attribute_names.each do |attribute| %>
+          <li><%= campaign.errors.messages_for(attribute).first %></li>
+        <% end %>
+      </ul>
+    </p>
+  </div>
+<% end %>
+
+<%= form_for [:admin, campaign], builder: FormBuilderDsfr do |f| %>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-md-6">
+      <h3>Configuration</h3>
+      <div class="fr-input-group">
+        <%= f.label :departement_code %>
+        <%= f.select :departement_code, Departement.order(:code).all.map { [_1.to_s, _1.code ] }, {}, disabled: campaign.persisted? %>
+      </div>
+      <div class="fr-input-group">
+        <%= f.label :sender_name do %>
+          <%= t("activerecord.attributes.campaign.sender_name") %>
+          <span class="fr-hint-text">
+            C'est ce nom qui sera affiché dans les mails reçus par les communes. Les mails seront toujours envoyés avec l'adresse collectifobjets@beta.gouv.fr et le reply-to à support@collectif-objets.beta.gouv.fr
+          </span>
+        <% end %>
+        <%= f.text_field :sender_name, placeholder: "Jeanne Dupont" %>
+      </div>
+      <div class="fr-input-group">
+        <%= f.label :nom_drac do %>
+          <%= t("activerecord.attributes.campaign.nom_drac") %>
+          <span class="fr-hint-text">
+            Ce nom de DRAC sera utilisé dans des phrases comme "La DRAC Grand Est vous invite à participer…". Il ne faut pas inclure DRAC au début, seulement "Grand Est".
+          </span>
+        <% end %>
+        <%= f.text_field :nom_drac, placeholder: "Grand Est" %>
+      </div>
+      <div class="fr-input-group">
+        <%= f.label :signature do %>
+          <%= t("activerecord.attributes.campaign.signature") %>
+          <span class="fr-hint-text">
+            La signature sera utilisée dans le bas du mail. Elle peut faire entre 1 et 8 lignes.
+          </span>
+        <% end %>
+        <%= f.text_area :signature, placeholder: "Jeanne Dupont\n\nConservatrice en charge des monuments historiques\nDRAC Rhône-Alpes, Châlons-sur-Saone, 10 rue de la république", rows: 4 %>
+      </div>
+    </div>
+    <div class="fr-col-md-6">
+      <h3>Dates</h3>
+      <div data-controller="date-jump" class="fr-mb-2w">
+        <% Campaign::DATE_FIELDS.each_with_index do |date_field, index| %>
+          <div class="fr-input-group" data-controller="date-display">
+            <div class="fr-grid-row">
+              <div class="fr-col-sm-10">
+                <%= f.label date_field do %>
+                  <%= t("activerecord.attributes.campaign.#{date_field}") %>
+                  <span class="fr-hint-text" data-date-display-target="hint"></span>
+                <% end %>
+              </div>
+              <% if index > 0 %>
+                <div class="fr-col-sm-2 co-text--right">
+                  <button
+                    class="fr-btn fr-btn--tertiary fr-btn--sm fr-mb-1w"
+                    data-date-jump-target="button"
+                    data-action="date-jump#set">
+                    +14 jours
+                  </button>
+                </div>
+              <% end %>
+            </div>
+            <%= f.date_field(
+              date_field,
+              class: "fr-input",
+              "data-action": "change->date-display#onChange",
+              "data-date-jump-target": "input",
+              "data-date-display-target": "input"
+            ) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="fr-input-group co-text--right fr-mt-4w">
+    <%= f.submit campaign.persisted? ? "Sauvegarder" : "Créer la campagne" %>
+    <% if campaign.new_record? %>
+      <p class="co-text--italic">
+        Vous pourrez définir les communes à inclure dans cette campagne à l'étape suivante
+      </p>
+    <% end %>
+  </div>
+<% end %><%# end form %>

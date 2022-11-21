@@ -41,18 +41,17 @@
   <div class="fr-grid-row">
     <div class="fr-col-md-6">
       <%= form_for(
-        @commune,
+        @dossier_completion,
+        as: :dossier_completion,
         url: commune_completion_path(@commune),
         method: "POST",
         builder: FormBuilderDsfr,
         data: (@missing_photos ? { turbo_confirm: "Un recensement d'objet sans photo vous sera probablement renvoyé par les conservateurs. Êtes-vous sûr de vouloir valider votre recensement en l'état ?" } : {})
       ) do |f| %>
-        <%= f.fields_for :dossier do |ff| %>
-          <div class="fr-input-group">
-            <%= ff.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
-            <%= ff.text_area :notes_commune %>
-          </div>
-        <% end %>
+        <div class="fr-input-group">
+          <%= f.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune") %>
+          <%= f.text_area :notes_commune %>
+        </div>
         <div class="actions">
           <%= f.submit "Je valide le recensement des objets de ma commune" %>
         </div>

@@ -1,0 +1,43 @@
+<% content_for(:head_title) { "Liste des campagnes" } %>
+
+<main class="fr-container fr-pt-2w fr-pb-4w">
+  <%= render(
+    "shared/breadcrumbs",
+    links: [
+      ["Accueil", root_path],
+    ],
+    current_page_label: "Campagnes")
+  %>
+
+  <h2>
+    <span class="fr-icon-question-answer-line" aria-hidden="true"></span>
+    Liste des campagnes
+  </h2>
+
+  <div class="fr-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Identifiant</th>
+          <th>Département</th>
+          <th>Statut</th>
+          <th>Nombre de communes</th>
+          <th>Dates</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @campaigns.each do |campaign| %>
+          <tr>
+            <td><%= link_to campaign.human_id, admin_campaign_path(campaign) %></td>
+            <td><%= campaign.departement %></td>
+            <td><%= campaign_status_badge(campaign) %></span></td>
+            <td><%= campaign.communes.count %></td>
+            <td>du <%= l(campaign.date_lancement) %> au <%= l(campaign.date_fin) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to "Créer une nouvelle campagne", new_admin_campaign_path, class: "fr-btn" %>
+</main>

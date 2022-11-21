@@ -1,36 +1,35 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class DepartementsController < ApplicationController
-    before_action :restrict_access_index, only: [:index]
-    before_action :set_departement, :restrict_access_show, only: [:show]
+  class DepartementsController < BaseController
+    before_action :set_departement, :set_campaign, only: [:show]
 
     def index
-      @departements = current_conservateur.departements.include_communes_count.include_objets_count
+      @departements = policy_scope(Departement).include_communes_count.include_objets_count
     end
 
     def show
-      @campaign = @departement.current_campaign
       @stats = Co::DepartementStats.new(@departement.code)
       if params[:vue] == "carte"
         set_communes
         set_departement_json
         render "show_map"
       else
-        @communes_search = Co::Conservateurs::CommunesSearch.new(@departement.code, params)
+        @communes_search = Co::Conservateurs::CommunesSearch.new(
+          @departement, params, scoped_communes: policy_scope(Commune)
+        )
       end
     end
 
     protected
 
-    def restrict_access_index
-      return true if current_conservateur.present?
-
-      redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
-    end
-
     def set_departement
       @departement = Departement.find(params[:id])
+      authorize(@departement)
+    end
+
+    def set_campaign
+      @campaign = @departement.current_campaign
     end
 
     def set_departement_json
@@ -39,12 +38,6 @@ module Conservateurs
         bounding_box_ne: @departement.bounding_box_ne.coordinates,
         bounding_box_sw: @departement.bounding_box_sw.coordinates
       }.to_json
-    end
-
-    def restrict_access_show
-      return true if current_conservateur&.departements&.include?(@departement)
-
-      redirect_to root_path, alert: "Veuillez vous connecter en tant que conservateur"
     end
 
     def set_communes
