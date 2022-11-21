@@ -44,6 +44,7 @@ class Recensement < ApplicationRecord
   validates :etat_sanitaire, inclusion: { in: [nil] }, if: -> { !recensable? }
   validates :securisation, inclusion: { in: [nil] }, if: -> { !recensable? }
   validates :photos, inclusion: { in: [] }, if: -> { !recensable? && photos.attached? }
+  validates :confirmation_pas_de_photos, inclusion: { in: [false] }, if: -> { photos.attached? }
 
   validates(
     :photos,

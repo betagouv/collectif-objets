@@ -16,6 +16,8 @@ FactoryBot.define do
     confirmation_pas_de_photos { true }
 
     trait :with_photo do
+      confirmation_pas_de_photos { false }
+
       after(:build) do |recensement|
         recensement.photos.attach(
           io: Rails.root.join("spec/fixture_files/tableau1.jpg").open,

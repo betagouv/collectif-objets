@@ -334,6 +334,8 @@ fr:
               inclusion: "La ou les actions choisies ne sont pas valides"
             analyse_fiches:
               inclusion: "La ou les fiches choisies ne sont pas valides"
+            confirmation_pas_de_photos:
+              inclusion: "Incohérence sur la présence de photos"
         conservateur:
           attributes:
             reset_password_token:
