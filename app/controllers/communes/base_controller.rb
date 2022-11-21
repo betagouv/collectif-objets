@@ -24,7 +24,7 @@ module Communes
     def restrict_access
       return true if current_user&.commune == @commune
 
-      redirect_to root_path, alert: "Veuillez vous connecter"
+      redirect_to root_path, alert: "Vous n'êtes pas connecté avec le compte de la commune #{@commune}"
     end
 
     def policy_scope(scope)
