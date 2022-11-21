@@ -2,9 +2,10 @@
 
 module Conservateurs
   class ObjetCardComponent < ViewComponent::Base
-    def initialize(objet:, recensement: nil)
+    def initialize(objet:, recensement: nil, can_analyse: false)
       @objet = objet
       @recensement = recensement
+      @can_analyse = can_analyse
       super
     end
 
@@ -12,10 +13,12 @@ module Conservateurs
       render ::ObjetCardComponent.new(objet:, badges:, main_photo_url: recensement_photo_url, path:, tags:)
     end
 
-    attr_reader :objet, :recensement
+    private
+
+    attr_reader :objet, :recensement, :can_analyse
 
     def path
-      if recensement
+      if can_analyse
         edit_conservateurs_objet_recensement_analyse_path(objet, recensement)
       else
         objet_path(objet)

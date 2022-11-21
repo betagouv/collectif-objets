@@ -95,10 +95,13 @@
     <div class="fr-col-md-10">
       <%= render layout: "objets/cards_grid_layout", locals: { objets: @objets } do %>
         <% @objets.each do |objet| %>
-          <%= render Conservateurs::ObjetCardComponent.new(objet:, recensement: objet.current_recensement) %>
+          <%= render Conservateurs::ObjetCardComponent.new(
+            objet:,
+            recensement: objet.current_recensement,
+            can_analyse: conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?
+          ) %>
         <% end %>
       <% end %>
-      </div>
     </div>
   </div>
 

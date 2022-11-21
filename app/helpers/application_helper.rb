@@ -46,4 +46,8 @@ module ApplicationHelper
   def communes_policy(*args)
     policy([:communes] + args)
   end
+
+  def conservateurs_policy(*args)
+    policy([:conservateurs] + args)
+  end
 end
