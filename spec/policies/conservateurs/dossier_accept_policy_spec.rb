@@ -23,7 +23,7 @@ describe Conservateurs::DossierAcceptPolicy do
       let(:dossier) { build(:dossier, commune:, status: :submitted, recensements: [recensement]) }
       let(:dossier_accept) { DossierAccept.new(dossier:) }
       let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3)) }
-      it { should permit(conservateur, dossier_accept) }
+      it { should_not permit(conservateur, dossier_accept) }
     end
 
     context "acceptation du dossier d'une commune started" do

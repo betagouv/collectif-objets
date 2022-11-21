@@ -31,7 +31,7 @@ describe Conservateurs::DossierRejectPolicy do
     end
 
     context "rejection d'un dossier d'un autre departement" do
-      let(:commune) { build(:commune, status: :started) }
+      let(:commune) { build(:commune, status: :completed) }
       let(:dossier) { build(:dossier, commune:, status: :submitted) }
       let(:dossier_reject) { DossierAccept.new(dossier:) }
       let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3)) }

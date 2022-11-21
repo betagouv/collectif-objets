@@ -7,7 +7,8 @@ module Conservateurs
     delegate :dossier, to: :dossier_accept
 
     def create?
-      dossier.submitted? &&
+      conservateur.departements.include?(dossier.departement) &&
+        dossier.submitted? &&
         dossier.commune.completed? &&
         dossier.recensements.not_analysed.empty?
     end
