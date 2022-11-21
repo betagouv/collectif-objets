@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Recompletion
+class DossierRecompletion
   attr_reader :dossier
 
   delegate :commune, :notes_commune, to: :dossier

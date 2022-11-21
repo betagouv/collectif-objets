@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe Communes::CompletionPolicy do
+describe Communes::DossierCompletionPolicy do
   subject { described_class }
 
   permissions :show? do
@@ -11,8 +11,8 @@ describe Communes::CompletionPolicy do
       let(:dossier) { build(:dossier, commune:, status: :submitted) }
       before { commune.dossier = dossier }
       let(:user) { build(:user, commune:) }
-      let(:completion) { Completion.new(dossier:) }
-      it { should permit(user, completion) }
+      let(:dossier_completion) { DossierCompletion.new(dossier:) }
+      it { should permit(user, dossier_completion) }
     end
 
     context "commune du user + started" do
@@ -20,8 +20,8 @@ describe Communes::CompletionPolicy do
       let(:dossier) { build(:dossier, commune:, status: :construction) }
       before { commune.dossier = dossier }
       let(:user) { build(:user, commune:) }
-      let(:completion) { Completion.new(dossier:) }
-      it { should_not permit(user, completion) }
+      let(:dossier_completion) { DossierCompletion.new(dossier:) }
+      it { should_not permit(user, dossier_completion) }
     end
 
     context "autre commune" do
@@ -32,8 +32,8 @@ describe Communes::CompletionPolicy do
       let(:dossier2) { build(:dossier, commune: commune2, status: :submitted) }
       before { commune1.dossier = dossier2 }
       let(:user) { build(:user, commune: commune2) }
-      let(:completion) { Completion.new(dossier: dossier1) }
-      it { should_not permit(user, completion) }
+      let(:dossier_completion) { DossierCompletion.new(dossier: dossier1) }
+      it { should_not permit(user, dossier_completion) }
     end
   end
 
@@ -42,8 +42,8 @@ describe Communes::CompletionPolicy do
       let(:commune) { build(:commune, status: :started) }
       let(:dossier) { build(:dossier, commune:, status: :construction) }
       let(:user) { build(:user, commune:) }
-      let(:completion) { Completion.new(dossier:) }
-      it { should permit(user, completion) }
+      let(:dossier_completion) { DossierCompletion.new(dossier:) }
+      it { should permit(user, dossier_completion) }
     end
 
     context "commune du user + completed" do
@@ -51,8 +51,8 @@ describe Communes::CompletionPolicy do
       let(:dossier) { build(:dossier, commune:, status: :submitted) }
       before { commune.dossier = dossier }
       let(:user) { build(:user, commune:) }
-      let(:completion) { Completion.new(dossier:) }
-      it { should_not permit(user, completion) }
+      let(:dossier_completion) { DossierCompletion.new(dossier:) }
+      it { should_not permit(user, dossier_completion) }
     end
 
     context "autre commune" do
@@ -63,8 +63,8 @@ describe Communes::CompletionPolicy do
       let(:dossier2) { build(:dossier, commune: commune2, status: :construction) }
       before { commune1.dossier = dossier2 }
       let(:user) { build(:user, commune: commune2) }
-      let(:completion) { Completion.new(dossier: dossier1) }
-      it { should_not permit(user, completion) }
+      let(:dossier_completion) { DossierCompletion.new(dossier: dossier1) }
+      it { should_not permit(user, dossier_completion) }
     end
   end
 end

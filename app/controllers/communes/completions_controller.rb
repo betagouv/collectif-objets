@@ -2,7 +2,7 @@
 
 module Communes
   class CompletionsController < BaseController
-    before_action :set_completion_and_authorize
+    before_action :set_dossier_completion_and_authorize
     before_action :set_objets
     before_action :set_missing_photos, only: %i[new create]
 
@@ -11,7 +11,7 @@ module Communes
     def new; end
 
     def create
-      if @completion.create!(**completion_params)
+      if @dossier_completion.create!(**dossier_completion_params)
         redirect_to commune_objets_path(@commune), notice: "Le recensement de votre commune est terminé !"
       else
         render :new, status: :unprocessable_entity
@@ -20,9 +20,9 @@ module Communes
 
     protected
 
-    def set_completion_and_authorize
-      @completion = Completion.new(dossier: @dossier)
-      authorize(@completion)
+    def set_dossier_completion_and_authorize
+      @dossier_completion = DossierCompletion.new(dossier: @dossier)
+      authorize(@dossier_completion)
     end
 
     def redirect_with_alert(alert)
@@ -38,8 +38,8 @@ module Communes
       @missing_photos = @dossier.recensements.any?(&:missing_photos?)
     end
 
-    def completion_params
-      params.require(:completion).permit(:notes_commune).to_h.symbolize_keys
+    def dossier_completion_params
+      params.require(:dossier_completion).permit(:notes_commune).to_h.symbolize_keys
         .merge(user: current_user)
     end
   end

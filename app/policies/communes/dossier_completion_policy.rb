@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Communes
-  class CompletionPolicy < ApplicationPolicy
-    alias completion record
-    delegate :commune, to: :completion
+  class DossierCompletionPolicy < ApplicationPolicy
+    alias dossier_completion record
+    delegate :commune, to: :dossier_completion
 
     def show?
       user_commune? && commune.completed?

@@ -41,8 +41,8 @@
   <div class="fr-grid-row">
     <div class="fr-col-md-6">
       <%= form_for(
-        @completion,
-        as: :completion,
+        @dossier_completion,
+        as: :dossier_completion,
         url: commune_completion_path(@commune),
         method: "POST",
         builder: FormBuilderDsfr,
