@@ -44,15 +44,14 @@ module Synchronizer
     end
 
     def synchronize_row(row)
-      logger.info row.log_message
-      return if @dry_run || !row.should_save?
+      @logfile.puts(row.log_message) if row.log_message.present?
+      return if @dry_run || !row.save?
 
-      objet.save!
+      row.objet.save!
     end
 
     def close
-      logger.info "--- CLOSING --- #{@counters}"
-      @logfile.puts "\n #{@counters}"
+      @logfile.puts "counters: #{@counters}"
       @logfile.close
     end
 

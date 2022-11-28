@@ -8,7 +8,7 @@ module Synchronizer
 
     def initialize(raw_rows)
       @raw_rows = raw_rows
-      @rows_by_action = Hash.new([])
+      @rows_by_action = {}
     end
 
     def prepare
@@ -25,12 +25,18 @@ module Synchronizer
 
     def prepare_row(raw_row)
       row = build_objet_row(raw_row)
+      return if row.nil?
+
+      @rows_by_action[row.action] ||= []
       @rows_by_action[row.action] << row
     end
 
     def build_objet_row(raw_row)
       persisted_objet = persisted_objets[raw_row["REF"]]
-      commune = all_communes[raw_row["INSEE"]] || raise(MissingCommuneError, raw_row.slice("INSEE", "COM").join(" - "))
+      # commune = all_communes[raw_row["INSEE"]] || raise(MissingCommuneError, raw_row)
+      commune = all_communes[raw_row["INSEE"]]
+      return nil if commune.nil?
+
       ObjetRow.new(raw_row, persisted_objet:, commune:)
     end
 
@@ -47,7 +53,10 @@ module Synchronizer
     end
 
     def all_communes
-      @all_communes ||= Commune.where(code_insee: @raw_rows.pluck("INSEE"))
+      @all_communes ||= Commune
+        .where(code_insee: @raw_rows.pluck("INSEE"))
+        .to_a
+        .index_by(&:code_insee)
     end
   end
 end

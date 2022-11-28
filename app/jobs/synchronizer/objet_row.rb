@@ -108,7 +108,7 @@ module Synchronizer
     end
 
     def minor_changes?
-      objet.persisted? && (objet.changed - ["palissy_DENQ"]).empty?
+      objet.persisted? && (objet.changed - %w[palissy_DENQ palissy_COM]).empty?
     end
 
     def ref
