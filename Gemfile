@@ -26,6 +26,7 @@ gem "pg", "~> 1.4"
 gem "pg_search"
 gem "prawn"
 gem "prawn-table"
+gem "progressbar"
 gem "puma", "~> 6.0"
 gem "pundit"
 gem "rails", "~> 7.0.4"
@@ -55,7 +56,6 @@ group :development do
   gem "aasm-diagram", require: false
   gem "htmlbeautifier"
   gem "lookbook"
-  gem "progressbar"
   gem "pry"
   gem "rails-erd", require: false
   gem "web-console"
