@@ -2,85 +2,86 @@
 
 require "csv"
 
-def iterate_files(glob_path)
-  Dir.glob(glob_path) do |csv_path|
-    puts "reading file #{csv_path}..."
-    for row in CSV.read(csv_path, headers: true, col_sep: ";") do
-      yield(row.to_h.transform_keys(&:parameterize))
-    end
+namespace :objets do
+  # rake "objets:stats[tmp/stats_avant.csv]"
+  desc "export stats on objets"
+  task :stats, [:path] => :environment do |_, args|
+    PalissyStats.new(args[:path]).perform
   end
 end
 
-namespace :objets do
-  # rake objets:import[../tmp-pop-custom-export-filtered-65.csv]
-  desc "imports objets from custom export POP CSV"
-  task :import, [:path] => :environment do |_, args|
-    mapping = {
-      memoire_REF: "Référence de l’illustration (Mémoire)",
-      palissy_REF: "Référence de la notice Palissy",
-      palissy_TICO: "Nom de l'objet",
-      palissy_CATE: "CATE",
-      palissy_COM: "COM",
-      # commune_code_insee:
-      palissy_DPT: "DPT",
-      palissy_SCLE: "SOUR",
-      palissy_DENQ: "DENQ",
-      palissy_DOSS: "DOSS",
-      palissy_EDIF: "Edifice",
-      palissy_EMPL: "Emplacement",
-      # recolement_status: "Statut recensement"
-    }
-    for row in CSV.read(args[:path], headers: true) do
-      row_parameterized = row.to_h.transform_keys(&:parameterize)
-      cols = row_parameterized.keys
-      missing_cols = mapping.values.map(&:parameterize).reject { |col| cols.include?(col) }
-      if missing_cols.any?
-        raise StandardError.new "missing cols: #{missing_cols}"
-      end
 
-      Objet.create!(mapping.transform_values { row_parameterized[_1.parameterize] })
+class PalissyStats
+  def initialize(path)
+    @path = path
+  end
+
+  def perform
+    @file = File.open(@path, "wb")
+    @total = Objet.count
+    log "total: #{@total} objets"
+    Synchronizer::ObjetBuilder::ALL_FIELDS.each { log_field(_1) }
+    log_photos
+    @file.close
+  end
+
+  private
+
+  def log_field(field)
+    db_field = "palissy_#{field}"
+    log "\n\n---- #{field} ---\n"
+    present_count = Objet.where.not(db_field => ["", nil]).count
+    log "#{present_count} present values (#{percent(present_count)}%)"
+    top_values = Objet.pluck(db_field).tally.sort_by(&:last).reverse.first(10)
+    log "most common values:"
+    top_values.each { log "- '#{_1[0]}' (#{_1[1]} objets - #{percent(_1[1])}%)" }
+  end
+
+  def log_photos
+    log "\n\n ------ PHOTOS ------"
+    present_count = Objet.with_images.count
+    log "#{present_count}  objets have at least 1 photo (#{percent(present_count)}%)"
+    total_photos = q('select count(*) as total from objets cross join unnest("palissy_photos") photos')[0]["total"]
+    log "in total there are #{total_photos} photos"
+    %w[url credit].each do |field_name|
+      present_count = q(sql_json_present_count(field_name))[0]["total"]
+      log "\namong all photos, #{field_name} is filled on #{present_count} photos (#{percent(present_count, total: total_photos)}%)"
+      log "most common #{field_name} values:"
+      top_values = q sql_json_top_values(field_name)
+      top_values.map(&:values).each { log "- '#{_1[0]}' (#{_1[1]} objets - #{percent(_1[1])}%)" }
     end
   end
 
-  # rake objets:import_insee[../collectif-objets-data/pop-exports-custom]
-  task :import_insee, [:path] => :environment do |_, args|
-    puts "before: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
-    iterate_files("#{args[:path]}/*.csv") do |row|
-      next if row["ref"].blank? || row["insee"].blank?
-
-      objet = Objet.find_by(palissy_REF: row["ref"])
-      next unless objet
-
-      objet.commune_code_insee = row["insee"]
-      objet.save!
-    end
-    puts "after: #{Objet.where.not(commune_code_insee: nil).count}/#{Objet.count} objets have insee code"
+  def sql_json_present_count(field_name)
+    <<~SQL.squish
+      select count(*) as total
+      from objets
+      cross join unnest("palissy_photos") photos
+      where (photos -> '#{field_name}')::text != 'null';
+    SQL
   end
 
-  # rake "objets:import_scle[../collectif-objets-data/pop-scle-column.csv]"
-  task :import_scle, [:path] => :environment do |_, args|
-    puts "before: #{Objet.where.not(palissy_SCLE: nil).count} objets have SCLE"
-    for row in CSV.read(args[:path], headers: true) do
-      objet = Objet.find_by(palissy_REF: row["palissy_REF"])
-      next unless objet
-
-      objet.update!(palissy_SCLE: row["SCLE"])
-    end
-    puts "after: #{Objet.where.not(palissy_SCLE: nil).count} objets have SCLE"
+  def sql_json_top_values(field_name)
+    <<~SQL.squish
+      select (photo -> '#{field_name}')::text as field, count(*) as total
+      from objets
+      cross join unnest("palissy_photos") photo
+      group by field
+      order by total desc
+      limit 10;
+    SQL
   end
 
-  # rake "objets:destroy_without_communes"
-  task :destroy_without_communes, [:path] => :environment do |_, args|
-    objets = Objet.where(commune_code_insee: [nil, ""])
-    puts "before: #{objets.count} objets don't have a commune code insee"
-    objets.each do |objet|
-      puts "- https://www.pop.culture.gouv.fr/notice/palissy/#{objet.palissy_REF} (id #{objet.id})"
-      if objet.recensements.any?
-        puts "has recensements, skipping!"
-        next
-      end
-      objet.destroy!
-      puts "destroyed!"
-    end
+  def q(query)
+    ActiveRecord::Base.connection.execute(query)
+  end
+
+  def log message
+    puts message
+    @file.puts message
+  end
+
+  def percent(count, total: @total)
+    ((count.to_i * 100).to_f / total).round(2)
   end
 end
