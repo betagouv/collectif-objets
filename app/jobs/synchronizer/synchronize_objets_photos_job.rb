@@ -7,6 +7,7 @@ module Synchronizer
     API_URL = "https://collectif-objets-datasette.fly.dev/data/palissy_to_memoire.json"
     # API_URL = "http://localhost:8001/data/palissy_to_memoire.json"
     BASE_PARAMS = { _size: "1000", _shape: "objects", _sort: "REF_PALISSY" }.freeze
+    MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
 
     def perform(params = {})
       @limit = params.with_indifferent_access[:limit]
@@ -43,7 +44,7 @@ module Synchronizer
 
     def format_row(row)
       {
-        url: row["URL"],
+        url: [MEMOIRE_PHOTOS_BASE_URL, row["URL"]].join("/"),
         name: row["NAME"],
         credit: row["COPY"]
       }
