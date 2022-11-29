@@ -37,7 +37,6 @@ module Synchronizer
 
     def synchronize_rows(rows)
       batch = ObjetRowsBatch.call_with(rows)
-      Rails.logger.info "batch #{batch}"
       batch.rows_by_action.each do |action, subrows|
         @counters[action] += subrows.count
         subrows.each { synchronize_row(_1) }
