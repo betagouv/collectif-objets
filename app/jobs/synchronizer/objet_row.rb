@@ -44,7 +44,7 @@ module Synchronizer
       when :update
         "mise à jour de l'objet #{ref} avec #{objet.changes}"
       when :create_invalid
-        "X création interdite de l'objet #{ref} car #{errors_s}. attributs : #{objet_attributes_s}"
+        "création interdite de l'objet #{ref} car #{errors_s}. attributs : #{objet_attributes_s}"
       when :update_invalid
         "mise à jour interdite de l'objet #{ref} car #{errors_s}. changements annulés : #{objet.changes}"
       end

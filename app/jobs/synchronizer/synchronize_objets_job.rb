@@ -62,7 +62,7 @@ module Synchronizer
 
       return true if row.save?
 
-      return true unless @interactive
+      return false unless @interactive
 
       return false unless row.action.to_s.ends_with?("_invalid")
 
