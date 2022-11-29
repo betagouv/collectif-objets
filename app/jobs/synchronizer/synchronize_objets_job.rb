@@ -27,6 +27,7 @@ module Synchronizer
       @logfile = File.open("tmp/synchronize-objets-#{timestamp}.log", "a+")
       @limit = params.with_indifferent_access[:limit]
       @dry_run = params.with_indifferent_access["dry_run"]
+      @interactive = params.with_indifferent_access["interactive"]
       initial_url = "#{API_URL}?#{URI.encode_www_form(BASE_PARAMS)}"
       ApiClient.new(initial_url, logger:).iterate { |batch| synchronize_rows(batch) }
       close
@@ -45,9 +46,7 @@ module Synchronizer
 
     def synchronize_row(row)
       @logfile.puts(row.log_message) if row.log_message.present?
-      return if @dry_run || !row.save?
-
-      row.objet.save!
+      row.objet.save! if save_row?(row)
     end
 
     def close
@@ -58,5 +57,31 @@ module Synchronizer
     def timestamp
       Time.zone.now.strftime("%Y_%m_%d_%HH%M")
     end
+
+    def save_row?(row)
+      return false if @dry_run
+
+      return true if row.save?
+
+      return true unless @interactive
+
+      return false unless row.action.to_s.ends_with?("_invalid")
+
+      chomp_save_row?(row)
+    end
+
+    # rubocop:disable Rails/Output
+    def chomp_save_row?(row)
+      puts "\n----\n#{row.log_message}\n----"
+      response = nil
+      while response.nil?
+        puts "voulez-vous forcer la sauvegarde de cet objet ? 'oui' : 'non'"
+        raw = gets.chomp
+        response = false if raw == "non"
+        response = true if raw == "oui"
+      end
+      response
+    end
   end
+  # rubocop:enable Rails/Output
 end
