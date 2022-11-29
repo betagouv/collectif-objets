@@ -4,8 +4,8 @@ module Synchronizer
   class SynchronizeObjetsJob
     include Sidekiq::Job
 
-    # API_URL = "https://collectif-objets-datasette.fly.dev/data/palissy.json"
-    API_URL = "http://localhost:8001/data/palissy.json"
+    API_URL = "https://collectif-objets-datasette.fly.dev/data/palissy.json"
+    # API_URL = "http://localhost:8001/data/palissy.json"
     PER_PAGE = 1000
     BASE_PARAMS = {
       _size: PER_PAGE.to_s,

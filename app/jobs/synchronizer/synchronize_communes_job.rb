@@ -4,7 +4,7 @@ module Synchronizer
   class SynchronizeCommunesJob
     include Sidekiq::Job
 
-    API_URL = "https://collectif-objets-datasette.fly.dev/collectif-objets/mairies.json"
+    API_URL = "https://collectif-objets-datasette.fly.dev/data/mairies.json"
     BASE_PARAMS = {
       _size: "1000",
       _sort: "code_insee",

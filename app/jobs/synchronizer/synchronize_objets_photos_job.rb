@@ -4,8 +4,8 @@ module Synchronizer
   class SynchronizeObjetsPhotosJob
     include Sidekiq::Job
 
-    # API_URL = "https://collectif-objets-datasette.fly.dev/data/palissy_to_memoire.json"
-    API_URL = "http://localhost:8001/data/palissy_to_memoire.json"
+    API_URL = "https://collectif-objets-datasette.fly.dev/data/palissy_to_memoire.json"
+    # API_URL = "http://localhost:8001/data/palissy_to_memoire.json"
     BASE_PARAMS = { _size: "1000", _shape: "objects", _sort: "REF_PALISSY" }.freeze
 
     def perform(params = {})
