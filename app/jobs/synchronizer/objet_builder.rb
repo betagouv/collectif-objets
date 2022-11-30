@@ -29,6 +29,7 @@ module Synchronizer
         .merge(json_fields)
         .merge(text_fields)
         .merge({ "palissy_REFA" => ref_merimee })
+        .merge(edifice_id.present? ? { "edifice_id" => edifice_id } : {})
     end
 
     def json_fields
@@ -49,6 +50,25 @@ module Synchronizer
       return nil unless possible_values.count == 1
 
       possible_values[0]
+    end
+
+    def edifice_id
+      return nil if @persisted_objet&.edifice_id&.present? || row["INSEE"].nil?
+
+      merimee_edifice&.id || custom_edifice.id
+    end
+
+    def merimee_edifice
+      return nil if ref_merimee.blank?
+
+      edifice = Edifice.find_or_create_and_synchronize!(ref_merimee)
+
+      return edifice if edifice.code_insee == row["INSEE"]
+    end
+
+    def custom_edifice
+      atts = { code_insee: row["INSEE"], slug: Edifice.slug_for(row["EDIF"]), nom: row["EDIF"] }
+      Edifice.where(atts.slice(:code_insee, :slug)).first_or_create!(atts)
     end
   end
 end

@@ -13,7 +13,7 @@ module Synchronizer
       limit = params.with_indifferent_access[:limit]
       @dry_run = params.with_indifferent_access["dry_run"]
       @interactive = params.with_indifferent_access["interactive"]
-      ApiClientSql.objets(logger:, limit:).iterate { |batch| synchronize_rows(batch) }
+      ApiClientSql.objets(logger:, limit:).iterate_batches { synchronize_rows(_1) }
       close
     end
 

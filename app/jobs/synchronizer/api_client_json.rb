@@ -4,6 +4,16 @@ module Synchronizer
   class ApiClientJson
     include ApiClientConcern
 
+    BASE_PARAMS = { _size: 1000, _shape: "objects" }.freeze
+
+    def self.objets_photos(params: nil, **kwargs)
+      new("data/palissy_to_memoire.json", BASE_PARAMS.merge(params), **kwargs)
+    end
+
+    def self.edifices(params: nil, **kwargs)
+      new("data/merimee.json", BASE_PARAMS.merge(params), **kwargs)
+    end
+
     def initialize(path, params, logger:, limit:)
       @path = path
       @params = params
@@ -11,9 +21,19 @@ module Synchronizer
       @limit = limit
     end
 
-    def iterate
+    def iterate_batches
       @request_number = 1
       api_query(build_url(@path, @params)) { yield _1 }
+    end
+
+    def iterate
+      iterate_batches { |batch| batch.each { yield _1 } }
+    end
+
+    def first
+      @request_number = 1
+      parsed = fetch_and_parse_url(build_url(@path, @params))
+      return parsed["rows"][0] if parsed["rows"].count >= 1
     end
 
     private

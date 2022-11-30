@@ -5,10 +5,14 @@ class Objet < ApplicationRecord
 
   scope :with_images, -> { where("cardinality(palissy_photos) >= 1") }
   belongs_to :commune, foreign_key: :palissy_INSEE, primary_key: :code_insee, optional: true, inverse_of: :objets
+  belongs_to :edifice, optional: true
   has_many :recensements, dependent: :restrict_with_exception
 
   scope :with_photos_first, -> { order('cardinality(palissy_photos) DESC, LOWER(objets."palissy_TICO") ASC') }
   scope :order_by_recensement_priorite, -> { joins(:recensements).order(Arel.sql(Recensement::SQL_ORDER_PRIORITE)) }
+  def self.order_by_recensement_priorite_array(objets_arel)
+    objets_arel.to_a.sort_by { _1.recensements.to_a.any?(&:prioritaire?) ? 0 : 1 }
+  end
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
