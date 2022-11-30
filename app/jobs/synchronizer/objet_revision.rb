@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 module Synchronizer
-  class ObjetRow
-    JSON_FIELDS = %w[DENO CATE SCLE DENQ].freeze
-    TEXT_FIELDS = %w[COM INSEE DPT DOSS EDIF EMPL TICO].freeze
-    ALL_FIELDS = (JSON_FIELDS + TEXT_FIELDS).freeze
-
+  class ObjetRevision
     delegate :changed?, to: :objet
 
     include ActiveModel::Validations
@@ -14,21 +10,19 @@ module Synchronizer
     validate :validate_initial_commune_inactive
     validate :validate_tico_en_cours
 
-    def initialize(row, commune:, persisted_objet: nil)
-      @row = row
-      @commune = commune
-      @persisted_objet = persisted_objet
-      @commune_before_update = persisted_objet&.commune
+    attr_reader :objet
+
+    def self.from_row(row, commune: nil, persisted_objet: nil)
+      commune_before_update = persisted_objet&.commune
+      objet = ObjetBuilder.new(row, persisted_objet:).objet
+      commune ||= objet.commune
+      new(objet:, commune:, commune_before_update:)
     end
 
-    def objet
-      @objet ||= \
-        if @persisted_objet.present?
-          @persisted_objet.assign_attributes(attributes.except("palissy_REF"))
-          @persisted_objet
-        else
-          Objet.new(attributes)
-        end
+    def initialize(objet:, commune: nil, commune_before_update: nil)
+      @objet = objet
+      @commune = commune || objet.commune || raise(ArgumentError, "missing commune for objet #{objet.palissy_REF}")
+      @commune_before_update = commune_before_update
     end
 
     def action
@@ -59,12 +53,6 @@ module Synchronizer
     attr_reader :commune, :commune_before_update
     alias commune_after_update commune
 
-    def attributes
-      @attributes ||= { "palissy_REF" => @row["REF"] } \
-        .merge(json_fields)
-        .merge(text_fields)
-    end
-
     def validate_objet
       return true if objet.valid?
 
@@ -72,7 +60,7 @@ module Synchronizer
     end
 
     def validate_tico_en_cours
-      return true if attributes["palissy_TICO"] != "Traitement en cours"
+      return true if objet.palissy_TICO != "Traitement en cours"
 
       @errors.add(:base, "l'objet est en cours de traitement par POP")
     end
@@ -93,14 +81,6 @@ module Synchronizer
       )
     end
 
-    def json_fields
-      JSON_FIELDS.to_h { ["palissy_#{_1}", @row[_1]&.any? ? @row[_1]&.join(";") : nil] }
-    end
-
-    def text_fields
-      TEXT_FIELDS.to_h { ["palissy_#{_1}", @row[_1]] }
-    end
-
     def action_simple
       return :create if objet.new_record?
 
@@ -108,16 +88,13 @@ module Synchronizer
     end
 
     def minor_changes?
-      objet.persisted? && (objet.changed - %w[palissy_DENQ palissy_COM]).empty?
+      objet.persisted? && (objet.changed - %w[palissy_DENQ palissy_COM palissy_REFA]).empty?
+      # TODO: remove palissy_REFA
     end
 
-    def ref
-      attributes["palissy_REF"]
-    end
+    def ref = objet.palissy_REF
 
-    def errors_s
-      errors.full_messages.to_sentence
-    end
+    def errors_s = errors.full_messages.to_sentence
 
     def objet_attributes_s
       objet.attributes.except("palissy_REF").compact

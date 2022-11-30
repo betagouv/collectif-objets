@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_23_103925) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_29_152439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -215,6 +215,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_103925) do
     t.datetime "updated_at", null: false
     t.string "palissy_TICO"
     t.json "palissy_photos", default: [], array: true
+    t.string "palissy_REFA"
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
     t.index ["palissy_INSEE"], name: "index_objets_on_palissy_INSEE"
