@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_152439) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_05_093815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+  enable_extension "unaccent"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -190,6 +191,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_152439) do
     t.index ["conservateur_id"], name: "index_dossiers_on_conservateur_id"
   end
 
+  create_table "edifices", force: :cascade do |t|
+    t.string "merimee_REF"
+    t.string "code_insee"
+    t.string "nom"
+    t.string "merimee_PRODUCTEUR"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code_insee"], name: "index_edifices_on_code_insee"
+    t.index ["merimee_REF"], name: "index_edifices_on_merimee_REF"
+  end
+
   create_table "objet_overrides", primary_key: "palissy_REF", id: :string, force: :cascade do |t|
     t.string "plan_objet_id"
     t.string "image_urls", array: true
@@ -216,6 +229,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_152439) do
     t.string "palissy_TICO"
     t.json "palissy_photos", default: [], array: true
     t.string "palissy_REFA"
+    t.bigint "edifice_id"
+    t.index ["edifice_id"], name: "index_objets_on_edifice_id"
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
     t.index ["palissy_INSEE"], name: "index_objets_on_palissy_INSEE"
