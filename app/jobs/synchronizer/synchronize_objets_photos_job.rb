@@ -4,8 +4,7 @@ module Synchronizer
   class SynchronizeObjetsPhotosJob
     include Sidekiq::Job
 
-    API_URL = "https://collectif-objets-datasette.fly.dev/data/palissy_to_memoire.json"
-    # API_URL = "http://localhost:8001/data/palissy_to_memoire.json"
+    API_PATH = "data/palissy_to_memoire.json"
     BASE_PARAMS = { _size: "1000", _shape: "objects", _sort: "REF_PALISSY" }.freeze
     MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
 
@@ -13,8 +12,7 @@ module Synchronizer
       @limit = params.with_indifferent_access[:limit]
       @dry_run = params.with_indifferent_access[:dry_run]
       @stack = []
-      initial_url = "#{API_URL}?#{URI.encode_www_form(BASE_PARAMS)}"
-      ApiClient.new(initial_url, logger:).iterate do |rows|
+      ApiClientJson.new(API_PATH, BASE_PARAMS, logger:, limit: @limit).iterate do |rows|
         @stack += rows
         unstack
       end

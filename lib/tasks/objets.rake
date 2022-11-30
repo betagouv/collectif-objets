@@ -20,7 +20,7 @@ class PalissyStats
     @file = File.open(@path, "wb")
     @total = Objet.count
     log "total: #{@total} objets"
-    Synchronizer::ObjetRow::ALL_FIELDS.each { log_field(_1) }
+    Synchronizer::ObjetBuilder::ALL_FIELDS.each { log_field(_1) }
     log_photos
     @file.close
   end
