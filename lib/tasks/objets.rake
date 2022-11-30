@@ -3,7 +3,7 @@
 require "csv"
 
 namespace :objets do
-  # rake "objets:stats[tmp/stats_avant.csv]"
+  # rake "objets:stats[tmp/stats_avant.txt]"
   desc "export stats on objets"
   task :stats, [:path] => :environment do |_, args|
     PalissyStats.new(args[:path]).perform
@@ -20,7 +20,7 @@ class PalissyStats
     @file = File.open(@path, "wb")
     @total = Objet.count
     log "total: #{@total} objets"
-    Synchronizer::ObjetBuilder::ALL_FIELDS.each { log_field(_1) }
+    (Synchronizer::ObjetBuilder::ALL_FIELDS + ["REFA"]).each { log_field(_1) }
     log_photos
     @file.close
   end
