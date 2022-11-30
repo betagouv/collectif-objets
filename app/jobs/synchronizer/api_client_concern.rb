@@ -2,8 +2,8 @@
 
 module Synchronizer
   module ApiClientConcern
-    # HOST = "https://collectif-objets-datasette.fly.dev"
-    HOST = "http://localhost:8001"
+    HOST = "https://collectif-objets-datasette.fly.dev"
+    # HOST = "http://localhost:8001"
     PER_PAGE = 1000
 
     def fetch_and_parse(path, params)
