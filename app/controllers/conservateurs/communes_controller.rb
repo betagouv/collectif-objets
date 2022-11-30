@@ -15,11 +15,12 @@ module Conservateurs
     end
 
     def show
-      @objets = compute_objets
-      return true if params[:analyse_saved].blank?
+      return show_analyse_saved if params[:analyse_saved].present?
 
-      @objets = @objets.where(recensements: { analysed_at: nil })
-      render "show_analyse_saved"
+      @edifices = @commune
+        .edifices
+        .ordered_by_nom
+        .includes(objets: { edifice: [], recensements: %i[photos_attachments photos_blobs] })
     end
 
     def autocomplete
@@ -32,6 +33,15 @@ module Conservateurs
 
     protected
 
+    def show_analyse_saved
+      @objets = @dossier
+        .objets
+        .includes(:edifice, recensements: %i[photos_attachments photos_blobs])
+        .where(recensements: { analysed_at: nil })
+        .order_by_recensement_priorite
+      render "show_analyse_saved"
+    end
+
     def set_commune
       @commune = Commune.find(params[:id])
       authorize(@commune)
@@ -43,17 +53,6 @@ module Conservateurs
 
     def set_departement
       @departement = params[:departement_id]
-    end
-
-    def compute_objets
-      if @dossier&.full?
-        return @dossier.objets
-          .order_by_recensement_priorite
-          .includes(:commune, recensements: %i[photos_attachments photos_blobs])
-      end
-      @commune.objets
-        .with_photos_first
-        .includes(:commune, recensements: %i[photos_attachments photos_blobs])
     end
 
     def communes_autocomplete_arel

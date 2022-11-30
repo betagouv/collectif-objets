@@ -3,20 +3,21 @@
 class ObjetCardComponent < ViewComponent::Base
   with_collection_parameter :objet
 
-  def initialize(objet:, path: nil, badges: nil, main_photo_url: nil, tags: nil)
+  def initialize(objet, **kwargs)
     @objet = objet
-    @badges = badges
-    @path = path
-    @main_photo_url = main_photo_url
-    @tags = tags
+    @badges = kwargs[:badges]
+    @path = kwargs[:path]
+    @main_photo_url = kwargs[:main_photo_url]
+    @tags = kwargs[:tags]
+    @commune = kwargs[:commune] || objet.commune # pass to avoid n+1 queries
     super
   end
 
   private
 
-  attr_reader :objet, :badges, :tags
+  attr_reader :objet, :badges, :tags, :commune
 
-  delegate :nom, :palissy_DENO, :commune, :edifice_nom, :palissy_photos, to: :objet
+  delegate :nom, :palissy_DENO, :edifice_nom, :palissy_photos, to: :objet
 
   def path
     @path ||= objet_path(@objet)

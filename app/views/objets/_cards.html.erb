@@ -1,4 +1,4 @@
-<%= render layout: "objets/cards_grid_layout", locals: { objets: } do %>
+<%= render layout: "objets/cards_grid_layout", locals: { count: objets.count } do %>
   <%= render ObjetCardComponent.with_collection(objets) %>
 
   <% if local_assigns[:card_objets_manquants] %>

@@ -88,6 +88,9 @@ class Recensement < ApplicationRecord
     END
   SQL
   scope :order_by_priorite, -> { order(Arel.sql(SQL_ORDER_PRIORITE)) }
+  def self.order_by_priorite_array(recensements_arel)
+    recensements_arel.to_a.sort_by { prioritaire? ? 0 : 1 }
+  end
 
   accepts_nested_attributes_for :dossier
 

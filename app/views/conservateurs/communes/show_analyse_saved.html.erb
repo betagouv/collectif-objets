@@ -63,12 +63,13 @@
         <h3 class="co-text--center">
           <%= t("recensement.analyse.remaining_count", count: @objets.count, commune: @commune.nom) %>
         </h3>
-        <%= render layout: "objets/cards_grid_layout", locals: { objets: @objets } do %>
+        <%= render layout: "objets/cards_grid_layout", locals: { count: @objets.count } do %>
           <% @objets.each do |objet| %>
             <%= render Conservateurs::ObjetCardComponent.new(
-              objet:,
+              objet,
               recensement: objet.current_recensement,
-              can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?
+              can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?,
+              commune: @commune
             ) %>
           <% end %>
         <% end %>
