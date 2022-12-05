@@ -41,14 +41,14 @@
   <div class="co-background--teal">
     <div class="fr-container fr-py-8w">
       <h3 class="co-text--blue">
-        <% if @objets_list.group_by_edifice? && @objets_list.edifice_nom.present? %>
-          <%= t(".leftover_in_edifice", nom: @objets_list.edifice_nom) %>
+        <% if @objets_list.group_by_edifice? && @objets_list.edifice.present? %>
+          <%= t(".leftover_in_edifice", nom: @objets_list.edifice.nom) %>
         <% else %>
           <%= t(".leftover") %>
         <% end %>
       </h3>
 
-      <%= render "communes/objets/cards", objets: @objets_list.objets %>
+      <%= render "communes/objets/cards", objets: @objets_list.objets, commune: @commune %>
 
       <%= link_to "Revenir à la liste de tous les objets de ma commune", commune_objets_path(@commune), class: "fr-link" %>
     </div>

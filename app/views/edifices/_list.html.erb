@@ -1,13 +1,14 @@
 <h4>Liste des <%= edifices.count %> édifices</h4>
 
 <ul class="co-columns--3 fr-mb-8w">
-  <% edifices.each do |edifice_group| %>
+  <% edifices.each do |edifice| %>
     <li>
       <%= link_to(
-        "#{edifice_nom(edifice_group[:nom])}".html_safe,
-        "##{edifice_group[:nom_parameterized]}"
+        "#{edifice_nom(edifice.nom)}".html_safe,
+        "##{edifice.slug}"
       ) %>
-      · <%= edifice_group[:objets].count %> objets
+      · <%= edifice.objets.length %> objets
+      <%# length rather than count avoids n+1 query %>
     </li>
   <% end %>
 </ul>

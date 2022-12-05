@@ -5,13 +5,13 @@ module Co
     class ObjetsList
       delegate :any?, to: :objets
 
-      attr_reader :edifice_nom
+      attr_reader :edifice, :commune
 
-      def initialize(commune, scoped_objets: Objet.all, exclude_recensed: false, exclude_ids: [], edifice_nom: nil)
+      def initialize(commune, scoped_objets: Objet.all, exclude_recensed: false, exclude_ids: [], edifice: nil)
         @commune = commune
         @exclude_ids = exclude_ids
         @exclude_recensed = exclude_recensed
-        @edifice_nom = edifice_nom
+        @edifice = edifice
         @scoped_objets = scoped_objets
       end
 
@@ -20,10 +20,10 @@ module Co
       end
 
       def edifices
-        @edifices ||= objets
-          .group_by(&:palissy_EDIF)
-          .sort_by { |k, _v| k.presence&.parameterize || "zzz" }
-          .map { edifice_group_hash(*_1) }
+        @edifices ||= commune
+          .edifices
+          .includes(objets: { recensements: %i[photos_attachments photos_blobs] })
+          .ordered_by_nom
       end
 
       def objets
@@ -34,13 +34,13 @@ module Co
             .includes(:commune, recensements: %i[photos_attachments photos_blobs])
           objets = objets.where.missing(:recensements) if @exclude_recensed
           objets = objets.where.not(id: @exclude_ids) if @exclude_ids.any?
-          objets = objets.where(palissy_EDIF: @edifice_nom) if group_by_edifice? && @edifice_nom.present?
+          objets = objets.where(edifice: @edifice) if group_by_edifice? && @edifice.present?
           objets
         end
       end
 
       def edifices_count
-        @edifices_count ||= @commune.objets.group(:palissy_EDIF).count.keys.count
+        @edifices_count ||= edifices.count
       end
 
       delegate :count, to: :objets
@@ -48,14 +48,6 @@ module Co
       protected
 
       attr_reader :scoped_objets
-
-      def edifice_group_hash(nom_edifice, objets)
-        {
-          nom: nom_edifice,
-          nom_parameterized: nom_edifice.presence&.parameterize || "edifice-na",
-          objets:
-        }
-      end
 
       def recensement_saved?
         false

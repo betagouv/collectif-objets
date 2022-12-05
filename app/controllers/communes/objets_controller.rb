@@ -40,7 +40,7 @@ module Communes
         scoped_objets: policy_scope(Objet),
         exclude_recensed: recensement_saved?,
         exclude_ids: [previous_objet&.id].compact,
-        edifice_nom: previous_objet&.edifice_nom
+        edifice: previous_objet&.edifice
       )
     end
 

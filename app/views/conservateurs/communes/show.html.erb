@@ -2,7 +2,7 @@
 
 <main>
   <div class="fr-container fr-grid-row fr-my-4w fr-grid-row--center">
-    <div class="fr-col-md-8">
+    <div class="fr-col-md-10">
       <%= render(
         "shared/breadcrumbs",
         links: [
@@ -33,7 +33,7 @@
   <% if @commune.completed? && @dossier&.can_generate_rapport? %>
     <div class="co-background--light-teal fr-my-4w fr-py-4w">
       <div class="fr-container fr-grid-row fr-grid-row--center">
-        <div class="fr-col-md-8">
+        <div class="fr-col-md-10">
           <p>
             <%= t(
               ".can_generate_rapport.content",
@@ -55,7 +55,7 @@
   <% if @dossier&.rejected? %>
     <div class="co-background--light-teal fr-my-4w fr-py-4w">
       <div class="fr-container fr-grid-row fr-grid-row--center ">
-        <div class="fr-col-md-8">
+        <div class="fr-col-md-10">
           <p>
             <%= t(".rejected.content", date: l(@dossier.rejected_at.to_date), conservateur: @dossier.conservateur) %>
           </p>
@@ -70,7 +70,7 @@
 
   <% if @dossier&.accepted? %>
     <div class="fr-container fr-grid-row fr-grid-row--center fr-mb-4w">
-      <div class="fr-col-md-8">
+      <div class="fr-col-md-10">
         <%= link_to "Voir le rapport", conservateurs_dossier_path(@dossier), class: "fr-btn" %>
       </div>
     </div>
@@ -78,7 +78,7 @@
 
   <% if @commune.completed? && !@dossier.accepted? %>
     <div class="fr-container fr-grid-row fr-grid-row--center fr-mb-4w">
-      <div class="fr-col-md-8">
+      <div class="fr-col-md-10">
         <% if @dossier.notes_commune.present? %>
           <p>
             <%= t("activerecord.attributes.dossier.notes_commune") %>
@@ -93,13 +93,21 @@
 
   <div class="fr-container fr-grid-row fr-grid-row--center">
     <div class="fr-col-md-10">
-      <%= render layout: "objets/cards_grid_layout", locals: { objets: @objets } do %>
-        <% @objets.each do |objet| %>
-          <%= render Conservateurs::ObjetCardComponent.new(
-            objet:,
-            recensement: objet.current_recensement,
-            can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?
-          ) %>
+      <%= render "edifices/list", edifices: @edifices %>
+      <% @edifices.each do |edifice|  %>
+        <h4 id="<%= edifice.slug %>">
+          <%= edifice_nom(edifice.nom).html_safe %> · <%= edifice.objets.length %> objets
+        </h4>
+        <%= render layout: "objets/cards_grid_layout", locals: { count: edifice.objets.length } do %>
+          <% reordered = @dossier ? Objet::order_by_recensement_priorite_array(edifice.objets) : edifice.objets %>
+          <% reordered.each do |objet| %>
+            <%= render Conservateurs::ObjetCardComponent.new(
+              objet,
+              recensement: objet.current_recensement,
+              can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?,
+              commune: @commune
+            ) %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
