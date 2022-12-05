@@ -54,7 +54,7 @@
     <% @objets_list.edifices.each do |edifice| %>
       <div class="fr-my-4w">
         <%= render "edifices/title", edifice: %>
-        <%= render "objets/cards", objets: edifice[:objets], commune: @objets_list.commune %>
+        <%= render "objets/cards", objets: edifice.objets, commune: @objets_list.commune %>
       </div>
     <% end %>
   <% else %>
