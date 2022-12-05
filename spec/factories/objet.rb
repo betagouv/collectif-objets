@@ -16,6 +16,7 @@ FactoryBot.define do
     palissy_EMPL { "dans la nef droite" }
 
     association :commune
+    association :edifice
 
     trait :without_image do
       # do nothing

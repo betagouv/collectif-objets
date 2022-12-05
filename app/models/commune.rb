@@ -37,6 +37,11 @@ class Commune < ApplicationRecord
     presence ? all : has_recensements_with_missing_photos
   }
   scope :completed, -> { where(status: STATE_COMPLETED) }
+  has_many(
+    :edifices,
+    foreign_key: :code_insee, primary_key: :code_insee,
+    inverse_of: :commune, dependent: :restrict_with_exception
+  )
 
   include PgSearch::Model
   pg_search_scope :search_by_nom, against: :nom, using: { tsearch: { prefix: true } }
