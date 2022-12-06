@@ -18,8 +18,8 @@
           p Ce dossier a été renvoyé à la commune le #{l(dossier.rejected_at.to_date)} par #{dossier.conservateur} avec le commentaire suivant
           = blockquote(dossier.notes_conservateur)
           p.fr-mt-4w
-            markdown:
-              Tant que la commune ne retourne pas le dossier, **vous ne pouvez pas l'analyser**
+            | Tant que la commune ne retourne pas le dossier,
+            b vous ne pouvez pas l'analyser
 
 - elsif dossier&.accepted?
   .fr-container.fr-grid-row.fr-grid-row--center.fr-mb-4w
