@@ -21,6 +21,8 @@
     current_page_label: "Recensement"
   ) %>
 
+  <%= render("first_recensement_warning", commune: @recensement.commune) if @recensement.commune.recensements.empty? %>
+
   <%= render(
     "recensements/form",
     recensement: @recensement,

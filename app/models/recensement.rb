@@ -77,6 +77,7 @@ class Recensement < ApplicationRecord
   }
   scope :in_commune, ->(commune) { joins(:objet).where(objets: { commune: }) }
   scope :not_analysed, -> { where(analysed_at: nil) }
+  scope :where_author_conservateur, -> { where(user_id: nil) }
 
   SQL_ORDER_PRIORITE = <<-SQL.squish
     CASE WHEN (

@@ -1,15 +1,14 @@
 h4= "Liste des #{edifices.count} édifices"
 
-ul.co-columns--3.fr-mb-8w
+ul class="fr-mb-8w #{edifices.length > 3 ? "co-columns--3" : ""}"
   - edifices.each do |edifice|
     li
-      div
-        => link_to(edifice_nom(edifice).html_safe, "##{edifice.slug}")
-        ' ·
-        - if edifice.objets.length == 1
-          | 1 objet
-        - else
-          ' #{edifice.objets.length} objets
-          / length rather than count avoids n+1 query
+      => link_to(edifice_nom(edifice).html_safe, "##{edifice.slug}")
+      ' ·
+      - if edifice.objets.length == 1
+        | 1 objet
+      - else
+        ' #{edifice.objets.length} objets
+        / length rather than count avoids n+1 query
       - if edifice.dossiers.any?
         = dossier_status_badge(Dossier.current(edifice.dossiers))

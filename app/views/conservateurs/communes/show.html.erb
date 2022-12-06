@@ -30,11 +30,13 @@
     </div>
   </div>
 
-  <%= render "dossier_infos", commune: @commune, dossier: @dossier  %>
+  <%= render("author_conservateur_warning", commune: @commune) if @commune.recensements.where_author_conservateur.any? %>
+
+  <%= render "dossier_commune_infos", commune: @commune, dossier: @dossier %>
 
   <%= render "objets_by_edifices", edifices: @edifices, commune: @commune %>
 
-  <%= render "dossier_actions", commune: @commune, dossier: @dossier  %>
+  <%= render "dossier_commune_actions", commune: @commune, dossier: @dossier %>
 
   <div class="co-background--light-grey fr-my-6w fr-py-6w">
     <div class="fr-container fr-grid-row fr-grid-row--center">

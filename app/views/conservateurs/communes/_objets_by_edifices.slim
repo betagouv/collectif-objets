@@ -1,5 +1,5 @@
 .fr-container.fr-grid-row.fr-grid-row--center
   .fr-col-md-10
-    = render "edifices/list", edifices: edifices
+    = render("edifices/list", edifices: edifices) if edifices.length > 1
     - @edifices.each do |edifice|
       = render "edifice", edifice:, commune:, dossier: Dossier.current(edifice.dossiers)
