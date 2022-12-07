@@ -8,13 +8,7 @@ class UserDecorator < Draper::Decorator
     super&.decorate
   end
 
-  def magic_token
-    return nil if super.blank?
-
-    link_to(
-      "#{super} ↗️" || "",
-      "/magic-authentication?magic-token=#{super}",
-      target: "_blank", rel: "noopener"
-    )
+  def impersonate_link
+    link_to "👤 incarner cet usager", "/admin/users/#{id}/impersonate"
   end
 end

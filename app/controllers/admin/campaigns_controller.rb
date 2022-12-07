@@ -26,7 +26,7 @@ module Admin
       return if @campaign.draft?
 
       redirect_to(
-        admin_campaign_path(@campaign),
+        admin_old_campaign_path(@campaign),
         alert: "Impossible de modifier les communes destinataires de cette campagne car elle n'est plus en brouillon"
       )
     end
@@ -41,7 +41,7 @@ module Admin
       @campaign = Campaign.new(**campaign_params)
       if @campaign.save
         redirect_to(
-          admin_campaign_path(@campaign),
+          admin_old_campaign_path(@campaign),
           notice: "La campagne a été créée avec succès, elle peut être configurée"
         )
       else
@@ -51,7 +51,7 @@ module Admin
 
     def update
       if @campaign.update(campaign_params)
-        redirect_to admin_campaign_path(@campaign), notice: "La campagne a été modifiée"
+        redirect_to admin_old_campaign_path(@campaign), notice: "La campagne a été modifiée"
       else
         render :new, status: :unprocessable_entity
       end
@@ -59,10 +59,10 @@ module Admin
 
     def update_recipients
       @campaign.commune_ids = params.fetch(:campaign, {}).fetch(:recipients_attributes, []).pluck(:commune_id)
-      redirect_to admin_campaign_path(@campaign), notice: "Les destinataires de la campagne ont été modifiés"
+      redirect_to admin_old_campaign_path(@campaign), notice: "Les destinataires de la campagne ont été modifiés"
     rescue ActiveRecord::RecordInvalid => e
       redirect_to(
-        admin_campaign_edit_recipients_path(@campaign),
+        admin_old_campaign_edit_recipients_path(@campaign),
         alert: "#{e.record.commune.nom} : #{e.record.errors.first.message}"
       )
     end
@@ -70,7 +70,7 @@ module Admin
     def update_status
       status_event = params.require(:campaign).require(:status_event)
       success = transit_campaign!(status_event)
-      return redirect_to admin_campaign_path(@campaign), notice: "La campagne a été modifiée" if success
+      return redirect_to admin_old_campaign_path(@campaign), notice: "La campagne a été modifiée" if success
 
       error = if status_event == "plan" && !@campaign.only_inactive_communes?
                 "cannot_plan_active_communes"
@@ -83,7 +83,7 @@ module Admin
 
     def destroy
       if @campaign.destroy
-        redirect_to admin_campaigns_path, status: :see_other, notice: "Le brouillon de campagne a été détruit"
+        redirect_to admin_old_campaigns_path, status: :see_other, notice: "Le brouillon de campagne a été détruit"
       else
         @campaign.errors.add(:base, "Impossible de supprimer ce brouillon de campagne")
         render :show, status: :unprocessable_entity
@@ -101,7 +101,7 @@ module Admin
 
       @campaign.update_columns(date_lancement: Time.zone.today, status: "planned")
       enqueue_campaign_jobs
-      redirect_to admin_campaign_path(@campaign), notice: "La campagne est en train de démarrer…"
+      redirect_to admin_old_campaign_path(@campaign), notice: "La campagne est en train de démarrer…"
     end
 
     def force_step_up
@@ -109,7 +109,7 @@ module Admin
 
       @campaign.update_columns("date_#{@campaign.next_step}": Time.zone.today)
       enqueue_campaign_jobs
-      redirect_to admin_campaign_path(@campaign),
+      redirect_to admin_old_campaign_path(@campaign),
                   notice: "La campagne est en train de passer à l'étape #{@campaign.next_step}…"
     end
 
@@ -117,7 +117,7 @@ module Admin
       Campaigns::SynchronizeCampaignEmailsJob.perform_async(@campaign.id)
       Campaigns::RefreshCampaignStatsJob.perform_in(10.minutes, @campaign.id)
       redirect_to(
-        admin_campaign_path(@campaign),
+        admin_old_campaign_path(@campaign),
         notice: "Les informations d'envoi des mails sont en train d'être rafraîchies…"
       )
     end
@@ -125,7 +125,7 @@ module Admin
     def refresh_stats
       Campaigns::RefreshCampaignStatsJob.perform_async(@campaign.id)
       redirect_to(
-        admin_campaign_path(@campaign),
+        admin_old_campaign_path(@campaign),
         notice: "Les statistiques sont en train d'être rafraîchies…"
       )
     end

@@ -33,6 +33,7 @@ ActiveAdmin.register User do
           row :id
           row :email
           row :role
+          row :impersonate_link
           row :magic_token
           row :login_token
           row :encrypted_password
@@ -44,7 +45,7 @@ ActiveAdmin.register User do
 
         panel "📍 Commune ##{user.commune.id}" do
           attributes_table_for user.commune.decorate do
-            row(:id) { link_to _1.id, admin_commune_path(_1) }
+            row(:id) { link_to _1.id, admin_old_commune_path(_1) }
             row :nom
             row :departement
             row :code_insee
@@ -70,7 +71,7 @@ ActiveAdmin.register User do
   action_item :view, only: :show do
     link_to(
       "Rafraîchir le lien magique",
-      rotate_magic_token_admin_user_path(user),
+      rotate_magic_token_admin_old_user_path(user),
       method: "PUT",
       data: {
         confirm: (

@@ -49,7 +49,7 @@ ActiveAdmin.register Objet do
 
         panel "✍️ Recensements" do
           table_for objet.recensements.map(&:decorate) do
-            column(:id) { link_to _1.id, admin_recensement_path(_1) }
+            column(:id) { link_to _1.id, admin_old_recensement_path(_1) }
             column :created_at
             column :localisation
             column :edifice_nom

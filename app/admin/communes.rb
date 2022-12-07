@@ -73,10 +73,10 @@ ActiveAdmin.register Commune do
         commune.users.map(&:decorate).each do |user|
           panel "👤 User ##{user.id}" do
             attributes_table_for user do
-              row(:id) { link_to _1.id, admin_user_path(_1) }
+              row(:id) { link_to _1.id, admin_old_user_path(_1) }
               row :email
               row :role
-              row :magic_token
+              row :impersonate_link
               row :role
             end
           end
@@ -84,7 +84,7 @@ ActiveAdmin.register Commune do
 
         panel "🖼 Objets" do
           table_for commune.objets.map(&:decorate) do
-            column(:id) { link_to _1.id, admin_objet_path(_1) }
+            column(:id) { link_to _1.id, admin_old_objet_path(_1) }
             column :palissy_REF
             column :palissy_TICO
             column :palissy_EDIF
@@ -98,7 +98,7 @@ ActiveAdmin.register Commune do
 
         panel "📂 Dossiers" do
           table_for commune.past_dossiers do
-            column(:id) { link_to _1.id, admin_dossier_path(_1) }
+            column(:id) { link_to _1.id, admin_old_dossier_path(_1) }
             column :status
             column :created_at
           end
@@ -106,7 +106,7 @@ ActiveAdmin.register Commune do
 
         panel "✍️ Recensements" do
           table_for commune.recensements.map(&:decorate) do
-            column(:id) { link_to _1.id, admin_recensement_path(_1) }
+            column(:id) { link_to _1.id, admin_old_recensement_path(_1) }
             column :dossier_id
             column :created_at
             column :localisation
@@ -147,7 +147,7 @@ ActiveAdmin.register Commune do
 
     link_to(
       "Repasser en recensement démarré",
-      return_dossier_to_construction_admin_commune_path(resource),
+      return_dossier_to_construction_admin_old_commune_path(resource),
       method: "POST"
     )
   end

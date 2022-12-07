@@ -30,4 +30,8 @@ class User < ApplicationRecord
   def safe_email?
     SAFE_DOMAINS.include?(email.split("@").last)
   end
+
+  def to_s
+    email.split("@")[0]
+  end
 end

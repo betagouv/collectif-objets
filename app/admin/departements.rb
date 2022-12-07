@@ -29,7 +29,7 @@ ActiveAdmin.register Departement do
 
         panel "👷‍♀️ Conservateurs" do
           table_for departement.conservateurs.map(&:decorate) do
-            column(:id) { link_to _1.id, admin_conservateur_path(_1) }
+            column(:id) { link_to _1.id, admin_old_conservateur_path(_1) }
             column :first_name
             column :last_name
             column :departements

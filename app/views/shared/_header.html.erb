@@ -30,7 +30,9 @@
           </div>
         </div>
         <div class="fr-header__tools">
-          <% if current_conservateur %>
+          <% if current_admin_user %>
+            <%= render "shared/header/header_tools_admin" %>
+          <% elsif current_conservateur %>
             <%= render "shared/header/header_tools_conservateur" %>
           <% elsif current_user %>
             <%= render "shared/header/header_tools_user" %>

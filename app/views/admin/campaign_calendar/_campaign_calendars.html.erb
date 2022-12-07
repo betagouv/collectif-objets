@@ -17,7 +17,7 @@
                   <div class="day-number"><%= day.day.day %></div>
                   <% day.events.each do |event| %>
                     <div>
-                      <%= link_to "#{event.step} #{event.campaign.departement.nom}", admin_campaign_path(event.campaign) %>
+                      <%= link_to "#{event.step} #{event.campaign.departement.nom}", admin_old_campaign_path(event.campaign) %>
                     </div>
                   <% end %>
                 </td>

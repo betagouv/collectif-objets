@@ -1,0 +1,42 @@
+- content_for(:head_title) { "Liste des campagnes" }
+
+.fr-container.fr-grid-row.fr-pt-2w.fr-pb-4w
+  .fr-col-md-10
+    = render( \
+      "shared/breadcrumbs", \
+      links: [ \
+        ["Admin", admin_communes_path], \
+      ], \
+      current_page_label: "Communes" \
+    )
+
+    .co-flex.co-flex--space-between
+      h2
+        .fr-icon-city-line[aria-hidden="true"]
+        | Liste des communes
+
+    .fr-table
+      table
+        thead
+          tr
+            th Département
+            th Code Insee
+            th Nom
+            th Statut
+            th Nombre d'objets
+            th Recensement
+
+        tbody
+          - @communes.each do |commune|
+            tr
+              td= commune.departement_code
+              td= commune.code_insee
+              td= link_to commune.nom, admin_commune_path(commune)
+              td= commune.aasm.human_state
+              td= commune.objets_count
+              td
+                - if commune.recensement_ratio.present?
+                  | #{commune.recensement_ratio}%
+
+    - if @pagy.pages > 1
+      = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}

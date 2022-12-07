@@ -1,0 +1,50 @@
+- content_for(:head_title) { "Connexion" }
+
+main.fr-container.fr-pt-2w.fr-pb-4w data-controller="devise--sessions"
+  = render( \
+    "shared/breadcrumbs", \
+    links: [ \
+      ["Accueil", root_path], \
+      ["Connexion", connexion_path], \
+      ["Connexion conservateur / conservatrice", new_conservateur_session_path], \
+      ["Réinitialisation mot de passe", new_conservateur_password_path] \
+    ], \
+    current_page_label: "Changer votre mot de passe" \
+  )
+
+  h2
+    | (Re-)définir votre mot de passe conservateur
+
+  .fr-grid-row
+    .fr-col-md-6
+      - if resource.errors.any?
+        .fr-alert.fr-alert--error.fr-mb-6w
+          ul
+            - resource.errors.attribute_names.each do |attribute|
+              li = resource.errors.messages_for(attribute).first
+
+      = form_for( \
+        resource, \
+        as: resource_name, \
+        url: password_path(resource_name), \
+        builder: FormBuilderDsfr, \
+        method: :put, \
+        data: { turbo: false } \
+      ) do |f|
+        = f.hidden_field :reset_password_token
+        .fr-input-group
+          = render PasswordInputComponent.new( \
+            name: "conservateur[password]", \
+            autofocus: true, \
+            autocomplete: "new-password", \
+            label: "Nouveau mot de passe" \
+          )
+        .fr-input-group
+          = render PasswordInputComponent.new( \
+            name: "conservateur[password_confirmation]", \
+            autocomplete: "new-password", \
+            label: "Confirmation du nouveau mot de passe", \
+            hint: false \
+          )
+        .actions
+          = f.submit "(Re-)définir le mot de passe"

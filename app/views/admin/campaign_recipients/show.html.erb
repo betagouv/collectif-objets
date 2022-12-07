@@ -5,8 +5,8 @@
     "shared/breadcrumbs",
     links: [
       ["Accueil", root_path],
-      ["Campagnes", admin_campaigns_path],
-      [@campaign.human_id, admin_campaign_path(@campaign)]
+      ["Campagnes", admin_old_campaigns_path],
+      [@campaign.human_id, admin_old_campaign_path(@campaign)]
     ],
     current_page_label: @commune.nom
   ) %>
@@ -19,7 +19,7 @@
   <div class="fr-mb-8w">
     <p class="fr-text--sm">
       Commune <%= @commune.code_insee %>
-      destinataire de la campagne <%= link_to @campaign, admin_campaign_path(@campaign) %>
+      destinataire de la campagne <%= link_to @campaign, admin_old_campaign_path(@campaign) %>
     </p>
 
     <p class="co-text--monospace fr-text--sm">
@@ -50,7 +50,7 @@
       <%= render(
         "shared/campaign_recipient_opt_out_form",
         recipient: @recipient,
-        url: admin_campaign_recipient_path(@campaign, @recipient)
+        url: admin_old_campaign_recipient_path(@campaign, @recipient)
       ) %>
     </div>
   <% end %>

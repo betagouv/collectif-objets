@@ -1,0 +1,30 @@
+- content_for(:head_title) { "Connexion" }
+
+main.fr-container.fr-pt-2w.fr-pb-4w [data-controller="devise--sessions"]
+  = render("shared/breadcrumbs", links: [["Accueil", root_path], ["Connexion", connexion_path]], current_page_label: "Connexion admin")
+
+  h2 Connexion Admin
+
+  .fr-grid-row
+    .fr-col-md-6
+      = form_for( \
+        resource, \
+        as: resource_name, \
+        url: session_path(resource_name), \
+        builder: FormBuilderDsfr, \
+        data: { turbo: false } \
+      ) do |f|
+        .fr-input-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email", required: true
+        .fr-input-group
+          = render PasswordInputComponent.new(name: "admin_user[password]" )
+          .fr-mt-1w
+            = link_to "Mot de passe oublié ?", new_admin_user_password_path, class: "fr-link"
+        .co-flex.co-flex--space-between.fr-mt-4w
+          div
+            .fr-checkbox-group
+              = f.check_box :remember_me, checked: true
+              = f.label "Se souvenir de moi"
+          .actions
+            = f.submit "Se connecter"

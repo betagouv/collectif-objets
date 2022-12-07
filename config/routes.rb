@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # Replace Sidekiq Queues with enhanced version!
   Sidekiq::Throttled::Web.enhance_queues_tab!
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :admin_users, skip: [:registrations]
   ActiveAdmin.routes(self)
 
   authenticate :admin_user do
@@ -85,6 +85,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :communes, only: [:index, :show]
+    resources :users, only: [] do
+      get :impersonate
+    end
     resources :campaigns do
       get :show_statistics
       get :edit_recipients
@@ -105,6 +109,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  get '/admin', to: redirect('/admin/communes')
 
   get "health/raise_on_purpose", to: "health#raise_on_purpose"
   get "health/js_error", to: "health#js_error"

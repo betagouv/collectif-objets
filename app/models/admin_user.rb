@@ -7,6 +7,6 @@ class AdminUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def to_s
-    email
+    email.split("@")[0].gsub("_", " ").gsub("-", " ").gsub(".", " ").capitalize
   end
 end
