@@ -1,7 +1,7 @@
 ul
+  li 🔓 Admin connecté #{current_admin_user}
+  li = link_to "Liste des communes", admin_communes_path
   li
-    = link_to admin_communes_path do
-      | 🔓 Admin connecté #{current_admin_user}
     = form_tag destroy_admin_user_session_path, method: :delete, data: { turbo: false } do
       button.fr-btn.fr-btn--secondary.fr-btn--sm.fr-icon-logout-box-r-line.fr-btn--icon-left type="submit"
         | Déconnexion

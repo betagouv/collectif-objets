@@ -9,6 +9,10 @@ class FormBuilderDsfr < ActionView::Helpers::FormBuilder
     super(method, options.merge(class: "fr-input"))
   end
 
+  def search_field(method, options = {})
+    super(method, options.merge(class: "fr-input"))
+  end
+
   def email_field(method, options = {})
     super(method, options.merge(class: "fr-input"))
   end

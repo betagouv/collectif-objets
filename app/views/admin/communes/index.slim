@@ -1,42 +1,81 @@
-- content_for(:head_title) { "Liste des campagnes" }
+- content_for(:head_title) { "Liste des communes - Admin" }
 
-.fr-container.fr-grid-row.fr-pt-2w.fr-pb-4w
-  .fr-col-md-10
-    = render( \
+.fr-container.fr-pt-2w.fr-pb-4w
+  .co-flex.co-flex--space-between
+    div= render( \
       "shared/breadcrumbs", \
       links: [ \
         ["Admin", admin_communes_path], \
       ], \
       current_page_label: "Communes" \
     )
+    div= link_to "Ancienne interface d'admin", admin_old_communes_path
 
-    .co-flex.co-flex--space-between
-      h2
-        .fr-icon-city-line[aria-hidden="true"]
-        | Liste des communes
+  h2 Liste des communes
 
-    .fr-table
-      table
-        thead
-          tr
-            th Département
-            th Code Insee
-            th Nom
-            th Statut
-            th Nombre d'objets
-            th Recensement
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-10
+      - if @pagy.count.zero?
+        ' Vos filtres n'ont donné aucun résultat
+        div= link_to "réinitialiser les filtres", admin_communes_path
+      / - if @pagy.pages > 1
+      /   = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+      - else
+        .co-text--center
+          - if @query_present && @pagy.count == 1
+            | Une seule commune correspond aux filtres
+          - elsif @query_present
+            | #{@pagy.count} communes correspondent aux filtres
+        .fr-table
+          table
+            thead
+              tr
+                th Département
+                th Code Insee
+                th Nom
+                th Objets
+                th Statut
+                th Recensement
+                th Envoi dossier
+            tbody
+              - @communes.each do |commune|
+                tr
+                  td= commune.departement_code
+                  td= commune.code_insee
+                  td= link_to commune.nom, admin_commune_path(commune)
+                  td= commune.objets_count
+                  td= commune_status_badge(commune)
+                  td
+                    - if commune.recensement_ratio.present?
+                      | #{commune.recensement_ratio}%
+                    - if commune.recensements.any? && commune.recensements.missing_photos.empty?
+                      .fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
+                  td= l(commune.completed_at.to_date) if commune.completed_at.present?
+        - if @pagy.pages > 1
+          = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
 
-        tbody
-          - @communes.each do |commune|
-            tr
-              td= commune.departement_code
-              td= commune.code_insee
-              td= link_to commune.nom, admin_commune_path(commune)
-              td= commune.aasm.human_state
-              td= commune.objets_count
-              td
-                - if commune.recensement_ratio.present?
-                  | #{commune.recensement_ratio}%
-
-    - if @pagy.pages > 1
-      = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    .fr-col-2
+      h5 Filtres
+      - if @query_present
+        .fr-mb-2w= link_to "réinitialiser les filtres", admin_communes_path
+      = search_form_for @ransack, url: admin_communes_path, builder: FormBuilderDsfr do |f|
+        .fr-input-group
+          = f.label :nom_cont, "Nom contient"
+          = f.search_field :nom_cont
+        .fr-input-group
+          = f.label :code_insee_eq, "Code INSEE égal à"
+          = f.search_field :code_insee_eq
+        .fr-input-group
+          = f.label :departement_code_eq, "Département"
+          = f.select :departement_code_eq, [["", ""]] + Departement.order(:code).map { [_1.to_s, _1.code] }
+        .fr-input-group
+          = f.label :status_eq, "Statut"
+          = f.select :status_eq, [["", ""]] + [ \
+            ["Commune inactive", Commune::STATE_INACTIVE], \
+            ["Recensement démarré", Commune::STATE_STARTED], \
+            ["Recensement terminé", Commune::STATE_COMPLETED] \
+          ]
+        / .fr-input-group
+        /   = f.check_box :recensements_photos_presence_in, {}, "1"
+        /   = f.label :recensements_photos_presence_in, "Photos manquantes"
+        = f.submit "Filtrer"
