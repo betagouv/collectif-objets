@@ -1,6 +1,8 @@
 <div class="fr-grid-row fr-pb-4w fr-grid-row--gutters">
   <div class="fr-col-md-6">
-    <%= render GalleryComponent.palissy_photos_from_objet(objet, responsive_versions: [:small]) %>
+    <div class="hide co-display--md">
+      <%= render GalleryComponent.palissy_photos_from_objet(objet, template: :small) %>
+    </div>
     <% if cta %>
       <p><%= cta %></p>
     <% end %>
@@ -41,7 +43,7 @@
 
   </div>
 
-  <div class="fr-col-md-6">
-    <%= render GalleryComponent.palissy_photos_from_objet(objet, responsive_versions: [:full]) %>
+  <div class="fr-col-md-6 co-hide--md">
+    <%= render GalleryComponent.palissy_photos_from_objet(objet, template: :full) %>
   </div>
 </div>

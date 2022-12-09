@@ -12,9 +12,17 @@ module ObjetHelper
   end
 
   def edifice_nom(nom)
-    return nom.upcase_first if nom.present?
+    return nom.capitalize if nom.present?
 
     content_tag(:i, "Édifice non renseigné")
+  end
+
+  def link_to_palissy(objet)
+    link_to(
+      objet.palissy_REF,
+      "https://www.pop.culture.gouv.fr/notice/palissy/#{objet.palissy_REF}",
+      target: "_blank", rel: "noopener"
+    )
   end
 
   private

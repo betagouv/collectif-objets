@@ -86,10 +86,7 @@
           </div>
           <% if @recensement.photos.any? %>
             <div class="fr-col-md-6 co-flex-md-reverse-order">
-              <%= render GalleryComponent.from_attachments(
-                @recensement.photos,
-                title: t("recensement.photos.taken_count", count: @recensement.photos.count)
-              ) %>
+              <%= render "shared/recensement_photos_gallery", recensement: @recensement %>
             </div>
           <% end %>
         </div>

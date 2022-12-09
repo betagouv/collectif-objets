@@ -1,23 +1,15 @@
 # frozen_string_literal: true
 
 class GalleryComponentPreview < ViewComponent::Preview
-  def single_photo
-    urls = [
-      "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP51P00156/sap01_51p00156_p.jpg"
-    ]
-    render(GalleryComponent.palissy_photos_from_objet(urls))
-  end
-
   # @param count number
-  def multiple_photos(count: 6)
-    urls = [
-      "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L040680/sap04_80l040680_p.jpg",
-      "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP52W02313/52W02313.JPG",
-      "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L040649/sap04_80l040649_p.jpg",
-      "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L040653/sap04_80l040653_p.jpg",
-      "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L040654/sap04_80l040654_p.jpg",
-      "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L040655/sap04_80l040655_p.jpg"
-    ].first(count)
-    render(GalleryComponent.palissy_photos_from_objet(urls))
+  # @param template select ["full", "small"]
+  # @param display_description toggle
+  # @param display_gallery_link toggle
+  def default(count: 6, template: "full", display_description: true, display_gallery_link: true)
+    urls = ([
+      "/image-non-renseignee.jpeg"
+    ] * 10).first(count)
+    photos = urls.map { GalleryComponent::PHOTO.new(original_url: _1, thumb_url: _1, description: "jolie fleur") }
+    render(GalleryComponent.new(photos, template:, display_description:, display_gallery_link:))
   end
 end
