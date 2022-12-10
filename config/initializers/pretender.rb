@@ -1,3 +1,5 @@
+# slightly adapted from https://github.com/ankane/pretender to work with multiple devise models at once
+
 module Pretender
   class Error < StandardError; end
 
