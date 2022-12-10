@@ -20,7 +20,7 @@
         .fr-alert.fr-alert--error.fr-mb-6w
           %ul
             - resource.errors.attribute_names.each do |attribute|
-              %li = resource.errors.messages_for(attribute).first
+              %li= resource.errors.messages_for(attribute).first
 
       = form_for resource, as: resource_name, url: password_path(resource_name), builder: FormBuilderDsfr, method: :put, data: { turbo: false } do |f|
         = f.hidden_field :reset_password_token
