@@ -50,4 +50,8 @@ module ApplicationHelper
   def conservateurs_policy(*args)
     policy([:conservateurs] + args)
   end
+
+  def icon_span(name, contour: :line, **kwargs)
+    content_tag(:span, "", class: "fr-icon-#{name}-#{contour}", "aria-hidden": "true", **kwargs)
+  end
 end

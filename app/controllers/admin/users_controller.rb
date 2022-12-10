@@ -2,17 +2,15 @@
 
 module Admin
   class UsersController < BaseController
-    before_action :set_user
-
     def impersonate
+      @user = User.find(params[:user_id])
       impersonate_user(@user)
-      redirect_to commune_objets_path(@user.commune), notice: "Vous incarnez maintenant l'usager #{@user}"
+      redirect_to commune_objets_path(@user.commune)
     end
 
-    private
-
-    def set_user
-      @user = User.find(params[:user_id])
+    def stop_impersonating
+      stop_impersonating_user
+      redirect_to admin_path, notice: "Vous n'incarnez plus d'usager"
     end
   end
 end

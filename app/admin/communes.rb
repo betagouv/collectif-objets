@@ -136,20 +136,5 @@ ActiveAdmin.register Commune do
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end
-
-  member_action :return_dossier_to_construction, method: :post do
-    resource.dossier.return_to_construction!
-    redirect_to resource_path
-  end
-
-  action_item :return_dossier_to_construction_action, only: :show do
-    next unless resource.dossier&.can_return_to_construction?
-
-    link_to(
-      "Repasser en recensement démarré",
-      return_dossier_to_construction_admin_old_commune_path(resource),
-      method: "POST"
-    )
-  end
 end
 # rubocop:enable Metrics/BlockLength

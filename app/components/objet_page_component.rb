@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ObjetPageComponent < ViewComponent::Base
+  include ObjetHelper
   attr_reader :objet
 
   renders_one :cta

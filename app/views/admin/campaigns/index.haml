@@ -1,0 +1,46 @@
+- content_for(:head_title) { "Admin - Campagnes" }
+
+.fr-container.fr-grid-row.fr-pt-2w.fr-pb-4w
+  .fr-col-md-10
+    = render("shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Campagnes")
+
+    .co-flex.co-flex--space-between
+      %h2
+        = icon_span("question-answer")
+        Admin - Campagnes
+      %div= link_to "Créer une nouvelle campagne", new_admin_campaign_path, class: "fr-btn"
+
+    = form_for @campaign_search, as: :campaign_search, url: admin_campaigns_path, method: "GET", builder: FormBuilderDsfr do |f|
+      .co-flex.co-flex--align-items-center.co-flex--justify-content-center.fr-mt-2w
+        %div Filtres
+        .fr-ml-2w
+          = f.select(:status, [["tous les statuts", nil]] + campaigns_statuses_options, {}, onchange: "this.form.submit()" )
+
+        .fr-ml-2w
+          = f.select(:departement_code, [["tous les départements", nil]] + departements_options, {}, onchange: "this.form.submit()")
+
+        - if @campaign_search.filters?
+          .fr-ml-2w
+            = link_to "Réinitialiser", admin_campaigns_path, class: "fr-link"
+
+    .fr-table
+      %table
+        %thead
+          %tr
+            %th Identifiant
+            %th Département
+            %th Statut
+            %th Nombre de communes
+            %th Dates
+
+        %tbody
+          - @campaigns.each do |campaign|
+            %tr
+              %td(style="min-width: 200px")= link_to campaign.human_id, admin_campaign_path(campaign)
+              %td(style="min-width: 200px")= campaign.departement
+              %td= campaign_status_badge(campaign)
+              %td= campaign.communes.count
+              %td du&nbsp;#{l(campaign.date_lancement)}&nbsp;au&nbsp;#{l(campaign.date_fin)}
+
+    - if @pagy.pages > 1
+      = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}

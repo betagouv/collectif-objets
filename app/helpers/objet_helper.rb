@@ -17,12 +17,12 @@ module ObjetHelper
     content_tag(:i, "Édifice non renseigné")
   end
 
-  def link_to_palissy(objet)
-    link_to(
-      objet.palissy_REF,
-      "https://www.pop.culture.gouv.fr/notice/palissy/#{objet.palissy_REF}",
-      target: "_blank", rel: "noopener"
-    )
+  def palissy_url(objet)
+    "https://www.pop.culture.gouv.fr/notice/palissy/#{objet.palissy_REF}"
+  end
+
+  def link_to_palissy(objet, **kwargs, &)
+    link_to(palissy_url(objet), target: "_blank", rel: "noopener", **kwargs, &)
   end
 
   private

@@ -27,6 +27,9 @@ registerControllers(window.Stimulus, controllers);
 import PhotoUploadComponent from "../stimulus_controllers_components/photo_upload_controller"
 window.Stimulus.register("photo-upload", PhotoUploadComponent)
 
+import AdminIdentityComponent from "../stimulus_controllers_components/admin_identity_controller"
+window.Stimulus.register("admin-identity", AdminIdentityComponent)
+
 import PhotosUploadGroupComponent from "../stimulus_controllers_components/photos_upload_group_controller"
 window.Stimulus.register("photos-upload-group", PhotosUploadGroupComponent)
 

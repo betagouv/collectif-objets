@@ -1,0 +1,46 @@
+.fr-grid-row.fr-pb-4w.fr-grid-row--gutters
+  .fr-col-md-6
+    .hide.co-display--md
+      = render GalleryComponent.palissy_photos_from_objet(objet, template: :small)
+    - if cta
+      %p= cta
+    %p
+      %b Emplacement
+      %br
+      Se situe dans l'édifice
+      %b= objet.edifice_nom
+      %br
+      %i= objet.emplacement
+
+    %p
+      %b Dénomination
+      %br
+      = objet.palissy_DENO
+
+    %p
+      %b Catégorie
+      %br
+      = objet.categorie
+
+    %p
+      %b Époque
+      %br
+      = objet.crafted_at || "N/A"
+
+    %p
+      %b Récolement
+      %br
+      Dernier récolement : = objet.last_recolement_at || "N/A"
+
+    %p
+      %b Références
+      %br
+      POP (Base Palissy) :
+      = objet.palissy_REF
+
+    %p
+      = link_to_palissy(objet, class: "co-text--blue") do
+        Voir plus de détails sur la Plateforme Ouverte du Patrimoine
+
+  .fr-col-md-6.co-hide--md
+    = render GalleryComponent.palissy_photos_from_objet(objet, template: :full)

@@ -56,7 +56,8 @@
   left: 0;
   top: 0;
   background: linear-gradient(transparent 60%, white);
-  pointer-events: none
+  pointer-events: none;
+  z-index: 10;
 }
 
 /* SIZES */
@@ -133,6 +134,14 @@
 
 .co-white-space-pre-line {
   white-space: pre-line;
+}
+
+.co-white-space-nowrap {
+  white-space: nowrap;
+}
+
+.co-word-break-all {
+  word-break: break-all;
 }
 
 .co-text--sm {

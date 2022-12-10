@@ -1,0 +1,70 @@
+- content_for(:head_title) { "Admin - Conservateurs" }
+
+.fr-container.fr-pt-2w.fr-pb-4w
+  .co-flex.co-flex--space-between
+    %div
+      = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Conservateurs"
+    %div= link_to "Ancienne interface d'admin", admin_old_conservateurs_path
+
+
+  .co-flex.co-flex--space-between
+    %h2
+      = icon_span("question-answer")
+      Admin - Conservateurs
+    %div
+      %div= link_to "Créer un nouveau conservateur", new_admin_conservateur_path, class: "fr-btn"
+
+
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-10
+      - if @pagy.count.zero?
+        Vos filtres n'ont donné aucun résultat
+        %div= link_to "réinitialiser les filtres", admin_communes_path
+      - else
+        .co-text--center
+          - if @query_present && @pagy.count == 1
+            Un seul conservateur correspond aux filtres
+          - elsif @query_present
+            %span #{@pagy.count} conservateurs correspondent aux filtres
+        .fr-table
+          %table
+            %thead
+              %tr
+                %th Nom
+                %th Départements
+                %th Téléphone
+                %th
+            %tbody
+              - @conservateurs.each do |conservateur|
+                %tr
+                  %td
+                    %div
+                      = conservateur.full_name
+                      .co-word-break-all= link_to conservateur.email, "mailto:#{conservateur.email}", target: "_blank"
+                  %td= conservateur.departements.map { _1.to_s }.to_sentence
+                  %td.co-white-space-nowrap= conservateur.phone_number
+                  %td.co-white-space-nowrap
+                    %div
+                      = link_to admin_conservateur_impersonate_path(conservateur) do
+                        = icon_span("eye")
+                        Incarner
+                    .fr-mt-1w
+                      = link_to edit_admin_conservateur_path(conservateur) do
+                        = icon_span("pencil")
+                        Modifier
+
+        - if @pagy.pages > 1
+          = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+
+    .fr-col-2
+      %h5 Filtres
+      - if @query_present
+        .fr-mb-2w= link_to "réinitialiser les filtres", admin_conservateurs_path
+      = search_form_for @ransack, url: admin_conservateurs_path, builder: FormBuilderDsfr do |f|
+        .fr-input-group
+          = f.label :last_name_cont, "Nom contient"
+          = f.search_field :last_name_cont
+        .fr-input-group
+          = f.label :departements_code_eq, "Département"
+          = f.select :departements_code_eq, [["", ""]] + Departement.order(:code).map { [_1.to_s, _1.code] }
+        = f.submit "Filtrer"

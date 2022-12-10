@@ -11,6 +11,8 @@ module Communes
 
     before_action :set_commune, :set_dossier, :restrict_access
 
+    layout "commune"
+
     protected
 
     def set_commune

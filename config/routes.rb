@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get "/fiche", to: "pages#pdf_embed"
   get "/pdf", to: "pages#pdf_download", as: "pdf_download"
   get "/connexion", to: "pages#connexion", as: "connexion"
+  get "/admin", to: "pages#admin", as: "admin"
 
   resources :objets, only: [:index, :show]
   get "objets/ref_pop/:palissy_REF", to: "objets#show_by_ref_pop"
@@ -86,9 +87,15 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :communes, only: [:index, :show]
+    resources :conservateurs, except: [:destroy] do |conservateur|
+      get :impersonate
+    end
+    post "conservateurs/stop_impersonating", to: "conservateurs#stop_impersonating", as: :stop_impersonating_conservateur
+    resources :dossiers, only: [:update]
     resources :users, only: [] do
       get :impersonate
     end
+    post "users/stop_impersonating", to: "users#stop_impersonating", as: :stop_impersonating_user
     resources :campaigns do
       get :show_statistics
       get :edit_recipients

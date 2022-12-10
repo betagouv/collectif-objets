@@ -1,0 +1,12 @@
+- content_for(:head_title) { "Admin" }
+
+%main.fr-mt-4w.fr-mb-8w
+  .fr-container.fr-grid-row
+    .fr-col-md-8
+      %h1
+        %span.fr-icon-lock-line(aria-hidden="true")
+        Admin
+      %ul
+        %li= link_to "Communes", admin_communes_path
+        %li= link_to "Conservateurs", admin_conservateurs_path
+        %li= link_to "Campagnes", admin_campaigns_path

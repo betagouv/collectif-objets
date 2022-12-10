@@ -20,7 +20,8 @@
   <body>
     <%= render "shared/environment_banner" %>
     <%= render "shared/header" %>
-    <%= yield %>
+    <%= yield(:below_header) if content_for?(:below_header) %>
+    <%= content_for?(:content) ? yield(:content) : yield %>
     <%= render "shared/footer" %>
     <%= render "shared/tracking_scripts" %>
   </body>

@@ -1,0 +1,148 @@
+- content_for(:head_title) { "#{@commune.nom} - Admin" }
+
+.fr-container.fr-pt-2w
+  .co-flex.co-flex--space-between
+    %div
+      = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
+    %div= link_to "Ancienne interface d'admin", admin_old_commune_path(@commune)
+
+  %h2
+    = @commune
+    = commune_status_badge(@commune)
+
+  - if @commune.recensement_ratio.present?
+    %p
+      Objets recensés à #{@commune.recensement_ratio}%
+      - if @commune.recensements.any? && @commune.recensements.missing_photos.empty?
+        %span.fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
+
+  - if @commune.started_at.present?
+    %p
+      Recensement démarré le #{l(@commune.started_at, format: :long_with_weekday)}
+      - if @commune.completed_at.present?
+        %br
+        et terminé le #{l(@commune.completed_at, format: :long_with_weekday)}
+
+
+  %h4
+    = icon_span("account-circle")
+    #{@commune.users.count} Usager(s)
+  - if @commune.users.empty?
+    %p Aucun usager
+    %p
+      %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
+  %p
+    %ul
+      - @commune.users.each do |user|
+        %li
+          %span #{user.email} ·
+          = link_to "envoyer un email", "mailto:#{user.email}"
+          %span ·
+          = link_to admin_user_impersonate_path(user) do
+            %span.fr-icon-eye-line(aria-hidden="true")
+            incarner cet usager
+
+  %h4
+    = icon_span("passport")
+    #{@commune.objets.count} objet(s) dans #{@commune.edifices.count} édifice(s)
+
+  = render UnfoldComponent.new(max_height_px: 800, button_text: "Voir tous les objets") do
+    .fr-table
+      %table
+        %thead
+          %tr
+            %th REF
+            %th Nom
+            %th Emplacement
+            %th Photo(s) Mémoire
+            %th catégorie
+            %th siècle
+        %tbody
+          - @commune.edifices.each do |edifice|
+            %tr
+              %th(colspan="6")
+                %div.co-flex.co-flex--align-items-center.co-flex--gap-1rem
+                  %div
+                    %h5 Édifice #{edifice_nom(edifice.nom)}
+                  %div #{edifice.objets.count} objets
+            - edifice.objets.each do |objet|
+              %tr
+                %td= link_to_palissy(objet) { objet.palissy_REF }
+                %td= objet.palissy_TICO
+                %td= objet.palissy_EMPL
+                %td
+                  = render GalleryComponent.palissy_photos_from_objet(objet, template: :small, display_description: false, display_gallery_link: false)
+                %td= objet.palissy_CATE
+                %td= objet.palissy_SCLE
+
+  %h4
+    = icon_span "file-text"
+    #{@commune.past_dossiers.count} Dossier(s) de recensements
+  - if @commune.past_dossiers.empty?
+    %p Aucun dossier de recensement démarré
+
+- @commune.past_dossiers.each do |dossier|
+  .fr-container
+    %h5 Dossier ##{dossier.id} #{dossier_status_badge(dossier)}
+    %ul.fr-mb-2w
+      %li démarré le #{l(dossier.created_at, format: :long_with_weekday)}
+      - if dossier.submitted_at.present?
+        %li envoyé le #{l(dossier.submitted_at, format: :long_with_weekday)}
+      - if dossier.rejected_at.present?
+        %li rejeté le #{l(dossier.rejected_at, format: :long_with_weekday)}
+      - if dossier.accepted_at.present?
+        %li accepté le #{l(dossier.accepted_at, format: :long_with_weekday)}
+    %p #{dossier.recensements.count} recensements
+
+    - if dossier.can_return_to_construction?
+      %a.fr-btn.fr-btn--secondary{href: admin_dossier_path(dossier, status: "construction"), "data-turbo-method": "PUT"}
+        Repasser en recensement démarré
+  = render UnfoldComponent.new(max_height_px: 800, button_text: "Voir tous les recensements") do
+    .fr-table
+      %table
+        %thead
+          %tr
+            %th Objet
+            %th Localisation
+            %th Recensable
+            %th État sanitaire de l'édifice
+            %th État sanitaire
+            %th Sécurisation
+            %th Photos
+            %th Notes
+        %tbody
+          - dossier.recensements.each do |recensement|
+            - recensement_presenter = RecensementPresenter.new(recensement)
+            %tr
+              %td
+                = link_to_palissy(recensement.objet) { recensement.objet.palissy_REF }
+                = recensement.objet.palissy_TICO
+              %td= recensement_presenter.localisation
+              %td= recensement_presenter.recensable
+              - if recensement.recensable?
+                %td
+                  = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :etat_sanitaire_edifice, recensement:, recensement_presenter:)
+                %td
+                  = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :etat_sanitaire, recensement:, recensement_presenter:)
+                %td
+                  = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :securisation, recensement:, recensement_presenter:)
+              - else
+                %td
+                %td
+                %td
+              %td
+                - if recensement.missing_photos?
+                  .fr-badge.fr-badge--warning.fr-badge--sm
+                    Photos manquantes
+                - else
+                  = render GalleryComponent.from_attachments(recensement.photos, template: :small, display_description: false, display_gallery_link: false)
+              %td
+                - if recensement.notes.present?
+                  %div Commentaire de la commune
+                  %blockquote= recensement.notes
+                - if recensement.analyse_notes.present?
+                  %div Commentaire du conservateur
+                  %blockquote= recensement.analyse_notes
+
+:css
+  .co-gallery--photo img { max-height: 100px; }
