@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 module Communes
-  class DossierRecompletionPolicy < ApplicationPolicy
+  class DossierRecompletionPolicy < BasePolicy
     alias dossier_recompletion record
 
-    def create?
+    def new?
       user_commune? && dossier_recompletion.dossier.rejected?
+    end
+
+    def create?
+      new? && !impersonating?
     end
 
     private

@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :commune
 
+  attr_accessor :impersonating
+
   def password_required?
     false
   end

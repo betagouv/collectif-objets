@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Communes
-  class CampaignRecipientPolicy < ApplicationPolicy
+  class CampaignRecipientPolicy < BasePolicy
     alias campaign_recipient record
 
     def update?
-      user_commune?
+      !impersonating? && user_commune?
     end
 
     private

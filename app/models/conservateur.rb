@@ -8,6 +8,8 @@ class Conservateur < ApplicationRecord
 
   scope :with_departement, ->(d) { where("departement_codes @> ARRAY[?]::varchar[]", d) }
 
+  attr_accessor :impersonating
+
   def self.ransackable_scopes(_auth_object = nil)
     [:with_departement]
   end

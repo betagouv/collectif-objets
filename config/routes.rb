@@ -89,13 +89,19 @@ Rails.application.routes.draw do
     resources :communes, only: [:index, :show]
     resources :conservateurs, except: [:destroy] do |conservateur|
       get :impersonate
+      collection do
+        post :stop_impersonating
+        post :toggle_impersonate_mode
+      end
     end
-    post "conservateurs/stop_impersonating", to: "conservateurs#stop_impersonating", as: :stop_impersonating_conservateur
     resources :dossiers, only: [:update]
     resources :users, only: [] do
       get :impersonate
+      collection do
+        post :stop_impersonating
+        post :toggle_impersonate_mode
+      end
     end
-    post "users/stop_impersonating", to: "users#stop_impersonating", as: :stop_impersonating_user
     resources :campaigns do
       get :show_statistics
       get :edit_recipients

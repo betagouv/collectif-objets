@@ -1,50 +1,43 @@
-%header.fr-header(role="banner")
-  .fr-header__body
-    .fr-container
-      .fr-header__body-row
-        .fr-header__brand.fr-enlarge-link
-          .fr-header__brand-top
-            .fr-header__logo
-              %p.fr-logo
-                Ministère
-                %br
-                de la Culture
-
-
-            .fr-header__navbar
-              - if current_conservateur
-                %button.fr-btn--search.fr-btn(data-fr-opened="false" aria-controls="modal-menu-search" title="Rechercher")
-                  Rechercher
-
-              %button.fr-btn--menu.fr-btn(data-fr-opened="false" aria-controls="modal-menu-links" aria-haspopup="menu" title="Menu" id="fr-btn-menu-mobile")
-                Menu
-
-          .fr-header__service
-            %a(href="/" title="Accueil - Collectif Objets - Ministère de la Culture")
-              %p.fr-header__service-title Collectif Objets
-
-            %p.fr-header__service-tagline Préservez votre patrimoine mobilier
-
-        - if current_admin_user
-          = render "shared/header/header_tools_admin"
-        - elsif current_conservateur
-          .fr-header__tools= render "shared/header/header_tools_conservateur"
-        - elsif current_user
-          .fr-header__tools= render "shared/header/header_tools_user"
-        - else
-          .fr-header__tools= render "shared/header/header_tools_guest"
-
-    - if notice || alert
-      .fr-container.fr-pb-2w
-        - if notice
-          .fr-alert.fr-alert--success
-            %p= notice
-
-        - if alert
-          .fr-alert.fr-alert--error
-            %p= alert
-
-  .fr-header__menu.fr-modal#modal-menu-links(aria-labelledby="fr-btn-menu-mobile")
-    .fr-container
-      %button.fr-link--close.fr-link(aria-controls="modal-menu-links") Fermer
-      .fr-header__menu-links
+- if current_admin_user
+  = render HeaderComponent.new(notice:, alert:) do |c|
+    - c.with_tools do
+      %ul.fr-links-group
+        %li
+          = icon_span("admin")
+          = current_admin_user
+        %li
+          = link_to destroy_admin_user_session_path, "data-turbo-method": "DELETE", class: "fr-link" do
+            = icon_span("logout-box-r")
+            Déconnexion
+    - c.with_menu do
+      %nav.fr-nav#menu-navigation(role="navigation" aria-label="Menu principal")
+        %ul.fr-nav__list
+          - path_commune = current_user.present? ? commune_objets_path(current_user.commune) : admin_communes_path
+          %li.fr-nav__item{class: content_for(:current_layout) == "commune" ? "active" : ""}
+            %a.fr-nav__link(href=path_commune target="_self")
+              = icon_span("user")
+              Interface Commune
+          - path_conservateur = current_conservateur.present? ? conservateurs_departements_path : admin_conservateurs_path
+          %li.fr-nav__item{class: content_for(:current_layout) == "conservateur" ? "active" : ""}
+            = link_to path_conservateur, class: "fr-nav__link" do
+              = icon_span("user-star")
+              Interface Conservateur
+          %li.fr-nav__item{class: content_for(:current_layout) == "admin" ? "active" : ""}
+            %a.fr-nav__link(href=admin_path target="_self")
+              = icon_span("lock")
+              Administration
+- elsif current_conservateur
+  = render HeaderComponent.new(notice:, alert:) do |c|
+    - c.with_navbar do
+      %button.fr-btn--search.fr-btn(data-fr-opened="false" aria-controls="modal-menu-search" title="Rechercher")
+        Rechercher
+    - c.with_tools do
+      = render "shared/header/header_tools_conservateur"
+- elsif current_user
+  = render HeaderComponent.new(notice:, alert:) do |c|
+    - c.with_tools do
+      = render "shared/header/header_tools_user"
+- else
+  = render HeaderComponent.new(notice:, alert:) do |c|
+    - c.with_tools do
+      = render "shared/header/header_tools_guest"

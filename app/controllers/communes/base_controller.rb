@@ -15,6 +15,11 @@ module Communes
 
     protected
 
+    def pundit_user
+      current_user.impersonating = current_user != true_user
+      current_user
+    end
+
     def set_commune
       @commune = Commune.find(params[:commune_id])
     end

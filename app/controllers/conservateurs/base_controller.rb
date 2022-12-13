@@ -16,6 +16,7 @@ module Conservateurs
     private
 
     def pundit_user
+      current_conservateur.impersonating = (current_conservateur != true_conservateur)
       current_conservateur
     end
 

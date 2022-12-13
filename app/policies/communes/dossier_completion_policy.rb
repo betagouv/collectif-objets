@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Communes
-  class DossierCompletionPolicy < ApplicationPolicy
+  class DossierCompletionPolicy < BasePolicy
     alias dossier_completion record
     delegate :commune, to: :dossier_completion
 
@@ -9,8 +9,12 @@ module Communes
       user_commune? && commune.completed?
     end
 
-    def create?
+    def new?
       user_commune? && commune.started?
+    end
+
+    def create?
+      new? && !impersonating?
     end
 
     private

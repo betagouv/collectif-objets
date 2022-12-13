@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Communes
-  class FormulaireImprimablePolicy < ApplicationPolicy
+  class FormulaireImprimablePolicy < BasePolicy
     alias formulaire_imprimable record
     delegate :commune, to: :formulaire_imprimable
 

@@ -2,11 +2,15 @@
 - content_for(:below_header) do
   - if current_user != true_user
     .fr-container
-      .fr-alert.fr-alert--warning
+      .fr-alert.fr-alert--warning.co-impersonate-alert
         .co-flex.co-flex--space-between.co-flex--align-items-center
-          %div Vous incarnez l'usager #{current_user}
           %div
-            = link_to admin_stop_impersonating_user_path, class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-logout-box-r-line", "data-turbo-method": "POST" do
+            Vous incarnez l'usager #{current_user} de la commune #{current_user.commune}
+            %b en lecture seule
+          %div
+            = link_to toggle_impersonate_mode_admin_users_path, class: "fr-btn fr-btn--tertiary fr-btn--icon-right fr-icon-warning-line fr-mr-2w", "data-turbo-method": "POST" do
+              Passer en écriture
+            = link_to stop_impersonating_admin_users_path, class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-logout-box-r-line", "data-turbo-method": "POST" do
               Arrêter
 
 - content_for(:content) do

@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
     conservateurs_departements_path
   end
 
-  def after_sign_in_path_for_adminuser
+  def after_sign_in_path_for_adminuser(_admin_user)
     admin_path
   end
 end

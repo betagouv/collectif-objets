@@ -15,10 +15,10 @@
           = render PasswordInputComponent.new(name: "admin_user[password]" )
           .fr-mt-1w
             = link_to "Mot de passe oublié ?", new_admin_user_password_path, class: "fr-link"
-        .co-flex.co-flex--space-between.fr-mt-4w
+        .co-flex.co-flex--space-between.fr-my-4w
           %div
             .fr-checkbox-group
               = f.check_box :remember_me, checked: true
               = f.label "Se souvenir de moi"
         .actions
-            = f.submit "Se connecter"
+          = f.submit "Se connecter"

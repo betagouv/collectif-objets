@@ -38,12 +38,21 @@ module Admin
     def impersonate
       @conservateur = Conservateur.find(params[:conservateur_id])
       impersonate_conservateur(@conservateur)
-      redirect_to conservateurs_departements_path, notice: "Vous incarnez maintenant le conservateur #{@conservateur}"
+      redirect_to conservateurs_departements_path
     end
 
     def stop_impersonating
       stop_impersonating_conservateur
       redirect_to admin_path, notice: "Vous n'incarnez plus de conservateur"
+    end
+
+    def toggle_impersonate_mode
+      if session[:conservateur_impersonate_write].present?
+        session.delete(:conservateur_impersonate_write)
+      else
+        session[:conservateur_impersonate_write] = "1"
+      end
+      redirect_to conservateurs_departements_path
     end
 
     private
