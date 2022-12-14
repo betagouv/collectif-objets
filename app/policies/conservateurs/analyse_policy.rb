@@ -5,7 +5,8 @@ module Conservateurs
     alias analyse record
 
     def update?
-      conservateur.departements.include?(analyse.departement) &&
+      !impersonating? &&
+        conservateur.departements.include?(analyse.departement) &&
         analyse.commune.completed? &&
         analyse.dossier.submitted?
     end

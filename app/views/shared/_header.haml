@@ -1,14 +1,7 @@
 - if current_admin_user
   = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.with_tools do
-      %ul.fr-links-group
-        %li
-          = icon_span("admin")
-          = current_admin_user
-        %li
-          = link_to destroy_admin_user_session_path, "data-turbo-method": "DELETE", class: "fr-link" do
-            = icon_span("logout-box-r")
-            Déconnexion
+    - c.tool_link current_admin_user, "#", icon: "admin"
+    - c.tool_link "Déconnexion", destroy_admin_user_session_path, icon: "logout-box-r", "data-turbo-method": "DELETE"
     - c.with_menu do
       %nav.fr-nav#menu-navigation(role="navigation" aria-label="Menu principal")
         %ul.fr-nav__list
@@ -31,13 +24,19 @@
     - c.with_navbar do
       %button.fr-btn--search.fr-btn(data-fr-opened="false" aria-controls="modal-menu-search" title="Rechercher")
         Rechercher
-    - c.with_tools do
-      = render "shared/header/header_tools_conservateur"
+    - path = current_conservateur.departements.count == 1 ? conservateurs_departement_path(current_conservateur.departements.first) : conservateurs_departements_path
+    - c.tool_link t("menu.conservateurs.departements", count: current_conservateur.departements.count), path, icon: "arrow-right"
+    - c.tool_link current_conservateur, edit_conservateur_registration_path, icon: "user"
+    - c.with_search do
+      = render "shared/header/header_conservateur_search"
 - elsif current_user
   = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.with_tools do
-      = render "shared/header/header_tools_user"
+    - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
+    - c.tool_link "Mon compte", edit_user_registration_path, icon: "user"
+    - c.tool_link "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), icon: "image"
 - else
   = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.with_tools do
-      = render "shared/header/header_tools_guest"
+    - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
+    - c.tool_link "Connexion", connexion_path, icon: "lock"
+    - c.tool_link "Voir les objets dans ma commune" , objets_path, icon: "image"
+

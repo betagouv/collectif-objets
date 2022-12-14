@@ -2,8 +2,11 @@
 
 class HeaderComponent < ViewComponent::Base
   renders_one :navbar
-  renders_one :tools
+  renders_many :tool_links, lambda { |text, path, icon:, **kwargs|
+    link_to text, path, class: "fr-link #{icon ? "fr-icon-#{icon}-line" : ''}", **kwargs
+  }
   renders_one :menu
+  renders_one :search
 
   attr_reader :notice, :alert
 

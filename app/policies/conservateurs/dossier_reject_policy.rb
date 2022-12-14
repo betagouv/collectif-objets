@@ -6,10 +6,14 @@ module Conservateurs
 
     delegate :dossier, to: :dossier_reject
 
-    def create?
+    def new?
       conservateur.departements.include?(dossier.departement) &&
         dossier.submitted? &&
         dossier.commune.completed?
+    end
+
+    def create?
+      !impersonating? && new?
     end
     alias update? create?
   end

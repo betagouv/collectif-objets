@@ -22,8 +22,12 @@
 
             %p.fr-header__service-tagline Préservez votre patrimoine mobilier
 
-
-        .fr-header__tools= tools
+        .fr-header__tools
+          %ul.fr-links-group
+            - tool_links.each do |tool_link|
+              %li= tool_link
+          - if search
+            = search
 
     - if notice || alert
       .fr-container.fr-pb-2w
