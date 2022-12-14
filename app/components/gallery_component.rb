@@ -59,8 +59,9 @@ class GalleryComponent < ViewComponent::Base
     return photos.first if photos.any?
 
     PHOTO.new(
-      "images/illustrations/photo-manquante.png",
-      "images/illustrations/photo-manquante.png"
+      original_url: "images/illustrations/photo-manquante.png",
+      thumb_url: "images/illustrations/photo-manquante.png",
+      description: "Photo manquante"
     )
   end
 
