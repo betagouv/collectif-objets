@@ -1,0 +1,31 @@
+- possible_variants = Co::Campaigns::Mail.possible_variants_for(step, recipient.commune)
+= turbo_frame_tag "#{step}_email" do
+  - if local_assigns[:mail].nil? || possible_variants.count > 1
+    = form_with(                                                                  |
+      url: admin_campaign_recipient_mail_preview_path(campaign, recipient), |
+      builder: FormBuilderDsfr,                                                 |
+      method: :get                                                              |
+    ) do |f|                                                                    |
+      - if possible_variants.count > 1
+        .fr-form-group
+          %fieldset.fr-fieldset.fr-fieldset--inline
+            %legend#radio-legend.fr-fieldset__legend.fr-text--regular
+              Variante de mail
+            .fr-fieldset__content
+              - possible_variants.each do |variant|
+                .fr-radio-group
+                  = f.radio_button(                                                  |
+                    :variant,                                                      |
+                    variant,                                                       |
+                    checked: local_assigns.fetch(:variant, "inactive") == variant, |
+                    id: "#{step}_#{variant}"                                       |
+                  )                                                                |
+                  = f.label t("campaign_v1_mailer.variants.#{variant}"), for: "#{step}_#{variant}"
+      - if step == "relance1"
+        = f.hidden_field :variant, value: "inactive"
+      = f.hidden_field :step, value: step
+      .fr-input-group
+        = f.submit "Générer l'aperçu de l'email…", class: "fr-btn--tertiary"
+  - if local_assigns[:mail]
+    .fr-mt-2w
+      = render Conservateurs::MailIframeComponent.new(mail:)

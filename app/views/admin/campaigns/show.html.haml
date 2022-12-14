@@ -1,0 +1,193 @@
+- content_for(:head_title) { "Campagne #{@campaign}" }
+
+%main.fr-container.fr-pt-2w.fr-pb-4w
+  = render( |
+    "shared/breadcrumbs", |
+    links: [ |
+      ["Accueil", root_path], |
+      ["Campagnes", admin_campaigns_path] |
+    ], |
+    current_page_label: @campaign.human_id |
+  ) |
+  %h2
+    %span.fr-icon-question-answer-line{"aria-hidden" => "true"}
+    Campagne #{@campaign.human_id}
+    = campaign_status_badge(@campaign)
+    - if @campaign.imported?
+      %span.fr-badge.fr-badge--sm Importée
+    - if @campaign.ongoing?
+      %span.fr-badge.fr-badge--sm
+        = t("campaigns.step_names.#{@campaign.current_step}")
+
+  - if @campaign.errors.any?
+    .fr-alert.fr-alert--error.fr-mb-6w
+      %p
+        %ul
+          - @campaign.errors.attribute_names.each do |attribute|
+            %li= @campaign.errors.messages_for(attribute).first
+
+  - if @campaign.draft? && @campaign.date_lancement > Time.zone.today
+    = form_for [:admin, @campaign], builder: FormBuilderDsfr, url: admin_campaign_update_status_path(@campaign) do |f|
+      = f.hidden_field :status_event, value: "plan"
+      .fr-callout
+        %p.fr-callout__text
+          Cette campagne est en brouillon. Pour qu'elle soit active et démarre effectivement le #{l(@campaign.date_lancement, format: :long_with_weekday)}, il faut la marquer comme planifiée. Vous pourrez repasser la campagne en brouillon si nécessaire.
+        = f.submit "Planifier la campagne"
+  - elsif @campaign.planned? && @campaign.date_lancement > Time.zone.today
+    = form_for @campaign, builder: FormBuilderDsfr, url: admin_campaign_update_status_path(@campaign) do |f|
+      = f.hidden_field :status_event, value: "return_to_draft"
+      .fr-callout.fr-callout--brown-caramel
+        %p.fr-callout__text
+          Cette campagne est planifiée,
+          = succeed "." do
+            %b
+              elle démarrera le #{l(@campaign.date_lancement, format: :long_with_weekday)}
+          %br/
+          Si vous avez besoin de la modifier ou de l'annuler, vous pouvez la repasser en brouillon.
+        = f.submit "Repasser en brouillon"
+  - if (@campaign.ongoing? || @campaign.finished?) && @campaign.stats.present?
+    = render "stats", stats: @campaign.stats
+  .fr-mb-8w
+    .fr-grid-row
+      .fr-col-md-6
+        %h4 Configuration
+        %div
+          %b
+            = t("activerecord.attributes.campaign.sender_name")
+            \:
+          %span= @campaign.sender_name.presence || "N/A"
+        %div
+          %b
+            = t("activerecord.attributes.campaign.nom_drac")
+            \:
+          %span= @campaign.nom_drac.presence || "N/A"
+        %div
+          %b
+            = t("activerecord.attributes.campaign.signature")
+            \:
+          - if @campaign.signature.present?
+            .co-white-space-pre-line.co-blockquote= @campaign.signature
+          - else
+            %span N/A
+        .fr-mt-2w
+          = button_to( |
+              "Modifier la configuration", |
+              edit_admin_campaign_path(@campaign), |
+              class: "fr-btn fr-btn--secondary", |
+              method: :get, |
+              disabled: !@campaign.draft? |
+            ) |
+      .fr-col-md-6
+        %h4 Dates
+        %table
+          %tbody
+            - Campaign::DATE_FIELDS.each do |date_field|
+              %tr
+                %th.co-text--right.fr-pr-2w= t("activerecord.attributes.campaign.#{date_field}")
+                %td= l(@campaign.send(date_field), format: :long_with_weekday)
+          %tfoot
+            %tr
+              %td.co-text--center.fr-pt-2w{:colspan => "2"}
+                = button_to( |
+                  "Modifier les dates", |
+                  edit_admin_campaign_path(@campaign), |
+                  class: "fr-btn fr-btn--secondary", |
+                  method: :get, |
+                  disabled: !@campaign.draft? |
+                ) |
+
+  - if @campaign.communes.any?
+    %p
+      = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
+        %h4 #{@campaign.communes.count} communes destinataires :
+        %ul.co-columns--4
+          - @campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
+            %li{class: recipient.commune.active? && (@campaign.draft? || @campaign.planned?) ? "co-text--red" : ""}
+              = link_to recipient.commune.nom, admin_campaign_recipient_path(@campaign, recipient)
+              = campaign_recipient_status_badge(recipient)
+              = campaign_recipient_opt_out_badge(recipient)
+              %span.fr-text--sm.co-text--muted= recipient.commune.code_insee
+        - if @excluded_communes.any?
+          .fr-mt-4w
+            %b
+              = @excluded_communes.count
+              communes non inclues :
+            %ul.co-columns--4
+              - @excluded_communes.each do |commune|
+                %li
+                  = commune.nom
+                  %span.fr-text--sm.co-text--muted= commune.code_insee
+  - else
+    %p Les communes destinataires n'ont pas encore été définies
+
+  .fr-grid-row.fr-mb-8w
+    .fr-col-md-6
+      = button_to( |
+        @campaign.communes.any? ? "Modifier les communes destinataires" : "Définir les communes destinataires", |
+        admin_campaign_edit_recipients_path(@campaign), |
+        method: :get, |
+        class: "fr-btn fr-btn--secondary", |
+        disabled: !@campaign.draft? |
+      ) |
+  - if @campaign.communes.any? && (@campaign.draft? || @campaign.planned?)
+    .fr-grid-row
+      .fr-col-md-6
+        %h4 Prévisualisation des emails de lancement
+        = button_to( |
+          "Génerer un aperçu des mails qui vont être envoyés", |
+          admin_campaign_mail_previews_path(@campaign), |
+          method: :get, |
+          class: "fr-btn fr-btn--tertiary" |
+        ) |
+  .fr-my-8w.fr-grid-row
+    .fr-col-md-4
+      %h4 Actions
+      %ul.fr-btns-group.fr-btns-group--icon-left
+        - if @campaign.ongoing? || @campaign.finished?
+          %li
+            = button_to( |
+              "Rafraîchir les statistiques", |
+              admin_campaign_refresh_stats_path(@campaign), |
+              class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line", |
+              method: :post |
+            ) |
+        - if @campaign.ongoing? || @campaign.finished?
+          %li
+            = button_to( |
+              "Rafraîchir les informations d'envoi des mails", |
+              admin_campaign_refresh_delivery_infos_path(@campaign), |
+              class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line", |
+              method: :post, |
+              disabled: @campaign.imported? |
+            ) |
+        %li
+          = form_with( |
+            url: admin_campaign_path(@campaign), |
+            method: :delete, |
+            data: { |
+              turbo_confirm: "Êtes-vous sûr.e  de vouloir supprimer ce brouillon ? C'est irréversible.", |
+            } |
+          ) do |f| |
+            = f.submit "Supprimer ce brouillon de campagne…", class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-delete-line"
+  - if @campaign.can_force_start?
+    .fr-callout.fr-callout--brown-caramel.fr-fi-warning-line
+      %h3.fr-callout__title Lancer la campagne tout de suite [DEBUG]
+      %p.fr-callout__text
+        Ceci est une action exceptionnelle pour tester le fonctionnement des campagnes. Les mails seront vraiment envoyés ! Vérifiez les adresses emails avant de lancer.
+      = button_to( |
+          "Lancer tout de suite", |
+          admin_campaign_force_start_path(@campaign), |
+          method: :post, |
+          class: "fr-btn fr-btn--icon-left fr-icon-warning-line" |
+        ) |
+  - elsif @campaign.can_force_step_up?
+    .fr-callout.fr-callout--brown-caramel.fr-fi-warning-line
+      %h3.fr-callout__title Passer à l'étape suivante tout de suite [DEBUG]
+      %p.fr-callout__text
+        Ceci est une action exceptionnelle pour tester le fonctionnement des campagnes. Les mails seront vraiment envoyés ! Vérifiez les adresses emails avant de lancer.
+      = button_to( |
+          "Passer à l'étape #{t("campaigns.step_names.#{@campaign.next_step}").downcase}", |
+          admin_campaign_force_step_up_path(@campaign), |
+          method: :post, |
+          class: "fr-btn fr-btn--icon-left fr-icon-warning-line" |
+        ) |

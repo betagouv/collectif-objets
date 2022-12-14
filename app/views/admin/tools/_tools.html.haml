@@ -1,0 +1,13 @@
+.panel
+  %h3 Aperçus des mails envoyés depuis le site
+  .panel_contents
+    %a{:href => "https://staging.collectif-objets.incubateur.net/mail_previews"}
+      ✉️ voir sur staging.collectif-objets.incubateur.net/mail_previews ↗️
+.panel
+  %h3 Outils externes
+  .panel_contents
+    %p
+      = link_to "⚙️ Sidekiq - Suivi des tâches asynchrones", "/sidekiq"
+    - if Rails.env.development?
+      %p
+        = link_to "📬 Mailcatcher", "http://localhost:1080"

@@ -1,0 +1,33 @@
+.fr-mb-4w
+  %h4 Statistiques
+  .fr-grid-row.fr-grid-row--gutters
+    - if stats[:statuses].present? || stats[:objets].present?
+      .fr-col-md-6
+        - if stats[:statuses].present?
+          %p
+            Statut des #{@campaign.communes.count} communes
+          = render(                                                                               |
+              "shared/chart_percentage",                                                          |
+              values: ["inactive", "started", "completed"].map { stats[:statuses].fetch(_1, 0) }, |
+              labels: ["Inactive", "Recensement démarré", "Recensement terminé"],                 |
+              colors: ["yellow", "blue", "rgb(30, 100, 30)", "green"]                             |
+            )                                                                                     |
+        - if stats[:objets].present?
+          %p
+            = stats[:objets][:total]
+            objets à recenser
+          = render(                                                                     |
+              "shared/chart_percentage",                                                |
+              values: ["not_recensed", "recensed"].map { stats[:objets].fetch(_1, 0) }, |
+              labels: ["Pas encore recensé", "Recensé"],                                |
+              colors: ["yellow", "green"]                                               |
+            )                                                                           |
+          - if stats[:objets][:recensements_with_photos_ratio].present?
+            %p
+              = (stats[:objets][:recensements_with_photos_ratio] * 100).round
+              \% des recensements ont des photos
+    - if stats[:mails].present?
+      .fr-col-md-6
+        %p= t("campaigns.statistics.mails.all", count: stats[:mails][:all][:count])
+        = render Campaigns::EmailsStatsComponent.new(stats[:mails][:all])
+        = link_to "Voir toutes les statistiques", admin_campaign_show_statistics_path(@campaign), class: "fr-link"

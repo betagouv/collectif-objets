@@ -4,7 +4,7 @@
   .co-flex.co-flex--space-between
     %div
       = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
-    %div= link_to "Ancienne interface d'admin", admin_old_commune_path(@commune)
+    %div= link_to "Ancienne interface d'admin", admin_commune_path(@commune)
 
   %h2
     = @commune
@@ -39,7 +39,7 @@
           = link_to "envoyer un email", "mailto:#{user.email}"
           %span ·
           = link_to admin_user_impersonate_path(user) do
-            %span.fr-icon-eye-line(aria-hidden="true")
+            = icon_span("eye")
             incarner cet usager
 
   %h4

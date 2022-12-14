@@ -9,8 +9,9 @@ module Admin
     end
 
     def stop_impersonating
+      session.delete(:user_impersonate_write)
       stop_impersonating_user
-      redirect_to admin_path, notice: "Vous n'incarnez plus d'usager"
+      redirect_to "/", notice: "Vous n'incarnez plus d'usager", status: :see_other
     end
 
     def toggle_impersonate_mode
@@ -19,7 +20,7 @@ module Admin
       else
         session[:user_impersonate_write] = "1"
       end
-      redirect_to commune_objets_path(current_user.commune)
+      redirect_back fallback_location: commune_objets_path(current_user.commune), status: :see_other
     end
   end
 end

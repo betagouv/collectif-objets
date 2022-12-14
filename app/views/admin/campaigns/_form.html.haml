@@ -1,0 +1,58 @@
+- if campaign.errors.any?
+  .fr-alert.fr-alert--error.fr-mb-6w
+    %p
+      Votre campagne n'a pas pu être enregistrée :
+    %ul
+      - campaign.errors.attribute_names.each do |attribute|
+        %li= campaign.errors.messages_for(attribute).first
+= form_for [:admin, campaign], builder: FormBuilderDsfr do |f|
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-md-6
+      %h3 Configuration
+      .fr-input-group
+        = f.label :departement_code
+        = f.select :departement_code, Departement.order(:code).all.map { [_1.to_s, _1.code ] }, {}, disabled: campaign.persisted?
+      .fr-input-group
+        = f.label :sender_name do
+          = t("activerecord.attributes.campaign.sender_name")
+          %span.fr-hint-text
+            C'est ce nom qui sera affiché dans les mails reçus par les communes. Les mails seront toujours envoyés avec l'adresse collectifobjets@beta.gouv.fr et le reply-to à support@collectif-objets.beta.gouv.fr
+        = f.text_field :sender_name, placeholder: "Jeanne Dupont"
+      .fr-input-group
+        = f.label :nom_drac do
+          = t("activerecord.attributes.campaign.nom_drac")
+          %span.fr-hint-text
+            Ce nom de DRAC sera utilisé dans des phrases comme "La DRAC Grand Est vous invite à participer…". Il ne faut pas inclure DRAC au début, seulement "Grand Est".
+        = f.text_field :nom_drac, placeholder: "Grand Est"
+      .fr-input-group
+        = f.label :signature do
+          = t("activerecord.attributes.campaign.signature")
+          %span.fr-hint-text
+            La signature sera utilisée dans le bas du mail. Elle peut faire entre 1 et 8 lignes.
+        = f.text_area :signature, placeholder: "Jeanne Dupont\n\nConservatrice en charge des monuments historiques\nDRAC Rhône-Alpes, Châlons-sur-Saone, 10 rue de la république", rows: 4
+    .fr-col-md-6
+      %h3 Dates
+      .fr-mb-2w{"data-controller" => "date-jump"}
+        - Campaign::DATE_FIELDS.each_with_index do |date_field, index|
+          .fr-input-group{"data-controller" => "date-display"}
+            .fr-grid-row
+              .fr-col-sm-10
+                = f.label date_field do
+                  = t("activerecord.attributes.campaign.#{date_field}")
+                  %span.fr-hint-text{"data-date-display-target" => "hint"}
+              - if index > 0
+                .fr-col-sm-2.co-text--right
+                  %button.fr-btn.fr-btn--tertiary.fr-btn--sm.fr-mb-1w{"data-action" => "date-jump#set", "data-date-jump-target" => "button"}
+                    +14 jours
+            = f.date_field(                                     |
+                date_field,                                     |
+                class: "fr-input",                              |
+                "data-action": "change->date-display#onChange", |
+                "data-date-jump-target": "input",               |
+                "data-date-display-target": "input"             |
+              )                                                 |
+  .fr-input-group.co-text--right.fr-mt-4w
+    = f.submit campaign.persisted? ? "Sauvegarder" : "Créer la campagne"
+    - if campaign.new_record?
+      %p.co-text--italic
+        Vous pourrez définir les communes à inclure dans cette campagne à l'étape suivante
