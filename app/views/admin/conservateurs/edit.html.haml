@@ -4,7 +4,7 @@
   .co-flex.co-flex--space-between
     %div
       = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Conservateurs", admin_conservateurs_path]], current_page_label: "Modifier #{@conservateur}"
-    %div= link_to "Ancienne interface d'admin", admin_conservateur_path(@conservateur)
+    %div= link_to "Ancienne interface d'admin", admin_old_conservateur_path(@conservateur)
 
   %h2 Admin - Modifier #{@conservateur}
 

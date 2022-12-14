@@ -121,6 +121,7 @@ Rails.application.routes.draw do
         get :redirect_to_sib_preview
       end
     end
+    resources :active_admin_comments, only: [:create, :destroy], controller: "comments"
   end
   get '/admin', to: redirect('/admin/communes')
 

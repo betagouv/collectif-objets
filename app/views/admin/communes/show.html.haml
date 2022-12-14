@@ -4,43 +4,65 @@
   .co-flex.co-flex--space-between
     %div
       = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
-    %div= link_to "Ancienne interface d'admin", admin_commune_path(@commune)
+    %div= link_to "Ancienne interface d'admin", admin_old_commune_path(@commune)
 
   %h2
     = @commune
     = commune_status_badge(@commune)
 
-  - if @commune.recensement_ratio.present?
-    %p
-      Objets recensés à #{@commune.recensement_ratio}%
-      - if @commune.recensements.any? && @commune.recensements.missing_photos.empty?
-        %span.fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
+  .fr-grid-row
+    .fr-col-md-8
+      - if @commune.recensement_ratio.present?
+        %p
+          Objets recensés à #{@commune.recensement_ratio}%
+          - if @commune.recensements.any? && @commune.recensements.missing_photos.empty?
+            %span.fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
 
-  - if @commune.started_at.present?
-    %p
-      Recensement démarré le #{l(@commune.started_at, format: :long_with_weekday)}
-      - if @commune.completed_at.present?
-        %br
-        et terminé le #{l(@commune.completed_at, format: :long_with_weekday)}
+      - if @commune.started_at.present?
+        %p
+          Recensement démarré le #{l(@commune.started_at, format: :long_with_weekday)}
+          - if @commune.completed_at.present?
+            %br
+            et terminé le #{l(@commune.completed_at, format: :long_with_weekday)}
 
 
-  %h4
-    = icon_span("account-circle")
-    #{@commune.users.count} Usager(s)
-  - if @commune.users.empty?
-    %p Aucun usager
-    %p
-      %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
-  %p
-    %ul
-      - @commune.users.each do |user|
-        %li
-          %span #{user.email} ·
-          = link_to "envoyer un email", "mailto:#{user.email}"
-          %span ·
-          = link_to admin_user_impersonate_path(user) do
-            = icon_span("eye")
-            incarner cet usager
+      %h4
+        = icon_span("account-circle")
+        #{@commune.users.count} Usager(s)
+      - if @commune.users.empty?
+        %p Aucun usager
+        %p
+          %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
+      %p
+        %ul
+          - @commune.users.each do |user|
+            %li
+              %span #{user.email} ·
+              = link_to "envoyer un email", "mailto:#{user.email}"
+              %span ·
+              = link_to admin_user_impersonate_path(user) do
+                = icon_span("eye")
+                incarner cet usager
+    .fr-col-md-4
+      %h4 Commentaires admin
+      .fr-mb-2w
+        = form_for [:admin, @commune.active_admin_comments.build], builder: FormBuilderDsfr, as: :comment do |f|
+          = f.hidden_field :resource_type
+          = f.hidden_field :resource_id
+          .fr-input-group
+            = f.text_area :body
+          = f.submit "Créer un nouveau commentaire"
+      - if @commune.active_admin_comments.count.zero?
+        .co-text--italic Aucun commentaire pour l'instant
+      - else
+        = render UnfoldComponent.new(max_height_px: 200) do
+          - @commune.active_admin_comments.order(updated_at: :desc).each do |comment|
+            .fr-mb-2w
+              %span.co-text--bold= comment.author.first_name
+              %span.fr-text--sm le #{l(comment.updated_at)}
+              %span.fr-text--sm= link_to "Supprimer", admin_active_admin_comment_path(comment), "data-turbo-method": "delete"
+              = blockquote comment.body
+
 
   %h4
     = icon_span("passport")

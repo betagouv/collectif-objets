@@ -29,6 +29,7 @@ class Commune < ApplicationRecord
   belongs_to :dossier, optional: true
   has_one_attached :formulaire
   has_many :campaign_recipients, dependent: :destroy
+  has_many :active_admin_comments, dependent: :destroy, as: :resource
 
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)

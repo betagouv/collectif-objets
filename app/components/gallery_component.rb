@@ -14,9 +14,9 @@ class GalleryComponent < ViewComponent::Base
     new(
       attachments.map do |attachment|
         PHOTO.new(
-          Rails.application.routes.url_helpers.url_for(attachment),
-          Rails.application.routes.url_helpers.url_for(attachment.variant(:medium)),
-          "© Licence ouverte"
+          original_url: Rails.application.routes.url_helpers.url_for(attachment),
+          thumb_url: Rails.application.routes.url_helpers.url_for(attachment.variant(:medium)),
+          description: "© Licence ouverte"
         )
       end,
       **kwargs
