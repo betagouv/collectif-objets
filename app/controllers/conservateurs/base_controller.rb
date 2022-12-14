@@ -16,7 +16,9 @@ module Conservateurs
     private
 
     def pundit_user
-      current_conservateur.impersonating = (current_conservateur != true_conservateur)
+      current_conservateur.impersonating =
+        current_conservateur != true_conservateur &&
+        session[:conservateur_impersonate_write].blank?
       current_conservateur
     end
 

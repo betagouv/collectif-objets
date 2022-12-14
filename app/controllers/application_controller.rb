@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
     render(turbo_stream: [turbo_stream.update(*args, **kwargs)])
   end
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   protected
 
   def set_sentry_context
@@ -64,5 +66,10 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for_adminuser(_admin_user)
     admin_path
+  end
+
+  def user_not_authorized
+    flash[:alert] = "Vous n'avez pas le droit de faire cette action"
+    redirect_back(fallback_location: root_path)
   end
 end

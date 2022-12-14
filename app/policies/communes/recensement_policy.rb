@@ -13,8 +13,7 @@ module Communes
     end
 
     def edit?
-      !impersonating? &&
-        user_commune? &&
+      user_commune? &&
         commune_can_edit?
     end
 

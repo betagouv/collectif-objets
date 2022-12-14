@@ -13,7 +13,7 @@ module Conservateurs
     end
 
     def create?
-      !impersonating? && new?
+      new? && !impersonating?
     end
     alias update? create?
   end

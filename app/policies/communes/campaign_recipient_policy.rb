@@ -5,7 +5,7 @@ module Communes
     alias campaign_recipient record
 
     def update?
-      !impersonating? && user_commune?
+      user_commune? && !impersonating?
     end
 
     private

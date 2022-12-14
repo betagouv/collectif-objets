@@ -1,0 +1,18 @@
+.fr-container
+  .fr-alert.co-impersonate-alert{class: write? ? "fr-alert--warning" : "fr-alert--info"}
+    .co-flex.co-flex--space-between.co-flex--align-items-center
+      %div
+        = icon_span "user-star"
+        Vous incarnez #{name}
+        - if write?
+          %b en mode écriture
+        - else
+          %b en mode lecture-seule
+      %div
+        = link_to toggle_path, class: "fr-btn fr-btn--tertiary fr-btn--icon-right #{write? ? "fr-icon-eye-line" : "fr-icon-warning-line"} fr-mr-2w", "data-turbo-method": "POST" do
+          - if write?
+            Mode lecture-seule
+          - else
+            Mode écriture
+        = link_to stop_path, class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-logout-box-r-line", "data-turbo-method": "POST" do
+          Arrêter

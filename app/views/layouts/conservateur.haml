@@ -1,24 +1,13 @@
 - content_for(:current_layout) { "conservateur" }
 - content_for(:below_header) do
   - if current_conservateur != true_conservateur
-    .fr-container
-      .fr-alert.co-impersonate-alert{class: session[:conservateur_impersonate_write] ? "fr-alert--warning" : "fr-alert--info"}
-        .co-flex.co-flex--space-between.co-flex--align-items-center
-          %div
-            = icon_span "user-star"
-            Vous incarnez le conservateur #{current_conservateur}
-            - if session[:conservateur_impersonate_write]
-              %b en mode écriture
-            - else
-              %b en mode lecture-seule
-          %div
-            = link_to toggle_impersonate_mode_admin_conservateurs_path, class: "fr-btn fr-btn--tertiary fr-btn--icon-right #{session[:conservateur_impersonate_write] ? "fr-icon-eye-line" : "fr-icon-warning-line"} fr-mr-2w", "data-turbo-method": "POST" do
-              - if session[:conservateur_impersonate_write]
-                Mode lecture-seule
-              - else
-                Mode écriture
-            = link_to stop_impersonating_admin_conservateurs_path, class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-logout-box-r-line", "data-turbo-method": "POST" do
-              Arrêter
+    = render ImpersonateCalloutComponent.new( |
+      name: "le conservateur #{current_conservateur}", |
+      mode: session[:conservateur_impersonate_write].present? ? :write : :read, |
+      toggle_path: toggle_impersonate_mode_admin_conservateurs_path, |
+      stop_path: stop_impersonating_admin_conservateurs_path |
+    ) |
+
 
 - content_for(:content) do
   = yield

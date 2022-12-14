@@ -16,7 +16,7 @@ module Communes
     protected
 
     def pundit_user
-      current_user.impersonating = current_user != true_user
+      current_user.impersonating = current_user != true_user && session[:user_impersonate_write].blank?
       current_user
     end
 
