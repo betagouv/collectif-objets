@@ -20,7 +20,6 @@ gem "devise-i18n", "~> 1.10"
 gem "draper", "~> 4.0"
 gem "factory_bot_rails"
 gem "haml-rails"
-gem "html2haml"
 gem "image_processing"
 gem "matrix"
 gem "pagy", "~> 5.10"
@@ -56,6 +55,7 @@ end
 
 group :development do
   gem "aasm-diagram", require: false
+  gem "html2haml"
   gem "htmlbeautifier"
   gem "lookbook"
   gem "pry"
