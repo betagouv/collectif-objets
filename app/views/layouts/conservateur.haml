@@ -1,0 +1,14 @@
+- content_for(:current_layout) { "conservateur" }
+- content_for(:below_header) do
+  - if current_conservateur != true_conservateur
+    = render ImpersonateCalloutComponent.new( |
+      name: "le conservateur #{current_conservateur}", |
+      mode: session[:conservateur_impersonate_write].present? ? :write : :read, |
+      toggle_path: toggle_impersonate_mode_admin_conservateurs_path, |
+      stop_path: stop_impersonating_admin_conservateurs_path |
+    ) |
+
+
+- content_for(:content) do
+  = yield
+= render template: "layouts/application"

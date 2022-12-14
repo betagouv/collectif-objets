@@ -84,7 +84,7 @@ ActiveAdmin.register Conservateur do
 
     link_to(
       "📤 Envoyer mail d'invitation",
-      reset_password_admin_conservateur_path(resource),
+      reset_password_admin_old_conservateur_path(resource),
       method: "POST",
       data: {
         confirm:

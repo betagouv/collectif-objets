@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :commune
 
+  attr_accessor :impersonating
+
   def password_required?
     false
   end
@@ -29,5 +31,9 @@ class User < ApplicationRecord
 
   def safe_email?
     SAFE_DOMAINS.include?(email.split("@").last)
+  end
+
+  def to_s
+    email.split("@")[0]
   end
 end

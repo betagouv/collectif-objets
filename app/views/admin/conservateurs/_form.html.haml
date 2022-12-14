@@ -1,0 +1,28 @@
+- if conservateur.errors.any?
+  .fr-alert.fr-alert--error.fr-mb-4w
+    %p
+      Erreur(s)
+      - conservateur.errors.full_messages.each do |message|
+        %li= message
+
+= form_for [:admin, conservateur], builder: FormBuilderDsfr, data: { turbo: false } do |f|
+  .fr-input-group
+    = f.label :email, "Email (*)"
+    - if conservateur.persisted?
+      %i Si c'est un conservateur différent, il faut créer un nouveau compte conservateur !
+    = f.text_field :email, required: true
+  .fr-input-group
+    = f.label :first_name
+    = f.text_field :first_name
+  .fr-input-group
+    = f.label :last_name
+    = f.text_field :last_name
+  .fr-input-group
+    = f.label :phone_number
+    = f.text_field :phone_number
+  .fr-input-group
+    = f.label :departements, "Départements"
+    .co-columns--4
+      = f.collection_check_boxes(:departement_ids, Departement.all.order(:code), :code, :to_s) do |ff|
+        %div= ff.label { ff.check_box + ff.text }
+  = f.submit "Enregistrer"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Communes
-  class DossierPolicy < ApplicationPolicy
+  class DossierPolicy < BasePolicy
     alias dossier record
 
     def show?

@@ -8,6 +8,8 @@ class Conservateur < ApplicationRecord
 
   scope :with_departement, ->(d) { where("departement_codes @> ARRAY[?]::varchar[]", d) }
 
+  attr_accessor :impersonating
+
   def self.ransackable_scopes(_auth_object = nil)
     [:with_departement]
   end
@@ -15,4 +17,5 @@ class Conservateur < ApplicationRecord
   def to_s
     [first_name, last_name].join(" ")
   end
+  alias full_name to_s
 end

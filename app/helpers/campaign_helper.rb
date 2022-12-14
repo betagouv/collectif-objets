@@ -74,5 +74,9 @@ module CampaignHelper
 
     content_tag(:span, "⛔️", title: "Ne souhaite plus recevoir d'emails")
   end
+
+  def campaigns_statuses_options
+    Campaign::STATUSES.map { [t("activerecord.attributes.campaign.statuses.#{_1}"), _1] }
+  end
 end
 # rubocop:enable Rails/OutputSafety

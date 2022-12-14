@@ -2,6 +2,8 @@
 
 class ApplicationController < ActionController::Base
   include Pagy::Backend
+  impersonates :user
+  impersonates :conservateur
 
   before_action :set_locale
   before_action :set_sentry_context
@@ -9,6 +11,8 @@ class ApplicationController < ActionController::Base
   def render_turbo_stream_update(*args, **kwargs)
     render(turbo_stream: [turbo_stream.update(*args, **kwargs)])
   end
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   protected
 
@@ -47,11 +51,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     return params[:after_sign_in_path] if params[:after_sign_in_path].present?
 
-    if resource.is_a?(User) || resource.is_a?(Conservateur)
-      return send("after_sign_in_path_for_#{resource.class.name.downcase}", resource)
-    end
-
-    super
+    send("after_sign_in_path_for_#{resource.class.name.downcase}", resource)
   end
 
   def after_sign_in_path_for_user(user)
@@ -62,5 +62,14 @@ class ApplicationController < ActionController::Base
     return conservateurs_departement_path(conservateur.departements.first) if conservateur.departements.count == 1
 
     conservateurs_departements_path
+  end
+
+  def after_sign_in_path_for_adminuser(_admin_user)
+    admin_path
+  end
+
+  def user_not_authorized
+    flash[:alert] = "Vous n'avez pas le droit de faire cette action"
+    redirect_back(fallback_location: root_path)
   end
 end

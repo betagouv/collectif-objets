@@ -4,19 +4,19 @@ class GalleryComponent < ViewComponent::Base
   include ApplicationHelper # for vite_or_raw_image_tag
 
   MAX_PHOTOS_SHOWN = 4
-  PHOTO_STRUCT = Struct.new(:original_url, :thumb_url, :description)
+  PHOTO = Struct.new(:original_url, :thumb_url, :description, keyword_init: true)
 
-  attr_reader :photos_structs
+  attr_reader :photos, :template
 
-  delegate :count, to: :photos_structs
+  delegate :count, to: :photos
 
   def self.from_attachments(attachments, **kwargs)
     new(
       attachments.map do |attachment|
-        PHOTO_STRUCT.new(
-          Rails.application.routes.url_helpers.url_for(attachment),
-          Rails.application.routes.url_helpers.url_for(attachment.variant(:medium)),
-          "© Licence ouverte"
+        PHOTO.new(
+          original_url: Rails.application.routes.url_helpers.url_for(attachment),
+          thumb_url: Rails.application.routes.url_helpers.url_for(attachment.variant(:medium)),
+          description: "© Licence ouverte"
         )
       end,
       **kwargs
@@ -25,16 +25,17 @@ class GalleryComponent < ViewComponent::Base
 
   def self.palissy_photos_from_objet(objet, **kwargs)
     new(
-      objet.palissy_photos.map { PHOTO_STRUCT.new(_1["url"], _1["url"], _1["credit"]) },
+      objet.palissy_photos.map { PHOTO.new(original_url: _1["url"], thumb_url: _1["url"], description: _1["credit"]) },
       title: I18n.t("objets.palissy_photos_count", count: objet.palissy_photos.count),
       **kwargs
     )
   end
 
-  def initialize(photos_structs, title: nil, responsive_versions: %i[full small])
-    @photos_structs = photos_structs
+  def initialize(photos, title: nil, template: :full, **options)
+    @photos = photos
     @title = title
-    @responsive_versions = responsive_versions
+    @template = template.to_sym
+    @options = options.with_indifferent_access
     super
   end
 
@@ -54,20 +55,13 @@ class GalleryComponent < ViewComponent::Base
     count - MAX_PHOTOS_SHOWN
   end
 
-  def responsive_version_full?
-    @responsive_versions.include?(:full)
-  end
+  def first_photo
+    return photos.first if photos.any?
 
-  def responsive_version_small?
-    @responsive_versions.include?(:small)
-  end
-
-  def first_photo_struct
-    return photos_structs.first if photos_structs.any?
-
-    PHOTO_STRUCT.new(
-      "images/illustrations/photo-manquante.png",
-      "images/illustrations/photo-manquante.png"
+    PHOTO.new(
+      original_url: "images/illustrations/photo-manquante.png",
+      thumb_url: "images/illustrations/photo-manquante.png",
+      description: "Photo manquante"
     )
   end
 
@@ -78,10 +72,18 @@ class GalleryComponent < ViewComponent::Base
   end
 
   def json_data
-    photos_structs.map { { src: _1.original_url, description: _1.description.presence }.compact }.to_json
+    photos.map { { src: _1.original_url, description: _1.description.presence }.compact }.to_json
   end
 
   def first_description
-    photos_structs.first&.description&.presence
+    photos.first&.description&.presence
+  end
+
+  def display_description?
+    @options.fetch(:display_description, false)
+  end
+
+  def display_gallery_link?
+    @options.fetch(:display_gallery_link, false)
   end
 end

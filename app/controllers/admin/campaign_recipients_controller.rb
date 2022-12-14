@@ -9,7 +9,8 @@ module Admin
 
     def update
       if @recipient.update(recipient_params)
-        redirect_to admin_campaign_recipient_path(@recipient.campaign, @recipient), notice: "Destinataire mis à jour"
+        redirect_to admin_campaign_recipient_path(@recipient.campaign, @recipient),
+                    notice: "Destinataire mis à jour"
       else
         render :show, status: :unprocessable_entity
       end

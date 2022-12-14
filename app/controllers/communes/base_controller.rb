@@ -11,7 +11,14 @@ module Communes
 
     before_action :set_commune, :set_dossier, :restrict_access
 
+    layout "commune"
+
     protected
+
+    def pundit_user
+      current_user.impersonating = current_user != true_user && session[:user_impersonate_write].blank?
+      current_user
+    end
 
     def set_commune
       @commune = Commune.find(params[:commune_id])

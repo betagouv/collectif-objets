@@ -51,7 +51,7 @@ ActiveAdmin.register Recensement do
 
         panel "🖼 Objet ##{recensement.objet.id}" do
           attributes_table_for recensement.objet.decorate do
-            row(:id) { link_to _1.id, admin_objet_path(_1) }
+            row(:id) { link_to _1.id, admin_old_objet_path(_1) }
             row :palissy_REF
             row :palissy_TICO
             row :palissy_EDIF
@@ -65,7 +65,7 @@ ActiveAdmin.register Recensement do
 
         panel "📍 Commune ##{recensement.commune.id}" do
           attributes_table_for recensement.commune do
-            row(:id) { link_to _1.id, admin_commune_path(_1) }
+            row(:id) { link_to _1.id, admin_old_commune_path(_1) }
             row :nom
             row :departement
             row :code_insee
@@ -78,7 +78,7 @@ ActiveAdmin.register Recensement do
 
         panel "📂 Dossier ##{recensement.dossier.id}" do
           attributes_table_for recensement.dossier do
-            row(:id) { link_to _1.id, admin_dossier_path(_1) }
+            row(:id) { link_to _1.id, admin_old_dossier_path(_1) }
             row :status
             row :submitted_at
             row :rejected_at

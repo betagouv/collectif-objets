@@ -53,7 +53,7 @@ module Admin
       if @campaign.update(campaign_params)
         redirect_to admin_campaign_path(@campaign), notice: "La campagne a été modifiée"
       else
-        render :new, status: :unprocessable_entity
+        render :edit, status: :unprocessable_entity
       end
     end
 

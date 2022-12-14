@@ -46,7 +46,7 @@ ActiveAdmin.register Dossier do
 
         panel "📍 Commune ##{dossier.commune.id}" do
           attributes_table_for dossier.commune do
-            row(:id) { link_to _1.id, admin_commune_path(_1) }
+            row(:id) { link_to _1.id, admin_old_commune_path(_1) }
             row :nom
             row :departement
             row :code_insee
@@ -60,7 +60,7 @@ ActiveAdmin.register Dossier do
         if dossier.conservateur.present?
           panel "👷‍♀️ Conservateur #{dossier.conservateur}" do
             attributes_table_for dossier.conservateur do
-              row(:id) { link_to _1.id, admin_conservateur_path(_1) }
+              row(:id) { link_to _1.id, admin_old_conservateur_path(_1) }
               row :email
               row :first_name
               row :last_name
@@ -72,7 +72,7 @@ ActiveAdmin.register Dossier do
 
         panel "✍️ Recensements" do
           table_for dossier.recensements.map(&:decorate) do
-            column(:id) { link_to _1.id, admin_recensement_path(_1) }
+            column(:id) { link_to _1.id, admin_old_recensement_path(_1) }
             column :dossier_id
             column :created_at
             column :localisation

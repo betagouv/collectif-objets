@@ -1,0 +1,36 @@
+- content_for(:head_title) { "Campagne #{@campaign}" }
+%main.fr-container.fr-pt-2w.fr-pb-4w
+  = render(                                                         |
+      "shared/breadcrumbs",                                         |
+      links: [                                                      |
+        ["Accueil", root_path],                                     |
+        ["Campagnes", admin_campaigns_path],                        |
+        [@campaign.human_id, admin_campaign_path(@campaign)]        |
+      ],                                                            |
+      current_page_label: "Prévisualisation des mails de lancement" |
+    )                                                               |
+  %h2 Prévisualisation des mails de lancement
+  %h4
+    Campagne #{@campaign.human_id} #{campaign_status_badge(@campaign)}
+  .fr-grid-row.fr-mb-8w
+    .fr-col-md-6
+      = form_with url: admin_campaign_mail_previews_path(@campaign), method: :get, builder: FormBuilderDsfr do |f|
+        .fr-input-group
+          = f.label :count, "Nombre de mails max (peut être lent)"
+          = f.text_field :count, value: @count, type: :number, autocomplete: "off"
+        .fr-input-group
+          = f.submit "Prévisualiser les mails"
+  - @campaign.recipients.includes(:commune).first(@count).each_slice(2) do |recipients|
+    .fr-grid-row.fr-mb-2w.fr-grid-row--gutters
+      - recipients.each do |recipient|
+        .fr-col-md-6
+          %b= recipient.commune
+          = render Conservateurs::MailIframeComponent.new( |
+              mail: CampaignV1Mailer.with(                 |
+                user: recipient.commune.users.first,       |
+                commune: recipient.commune,                |
+                campaign: recipient.campaign               |
+              ).lancement_email,                           |
+              display_headers: false,                      |
+              fit: true                                    |
+            )                                              |

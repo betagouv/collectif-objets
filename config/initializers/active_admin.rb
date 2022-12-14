@@ -2,22 +2,8 @@ ActiveAdmin.setup do |config|
   config.site_title = "Collectif Objets"
   config.site_title_link = "/"
 
-  # == Default Namespace
-  #
-  # Set the default namespace each administration resource
-  # will be added to.
-  #
-  # eg:
-  #   config.default_namespace = :hello_world
-  #
-  # This will create resources in the HelloWorld module and
-  # will namespace routes to /hello_world/*
-  #
-  # To set no namespace by default, use:
-  #   config.default_namespace = false
-  #
-  # Default:
-  # config.default_namespace = :admin
+
+  config.default_namespace = :admin_old
   #
   # You can customize the settings for each namespace by using
   # a namespace block. For example, to change the site title

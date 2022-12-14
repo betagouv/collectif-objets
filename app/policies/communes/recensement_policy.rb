@@ -1,16 +1,24 @@
 # frozen_string_literal: true
 
 module Communes
-  class RecensementPolicy < ApplicationPolicy
-    def create?
+  class RecensementPolicy < BasePolicy
+    def new?
       user_commune? &&
         objet.current_recensement.nil? &&
         commune_can_edit?
     end
 
-    def update?
+    def create?
+      new? && !impersonating?
+    end
+
+    def edit?
       user_commune? &&
         commune_can_edit?
+    end
+
+    def update?
+      edit? && !impersonating?
     end
 
     private

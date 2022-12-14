@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Communes
-  class ObjetPolicy < ApplicationPolicy
+  class ObjetPolicy < BasePolicy
     def show?
       user.commune == record.commune
     end

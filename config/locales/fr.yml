@@ -560,7 +560,6 @@ fr:
   gallery_component:
     open:
       one: Agrandir
-      other: Voir la galerie
     title:
       zero: Aucune photo
       one: 1 photo

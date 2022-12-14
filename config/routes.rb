@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # Replace Sidekiq Queues with enhanced version!
   Sidekiq::Throttled::Web.enhance_queues_tab!
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :admin_users, skip: [:registrations]
   ActiveAdmin.routes(self)
 
   authenticate :admin_user do
@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get "/fiche", to: "pages#pdf_embed"
   get "/pdf", to: "pages#pdf_download", as: "pdf_download"
   get "/connexion", to: "pages#connexion", as: "connexion"
+  get "/admin", to: "pages#admin", as: "admin"
 
   resources :objets, only: [:index, :show]
   get "objets/ref_pop/:palissy_REF", to: "objets#show_by_ref_pop"
@@ -85,6 +86,22 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :communes, only: [:index, :show]
+    resources :conservateurs, except: [:destroy] do |conservateur|
+      get :impersonate
+      collection do
+        post :stop_impersonating
+        post :toggle_impersonate_mode
+      end
+    end
+    resources :dossiers, only: [:update]
+    resources :users, only: [] do
+      get :impersonate
+      collection do
+        post :stop_impersonating
+        post :toggle_impersonate_mode
+      end
+    end
     resources :campaigns do
       get :show_statistics
       get :edit_recipients
@@ -104,7 +121,9 @@ Rails.application.routes.draw do
         get :redirect_to_sib_preview
       end
     end
+    resources :active_admin_comments, only: [:create, :destroy], controller: "comments"
   end
+  get '/admin', to: redirect('/admin/communes')
 
   get "health/raise_on_purpose", to: "health#raise_on_purpose"
   get "health/js_error", to: "health#js_error"
