@@ -1,3 +1,8 @@
+<% if @campaign.custom_message.present? %>
+<mj-text>
+  <%= @campaign.custom_message %>
+</mj-text>
+<% end %>
 <% if @departement.concordataire? %>
 <mj-text>
   <%= ct(".concordataires.intro") %>

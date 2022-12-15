@@ -1,0 +1,7 @@
+<% if @departement.concordataire? || @campaign.custom_message %>
+<mj-section>
+  <mj-column>
+    <%= render partial: "custom_campaign_infos" %>
+  </mj-column>
+</mj-section>
+<% end %>

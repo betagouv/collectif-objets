@@ -10,7 +10,7 @@
 <mj-section>
   <mj-column>
     <mj-text><%= ct("lancement.simple") %></mj-text>
-    <%= render partial: "info_concordataires" %>
+    <%= render partial: "custom_campaign_infos" %>
     <mj-text><%= ct("lancement.conseils") %></mj-text>
     <mj-text>
       <ul>

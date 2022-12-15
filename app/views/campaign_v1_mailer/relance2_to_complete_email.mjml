@@ -8,4 +8,4 @@
 
 <%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>
 
-<%= render partial: "info_concordataires_section" %>
+<%= render partial: "custom_campaign_infos_section" %>
