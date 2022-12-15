@@ -8,7 +8,8 @@
           %tr
             %th Département
             %th Dossiers analysés
-            %th Recensements
+            %th Recensements analysés
+            %th dont disparus ou introuvables
             %th Photos
             %th Palissy
             %th Mémoire
@@ -18,7 +19,8 @@
               %td= departement
               %td= departement.dossiers.length
               %td= departement.recensements.length
-              %td
+              %td= departement.recensements.to_a.reject(&:edifice_initial?).length
+              %td= departement.recensements.to_a.sum { _1.photos.length }
               %td= link_to "Export Palissy", admin_export_path(departement.code, base: "palissy")
               %td= link_to "Export Mémoire", admin_export_path(departement.code, base: "memoire")
         %tfooter
@@ -26,6 +28,7 @@
             %th Totaux
             %th= @departements.sum { _1.dossiers.length }
             %th= @departements.sum { _1.recensements.length }
-            %th
+            %th= @departements.sum { _1.recensements.to_a.reject(&:edifice_initial?).length }
+            %th= @departements.sum { |d| d.recensements.to_a.sum { |r| r.photos.length } }
             %th
             %th

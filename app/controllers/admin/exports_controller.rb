@@ -11,7 +11,7 @@ module Admin
         .order(:code)
         .includes(:dossiers)
         .where.not(dossiers: { accepted_at: nil })
-        .includes(:recensements)
+        .includes(recensements: [:photos_attachments])
         .where(RECENSEMENTS_EXPORTABLE_SQL)
     end
 
@@ -47,7 +47,6 @@ module Admin
         .where(RECENSEMENTS_EXPORTABLE_SQL)
         .includes(objet: [:commune])
         .order('communes.nom, objets."palissy_REF"')
-        .includes(%i[photos_attachments photos_blobs objet])
     end
 
     def attachments_arel
