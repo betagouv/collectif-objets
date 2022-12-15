@@ -1,0 +1,10 @@
+%main
+  .fr-container.fr-mb-8w
+    = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Exports par département", admin_exports_path]], current_page_label: "Export #{@base} pour #{@departement}"
+
+    %h1 Export #{@base} pour #{@departement}
+
+  - if @base == "palissy"
+    = render "palissy", recensements: @recensements
+  - elsif @base == "memoire"
+    = render "memoire", pagy: @pagy, photos: @photos

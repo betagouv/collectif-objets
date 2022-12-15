@@ -2,35 +2,63 @@
 
 module Admin
   class ExportsController < BaseController
-    Export = Struct.new(:departement_code, keyword_init: true)
+    RECENSEMENTS_EXPORTABLE_SQL = "recensements.recensable != false OR recensements.localisation = 'absent'"
 
-    def new
-      @export = Export.new(departement_code: params[:departement_code])
-      return unless @export.departement_code
+    Photo = Struct.new(:attachment, :recensement, keyword_init: true)
 
-      set_instance_vars
+    def index
+      @departements = Departement
+        .order(:code)
+        .includes(:dossiers)
+        .where.not(dossiers: { accepted_at: nil })
+        .includes(:recensements)
+        .where(RECENSEMENTS_EXPORTABLE_SQL)
     end
 
-    def create
-      redirect_to new_admin_export_path(departement_code: params[:export][:departement_code])
+    def show
+      @departement = Departement.find(params[:id])
+      @base = params[:base]
+      return set_instance_vars_palissy if @base == "palissy"
+
+      return set_instance_vars_memoire if @base == "memoire"
     end
 
     private
 
-    def set_instance_vars
-      @dossiers ||= dossiers
-      @recensements = @dossiers.to_a.map(&:recensements).flatten
-        .select { _1.recensable? || _1.absent? }
-        .sort_by { "#{_1.commune.nom} - #{_1.objet.palissy_REF}" }
-      @photos = @recensements.map(&:photos).flatten
+    def set_instance_vars_palissy
+      @recensements = recensements.where.not(localisation: "edifice_initial")
+    end
+
+    def set_instance_vars_memoire
+      @pagy, attachments = pagy(attachments_arel, items: 50)
+      recensements_by_id = recensements.where(id: attachments.pluck(:record_id)).to_a.index_by(&:id)
+      @photos = attachments.map do |attachment|
+        Photo.new(attachment:, recensement: recensements_by_id[attachment.record_id])
+      end
     end
 
     def dossiers
-      Dossier
-        .in_departement(@export.departement_code)
-        .accepted
+      Dossier.in_departement(@departement).accepted
+    end
+
+    def recensements
+      Recensement
+        .where(dossier: dossiers)
+        .where(RECENSEMENTS_EXPORTABLE_SQL)
+        .includes(objet: [:commune])
+        .order('communes.nom, objets."palissy_REF"')
+        .includes(%i[photos_attachments photos_blobs objet])
+    end
+
+    def attachments_arel
+      ActiveStorage::Attachment
+        .where(record_type: "Recensement")
+        .joins("LEFT JOIN recensements ON recensements.id = active_storage_attachments.record_id")
+        .joins("LEFT JOIN objets ON objets.id = recensements.objet_id")
+        .joins("LEFT JOIN dossiers ON dossiers.id = recensements.dossier_id")
+        .joins("LEFT JOIN communes ON communes.id = dossiers.commune_id")
+        .where(dossiers: { id: dossiers.to_a.map(&:id) })
         .order("communes.nom ASC")
-        .includes(recensements: %i[photos_attachments photos_blobs objet])
     end
   end
 end

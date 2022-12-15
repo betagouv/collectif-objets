@@ -1,0 +1,31 @@
+%main
+  .fr-container.fr-mb-8w
+    = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Exports par département"
+    %h1 Exports par département
+    .fr-table
+      %table
+        %thead
+          %tr
+            %th Département
+            %th Dossiers analysés
+            %th Recensements
+            %th Photos
+            %th Palissy
+            %th Mémoire
+        %tbody
+          - @departements.each do |departement|
+            %tr
+              %td= departement
+              %td= departement.dossiers.length
+              %td= departement.recensements.length
+              %td
+              %td= link_to "Export Palissy", admin_export_path(departement.code, base: "palissy")
+              %td= link_to "Export Mémoire", admin_export_path(departement.code, base: "memoire")
+        %tfooter
+          %tr
+            %th Totaux
+            %th= @departements.sum { _1.dossiers.length }
+            %th= @departements.sum { _1.recensements.length }
+            %th
+            %th
+            %th
