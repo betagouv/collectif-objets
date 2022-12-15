@@ -21,6 +21,7 @@ class PagesController < ApplicationController
 
   def admin
     redirect_to new_admin_user_session_path, alert: "Connectez-vous en tant qu'admin" if current_admin_user.nil?
+    render layout: "admin"
   end
 
   def guide
