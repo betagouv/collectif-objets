@@ -4,6 +4,8 @@ module Admin
   class BaseController < ApplicationController
     before_action :restrict_access
 
+    layout "admin"
+
     protected
 
     def restrict_access

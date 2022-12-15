@@ -35,6 +35,8 @@ class Dossier < ApplicationRecord
 
   delegate :departement, to: :commune
 
+  scope :in_departement, ->(d) { joins(:commune).where(communes: { departement: d }) }
+
   def full?
     recensements.count == commune.objets.count
   end

@@ -8,7 +8,8 @@ class Recensement < ApplicationRecord
   belongs_to :user
   belongs_to :dossier
   has_many_attached :photos do |attachable|
-    attachable.variant :medium, resize_to_limit: [800, 800]
+    attachable.variant :small, resize_to_limit: [300, 400], saver: { strip: true }
+    attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }
   end
 
   delegate :commune, to: :objet
@@ -77,6 +78,7 @@ class Recensement < ApplicationRecord
   }
   scope :in_commune, ->(commune) { joins(:objet).where(objets: { commune: }) }
   scope :not_analysed, -> { where(analysed_at: nil) }
+  scope :absent_or_recensable, -> { where(recensable: true).or(absent) }
 
   SQL_ORDER_PRIORITE = <<-SQL.squish
     CASE WHEN (
@@ -111,13 +113,5 @@ class Recensement < ApplicationRecord
     elsif attribute_name.include?("securisation")
       SECURISATIONS
     end
-  end
-
-  def analysable?
-    commune.completed?
-  end
-
-  def first?
-    commune.recensements.empty?
   end
 end
