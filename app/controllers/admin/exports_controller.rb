@@ -18,14 +18,19 @@ module Admin
     private
 
     def set_instance_vars
-      @dossiers = Dossier
+      @dossiers ||= dossiers
+      @recensements = @dossiers.to_a.map(&:recensements).flatten
+        .select { _1.recensable? || _1.absent? }
+        .sort_by { "#{_1.commune.nom} - #{_1.objet.palissy_REF}" }
+      @photos = @recensements.map(&:photos).flatten
+    end
+
+    def dossiers
+      Dossier
         .in_departement(@export.departement_code)
         .accepted
         .order("communes.nom ASC")
         .includes(recensements: %i[photos_attachments photos_blobs objet])
-      @recensements = @dossiers.to_a.map(&:recensements).flatten
-        .select { _1.recensable? || _1.absent? }
-      @photos = @recensements.map(&:photos).flatten
     end
   end
 end

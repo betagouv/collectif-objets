@@ -123,6 +123,9 @@ Rails.application.routes.draw do
     end
     resources :active_admin_comments, only: [:create, :destroy], controller: "comments"
     resources :exports, only: [:new, :create]
+    resources :attachments, only: [] do
+      post :rotate
+    end
   end
   get '/admin', to: redirect('/admin/communes')
 

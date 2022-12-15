@@ -7,6 +7,6 @@ module DepartementHelper
   end
 
   def departements_options
-    Departement.all.map { [_1, _1.code] }
+    Departement.order(:code).map { [_1, _1.code] }
   end
 end
