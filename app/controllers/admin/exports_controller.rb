@@ -4,6 +4,8 @@ module Admin
   class ExportsController < BaseController
     RECENSEMENTS_EXPORTABLE_SQL = "recensements.recensable != false OR recensements.localisation = 'absent'"
 
+    before_action :set_instance_vars, only: %i[show create]
+
     Photo = Struct.new(:attachment, :recensement, keyword_init: true)
 
     def index
@@ -15,15 +17,19 @@ module Admin
         .where(RECENSEMENTS_EXPORTABLE_SQL)
     end
 
-    def show
+    def show; end
+
+    def create; end
+
+    private
+
+    def set_instance_vars
       @departement = Departement.find(params[:id])
       @base = params[:base]
       return set_instance_vars_palissy if @base == "palissy"
 
       return set_instance_vars_memoire if @base == "memoire"
     end
-
-    private
 
     def set_instance_vars_palissy
       @recensements = recensements.where.not(localisation: "edifice_initial")

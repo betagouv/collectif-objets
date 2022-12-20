@@ -278,10 +278,6 @@ GEM
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-linux)
-      racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (5.10.1)
       activesupport
@@ -542,6 +538,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0)
   rubocop
   rubocop-rails
+  rubyzip
   sassc-rails
   selenium-webdriver
   sentry-rails

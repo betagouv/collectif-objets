@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_15_171224) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_20_083213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_171224) do
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.integer "memoire_number"
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -236,6 +237,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_171224) do
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
     t.index ["palissy_INSEE"], name: "index_objets_on_palissy_INSEE"
     t.index ["palissy_REF"], name: "objets_unique_ref_pop", unique: true
+  end
+
+  create_table "pop_export_recensements", id: false, force: :cascade do |t|
+    t.bigint "pop_export_id", null: false
+    t.bigint "recensement_id", null: false
+  end
+
+  create_table "pop_exports", force: :cascade do |t|
+    t.string "base", null: false
+    t.string "departement_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "recensements", force: :cascade do |t|

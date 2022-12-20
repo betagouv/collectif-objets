@@ -1,0 +1,57 @@
+.fr-table#photos
+  %table
+    %thead
+      %tr
+        %th Photo
+        %th Commune
+        - memoire_export_columns.each do |col|
+          %th{class: col[:fixed] ? "fixed" : ""}= col[:nom]
+      %tr.fr-text--sm
+        %th
+        %th
+        - memoire_export_columns.each do |col|
+          %th{class: col[:fixed] ? "fixed" : ""}= col[:desc]
+      %tr.fr-text--sm
+        %th
+        %th ex: Vouziers
+        - memoire_export_columns.each do |col|
+          %th{class: col[:fixed] ? "fixed" : ""}= col[:desc2]
+    %tbody
+      - photos_recensement.each do |photo|
+        %tr
+          %td= render "photo", photo: photo.attachment
+          %td= photo.recensement.commune
+          %td #{photo.recensement.objet.palissy_REF}
+          %td.co-word-break-all= photo.memoire_REF
+          %td.co-word-break-all= photo.memoire_REFIMG
+          %td= photo.memoire_NUMP
+          %td= photo.memoire_DATPV
+          %td.fixed Oui
+          %td.fixed Photographie fournie lors du recensement réalisé par Collectif Objets
+          %td= photo.recensement.commune.nom
+          %td.fixed objet
+          %td= photo.recensement.objet.edifice.nom
+          %td.fixed © Ministère de la Culture (France), Collectif Objets – Tous droits réservés
+          %td.fixed Image numérique native
+          %td.fixed MHCO008
+          %td.fixed Collectif Objets
+
+:css
+  .fr-table:not(.display-fixed) .fixed {
+    display: none;
+  }
+  .fr-table thead tr:not(:first-child) th {
+    font-size: 0.6rem;
+    line-height: 1rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  #photos img {
+    max-width: 150px;
+  }
+  #photos a[target="_blank"] {
+    background: none;
+  }
+  #photos a[target="_blank"]::after {
+    display: none;
+  }

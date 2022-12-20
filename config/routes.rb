@@ -122,7 +122,9 @@ Rails.application.routes.draw do
       end
     end
     resources :active_admin_comments, only: [:create, :destroy], controller: "comments"
-    resources :exports, only: [:index, :show]
+    resources :exports, only: [:index]
+    resources :palissy_exports, only: [:new, :create]
+    resources :memoire_exports, only: [:new, :create, :show]
     resources :attachments, only: [] do
       post :rotate
     end

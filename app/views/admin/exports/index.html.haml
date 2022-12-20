@@ -21,8 +21,8 @@
               %td= departement.recensements.length
               %td= departement.recensements.to_a.reject(&:edifice_initial?).length
               %td= departement.recensements.to_a.sum { _1.photos.length }
-              %td= link_to "Export Palissy", admin_export_path(departement.code, base: "palissy")
-              %td= link_to "Export Mémoire", admin_export_path(departement.code, base: "memoire")
+              %td= link_to "Export Palissy", new_admin_palissy_export_path(departement_code: departement.code)
+              %td= link_to "Export Mémoire", new_admin_memoire_export_path(departement_code: departement.code)
         %tfooter
           %tr
             %th Totaux
