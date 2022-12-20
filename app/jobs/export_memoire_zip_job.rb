@@ -18,15 +18,19 @@ class ExportMemoireZipJob
   private
 
   def download_and_zip_attachments
-    progress = ProgressBar.create(total: attachments.count, format: "%t: |%B| %p%% %e")
-    Zip::OutputStream.open(zip_file) do |zos|
-      attachments.each do |attachment|
-        zos.put_next_entry(attachment.memoire_REFIMG)
-        zos.print attachment.download
-        progress.increment
-      end
-    end
+    @progressbar = ProgressBar.create(total: attachments.count, format: "%t: |%B| %p%% %e")
+    @zip_output_stream = Zip::OutputStream.open(zip_file)
+    attachments.each { download_and_zip_attachment(_1) }
+    @zip_output_stream.close
     zip_file.rewind
+  end
+
+  def download_and_zip_attachment(attachment)
+    @zip_output_stream.put_next_entry(attachment.memoire_REFIMG)
+    @zip_output_stream.print attachment.download
+    @progressbar.increment
+    # rescue ActiveStorage::FileNotFoundError
+    #   puts "file not found ! for attachment #{attachment.id} of recensement #{attachment.record_id}"
   end
 
   def attachments = @pop_export.photos_attachments

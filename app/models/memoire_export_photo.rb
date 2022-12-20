@@ -34,7 +34,7 @@ class MemoireExportPhoto
   end
 
   # rubocop:disable Naming/MethodName
-  def memoire_LBASE = ""
+  def memoire_LBASE = recensement.objet.palissy_REF
 
   def memoire_REF
     [
