@@ -2,20 +2,12 @@
 
 module Admin
   class MemoireExportsController < BaseController
-    before_action :set_pop_export, only: [:show]
+    before_action :set_pop_export, only: %i[show destroy]
     before_action :set_departement, only: %i[new create]
 
     def show
-      respond_to do |format|
-        format.csv do
-          csv = MemoireExportCsv.new(@pop_export)
-          send_data(csv.to_s, filename: csv.filename, type: "text/csv")
-        end
-        format.html do
-          @pagy, attachments = pagy(@pop_export.recensement_photos_attachments, items: 50)
-          @photos = MemoireExportPhoto.from_attachments(attachments)
-        end
-      end
+      @pagy, attachments = pagy(@pop_export.recensement_photos_attachments, items: 50)
+      @photos = MemoireExportPhoto.from_attachments(attachments)
     end
 
     def new
@@ -23,16 +15,25 @@ module Admin
       @photos = MemoireExportPhoto.from_attachments(attachments)
     end
 
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def create
       pop_export = PopExport.new(base: "memoire", departement: @departement)
       if pop_export.save
         recensements.each { pop_export.recensements << _1 }
+        ExportMemoireZipJob.perform_async(pop_export.id)
+        ExportMemoireCsvJob.perform_async(pop_export.id)
         redirect_to admin_memoire_export_path(pop_export), status: :see_other
       else
         redirect_to \
           new_admin_memoire_export_path(departement_code: pop_export.departement_code),
           alert: "Impossible de générer l'export : #{pop_export.errors.full_messages.to_sentence}"
       end
+    end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+    def destroy
+      @pop_export.destroy!
+      redirect_to admin_exports_path, notice: "L'export a été supprimé", status: :see_other
     end
 
     private
@@ -48,10 +49,7 @@ module Admin
     def attachments_arel
       ActiveStorage::Attachment
         .where(record_type: "Recensement")
-        .joins("LEFT JOIN recensements ON recensements.id = active_storage_attachments.record_id")
-        .joins("LEFT JOIN objets ON objets.id = recensements.objet_id")
-        .joins("LEFT JOIN dossiers ON dossiers.id = recensements.dossier_id")
-        .joins("LEFT JOIN communes ON communes.id = dossiers.commune_id")
+        .joins(recensement: { objet: [:commune], dossier: {}, pop_exports: {} })
         .where(dossiers: { status: "accepted" })
         .where(communes: { departement_code: @departement })
         .order("communes.nom ASC")
