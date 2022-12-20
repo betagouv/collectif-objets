@@ -7,14 +7,18 @@ class MemoireExportPhoto
 
   def initialize(attachment:, recensement:)
     @attachment = attachment
+    raise ArgumentError, "missing attachment" if @attachment.nil?
+
     @recensement = recensement
+    raise ArgumentError, "missing recensement" if @recensement.nil?
   end
 
-  def self.from_attachments(attachments)
+  def self.from_attachments(attachments_arel)
+    attachments = attachments_arel.to_a
     raise if (attachments.pluck(:record_type) - ["Recensement"]).any?
 
     map = Recensement.where(id: attachments.pluck(:record_id)).to_a.index_by(&:id)
-    attachments.map { new(attachment: _1, recensement: map[_1.record_id]) }
+    attachments.map { new(attachment: _1, recensement: map.fetch(_1.record_id)) }
   end
 
   def self.from_recensements(recensements_arel)
@@ -37,7 +41,6 @@ class MemoireExportPhoto
       "MHCO",
       recensement.departement.code.rjust(3, "0"),
       "_",
-      memoire_DATPV,
       memoire_NUMP
     ].join
   end
@@ -51,7 +54,11 @@ class MemoireExportPhoto
   end
 
   def memoire_NUMP
-    attachment.memoire_number.to_s.rjust(6, "0")
+    [
+      memoire_DATPV,
+      recensement.departement.code.rjust(3, "0"),
+      attachment.memoire_number.to_s.rjust(6, "0")
+    ].join
   end
 
   def memoire_COULEUR = "Oui"
