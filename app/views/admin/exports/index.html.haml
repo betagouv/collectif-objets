@@ -19,16 +19,22 @@
               %td= departement
               %td= departement.dossiers.length
               %td= departement.recensements.length
-              %td= departement.recensements.to_a.reject(&:edifice_initial?).length
-              %td= departement.recensements.to_a.sum { _1.photos.length }
-              %td= link_to "Export Palissy", admin_export_path(departement.code, base: "palissy")
-              %td= link_to "Export Mémoire", admin_export_path(departement.code, base: "memoire")
+              %td= departement.recensements.to_a.reject(&:pop_export_palissy_id).reject(&:edifice_initial?).length
+              %td= departement.recensements.to_a.reject(&:pop_export_memoire_id).sum { _1.photos.length }
+              %td.co-white-space-nowrap
+                - departement.pop_exports.palissy.each do |pop_export|
+                  .fr-mb-2w= link_to pop_export, admin_palissy_export_path(pop_export), class: "fr-link"
+                %div= link_to "nouvel export Palissy …", new_admin_palissy_export_path(departement_code: departement.code), class: "fr-btn fr-btn--secondary"
+              %td.co-white-space-nowrap
+                - departement.pop_exports.memoire.each do |pop_export|
+                  .fr-mb-2w= link_to pop_export, admin_memoire_export_path(pop_export), class: "fr-link"
+                %div= link_to "nouvel export Mémoire…", new_admin_memoire_export_path(departement_code: departement.code), class: "fr-btn fr-btn--secondary"
         %tfooter
           %tr
             %th Totaux
             %th= @departements.sum { _1.dossiers.length }
             %th= @departements.sum { _1.recensements.length }
-            %th= @departements.sum { _1.recensements.to_a.reject(&:edifice_initial?).length }
-            %th= @departements.sum { |d| d.recensements.to_a.sum { |r| r.photos.length } }
+            %th= @departements.sum { _1.recensements.to_a.reject(&:pop_export_palissy_id).reject(&:edifice_initial?).length }
+            %th= @departements.sum { |d| d.recensements.to_a.reject(&:pop_export_memoire_id).sum { |r| r.photos.length } }
             %th
             %th

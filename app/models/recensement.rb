@@ -7,6 +7,9 @@ class Recensement < ApplicationRecord
   belongs_to :objet
   belongs_to :user
   belongs_to :dossier
+  belongs_to :pop_export_memoire, class_name: "PopExport", inverse_of: :recensements_memoire, optional: true
+  belongs_to :pop_export_palissy, class_name: "PopExport", inverse_of: :recensements_palissy, optional: true
+
   has_many_attached :photos do |attachable|
     attachable.variant :small, resize_to_limit: [300, 400], saver: { strip: true }
     attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }

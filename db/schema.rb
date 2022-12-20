@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_15_171224) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_20_083213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_171224) do
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.integer "memoire_number"
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -238,6 +239,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_171224) do
     t.index ["palissy_REF"], name: "objets_unique_ref_pop", unique: true
   end
 
+  create_table "pop_exports", force: :cascade do |t|
+    t.string "base", null: false
+    t.string "departement_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "recensements", force: :cascade do |t|
     t.bigint "objet_id", null: false
     t.string "localisation"
@@ -261,6 +269,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_171224) do
     t.bigint "dossier_id", null: false
     t.boolean "confirmation_sur_place"
     t.boolean "confirmation_pas_de_photos"
+    t.bigint "pop_export_memoire_id"
+    t.bigint "pop_export_palissy_id"
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true

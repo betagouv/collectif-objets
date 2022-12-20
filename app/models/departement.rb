@@ -8,6 +8,7 @@ class Departement < ApplicationRecord
   has_many :conservateur_roles, dependent: :destroy, foreign_key: :departement_code, inverse_of: :departement
   has_many :conservateurs, through: :conservateur_roles
   has_many :campaigns, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
+  has_many :pop_exports, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
 
   def self.include_communes_count
     joins(
@@ -45,6 +46,10 @@ class Departement < ApplicationRecord
   def to_h
     # DEPRECATE
     %i[code nom communes_count objets_count].map { [_1, send(_1)] }.to_h
+  end
+
+  def memoire_sequence_name
+    "memoire_photos_number_#{code}"
   end
 
   alias display_name to_s
