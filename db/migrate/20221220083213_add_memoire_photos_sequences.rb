@@ -2,7 +2,7 @@ class AddMemoirePhotosSequences < ActiveRecord::Migration[7.0]
   def up
     add_column :active_storage_attachments, :memoire_number, :integer
     ActiveRecord::Base.connection.execute \
-      sequence_names.map { "CREATE SEQUENCE #{_1};" }.join("\n")
+      sequence_names.map { "CREATE SEQUENCE IF NOT EXISTS #{_1};" }.join("\n")
     progress = ProgressBar.create(total: attachments.count, format: "%t: |%B| %p%% %e")
     attachments.each do |attachment|
       attachment.set_memoire_number
