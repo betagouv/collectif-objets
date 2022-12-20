@@ -16,6 +16,7 @@ module Admin
         .joins(:dossier)
         .includes(objet: [:commune])
         .absent_or_recensable
+        .where(pop_export_palissy_id: nil)
         .where(dossiers: { status: "accepted" })
         .where(communes: { departement_code: @departement })
         .where.not(localisation: "edifice_initial")

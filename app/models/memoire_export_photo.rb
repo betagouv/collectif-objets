@@ -35,7 +35,7 @@ class MemoireExportPhoto
   def memoire_REF
     [
       "MHCO",
-      recensement.departement.code_3_characters,
+      recensement.departement.code.rjust(3, "0"),
       "_",
       memoire_DATPV,
       memoire_NUMP

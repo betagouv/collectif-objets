@@ -18,7 +18,6 @@ module Admin
     def create
       pop_export = PopExport.new(base: "memoire", departement: @departement, recensements_memoire: recensements)
       if pop_export.save
-        # recensements.update_all(pop_export_memoire_id: pop_export.id)
         ExportMemoireZipJob.perform_async(pop_export.id)
         ExportMemoireCsvJob.perform_async(pop_export.id)
         redirect_to admin_memoire_export_path(pop_export), status: :see_other

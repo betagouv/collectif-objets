@@ -24,13 +24,14 @@ module Rotation
   end
 end
 
-module BelongsToRecensement
+module RecensementPhoto
   extend ActiveSupport::Concern
   included do
     belongs_to :recensement, foreign_key: 'record_id', optional: true
-    delegate :objet, to: :recensement, allow_nil: true
-    delegate :departement, to: :objet, allow_nil: true
-    delegate :memoire_sequence_name, to: :departement, allow_nil: true
+    has_one :objet, through: :recensement
+    has_one :commune, through: :objet
+    has_one :departement, through: :commune
+    delegate :memoire_sequence_name, to: :departement
     after_save :set_memoire_number, if: :recensement?
   end
 
@@ -64,5 +65,5 @@ end
 
 ActiveSupport.on_load(:active_storage_attachment) do
   ActiveStorage::Attachment.include Rotation
-  ActiveStorage::Attachment.include BelongsToRecensement
+  ActiveStorage::Attachment.include RecensementPhoto
 end

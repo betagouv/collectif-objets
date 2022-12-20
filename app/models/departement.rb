@@ -48,10 +48,6 @@ class Departement < ApplicationRecord
     %i[code nom communes_count objets_count].map { [_1, send(_1)] }.to_h
   end
 
-  def code_3_characters
-    code.rjust(3, "0")
-  end
-
   def memoire_sequence_name
     "memoire_photos_number_#{code}"
   end
