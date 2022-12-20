@@ -239,11 +239,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_20_083213) do
     t.index ["palissy_REF"], name: "objets_unique_ref_pop", unique: true
   end
 
-  create_table "pop_export_recensements", id: false, force: :cascade do |t|
-    t.bigint "pop_export_id", null: false
-    t.bigint "recensement_id", null: false
-  end
-
   create_table "pop_exports", force: :cascade do |t|
     t.string "base", null: false
     t.string "departement_code", null: false
@@ -274,6 +269,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_20_083213) do
     t.bigint "dossier_id", null: false
     t.boolean "confirmation_sur_place"
     t.boolean "confirmation_pas_de_photos"
+    t.bigint "pop_export_memoire_id"
+    t.bigint "pop_export_palissy_id"
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true

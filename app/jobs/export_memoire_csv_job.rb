@@ -23,7 +23,7 @@ class ExportMemoireCsvJob
   end
 
   def recensement_photos
-    @recensement_photos ||= MemoireExportPhoto.from_recensements(@pop_export.recensements)
+    @recensement_photos ||= MemoireExportPhoto.from_recensements(@pop_export.recensements_memoire)
   end
 
   def filename = "export_memoire_#{@pop_export.departement_code}_#{@pop_export.timestamp}.csv"

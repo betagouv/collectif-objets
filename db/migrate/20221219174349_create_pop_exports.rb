@@ -7,6 +7,7 @@ class CreatePopExports < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    create_join_table :pop_exports, :recensements, table_name: :pop_export_recensements
+    add_column :recensements, :pop_export_memoire_id, :bigint
+    add_column :recensements, :pop_export_palissy_id, :bigint
   end
 end

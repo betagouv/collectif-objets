@@ -11,7 +11,7 @@ class MemoireExportPhoto
   end
 
   def self.from_attachments(attachments)
-    raise unless attachments.pluck(:record_type).to_set == ["Recensement"].to_set
+    raise if (attachments.pluck(:record_type) - ["Recensement"]).any?
 
     map = Recensement.where(id: attachments.pluck(:record_id)).to_a.index_by(&:id)
     attachments.map { new(attachment: _1, recensement: map[_1.record_id]) }

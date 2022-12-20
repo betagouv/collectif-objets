@@ -3,9 +3,21 @@
 class PopExport < ApplicationRecord
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :pop_exports
   validates :base, inclusion: { in: %w[palissy memoire] }
-  has_many :pop_export_recensements, dependent: :delete_all, inverse_of: :pop_export
-  has_many :recensements, through: :pop_export_recensements, inverse_of: :pop_exports
-  has_many :photos_attachments, through: :recensements
+  has_many(
+    :recensements_memoire,
+    class_name: "Recensement",
+    foreign_key: :pop_export_memoire_id,
+    inverse_of: :pop_export_memoire,
+    dependent: :nullify
+  )
+  has_many(
+    :recensements_palissy,
+    class_name: "Recensement",
+    foreign_key: :pop_export_palissy_id,
+    inverse_of: :pop_export_palissy,
+    dependent: :nullify
+  )
+  has_many :photos_attachments, through: :recensements_memoire
   has_one_attached :zip
   has_one_attached :csv
   scope :palissy, -> { where(base: "palissy") }
@@ -15,10 +27,9 @@ class PopExport < ApplicationRecord
     ActiveStorage::Attachment
       .where(record_type: "Recensement")
       .joins("LEFT JOIN recensements ON recensements.id = active_storage_attachments.record_id")
-      .joins("LEFT JOIN pop_export_recensements ON recensements.id = pop_export_recensements.recensement_id")
       .joins("LEFT JOIN objets ON objets.id = recensements.objet_id")
       .joins('LEFT JOIN communes ON communes.code_insee = objets."palissy_INSEE"')
-      .where(pop_export_recensements: { pop_export_id: id })
+      .where(recensements: { pop_export_memoire_id: id })
       .order("communes.nom ASC")
   end
 

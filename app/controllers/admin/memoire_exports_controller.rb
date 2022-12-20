@@ -15,11 +15,10 @@ module Admin
       @photos = MemoireExportPhoto.from_attachments(attachments)
     end
 
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def create
-      pop_export = PopExport.new(base: "memoire", departement: @departement)
+      pop_export = PopExport.new(base: "memoire", departement: @departement, recensements_memoire: recensements)
       if pop_export.save
-        recensements.each { pop_export.recensements << _1 }
+        # recensements.update_all(pop_export_memoire_id: pop_export.id)
         ExportMemoireZipJob.perform_async(pop_export.id)
         ExportMemoireCsvJob.perform_async(pop_export.id)
         redirect_to admin_memoire_export_path(pop_export), status: :see_other
@@ -29,7 +28,6 @@ module Admin
           alert: "Impossible de générer l'export : #{pop_export.errors.full_messages.to_sentence}"
       end
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def destroy
       @pop_export.destroy!
@@ -49,9 +47,10 @@ module Admin
     def attachments_arel
       ActiveStorage::Attachment
         .where(record_type: "Recensement")
-        .joins(recensement: { objet: [:commune], dossier: {}, pop_exports: {} })
+        .joins(recensement: { objet: [:commune], dossier: {} })
         .where(dossiers: { status: "accepted" })
         .where(communes: { departement_code: @departement })
+        .where(recensements: { pop_export_memoire_id: nil })
         .order("communes.nom ASC")
     end
 

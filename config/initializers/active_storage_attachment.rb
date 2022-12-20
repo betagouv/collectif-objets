@@ -20,7 +20,7 @@ module Rotation
   private
 
   def file_extension
-    {"image/jpeg" => "jpg"}.fetch(blob.content_type)
+    {"image/jpeg" => "jpg", "image/png" => "png"}.fetch(blob.content_type)
   end
 end
 
