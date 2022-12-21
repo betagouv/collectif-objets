@@ -1,0 +1,59 @@
+- content_for(:head_title) { "Connexion" }
+
+%main.fr-container.fr-pt-2w.fr-pb-4w{"data-controller": "devise--sessions"}
+  = render "shared/breadcrumbs", links: [ ["Accueil", root_path], ["Connexion", connexion_path]], current_page_label: "Connexion mairie"
+  .fr-grid-row
+    .fr-col-md-6
+      %h1 Connexion mairie
+      - if @success
+        %p Veuillez cliquer sur le lien que vous avez reçu par mail pour vous connecter
+        %p Si vous n'avez pas reçu le lien ou que vous n'arrivez pas à vous connecter, vous pouvez :
+        %p
+          %button.fr-btn{"data-action": "devise--sessions#toggleMagicLinkForm"}
+            Demander un nouveau lien
+          ou
+          %a.fr-btn.fr-btn--secondary{href: "mailto:collectifobjets@beta.gouv.fr"}
+            Nous contacter
+      - if @error == "no_user_found"
+        %p Assurez vous de bien utiliser l'adresse mail sur laquelle vous avez reçu des messages de notre part.
+        %p
+          %button.fr-btn{"data-action": "devise--sessions#toggleMagicLinkForm"}
+            Ré-essayer avec une autre adresse email
+          ou
+        %p
+          %a.fr-btn.fr-btn--secondary{href: "mailto:collectifobjets@beta.gouv.fr"}
+            Nous contacter pour résoudre le problème
+      %div{class: "#{"hide" if @success || @error}", "data-devise--sessions-target": "magicLinkForm"}
+        = form_for(resource, as: resource_name, url: users_magic_links_path, builder: FormBuilderDsfr) do |f|
+          .fr-input-group
+            = f.label :email do
+              Email
+              %span.fr-hint-text
+                Utilisez l'email principal de la mairie, c'est à dire celui publié sur
+                = link_to "https://www.service-public.fr/", rel: "noopener", target: "_blank" do
+                  service-public.fr
+            %br
+            = f.email_field :email, autofocus: true, autocomplete: "email", required: true
+          .actions
+            = f.submit "Recevoir un lien de connexion"
+      .fr-mt-6w
+        %ul.fr-accordions-group
+          %li
+            %section.fr-accordion
+              %h2.fr-accordion__title
+                %button.fr-accordion__btn{"aria-controls": "faq1", "aria-expanded": "false"}
+                  Où sont les mots de passe ?
+              #faq1.fr-collapse
+                Pour plus de sécurité et de simplicité, Collectif Objets ne vous demande pas de mot de passe. Pour vous identifier, vous devez renseigner l'email de la mairie puis cliquer sur le lien de connexion reçu par mail.
+          %li
+            %section.fr-accordion
+              %h2.fr-accordion__title
+                %button.fr-accordion__btn{"aria-controls": "faq2", "aria-expanded": "false"}
+                  Mauvais email / Je n'y ai pas accès
+              #faq2.fr-collapse
+                Les comptes des mairies ont été créées en utilisant les données publiées sur
+                = link_to "https://www.service-public.fr/", rel: "noopener", target: "_blank" do
+                  service-public.fr
+                \. Si cet email est erroné ou que vous n'y avez pas accès, veuillez
+                = link_to "mailto:support@collectif-objets.beta.gouv.fr" do
+                  nous envoyer un mail

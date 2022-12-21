@@ -1,0 +1,154 @@
+%main
+  / SECTION INTRO
+  .co-background--light-grey.fr-py-6w
+    .fr-container.fr-grid-row
+      .fr-col-md-6.fr-pr-4w>
+        %h1 Recenser notre patrimoine pour le protéger
+        :markdown
+          En France, **3 communes sur 4** abritent des **objets classés ou inscrits aux monuments historiques**
+
+          À travers **Collectif Objets**, le ministère de la Culture lance une opération de
+          **recensement participatif** pour accompagner les communes propriétaires dans la protection et la valorisation de ce patrimoine.
+
+          Pour lutter contre les vols et les dégradations des objets monuments historiques de votre commune, **votre rôle d'élu local est essentiel**.
+
+        %p= render "shared/cta_voir_objets"
+      .fr-col-md-6.fr-px-6w
+        = render("shared/video_reportage_canal32")
+        %p.co-text--italic.fr-mt-1w.fr-text--sm
+          Reportage sur le terrain à Montaulin, avec Remy Marty, Maire de la commune, Eric Blanchegorge, Conservateur des Antiquités et Objets dʼArts de lʼAube et Fantine Monot, chargée de déploiement pour Collectif Objets.
+          = link_to "https://www.canal32.fr/thematiques/culture/sujet/des-maires-participent-au-recensement-du-patrimoine-du-02-novembre-2022.html", rel:  "noopener", target:  "_blank" do
+            voir sur canal32.fr
+
+  / SECTION POURQUOI
+  .co-home-section-pourquoi.fr-py-12w
+    .fr-container.fr-grid-row.fr-grid-row--center
+      .fr-col-md-6
+        %h2.co-text--blue Pourquoi participer au recensement ?
+        %p
+          Les objets monuments historiques sont l'histoire de nos territoires.
+          Un recensement régulier permet d'identifier à temps les situations qui
+          nécessitent une intervention et d'apporter des solutions adaptées aux
+          singularités de votre commune.
+    .fr-container.fr-grid-row.fr-grid-row--center.fr-mt-4w
+      .fr-col-md-4.fr-px-4w.fr-pb-4w
+        = vite_image_tag "images/illustrations/woman-magnifier.svg", class: "fr-mb-2w  co--width-max-100", alt: ""
+        %div
+          %b (Re) Découvrez les objets
+          classés ou inscrits aux monuments historiques qui font la richesse de votre commune
+      .fr-col-md-4.fr-px-4w.fr-pb-4w
+        = vite_image_tag "images/illustrations/people-clap.svg", class: "fr-mb-2w  co--width-max-100", alt: ""
+        %div
+          %b Bénéficiez des conseils
+          et de l'expertise des conservatrices et conservateurs
+      .fr-col-md-4.fr-px-4w.fr-pb-4w
+        = vite_image_tag "images/illustrations/woman-going-up-stairs.svg", class: "fr-mb-2w  co--width-max-100", alt: ""
+        %div
+          Les conservateurs de votre département vous adresseront un
+          = succeed "," do
+            %b rapport sur la conservation et la sécurisation de vos objets
+  .co-background--light-grey.fr-py-12w
+    .fr-container.fr-grid-row.fr-grid-row--center.fr-my-8w
+      .fr-col-md-6
+        = link_to "Je découvre les objets monuments historiques de ma commune", objets_path, class: "fr-btn"
+
+  / SECTION ETAPES
+  .co-home-section-steps
+    .fr-container.fr-grid-row.fr-grid-row-gutters.fr-grid-row--middle.fr-grid-row--center.fr-my-12w
+      .fr-col-md-5.fr-px-12w.fr-pb-2w.co-text--center
+        = vite_image_tag "images/illustrations/counter-01.svg" , class: "co--width-max-100", alt: "étape 1"
+      .fr-col-md-5
+        %p.fr-text--lg= t("recensements.etapes.etape1_html")
+        %p
+          = link_to "Voir les objets de ma commune", objets_path, class: "fr-icon-arrow-right-line fr-link--icon-right"
+    .fr-container.fr-grid-row.fr-grid-row-gutters.fr-grid-row--middle.fr-grid-row--center.fr-my-12w
+      .fr-col-md-5
+        %p.fr-text--lg= t("recensements.etapes.etape2_html")
+        %p
+          = link_to "Lire le guide", guide_url
+      .fr-col-md-5.fr-px-12w.fr-pb-2w.co-text--center.co-flex-md-reverse-order
+        = vite_image_tag "images/illustrations/counter-02.svg" , class: "co--width-max-100", alt: "étape 2"
+    .fr-container.fr-grid-row.fr-grid-row-gutters.fr-grid-row--middle.fr-grid-row--center.fr-my-12w
+      .fr-col-md-5.fr-px-12w.fr-pb-2w.co-text--center
+        = vite_image_tag "images/illustrations/counter-03.svg" , class: "co--width-max-100", alt: "étape 3"
+      .fr-col-md-5
+        %p.fr-text--lg= t("recensements.etapes.etape3_html")
+
+  / SECTION STATS
+  .co-background--light-grey.fr-py-12w.co-text--center
+    %h2#stats.co-text--blue Elles ont participé
+    .fr-container.fr-grid-row.fr-grid-row--center.fr-grid-row-gutters
+      .fr-col-md-6.fr-px-8w.fr-pb-4w
+        .fr-display--xl.co-text--blue= @stats[:communes]
+        .co-text--blue
+          communes engagées dans le recensement
+      .fr-col-md-6.fr-px-8w
+        .fr-display--xl.co-text--blue= @stats[:recensements]
+        .co-text--blue
+          objets monuments historiques déjà recensés
+          depuis le début de l'opération
+    .fr-mt-8w
+      = link_to "Voir plus de statistiques", stats_path, class: "fr-link"
+
+  / SECTION TESTIMONIALS
+  #testimonials.co-home-section-testimonials.fr-py-12w
+    .fr-container
+      .fr-grid-row.fr-grid-row-gutters
+        .fr-col-12.fr-pb-4w.co-text--center
+          %h2.co-text--blue Ils témoignent
+        .fr-col-md-6.fr-p-4w
+          .co-testimonial-wrapper
+            = vite_image_tag "images/illustrations/head-circle-man-blue.svg", class: "co-testimonial-avatar", alt: ""
+            %p
+              ‟ Je n'avais pas connaissance de la valeur ou de ce que pouvaient représenter mes objets au niveau du patrimoine ”
+          .co-text--center
+            Maire d'une commune de 545 habitants
+            %span.co-text--muted Haute-Marne
+        .fr-col-md-6.fr-p-4w
+          .co-testimonial-wrapper
+            = vite_image_tag "images/illustrations/head-circle-woman-red.svg", class: "co-testimonial-avatar", alt: ""
+            %p
+              ‟ Le recensement s'est bien passé, le guide fourni était super. Je ne connaissais pas tout cela ! ”
+          .co-text--center
+            Conseillère Municipale d'une commune de 729 habitants
+            %span.co-text--muted Haute-Marne
+        .fr-col-md-6.fr-p-4w
+          .co-testimonial-wrapper
+            = vite_image_tag "images/illustrations/head-circle-man-glasses.svg", class: "co-testimonial-avatar", alt: ""
+            %p
+              ‟ Ça prend 5 minutes, rien de compliqué, c'est simple. C'est la patrimoine de la France, il est chez nous, c'est notre devoir. ”
+          .co-text--center
+            Maire d'une commune de 518 habitants
+            %span.co-text--muted Haute-Marne
+        .fr-col-md-6.fr-p-4w
+          .co-testimonial-wrapper
+            = vite_image_tag "images/illustrations/head-circle-man-beard.svg", class: "co-testimonial-avatar", alt: ""
+            %p
+              ‟ La démarche permet de mieux connaître l'histoire de sa commune et d'échanger avec les habitants, et les anciens, sur ce qui fait notre commune ”
+          .co-text--center
+            Maire d'une commune de 789 habitants
+            %span.co-text--muted Haute-Marne
+      %p.co-text--center.fr-mt-8w
+        = link_to "Voir toutes nos apparitions dans la presse", presse_path, class: "fr-link"
+
+  / SECTION AIDE
+  #help.co-background--light-grey.fr-py-12w
+    .fr-container.fr-grid-row
+      .fr-col-md-6.fr-pr-4w.fr-pb-4w
+        %h2.co-text--blue
+          L'équipe de Collectif Objets
+        %p
+          Nous sommes là pour vous répondre et vous accompagner dans cette démarche
+        :markdown
+          - **Enora Bulting** Designer
+          - **Elsa Le Duigou** Chargée de déploiement
+          - **Romuald Goudeseune** Conservateur des monuments historiques en charge de l'expérimentation
+          - **Fantine Monot** Chargée de déploiement
+          - **Raphaëlle Neyton** Coach
+          - **Adrien di Pasquale** Développeur
+          - **Sybille de La Raudière** Chargée de déploiement
+
+        %p
+          = link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-mail-line fr-mt-2w"
+      .fr-col-md-6.fr-px-6w
+        = render 'shared/picture_tag', filename_without_extension: "equipe",  img_class: "co--width-max-100", alt: "Équipe de Collectif Objets"

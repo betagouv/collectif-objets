@@ -87,4 +87,6 @@ Rails.application.configure do
   config.x.environment_specific_name = "development"
 
   config.hosts << /.*\.ngrok\.io/
+
+  config.log_file_size = 100_000_000
 end

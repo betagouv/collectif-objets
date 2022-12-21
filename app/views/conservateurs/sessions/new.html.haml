@@ -1,0 +1,52 @@
+- content_for(:head_title) { "Connexion" }
+%main.fr-container.fr-pt-2w.fr-pb-4w{"data-controller": "devise--sessions"}
+  = render "shared/breadcrumbs", links: [["Accueil", root_path],["Connexion", connexion_path]], current_page_label: "Connexion conservateur / conservatrice"
+  %h1 Connexion conservateur / conservatrice
+  .fr-grid-row
+    .fr-col-md-6
+      = form_for resource, as: resource_name, url: session_path(resource_name), builder: FormBuilderDsfr, data: { turbo: false } do |f|
+        .fr-input-group
+          = f.label :email do
+            Email
+            %span.fr-hint-text Utilisez votre email de conservateur ou conservatrice
+          = f.email_field :email, autofocus: true, autocomplete: "email", required: true
+        .fr-input-group
+          = render PasswordInputComponent.new(name: "conservateur[password]" )
+          .fr-mt-1w
+            = link_to "Mot de passe oublié ?", new_conservateur_password_path, class: "fr-link"
+        .co-flex.co-flex--space-between.fr-mt-4w
+          %div
+            .fr-checkbox-group
+              = f.check_box :remember_me, checked: true
+              = f.label :remember_me, "Se souvenir de moi"
+          .actions
+            = f.submit "Se connecter"
+      .fr-mt-6w
+        %ul.fr-accordions-group
+          %li
+            %section.fr-accordion
+              %h2.fr-accordion__title
+                %button.fr-accordion__btn{"aria-controls": "faq1", "aria-expanded": "false"}
+                  Comment créer mon compte ?
+              #faq1.fr-collapse
+                Tous les conservateurs de France ont normalement déjà un compte sur la plateforme. Nous avons créé des comptes à partir des informations présentes dans l'annuaire des conservateurs (nom, email et rôle). Lors de votre première connexion, vous avez seulement à créer un mot de passe ici :
+                = link_to "Réinitialiser mon mot de passe", new_conservateur_password_path
+                .fr-mt-2w
+                  Si votre email n'est pas reconnu, veuillez nous contacter par mail à
+                  = link_to "mailto:support@collectif-objets.beta.gouv.fr" do
+                    support@collectif-objets.beta.gouv.fr
+          %li
+            %section.fr-accordion
+              %h2.fr-accordion__title
+                %button.fr-accordion__btn{"aria-controls": "faq2", "aria-expanded": "false"}
+                  Première connexion / Je n'ai pas de mot de passe
+              #faq2.fr-collapse
+                Vous pouvez créer un mot de passe ici :
+                = link_to "Réinitialiser mon mot de passe", new_conservateur_password_path
+          %li
+            %section.fr-accordion
+              %h3.fr-accordion__title
+                %button.fr-accordion__btn{"aria-controls": "faq3", "aria-expanded": "false"}
+                  Où sont les liens de connexion sans mot de passe ?
+              #faq3.fr-collapse
+                Il était possible auparavant de se connecter sans mot de passe, en suivant un lien reçu depuis un email. Ce n'est plus possible. Il vous faut maintenant définir et utiliser un mot de passe.
