@@ -1,72 +1,85 @@
+# rubocop:disable Metrics/BlockLength
 # frozen_string_literal: true
 
-require 'sidekiq/web'
+require "sidekiq/web"
 require "sidekiq/throttled/web"
 
 Rails.application.routes.draw do
-  # Replace Sidekiq Queues with enhanced version!
-  Sidekiq::Throttled::Web.enhance_queues_tab!
+  ## -----
+  ## DEVISE
+  ## -----
 
   devise_for :admin_users, skip: [:registrations]
-  ActiveAdmin.routes(self)
-
   authenticate :admin_user do
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web => "/sidekiq"
   end
 
-  devise_for :users, :skip => [:registrations], controllers: {
+  devise_for :users, skip: [:registrations], controllers: {
     sessions: "users/sessions"
   }
   devise_scope :user do
     # we've disabled registrations to avoid sign ups, but we still want editable users
-    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
-    put 'users' => 'devise/registrations#update', :as => 'user_registration'
+    get "users/edit" => "devise/registrations#edit", :as => "edit_user_registration"
+    put "users" => "devise/registrations#update", :as => "user_registration"
 
-    get 'users/sign_in_with_token', to: 'users/sessions#sign_in_with_token'
-    get 'magic-authentication', to: "users/sessions#sign_in_with_magic_token"
+    get "users/sign_in_with_token", to: "users/sessions#sign_in_with_token"
+    get "magic-authentication", to: "users/sessions#sign_in_with_magic_token"
     namespace :users do
       resources :magic_links, only: [:create]
     end
   end
 
-  devise_for :conservateurs, only: [:sessions, :passwords]
+  devise_for :conservateurs, only: %i[sessions passwords]
   devise_scope :conservateur do
     # we've disabled registrations to avoid sign ups, but we still want editable conservateurs
-    get 'conservateurs/edit' => 'devise/registrations#edit', :as => 'edit_conservateur_registration'
+    get "conservateurs/edit" => "devise/registrations#edit", :as => "edit_conservateur_registration"
   end
+
+  ## ------
+  ## PUBLIC
+  ## ------
 
   root "pages#home"
-  get "/stats", to: "pages#stats"
-  get "/presse", to: "pages#presse"
-  get "/conditions", to: "pages#cgu"
-  get "/mentions_legales", to: "pages#mentions_legales"
-  get "/confidentialite", to: "pages#confidentialite"
-  get "comment-ca-marche", to: "pages#aide", as: "aide"
-  get "guide-de-recensement", to: "pages#guide", as: "guide"
-  get "/fiches", to: "pages#fiches"
-  get "/fiche", to: "pages#pdf_embed"
-  get "/pdf", to: "pages#pdf_download", as: "pdf_download"
-  get "/connexion", to: "pages#connexion", as: "connexion"
-  get "/admin", to: "pages#admin", as: "admin"
-
-  resources :objets, only: [:index, :show]
-  get "objets/ref_pop/:palissy_REF", to: "objets#show_by_ref_pop"
-
-  resources :communes, only: [] do
-    resource :completion, only: [:new, :create, :show], controller: "communes/completions"
-    resource :recompletion, only: [:new, :create], controller: "communes/recompletions"
-    resources :objets, only: [:index, :show], controller: "communes/objets" do
-      resources :recensements, except: [:index, :show, :destroy], controller: "communes/recensements"
-    end
-    resource :formulaire, only: [:show], controller: "communes/formulaires"
-    resources :dossiers, only: [:show], controller: "communes/dossiers"
-    resources :campaign_recipients, only: [:update], controller: "communes/campaign_recipients"
+  controller :pages do
+    get :connexion
+    get :stats
+    get :presse
+    get :conditions
+    get :mentions_legales
+    get :confidentialite
+    get "comment-ca-marche", action: :aide, as: :aide
+    get "guide-de-recensement", action: :guide, as: :guide
+    get :fiches
+    get :fiche, action: :pdf_embed
+    get :pdf, action: :pdf_download, as: :pdf_download
+    get :admin
   end
 
-  resources :departements, only: [:index, :show]
+  resources :departements, only: %i[index show]
+  resources :objets, only: %i[index show]
+  get "objets/ref_pop/:palissy_REF", to: "objets#show_by_ref_pop"
+
+  ## --------
+  ## COMMUNES
+  ## --------
+
+  resources :communes, module: :communes, only: [] do
+    resource :completion, only: %i[new create show]
+    resource :recompletion, only: %i[new create]
+    resources :objets, only: %i[index show] do
+      resources :recensements, except: %i[index show destroy]
+    end
+    resource :formulaire, only: [:show]
+    resources :dossiers, only: [:show]
+    resources :campaign_recipients, only: [:update]
+  end
+
+  ## -------------
+  ## CONSERVATEURS
+  ## -------------
 
   namespace :conservateurs do
-    resources :departements, only: [:index, :show] do
+    resources :departements, only: %i[index show] do
       resources :communes, only: [:index]
     end
     resources :communes, only: [:show] do
@@ -76,18 +89,22 @@ Rails.application.routes.draw do
     end
     resources :objets, only: [] do
       resources :recensements, only: [] do
-        resource :analyse, only: [:edit, :update]
+        resource :analyse, only: %i[edit update]
       end
     end
     resources :dossiers, only: [:show] do
-      resource :accept, only: [:new, :create, :update]
-      resource :reject, only: [:new, :create, :update]
+      resource :accept, only: %i[new create update]
+      resource :reject, only: %i[new create update]
     end
   end
 
+  ## -----
+  ## ADMIN
+  ## -----
+
   namespace :admin do
-    resources :communes, only: [:index, :show]
-    resources :conservateurs, except: [:destroy] do |conservateur|
+    resources :communes, only: %i[index show]
+    resources :conservateurs, except: [:destroy] do
       get :impersonate
       collection do
         post :stop_impersonating
@@ -114,32 +131,35 @@ Rails.application.routes.draw do
       end
       post :refresh_delivery_infos
       post :refresh_stats
-      resources :recipients, controller: "campaign_recipients", only: [:show, :update] do
+      resources :recipients, controller: "campaign_recipients", only: %i[show update] do
         get :mail_preview
       end
       resources :emails, controller: "campaign_emails", only: [] do
         get :redirect_to_sib_preview
       end
     end
-    resources :active_admin_comments, only: [:create, :destroy], controller: "comments"
+    resources :active_admin_comments, only: %i[create destroy], controller: "comments"
     resources :exports, only: [:index]
-    resources :palissy_exports, only: [:new, :create, :show, :destroy]
-    resources :memoire_exports, only: [:new, :create, :show, :destroy]
+    resources :palissy_exports, only: %i[new create show destroy]
+    resources :memoire_exports, only: %i[new create show destroy]
     resources :attachments, only: [] do
       post :rotate
     end
   end
-  get '/admin', to: redirect('/admin/communes')
+  Sidekiq::Throttled::Web.enhance_queues_tab!
+  ActiveAdmin.routes(self)
 
-  get "health/raise_on_purpose", to: "health#raise_on_purpose"
-  get "health/js_error", to: "health#js_error"
-
-  if Rails.env.development?
-    get "health/slow_image", to: "health#slow_image", as: "slow_image"
-    mount Lookbook::Engine, at: "/lookbook"
+  namespace :health do
+    scope controller: :health do
+      get :raise_on_purpose
+      get :js_error
+      get :slow_image if Rails.env.development?
+    end
   end
 
-  if Rails.configuration.x.environment_specific_name != "production"
-    resources :mail_previews, only: [:index]
-  end
+  mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
+
+  resources :mail_previews, only: [:index] if Rails.configuration.x.environment_specific_name != "production"
 end
+
+# rubocop:enable Metrics/BlockLength
