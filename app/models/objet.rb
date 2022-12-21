@@ -72,4 +72,6 @@ class Objet < ApplicationRecord
     current_arr.first
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+  def to_s = palissy_TICO
 end
