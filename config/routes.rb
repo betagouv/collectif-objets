@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     get :fiche, action: :pdf_embed
     get :pdf, action: :pdf_download, as: :pdf_download
     get :admin
+    get :plan
   end
 
   resources :departements, only: %i[index show]

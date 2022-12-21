@@ -1,0 +1,78 @@
+- content_for(:head_title) { "Plan du site" }
+
+%main.fr-pt-2w.fr-pb-8w
+  .fr-container
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Plan du site")
+
+    %h2 Pages publiques
+    %p Ces pages sont visibles par tous les visiteurs du site
+    %ul
+      %li
+        = link_to "Liste des objets protégés de toute la France", objets_path
+        %ul
+          - Objet.first(2).each do |objet|
+            %li= link_to "Objet #{objet}", objet_path(objet)
+          %li …
+      %li
+        = link_to "Liste des communes par département", departements_path
+        %ul
+          - Departement.order(:code).first(2).each do |departement|
+            %li
+              = link_to "Liste des communes du #{departement}", departement_path(departement)
+              %ul
+                - departement.communes.order(:code_insee).first(2).each do |commune|
+                  %li= link_to "Liste des objets de #{commune}", objets_path(commune_code_insee: commune.code_insee)
+                %li …
+          %li …
+      %li
+        = link_to "Connexion", connexion_path
+        %ul
+          %li= link_to "Connexion Communes", new_user_session_path
+          %li= link_to "Connexion Conservateur", new_conservateur_session_path
+          %li= link_to "Connexion Administrateur", new_admin_user_session_path
+      %li= link_to "Statistiques", stats_path
+      %li= link_to "Ils parlent de nous", presse_path
+      %li= link_to "Conditions générales d'utilisation", conditions_path
+      %li= link_to "Mentions Légales", mentions_legales_path
+      %li= link_to "Confidentialité", confidentialite_path
+      %li= link_to "Comment ça marche", aide_path
+      %li= link_to "Guide du recensement", guide_path
+      %li
+        = link_to "Fiches conseil", fiches_path
+        %ul
+          - [:vol, :securisation, :nuisibles].each do |key|
+            %li= link_to t("pages.pdf_embed.title.fiche_#{key}"), fiche_path(pdf: "fiche_#{key}")
+      %li= link_to "Plan du site", plan_path
+
+    %h2 Interface Communes
+    %p Ces pages sont visibles uniquement pour les communes connectées
+    %ul
+      %li
+        Liste des objets à protéger de la commune
+        %ul
+          %li
+            Objet 1 à protéger
+            %ul
+              %li Recensement de l'objet 1
+          %li
+            Objet 2 à protéger
+            %ul
+              %li Recensement de l'objet 2
+          %li …
+      %li Finalisation du recensement
+      %li Voir les recensements envoyées
+      %li Renvoyer le dossier
+      %li Formulaire de recensement imprimable
+      %li Voir le rapport de recensement
+      %li= link_to "Mon compte", edit_user_registration_path
+
+    %h2 Interface conservateurs
+    %p Ces pages sont visibles uniquement pour les conservateurs connectés
+    %p Plan des pages en construction …
+
+    %h2 Administration
+    %p Ces pages sont visibles uniquement pour les administrateurs connectés
+    %p Plan des pages en construction …
+
+    %ul
+      %li= link_to "Accueil de l'administration", admin_path
