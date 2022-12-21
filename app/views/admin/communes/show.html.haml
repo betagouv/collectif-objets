@@ -6,9 +6,13 @@
       = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
     %div= link_to "Ancienne interface d'admin", admin_old_commune_path(@commune)
 
-  %h2
-    = @commune
-    = commune_status_badge(@commune)
+  .co-flex{"data-controller": "copy-to-clipboard"}
+    %h2{"data-copy-to-clipboard-target": "content"}= @commune
+    %div.fr-ml-2w
+      %a{href: "#", "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-todo-line"}
+        copier
+
+  %p= commune_status_badge(@commune)
 
   .fr-grid-row
     .fr-col-md-8
@@ -34,15 +38,18 @@
         %p
           %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
       %p
-        %ul
-          - @commune.users.each do |user|
-            %li
-              %span #{user.email} ·
-              = link_to "envoyer un email", "mailto:#{user.email}"
-              %span ·
-              = link_to admin_user_impersonate_path(user) do
-                = icon_span("eye")
-                incarner cet usager
+        - @commune.users.each do |user|
+          %div
+            .co-text--bold #{user.email}
+            .fr-my-1w= link_to "envoyer un email", "mailto:#{user.email}", class: "fr-link fr-link--icon-left fr-icon-mail-line"
+            .fr-my-1w= link_to "incarner cet usager", admin_user_impersonate_path(user), class: "fr-btn fr-btn--icon-left fr-icon-eye-line"
+            .fr-my-1w{"data-controller": "copy-to-clipboard"}
+              Lien magique :
+              %code{"data-copy-to-clipboard-target": "content"}
+                = magic_authentication_url("magic-token": user.magic_token)
+              %a{href: "#", "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-todo-line"}
+                copier
+
     .fr-col-md-4
       %h4 Commentaires admin
       .fr-mb-2w
