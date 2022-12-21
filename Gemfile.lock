@@ -248,6 +248,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    kramdown (2.4.0)
+      rexml
     launchy (2.5.0)
       addressable (~> 2.7)
     listen (3.7.1)
@@ -297,10 +299,6 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
-      racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (5.10.1)
@@ -550,6 +548,7 @@ DEPENDENCIES
   html2haml
   htmlbeautifier
   image_processing
+  kramdown
   launchy
   lookbook
   matrix
