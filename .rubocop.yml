@@ -11,7 +11,9 @@ AllCops:
     - "bin/**/*"
     - "db/**/*"
     - "shared/db/**/*"
-    - "config/**/*"
+    - "config/db/*"
+    - "config/environments/*"
+    - "config/initializers/*"
     - "lib/tasks/**/*"
   SuggestExtensions: false
 
