@@ -4,9 +4,13 @@
 
 <%= tt("fin_inactive.raison") %>
 
-- <%= tt("fin_inactive.raison1") %>
-- <%= tt("fin_inactive.raison2") %>
-- <%= tt("fin_inactive.raison3") %>
-- <%= tt("fin_inactive.raison4") %>
+<% SurveyVote::CAMPAIGN_INACTIVE_REASONS.each do |value, label| %>
+- <%= label %> : <%= new_survey_vote_url(commune_id: @commune.id, survey: "campaign_inactive", reason: value) %>
+
+<% end %>
+
+<%= tt("fin_inactive.vous_pouvez_finaliser") %>
+
+<%= tt("fin_inactive.annee_prochaine") %>
 
 <%= tt("fin_inactive.a_votre_disposition") %>
