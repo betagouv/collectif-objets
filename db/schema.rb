@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_20_083213) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_22_100349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -275,6 +275,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_20_083213) do
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true
     t.index ["user_id"], name: "index_recensements_on_user_id"
+  end
+
+  create_table "survey_votes", force: :cascade do |t|
+    t.bigint "commune_id"
+    t.string "survey"
+    t.string "reason"
+    t.string "additional_info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commune_id", "survey"], name: "index_survey_votes_on_commune_id_and_survey", unique: true
+    t.index ["commune_id"], name: "index_survey_votes_on_commune_id"
   end
 
   create_table "users", force: :cascade do |t|

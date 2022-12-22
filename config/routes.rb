@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     get :admin
     get :plan
   end
+  resources :survey_votes, only: %w[new create]
 
   resources :departements, only: %i[index show]
   resources :objets, only: %i[index show]

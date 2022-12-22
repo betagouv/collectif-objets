@@ -625,13 +625,11 @@ fr:
     fin_inactive:
       title: "Mail de clotûre - commune inactive"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
-      fin_aujourdhui: <b>La campagne de recensement participatif %{dans_departement} prend fin aujourd’hui.</b>
+      fin_aujourdhui: La campagne de recensement participatif %{dans_departement} prend fin aujourd’hui.
       vous_navez_pas_souhaite: Sauf erreur de notre part, vous n’avez pas souhaité participer à la campagne de recensement des objets monuments historiques pour laquelle nous vous avons sollicité il y a quelques semaines.
-      raison: "Dans une démarche d’amélioration, nous vous serions reconnaissants de nous expliquer pourquoi :"
-      raison1: Délai trop court
-      raison2: Je ne connais pas Collectif Objets
-      raison3: J'ai d'autres priorités
-      raison4: Autre raison
+      raison: "Dans une démarche d’amélioration, nous vous serions reconnaissants de nous indiquer pourquoi. Il vous suffit de cliquer sur un de ces liens :"
+      vous_pouvez_finaliser: Par ailleurs, <b>si vous aviez commencé les démarches de recensement, sachez que votre compte sur Collectif Objets vous est toujours accessible pour le finaliser et le transmettre aux conservateurs</b>. Votre travail n’est pas perdu !
+      annee_prochaine: "Si vous n’avez pas pu participer cette année, ne vous inquiétez pas : votre commune sera recontactée ultérieurement pour une prochaine campagne."
       a_votre_disposition: Nous restons à votre disposition pour toute information complémentaire.
     relance2_started:
       title: "Mail de seconde relance - recensement démarré"

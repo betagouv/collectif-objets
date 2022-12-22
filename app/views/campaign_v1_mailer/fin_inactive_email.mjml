@@ -5,12 +5,13 @@
     <mj-text><%= ct("fin_inactive.raison") %></mj-text>
     <mj-text>
       <ul>
-        <li><%= ct("fin_inactive.raison1") %></li>
-        <li><%= ct("fin_inactive.raison2") %></li>
-        <li><%= ct("fin_inactive.raison3") %></li>
-        <li><%= ct("fin_inactive.raison4") %></li>
+        <% SurveyVote::CAMPAIGN_INACTIVE_REASONS.each do |value, label| %>
+          <li><%= link_to label, new_survey_vote_url(commune_id: @commune.id, survey: "campaign_inactive", reason: value) %></li>
+        <% end %>
       </ul>
     </mj-text>
+    <mj-text><%= ct("fin_inactive.vous_pouvez_finaliser") %></mj-text>
+    <mj-text><%= ct("fin_inactive.annee_prochaine") %></mj-text>
     <mj-text><%= ct("fin_inactive.a_votre_disposition") %></mj-text>
   </mj-column>
 </mj-section>
