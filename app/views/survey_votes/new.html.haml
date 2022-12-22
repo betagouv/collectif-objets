@@ -1,0 +1,37 @@
+- content_for(:head_title) { "Pourquoi n'avez vous pas pu participer à Collectif Objets ?" }
+
+%main.fr-pt-2w.fr-pb-8w
+  .fr-container
+    = render("shared/breadcrumbs", links: [["Accueil", root_path], ["Objets de #{@commune}", objets_path(commune_code_insee: @commune.code_insee)]], current_page_label: "Pourquoi n'avez vous pas pu participer à Collectif Objets ?")
+
+    %h1 Pourquoi n'avez vous pas pu participer à Collectif Objets ?
+
+    %p Vous pouvez nous répondre en toute transparence
+
+    %p Vous allez répondre pour la commune #{@commune}
+
+    - if @survey_vote.errors.any?
+      .fr-alert.fr-alert--error.fr-mb-6w
+        %ul
+          - @survey_vote.errors.full_messages.each do |message|
+            %li= message
+
+    = form_for @survey_vote, builder: FormBuilderDsfr do |f|
+      = f.hidden_field :survey
+      = f.hidden_field :commune_id
+      .fr-grid-row
+        .fr-col-md-6
+          .fr-radio-group
+            = f.label :reason, "Raison"
+            - SurveyVote::CAMPAIGN_INACTIVE_REASONS.each do |value, label|
+              = f.radio_button :reason, value
+              = f.label "reason_#{value}", label
+        .fr-col-md-6
+          = f.label :additional_info do
+            Plus d'informations (optionnel)
+            .fr-hint-text Si vous le souhaitez vous pouvez détailler votre réponse (optionnel)
+          = f.text_area :additional_info
+      .fr-input-group.co-text--right
+        = f.submit "Enregistrer"
+
+
