@@ -603,7 +603,7 @@ fr:
       simple: Ce recensement est simple et ne vous prendra que quelques minutes par objet.
       conseils: Suite à celui-ci, vous pourrez bénéficier de conseils et de l’expertise des conservateurs pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
       decouvrez:
-        one: "<b>Découvrez l'objets monument historique à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
+        one: "<b>Découvrez l'objet monument historique à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
         other: "Découvrez les objets monuments historiques à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
       date_fin: Cette campagne de recensement est ouverte jusqu’au %{date_fin}.
     relance2_inactive:
@@ -681,8 +681,8 @@ fr:
       cta_started: Terminer le recensement des %{count} objets protégés à %{nom_commune}
       cta_complete: Finaliser le recensement
       commune_abrite_objets:
-        one: "%{nom_commune} abrite un objet monument historique"
-        other: "%{nom_commune} abrite %{count} objets monuments historiques"
+        one: "%{nom_commune} abrite un objet monument historique."
+        other: "%{nom_commune} abrite %{count} objets monuments historiques."
       cliquez: "Il vous suffit de cliquer ici :"
       politesse: "Bien cordialement,"
     concordataires:

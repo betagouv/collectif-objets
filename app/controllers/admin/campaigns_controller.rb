@@ -137,7 +137,7 @@ module Admin
     end
 
     def set_excluded_communes
-      @excluded_communes = @campaign.departement.communes - @campaign.communes
+      @excluded_communes = (@campaign.departement.communes - @campaign.communes).sort_by(&:nom)
     end
 
     def campaign_params

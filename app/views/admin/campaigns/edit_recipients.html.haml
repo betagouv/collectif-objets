@@ -45,6 +45,6 @@
                 %span.co-text--sm (déjà active)
               - if commune.users.empty?
                 %span.co-text--sm (pas d'email)
-              %span.co-text--sm= commune.code_insee
+              %span.fr-ml-1w.fr-badge.fr-badge--sm= commune.code_insee
       .fr-input-group.co-text--center
         = f.submit "Sauvegarder les communes"
