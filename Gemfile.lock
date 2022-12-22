@@ -258,7 +258,7 @@ GEM
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lookbook (1.4.4)
+    lookbook (1.4.5)
       actioncable
       activemodel
       css_parser
@@ -391,7 +391,7 @@ GEM
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
-    rouge (4.0.0)
+    rouge (4.0.1)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.1)
