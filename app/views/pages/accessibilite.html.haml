@@ -1,0 +1,29 @@
+- content_for(:head_title) { "Accessibilité" }
+
+%main.fr-pt-2w.fr-pb-8w
+  .fr-container
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Accessibilité")
+
+    %h1 Accessibilité
+
+    .fr-grid-row
+      .fr-col-md-8
+        :markdown
+          Ce site a pour objectif d'être conforme au [Référentiel Général d’Amélioration de l’Accessibilité (RGAA)](https://accessibilite.numerique.gouv.fr/){:target="_blank" rel="noopener"}.
+
+          Notre démarche pour y arriver est de mettre en place des tests automatisés et des tests manuels, puis de demander un audit externe. Vous pouvez suivre la couverture des tests actuels sur le [plan du site](/plan).
+
+
+          ## Tests automatisés
+
+          Les tests automatisés font tourner la batterie de tests [aXe](https://github.com/dequelabs/axe-core){:target="_blank" rel="noopener"}. qui permet normalement de confirmer plus de la moitié des critères du standard international [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/WAI/standards-guidelines/wcag/){:target="_blank" rel="noopener"}. Le RGAA est fortement inspiré de ce WCAG.
+
+
+          ## Tests manuels
+
+          Les tests manuels consistent à utiliser des outils comme [ara.numerique.gouv.fr](https://ara.numerique.gouv.fr/){:target="_blank" rel="noopener"} et [accessibilityinsights.io](https://accessibilityinsights.io/){:target="_blank" rel="noopener"} pour valider différents points d'accessibilité.
+
+
+          ## Audit
+
+          L'audit n'est pas encore prévu. Il sera fait courant 2023.

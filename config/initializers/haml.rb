@@ -1,0 +1,1 @@
+Tilt.prefer Tilt::KramdownTemplate
