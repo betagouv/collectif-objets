@@ -4,7 +4,6 @@ class GalleryComponent < ViewComponent::Base
   include ApplicationHelper # for vite_or_raw_image_tag
 
   MAX_PHOTOS_SHOWN = 4
-  PHOTO = Struct.new(:original_url, :thumb_url, :description, keyword_init: true)
 
   attr_reader :photos, :template
 
@@ -13,11 +12,10 @@ class GalleryComponent < ViewComponent::Base
   def self.from_attachments(attachments, **kwargs)
     new(
       attachments.map do |attachment|
-        PHOTO.new(
-          original_url: Rails.application.routes.url_helpers.url_for(attachment),
+        Photo.new \
+          url: Rails.application.routes.url_helpers.url_for(attachment),
           thumb_url: Rails.application.routes.url_helpers.url_for(attachment.variant(:medium)),
-          description: "© Licence ouverte"
-        )
+          credit: "© Licence ouverte"
       end,
       **kwargs
     )
@@ -25,7 +23,7 @@ class GalleryComponent < ViewComponent::Base
 
   def self.palissy_photos_from_objet(objet, **kwargs)
     new(
-      objet.palissy_photos.map { PHOTO.new(original_url: _1["url"], thumb_url: _1["url"], description: _1["credit"]) },
+      objet.palissy_photos,
       title: I18n.t("objets.palissy_photos_count", count: objet.palissy_photos.count),
       **kwargs
     )
@@ -58,11 +56,10 @@ class GalleryComponent < ViewComponent::Base
   def first_photo
     return photos.first if photos.any?
 
-    PHOTO.new(
-      original_url: "images/illustrations/photo-manquante.png",
+    Photo.new \
+      url: "images/illustrations/photo-manquante.png",
       thumb_url: "images/illustrations/photo-manquante.png",
       description: "Photo manquante"
-    )
   end
 
   def last_thumb_open_index
@@ -72,7 +69,7 @@ class GalleryComponent < ViewComponent::Base
   end
 
   def json_data
-    photos.map { { src: _1.original_url, description: _1.description.presence }.compact }.to_json
+    photos.map { { src: _1.url, description: _1.description.presence }.compact }.to_json
   end
 
   def first_description

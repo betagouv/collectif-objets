@@ -35,9 +35,12 @@
     %ul
       %li
         = link_to "Liste des objets protégés de toute la France", objets_path
+        = accessible_icon_span
         %ul
           - Objet.first(2).each do |objet|
-            %li= link_to "Objet #{objet}", objet_path(objet)
+            %li
+              = link_to "Objet #{objet}", objet_path(objet)
+              = accessible_icon_span
           %li …
       %li
         = link_to "Liste des communes par département", departements_path

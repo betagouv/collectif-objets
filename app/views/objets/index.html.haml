@@ -1,0 +1,39 @@
+- content_for :head_title do
+  - if @filters[:commune]
+    Objets protégés de #{@filters[:commune].nom}
+  - else
+    Objets protégés de ma commune
+
+%main.fr-container.fr-pt-2w.fr-pb-4w
+  - if @filters[:commune]
+    = render("shared/breadcrumbs",
+      links: [["Accueil", root_path], ["Tous les objets", objets_path]],
+      current_page_label: "Objets de #{@filters[:commune].nom}")
+  - else
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Tous les objets")
+
+  %h1.co-text--blue.co-text--center
+    - if @filters[:commune]
+      Les #{@pagy.count} objets protégés de #{@filters[:commune].nom}
+    - else
+      Liste des #{@pagy.count} objets protégés en France
+
+  - if @filters[:commune].blank?
+    %p.co-text--center
+      = link_to "Filtrer les objets d'une commune en particulier", departements_path
+
+  - if @filters[:commune].blank?
+    - if @pagy.pages > 1
+      .fr-mt-4w= render 'shared/pagy_nav', pagy: @pagy
+    = render layout: "objets/cards_grid_layout", locals: { count: @objets.count } do
+      = render ObjetCardComponent.with_collection(@objets)
+    - if @pagy.pages > 1
+      = render 'shared/pagy_nav', pagy: @pagy, label: "Pagination bas de page"
+  - elsif @objets_list.group_by_edifice?
+    = render "edifices/list", edifices: @objets_list.edifices
+    - @objets_list.edifices.each do |edifice|
+      .fr-my-4w
+        = render "edifices/title", edifice:
+        = render "objets/cards", objets: edifice.objets, commune: @objets_list.commune
+  - else
+    = render "objets/cards", objets: @objets_list.objets, card_objets_manquants: true, commune: @objets_list.commune
