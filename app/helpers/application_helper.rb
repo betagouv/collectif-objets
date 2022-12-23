@@ -54,4 +54,11 @@ module ApplicationHelper
   def icon_span(name, contour: :line, **kwargs)
     content_tag(:span, "", class: "fr-icon-#{name}-#{contour}", "aria-hidden": "true", **kwargs)
   end
+
+  def accessible_icon_span(type: :auto)
+    contour = { auto: :line, manual: :fill }[type]
+    type_str = { auto: "automatiquement", manual: "manuellement" }[type]
+    title = "Accessibilité validée #{type_str}"
+    icon_span("thumb-up", contour:, title:)
+  end
 end

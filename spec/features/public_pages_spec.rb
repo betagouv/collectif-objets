@@ -18,7 +18,7 @@ feature "public pages accessibility", js: true do
     ["Conditions générales d'utilisation", :conditions_path],
     ["Mentions Légales", :mentions_legales_path],
     ["Confidentialité", :confidentialite_path],
-    ["Comment ça marche", :aide_path],
+    ["Comment ça marche ?", :aide_path],
     ["Guide du recensement", :guide_path]
   ].each do |page_name, path_name|
     scenario "la page publique '#{page_name}' est accessible" do

@@ -4,7 +4,33 @@
   .fr-container
     = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Plan du site")
 
-    %h2 Pages publiques
+    %h1 Plan du site
+
+    .fr-grid-row
+      .fr-col-md-6
+        %p
+          Ce site est organisé en 4 grandes parties, accessibles à différents types d'usagers :
+          %ul
+            %li= link_to "Pages publiques", "#public"
+            %li= link_to "Interface Communes", "#communes"
+            %li= link_to "Interface Conservateurs", "#conservateurs"
+            %li= link_to "Administration", "#administration"
+      .fr-col-md-6
+        %p
+          Pour chaque page, le niveau de test d'accessibilité effectué est affiché. Vous pouvez lire plus de détail sur notre démarche d'accessibilité
+          = link_to "sur la page dédiée", accessibilite_path
+          \.
+        %p
+          Légende :
+          %ol
+            %li
+              = icon_span("thumb-up")
+              Accessibilité validée automatiquement
+            %li
+              = icon_span("thumb-up", contour: "fill")
+              Accessibilité validée manuellement
+
+    %h2#public Pages publiques
     %p Ces pages sont visibles par tous les visiteurs du site
     %ul
       %li
@@ -26,17 +52,36 @@
           %li …
       %li
         = link_to "Connexion", connexion_path
+        = accessible_icon_span
         %ul
-          %li= link_to "Connexion Communes", new_user_session_path
-          %li= link_to "Connexion Conservateur", new_conservateur_session_path
-          %li= link_to "Connexion Administrateur", new_admin_user_session_path
+          %li
+            = link_to "Connexion Communes", new_user_session_path
+            = accessible_icon_span
+          %li
+            = link_to "Connexion Conservateur", new_conservateur_session_path
+            = accessible_icon_span
+          %li
+            = link_to "Connexion Administrateur", new_admin_user_session_path
+            = accessible_icon_span
       %li= link_to "Statistiques", stats_path
-      %li= link_to "Ils parlent de nous", presse_path
-      %li= link_to "Conditions générales d'utilisation", conditions_path
-      %li= link_to "Mentions Légales", mentions_legales_path
-      %li= link_to "Confidentialité", confidentialite_path
-      %li= link_to "Comment ça marche", aide_path
-      %li= link_to "Guide du recensement", guide_path
+      %li
+        = link_to "Ils parlent de nous", presse_path
+        = accessible_icon_span
+      %li
+        = link_to "Conditions générales d'utilisation", conditions_path
+        = accessible_icon_span
+      %li
+        = link_to "Mentions Légales", mentions_legales_path
+        = accessible_icon_span
+      %li
+        = link_to "Confidentialité", confidentialite_path
+        = accessible_icon_span
+      %li
+        = link_to "Comment ça marche ?", aide_path
+        = accessible_icon_span
+      %li
+        = link_to "Guide du recensement", guide_path
+        = accessible_icon_span
       %li
         = link_to "Fiches conseil", fiches_path
         %ul
@@ -44,7 +89,7 @@
             %li= link_to t("pages.pdf_embed.title.fiche_#{key}"), fiche_path(pdf: "fiche_#{key}")
       %li= link_to "Plan du site", plan_path
 
-    %h2 Interface Communes
+    %h2#communes Interface Communes
     %p Ces pages sont visibles uniquement pour les communes connectées
     %ul
       %li
@@ -66,11 +111,11 @@
       %li Voir le rapport de recensement
       %li= link_to "Mon compte", edit_user_registration_path
 
-    %h2 Interface conservateurs
+    %h2#conservateurs Interface conservateurs
     %p Ces pages sont visibles uniquement pour les conservateurs connectés
     %p Plan des pages en construction …
 
-    %h2 Administration
+    %h2#administration Administration
     %p Ces pages sont visibles uniquement pour les administrateurs connectés
     %p Plan des pages en construction …
 
