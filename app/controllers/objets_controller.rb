@@ -15,6 +15,10 @@ class ObjetsController < ApplicationController
 
   def show
     @objet = Objet.find(params[:id])
+
+    return true if @objet.palissy_INSEE.present?
+
+    redirect_to root_path, alert: "Cet objet n'est lié à aucune commune"
   end
 
   def show_by_ref_pop
