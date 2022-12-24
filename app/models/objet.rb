@@ -40,7 +40,7 @@ class Objet < ApplicationRecord
   end
 
   def first_palissy_photo_url
-    palissy_photos.any? && palissy_photos.first["url"]
+    palissy_photos.first&.url
   end
 
   def nom_with_ref_pop
@@ -72,6 +72,10 @@ class Objet < ApplicationRecord
     current_arr.first
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+
+  def palissy_photos
+    super.map { Photo.new(url: _1["url"], description: _1["name"], credit: _1["credit"]) }
+  end
 
   def to_s = palissy_TICO
 end

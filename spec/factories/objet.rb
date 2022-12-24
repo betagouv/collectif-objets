@@ -31,7 +31,8 @@ FactoryBot.define do
         [
           {
             "url" => "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP80L043503/sap04_80l043503_p.jpg",
-            "credit" => "© Médiathèque Paris"
+            "credit" => "© Médiathèque Paris",
+            "name" => "Vase bleu"
           }
         ]
       end

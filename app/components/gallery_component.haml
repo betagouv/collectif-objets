@@ -9,12 +9,12 @@
 
     .co-first
       = link_to( |
-        first_photo.original_url, |
+        first_photo.url, |
         "data-action": "photo-gallery#show", |
         "data-index": "1", |
         class: "co-gallery--photo co-cursor--zoom-in", |
       ) do |
-        = vite_or_raw_image_tag first_photo.thumb_url
+        = vite_or_raw_image_tag first_photo.thumb_url, alt: first_photo.alt
         %span.fr-icon-zoom-in-line.co-gallery-magnifier-icon(aria-hidden="true")
 
     - if count > 1
@@ -22,12 +22,12 @@
         - photos.from(1).to(thumbs_count - 1).each_with_index do |photo, index|
           .co-gallery-thumb
             = link_to( |
-              photo.original_url, |
+              photo.url, |
               "data-action": "photo-gallery#show", |
               "data-index": index + 2, |
               class: "co-gallery--photo co-cursor--zoom-in" |
             ) do |
-              = vite_or_raw_image_tag photo.thumb_url
+              = vite_or_raw_image_tag photo.thumb_url, alt: photo.alt
 
         - if display_gallery_link?
           .co-gallery-others
@@ -43,12 +43,12 @@
     - if count > 0
       .fr-my-2w
         = link_to( |
-          first_photo.original_url, |
+          first_photo.url, |
           "data-action": "photo-gallery#show", |
           "data-index": "1", |
           class: "co-gallery--photo co-cursor--zoom-in" |
         ) do |
-          = vite_or_raw_image_tag first_photo.thumb_url
+          = vite_or_raw_image_tag first_photo.thumb_url, alt: first_photo.alt
     - if display_gallery_link? && count > 1
       %a.fr-link.fr-link--icon-right.fr-icon-zoom-in-line(href="#"  data-action="photo-gallery#show")
         Voir la galerie de #{count} photos
