@@ -7,7 +7,7 @@ class ObjetCardComponent < ViewComponent::Base
     @objet = objet || kwargs[:objet]
     @badges = kwargs[:badges]
     @path = kwargs[:path]
-    @main_photo_url = kwargs[:main_photo_url]
+    @main_photo = kwargs[:main_photo]
     @tags = kwargs[:tags]
     @commune = kwargs[:commune] || @objet.commune # pass to avoid n+1 queries
     super
@@ -27,9 +27,7 @@ class ObjetCardComponent < ViewComponent::Base
     truncate(nom || palissy_DENO, length: 30)
   end
 
-  def main_photo_url
-    @main_photo_url ||= \
-      palissy_photos&.first&.fetch("url", nil) \
-      || "images/illustrations/photo-manquante.png"
+  def main_photo
+    @main_photo || palissy_photos&.first
   end
 end

@@ -1,0 +1,22 @@
+.fr-col-md-3
+  .fr-card.fr-enlarge-link
+    .fr-card__body
+      .fr-card__content
+        %h2.fr-card__title
+          = link_to(truncated_nom, path, class: "fr-card__link")
+        %p.fr-card__desc
+          = commune.nom
+          %br/
+          = edifice_nom
+        - if tags
+          .fr-card__start
+            %ul.fr-tags-group
+              - tags.each do |tag|
+                %li
+                  %p{class: "fr-tag fr-tag--#{tag.color}"}
+                    = tag.text
+    .fr-card__header
+      = render("shared/card_photo", photo: main_photo)
+      - if badges
+        %ul.fr-badges-group
+          = render partial: "shared/badge_li", collection: badges, as: :badge
