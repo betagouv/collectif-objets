@@ -615,7 +615,7 @@ fr:
     relance3_inactive:
       title: "Mail de dernière relance - commune inactive"
       subject: "Plus que %{fin_dans_n_jours} jours pour recenser les objets monuments historiques de %{nom_commune}"
-      intro: Nous nous permettons de vous relancer une dernière fois à propos de la campagne de recensement participatif lancée par la DRAC %{nom_drac} sur %{count} communes %{dans_departement}.
+      intro: Nous nous permettons de vous relancer une dernière fois à propos de la campagne de recensement participatif lancée par la DRAC %{nom_drac} sur %{nombre_communes} communes %{dans_departement}.
       role_elu: <b>Pour les protéger des vols et des dégradations, votre rôle d’élu est essentiel.</b>
       simple: Le recensement est simple et ne vous prendra que quelques minutes par objet.
       contact: À partir de vos informations, les conservateurs prendront directement contact avec vous pour vous guider dans la protection et la mise en valeur de votre patrimoine.
