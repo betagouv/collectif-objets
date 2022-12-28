@@ -48,7 +48,7 @@ gem "view_component"
 gem "vite_rails"
 
 group :development, :test do
-  gem "debug", platforms: %i[mri mingw x64_mingw]
+  gem "debug", ">= 1.0.0"
   gem "launchy"
   gem "rspec-rails", "~> 6.0"
   gem "rubocop", require: false
@@ -57,6 +57,7 @@ end
 
 group :development do
   gem "aasm-diagram", require: false
+  gem "foreman"
   gem "html2haml"
   gem "htmlbeautifier"
   gem "lookbook"
