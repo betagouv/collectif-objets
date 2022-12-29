@@ -44,13 +44,17 @@
           %li …
       %li
         = link_to "Liste des communes par département", departements_path
+        = accessible_icon_span
         %ul
           - Departement.order(:code).first(2).each do |departement|
             %li
               = link_to "Liste des communes du #{departement}", departement_path(departement)
+              = accessible_icon_span
               %ul
                 - departement.communes.order(:code_insee).first(2).each do |commune|
-                  %li= link_to "Liste des objets de #{commune}", objets_path(commune_code_insee: commune.code_insee)
+                  %li
+                    = link_to "Liste des objets de #{commune}", objets_path(commune_code_insee: commune.code_insee)
+                    = accessible_icon_span
                 %li …
           %li …
       %li
@@ -87,10 +91,16 @@
         = accessible_icon_span
       %li
         = link_to "Fiches conseil", fiches_path
+        = accessible_icon_span
         %ul
           - [:vol, :securisation, :nuisibles].each do |key|
-            %li= link_to t("pages.pdf_embed.title.fiche_#{key}"), fiche_path(pdf: "fiche_#{key}")
-      %li= link_to "Plan du site", plan_path
+            %li
+              = link_to t("pages.pdf_embed.title.fiche_#{key}"), fiche_path(pdf: "fiche_#{key}")
+              = accessible_icon_span
+      %li
+        = link_to "Plan du site", plan_path
+        = accessible_icon_span
+
 
     %h2#communes Interface Communes
     %p Ces pages sont visibles uniquement pour les communes connectées

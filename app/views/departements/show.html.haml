@@ -1,0 +1,12 @@
+- content_for(:head_title) { "Liste des communes du #{@departement}" }
+%main.fr-container.fr-pt-2w.fr-pb-4w
+  = render "shared/breadcrumbs",
+    links: [["Accueil", root_path], ["Tous les objets", objets_path], ["Liste des départements", departements_path]],
+    current_page_label: "Liste des communes du #{@departement}"
+  %h1 Liste des communes du #{@departement}
+  %ul.co-columns--3
+    - @communes.each do |commune|
+      %li
+        = commune.nom
+        \-
+        = link_to t("objets.count", count: commune.objets_count), objets_path(commune_code_insee: commune.code_insee)
