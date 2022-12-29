@@ -8,7 +8,9 @@ shared_examples "an accessible page" do
   end
 end
 
-feature "public pages accessibility", js: true do
+feature "accessibility", js: true do
+  # PUBLIC
+
   describe "objets#index" do
     let!(:objets1) { create_list(:objet, 10, :with_image) }
     let!(:objets2) { create_list(:objet, 12, :without_image) }
@@ -118,6 +120,18 @@ feature "public pages accessibility", js: true do
 
   describe "Fiche conseil vol" do
     before { visit fiche_path(pdf: "fiche_vol") }
+    it_behaves_like "an accessible page"
+  end
+
+  # COMMUNES
+
+  describe "communes/objets#index - Démo 3 objets sans photos" do
+    before { visit demo_communes_objets_index_path }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/objets#show - Démo sans photos" do
+    before { visit demo_communes_objets_show_path }
     it_behaves_like "an accessible page"
   end
 end

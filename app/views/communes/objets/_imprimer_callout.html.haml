@@ -1,0 +1,8 @@
+= render CalloutWithCtaComponent.new do |c|
+  - c.with_text do
+    %p.fr-callout__text.co-text--blue
+      = t(".pas_de_connexion")
+    %p.fr-callout__text
+      = t(".vous_pouvez_imprimer")
+  - c.with_cta do
+    = link_to t(".cta"), commune_formulaire_path(commune), class: "fr-btn fr-btn--tertiary"

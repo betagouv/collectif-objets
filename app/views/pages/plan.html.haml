@@ -103,13 +103,17 @@
 
 
     %h2#communes Interface Communes
-    %p Ces pages sont visibles uniquement pour les communes connectées
+    %p Ces pages sont visibles uniquement pour les communes connectées. Les liens présents sont des pages de démonstration avec des données de test.
     %ul
       %li
-        Liste des objets à protéger de la commune
+        Liste des objets de la commune ·
+        = link_to "3 objets sans photos", demo_communes_objets_index_path
+        = accessible_icon_span
         %ul
           %li
             Objet 1 à protéger
+            = link_to "Sans photos", demo_communes_objets_show_path
+            = accessible_icon_span
             %ul
               %li Recensement de l'objet 1
           %li

@@ -1,0 +1,40 @@
+- content_for(:head_title) { "Objets protégés de #{@commune.nom}" }
+%main.fr-container.fr-pt-2w.fr-pb-4w
+  = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Objets de #{@commune.nom}"
+  %h1.co-text--blue= @commune.nom
+  - if @commune.inactive?
+    %h2.co-text--blue
+      = t(".n_objets_a_recenser", count: @objets_list.count)
+    = render "recensements/etapes"
+    = render "communes/objets/list", objets_list: @objets_list, commune: @commune
+    = render "communes/objets/pourquoi_n_objets_callout", objets_list: @objets_list if @objets_list.group_by_edifice?
+    = render "communes/objets/imprimer_callout", commune: @commune
+  - elsif @commune.can_complete?
+    %h2.co-text--blue
+      = t(".tous_les_objets_recenses")
+    = render "communes/objets/complete_callout", dossier: @dossier, commune: @commune
+    = render "communes/objets/list", objets_list: @objets_list, commune: @commune
+    = render "communes/objets/pourquoi_n_objets_callout", objets_list: @objets_list if @objets_list.group_by_edifice?
+    = render "communes/objets/imprimer_callout", commune: @commune
+  - elsif @commune.started?
+    %h2.co-text--blue
+      = t(".n_objets_restants_a_recenser", count: @commune.objets.where.missing(:recensements).count)
+    = render "recensements/etapes"
+    = render "communes/objets/list", objets_list: @objets_list, commune: @commune
+    = render "communes/objets/pourquoi_n_objets_callout", objets_list: @objets_list if @objets_list.group_by_edifice?
+    = render "communes/objets/imprimer_callout", commune: @commune
+  - elsif @commune.completed? && @dossier.submitted?
+    = render "communes/objets/submitted_callout", commune: @commune
+    = render "communes/objets/list", objets_list: @objets_list, commune: @commune
+  - elsif @commune.completed? && @dossier.rejected?
+    = render "communes/objets/rejected_callout", dossier: @dossier
+    = render "communes/objets/list", objets_list: @objets_list, commune: @commune
+    %p.co-text--center.fr-mt-4w
+      = link_to "Renvoyer le dossier au conservateur…", new_commune_recompletion_path(@commune), class: "fr-btn"
+    = render "recensements/etapes"
+    = render "communes/objets/pourquoi_n_objets_callout", objets_list: @objets_list if @objets_list.group_by_edifice?
+    = render "communes/objets/imprimer_callout", commune: @commune
+  - elsif @commune.completed? && @dossier.accepted?
+    = render "communes/objets/accepted_callout", dossier: @dossier
+    = render "communes/objets/list", objets_list: @objets_list, commune: @commune
+    = render "communes/objets/pourquoi_n_objets_callout", objets_list: @objets_list if @objets_list.group_by_edifice?
