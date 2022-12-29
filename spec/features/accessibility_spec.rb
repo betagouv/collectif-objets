@@ -131,7 +131,7 @@ feature "accessibility", js: true do
   end
 
   describe "communes/objets#show - Démo sans photos" do
-    before { visit demo_communes_objets_show_path }
+    before { visit demo_communes_objet_show_path }
     it_behaves_like "an accessible page"
   end
 

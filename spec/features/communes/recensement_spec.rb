@@ -25,7 +25,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("st Jean")
 
     click_on "Recenser cet objet"
-    expect(page).to have_selector("h2", text: "Recensement")
+    expect(page).to have_selector("h1", text: "Recensement")
     find("label", text: "Je confirme m'être déplacé voir l'objet pour ce recensement").click
     find("label", text: "L'objet est bien présent dans l'édifice Eglise st Jean").click
     within("[data-recensement-target=recensable]") do
@@ -54,7 +54,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Musée")
 
     click_on "Recenser cet objet"
-    expect(page).to have_selector("h2", text: "Recensement")
+    expect(page).to have_selector("h1", text: "Recensement")
     find("label", text: "Je confirme m'être déplacé voir l'objet pour ce recensement").click
     find("label", text: "L'objet est présent dans un autre édifice").click
     fill_in "Précisez le nom de l’édifice dans lequel se trouve l’objet *", with: "Salle des fêtes"
