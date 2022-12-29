@@ -15,6 +15,18 @@ FactoryBot.define do
     notes { "objet très doux" }
     confirmation_pas_de_photos { true }
 
+    trait :empty do
+      confirmation_sur_place { nil }
+      localisation { nil }
+      recensable { nil }
+      edifice_nom { nil }
+      etat_sanitaire { nil }
+      etat_sanitaire_edifice { nil }
+      securisation { nil }
+      notes { nil }
+      confirmation_pas_de_photos { nil }
+    end
+
     trait :with_photo do
       confirmation_pas_de_photos { false }
 

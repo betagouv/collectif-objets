@@ -1,10 +1,6 @@
-<% content_for(:head_title) { "Recensement · #{truncate(@recensement.objet.nom, length: 20)}" } %>
-
-<main class="fr-container fr-py-8w">
-  <%= render(
-    "recensements/form",
+- content_for(:head_title) { "Recensement · #{truncate(@recensement.objet.nom, length: 20)}" }
+%main.fr-container.fr-py-8w
+  = render "recensements/form",
     recensement: @recensement,
     form_url: commune_objet_recensement_path(@recensement.commune, @recensement.objet, @recensement),
     back_to_objet_url: commune_objet_path(@recensement.commune, @recensement.objet)
-  ) %>
-</main>

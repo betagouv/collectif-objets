@@ -154,9 +154,7 @@ Rails.application.routes.draw do
 
   namespace :demo do
     namespace :communes do
-      namespace :objets do
-        %i[index show].each { get _1 }
-      end
+      %i[objets_index objet_show new_recensement].each { get _1 }
     end
   end
 

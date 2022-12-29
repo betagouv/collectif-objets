@@ -134,4 +134,9 @@ feature "accessibility", js: true do
     before { visit demo_communes_objets_show_path }
     it_behaves_like "an accessible page"
   end
+
+  describe "communes/recensements#new - Démo " do
+    before { visit demo_communes_new_recensement_path }
+    it_behaves_like "an accessible page"
+  end
 end

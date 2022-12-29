@@ -78,6 +78,6 @@ class ApplicationController < ActionController::Base
     return if params[:id] != "-1" &&
               params.keys.select { _1.end_with?("_id") }.none? { params[_1] == "-1" }
 
-    redirect_to plan_path, alert: "Les liens des pages de démonstration ne fonctionnent pas"
+    redirect_to plan_path, alert: "Les liens et les formulaires des pages de démonstration ne fonctionnent pas"
   end
 end

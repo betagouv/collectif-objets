@@ -10,5 +10,6 @@ ls $1 | sed 's/.erb$/.haml/' | xargs sed -i '' 's/&#xFB01;/fi/g'
 ls $1 | sed 's/.erb$/.haml/' | xargs sed -i '' 's/&#x153;/œ/g'
 ls $1 | sed 's/.erb$/.haml/' | xargs sed -i '' 's/&#xEE;/î/g'
 ls $1 | sed 's/.erb$/.haml/' | xargs sed -i '' 's/\&#xC0;/À/g'
+ls $1 | sed 's/.erb$/.haml/' | xargs sed -i '' 's/&#xEA;/ê/g'
 # ls $1 | sed 's/.erb$/.haml/' | xargs sed -i '' 's/&#xE0;/à/g'
 
