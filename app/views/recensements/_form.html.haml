@@ -1,0 +1,144 @@
+%div{"data-controller" => "recensement"}
+  - if recensement.errors.any?
+    .fr-alert.fr-alert--error.fr-mb-6w
+      %p
+        Votre recensement n'a pas pu être enregistré :
+        %ul
+          - recensement.errors.attribute_names.each do |attribute|
+            %li= recensement.errors.messages_for(attribute).first
+  .fr-grid-row
+    .fr-col-md-6
+      .co-objet-summary
+        .co-objet-thumb
+          - if recensement.objet.palissy_photos.any?
+            %img{src: recensement.objet.first_palissy_photo_url}
+          - else
+            = vite_image_tag "images/illustrations/photo-manquante.png", alt: "image manquante"
+        .co-objet-desc
+          %div
+            %div.co-text--bold= recensement.objet.nom
+            %div #{recensement.objet.edifice_nom} (#{recensement.objet.commune.nom})
+            %div.co-text--muted= recensement.objet.palissy_REF
+          %div
+            = link_to "← Revenir à la fiche objet", back_to_objet_url
+  %h1.co-text--blue.fr-mt-6w.fr-mb-3w Recensement
+  - if recensement.analyse_notes.present?
+    .fr-callout.fr-icon-info-line
+      %h4.fr-callout__title Commentaire du conservateur
+      %blockquote.fr-callout__text.fr-my-2w.co-blockquote.fr-text--alt
+        = recensement.analyse_notes
+      %p.fr-callout__text
+        le #{l(recensement.analysed_at.to_date)}
+        par #{recensement.conservateur}
+  %p.co-text--muted.fr-mb-6w
+    Tous les champs marqués dʼun astérisque
+    %span.co-text--blue *
+    sont obligatoires
+  = form_for recensement, url: form_url, builder: FormBuilderDsfr, html: {"data-recensement-target": "form", "data-action": "direct-uploads:start-recensement#disableSubmit submit-recensement#showLoader direct-upload:error-hideLoader"} do |f|
+    .fr-grid-row.fr-mb-12w.fr-grid-row--gutters
+      .fr-col-md-6
+        .fr-checkbox-group
+          %input{name: "recensement[confirmation_sur_place]",
+            type: "hidden",
+            value: "0",
+            disabled: recensement.persisted?}
+          %input{id: "recensement[confirmation_sur_place]",
+            name: "recensement[confirmation_sur_place]",
+            type: "checkbox",
+            "data-action": "change->recensement#refreshFields",
+            checked: recensement.confirmation_sur_place,
+            disabled: recensement.persisted?,
+            value: "1"}
+          %label.fr-label{for: "recensement[confirmation_sur_place]"}
+            Je confirme m'être déplacé voir l'objet pour ce recensement
+      .fr-col-md-6.co-text--muted.co-form-explanations
+        L'intérêt de ce recensement est de constater l'état de l'objet à un instant.
+        Il est donc nécessaire de vous déplacer pour faire vos observations.
+    .fr-grid-row.fr-grid-row--gutters.fr-my-12w
+      .fr-col-md-6
+        %div{"data-recensement-target": "localisation"}
+          = render Communes::RecensementFormRadioComponent.new form_builder: f, attribute_name: :localisation, options: localisation_options(recensement), radio_button_options: {"data-action": "change->recensement#refreshFields"}
+        %div{"data-recensement-target": "edificeNom"}
+          - has_error = recensement.errors.attribute_names.include?(:edifice_nom)
+          .fr-input-group{class: has_error ? "fr-input-group--error" : ""}
+          = f.label :edifice_nom do
+            = t("activerecord.attributes.recensement.edifice_nom")
+            %span.co-text--blue *
+          = f.text_field :edifice_nom, "aria-describedby": ("edifice-nom-desc-error" if has_error)
+          - if has_error
+            %p#edifice-nom-desc-error.fr-error-text
+              = recensement.errors.messages_for(:edifice_nom).first
+      .fr-col-md-6.co-text--muted.co-form-explanations
+        %p
+          Si vous ne trouvez pas l'objet après avoir inspecté toutes les parties
+          de l'édifice, il convient dʼinterroger certaines personnes : les
+          habitués, un représentant de la paroisse ou le curé lui-même, la
+          personne en charge des accès à lʼédifice, etc.
+        %p
+          Le recensement vise à mettre à jour les données de localisation.
+          Ne vous étonnez pas d'une mauvaise localisation dans les fiches qui vous sont fournies.
+        = link_to "Voir la page 11 du guide", guide_url(page: 11), target: "_blank", rel: "noopener"
+    .fr-grid-row.fr-my-12w{"data-recensement-target": "recensable"}
+      .fr-col-md-6
+        %div
+          = render Communes::RecensementFormRadioComponent.new form_builder: f, attribute_name: :recensable, options: recensable_options, radio_button_options: {"data-action": "change->recensement#refreshFields"}
+      .fr-col-md-6.co-text--muted.co-form-explanations
+        %p Si lʼobjet ne peut pas être recensé, merci de nous en indiquer les raisons en commentaire.
+    .fr-grid-row.fr-grid-row--gutters.fr-my-12w
+      .fr-col-md-6.fr-mb-2w
+        = render PhotosUploadGroupComponent.from_form_builder f
+      .fr-col-md-6.co-text--muted.co-form-explanations
+        %p
+          Vos photos permettent aux conservateurs dʼappréhender votre évaluation.
+          %br
+          Les prises de vue contiennent idéalement :
+          %ul
+            %li Une vue de lʼobjet entier de face
+            %li Une vue de lʼobjet entier de côté
+            %li Une ou plusieurs photos de détails sur les points dʼattention signalés dans ce questionnaire de lʼobjet
+        = link_to "Voir la page 19 du guide", guide_url(page: 19), target: "_blank", rel: "noopener"
+    .fr-grid-row.fr-my-12w{"data-recensement-target": "etatSanitaireEdifice"}
+      .fr-col-md-6
+        %div
+          = render Communes::RecensementFormRadioComponent.new form_builder: f, attribute_name: :etat_sanitaire_edifice, options: etat_sanitaire_edifice_options
+      .fr-col-md-6.co-text--muted.co-form-explanations
+        %p
+          Souvent, les objets souffrent parce que le bâtiment qui les abrite est dans
+          un état préoccupant. Renseignez pour chaque objet votre
+          impression sur l'état sanitaire de la partie de lʼimmeuble qui abrite lʼobjet.
+        = link_to "Voir la page 13 du guide", guide_url(page: 13), target: "_blank", rel: "noopener"
+    .fr-grid-row.fr-my-12w{"data-recensement-target": "etatSanitaire"}
+      .fr-col-md-6
+        %div
+          = render Communes::RecensementFormRadioComponent.new form_builder: f, attribute_name: :etat_sanitaire, options: etat_sanitaire_options
+      .fr-col-md-6.co-text--muted.co-form-explanations
+        %p
+          Pour vous aider à estimer cet état sanitaire et la vitesse de dégradation,
+          deux points sont à observer:
+          %ul
+            %li
+              L'environnement immédiat de l'objet (déjections, poussières amoncelés, éclats ou morceaux tombés)
+            %li
+              L'objet lui-même (son intégrité est-elle bonne, la peinture qui le recouvre est-elle homogène, a-t-il l'air contaminé par un champignon, un ver, une mousse ?)
+          = link_to "Voir les points d'attention en fonction de la nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank", rel: "noopener"
+    .fr-grid-row.fr-my-12w{"data-recensement-target": "securisation"}
+      .fr-col-md-6
+        %div
+          = render Communes::RecensementFormRadioComponent.new form_builder: f, attribute_name: :securisation, options: securisation_options
+      .fr-col-md-6.co-text--muted.co-form-explanations
+        = link_to "Voir la page 18 du guide", guide_url(page: 18), target: "_blank", rel: "noopener"
+    .fr-grid-row.fr-my-12w{"data-recensement-target": "notes"}
+      .fr-col-md-6.co-flex--grow
+        .fr-form-group
+          = f.label :notes
+          = f.text_area :notes
+      .fr-col-md-6.co-text--muted.co-form-explanations
+        %p
+          Vous pouvez ajouter ici vos remarques sur la localisation, l'état sanitaire, la sécurisation, les dégradations ou toute information utile à partager aux conservateurs.
+    .fr-grid-row
+      .col-md-6
+        %button.fr-btn{"data-recensement-target": "submit", type: "submit"}
+          Enregistrer ce recensement
+        %br
+        %span.co-text--italic
+          Vous pourrez toujours le modifier après l'avoir enregistré
