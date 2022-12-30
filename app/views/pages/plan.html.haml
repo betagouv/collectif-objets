@@ -103,26 +103,30 @@
 
 
     %h2#communes Interface Communes
-    %p Ces pages sont visibles uniquement pour les communes connectées
+    %p Ces pages sont visibles uniquement pour les communes connectées. Les liens présents sont des pages de démonstration avec des données de test.
     %ul
       %li
-        Liste des objets à protéger de la commune
+        Liste des objets de la commune ·
+        = link_to "3 objets sans photos", demo_communes_objets_index_path
+        = accessible_icon_span
         %ul
           %li
             Objet 1 à protéger
+            = link_to "Sans photos", demo_communes_objet_show_path
+            = accessible_icon_span
             %ul
-              %li Recensement de l'objet 1
-          %li
-            Objet 2 à protéger
-            %ul
-              %li Recensement de l'objet 2
-          %li …
+              %li
+                Recensement de l'objet 1
+                = link_to "Démo", demo_communes_new_recensement_path
+                = accessible_icon_span
+
+          %li Autres objets …
       %li Finalisation du recensement
-      %li Voir les recensements envoyées
+      %li Voir les recensements envoyés
       %li Renvoyer le dossier
       %li Formulaire de recensement imprimable
       %li Voir le rapport de recensement
-      %li= link_to "Mon compte", edit_user_registration_path
+      %li Mon compte
 
     %h2#conservateurs Interface conservateurs
     %p Ces pages sont visibles uniquement pour les conservateurs connectés

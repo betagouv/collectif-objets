@@ -290,3 +290,9 @@ img.co-object-fit-contain,
   list-style: none;
   padding: 0;
 }
+
+/* MARGINS */
+
+.co-negative-margin-top {
+  margin-top: -1px;
+}
