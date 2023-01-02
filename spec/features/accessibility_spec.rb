@@ -4,6 +4,8 @@ require "rails_helper"
 
 shared_examples "an accessible page" do
   it "should be axe clean" do
+    expect(page).not_to have_text(/erreur 500/i)
+    expect(page).not_to have_text(/error 500/i)
     expect(page).to be_axe_clean
   end
 end
@@ -12,7 +14,7 @@ feature "accessibility", js: true do
   # PUBLIC
 
   describe "objets#index" do
-    let!(:objets1) { create_list(:objet, 10, :with_image) }
+    let!(:objets1) { create_list(:objet, 10, :with_palissy_photo) }
     let!(:objets2) { create_list(:objet, 12, :without_image) }
     before { visit objets_path }
     it_behaves_like "an accessible page"
@@ -25,7 +27,7 @@ feature "accessibility", js: true do
   end
 
   describe "objets#show avec photo" do
-    let!(:objet) { create(:objet, :with_image) }
+    let!(:objet) { create(:objet, :with_palissy_photo) }
     before { visit objet_path(objet) }
     it_behaves_like "an accessible page"
   end
@@ -124,19 +126,26 @@ feature "accessibility", js: true do
   end
 
   # COMMUNES
+end
 
+feature "accessibility communes", js: true do
   describe "communes/objets#index - Démo 3 objets sans photos" do
-    before { visit demo_communes_objets_index_path }
+    before { visit demo_path(namespace: "communes", name: "objets_index") }
     it_behaves_like "an accessible page"
   end
 
   describe "communes/objets#show - Démo sans photos" do
-    before { visit demo_communes_objet_show_path }
+    before { visit demo_path(namespace: "communes", name: "objet_show") }
     it_behaves_like "an accessible page"
   end
 
   describe "communes/recensements#new - Démo " do
-    before { visit demo_communes_new_recensement_path }
+    before { visit demo_path(namespace: "communes", name: "new_recensement") }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/completions#new - Démo" do
+    before { visit demo_path(namespace: "communes", name: "new_completion") }
     it_behaves_like "an accessible page"
   end
 end

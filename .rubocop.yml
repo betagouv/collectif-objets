@@ -39,3 +39,4 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - spec/**/*
+    - app/lib/demos/**/*

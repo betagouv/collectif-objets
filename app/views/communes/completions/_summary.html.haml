@@ -1,0 +1,41 @@
+.fr-table.co-recensement-completion-summary
+  %table
+    %thead
+      %tr
+        %th Objet
+        %th Localisation
+        %th Recensable
+        %th État sanitaire de l'édifice
+        %th État sanitaire de l'objet
+        %th Sécurisation
+        %th Photos
+    %tbody
+      - objets.each do |objet|
+        - recensement = objet.current_recensement
+        - presenter = RecensementPresenter.new(recensement)
+        - palissy_photo = recensement.objet.palissy_photos.first
+        %tr
+          %td
+            %div
+              %div
+                - if palissy_photo
+                  %img.co--width-max-100{alt: palissy_photo.alt, src: palissy_photo.url}
+                - else
+                  = vite_image_tag "images/illustrations/photo-manquante.png"
+              %div
+                = link_to truncate(recensement.objet.nom, length: 30), commune_objet_path(objet.commune, recensement.objet)
+          %td= presenter.localisation
+          %td= presenter.recensable
+          - %i[etat_sanitaire_edifice etat_sanitaire securisation].each do |original_attribute_name|
+            %td
+              = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name:
+          %td
+            - if recensement.missing_photos?
+              = badge("warning") { "Aucune photo" }
+            - elsif recensement.photos.any?
+              %div
+                = recensement.photos.count
+                photo#{recensement.photos.count > 1 ? 's' : ""}
+              .co-recensement-photos{tabindex: "0"}
+                - recensement.photos.each_with_index.map do |photo, index|
+                  %div= image_tag photo.variant(:medium), alt: "Photo de recensement #{index + 1}"
