@@ -1,27 +1,13 @@
-= form_with( |
-  url: autocomplete_conservateurs_communes_path, |
-  id: "header-search-form", |
-  data: { |
-    controller: "header-search", "header-search-target" => "form", |
-    action: "turbo:submit-end->header-search#hideSpinner" |
-  } |
-) do |f| |
-  .fr-header__search.fr-modal#modal-menu-search
-    .fr-container.fr-container-lg--fluid
-      %button.fr-link--close.fr-link(aria-controls="modal-menu-search")
-        Fermer
-      .fr-search-bar#search-865(role="search")
+.fr-header__search.fr-modal#modal-menu-search
+  .fr-container
+    %button.fr-btn--close.fr-btn(aria-controls="modal-menu-search") Fermer
+    = form_with url: autocomplete_conservateurs_communes_path, id: "header-search-form",
+      data: {controller: "header-search", "header-search-target" => "form",
+      action: "turbo:submit-end->header-search#hideSpinner"} do |f|
+      .fr-search-bar(role="search")
         = f.label :nom, "Rechercher une commune", class: "fr-label"
         .fr-input-wrap.co-btn--icon-spinning.co-header-search-input-wrap(data-header-search-target="inputWrap")
-          = f.text_field( |
-            :nom, |
-            placeholder: "Rechercher une commune", |
-            autocomplete: "off", |
-            data: { |
-              "header-search-target" => "input", |
-              action: "input->header-search#performSearch" |
-            }, |
-            class: "fr-input" |
-          ) |
+          = f.text_field :nom, placeholder: "Rechercher une commune", autocomplete: "off", class: "fr-input",
+            data: {"header-search-target" => "input", action: "input->header-search#performSearch"}
         = f.button value: "Rechercher", class: "fr-btn"
-      #js-header-search-results(data-header-search-target="results")
+    #js-header-search-results(data-header-search-target="results")

@@ -3,7 +3,7 @@
 class HeaderComponent < ViewComponent::Base
   renders_one :navbar
   renders_many :tool_links, lambda { |text, path, icon:, **kwargs|
-    link_to text, path, class: "fr-link #{icon ? "fr-icon-#{icon}-line" : ''}", **kwargs
+    link_to text, path, class: "fr-btn #{icon ? "fr-icon-#{icon}-line" : ''}", **kwargs
   }
   renders_one :menu
   renders_one :search
