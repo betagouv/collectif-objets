@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :edifice do
-    sequence(:merimee_REF) { |n| "PA#{51_001_252 + n}" }
+    sequence(:merimee_REF) { |n| "PA#{n + 51_001_252}" }
     nom { "église saint jean" }
     merimee_PRODUCTEUR { "Monuments Historiques" }
     code_insee { "51002" }
