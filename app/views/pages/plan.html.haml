@@ -107,21 +107,24 @@
     %ul
       %li
         Liste des objets de la commune ·
-        = link_to "3 objets sans photos", demo_communes_objets_index_path
+        = link_to "3 objets sans photos", demo_path(namespace: "communes", name: "objets_index")
         = accessible_icon_span
         %ul
           %li
             Objet 1 à protéger
-            = link_to "Sans photos", demo_communes_objet_show_path
+            = link_to "Sans photos", demo_path(namespace: "communes", name: "objet_show")
             = accessible_icon_span
             %ul
               %li
                 Recensement de l'objet 1
-                = link_to "Démo", demo_communes_new_recensement_path
+                = link_to "Démo", demo_path(namespace: "communes", name: "new_recensement")
                 = accessible_icon_span
 
           %li Autres objets …
-      %li Finalisation du recensement
+      %li
+        Finalisation du recensement
+        = link_to "2 recensements avec photos", demo_path(namespace: "communes", name: "new_completion")
+        = accessible_icon_span
       %li Voir les recensements envoyés
       %li Renvoyer le dossier
       %li Formulaire de recensement imprimable

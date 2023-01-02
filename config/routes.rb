@@ -152,11 +152,15 @@ Rails.application.routes.draw do
   Sidekiq::Throttled::Web.enhance_queues_tab!
   ActiveAdmin.routes(self)
 
-  namespace :demo do
-    namespace :communes do
-      %i[objets_index objet_show new_recensement].each { get _1 }
-    end
-  end
+  # ------
+  # DEMOS
+  # ------
+
+  get "demos/:namespace/:name", to: "demos#show", as: :demo
+
+  # --------------
+  # HEALTH & DEBUG
+  # --------------
 
   namespace :health do
     scope controller: :health do
