@@ -38,6 +38,6 @@ class CampaignEmail < ApplicationRecord
   def redirect_to_sib_path
     return nil if created_at < 30.days.ago # limit in SIB API
 
-    Rails.application.routes.url_helpers.admin_old_campaign_email_redirect_to_sib_preview_path(campaign, id)
+    Rails.application.routes.url_helpers.admin_campaign_email_redirect_to_sib_preview_path(campaign, id)
   end
 end
