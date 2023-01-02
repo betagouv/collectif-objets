@@ -12,7 +12,8 @@
               labels: ["Inactive", "Recensement démarré", "Recensement terminé"],                 |
               colors: ["yellow", "blue", "rgb(30, 100, 30)", "green"]                             |
             )                                                                                     |
-        - if stats[:objets].present?
+      - if stats[:objets].present?
+        .fr-col-md-6
           %p
             = stats[:objets][:total]
             objets à recenser
@@ -26,8 +27,3 @@
             %p
               = (stats[:objets][:recensements_with_photos_ratio] * 100).round
               \% des recensements ont des photos
-    - if stats[:mails].present?
-      .fr-col-md-6
-        %p= t("campaigns.statistics.mails.all", count: stats[:mails][:all][:count])
-        = render Campaigns::EmailsStatsComponent.new(stats[:mails][:all])
-        = link_to "Voir toutes les statistiques", admin_campaign_show_statistics_path(@campaign), class: "fr-link"

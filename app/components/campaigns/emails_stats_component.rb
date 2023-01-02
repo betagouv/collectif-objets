@@ -4,14 +4,13 @@ module Campaigns
   class EmailsStatsComponent < ViewComponent::Base
     include ApplicationHelper
 
-    KEYS = %i[error pending sent delivered opened clicked].freeze
+    KEYS = %i[error pending sent delivered clicked].freeze
 
     COLORS = {
       error: "red",
       pending: "yellow",
       sent: "#1c5b15",
       delivered: "#28841e",
-      opened: "#2e9322",
       clicked: "#47e535"
     }.freeze
 

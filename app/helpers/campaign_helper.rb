@@ -33,7 +33,6 @@ module CampaignHelper
     [
       email.sent? ? %w[info Envoyé] : nil,
       email.delivered? ? %w[success Reçu] : nil,
-      email.opened? ? %w[success Lu] : nil,
       email.clicked? ? %w[success Cliqué] : nil,
       email.error? ? %w[error Erreur] : nil
     ].compact.map do |color, text|
