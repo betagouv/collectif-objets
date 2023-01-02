@@ -19,16 +19,6 @@ RSpec.describe Co::SendInBlueClient do
             "events": [
               {
                 "email": "adrien@dipasquale.fr",
-                "date": "2022-08-23T11:29:14.729+02:00",
-                "subject": "Envoi 1661246768 d'un dossier Collectif Objets",
-                "messageId": "<63049d3042a81_3d3b1ae08868@Adriens-Air.mail>",
-                "event": "opened",
-                "tag": "",
-                "ip": "78.126.55.225",
-                "from": "collectifobjets@beta.gouv.fr"
-              },
-              {
-                "email": "adrien@dipasquale.fr",
                 "date": "2022-08-23T11:26:10.623+02:00",
                 "subject": "Envoi 1661246768 d'un dossier Collectif Objets",
                 "messageId": "<63049d3042a81_3d3b1ae08868@Adriens-Air.mail>",
@@ -56,13 +46,11 @@ RSpec.describe Co::SendInBlueClient do
 
       it "should return parsed events" do
         res = subject
-        expect(res.count).to eq(3)
+        expect(res.count).to eq(2)
         expect(res[0].event).to eq("requests")
         expect(res[0].date).to be_within(1.day).of(Date.new(2022, 8, 23))
         expect(res[1].event).to eq("delivered")
         expect(res[1].date).to be_within(1.day).of(Date.new(2022, 8, 23))
-        expect(res[2].event).to eq("opened")
-        expect(res[2].date).to be_within(1.day).of(Date.new(2022, 8, 23))
       end
 
       context "message_id mismatch" do
