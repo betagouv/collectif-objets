@@ -64,7 +64,7 @@ module Co
         end
 
         def pop_photo_io(objet)
-          return URI.parse(objet.palissy_photos.first["url"]).open if objet.palissy_photos.any?
+          return URI.parse(objet.palissy_photos.first.url).open if objet.palissy_photos.any?
 
           Rails.root.join "app/frontend/images/illustrations/photo-manquante.png"
         end
