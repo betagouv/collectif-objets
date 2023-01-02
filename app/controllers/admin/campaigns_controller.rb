@@ -114,7 +114,6 @@ module Admin
     end
 
     def refresh_delivery_infos
-      Campaigns::SynchronizeCampaignEmailsJob.perform_async(@campaign.id)
       Campaigns::RefreshCampaignStatsJob.perform_in(10.minutes, @campaign.id)
       redirect_to(
         admin_campaign_path(@campaign),
@@ -156,7 +155,6 @@ module Admin
 
     def enqueue_campaign_jobs
       Campaigns::CronJob.perform_inline
-      Campaigns::SynchronizeCampaignEmailsJob.perform_in(2.minutes.from_now, @campaign.id)
       Campaigns::RefreshCampaignStatsJob.perform_in(10.minutes, @campaign.id)
     end
 

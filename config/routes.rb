@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require "sidekiq/web"
-require "sidekiq/throttled/web"
 
 Rails.application.routes.draw do
   ## -----
@@ -149,7 +148,6 @@ Rails.application.routes.draw do
       post :rotate
     end
   end
-  Sidekiq::Throttled::Web.enhance_queues_tab!
   ActiveAdmin.routes(self)
 
   # ------
