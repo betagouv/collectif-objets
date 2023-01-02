@@ -12,6 +12,11 @@
   margin-bottom: 1rem;
 }
 
+html[data-fr-scheme="dark"] .co-testimonial-wrapper {
+  background-color: rgb(78, 20, 251);
+}
+
+
 .co-testimonial-wrapper img.co-testimonial-avatar {
   position: absolute;
   top: -19px;

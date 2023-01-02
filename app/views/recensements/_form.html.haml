@@ -8,7 +8,7 @@
             %li= recensement.errors.messages_for(attribute).first
   .fr-grid-row
     .fr-col-md-6
-      .co-objet-summary
+      .co-objet-summary.co-background--grey
         .co-objet-thumb
           - if recensement.objet.palissy_photos.any?
             %img{src: recensement.objet.first_palissy_photo_url}
