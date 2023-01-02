@@ -7,7 +7,7 @@ module Co
     include Singleton
 
     EMAIL_EVENTS = {
-      preserved: %w[delivered requests opened clicks error].freeze,
+      preserved: %w[delivered requests clicks error].freeze,
       ignored: %w[deferred unsubscribed loadedByProxy].freeze,
       error: %w[bounces hardBounces softBounces spam invalid blocked error].freeze
     }.freeze
