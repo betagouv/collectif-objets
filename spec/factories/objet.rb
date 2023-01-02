@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :objet do
-    sequence(:palissy_REF) { |n| "PM#{51_001_252 + n}" }
+    sequence(:palissy_REF) { |n| "PM#{n + 51_001_252}" }
     memoire_REF { "AP80L043503" }
     palissy_TICO { "La Sainte-Famille" }
     palissy_CATE { "Peinture" }
