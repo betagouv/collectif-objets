@@ -9,10 +9,10 @@
       %a{href: "#", "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-todo-line"}
         copier
 
-  %p= commune_status_badge(@commune)
-
   .fr-grid-row
     .fr-col-md-8
+      %p= commune_status_badge(@commune)
+
       - if @commune.recensement_ratio.present?
         %p
           Objets recensés à #{@commune.recensement_ratio}%
@@ -26,7 +26,6 @@
             %br
             et terminé le #{l(@commune.completed_at, format: :long_with_weekday)}
 
-
       %h4
         = icon_span("account-circle")
         #{@commune.users.count} Usager(s)
@@ -34,18 +33,16 @@
         %p Aucun usager
         %p
           %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
-      %p
-        - @commune.users.each do |user|
-          %div
-            .co-text--bold #{user.email}
-            .fr-my-1w= link_to "envoyer un email", "mailto:#{user.email}", class: "fr-link fr-link--icon-left fr-icon-mail-line"
-            .fr-my-1w= link_to "incarner cet usager", admin_user_impersonate_path(user), class: "fr-btn fr-btn--icon-left fr-icon-eye-line"
-            .fr-my-1w{"data-controller": "copy-to-clipboard"}
-              Lien magique :
-              %code{"data-copy-to-clipboard-target": "content"}
-                = magic_authentication_url("magic-token": user.magic_token)
-              %a{href: "#", "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-todo-line"}
-                copier
+      - @commune.users.each do |user|
+        %h4= user.email
+        %ul{style: "list-style-type: none; padding-left: 0;"}
+          %li= link_to "envoyer un email", "mailto:#{user.email}", class: "fr-link fr-link--icon-left fr-icon-mail-line"
+          %li= link_to "incarner cet usager", admin_user_impersonate_path(user), class: "fr-link fr-link--icon-left fr-icon-eye-line"
+          %li= link_to "modifier cet usager", edit_admin_user_path(user), class: "fr-link fr-link--icon-left fr-icon-pencil-line"
+          %li{"data-controller": "copy-to-clipboard"}
+            %input{type:"hidden", "data-copy-to-clipboard-target": "content", "data-value": magic_authentication_url("magic-token": user.magic_token)}
+            %a{href: "#", "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-link fr-link--icon-left fr-icon-todo-line"}
+              copier le lien magique
 
     .fr-col-md-4
       %h4 Commentaires admin
@@ -68,7 +65,7 @@
               = blockquote comment.body
 
 
-  %h4
+  %h4.fr-mt-4w
     = icon_span("passport")
     #{@commune.objets.count} objet(s) dans #{@commune.edifices.count} édifice(s)
 

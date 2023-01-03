@@ -114,7 +114,7 @@ Rails.application.routes.draw do
       end
     end
     resources :dossiers, only: [:update]
-    resources :users, only: [] do
+    resources :users, only: %i[edit update] do
       get :impersonate
       collection do
         post :stop_impersonating

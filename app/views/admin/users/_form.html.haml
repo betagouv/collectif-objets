@@ -1,0 +1,17 @@
+- if user.errors.any?
+  .fr-alert.fr-alert--error.fr-mb-4w
+    %p
+      Erreur(s)
+      - user.errors.full_messages.each do |message|
+        %li= message
+
+= form_for [:admin, user], builder: FormBuilderDsfr, data: { turbo: false } do |f|
+  .fr-input-group
+    = f.label :email, "Email (*)"
+    - if user.persisted?
+      %i Si c'est un usager différent, il faut créer un nouveau compte usager !
+    = f.text_field :email, required: true
+  .fr-input-group
+    = f.label :commune, "Commune"
+    %input{disabled: true, id: "commune", name: "users[commune]", value: user.commune, class: "fr-input"}
+  = f.submit "Enregistrer"
