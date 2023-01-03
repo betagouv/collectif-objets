@@ -11,6 +11,9 @@
     },
     {
       "command": "0 * * * * rails runner Campaigns::RefreshAllCampaignStatsJob.perform_async"
+    },
+    {
+      "command": "0 9 * * * rails runner AutoSubmitDossiersJob.perform_async"
     }
   ]
 }

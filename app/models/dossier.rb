@@ -36,6 +36,15 @@ class Dossier < ApplicationRecord
   delegate :departement, to: :commune
 
   scope :in_departement, ->(d) { joins(:commune).where(communes: { departement: d }) }
+  scope :auto_submittable, -> { where(id: auto_submittable_ids) }
+
+  def self.auto_submittable_ids
+    construction.includes(:recensements, commune: [:objets])
+      .to_a
+      .select { |dossier| dossier.recensements.all? { _1.created_at < 1.month.ago } }
+      .select { |dossier| dossier.recensements.length == dossier.commune.objets.length }
+      .map(&:id)
+  end
 
   def full?
     recensements.count == commune.objets.count
