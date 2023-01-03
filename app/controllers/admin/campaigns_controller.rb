@@ -14,8 +14,9 @@ module Admin
     before_action :set_excluded_communes, only: %i[show update_status]
 
     def index
-      @campaign_search = Co::Conservateurs::CampaignSearch.new(**search_params)
-      @pagy, @campaigns = pagy(@campaign_search.resolve, items: 10)
+      @ransack = Campaign.ransack(params[:q])
+      @query_present = params[:q].present?
+      @pagy, @campaigns = pagy(@ransack.result, items: 20)
     end
 
     def show; end

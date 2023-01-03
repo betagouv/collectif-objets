@@ -10,16 +10,16 @@
         Admin - Campagnes
       %div= link_to "Créer une nouvelle campagne", new_admin_campaign_path, class: "fr-btn"
 
-    = form_for @campaign_search, as: :campaign_search, url: admin_campaigns_path, method: "GET", builder: FormBuilderDsfr do |f|
+    = search_form_for @ransack, url: admin_campaigns_path, builder: FormBuilderDsfr do |f|
       .co-flex.co-flex--align-items-center.co-flex--justify-content-center.fr-mt-2w
         %div Filtres
         .fr-ml-2w
-          = f.select(:status, [["tous les statuts", nil]] + campaigns_statuses_options, {}, onchange: "this.form.submit()" )
+          = f.select(:status_eq, [["tous les statuts", nil]] + campaigns_statuses_options, {}, onchange: "this.form.submit()" )
 
         .fr-ml-2w
-          = f.select(:departement_code, [["tous les départements", nil]] + departements_options, {}, onchange: "this.form.submit()")
+          = f.select(:departement_code_eq, [["tous les départements", nil]] + departements_options, {}, onchange: "this.form.submit()")
 
-        - if @campaign_search.filters?
+        - if @query_present
           .fr-ml-2w
             = link_to "Réinitialiser", admin_campaigns_path, class: "fr-link"
 
