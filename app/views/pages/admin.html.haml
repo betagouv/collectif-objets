@@ -14,6 +14,9 @@
 
       %h2.fr-mt-4w Outils & Debug
       %ul
-        %li= link_to "Prévisualisation des emails", mail_previews_path
+        - if Rails.configuration.x.environment_specific_name == "production"
+          %li= link_to "Prévisualisation des emails (sur staging)", "https://staging.collectif-objets.incubateur.net/mail_previews", target: "_blank", rel: "noopener"
+        - else
+          %li= link_to "Prévisualisation des emails", mail_previews_path
         %li= link_to "Suivi des tâches asynchrones (Sidekiq)", sidekiq_web_path
         %li= link_to "Exports pour POP", admin_exports_path
