@@ -6,7 +6,7 @@ class Campaign < ApplicationRecord
   DATE_FIELDS = STEPS.map { "date_#{_1}" }.freeze
 
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :campaigns
-  has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy
+  has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy, counter_cache: :recipients_count
   has_many :communes, through: :recipients
   has_many :objets, through: :communes
   has_many :emails, class_name: "CampaignEmail", through: :recipients
