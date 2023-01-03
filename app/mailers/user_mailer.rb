@@ -45,6 +45,16 @@ class UserMailer < ApplicationMailer
     )
   end
 
+  def dossier_auto_submitted_email
+    @user = params[:user]
+    @commune = params[:commune]
+    set_login_url
+    mail(
+      to: @user.email,
+      subject: I18n.t("user_mailer.dossier_auto_submitted.subject", commune_nom: @commune.nom)
+    )
+  end
+
   protected
 
   def set_login_url

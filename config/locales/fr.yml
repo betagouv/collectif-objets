@@ -748,6 +748,12 @@ fr:
       contact: En attendant, nous restons à votre disposition pour toute information complémentaire.
       consulter: Vous pouvez consulter les recensements que vous nous avez envoyés sur le site Collectif Objets.
       cta: Accéder à Collectif Objets
+    dossier_auto_submitted:
+      subject: "Vos recensements d'objets ont été transmis aux conservateurs"
+      intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs ne l'avaient pas encore reçu.
+      auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’analyser et revenir vers vous avec un rapport, en temps voulu.
+      cta: Voir les données envoyées
+      contact: Nous restons à votre disposition pour toute question ou demande de clarification.
     dossier_accepted:
       subject: "Rapport de recensement des objets protégés de %{commune_nom}"
       submitted: Vous avez envoyé un dossier de recensement des objets protégés de %{commune_nom} et je vous en remercie.

@@ -80,4 +80,21 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
     end
   end
+
+  describe "dossier_auto_submitted_email" do
+    let(:commune) { create(:commune, nom: "Marseille") }
+    let(:user) { create(:user, email: "jean@user.fr", commune:) }
+    let(:mail) { UserMailer.with(user:, commune:).dossier_auto_submitted_email }
+
+    include_examples(
+      "both parts contain",
+      "Votre dossier était en attente de clôture"
+    )
+
+    it "behaves as expected" do
+      expect(mail.subject).to include "Vos recensements d'objets ont été transmis aux conservateurs"
+      expect(mail.to).to eq(["jean@user.fr"])
+      expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
+    end
+  end
 end

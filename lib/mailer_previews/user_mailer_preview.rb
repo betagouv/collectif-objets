@@ -58,4 +58,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(dossier:).dossier_rejected_email
   end
   # rubocop:enable Metrics/MethodLength
+
+  def dossier_auto_submitted
+    user = User.order(Arel.sql("RANDOM()")).first
+    commune = Commune.order(Arel.sql("RANDOM()")).first
+    UserMailer.with(user:, commune:).dossier_auto_submitted_email
+  end
 end
