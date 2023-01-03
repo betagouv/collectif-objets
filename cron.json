@@ -10,9 +10,6 @@
       "command": "30 10 * * * rails runner Campaigns::CronJob.perform_async"
     },
     {
-      "command": "0 0 * * * rails runner Campaigns::SynchronizeOutdatedEmailsJob.perform_async"
-    },
-    {
       "command": "0 * * * * rails runner Campaigns::RefreshAllCampaignStatsJob.perform_async"
     }
   ]
