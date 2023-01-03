@@ -10,7 +10,7 @@ module CampaignHelper
 
   def campaign_status_badge(campaign)
     color = {
-      "draft" => :info,
+      "draft" => :warning,
       "planned" => :new,
       "ongoing" => :info,
       "finished" => :success
