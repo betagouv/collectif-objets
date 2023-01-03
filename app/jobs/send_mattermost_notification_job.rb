@@ -6,7 +6,7 @@ class SendMattermostNotificationJob
   include Sidekiq::Job
 
   HOOKS_URL = "https://mattermost.incubateur.net/hooks/#{Rails.application.credentials.mattermost&.hook_id}".freeze
-  HANDLED_EVENTS = %w[commune_completed recensement_created].freeze
+  HANDLED_EVENTS = %w[commune_completed recensement_created dossier_auto_submitted].freeze
 
   def perform(event, payload)
     raise "unsupported event type #{event}" unless HANDLED_EVENTS.include?(event)

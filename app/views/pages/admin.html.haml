@@ -6,8 +6,14 @@
       %h1
         %span.fr-icon-lock-line(aria-hidden="true")
         Admin
+      %h2 Ressources
       %ul
         %li= link_to "Communes", admin_communes_path
         %li= link_to "Conservateurs", admin_conservateurs_path
         %li= link_to "Campagnes", admin_campaigns_path
+
+      %h2.fr-mt-4w Outils & Debug
+      %ul
+        %li= link_to "Prévisualisation des emails", mail_previews_path
+        %li= link_to "Suivi des tâches asynchrones (Sidekiq)", sidekiq_web_path
         %li= link_to "Exports pour POP", admin_exports_path
