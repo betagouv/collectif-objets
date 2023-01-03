@@ -8,7 +8,7 @@ module Admin
       :set_campaign, only: %i[
         show show_statistics mail_previews edit edit_recipients update_recipients
         update_status update destroy force_start force_step_up
-        refresh_stats refresh_delivery_infos
+        refresh_stats
       ]
     )
     before_action :set_excluded_communes, only: %i[show update_status]
@@ -112,14 +112,6 @@ module Admin
       enqueue_campaign_jobs
       redirect_to admin_campaign_path(@campaign),
                   notice: "La campagne est en train de passer à l'étape #{@campaign.next_step}…"
-    end
-
-    def refresh_delivery_infos
-      Campaigns::RefreshCampaignStatsJob.perform_in(10.minutes, @campaign.id)
-      redirect_to(
-        admin_campaign_path(@campaign),
-        notice: "Les informations d'envoi des mails sont en train d'être rafraîchies…"
-      )
     end
 
     def refresh_stats

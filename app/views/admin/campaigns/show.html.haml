@@ -151,15 +151,6 @@
               class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line", |
               method: :post |
             ) |
-        - if @campaign.ongoing? || @campaign.finished?
-          %li
-            = button_to( |
-              "Rafraîchir les informations d'envoi des mails", |
-              admin_campaign_refresh_delivery_infos_path(@campaign), |
-              class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line", |
-              method: :post, |
-              disabled: @campaign.imported? |
-            ) |
         %li
           = form_with( |
             url: admin_campaign_path(@campaign), |
