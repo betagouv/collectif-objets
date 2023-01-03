@@ -28,10 +28,10 @@
         %thead
           %tr
             %th Identifiant
-            %th Département
-            %th Statut
-            %th Nombre de communes
-            %th Dates
+            %th= sort_link @ransack, :departement_code, "Département"
+            %th= sort_link @ransack, :status, "Statut"
+            %th= sort_link @ransack, :recipients_count, "Nombre de communes"
+            %th= sort_link @ransack, :date_lancement, "Dates"
 
         %tbody
           - @campaigns.each do |campaign|
@@ -39,7 +39,7 @@
               %td(style="min-width: 200px")= link_to campaign.human_id, admin_campaign_path(campaign)
               %td(style="min-width: 200px")= campaign.departement
               %td= campaign_status_badge(campaign)
-              %td= campaign.communes.count
+              %td= campaign.recipients_count
               %td du&nbsp;#{l(campaign.date_lancement)}&nbsp;au&nbsp;#{l(campaign.date_fin)}
 
     - if @pagy.pages > 1

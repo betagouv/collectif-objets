@@ -132,7 +132,6 @@ Rails.application.routes.draw do
         post :force_start
         post :force_step_up
       end
-      post :refresh_delivery_infos
       post :refresh_stats
       resources :recipients, controller: "campaign_recipients", only: %i[show update] do
         get :mail_preview

@@ -4,7 +4,7 @@ class CampaignRecipient < ApplicationRecord
   STATUSES = %w[completed started step_lancement step_relance1 step_relance2 step_relance3 step_fin].freeze
   OPT_OUT_REASONS = %w[postponed other].freeze
 
-  belongs_to :campaign
+  belongs_to :campaign, counter_cache: :recipients_count
   belongs_to :commune
   has_many :emails, class_name: "CampaignEmail", dependent: :destroy, inverse_of: :recipient
 

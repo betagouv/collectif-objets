@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_22_100349) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_03_164424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -120,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_100349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "custom_message"
+    t.integer "recipients_count", default: 0
     t.index ["departement_code"], name: "index_campaigns_on_departement_code"
   end
 

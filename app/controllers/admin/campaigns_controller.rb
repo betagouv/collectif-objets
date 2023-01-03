@@ -113,14 +113,6 @@ module Admin
                   notice: "La campagne est en train de passer à l'étape #{@campaign.next_step}…"
     end
 
-    def refresh_delivery_infos
-      Campaigns::RefreshCampaignStatsJob.perform_in(10.minutes, @campaign.id)
-      redirect_to(
-        admin_campaign_path(@campaign),
-        notice: "Les informations d'envoi des mails sont en train d'être rafraîchies…"
-      )
-    end
-
     def refresh_stats
       Campaigns::RefreshCampaignStatsJob.perform_async(@campaign.id)
       redirect_to(
