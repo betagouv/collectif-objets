@@ -1,10 +1,7 @@
 - content_for(:head_title) { "Admin - Communes" }
 
 .fr-container.fr-pt-2w.fr-pb-4w
-  .co-flex.co-flex--space-between
-    %div
-      = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Communes"
-    %div= link_to "Ancienne interface d'admin", admin_old_communes_path
+  = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Communes"
 
   %h2 Admin - Communes
 

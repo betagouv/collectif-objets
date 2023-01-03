@@ -148,7 +148,6 @@ Rails.application.routes.draw do
       post :rotate
     end
   end
-  ActiveAdmin.routes(self)
 
   # ------
   # DEMOS

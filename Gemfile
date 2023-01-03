@@ -7,7 +7,6 @@ ruby "3.1.3"
 
 gem "aasm"
 gem "actioncable"
-gem "activeadmin", "~> 2.11"
 gem "active_model_validates_intersection_of"
 gem "activerecord-postgis-adapter"
 gem "activerecord_where_assoc"

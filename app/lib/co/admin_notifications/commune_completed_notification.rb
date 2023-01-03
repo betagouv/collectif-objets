@@ -16,7 +16,7 @@ module Co
       def message
         "La commune #{@commune.nom} (#{@commune.code_insee}) " \
           "a terminé son recensement. " \
-          "[voir dans l'admin](#{admin_url(@commune)})"
+          "[voir dans l'admin](#{admin_commune_url(@commune)})"
       end
     end
   end

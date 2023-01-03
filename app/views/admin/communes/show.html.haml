@@ -1,10 +1,7 @@
 - content_for(:head_title) { "#{@commune.nom} - Admin" }
 
 .fr-container.fr-pt-2w
-  .co-flex.co-flex--space-between
-    %div
-      = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
-    %div= link_to "Ancienne interface d'admin", admin_old_commune_path(@commune)
+  = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
 
   .co-flex{"data-controller": "copy-to-clipboard"}
     %h2{"data-copy-to-clipboard-target": "content"}= @commune

@@ -1,10 +1,7 @@
 - content_for(:head_title) { "Admin - Conservateurs" }
 
 .fr-container.fr-pt-2w.fr-pb-4w
-  .co-flex.co-flex--space-between
-    %div
-      = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Conservateurs", admin_conservateurs_path]], current_page_label: "Modifier #{@conservateur}"
-    %div= link_to "Ancienne interface d'admin", admin_old_conservateur_path(@conservateur)
+  = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Conservateurs", admin_conservateurs_path]], current_page_label: "Modifier #{@conservateur}"
 
   %h2 Admin - Modifier #{@conservateur}
 
