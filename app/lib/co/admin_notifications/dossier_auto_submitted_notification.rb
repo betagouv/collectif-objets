@@ -9,9 +9,7 @@ module Co
         @dossier = Dossier.find(payload[:dossier_id])
       end
 
-      def icon_emoji
-        "checkered_flag"
-      end
+      def icon_emoji = "checkered_flag"
 
       def message
         "Le dossier ##{@dossier.id} de [#{@dossier.commune}](#{admin_commune_url(@dossier.commune)}) " \
