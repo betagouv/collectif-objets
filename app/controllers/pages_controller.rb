@@ -49,4 +49,10 @@ class PagesController < ApplicationController
 
     send_data(pdf_body, content_type: "application/pdf", filename:, disposition: :inline)
   end
+
+  def campaigns_ics
+    campaigns = Campaign.where.not(status: :draft).includes(:departement)
+    ics = Co::Campaigns::Ics.new(campaigns)
+    render plain: ics.to_ical, content_type: "text/calendar"
+  end
 end

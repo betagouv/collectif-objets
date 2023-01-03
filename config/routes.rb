@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     get :plan
     get :accessibilite
   end
+  get "campaigns.ics", to: "pages#campaigns_ics", as: :campaigns_ics
   resources :survey_votes, only: %w[new create]
 
   resources :departements, only: %i[index show]

@@ -201,6 +201,9 @@ GEM
     htmlentities (4.3.4)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    icalendar (2.8.0)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.4)
     ice_nine (0.11.2)
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
@@ -510,6 +513,7 @@ DEPENDENCIES
   haml-rails
   html2haml
   htmlbeautifier
+  icalendar
   image_processing
   kramdown
   launchy
