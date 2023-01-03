@@ -10,10 +10,6 @@ module Co
         []
       end
 
-      def admin_url(resource)
-        send("admin_old_#{resource.class.to_s.parameterize}_url", resource)
-      end
-
       def default_url_options
         Rails.application.default_url_options
       end

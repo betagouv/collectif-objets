@@ -14,12 +14,9 @@ module Co
       end
 
       def message
-        "Nouveau recensement " \
-          "· [admin](#{admin_url(@recensement)}) ! " \
-          "Commune #{@recensement.commune.nom} (#{@recensement.commune.code_insee}) " \
-          "· [admin](#{admin_url(@recensement.commune)}) " \
+        "Nouveau recensement !" \
+          "[Commune #{@recensement.commune}](#{admin_commune_url(@recensement.commune)})" \
           "- Objet #{truncate(@recensement.objet.nom, length: 30)} " \
-          "· [admin](#{admin_url(@recensement.objet)}) " \
           "- #{@recensement.photos.any? ? "#{@recensement.photos.count} photos" : '❌ Photos absentes'}"
       end
 
