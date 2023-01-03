@@ -93,4 +93,56 @@ RSpec.describe Dossier, type: :model do
     subject { dossier.valid? }
     it { should be false }
   end
+
+  describe "#auto_submittable" do
+    # A is auto submittable
+    let!(:communeA) { build(:commune) }
+    let!(:objetsA) { create_list(:objet, 2, commune: communeA) }
+    let!(:dossierA) { create(:dossier, commune: communeA, status: "construction") }
+    let!(:recensementA1) { create(:recensement, objet: objetsA[0], dossier: dossierA, created_at: 2.months.ago) }
+    let!(:recensementA2) { create(:recensement, objet: objetsA[1], dossier: dossierA, created_at: 2.months.ago) }
+
+    # B is already submitted
+    let!(:communeB) { build(:commune) }
+    let!(:objetsB) { create_list(:objet, 2, commune: communeB) }
+    let!(:dossierB) { create(:dossier, commune: communeB, status: "submitted") }
+    let!(:recensementB1) { create(:recensement, objet: objetsB[0], dossier: dossierB, created_at: 2.months.ago) }
+    let!(:recensementB2) { create(:recensement, objet: objetsB[1], dossier: dossierB, created_at: 2.months.ago) }
+
+    # C has an objet without a recensement
+    let!(:communeC) { build(:commune) }
+    let!(:objetsC) { create_list(:objet, 3, commune: communeC) }
+    let!(:dossierC) { create(:dossier, commune: communeC, status: "construction") }
+    let!(:recensementC1) { create(:recensement, objet: objetsC[0], dossier: dossierC, created_at: 2.months.ago) }
+    let!(:recensementC2) { create(:recensement, objet: objetsC[1], dossier: dossierC, created_at: 2.months.ago) }
+
+    # D has 0 recensements
+    let!(:communeD) { build(:commune) }
+    let!(:objetsD) { create_list(:objet, 2, commune: communeD) }
+    let!(:dossierD) { create(:dossier, commune: communeD, status: "construction") }
+
+    # E is auto submittable too
+    let!(:communeE) { build(:commune) }
+    let!(:objetsE) { create_list(:objet, 2, commune: communeE) }
+    let!(:dossierE) { create(:dossier, commune: communeE, status: "construction") }
+    let!(:recensementE1) { create(:recensement, objet: objetsE[0], dossier: dossierE, created_at: 2.months.ago) }
+    let!(:recensementE2) { create(:recensement, objet: objetsE[1], dossier: dossierE, created_at: 2.months.ago) }
+
+    # F is too recent
+    let!(:communeF) { build(:commune) }
+    let!(:objetsF) { create_list(:objet, 2, commune: communeF) }
+    let!(:dossierF) { create(:dossier, commune: communeF, status: "construction") }
+    let!(:recensementF1) { create(:recensement, objet: objetsF[0], dossier: dossierF, created_at: 1.day.ago) }
+    let!(:recensementF2) { create(:recensement, objet: objetsF[1], dossier: dossierF, created_at: 1.day.ago) }
+
+    it "should work" do
+      dossiers = Dossier.auto_submittable.to_a
+      expect(dossiers).to include(dossierA)
+      expect(dossiers).to include(dossierE)
+      expect(dossiers).not_to include(dossierB)
+      expect(dossiers).not_to include(dossierC)
+      expect(dossiers).not_to include(dossierD)
+      expect(dossiers).not_to include(dossierF)
+    end
+  end
 end
