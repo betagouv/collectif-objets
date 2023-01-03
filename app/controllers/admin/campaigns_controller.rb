@@ -7,8 +7,7 @@ module Admin
     before_action(
       :set_campaign, only: %i[
         show show_statistics mail_previews edit edit_recipients update_recipients
-        update_status update destroy force_start force_step_up
-        refresh_stats refresh_delivery_infos
+        update_status update destroy force_start force_step_up refresh_stats
       ]
     )
     before_action :set_excluded_communes, only: %i[show update_status]

@@ -44,3 +44,18 @@
 
     - if @pagy.pages > 1
       = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+
+    %h2.fr-mt-4w Calendrier des campagnes
+    %p{"data-controller": "copy-to-clipboard"}
+      = link_to campaigns_ics_url, campaigns_ics_path
+      %input{type: :hidden, "data-copy-to-clipboard-target": "content", "data-value": campaigns_ics_url}
+      = button_tag("Copier", class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-todo-line", "data-action": "copy-to-clipboard#copy", "data-copy-to-clipboard-target": "button")
+
+    %p
+      :markdown
+        Ce lien peut être utilisé pour ajouter le calendrier des campagnes sur votre logiciel d'agenda.
+
+        - Sur le webmail SOGo de Gandi, il faut cliquer sur le + à droite de "Calendriers web"
+        - Sur Mac OS Calendar, il faut cliquer sur "fichier > nouvel abonnement à un calendrier
+        - Sur Google Calendar, il faut cliquer sur le + à côté de Autres agendas et choisir "À partir de l'URL"
+
