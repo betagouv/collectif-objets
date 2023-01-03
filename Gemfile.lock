@@ -376,6 +376,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
+    redis (4.8.0)
     redis-client (0.11.2)
       connection_pool
     regexp_parser (2.6.1)
@@ -567,6 +568,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   rails-erd
   ransack
+  redis
   rspec-rails (~> 6.0)
   rubocop
   rubocop-rails
