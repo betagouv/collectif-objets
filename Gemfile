@@ -75,3 +75,5 @@ group :test do
 end
 
 gem "mjml-rails", "~> 4.8"
+
+gem "front_matter_parser", "~> 1.0"

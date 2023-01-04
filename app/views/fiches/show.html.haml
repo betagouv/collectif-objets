@@ -1,0 +1,6 @@
+%main.fr-container.fr-pb-16w.fr-pt-2w.co-readable-content
+  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Fiches conseils", fiches_path]], current_page_label: @title
+
+  %h1= @title
+
+  != @markdown_content

@@ -48,14 +48,13 @@ Rails.application.routes.draw do
     get :confidentialite
     get "comment-ca-marche", action: :aide, as: :aide
     get "guide-de-recensement", action: :guide, as: :guide
-    get :fiches
-    get :fiche, action: :pdf_embed
     get :pdf, action: :pdf_download, as: :pdf_download
     get :admin
     get :plan
     get :accessibilite
   end
   get "campaigns.ics", to: "pages#campaigns_ics", as: :campaigns_ics
+  resources :fiches, only: %i[index show]
   resources :survey_votes, only: %w[new create]
 
   resources :departements, only: %i[index show]

@@ -1,0 +1,9 @@
+%main.fr-container.fr-pb-16w.fr-pt-2w
+  = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Fiches conseils"
+  %h1 Fiches conseils des conservateurs
+  %ul
+    %li= link_to "Sécuriser", fiche_path("securiser")
+    %li= link_to "Les étapes préalables à la restauration", fiche_path("restaurer")
+    %li= link_to "Entretenir", fiche_path("entretenir")
+    %li= link_to "Porter plainte", fiche_path("porter_plainte")
+
