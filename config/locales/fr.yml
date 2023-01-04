@@ -116,9 +116,6 @@ fr:
           updated: Modifications conservateur
         no_actions: Aucune action
         no_fiches: Aucune fiche
-        fiche_vol: "Fiche Vol"
-        fiche_securisation: "Fiche Sécurisation"
-        fiche_nuisibles: "Fiche Nuisibles"
       form:
         submit_preview: Mettre à jour mes retours
         submit: Envoyer le rapport à la commune
@@ -206,10 +203,6 @@ fr:
       restaurer: Restaurer
       identifier: Identifier
       localiser: Localiser
-    analyse_fiches:
-      vol: "Comment porter plainte ?&nbsp;<a href=\"/fiche?pdf=fiche_vol\">voir la fiche</a>"
-      securisation: "Comment sécuriser mon édifice et mes objets ?&nbsp;<a href=\"/fiche?pdf=fiche_securisation\">voir la fiche</a>"
-      nuisibles: "Comment évaluer le danger des insectes xylophages ?&nbsp;<a href=\"/fiche?pdf=fiche_nuisibles\">voir la fiche</a>"
     etat_sanitaire_choices:
       bon: L'objet est en bon état
       moyen: L'objet est en état moyen

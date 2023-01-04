@@ -69,5 +69,13 @@ module Recensements
 
       send(original_attribute_name)
     end
+
+    def analyse_fiches_new_ids
+      analyse_fiches.map(&:to_sym).map { Fiche::ANCIEN_IDS_MAPPING.fetch(_1) }
+    end
+
+    def analyse_fiches_objects
+      analyse_fiches_new_ids.map { Fiche.load_from_id(_1) }
+    end
   end
 end

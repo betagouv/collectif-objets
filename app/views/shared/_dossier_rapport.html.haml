@@ -1,0 +1,81 @@
+%h1 Rapport de recensement
+%h2= @dossier.commune
+%p
+  Dossier de recensement analysé le #{l(@dossier.accepted_at.to_date)}
+  par #{@dossier.conservateur}
+  (#{link_to @dossier.conservateur.email, "mailto:#{@dossier.conservateur.email}"})
+
+%h4 Table des matières
+%ul.fr-mb-8w
+  %li
+    %a{href: "#commentaires"} Commentaires
+  - @dossier.recensements.each_with_index do |recensement, index|
+    %li
+      %a{href: "##{recensement.objet.palissy_REF}"}
+        \#{index + 1} - #{recensement.objet.nom}
+
+%h4= t('activerecord.attributes.dossier.notes_commune')
+%p= blockquote(@dossier.notes_commune.presence || "Aucun commentaire")
+
+%h4= t('activerecord.attributes.dossier.notes_conservateur')
+%p= blockquote(@dossier.notes_conservateur.presence || "Aucun commentaire")
+
+- @dossier.recensements.each_with_index do |recensement, index|
+  - presenter = RecensementPresenter.new(recensement)
+  .fr-my-8w{id: "#{recensement.objet.palissy_REF}"}
+    %h4 #{index + 1} - #{recensement.objet.nom}
+    .fr-grid-row
+      .fr-col-md-6
+        %p.fr-text--sm
+          - if current_user
+            = link_to "voir lʼobjet", commune_objet_path(@dossier.commune, recensement.objet)
+          - elsif current_conservateur
+            = link_to "voir lʼobjet", objet_path(recensement.objet)
+          ·
+          Référence POP Palissy : #{recensement.objet.palissy_REF}
+        - if recensement.missing_photos?
+          %span.fr-badge.fr-badge--sm.fr-badge--warning
+            = t("recensement.photos.taken_count", count: 0)
+        %p
+          .co-text--bold
+            = t("activerecord.attributes.recensement.localisation")
+          = presenter.localisation
+
+        %p
+          .co-text--bold
+            = t("activerecord.attributes.recensement.recensable")
+          = presenter.recensable
+
+        - if recensement.recensable?
+          - [:etat_sanitaire_edifice, :etat_sanitaire, :securisation].each do |original_attribute_name|
+            %p
+              .co-text--bold
+                = t("activerecord.attributes.recensement.#{original_attribute_name}").html_safe
+              = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name:
+
+        %p
+          .co-text--bold
+            = t("activerecord.attributes.recensement.notes")
+          = blockquote(recensement.notes.presence || "Aucun commentaire")
+
+        %p
+          .co-text--bold
+            = t("dossier.rapport.recensement.analyse_notes")
+          = blockquote(recensement.analyse_notes.presence || "Aucun commentaire")
+
+        - if recensement.analyse_fiches.any?
+          .co-text--bold
+            = t("dossier.rapport.recensement.analyse_fiches")
+          %ul
+            - recensement.analyse_fiches_objects.each do |fiche|
+              %li= link_to "Fiche #{fiche.title}", fiche_path(fiche.id)
+
+        - if current_conservateur && recensement.analyse_actions.any?
+          .co-text--bold
+            = t("dossier.rapport.recensement.analyse_actions")
+          %ul
+            - recensement.analyse_actions.each do |action|
+              %li= action
+
+      .fr-col-md-6.co-flex-md-reverse-order
+        = render "shared/recensement_photos_gallery", recensement:

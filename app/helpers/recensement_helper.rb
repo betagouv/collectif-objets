@@ -120,8 +120,8 @@ module RecensementHelper
   end
 
   def analyse_fiche_options
-    Recensement::ANALYSE_FICHES.map do |fiche|
-      Option.new(fiche, I18n.t("recensement.analyse_fiches.#{fiche}"))
+    Fiche.load_all.select(&:ancien_id).map do |fiche|
+      Option.new(fiche.ancien_id, "Fiche #{fiche.title} · #{link_to('voir', fiche_path(fiche.id))}")
     end
   end
 

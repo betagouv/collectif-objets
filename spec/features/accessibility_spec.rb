@@ -120,9 +120,11 @@ feature "accessibility", js: true do
     it_behaves_like "an accessible page"
   end
 
-  describe "Fiche conseil vol" do
-    before { visit fiche_path(pdf: "fiche_vol") }
-    it_behaves_like "an accessible page"
+  Fiche.load_all.each do |fiche|
+    describe "Fiche conseil #{fiche.title}" do
+      before { visit fiche_path(fiche.id) }
+      it_behaves_like "an accessible page"
+    end
   end
 
   # COMMUNES

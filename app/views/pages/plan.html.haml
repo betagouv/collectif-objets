@@ -93,9 +93,9 @@
         = link_to "Fiches conseil", fiches_path
         = accessible_icon_span
         %ul
-          - [:vol, :securisation, :nuisibles].each do |key|
+          - Fiche.load_all.each do |fiche|
             %li
-              = link_to t("pages.pdf_embed.title.fiche_#{key}"), fiche_path(pdf: "fiche_#{key}")
+              = link_to fiche.title, fiche_path(fiche.id)
               = accessible_icon_span
       %li
         = link_to "Plan du site", plan_path

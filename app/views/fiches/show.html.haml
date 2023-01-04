@@ -1,0 +1,11 @@
+%main.fr-container.fr-pb-16w.fr-pt-2w
+  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Fiches conseils", fiches_path]], current_page_label: @fiche.title
+
+  %h1= @fiche.title
+
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-md-4
+      %nav{style: "position: sticky; top: 2rem;", "aria-label": "Table des matières de la fiche"}
+        != @fiche.table_of_contents_html
+    .fr-col-md-8
+      != @fiche.to_html
