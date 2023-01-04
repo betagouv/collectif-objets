@@ -18,9 +18,11 @@ class Fiche
   end
 
   def self.load_from_id(id)
-    path = Rails.root.join("contenus/fiches/#{id}.md")
-    parsed = FrontMatterParser::Parser.parse_file path
-    new(id, parsed.content, parsed.front_matter.symbolize_keys)
+    Rails.cache.fetch("fiche-#{id}", expires_in: 10.days) do
+      path = Rails.root.join("contenus/fiches/#{id}.md")
+      parsed = FrontMatterParser::Parser.parse_file path
+      new(id, parsed.content, parsed.front_matter.symbolize_keys)
+    end
   end
 
   def initialize(id, markdown_content, frontmatter_data)

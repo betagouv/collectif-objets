@@ -66,8 +66,8 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       strikethrough = find(".co-text--strikethrough", text: /L'objet est en bon état/i)
       expect(strikethrough).to be_truthy
       expect(page).to have_text(/L'objet est en péril/i)
-      expect(page).to have_text(/fiche securisation/i)
-      expect(page).to have_text(/fiche nuisibles/i)
+      expect(page).to have_text(/Fiche Sécuriser vos objets/i)
+      expect(page).to have_text(/Fiche Entretien de l’édifice et lutte contre les infestations/i)
       expect(page).not_to have_text(/identifier/i) # actions visibles seulement par les conservateurs
     end
     within(find("#PM51001254")) do
