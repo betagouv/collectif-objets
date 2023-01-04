@@ -1,5 +1,6 @@
 ---
-title: Dépôt de plainte
+titre: Dépôt de plainte
+ancien_id: vol
 ---
 
 ## Pourquoi signaler la disparition d’un objet monument historique ?

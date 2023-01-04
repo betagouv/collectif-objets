@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Fiche
+  ANCIEN_IDS_MAPPING = {
+    vol: :depot_plainte,
+    securisation: :securisation,
+    nuisibles: :entretien_edifices
+  }.freeze
+
   def self.load_all
     all_ids.map { load_from_id(_1) }
   end
@@ -25,7 +31,8 @@ class Fiche
 
   attr_reader :id, :markdown_content, :frontmatter_data
 
-  def title = frontmatter_data.fetch(:title)
+  def title = frontmatter_data.fetch(:titre)
+  def ancien_id = frontmatter_data[:ancien_id]
 
   def kramdown_doc
     @kramdown_doc ||= Kramdown::Document.new(markdown_content)

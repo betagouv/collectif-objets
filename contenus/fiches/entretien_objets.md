@@ -1,5 +1,5 @@
 ---
-title: Entretien des objets
+titre: Entretien des objets
 ---
 
 ## Conseils pour l’entretien de vos objets

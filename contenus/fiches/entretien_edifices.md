@@ -1,5 +1,6 @@
 ---
-title: Entretien de l’édifice et lutte contre les infestations
+titre: Entretien de l’édifice et lutte contre les infestations
+ancien_id: nuisibles
 ---
 
 ## Introduction
@@ -55,11 +56,11 @@ Vous trouverez ci-dessous des marques typiques de la présence d’insectes :
 
 Les insectes xylophages les plus fréquents sont la petite vrillette, la grande vrillette, le capricorne et les termites.
 
-![Trous marqueurs de la présence de petite vrillette](/images/fiches/vrillette-trous.jpg)
+![Trous marqueurs de la présence de petite vrillette](/contenus/fiches/images/vrillette-trous.jpg)
 
 Trous marqueurs de la présence de petite vrillette
 
-![Sciure au pied du meuble, illustrant la présence de vrillette](/images/fiches/vrillette-sciure.jpg)
+![Sciure au pied du meuble, illustrant la présence de vrillette](/contenus/fiches/images/vrillette-sciure.jpg)
 
 Sciure au pied du meuble, illustrant la présence de vrillette
 
@@ -67,7 +68,7 @@ Sciure au pied du meuble, illustrant la présence de vrillette
 
 Les mites, les blattes et les poissons d’argents peuvent infester des supports très divers (toiles des tableaux…).
 
-![Trou de mite sur un tissus](/images/fiches/mite-trou-tissu.jpg)
+![Trou de mite sur un tissus](/contenus/fiches/images/mite-trou-tissu.jpg)
 
 Trou de mite sur un tissu
 
