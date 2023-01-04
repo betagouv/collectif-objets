@@ -7,6 +7,6 @@ url: https://www.ladepeche.fr/2022/11/20/le-mobilier-protege-recense-10814844.ph
 resume: Le mobilier protégé recensé
 ---
 
-> Le mobilier protégé recensé
+Le mobilier protégé recensé
 
 Retour sur la campagne de recensement participatif des objets monuments historiques de l’Ariège

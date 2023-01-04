@@ -9,6 +9,6 @@ resume: Un site pour aider les maires à gérer leur patrimoine
 
 Un site pour aider les maires à gérer leur patrimoine
 
-> Collectif Objets, “une interface entre le maire et le conservateur”
+*Collectif Objets, “une interface entre le maire et le conservateur”*
 
 Interview par M. Van Houtte avec Remy Marty, Maire de Montaulin, Eric Blanchegorge, Conservateur des Antiquités et Objets d’Arts de l’Aube et Fantine Monot, chargée de déploiement pour Collectif Objets.
