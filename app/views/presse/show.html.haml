@@ -1,0 +1,22 @@
+- content_for(:head_title) { @article.titre }
+
+%main.fr-pt-2w.fr-pb-8w
+  .fr-container
+    = render("shared/breadcrumbs", links: [["Accueil", root_path], ["Ils parlent de nous", presse_path]], current_page_label: @article.titre)
+
+    %h1= @article.titre
+
+    .co-flex.co-flex--align-items-center.co-flex--gap-1rem
+      = image_tag @article.logo, alt: "Logo #{@article.source}", style: "max-width: 150px; max-height: 80px;"
+      %span.co-text--italic= @article.date
+      = @article.source
+
+    .fr-mt-4w.co-readable
+      != @article.to_html
+
+    - if @article.video == "reportage_canal32"
+      .fr-my-2w{style: "max-width: 45rem;"}
+        = render("shared/video_reportage_canal32")
+
+    .fr-mt-4w
+      = link_to "Lire l'article complet", @article.url, class: "co-link", target: "_blank", rel: "noopener"
