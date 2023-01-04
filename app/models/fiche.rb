@@ -6,13 +6,13 @@ class Fiche
   end
 
   def self.all_ids
-    Rails.root.join("app/views/fiches")
+    Rails.root.join("contenus/fiches")
       .glob("*.md")
       .map { File.basename(_1, ".md") }
   end
 
   def self.load_from_id(id)
-    path = Rails.root.join("app/views/fiches/#{id}.md")
+    path = Rails.root.join("contenus/fiches/#{id}.md")
     parsed = FrontMatterParser::Parser.parse_file path
     new(id, parsed.content, parsed.front_matter.symbolize_keys)
   end

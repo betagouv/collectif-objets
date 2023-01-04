@@ -104,7 +104,7 @@
                     #faq-securisation.fr-collapse
                       %ul
                         %li
-                          = link_to t(".faq.securisation.voir_la_fiche"), fiche_path(pdf: "fiche_securisation")
+                          = link_to t(".faq.securisation.voir_la_fiche"), fiche_path("securisation")
                         %li
                           = link_to t(".faq.securisation.page_securite"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete", rel: "noopener", target: "_blank"
                         %li
@@ -129,7 +129,7 @@
                     #faq-introuvable.fr-collapse
                       %p= t(".faq.introuvable.verifier")
                       %p= t(".faq.introuvable.introuvable")
-                      %p= link_to t(".faq.introuvable.voir_la_fiche"), fiche_path(pdf: "fiche_vol")
+                      %p= link_to t(".faq.introuvable.voir_la_fiche"), fiche_path("depot_plainte")
                 %li
                   %section.fr-accordion
                     .fr-accordion__title

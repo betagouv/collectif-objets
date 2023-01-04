@@ -5,7 +5,7 @@
 
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-md-4
-      %div{style: "position: sticky; top: 2rem;"}
+      %nav{style: "position: sticky; top: 2rem;", "aria-label": "Table des matières de la fiche"}
         != @fiche.table_of_contents_html
     .fr-col-md-8
       != @fiche.to_html
