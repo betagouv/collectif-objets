@@ -37,14 +37,17 @@
               value: "#{commune.id}", |
               checked: checked, |
               "data-multichecker-target": "checkbox", |
-              disabled: !checked && (commune.active? || commune.users.empty?)
+              disabled: !checked && !commune.can_be_campaign_recipient?
             } |
-            %label.fr-label{class: commune.active? && checked ? "co-text--red" : "", for: "campaign_recipients_attributes_commune_#{commune.id}"}
+            %label.fr-label{for: "campaign_recipients_attributes_commune_#{commune.id}"}
               %span= commune.nom
+              &nbsp;
               - if commune.active?
                 %span.co-text--sm (déjà active)
               - if commune.users.empty?
                 %span.co-text--sm (pas d'email)
+              - if commune.objets.empty?
+                %span.co-text--sm (pas d'objets)
               %span.fr-ml-1w.fr-badge.fr-badge--sm= commune.code_insee
       .fr-input-group.co-text--center
         = f.submit "Sauvegarder les communes"

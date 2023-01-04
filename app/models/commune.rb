@@ -90,4 +90,8 @@ class Commune < ApplicationRecord
   def ongoing_campaign_recipient
     campaign_recipients.joins(:campaign).where(campaigns: { status: "ongoing" }).first
   end
+
+  def can_be_campaign_recipient?
+    inactive? && users.any? && objets.any?
+  end
 end
