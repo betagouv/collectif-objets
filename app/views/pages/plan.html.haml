@@ -77,7 +77,7 @@
         %ul
           - ArticlePresse.load_all.each do |article_presse|
             %li
-              = link_to article_presse.titre, article_presse_path(article_presse.id)
+              = link_to article_presse.title, article_presse_path(article_presse.id)
               = accessible_icon_span
       %li
         = link_to "Conditions générales d'utilisation", conditions_path

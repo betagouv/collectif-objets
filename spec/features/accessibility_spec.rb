@@ -86,7 +86,7 @@ feature "accessibility", js: true do
   end
 
   ArticlePresse.load_all.each do |article_presse|
-    describe "Article de Presse #{article_presse.titre}" do
+    describe "Article de Presse #{article_presse.title}" do
       before { visit article_presse_path(article_presse.id) }
       it_behaves_like "an accessible page"
     end

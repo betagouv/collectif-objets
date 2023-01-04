@@ -11,11 +11,11 @@
           .fr-card__body
             .fr-card__content
               %h2.fr-card__title
-                = link_to article.titre, article_presse_path(article.id)
+                = link_to article.title, article_presse_path(article.id)
               %p.fr-card__desc
                 %span.co-text--italic= article.date
                 %br
-                %span= article.resume
+                %span= article.summary
           .fr-card__header
             .fr-card__img
               = image_tag article.logo, alt: "Logo #{article.source}", class: "co-object-fit-contain co--width-100"
