@@ -512,7 +512,7 @@ DEPENDENCIES
   draper (~> 4.0)
   factory_bot_rails
   foreman
-  front_matter_parser (~> 1.0)
+  front_matter_parser
   haml-rails
   html2haml
   htmlbeautifier

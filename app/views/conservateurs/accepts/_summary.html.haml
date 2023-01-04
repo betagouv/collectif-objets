@@ -12,10 +12,8 @@
         %tr
           - presenter = RecensementPresenter.new(recensement)
           %td
-            = link_to(                                                                            |
-                truncate(recensement.objet.nom, length: 30),                                      |
-                edit_conservateurs_objet_recensement_analyse_path(recensement.objet, recensement) |
-              )                                                                                   |
+            = link_to truncate(recensement.objet.nom, length: 30),
+              edit_conservateurs_objet_recensement_analyse_path(recensement.objet, recensement)
           %td= render Recensements::AttributeBadgeComponent.new(recensement, :etat_sanitaire)
           %td
             - if recensement.analyse_actions.empty?
