@@ -1,6 +1,11 @@
 %main.fr-container.fr-pb-16w.fr-pt-2w.co-readable-content
-  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Fiches conseils", fiches_path]], current_page_label: @title
+  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Fiches conseils", fiches_path]], current_page_label: @fiche.title
 
-  %h1= @title
+  %h1= @fiche.title
 
-  != @markdown_content
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-md-4
+      %div{style: "position: sticky; top: 2rem;"}
+        != @fiche.table_of_contents_html
+    .fr-col-md-8
+      != @fiche.to_html
