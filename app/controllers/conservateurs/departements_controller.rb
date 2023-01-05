@@ -2,7 +2,7 @@
 
 module Conservateurs
   class DepartementsController < BaseController
-    before_action :set_departement, :set_campaign, only: [:show]
+    before_action :set_departement, only: [:show]
 
     def index
       @departements = policy_scope(Departement).include_communes_count.include_objets_count
@@ -26,10 +26,6 @@ module Conservateurs
     def set_departement
       @departement = Departement.find(params[:id])
       authorize(@departement)
-    end
-
-    def set_campaign
-      @campaign = @departement.current_campaign
     end
 
     def set_departement_json

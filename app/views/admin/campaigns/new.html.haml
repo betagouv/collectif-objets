@@ -1,12 +1,7 @@
 - content_for(:head_title) { "Nouvelle campagne" }
+
 %main.fr-container.fr-pt-2w.fr-pb-4w
-  = render(                                   |
-      "shared/breadcrumbs",                   |
-      links: [                                |
-        ["Accueil", root_path],               |
-        ["Campagnes", admin_campaigns_path]   |
-      ],                                      |
-      current_page_label: "Nouvelle campagne" |
-    )                                         |
+  = render "shared/breadcrumbs", links: [["Accueil", root_path],["Campagnes", admin_campaigns_path]], current_page_label: "Nouvelle campagne"
+
   %h1 Créer une nouvelle campagne
-  = render "form", campaign: @campaign
+  = render "shared/campaigns/form", campaign: @campaign, routes_prefix: :admin

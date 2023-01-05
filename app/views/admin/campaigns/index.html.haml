@@ -27,7 +27,7 @@
       %table
         %thead
           %tr
-            %th Identifiant
+            %th
             %th= sort_link @ransack, :departement_code, "Département"
             %th= sort_link @ransack, :status, "Statut"
             %th= sort_link @ransack, :recipients_count, "Nombre de communes"
@@ -36,7 +36,7 @@
         %tbody
           - @campaigns.each do |campaign|
             %tr
-              %td(style="min-width: 200px")= link_to campaign.human_id, admin_campaign_path(campaign)
+              %td(style="min-width: 200px")= link_to campaign_title(campaign), admin_campaign_path(campaign)
               %td(style="min-width: 200px")= campaign.departement
               %td= campaign_status_badge(campaign)
               %td= campaign.recipients_count

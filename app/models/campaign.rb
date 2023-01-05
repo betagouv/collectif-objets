@@ -2,6 +2,7 @@
 
 class Campaign < ApplicationRecord
   STATUSES = %i[draft planned ongoing finished].freeze
+  TRANSITIONS = %i[plan return_to_draft start finish].freeze
   STEPS = %w[lancement relance1 relance2 relance3 fin].freeze
   DATE_FIELDS = STEPS.map { "date_#{_1}" }.freeze
 
@@ -35,11 +36,6 @@ class Campaign < ApplicationRecord
   validate :validate_no_overlapping_campaigns, if: -> { dates_are_present? && planned? }
 
   include Campaigns::ForceStepUpConcern
-
-  def human_id
-    [departement.nom, date_lancement.strftime("%m/%y")].join("-").parameterize
-  end
-  alias to_s human_id
 
   def step_for_date(date)
     return nil if date < date_lancement
@@ -127,5 +123,15 @@ class Campaign < ApplicationRecord
 
   def dates_are_present?
     DATE_FIELDS.map { send(_1) }.all?(&:present?)
+  end
+
+  def draft_or_planned?
+    draft? || planned?
+  end
+
+  def update_status(status_event)
+    raise ArgumentError if TRANSITIONS.exclude?(status_event.to_sym)
+
+    send(status_event) && save
   end
 end

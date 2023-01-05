@@ -4,6 +4,7 @@
   = render "shared/breadcrumbs", links: [["Départements", conservateurs_departements_path]], current_page_label: @departement.nom
   %h1= @departement.nom
 
+  = render "campaigns", departement: @departement
   = render "stats", stats: @stats
   #tabs-container
     .fr-tabs

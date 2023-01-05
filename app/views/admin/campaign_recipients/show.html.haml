@@ -1,17 +1,9 @@
 - content_for(:head_title) { "#{@commune.nom} - Campagne #{@campaign}" }
+
 %main.fr-container.fr-pt-2w.fr-pb-4w
-  = render(                                                      |
-    "shared/breadcrumbs",                                      |
-    links: [                                                   |
-      ["Accueil", root_path],                                  |
-      ["Campagnes", admin_campaigns_path],                 |
-      [@campaign.human_id, admin_campaign_path(@campaign)] |
-    ],                                                         |
-    current_page_label: @commune.nom                           |
-  )                                                            |
-  %h2
-    = icon_span("community")
-    = @commune.nom
+  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Campagnes", admin_campaigns_path], [campaign_title(@campaign), admin_campaign_path(@campaign)]], current_page_label: @commune.nom
+  %h2= @commune.nom
+
   .fr-mb-8w
     %p.fr-text--sm
       Commune #{@commune.code_insee}

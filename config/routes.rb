@@ -84,6 +84,7 @@ Rails.application.routes.draw do
   namespace :conservateurs do
     resources :departements, only: %i[index show] do
       resources :communes, only: [:index]
+      resources :campaigns, only: %i[new]
     end
     resources :communes, only: [:show] do
       collection do
@@ -98,6 +99,15 @@ Rails.application.routes.draw do
     resources :dossiers, only: [:show] do
       resource :accept, only: %i[new create update]
       resource :reject, only: %i[new create update]
+    end
+    resources :campaigns, except: %i[new index] do
+      get :edit_recipients
+      patch :update_recipients
+      patch :update_status
+      get :mail_previews
+      resources :recipients, controller: "campaign_recipients", only: %i[show update] do
+        get :mail_preview
+      end
     end
   end
 

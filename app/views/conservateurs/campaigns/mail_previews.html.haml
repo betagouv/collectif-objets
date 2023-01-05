@@ -1,0 +1,8 @@
+- title = "Prévisualisation des mails de lancement de la campagne #{campaign_title(@campaign)}"
+- content_for(:head_title) { title }
+
+%main.fr-container.fr-mb-8w
+  = render "shared/breadcrumbs", links: [["Départements", conservateurs_departements_path], [@campaign.departement.nom, conservateurs_departement_path(@campaign.departement)], ["Campagne #{campaign_title(@campaign)}", conservateurs_campaign_path(@campaign)]], current_page_label: "Prévisualisation des mails de lancement"
+
+  %h1= title
+  = render "shared/campaigns/mail_previews_content", campaign: @campaign, routes_prefix: :conservateurs

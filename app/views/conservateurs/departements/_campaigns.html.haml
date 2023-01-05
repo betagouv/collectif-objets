@@ -1,0 +1,13 @@
+- draft = departement.campaigns.draft.first
+- if departement.current_campaign
+  = render CalloutWithCtaComponent.new do |c|
+    - c.with_text { "Une campagne est en cours dans ce département" }
+    - c.with_cta { link_to "Voir la campagne", conservateurs_campaign_path(departement.current_campaign), class: "fr-btn" }
+- elsif draft
+  %p
+    Une campagne est en brouillon dans ce département ·
+    = link_to "Reprendre le brouillon…", conservateurs_campaign_path(draft), class: "fr-link"
+- else
+  %p
+    Aucune campagne n'est en cours dans ce département ·
+    = link_to "Créer une nouvelle campagne", new_conservateurs_departement_campaign_path(departement), class: "fr-link"

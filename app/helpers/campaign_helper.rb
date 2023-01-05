@@ -77,5 +77,9 @@ module CampaignHelper
   def campaigns_statuses_options
     Campaign::STATUSES.map { [t("activerecord.attributes.campaign.statuses.#{_1}"), _1] }
   end
+
+  def campaign_title(campaign)
+    "#{campaign.departement.nom} #{campaign.date_lancement.strftime('%m/%Y')}"
+  end
 end
 # rubocop:enable Rails/OutputSafety
