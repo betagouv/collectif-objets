@@ -1,0 +1,15 @@
+.fr-grid-row.fr-grid-row--gutters.fr-mb-4w
+  .fr-col-md-3
+    .co-background--grey.co-height--100.fr-p-4w
+      .fr-mb-2w
+        %b #{stats.communes_completed_count} communes ont recensé sur #{stats.communes_count}
+      .fr-h2 #{stats.communes_completed_percentage}%
+  .fr-col-md-3
+    .co-background--grey.co-height--100.fr-p-4w
+      .fr-mb-2w
+        %b #{stats.objets_recenses_count} objets recensés sur #{stats.objets_count}
+      .fr-h2 #{stats.objets_recenses_percentage}%
+  .fr-col-md-6
+    .co-background--grey.co-height--100.fr-p-4w
+      %b= t(".etats_sanitaires_distribution_title")
+      .objets-chart{"data-controller" => "objets-chart", "data-objets-chart-target" => "wrapper", "data-type" => "etats-sanitaires", "data-values" => "#{stats.etats_sanitaires_chart_values.to_json}"}

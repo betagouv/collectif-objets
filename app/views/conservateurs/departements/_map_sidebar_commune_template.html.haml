@@ -1,0 +1,17 @@
+%template{"data-code-insee" => "#{commune.code_insee}", "data-conservateur-map-target" => "sidebarCommuneTemplate"}
+  .co-flex.co-flex--column.co-flex--justify-content-center.co-height--100.fr-p-4w
+    .fr-mb-6w
+      %h5= commune.nom
+      %div= dossier_status_badge(commune.dossier)
+    .fr-mb-6w
+      - if commune.recensements_prioritaires_count
+        .co-text--bold
+          = t(".prioritaires_count", count: commune.recensements_prioritaires_count)
+        %div sur #{t(".recensed_count", count: commune.objets_count)}
+      - else
+        = t(".recensed_count", count: commune.objets_count)
+    %div
+      = link_to "Voir la commune", conservateurs_commune_path(commune), class: "fr-btn"
+    .sidebar-close
+      %button{"data-action" => "conservateur-map#closeSidebar"}
+        %span.fr-icon-close-line{"aria-hidden" => "true"}

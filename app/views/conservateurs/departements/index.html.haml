@@ -1,0 +1,17 @@
+- content_for(:head_title) { t(".head_title") }
+
+%main.fr-container.fr-py-4w{style:"min-height: 50vh"}
+  %h1= t("conservateurs.departements.index.title")
+
+  - if @departements.empty?
+    %p= t("conservateurs.departements.index.empty")
+  - else
+    %ul
+      - @departements.each do |departement|
+        %li.fr-mb-1w
+          = link_to(departement, conservateurs_departement_path(departement))
+          %br/
+          %span.fr-text--sm
+            = "#{departement.objets_count} objets protégés dans #{departement.communes_count} communes"
+  .fr-my-4w
+    = link_to t("conservateurs.departements.index.contact"), "mailto:support@collectif-objets.beta.gouv.fr"

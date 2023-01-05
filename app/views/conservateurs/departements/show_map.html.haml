@@ -1,0 +1,20 @@
+- content_for(:head_title) { t(".head_title", departement: @departement) }
+
+= vite_javascript_tag "conservateur_map"
+
+%main.fr-container.fr-mb-8w
+  = render "shared/breadcrumbs", links: [["Départements", conservateurs_departements_path]], current_page_label: @departement.nom
+  %h1= @departement.nom
+
+  = render "stats", stats: @stats
+  #tabs-container
+    .fr-tabs
+      %ul.fr-tabs__list{"aria-label" => "Tableau ou Carte", role: "tablist"}
+        %li{role: "presentation"}
+          %a#tab-tableau.fr-tabs__tab{href: "#{conservateurs_departement_path(@departement, anchor: "tabs-container")}", role: "tab", tabindex: "0"}
+            Vue Tableau
+        %li{role: "presentation"}
+          %button#tab-carte.fr-tabs__tab{"aria-controls" => "tabpanel-carte", "aria-selected" => "true", role: "tab", tabindex: "1"}
+            Vue Carte
+      #tabpanel-carte.fr-tabs__panel.fr-tabs__panel--selected{"aria-labelledby" => "tab-carte", role: "tabpanel", tabindex: "0"}
+        = render "map", communes: @communes, departement: @departement, departement_json: @departement_json
