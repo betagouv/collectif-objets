@@ -6,7 +6,7 @@ module Admin
   class CampaignsController < BaseController
     before_action(
       :set_campaign, only: %i[
-        show show_statistics mail_previews edit edit_recipients update_recipients
+        show mail_previews edit edit_recipients update_recipients
         update_status update destroy force_start force_step_up refresh_stats
       ]
     )
@@ -20,8 +20,6 @@ module Admin
     end
 
     def show; end
-
-    def show_statistics; end
 
     def edit_recipients; end
 
