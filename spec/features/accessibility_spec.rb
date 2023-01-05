@@ -80,7 +80,7 @@ feature "accessibility", js: true do
     it_behaves_like "an accessible page"
   end
 
-  describe "Ils parlent de nous" do
+  describe "On parle de nous" do
     before { visit presse_path }
     it_behaves_like "an accessible page"
   end

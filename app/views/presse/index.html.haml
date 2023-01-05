@@ -1,21 +1,33 @@
-- content_for(:head_title) { "Ils parlent de nous" }
+- content_for(:head_title) { "On parle de nous" }
 
 %main.fr-pt-2w.fr-pb-8w
   .fr-container
-    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Ils parlent de nous")
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "On parle de nous")
 
-    %h1 Ils parlent de nous
-    .co-flex.co-flex--wrap.co-flex--gap-05rem
-      - @articles.each do |article|
-        .fr-card.fr-enlarge-link{style: "width: 330px;"}
-          .fr-card__body
-            .fr-card__content
-              %h2.fr-card__title
-                = link_to article.title, article_presse_path(article.id)
-              %p.fr-card__desc
-                %span.co-text--italic= article.date
-                %br
-                %span= article.summary
-          .fr-card__header
-            .fr-card__img
-              = image_tag article.logo, alt: "Logo #{article.source}", class: "co-object-fit-contain co--width-100"
+    %h1.co-text--center On parle de nous
+
+    .fr-grid-row.fr-grid-row--center.fr-mb-4w
+      .fr-col-md-6
+        .fr-pl-2w.co-text--italic{style: "border-left: 1px solid #ccc;"}
+          “Quelques clics suffisent. […] La facilité de mise en oeuvre a suscité une adhésion plus importante que prévue !”
+        .fr-my-2w= render("shared/video_reportage_canal32")
+        .co-text--muted.fr-text--sm
+          Canal 32, 02.11.2022
+          %br
+          = link_to "Retrouvez le reportage sur Canal 32", "https://www.canal32.fr/thematiques/culture/sujet/des-maires-participent-au-recensement-du-patrimoine-du-02-novembre-2022.html", target: "_blank", rel: "noopener", class: "fr-link co-text--muted fr-text--sm"
+
+
+    - @articles.each_slice(4) do |articles|
+      .fr-grid-row.fr-grid-row--gutters
+        - articles.each do |article|
+          .fr-col-6.fr-col-md-4.fr-col-lg-3
+            .fr-tile.fr-enlarge-link
+              .fr-tile__body
+                %h2.fr-tile__title
+                  = link_to article.title, article_presse_path(article.id), class: "fr-tile__link"
+                %p.fr-tile__desc
+                  %span.co-text--italic= article.date
+                  -# %br
+                  -# %span= article.summary
+              .fr-tile__img
+                = image_tag article.logo, alt: "Logo #{article.source}", class: "fr-responsive-img"
