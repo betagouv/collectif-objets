@@ -5,13 +5,16 @@
     %ul
       - campaign.errors.attribute_names.each do |attribute|
         %li= campaign.errors.messages_for(attribute).first
-= form_for [:admin, campaign], builder: FormBuilderDsfr do |f|
+
+= form_for [routes_prefix, campaign], builder: FormBuilderDsfr do |f|
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-md-6
       %h3 Configuration
       .fr-input-group
         = f.label :departement_code
-        = f.select :departement_code, Departement.order(:code).all.map { [_1.to_s, _1.code ] }, {}, disabled: campaign.persisted?
+        = f.select :departement_code, Departement.order(:code).all.map { [_1.to_s, _1.code ] }, {}, disabled: campaign.persisted? || local_assigns[:departement_disabled]
+        - if local_assigns[:departement_disabled]
+          = f.hidden_field :departement_code
       .fr-input-group
         = f.label :sender_name do
           = t("activerecord.attributes.campaign.sender_name")

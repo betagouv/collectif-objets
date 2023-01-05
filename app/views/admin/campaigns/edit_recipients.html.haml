@@ -1,53 +1,8 @@
-- content_for(:head_title) { "Choisir les communes de la campagne" }
+- title = "Choisir les communes de la campagne #{campaign_title(@campaign)}"
+- content_for(:head_title) { title }
+
 %main.fr-container.fr-pt-2w.fr-pb-4w
-  = render(                                                  |
-      "shared/breadcrumbs",                                  |
-      links: [                                               |
-        ["Accueil", root_path],                              |
-        ["Campagnes", admin_campaigns_path],                 |
-        [@campaign.human_id, admin_campaign_path(@campaign)] |
-      ],                                                     |
-      current_page_label: "Communes"                         |
-    )                                                        |
-  .fr-grid-row
-    .fr-col-md-10
-      %h2
-        Communes de la campagne #{@campaign.human_id}
-  .fr-callout.fr-icon-information-line
-    %p.fr-callout__text
-      = t("campaigns.edit_recipients_tooltip")
+  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Campagnes", admin_campaigns_path], [campaign_title(@campaign), admin_campaign_path(@campaign)]], current_page_label: "Communes"
+  %h1= title
 
-  %b #{@campaign.communes.count} communes destinataires
-
-  %p
-    = form_for @campaign, builder: FormBuilderDsfr, url: admin_campaign_update_recipients_path(@campaign), data: { controller: "multichecker" } do |f|
-      .fr-mb-4w
-        %button.fr-btn.fr-btn--secondary{"data-action" => "multichecker#checkAll"}
-          Tout sélectionner
-        %button.fr-btn.fr-btn--tertiary{"data-action" => "multichecker#uncheckAll"}
-          Tout désélectionner
-      %ul.co-columns--4
-        - @campaign.departement.communes.order("communes.nom").each do |commune|
-          - checked = @campaign.commune_ids.include?(commune.id)
-          .fr-checkbox-group
-            %input{ |
-              type: "checkbox", |
-              name: "campaign[recipients_attributes][][commune_id]", |
-              id: "campaign_recipients_attributes_commune_#{commune.id}", |
-              value: "#{commune.id}", |
-              checked: checked, |
-              "data-multichecker-target": "checkbox", |
-              disabled: !checked && !commune.can_be_campaign_recipient?
-            } |
-            %label.fr-label{for: "campaign_recipients_attributes_commune_#{commune.id}"}
-              %span= commune.nom
-              &nbsp;
-              - if commune.active?
-                %span.co-text--sm (déjà active)
-              - if commune.users.empty?
-                %span.co-text--sm (pas d'email)
-              - if commune.objets.empty?
-                %span.co-text--sm (pas d'objets)
-              %span.fr-ml-1w.fr-badge.fr-badge--sm= commune.code_insee
-      .fr-input-group.co-text--center
-        = f.submit "Sauvegarder les communes"
+  = render "shared/campaigns/edit_recipients_content", campaign: @campaign, routes_prefix: :admin

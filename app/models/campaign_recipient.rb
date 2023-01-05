@@ -6,6 +6,7 @@ class CampaignRecipient < ApplicationRecord
 
   belongs_to :campaign, counter_cache: :recipients_count
   belongs_to :commune
+  has_one :departement, through: :commune
   has_many :emails, class_name: "CampaignEmail", dependent: :destroy, inverse_of: :recipient
 
   validates :commune_id, uniqueness: { scope: :campaign_id }

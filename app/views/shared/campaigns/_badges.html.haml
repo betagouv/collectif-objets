@@ -1,0 +1,6 @@
+= campaign_status_badge(campaign)
+- if campaign.imported?
+  %span.fr-badge.fr-badge--sm Importée
+- if campaign.ongoing?
+  %span.fr-badge.fr-badge--sm
+    = t("campaigns.step_names.#{campaign.current_step}")

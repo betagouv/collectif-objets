@@ -1,13 +1,7 @@
-- content_for(:head_title) { "Éditer la campagne #{@campaign.human_id}" }
+- content_for(:head_title) { "Éditer la campagne #{campaign_title(@campaign)}" }
+
 %main.fr-container.fr-pt-2w.fr-pb-4w
-  = render(                                                  |
-      "shared/breadcrumbs",                                  |
-      links: [                                               |
-        ["Accueil", root_path],                              |
-        ["Campagnes", admin_campaigns_path],                 |
-        [@campaign.human_id, admin_campaign_path(@campaign)] |
-      ],                                                     |
-      current_page_label: "Éditer la configuration"          |
-    )                                                        |
-  %h1 Éditer la campagne #{@campaign.human_id}
-  = render "form", campaign: @campaign
+  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Campagnes", admin_campaigns_path], [campaign_title(@campaign), admin_campaign_path(@campaign)]], current_page_label: "Éditer la configuration"
+
+  %h1 Éditer la campagne #{campaign_title(@campaign)}
+  = render "shared/campaigns/form", campaign: @campaign, routes_prefix: :admin

@@ -1,0 +1,63 @@
+.fr-mb-8w
+  %p.fr-text--sm
+    Commune #{commune.code_insee} destinataire de la campagne
+    = link_to campaign_title(campaign), send("#{routes_prefix}_campaign_path", campaign)
+  %p.co-text--monospace.fr-text--sm
+    = user.email
+  %p
+    = t("objets.count", count: commune.objets.count)
+    = link_to "voir les objets", send("#{routes_prefix}_commune_path", commune)
+
+  - if recipient.status.present?
+    %p
+      = campaign_recipient_status_badge(recipient)
+      = t("activerecord.attributes.campaign_recipient.statuses.#{recipient.status}")
+  - if current_admin_user
+    %span.fr-icon-lock-line.fr-text--sm{"aria-hidden" => "true"}
+    Actions réservées aux admins :
+    = link_to("Incarner un usager de cette commune", send("#{routes_prefix}_user_impersonate_path", user), class: "fr-btn fr-btn--tertiary fr-btn--sm" )
+
+- if campaign.ongoing?
+  .fr-mb-8w
+    %h3 Sortie manuelle de la campagne
+    = render "shared/campaign_recipient_opt_out_form", recipient: recipient, url: send("#{routes_prefix}_campaign_recipient_path", campaign, recipient)
+
+%h3 Mails
+- if campaign.imported?
+  %p
+    Les mails envoyés ne sont pas visibles pour les anciennes campagnes ayant été importées
+- else
+  - Campaign::STEPS.each do |step|
+    - existing_campaign_email = recipient.email_for_step(step)
+    - if existing_campaign_email
+      %h4= t("campaign_v1_mailer.#{existing_campaign_email.i18n_name}.title")
+      .fr-grid-row.fr-mb-4w
+        .fr-col-md-8
+          %p
+            L'envoi a été déclenché le #{l(existing_campaign_email.created_at, format: :long_with_weekday)}
+            - campaign_email_badges(existing_campaign_email).each do |badge|
+              = badge
+            - if existing_campaign_email.error_reason.present?
+              %div
+                Erreur:
+                %span.co-text--italic
+                  = existing_campaign_email.error_reason
+          = render UnfoldComponent.new(max_height_px: 40, button_text: "Voir le mail…") do
+            = render Conservateurs::MailIframeComponent.from_campaign_email(existing_campaign_email)
+    - elsif recipient.opt_out? || commune.completed? || recipient.should_skip_mail_for_step(step)
+      %h4= t("campaigns.mail_names.#{step}")
+      .fr-grid-row.fr-mb-4w
+        .fr-col-md-8
+          %p
+            Ce mail ne sera pas envoyé, selon l'une des règles suivantes : commune sortie de la campagne, recensement terminé ou dernier objet recensé récemment.
+    - else
+      %h4= t("campaigns.mail_names.#{step}")
+      .fr-grid-row.fr-mb-4w
+        .fr-col-md-8
+          %p
+            Ce mail sera envoyé le #{l(campaign.send("date_#{step}"), format: :long_with_weekday)}
+            - if step == "relance1"
+              sauf si la commune commence à recenser avant, alors la première relance est sautée
+            - elsif %w[relance2 relance3].include?(step)
+              sauf si la commune a recensé un objet dans les 5 jours précédents
+          = render "shared/campaign_recipients/mail_preview", campaign: campaign, recipient: recipient, step: step
