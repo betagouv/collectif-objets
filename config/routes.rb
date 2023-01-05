@@ -42,7 +42,6 @@ Rails.application.routes.draw do
   controller :pages do
     get :connexion
     get :stats
-    get :presse
     get :conditions
     get :mentions_legales
     get :confidentialite
@@ -55,6 +54,8 @@ Rails.application.routes.draw do
   end
   get "campaigns.ics", to: "pages#campaigns_ics", as: :campaigns_ics
   resources :fiches, only: %i[index show]
+  get "/presse", to: "presse#index", as: :presse
+  get "/presse/:id", to: "presse#show", as: :article_presse
   resources :survey_votes, only: %w[new create]
 
   resources :departements, only: %i[index show]

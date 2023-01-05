@@ -1,0 +1,21 @@
+- content_for(:head_title) { "Ils parlent de nous" }
+
+%main.fr-pt-2w.fr-pb-8w
+  .fr-container
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Ils parlent de nous")
+
+    %h1 Ils parlent de nous
+    .co-flex.co-flex--wrap.co-flex--gap-05rem
+      - @articles.each do |article|
+        .fr-card.fr-enlarge-link{style: "width: 330px;"}
+          .fr-card__body
+            .fr-card__content
+              %h2.fr-card__title
+                = link_to article.title, article_presse_path(article.id)
+              %p.fr-card__desc
+                %span.co-text--italic= article.date
+                %br
+                %span= article.summary
+          .fr-card__header
+            .fr-card__img
+              = image_tag article.logo, alt: "Logo #{article.source}", class: "co-object-fit-contain co--width-100"

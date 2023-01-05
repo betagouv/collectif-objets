@@ -318,3 +318,8 @@ img.co-object-fit-contain,
 .co-negative-margin-top {
   margin-top: -1px;
 }
+
+.co-readable p,
+.co-readable ul {
+  max-width: 45rem;
+}

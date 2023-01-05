@@ -7,52 +7,27 @@ class Fiche
     nuisibles: :entretien_edifices
   }.freeze
 
-  def self.load_all
-    all_ids.map { load_from_id(_1) }
-  end
+  def self.directory_path = "contenus/fiches"
+  def self.cache_prefix = "fiches"
 
-  def self.all_ids
-    Rails.root.join("contenus/fiches")
-      .glob("*.md")
-      .map { File.basename(_1, ".md") }
-  end
-
-  def self.load_from_id(id)
-    Rails.cache.fetch("fiche-#{id}", expires_in: 10.days) do
-      path = Rails.root.join("contenus/fiches/#{id}.md")
-      parsed = FrontMatterParser::Parser.parse_file path
-      new(id, parsed.content, parsed.front_matter.symbolize_keys)
-    end
-  end
-
-  def initialize(id, markdown_content, frontmatter_data)
-    @id = id
-    @markdown_content = markdown_content
-    @frontmatter_data = frontmatter_data
-  end
-
-  attr_reader :id, :markdown_content, :frontmatter_data
+  include MarkdownModelConcern
 
   def title = frontmatter_data.fetch(:titre)
   def ancien_id = frontmatter_data[:ancien_id]
 
-  def kramdown_doc
-    @kramdown_doc ||= Kramdown::Document.new(markdown_content)
-  end
-
-  delegate :to_html, to: :kramdown_doc
-
   def table_of_contents_html
     kramdown_elt_to_list_html(kramdown_doc.to_toc)
   end
-end
 
-def kramdown_elt_to_list_html(elt)
-  return nil if elt.children.empty?
+  private
 
-  "<ol>\n#{elt.children.map { kramdown_elt_to_list_item_html(_1) }.join("\n")}\n</ol>\n"
-end
+  def kramdown_elt_to_list_html(elt)
+    return nil if elt.children.empty?
 
-def kramdown_elt_to_list_item_html(elt)
-  "<li><a href='##{elt.attr[:id]}'>#{elt.value.options[:raw_text]}</a>#{kramdown_elt_to_list_html(elt)}</li>"
+    "<ol>\n#{elt.children.map { kramdown_elt_to_list_item_html(_1) }.join("\n")}\n</ol>\n"
+  end
+
+  def kramdown_elt_to_list_item_html(elt)
+    "<li><a href='##{elt.attr[:id]}'>#{elt.value.options[:raw_text]}</a>#{kramdown_elt_to_list_html(elt)}</li>"
+  end
 end
