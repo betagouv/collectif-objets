@@ -40,8 +40,9 @@ module CampaignsControllerConcern
   end
 
   def update_status
-    status_event = params.require(:campaign).require(:status_event)
-    if @campaign.update_status(status_event)
+    @status_event = params.require(:campaign).require(:status_event)
+    @success = @campaign.update_status(@status_event)
+    if @success
       redirect_to send("#{routes_prefix}_campaign_path", @campaign), notice: "La campagne a été modifiée"
     else
       render :show, status: :unprocessable_entity
