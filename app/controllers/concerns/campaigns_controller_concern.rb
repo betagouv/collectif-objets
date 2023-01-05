@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module CampaignsControllerConcern
-  include ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
   def show; end
 
