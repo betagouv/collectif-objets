@@ -25,6 +25,7 @@ Avant de porter plainte, il est important de vérifier auprès des personnes hab
 ## Étape 2 : je vérifie la propriété de l’objet
 
 Comme pour un objet courant, c’est à son propriétaire de déclarer le vol.
+
 Pour les objets appartenant à la commune, il existe assez souvent une preuve de propriété dans la documentation ou les archives communales.
 Cette preuve de propriété peut être un inventaire ou un acte juridique (par exemple une lettre proposant une donation à la commune avec la délibération du conseil municipal qui en accepte le principe).
 
