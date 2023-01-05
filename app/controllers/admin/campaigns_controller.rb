@@ -11,6 +11,7 @@ module Admin
       ]
     )
     before_action :set_excluded_communes, only: %i[show update_status]
+    before_action :redirect_planned_campaign, only: %i[edit_recipients]
 
     def index
       @ransack = Campaign.ransack(params[:q])
@@ -22,14 +23,7 @@ module Admin
 
     def show_statistics; end
 
-    def edit_recipients
-      return if @campaign.draft?
-
-      redirect_to(
-        admin_campaign_path(@campaign),
-        alert: "Impossible de modifier les communes destinataires de cette campagne car elle n'est plus en brouillon"
-      )
-    end
+    def edit_recipients; end
 
     def new
       @campaign = Campaign.new
@@ -154,6 +148,15 @@ module Admin
       return {} if params[:campaign_search].blank?
 
       params.require(:campaign_search).permit(:departement_code, :status).to_h.symbolize_keys
+    end
+
+    def redirect_planned_campaign
+      return if @campaign.draft?
+
+      redirect_to(
+        admin_campaign_path(@campaign),
+        alert: "Impossible de modifier les communes destinataires de cette campagne car elle n'est plus en brouillon"
+      )
     end
   end
 end

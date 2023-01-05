@@ -123,7 +123,6 @@ Rails.application.routes.draw do
       end
     end
     resources :campaigns do
-      get :show_statistics
       get :edit_recipients
       patch :update_recipients
       patch :update_status
