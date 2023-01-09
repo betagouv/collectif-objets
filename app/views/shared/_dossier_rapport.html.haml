@@ -1,5 +1,11 @@
 %h1 Rapport de recensement
-%h2= @dossier.commune
+
+.co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w
+  %div
+    %h2.fr-mb-0= @dossier.commune
+  - if current_conservateur
+    = dossier_visit_badge(@dossier)
+
 %p
   Dossier de recensement analysé le #{l(@dossier.accepted_at.to_date)}
   par #{@dossier.conservateur}

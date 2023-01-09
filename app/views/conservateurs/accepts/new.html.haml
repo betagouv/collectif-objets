@@ -1,0 +1,15 @@
+- title = "Rapport de recensement pour #{@commune.nom}"
+
+- content_for(:head_title) { title }
+%main.fr-container
+  = render "shared/breadcrumbs",
+    links: [["Départements", conservateurs_departements_path],
+      [@commune.departement.nom, conservateurs_departement_path(@commune.departement)],
+      [@commune.nom, conservateurs_commune_path(@commune)]],
+    current_page_label: "Rapport"
+  %h1= title
+
+  = render "summary", recensements: @dossier.recensements
+
+  .fr-mb-4w
+    = render "form", dossier: @dossier

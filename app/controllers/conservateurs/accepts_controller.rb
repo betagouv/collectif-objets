@@ -7,9 +7,7 @@ module Conservateurs
     def new; end
 
     def create
-      # TODO : move this logic to DossierAccept model
-      @dossier.update!(conservateur: current_conservateur) if @dossier.conservateur != current_conservateur
-      if @dossier.accept!
+      if @dossier.update(**dossier_params) && @dossier.accept!
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
         redirect_to conservateurs_commune_path(@commune), notice: "Le rapport a été envoyé à la commune"
       else
@@ -19,7 +17,7 @@ module Conservateurs
 
     def update
       @dossier.update(**dossier_params)
-      render partial: "form", locals: { dossier: @dossier }
+      render partial: "form", locals: { dossier: @dossier, preview_expanded: params[:preview_expanded] }
     end
 
     protected
@@ -45,8 +43,9 @@ module Conservateurs
     def dossier_params
       params
         .require(:dossier)
-        .permit(:notes_conservateur)
+        .permit(:notes_conservateur, :visit)
         .merge(conservateur_id: current_conservateur.id)
+        .transform_values { |v| v == "" ? nil : v }
     end
   end
 end

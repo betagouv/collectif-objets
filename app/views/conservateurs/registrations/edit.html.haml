@@ -1,0 +1,30 @@
+- content_for(:head_title) { "Mon compte" }
+%main.fr-container.fr-py-4w.fr-grid-row.fr-grid-row--center{"data-controller" => "devise--sessions"}
+  .fr-col-md-8
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Mon compte")
+    .co-flex.co-flex--space-between.co-flex--align-items-center
+      %h1 Mon compte conservateur
+      = form_tag destroy_conservateur_session_path, method: :delete, data: { turbo: false } do
+        %button.fr-btn.fr-btn--secondary.fr-icon-logout-box-r-line.fr-btn--icon-left{type: "submit"}
+          Déconnexion
+
+    %ul
+      %li
+        Prénom:
+        %b= current_conservateur.first_name
+      %li
+        Nom:
+        %b= current_conservateur.last_name
+      %li
+        Email:
+        %b= current_conservateur.email
+
+    %h2.fr-mt-4w Visites prévues
+    - if current_conservateur.dossiers.to_visit.blank?
+      %i Aucune visite prévue
+    - else
+      %ul
+        - current_conservateur.dossiers.to_visit.each do |dossier|
+          %li
+            = link_to dossier.commune, conservateurs_dossier_path(dossier)
+            = dossier_visit_badge(dossier)

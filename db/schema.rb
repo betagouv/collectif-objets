@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_154949) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_165105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -190,6 +190,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_154949) do
     t.bigint "conservateur_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "visit"
     t.index ["commune_id"], name: "dossiers_unique_commune_id", unique: true
     t.index ["conservateur_id"], name: "index_dossiers_on_conservateur_id"
   end

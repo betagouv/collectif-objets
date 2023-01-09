@@ -99,24 +99,9 @@ fr:
       prioritaires:
         one: 1 objet prioritaire
         other: "%{count} objets prioritaires"
-
     objet_card_component:
       analysed_badge: Analysé
       prioritaire_badge: Prioritaire
-    accepts:
-      new:
-        head_title: "Rapport de recensement pour %{commune}"
-        title: "📄 Rapport de recensement pour %{commune}"
-      summary:
-        headers:
-          objet: Objet
-          etat_sanitaire: État sanitaire
-          fiches: Fiches
-          updated: Modifications conservateur
-        no_fiches: Aucune fiche
-      form:
-        submit_preview: Mettre à jour mes retours
-        submit: Envoyer le rapport à la commune
     rejects:
       new:
         head_title: "Renvoyer le dossier de recensement de %{commune}"

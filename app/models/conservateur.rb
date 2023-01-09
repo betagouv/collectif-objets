@@ -3,6 +3,7 @@
 class Conservateur < ApplicationRecord
   has_many :roles, class_name: "ConservateurRole", dependent: :destroy
   has_many :departements, through: :roles
+  has_many :dossiers, dependent: :nullify
 
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, password_length: 8..128
 
