@@ -114,14 +114,6 @@
               </p>
             </div>
           <% end %>
-          <%= render(
-            "forms/collection_check_boxes",
-            f: f,
-            field_name: :analyse_actions,
-            options: analyse_action_options,
-            disabled: !@recensement.analysable?,
-            hint: t("conservateurs.recensements.analyse_actions.hint")
-          ) %>
         </div>
         <div class="fr-col-md-6 fr-my-2w">
           <%= render(

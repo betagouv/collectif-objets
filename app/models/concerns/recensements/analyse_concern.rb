@@ -8,19 +8,6 @@ module Recensements
 
     OVERRIDABLE_FIELDS = %i[etat_sanitaire etat_sanitaire_edifice securisation].freeze
 
-    ANALYSE_ACTION_SECURISER = "securiser"
-    ANALYSE_ACTION_ENTRETENIR = "entretenir"
-    ANALYSE_ACTION_RESTAURER = "restaurer"
-    ANALYSE_ACTION_IDENTIFIER = "identifier"
-    ANALYSE_ACTION_LOCALISER = "localiser"
-    ANALYSE_ACTIONS = [
-      ANALYSE_ACTION_SECURISER,
-      ANALYSE_ACTION_ENTRETENIR,
-      ANALYSE_ACTION_RESTAURER,
-      ANALYSE_ACTION_IDENTIFIER,
-      ANALYSE_ACTION_LOCALISER
-    ].freeze
-
     ANALYSE_FICHE_VOL = "vol"
     ANALYSE_FICHE_SECURISATION = "securisation"
     ANALYSE_FICHE_NUISIBLES = "nuisibles"
@@ -32,7 +19,6 @@ module Recensements
 
     included do
       belongs_to :conservateur, optional: true
-      validates :analyse_actions, intersection: { in: ANALYSE_ACTIONS }
       validates :analyse_fiches, intersection: { in: ANALYSE_FICHES }
       before_save :prevent_dull_analyse_override
     end

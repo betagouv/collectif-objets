@@ -4,7 +4,6 @@
       %tr
         %th= t(".headers.objet")
         %th= t(".headers.etat_sanitaire")
-        %th= t(".headers.actions")
         %th= t(".headers.fiches")
         %th= t(".headers.updated")
     %tbody
@@ -15,11 +14,6 @@
             = link_to truncate(recensement.objet.nom, length: 30),
               edit_conservateurs_objet_recensement_analyse_path(recensement.objet, recensement)
           %td= render Recensements::AttributeBadgeComponent.new(recensement, :etat_sanitaire)
-          %td
-            - if recensement.analyse_actions.empty?
-              %i= t(".no_actions")
-            - recensement.analyse_actions.each do |action|
-              = badge { t("recensement.analyse_actions.#{action}") }
           %td
             - if recensement.analyse_fiches.empty?
               %i= t(".no_fiches")

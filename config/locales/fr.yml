@@ -111,10 +111,8 @@ fr:
         headers:
           objet: Objet
           etat_sanitaire: État sanitaire
-          actions: Actions
           fiches: Fiches
           updated: Modifications conservateur
-        no_actions: Aucune action
         no_fiches: Aucune fiche
       form:
         submit_preview: Mettre à jour mes retours
@@ -165,8 +163,6 @@ fr:
           one: 1 objet recensé
           other: "%{count} objets recensés"
     recensements:
-      analyse_actions:
-        hint: Ces actions seront uniquement visibles par les conservateurs, elles ne seront pas partagées aux communes
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
     analyses:
@@ -197,12 +193,6 @@ fr:
       remaining_count:
         one: "Il reste 1 recensement à analyser à %{commune}"
         other: "Il reste %{count} recensements à analyser à %{commune}"
-    analyse_actions:
-      securiser: Sécuriser
-      entretenir: Entretenir
-      restaurer: Restaurer
-      identifier: Identifier
-      localiser: Localiser
     etat_sanitaire_choices:
       bon: L'objet est en bon état
       moyen: L'objet est en état moyen
@@ -230,7 +220,6 @@ fr:
         notes: Commentaires de la commune
         analyse_notes: Commentaires du conservateur
         analyse_fiches: Conseils du conservateur
-        analyse_actions: Actions à mener (seulement visibles par les conservateurs)
   pages:
     pdf_embed:
       title:
@@ -323,8 +312,6 @@ fr:
               blank: "Les photos sont fortement recommandées. Si vous ne pouvez pas en prendre, merci de le signaler."
               file_size_out_of_range: "Les photos doivent faire moins de 20MB"
               content_type_invalid: "Les photos doivent être au format JPG ou PNG"
-            analyse_actions:
-              inclusion: "La ou les actions choisies ne sont pas valides"
             analyse_fiches:
               inclusion: "La ou les fiches choisies ne sont pas valides"
             confirmation_pas_de_photos:
@@ -380,7 +367,6 @@ fr:
         etat_sanitaire: Dans quel état est <u>l’objet</u> ?
         securisation: Est-il facile de voler cet objet ?
         notes: Commentaires
-        analyse_actions: Actions à mener
         analyse_fiches: Fiches à associer
         analyse_notes: Commentaires pour la mairie
       dossier:

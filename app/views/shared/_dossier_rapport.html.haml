@@ -70,12 +70,5 @@
             - recensement.analyse_fiches_objects.each do |fiche|
               %li= link_to "Fiche #{fiche.title}", fiche_path(fiche.id)
 
-        - if current_conservateur && recensement.analyse_actions.any?
-          .co-text--bold
-            = t("dossier.rapport.recensement.analyse_actions")
-          %ul
-            - recensement.analyse_actions.each do |action|
-              %li= action
-
       .fr-col-md-6.co-flex-md-reverse-order
         = render "shared/recensement_photos_gallery", recensement:

@@ -15,7 +15,7 @@ module Co
       def parse
         @params = @request_params
           .require(:recensement)
-          .permit(*PERMITTED_PARAMS, analyse_actions: [], analyse_fiches: [])
+          .permit(*PERMITTED_PARAMS, analyse_fiches: [])
         @params.transform_values! { |v| v.is_a?(Array) ? v.map(&:presence).compact : v }
         @params.merge!(analysed_at: Time.zone.now)
         @params

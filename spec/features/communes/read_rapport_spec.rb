@@ -32,7 +32,6 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       notes: "objet très doux",
       analyse_notes: "Ce bouquet va fâner !!!",
       analyse_fiches: [Recensement::ANALYSE_FICHE_NUISIBLES, Recensement::ANALYSE_FICHE_SECURISATION],
-      analyse_actions: [Recensement::ANALYSE_ACTION_IDENTIFIER],
       analysed_at: 2.days.ago,
       conservateur:
     )
@@ -68,7 +67,6 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       expect(page).to have_text(/L'objet est en péril/i)
       expect(page).to have_text(/Fiche Sécuriser vos objets/i)
       expect(page).to have_text(/Fiche Entretien de l’édifice et lutte contre les infestations/i)
-      expect(page).not_to have_text(/identifier/i) # actions visibles seulement par les conservateurs
     end
     within(find("#PM51001254")) do
       expect(page).to have_text(/Ciboire des malades/i)
