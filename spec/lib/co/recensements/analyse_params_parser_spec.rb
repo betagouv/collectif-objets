@@ -9,7 +9,6 @@ RSpec.describe Co::Recensements::ParamsParser do
       analyse_etat_sanitaire_edifice: "moyen",
       analyse_securisation: "en_securite",
       analyse_notes: "merci",
-      analyse_actions: %w[],
       analyse_fiches: %w[]
     }
   end
@@ -25,16 +24,15 @@ RSpec.describe Co::Recensements::ParamsParser do
       expect(res[:analyse_etat_sanitaire_edifice]).to eq "moyen"
       expect(res[:analyse_securisation]).to eq "en_securite"
       expect(res[:analyse_notes]).to eq "merci"
-      expect(res[:analyse_actions]).to eq %w[]
       expect(res[:analyse_fiches]).to eq %w[]
     end
   end
 
-  context "analyse actions has blank values" do
-    before { raw_recensement_params.merge!(analyse_actions: ["blah", nil, "thing", ""]) }
+  context "analyse fiches has blank values" do
+    before { raw_recensement_params.merge!(analyse_fiches: ["blah", nil, "thing", ""]) }
     it "should clear blank values" do
       res = subject
-      expect(res[:analyse_actions]).to eq %w[blah thing]
+      expect(res[:analyse_fiches]).to eq %w[blah thing]
     end
   end
 end
