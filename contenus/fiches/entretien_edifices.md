@@ -1,6 +1,5 @@
 ---
 titre: Entretien de l’édifice et lutte contre les infestations
-ancien_id: nuisibles
 ---
 
 ## Introduction

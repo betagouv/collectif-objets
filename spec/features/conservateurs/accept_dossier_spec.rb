@@ -49,13 +49,13 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
 
     # analyse first recensement
     click_on "Bouquet d'Autel"
-    etat_sanitaire_group = find("b", text: "Dans quel état est l’objet ?")
+    etat_sanitaire_group = find("div", text: /État sanitaire de l’objet/, class: "co-text--bold")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(etat_sanitaire_group) do
       click_on "Modifier"
       select "L'objet est en péril", from: "recensement[analyse_etat_sanitaire]"
     end
-    find("label", text: "Dépôt de plainte").click
+    find("a", text: /entretien des édifices/).find(:xpath, "ancestor::label").click
     fill_in "recensement[analyse_notes]", with: "Est-ce qu'il est le pepito bleu?"
 
     click_on "Sauvegarder"
@@ -63,7 +63,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
 
     # analyse second recensement
     click_on "Ciboire des malades"
-    securisation_group = find("b", text: "Est-il facile de voler cet objet ?")
+    securisation_group = find("div", text: /Sécurisation de l’objet/, class: "co-text--bold")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(securisation_group) do
       click_on "Modifier"
@@ -76,11 +76,11 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     # envoi rapport
     click_on "Finaliser le rapport …"
     bouquet_row = find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")
-    expect(bouquet_row).to have_text(/Dépôt de plainte/i)
+    expect(bouquet_row).to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     expect(bouquet_row.all("td")[1]).to have_text(/Bon/i)
     expect(bouquet_row.all("td")[1]).to have_text(/L'objet est en péril/i)
     ciboire_row = find_link("Ciboire des malades").find(:xpath, "ancestor::tr")
-    expect(ciboire_row).not_to have_text(/Dépôt de plainte/i)
+    expect(ciboire_row).not_to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     fill_in("dossier[notes_conservateur]", with: "Merci pour ce joli dossier")
     click_on "Mettre à jour mes retours"
     click_on "Envoyer le rapport à la commune"

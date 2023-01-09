@@ -173,12 +173,6 @@ fr:
           categorie: Catégorie
           crafted_at: Époque
           link: ouvrir dans POP
-        recensement:
-          title: Recensement
-        analyse:
-          error: "Votre analyse n'a pas pu être enregistrée :"
-          submit: "Sauvegarder"
-          submit_desc: Ces informations ne seront pas envoyées à la mairie tout de suite. Vous pourrez les modifier avant de valider votre rapport dans son ensemble.
     password:
       hint: 8 caractères minimum (tous les caractères sont autorisés y compris les espaces)
   recensement:

@@ -1,6 +1,5 @@
 ---
 titre: Sécuriser vos objets
-ancien_id: securisation
 ---
 
 ## Pourquoi sécuriser mes objets ?
