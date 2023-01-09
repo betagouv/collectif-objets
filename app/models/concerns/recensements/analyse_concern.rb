@@ -8,13 +8,17 @@ module Recensements
 
     OVERRIDABLE_FIELDS = %i[etat_sanitaire etat_sanitaire_edifice securisation].freeze
 
-    ANALYSE_FICHE_VOL = "vol"
+    ANALYSE_FICHE_DEPOT_PLAINTE = "depot_plainte"
     ANALYSE_FICHE_SECURISATION = "securisation"
-    ANALYSE_FICHE_NUISIBLES = "nuisibles"
+    ANALYSE_FICHE_RESTAURATION = "restauration"
+    ANALYSE_FICHE_ENTRETIEN_EDIFICES = "entretien_edifices"
+    ANALYSE_FICHE_ENTRETIEN_OBJETS = "entretien_objets"
     ANALYSE_FICHES = [
-      ANALYSE_FICHE_VOL,
+      ANALYSE_FICHE_DEPOT_PLAINTE,
       ANALYSE_FICHE_SECURISATION,
-      ANALYSE_FICHE_NUISIBLES
+      ANALYSE_FICHE_RESTAURATION,
+      ANALYSE_FICHE_ENTRETIEN_EDIFICES,
+      ANALYSE_FICHE_ENTRETIEN_OBJETS
     ].freeze
 
     included do
@@ -56,12 +60,8 @@ module Recensements
       send(original_attribute_name)
     end
 
-    def analyse_fiches_new_ids
-      analyse_fiches.map(&:to_sym).map { Fiche::ANCIEN_IDS_MAPPING.fetch(_1) }
-    end
-
     def analyse_fiches_objects
-      analyse_fiches_new_ids.map { Fiche.load_from_id(_1) }
+      analyse_fiches.map { Fiche.load_from_id(_1) }
     end
   end
 end

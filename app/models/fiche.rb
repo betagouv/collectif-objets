@@ -1,19 +1,12 @@
 # frozen_string_literal: true
 
 class Fiche
-  ANCIEN_IDS_MAPPING = {
-    vol: :depot_plainte,
-    securisation: :securisation,
-    nuisibles: :entretien_edifices
-  }.freeze
-
   def self.directory_path = "contenus/fiches"
   def self.cache_prefix = "fiches"
 
   include MarkdownModelConcern
 
   def title = frontmatter_data.fetch(:titre)
-  def ancien_id = frontmatter_data[:ancien_id]
 
   def table_of_contents_html
     kramdown_elt_to_list_html(kramdown_doc.to_toc)

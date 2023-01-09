@@ -113,12 +113,17 @@ module RecensementHelper
     ]
   end
 
-  def analyse_fiche_options
-    Fiche.load_all.select(&:ancien_id).map do |fiche|
-      Option.new(fiche.ancien_id, "Fiche #{fiche.title} · #{link_to('voir', fiche_path(fiche.id))}")
+  # rubocop:enable Metrics/MethodLength
+
+  def analyse_attribute_component(recensement:, form_builder:, recensement_presenter:, attribute_name:)
+    original_attribute_name = attribute_name
+    if recensement.analysable?
+      Conservateurs::AnalyseOverrideEditableComponent.new \
+        form_builder:, recensement_presenter:, original_attribute_name:
+    else
+      Conservateurs::AnalyseOverrideComponent.new \
+        recensement:, recensement_presenter:, original_attribute_name:
     end
   end
-
-  # rubocop:enable Metrics/MethodLength
 end
 # rubocop:enable Metrics/ModuleLength
