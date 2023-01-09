@@ -55,7 +55,6 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
       click_on "Modifier"
       select "L'objet est en péril", from: "recensement[analyse_etat_sanitaire]"
     end
-    find("label", text: "Entretenir").click
     find("label", text: "Dépôt de plainte").click
     fill_in "recensement[analyse_notes]", with: "Est-ce qu'il est le pepito bleu?"
 
@@ -78,12 +77,10 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     click_on "Finaliser le rapport …"
     bouquet_row = find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")
     expect(bouquet_row).to have_text(/Dépôt de plainte/i)
-    expect(bouquet_row).to have_text(/entretenir/i)
     expect(bouquet_row.all("td")[1]).to have_text(/Bon/i)
     expect(bouquet_row.all("td")[1]).to have_text(/L'objet est en péril/i)
     ciboire_row = find_link("Ciboire des malades").find(:xpath, "ancestor::tr")
     expect(ciboire_row).not_to have_text(/Dépôt de plainte/i)
-    expect(ciboire_row).not_to have_text(/Entretenir/i)
     fill_in("dossier[notes_conservateur]", with: "Merci pour ce joli dossier")
     click_on "Mettre à jour mes retours"
     click_on "Envoyer le rapport à la commune"
