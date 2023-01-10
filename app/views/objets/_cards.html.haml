@@ -1,0 +1,6 @@
+= render layout: "objets/cards_grid_layout", locals: { count: objets.count } do
+  - objets.each do |objet|
+    .fr-col-md-4
+      = render ObjetCardComponent.new(objet)
+  - if local_assigns[:card_objets_manquants]
+    = render "objets/card_objets_manquants", objets:

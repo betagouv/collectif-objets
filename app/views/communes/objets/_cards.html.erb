@@ -1,9 +1,0 @@
-<%= render layout: "objets/cards_grid_layout", locals: { count: objets.length } do %>
-  <% objets.each do |objet| %>
-    <%= render Communes::ObjetCardComponent.new(objet, commune:, recensement: objet.current_recensement) %>
-  <% end %>
-
-  <% if local_assigns[:card_objets_manquants] %>
-    <%= render "objets/card_objets_manquants", objets: %>
-  <% end %>
-<% end %>

@@ -69,12 +69,6 @@ fr:
       no_results: Aucune commune trouvée
       index:
         title: "Communes dans le %{departement}"
-      analyse_saved:
-        success: Votre analyse a bien été sauvegardée
-        all_done: "Vous avez analysé tous les recensements de %{commune}"
-        updatable: Vous pouvez modifier votre analyse de ce dossier de recensement autant que vous le souhaitez avant l'envoi du rapport.
-        back: Retour à la liste des recensements de la commune
-        send: Finaliser le rapport …
       show:
         can_generate_rapport:
           content:
