@@ -15,6 +15,7 @@ AllCops:
     - "config/environments/*"
     - "config/initializers/*"
     - "lib/tasks/**/*"
+    - ".irbrc"
   SuggestExtensions: false
 
 Style/StringLiterals:

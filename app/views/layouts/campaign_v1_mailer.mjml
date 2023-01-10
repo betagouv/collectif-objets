@@ -1,6 +1,11 @@
 <mjml>
-  <mj-body>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Arial" />
+    </mj-attributes>
+  </mj-head>
 
+  <mj-body>
     <%= render "layouts/mail_header" %>
 
     <mj-section>
