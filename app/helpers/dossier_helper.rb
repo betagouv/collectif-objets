@@ -16,4 +16,13 @@ module DossierHelper
     )
   end
   # rubocop:enable Metrics/MethodLength
+
+  def dossier_visit_badge(dossier)
+    case dossier.visit
+    when "souhaitable"
+      content_tag(:span, "Visite souhaitable", class: "fr-badge fr-badge--info")
+    when "prioritaire"
+      content_tag(:span, "Visite prioritaire", class: "fr-badge fr-badge--warning")
+    end
+  end
 end

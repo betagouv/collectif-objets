@@ -15,7 +15,7 @@
         = link_to "dépôt de plainte", fiche_path("depot_plainte"), target: "_blank", rel: "noopener"
 
 - if recensement.recensable?
-  .fr-my-3w.attribute-group
+  .fr-my-4w.attribute-group
     .fr-pb-1w.co-text--bold
       État sanitaire de l’édifice à proximité de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "etat_sanitaire_edifice")
@@ -26,7 +26,7 @@
         = link_to "mesures d’entretien des édifices", fiche_path("entretien_edifices"), target: "_blank", rel: "noopener"
         et de prévention d’attaques de nuisibles
 
-  .fr-my-3w.attribute-group
+  .fr-my-4w.attribute-group
     .fr-pb-1w.co-text--bold
       État sanitaire de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "etat_sanitaire")
@@ -41,7 +41,7 @@
         Informer la commune sur les&nbsp;
         = link_to "étapes préalables à la restauration", fiche_path("restauration"), target: "_blank", rel: "noopener"
 
-  .fr-my-3w.attribute-group
+  .fr-my-4w.attribute-group
     .fr-pb-1w.co-text--bold
       Sécurisation de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "securisation")
@@ -53,7 +53,7 @@
 
 - elsif !recensement.absent?
   -# only display the badge when it's found but not recensable
-  .fr-my-3w
+  .fr-my-4w
     .fr-badge.fr-badge--sm.fr-badge--warning
       Recensement impossible
 

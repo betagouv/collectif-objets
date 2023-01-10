@@ -32,7 +32,7 @@
       .co-background--light-teal.fr-py-6w.fr-px-6w
         %h3 Recensement
         .fr-grid-row.fr-grid-row--gutters.fr-pb-6w
-          .fr-col-md-6
+          %div{class: @recensement.photos.any? ? "fr-col-md-8" : "fr-col-md-12"}
             - if @recensement.missing_photos?
               %p.fr-badge.fr-badge--sm.fr-badge--warning.fr-mb-4w
                 = t("recensement.photos.taken_count", count: 0)
@@ -42,7 +42,7 @@
             %div
               = blockquote(@recensement.notes, class: "fr-my-2w")
           - if @recensement.photos.any?
-            .fr-col-md-6.co-flex-md-reverse-order
+            .fr-col-md-4.co-flex-md-reverse-order
               = render "shared/recensement_photos_gallery", recensement: @recensement
     .fr-container
       .fr-grid-row
