@@ -2,10 +2,11 @@
 
 module Communes
   class ObjetCardComponent < ViewComponent::Base
-    def initialize(objet, commune:, recensement: nil)
+    def initialize(objet, commune:, recensement: nil, badges: nil)
       @objet = objet
       @recensement = recensement
       @commune = commune
+      @badges = badges
       super
     end
 

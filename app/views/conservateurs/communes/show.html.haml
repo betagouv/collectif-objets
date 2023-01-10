@@ -1,0 +1,88 @@
+- content_for(:head_title) { @commune.nom }
+%main
+  .fr-container.fr-grid-row.fr-my-4w.fr-grid-row--center
+    .fr-col-md-10
+      = render "shared/breadcrumbs",
+        links: [["Départements", conservateurs_departements_path], [@commune.departement.nom, conservateurs_departement_path(@commune.departement)]],
+        current_page_label: @commune.nom
+      .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-1w
+        %h2.fr-my-0
+          %span.fr-icon-map-pin-2-fill{"aria-hidden" => "true"}
+          = @commune.nom
+          (#{@commune.code_insee})
+        %div{style: "flex-shrink: 0"}
+          - if @dossier
+            %div= dossier_status_badge(@dossier)
+      %span= t("activerecord.attributes.commune.statuses.#{@commune.status}")
+
+  - if @commune.completed? && @dossier&.can_generate_rapport?
+    .co-background--light-teal.fr-my-4w.fr-py-4w
+      .fr-container.fr-grid-row.fr-grid-row--center
+        .fr-col-md-10
+          %p= t ".can_generate_rapport.content", count: @commune.recensements.count
+          %p= link_to t(".can_generate_rapport.send"), new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn"
+
+  - if @dossier&.rejected?
+    .co-background--light-teal.fr-my-4w.fr-py-4w
+      .fr-container.fr-grid-row.fr-grid-row--center
+        .fr-col-md-10
+          %p
+            = t(".rejected.content", date: l(@dossier.rejected_at.to_date), conservateur: @dossier.conservateur)
+          = blockquote(@dossier.notes_conservateur)
+          %p.fr-mt-4w
+            = t(".rejected.content_end_html")
+
+  - if @dossier&.accepted?
+    .fr-container.fr-grid-row.fr-grid-row--center.fr-mb-4w
+      .fr-col-md-10
+        = link_to "Voir le rapport", conservateurs_dossier_path(@dossier), class: "fr-btn"
+
+  - if @commune.completed? && !@dossier.accepted?
+    .fr-container.fr-grid-row.fr-grid-row--center.fr-mb-4w
+      .fr-col-md-10
+        - if @dossier.notes_commune.present?
+          %p
+            = t("activerecord.attributes.dossier.notes_commune")
+          = blockquote(@dossier.notes_commune)
+        - else
+          %i Aucun commentaire laissé par la commune
+
+  .fr-container.fr-grid-row.fr-grid-row--center
+    .fr-col-md-10
+      = render "edifices/list", edifices: @edifices
+      - @edifices.each do |edifice|
+        %h4{id: "#{edifice.slug}"}
+          = edifice_nom(edifice.nom).html_safe
+          · #{edifice.objets.length} objets
+        = render layout: "objets/cards_grid_layout", locals: { count: edifice.objets.length } do
+          - reordered = @dossier ? Objet::order_by_recensement_priorite_array(edifice.objets) : edifice.objets
+          - reordered.each do |objet|
+            .fr-col-md-4
+              = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.current_recensement, can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?, commune: @commune
+
+  .fr-container.fr-grid-row.fr-mt-4w
+    .fr-col-md-10.co-text--right
+      - if @dossier && !@dossier&.accepted?
+        %div
+          = link_to_button t(".actions.send"), new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", disabled: !@dossier.can_generate_rapport?
+      - if @dossier&.submitted?
+        %div ou
+        %div
+          = link_to t(".actions.reject"), new_conservateurs_dossier_reject_path(@dossier), class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-error-warning-line"
+          %p.text-muted.co-text--italic.fr-text--sm
+            = t(".actions.reject_desc")
+
+  .co-background--light-grey.fr-my-6w.fr-py-6w
+    .fr-container.fr-grid-row.fr-grid-row--center
+      .fr-col-md-4
+        %h3= t(".contact.title")
+      .fr-col-md-4
+        %div
+          = link_to @commune.users.first.email, "mailto:#{@commune.users.first.email}", class: "fr-link fr-icon-mail-line fr-link--icon-left"
+        - if @commune.phone_number
+          .fr-mt-1w
+            = link_to @commune.phone_number, "tel:#{@commune.phone_number}", class: "fr-link fr-icon-phone-line fr-link--icon-left"
+        - sp_prefix = @commune.departement.service_public_prefix
+        - if sp_prefix
+          .fr-mt-1w
+            = link_to "Service-Public.fr", "https://lannuaire.service-public.fr/#{sp_prefix}/mairie-#{@commune.code_insee}-01", class: "fr-link fr-icon-information-line fr-link--icon-left", target: "_blank", rel: "noopener"
