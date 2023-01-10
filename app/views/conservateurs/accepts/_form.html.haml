@@ -16,7 +16,7 @@
 
           = form_for dossier, url: conservateurs_dossier_accept_path(dossier), method: "PUT", builder: FormBuilderDsfr, html: { data: { "rapport-notes-form-target": "form" } } do |f|
             .fr-input-group
-              = f.label :notes_conservateur, "Vous pouvez laisser un comentaire qui sera envoyé dans le mail envoyé à la commune et inscrit dans le rapport de recensement"
+              = f.label :notes_conservateur, "Vous pouvez laisser un commentaire qui sera envoyé dans le mail envoyé à la commune et inscrit dans le rapport de recensement"
               .co-position-relative.fr-mt-1w
                 = f.text_area :notes_conservateur,
                   data: {"rapport-notes-form-target": "textarea", "original-value": @dossier.notes_conservateur},
