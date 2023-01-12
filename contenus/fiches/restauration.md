@@ -1,5 +1,5 @@
 ---
-titre: Les étapes préalables à la restauration
+titre: Étapes préalables à la restauration
 ---
 
 Chaque année vos conservateurs traitent un large volume de demandes de restaurations. Des échanges approfondis avec les communes leur permettront de mieux prioriser les objets qui feront effectivement l’objet d’une démarche de restauration. Les échanges préalables avec vos conservateurs sont ainsi essentiels **avant** de déposer les demandes d’autorisation et de subvention.
