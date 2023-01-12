@@ -2,6 +2,7 @@
 
 class UserMailer < ApplicationMailer
   helper :messages, :user
+  layout "user_mailer"
 
   def validate_email(user)
     @user = user

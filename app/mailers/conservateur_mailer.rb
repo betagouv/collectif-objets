@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ConservateurMailer < ApplicationMailer
+  layout "conservateur_mailer"
   helper :messages
 
   def commune_recompleted_email

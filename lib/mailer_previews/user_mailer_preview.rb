@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserMailerPreview < ActionMailer::Preview
+class UserMailerPreview < ApplicationMailerPreview
   def validate_email
     user = User.new(email: "mairie@thoiry.fr", login_token: "a1r2b95")
     user.readonly!
@@ -13,7 +13,6 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.with(user_id:, commune_id:).commune_completed_email
   end
 
-  # rubocop:disable Metrics/MethodLength
   def dossier_accepted_email(dossier = nil, conservateur = nil)
     dossier = dossier&.clone || Dossier.new(
       commune: Commune.new(
@@ -57,7 +56,6 @@ class UserMailerPreview < ActionMailer::Preview
 
     UserMailer.with(dossier:).dossier_rejected_email
   end
-  # rubocop:enable Metrics/MethodLength
 
   def dossier_auto_submitted
     user = User.order(Arel.sql("RANDOM()")).first

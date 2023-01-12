@@ -123,8 +123,10 @@ docker compose run web rails db:setup
 
 ### Installation en local via rbenv et bundle
 
+- installer manuellement [`rbenv`](https://github.com/rbenv/rbenv#installation)
+
+
 ```sh
-# installer rbenv : https://github.com/rbenv/rbenv#installation
 rbenv install `cat .ruby-version`
 make install
 make dev

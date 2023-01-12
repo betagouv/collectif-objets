@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/MethodLength, Style/OpenStructUse
+# rubocop:disable Style/OpenStructUse
 
-class CampaignV1MailerPreview < ActionMailer::Preview
+class CampaignV1MailerPreview < ApplicationMailerPreview
   CampaignV1Mailer::MAIL_NAMES.each do |name|
     define_method "#{name}_email" do
       @commune_status = name.include?("started") || name.include?("to_complete") ? "started" : "inactive"
@@ -45,4 +45,4 @@ class CampaignV1MailerPreview < ActionMailer::Preview
   end
 end
 
-# rubocop:enable Metrics/MethodLength, Style/OpenStructUse
+# rubocop:enable Style/OpenStructUse

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-class ConservateurMailerPreview < ActionMailer::Preview
-  # rubocop:disable Metrics/MethodLength
+class ConservateurMailerPreview < ApplicationMailerPreview
   def commune_recompleted_email
     dossier =  Dossier.new(
       commune: Commune.new(
@@ -28,7 +27,6 @@ class ConservateurMailerPreview < ActionMailer::Preview
 
     ConservateurMailer.with(dossier:).commune_recompleted_email
   end
-  # rubocop:enable Metrics/MethodLength
 
   def message_received_email
     conservateur = build(:conservateur)

@@ -6,10 +6,10 @@ module Conservateurs
 
     IFRAME_CSS = <<-HTML
       <style>
-        td[align="center"] a{
-          background: white !important;
-          color: black !important;
-          border: 1px solid black !important;
+        body {
+          background: white;
+        }
+        a{
           pointer-events: none;
         }
       </style>
