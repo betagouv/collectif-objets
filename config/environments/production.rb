@@ -95,7 +95,7 @@ Rails.application.configure do
 
   config.force_ssl = true
   config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
-
+  config.x.inbound_emails_domain = "reponse.collectifobjets.org"
 
   if config.x.environment_specific_name == "staging"
     config.action_mailer.show_previews = true

@@ -688,6 +688,14 @@ fr:
       aucun_commentaire: Aucun commentaire
       rejected_at: "Le dossier avait été retourné à la commune le %{date} avec le commentaire suivant :"
       cta: Voir le dossier sur Collectif Objets
+    message_received:
+      subject: "%{nom_commune} vous a envoyé un message"
+      bonjour: Bonjour %{nom},
+      intro: Un usager de la commune %{nom_commune} vous a envoyé un nouveau message le %{date}
+      cta: Répondre sur Collectif Objets
+      reply_by_email: Vous pouvez aussi répondre à cet email directement. Le message apparaîtra dans la messagerie de Collectif Objets et l'usager sera notifié par email.
+    layout:
+      unsubscribe: Je ne souhaite plus recevoir ces emails
   user_mailer:
     shared:
       bonjour: Madame, Monsieur le Maire,
@@ -725,4 +733,11 @@ fr:
       one_hour: Ce lien est valide une heure.
       nouveau_html: Vous pouvez en demander un nouveau depuis <a href="%{url}">la page de connexion</a>.
       nouveau: Vous pouvez en demander un nouveau depuis la page de connexion
-
+    message_received:
+      subject: "%{conservateur} vous a envoyé un message sur Collectif Objets"
+      bonjour: Bonjour %{nom_commune},
+      intro: "%{conservateur}, conservateur de votre département, vous a envoyé un message sur Collectif Objets le %{date} :"
+      cta: Répondre sur Collectif Objets
+      reply_by_email: Vous pouvez aussi répondre à cet email directement. Le message apparaîtra dans la messagerie de Collectif Objets et l'usager sera notifié par email.
+    layout:
+      unsubscribe: Je ne souhaite plus recevoir ces emails

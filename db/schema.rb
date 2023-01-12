@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_165105) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_18_131230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -139,6 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_165105) do
     t.datetime "formulaire_updated_at"
     t.float "latitude"
     t.float "longitude"
+    t.string "inbound_email_token", null: false
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement_code"], name: "index_communes_on_departement_code"
     t.index ["dossier_id"], name: "index_communes_on_dossier_id"
@@ -165,6 +166,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_165105) do
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.boolean "messages_mail_notifications", default: true
     t.index ["email"], name: "index_conservateurs_on_email", unique: true
   end
 
@@ -205,6 +207,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_165105) do
     t.datetime "updated_at", null: false
     t.index ["code_insee"], name: "index_edifices_on_code_insee"
     t.index ["merimee_REF"], name: "index_edifices_on_merimee_REF"
+  end
+
+  create_table "inbound_emails", id: :string, force: :cascade do |t|
+    t.string "body_html"
+    t.string "body_text"
+    t.string "body_md"
+    t.string "signature_md"
+    t.string "from_email"
+    t.string "to_email"
+    t.string "sent_at"
+    t.json "raw"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "origin"
+    t.bigint "commune_id", null: false
+    t.string "inbound_email_id"
+    t.bigint "author_id"
+    t.string "author_type"
+    t.string "text"
+    t.string "automated_mail_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commune_id"], name: "index_messages_on_commune_id"
   end
 
   create_table "objet_overrides", primary_key: "palissy_REF", id: :string, force: :cascade do |t|
@@ -307,6 +333,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_165105) do
     t.string "job_title"
     t.string "email_personal"
     t.string "phone_number"
+    t.boolean "messages_mail_notifications", default: true
     t.index ["commune_id"], name: "index_users_on_commune_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["magic_token"], name: "index_users_on_magic_token", unique: true
@@ -316,6 +343,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_165105) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "dossiers", "communes"
+  add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
   add_foreign_key "recensements", "users"
 end

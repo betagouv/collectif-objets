@@ -13,6 +13,7 @@
     - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
     - c.tool_link "Mon compte", edit_user_registration_path, icon: "user"
     - c.tool_link "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), icon: "image"
+    - c.tool_link "Messagerie" , commune_messages_path(current_user.commune), icon: "mail"
 - elsif current_admin_user
   = render HeaderComponent.new(notice:, alert:) do |c|
     - c.tool_link current_admin_user, "#", icon: "admin"
@@ -39,4 +40,3 @@
     - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
     - c.tool_link "Connexion", connexion_path, icon: "lock"
     - c.tool_link "Voir les objets dans ma commune" , objets_path, icon: "image"
-

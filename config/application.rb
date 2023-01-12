@@ -39,5 +39,6 @@ module CollectifObjets
 
     config.view_component.preview_paths << Rails.root.join("spec/components/previews")
     config.view_component.default_preview_layout = "component_preview"
+    config.x.inbound_emails_domain = "test.domain.fr"
   end
 end

@@ -1,0 +1,9 @@
+<%= I18n.t("conservateur_mailer.message_received.bonjour", nom: @conservateur.to_s) %>
+
+<%= I18n.t("conservateur_mailer.message_received.intro", nom_commune: @commune.nom, date: I18n.l(@message.created_at, format: :long_with_weekday)) %>
+
+> <%= message_content_text @message %>
+
+<%= I18n.t("conservateur_mailer.message_received.cta") %> : <%= conservateurs_commune_url(@message.commune) %>
+
+<%= I18n.t("conservateur_mailer.message_received.reply_by_email") %>

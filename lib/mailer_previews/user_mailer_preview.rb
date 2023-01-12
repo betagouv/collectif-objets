@@ -64,4 +64,17 @@ class UserMailerPreview < ActionMailer::Preview
     commune = Commune.order(Arel.sql("RANDOM()")).first
     UserMailer.with(user:, commune:).dossier_auto_submitted_email
   end
+
+  def message_received
+    user = build(:user, email: "jean.frank@mairie.fr")
+    conservateur = build(:conservateur)
+    message = build(
+      :message,
+      author: conservateur,
+      origin: "web",
+      text: "Bonjour, merci mais il manque des photos du calice de la chapelle"
+    )
+
+    UserMailer.with(message:, user:).message_received_email
+  end
 end

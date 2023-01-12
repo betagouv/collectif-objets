@@ -10,6 +10,10 @@ module Co
         []
       end
 
+      def channel
+        nil # will use webhook's default
+      end
+
       def default_url_options
         Rails.application.default_url_options
       end

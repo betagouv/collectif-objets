@@ -29,4 +29,13 @@ class ConservateurMailerPreview < ActionMailer::Preview
     ConservateurMailer.with(dossier:).commune_recompleted_email
   end
   # rubocop:enable Metrics/MethodLength
+
+  def message_received_email
+    conservateur = build(:conservateur)
+    commune = build(:commune, id: 999)
+    user = build(:user, commune:)
+    message = build(:message, commune:, author: user)
+
+    ConservateurMailer.with(message:, conservateur:).message_received_email
+  end
 end

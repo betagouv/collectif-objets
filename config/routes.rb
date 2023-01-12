@@ -75,6 +75,10 @@ Rails.application.routes.draw do
     resource :formulaire, only: [:show]
     resources :dossiers, only: [:show]
     resources :campaign_recipients, only: [:update]
+    resources :messages, only: %i[index new create] do
+      get :download_skipped_attachment
+    end
+    resource :user, only: [:update]
   end
 
   ## -------------
@@ -90,6 +94,7 @@ Rails.application.routes.draw do
       collection do
         post :autocomplete
       end
+      resources :messages, only: %i[index new create]
     end
     resources :objets, only: [] do
       resources :recensements, only: [] do
@@ -109,6 +114,7 @@ Rails.application.routes.draw do
         get :mail_preview
       end
     end
+    resource :conservateur, only: [:update]
   end
 
   ## -----
@@ -155,6 +161,17 @@ Rails.application.routes.draw do
     resources :memoire_exports, only: %i[new create show destroy]
     resources :attachments, only: [] do
       post :rotate
+    end
+    resources :messages, only: [:create]
+  end
+
+  # -----
+  # API
+  # -----
+
+  namespace :api do
+    namespace :v1 do
+      resources :inbound_emails, only: [:create]
     end
   end
 

@@ -31,6 +31,7 @@ class Commune < ApplicationRecord
   has_many :campaign_recipients, dependent: :destroy
   has_many :active_admin_comments, dependent: :destroy, as: :resource
   has_many :survey_votes, dependent: :nullify
+  has_many :messages, dependent: :destroy
 
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)
@@ -54,6 +55,8 @@ class Commune < ApplicationRecord
 
     errors.add(:nom, :invalid, message: "le nom contient des espaces en trop")
   end
+
+  before_create { self.inbound_email_token ||= SecureRandom.hex(10) }
 
   def self.ransackable_scopes(_auth_object = nil)
     [:recensements_photos_presence_in]
@@ -93,5 +96,12 @@ class Commune < ApplicationRecord
 
   def can_be_campaign_recipient?
     inactive? && users.any? && objets.any?
+  end
+
+  def support_email(role:)
+    parts = ["mairie", code_insee]
+    parts << "conservateur" if role == :conservateur
+    parts << inbound_email_token
+    "#{parts.join('-')}@#{Rails.configuration.x.inbound_emails_domain}"
   end
 end

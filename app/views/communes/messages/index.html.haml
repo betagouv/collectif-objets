@@ -1,0 +1,18 @@
+- content_for(:head_title) { "Messagerie" }
+
+%main.fr-mb-8w
+  .fr-grid-row.fr-grid-row--center
+    .fr-col-md-10
+      = render "shared/breadcrumbs",
+        links: [["Accueil", root_path]], current_page_label: "Messagerie"
+
+      %h1 Messagerie
+
+      = render "shared/messages", messages: @messages, viewed_by: current_user
+
+      = render "shared/new_message_form", message: @new_message, url: commune_messages_path(@commune)
+
+      %p
+        Les mails que vous envoyez à l'adresse
+        = link_to @commune.support_email(role: :user), "mailto:#{@commune.support_email(role: :user)}", target: "_blank", rel: "noopener"
+        apparaissent aussi ici

@@ -85,8 +85,9 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.x.environment_specific_name = "development"
+  config.x.inbound_emails_domain = "reponse-loophole.collectifobjets.org"
 
-  config.hosts << /.*\.ngrok\.io/
+  config.hosts << "collectifobjets-mail-inbound.loophole.site"
 
   config.log_file_size = 100_000_000
 end

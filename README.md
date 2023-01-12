@@ -132,6 +132,11 @@ make dev
 
 optionnel: pour une utilisation de rubocop plus rapide en local, [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
 
+### Travail en local sur les webhooks d'inbound mails
+
+- installer manuellement [`loophole`](https://loophole.cloud/) 
+- `make tunnel`
+
 ## Plus de documentation…
 
 Après l'installation n'hésitez pas à suivre les [Premiers pas](https://github.com/betagouv/collectif-objets/wiki/premiers-pas)dans le wiki pour découvrir les interfaces et les fonctionnalités

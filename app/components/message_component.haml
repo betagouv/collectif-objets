@@ -1,0 +1,47 @@
+.co-background--white.fr-pt-2w.fr-px-1w.fr-mb-4w{style: "max-width: 80%;", class: css_classes}
+  .co-flex.co-flex--space-between.co-flex--align-items-center
+    .co-text--bold
+      = icon_span(author_icon)
+      = author_name
+    .co-text--italic le #{l(sent_at, format: :long_with_weekday)}
+  .fr-my-2w.fr-pl-4w
+    - if inbound_email?
+      - if inbound_email.body_md.present?
+        != Kramdown::Document.new(message.inbound_email.body_md).to_html
+      - if inbound_email.signature_md.present?
+        %details
+          %summary Afficher la signature
+          %p
+            != Kramdown::Document.new(message.inbound_email.signature_md).to_html
+    - else
+      = simple_format message.text
+  - if message.files.any?
+    .fr-my-2w.fr-pl-4w
+      .fr-mb-1w
+        - if message.files.length == 1
+          1 fichier
+        - else
+          \#{message.files.length} fichiers
+      .co-flex.co-flex--gap-05rem
+        - message.files.each do |file|
+          - if file.variable?
+            = link_to url_for(file), target: "_blank", rel: "noopener", class: "co-external-link--without-decoration" do
+              = image_tag url_for(file.variant(:small)), style: "max-height: 150px; max-width: 150px;"
+          - else
+            .fr-py-2w.fr-px-1w.co-border.co-text--center
+              = link_to url_for(file), target: "_blank", rel: "noopener", class: "co-external-link--without-decoration" do
+                .co-flex.co-flex--column.co-flex--justify-content-center.co-height--100
+                  %div= file.filename
+                  .co-text--italic= number_to_human_size file.byte_size
+  - if skipped_attachments&.any?
+    .fr-my-2w.fr-pl-4w
+      %details
+        %summary #{skipped_attachments.length} autres fichiers
+        %ul
+          - skipped_attachments.each_with_index do |attachment, index|
+            %li
+              = link_to "#{attachment.filename} (#{number_to_human_size(attachment.size)})", commune_message_download_skipped_attachment_path(commune, message, attachment_index: index), target: "_blank", rel: "noopener"
+  .co-text--italic.fr-text--sm.fr-pb-1w
+    - if inbound_email?
+      Ce message a été envoyé par mail depuis l'adresse
+      = inbound_email.from_email
