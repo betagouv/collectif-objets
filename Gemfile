@@ -65,6 +65,7 @@ group :development do
   gem "lookbook"
   gem "pry"
   gem "rails-erd", require: false
+  gem "solargraph", group: :development
   gem "web-console"
 end
 
