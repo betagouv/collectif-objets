@@ -1,5 +1,5 @@
 ---
-titre: Sécuriser vos objets
+titre: Sécurisation des objets
 ---
 
 ## Pourquoi sécuriser mes objets ?
