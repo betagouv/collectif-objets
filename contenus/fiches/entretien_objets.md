@@ -1,5 +1,5 @@
 ---
-titre: Entretien des objets
+titre: Mesures d'entretien préventives
 ---
 
 ## Conseils pour l’entretien de vos objets
