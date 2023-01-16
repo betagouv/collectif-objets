@@ -52,13 +52,15 @@ Les 3 interfaces sont servies par une seule et unique application Ruby On Rails 
 Les gems principales dont dépend cette application Rails sont :
 
 - `devise` : Authentification des usagers. Il y a trois modèles Devise `User` (Communes), `Conservateur` et `Admin`.
+- `pundit` : droits et règles d'accès selon les profils
 - `sidekiq` : Gestion des tâches asynchrones via Redis
-- `activeadmin` : Interface d'administration
 - `vite_rails` : Compilation des assets JS et images
 - `turbo_rails` : Interactions JS simplifiées
 - `sprockets-rails` : Compilation traditionnelle des assets, utilisée uniquement pour activeadmin
 - `mjml-rails` : Templates de mails en MJML
 - `AASM` : Machines à états finis pour les statuts des modèles
+- `haml-rails`, `kramdown` et `view_component` pour les modèles de vues
+- `ransack` : recherches et filtres dans l'admin principalement
 
 Côté Javascript les principaux packages utilisés sont :
 
