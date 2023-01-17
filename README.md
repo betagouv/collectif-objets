@@ -56,7 +56,6 @@ Les gems principales dont dépend cette application Rails sont :
 - `sidekiq` : Gestion des tâches asynchrones via Redis
 - `vite_rails` : Compilation des assets JS et images
 - `turbo_rails` : Interactions JS simplifiées
-- `sprockets-rails` : Compilation traditionnelle des assets, utilisée uniquement pour activeadmin
 - `mjml-rails` : Templates de mails en MJML
 - `AASM` : Machines à états finis pour les statuts des modèles
 - `haml-rails`, `kramdown` et `view_component` pour les modèles de vues
