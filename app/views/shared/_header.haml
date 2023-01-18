@@ -1,4 +1,19 @@
-- if current_admin_user
+- if current_conservateur
+  = render HeaderComponent.new(notice:, alert:) do |c|
+    - c.with_navbar do
+      %button.fr-btn--search.fr-btn(data-fr-opened="false" aria-controls="modal-menu-search" title="Rechercher")
+        Rechercher
+    - path = current_conservateur.departements.count == 1 ? conservateurs_departement_path(current_conservateur.departements.first) : conservateurs_departements_path
+    - c.tool_link t("menu.conservateurs.departements", count: current_conservateur.departements.count), path, icon: "arrow-right"
+    - c.tool_link current_conservateur, edit_conservateur_registration_path, icon: "user"
+    - c.with_search do
+      = render "shared/header/header_conservateur_search"
+- elsif current_user
+  = render HeaderComponent.new(notice:, alert:) do |c|
+    - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
+    - c.tool_link "Mon compte", edit_user_registration_path, icon: "user"
+    - c.tool_link "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), icon: "image"
+- elsif current_admin_user
   = render HeaderComponent.new(notice:, alert:) do |c|
     - c.tool_link current_admin_user, "#", icon: "admin"
     - c.tool_link "Déconnexion", destroy_admin_user_session_path, icon: "logout-box-r", "data-turbo-method": "DELETE"
@@ -19,21 +34,6 @@
             %a.fr-nav__link(href=admin_path target="_self")
               = icon_span("lock")
               Administration
-- elsif current_conservateur
-  = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.with_navbar do
-      %button.fr-btn--search.fr-btn(data-fr-opened="false" aria-controls="modal-menu-search" title="Rechercher")
-        Rechercher
-    - path = current_conservateur.departements.count == 1 ? conservateurs_departement_path(current_conservateur.departements.first) : conservateurs_departements_path
-    - c.tool_link t("menu.conservateurs.departements", count: current_conservateur.departements.count), path, icon: "arrow-right"
-    - c.tool_link current_conservateur, edit_conservateur_registration_path, icon: "user"
-    - c.with_search do
-      = render "shared/header/header_conservateur_search"
-- elsif current_user
-  = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
-    - c.tool_link "Mon compte", edit_user_registration_path, icon: "user"
-    - c.tool_link "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), icon: "image"
 - else
   = render HeaderComponent.new(notice:, alert:) do |c|
     - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
