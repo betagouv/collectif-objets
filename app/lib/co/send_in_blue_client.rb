@@ -55,13 +55,12 @@ module Co
     end
 
     def get_api_request_raw(path, **params)
-      url = URI::HTTPS.build(host: "api.sendinblue.com", query: params.to_query, path:)
-      http = Net::HTTP.new(url.host, url.port)
-      http.use_ssl = true
-      request = Net::HTTP::Get.new(url)
-      request["Accept"] = "application/json"
-      request["api-key"] = api_key
-      http.request(request).read_body
+      Typhoeus::Request.new(
+        "https://api.sendinblue.com#{path}",
+        method: :get,
+        params:,
+        headers: { Accept: "application/json", "api-key": api_key }
+      ).run.body
     end
 
     def api_key
