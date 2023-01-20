@@ -1,16 +1,20 @@
 # frozen_string_literal: true
 
 class MemoireExportPhoto
-  COLS = %w[LBASE REF REFIMG NUMP DATPV COULEUR OBS COM DOM EDIF COPY TYPDOC IDPROD LIEUCOR].freeze
+  COLS = %w[LBASE REF REFIMG NUMP DATPV COULEUR OBS COM DOM EDIF COPY TYPDOC IDPROD LIEUCOR
+            LEG TECHOR DATOEU SCLE AUTOEU INSEE ADRESSE LIEU].freeze
 
-  attr_reader :attachment, :recensement
+  attr_reader :attachment, :recensement, :palissy_objet
 
-  def initialize(attachment:, recensement:)
+  def initialize(attachment:, recensement:, palissy_objet: {})
     @attachment = attachment
     raise ArgumentError, "missing attachment" if @attachment.nil?
 
     @recensement = recensement
     raise ArgumentError, "missing recensement" if @recensement.nil?
+
+    @palissy_objet = palissy_objet
+    raise ArgumentError, "missing palissy_objet" if @palissy_objet.nil?
   end
 
   def self.from_attachments(attachments_arel)
@@ -21,11 +25,12 @@ class MemoireExportPhoto
     attachments.map { new(attachment: _1, recensement: map.fetch(_1.record_id)) }
   end
 
-  def self.from_recensements(recensements_arel)
+  def self.from_recensements(recensements_arel, palissy_data:)
     recensements_arel
       .includes(:photos_attachments, :photos_blobs)
       .map do |recensement|
-        recensement.photos.map { MemoireExportPhoto.new(attachment: _1, recensement:) }
+        palissy_objet = palissy_data.find { _1["REF"] == recensement.objet.palissy_REF }
+        recensement.photos.map { MemoireExportPhoto.new(attachment: _1, recensement:, palissy_objet:) }
       end.flatten
   end
 
@@ -78,5 +83,14 @@ class MemoireExportPhoto
   def memoire_IDPROD = "MHCO008"
 
   def memoire_LIEUCOR = "Collectif Objets"
+
+  def memoire_LEG = palissy_objet["TICO"]
+  def memoire_TECHOR = palissy_objet["CATE"]&.join(";")
+  def memoire_DATOEU = palissy_objet["DATE"]&.join(";")
+  def memoire_SCLE = palissy_objet["SCLE"]&.join(";")
+  def memoire_AUTOEU = palissy_objet["AUTR"]&.join(";")
+  def memoire_INSEE = palissy_objet["INSEE"]
+  def memoire_ADRESSE = palissy_objet["ADRS"]
+  def memoire_LIEU = palissy_objet["LIEU"]
   # rubocop:enable Naming/MethodName
 end

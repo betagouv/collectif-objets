@@ -14,6 +14,10 @@ module Synchronizer
       new("data/merimee.json", BASE_PARAMS.merge(params), **kwargs)
     end
 
+    def self.objets(params: nil, **kwargs)
+      new("data/palissy.json", BASE_PARAMS.merge(params), **kwargs)
+    end
+
     def initialize(path, params, logger:, limit:)
       @path = path
       @params = params
@@ -34,6 +38,12 @@ module Synchronizer
       @request_number = 1
       parsed = fetch_and_parse_url(build_url(@path, @params))
       return parsed["rows"][0] if parsed["rows"].count >= 1
+    end
+
+    def to_a
+      list = []
+      iterate { |row| list << row }
+      list
     end
 
     private
