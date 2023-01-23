@@ -1,0 +1,40 @@
+- content_for(:head_title) { "Mon compte" }
+- commune = current_user.commune
+%main.fr-container.fr-py-4w.fr-grid-row.fr-grid-row--center{"data-controller" => "devise--sessions"}
+  .fr-col-md-8
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Mon compte")
+    .fr-mb-6w
+      %h1 Mon compte
+      %p
+        %b Email :
+        %span #{current_user.email}
+        %br
+        %b Commune :
+        %span= commune || "N/A"
+      %p
+        = form_tag destroy_user_session_path, method: :delete, data: { turbo: false } do
+          %button.fr-btn.fr-btn--secondary.fr-icon-logout-box-r-line.fr-btn--icon-left{type: "submit"}
+            Déconnexion
+
+      - if current_user.commune
+        %h2.fr-mt-8w Préférences de communication
+        = form_for current_user, url: commune_user_path(current_user.commune), builder: FormBuilderDsfr do |f|
+          .fr-checkbox-group.fr-mb-4w
+            = f.check_box :messages_mail_notifications, autocomplete: "off"
+            = f.label :messages_mail_notifications do
+              = icon_span(:mail)
+              %span Notifications mails pour les messages reçus
+          .fr-input-group
+            = f.submit "Sauvegarder"
+
+    - if commune.users.count > 1
+      .fr-mb-6w
+        %h3 Suppression
+        %p= button_to "Supprimer mon compte ", registration_path(resource_name), form: { data: { turbo_confirm: "Êtes-vous sûr(e) de vouloir supprimer votre compte ?" } }, method: :delete, class: "fr-btn fr-btn--secondary fr-icon-delete-line fr-btn--icon-left"
+    - recipient = commune.ongoing_campaign_recipient
+    - if recipient
+      %h3 Préférences de communication
+      %p
+        Vous recevez des mails depuis le #{l(recipient.campaign.date_lancement)}
+        pour la campagne de recensement terminant le #{l(recipient.campaign.date_fin)}
+      = render "shared/campaign_recipient_opt_out_form", recipient:, url: commune_campaign_recipient_path(commune, recipient)

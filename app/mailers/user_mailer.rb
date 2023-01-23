@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class UserMailer < ApplicationMailer
+  helper :messages, :user
+  layout "user_mailer"
+
   def validate_email(user)
     @user = user
     @login_url = users_sign_in_with_token_url(
@@ -52,6 +55,19 @@ class UserMailer < ApplicationMailer
     mail(
       to: @user.email,
       subject: I18n.t("user_mailer.dossier_auto_submitted.subject", commune_nom: @commune.nom)
+    )
+  end
+
+  def message_received_email
+    @message, @user = params.values_at(:message, :user)
+    @conservateur = @message.author
+    @commune = @message.commune
+
+    set_login_url
+    mail(
+      to: @user.email,
+      reply_to: email_address_with_name(@commune.support_email(role: :user), "Collectif Objets Messagerie"),
+      subject: I18n.t("user_mailer.message_received.subject", conservateur: @conservateur.to_s)
     )
   end
 

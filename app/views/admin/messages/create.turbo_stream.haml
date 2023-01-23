@@ -1,0 +1,6 @@
+= turbo_stream.replace "new-message-form", partial: "shared/messages/form", locals: { message: Message.new(commune: @commune), url: admin_messages_path(commune_id: @commune.id) }
+
+= turbo_stream.remove "empty-message"
+
+= turbo_stream.append "messages-list" do
+  = render MessageComponent.new(message: @message, viewed_by: current_admin_user)

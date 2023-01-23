@@ -19,12 +19,24 @@
         Email:
         %b= current_conservateur.email
 
-    %h2.fr-mt-4w Visites prévues
-    - if current_conservateur.dossiers.to_visit.blank?
-      %i Aucune visite prévue
-    - else
-      %ul
-        - current_conservateur.dossiers.to_visit.each do |dossier|
-          %li
-            = link_to dossier.commune, conservateurs_dossier_path(dossier)
-            = dossier_visit_badge(dossier)
+    .fr-my-8w
+      %h2 Préférences de communication
+      = form_for current_conservateur, url: conservateurs_conservateur_path, builder: FormBuilderDsfr do |f|
+        .fr-checkbox-group.fr-mb-4w
+          = f.check_box :messages_mail_notifications, autocomplete: "off"
+          = f.label :messages_mail_notifications do
+            = icon_span(:mail)
+            %span Notifications mails pour les messages reçus
+        .fr-input-group
+          = f.submit "Sauvegarder"
+
+    .fr-my-8w
+      %h2 Visites prévues
+      - if current_conservateur.dossiers.to_visit.blank?
+        %i Aucune visite prévue
+      - else
+        %ul
+          - current_conservateur.dossiers.to_visit.each do |dossier|
+            %li
+              = link_to dossier.commune, conservateurs_dossier_path(dossier)
+              = dossier_visit_badge(dossier)

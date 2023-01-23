@@ -6,7 +6,7 @@ class SendMattermostNotificationJob
   include Sidekiq::Job
 
   HOOKS_URL = "https://mattermost.incubateur.net/hooks/#{Rails.application.credentials.mattermost&.hook_id}".freeze
-  HANDLED_EVENTS = %w[commune_completed recensement_created dossier_auto_submitted].freeze
+  HANDLED_EVENTS = %w[commune_completed recensement_created dossier_auto_submitted message_created].freeze
 
   def perform(event, payload)
     raise "unsupported event type #{event}" unless HANDLED_EVENTS.include?(event)
@@ -21,25 +21,20 @@ class SendMattermostNotificationJob
   protected
 
   def send_notification
-    res = Typhoeus.post(
-      HOOKS_URL,
-      headers: { "Content-Type" => "application/json" },
-      body:
-    )
+    headers = { "Content-Type" => "application/json" }
+    res = Typhoeus.post(HOOKS_URL, headers:, body:)
     raise MattermostApiError, "status: #{res.response_code}" unless res.success?
   end
 
   def body
-    {
-      text: notification.message,
-      attachments: notification.attachments,
-      icon_emoji: notification.icon_emoji
-    }.to_json
+    { text: message, attachments:, icon_emoji:, channel: }.compact.to_json
   end
 
   def notification
     @notification ||= notification_class_name.constantize.new(@payload)
   end
+
+  delegate :message, :attachments, :icon_emoji, :channel, to: :notification
 
   def notification_class_name
     "Co::AdminNotifications::#{ActiveSupport::Inflector.classify(@event)}Notification"

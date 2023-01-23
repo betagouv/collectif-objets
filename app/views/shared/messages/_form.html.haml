@@ -1,0 +1,16 @@
+.fr-mt-2w
+  - if message.errors.any?
+    .fr-alert.fr-alert--error.fr-mb-6w
+      %p Votre message n'a pas pu être envoyé :
+      %ul
+        - message.errors.attribute_names.each do |attribute|
+          %li= message.errors.messages_for(attribute).first
+
+  = form_for message, url: , method: :post, builder: FormBuilderDsfr, html: { id: "new-message-form" } do |f|
+    .fr-input-group
+      = f.text_area :text, label: "Nouveau message", rows: 5, required: true, autocomplete: "nope"
+    .co-flex.co-flex--space-between
+      .fr-input-group
+        = f.file_field :files, multiple: true, direct_upload: true
+      .fr-input-group
+        = f.submit "Envoyer"

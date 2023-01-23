@@ -7,6 +7,7 @@ FactoryBot.define do
     # status { "inactive" }
     association :departement
     phone_number { "01 01 01 01 01" }
+    inbound_email_token { "12345678901234567890" }
 
     factory :commune_with_user do
       users { [association(:user)] }

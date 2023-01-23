@@ -32,10 +32,13 @@
           %p.fr-mt-4w
             = t(".rejected.content_end_html")
 
-  - if @dossier&.accepted?
+  - if @actions.any?
     .fr-container.fr-grid-row.fr-grid-row--center.fr-mb-4w
       .fr-col-md-10
-        = link_to "Voir le rapport", conservateurs_dossier_path(@dossier), class: "fr-btn"
+        - if @actions.include?(:see_rapport)
+          = link_to "Voir le rapport", conservateurs_dossier_path(@dossier), class: "fr-btn"
+        - if @actions.include?(:messagerie)
+          = link_to "Messagerie", conservateurs_commune_messages_path(@commune), class: "fr-btn"
 
   - if @commune.completed? && !@dossier.accepted?
     .fr-container.fr-grid-row.fr-grid-row--center.fr-mb-4w

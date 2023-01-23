@@ -3,11 +3,10 @@
 class CampaignV1Mailer < ApplicationMailer
   layout "campaign_v1_mailer"
   before_action :set_campaign_commune_and_user
-  default(
+  default \
     to: -> { @user.email },
     from: -> { email_address_with_name("collectifobjets@beta.gouv.fr", @campaign.sender_name) },
-    reply_to: "support@collectif-objets.beta.gouv.fr"
-  )
+    reply_to: -> { @commune.support_email(role: :user) }
 
   MAIL_NAMES = (
     %w[lancement] +
@@ -51,8 +50,8 @@ class CampaignV1Mailer < ApplicationMailer
       nom_drac: @campaign.nom_drac,
       dans_departement: @departement.dans_nom,
       nom_commune: @commune.nom,
-      count: @commune.objets.count,
-      nombre_communes: @campaign.communes.count,
+      count: @commune.objets.size,
+      nombre_communes: @campaign.communes.size,
       date_lancement: I18n.l(@campaign.date_lancement, format: :long_with_weekday),
       date_fin: I18n.l(@campaign.date_fin, format: :long_with_weekday),
       fin_dans_n_semaines: Time.zone.today.upto(@campaign.date_fin).count / 7,

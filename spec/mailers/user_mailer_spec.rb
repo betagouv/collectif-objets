@@ -97,4 +97,23 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
     end
   end
+
+  describe "message_received_email" do
+    let(:commune) { build(:commune, id: 10, nom: "Marseille") }
+    let(:user) { build(:user, email: "jean@user.fr", commune:) }
+    let(:conservateur) { build(:conservateur, first_name: "Nadia", last_name: "Riza") }
+    let(:message) { build(:message, text: "quel est l'objet ?", author: conservateur, created_at: 1.day.ago) }
+    let(:mail) { UserMailer.with(user:, message:).message_received_email }
+
+    include_examples(
+      "both parts contain",
+      "vous a envoyé un message sur Collectif Objets"
+    )
+
+    it "behaves as expected" do
+      expect(mail.subject).to include "Nadia Riza vous a envoyé un message sur Collectif Objets"
+      expect(mail.to).to eq(["jean@user.fr"])
+      expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
+    end
+  end
 end

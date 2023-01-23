@@ -123,14 +123,21 @@ docker compose run web rails db:setup
 
 ### Installation en local via rbenv et bundle
 
+- installer manuellement [`rbenv`](https://github.com/rbenv/rbenv#installation)
+
+
 ```sh
-# installer rbenv : https://github.com/rbenv/rbenv#installation
 rbenv install `cat .ruby-version`
 make install
 make dev
 ```
 
 optionnel: pour une utilisation de rubocop plus rapide en local, [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
+
+### Travail en local sur les webhooks d'inbound mails
+
+- installer manuellement [`loophole`](https://loophole.cloud/) 
+- `make tunnel`
 
 ## Plus de documentation…
 

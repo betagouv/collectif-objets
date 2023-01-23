@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require "singleton"
-
 module Co
   class SendInBlueClient
     include Singleton
+    include ActionView::Helpers::NumberHelper
 
     EMAIL_EVENTS = {
       preserved: %w[delivered requests clicks error].freeze,
@@ -13,6 +12,7 @@ module Co
     }.freeze
 
     EVENT_STRUCT = Struct.new(:event, :date, :error, :error_reason)
+    HOST = "api.sendinblue.com"
 
     def get_transaction_email_events(message_id)
       get_api_request("/v3/smtp/statistics/events", limit: 20, messageId: message_id).fetch("events", [])
@@ -39,6 +39,34 @@ module Co
       get_api_request("/v3/contacts/#{email}")
     end
 
+    def list_webhooks
+      get_api_request("/v3/webhooks")
+    end
+
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    def download_inbound_attachment(download_token)
+      f = Tempfile.new "test", binmode: true
+      request = Typhoeus::Request.new(
+        "https://#{HOST}/v3/inbound/attachments/#{download_token}",
+        method: :get,
+        headers: { Accept: "application/octet-stream", "api-key": api_key }
+      )
+      request.on_headers do |response|
+        raise "Request failed with status #{response.code}" if response.code != 200
+      end
+      request.on_body do |chunk|
+        f.write(chunk)
+      end
+      request.on_complete do |_response|
+        Rails.logger.info "tempfile downloaded to #{f.path} (size #{number_to_human_size(f.size)})"
+        f.rewind
+        yield f
+        f.close
+      end
+      request.run
+    end
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
+
     private
 
     def parse_email_event(raw)
@@ -55,12 +83,22 @@ module Co
     end
 
     def get_api_request_raw(path, **params)
-      Typhoeus::Request.new(
-        "https://api.sendinblue.com#{path}",
-        method: :get,
-        params:,
-        headers: { Accept: "application/json", "api-key": api_key }
-      ).run.body
+      request = build_request("https://#{HOST}#{path}", method: :get, params:)
+      run_request_raw(request)
+    end
+
+    def run_request_raw(request)
+      response = request.run
+      unless response.code.to_s.starts_with?("2")
+        raise "http response #{res.code} - #{res.message} - #{JSON.parse(res.read_body)}"
+      end
+
+      response.body
+    end
+
+    def build_request(url, method: :get, **kwargs)
+      headers = { Accept: "application/json", "api-key": api_key }
+      Typhoeus::Request.new(url, method:, headers:, **kwargs)
     end
 
     def api_key

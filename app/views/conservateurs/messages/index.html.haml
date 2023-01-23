@@ -1,0 +1,16 @@
+- content_for(:head_title) { "Messagerie - #{@commune.nom}" }
+
+%main.fr-mb-8w
+  .fr-grid-row.fr-grid-row--center
+    .fr-col-md-10
+      = render "shared/breadcrumbs",
+        links: [["Départements", conservateurs_departements_path], [@commune.departement.nom, conservateurs_departement_path(@commune.departement)], [@commune.to_s, conservateurs_commune_path(@commune)]],
+        current_page_label: "Messagerie"
+
+      %h1 Messagerie · #{@commune}
+
+      = render "shared/messages/list", messages: @messages, viewed_by: current_conservateur
+
+      = render "shared/messages/form", url: conservateurs_commune_messages_path(@commune), message: @new_message
+
+      = render "shared/messages/email_address_hint", email_address: @commune.support_email(role: :conservateur)

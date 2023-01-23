@@ -64,6 +64,12 @@
               %span.fr-text--sm= link_to "Supprimer", admin_active_admin_comment_path(comment), "data-turbo-method": "delete"
               = blockquote comment.body
 
+  %h4.fr-mt-4w
+    = icon_span("mail")
+    Messagerie
+
+  = render "shared/messages/list", viewed_by: current_admin_user, messages: @messages
+  = render "shared/messages/form", message: Message.new, url: admin_messages_path(commune_id: @commune.id)
 
   %h4.fr-mt-4w
     = icon_span("passport")

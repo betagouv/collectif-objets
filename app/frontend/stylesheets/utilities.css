@@ -64,6 +64,14 @@ html[data-fr-scheme="dark"] .co-background--light-teal {
   background-color: #10106a;
 }
 
+.co-background--white {
+  background-color: #fff;
+}
+
+html[data-fr-scheme="dark"] .co-background--white {
+  background-color: #000;
+}
+
 
 .co-fade-overflow:before {
   content: '';
@@ -364,4 +372,28 @@ img.co-object-fit-contain,
   right: 1rem;
   top: 1rem;
   z-index: 10;
+}
+
+.co-margin-left-auto {
+  margin-left: auto;
+}
+
+.co-max-height-40vh {
+  max-height: 40vh;
+}
+
+.co-overflow-auto {
+  overflow: auto;
+}
+
+.co-border {
+  border: 1px solid #ccc;
+}
+
+a.co-external-link--without-decoration {
+  text-decoration: none !important;
+  background-image: none !important;
+}
+a.co-external-link--without-decoration::after {
+  display: none;
 }
