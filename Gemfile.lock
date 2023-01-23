@@ -140,7 +140,7 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
     crass (1.0.6)
-    css_parser (1.12.0)
+    css_parser (1.14.0)
       addressable
     date (3.3.3)
     debug (1.7.1)
@@ -207,13 +207,13 @@ GEM
       rexml
     launchy (2.5.2)
       addressable (~> 2.8)
-    listen (3.7.1)
+    listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lookbook (1.4.5)
+    lookbook (1.5.0)
       actioncable
       activemodel
       css_parser
@@ -223,7 +223,7 @@ GEM
       railties (>= 5.0)
       redcarpet (~> 3.5)
       rouge (>= 3.26, < 5.0)
-      view_component (~> 2.0)
+      view_component (> 2.0, < 4)
       yard (~> 0.9.25)
       zeitwerk (~> 2.5)
     mail (2.8.0.1)
@@ -309,7 +309,7 @@ GEM
       activesupport (>= 4.2)
       choice (~> 0.2.0)
       ruby-graphviz (~> 1.2)
-    rails-html-sanitizer (1.4.4)
+    rails-html-sanitizer (1.5.0)
       loofah (~> 2.19, >= 2.19.1)
     railties (7.0.4.1)
       actionpack (= 7.0.4.1)
