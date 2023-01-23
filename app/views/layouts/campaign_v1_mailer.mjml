@@ -45,7 +45,6 @@
         </mj-text>
         <mj-text color="#666">
           <%= t("campaign_v1_mailer.layout.contact") %>
-          <a href="mailto:support@collectif-objets.beta.gouv.fr">support@collectifobjets.beta.gouv.fr</a>
         </mj-text>
       </mj-column>
     </mj-section>

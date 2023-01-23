@@ -1,7 +1,10 @@
 <mj-section>
   <mj-column>
     <mj-text><%= ct("relance2_started.bien_recu") %></mj-text>
-    <mj-text><%= ct("relance2_started.plus_actif") %></mj-text>
+    <mj-text>
+      <%= ct("relance2_started.plus_actif") %>
+      <b><%= ct("relance2_started.reply") %></b>
+    </mj-text>
   </mj-column>
 </mj-section>
 

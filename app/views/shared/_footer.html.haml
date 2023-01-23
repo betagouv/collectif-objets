@@ -16,7 +16,7 @@
     .fr-footer__bottom
       %ul.fr-footer__bottom-list
         %li.fr-footer__bottom-item
-          = link_to "mailto:support@collectif-objets.beta.gouv.fr", class: "fr-footer__bottom-link fr-link--icon-left fr-icon-mail-line" do
+          = link_to "mailto:#{current_user&.commune&.support_email(role: :user) || "support@collectif-objets.beta.gouv.fr"}", class: "fr-footer__bottom-link fr-link--icon-left fr-icon-mail-line" do
             Contact
         %li.fr-footer__bottom-item
           = link_to fiches_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-file-line" do

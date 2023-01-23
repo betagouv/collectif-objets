@@ -530,7 +530,7 @@ fr:
     layout:
       tagline: Préservez votre patrimoine mobilier
       portage: Cette initiative est portée par le ministère de la Culture et la Direction interministérielle du numérique dans le cadre du programme beta.gouv.
-      contact: "En cas de difficultés pour recenser vous pouvez nous contacter sur : "
+      contact: En cas de difficultés pour recenser vous pouvez nous contacter en répondant à cet email
       desinscription: Suivez ce lien pour ne plus recevoir d'emails de Collectif Objets
     lancement:
       title: Mail de lancement
@@ -587,7 +587,8 @@ fr:
       title: "Mail de seconde relance - recensement démarré"
       subject: Rencontrez-vous des difficultés dans le recensement de vos objets protégés à %{nom_commune} ?
       bien_recu: Nous avons bien reçu vos premiers retours concernant les objets protégés de %{nom_commune}. Nous vous remercions de vous investir dans la protection de notre patrimoine mobilier.
-      plus_actif: "Nous avons remarqué que vous n’étiez plus actif depuis quelque temps. <b>Sachez que si vous rencontrez des problèmes pour finaliser le recensement de vos objets protégés, vous pouvez nous contacter à l’adresse suivante</b> : <a href=\"mailto:support@collectif-objets.beta.gouv.fr\">support@collectif-objets.beta.gouv.fr</a>"
+      plus_actif: Nous avons remarqué que vous n’étiez plus actif depuis quelque temps.
+      reply: Sachez que si vous rencontrez des problèmes pour finaliser le recensement de vos objets protégés, vous pouvez nous contacter en répondant à cet email.
     fin_started:
       title: "Mail de clotûre - recensement démarré"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
@@ -603,7 +604,7 @@ fr:
       date_fin: <b>Pour rappel, la campagne prendra fin le %{date_fin}.</b>
       finalisez: Nous vous invitons donc à finaliser le recensement de l’ensemble de vos objets protégés avant cette échéance, afin que les conservateurs puissent prendre connaissance de vos réponses et vous accompagner au mieux.
       photos: <b>Il est important d’y joindre des photos récentes pour permettre aux conservateurs d’évaluer l’état sanitaire des objets recensés.</b>
-      besoin_daide: "Si vous avez besoin d’aide pour terminer le recensement, notre équipe se tient à votre disposition : <a href=\"mailto:support@collectif-objets.beta.gouv.fr\">support@collectif-objets.beta.gouv.fr</a>"
+      besoin_daide: Si vous avez besoin d’aide pour terminer le recensement, notre équipe se tient à votre disposition, il vous suffit de répondre à cet email.
     relance2_to_complete:
       title: "Mail de deuxième relance - commune doit finaliser"
       subject: Il reste une dernière étape pour envoyer le dossier de recensement de %{nom_commune}
