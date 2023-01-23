@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-class InboundEmailAttachment
-  attr_reader :raw
+class EmailAttachment
+  attr_reader :raw, :index
 
-  def initialize(raw, inbound_email_id)
+  def initialize(raw, inbound_email_id, index: nil)
     @raw = raw
     @inbound_email_id = inbound_email_id
+    @index = index
   end
 
   def download_token = raw["DownloadToken"]

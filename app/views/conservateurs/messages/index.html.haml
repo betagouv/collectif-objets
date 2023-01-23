@@ -9,6 +9,8 @@
 
       %h1 Messagerie · #{@commune}
 
-      = render "shared/messages", messages: @messages, viewed_by: current_conservateur
+      = render "shared/messages/list", messages: @messages, viewed_by: current_conservateur
 
-      = render "shared/new_message_form", url: conservateurs_commune_messages_path(@commune), message: @new_message
+      = render "shared/messages/form", url: conservateurs_commune_messages_path(@commune), message: @new_message
+
+      = render "shared/messages/email_address_hint", email_address: @commune.support_email(role: :conservateur)

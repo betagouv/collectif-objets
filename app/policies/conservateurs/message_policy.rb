@@ -4,8 +4,12 @@ module Conservateurs
   class MessagePolicy < BasePolicy
     alias message record
 
-    def create?
+    def show?
       conservateur.departements.include?(message.commune.departement)
+    end
+
+    def create?
+      conservateur.departements.include?(message.commune.departement) && !impersonating?
     end
 
     class Scope < Scope

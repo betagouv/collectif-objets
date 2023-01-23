@@ -28,7 +28,7 @@ class MessageComponent < ViewComponent::Base
   end
 
   def author_class_name
-    { Conservateur => "Conservateur", AdminUser => "Support" }[author.class]
+    { User => "Usager de la commune", Conservateur => "Conservateur", AdminUser => "Support" }[author.class]
   end
 
   def author_icon
@@ -42,5 +42,16 @@ class MessageComponent < ViewComponent::Base
   def sent_at
     message.created_at
     # TODO: use inbound_email sent_at
+  end
+
+  def attachment_path(attachment)
+    case viewed_by
+    when User
+      commune_message_email_attachment_path(commune, message, attachment.index)
+    when Conservateur
+      conservateurs_commune_message_email_attachment_path(commune, message, attachment.index)
+    when AdminUser
+      admin_message_email_attachment_path(message, attachment.index)
+    end
   end
 end

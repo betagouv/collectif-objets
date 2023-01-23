@@ -14,6 +14,7 @@ class Message < ApplicationRecord
   after_create_commit :enqueue_mattermost_notification
 
   def inbound_email? = origin == "inbound_email"
+
   def web? = origin == "web"
 
   def enqueue_message_received_emails
@@ -25,7 +26,7 @@ class Message < ApplicationRecord
     end
   end
 
-  delegate :skipped_attachments, to: :inbound_email, allow_nil: true
+  delegate :attachments, :skipped_attachments, to: :inbound_email, allow_nil: true
 
   def enqueue_mattermost_notification
     delay = inbound_email? && inbound_email.attachments.any? ? 3.minutes : 0
@@ -33,6 +34,10 @@ class Message < ApplicationRecord
       delay, # to give time for attachments to be downloaded in case there are any
       "message_created", "message_id" => id
     )
+  end
+
+  def files_and_skipped_attachments_count
+    files.count + (skipped_attachments || []).length
   end
 
   private

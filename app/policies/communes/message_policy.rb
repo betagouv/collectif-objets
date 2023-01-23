@@ -4,10 +4,13 @@ module Communes
   class MessagePolicy < BasePolicy
     alias message record
 
-    def create?
+    def show
       message.commune == user.commune
     end
-    alias show? create?
+
+    def create?
+      message.commune == user.commune && !impersonating?
+    end
 
     class Scope < Scope
       def resolve

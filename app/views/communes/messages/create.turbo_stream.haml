@@ -1,4 +1,4 @@
-= turbo_stream.replace "new-message-form", partial: "shared/new_message_form", locals: { message: Message.new(commune: @commune), url: commune_messages_path(@commune) }
+= turbo_stream.replace "new-message-form", partial: "shared/messages/form", locals: { message: Message.new(commune: @commune), url: commune_messages_path(@commune) }
 
 = turbo_stream.remove "empty-message"
 

@@ -8,11 +8,8 @@
 
       %h1 Messagerie
 
-      = render "shared/messages", messages: @messages, viewed_by: current_user
+      = render "shared/messages/list", messages: @messages, viewed_by: current_user
 
-      = render "shared/new_message_form", message: @new_message, url: commune_messages_path(@commune)
+      = render "shared/messages/form", message: @new_message, url: commune_messages_path(@commune)
 
-      %p
-        Les mails que vous envoyez à l'adresse
-        = link_to @commune.support_email(role: :user), "mailto:#{@commune.support_email(role: :user)}", target: "_blank", rel: "noopener"
-        apparaissent aussi ici
+      = render "shared/messages/email_address_hint", email_address: @commune.support_email(role: :user)

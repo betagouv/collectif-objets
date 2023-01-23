@@ -31,12 +31,15 @@ class InboundEmail < ApplicationRecord
       raw: raw.except("RawHtmlBody", "RawTextBody", "ExtractedMarkdownMessage", "ExtractedMarkdownSignature")
     )
   end
+
   # rubocop:enable Metrics/MethodLength
 
   # cf https://developers.sendinblue.com/docs/inbound-parse-webhooks#sample-payload
 
   def author_type = regex_match[:conservateur] ? :conservateur : :user
+
   def commune_token = regex_match[:token]
+
   def commune_code_insee = regex_match[:code_insee]
 
   def regex_match
@@ -65,7 +68,7 @@ class InboundEmail < ApplicationRecord
   end
 
   def attachments
-    raw.fetch("Attachments", []).map { InboundEmailAttachment.new(_1, id) }
+    raw.fetch("Attachments", []).each_with_index.map { |raw, index| EmailAttachment.new(raw, id, index:) }
   end
 
   def skipped_attachments

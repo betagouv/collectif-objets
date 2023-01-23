@@ -691,7 +691,10 @@ fr:
     message_received:
       subject: "%{nom_commune} vous a envoyé un message"
       bonjour: Bonjour %{nom},
-      intro: Un usager de la commune %{nom_commune} vous a envoyé un nouveau message le %{date}
+      intro: "Un usager de la commune %{nom_commune} vous a envoyé un nouveau message le %{date} :"
+      attachments:
+        one: Ce message contient 1 pièce jointe visible depuis Collectif Objets.
+        other: Ce message contient %{count} pièces jointes visibles depuis Collectif Objets.
       cta: Répondre sur Collectif Objets
       reply_by_email: Vous pouvez aussi répondre à cet email directement. Le message apparaîtra dans la messagerie de Collectif Objets et l'usager sera notifié par email.
     layout:
@@ -737,6 +740,9 @@ fr:
       subject: "%{conservateur} vous a envoyé un message sur Collectif Objets"
       bonjour: Bonjour %{nom_commune},
       intro: "%{conservateur}, conservateur de votre département, vous a envoyé un message sur Collectif Objets le %{date} :"
+      attachments:
+        one: Ce message contient 1 pièce jointe visible depuis Collectif Objets.
+        other: Ce message contient %{count} pièces jointes visibles depuis Collectif Objets.
       cta: Répondre sur Collectif Objets
       reply_by_email: Vous pouvez aussi répondre à cet email directement. Le message apparaîtra dans la messagerie de Collectif Objets et l'usager sera notifié par email.
     layout:

@@ -36,11 +36,15 @@
   - if skipped_attachments&.any?
     .fr-my-2w.fr-pl-4w
       %details
-        %summary #{skipped_attachments.length} autres fichiers
+        %summary
+          - if skipped_attachments.length == 1
+            1 autre fichier
+          - else
+            #{skipped_attachments.length} autres fichiers
         %ul
-          - skipped_attachments.each_with_index do |attachment, index|
+          - skipped_attachments.each do |attachment|
             %li
-              = link_to "#{attachment.filename} (#{number_to_human_size(attachment.size)})", commune_message_download_skipped_attachment_path(commune, message, attachment_index: index), target: "_blank", rel: "noopener"
+              = link_to "#{attachment.filename} (#{number_to_human_size(attachment.size)})", attachment_path(attachment), target: "_blank", rel: "noopener"
   .co-text--italic.fr-text--sm.fr-pb-1w
     - if inbound_email?
       Ce message a été envoyé par mail depuis l'adresse

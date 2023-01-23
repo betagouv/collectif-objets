@@ -38,7 +38,7 @@
         - if @actions.include?(:see_rapport)
           = link_to "Voir le rapport", conservateurs_dossier_path(@dossier), class: "fr-btn"
         - if @actions.include?(:messagerie)
-          = link_to "Messagerie", conservateurs_commune_messages_path(@dossier.commune), class: "fr-btn"
+          = link_to "Messagerie", conservateurs_commune_messages_path(@commune), class: "fr-btn"
 
   - if @commune.completed? && !@dossier.accepted?
     .fr-container.fr-grid-row.fr-grid-row--center.fr-mb-4w

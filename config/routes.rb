@@ -76,7 +76,7 @@ Rails.application.routes.draw do
     resources :dossiers, only: [:show]
     resources :campaign_recipients, only: [:update]
     resources :messages, only: %i[index new create] do
-      get :download_skipped_attachment
+      resources :email_attachments, only: [:show]
     end
     resource :user, only: [:update]
   end
@@ -94,7 +94,9 @@ Rails.application.routes.draw do
       collection do
         post :autocomplete
       end
-      resources :messages, only: %i[index new create]
+      resources :messages, only: %i[index new create] do
+        resources :email_attachments, only: [:show]
+      end
     end
     resources :objets, only: [] do
       resources :recensements, only: [] do
@@ -162,7 +164,9 @@ Rails.application.routes.draw do
     resources :attachments, only: [] do
       post :rotate
     end
-    resources :messages, only: [:create]
+    resources :messages, only: [:create] do
+      resources :email_attachments, only: [:show]
+    end
   end
 
   # -----

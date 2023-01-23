@@ -6,7 +6,7 @@ class DownloadInboundEmailAttachmentJob
   include Sidekiq::Job
 
   def perform(attachment_raw, inbound_email_id)
-    @inbound_email_attachment = InboundEmailAttachment.new(attachment_raw, inbound_email_id)
+    @email_attachment = EmailAttachment.new(attachment_raw, inbound_email_id)
     return Sidekiq.logger.info("skipping download #{attachment_raw}") if skip_download?
 
     return Sidekiq.logger.info("skipping already downloaded #{attachment_raw}") if already_downloaded?
@@ -16,10 +16,10 @@ class DownloadInboundEmailAttachmentJob
 
   private
 
-  attr_reader :inbound_email_attachment
+  attr_reader :email_attachment
 
   delegate :message, :download_token, :skip_download?, :already_downloaded?, :content_type, :filename,
-           to: :inbound_email_attachment
+           to: :email_attachment
 
   def download_callback(tempfile)
     raise DownloadError, "downloaded file size is #{tempfile.size}" if tempfile.size < 100

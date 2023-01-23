@@ -6,7 +6,7 @@ module Admin
 
     def create
       @message = Message.new(**message_params)
-      redirect_to admin_commune_path(@commune), error: "impossible d'envoyer le message" unless @message.save
+      redirect_to admin_commune_path(@commune), alert: "impossible d'envoyer le message" unless @message.save
 
       @message.enqueue_message_received_emails
       respond_to do |format|

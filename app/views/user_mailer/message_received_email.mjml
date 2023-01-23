@@ -19,6 +19,16 @@
   </mj-column>
 </mj-section>
 
+<%- if @message.files_and_skipped_attachments_count > 0 %>
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= I18n.t("user_mailer.message_received.attachments", count: @message.files_and_skipped_attachments_count) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<%- end %>
+
 <mj-section>
   <mj-column>
     <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= @login_url %>">

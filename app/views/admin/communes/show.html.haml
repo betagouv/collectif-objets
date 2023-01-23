@@ -68,8 +68,8 @@
     = icon_span("mail")
     Messagerie
 
-  = render "shared/messages", viewed_by: current_admin_user, messages: @messages
-  = render "shared/new_message_form", message: Message.new, url: admin_messages_path(commune_id: @commune.id)
+  = render "shared/messages/list", viewed_by: current_admin_user, messages: @messages
+  = render "shared/messages/form", message: Message.new, url: admin_messages_path(commune_id: @commune.id)
 
   %h4.fr-mt-4w
     = icon_span("passport")
