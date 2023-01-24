@@ -59,7 +59,7 @@
         = render UnfoldComponent.new(max_height_px: 200) do
           - @commune.active_admin_comments.order(updated_at: :desc).each do |comment|
             .fr-mb-2w
-              %span.co-text--bold= comment.author.first_name
+              %span.co-text--bold= comment.author&.first_name || "Admin supprimé"
               %span.fr-text--sm le #{l(comment.updated_at)}
               %span.fr-text--sm= link_to "Supprimer", admin_active_admin_comment_path(comment), "data-turbo-method": "delete"
               = blockquote comment.body
