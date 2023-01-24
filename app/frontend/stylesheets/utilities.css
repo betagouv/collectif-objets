@@ -85,6 +85,10 @@ html[data-fr-scheme="dark"] .co-background--white {
   z-index: 10;
 }
 
+html[data-fr-scheme="dark"] .co-fade-overflow:before {
+  background: linear-gradient(transparent 60%, #181818);
+}
+
 /* SIZES */
 
 .co--width-max-100 {
