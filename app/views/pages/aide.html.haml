@@ -36,10 +36,6 @@
             %li= t(".etape2.questions.question2")
             %li= t(".etape2.questions.question3")
           %p= t(".etape2.photo")
-          %p= t(".etape2.hors_ligne")
-          - if current_user.present?
-            %p
-              = link_to "Télécharger le questionnaire imprimable", commune_formulaire_path(current_user.commune), class: "fr-link"
   / SECTION ETAPE 3
   %section.fr-container
     .fr-grid-row.fr-py-8w.fr-grid-row--center

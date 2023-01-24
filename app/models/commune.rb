@@ -27,7 +27,6 @@ class Commune < ApplicationRecord
   has_many :recensements, through: :objets
   has_many :past_dossiers, class_name: "Dossier", dependent: :nullify
   belongs_to :dossier, optional: true
-  has_one_attached :formulaire
   has_many :campaign_recipients, dependent: :destroy
   has_many :active_admin_comments, dependent: :destroy, as: :resource
   has_many :survey_votes, dependent: :nullify

@@ -23,10 +23,6 @@ fr:
       accepted_callout:
         title: Dossier accepté par le conservateur
         content: "%{conservateur} a analysé votre dossier le %{date}."
-      imprimer_callout:
-        pas_de_connexion: Vous n'avez pas de connexion internet pendant le recensement ?
-        vous_pouvez_imprimer: Vous pouvez imprimer le formulaire de recensement. Vous devrez reporter ces informations sur ce site une fois le recensement sur place effectué.
-        cta: Imprimer le formulaire
       complete_callout:
         hint:
           one: Il ne vous reste plus qu'à envoyer le recensement aux conservateurs
@@ -355,8 +351,6 @@ fr:
           inactive: Commune inactive
           started: Recensement démarré
           completed: Recensement terminé
-        formulaire:
-          title: Formulaires de recensement
         departement_code: Département
       campaign:
         departement_code: Département
