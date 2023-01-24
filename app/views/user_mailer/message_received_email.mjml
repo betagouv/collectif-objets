@@ -4,7 +4,7 @@
       <%= I18n.t("user_mailer.message_received.bonjour", nom_commune: @commune.nom) %>
     </mj-text>
     <mj-text>
-      <%= I18n.t("user_mailer.message_received.intro", conservateur: @conservateur.to_s, date: I18n.l(@message.created_at, format: :long_with_weekday)) %>
+      <%= I18n.t("user_mailer.message_received.from_#{@author.class.to_s.underscore}", author: @author.to_s, date: I18n.l(@message.created_at, format: :long_with_weekday)) %>
     </mj-text>
   </mj-column>
 </mj-section>

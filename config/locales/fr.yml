@@ -732,9 +732,10 @@ fr:
       nouveau_html: Vous pouvez en demander un nouveau depuis <a href="%{url}">la page de connexion</a>.
       nouveau: Vous pouvez en demander un nouveau depuis la page de connexion
     message_received:
-      subject: "%{conservateur} vous a envoyé un message sur Collectif Objets"
+      subject: "%{author} vous a envoyé un message sur Collectif Objets"
       bonjour: Bonjour %{nom_commune},
-      intro: "%{conservateur}, conservateur de votre département, vous a envoyé un message sur Collectif Objets le %{date} :"
+      from_conservateur: "%{author}, conservateur de votre département, vous a envoyé un message sur Collectif Objets le %{date} :"
+      from_admin_user: "%{author} de l'équipe support de Collectif Objets vous a envoyé un message le %{date} :"
       attachments:
         one: Ce message contient 1 pièce jointe visible depuis Collectif Objets.
         other: Ce message contient %{count} pièces jointes visibles depuis Collectif Objets.
