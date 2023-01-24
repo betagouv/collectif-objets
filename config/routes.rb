@@ -72,7 +72,6 @@ Rails.application.routes.draw do
     resources :objets, only: %i[index show] do
       resources :recensements, except: %i[index show destroy]
     end
-    resource :formulaire, only: [:show]
     resources :dossiers, only: [:show]
     resources :campaign_recipients, only: [:update]
     resources :messages, only: %i[index new create] do

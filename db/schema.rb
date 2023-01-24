@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_18_131230) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_24_095617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -136,7 +136,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_18_131230) do
     t.integer "recensement_ratio"
     t.bigint "dossier_id"
     t.datetime "started_at"
-    t.datetime "formulaire_updated_at"
     t.float "latitude"
     t.float "longitude"
     t.string "inbound_email_token", null: false
