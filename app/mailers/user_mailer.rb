@@ -60,14 +60,14 @@ class UserMailer < ApplicationMailer
 
   def message_received_email
     @message, @user = params.values_at(:message, :user)
-    @conservateur = @message.author
+    @author = @message.author
     @commune = @message.commune
 
     set_login_url
     mail(
       to: @user.email,
       reply_to: email_address_with_name(@commune.support_email(role: :user), "Collectif Objets Messagerie"),
-      subject: I18n.t("user_mailer.message_received.subject", conservateur: @conservateur.to_s)
+      subject: I18n.t("user_mailer.message_received.subject", author: @author.to_s)
     )
   end
 

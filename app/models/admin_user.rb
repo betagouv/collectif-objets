@@ -8,11 +8,9 @@ class AdminUser < ApplicationRecord
 
   has_many :active_admin_comments, as: :author, dependent: :nullify
 
-  def to_s
-    email.split("@")[0].gsub("_", " ").gsub("-", " ").gsub(".", " ").capitalize
-  end
+  validates :first_name, :last_name, presence: true
 
-  def first_name
-    to_s.split[0]
+  def to_s
+    [first_name, last_name].join(" ")
   end
 end
