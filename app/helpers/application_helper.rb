@@ -59,6 +59,6 @@ module ApplicationHelper
     contour = { auto: :line, manual: :fill }[type]
     type_str = { auto: "automatiquement", manual: "manuellement" }[type]
     title = "Accessibilité validée #{type_str}"
-    icon_span("thumb-up", contour:, title:)
+    icon_span("checkbox", contour:, title:)
   end
 end
