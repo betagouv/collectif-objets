@@ -264,6 +264,11 @@ html[data-fr-scheme="dark"] .co-text--blue {
   position: relative;
 }
 
+.co-position-sticky {
+  position: sticky;
+  top: 2rem;
+}
+
 .co-top-50pct {
   top: 50%;
 }

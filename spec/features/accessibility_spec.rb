@@ -154,7 +154,17 @@ feature "accessibility communes", js: true do
   end
 
   describe "communes/completions#new - Démo" do
-    before { visit demo_path(namespace: "communes", name: "new_completion") }
+    before { visit demo_path(namespace: "communes", name: "completion_new") }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/completions#show - Démo" do
+    before { visit demo_path(namespace: "communes", name: "completion_show") }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/recompletions#new - Démo" do
+    before { visit demo_path(namespace: "communes", name: "recompletion_new") }
     it_behaves_like "an accessible page"
   end
 

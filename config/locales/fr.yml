@@ -53,13 +53,6 @@ fr:
         title: Le recensement de vos objets est terminé, merci !
         content: Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
         cta: Voir les données envoyées
-    recompletions:
-      new:
-        head_title: "Renvoi du dossier de recensement de %{commune_nom}"
-        title: "Renvoi du dossier de recensement de %{commune_nom}"
-        notes_conservateur: "%{conservateur} - le %{date} "
-        error: "Votre dossier n'a pas pu être renvoyé :"
-        cta: Renvoyer le dossier au conservateur
   conservateurs:
     communes:
       no_results: Aucune commune trouvée

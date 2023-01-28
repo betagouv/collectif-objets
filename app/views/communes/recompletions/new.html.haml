@@ -1,0 +1,36 @@
+- content_for(:head_title) { t(".head_title", commune_nom: @commune.nom) }
+
+%main.fr-container.fr-pb-8w
+  = render"shared/breadcrumbs",
+    links: [["Accueil", root_path], ["Objets de #{@commune.nom}", commune_objets_path(@commune)]], current_page_label: "Renvoi du dossier"
+  %h1.co-text--blue
+    Renvoi du dossier de recensement de #{@commune.nom}
+  - if @commune.errors.any?
+    .fr-grid-row
+      .fr-col-md-6
+        .fr-alert.fr-alert--error.fr-mb-6w
+          %p
+            Votre dossier n'a pas pu être renvoyé :
+          %ul
+            - @commune.errors.attribute_names.each do |attribute|
+              %li= @commune.errors.messages_for(attribute).first
+  .fr-grid-row
+    .fr-col-md-6
+      %p
+        Le dossier de recensement sera retourné au conservateur pour validation avec les informations de recensements que vous avez mises à jour.
+      %p
+        %b Commentaire du conservateur lors du renvoi
+      = blockquote(@dossier.notes_conservateur, class: "fr-my-2w")
+      %p
+        = @dossier.conservateur.to_s
+        ·
+        le #{l @dossier.rejected_at.to_date }
+  = render "communes/completions/summary", objets: @objets
+  .fr-grid-row
+    .fr-col-md-6
+      = form_for @dossier_recompletion,  as: :dossier_recompletion,  url: commune_recompletion_path(@commune),  method: "POST",  builder: FormBuilderDsfr do |f|
+        .fr-input-group
+          = f.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune")
+          = f.text_area :notes_commune
+        .actions
+          = f.submit "Renvoyer le dossier au conservateur"
