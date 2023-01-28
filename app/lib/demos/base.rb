@@ -7,12 +7,14 @@ module Demos
     def initialize(controller, variant: default_variant)
       @controller = controller
       @variant = variant
+      @commune = build(:commune)
+      @current_user ||= build(:user, commune: @commune)
     end
+
+    attr_reader :current_user, :commune
 
     private
 
-    def default_variant
-      "default"
-    end
+    def default_variant = :default
   end
 end

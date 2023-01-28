@@ -157,4 +157,9 @@ feature "accessibility communes", js: true do
     before { visit demo_path(namespace: "communes", name: "new_completion") }
     it_behaves_like "an accessible page"
   end
+
+  describe "communes/messages#index - Démo" do
+    before { visit demo_path(namespace: "communes", name: "messagerie") }
+    it_behaves_like "an accessible page"
+  end
 end

@@ -134,6 +134,10 @@
       %li Renvoyer le dossier
       %li Voir le rapport de recensement
       %li Mon compte
+      %li
+        Messagerie
+        = link_to "Quelques messages", demo_path(namespace: "communes", name: "messagerie")
+        = accessible_icon_span
 
     %h2#conservateurs Interface conservateurs
     %p Ces pages sont visibles uniquement pour les conservateurs connectés

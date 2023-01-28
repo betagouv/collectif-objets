@@ -6,8 +6,7 @@ module Demos
       def template = "communes/recensements/new"
 
       def perform
-        @commune = build(:commune)
-        @objet = build(:objet, commune: @commune)
+        @objet = build(:objet, commune:)
         @recensement = build(:recensement, :empty, objet: @objet)
       end
     end
