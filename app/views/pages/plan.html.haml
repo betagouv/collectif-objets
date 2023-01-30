@@ -4,144 +4,155 @@
   .fr-container
     = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Plan du site")
 
-    %h1 Plan du site
+    .fr-grid-row.fr-grid-row--gutters
+      .fr-col-md-4
+        .co-position-sticky
+          %h1 Plan du site
 
-    .fr-grid-row
-      .fr-col-md-6
-        %p
-          Ce site est organisé en 4 grandes parties, accessibles à différents types d'usagers :
-          %ul
-            %li= link_to "Pages publiques", "#public"
-            %li= link_to "Interface Communes", "#communes"
-            %li= link_to "Interface Conservateurs", "#conservateurs"
-            %li= link_to "Administration", "#administration"
-      .fr-col-md-6
-        %p
-          Pour chaque page, le niveau de test d'accessibilité effectué est affiché. Vous pouvez lire plus de détail sur notre démarche d'accessibilité
-          = link_to "sur la page dédiée", accessibilite_path
-          \.
-        %p
-          Légende :
+          %p
+            Ce site est organisé en 4 grandes parties, accessibles à différents types d'usagers :
+            %ul
+              %li= link_to "1. Pages publiques", "#public"
+              %li= link_to "2. Interface Communes", "#communes"
+              %li= link_to "3. Interface Conservateurs", "#conservateurs"
+              %li= link_to "4. Administration", "#administration"
+          %p
+            Pour chaque page, le niveau de test d'accessibilité effectué est affiché. Vous pouvez lire plus de détail sur notre démarche d'accessibilité
+            = link_to "sur la page dédiée", accessibilite_path
+            \.
+          %p
+            Légende :
           %ol
             %li
-              = icon_span("thumb-up")
+              = accessible_icon_span(type: :auto)
               Accessibilité validée automatiquement
             %li
-              = icon_span("thumb-up", contour: "fill")
+              = accessible_icon_span(type: :manual)
               Accessibilité validée manuellement
 
-    %h2#public Pages publiques
-    %p Ces pages sont visibles par tous les visiteurs du site
-    %ul
-      %li
-        = link_to "Liste des objets protégés de toute la France", objets_path
-        = accessible_icon_span
-        %ul
-          - Objet.first(2).each do |objet|
-            %li
-              = link_to "Objet #{objet}", objet_path(objet)
-              = accessible_icon_span
-          %li …
-      %li
-        = link_to "Liste des communes par département", departements_path
-        = accessible_icon_span
-        %ul
-          - Departement.order(:code).first(2).each do |departement|
-            %li
-              = link_to "Liste des communes du #{departement}", departement_path(departement)
-              = accessible_icon_span
-              %ul
-                - departement.communes.order(:code_insee).first(2).each do |commune|
-                  %li
-                    = link_to "Liste des objets de #{commune}", objets_path(commune_code_insee: commune.code_insee)
-                    = accessible_icon_span
-                %li …
-          %li …
-      %li
-        = link_to "Connexion", connexion_path
-        = accessible_icon_span
+      .fr-col-md-8
+        %h2#public 1. Pages publiques
+        %p Ces pages sont visibles par tous les visiteurs du site
         %ul
           %li
-            = link_to "Connexion Communes", new_user_session_path
+            = link_to "Liste des objets protégés de toute la France", objets_path
             = accessible_icon_span
+            %ul
+              - Objet.first(2).each do |objet|
+                %li
+                  = link_to "Objet #{objet}", objet_path(objet)
+                  = accessible_icon_span
+              %li …
           %li
-            = link_to "Connexion Conservateur", new_conservateur_session_path
+            = link_to "Liste des communes par département", departements_path
             = accessible_icon_span
+            %ul
+              - Departement.order(:code).first(2).each do |departement|
+                %li
+                  = link_to "Liste des communes du #{departement}", departement_path(departement)
+                  = accessible_icon_span
+                  %ul
+                    - departement.communes.order(:code_insee).first(2).each do |commune|
+                      %li
+                        = link_to "Liste des objets de #{commune}", objets_path(commune_code_insee: commune.code_insee)
+                        = accessible_icon_span
+                    %li …
+              %li …
           %li
-            = link_to "Connexion Administrateur", new_admin_user_session_path
-            = accessible_icon_span
-      %li= link_to "Statistiques", stats_path
-      %li
-        = link_to "On parle de nous", presse_path
-        = accessible_icon_span
-        %ul
-          - ArticlePresse.load_all.each do |article_presse|
-            %li
-              = link_to article_presse.title, article_presse_path(article_presse.id)
-              = accessible_icon_span
-      %li
-        = link_to "Conditions générales d'utilisation", conditions_path
-        = accessible_icon_span
-      %li
-        = link_to "Mentions Légales", mentions_legales_path
-        = accessible_icon_span
-      %li
-        = link_to "Confidentialité", confidentialite_path
-        = accessible_icon_span
-      %li
-        = link_to "Comment ça marche ?", aide_path
-        = accessible_icon_span
-      %li
-        = link_to "Guide du recensement", guide_path
-        = accessible_icon_span
-      %li
-        = link_to "Fiches conseil", fiches_path
-        = accessible_icon_span
-        %ul
-          - Fiche.load_all.each do |fiche|
-            %li
-              = link_to fiche.title, fiche_path(fiche.id)
-              = accessible_icon_span
-      %li
-        = link_to "Plan du site", plan_path
-        = accessible_icon_span
-
-
-    %h2#communes Interface Communes
-    %p Ces pages sont visibles uniquement pour les communes connectées. Les liens présents sont des pages de démonstration avec des données de test.
-    %ul
-      %li
-        Liste des objets de la commune ·
-        = link_to "3 objets sans photos", demo_path(namespace: "communes", name: "objets_index")
-        = accessible_icon_span
-        %ul
-          %li
-            Objet 1 à protéger
-            = link_to "Sans photos", demo_path(namespace: "communes", name: "objet_show")
+            = link_to "Connexion", connexion_path
             = accessible_icon_span
             %ul
               %li
-                Recensement de l'objet 1
-                = link_to "Démo", demo_path(namespace: "communes", name: "new_recensement")
+                = link_to "Connexion Communes", new_user_session_path
                 = accessible_icon_span
+              %li
+                = link_to "Connexion Conservateur", new_conservateur_session_path
+                = accessible_icon_span
+              %li
+                = link_to "Connexion Administrateur", new_admin_user_session_path
+                = accessible_icon_span
+          %li= link_to "Statistiques", stats_path
+          %li
+            = link_to "On parle de nous", presse_path
+            = accessible_icon_span
+            %ul
+              - ArticlePresse.load_all.each do |article_presse|
+                %li
+                  = link_to article_presse.title, article_presse_path(article_presse.id)
+                  = accessible_icon_span
+          %li
+            = link_to "Conditions générales d'utilisation", conditions_path
+            = accessible_icon_span
+          %li
+            = link_to "Mentions Légales", mentions_legales_path
+            = accessible_icon_span
+          %li
+            = link_to "Confidentialité", confidentialite_path
+            = accessible_icon_span
+          %li
+            = link_to "Comment ça marche ?", aide_path
+            = accessible_icon_span
+          %li
+            = link_to "Guide du recensement", guide_path
+            = accessible_icon_span
+          %li
+            = link_to "Fiches conseil", fiches_path
+            = accessible_icon_span
+            %ul
+              - Fiche.load_all.each do |fiche|
+                %li
+                  = link_to fiche.title, fiche_path(fiche.id)
+                  = accessible_icon_span
+          %li
+            = link_to "Plan du site", plan_path
+            = accessible_icon_span
 
-          %li Autres objets …
-      %li
-        Finalisation du recensement
-        = link_to "2 recensements avec photos", demo_path(namespace: "communes", name: "new_completion")
-        = accessible_icon_span
-      %li Voir les recensements envoyés
-      %li Renvoyer le dossier
-      %li Voir le rapport de recensement
-      %li Mon compte
 
-    %h2#conservateurs Interface conservateurs
-    %p Ces pages sont visibles uniquement pour les conservateurs connectés
-    %p Plan des pages en construction …
+        %h2.fr-mt-4w#communes 2. Interface Communes
+        %p Ces pages sont visibles uniquement pour les communes connectées. Les liens présents sont des pages de démonstration avec des données de test.
+        %ul
+          %li
+            Liste des objets de la commune ·
+            = link_to "3 objets sans photos", demo_path(namespace: "communes", name: "objets_index")
+            = accessible_icon_span
+            %ul
+              %li
+                Objet 1 à protéger
+                = link_to "Sans photos", demo_path(namespace: "communes", name: "objet_show")
+                = accessible_icon_span
+                %ul
+                  %li
+                    Recensement de l'objet 1
+                    = link_to "Démo", demo_path(namespace: "communes", name: "new_recensement")
+                    = accessible_icon_span
 
-    %h2#administration Administration
-    %p Ces pages sont visibles uniquement pour les administrateurs connectés
-    %p Plan des pages en construction …
+              %li Autres objets …
+          %li
+            Finalisation du recensement
+            = link_to "2 recensements avec photos", demo_path(namespace: "communes", name: "completion_new")
+            = accessible_icon_span
+          %li
+            Voir les recensements envoyés
+            = link_to "2 recensements avec photos", demo_path(namespace: "communes", name: "completion_show")
+            = accessible_icon_span
+          %li
+            Renvoyer le dossier
+            = link_to "2 recensements avec photos", demo_path(namespace: "communes", name: "recompletion_new")
+            = accessible_icon_span
+          %li Voir le rapport de recensement
+          %li Mon compte
+          %li
+            Messagerie
+            = link_to "Quelques messages", demo_path(namespace: "communes", name: "messagerie")
+            = accessible_icon_span
 
-    %ul
-      %li= link_to "Accueil de l'administration", admin_path
+        %h2.fr-mt-4w#conservateurs 3. Interface conservateurs
+        %p Ces pages sont visibles uniquement pour les conservateurs connectés
+        %p Plan des pages en construction …
+
+        %h2.fr-mt-4w#administration 4. Administration
+        %p Ces pages sont visibles uniquement pour les administrateurs connectés
+        %p Plan des pages en construction …
+
+        %ul
+          %li= link_to "Accueil de l'administration", admin_path

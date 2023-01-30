@@ -9,10 +9,7 @@ class DemosController < ApplicationController
   end
   helper_method :policy
 
-  def current_user
-    commune = build(:commune)
-    build(:user, commune:)
-  end
+  delegate :current_user, to: :demo_object
 
   def show
     demo_object.perform

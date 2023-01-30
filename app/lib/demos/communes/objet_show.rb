@@ -6,8 +6,7 @@ module Demos
       def template = "communes/objets/show"
 
       def perform
-        @commune = build(:commune)
-        @objet = build(:objet, commune: @commune)
+        @objet = build(:objet, commune:)
       end
     end
   end
