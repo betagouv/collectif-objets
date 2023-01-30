@@ -7,7 +7,7 @@ module Demos
       def default_variant = "with_photos"
 
       def perform
-        @dossier = build(:dossier, :submitted, notes_communes: "Voici les recensements demandés", commune:)
+        @dossier = build(:dossier, :submitted, notes_commune: "Voici les recensements demandés", commune:)
         @objets = [
           build(
             :objet, :with_palissy_photo, :with_recensement_with_photos_mocked,
