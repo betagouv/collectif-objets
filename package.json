@@ -23,7 +23,7 @@
   "dependencies": {
     "@gouvfr/dsfr": "^1.8.5",
     "@hotwired/stimulus": "^3.2.1",
-    "@hotwired/turbo-rails": "^7.2.4",
+    "@hotwired/turbo-rails": "^7.2.5",
     "@rails/activestorage": "^7.0.4",
     "@sentry/browser": "^7.35.0",
     "@sentry/cli": "^2.11.0",
