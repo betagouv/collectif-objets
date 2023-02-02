@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     get :admin
     get :plan
     get :accessibilite
+    get :aide_conservateurs
   end
   get "campaigns.ics", to: "pages#campaigns_ics", as: :campaigns_ics
   resources :fiches, only: %i[index show]

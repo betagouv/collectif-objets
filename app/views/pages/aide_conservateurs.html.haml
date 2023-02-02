@@ -1,0 +1,19 @@
+- content_for(:head_title) { "Aide conservateurs" }
+
+%main.fr-pt-2w.fr-pb-8w
+  .fr-container
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Aide conservateurs")
+
+    %h1 Aide conservateurs
+
+    .fr-callout
+      %p.fr-callout__text Cette page est en cours de construction
+
+    %h2 Tutoriel d'utilisation de la messagerie
+    .fr-my-2w{style: "max-width: 45rem;"}
+      %video.co-cursor-pointer{controls:"", width:"100%", preload:"none", poster:vite_asset_path("images/2023_01_tutoriel_messagerie.webp"), href:"#"}
+        / the href is a fix for a bad rule in DSFR
+        %source(src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_01_tutoriel_messagerie.webm" type="video/webm")
+        %source(src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_01_tutoriel_messagerie.mp4" type="video/mp4")
+        %a(href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_01_tutoriel_messagerie.mp4")
+          Télécharger le reportage au format MP4
