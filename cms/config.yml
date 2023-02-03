@@ -1,7 +1,14 @@
 backend:
-  name: github
+  name: git-gateway
   repo: betagouv/collectif-objets
   branch: main
+  commit_messages:
+    create: Crée {{slug}}
+    update: Met à jour {{slug}}
+    delete: Supprime {{slug}}
+    uploadMedia: Nouvelle image {{path}}
+    deleteMedia: Suppression de l'image {{path}}
+
 publish_mode: editorial_workflow
 media_folder: /public/cms/images
 locale: fr
@@ -9,6 +16,12 @@ site_url: https://collectif-objets.beta.gouv.fr
 display_url: https://collectif-objets.beta.gouv.fr
 logo_url: https://collectif-objets.beta.gouv.fr/ministere-culture.png
 show_preview_links: false
+
+patterns:
+  pattern_url: &pattern_url
+    - "^(https?:\/\/)"
+    - "Le champ doit contenir une url valide"
+
 collections:
   - name: articles_presses
     label: Articles de presse
