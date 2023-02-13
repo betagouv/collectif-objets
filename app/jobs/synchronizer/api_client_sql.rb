@@ -18,7 +18,7 @@ module Synchronizer
         left join palissy_to_merimee ptmerimee on ptmerimee.REF_PALISSY = palissy.REF
       SQL
       where: <<~SQL.squish,
-        WHERE "DOSS" = 'dossier individuel'
+        WHERE "DOSS" IN ('dossier individuel', 'dossier avec sous-dossier', 'individuel', 'dossier indiviuel', 'dossier avec sous-dossiers')
         and ("MANQUANT" is NULL OR "MANQUANT" NOT IN ('manquant', 'volé'))
         and ("PROT" IS NULL OR "PROT" != 'déclassé')
         and "propriété de l'Etat" not in (select value from json_each([palissy].[STAT]))
