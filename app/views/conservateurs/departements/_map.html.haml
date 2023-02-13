@@ -6,7 +6,10 @@
     .fr-pb-2w
       .map-legend-icon.commune-prioritaire
       Commune ayant soumis un dossier de recensement avec des objets prioritaires
-.co-position-relative{"data-communes-json" => "#{communes.map { _1.slice(%w[code_insee status objets_count recensements_prioritaires_count]) }.to_json}", "data-conservateur-map-target" => "wrapper", "data-controller" => "conservateur-map", "data-departement-json" => "#{@departement_json}"}
+.co-position-relative{"data-communes-json" => "#{communes.map { _1.slice(%w[code_insee status objets_count recensements_prioritaires_count]) }.to_json}",
+  "data-conservateur-map-target" => "wrapper",
+  "data-controller" => "conservateur-map",
+  "data-departement-json" => "#{@departement_json}"}
   .conservateur-map-sidebar.co-position-relative{"data-collapsed" => "true", "data-conservateur-map-target" => "sidebar"}
   .co-position-relative
     .conservateur-map-container{"data-conservateur-map-target" => "container", style: "max-width: 90%; margin: auto;"}

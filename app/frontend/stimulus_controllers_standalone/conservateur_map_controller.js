@@ -76,6 +76,8 @@ export default class extends Controller {
       this.initClick()
       this.hydrateStatuses()
     })
+
+    this.map.addControl(new maplibregl.NavigationControl({showCompass: false}));
   }
 
   initHover() {
