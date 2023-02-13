@@ -296,46 +296,29 @@ Avec le fichier suivant
 
 ## Données (Origine, Transformations, Republications)
 
-### Schéma d'infrastructure général
-
 ![Schéma d'infrastructure général](https://github.com/betagouv/collectif-objets/raw/main/doc/infrastructure.drawio.png)
-
-### Origine des données
 
 Les données sur les communes (email de la mairie, numéro de téléphone etc…) proviennent
 de [service-public.fr](https://www.service-public.fr/).
+Nous utilisons [BaseAdresseNationale/annuaire-api](https://github.com/BaseAdresseNationale/annuaire-api), un outil qui 
+récupère et parse les exports XML de service-public.fr.
 
 Les données sur les objets monuments historiques sont celles de Palissy, la base patrimoniale hébergée sur la
 [Plateforme Ouverte du Patrimoine (POP)](https://www.pop.culture.gouv.fr/).
+L'export publié sur data.gouv.fr est trop partiel et peu fréquent pour les besoins de Collectif Objets.
+Nous scrappons donc POP via [pop-scraper](https://github.com/adipasquale/pop-scraper).
 
 Les données sur les conservateurs nous ont été transmises personnellement via un annuaire national en PDF.
 
-### Récupération des données
+Pour simplifier la réutilisation des données de service-public.fr et de POP, nous avons déployé une plateforme de 
+données publique : [collectif-objets-datasette.fly.dev](https://collectif-objets-datasette.fly.dev) qui fournit une 
+interface visuelle web avec des filtres, et une API JSON.
+Le code est disponible [sur GitHub](https://github.com/adipasquale/collectif-objets-datasette) et utilise la librairie
+[datasette](https://github.com/simonw/datasette/).
 
-Pour les données de service-public.fr nous utilisons
-[BaseAdresseNationale/annuaire-api](https://github.com/BaseAdresseNationale/annuaire-api).
-C'est un outil qui récupère et parse les exports XML de service-public.fr.
+`rails runner Synchronizer::SynchronizeObjetsJob.perform_inline` importe les données depuis la 
+collectif-objets-datasette.fly.dev vers la base de donnée locale de Collectif Objets.
 
-Pour les données de POP (Palissy) nous devons pour l'instant les scrapper.
-L'export publié sur data.gouv.fr n'est pas assez complet pour nos besoins, il manque beaucoup de colonnes.
-Il n'est pas mis à jour fréquemment.
-Le code du scraper POP est disponible sur le repo GitHub
-[pop-scraper](https://github.com/adipasquale/pop-scraper).
-
-### Republication des données
-
-Pour simplifier la réutilisation des données, notamment leur synchronisation vers l'appli Rails Collectif Objets,
-nous avons déployé une plateforme publique.
-Elle utilise la librairie [datasette](https://github.com/simonw/datasette/) qui permet de publier simplement
-une base de données SQLite et de fournir une interface visuelle web avec des filtres,
-et une API JSON sans aucune configuration.
-
-Cette application est hébergée sur Fly.io car le déploiement y est très simple.
-Elle est accessible sur https://collectif-objets-datasette.fly.dev/.
-Son code est disponible sur le repo GitHub
-[collectif-objets-datasette](https://github.com/adipasquale/collectif-objets-datasette)
-
-### Sensibilité des données stockées
 
 La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :
 
