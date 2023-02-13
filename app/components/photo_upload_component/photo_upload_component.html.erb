@@ -1,10 +1,10 @@
 <div
-  data-controller="photo-upload"
-  data-photo-upload-target="wrapper"
+  data-controller="photo-upload-component"
+  data-photo-upload-component-target="wrapper"
 >
   <div
     class="fr-upload-group"
-    data-photo-upload-target="uploadGroup"
+    data-photo-upload-component-target="uploadGroup"
   >
     <label class="fr-label" for="recensement_photos">
       <span class="fr-hint-text">
@@ -21,11 +21,11 @@
       multiple
       value=""
       autocomplete="off"
-      data-photo-upload-target="input"
+      data-photo-upload-component-target="input"
       data-photos-upload-group-target="input"
       data-action="
-        change->photo-upload#refreshPreview
-        change->photo-upload#triggerUpload
+        change->photo-upload-component#refreshPreview
+        change->photo-upload-component#triggerUpload
         change->photos-upload-group#onInputChange
         change->recensement#refreshFields
       "
@@ -34,12 +34,12 @@
 
     <div
       class="hide"
-      data-photo-upload-target="ctaWithCapture"
+      data-photo-upload-component-target="ctaWithCapture"
     >
       <button
         class="fr-btn fr-btn--primary fr-icon-camera-line fr-btn--icon-left co-button--high co-button--big-icon co--width-100 co-flex--justify-content-center"
-        data-photo-upload-target="uploadButton"
-        data-action="photo-upload#triggerCapture"
+        data-photo-upload-component-target="uploadButton"
+        data-action="photo-upload-component#triggerCapture"
         disabled="disabled"
         data-force-disabled="true"
       >
@@ -50,8 +50,8 @@
       </p>
       <button
         class="fr-btn fr-btn--tertiary-no-outline fr-icon-attachment-line fr-btn--icon-right co--width-100 co-flex--justify-content-center"
-        data-photo-upload-target="uploadButton"
-        data-action="photo-upload#triggerBrowse"
+        data-photo-upload-component-target="uploadButton"
+        data-action="photo-upload-component#triggerBrowse"
         disabled="disabled"
         data-force-disabled="true"
       >
@@ -59,11 +59,11 @@
       </button>
     </div>
 
-    <div data-photo-upload-target="ctaWithoutCapture">
+    <div data-photo-upload-component-target="ctaWithoutCapture">
       <button
         class="fr-btn fr-btn--primary fr-icon-attachment-line fr-btn--icon-right"
-        data-action="photo-upload#triggerBrowse"
-        data-photo-upload-target="uploadButton"
+        data-action="photo-upload-component#triggerBrowse"
+        data-photo-upload-component-target="uploadButton"
         disabled="disabled"
         data-force-disabled="true"
       >
@@ -73,21 +73,21 @@
   </div>
   <div
     class="hide co-flex co-flex--align-items-center fr-mb-2w"
-    data-photo-upload-target="preview"
+    data-photo-upload-component-target="preview"
   >
-    <div class="co-photo-upload-wrapper" data-photo-upload-target="photoWrapper">
-      <img data-photo-upload-target="img" />
+    <div class="co-photo-upload-wrapper" data-photo-upload-component-target="photoWrapper">
+      <img data-photo-upload-component-target="img" />
     </div>
     <div class="fr-ml-2w">
       <div class="fr-mb-2w">
-        <div class="co-nanobar" data-photo-upload-target="nanobar"></div>
-        <div class="co-text--muted" data-photo-upload-target="progress"></div>
-        <span class="co-text--muted" data-photo-upload-target="metadata"></span>
+        <div class="co-nanobar" data-photo-upload-component-target="nanobar"></div>
+        <div class="co-text--muted" data-photo-upload-component-target="progress"></div>
+        <span class="co-text--muted" data-photo-upload-component-target="metadata"></span>
       </div>
       <button
         class="fr-btn fr-btn--secondary fr-icon-delete-line fr-btn--icon-right"
-        data-action="click->photo-upload#remove"
-        data-photo-upload-target="removeButton"
+        data-action="click->photo-upload-component#remove"
+        data-photo-upload-component-target="removeButton"
         disabled="disabled"
       >
         Retirer cette photo
