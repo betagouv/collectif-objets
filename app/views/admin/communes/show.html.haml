@@ -16,7 +16,7 @@
       - if @commune.recensement_ratio.present?
         %p
           Objets recensés à #{@commune.recensement_ratio}%
-          - if @commune.recensements.any? && @commune.recensements.missing_photos.empty?
+          - if @commune.recensements.any? && @commune.recensements.missing_photos.any?
             %span.fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
 
       - if @commune.started_at.present?

@@ -38,7 +38,7 @@
                   %td
                     - if commune.recensement_ratio.present?
                       #{commune.recensement_ratio}%
-                    - if commune.recensements.any? && commune.recensements.missing_photos.empty?
+                    - if commune.recensements.any? && commune.recensements.missing_photos.any?
                       .fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
                   %td= l(commune.completed_at.to_date) if commune.completed_at.present?
         - if @pagy.pages > 1
