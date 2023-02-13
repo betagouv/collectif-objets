@@ -2,28 +2,18 @@
 
 ![CI](https://github.com/adipasquale/collectif-objets/actions/workflows/ci.yml/badge.svg)
 
-Collectif Objets est un site web permettant aux communes françaises de recenser leur patrimoine mobilier monument historiques et aux conservateurs d'analyser ces recensements.
-
-- [Interfaces & Usagers](#interfaces--usagers)
-- [Captures d'écran](#captures-décran)
-- [Frameworks et dépendances](#frameworks-et-dépendances)
-- [Infrastructure, Écosystème et environnements](#infrastructure-écosystème-et-environnements)
-- [Diagramme d'entités de la base de données](#diagramme-dentités-de-la-base-de-données)
-- [Diagrammes des machines à état finis](#diagrammes-des-machines-à-état-finis)
-- [Installation](#installation)
-- [Plus de documentation…](#plus-de-documentation)
+Collectif Objets est un site web permettant aux communes françaises de recenser leur patrimoine mobilier monument 
+historiques et aux conservateurs d'analyser ces recensements.
 
 ## Interfaces & Usagers
 
 Le site expose trois interfaces pour trois types d'usagers différents :
 
-1. **Interface communes** : permet aux agents municipaux des communes de réaliser les recensements d'objets.
+1. **Interface communes** : permet aux agents municipaux des communes de réaliser les recensements d'objets ;
+2. **Interface conservateurs** : permet aux conservateurs d'analyser les recensements réalisés ;
+3. **Interface administrateurs** : permet à l'équipe technique de faire le support
 
-2. **Interface conservateurs** : permet aux conservateurs de voir les recensements réalisés sur leur territoire et de les analyser
-
-3. **Interface administrateurs** : permet à l'équipe technique de gérer les accès et les données
-
-Toutes ces interfaces sont accessibles sur https://collectif-objets.beta.gouv.fr
+Ces 3 interfaces sont accessibles sur un unique site : https://collectif-objets.beta.gouv.fr
 
 ## Captures d'écran
 
@@ -76,39 +66,56 @@ Côté Javascript les principaux packages utilisés sont :
 
 *Diagramme d'infrastructure simplifié* · [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Finfrastructure-simple.drawio.svg)
 
-Le site web hébergé sur Scalingo est accessible sur [collectif-objets.beta.gouv.fr](https://)
+Un environnement de recette (ou staging) est disponible à l'adresse 
+[staging.collectif-objets.incubateur.net](https://staging.collectif-objets.incubateur.net). 
+Il n'y a pas de données sensible sur cette base de données et elle peut être réinitialisée à tout moment.
 
-Un environnement de recette (ou staging) est disponible à l'adresse [staging.collectif-objets.incubateur.net](https://staging.collectif-objets.incubateur.net). Il n'y a pas de données sensible sur cette base de données et elle peut être réinitialisée à tout moment.
-
-Une liste complète d'URLs des environnements et des outils externes est disponible [sur le wiki](https://github.com/betagouv/collectif-objets/wiki/urls).
+Une liste complète d'URLs des environnements et des outils externes est disponible (plus bas)[#urls]
 
 ## Diagramme d'entités de la base de données
 
 ![](/doc/erd-simple.drawio.svg)
 
-*Diagramme d'entités simplifié de la base de données* · [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Ferd-simple.drawio.svg)
+*Diagramme d'entités simplifié de la base de données* · 
+[éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Ferd-simple.drawio.svg)
 
+- Les `User` sont les comptes usagers des communes. C'est un modèle Devise. Un `User` a accès à une et une seule 
+  commune.
+- Les `Conservateurs` sont les comptes usagers des conservateurs. C'est aussi un modèle Devise. 
+  Un Conservateur a accès à un ou plusieurs départements et toutes les communes inclues.
+- Les `Édifices` sont les lieux abritant les objets. Une partie sont des monuments historiques avec des références 
+  vers la base Mérimée.
+- Les `Objets` sont les objets monuments historiques. Leurs infos proviennent de Palissy. 
+  Leur identifiant unique provient de POP et s'appelle dans notre base `palissy_REF`, il ressemble à `PM00023944`.
+- Un `Recensement` contient les observations sur l'état d'un `Objet` et les photos associées à la visite du `User`.
+- Un `Dossier` est un ensemble de `Recensements` pour une commune. 
+  Il doit être finalisé par la commune pour être analysable par les conservateurs.
+- Une `Campagne` contient les dates et les communes à démarcher pour une campagne mail avec plusieurs relances. 
+  Elle est gérée et visible uniquement par les administrateurs.
 
-- Les `User` sont les comptes usagers des communes. C'est un modèle Devise. Un `User` a accès à une et une seule commune.
-- Les `Conservateurs` sont les comptes usagers des conservateurs. C'est aussi un modèle Devise. Un Conservateur a accès à un ou plusieurs départements et toutes les communes inclues.
-- Les `Édifices` sont les lieux abritant les objets. Une partie sont des monuments historiques avec des références vers la base Mérimée.
-- Les `Objets` sont les objets monuments historiques. Leurs infos proviennent de Palissy. Leur identifiant unique provient de POP et s'appelle dans notre base `palissy_REF`, il ressemble à `PM00023944`.
-- Un `Recensement` contient les observations sur l'état d'un `Objet` et les photos associées à la visite de l'agent municipal.
-- Un `Dossier` est un ensemble de `Recensements` pour une commune. Il doit être finalisé par la commune pour être analysable par les conservateurs.
-- Une `Campagne` contient les dates et les communes à démarcher pour une campagne mail avec plusieurs relances. Elle est gérée et visible uniquement par les administrateurs.
+La version complète du diagramme d'entités de la base de données est visible ici 
+[doc/entity-relationship-diagram.svg](/doc/entity-relationship-diagram.svg)
 
-La version complète du diagramme d'entités de la base de données est visible ici [doc/entity-relationship-diagram.svg](/doc/entity-relationship-diagram.svg)
-
-## Diagrammes des machines à état finis
+## Machines à états finis
 
 | Communes | Dossiers | Campaigns |
 | - | - | - |
 | ![](/doc/commune_state_machine_diagram.png) | ![](/doc/dossier_state_machine_diagram.png) | ![](/doc/campaign_state_machine_diagram.png) |
 
 - Un `Dossier` est d'abord en construction, puis est soumis aux conservateurs et enfin accepté ou rejeté.
-- L'état d'une `Commune` est lié à l'état de son `Dossier`. La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque le dossier est soumis.
+- L'état d'une `Commune` est lié à l'état de son `Dossier`. 
+  La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque 
+  le dossier est soumis.
 
 `bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
+
+Voici le schéma du cycle de vie d'un dossier.
+
+![cycle de vie dossier drawio](https://user-images.githubusercontent.com/883348/203020939-f920f379-4e39-4653-bdaa-4fb7d968c87f.svg)
+
+[éditer](https://app.diagrams.net/?client=1#Uhttps%3A%2F%2Fuser-images.githubusercontent.com%2F883348%2F203020939-f920f379-4e39-4653-bdaa-4fb7d968c87f.svg)
+
+⚠️ Ce cycle va bientôt être grandement simplifié
 
 ## Installation
 
@@ -125,29 +132,343 @@ docker compose run web rails db:setup
 
 - installer manuellement [`rbenv`](https://github.com/rbenv/rbenv#installation)
 
-
 ```sh
 rbenv install `cat .ruby-version`
 make install
 make dev
 ```
 
-optionnel: pour une utilisation de rubocop plus rapide en local, [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
+optionnel: pour une utilisation de rubocop plus rapide en local, 
+[voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
 
 ### Travail en local sur les webhooks d'inbound mails
 
 - installer manuellement [`loophole`](https://loophole.cloud/) 
 - `make tunnel`
 
-## Plus de documentation…
+## Premiers pas - Découverte du produit
 
-Après l'installation n'hésitez pas à suivre les [Premiers pas](https://github.com/betagouv/collectif-objets/wiki/premiers-pas)dans le wiki pour découvrir les interfaces et les fonctionnalités
+Durée à prévoir : 15 minutes 
 
-Dans le [wiki](https://github.com/betagouv/collectif-objets/wiki/) vous trouverez des informations sur les sujets suivants :
+### Découverte interface administrateurs
 
-- [URLs des environnements et des services externes](https://github.com/betagouv/collectif-objets/wiki/urls)
-- [Astreinte, autorisations et accès](https://github.com/betagouv/collectif-objets/wiki/astreinte)
-- [Dumps et seeds](https://github.com/betagouv/collectif-objets/wiki/dumps)
-- [Configuration des buckets S3 sur Scaleway](https://github.com/betagouv/collectif-objets/wiki/buckets-s3)
-- [Origines des données, transformations et stockage](https://github.com/betagouv/collectif-objets/wiki/donnees)
-- [Intégration du Design Système de l'État Français (DSFR)](https://github.com/betagouv/collectif-objets/wiki/dsfr)
+- [ ] aller sur [localhost:3000/admin](http://localhost:3000/admin)
+- [ ] se connecter avec le compte de seed `admin@collectif.local` mot de passe `123456`
+- [ ] trouver un lien de connexion magique à une commune dans la Marne 51 et le suivre
+
+### Découverte interface communes
+
+- [ ] se connecter depuis un lien magique depuis l'admin
+- pour info, dans les seeds, le code du lien magique est le code INSEE
+- [ ] recenser un objet en uploadant une photo
+- [ ] recenser tous les objets d'une commune et finaliser un dossier
+
+### Découverte interface conservateurs
+
+- [ ] se déconnecter en tant que commune
+- [ ] se connecter en tant que conservateur depuis le lien de connexion sur le site avec le compte suivant : `conservateur@collectif.local` mot de passe `123456789 123456789 123456789`
+- [ ] ouvrir un dossier de recensement à analyser
+- [ ] analyser un recensement
+- [ ] analyser tous les recensements d'un dossier et l'accepter
+- [ ] lire le mail envoyé depuis MailHog sur [localhost:8025](http://localhost:8025)
+- [ ] renvoyer un dossier à la commune pour lui demander de nouvelles photos
+
+### URLs du site web
+
+- En production [collectif-objets.beta.gouv.fr](https://collectif-objets.beta.gouv.fr/)
+- En staging [staging.collectifobjets.org](https://staging.collectifobjets.org/) 
+- En local [localhost:3000](http://localhost:3000) héberge le site et [localhost:8025](http://localhost:8025) héberge 
+  MailHog pour voir les emails simulés
+
+### Outils & services externes
+
+- [Metabase](https://metabase.collectifobjets.org) - Stats et visualisations
+- [Dashboard Scalingo](https://dashboard.scalingo.com/)
+- [Sentry de beta.gouv.fr](https://sentry.incubateur.net)
+- [SendinBlue](https://my.sendinblue.com/) - Campagnes et mails transactionnel
+- [Scaleway - buckets S3](https://console.scaleway.com/)
+- [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
+- [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
+
+### Config DNS & Serveurs Mails
+
+- La configuration des domaines en .beta.gouv.fr est gérée par l'équipe transverse de beta.gouv.fr
+- Idem pour les domaines en `.incubateur.net`
+- L'adresse collectifobjets@beta.gouv.fr est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost 
+  de beta cf https://doc.incubateur.net/communaute/travailler-a-beta-gouv/jutilise-les-outils-de-la-communaute/outils/liste-de-diffusion-et-adresses-de-contact#la-commande-mattermost-emails
+- L'adresse support@collectif-objets.beta.gouv.fr est gérée en délégation de service par l'incubateur du ministère de 
+  la Culture (référent : Ned Baldessin).
+- Idem pour tout le sous-domaine collectif-objets.beta.gouv.fr
+- Le domaine collectifobjets.org, le sous domaine de redirection des emails de réponse, et les adresses mails associées
+  de l'équipe sont gérées par Adrien et son compte Gandi.
+
+## Dumps des bases de données
+
+```sh
+# Dans un terminal
+scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL
+
+# Dans un second terminal
+./scripts/pg_dump_data_anonymous.sh postgres://collectif_o_9999:XXXXX@localhost:10000/collectif_o_9999 tmp/dump.pgsql
+
+# Le dump peut alors être importé en local
+rails db:drop db:create db:schema:load
+rails runner config/initializers/postgres_sequences.rb
+pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=collectif_objets_dev tmp/dump.pgsql
+```
+
+### Mise à jour du fichier `seeds.pgsql` pour les Review Apps
+
+- Créer et importer un dump de staging (voir section précédente)
+- lancer `rails runner scripts/reset_recensements_dossiers_communes.rb`
+- créer le dump de seeds via `./scripts/pg_dump_data_anonymous.sh collectif_objets_dev tmp/seeds.pgsql`
+- uploader `tmp/seeds.pgsql` sur le bucket S3 `collectif-objets-public`, par exemple avec Cyberduck
+
+en local `rails db:reset` : détruit puis recréé les bases locales, charge le schéma puis les seeds qui se téléchargent 
+depuis le bucket S3 `collectif-objets-public`.
+
+## Préparation d'une astreinte dev
+
+Voici une liste à suivre pour préparer une astreinte sereine :
+
+- [ ] demander un accès d'administrateur au projet Scalingo. Il faut un compte validé pour accéder à la région osc-secnum-fr1. Une adresse en beta.gouv.fr permet de l'avoir
+- [ ] demander un accès contributeur au repository GitHub
+- [ ] demander un accès aux projets sur sentry.incubateur.net
+- [ ] vérifier que les notifications mail Sentry sont activées
+- [ ] activer le 2FA sur GitHub et Sentry
+- [ ] demander à être ajouté aux chaînes Mattermost `~projet-collectif_objets` et `~projet-collectif_objets-dev` dans l'espace AtNumCulture
+- [ ] se présenter aux membres de l'équipe, déclarer les dates et horaires d'astreinte et les moyens de contact
+- [ ] demander un compte admin en prod et en staging
+- [ ] faire tourner le projet en local, [cf README/installation](https://github.com/betagouv/collectif-objets/#readme)
+- [ ] récupérer la variable d'env RAILS_MASTER_KEY depuis l'app de prod scalingo (ou un membre de l'équipe) et la définir dans `config/master.key`
+- [ ] faire un tour des principales fonctionnalités de l'appli en tant que commune et conservateur
+
+Optionnel :
+
+- [ ] demander un accès Scaleway
+- [ ] demander les identifiants partagés Send In Blue de l'équipe
+
+## Buckets S3 : ACLs et CORS
+
+Les buckets de photos uploadés doivent être configurés pour le CORS
+
+cf https://www.scaleway.com/en/docs/storage/object/api-cli/setting-cors-rules/
+
+```sh
+aws s3api put-bucket-cors --bucket collectif-objets-development2 --cors-configuration file://scripts/s3buckets/cors-development.json
+aws s3api put-bucket-cors --bucket collectif-objets-staging2 --cors-configuration file://scripts/s3buckets/cors-staging.json
+aws s3api put-bucket-cors --bucket collectif-objets-production --cors-configuration file://scripts/s3buckets/cors-production.json
+```
+
+Il y a deux buckets où tous les fichiers sont publics
+
+- `collectif-objets-public` : contient le fichier seeds.pgsql pour les review apps ainsi que les vidéos des articles de presse
+- `collectif-objets-photos-overrides` : contient des photos d'objets à utiliser préférentiellement par rapport à POP
+
+Pour configurer l'accès public de ces buckets utilisez la commande suivante :
+
+`aws s3api put-bucket-policy --bucket collectif-objets-photos-overrides --policy file://bucket-policy-objet-overrides.json`
+
+Avec le fichier suivant
+
+```json
+{
+  "Version": "2022-09-21",
+  "Id": "collectifobjets",
+  "Statement": [
+    {
+      "Sid": "Allow public access on all photos overrides",
+      "Effect": "Allow",
+      "Principal": {
+        "SCW": "project_id:xxxx-xxxx-xxxx"
+      },
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "collectif-objets-public",
+        "collectif-objets-photos-overrides"
+      ]
+    }
+  ]
+}
+```
+
+## Données (Origine, Transformations, Republications)
+
+### Schéma d'infrastructure général
+
+![Schéma d'infrastructure général](https://github.com/betagouv/collectif-objets/raw/main/doc/infrastructure.drawio.png)
+
+### Origine des données
+
+Les données sur les communes (email de la mairie, numéro de téléphone etc…) proviennent
+de [service-public.fr](https://www.service-public.fr/).
+
+Les données sur les objets monuments historiques sont celles de Palissy, la base patrimoniale hébergée sur la
+[Plateforme Ouverte du Patrimoine (POP)](https://www.pop.culture.gouv.fr/).
+
+Les données sur les conservateurs nous ont été transmises personnellement via un annuaire national en PDF.
+
+### Récupération des données
+
+Pour les données de service-public.fr nous utilisons
+[BaseAdresseNationale/annuaire-api](https://github.com/BaseAdresseNationale/annuaire-api).
+C'est un outil qui récupère et parse les exports XML de service-public.fr.
+
+Pour les données de POP (Palissy) nous devons pour l'instant les scrapper.
+L'export publié sur data.gouv.fr n'est pas assez complet pour nos besoins, il manque beaucoup de colonnes.
+Il n'est pas mis à jour fréquemment.
+Le code du scraper POP est disponible sur le repo GitHub
+[pop-scraper](https://github.com/adipasquale/pop-scraper).
+
+### Republication des données
+
+Pour simplifier la réutilisation des données, notamment leur synchronisation vers l'appli Rails Collectif Objets,
+nous avons déployé une plateforme publique.
+Elle utilise la librairie [datasette](https://github.com/simonw/datasette/) qui permet de publier simplement
+une base de données SQLite et de fournir une interface visuelle web avec des filtres,
+et une API JSON sans aucune configuration.
+
+Cette application est hébergée sur Fly.io car le déploiement y est très simple.
+Elle est accessible sur https://collectif-objets-datasette.fly.dev/.
+Son code est disponible sur le repo GitHub
+[collectif-objets-datasette](https://github.com/adipasquale/collectif-objets-datasette)
+
+### Sensibilité des données stockées
+
+La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :
+
+- Les infos personnelles des conservateurs (email, numéro de téléphone)
+- Les données de recensements. avant d'être validées et republiées sur POP, elles peuvent contenir des données à ne pas
+  publier.
+
+## Intégration du Design Système de l'État Français (DSFR)
+
+L'intégration du DSFR est faite par des liens symboliques définis dans `/public` qui pointent vers les assets 
+précompilés du package node :
+
+```
+/public/dsfr/dsfr.min.css -> /node_modules/@gouvfr/dsfr/dist/dsfr.min.css
+/public/dsfr/fonts -> /node_modules/@gouvfr/dsfr/dist/fonts/
+/public/dsfr/icons -> /node_modules/@gouvfr/dsfr/dist/icons/
+/public/dsfr/utility/utility.min.css -> /../node_modules/@gouvfr/dsfr/dist/utility/utility.min.css
+```
+
+Cela permet :
+- de ne pas repasser inutilement par un compilateur d'assets (vite dans ce projet)
+- de rester à jour avec le DSFR plus facilement en utilisant les upgrades de packages JS
+
+En revanche ce n'est vraiment pas standard et risque de poser des soucis de maintenance.
+
+C'est discuté ici : https://mattermost.incubateur.net/betagouv/pl/ehsuormqztnr3fz6ncuqt9f5ac
+
+## Overrides de Photos Palissy
+
+Les overrides de photos permettent d'intégrer des photos de bases locales non reversées dans POP.
+
+### Préparer des overrides de photos en local 
+
+- récupérer les photos et le lien avec la référence palissy depuis le département
+- s'assurer que les noms de fichiers sont corrects et présents
+- isoler les photos qui nous concernent
+- les uploader sur S3 public
+- lancer le script pour importer les ObjetsOverrides dans la db
+- resynchroniser les objets
+
+### Importer des overrides de photos en production
+
+`scalingo --app collectif-objets-prod --region osc-secnum-fr1 run bash`
+
+```sh
+curl https://transfer.sh/url-du-fichier.csv > tmp.csv
+rake objet_overrides:import[tmp.csv]
+rails runner "SynchronizeObjetsJob.perform_inline('52')"
+```
+
+## Messagerie
+
+La messagerie permet des échanges entre les usagers, les conservateurs et l'équipe support de Collectif Objets.
+Les messages apparaissent dans l'interface de Collectif Objets et sont envoyés par email aux destinataires.
+Les conservateurs et usagers peuvent répondre aux emails et les réponses apparaissent dans l'interface de 
+Collectif Objets.
+
+Pour récupérer ces emails, nous utilisons la fonctionnalité 
+[Inbound Parsing Webhooks de Send In Blue](https://developers.sendinblue.com/docs/inbound-parse-webhooks).
+Le script `scripts/create_sib_webhooks.sh` permet de gérer les webhooks actifs sur Send In Blue.
+Il y a 3 webhooks actifs pour les 3 environnements (production, staging, local) :
+
+```json
+[{
+  "description": "[STAGING] inbound emails webhook",
+  "url": "https://staging.collectifobjets.org/api/v1/inbound_emails",
+  "events": ["inboundEmailProcessed"],
+  "domain": "reponse-staging.collectifobjets.org"
+}, {
+  "description": "[PROD] inbound emails webhook",
+  "url": "https://collectif-objets.beta.gouv.fr/api/v1/inbound_emails",
+  "events": ["inboundEmailProcessed"],
+  "domain": "reponse.collectifobjets.org"
+}, {
+  "description": "Debug inbound email webhook tunneled to localhost",
+  "url": "https://collectifobjets-mail-inbound.loophole.site",
+  "events": ["inboundEmailProcessed"],
+  "domain": "reponse-loophole.collectifobjets.org"
+}]
+```
+
+Chacun des sous domaines `reponse(-[a-z]+)` de `collectifobjets.org` hébergé sur Gandi est configuré pour rediriger 
+les emails entrants vers SIB.
+
+Les emails entrants sont reçus sur des adresses signées (qui sont les reply-to des mails de notifications de nouveau 
+message) qui permettent d'authentifier l'auteur du message :
+
+- `mairie-30001-a1b2c3d4h5@reponse.collectifobjets.org` : réponse de l'usager de la commune 30001 dont le 
+  `inbound_email_token` secret est `a1b2c3d4h5`.
+- `mairie-30001-conservateur-a1b2c3d4h5@reponse.collectifobjets.org` : réponse du conservateur pour la même commune
+
+## Accessibilité, Plan du site et Pages démos
+
+La démarche d'accessibilité est de réaliser une couverture quasi exhaustive des pages de l'application par des tests 
+automatisés, puis de faire réaliser des tests manuels dans un second temps. 
+Actuellement (février 2023) nous sommes à environ 70% de couverture des pages par des tests automatisés.
+
+Les tests automatisés sont réalisés avec [aXe](https://www.deque.com/axe/). 
+Pour les pages publiques, les tests sont lancées de manière classique sur des pages avec des seeds générées à chaque 
+test via FactoryBot.
+
+Pour les pages privées accessibles uniquement aux communes et aux conservateurs, l'approche est différente. 
+Pour chaque page privée, une version de "démo" est accessible publiquement sur une route parallèle, par exemple 
+[`demos/communes/completion_new`](https://collectif-objets.beta.gouv.fr/demos/communes/completion_new). 
+Ces pages de démo présentent des données de test générées à la volée par FactoryBot.
+Elles simulent la connexion de la commune ou du conservateur. 
+Des précautions sont prises pour ne pas générer de données en base de données en freezant tous les objets de seeds et en
+limitant les clics sur les boutons d'actions.
+
+Ce sont ces pages de démos qui sont testées automatiquement par aXe. 
+Leur accessibilité publique comme des vraies pages permet aussi de présenter l'application plus facilement, ou bien de
+faire tester l'accessibilité de ces pages à des intervenants externes ou à des outils en ligne.
+
+## Netlify CMS
+
+Netlify CMS est un headless CMS (c'est à dire un backend dissocié de l'application principale) qui permet de modifier
+des contenus facilement par des personnes sans modifier le code directement.
+
+Les particularités de ce CMS sont :
+
+- de stocker les contenus dans des fichiers Markdown dans le dépôt Git du projet ;
+- de créer des branches et des pull requests pour chaque modification de contenu 
+
+Il n'y a donc pas de base de données supplémentaire à gérer ou de serveur d'API de contenu à maintenir, tous les 
+contenus restent présents dans le dépôt Git.
+
+Nous utilisons ce CMS pour permettre à l'équipe d'éditer les articles de presse et les fiches de conseil.
+
+Le CMS est hébergé sur [Netlify](https://www.netlify.com/) et est accessible à l'adresse 
+[collectif-objets-cms.netlify.app](https://collectif-objets-cms.netlify.app).
+
+Ce site Netlify est configuré pour déployer le répertoire `/cms` à la racine de ce dépôt Git courant. 
+Le fichier `/cms/config.yml` configure Netlify CMS pour notre cas. 
+Nous utilisons Netlify Identity pour authentifier les accès au CMS, et un user github robot pour réaliser les commits 
+et les PRs émanant de Netlify CMS.
+Cette configuration est décrite sur [ce pad](https://pad.incubateur.net/zdhV1dI-RBivCfmwXq-hVw#).
