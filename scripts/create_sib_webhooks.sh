@@ -1,7 +1,11 @@
 api_key=`rails runner "puts Rails.application.credentials.sendinblue.api_key"`
 echo "got api_key ${api_key:0:20}..."
+#
+#curl --url 'https://api.sendinblue.com/v3/webhooks?type=inbound' \
+#  --header 'accept: application/json' \
+# --header "api-key: $api_key" | jq -s
 
-curl --url 'https://api.sendinblue.com/v3/webhooks?type=inbound' \
+curl --url 'https://api.sendinblue.com/v3/inbound/events' \
   --header 'accept: application/json' \
  --header "api-key: $api_key" | jq -s
 
