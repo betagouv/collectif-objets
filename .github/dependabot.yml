@@ -6,10 +6,22 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "sentry-ruby"
+        versions: ["5.x"]
+      - dependency-name: "sentry-rails"
+        versions: ["5.x"]
+      - dependency-name: "sentry-sidekiq"
+        versions: ["5.x"]
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "@sentry/browser"
+        versions: ["7.x"]
+      - dependency-name: "@sentry/tracing"
+        versions: ["7.x"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
