@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import { DirectUpload } from "@rails/activestorage"
 import Nanobar from "nanobar"
+import "./photo_upload_component.css"
 
 function humanFileSize(number) {
   if (number < 1024) {

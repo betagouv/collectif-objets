@@ -1,4 +1,4 @@
-<div data-controller="photos-upload-group">
+<div data-controller="photos-upload-group-component">
   <div
     class="fr-fieldset <%= "fr-fieldset--error" if error_message %>"
     data-recensement-target="photos"
@@ -41,7 +41,7 @@
         </div>
       <% end %>
 
-      <div data-photos-upload-group-target="inputsWrapper">
+      <div data-photos-upload-group-component-target="inputsWrapper">
         <%= render PhotoUploadComponent.new %>
       </div>
 
@@ -79,7 +79,7 @@
     </div>
   </div>
 
-  <template data-photos-upload-group-target="template">
+  <template data-photos-upload-group-component-target="template">
     <%= render PhotoUploadComponent.new %>
   </template>
 </div>

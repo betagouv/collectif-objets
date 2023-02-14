@@ -36,6 +36,6 @@ export default class extends Controller {
       this.inputsWrapperTarget.appendChild(newUploadFragment)
     }
 
-    event.currentTarget.closest("div[data-controller=\"photo-upload\"]").remove()
+    event.currentTarget.closest("div[data-controller=\"photo-upload-component\"]").remove()
   }
 }

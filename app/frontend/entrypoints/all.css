@@ -8,9 +8,3 @@
 @import url(../stylesheets/views/pages.css);
 @import url(../stylesheets/views/objets-show.css);
 @import url(../stylesheets/views/recensements.css);
-
-/* COMPONENTS */
-
-@import url(../stylesheets/components/gallery_component.css);
-@import url(../stylesheets/components/photo_upload_component.css);
-@import url(../stylesheets/components/copy_to_clipboard_component.css);

@@ -27,17 +27,14 @@ const controllers = import.meta.globEager("../stimulus_controllers/**/*_controll
 registerControllers(window.Stimulus, controllers);
 
 const identifierForComponentControllerPath = (path) => {
-  const match_data = path.match(/components\/(.*)\/controller\.js/)
+  const match_data = path.match(/components\/(.*)\/.*_controller\.js/)
   if (!match_data) return null
   return match_data[1].replace(/\//g, "--").replace(/_/g, "-")
 }
 
-const componentControllers = import.meta.globEager("../../components/**/controller.js");
+const componentControllers = import.meta.globEager("../../components/**/*_controller.js");
 Object.entries(componentControllers).forEach(([path, controllerModule]) => {
   const identifier = identifierForComponentControllerPath(path)
   if (!identifier || typeof controllerModule.default !== 'function') return
   window.Stimulus.register(identifier, controllerModule.default)
 })
-
-import PhotosUploadGroupComponent from "../stimulus_controllers_components/photos_upload_group_controller"
-window.Stimulus.register("photos-upload-group", PhotosUploadGroupComponent)

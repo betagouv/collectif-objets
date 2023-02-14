@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GalleryComponentPreview < ViewComponent::Preview
+class GalleryComponent::GalleryComponentPreview < ViewComponent::Preview
   # @param count number
   # @param template select ["full", "small"]
   # @param display_description toggle

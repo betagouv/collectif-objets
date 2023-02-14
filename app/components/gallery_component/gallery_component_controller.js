@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import Spotlight from "spotlight.js/src/js/spotlight"
-import 'spotlight.js/dist/css/spotlight.min.css'
+import "spotlight.js/dist/css/spotlight.min.css"
+import "./gallery_component.css"
 
 export default class extends Controller {
   static targets = ["photos", "gallery", "anchor"]
