@@ -2,9 +2,7 @@
 
 module Communes
   class ObjetsController < BaseController
-    before_action :restrict_connected_as_commune
     before_action :set_objet, only: [:show]
-    before_action :restrict_own_commune, only: [:show]
 
     def index
       @objets_list = objets_list
@@ -48,18 +46,6 @@ module Communes
       return nil if params[:objet_id].blank?
 
       @previous_objet ||= Objet.find(params[:objet_id])
-    end
-
-    def restrict_connected_as_commune
-      return true if current_user.present?
-
-      redirect_to root_path, alert: "Vous n'êtes pas connecté en tant que commune"
-    end
-
-    def restrict_own_commune
-      return true if current_user&.commune == @objet.commune
-
-      redirect_to root_path, alert: "Cet objet n'appartient pas à votre commune"
     end
   end
 end
