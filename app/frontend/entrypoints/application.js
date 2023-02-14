@@ -1,6 +1,12 @@
 import * as Sentry from "@sentry/browser";
 import { BrowserTracing } from "@sentry/tracing";
+import "@hotwired/turbo-rails"
+import "@gouvfr/dsfr/dist/dsfr.module"
+import { Application } from '@hotwired/stimulus'
+import * as ActiveStorage from '@rails/activestorage'
+import { registerControllers } from "stimulus-vite-helpers";
 
+// Sentry
 const environmentSpecificName = document.querySelector('meta[name="environment-specific-name"]')?.getAttribute("content")
 if (environmentSpecificName && environmentSpecificName != "development") {
   Sentry.init({
@@ -11,24 +17,25 @@ if (environmentSpecificName && environmentSpecificName != "development") {
   });
 }
 
-import "@hotwired/turbo-rails"
-import "@gouvfr/dsfr/dist/dsfr.module"
-
-import { Application } from '@hotwired/stimulus'
-window.Stimulus = Application.start()
-
-import * as ActiveStorage from '@rails/activestorage'
+// Active Storage
 ActiveStorage.start()
 
-import { registerControllers } from "stimulus-vite-helpers";
+// Stimulus
+window.Stimulus = Application.start()
+
 const controllers = import.meta.globEager("../stimulus_controllers/**/*_controller.js");
 registerControllers(window.Stimulus, controllers);
 
-import PhotoUploadComponent from "../stimulus_controllers_components/photo_upload_controller"
-window.Stimulus.register("photo-upload", PhotoUploadComponent)
+const identifierForComponentControllerPath = (path) => {
+  // inspired by https://github.com/ElMassimo/stimulus-vite-helpers/blob/main/src/index.ts
+  const match_data = path.match(/components\/(.*)\/.*_controller\.js/)
+  if (!match_data) return null
+  return match_data[1].replace(/\//g, "--").replace(/_/g, "-")
+}
 
-import PhotosUploadGroupComponent from "../stimulus_controllers_components/photos_upload_group_controller"
-window.Stimulus.register("photos-upload-group", PhotosUploadGroupComponent)
-
-import UnfoldComponent from "../stimulus_controllers_components/unfold_controller"
-window.Stimulus.register("unfold", UnfoldComponent)
+const componentControllers = import.meta.globEager("../../components/**/*_controller.js");
+Object.entries(componentControllers).forEach(([path, controllerModule]) => {
+  const identifier = identifierForComponentControllerPath(path)
+  if (!identifier || typeof controllerModule.default !== 'function') return
+  window.Stimulus.register(identifier, controllerModule.default)
+})

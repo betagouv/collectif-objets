@@ -42,3 +42,8 @@ Metrics/MethodLength:
     - spec/**/*
     - app/lib/demos/**/*
     - lib/mailer_previews/**/*
+    - app/components/**/*_preview.rb
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - app/components/**/*_preview.rb

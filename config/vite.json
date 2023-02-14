@@ -1,7 +1,11 @@
 {
   "all": {
     "sourceCodeDir": "app/frontend",
-    "watchAdditionalPaths": []
+    "watchAdditionalPaths": ["app/components/**/*"],
+    "additionalEntrypoints": [
+      "app/components/**/*_controller.{js,css}",
+      "~/{assets,fonts,icons,images}/**/*"
+    ]
   },
   "development": {
     "autoBuild": true,

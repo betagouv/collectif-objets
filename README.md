@@ -326,6 +326,29 @@ La plupart des données stockées sur Collectif Objets sont publiques. Les excep
 - Les données de recensements. avant d'être validées et republiées sur POP, elles peuvent contenir des données à ne pas
   publier.
 
+## Frontend : Vite, View Components, Stimulus
+
+Les fichiers `.rb` des composants View Components sont dans `/app/components`.
+Pour chaque composant, tous les fichiers liés (JS, CSS, preview) sont dans un dossier du même nom dans 
+`/app/components`.
+
+Par exemple un composant GalleryComponent pourra être composé les fichiers suivants: 
+
+- `/app/components/gallery_component.rb`
+- `/app/components/gallery_component/gallery_component.css`
+- `/app/components/gallery_component/gallery_component_controller.js`
+- `/app/components/gallery_component/gallery_component_preview.rb`
+
+Le format du nom du fichier `gallery_component_controller.js` est important : il ne sera importé que s'il respecte ce format. 
+Ce fichier doit exporter un controlleur Stimulus et est responsable d'importer le fichier CSS.
+La classe de preview doit malheureusement être préfixée par le nom du composant, ici `GalleryComponent::GalleryComponentPreview`.
+Cette configuration s'inspire partiellement de [view_component-contrib](https://github.com/palkan/view_component-contrib).
+
+Des controlleurs Stimulus non liés à des composants existent dans : 
+
+- `/app/frontend/stimulus_controllers` : importés par défaut dans l'entrypoint `application.js`
+- `/app/frontend/stimulus_controllers_standalone` : doivent être importés dans des entrypoints spécifiques
+
 ## Intégration du Design Système de l'État Français (DSFR)
 
 L'intégration du DSFR est faite par des liens symboliques définis dans `/public` qui pointent vers les assets 

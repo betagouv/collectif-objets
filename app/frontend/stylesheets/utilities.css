@@ -406,3 +406,9 @@ a.co-external-link--without-decoration {
 a.co-external-link--without-decoration::after {
   display: none;
 }
+
+/* STIMULUS CONTROLLERS */
+
+.co-copy-to-clipboard--active {
+  color: blue;
+}

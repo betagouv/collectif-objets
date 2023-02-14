@@ -1,0 +1,97 @@
+<div
+  data-controller="photo-upload-component"
+  data-photo-upload-component-target="wrapper"
+>
+  <div
+    class="fr-upload-group"
+    data-photo-upload-component-target="uploadGroup"
+  >
+    <label class="fr-label" for="recensement_photos">
+      <span class="fr-hint-text">
+        Taille maximale : 20 Mo. Formats supportés : jpg ou png. Vous pouvez ajouter plusieurs photos.<br />
+        En déposant des photos, vous acceptez leur réutilisation dans le cadre de la <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank">Licence Ouverte Etalab</a>
+      </span>
+    </label>
+    <input name="recensement[photos][]" type="hidden" value="" autocomplete="off">
+    <input
+      type="file"
+      data-direct-upload-url="<%= rails_direct_uploads_url %>"
+      name="recensement[photos][]"
+      accept="image/*"
+      multiple
+      value=""
+      autocomplete="off"
+      data-photo-upload-component-target="input"
+      data-photos-upload-group-component-target="input"
+      data-action="
+        change->photo-upload-component#refreshPreview
+        change->photo-upload-component#triggerUpload
+        change->photos-upload-group-component#onInputChange
+        change->recensement#refreshFields
+      "
+      class="hide"
+    >
+
+    <div
+      class="hide"
+      data-photo-upload-component-target="ctaWithCapture"
+    >
+      <button
+        class="fr-btn fr-btn--primary fr-icon-camera-line fr-btn--icon-left co-button--high co-button--big-icon co--width-100 co-flex--justify-content-center"
+        data-photo-upload-component-target="uploadButton"
+        data-action="photo-upload-component#triggerCapture"
+        disabled="disabled"
+        data-force-disabled="true"
+      >
+        Prendre une photo
+      </button>
+      <p class="co-text--center fr-mt-2w fr-mb-1w">
+        Ou
+      </p>
+      <button
+        class="fr-btn fr-btn--tertiary-no-outline fr-icon-attachment-line fr-btn--icon-right co--width-100 co-flex--justify-content-center"
+        data-photo-upload-component-target="uploadButton"
+        data-action="photo-upload-component#triggerBrowse"
+        disabled="disabled"
+        data-force-disabled="true"
+      >
+        Ajouter une photo enregistrée
+      </button>
+    </div>
+
+    <div data-photo-upload-component-target="ctaWithoutCapture">
+      <button
+        class="fr-btn fr-btn--primary fr-icon-attachment-line fr-btn--icon-right"
+        data-action="photo-upload-component#triggerBrowse"
+        data-photo-upload-component-target="uploadButton"
+        disabled="disabled"
+        data-force-disabled="true"
+      >
+        Ajouter une photo
+      </button>
+    </div>
+  </div>
+  <div
+    class="hide co-flex co-flex--align-items-center fr-mb-2w"
+    data-photo-upload-component-target="preview"
+  >
+    <div class="co-photo-upload-wrapper" data-photo-upload-component-target="photoWrapper">
+      <img data-photo-upload-component-target="img" />
+    </div>
+    <div class="fr-ml-2w">
+      <div class="fr-mb-2w">
+        <div class="co-nanobar" data-photo-upload-component-target="nanobar"></div>
+        <div class="co-text--muted" data-photo-upload-component-target="progress"></div>
+        <span class="co-text--muted" data-photo-upload-component-target="metadata"></span>
+      </div>
+      <button
+        class="fr-btn fr-btn--secondary fr-icon-delete-line fr-btn--icon-right"
+        data-action="click->photo-upload-component#remove"
+        data-photo-upload-component-target="removeButton"
+        disabled="disabled"
+      >
+        Retirer cette photo
+      </button>
+    </div>
+  </div>
+</div>

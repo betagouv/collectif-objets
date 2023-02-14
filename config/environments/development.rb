@@ -90,4 +90,6 @@ Rails.application.configure do
   config.hosts << "collectifobjets-mail-inbound.loophole.site"
 
   config.log_file_size = 100_000_000
+
+  config.view_component.preview_paths << Rails.root.join("app/components/")
 end
