@@ -3,7 +3,7 @@
     "sourceCodeDir": "app/frontend",
     "watchAdditionalPaths": ["app/components/**/*"],
     "additionalEntrypoints": [
-      "app/components/**/*_controller.js",
+      "app/components/**/*_controller.{js,css}",
       "~/{assets,fonts,icons,images}/**/*"
     ]
   },

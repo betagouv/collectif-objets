@@ -27,6 +27,7 @@ const controllers = import.meta.globEager("../stimulus_controllers/**/*_controll
 registerControllers(window.Stimulus, controllers);
 
 const identifierForComponentControllerPath = (path) => {
+  // inspired by https://github.com/ElMassimo/stimulus-vite-helpers/blob/main/src/index.ts
   const match_data = path.match(/components\/(.*)\/.*_controller\.js/)
   if (!match_data) return null
   return match_data[1].replace(/\//g, "--").replace(/_/g, "-")

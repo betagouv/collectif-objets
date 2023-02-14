@@ -37,8 +37,6 @@ module CollectifObjets
 
     config.active_job.queue_adapter = :sidekiq
 
-    config.view_component.preview_paths << Rails.root.join("app/components/")
-    # config.lookbook.preview_paths = [Rails.root.join("app/components/")]
     config.x.inbound_emails_domain = "test.domain.fr"
   end
 end
