@@ -27,6 +27,11 @@ module Api
       def create
         items.each { ReceiveInboundEmailJob.perform_async(_1) }
         render json: { success: true }
+      rescue ArgumentError => e
+        Sentry.configure_scope do |scope|
+          scope.set_context("items", items)
+        end
+        raise e
       end
 
       private
@@ -42,7 +47,7 @@ module Api
       end
 
       def items
-        params.permit(PERMITTED_PARAMS)["items"].map(&:to_h)
+        @items ||= params.permit(PERMITTED_PARAMS)["items"].map(&:to_h)
       end
     end
   end
