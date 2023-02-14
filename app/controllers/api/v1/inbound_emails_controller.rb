@@ -28,7 +28,7 @@ module Api
         items.each { ReceiveInboundEmailJob.perform_async(_1) }
         render json: { success: true }
       rescue ArgumentError => e
-        Sentry.configure_scope { _1.set_context("items", items) }
+        Sentry.configure_scope { _1.set_context(items:) }
         raise e
       end
 
