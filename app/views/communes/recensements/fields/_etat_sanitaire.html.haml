@@ -1,0 +1,17 @@
+-# locals: (:form_builder)
+
+= render RecensementRadiosFieldsetComponent.new(form_builder:, field: :etat_sanitaire) do |c|
+  - c.with_legend do
+    Quel est l’état actuel de l’objet ?
+    .fr-hint-text
+      Pour vous aider à estimer l’état de l’objet et la vitesse de dégradation, deux points sont à observer:
+      %ul
+        %li
+          L'environnement immédiat de l’objet (déjections, poussières amoncelés, éclats ou morceaux tombés)
+        %li
+          L'objet lui-même (son intégrité est-elle bonne, la peinture qui le recouvre est-elle homogène, a-t-il l'air contaminé par un champignon, un ver, une mousse ?)
+      = link_to "Voir les points d'attention en fonction de la nature des objets page 15 et 16 du guide", guide_url(page: 15), target: "_blank", rel: "noopener"
+  - c.with_option value: :bon, label: t("recensement.etat_sanitaire_choices.bon")
+  - c.with_option value: :moyen, label: t("recensement.etat_sanitaire_choices.moyen")
+  - c.with_option value: :mauvais, label: t("recensement.etat_sanitaire_choices.mauvais")
+  - c.with_option value: :peril, label: t("recensement.etat_sanitaire_choices.peril")

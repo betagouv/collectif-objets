@@ -3,10 +3,7 @@
 module Co
   module Recensements
     class AnalyseParamsParser
-      PERMITTED_PARAMS = %i[
-        analyse_etat_sanitaire analyse_etat_sanitaire_edifice
-        analyse_securisation analyse_notes
-      ].freeze
+      PERMITTED_PARAMS = %i[analyse_etat_sanitaire analyse_securisation analyse_notes].freeze
 
       def initialize(request_params)
         @request_params = request_params

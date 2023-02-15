@@ -38,8 +38,9 @@ module Recensements
       commune.completed?
     end
 
-    def first?
-      commune.recensements.empty?
-    end
+    def first? = commune.recensements.completed.empty?
+
+    def completed? = status == "completed"
+    def draft? = status == "draft"
   end
 end

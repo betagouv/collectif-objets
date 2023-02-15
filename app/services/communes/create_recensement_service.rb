@@ -10,13 +10,13 @@ module Communes
   class CreateRecensementService
     RESULT = Struct.new(:success?, :recensement)
 
-    def initialize(params:, objet:, user:)
-      @params = params
-      @objet = objet
-      @user = user
+    def initialize(recensement)
+      @recensement = recensement
     end
 
     def perform
+      recensement.status = "completed"
+      recensement.assign_attributes(dossier_params)
       success = recensement.save
       post_create_actions if success
       RESULT.new(success, recensement)
@@ -24,9 +24,9 @@ module Communes
 
     protected
 
-    attr_reader :params, :objet, :user
+    attr_reader :recensement
 
-    delegate :commune, to: :objet
+    delegate :commune, to: :recensement
 
     def post_create_actions
       start_commune! if commune.inactive?
@@ -37,10 +37,6 @@ module Communes
       raise CommuneStartError, commune unless
         commune.start! &&
         commune.update!(dossier: recensement.dossier)
-    end
-
-    def recensement
-      @recensement ||= Recensement.new(**params, **dossier_params, user:, objet:)
     end
 
     def dossier_params

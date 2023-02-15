@@ -43,7 +43,7 @@ module Conservateurs
 
       Photo.new \
         url: recensement&.photos&.first&.variant(:medium),
-        description: "Photo de recensement de l'objet #{objet.nom}"
+        description: "Photo de recensement de l’objet #{objet.nom}"
     end
 
     def badge_struct

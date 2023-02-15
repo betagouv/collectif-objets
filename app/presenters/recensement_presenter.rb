@@ -52,25 +52,11 @@ class RecensementPresenter
     end
   end
 
-  def etat_sanitaire_edifice
-    value = @recensement.etat_sanitaire_edifice
-    return if value.blank?
-
-    badge(etat_badge_color(value)) { I18n.t("recensement.etat_sanitaire_edifice_choices.#{value}") }
-  end
-
   def etat_sanitaire
     value = @recensement.etat_sanitaire
     return if value.blank?
 
     badge(etat_badge_color(value)) { I18n.t("recensement.etat_sanitaire_choices.#{value}") }
-  end
-
-  def analyse_etat_sanitaire_edifice
-    value = @recensement.analyse_etat_sanitaire_edifice
-    return if value.blank?
-
-    badge(etat_badge_color(value)) { I18n.t("recensement.etat_sanitaire_edifice_choices.#{value}") }
   end
 
   def analyse_etat_sanitaire
@@ -103,9 +89,9 @@ class RecensementPresenter
   def generic_securisation(value)
     case value
     when Recensement::SECURISATION_CORRECTE
-      badge("success") { I18n.t("recensement.securisation_badges.correcte") }
+      badge("success") { I18n.t("recensement.securisation_badges.en_securite") }
     when Recensement::SECURISATION_MAUVAISE
-      badge("warning") { I18n.t("recensement.securisation_badges.mauvaise") }
+      badge("warning") { I18n.t("recensement.securisation_badges.en_danger") }
     end
   end
 end

@@ -6,7 +6,7 @@ class Recensement < ApplicationRecord
 
   belongs_to :objet
   belongs_to :user
-  belongs_to :dossier
+  belongs_to :dossier, optional: true
   belongs_to :pop_export_memoire, class_name: "PopExport", inverse_of: :recensements_memoire, optional: true
   belongs_to :pop_export_palissy, class_name: "PopExport", inverse_of: :recensements_palissy, optional: true
 
@@ -35,30 +35,19 @@ class Recensement < ApplicationRecord
 
   validates :objet_id, uniqueness: true
 
-  validates :confirmation_sur_place, inclusion: { in: [true] }
-  validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }
-  validates :edifice_nom, presence: true, if: -> { autre_edifice? }
-  validates :recensable, inclusion: { in: [true, false] }, unless: -> { absent? }
-  validates :recensable, inclusion: { in: [false] }, if: -> { absent? }
-  validates :etat_sanitaire_edifice, presence: true, if: -> { recensable? }
-  validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { recensable? }
-  validates :securisation, presence: true, inclusion: { in: SECURISATIONS }, if: -> { recensable? }
+  validates :confirmation_sur_place, inclusion: { in: [true], if: -> { completed? && !absent? } }
+  validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
+  validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? }
+  validates :recensable, inclusion: { in: [true, false] }, if: -> { completed? }
+  validates :recensable, inclusion: { in: [false] }, if: -> { completed? && absent? }
+  validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { completed? && recensable? }
+  validates :securisation, presence: true, inclusion: { in: SECURISATIONS }, if: -> { completed? && recensable? }
 
-  validates :etat_sanitaire_edifice, inclusion: { in: [nil] }, if: -> { !recensable? }
-  validates :etat_sanitaire, inclusion: { in: [nil] }, if: -> { !recensable? }
-  validates :securisation, inclusion: { in: [nil] }, if: -> { !recensable? }
-  validates :photos, inclusion: { in: [] }, if: -> { !recensable? && photos.attached? }
-  validates :confirmation_pas_de_photos, inclusion: { in: [nil, false] }, if: -> { photos.attached? }
+  validates :etat_sanitaire, inclusion: { in: [nil] }, if: -> { completed? && !recensable? }
+  validates :securisation, inclusion: { in: [nil] }, if: -> { completed? && !recensable? }
+  validates :photos, inclusion: { in: [] }, if: -> { completed? && !recensable? && photos.attached? }
 
-  validates(
-    :photos,
-    if: -> { recensable? && !confirmation_pas_de_photos },
-    attached: true,
-    content_type: ["image/jpg", "image/jpeg", "image/png"],
-    size: { less_than: 20.megabytes }
-  )
-
-  validates :conservateur_id, presence: true, if: -> { analysed? }
+  validates :conservateur_id, presence: true, if: -> { completed? && analysed? }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
@@ -82,6 +71,7 @@ class Recensement < ApplicationRecord
   scope :in_commune, ->(commune) { joins(:objet).where(objets: { commune: }) }
   scope :not_analysed, -> { where(analysed_at: nil) }
   scope :absent_or_recensable, -> { where(recensable: true).or(absent) }
+  scope :completed, -> { where(status: "completed") }
 
   SQL_ORDER_PRIORITE = <<-SQL.squish
     CASE WHEN (

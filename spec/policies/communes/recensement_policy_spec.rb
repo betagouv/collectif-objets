@@ -51,7 +51,7 @@ describe Communes::RecensementPolicy do
     end
   end
 
-  permissions :edit?, :update? do
+  permissions :edit?, :update?, :destroy? do
     context "commune started" do
       let(:commune) { build(:commune, status: :started) }
       let(:objet) { build(:objet, commune:) }

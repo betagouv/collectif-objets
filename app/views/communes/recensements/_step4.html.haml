@@ -1,0 +1,13 @@
+-# locals: (:wizard)
+
+= render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
+
+  = render "communes/recensements/fields/etat_sanitaire", form_builder:
+
+  .fr-mt-4w
+    = render "communes/recensements/fields/securisation", form_builder:
+
+
+  .co-text--right
+    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"
+    .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:

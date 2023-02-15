@@ -92,3 +92,10 @@ a.co-link--no-arrow[target="_blank"]::after {
   min-height: 600px;
   height: 70vh;
 }
+
+@media (max-width: 62em) {
+  .co-container--sm-px-0 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

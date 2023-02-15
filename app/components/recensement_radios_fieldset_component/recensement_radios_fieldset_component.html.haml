@@ -1,0 +1,12 @@
+= hidden_field_tag "wizard[#{field}]", ""
+.fr-form-group
+  %fieldset.fr-fieldset{class: ("fr-fieldset--error" if wizard.errors[field].present?)}
+    %legend.fr-fieldset__legend
+      = legend
+    .fr-fieldset__content
+      - options.each do |option|
+        .fr-radio-group
+          = option
+    - wizard.errors[field].each do |error_message|
+      %p.fr-error-text
+        = error_message

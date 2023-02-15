@@ -6,155 +6,145 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
-  let!(:objet_bouquet) { create(:objet, palissy_TICO: "Bouquet d'Autel", palissy_EDIF: "Eglise st Jean", commune:) }
+  let!(:objet_bouquet) { create(:objet, palissy_TICO: "Bouquet d’Autel", palissy_EDIF: "Eglise st Jean", commune:) }
   let!(:objet_ciboire) { create(:objet, palissy_TICO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
 
-  scenario "full recensement" do
+  scenario "recensement of 2 objects + completion" do
     login_as(user, scope: :user)
     visit "/"
     expect(page).to have_text("Albon")
 
     within("header") { click_on "Voir les objets de Albon" }
-    expect(page).to have_text("Bouquet d'Autel")
+    expect(page).to have_text("Bouquet d’Autel")
     expect(page).to have_text("Ciboire des malades")
 
     # PREMIER OBJET
-
-    click_on "Bouquet d'Autel"
+    click_on "Bouquet d’Autel"
     expect(page).to have_text("PAS ENCORE RECENSÉ")
     expect(page).to have_text("st Jean")
-
     click_on "Recenser cet objet"
-    expect(page).to have_selector("h1", text: "Recensement")
-    find("label", text: "Je confirme m'être déplacé voir l'objet pour ce recensement").click
-    find("label", text: "L'objet est bien présent dans l'édifice Eglise st Jean").click
-    within("[data-recensement-target=recensable]") do
-      find("label", text: "Oui").click
-    end
-    within("[data-recensement-target=etatSanitaireEdifice]") do
-      find("label", text: "L'édifice est en état moyen").click
-    end
-    within("[data-recensement-target=etatSanitaire]") do
-      find("label", text: "L'objet est en bon état").click
-    end
-    within("[data-recensement-target=securisation]") do
-      find("label", text: "L’objet est facile à voler").click
-    end
-    find("label", text: "Je ne peux pas prendre cet objet en photo").click
-    fill_in "Commentaires", with: "C'est un superbe pépito bleu"
 
-    click_on "Enregistrer ce recensement"
-    expect(page).to have_content("Votre recensement a bien été enregistré")
+    # STEP 1
+    # "comment ça marche" accordion should be opened for first recensement
+    expect(page).to have_text("Je me rends sur place pour recenser mes objets protégés et les prendre en photo")
+    expect(page).to have_text("Étape 1 sur 6")
+    expect(page).to have_text("Recherche")
+    expect(page).to have_text("Étape suivante : Localisation")
+    expect(page).to have_text("Avez-vous trouvé l’objet ?")
+    scroll_to(find("#recensement_form_step"))
+    choose_by_label "Je confirme que je me suis bien déplacé"
+    click_on("Passer à l’étape suivante")
 
-    # DEUXIEME OBJET
-    expect(page).not_to have_button("Finaliser le recensement")
-    expect(page).not_to have_content("Bouquet d'Autel")
+    # STEP 2
+    expect(page).to have_text("Étape 2 sur 6")
+    expect(page).to have_text("Localisation")
+    expect(page).to have_text("Étape suivante : Photos de l’objet")
+    expect(page).to have_text("Où se trouve l’objet ?")
+    choose_by_label "L’objet se trouve dans l’édifice indiqué initialement"
+    expect(page).to have_text("L’objet est-il recensable ?")
+    choose_by_label "L’objet est recensable"
+    click_on("Passer à l’étape suivante")
+
+    # STEP 3
+    expect(page).to have_text("Étape 3 sur 6")
+    expect(page).to have_text("Photos de l’objet")
+    expect(page).to have_text("Étape suivante : Objet")
+    expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
+    attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau1.jpg"))
+    expect(page).to have_selector("img[src*='tableau1.jpg']")
+    attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau2.jpg"))
+    tableau2 = find("img[src*='tableau2.jpg']")
+    expect(tableau2).to be_present
+    tableau2.ancestor(".co-photo-preview").click_on("Supprimer")
+    expect(page).not_to have_selector("img[src*='tableau2.jpg']")
+    click_on("Passer à l’étape suivante")
+
+    # Step 4
+    expect(page).to have_text("Étape 4 sur 6")
+    expect(page).to have_text("Objet")
+    expect(page).to have_text("Étape suivante : Commentaires")
+    expect(page).to have_text("Quel est l’état actuel de l’objet ?")
+    choose_by_label "L’objet est en état moyen"
+    expect(page).to have_text("L’objet est-il en sécurité ?")
+    choose_by_label "L’objet est difficile à voler"
+    click_on("Passer à l’étape suivante")
+
+    # Step 5
+    expect(page).to have_text("Étape 5 sur 6")
+    expect(page).to have_text("Commentaires")
+    expect(page).to have_text("Étape suivante : Récapitulatif")
+    expect(page).to have_text("Avez-vous des commentaires ?")
+    fill_in "Avez-vous des commentaires ?", with: "Cette peinture est magnifique"
+    click_on("Passer à l’étape suivante")
+
+    # Step 6 - Recap
+    expect(page).to have_text("Étape 6 sur 6")
+    expect(page).to have_text("Récapitulatif")
+    expect(page).not_to have_text("Étape suivante")
+    expect(page).to have_text("Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet")
+    expect(page).to have_text("L’objet se trouve dans l’édifice indiqué initialement: Eglise st Jean")
+    expect(page).to have_text("L’objet est recensable")
+    expect(page).to have_selector("img[src*='tableau1.jpg']")
+    expect(page).to have_text("L’objet est en état moyen")
+    expect(page).to have_text("L’objet est difficile à voler")
+    expect(page).to have_text("Cette peinture est magnifique")
+    click_on("Valider le recensement de cet objet")
+
+    # Confirmation page
+    expect(page).to have_text("Votre recensement a bien été enregistré")
+    expect(page).to have_text("Ciboire des malades")
+    find("a", text: "Revenir à la liste d’objets de ma commune", match: :first).click
+
+    # Objets index
+    expect(page).to have_text("Il reste un objet protégé à recenser")
+    card_bouquet = find("a", text: "Bouquet d’Autel").ancestor(".fr-card")
+    expect(card_bouquet).to have_text(/Recensé/i)
+    card_ciboire = find("a", text: "Ciboire des malades").ancestor(".fr-card")
+    expect(card_ciboire).to have_text(/Pas encore recensé/i)
     click_on "Ciboire des malades"
-    expect(page).to have_text("PAS ENCORE RECENSÉ")
-    expect(page).to have_text("Musée")
 
+    # SECOND OBJET
+    expect(page).to have_text(/Pas encore recensé/i)
     click_on "Recenser cet objet"
-    expect(page).to have_selector("h1", text: "Recensement")
-    find("label", text: "Je confirme m'être déplacé voir l'objet pour ce recensement").click
-    find("label", text: "L'objet est présent dans un autre édifice").click
-    fill_in "Précisez le nom de l’édifice dans lequel se trouve l’objet *", with: "Salle des fêtes"
-    within("[data-recensement-target=recensable]") do
-      find("label", text: "Oui").click
-    end
-    within("[data-recensement-target=etatSanitaireEdifice]") do
-      find("label", text: "L'édifice est en bon état").click
-    end
-    within("[data-recensement-target=etatSanitaire]") do
-      find("label", text: "L'objet est en mauvais état").click
-    end
-    within("[data-recensement-target=securisation]") do
-      find("label", text: "L’objet est facile à voler").click
-    end
-    find("label", text: "Je ne peux pas prendre cet objet en photo").click
+    # "comment ça marche" accordion should be closed for successive recensements
+    expect(page).not_to have_text("Je me rends sur place pour recenser mes objets protégés et les prendre en photo")
+    choose_by_label "Je confirme que je me suis bien déplacé"
+    click_on("Passer à l’étape suivante")
+    choose_by_label "L’objet se trouve dans l’édifice indiqué initialement"
+    choose_by_label "L’objet est recensable"
+    click_on("Passer à l’étape suivante")
+    attach_file("recensement_photos", Rails.root.join("spec/fixture_files/peinture1.jpg"))
+    expect(page).to have_selector("img[src*='peinture1.jpg']")
+    click_on("Passer à l’étape suivante")
+    choose_by_label "L’objet est en bon état"
+    choose_by_label "L’objet est difficile à voler"
+    click_on("Passer à l’étape suivante")
+    sleep(0.2)
+    click_on("Passer à l’étape suivante")
+    click_on("Valider le recensement de cet objet")
 
-    click_on "Enregistrer ce recensement"
-    expect(page).to have_content("Votre recensement a bien été enregistré")
+    # Confirmation
+    expect(page).to have_text("Vous avez recensé tous les objets de votre commune")
+    click_on("Finaliser le recensement…")
 
-    # EDIT du deuxieme
-    expect(page).to have_link("Finaliser le recensement")
-    expect(page).not_to have_content("Bouquet d'Autel")
-    expect(page).not_to have_content("Ciboire des malades")
-    click_on "Revenir à la liste d'objets de ma commune"
-    click_on "Ciboire des malades"
-    click_on "modifier le recensement"
-    within("[data-recensement-target=etatSanitaire]") do
-      find("label", text: "L'objet est en péril").click
-    end
-    click_on "Enregistrer ce recensement"
-    expect(page).to have_content("Votre recensement a bien été enregistré")
+    # Completion page
+    row_bouquet = find("a", text: "Bouquet d’Autel").ancestor("tr")
+    expect(row_bouquet).to have_text(/Recensable/i)
+    expect(row_bouquet).to have_text(/L’objet est en état moyen/i)
+    expect(row_bouquet).to have_text(/Difficile à voler/i)
+    expect(row_bouquet).to have_selector("img[src*='tableau1.jpg']")
+    row_ciboire = find("a", text: "Ciboire des malades").ancestor("tr")
+    expect(row_ciboire).to have_text(/Recensable/i)
+    expect(row_ciboire).to have_text(/L’objet est en bon état/i)
+    expect(row_ciboire).to have_text(/Difficile à voler/i)
+    expect(row_ciboire).to have_selector("img[src*='peinture1.jpg']")
+    fill_in("Vos commentaires", with: "C’était fort sympathique")
+    click_on "Je valide le recensement des objets de ma commune"
 
-    # CONFIRMATION
-    click_on "Finaliser le recensement"
-    expect(page).to have_content("Finalisation du recensement de Albon")
-    fill_in("Vos commentaires à destination des conservateurs", with: "Beau voyage")
-    accept_confirm do
-      click_on "Je valide le recensement des objets de ma commune"
-    end
-    expect(page).to have_content("Le recensement de votre commune est terminé !")
-    click_on "Ciboire des malades"
-    expect(page).not_to have_link("Recenser cet objet")
+    expect(page).to have_text("Le recensement de vos objets est terminé, merci !")
   end
 
-  context "commune has validation error" do
-    before { commune.update_columns(nom: " Albon ") }
-    scenario "recensement cannot save but doesn't explode" do
-      login_as(user, scope: :user)
-      visit "/"
-      within("header") { click_on "Voir les objets de Albon" }
-      click_on "Bouquet d'Autel"
-      click_on "Recenser cet objet"
-      find("label", text: "Je confirme m'être déplacé voir l'objet pour ce recensement").click
-      find("label", text: "L'objet est bien présent dans l'édifice Eglise st Jean").click
-      within("[data-recensement-target=recensable]") do
-        find("label", text: "Oui").click
-      end
-      within("[data-recensement-target=etatSanitaireEdifice]") do
-        find("label", text: "L'édifice est en état moyen").click
-      end
-      within("[data-recensement-target=etatSanitaire]") do
-        find("label", text: "L'objet est en bon état").click
-      end
-      within("[data-recensement-target=securisation]") do
-        find("label", text: "L’objet est facile à voler").click
-      end
-      find("label", text: "Je ne peux pas prendre cet objet en photo").click
-      fill_in "Commentaires", with: "C'est un superbe pépito bleu"
-
-      click_on "Enregistrer ce recensement"
-      expect(page).to have_content(/erreur 500/i)
-    end
-  end
-
-  scenario "recensement with missing photos" do
-    login_as(user, scope: :user)
-    visit "/"
-    within("header") { click_on "Voir les objets de Albon" }
-    click_on "Bouquet d'Autel"
-    click_on "Recenser cet objet"
-    find("label", text: "Je confirme m'être déplacé voir l'objet pour ce recensement").click
-    find("label", text: "L'objet est bien présent dans l'édifice Eglise st Jean").click
-    within("[data-recensement-target=recensable]") do
-      find("label", text: "Oui").click
-    end
-    within("[data-recensement-target=etatSanitaireEdifice]") do
-      find("label", text: "L'édifice est en état moyen").click
-    end
-    within("[data-recensement-target=etatSanitaire]") do
-      find("label", text: "L'objet est en bon état").click
-    end
-    within("[data-recensement-target=securisation]") do
-      find("label", text: "L’objet est facile à voler").click
-    end
-    # find("label", text: "Je ne peux pas prendre cet objet en photo").click
-    fill_in "Commentaires", with: "C'est un superbe pépito bleu"
-
-    click_on "Enregistrer ce recensement"
-    expect(page).to have_content(/Votre recensement n'a pas pu être enregistré/i)
-    expect(page).to have_content(/Les photos sont fortement recommandées/i)
+  def choose_by_label(label)
+    find("label", text: label).click
   end
 end

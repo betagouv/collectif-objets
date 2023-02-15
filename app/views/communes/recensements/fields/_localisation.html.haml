@@ -1,0 +1,26 @@
+-# locals: (:form_builder)
+
+- recensement = form_builder.object
+
+= render RecensementRadiosFieldsetComponent.new(form_builder:, field: :localisation) do |c|
+  - c.with_legend do
+    Où se trouve l’objet ?
+    .fr-hint-text
+      .fr-mb-1w
+        Si vous ne trouvez pas l'objet après avoir inspecté toutes les parties de l'édifice, il convient dʼinterroger certaines personnes : les habitués, un représentant de la paroisse ou le curé lui-même, la personne en charge des accès à lʼédifice, etc.
+      .fr-mb-1w
+        Le recensement vise à mettre à jour les données de localisation. Ne vous étonnez pas d'une mauvaise localisation dans les fiches qui vous sont fournies.
+      .fr-mb-1w
+        = link_to "Voir la page 11 du guide", guide_url(page: 11), target: "_blank", rel: "noopener"
+    - c.with_option value: :edifice_initial,
+      label: t("recensement.localisation_choices.edifice_initial", nom_edifice: recensement.objet.palissy_EDIF)
+    - c.with_option value: :autre_edifice,
+      label: t("recensement.localisation_choices.autre_edifice", nom_edifice: ""),
+      data: { controller: "dependent-field", target: "#edifice_nom"}
+
+.fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if recensement.errors[:edifice_nom].present?)}
+  = form_builder.label :edifice_nom, "Quel est le nom de l’édifice dans lequel l’objet a été déplacé ?", class: "fr-label"
+  = form_builder.text_field :edifice_nom
+  - recensement.errors[:edifice_nom].each do |error_message|
+    %p.fr-error-text
+      = error_message

@@ -21,6 +21,10 @@ module Communes
       edit? && !impersonating?
     end
 
+    def destroy?
+      update?
+    end
+
     private
 
     delegate :objet, :commune, to: :record

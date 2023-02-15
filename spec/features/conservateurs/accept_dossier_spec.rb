@@ -18,7 +18,6 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
       :recensement,
       objet: objet_bouquet, user:, dossier:,
       etat_sanitaire: Recensement::ETAT_BON,
-      etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: "objet très doux"
     )
@@ -29,7 +28,6 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
       :recensement,
       objet: objet_ciboire, user:, dossier:,
       etat_sanitaire: Recensement::ETAT_BON,
-      etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil
     )
@@ -53,7 +51,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(etat_sanitaire_group) do
       click_on "Modifier"
-      select "L'objet est en péril", from: "recensement[analyse_etat_sanitaire]"
+      select "L’objet est en péril", from: "recensement[analyse_etat_sanitaire]"
     end
     find("a", text: /entretien des édifices/).find(:xpath, "ancestor::label").click
     fill_in "recensement[analyse_notes]", with: "Est-ce qu'il est le pepito bleu?"
@@ -78,11 +76,10 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     bouquet_row = find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")
     expect(bouquet_row).to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     expect(bouquet_row.all("td")[1]).to have_text(/Bon/i)
-    expect(bouquet_row.all("td")[1]).to have_text(/L'objet est en péril/i)
+    expect(bouquet_row.all("td")[1]).to have_text(/L’objet est en péril/i)
     ciboire_row = find_link("Ciboire des malades").find(:xpath, "ancestor::tr")
     expect(ciboire_row).not_to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     fill_in("dossier[notes_conservateur]", with: "Merci pour ce joli dossier")
-    sleep(1.5) # wait for debounced call to update notes
     click_on "Envoyer le rapport à la commune"
 
     # visualisation rapport

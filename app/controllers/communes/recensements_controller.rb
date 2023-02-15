@@ -3,33 +3,37 @@
 module Communes
   class RecensementsController < BaseController
     before_action :set_objet
-    before_action :set_new_recensement, only: %i[new create]
-    before_action :set_recensement, only: %i[edit update]
-    before_action :authorize_recensement
-
-    def new
-      @recensement = Recensement.new(objet: @objet, recensable: "true")
-    end
+    before_action :set_recensement, only: %i[edit update destroy]
+    before_action :set_wizard, only: %i[edit update]
 
     def edit
-      @recensement.confirmation_pas_de_photos = true if @recensement.photos.empty?
+      @modal = params[:modal]
     end
 
     def create
-      result = Communes::CreateRecensementService
-        .new(params: recensement_params, objet: @objet, user: current_user)
-        .perform
-      if result.success?
-        redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
+      @recensement = Recensement.new(objet: @objet, user: current_user, status: "draft")
+      authorize(@recensement)
+      if @recensement.save
+        redirect_to edit_commune_objet_recensement_path(@recensement.commune, @objet, @recensement, step: 1)
       else
-        @recensement = result.recensement
-        render :new, status: :unprocessable_entity
+        redirect_to commune_objet_path(objet.commune, objet),
+                    alert: "Une erreur est survenue : #{@recensement.errors.full_messages.join}"
       end
     end
 
     def update
-      if @recensement.update(recensement_params)
-        redirect_to commune_objets_path(@objet.commune, recensement_saved: true, objet_id: @objet.id)
+      if @wizard.update(params_wizard)
+        redirect_to @wizard.after_success_path
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      if @recensement.destroy
+        redirect_to \
+          commune_objet_path(@recensement.commune, @recensement.objet),
+          success: "Recensement supprimé"
       else
         render :edit, status: :unprocessable_entity
       end
@@ -43,18 +47,21 @@ module Communes
 
     def set_recensement
       @recensement = Recensement.find(params[:id])
+      authorize @recensement
     end
 
-    def set_new_recensement
-      @recensement = Recensement.new(objet: @objet)
+    def set_wizard
+      step = params[:step] || (@recensement.draft? ? 1 : 6)
+      @wizard = RecensementWizard::Base.build_for(step, @recensement)
+      @wizard.assign_attributes(params_wizard)
     end
 
-    def recensement_params
-      @recensement_params ||= Co::Recensements::ParamsParser.new(params).parse
+    def params_wizard
+      params[:wizard].present? ? params.require(:wizard).permit(*@wizard.permitted_params) : {}
     end
 
-    def authorize_recensement
-      authorize(@recensement)
-    end
+    # def recensement_params
+    #   params.require(:recensement).permit(*PARTS, :edifice_nom).merge(user: current_user)
+    # end
   end
 end

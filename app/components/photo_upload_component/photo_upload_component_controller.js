@@ -14,52 +14,38 @@ function humanFileSize(number) {
 }
 
 export default class extends Controller {
-  static targets = [
-    "wrapper",
-    "uploadGroup",
-    "input",
-    "img",
-    "preview",
-    "metadata",
-    "progress",
-    "nanobar",
-    "ctaWithCapture",
-    "ctaWithoutCapture",
-    "uploadButton",
-    "removeButton"
-  ]
+  static targets = ["wrapper", "input", "submit",  "nanobar", "progressText"]
 
   connect() {
     const tmpElt = document.createElement('input')
-    this.captureSupported = tmpElt.capture != undefined
-    this.enableButtons()
-    this.refreshPreview()
-    this.triggerUpload()
-  }
-
-  enableButtons() {
-    // form gets submitted if buttons are clicked before JS is loaded
-    this.uploadButtonTargets.forEach(button => {
-      button.disabled = false
-      button.removeAttribute("data-force-disabled")
-    })
-    document.dispatchEvent(new Event("refreshFields"))
+    this.captureSupported = tmpElt.capture !== undefined
+    this.formTarget = this.inputTarget.closest("form")
+    this.submitTarget.remove()
+    this.toggleDependentLinks(true)
   }
 
   triggerUpload() {
     const files = Array.from(this.inputTarget.files)
-    if (files.length == 0 || files.length > 1) return
-    // wait for multiple file inputs to be splitted by group component
+    if (files.length !== 1) return
 
-    this.uploadFile(files[0])
     this.nanobar = new Nanobar({ target: this.nanobarTarget })
-    this.progressTarget.innerText = `chargement démarré …`
+    this.progressTextTarget.innerHTML = `chargement démarré …`
+    this.toggleDependentLinks(false)
+    this.uploadFile(files[0])
+    document.querySelector(".fr-input-group--error")?.classList.remove("fr-input-group--error")
+    document.querySelectorAll(".fr-error-text,.fr-alert.fr-alert--error").forEach(e => e.remove())
+
   }
 
   directUploadWillStoreFileWithXHR(xhr) {
-    // console.log("in directUploadWillStoreFileWithXHR")
     xhr.upload.addEventListener("progress", event => this.uploadRequestDidProgress(event))
-    this.progressTarget.innerText = `chargement en cours …`
+    this.progressTextTarget.innerHTML = `chargement en cours …`
+  }
+
+  toggleDependentLinks(enabled) {
+    document
+      .querySelectorAll('[data-recensement-form-step-target="link"]')
+      .forEach(link => link.toggleAttribute("disabled", !enabled))
   }
 
   uploadRequestDidProgress(event) {
@@ -67,14 +53,13 @@ export default class extends Controller {
     const progress = event.loaded / event.total * 100
     if (!progress) return
 
-    this.progressTarget.innerText = `chargée à ${Math.round(progress)}%`
+    this.progressTextTarget.innerHTML = `chargée à ${Math.round(progress)}%`
     this.nanobar.go(progress)
   }
 
   uploadFile(file) {
     this.inputTarget.disabled = true // so it does re-upload on form submit
-    this.inputTarget.setAttribute("data-uploading", "true")
-    new DirectUpload(file, this.inputTarget.dataset.directUploadUrl, this).create(
+    new DirectUpload(file, this.wrapperTarget.dataset.directUploadUrl, this).create(
       (error, blob) => {
         if (error) {
           this.inputTarget.disabled = false
@@ -85,45 +70,23 @@ export default class extends Controller {
           hiddenField.setAttribute("value", blob.signed_id)
           hiddenField.name = this.inputTarget.name
           this.inputTarget.after(hiddenField)
-          this.removeButtonTarget.disabled = false
           this.inputTarget.removeAttribute("data-uploading")
-          document.dispatchEvent(new Event("refreshFields"))
+          this.progressTextTarget.innerHTML = "photo en cours d’ajout …"
+          this.formTarget.requestSubmit()
         }
       }
     )
   }
 
-  refreshPreview() {
-    this.ctaWithCaptureTarget.classList.toggle("hide", !this.captureSupported)
-    this.ctaWithoutCaptureTarget.classList.toggle("hide", this.captureSupported)
-    if (this.inputTarget.files.length === 0) {
-    } else {
-      const file = this.inputTarget.files[0]
-      this.imgTarget.src = URL.createObjectURL(file)
-      this.metadataTarget.innerHTML = `${file.type.split("/").pop()} - ${humanFileSize(file.size)}`
-      this.previewTarget.classList.remove("hide")
-      this.uploadGroupTarget.classList.add("hide")
-    }
-  }
-
-  remove(event) {
-    this.wrapperTarget.remove()
-    event.preventDefault()
-  }
-
-  disconnect() {
-    document.dispatchEvent(new Event("refreshFields"))
-  }
-
-  triggerBrowse(e) {
-    e.preventDefault()
-    this.inputTarget.click()
-  }
-
-  triggerCapture(e) {
-    e.preventDefault()
-    this.inputTarget.setAttribute("capture", "environment")
-    this.inputTarget.click()
-    this.inputTarget.removeAttribute("capture")
-  }
+  // triggerBrowse(e) {
+  //   e.preventDefault()
+  //   this.inputTarget.click()
+  // }
+  //
+  // triggerCapture(e) {
+  //   e.preventDefault()
+  //   this.inputTarget.setAttribute("capture", "environment")
+  //   this.inputTarget.click()
+  //   this.inputTarget.removeAttribute("capture")
+  // }
 }

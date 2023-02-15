@@ -158,8 +158,33 @@ feature "accessibility communes", js: true do
     it_behaves_like "an accessible page"
   end
 
-  describe "communes/recensements#new - Démo " do
-    before { visit demo_path(namespace: "communes", name: "new_recensement") }
+  describe "communes/recensements#edit step 1 - Démo" do
+    before { visit demo_path(namespace: "communes", name: "recensement_step1") }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/recensements#edit step 2 - Démo" do
+    before { visit demo_path(namespace: "communes", name: "recensement_step2") }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/recensements#edit step 3 - Démo" do
+    before { visit demo_path(namespace: "communes", name: "recensement_step3") }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/recensements#edit step 4 - Démo" do
+    before { visit demo_path(namespace: "communes", name: "recensement_step4") }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/recensements#edit step 5 - Démo" do
+    before { visit demo_path(namespace: "communes", name: "recensement_step5") }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "communes/recensements#edit step 6 - Démo" do
+    before { visit demo_path(namespace: "communes", name: "recensement_step6") }
     it_behaves_like "an accessible page"
   end
 

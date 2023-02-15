@@ -1,0 +1,9 @@
+-# locals: (:form_builder)
+
+.fr-input-group
+  = form_builder.label :notes, class: "fr-label" do
+    %span.co-text--bold Avez-vous des commentaires ?
+    (optionnel)
+    %span.fr-hint-text
+      Vous pouvez ajouter ici vos remarques sur la localisation, l'état de l’objet, sa sécurisation, les dégradations ou toute information utile à partager aux conservateurs.
+  = form_builder.text_area :notes,  class: "fr-input"

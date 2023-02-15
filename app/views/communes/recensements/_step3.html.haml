@@ -1,0 +1,39 @@
+-# locals: (:wizard, :recensement)
+
+= render "communes/recensements/fields/photos", recensement:
+
+= render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
+
+  = form_builder.hidden_field :confirmation_no_photos
+
+  - if @modal == "confirmation-no-photos"
+    = dsfr_modal(title: "Êtes-vous sûr de ne pas pouvoir prendre de photos ?",
+          html_attributes: { id: "modal-confirmation-no-photos",
+            "data-controller": "modal-auto-open",
+            "data-modal-auto-open-target": "modal"}) do |m|
+      %p Attention : votre recensement risque de ne pas être exploitable par le conservateur sans photos.
+
+      %p
+        En cas de difficultés, n’hésitez pas à contacter votre conservateur sur la
+        = link_to "messagerie", commune_messages_path(wizard.commune)
+
+      - m.with_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
+      - m.with_button label: "Annuler",
+            level: :secondary,
+            html_attributes: { type: "button",
+              "aria-controls": "modal-confirmation-no-photos",
+              "data-controller": "button-link",
+              "data-action": "button-link#handleClick",
+              "data-href": edit_commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: 3) }
+
+  .co-text--right
+    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", data: { recensement_form_step_target: "link" }
+
+.fr-mt-2w.co-text--right
+  = button_to "Revenir à l’étape précédente",
+    edit_commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement),
+    params: {step: wizard.previous_step_number},
+    class: "fr-link fr-link--icon-left fr-icon-arrow-left-line",
+    method: "get",
+    data: { turbo_action: "advance", recensement_form_step_target: "link" },
+    type: "button"

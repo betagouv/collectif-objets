@@ -25,6 +25,23 @@ module ObjetHelper
     link_to(palissy_url(objet), target: "_blank", rel: "noopener", **kwargs, &)
   end
 
+  def objet_recensement_badge_color_and_text(objet)
+    recensement = objet.current_recensement
+    dossier = recensement&.dossier
+    return nil if dossier&.rejected? || dossier&.accepted?
+
+    {
+      nil => ["", "Pas encore recensé"],
+      "completed" => %w[success Recensé],
+      "draft" => ["info", "Recensement à compléter"]
+    }[recensement&.status]
+  end
+
+  def objet_recensement_badge(objet)
+    color, text = objet_recensement_badge_color_and_text(objet)
+    content_tag(:span, class: "fr-badge fr-badge--md fr-badge--#{color}") { text }
+  end
+
   private
 
   def can_see_recensement_for(objet)

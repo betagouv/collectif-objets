@@ -1,0 +1,18 @@
+= form_for wizard,
+  url: commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: wizard.step_number),
+  builder: FormBuilderDsfr,
+  as: :wizard,
+  data: { turbo_action: "advance" } do |f|
+
+  = yield f
+
+  - if wizard.errors.any?
+    .fr-mt-4w
+      .fr-alert.fr-alert--error
+        .fr-alert__content
+          - if wizard.errors[:base].present?
+            %ul
+              - wizard.errors[:base].each do |error_message|
+                %li= error_message
+          - else
+            Veuillez corriger le formulaire ci-dessus

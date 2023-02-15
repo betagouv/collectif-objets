@@ -1,0 +1,84 @@
+-# locals: (:wizard, :recensement)
+
+- if recensement.errors.any?
+  .fr-mb-4w
+    .fr-alert.fr-alert--error
+      .fr-alert__content
+        - if recensement.errors.count == 1
+          = recensement.errors.first.message
+        - else
+          %ul
+            - recensement.errors.each do |error|
+              %li= error.full_message
+
+%p
+  .co-text--bold
+    Avez-vous trouvé l’objet ?
+    = edit_recensement_step_link recensement, 1, "aria-label": "Modifier la réponse"
+  %div= t "recensement.investigation_choices.#{!recensement.absent?}"
+
+- if !recensement.absent?
+  %p
+    .co-text--bold
+      Où se trouve l’objet ?
+      = edit_recensement_step_link recensement, 2, "aria-label": "Modifier la localisation de l’objet"
+    %div
+      = t "recensement.localisation_choices.#{recensement.localisation}",
+        nom_edifice: recensement_nom_edifice(recensement)
+
+  %p
+    .co-text--bold
+      L’objet est-il recensable ?
+      = edit_recensement_step_link recensement, 2, "aria-label": "Modifier la réponse"
+    %div= t "recensement.recensable_choices.#{recensement.recensable.to_s}"
+
+- if recensement.recensable?
+  %p
+    .co-text--bold
+      Photos
+      = edit_recensement_step_link recensement, 3, "aria-label": "Modifier les photos"
+    - if recensement.photos.any?
+      .co-flex.co-flex--gap-1rem.co-flex--wrap
+        - recensement.photos.each do |photo|
+          = render "communes/recensements/photo", photo:, recensement:
+    - else
+      %div
+        %span.fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
+
+  %p
+    .co-text--bold
+      Quel est l’état de l’objet ?
+      = edit_recensement_step_link recensement, 4, "aria-label": "Modifier l’état de l’objet"
+    %div= t "recensement.etat_sanitaire_choices.#{recensement.etat_sanitaire}"
+
+  %p
+    .co-text--bold
+      L’objet est-il en sécurité ?
+      = edit_recensement_step_link recensement, 4, "aria-label": "Modifier la réponse"
+    %div= t "recensement.securisation_choices.#{recensement.securisation}"
+
+%p
+  .co-text--bold
+    Commentaires
+    = edit_recensement_step_link recensement, 5, "aria-label": "Modifier les commentaires"
+  - if recensement.notes.present?
+    .co-blockquote= recensement.notes
+  - else
+    .co-text--italic Aucun commentaire
+
+- if recensement.draft?
+  = form_for wizard,
+    url: commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: wizard.step_number),
+    builder: FormBuilderDsfr,
+    as: :wizard,
+    data: { turbo: "false" } do |f|
+    .co-text--right
+      %div= f.submit "Valider le recensement de cet objet", class: "fr-btn"
+      .fr-mt-1w.co-text--italic Vous pourrez modifier le recensement même après l’avoir validé
+      .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:
+- else
+  .co-text--right
+    %div
+      = link_to "Valider le recensement de cet objet", commune_objets_path(recensement.commune, recensement_saved: true, objet_id: recensement.objet.id), class: "fr-btn"
+    .fr-mt-1w.co-text--italic Vous pourrez modifier le recensement même après l’avoir validé
+    .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:

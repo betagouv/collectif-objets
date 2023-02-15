@@ -33,16 +33,7 @@ fr:
       recensement_saved_after_reject:
         title: Votre recensement a bien été mis à jour
         cta: Renvoyer le dossier…
-        back: Revenir à la liste d'objets de ma commune
-      recensement_saved:
-        head_title: Recensement enregistré
-        title: Votre recensement a bien été enregistré
-        instructions: Vous pourrez revenir sur la fiche de cet objet pour modifier votre recensement.
-        finished: Vous avez recensé tous les objets de votre commune !
-        leftover: "Ces objets sont encore à recenser:"
-        leftover_in_edifice: "Ces objets sont encore à recenser dans l'édifice %{nom}:"
-        cta: Finaliser le recensement…
-        back: Revenir à la liste d'objets de ma commune
+        back: Revenir à la liste d’objets de ma commune
       objets_manquants:
         pourquoi_n_objets:
           one: Pourquoi cette liste ne contient qu'un objet ?
@@ -99,7 +90,7 @@ fr:
           label: "Messages prédéfinis :"
           missing_photos:
             button: Photos non disponibles
-            message: "Pour analyser votre recensement, le conservateur a absolument besoin d'une photo de l'objet. Or, il semblerait qu'aucune photo n'ait été soumise pour cet objet. Pourriez-vous s'il-vous-plaît en prendre et les ajouter à votre recensement ?"
+            message: "Pour analyser votre recensement, le conservateur a absolument besoin d'une photo de l’objet. Or, il semblerait qu'aucune photo n'ait été soumise pour cet objet. Pourriez-vous s'il-vous-plaît en prendre et les ajouter à votre recensement ?"
           blurry_photos:
             button: Photos floues
             message: "Une partie des photos que vous avez envoyées sont trop floues pour permettre l'analyse du conservateur. Pourriez-vous s'il-vous-plaît en prendre de nouvelles et les ajouter à votre recensement ?"
@@ -155,22 +146,26 @@ fr:
       remaining_count:
         one: "Il reste 1 recensement à analyser à %{commune}"
         other: "Il reste %{count} recensements à analyser à %{commune}"
+    investigation_choices:
+      true: Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet
+      false: Je ne trouve pas l’objet
+    localisation_choices:
+      edifice_initial: "L’objet se trouve dans l’édifice indiqué initialement: %{nom_edifice}"
+      autre_edifice: "L’objet se trouve dans un autre édifice: %{nom_edifice}"
+    recensable_choices:
+      true: L’objet est recensable
+      false: L’objet n'est pas recensable
     etat_sanitaire_choices:
-      bon: L'objet est en bon état
-      moyen: L'objet est en état moyen
-      mauvais: L'objet est en mauvais état
-      peril: L'objet est en péril
-    etat_sanitaire_edifice_choices:
-      bon: L'édifice est en bon état
-      moyen: L'édifice est en état moyen
-      mauvais: L'édifice est en mauvais état
-      peril: L'édifice est en péril
+      bon: L’objet est en bon état
+      moyen: L’objet est en état moyen
+      mauvais: L’objet est en mauvais état
+      peril: L’objet est en péril
     securisation_choices:
-      correcte: L’objet est difficile à voler
-      mauvaise: L’objet est facile à voler
+      en_securite: L’objet est difficile à voler
+      en_danger: L’objet est facile à voler
     securisation_badges:
-      correcte: Difficile à voler
-      mauvaise: Facile à voler
+      en_securite: Difficile à voler
+      en_danger: Facile à voler
   dossier:
     status_badge:
       construction: Recensement en cours
@@ -258,26 +253,21 @@ fr:
               blank: "La localisation doit être indiquée"
               inclusion: "La localisation est invalide"
             edifice_nom:
-              blank: "Le nom de l'édifice dans lequel se trouve maintenant l'objet doit être indiqué"
+              blank: "Le nom de l'édifice dans lequel se trouve maintenant L’objet doit être indiqué"
             etat_sanitaire:
-              blank: "L'état sanitaire doit être rempli"
-              inclusion: "L'état sanitaire est invalide"
+              blank: "L'état doit être rempli"
+              inclusion: "L'état est invalide"
             securisation:
-              blank: "La sécurisation de l'objet doit être remplie"
-              inclusion: "La sécurisation de l'objet est invalide"
-            etat_sanitaire_edifice:
-              blank: "L'état sanitaire de l'édifice doit être rempli"
-              inclusion: "L'état sanitaire de l'édifice est invalide"
+              blank: "La sécurisation de L’objet doit être remplie"
+              inclusion: "La sécurisation de L’objet est invalide"
             recensable:
-              inclusion: "Vous devez préciser si l'objet peut être recensé"
+              inclusion: "Vous devez préciser si L’objet peut être recensé"
             photos:
               blank: "Les photos sont fortement recommandées. Si vous ne pouvez pas en prendre, merci de le signaler."
               file_size_out_of_range: "Les photos doivent faire moins de 20MB"
               content_type_invalid: "Les photos doivent être au format JPG ou PNG"
             analyse_fiches:
               inclusion: "La ou les fiches choisies ne sont pas valides"
-            confirmation_pas_de_photos:
-              inclusion: "Incohérence sur la présence de photos"
         conservateur:
           attributes:
             reset_password_token:
@@ -325,7 +315,6 @@ fr:
         localisation: Où se trouve l’objet ?
         edifice_nom: Précisez le nom de l’édifice dans lequel se trouve l’objet
         recensable: L’objet peut-il être recensé ?
-        etat_sanitaire_edifice: Dans quel état est <u>l’édifice</u> à proximité de l’objet ?
         etat_sanitaire: Dans quel état est <u>l’objet</u> ?
         securisation: Est-il facile de voler cet objet ?
         notes: Commentaires
@@ -526,7 +515,7 @@ fr:
       abrite_n_objets:
         one: "%{nom_commune} abrite un objet protégé au titre des monuments historiques :"
         other: "%{nom_commune} abrite %{count} objets protégés au titre des monuments historiques, comme celui-ci :"
-      simple: Le recensement est court et simple. Il se fait en ligne sur le site dédié Collectif Objets. Il consiste à vérifier la présence de l’objet, le photographier et répondre à un rapide questionnaire visant à évaluer son état sanitaire. Il se différencie donc des précédents inventaires.
+      simple: Le recensement est court et simple. Il se fait en ligne sur le site dédié Collectif Objets. Il consiste à vérifier la présence de l’objet, le photographier et répondre à un rapide questionnaire visant à évaluer son état. Il se différencie donc des précédents inventaires.
       conseils: "À la lecture de vos réponses, les conservateurs pourront vous conseiller sur :"
       conseil1: "l'entretien de vos objets et leur restauration éventuelle,"
       conseil2: "leur sécurisation et leur valorisation,"
@@ -614,7 +603,7 @@ fr:
       madame_monsieur_le_maire: "Madame, Monsieur le Maire,"
       role_elu: Pour lutter contre les vols et les dégradations des objets protégés de votre commune, <b>votre rôle d'élu local est essentiel</b>.
       cta_inactive:
-        one: Commencer le recensement de l'objet protégé à %{nom_commune}
+        one: Commencer le recensement de l’objet protégé à %{nom_commune}
         other: Commencer le recensement des %{count} objets protégés à %{nom_commune}
       cta_started: Terminer le recensement des %{count} objets protégés à %{nom_commune}
       cta_complete: Finaliser le recensement

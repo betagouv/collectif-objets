@@ -53,11 +53,14 @@
           = presenter.recensable
 
         - if recensement.recensable?
-          - [:etat_sanitaire_edifice, :etat_sanitaire, :securisation].each do |original_attribute_name|
-            %p
-              .co-text--bold
-                = t("activerecord.attributes.recensement.#{original_attribute_name}").html_safe
-              = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name:
+          %p
+            .co-text--bold
+              = t("activerecord.attributes.recensement.etat_sanitaire").html_safe
+            = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :etat_sanitaire
+          %p
+            .co-text--bold
+              = t("activerecord.attributes.recensement.securisation").html_safe
+            = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
 
         %p
           .co-text--bold

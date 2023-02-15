@@ -25,7 +25,7 @@ module Communes
     end
 
     def analyse_attribute_value
-      return nil unless %i[etat_sanitaire_edifice etat_sanitaire securisation].include?(attribute_name.to_sym)
+      return nil unless %i[etat_sanitaire securisation].include?(attribute_name.to_sym)
 
       @analyse_attribute_value ||= recensement.send(analyse_attribute_name)
     end
