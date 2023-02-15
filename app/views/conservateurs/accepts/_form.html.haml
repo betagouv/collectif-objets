@@ -1,52 +1,45 @@
-= turbo_frame_tag("#{dossier.id}_rapport_form") do
-  %div{"data-controller": "rapport-notes-form", "data-rapport-notes-form-target": "container"}
-    .co-background--light-grey
-      .fr-grid-row.fr-grid-row--center.fr-pt-4w
-        .fr-col-md-8
-          %h2 Ajouter un commentaire global
+= form_for dossier, url: conservateurs_dossier_accept_path(dossier), method: "POST", builder: FormBuilderDsfr, html: { id: "mainForm" } do |f|
+  -# nothing
 
-          - if dossier.errors.any?
-            .fr-alert.fr-alert--error.fr-mt-3w
-              %p Erreur
-              %ul
-                - dossier.errors.attribute_names.each do |attribute|
-                  %li
-                    = attribute
-                    = dossier.errors.messages_for(attribute).first
+.fr-grid-row.fr-grid-row--center.co-background--light-grey.fr-pt-4w{data: { controller: "rapport-notes-form"}}
+  .fr-col-md-8
+    %h2 Ajouter un commentaire global
 
-          = form_for dossier, url: conservateurs_dossier_accept_path(dossier), method: "PUT", builder: FormBuilderDsfr, html: { data: { "rapport-notes-form-target": "form" } } do |f|
-            .fr-input-group
-              = f.label :notes_conservateur, "Vous pouvez laisser un commentaire qui sera envoyé dans le mail envoyé à la commune et inscrit dans le rapport de recensement"
-              .co-position-relative.fr-mt-1w
-                = f.text_area :notes_conservateur,
-                  data: {"rapport-notes-form-target": "textarea", "original-value": @dossier.notes_conservateur},
-                  class: "co-textarea--high"
-                %span.fr-icon-recycle-line.co-spin.co-spinner{"aria-hidden": "true"}
-            %input{type: "hidden", name: "preview_expanded", value: local_assigns.fetch(:preview_expanded, "false"), data: {"rapport-notes-form-target": "previewExpandedInput"}}
+    - if dossier.errors.any?
+      .fr-alert.fr-alert--error.fr-mt-3w
+        %p Erreur
+        %ul
+          - dossier.errors.attribute_names.each do |attribute|
+            %li
+              = attribute
+              = dossier.errors.messages_for(attribute).first
 
-      .fr-grid-row.fr-grid-row--center
-        .fr-col-md-8
-          .fr-accordion.co-position-relative.fr-mb-4w
-            .co-loading-overlay
-            %h3.fr-accordion__title
-              %button.fr-accordion__btn{"aria-expanded": local_assigns.fetch(:preview_expanded, false).to_s, "aria-controls": "mail-preview", "data-rapport-notes-form-target": "accordionButton", "data-action": "rapport-notes-form#toggleAccordion"}
-                Prévisualiser le mail envoyé à la commune
-              .fr-collapse{id: "mail-preview"}
-                = render Conservateurs::MailIframeComponent.new(mail: UserMailerPreview.new.dossier_accepted_email(dossier, current_conservateur))
+    .fr-input-group
+      = label_tag "dossier[notes_conservateur]", "Vous pouvez laisser un commentaire qui sera envoyé dans le mail envoyé à la commune et inscrit dans le rapport de recensement", class: "fr-label", form: "mainForm"
+      .co-position-relative.fr-mt-1w
+        = text_area_tag "dossier[notes_conservateur]", dossier.notes_conservateur, class: "co-textarea--high fr-input", form: "mainForm", "data-rapport-notes-form-target": "notesTextarea", "data-action": "rapport-notes-form#closePreview"
 
-  .fr-mt-4w
-    = form_for dossier,
-      url: conservateurs_dossier_accept_path(dossier), method: "POST", builder: FormBuilderDsfr,
-      html: { "data-turbo-frame": "_top" } do |f|
-      .co-flex.co-flex--justify-content-end.co-flex--align-content-center.co-flex--gap-1rem.co-flex--align-items-center
-        .fr-fieldset--inline
-          .fr-radio-group
-            = f.radio_button :visit, ""
-            = f.label "visit_", "Pas de visite prévue"
-          .fr-radio-group
-            = f.radio_button :visit, "souhaitable"
-            = f.label "visit_souhaitable", "Visite souhaitable"
-          .fr-radio-group
-            = f.radio_button :visit, "prioritaire"
-            = f.label "visit_prioritaire", "Visite prioritaire"
-        %div= f.submit "Finaliser et Envoyer le rapport à la commune"
+    .fr-accordion.co-position-relative.fr-mb-4w
+      .co-loading-overlay
+      %h3.fr-accordion__title
+        %button.fr-accordion__btn{type: "button", "aria-controls": "preview", "aria-expanded": "false", data: { "rapport-notes-form-target": "accordionButton", "action": "rapport-notes-form#submitPreview" } }
+          Enregistrer et prévisualiser le mail envoyé à la commune
+        .fr-collapse#preview{"data-rapport-notes-form-target": "previewPanel"}
+          = turbo_frame_tag :preview do
+            = form_for dossier, url: conservateurs_dossier_accept_path(dossier), method: "PUT" do |ff|
+              = ff.hidden_field :notes_conservateur
+            = render Conservateurs::MailIframeComponent.new(mail: UserMailerPreview.new.dossier_accepted_email(dossier, current_conservateur))
+
+.co-flex.co-flex--justify-content-end.co-flex--align-content-center.co-flex--gap-1rem.co-flex--align-items-center.fr-mt-4w
+  .fr-fieldset--inline
+    = fields_for dossier do |f|
+      .fr-radio-group
+        = f.radio_button :visit, "", form: "mainForm"
+        = f.label "visit_", "Pas de visite prévue", form: "mainForm"
+      .fr-radio-group
+        = f.radio_button :visit, "souhaitable", form: "mainForm"
+        = f.label "visit_souhaitable", "Visite souhaitable", form: "mainForm"
+      .fr-radio-group
+        = f.radio_button :visit, "prioritaire", form: "mainForm"
+        = f.label "visit_prioritaire", "Visite prioritaire", form: "mainForm"
+  %div= submit_tag "Finaliser et Envoyer le rapport à la commune", form: "mainForm", class: "fr-btn"
