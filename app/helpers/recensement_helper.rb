@@ -4,7 +4,6 @@
 module RecensementHelper
   Option = Struct.new :value, :label, :badge_color
 
-  # rubocop:disable Metrics/MethodLength
   def localisation_options(recensement)
     [
       Option.new(

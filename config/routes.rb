@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 # frozen_string_literal: true
 
 require "sidekiq/web"

@@ -43,7 +43,6 @@ module Co
       get_api_request("/v3/webhooks")
     end
 
-    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def download_inbound_attachment(download_token)
       f = Tempfile.new "test", binmode: true
       request = Typhoeus::Request.new(

@@ -44,7 +44,6 @@ class CampaignV1Mailer < ApplicationMailer
     @departement = @campaign.departement
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def i18n_args
     @i18n_args ||= {
       nom_drac: @campaign.nom_drac,

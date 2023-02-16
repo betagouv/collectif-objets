@@ -2,9 +2,6 @@
 
 require "active_support/concern"
 
-# rubocop:disable Metrics/BlockLength
-# rubocop:disable Metrics/MethodLength
-
 module Communes
   module IncludeCountsConcern
     extend ActiveSupport::Concern

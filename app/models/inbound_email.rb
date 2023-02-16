@@ -17,7 +17,6 @@ class InboundEmail < ApplicationRecord
     message: "L'email du destinataire n'est pas reconnu comme un email de support"
   }
 
-  # rubocop:disable Metrics/MethodLength
   def self.from_raw(raw)
     new(
       id: raw["MessageId"],

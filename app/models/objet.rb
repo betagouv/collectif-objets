@@ -55,7 +55,6 @@ class Objet < ApplicationRecord
     current_recensement.present?
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def self.select_best_objet_in_list(objets_arr)
     current_arr = objets_arr
     [

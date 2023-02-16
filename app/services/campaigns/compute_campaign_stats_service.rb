@@ -73,7 +73,6 @@ module Campaigns
 
     attr_reader :emails
 
-    # rubocop:disable Metrics/AbcSize
     def compute_stats
       base_stats.deep_merge(
         pending: { count_exclusive: base_stats[:count] - c(:error) - c(:sent) },

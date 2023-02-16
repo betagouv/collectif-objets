@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module DossierHelper
-  # rubocop:disable Metrics/MethodLength
   def dossier_status_badge(dossier)
     color = {
       construction: "new",

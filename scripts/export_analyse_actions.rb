@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # rails runner scripts/export_analyse_actions.rb
-# rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 
 require "csv"
 
