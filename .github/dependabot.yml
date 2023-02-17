@@ -22,6 +22,8 @@ updates:
         versions: ["7.x"]
       - dependency-name: "@sentry/tracing"
         versions: ["7.x"]
+      - dependency-name: "@sentry/cli"
+        versions: ["2.x"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
