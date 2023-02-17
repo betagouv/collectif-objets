@@ -26,7 +26,7 @@
     "@hotwired/turbo-rails": "^7.2.5",
     "@rails/activestorage": "^7.0.4",
     "@sentry/browser": "^7.35.0",
-    "@sentry/cli": "^2.12.0",
+    "@sentry/cli": "^2.13.0",
     "@sentry/tracing": "^7.36.0",
     "frappe-charts": "^1.6.2",
     "maplibre-gl": "^2.4.0",
