@@ -40,6 +40,13 @@ class Message < ApplicationRecord
     files.count + (skipped_attachments || []).length
   end
 
+  def sent_at
+    # TODO : parse upon saving inbound email instead
+    return DateTime.parse(inbound_email.sent_at) if inbound_email?
+
+    created_at
+  end
+
   private
 
   def enqueue_message_received_emails_for_conservateurs
