@@ -14,7 +14,7 @@ module Api
           "Uuid" => [],
           "From" => %w[Name Address],
           "To" => %w[Name Address],
-          "Cc" => [],
+          "Cc" => %w[Name Address],
           "Attachments" => %w[Name ContentType ContentLength ContentID DownloadToken],
           "Headers" => %w[
             Return-Path Delivered-To Received ARC-Seal ARC-Message-Signature ARC-Authentication-Results DKIM-Signature

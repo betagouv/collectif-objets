@@ -12,12 +12,14 @@ class InboundEmail < ApplicationRecord
     [a-z-]+.collectifobjets.org
   /x
 
-  validates :to_email, format: {
+  validates :to_email, presence: { message: "Aucun email de destinataire reconnu" }, format: {
     with: SUPPORT_EMAIL_REGEX,
-    message: "L'email du destinataire n'est pas reconnu comme un email de support"
+    message: "Aucun email reconnu comme un email de support (ni To, ni Cc)"
   }
 
   def self.from_raw(raw)
+    to_emails = (raw.fetch("To", []) + raw.fetch("Cc", [])).pluck("Address")
+    to_email = to_emails.find { _1.match(SUPPORT_EMAIL_REGEX) } || to_emails.first
     new(
       id: raw["MessageId"],
       body_html: raw["RawHtmlBody"],
@@ -25,7 +27,7 @@ class InboundEmail < ApplicationRecord
       body_md: raw["ExtractedMarkdownMessage"],
       signature_md: raw["ExtractedMarkdownSignature"],
       from_email: raw.dig("From", "Address"),
-      to_email: raw.dig("To", 0, "Address"),
+      to_email:,
       sent_at: raw["SentAtDate"],
       raw: raw.except("RawHtmlBody", "RawTextBody", "ExtractedMarkdownMessage", "ExtractedMarkdownSignature")
     )
@@ -42,7 +44,7 @@ class InboundEmail < ApplicationRecord
   def commune_code_insee = regex_match[:code_insee]
 
   def regex_match
-    @regex_match ||= to_email.match(SUPPORT_EMAIL_REGEX)
+    @regex_match ||= to_email&.match(SUPPORT_EMAIL_REGEX)
   end
 
   def commune
