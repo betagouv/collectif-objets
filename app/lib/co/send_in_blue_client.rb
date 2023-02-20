@@ -2,6 +2,8 @@
 
 module Co
   class SendInBlueClient
+    class SibServerError < StandardError; end
+
     include Singleton
     include ActionView::Helpers::NumberHelper
 
@@ -39,9 +41,9 @@ module Co
       get_api_request("/v3/contacts/#{email}")
     end
 
-    def list_webhooks
-      get_api_request("/v3/webhooks")
-    end
+    def list_webhooks = get_api_request("/v3/webhooks")
+    def list_inbound_events = get_api_request("/v3/inbound/events")["events"]
+    def get_inbound_event(uuid) = get_api_request("/v3/inbound/events/#{uuid}")
 
     def download_inbound_attachment(download_token)
       f = Tempfile.new "test", binmode: true
@@ -86,13 +88,17 @@ module Co
       run_request_raw(request)
     end
 
-    def run_request_raw(request)
+    def run_request_raw(request, current_retry: 0)
       response = request.run
-      unless response.code.to_s.starts_with?("2")
-        raise "http response #{res.code} - #{res.message} - #{JSON.parse(res.read_body)}"
-      end
+      raise SibServerError, "error #{response.code}" unless response.code.to_s.starts_with?("2")
 
       response.body
+    rescue SibServerError => e
+      raise e if !e.message.match(/error 500/) || current_retry > 4
+
+      Rails.logger.info "Retrying request after SibServerError"
+      sleep 1
+      run_request_raw(request, current_retry: current_retry + 1)
     end
 
     def build_request(url, method: :get, **kwargs)
