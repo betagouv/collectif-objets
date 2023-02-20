@@ -15,7 +15,9 @@ class MessageComponent < ViewComponent::Base
 
   attr_reader :message, :viewed_by
 
-  delegate :author, :created_at, :text, :inbound_email?, :inbound_email, :commune, :skipped_attachments, to: :message
+  delegate \
+    :author, :created_at, :text, :inbound_email?, :inbound_email, :commune, :skipped_attachments, :sent_at,
+    to: :message
 
   def viewed_by_author?
     viewed_by == author
@@ -37,11 +39,6 @@ class MessageComponent < ViewComponent::Base
 
   def css_classes
     viewed_by_author? ? ["co-margin-left-auto"] : []
-  end
-
-  def sent_at
-    message.created_at
-    # TODO: use inbound_email sent_at
   end
 
   def attachment_path(attachment)
