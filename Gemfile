@@ -14,7 +14,7 @@ gem "active_storage_validations"
 gem "after_commit_everywhere"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false
-gem "devise", "~> 4.8"
+gem "devise", "~> 4.9"
 gem "devise-i18n", "~> 1.10"
 gem "dsfr-view-components"
 gem "factory_bot_rails"
