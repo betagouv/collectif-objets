@@ -227,6 +227,25 @@ pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=collect
 en local `rails db:reset` : détruit puis recréé les bases locales, charge le schéma puis les seeds qui se téléchargent 
 depuis le bucket S3 `collectif-objets-public`.
 
+## Review apps
+
+```sh
+  # Création :
+  scalingo integration-link-manual-review-app --app collectif-objets-staging 701
+
+  # Déploiement d’une nouvelle version de la branche
+  # git push origin feature/etapes-recensement
+  scalingo integration-link-manual-deploy --app collectif-objets-staging-pr701 feature/etapes-recensement && \
+  scalingo --app collectif-objets-staging-pr701 deployment-follow
+
+  # Réinitialisation de la base de données
+  # on n’a pas les droits pour dropper la db ni l’app
+  scalingo --app collectif-objets-staging-pr701 run bash
+  rails runner scripts/truncate_all_tables.rb
+  rails db:seed
+```
+
+
 ## Préparation d'une astreinte dev
 
 Voici une liste à suivre pour préparer une astreinte sereine :
