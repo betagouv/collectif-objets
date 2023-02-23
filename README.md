@@ -141,11 +141,6 @@ make dev
 optionnel: pour une utilisation de rubocop plus rapide en local, 
 [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
 
-### Travail en local sur les webhooks d'inbound mails
-
-- installer manuellement [`loophole`](https://loophole.cloud/) 
-- `make tunnel`
-
 ## Premiers pas - Découverte du produit
 
 Durée à prévoir : 15 minutes 
@@ -245,6 +240,7 @@ depuis le bucket S3 `collectif-objets-public`.
   rails db:seed
 ```
 
+Note: Pour faire fonctionner le direct-upload pour les photos sur une review vous devrez rajouter l’hôte de la review dans la liste des hosts autorisés en CORS sur le bucket S3 de staging, voir plus bas.
 
 ## Préparation d'une astreinte dev
 
@@ -452,6 +448,8 @@ message) qui permettent d'authentifier l'auteur du message :
   `inbound_email_token` secret est `a1b2c3d4h5`.
 - `mairie-30001-conservateur-a1b2c3d4h5@reponse.collectifobjets.org` : réponse du conservateur pour la même commune
 
+Voir la partie sur les tunnels plus bas pour itérer en local sur ces webhooks.
+
 ## Accessibilité, Plan du site et Pages démos
 
 La démarche d'accessibilité est de réaliser une couverture quasi exhaustive des pages de l'application par des tests 
@@ -497,3 +495,14 @@ Le fichier `/cms/config.yml` configure Netlify CMS pour notre cas.
 Nous utilisons Netlify Identity pour authentifier les accès au CMS, et un user github robot pour réaliser les commits 
 et les PRs émanant de Netlify CMS.
 Cette configuration est décrite sur [ce pad](https://pad.incubateur.net/zdhV1dI-RBivCfmwXq-hVw#).
+
+## Debug local via tunneling
+
+Le tunneling consiste à exposer votre environnement local sur une URL publiquement accessible.
+`ngrok` est l’outil de tunneling le plus répandu mais nous avons configuré `loophole` sur ce projet car le plan gratuit est plus généreux.
+Les instructions d’installation sont sur [le site public de loophole](https://loophole.cloud/).
+
+Une fois installé vous pouvez utiliser :
+
+- `make tunnel` tunnel général du port 3000 accessible sur https://collectifobjets.loophole.site. Cela permet par exemple de tester le rendu sur un mobile.
+- `make tunnel_webhooks` expose uniquement l’URL racine https://collectifobjets-mail-inbound.loophole.site qui est configurée sur un webhook inbound parsing sur Send In Blue.

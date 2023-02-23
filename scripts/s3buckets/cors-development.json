@@ -2,7 +2,8 @@
   "CORSRules": [
     {
       "AllowedOrigins": [
-        "http://localhost:3000"
+        "http://localhost:3000",
+        "https://collectifobjets.loophole.site"
       ],
       "AllowedHeaders": [
         "*"
