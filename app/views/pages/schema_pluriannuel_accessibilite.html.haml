@@ -2,17 +2,25 @@
 
 %main.fr-pt-2w.fr-pb-8w
   .fr-container
-    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Accessibilité")
+    = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Schéma pluriannuel d’accessibilité")
 
-    %h1 Accessibilité
+    %nav.fr-pb-4w.fr-text--sm
+      = link_to "Déclaration d’accessibilité", declaration_accessibilite_path, class: "fr-link fr-text--sm"
+      \·
+      Schéma pluriannuel d’accessibilité
+      \·
+      = link_to "Plan du site", plan_path, class: "fr-link fr-text--sm"
+
+    %h1 Schéma pluriannuel d’accessibilité
 
     .fr-grid-row
       .fr-col-md-8
         :markdown
-          Ce site a pour objectif d'être conforme au [Référentiel Général d’Amélioration de l’Accessibilité (RGAA)](https://accessibilite.numerique.gouv.fr/){:target="_blank" rel="noopener"}.
+          Ce schéma pluriannuel est en cours de rédaction.
 
-          Notre démarche pour y arriver est de mettre en place des tests automatisés et des tests manuels, puis de demander un audit externe. Vous pouvez suivre la couverture des tests actuels sur le [plan du site](/plan).
-
+          Dans un premier temps, nous mettons en place des tests d’accessibilité automatisés et manuels en interne.
+          Vous pouvez suivre la couverture des tests actuels sur le [plan du site](/plan).
+          Ensuite, nous ferons réaliser un audit externe.
 
           ## Tests automatisés
 
@@ -20,11 +28,9 @@
 
           La liste complète des 140 règles testées automatiquement est disponible sur [le projet GitHub aXe-core (en anglais)](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md#rule-descriptions){:target="_blank" rel="noopener"}.
 
-
           ## Tests manuels
 
           Les tests manuels consistent à utiliser des outils comme [ara.numerique.gouv.fr](https://ara.numerique.gouv.fr/){:target="_blank" rel="noopener"} et [accessibilityinsights.io](https://accessibilityinsights.io/){:target="_blank" rel="noopener"} pour valider différents points d'accessibilité.
-
 
           ## Audit
 

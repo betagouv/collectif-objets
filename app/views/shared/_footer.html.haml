@@ -1,58 +1,57 @@
 %footer#footer.fr-footer{role: "contentinfo"}
   .fr-container
     .fr-footer__body
-      .fr-footer__brand.fr-enlarge-link
+      .fr-footer__brand.fr-enlarge-link.co-footer-logo
         = link_to root_path, title: "Retour à l’accueil" do
           %p.fr-logo{title: "Ministère de la Culture"}
             Ministère
             %br
             de la Culture
-      .fr-footer__brand.fr-enlarge-link
-        = link_to "https://beta.gouv.fr/communaute/#/incubators/culture", title: "Incubateur Atelier Numérique", class: "co-footer-logo" do
+      .fr-footer__brand.fr-enlarge-link.co-footer-logo
+        = link_to "https://beta.gouv.fr/communaute/#/incubators/culture", title: "Incubateur Atelier Numérique" do
           = vite_image_tag "images/logo-atelier-numerique.svg", alt: "Logo Atelier Numérique"
-      .fr-footer__brand.fr-enlarge-link
-        = link_to "https://beta.gouv.fr", title: "beta.gouv.fr", class: "co-footer-logo" do
+      .fr-footer__brand.fr-enlarge-link.co-footer-logo
+        = link_to "https://beta.gouv.fr", title: "beta.gouv.fr" do
           = render "shared/picture_tag", filename_without_extension: "logo-beta-gouv", img_class: "co--width-max-100", alt: "logo beta.gouv.fr"
     .fr-footer__bottom
       %ul.fr-footer__bottom-list
-        %li.fr-footer__bottom-item
+        %li.fr-footer__bottom-item.co-white-space-nowrap
           = link_to "mailto:#{current_user&.commune&.support_email(role: :user) || "support@collectif-objets.beta.gouv.fr"}", class: "fr-footer__bottom-link fr-link--icon-left fr-icon-mail-line" do
             Contact
-        %li.fr-footer__bottom-item
+        %li.fr-footer__bottom-item.co-white-space-nowrap
           = link_to fiches_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-file-line" do
             Fiches
-        %li.fr-footer__bottom-item
+        %li.fr-footer__bottom-item.co-white-space-nowrap
           = link_to stats_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-line-chart-line" do
             Statistiques
-        %li.fr-footer__bottom-item
+        %li.fr-footer__bottom-item.co-white-space-nowrap
           = link_to presse_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-chat-2-line" do
             On parle de nous
         - if current_admin_user.nil?
-          %li.fr-footer__bottom-item
+          %li.fr-footer__bottom-item.co-white-space-nowrap
             = link_to admin_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-lock-line" do
               Administration
-        %li.fr-footer__bottom-item
-          = link_to mentions_legales_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-file-text-line" do
-            Mentions légales
-        %li.fr-footer__bottom-item
-          = link_to conditions_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-file-text-line" do
-            Conditions Générales d'utilisation
-        %li.fr-footer__bottom-item
-          = link_to confidentialite_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-file-text-line" do
-            Politique de confidentialité
-        %li.fr-footer__bottom-item
+        %li.fr-footer__bottom-item.co-white-space-nowrap
           = link_to plan_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-list-unordered" do
             Plan du site
-        %li.fr-footer__bottom-item
+        %li.fr-footer__bottom-item.co-white-space-nowrap
           %button.fr-footer__bottom-link.fr-icon-theme-fill.fr-link--icon-left{"aria-controls": "fr-theme-modal", "data-fr-opened": "false"}
             Paramètres d'affichage
       .fr-footer__bottom-copy
         %p
-          = link_to "Accessibilité : non conforme", accessibilite_path
+          %span.co-white-space-nowrap= link_to "Mentions légales", mentions_legales_path
+          \·
+          %span.co-white-space-nowrap= link_to "Conditions Générales d'utilisation", conditions_path
+          \·
+          %span.co-white-space-nowrap= link_to "Politique de confidentialité", confidentialite_path
           \·
           Sauf mention contraire, tous les contenus de ce site sont sous
-          = link_to "https://github.com/etalab/licence-ouverte/blob/master/LO.md", target: "_blank", rel: "noopener" do
-            Licence etalab-2.0
+          %span.co-white-space-nowrap
+            = link_to "Licence etalab-2.0", "https://github.com/etalab/licence-ouverte/blob/master/LO.md", target: "_blank", rel: "noopener"
+        %p
+          Accessibilité : non conforme
+          \·
+          %span.co-white-space-nowrap= link_to "Déclaration d’accessibilité", declaration_accessibilite_path
 %dialog#fr-theme-modal.fr-modal{"aria-labelledby": "fr-theme-modal-title", role: "dialog"}
   .fr-container.fr-container--fluid.fr-container-md
     .fr-grid-row.fr-grid-row--center

@@ -4,6 +4,13 @@
   .fr-container
     = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Plan du site")
 
+    %nav.fr-pb-4w.fr-text--sm
+      = link_to "Déclaration d’accessibilité", declaration_accessibilite_path, class: "fr-link fr-text--sm"
+      \·
+      = link_to "Schéma pluriannuel d’accessibilité", schema_pluriannuel_accessibilite_path, class: "fr-link fr-text--sm"
+      \·
+      Plan du site
+
     .fr-grid-row.fr-grid-row--gutters
       .fr-col-md-4
         .co-position-sticky
@@ -18,7 +25,7 @@
               %li= link_to "4. Administration", "#administration"
           %p
             Pour chaque page, le niveau de test d'accessibilité effectué est affiché. Vous pouvez lire plus de détail sur notre démarche d'accessibilité
-            = link_to "sur la page dédiée", accessibilite_path
+            = link_to "sur la page dédiée", declaration_accessibilite_path
             \.
           %p
             Légende :
@@ -103,6 +110,12 @@
                 %li
                   = link_to fiche.title, fiche_path(fiche.id)
                   = accessible_icon_span
+          %li
+            = link_to "Déclaration d’accessibilité", declaration_accessibilite_path
+            = accessible_icon_span
+          %li
+            = link_to "Schéma pluriannuel d’accessibilité", schema_pluriannuel_accessibilite_path
+            = accessible_icon_span
           %li
             = link_to "Plan du site", plan_path
             = accessible_icon_span

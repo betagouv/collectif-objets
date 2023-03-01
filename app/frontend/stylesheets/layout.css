@@ -8,8 +8,13 @@
   padding-right: none !important;
 }
 
-a.co-footer-logo img {
-  width: 150px;
+.co-footer-logo img {
+  max-width: 120px;
+  max-height: 120px;
+}
+.co-footer-logo {
+  /* overrides DSFR default that wraps logos for sm viewports */
+  flex-basis: auto;
 }
 
 .co-pagination-wrapper {
@@ -51,8 +56,6 @@ a.co-footer-logo img {
 .fr-btn--icon-left.co-button--big-icon[class*=" fr-icon-"]::before {
   --icon-size: 2rem;
 }
-
-/* DSFR OVERRIDES */
 
 /* hide DSFR arrow */
 
