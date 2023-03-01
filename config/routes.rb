@@ -49,7 +49,8 @@ Rails.application.routes.draw do
     get :pdf, action: :pdf_download, as: :pdf_download
     get :admin
     get :plan
-    get :accessibilite
+    get :declaration_accessibilite
+    get :schema_pluriannuel_accessibilite
     get :aide_conservateurs
   end
   get "campaigns.ics", to: "pages#campaigns_ics", as: :campaigns_ics

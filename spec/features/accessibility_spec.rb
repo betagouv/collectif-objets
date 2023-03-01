@@ -122,6 +122,16 @@ feature "accessibility", js: true do
     it_behaves_like "an accessible page"
   end
 
+  describe "Schéma pluriannuel d’accessibilité" do
+    before { visit schema_pluriannuel_accessibilite_path }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "Déclaration d’accessibilité" do
+    before { visit declaration_accessibilite_path }
+    it_behaves_like "an accessible page"
+  end
+
   describe "Fiches conseil" do
     before { visit fiches_path }
     it_behaves_like "an accessible page"
