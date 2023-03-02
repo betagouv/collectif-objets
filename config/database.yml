@@ -4,7 +4,7 @@ default: &default
   host: <%= ENV.fetch("DATABASE_HOST", "127.0.0.1") %>
   username: <%= ENV.fetch("DATABASE_USERNAME", "") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD", "") %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 20 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
 
 development:
   <<: *default
@@ -17,5 +17,5 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 20 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
   url: <%= ENV["DATABASE_URL"]&.sub(/^postgres/, "postgis") %>
