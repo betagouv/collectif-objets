@@ -16,6 +16,8 @@ AllCops:
     - "config/initializers/*"
     - "lib/tasks/**/*"
     - ".irbrc"
+    - "spec/rails_helper.rb"
+    
   SuggestExtensions: false
 
 Style/StringLiterals:

@@ -29,10 +29,10 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Warden::Test::Helpers
-  
+
   if ENV["CAPYBARA_OPEN_PAGE_ON_FAIL"]
     config.after do |example_group|
-      save_and_open_page if example_group.exception # rubocop:disable Lint/Debugger
+      save_and_open_page if example_group.exception 
     end
   end
 end
@@ -47,9 +47,7 @@ Capybara.register_driver :firefox do |app|
 end
 Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
 
-# rubocop:disable Lint/SuppressedException
 begin
   require "pry"
 rescue LoadError
 end
-# rubocop:enable Lint/SuppressedException
