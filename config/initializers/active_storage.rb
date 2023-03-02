@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+Rails.application.config.active_storage.resolve_model_to_route = :rails_storage_proxy
+
 module Rotation
   def rotate!(degrees: 90)
     rotated_tempfile = nil
