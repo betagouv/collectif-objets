@@ -29,8 +29,11 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Warden::Test::Helpers
-  config.after do |example_group|
-    save_and_open_page if example_group.exception # rubocop:disable Lint/Debugger
+  
+  if ENV["CAPYBARA_OPEN_PAGE_ON_FAIL"]
+    config.after do |example_group|
+      save_and_open_page if example_group.exception # rubocop:disable Lint/Debugger
+    end
   end
 end
 
@@ -42,7 +45,7 @@ Capybara.register_driver :firefox do |app|
   options = Selenium::WebDriver::Firefox::Options.new
   Capybara::Selenium::Driver.new app, browser: :firefox, options:
 end
-Capybara.javascript_driver = :selenium_headless
+Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
 
 # rubocop:disable Lint/SuppressedException
 begin
