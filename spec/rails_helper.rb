@@ -76,7 +76,7 @@ Capybara.register_driver :firefox do |app|
   options = Selenium::WebDriver::Firefox::Options.new
   Capybara::Selenium::Driver.new app, browser: :firefox, options:
 end
-Capybara.javascript_driver = :selenium_headless
+Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
 
 # rubocop:disable Lint/SuppressedException
 begin
