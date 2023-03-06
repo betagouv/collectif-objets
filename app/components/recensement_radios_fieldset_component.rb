@@ -2,8 +2,8 @@
 
 class RecensementRadiosFieldsetComponent < ViewComponent::Base
   renders_one :legend
-  renders_many :options, lambda { |value:, label:, data: nil|
-    form_builder.radio_button(field, value, data:) +
+  renders_many :options, lambda { |value:, label:, **kwargs|
+    form_builder.radio_button(field, value, **kwargs) +
       form_builder.label("#{field}_#{value}", label)
   }
 

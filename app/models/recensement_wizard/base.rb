@@ -12,6 +12,7 @@ module RecensementWizard
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
       :securisation, :notes, :photos, :photo_attachments, :errors, :recensable?, :absent?,
+      :analyse_etat_sanitaire, :analyse_securisation,
       to: :recensement
 
     def initialize(recensement)
