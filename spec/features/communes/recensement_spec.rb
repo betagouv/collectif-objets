@@ -89,6 +89,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_content("Votre recensement a bien été enregistré")
 
     # CONFIRMATION
+    save_screenshot("recensement.png")
     click_on "Finaliser le recensement"
     expect(page).to have_content("Finalisation du recensement de Albon")
     fill_in("Vos commentaires à destination des conservateurs", with: "Beau voyage")
