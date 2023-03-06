@@ -179,9 +179,9 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     #  le recensement repasse en draft quand on change cette réponse
     click_on "Objets de Albon"
-    card_bouquet = find(".fr-card", text: "Bouquet d’Autel")
+    card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
     expect(card_bouquet).not_to have_text(/Recensé/i)
-    expect(card_bouquet).not_to have_text(/Recensement à compléter/i)
+    expect(card_bouquet).to have_text(/Recensement à compléter/i)
     card_bouquet.click
     click_on "Compléter le recensement"
     expect(page).to have_text("Recherche")
