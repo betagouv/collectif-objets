@@ -154,7 +154,7 @@ fr:
       autre_edifice: "L’objet se trouve dans un autre édifice: %{nom_edifice}"
     recensable_choices:
       true: L’objet est recensable
-      false: L’objet n'est pas recensable
+      false: L’objet n’est pas recensable
     etat_sanitaire_choices:
       bon: L’objet est en bon état
       moyen: L’objet est en état moyen

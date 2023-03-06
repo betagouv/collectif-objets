@@ -27,7 +27,7 @@
             "aria-controls": "modal-confirmation-not-recensable",
             "data-controller": "button-link",
             "data-action": "button-link#handleClick",
-            "data-href": edit_commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: 2) }
+            "data-href": edit_commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: 2, "wizard[localisation]": wizard.localisation, "wizard[edifice_nom]": wizard.edifice_nom) }
 
   .co-text--right
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"

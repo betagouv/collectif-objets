@@ -144,6 +144,107 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Le recensement de vos objets est terminé, merci !")
   end
 
+  scenario "recensement introuvable" do
+    login_as(user, scope: :user)
+    visit "/"
+    within("header") { click_on "Voir les objets de Albon" }
+    click_on "Bouquet d’Autel"
+    click_on "Recenser cet objet"
+
+    scroll_to(find("#recensement_form_step"))
+    choose_by_label "Je ne trouve pas l’objet"
+    click_on("Passer à l’étape suivante")
+    expect(page).to have_text("Je confirme ne pas trouver l’objet")
+    click_on("Annuler")
+    sleep(1)
+    expect(page).to have_text("Avez-vous trouvé l’objet ?")
+    choose_by_label "Je ne trouve pas l’objet"
+    click_on("Passer à l’étape suivante")
+    expect(page).to have_text("Je confirme ne pas trouver l’objet")
+    click_on("Confirmer et continuer")
+    expect(page).to have_text("Avez-vous des commentaires ?")
+    click_on("Passer à l’étape suivante")
+    click_on("Valider le recensement de cet objet")
+
+    find_all("a", text: "Revenir à la liste d’objets de ma commune").first.click
+    card_bouquet = find(".fr-card", text: "Bouquet d’Autel")
+    expect(card_bouquet).to have_text(/Recensé/i)
+    card_bouquet.click
+    click_on "Modifier le recensement"
+    expect(page).to have_text("Récapitulatif")
+    find("section", text: "Avez-vous trouvé l’objet ?").find('button[aria-label="Modifier la réponse"]').click
+    choose_by_label "Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet"
+    click_on "Passer à l’étape suivante"
+    expect(page).to have_text("Où se trouve l’objet ?")
+
+    #  le recensement repasse en draft quand on change cette réponse
+    click_on "Objets de Albon"
+    card_bouquet = find(".fr-card", text: "Bouquet d’Autel")
+    expect(card_bouquet).not_to have_text(/Recensé/i)
+    expect(card_bouquet).not_to have_text(/Recensement à compléter/i)
+    card_bouquet.click
+    click_on "Compléter le recensement"
+    expect(page).to have_text("Recherche")
+    expect(
+      find(".fr-radio-group", text: "Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet")
+        .find("input", visible: false)
+    ).to be_checked
+  end
+
+  scenario "recensement non recensable" do
+    login_as(user, scope: :user)
+    visit "/"
+    within("header") { click_on "Voir les objets de Albon" }
+    click_on "Bouquet d’Autel"
+    click_on "Recenser cet objet"
+
+    scroll_to(find("#recensement_form_step"))
+    choose_by_label "Je confirme que je me suis bien déplacé"
+    click_on("Passer à l’étape suivante")
+    choose_by_label "L’objet se trouve dans l’édifice indiqué initialement"
+    choose_by_label "L’objet n’est pas recensable"
+    click_on("Passer à l’étape suivante")
+    expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
+    click_on("Annuler")
+    sleep(1)
+    choose_by_label "L’objet n’est pas recensable"
+    click_on("Passer à l’étape suivante")
+    expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
+    click_on("Confirmer et continuer")
+    expect(page).to have_text("Avez-vous des commentaires ?")
+    click_on("Revenir à l’étape précédente")
+    expect(page).to have_text("Localisation")
+    expect(find(".fr-radio-group", text: "L’objet n’est pas recensable").find("input", visible: false)).to be_checked
+    click_on "Passer à l’étape suivante"
+    expect(page).to have_text("Avez-vous des commentaires ?")
+    click_on("Passer à l’étape suivante")
+    expect(page).to have_text("Récapitulatif")
+    expect(page).to have_text("L’objet n’est pas recensable")
+    expect(page).not_to have_text(/Photos/i)
+    click_on "Valider le recensement de cet objet"
+
+    find_all("a", text: "Revenir à la liste d’objets de ma commune").first.click
+    card_bouquet = find(".fr-card", text: "Bouquet d’Autel")
+    expect(card_bouquet).to have_text(/Recensé/i)
+    card_bouquet.click
+    click_on "Modifier le recensement"
+    expect(page).to have_text("Récapitulatif")
+    find("section", text: "L’objet n’est pas recensable").find('button[aria-label="Modifier la réponse"]').click
+    choose_by_label "L’objet est recensable"
+    click_on "Passer à l’étape suivante"
+    expect(page).to have_text("Photos de l’objet")
+    click_on "Objets de Albon"
+    card_bouquet = find(".fr-card", text: "Bouquet d’Autel")
+    expect(card_bouquet).to have_text(/Recensement à compléter/i)
+    card_bouquet.click
+    click_on "Compléter le recensement"
+    expect(page).to have_text("Recherche")
+    click_on "Passer à l’étape suivante"
+    expect(page).to have_text("Localisation")
+    expect(find(".fr-radio-group", text: "L’objet est recensable").find("input", visible: false)).to be_checked
+    click_on "Passer à l’étape suivante"
+  end
+
   def choose_by_label(label)
     find("label", text: label).click
   end
