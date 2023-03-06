@@ -45,7 +45,9 @@ Capybara.register_driver :firefox do |app|
   options = Selenium::WebDriver::Firefox::Options.new
   Capybara::Selenium::Driver.new app, browser: :firefox, options:
 end
+
 Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
+Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
 
 begin
   require "pry"
