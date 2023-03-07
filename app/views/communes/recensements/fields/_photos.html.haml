@@ -15,7 +15,7 @@
         En déposant des photos, vous acceptez leur réutilisation dans le cadre de la
         = link_to "https://www.etalab.gouv.fr/licence-ouverte-open-licence/", target: "_blank", rel: "noopener" do
           Licence Ouverte Etalab
-      .fr-mb-1w= link_to "Voir la page 19 du guide", guide_url(page: 19), target: "_blank", rel: "noopener"
+      .fr-mb-1w= link_to "Voir la page 15 du guide", guide_url(page: 15), target: "_blank", rel: "noopener"
   = render PhotoUploadComponent.new(url: commune_objet_recensement_photos_path(recensement.commune, recensement.objet, recensement))
 
   - recensement.errors[:photos].each do |error_message|
