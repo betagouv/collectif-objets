@@ -30,21 +30,27 @@ RSpec.configure do |config|
 
   config.include Warden::Test::Helpers
 
-  if ENV["CAPYBARA_OPEN_PAGE_ON_FAIL"]
-    config.after do |example_group|
-      save_and_open_page if example_group.exception 
-    end
+  config.after(type: :feature) do |example_group|
+    save_screenshot if example_group.exception
   end
 end
 
 Capybara.register_driver :headless_firefox do |app|
-  options = Selenium::WebDriver::Firefox::Options.new.tap(&:headless!)
+  options = Selenium::WebDriver::Firefox::Options.new
+  options.add_argument "-headless"
   Capybara::Selenium::Driver.new app, browser: :firefox, options:
 end
+
 Capybara.register_driver :firefox do |app|
   options = Selenium::WebDriver::Firefox::Options.new
   Capybara::Selenium::Driver.new app, browser: :firefox, options:
 end
+
+Capybara.register_driver :chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  Capybara::Selenium::Driver.new app, browser: :chrome, options:
+end
+
 
 Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
 Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
