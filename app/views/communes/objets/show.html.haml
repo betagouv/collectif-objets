@@ -16,4 +16,4 @@
         = link_to "Modifier le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.current_recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
     - elsif communes_policy(Recensement.new(objet: @objet)).new?
       - c.with_cta do
-        = link_to "Recenser cet objet", commune_objet_recensements_path(@objet.commune, @objet), class: "fr-btn", data: { turbo_method: :post }
+        = button_to "Recenser cet objet", commune_objet_recensements_path(@objet.commune, @objet), class: "fr-btn", method: :post

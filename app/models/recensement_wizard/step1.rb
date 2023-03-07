@@ -34,6 +34,10 @@ module RecensementWizard
         wizard: { investigation: "introuvable", confirmation_introuvable: "true" } }
     end
 
+    def confirmation_modal_close_path
+      edit_commune_objet_recensement_path commune, objet, recensement, step: 1
+    end
+
     def assign_attributes(attributes)
       super
       if investigation == "confirmation_sur_place"

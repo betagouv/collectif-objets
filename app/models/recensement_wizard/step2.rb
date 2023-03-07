@@ -47,6 +47,10 @@ module RecensementWizard
         wizard: { recensable: "false", confirmation_not_recensable: "true", localisation:, edifice_nom: } }
     end
 
+    def confirmation_modal_close_path
+      edit_commune_objet_recensement_path commune, objet, recensement, step: 2, wizard: { localisation:, edifice_nom: }
+    end
+
     def next_step_number
       recensable == false ? 5 : super
     end
