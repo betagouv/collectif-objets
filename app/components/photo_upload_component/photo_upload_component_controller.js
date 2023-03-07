@@ -17,8 +17,6 @@ export default class extends Controller {
   static targets = ["wrapper", "input", "submit",  "nanobar", "progressText"]
 
   connect() {
-    const tmpElt = document.createElement('input')
-    this.captureSupported = tmpElt.capture !== undefined
     this.formTarget = this.inputTarget.closest("form")
     this.submitTarget.remove()
     this.toggleDependentLinks(true)
@@ -77,16 +75,4 @@ export default class extends Controller {
       }
     )
   }
-
-  // triggerBrowse(e) {
-  //   e.preventDefault()
-  //   this.inputTarget.click()
-  // }
-  //
-  // triggerCapture(e) {
-  //   e.preventDefault()
-  //   this.inputTarget.setAttribute("capture", "environment")
-  //   this.inputTarget.click()
-  //   this.inputTarget.removeAttribute("capture")
-  // }
 }

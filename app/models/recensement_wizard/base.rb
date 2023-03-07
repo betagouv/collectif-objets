@@ -12,7 +12,7 @@ module RecensementWizard
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
       :securisation, :notes, :photos, :photo_attachments, :errors, :recensable?, :absent?,
-      :analyse_etat_sanitaire, :analyse_securisation,
+      :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
     def initialize(recensement)
@@ -45,9 +45,6 @@ module RecensementWizard
 
       "RecensementWizard::Step#{next_step_number}".constantize::TITLE
     end
-
-    # so that form_for sends PATCH updates instead of POST
-    def persisted? = true
 
     def update(permitted_params)
       assign_attributes parse_params(permitted_params)
