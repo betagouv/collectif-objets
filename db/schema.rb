@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_06_081338) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_071516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -281,7 +281,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_081338) do
     t.boolean "recensable"
     t.string "edifice_nom"
     t.string "etat_sanitaire"
-    t.string "etat_sanitaire_edifice"
     t.string "securisation"
     t.string "notes"
     t.datetime "created_at", null: false
