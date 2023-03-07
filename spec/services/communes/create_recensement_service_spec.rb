@@ -31,8 +31,7 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
 
     it "should work" do
       res = subject
-      expect(res.success?).to be true
-      # expect(recensement).to be_a?(Recensement)
+      expect(res).to be true
       expect(recensement.persisted?).to be true
     end
   end
@@ -65,8 +64,7 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
 
     it "should work" do
       res = subject
-      expect(res.success?).to be true
-      # expect(recensement).to be_a?(Recensement)
+      expect(res).to be true
       expect(recensement.persisted?).to be true
       expect(recensement.dossier).to eq dossier
     end
@@ -97,8 +95,7 @@ RSpec.describe Communes::CreateRecensementService, type: :service do
 
     it "should work" do
       res = subject
-      expect(res.success?).to be false
-      # expect(recensement).to be_a?(Recensement)
+      expect(res).to be false
       expect(recensement.persisted?).to be false
       expect(recensement.errors.count).to be > 1
     end

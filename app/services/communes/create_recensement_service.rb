@@ -8,8 +8,6 @@ end
 
 module Communes
   class CreateRecensementService
-    RESULT = Struct.new(:success?, :recensement)
-
     def initialize(recensement)
       @recensement = recensement
     end
@@ -19,7 +17,7 @@ module Communes
       recensement.assign_attributes(dossier_params)
       success = recensement.save
       post_create_actions if success
-      RESULT.new(success, recensement)
+      success
     end
 
     protected

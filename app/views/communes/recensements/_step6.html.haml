@@ -87,7 +87,7 @@
   - else
     .co-text--italic Aucun commentaire
 
-- if recensement.draft?
+- if !recensement.valid? || recensement.draft?
   = form_for wizard,
     url: commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: wizard.step_number),
     builder: FormBuilderDsfr,
