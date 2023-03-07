@@ -39,5 +39,9 @@ module RecensementWizard
 
       { modal: "confirmation-no-photos", wizard: { confirmation_no_photos: "true" } }
     end
+
+    def confirmation_modal_close_path
+      edit_commune_objet_recensement_path(commune, objet, recensement, step: 3)
+    end
   end
 end

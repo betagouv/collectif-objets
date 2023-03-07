@@ -17,14 +17,10 @@
         En cas de difficultés, n’hésitez pas à contacter votre conservateur sur la
         = link_to "messagerie", commune_messages_path(wizard.commune)
 
-      - m.with_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
-      - m.with_button label: "Annuler",
-            level: :secondary,
-            html_attributes: { type: "button",
-              "aria-controls": "modal-confirmation-no-photos",
-              "data-controller": "button-link",
-              "data-action": "button-link#handleClick",
-              "data-href": edit_commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: 3) }
+      - m.with_button do
+        = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
+      - m.with_button do
+        = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
 
   .co-text--right
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", data: { recensement_form_step_target: "link" }
