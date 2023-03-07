@@ -1,4 +1,4 @@
-class AddDraftToRecensements < ActiveRecord::Migration[7.0]
+class AddRecensementsStatus < ActiveRecord::Migration[7.0]
   def up
     add_column :recensements, :status, :string, default: "draft", null: false
     Recensement.update_all(status: "completed")
