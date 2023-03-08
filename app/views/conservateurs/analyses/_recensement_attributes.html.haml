@@ -17,7 +17,7 @@
 - if recensement.recensable?
   .fr-my-4w.attribute-group
     .fr-pb-1w.co-text--bold
-      État sanitaire de l’objet
+      État de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "etat_sanitaire")
     .fr-checkbox-group.fr-mt-2w
       = check_box_tag "recensement[analyse_fiches][]", "entretien_objets", recensement.analyse_fiches.include?("entretien_objets"), id: "recensement_analyse_fiches_entretien_objets"

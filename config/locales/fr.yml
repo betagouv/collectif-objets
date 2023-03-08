@@ -579,7 +579,7 @@ fr:
       merci: Nous vous remercions de contribuer à cette campagne de recensement participatif %{dans_departement}.
       date_fin: <b>Pour rappel, la campagne prendra fin le %{date_fin}.</b>
       finalisez: Nous vous invitons donc à finaliser le recensement de l’ensemble de vos objets protégés avant cette échéance, afin que les conservateurs puissent prendre connaissance de vos réponses et vous accompagner au mieux.
-      photos: <b>Il est important d’y joindre des photos récentes pour permettre aux conservateurs d’évaluer l’état sanitaire des objets recensés.</b>
+      photos: <b>Il est important d’y joindre des photos récentes pour permettre aux conservateurs d’évaluer l’état des objets recensés.</b>
       besoin_daide: Si vous avez besoin d’aide pour terminer le recensement, notre équipe se tient à votre disposition, il vous suffit de répondre à cet email.
     relance2_to_complete:
       title: "Mail de deuxième relance - commune doit finaliser"

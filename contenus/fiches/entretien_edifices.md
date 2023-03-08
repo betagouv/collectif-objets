@@ -5,7 +5,7 @@ titre: Entretien de l’édifice et lutte contre les infestations
 ## Introduction
 
 Les objets monuments historiques sont des trésors nationaux (article L. 111-1 du Code du patrimoine).
-Il est du ressort de chacun - et en particulier des communes propriétaires - de s’assurer de leur préservation et de leur transmission aux générations futures.
+Il est du ressort de chacun - et en particulier des communes abritant des objets protégés - de s’assurer de leur préservation et de leur transmission aux générations futures.
 
 Le bon entretien de l’édifice dans lequel ces objets sont conservés est nécessaire pour leur préservation.
 

@@ -41,7 +41,7 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
 
     # override field on first recensement
     click_on "Bouquet d'Autel"
-    etat_sanitaire_group = find("div", text: /État sanitaire de l’objet/, class: "co-text--bold")
+    etat_sanitaire_group = find("div", text: /État de l’objet/, class: "co-text--bold")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(etat_sanitaire_group) do
       click_on "Modifier"
