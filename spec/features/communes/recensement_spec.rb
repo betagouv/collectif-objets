@@ -275,6 +275,16 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Votre recensement a bien été enregistré")
   end
 
+  scenario "aucun choix à l’étape 1" do
+    navigate_to_objets
+    click_on_and_wait "Bouquet d’Autel"
+    click_on_and_wait "Recenser cet objet"
+    click_on "Passer à l’étape suivante"
+    scroll_to(find("#recensement_form_step"))
+    expect(page).to have_text("Recherche")
+    expect(page).to have_text("Veuillez choisir une option")
+  end
+
   def click_on_and_wait(text)
     click_on text
     sleep 0.5 # and cry
