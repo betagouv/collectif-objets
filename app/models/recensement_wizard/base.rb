@@ -11,7 +11,7 @@ module RecensementWizard
 
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
-      :securisation, :notes, :photos, :photo_attachments, :errors, :recensable?, :absent?,
+      :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
@@ -48,6 +48,7 @@ module RecensementWizard
 
     def update(permitted_params)
       assign_attributes parse_params(permitted_params)
+      errors.merge!(recensement.errors) unless valid?
       return false unless valid?
 
       return true if skip_save?
