@@ -9,7 +9,7 @@ module RecensementWizard
 
     validates :investigation,
               inclusion: { in: %w[confirmation_sur_place introuvable],
-                           message: "Veuillez choisir une option parmi les 3" }
+                           message: "Veuillez choisir une option" }
 
     def initialize(recensement)
       super
