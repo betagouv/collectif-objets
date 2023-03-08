@@ -10,10 +10,9 @@ FactoryBot.define do
     recensable { true }
     edifice_nom { nil }
     etat_sanitaire { Recensement::ETAT_BON }
-    etat_sanitaire_edifice { Recensement::ETAT_MOYEN }
     securisation { Recensement::SECURISATION_CORRECTE }
     notes { "objet très doux" }
-    confirmation_pas_de_photos { true }
+    status { "completed" }
 
     trait :empty do
       confirmation_sur_place { nil }
@@ -21,10 +20,8 @@ FactoryBot.define do
       recensable { nil }
       edifice_nom { nil }
       etat_sanitaire { nil }
-      etat_sanitaire_edifice { nil }
       securisation { nil }
       notes { nil }
-      confirmation_pas_de_photos { nil }
     end
 
     trait :with_photos_mocked do
@@ -49,8 +46,6 @@ FactoryBot.define do
     end
 
     trait :with_photo do
-      confirmation_pas_de_photos { false }
-
       after(:build) do |recensement|
         recensement.photos.attach(
           io: Rails.root.join("spec/fixture_files/tableau1.jpg").open,

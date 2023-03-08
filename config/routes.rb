@@ -71,7 +71,9 @@ Rails.application.routes.draw do
     resource :completion, only: %i[new create show]
     resource :recompletion, only: %i[new create]
     resources :objets, only: %i[index show] do
-      resources :recensements, except: %i[index show destroy]
+      resources :recensements, only: %i[create edit update destroy] do
+        resources :photos, only: %i[create destroy], controller: "recensement_photos"
+      end
     end
     resources :dossiers, only: [:show]
     resources :campaign_recipients, only: [:update]

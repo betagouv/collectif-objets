@@ -32,7 +32,7 @@ module Co
             .where(commune: @commune)
             .with_photos_first
             .includes(:commune, recensements: %i[photos_attachments photos_blobs])
-          objets = objets.where.missing(:recensements) if @exclude_recensed
+          objets = objets.without_completed_recensements if @exclude_recensed
           objets = objets.where.not(id: @exclude_ids) if @exclude_ids.any?
           objets = objets.where(edifice: @edifice) if group_by_edifice? && @edifice.present?
           objets

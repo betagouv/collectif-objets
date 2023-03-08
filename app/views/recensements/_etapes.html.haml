@@ -1,19 +1,18 @@
 .fr-accordions-group.co-background--light-teal.fr-mb-4w
   %section.fr-accordion
-    %h3.fr-accordion__title
+    %h3.fr-accordion__title.fr-px-1w
       %button.fr-accordion__btn{"aria-controls": "etapes-accordion", "aria-expanded": local_assigns.fetch(:expanded, false).to_s}
         = t(".unfold")
     #etapes-accordion.fr-collapse
-      .fr-container.fr-grid-row.fr-grid-row--center.fr-mt-4w
-        .fr-col-md-4.fr-px-4w
+      .fr-container.fr-grid-row.fr-grid-row--center.fr-mt-4w.co-text--center
+        .fr-col-md-4
           = vite_image_tag "images/illustrations/etape1.svg", class: "fr-mb-2w  co--width-max-100", alt: "Étape 1"
           %p= t(".etape1_html")
-        .fr-col-md-4.fr-px-4w
+        .fr-col-md-4
           = vite_image_tag "images/illustrations/etape2.svg", class: "fr-mb-2w  co--width-max-100", alt: "Étape 2"
           %p= t(".etape2_html")
-        .fr-col-md-4.fr-px-4w
+        .fr-col-md-4
           = vite_image_tag "images/illustrations/etape3.svg", class: "fr-mb-2w  co--width-max-100", alt: "Étape 3"
           %p= t(".etape3_html")
       .co-text--center.fr-pt-4w
         = link_to t(".cta"), aide_path, class: "fr-btn fr-btn--secondary"
-

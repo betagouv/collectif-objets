@@ -1,0 +1,22 @@
+.fr-card.fr-enlarge-link.fr-card--horizontal.fr-card--sm
+  .fr-card__body
+    .fr-card__title
+      %h2.fr-text--md.fr-mb-0= link_to objet.nom, commune_objet_path(objet.commune, objet)
+    %p.fr-card__desc
+      #{objet.edifice_nom}
+      - if objet.palissy_EMPL
+        (#{objet.palissy_EMPL})
+      - if objet.palissy_CATE
+        %br
+        #{objet.palissy_CATE}
+      - if objet.palissy_SCLE
+        %br
+        #{objet.palissy_SCLE.gsub(";", " - ")}
+      %br
+      %span.co-text--muted= objet.palissy_REF
+  .fr-card__header
+    .fr-card__img
+      - if objet.palissy_photos.any?
+        = image_tag objet.palissy_photos.first.url, alt: objet.palissy_photos.first.description, class: "fr-responsive-img"
+      - else
+        = vite_image_tag "images/illustrations/photo-manquante.png", alt: "image manquante", class: "fr-responsive-img"

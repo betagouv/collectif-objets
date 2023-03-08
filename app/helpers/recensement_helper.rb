@@ -44,45 +44,24 @@ module RecensementHelper
     etat_sanitaire_options.map { [_1.label, _1.value] }
   end
 
-  def etat_sanitaire_edifice_options
-    Recensement::ETATS.map do |etat|
-      Option.new(
-        etat,
-        t("recensement.etat_sanitaire_edifice_choices.#{etat}"),
-        etat_badge_color(etat)
-      )
-    end
-  end
-
-  def etat_sanitaire_edifice_options_for_select
-    etat_sanitaire_edifice_options.map { [_1.label, _1.value] }
-  end
-
   def etat_sanitaire_badge(value, **html_opts)
     badge(etat_badge_color(value), **html_opts) do
       t("recensement.etat_sanitaire_choices.#{value}")
     end
   end
 
-  def etat_sanitaire_edifice_badge(value, **html_opts)
-    badge(etat_badge_color(value), **html_opts) do
-      t("recensement.etat_sanitaire_edifice_choices.#{value}")
-    end
-  end
-
   alias analyse_etat_sanitaire_badge etat_sanitaire_badge
-  alias analyse_etat_sanitaire_edifice_badge etat_sanitaire_edifice_badge
 
   def securisation_options
     [
       Option.new(
         Recensement::SECURISATION_MAUVAISE,
-        t("recensement.securisation_choices.mauvaise"),
+        t("recensement.securisation_choices.en_danger"),
         "warning"
       ),
       Option.new(
         Recensement::SECURISATION_CORRECTE,
-        t("recensement.securisation_choices.correcte"),
+        t("recensement.securisation_choices.en_securite"),
         "success"
       )
     ]
@@ -123,6 +102,25 @@ module RecensementHelper
       Conservateurs::AnalyseOverrideComponent.new \
         recensement:, recensement_presenter:, original_attribute_name:
     end
+  end
+
+  def edit_recensement_step_link(recensement, step, **kwargs)
+    button_to \
+      "",
+      edit_commune_objet_recensement_path(recensement.commune, recensement.objet, recensement),
+      params: { step: },
+      class: "fr-btn fr-btn--sm fr-icon-edit-line fr-btn--tertiary fr-btn--tertiary-no-outline",
+      data: { turbo_action: "advance" },
+      form_class: "co-display--inline co-edit-button",
+      method: :get,
+      **kwargs
+  end
+
+  def recensement_nom_edifice(recensement)
+    return recensement.objet.palissy_EDIF if recensement.edifice_initial?
+    return recensement.edifice_nom if recensement.autre_edifice?
+
+    nil
   end
 end
 # rubocop:enable Metrics/ModuleLength

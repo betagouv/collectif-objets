@@ -1,0 +1,37 @@
+- content_for(:head_title) { "Recensement enregistré" }
+
+%main
+  .fr-container
+    = render "shared/breadcrumbs",
+      links: [["Accueil", root_path], ["Objets de #{@commune.nom}", commune_objets_path(@commune)]],
+      current_page_label: "Confirmation"
+
+    .fr-grid-row.fr-mb-4w
+      .fr-col-md-6.fr-col-offset-md-1
+        %h2.co-text--blue Votre recensement a bien été enregistré
+        %p Vous pourrez revenir sur la fiche de cet objet pour modifier votre recensement.
+
+        - if @commune.objets.without_completed_recensements.any?
+          %p
+            = link_to "Revenir à la liste d’objets de ma commune", commune_objets_path(@commune), class: "fr-link fr-link--icon-left fr-icon-arrow-left-line"
+        - else
+          - if @dossier.construction?
+            %p Vous avez recensé tous les objets de votre commune !
+          %p
+            = link_to "Finaliser le recensement…", new_commune_completion_path(@commune), class: "fr-btn"
+            ou
+          %p
+            = link_to "Revenir à la liste d’objets de ma commune", commune_objets_path(@commune), class: "fr-btn fr-btn--secondary"
+      .fr-col-md-4.co-text--right.co-hide--md
+        = vite_image_tag "images/illustrations/man-ok-screen.svg", class: "co--width-max-100", style: "max-height: 13rem;"
+
+  - if @objets_list.any?
+    .co-background--teal.fr-pb-12w
+      .fr-container.fr-py-4w
+        %h3.co-text--blue
+          - if @objets_list.group_by_edifice? && @objets_list.edifice.present?
+            Ces objets sont encore à recenser dans l’édifice #{@objets_list.edifice.nom} :
+          - else
+            Ces objets sont encore à recenser :
+        = render "communes/objets/cards", objets: @objets_list.objets, commune: @commune
+        = link_to "Revenir à la liste d’objets de ma commune", commune_objets_path(@commune), class: "fr-link fr-link--icon-left fr-icon-arrow-left-line"

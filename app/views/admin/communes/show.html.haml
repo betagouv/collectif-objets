@@ -134,8 +134,7 @@
             %th Objet
             %th Localisation
             %th Recensable
-            %th État sanitaire de l'édifice
-            %th État sanitaire
+            %th État
             %th Sécurisation
             %th Photos
             %th Notes
@@ -149,8 +148,6 @@
               %td= recensement_presenter.localisation
               %td= recensement_presenter.recensable
               - if recensement.recensable?
-                %td
-                  = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :etat_sanitaire_edifice, recensement:, recensement_presenter:)
                 %td
                   = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :etat_sanitaire, recensement:, recensement_presenter:)
                 %td

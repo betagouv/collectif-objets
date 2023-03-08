@@ -27,7 +27,6 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       objet: objet_bouquet, user:, dossier:,
       etat_sanitaire: Recensement::ETAT_BON,
       analyse_etat_sanitaire: Recensement::ETAT_PERIL,
-      etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: "objet très doux",
       analyse_notes: "Ce bouquet va fâner !!!",
@@ -41,7 +40,6 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       :recensement,
       objet: objet_ciboire, user:, dossier:,
       etat_sanitaire: Recensement::ETAT_BON,
-      etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil,
       analysed_at: 2.days.ago,
@@ -62,9 +60,9 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       expect(page).to have_text(/Bouquet d'autel/i)
       expect(page).to have_text(/objet très doux/i)
       expect(page).to have_text(/ce bouquet va fâner/i)
-      strikethrough = find(".co-text--strikethrough", text: /L'objet est en bon état/i)
+      strikethrough = find(".co-text--strikethrough", text: /L’objet est en bon état/i)
       expect(strikethrough).to be_truthy
-      expect(page).to have_text(/L'objet est en péril/i)
+      expect(page).to have_text(/L’objet est en péril/i)
       expect(page).to have_text(/Fiche Sécuriser vos objets/i)
       expect(page).to have_text(/Fiche Entretien de l’édifice et lutte contre les infestations/i)
     end
@@ -73,9 +71,9 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       expect(page).not_to have_text(/Bouquet d'autel/i)
       expect(page).to have_text(/Aucune photo de recensement/i)
       expect(page).to have_text(/Musée/i)
-      expect(page).not_to have_text(/L'objet est en péril/i)
+      expect(page).not_to have_text(/L’objet est en péril/i)
       expect(page).not_to have_text(/Fiche Sécuriser vos objets/i)
-      expect(page).to have_text(/L'objet est en bon état/i)
+      expect(page).to have_text(/L’objet est en bon état/i)
       expect(page).to have_text(/Aucun commentaire/i)
     end
   end

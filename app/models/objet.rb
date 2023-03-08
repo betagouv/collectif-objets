@@ -14,6 +14,11 @@ class Objet < ApplicationRecord
     objets_arel.to_a.sort_by { _1.recensements.to_a.any?(&:prioritaire?) ? 0 : 1 }
   end
 
+  scope :without_completed_recensements, lambda {
+    joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.status = 'completed'")
+      .where(recensements: { id: nil })
+  }
+
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
 
@@ -47,13 +52,10 @@ class Objet < ApplicationRecord
     truncate("#{palissy_REF} #{nom}", length: 40)
   end
 
-  def current_recensement
-    recensements.first
-  end
+  def current_recensement = recensements.first
 
-  def recensement?
-    current_recensement.present?
-  end
+  def recensement? = current_recensement.present?
+  def recensement_completed? = current_recensement&.completed?
 
   def self.select_best_objet_in_list(objets_arr)
     current_arr = objets_arr

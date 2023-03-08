@@ -6,7 +6,7 @@ module Recensements
   module AnalyseConcern
     extend ActiveSupport::Concern
 
-    OVERRIDABLE_FIELDS = %i[etat_sanitaire etat_sanitaire_edifice securisation].freeze
+    OVERRIDABLE_FIELDS = %i[etat_sanitaire securisation].freeze
 
     ANALYSE_FICHE_DEPOT_PLAINTE = "depot_plainte"
     ANALYSE_FICHE_SECURISATION = "securisation"
@@ -43,7 +43,7 @@ module Recensements
     end
 
     def analyse_overrides?
-      %i[analyse_etat_sanitaire analyse_etat_sanitaire_edifice analyse_securisation].any? { send(_1).present? }
+      %i[analyse_etat_sanitaire analyse_securisation].any? { send(_1).present? }
     end
 
     def analysable?

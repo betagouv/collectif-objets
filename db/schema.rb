@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_24_140353) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_071516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -281,7 +281,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_140353) do
     t.boolean "recensable"
     t.string "edifice_nom"
     t.string "etat_sanitaire"
-    t.string "etat_sanitaire_edifice"
     t.string "securisation"
     t.string "notes"
     t.datetime "created_at", null: false
@@ -294,11 +293,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_140353) do
     t.text "analyse_notes"
     t.datetime "analysed_at"
     t.bigint "conservateur_id"
-    t.bigint "dossier_id", null: false
+    t.bigint "dossier_id"
     t.boolean "confirmation_sur_place"
-    t.boolean "confirmation_pas_de_photos"
     t.bigint "pop_export_memoire_id"
     t.bigint "pop_export_palissy_id"
+    t.string "status", default: "draft", null: false
+    t.integer "photos_count", default: 0
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true

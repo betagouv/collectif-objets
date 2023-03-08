@@ -1,0 +1,33 @@
+-# locals: (:wizard)
+
+= render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
+
+  = render "communes/recensements/fields/investigation", form_builder:
+
+  = form_builder.hidden_field :confirmation_introuvable
+
+  - if @modal == "confirmation-introuvable"
+    = dsfr_modal(title: "Je confirme ne pas trouver l’objet",
+      opened: true,
+      html_attributes: { id: "modal-confirmation-introuvable",
+        "data-controller": "modal-auto-open",
+        "data-modal-auto-open-target": "modal"}) do |m|
+      - m.with_header do
+        = link_to "Fermer", wizard.confirmation_modal_close_path, class: "fr-link--close fr-link"
+      %p
+        Vous allez être redirigé directement vers l’étape des commentaires.
+      %p
+        Vous pouvez aussi contacter votre conservateur via la
+        = link_to "messagerie", commune_messages_path(wizard.commune)
+        pour lui demander de l’aide ou des conseils pour localiser l’objet.
+      - m.with_button do
+        = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
+      - m.with_button do
+        = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
+
+  .co-text--right
+    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"
+    .fr-mt-2w
+      = link_to "Revenir à la fiche objet",
+        commune_objet_path(wizard.commune, wizard.objet),
+        class: "fr-link fr-link--icon-left fr-icon-arrow-left-line"

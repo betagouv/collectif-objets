@@ -1,6 +1,31 @@
-- content_for(:head_title) { "Recensement · #{truncate(@recensement.objet.nom, length: 20)}" }
-%main.fr-container.fr-py-8w
-  = render "recensements/form",
-    recensement: @recensement,
-    form_url: commune_objet_recensement_path(@recensement.commune, @recensement.objet, @recensement),
-    back_to_objet_url: commune_objet_path(@recensement.commune, @recensement.objet)
+- content_for(:head_title) { "Recensement · #{truncate(@wizard.objet.nom, length: 20)}" }
+%main.fr-container.co-container--sm-px-0.fr-pb-10w
+  .fr-px-1w.fr-px-md-0
+    = render "shared/breadcrumbs",
+      links: [["Accueil", root_path],
+        ["Objets de #{current_user.commune.nom}", commune_objets_path(current_user.commune)],
+        [@wizard.objet.nom, commune_objet_path(@wizard.commune, @wizard.objet)],
+      ], current_page_label: "Recensement"
+
+  .fr-grid-row
+    .fr-col-md-8.fr-col-offset-md-2
+      .fr-px-1w.fr-px-md-0
+        %h1 Recensement de l’objet #{truncate(@wizard.objet.nom, length: 20)}
+
+        .fr-mb-4w= render "communes/recensements/objet", objet: @wizard.objet
+
+        = render "recensements/etapes", expanded: @wizard.step_number == 1 && @recensement.first?
+
+      = turbo_frame_tag "recensement_form_step",
+        data: { controller: "recensement-form-step",
+          action: "turbo:submit-start->recensement-form-step#disableLinks turbo:frame-load->recensement-form-step#scroll turbo:load->recensement-form-step#scroll",
+          autoscroll: true,
+          autoscroll_block: "start" } do
+        .co-background--grey.fr-px-md-10w.fr-py-md-7w.fr-p-2w
+          .fr-mb-5w
+            = render DsfrComponent::StepperComponent.new(title: @wizard.title,
+              value: @wizard.step_number,
+              max: 6,
+              next_title: @wizard.next_step_title,
+              html_attributes: { class: @wizard.skipped_steps_class })
+          = render "communes/recensements/step#{@wizard.step_number}", wizard: @wizard, recensement: @recensement

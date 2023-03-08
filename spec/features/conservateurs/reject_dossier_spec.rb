@@ -18,7 +18,6 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
       :recensement,
       objet: objet_bouquet, user:, dossier:,
       etat_sanitaire: Recensement::ETAT_BON,
-      etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: "objet très doux"
     )
@@ -29,7 +28,6 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
       :recensement,
       objet: objet_ciboire, user:, dossier:,
       etat_sanitaire: Recensement::ETAT_BON,
-      etat_sanitaire_edifice: Recensement::ETAT_MOYEN,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil
     )
@@ -51,7 +49,7 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
         "select[name=\"recensement[analyse_etat_sanitaire]\"]",
         visible: true
       )
-      select "L'objet est en péril", from: "recensement[analyse_etat_sanitaire]"
+      select "L’objet est en péril", from: "recensement[analyse_etat_sanitaire]"
     end
     click_on "Sauvegarder"
 

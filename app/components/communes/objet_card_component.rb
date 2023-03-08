@@ -2,6 +2,8 @@
 
 module Communes
   class ObjetCardComponent < ViewComponent::Base
+    include ObjetHelper
+
     def initialize(objet, commune:, recensement: nil, badges: nil)
       @objet = objet
       @recensement = recensement
@@ -33,7 +35,7 @@ module Communes
 
       Photo.new \
         url: recensement&.photos&.first&.variant(:medium),
-        description: "Photo de recensement de l'objet #{objet.nom}"
+        description: "Photo de recensement de l’objet #{objet.nom}"
     end
 
     def badge_struct
@@ -41,13 +43,8 @@ module Communes
     end
 
     def recensement_badge
-      return nil if dossier&.rejected? || dossier&.accepted?
-
-      if recensement.present?
-        badge_struct.new("success", "Recensé")
-      else
-        badge_struct.new("", "Pas encore recensé")
-      end
+      color, text = objet_recensement_badge_color_and_text(objet)
+      badge_struct.new(color, text)
     end
 
     def analyse_notes_badge

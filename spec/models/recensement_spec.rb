@@ -30,10 +30,7 @@ RSpec.describe Recensement, type: :model do
 
     context "recensement introuvable" do
       let(:attributes) do
-        {
-          localisation: Recensement::LOCALISATION_ABSENT, recensable: false,
-          etat_sanitaire: nil, etat_sanitaire_edifice: nil, securisation: nil
-        }
+        { localisation: Recensement::LOCALISATION_ABSENT, recensable: false, etat_sanitaire: nil, securisation: nil }
       end
 
       context "other fields empty" do
@@ -72,9 +69,7 @@ RSpec.describe Recensement, type: :model do
     end
 
     context "recensement non recensable" do
-      let(:attributes) do
-        { recensable: false, etat_sanitaire: nil, etat_sanitaire_edifice: nil, securisation: nil }
-      end
+      let(:attributes) { { recensable: false, etat_sanitaire: nil, securisation: nil } }
 
       context "other fields empty" do
         let(:recensement) { build(:recensement, attributes) }

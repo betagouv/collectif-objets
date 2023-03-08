@@ -135,9 +135,32 @@
                 = accessible_icon_span
                 %ul
                   %li
-                    Recensement de l'objet 1
-                    = link_to "Démo", demo_path(namespace: "communes", name: "new_recensement")
-                    = accessible_icon_span
+                    Recensement de l’objet 1
+                    %ul
+                      %li
+                        Étape 1 - Recherche
+                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step1")
+                        = accessible_icon_span
+                      %li
+                        Étape 2 - Localisation
+                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step2")
+                        = accessible_icon_span
+                      %li
+                        Étape 3 - Photos
+                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step3")
+                        = accessible_icon_span
+                      %li
+                        Étape 4 - Objet
+                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step4")
+                        = accessible_icon_span
+                      %li
+                        Étape 5 - Commentaires
+                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step5")
+                        = accessible_icon_span
+                      %li
+                        Étape 6 - Récapitulatif
+                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step6")
+                        = accessible_icon_span
 
               %li Autres objets …
           %li

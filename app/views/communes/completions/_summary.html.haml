@@ -5,8 +5,7 @@
         %th Objet
         %th Localisation
         %th Recensable
-        %th État sanitaire de l'édifice
-        %th État sanitaire de l'objet
+        %th État de l’objet
         %th Sécurisation
         %th Photos
     %tbody
@@ -26,9 +25,10 @@
                 = link_to truncate(recensement.objet.nom, length: 30), commune_objet_path(objet.commune, recensement.objet)
           %td= presenter.localisation
           %td= presenter.recensable
-          - %i[etat_sanitaire_edifice etat_sanitaire securisation].each do |original_attribute_name|
-            %td
-              = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name:
+          %td
+            = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :etat_sanitaire
+          %td
+            = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
           %td
             - if recensement.missing_photos?
               = badge("warning") { "Aucune photo" }

@@ -16,7 +16,7 @@
     = render "communes/objets/pourquoi_n_objets_callout", objets_list: @objets_list if @objets_list.group_by_edifice?
   - elsif @commune.started?
     %h2.co-text--blue
-      = t(".n_objets_restants_a_recenser", count: @commune.objets.where.missing(:recensements).count)
+      = t(".n_objets_restants_a_recenser", count: @commune.objets.without_completed_recensements.count)
     = render "recensements/etapes"
     = render "communes/objets/list", objets_list: @objets_list, commune: @commune
     = render "communes/objets/pourquoi_n_objets_callout", objets_list: @objets_list if @objets_list.group_by_edifice?

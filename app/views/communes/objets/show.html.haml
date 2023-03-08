@@ -1,13 +1,19 @@
 - content_for(:head_title) { truncate(@objet.nom, length: 20) }
 %main.fr-container.co-objet-show.fr-pt-2w
-  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Objets de #{@objet.commune.nom}", commune_objets_path(current_user.commune)]], current_page_label: @objet.nom
+  = render "shared/breadcrumbs",
+    links: [["Accueil", root_path], ["Objets de #{@objet.commune.nom}", commune_objets_path(current_user.commune)]],
+    current_page_label: @objet.nom
   .co-flex.co-flex--align-items-center.co-flex--gap-1rem.co-flex--wrap.fr-mb-8w
     %h1.fr-mb-0= @objet.nom
-    = render "objets/recensement_badge", objet: @objet
+    = objet_recensement_badge(@objet)
+
   = render ObjetPageComponent.new(objet: @objet) do |c|
-    - if @objet.recensement? && communes_policy(@objet.current_recensement).edit?
+    - if @objet.current_recensement&.draft?
       - c.with_cta do
-        = link_to "modifier le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.current_recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
+        = link_to "Compléter le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.current_recensement, step: 1), class: "fr-btn"
+    - elsif @objet.recensement? && communes_policy(@objet.current_recensement).edit?
+      - c.with_cta do
+        = link_to "Modifier le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.current_recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
     - elsif communes_policy(Recensement.new(objet: @objet)).new?
       - c.with_cta do
-        = link_to "Recenser cet objet", new_commune_objet_recensement_path(@objet.commune, @objet), class: "fr-btn"
+        = button_to "Recenser cet objet", commune_objet_recensements_path(@objet.commune, @objet), class: "fr-btn", method: :post

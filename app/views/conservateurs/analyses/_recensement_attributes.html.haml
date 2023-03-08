@@ -17,17 +17,6 @@
 - if recensement.recensable?
   .fr-my-4w.attribute-group
     .fr-pb-1w.co-text--bold
-      État sanitaire de l’édifice à proximité de l’objet
-    = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "etat_sanitaire_edifice")
-    .fr-checkbox-group.fr-mt-2w
-      = check_box_tag "recensement[analyse_fiches][]", "entretien_edifices", recensement.analyse_fiches.include?("entretien_edifices"), id: "recensement_analyse_fiches_nuisibles"
-      = f.label :analyse_fiches_nuisibles do
-        Informer la commune sur les&nbsp;
-        = link_to "mesures d’entretien des édifices", fiche_path("entretien_edifices"), target: "_blank", rel: "noopener"
-        et de prévention d’attaques de nuisibles
-
-  .fr-my-4w.attribute-group
-    .fr-pb-1w.co-text--bold
       État sanitaire de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "etat_sanitaire")
     .fr-checkbox-group.fr-mt-2w
@@ -40,6 +29,12 @@
       = f.label :analyse_fiches_restauration do
         Informer la commune sur les&nbsp;
         = link_to "étapes préalables à la restauration", fiche_path("restauration"), target: "_blank", rel: "noopener"
+    .fr-checkbox-group.fr-mt-2w
+      = check_box_tag "recensement[analyse_fiches][]", "entretien_edifices", recensement.analyse_fiches.include?("entretien_edifices"), id: "recensement_analyse_fiches_nuisibles"
+      = f.label :analyse_fiches_nuisibles do
+        Informer la commune sur les&nbsp;
+        = link_to "mesures d’entretien des édifices", fiche_path("entretien_edifices"), target: "_blank", rel: "noopener"
+        et de prévention d’attaques de nuisibles
 
   .fr-my-4w.attribute-group
     .fr-pb-1w.co-text--bold
