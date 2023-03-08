@@ -30,4 +30,5 @@
     .fr-mt-2w
       = link_to "Revenir à la fiche objet",
         commune_objet_path(wizard.commune, wizard.objet),
-        class: "fr-link fr-link--icon-left fr-icon-arrow-left-line"
+        class: "fr-link fr-link--icon-left fr-icon-arrow-left-line",
+        data: { turbo_frame: "_top" }
