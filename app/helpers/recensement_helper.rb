@@ -104,14 +104,6 @@ module RecensementHelper
     end
   end
 
-  def edit_recensement_part_link(recensement, part)
-    link_to \
-      "modifier",
-      edit_commune_objet_recensement_path(recensement.commune, recensement.objet, recensement, part:),
-      class: "fr-link fr-icon-edit-line fr-link--icon-right",
-      data: { turbo_action: "advance" }
-  end
-
   def edit_recensement_step_link(recensement, step, **kwargs)
     button_to \
       "",
