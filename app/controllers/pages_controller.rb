@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  PDFS = {
-    "guide" => "Guidederecensement",
-    "fiche_nuisibles" => "fiche_nuisibles",
-    "fiche_securisation" => "fiche_securisation",
-    "fiche_vol" => "fiche_vol"
-  }.freeze
+  PDFS = { "guide" => "Guidederecensement" }.freeze
   STATIC_FILES_HOST = "fichiers.collectif-objets.beta.gouv.fr"
 
   def home
