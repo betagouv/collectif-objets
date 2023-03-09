@@ -1,12 +1,13 @@
 ---
 titre: Dépôt de plainte
 ---
-
 ## Pourquoi signaler la disparition d’un objet monument historique ?
 
 Les objets monuments historiques sont des trésors nationaux (article L. 111-1 du Code du patrimoine).
 
 Ils sont imprescriptibles et inaliénables. Quelle que soit la date de leur disparition, ils font toujours partie du domaine public et tous les moyens doivent être mis en œuvre pour les y faire revenir.
+
+N’hésitez pas à nous contacter
 
 **Il n’y a donc pas de prescription pour déclarer ce type de disparition.**
 
@@ -36,11 +37,12 @@ Vous pouvez déposer une pré-plainte en ligne, vous devrez ensuite vous rendre 
 Rappelez à l’agent de police judiciaire qui va vous recevoir que votre plainte se réfère au code NATINF 27479 “Vol d’un objet mobilier classé ou inscrit”.
 
 ### La liste de documents à apporter au commissariat pour le dépôt de plainte
-- Le rapport de recensement
-- La fiche POP/Palissy que vous pourrez retrouver en cliquant sur l'objet concerné dans Collectif Objets et en suivant le lien "Voir plus de détails sur la Plateforme Ouverte du Patrimoine"
-- Toutes les autres photos de l’objet prises avant celles du recensement (si vous en disposez)
-- Les documents qui prouvent la propriété de l’œuvre par la commune (si vous en disposez)
-- Un historique des dernières personnes ayant vu l’objet (quels sont les renseignements que vous avez pu glaner lors de votre recherche d’informations dans la commune ?)
+
+* Le rapport de recensement
+* La fiche POP/Palissy que vous pourrez retrouver en cliquant sur l'objet concerné dans Collectif Objets et en suivant le lien "Voir plus de détails sur la Plateforme Ouverte du Patrimoine"
+* Toutes les autres photos de l’objet prises avant celles du recensement (si vous en disposez)
+* Les documents qui prouvent la propriété de l’œuvre par la commune (si vous en disposez)
+* Un historique des dernières personnes ayant vu l’objet (quels sont les renseignements que vous avez pu glaner lors de votre recherche d’informations dans la commune ?)
 
 ## Étape 4 - Je transmets mon dépôt de plainte
 
