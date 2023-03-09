@@ -10,7 +10,7 @@
         %span.fr-icon-refresh-line.co-rotating{"aria-hidden": "true"}
 
     - if photo.variable?
-      = image_tag photo.variant(:small).processed,
+      = image_tag photo.variant(:small),
         class: "fr-p-1w",
         data: { action: "load->photo-preview#onImageLoad", photo_preview_target: "image" }
     - else
