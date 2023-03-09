@@ -1,6 +1,6 @@
 ---
-titre: Article de l'Est Éclair
-source: L'Est Éclair
+titre: Article de L’Est Éclair
+source: L’Est Éclair
 date: 06.11.2022
 logo: /contenus/articles_presse/images/logo-lest-eclair.png
 url: https://www.lest-eclair.fr/id424528/article/2022-11-06/un-site-internet-pour-aider-les-maires-gerer-le-patrimoine
