@@ -31,7 +31,7 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
 
   config.after(type: :feature) do |example_group|
-    return unless example_group.exception
+    next unless example_group.exception
     puts "saving screenshot to #{Capybara.save_path} ..."
     save_screenshot
   end
