@@ -496,6 +496,10 @@ Nous utilisons Netlify Identity pour authentifier les accès au CMS, et un user 
 et les PRs émanant de Netlify CMS.
 Cette configuration est décrite sur [ce pad](https://pad.incubateur.net/zdhV1dI-RBivCfmwXq-hVw#).
 
+Si l’erreur `Git Gateway Error: Please ask your site administrator to reissue the Git Gateway token` apparaît, il faut 
+- renouveller le token du user GitHub robot@collectifobjets.org depuis [sur cette page GitHub](https://github.com/settings/tokens) (Settings > Developer settings > Personal Access Tokens (classic)) avec le droit `repo` uniquement
+- copiez le sur [la configuration Netlify Identity](https://app.netlify.com/sites/collectif-objets-cms/settings/identity) dans Git Gateway
+
 ## Debug local via tunneling
 
 Le tunneling consiste à exposer votre environnement local sur une URL publiquement accessible.
