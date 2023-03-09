@@ -5,7 +5,8 @@ module ApplicationHelper
 
   def head_title
     if content_for(:head_title).present?
-      "#{content_for(:head_title)} · Collectif Objets"
+      content_for(:head_title).to_s + " · Collectif Objets" # rubocop:disable Style/StringConcatenation
+      # for some reason concatenation outputs html characters
     else
       "Collectif Objets"
     end
