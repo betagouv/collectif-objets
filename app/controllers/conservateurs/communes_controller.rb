@@ -17,8 +17,6 @@ module Conservateurs
     def show
       return show_analyse_saved if params[:analyse_saved].present?
 
-      @actions = [:messagerie]
-      @actions << :see_rapport if @dossier&.accepted?
       @edifices = @commune
         .edifices
         .ordered_by_nom

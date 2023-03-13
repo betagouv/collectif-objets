@@ -99,13 +99,14 @@ Rails.application.routes.draw do
       resources :messages, only: %i[index new create] do
         resources :email_attachments, only: [:show]
       end
+      resource :dossier, only: %i[show]
     end
     resources :objets, only: [] do
       resources :recensements, only: [] do
         resource :analyse, only: %i[edit update]
       end
     end
-    resources :dossiers, only: [:show] do
+    resources :dossiers do
       resource :accept, only: %i[new create update]
       resource :reject, only: %i[new create update]
     end

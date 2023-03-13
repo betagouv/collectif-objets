@@ -49,16 +49,6 @@ fr:
           content:
             one: "Vous avez analysé l'unique recensement de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune"
             other: Vous avez analysé l'ensemble des %{count} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
-          send: Finaliser le rapport …
-        rejected:
-          content: Ce dossier a été renvoyé à la commune le %{date} par %{conservateur} avec le commentaire suivant
-          content_end_html: Tant que la commune ne retourne pas le dossier, <b>vous ne pouvez pas l'analyser</b>
-        actions:
-          send: Finaliser le rapport …
-          reject: Renvoyer le dossier à la commune …
-          reject_desc: pour demander des informations manquantes
-        contact:
-          title: Contacter la commune
     communes_search_component:
       status_options:
         all: Toutes les communes

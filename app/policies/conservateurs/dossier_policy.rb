@@ -5,8 +5,7 @@ module Conservateurs
     alias dossier record
 
     def show?
-      conservateur.departements.include?(dossier.departement) &&
-        dossier.accepted?
+      conservateur.departements.include?(dossier.departement)
     end
   end
 end

@@ -9,7 +9,11 @@ module Conservateurs
     protected
 
     def set_dossier
-      @dossier = Dossier.find(params[:id])
+      if params[:id].present?
+        @dossier = Dossier.find(params[:id])
+      elsif params[:commune_id].present?
+        @dossier = Commune.find(params[:commune_id]).dossier
+      end
       authorize(@dossier)
     end
 
