@@ -1,30 +1,29 @@
-= dsfr_header(logo_text: "Ministère<br />de la Culture".html_safe,
+= dsfr_header(logo_text: "Ministère\nde la Culture".html_safe,
   title: "Collectif Objets",
   tagline: "Préservez votre patrimoine mobilier") do |c|
 
   - if current_conservateur
-    - c.with_tool_link t("menu.conservateurs.departements", count: current_conservateur.departements.count), conservateurs_departements_path, icon: "arrow-right"
-    - c.with_tool_link current_conservateur, edit_conservateur_registration_path, icon: "user"
+    - c.with_tool_link t("menu.conservateurs.departements", count: current_conservateur.departements.count), conservateurs_departements_path, class: "fr-icon-arrow-right-line"
+    - c.with_tool_link current_conservateur, edit_conservateur_registration_path, class: "fr-icon-user-line"
     - c.with_search do
       = render "shared/header/header_conservateur_search"
 
   - elsif current_user
-    - c.with_tool_link "Comment ça marche ?", aide_path, icon: "question"
-    - c.with_tool_link "Mon compte", edit_user_registration_path, icon: "user"
-    - c.with_tool_link "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), icon: "image"
-    - c.with_tool_link "Messagerie" , commune_messages_path(current_user.commune), icon: "mail"
+    - c.with_tool_link "Comment ça marche ?", aide_path, class: "fr-icon-question-line"
+    - c.with_tool_link "Mon compte", edit_user_registration_path, class: "fr-icon-user-line"
+    - c.with_tool_link "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), class: "fr-icon-image-line"
+    - c.with_tool_link "Messagerie" , commune_messages_path(current_user.commune), class: "fr-icon-mail-line"
 
   - elsif current_admin_user
-    - c.with_tool_link current_admin_user, "#", icon: "admin"
-    - c.with_tool_link "Déconnexion", destroy_admin_user_session_path, icon: "logout-box-r", "data-turbo-method": "DELETE"
+    - c.with_tool_link current_admin_user, "#", class: "fr-icon-admin-line"
+    - c.with_tool_link "Déconnexion", destroy_admin_user_session_path, class: "fr-icon-logout-box-r-line", "data-turbo-method": "DELETE"
     - c.with_direct_link "Accueil Admin", admin_path, active: current_page?(controller: '/pages', action: 'admin')
-    - c.with_direct_link "Communes", admin_communes_path, active: ["Admin::CommunesController", "Admin::UsersController"].include?(controller.class.name)
+    - c.with_direct_link "Communes", admin_communes_path, active: %w[Admin::CommunesController Admin::UsersController].include?(controller.class.name)
     - c.with_direct_link "Conservateurs", admin_conservateurs_path, active: controller.class.name == "Admin::ConservateursController"
+    - c.with_direct_link "Campagnes", admin_campaigns_path, active: controller.class.name == "Admin::CampaignsController"
     - c.with_direct_link "CMS", "https://collectif-objets-cms.netlify.app/", target: "_blank", rel: "noopener"
 
   - else
-    - c.with_tool_link "Comment ça marche ?", aide_path, icon: "question"
-    - c.with_tool_link "Connexion", connexion_path, icon: "lock"
-    - c.with_tool_link "Voir les objets dans ma commune" , objets_path, icon: "image"
-
--# TODO notice and alerts
+    - c.with_tool_link "Comment ça marche ?", aide_path, class: "fr-icon-question-line"
+    - c.with_tool_link "Connexion", connexion_path, class: "fr-icon-lock-line"
+    - c.with_tool_link "Voir les objets dans ma commune" , objets_path, class: "fr-icon-image-line"

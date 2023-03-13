@@ -1,0 +1,25 @@
+- env_name = Rails.configuration.x.environment_specific_name
+- environment_banner = %w[development staging].include?(env_name)
+- user_impersonate_banner = current_user.present? && current_user != true_user
+- conservateur_impersonate_banner = current_conservateur.present? && current_conservateur != true_conservateur
+
+- if environment_banner || user_impersonate_banner || conservateur_impersonate_banner
+  .fr-container.co-position-sticky.co-z-index-600.co-background-color-inherit
+
+    - if environment_banner
+      .fr-alert.fr-icon-alarm-warning-line
+        .co-environment-banner.co-flex.co-flex--space-between
+          %div Environnement #{env_name}
+          %div= link_to "mailhog", "http://localhost:8025", class: "fr-link fr-link--icon-right fr-icon-mail-line" if Rails.env.development?
+
+    - if conservateur_impersonate_banner
+      = render ImpersonateCalloutComponent.new name: "le conservateur #{current_conservateur}",
+        mode: session[:conservateur_impersonate_write].present? ? :write : :read,
+        toggle_path: toggle_impersonate_mode_admin_conservateurs_path,
+        stop_path: admin_conservateurs_path
+
+    - if user_impersonate_banner
+      = render ImpersonateCalloutComponent.new name: "l'usager #{current_user} de la commune #{current_user.commune}",
+        mode: session[:user_impersonate_write].present? ? :write : :read,
+        toggle_path: toggle_impersonate_mode_admin_users_path,
+        stop_path: admin_commune_path(current_user.commune)

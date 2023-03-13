@@ -72,6 +72,9 @@ html[data-fr-scheme="dark"] .co-background--white {
   background-color: #000;
 }
 
+.co-background-color-inherit {
+  background-color: inherit;
+}
 
 .co-fade-overflow:before {
   content: '';
@@ -242,6 +245,9 @@ html[data-fr-scheme="dark"] .co-text--blue {
 .co-flex--grow {
   flex-grow: 1;
 }
+.co-flex--shrink-0 {
+  flex-shrink: 0;
+}
 
 /* COLUMNS */
 
@@ -269,7 +275,14 @@ html[data-fr-scheme="dark"] .co-text--blue {
 
 .co-position-sticky {
   position: sticky;
-  top: 2rem;
+  top: 0;
+}
+.co-z-index-600 {
+  z-index: 600;
+}
+
+.co-position-fixed {
+  position: fixed;
 }
 
 .co-top-50pct {
@@ -322,10 +335,6 @@ img.co-object-fit-contain,
 }
 
 /* MARGINS */
-
-.co-negative-margin-top {
-  margin-top: -1px;
-}
 
 .co-readable p,
 .co-readable ul {

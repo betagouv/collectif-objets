@@ -130,7 +130,6 @@ Rails.application.routes.draw do
     resources :conservateurs, except: [:destroy] do
       get :impersonate
       collection do
-        post :stop_impersonating
         post :toggle_impersonate_mode
       end
     end
@@ -138,7 +137,6 @@ Rails.application.routes.draw do
     resources :users, only: %i[edit update] do
       get :impersonate
       collection do
-        post :stop_impersonating
         post :toggle_impersonate_mode
       end
     end
