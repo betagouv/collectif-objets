@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/betagouv/dsfr-view-components.git
-  revision: 2ee68e3f6d3bbbea3a16c26c5dcbb1d2a5ce4858
-  branch: component/modal
+  revision: ff971c692e4933c508b5236956858ad97eadd089
+  branch: components/header
   specs:
     dsfr-view-components (0.1.1)
       actionpack (>= 6.1)

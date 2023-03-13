@@ -1,9 +1,4 @@
 fr:
-  menu:
-    conservateurs:
-      departements:
-        one: Mon département
-        other: Mes départements
   communes:
     objets:
       index:
