@@ -35,10 +35,10 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
 
   scenario "full" do
     login_as(conservateur, scope: :conservateur)
-    visit "/conservateurs/departements"
+    visit "/"
     expect(page).to have_text("Drôme")
-
     click_on "26 - Drôme"
+
     expect(page).to have_text("Albon")
     click_on "Albon"
 
@@ -83,7 +83,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     click_on "Envoyer le rapport à la commune"
 
     # visualisation rapport
-    expect(page).to have_text(/Rapport envoyé à la commune/i)
+    expect(page).to have_text(/le rapport a été généré et envoyé/i)
     click_on "Voir le rapport"
     expect(page).to have_text(/Ciboire des malades/i)
     expect(page).to have_text(/Merci pour ce joli dossier/i)

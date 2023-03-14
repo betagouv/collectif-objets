@@ -2,7 +2,7 @@
   .fr-card__body
     .fr-card__content
       %h2.fr-card__title
-        = link_to(truncated_nom, path, class: "fr-card__link")
+        = link_to truncated_nom, path, **link_html_attributes
       %p.fr-card__desc
         = commune.nom
         %br/

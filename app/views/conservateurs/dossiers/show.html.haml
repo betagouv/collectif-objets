@@ -4,5 +4,9 @@
   - if @dossier.accepted?
     = render "shared/dossier_rapport", dossier: @dossier
   - else
-    Le rapport est généré lors de l’acceptation du dossier.
-    C’est une vue arrêtée du dossier à ce moment-là, qui ne sera normalement plus modifiée par la suite.
+    .co-readable
+      %p
+        Le rapport est généré lors de l’acceptation du dossier.
+        C’est une vue arrêtée du dossier à ce moment-là, qui ne sera normalement plus modifiée par la suite.
+
+    = render "conservateurs/dossiers/accept_cta", dossier: @dossier

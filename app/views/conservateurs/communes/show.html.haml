@@ -1,15 +1,21 @@
 = render layout: "conservateurs/communes/tabs",
-  locals: { commune: @commune, dossier: @dossier, current_tab_title: "Analyse" } do
+  locals: { dossier: @dossier, current_tab_title: "Analyse" } do
 
-  - if @commune.completed? && @dossier&.can_generate_rapport?
-    .co-background--light-teal.fr-mb-4w.fr-py-4w
-      %p= t "conservateurs.communes.show.can_generate_rapport.content", count: @commune.recensements.count
-      %p= link_to "Finaliser le rapport …", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn"
+  = render "conservateurs/dossiers/accept_cta", dossier: @dossier
+
+  - if @dossier&.accepted?
+    .fr-mb-4w
+      = dsfr_alert type: :success, title: "Analyse terminée" do
+        :markdown
+          Tous les recensements ont été analysés et le rapport a été généré et envoyé.
+
+          Le parcours est terminé pour cette commune !
+        = link_to "Voir le rapport", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
 
   - if @dossier&.rejected?
     .co-background--light-teal.fr-mb-4w.fr-p-2w
       %p
-        Ce dossier a été renvoyé à la commune le #{l(@dossier.rejected_at.to_date)} par #{conservateur} avec le commentaire suivant
+        Ce dossier a été renvoyé à la commune le #{l(@dossier.rejected_at.to_date)} par #{@conservateur} avec le commentaire suivant
       = blockquote(@dossier.notes_conservateur)
       %p.fr-mt-4w
         :markdown
@@ -49,7 +55,8 @@
       %div
         = link_to "Renvoyer le dossier à la commune …",
         new_conservateurs_dossier_reject_path(@dossier),
-        class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-error-warning-line"
+        class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-error-warning-line",
+        data: { turbo_action: "advance" }
 
         %p.text-muted.co-text--italic.fr-text--sm
           pour demander des informations manquantes

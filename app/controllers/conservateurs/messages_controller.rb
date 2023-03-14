@@ -3,6 +3,7 @@
 module Conservateurs
   class MessagesController < BaseController
     before_action :set_commune
+    before_action :set_dossier
     before_action :set_messages, only: :index # rubocop:disable Rails/LexicallyScopedActionFilter
     include MessagesControllerConcern
 
@@ -14,6 +15,10 @@ module Conservateurs
 
     def set_commune
       @commune = Commune.find(params[:commune_id])
+    end
+
+    def set_dossier
+      @dossier = @commune.dossier
     end
 
     def set_messages

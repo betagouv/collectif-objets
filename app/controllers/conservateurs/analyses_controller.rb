@@ -2,7 +2,7 @@
 
 module Conservateurs
   class AnalysesController < BaseController
-    before_action :set_recensement, :set_analyse, :set_objet
+    before_action :set_recensement, :set_dossier, :set_analyse, :set_objet
 
     def edit; end
 
@@ -17,7 +17,7 @@ module Conservateurs
     protected
 
     def set_recensement
-      @recensement = Recensement.find(params[:recensement_id])
+      @recensement = Recensement.includes(dossier: [:commune]).find(params[:recensement_id])
       @recensement_presenter = RecensementPresenter.new(@recensement) if @recensement
     end
 
@@ -30,8 +30,8 @@ module Conservateurs
       @objet = @recensement.objet
     end
 
-    def dossier
-      @dossier ||= @recensement.dossier
+    def set_dossier
+      @dossier = @recensement.dossier
     end
 
     def analyse_recensement_params
