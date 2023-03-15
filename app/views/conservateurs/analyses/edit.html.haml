@@ -1,38 +1,48 @@
 = render layout: "conservateurs/communes/tabs",
-  locals: { dossier: @dossier, current_tab_title: "Analyse" } do
+  locals: { no_padding: true, dossier: @dossier, current_tab_title: "Analyse" } do
 
-  .fr-mb-2w= dsfr_link_to "Retour à la liste des recensements", conservateurs_commune_path(@dossier.commune), icon_left: "arrow-left-line", data: { turbo_action: "advance" }
+  .fr-mt-4w.fr-px-4w
+    .fr-mb-2w
+      = dsfr_link_to "Retour à la liste des recensements",
+        conservateurs_commune_path(@dossier.commune),
+        icon_left: "arrow-left-line", data: { turbo_action: "advance" }
 
-  %h2 Analyse du recensement - #{@objet.nom}
-  .fr-grid-row
-    .fr-col-md-8
-      .fr-card.fr-card--horizontal.fr-card--horizontal-tier
-        .fr-card__body
-          .fr-card__content
-            %h4.fr-card__title
-              = @objet.palissy_REF
-            %p.fr-card__desc
-              %b Édifice
-              = @objet.edifice_nom.presence || "N/A"
-              %br
-              %b Emplacement
-              = @objet.emplacement.presence || "N/A"
-              %br
-              %b Catégorie
-              = @objet.categorie.presence || "N/A"
-              %br
-              %b Époque
-              = @objet.crafted_at.presence || "N/A"
-              %br
-              %br
-              = link_to "Voir sur POP", "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.palissy_REF}", target: "_blank", rel: "noopener"
-        .fr-card__header
-          - photo = Photo.new(url: @objet.palissy_photos.any? ? @objet.first_palissy_photo_url : "images/illustrations/photo-manquante-pop.png")
-          = render("shared/card_photo", photo:)
+    %h2 Analyse du recensement - #{@objet.nom}
+    .fr-grid-row
+      .fr-col-md-8
+        .fr-card.fr-card--horizontal.fr-card--horizontal-tier
+          .fr-card__body
+            .fr-card__content
+              %h4.fr-card__title
+                = @objet.palissy_REF
+              %p.fr-card__desc
+                %b Édifice
+                = @objet.edifice_nom.presence || "N/A"
+                %br
+                %b Emplacement
+                = @objet.emplacement.presence || "N/A"
+                %br
+                %b Catégorie
+                = @objet.categorie.presence || "N/A"
+                %br
+                %b Époque
+                = @objet.crafted_at.presence || "N/A"
+                %br
+                %br
+                = link_to "Voir sur POP",
+                  "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.palissy_REF}",
+                  target: "_blank",
+                  rel: "noopener"
+          .fr-card__header
+            - photo = Photo.new(url: @objet.palissy_photos.any? ? @objet.first_palissy_photo_url : "images/illustrations/photo-manquante-pop.png")
+            = render("shared/card_photo", photo:)
 
-  = form_for @recensement, url: conservateurs_objet_recensement_analyse_path(@objet, @recensement), builder: FormBuilderDsfr, data: { turbo_action: "advance" } do |f|
+  = form_for @recensement,
+    url: conservateurs_objet_recensement_analyse_path(@objet, @recensement),
+    builder: FormBuilderDsfr,
+    data: { turbo_action: "advance" } do |f|
     #recensement
-      .co-background--light-teal.fr-my-2w.fr-py-2w
+      .co-background--light-teal.fr-my-2w.fr-px-4w.fr-py-2w
         %h3 Recensement
         .fr-grid-row.fr-grid-row--gutters.fr-pb-6w
           %div{class: @recensement.photos.any? ? "fr-col-md-8" : "fr-col-md-12"}
@@ -63,14 +73,20 @@
                 %li
                   = attribute
                   = @recensement.errors.messages_for(attribute).first
-    .fr-grid-row.fr-mb-4w
-      .fr-col-md-6
-        = f.label :analyse_notes
-        = f.text_area :analyse_notes, disabled: !@recensement.analysable?
-    .fr-grid-row
-      .fr-col-md-8
-        = f.submit "Sauvegarder", disabled: !@recensement.analysable?
-        .fr-text--sm.fr-mt-1w
-          %i Ces informations ne seront pas envoyées à la mairie tout de suite. Vous pourrez les modifier avant de valider votre rapport dans son ensemble.
+    .fr-px-4w
+      .fr-grid-row.fr-mb-4w
+        .fr-col-md-6
+          = f.label :analyse_notes
+          = f.text_area :analyse_notes, disabled: !@recensement.analysable?
+      .fr-grid-row
+        .fr-col-md-8
+          = f.submit "Sauvegarder", disabled: !@recensement.analysable?
+          .fr-text--sm.fr-mt-1w
+            %i
+              Ces informations ne seront pas envoyées à la mairie tout de suite.
+              Vous pourrez les modifier avant de valider votre rapport dans son ensemble.
 
-  .fr-mb-2w= dsfr_link_to "Retour à la liste des recensements", conservateurs_commune_path(@dossier.commune), icon_left: "arrow-left-line", data: { turbo_action: "advance" }
+  .fr-px-4w.fr-mb-2w
+    = dsfr_link_to "Retour à la liste des recensements",
+        conservateurs_commune_path(@dossier.commune),
+        icon_left: "arrow-left-line", data: { turbo_action: "advance" }

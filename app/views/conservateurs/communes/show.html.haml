@@ -13,13 +13,14 @@
         = link_to "Voir le rapport", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
 
   - if @dossier&.rejected?
-    .co-background--light-teal.fr-mb-4w.fr-p-2w
-      %p
-        Ce dossier a été renvoyé à la commune le #{l(@dossier.rejected_at.to_date)} par #{@conservateur} avec le commentaire suivant
-      = blockquote(@dossier.notes_conservateur)
-      %p.fr-mt-4w
-        :markdown
-          Tant que la commune ne retourne pas le dossier, **vous ne pouvez pas l'analyser**
+    .fr-mb-4w
+      = dsfr_alert type: :warning, title: "Dossier renvoyé à la commune" do
+        %p
+          Ce dossier a été renvoyé à la commune le #{l(@dossier.rejected_at.to_date)} par #{@conservateur} avec le commentaire suivant
+        = blockquote(@dossier.notes_conservateur)
+        %p.fr-mt-4w
+          :markdown
+            Tant que la commune ne retourne pas le dossier, **vous ne pouvez pas l'analyser**
 
   - if @commune.completed? && !@dossier.accepted?
     .fr-mb-4w

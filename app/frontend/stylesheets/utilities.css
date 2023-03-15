@@ -425,3 +425,7 @@ html[data-fr-scheme="dark"] .fr-stepper.co-stepper--skip-steps .fr-stepper__step
   position: relative;
   top: 2px;
 }
+
+.co-tabs--no-padding .fr-tabs__panel{
+  padding: 0;
+}
