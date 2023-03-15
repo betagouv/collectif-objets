@@ -21,7 +21,7 @@ module Admin
 
       session.delete(:user_impersonate_write)
       stop_impersonating_user
-      flash.now[:notice] = "Vous n’incarnez plus d’usager"
+      redirect_to request.path, notice: "Vous n’incarnez plus d’usager"
     end
 
     def disconnect_impersonating_conservateur
@@ -29,7 +29,7 @@ module Admin
 
       session.delete(:conservateur_impersonate_write)
       stop_impersonating_conservateur
-      flash.now[:notice] = "Vous n’incarnez plus de conservateur"
+      redirect_to request.path, notice: "Vous n’incarnez plus de conservateur"
     end
   end
 end

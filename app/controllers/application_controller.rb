@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   impersonates :user
   impersonates :conservateur
 
+  before_action :init_banners
   before_action :set_locale
   before_action :set_sentry_context
   before_action :redirect_if_demo_link
@@ -83,4 +84,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :active_nav_links
   def active_nav_links = []
+
+  def init_banners
+    @banners = []
+    @banners << :environment if %w[development staging].include?(Rails.configuration.x.environment_specific_name)
+    @banners << :user_impersonate if current_user.present? && current_user != true_user
+    @banners << :conservateur_impersonate if current_conservateur.present? && current_conservateur != true_conservateur
+  end
 end

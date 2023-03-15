@@ -18,7 +18,7 @@
     <meta name="environment-specific-name" content="<%= Rails.configuration.x.environment_specific_name %>">
   </head>
   <body>
-    <%= render "shared/banners" %>
+    <%= render "shared/banners", banners: @banners %>
     <%= render "shared/header" %>
     <%= render "shared/flashes" %>
     <%= content_for?(:content) ? yield(:content) : yield %>

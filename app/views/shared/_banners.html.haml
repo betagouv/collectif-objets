@@ -1,28 +1,34 @@
-- env_name = Rails.configuration.x.environment_specific_name
-- environment_banner = %w[development staging].include?(env_name)
-- user_impersonate_banner = current_user.present? && current_user != true_user
-- conservateur_impersonate_banner = current_conservateur.present? && current_conservateur != true_conservateur
-
-- if environment_banner || user_impersonate_banner || conservateur_impersonate_banner
+- if banners.any?
   .co-background-color-inherit.co-position-sticky.co-z-index-600
     .fr-container.co-flex.co-flex--space-between.fr-mb-1w{data: { controller: "visibility-toggle", "visibility-toggle-target": "section" }}
       %div.co-flex--grow
-        - if environment_banner
+        - if banners.include?(:environment)
           .fr-alert.fr-alert--sm.fr-icon-alarm-warning-line.co-white-space-nowrap
             .co-environment-banner.co-flex.co-flex--space-between
-              %div Environnement #{env_name}
-              %div= link_to "mailhog", "http://localhost:8025", class: "fr-link fr-link--icon-right fr-icon-mail-line" if Rails.env.development?
+              %div Environnement #{Rails.configuration.x.environment_specific_name}
+              - if Rails.env.development?
+                %div= link_to "mailhog", "http://localhost:8025", class: "fr-link", target: "_blank", rel: "noopener"
 
-        - if conservateur_impersonate_banner
+        - if banners.include?(:conservateur_impersonate)
           = render ImpersonateCalloutComponent.new name: "le conservateur #{current_conservateur}",
             mode: session[:conservateur_impersonate_write].present? ? :write : :read,
             toggle_path: toggle_impersonate_mode_admin_conservateurs_path,
             stop_path: admin_conservateurs_path
 
-        - if user_impersonate_banner
+        - if banners.include?(:user_impersonate)
           = render ImpersonateCalloutComponent.new name: "l'usager #{current_user} de la commune #{current_user.commune}",
             mode: session[:user_impersonate_write].present? ? :write : :read,
             toggle_path: toggle_impersonate_mode_admin_users_path,
             stop_path: admin_commune_path(current_user.commune)
+
+        - if banners.include?(:demo)
+          .fr-alert.fr-alert--warning.fr-alert--sm
+            .co-flex.co-flex--space-between.co-flex--align-items-center
+              %div Vous parcourez une page de démo, les liens, les boutons et les formulaires ne fonctionneront pas
+              %div
+                = link_to "Revenir au plan du site", plan_path, class: "fr-link fr-link--icon-left fr-icon-arrow-left-line"
+
       .co-text--right
-        %button{type: "button", data: { action: "visibility-toggle#toggle" }, class: "fr-btn fr-btn--tertiary fr-btn--tertiary-no-outline fr-icon-close-line fr-btn--icon-right fr-btn--sm"}
+        %button{type: "button",
+          data: { action: "visibility-toggle#toggle" },
+          class: "fr-btn fr-btn--tertiary fr-btn--tertiary-no-outline fr-icon-close-line fr-btn--icon-right fr-btn--sm"}
