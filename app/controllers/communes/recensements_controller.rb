@@ -60,8 +60,6 @@ module Communes
       params[:wizard].present? ? params.require(:wizard).permit(*@wizard.permitted_params) : {}
     end
 
-    # def recensement_params
-    #   params.require(:recensement).permit(*PARTS, :edifice_nom).merge(user: current_user)
-    # end
+    def active_nav_links = %w[Recensement]
   end
 end

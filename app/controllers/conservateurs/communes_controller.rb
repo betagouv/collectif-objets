@@ -62,5 +62,7 @@ module Conservateurs
         .order("nom ASC")
         .first(5)
     end
+
+    def active_nav_links = ["Mes départements"] + (@commune ? [@commune.departement.to_s] : [])
   end
 end

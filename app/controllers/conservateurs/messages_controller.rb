@@ -27,5 +27,7 @@ module Conservateurs
                     .where(commune: @commune)
                     .order(created_at: :asc)
     end
+
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

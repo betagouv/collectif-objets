@@ -1,0 +1,21 @@
+- content_for(:head_title) { "Visites prévues" }
+- content_for(:active_nav_links) { ["Mes actions"] }
+
+%main.fr-container.fr-mb-8w
+  = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Visites prévues")
+
+  %h2 Visites prévues
+
+  .co-readable
+    :markdown
+      Cette page affiche les communes que vous avez marqués pour visite ultérieure.
+      Cela se fait au moment de l’envoi du rapport à une commune, après l’analyse de l’ensemble de ses recensements.
+
+  - if current_conservateur.dossiers.to_visit.blank?
+    %i Aucune visite prévue
+  - else
+    %ul
+      - @dossiers.each do |dossier|
+        %li
+          = link_to dossier.commune, conservateurs_dossier_path(dossier)
+          = dossier_visit_badge(dossier)

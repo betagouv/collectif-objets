@@ -39,7 +39,6 @@ Rails.application.routes.draw do
 
   root "pages#home"
   controller :pages do
-    get :connexion
     get :stats
     get :conditions
     get :mentions_legales
@@ -120,6 +119,7 @@ Rails.application.routes.draw do
       end
     end
     resource :conservateur, only: [:update]
+    resources :visits, only: [:index]
   end
 
   ## -----

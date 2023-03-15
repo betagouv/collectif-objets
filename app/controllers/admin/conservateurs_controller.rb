@@ -57,5 +57,7 @@ module Admin
     def conservateur_params
       params.require(:conservateur).permit(:email, :phone_number, :first_name, :last_name, departement_ids: [])
     end
+
+    def active_nav_links = %w[Conservateurs]
   end
 end

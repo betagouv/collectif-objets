@@ -25,5 +25,7 @@ module Admin
       params.require(:message).permit(:text, files: [])
         .merge(origin: "web", commune_id: @commune.id, author: current_admin_user)
     end
+
+    def active_nav_links = %w[Communes]
   end
 end

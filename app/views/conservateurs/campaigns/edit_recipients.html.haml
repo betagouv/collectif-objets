@@ -1,9 +1,9 @@
 - title = "Modifier les destinataires de la campagne #{campaign_title(@campaign)}"
 - content_for(:head_title) { title }
+- content_for(:active_nav_links) { ["Mes départements", @departement.to_s] }
 
 %main.fr-container.fr-mb-8w
   = render "shared/breadcrumbs", links: [["Départements", conservateurs_departements_path], [@campaign.departement.nom, conservateurs_departement_path(@campaign.departement)], ["Campagne #{campaign_title(@campaign)}", conservateurs_campaign_path(@campaign)]], current_page_label: "Modifier les destinataires"
 
   %h1= title
   = render "shared/campaigns/edit_recipients_content", campaign: @campaign, routes_prefix: :conservateurs
-

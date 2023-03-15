@@ -35,5 +35,7 @@ module Conservateurs
     def authorize_campaign
       authorize(@campaign)
     end
+
+    def active_nav_links = ["Mes départements", @departement.to_s]
   end
 end

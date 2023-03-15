@@ -51,5 +51,7 @@ module Conservateurs
         .permit(:notes_conservateur)
         .merge(conservateur_id: current_conservateur.id)
     end
+
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

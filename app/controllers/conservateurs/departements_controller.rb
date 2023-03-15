@@ -45,5 +45,7 @@ module Conservateurs
         .select(fields)
         .to_a
     end
+
+    def active_nav_links = ["Mes départements"] + (@departement ? [@departement.to_s] : [])
   end
 end

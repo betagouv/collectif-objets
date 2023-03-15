@@ -60,11 +60,6 @@ feature "accessibility", js: true do
 
   # "Statistiques", :stats_path
 
-  context "Connexion page" do
-    before { visit connexion_path }
-    it_behaves_like "an accessible page"
-  end
-
   describe "Connexion Communes" do
     before { visit new_user_session_path }
     it_behaves_like "an accessible page"

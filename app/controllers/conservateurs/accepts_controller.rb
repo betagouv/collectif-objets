@@ -47,5 +47,7 @@ module Conservateurs
         .merge(conservateur_id: current_conservateur.id)
         .transform_values { |v| v == "" ? nil : v }
     end
+
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

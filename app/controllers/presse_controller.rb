@@ -10,4 +10,8 @@ class PresseController < ApplicationController
 
     @article = ArticlePresse.load_from_id(params[:id])
   end
+
+  private
+
+  def active_nav_links = ["À propos", "Presse", "On parle de nous"]
 end

@@ -1,10 +1,10 @@
 - content_for(:head_title) { "Connexion" }
 
 %main.fr-container.fr-pt-2w.fr-pb-4w{"data-controller": "devise--sessions"}
-  = render "shared/breadcrumbs", links: [ ["Accueil", root_path], ["Connexion", connexion_path]], current_page_label: "Connexion mairie"
+  = render "shared/breadcrumbs", links: [ ["Accueil", root_path]], current_page_label: "Connexion commune"
   .fr-grid-row
     .fr-col-md-6
-      %h1 Connexion mairie
+      %h1 Connexion commune
       - if @success
         %p Veuillez cliquer sur le lien que vous avez reçu par mail pour vous connecter
         %p Si vous n'avez pas reçu le lien ou que vous n'arrivez pas à vous connecter, vous pouvez :

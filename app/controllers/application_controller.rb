@@ -80,4 +80,7 @@ class ApplicationController < ActionController::Base
 
     redirect_to plan_path, alert: "Les liens et les formulaires des pages de démonstration ne fonctionnent pas"
   end
+
+  helper_method :active_nav_links
+  def active_nav_links = []
 end

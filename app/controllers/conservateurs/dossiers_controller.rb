@@ -20,5 +20,7 @@ module Conservateurs
     def set_commune
       @commune = @dossier.commune
     end
+
+    def active_nav_links = ["Mes départements", @dossier.departement.to_s]
   end
 end

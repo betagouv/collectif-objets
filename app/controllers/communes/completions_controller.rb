@@ -42,5 +42,7 @@ module Communes
       params.require(:dossier_completion).permit(:notes_commune).to_h.symbolize_keys
         .merge(user: current_user)
     end
+
+    def active_nav_links = %w[Recensement]
   end
 end

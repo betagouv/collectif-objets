@@ -37,5 +37,7 @@ module Admin
     def user_params
       params.require(:user).permit(:email)
     end
+
+    def active_nav_links = %w[Communes]
   end
 end

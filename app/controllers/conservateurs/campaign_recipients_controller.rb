@@ -11,5 +11,7 @@ module Conservateurs
     def authorize_recipient
       authorize @recipient
     end
+
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

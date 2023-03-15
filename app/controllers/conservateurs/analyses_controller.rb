@@ -38,5 +38,7 @@ module Conservateurs
       @analyse_recensement_params ||=
         Co::Recensements::AnalyseParamsParser.new(params).parse.merge(conservateur_id: current_conservateur.id)
     end
+
+    def active_nav_links = ["Mes départements", @dossier.departement.to_s]
   end
 end
