@@ -9,8 +9,7 @@ RSpec.feature "Sign in with password", type: :feature, js: true do
 
   scenario "sign in with correct password" do
     visit "/"
-    click_on "Connexion"
-    click_on "Je suis conservateur ou conservatrice"
+    click_on "Connexion conservateur"
     fill_in "Email", with: "jeanne.michel@culture.gouv.fr"
     fill_in "Mot de passe", with: "super-long-mot-de-passe-du-futur"
     find_button("Se connecter").click
@@ -19,8 +18,7 @@ RSpec.feature "Sign in with password", type: :feature, js: true do
 
   scenario "sign in with wrong password" do
     visit "/"
-    click_on "Connexion"
-    click_on "Je suis conservateur ou conservatrice"
+    click_on "Connexion conservateur"
     fill_in "Email", with: "jeanne.michel@culture.gouv.fr"
     fill_in "Mot de passe", with: "abcdef"
     find_button("Se connecter").click
@@ -30,8 +28,7 @@ RSpec.feature "Sign in with password", type: :feature, js: true do
 
   scenario "sign in with wrong email" do
     visit "/"
-    click_on "Connexion"
-    click_on "Je suis conservateur ou conservatrice"
+    click_on "Connexion conservateur"
     fill_in "Email", with: "michel.jean@culture.gouv.fr"
     fill_in "Mot de passe", with: "super-long-mot-de-passe-du-futur"
     find_button("Se connecter").click
