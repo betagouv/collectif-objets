@@ -3,7 +3,6 @@
 - commune = dossier.commune
 - departement = dossier.departement
 - content_for(:head_title) { "#{current_tab_title} - #{commune}" }
-- content_for(:active_nav_links) { ["Mes départements", departement.to_s] }
 
 %main.fr-container.fr-pb-8w
   = render "shared/breadcrumbs",
