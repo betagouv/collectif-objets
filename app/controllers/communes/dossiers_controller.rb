@@ -2,17 +2,20 @@
 
 module Communes
   class DossiersController < BaseController
-    before_action :set_dossier
+    before_action :authorize_dossier
 
     def show; end
 
     protected
 
-    def set_dossier
-      @dossier = Dossier.find_by(id: params[:id], commune_id: params[:commune_id])
-      authorize(@dossier)
+    def authorize_dossier
+      if @dossier
+        authorize(@dossier)
+      else
+        skip_authorization
+      end
     end
 
-    def active_nav_links = %w[Rapport du conservateur]
+    def active_nav_links = ["Rapport du conservateur"]
   end
 end

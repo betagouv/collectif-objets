@@ -25,7 +25,7 @@
 
     - c.with_direct_link_simple title: "Recensement", path: commune_objets_path(current_user.commune), active: active_nav_link?("Recensement")
     - c.with_direct_link_simple title: "Messagerie", path: commune_messages_path(current_user.commune), active: active_nav_link?("Messagerie")
-    - c.with_direct_link_simple title: "Rapport du conservateur", path: "#", active: active_nav_link?("Rapport du conservateur") # TODO
+    - c.with_direct_link_simple title: "Rapport du conservateur", path: commune_dossier_path(current_user.commune), active: active_nav_link?("Rapport du conservateur")
     - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos") do |dropdown|
       - dropdown.with_link title: "Comment ça marche ?", path: aide_path
       - dropdown.with_link title: "On parle de nous", path: presse_path

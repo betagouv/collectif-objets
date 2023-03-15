@@ -74,7 +74,7 @@ Rails.application.routes.draw do
         resources :photos, only: %i[create destroy], controller: "recensement_photos"
       end
     end
-    resources :dossiers, only: [:show]
+    resource :dossier, only: [:show]
     resources :campaign_recipients, only: [:update]
     resources :messages, only: %i[index new create] do
       resources :email_attachments, only: [:show]

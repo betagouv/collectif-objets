@@ -206,6 +206,10 @@ html[data-fr-scheme="dark"] .co-text--blue {
   align-content: center;
 }
 
+.co-flex--align-items-stretch {
+  align-items: stretch;
+}
+
 .co-flex--align-items-end {
   align-items: end;
 }
