@@ -11,8 +11,6 @@ module Conservateurs
     after_action :verify_policy_scoped, only: :index
     # rubocop:enable Rails/LexicallyScopedActionFilter
 
-    layout "conservateur"
-
     private
 
     def pundit_user

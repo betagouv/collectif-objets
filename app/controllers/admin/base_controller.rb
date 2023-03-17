@@ -6,8 +6,6 @@ module Admin
     before_action :disconnect_impersonating_user
     before_action :disconnect_impersonating_conservateur
 
-    layout "admin"
-
     protected
 
     def restrict_access
