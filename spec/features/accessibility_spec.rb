@@ -10,7 +10,7 @@ shared_examples "an accessible page" do
   end
 end
 
-feature "accessibility", js: true do
+feature "accessibility public pages", js: true do
   # PUBLIC
 
   describe "objets#index" do

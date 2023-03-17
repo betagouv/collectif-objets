@@ -1,5 +1,5 @@
 - if banners.any?
-  .co-background-color-inherit.co-position-sticky.co-z-index-600
+  .co-background-color-inherit.co-position-sticky.co-z-index-600{role: "alert"}
     .fr-container.co-flex.co-flex--space-between.fr-mb-1w{data: { controller: "visibility-toggle", "visibility-toggle-target": "section" }}
       %div.co-flex--grow
         - if banners.include?(:environment)
@@ -32,3 +32,4 @@
         %button{type: "button",
           data: { action: "visibility-toggle#toggle" },
           class: "fr-btn fr-btn--tertiary fr-btn--tertiary-no-outline fr-icon-close-line fr-btn--icon-right fr-btn--sm"}
+          Cacher
