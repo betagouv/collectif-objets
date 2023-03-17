@@ -1,9 +1,7 @@
 <% content_for(:head_title) { "Statistiques" } %>
 
-<main class="fr-pt-2w fr-pb-8w">
-  <div class="fr-container">
-    <%= render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Statistiques") %>
-  </div>
+<main class="fr-container fr-pb-8w">
+  <%= render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Statistiques") %>
 
   <iframe
       src="https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/public/dashboard/33cf5b50-b2e8-41c4-9bcd-ed7fe5b994d0"

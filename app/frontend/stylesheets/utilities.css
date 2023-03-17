@@ -429,3 +429,8 @@ html[data-fr-scheme="dark"] .fr-stepper.co-stepper--skip-steps .fr-stepper__step
 .co-tabs--no-padding .fr-tabs__panel{
   padding: 0;
 }
+
+img.co-object-fit--contain,
+.fr-card img.co-object-fit--contain{
+  object-fit: contain;
+}

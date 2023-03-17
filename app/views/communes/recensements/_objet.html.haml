@@ -17,6 +17,6 @@
   .fr-card__header
     .fr-card__img
       - if objet.palissy_photos.any?
-        = image_tag objet.palissy_photos.first.url, alt: objet.palissy_photos.first.description, class: "fr-responsive-img"
+        = image_tag objet.palissy_photos.first.url, alt: objet.palissy_photos.first.description, class: "fr-responsive-img co-object-fit--contain"
       - else
-        = vite_image_tag "images/illustrations/photo-manquante.png", alt: "image manquante", class: "fr-responsive-img"
+        = vite_image_tag "images/illustrations/photo-manquante.png", alt: "image manquante", class: "fr-responsive-img co-object-fit--contain"

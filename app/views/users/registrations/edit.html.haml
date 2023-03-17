@@ -1,6 +1,6 @@
 - content_for(:head_title) { "Mon compte" }
 - commune = current_user.commune
-%main.fr-container.fr-py-4w.fr-grid-row.fr-grid-row--center{"data-controller" => "devise--sessions"}
+%main.fr-container.fr-pb-4w.fr-grid-row{"data-controller" => "devise--sessions"}
   .fr-col-md-8
     = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Mon compte")
     .fr-mb-6w
