@@ -17,11 +17,12 @@ module Admin
     end
 
     def disconnect_impersonating_user
+      commune = current_user&.commune
       return if current_user.blank?
 
       session.delete(:user_impersonate_write)
       stop_impersonating_user
-      redirect_to request.path, notice: "Vous n’incarnez plus d’usager"
+      redirect_to admin_commune_path(commune), notice: "Vous n’incarnez plus d’usager"
     end
 
     def disconnect_impersonating_conservateur
@@ -29,7 +30,7 @@ module Admin
 
       session.delete(:conservateur_impersonate_write)
       stop_impersonating_conservateur
-      redirect_to request.path, notice: "Vous n’incarnez plus de conservateur"
+      redirect_to admin_conservateurs_path, notice: "Vous n’incarnez plus de conservateur"
     end
   end
 end

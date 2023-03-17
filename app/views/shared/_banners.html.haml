@@ -12,14 +12,12 @@
         - if banners.include?(:conservateur_impersonate)
           = render ImpersonateCalloutComponent.new name: "le conservateur #{current_conservateur}",
             mode: session[:conservateur_impersonate_write].present? ? :write : :read,
-            toggle_path: toggle_impersonate_mode_admin_conservateurs_path,
-            stop_path: admin_conservateurs_path
+            toggle_path: toggle_impersonate_mode_admin_conservateurs_path
 
         - if banners.include?(:user_impersonate)
           = render ImpersonateCalloutComponent.new name: "l'usager #{current_user} de la commune #{current_user.commune}",
             mode: session[:user_impersonate_write].present? ? :write : :read,
-            toggle_path: toggle_impersonate_mode_admin_users_path,
-            stop_path: admin_commune_path(current_user.commune)
+            toggle_path: toggle_impersonate_mode_admin_users_path
 
         - if banners.include?(:demo)
           .fr-alert.fr-alert--warning.fr-alert--sm
