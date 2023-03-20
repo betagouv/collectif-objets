@@ -3,16 +3,19 @@
     %thead
       %tr
         %th Photo
+        %th.fixed Pré-existante
         %th Commune
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:nom]
       %tr.fr-text--sm
         %th
+        %th.fixed Déjà dans Mémoire
         %th
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:desc]
       %tr.fr-text--sm
         %th
+        %th.fixed
         %th ex: Vouziers
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:desc2]
@@ -20,11 +23,20 @@
       - ([nil] + photos_recensement).each_cons(2) do |previous_row_photo, photo|
         %tr
           %td= render "photo", photo: photo.attachment
+          %td.fixed
+            - if photo.recensement.objet.palissy_photos.any?
+              = image_tag photo.recensement.objet.palissy_photos.first.url, style: "max-height: 150px;"
+            - else
+              %i aucune photo
+          %td.fixed
           - if previous_row_photo.present? && photo.recensement.objet == previous_row_photo.recensement.objet
             %td.co-text--italic.co-text--muted{colspan: 2} Même objet
           - else
             %td= link_to photo.recensement.commune, admin_commune_path(photo.recensement.commune)
-            %td #{photo.recensement.objet.palissy_REF}
+            %td
+              %div= photo.recensement.objet.palissy_REF
+              .fixed= photo.recensement.objet.palissy_TICO
+              .fixed= link_to "voir sur POP", palissy_url(photo.recensement.objet), target: "_blank", rel: "noopener"
           %td.co-word-break-all= photo.memoire_REF
           %td.co-word-break-all= photo.memoire_REFIMG
           %td= photo.memoire_NUMP
