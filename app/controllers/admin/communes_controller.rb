@@ -14,5 +14,9 @@ module Admin
       @commune = Commune.find(params[:id])
       @messages = Message.where(commune: @commune).order(created_at: :asc)
     end
+
+    private
+
+    def active_nav_links = %w[Communes]
   end
 end

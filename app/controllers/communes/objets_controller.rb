@@ -47,5 +47,7 @@ module Communes
 
       @previous_objet ||= Objet.find(params[:objet_id])
     end
+
+    def active_nav_links = %w[Recensement]
   end
 end

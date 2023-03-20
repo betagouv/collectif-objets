@@ -1,16 +1,26 @@
-- content_for(:head_title) { "Messagerie - #{@commune.nom}" }
+= render layout: "conservateurs/communes/tabs",
+  locals: { commune: @commune, dossier: @dossier, current_tab_title: "Messagerie" } do
 
-%main.fr-mb-8w
-  .fr-grid-row.fr-grid-row--center
-    .fr-col-md-10
-      = render "shared/breadcrumbs",
-        links: [["Départements", conservateurs_departements_path], [@commune.departement.nom, conservateurs_departement_path(@commune.departement)], [@commune.to_s, conservateurs_commune_path(@commune)]],
-        current_page_label: "Messagerie"
+  = render "shared/messages/list", messages: @messages, viewed_by: current_conservateur
+  = render "shared/messages/form", url: conservateurs_commune_messages_path(@commune), message: @new_message
+  = render "shared/messages/email_address_hint", email_address: @commune.support_email(role: :conservateur)
 
-      %h1 Messagerie · #{@commune}
+  .fr-mt-16w
+    %h2 Autres moyens de contact
+    %p.co-text--italic
+      :markdown
+        Nous vous recommandons d’utiliser la messagerie ci-dessus en priorité pour centraliser vos échanges avec la commune.
+        Cela permet notamment de partager les échanges avec les autres conservateurs du département, ainsi qu’avec l’équipe de Collectif Objets qui peut répondre aux questions techniques.
 
-      = render "shared/messages/list", messages: @messages, viewed_by: current_conservateur
+        **La commune est prévenue par email à chaque fois qu’un message est envoyé.**
 
-      = render "shared/messages/form", url: conservateurs_commune_messages_path(@commune), message: @new_message
-
-      = render "shared/messages/email_address_hint", email_address: @commune.support_email(role: :conservateur)
+    %div
+    - if @commune.phone_number
+      .fr-mb-1w
+        = link_to @commune.phone_number, "tel:#{@commune.phone_number}", class: "fr-link fr-icon-phone-line fr-link--icon-left"
+    - sp_prefix = @commune.departement.service_public_prefix
+    - if sp_prefix
+      .fr-mb-1w
+        = link_to "Mairie de #{@commune} sur service-public.fr", "https://lannuaire.service-public.fr/#{sp_prefix}/mairie-#{@commune.code_insee}-01", class: "fr-link fr-icon-information-line fr-link--icon-left", target: "_blank", rel: "noopener"
+    .fr-mb-1w
+      = link_to @commune.users.first.email, "mailto:#{@commune.users.first.email}", class: "fr-link fr-icon-mail-line fr-link--icon-left"

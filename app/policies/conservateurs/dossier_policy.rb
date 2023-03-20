@@ -5,8 +5,13 @@ module Conservateurs
     alias dossier record
 
     def show?
-      conservateur.departements.include?(dossier.departement) &&
-        dossier.accepted?
+      conservateur.departements.include?(dossier.departement)
+    end
+
+    class Scope < Scope
+      def resolve
+        scope.joins(:commune).where(communes: { departement: conservateur.departements })
+      end
     end
   end
 end

@@ -1,8 +1,7 @@
 - content_for(:head_title) { "Comment ça marche ?" }
 %main
-  / SECTION PREPAREZ
-  %section.co-background--light-grey
-    .fr-container.fr-pt-2w
+  %section
+    .fr-container
       = render "shared/breadcrumbs", links: [["Accueil", root_path],], current_page_label: "Comment ça marche ?"
       .fr-grid-row.fr-pb-8w
         .fr-col-md-8
@@ -10,20 +9,21 @@
           %h2= t(".intro.title")
           %p= t(".intro.content1")
           %p= t(".intro.content2")
-  / SECTION ETAPE 1
-  %section.fr-container
-    .fr-grid-row.fr-py-8w.fr-grid-row--middle
-      .fr-col-md-5
-        %h2.co-text--blue= t(".etape1.title")
-        %p= t(".etape1.content1")
-        %p= t(".etape1.content2")
-        %p= t(".etape1.content3")
-        %p
-          = link_to "Voir le guide de recensement", guide_path, class: "fr-btn"
-      .fr-col-md-7.fr-px-12w
-        = render "shared/picture_tag", filename_without_extension: "sur-place", img_class: "co--width-max-100", alt: "exemples d'objets monuments historiques"
-  / SECTION ETAPE 2
+
   %section.co-background--light-grey
+    .fr-container
+      .fr-grid-row.fr-py-8w.fr-grid-row--middle
+        .fr-col-md-5
+          %h2.co-text--blue= t(".etape1.title")
+          %p= t(".etape1.content1")
+          %p= t(".etape1.content2")
+          %p= t(".etape1.content3")
+          %p
+            = link_to "Voir le guide de recensement", guide_path, class: "fr-btn"
+        .fr-col-md-7.fr-px-12w
+          = render "shared/picture_tag", filename_without_extension: "sur-place", img_class: "co--width-max-100", alt: "exemples d'objets monuments historiques"
+
+  %section
     .fr-container
       .fr-grid-row.fr-py-12w.fr-grid-row--middle
         .fr-col-md-7.fr-px-12w
@@ -36,117 +36,117 @@
             %li= t(".etape2.questions.question2")
             %li= t(".etape2.questions.question3")
           %p= t(".etape2.photo")
-  / SECTION ETAPE 3
-  %section.fr-container
-    .fr-grid-row.fr-py-8w.fr-grid-row--center
-      .fr-col-md-5
-        %h2.co-text--blue= t(".etape3.title")
-        %p= t(".etape3.conseils")
-        %p= t(".etape3.fiches")
-      .fr-col-md-7.fr-px-12w
-        = vite_image_tag "images/illustrations/etape3.svg", class: "co-width--100", alt: "etape 3"
-      / SECTION FAQ
-      %section.co-background--light-grey.fr-py-8w
-        #faq.fr-container
-          %h2.co-text--blue.co-text--center
-            Les questions les plus fréquentes
-          .fr-grid-row.fr-grid-row--center
-            .fr-col-md-8
-              %ul.fr-accordions-group{"data-accordion-open-target" => "group", "data-controller" => "accordion-open"}
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-1", "aria-expanded" => "false"}
-                        Quelles sont les obligations des propriétaires d'objets protégés / inscrits / classés ?
-                    #faq-1.fr-collapse
-                      Le code du patrimoine ne crée pas d'obligation particulière pour le propriétaire dans la gestion quotidienne. En en faisant un trésor national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention.
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-retours", "aria-expanded" => "false"}
-                        = t(".faq.retours.title")
-                    #faq-retours.fr-collapse
-                      = t(".faq.retours.content")
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-restauration", "aria-expanded" => "false"}
-                        = t(".faq.restauration.title")
-                    #faq-restauration.fr-collapse
-                      Veuillez consulter ces pages dédiées sur le site du Ministère de la Culture :
-                      %ul
-                        %li
-                          = link_to t(".faq.restauration.page_intervenir"), "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank"
-                        %li
-                          = link_to t(".faq.restauration.page_marches"), "https://www.culture.gouv.fr/Thematiques/Conservation-restauration/La-conservation-restauration-en-France/Marches-publics-et-conservation-restauration-des-biens-culturels", rel: "noopener", target: "_blank"
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-entretien", "aria-expanded" => "false"}
-                        = t(".faq.entretien.title")
-                    #faq-entretien.fr-collapse
-                      %p
-                        = t(".faq.entretien.content")
-                      %ul
-                        %li
-                          = link_to t(".faq.entretien.page_intervenir"), "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank"
-                        %li
-                          = link_to t(".faq.entretien.page_plan_sauvegarde"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Plan-de-sauvegarde-des-biens-culturels", rel: "noopener", target: "_blank"
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-securisation", "aria-expanded" => "false"}
-                        = t(".faq.securisation.title")
-                    #faq-securisation.fr-collapse
-                      %ul
-                        %li
-                          = link_to t(".faq.securisation.voir_la_fiche"), fiche_path("securisation")
-                        %li
-                          = link_to t(".faq.securisation.page_securite"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete", rel: "noopener", target: "_blank"
-                        %li
-                          = link_to t(".faq.securisation.page_vol"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol", rel: "noopener", target: "_blank"
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-5", "aria-expanded" => "false"}
-                        Quelle licence est utilisée pour les photos déposées ?
-                    #faq-5.fr-collapse
-                      %p
-                        Les photos déposées seront réutilisées dans le cadre de la
-                        = succeed "." do
-                          %a{href: "https://www.etalab.gouv.fr/licence-ouverte-open-licence/", target: "_blank"} Licence Ouverte Etalab
-                      %p
-                        Cette licence ouverte est automatiquement appliquée lorsque c'est un agent public qui prend la photo. Si c'est une personne externe, il faut recueillir leur cession de droits.
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-introuvable", "aria-expanded" => "false"}
-                        = t(".faq.introuvable.title")
-                    #faq-introuvable.fr-collapse
-                      %p= t(".faq.introuvable.verifier")
-                      %p= t(".faq.introuvable.introuvable")
-                      %p= link_to t(".faq.introuvable.voir_la_fiche"), fiche_path("depot_plainte")
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-manquants", "aria-expanded" => "false"}
-                        = t(".faq.manquants.title")
-                    #faq-manquants.fr-collapse
-                      %p= t(".faq.manquants.monuments_historiques")
-                      %p= link_to t(".faq.manquants.page_proteger"), "https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques", target: "_blank"
-                      %p= t(".faq.manquants.palissy")
-                %li
-                  %section.fr-accordion
-                    .fr-accordion__title
-                      %button.fr-accordion__btn{"aria-controls" => "faq-sur-place", "aria-expanded" => "false"}
-                        = t(".faq.sur_place.title")
-                    #faq-sur-place.fr-collapse
-                      %p= t(".faq.sur_place.content")
-      / SECTION QUESTION
-      %section.fr-py-8w
-        .fr-container
-          .fr-grid-row.fr-grid-row--middle
-            .fr-col-md-8.fr-text--lg.co-text--blue.fr-px-4w
-              Vous avez une question qui n'est pas dans la liste ? N'hésitez pas à nous contacter.
-            .fr-col-md-4
-              = link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-icon-mail-line fr-btn--icon-right"
+
+  %section.co-background--light-grey
+    .fr-container
+      .fr-grid-row.fr-py-8w.fr-grid-row--center
+        .fr-col-md-5
+          %h2.co-text--blue= t(".etape3.title")
+          %p= t(".etape3.conseils")
+          %p= t(".etape3.fiches")
+        .fr-col-md-7.fr-px-12w
+          = vite_image_tag "images/illustrations/etape3.svg", class: "co-width--100", alt: "etape 3"
+
+  %section.fr-py-8w
+    #faq.fr-container
+      %h2.co-text--blue.co-text--center
+        Les questions les plus fréquentes
+      .fr-grid-row.fr-grid-row--center
+        .fr-col-md-8
+          %ul.fr-accordions-group{"data-accordion-open-target" => "group", "data-controller" => "accordion-open"}
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-1", "aria-expanded" => "false"}
+                    Quelles sont les obligations des propriétaires d'objets protégés / inscrits / classés ?
+                #faq-1.fr-collapse
+                  Le code du patrimoine ne crée pas d'obligation particulière pour le propriétaire dans la gestion quotidienne. En en faisant un trésor national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention.
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-retours", "aria-expanded" => "false"}
+                    = t(".faq.retours.title")
+                #faq-retours.fr-collapse
+                  = t(".faq.retours.content")
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-restauration", "aria-expanded" => "false"}
+                    = t(".faq.restauration.title")
+                #faq-restauration.fr-collapse
+                  Veuillez consulter ces pages dédiées sur le site du Ministère de la Culture :
+                  %ul
+                    %li
+                      = link_to t(".faq.restauration.page_intervenir"), "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank"
+                    %li
+                      = link_to t(".faq.restauration.page_marches"), "https://www.culture.gouv.fr/Thematiques/Conservation-restauration/La-conservation-restauration-en-France/Marches-publics-et-conservation-restauration-des-biens-culturels", rel: "noopener", target: "_blank"
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-entretien", "aria-expanded" => "false"}
+                    = t(".faq.entretien.title")
+                #faq-entretien.fr-collapse
+                  %p
+                    = t(".faq.entretien.content")
+                  %ul
+                    %li
+                      = link_to t(".faq.entretien.page_intervenir"), "https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit", rel: "noopener", target: "_blank"
+                    %li
+                      = link_to t(".faq.entretien.page_plan_sauvegarde"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Plan-de-sauvegarde-des-biens-culturels", rel: "noopener", target: "_blank"
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-securisation", "aria-expanded" => "false"}
+                    = t(".faq.securisation.title")
+                #faq-securisation.fr-collapse
+                  %ul
+                    %li
+                      = link_to t(".faq.securisation.voir_la_fiche"), fiche_path("securisation")
+                    %li
+                      = link_to t(".faq.securisation.page_securite"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete", rel: "noopener", target: "_blank"
+                    %li
+                      = link_to t(".faq.securisation.page_vol"), "https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol", rel: "noopener", target: "_blank"
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-5", "aria-expanded" => "false"}
+                    Quelle licence est utilisée pour les photos déposées ?
+                #faq-5.fr-collapse
+                  %p
+                    Les photos déposées seront réutilisées dans le cadre de la
+                    = succeed "." do
+                      %a{href: "https://www.etalab.gouv.fr/licence-ouverte-open-licence/", target: "_blank"} Licence Ouverte Etalab
+                  %p
+                    Cette licence ouverte est automatiquement appliquée lorsque c'est un agent public qui prend la photo. Si c'est une personne externe, il faut recueillir leur cession de droits.
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-introuvable", "aria-expanded" => "false"}
+                    = t(".faq.introuvable.title")
+                #faq-introuvable.fr-collapse
+                  %p= t(".faq.introuvable.verifier")
+                  %p= t(".faq.introuvable.introuvable")
+                  %p= link_to t(".faq.introuvable.voir_la_fiche"), fiche_path("depot_plainte")
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-manquants", "aria-expanded" => "false"}
+                    = t(".faq.manquants.title")
+                #faq-manquants.fr-collapse
+                  %p= t(".faq.manquants.monuments_historiques")
+                  %p= link_to t(".faq.manquants.page_proteger"), "https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques", target: "_blank"
+                  %p= t(".faq.manquants.palissy")
+            %li
+              %section.fr-accordion
+                .fr-accordion__title
+                  %button.fr-accordion__btn{"aria-controls" => "faq-sur-place", "aria-expanded" => "false"}
+                    = t(".faq.sur_place.title")
+                #faq-sur-place.fr-collapse
+                  %p= t(".faq.sur_place.content")
+
+    %section.co-background--light-grey.fr-py-8w.fr-mt-8w
+      .fr-container.fr-grid-row.fr-grid-row--middle
+        .fr-col-md-8.fr-text--lg.co-text--blue.fr-px-4w
+          Vous avez une question qui n'est pas dans la liste ? N'hésitez pas à nous contacter.
+        .fr-col-md-4
+          = link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-icon-mail-line fr-btn--icon-right"

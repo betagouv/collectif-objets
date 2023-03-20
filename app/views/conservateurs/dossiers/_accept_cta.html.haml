@@ -1,0 +1,4 @@
+- if @commune.completed? && @dossier&.can_generate_rapport?
+  .co-background--light-teal.fr-mb-4w.fr-py-4w
+    %p= t "conservateurs.communes.show.can_generate_rapport.content", count: @commune.recensements.count
+    %p= link_to "Finaliser le rapport …", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }

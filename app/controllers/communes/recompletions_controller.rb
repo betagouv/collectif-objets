@@ -29,5 +29,7 @@ module Communes
     def dossier_recompletion_params
       params.require(:dossier_recompletion).permit(:notes_commune).to_h.symbolize_keys
     end
+
+    def active_nav_links = %w[Recensement]
   end
 end

@@ -19,5 +19,7 @@ module Admin
       @email = CampaignEmail.find(params[:email_id])
       @campaign = @email.campaign
     end
+
+    def active_nav_links = %w[Campagnes]
   end
 end

@@ -66,18 +66,14 @@
                     %li …
               %li …
           %li
-            = link_to "Connexion", connexion_path
+            = link_to "Connexion Communes", new_user_session_path
             = accessible_icon_span
-            %ul
-              %li
-                = link_to "Connexion Communes", new_user_session_path
-                = accessible_icon_span
-              %li
-                = link_to "Connexion Conservateur", new_conservateur_session_path
-                = accessible_icon_span
-              %li
-                = link_to "Connexion Administrateur", new_admin_user_session_path
-                = accessible_icon_span
+          %li
+            = link_to "Connexion Conservateur", new_conservateur_session_path
+            = accessible_icon_span
+          %li
+            = link_to "Connexion Administrateur", new_admin_user_session_path
+            = accessible_icon_span
           %li= link_to "Statistiques", stats_path
           %li
             = link_to "On parle de nous", presse_path

@@ -1,9 +1,4 @@
 fr:
-  menu:
-    conservateurs:
-      departements:
-        one: Mon département
-        other: Mes départements
   communes:
     objets:
       index:
@@ -54,16 +49,6 @@ fr:
           content:
             one: "Vous avez analysé l'unique recensement de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune"
             other: Vous avez analysé l'ensemble des %{count} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
-          send: Finaliser le rapport …
-        rejected:
-          content: Ce dossier a été renvoyé à la commune le %{date} par %{conservateur} avec le commentaire suivant
-          content_end_html: Tant que la commune ne retourne pas le dossier, <b>vous ne pouvez pas l'analyser</b>
-        actions:
-          send: Finaliser le rapport …
-          reject: Renvoyer le dossier à la commune …
-          reject_desc: pour demander des informations manquantes
-        contact:
-          title: Contacter la commune
     communes_search_component:
       status_options:
         all: Toutes les communes
@@ -73,15 +58,7 @@ fr:
       prioritaires:
         one: 1 objet prioritaire
         other: "%{count} objets prioritaires"
-    objet_card_component:
-      analysed_badge: Analysé
-      prioritaire_badge: Prioritaire
     rejects:
-      new:
-        head_title: "Renvoyer le dossier de recensement de %{commune}"
-        title: "Renvoyer le dossier de recensement de %{commune}"
-        instructions_html: "Une fois le dossier renvoyé, la commune pourra modifier ses recensements : par exemple rajouter des photos ou déclarer des objets retrouvés. En contrepartie, le dossier sera bloqué pour vous : <b>vous ne pourrez plus analyser les recensements déjà soumis</b>. Il faudra alors attendre que la commune vous retourne le dossier une nouvelle fois pour l'analyser."
-        instructions_overrides_html: Vous avez modifié des informations de recensement renseignées par la commune sur %{count} objets. Il s'agit d'états sanitaires ou d'évaluations de sécurité que vous avez corrigées. <b>La commune ne pourra plus modifier ces champs</b>, votre évaluation prime.<br />Si vous souhaitez rendre la main à la commune, vous pouvez retirer vos modifications sur ces recensements.
       form:
         error: "Une erreur s'est produite :"
         notes_conservateur:
@@ -124,14 +101,6 @@ fr:
     recensements:
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
-    analyses:
-      edit:
-        pop_card:
-          edifice_nom: Édifice
-          emplacement: Emplacement
-          categorie: Catégorie
-          crafted_at: Époque
-          link: ouvrir dans POP
     password:
       hint: 8 caractères minimum (tous les caractères sont autorisés y compris les espaces)
   recensement:

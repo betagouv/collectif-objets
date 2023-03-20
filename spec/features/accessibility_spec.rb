@@ -10,7 +10,7 @@ shared_examples "an accessible page" do
   end
 end
 
-feature "accessibility", js: true do
+feature "accessibility public pages", js: true do
   # PUBLIC
 
   describe "objets#index" do
@@ -59,11 +59,6 @@ feature "accessibility", js: true do
   end
 
   # "Statistiques", :stats_path
-
-  context "Connexion page" do
-    before { visit connexion_path }
-    it_behaves_like "an accessible page"
-  end
 
   describe "Connexion Communes" do
     before { visit new_user_session_path }

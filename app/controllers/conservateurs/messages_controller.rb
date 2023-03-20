@@ -3,6 +3,7 @@
 module Conservateurs
   class MessagesController < BaseController
     before_action :set_commune
+    before_action :set_dossier
     before_action :set_messages, only: :index # rubocop:disable Rails/LexicallyScopedActionFilter
     include MessagesControllerConcern
 
@@ -16,11 +17,17 @@ module Conservateurs
       @commune = Commune.find(params[:commune_id])
     end
 
+    def set_dossier
+      @dossier = @commune.dossier
+    end
+
     def set_messages
       @messages = policy_scope(Message)
                     .includes(:author, :files_attachments, :files_blobs)
                     .where(commune: @commune)
                     .order(created_at: :asc)
     end
+
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

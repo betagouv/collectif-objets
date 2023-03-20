@@ -17,5 +17,7 @@ module Communes
                     .where(commune: @commune)
                     .order(created_at: :asc)
     end
+
+    def active_nav_links = %w[Messagerie]
   end
 end

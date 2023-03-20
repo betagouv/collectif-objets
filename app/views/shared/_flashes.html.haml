@@ -1,0 +1,10 @@
+- if notice
+  .fr-container{role: "alert"}
+    .fr-alert.fr-alert--info
+      .fr-alert__content
+        = notice
+- if alert
+  .fr-container{role: "alert"}
+    .fr-alert.fr-alert--error
+      .fr-alert__content
+        = alert

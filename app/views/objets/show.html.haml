@@ -1,5 +1,5 @@
 - content_for(:head_title) { truncate(@objet.nom, length: 20) }
-%main.fr-container.co-objet-show.fr-pt-2w
+%main.fr-container.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Accueil", root_path],["Objets de #{@objet.commune.nom}",objets_path(commune_code_insee: @objet.commune.code_insee)]], current_page_label: @objet.nom
   %h1= @objet.nom
   = render ObjetPageComponent.new(objet: @objet)

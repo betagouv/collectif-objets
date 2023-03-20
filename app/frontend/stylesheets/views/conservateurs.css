@@ -50,6 +50,7 @@
 
 .fr-header__search>.fr-container {
   position: relative;
+  overflow: visible;
 }
 
 /* MAIL PREVIEW */

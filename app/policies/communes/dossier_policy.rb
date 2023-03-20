@@ -5,7 +5,7 @@ module Communes
     alias dossier record
 
     def show?
-      user_commune? && dossier.accepted?
+      user_commune?
     end
 
     private

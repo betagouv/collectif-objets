@@ -39,7 +39,6 @@ Rails.application.routes.draw do
 
   root "pages#home"
   controller :pages do
-    get :connexion
     get :stats
     get :conditions
     get :mentions_legales
@@ -75,7 +74,7 @@ Rails.application.routes.draw do
         resources :photos, only: %i[create destroy], controller: "recensement_photos"
       end
     end
-    resources :dossiers, only: [:show]
+    resource :dossier, only: [:show]
     resources :campaign_recipients, only: [:update]
     resources :messages, only: %i[index new create] do
       resources :email_attachments, only: [:show]
@@ -99,13 +98,14 @@ Rails.application.routes.draw do
       resources :messages, only: %i[index new create] do
         resources :email_attachments, only: [:show]
       end
+      resource :dossier, only: %i[show]
     end
     resources :objets, only: [] do
       resources :recensements, only: [] do
         resource :analyse, only: %i[edit update]
       end
     end
-    resources :dossiers, only: [:show] do
+    resources :dossiers do
       resource :accept, only: %i[new create update]
       resource :reject, only: %i[new create update]
     end
@@ -119,6 +119,7 @@ Rails.application.routes.draw do
       end
     end
     resource :conservateur, only: [:update]
+    resources :visits, only: [:index]
   end
 
   ## -----
@@ -130,7 +131,6 @@ Rails.application.routes.draw do
     resources :conservateurs, except: [:destroy] do
       get :impersonate
       collection do
-        post :stop_impersonating
         post :toggle_impersonate_mode
       end
     end
@@ -138,7 +138,6 @@ Rails.application.routes.draw do
     resources :users, only: %i[edit update] do
       get :impersonate
       collection do
-        post :stop_impersonating
         post :toggle_impersonate_mode
       end
     end

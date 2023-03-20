@@ -21,18 +21,18 @@ Ces 3 interfaces sont accessibles sur un unique site : https://collectif-objets.
 
 | | |
 | - | - |
-| ![](/doc/interface-communes1.png) | ![](/doc/interface-communes2.png) |
+| ![](/doc/interface-communes1.webp) | ![](/doc/interface-communes2.webp) |
 
 2. **Interface conservateurs**
 
 | | |
 | - | - |
-| ![](/doc/interface-conservateurs1.png) | ![](/doc/interface-conservateurs2.png) |
+| ![](/doc/interface-conservateurs1.webp) | ![](/doc/interface-conservateurs2.webp) |
 
 
 3. **Interface administrateurs**
 
-![](/doc/interface-admin1.png)
+![](/doc/interface-admin1.webp)
 
 
 ## Frameworks et dépendances

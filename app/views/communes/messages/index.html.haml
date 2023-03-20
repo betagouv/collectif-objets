@@ -1,7 +1,7 @@
 - content_for(:head_title) { "Messagerie" }
 
-%main.fr-mb-8w
-  .fr-grid-row.fr-grid-row--center
+%main.fr-mb-8w.fr-container
+  .fr-grid-row
     .fr-col-md-10
       = render "shared/breadcrumbs",
         links: [["Accueil", root_path]], current_page_label: "Messagerie"

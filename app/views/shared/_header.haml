@@ -1,42 +1,49 @@
-- if current_conservateur
-  = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.with_navbar do
-      %button.fr-btn--search.fr-btn(data-fr-opened="false" aria-controls="modal-menu-search" title="Rechercher")
-        Rechercher
-    - path = current_conservateur.departements.count == 1 ? conservateurs_departement_path(current_conservateur.departements.first) : conservateurs_departements_path
-    - c.tool_link t("menu.conservateurs.departements", count: current_conservateur.departements.count), path, icon: "arrow-right"
-    - c.tool_link current_conservateur, edit_conservateur_registration_path, icon: "user"
+= dsfr_header(logo_text: "Ministère\nde la Culture".html_safe,
+  title: "Collectif Objets",
+  tagline: "Préservez votre patrimoine mobilier") do |c|
+
+  - if current_conservateur
+    - c.with_tool_link title: current_conservateur, path: edit_conservateur_registration_path, classes: ["fr-icon-settings-5-line"]
+    - c.with_tool_link title: "Déconnexion", path: destroy_conservateur_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": "DELETE" }
+
+    - if current_conservateur.departements.count > 2
+      - c.with_direct_link_simple title: "Mes départements", path: conservateurs_departements_path, active: active_nav_link?("Mes départements")
+    - else
+      - current_conservateur.departements.each do |departement|
+        - c.with_direct_link_simple title: departement, path: conservateurs_departement_path(departement.code), active: active_nav_link?(departement.to_s)
+
+    - c.with_direct_link_dropdown title: "Mes actions", active: current_page?(controller: '/conservateurs/visits', action: 'index') do |dropdown|
+      - dropdown.with_link title: "Visites prévues", path: conservateurs_visits_path
+
     - c.with_search do
       = render "shared/header/header_conservateur_search"
-- elsif current_user
-  = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
-    - c.tool_link "Mon compte", edit_user_registration_path, icon: "user"
-    - c.tool_link "Voir les objets de #{current_user.commune.nom}" , commune_objets_path(current_user.commune), icon: "image"
-    - c.tool_link "Messagerie" , commune_messages_path(current_user.commune), icon: "mail"
-- elsif current_admin_user
-  = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.tool_link current_admin_user, "#", icon: "admin"
-    - c.tool_link "Déconnexion", destroy_admin_user_session_path, icon: "logout-box-r", "data-turbo-method": "DELETE"
-    - c.with_menu do
-      %nav.fr-nav#menu-navigation(role="navigation" aria-label="Menu principal")
-        %ul.fr-nav__list
-          - path_commune = current_user.present? ? commune_objets_path(current_user.commune) : admin_communes_path
-          %li.fr-nav__item{class: content_for(:current_layout) == "commune" ? "active" : ""}
-            %a.fr-nav__link(href=path_commune target="_self")
-              = icon_span("user")
-              Interface Commune
-          - path_conservateur = current_conservateur.present? ? conservateurs_departements_path : admin_conservateurs_path
-          %li.fr-nav__item{class: content_for(:current_layout) == "conservateur" ? "active" : ""}
-            = link_to path_conservateur, class: "fr-nav__link" do
-              = icon_span("user-star")
-              Interface Conservateur
-          %li.fr-nav__item{class: content_for(:current_layout) == "admin" ? "active" : ""}
-            %a.fr-nav__link(href=admin_path target="_self")
-              = icon_span("lock")
-              Administration
-- else
-  = render HeaderComponent.new(notice:, alert:) do |c|
-    - c.tool_link "Comment ça marche ?", aide_path, icon: "question"
-    - c.tool_link "Connexion", connexion_path, icon: "lock"
-    - c.tool_link "Voir les objets dans ma commune" , objets_path, icon: "image"
+
+  - elsif current_user
+    - c.with_tool_link title: "Voir les objets de #{current_user.commune.nom}", path: commune_objets_path(current_user.commune), classes: ["fr-icon-eye-line"]
+    - c.with_tool_link title: "Déconnexion", path: destroy_user_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": "DELETE" }
+    - c.with_tool_link title: "Préférences", path: edit_user_registration_path, classes: ["fr-icon-settings-5-line"]
+
+    - c.with_direct_link_simple title: "Recensement", path: commune_objets_path(current_user.commune), active: active_nav_link?("Recensement")
+    - c.with_direct_link_simple title: "Messagerie", path: commune_messages_path(current_user.commune), active: active_nav_link?("Messagerie")
+    - c.with_direct_link_simple title: "Rapport du conservateur", path: commune_dossier_path(current_user.commune), active: active_nav_link?("Rapport du conservateur")
+    - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos") do |dropdown|
+      - dropdown.with_link title: "Comment ça marche ?", path: aide_path
+      - dropdown.with_link title: "On parle de nous", path: presse_path
+      - dropdown.with_link title: "Statistiques", path: stats_path
+
+  - elsif current_admin_user
+    - c.with_tool_link title: "#{current_admin_user} (Admin)", path: "#", classes: ["fr-icon-admin-line"]
+    - c.with_tool_link title: "Déconnexion", path: destroy_admin_user_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": "DELETE" }
+    - c.with_direct_link_simple title: "Accueil Admin", path: admin_path, active: active_nav_link?("Accueil Admin")
+    - c.with_direct_link_simple title: "Communes", path: admin_communes_path, active: active_nav_link?("Communes")
+    - c.with_direct_link_simple title: "Conservateurs", path: admin_conservateurs_path, active: active_nav_link?("Conservateurs")
+    - c.with_direct_link_simple title: "Campagnes", path: admin_campaigns_path, active: active_nav_link?("Campagnes")
+    - c.with_direct_link_simple title: "CMS", path: "https://collectif-objets-cms.netlify.app/", html_attributes: { target: "_blank", rel: "noopener" }
+
+  - else
+    - c.with_tool_link title: "Connexion commune", path: new_user_session_path, classes: ["fr-icon-user-line"]
+    - c.with_tool_link title: "Connexion conservateur", path: new_conservateur_session_path, classes: ["fr-icon-user-star-line"]
+
+    - c.with_direct_link_simple title: "Comment ça marche ?", path: aide_path, active: active_nav_link?("Comment ça marche ?")
+    - c.with_direct_link_simple title: "On parle de nous", path: presse_path, active: active_nav_link?("On parle de nous")
+    - c.with_direct_link_simple title: "Statistiques", path: stats_path, active: active_nav_link?("Statistiques")

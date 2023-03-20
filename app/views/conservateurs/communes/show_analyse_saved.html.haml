@@ -1,32 +1,28 @@
-- content_for(:head_title) { "Votre analyse a bien été sauvegardée" }
-%main
-  .fr-container.fr-grid-row.fr-grid-row--center.fr-mt-6w
-    .fr-col-md-10
-      = render "shared/breadcrumbs",
-        links: [["Départements", conservateurs_departements_path], [@commune.departement.nom, conservateurs_departement_path(@commune.departement)]],
-        current_page_label: @commune.nom
-  .fr-container.fr-mb-6w
-    .fr-grid-row.fr-mb-4w.fr-grid-row--middle.fr-grid-row--center
-      .fr-col-md-5
-        %h2
-          - if @objets.any?
-            Votre analyse a bien été sauvegardée
-          - else
-            Vous avez analysé tous les recensements de #{@commune.nom}
-        %p Vous pouvez modifier votre analyse de ce dossier de recensement autant que vous le souhaitez avant l'envoi du rapport.
+= render layout: "conservateurs/communes/tabs",
+  locals: { dossier: @dossier, current_tab_title: "Analyse" } do
+
+  .fr-grid-row.fr-mb-4w.fr-grid-row--middle.fr-grid-row--center.fr-mb-6w
+    .fr-col-md-5
+      %h2
         - if @objets.any?
-          %p
-            = link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), class: "fr-btn fr-btn--secondary"
+          Votre analyse a bien été sauvegardée
         - else
-          %p
-            = link_to "Finaliser le rapport …", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn"
-          %p ou
-          %p
-            = link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), class: "fr-btn fr-btn--secondary"
-      .fr-col-md-5
-        = vite_image_tag "images/illustrations/people-clap.svg", class: "co--width-max-100"
+          Vous avez analysé tous les recensements de #{@commune.nom}
+      %p Vous pouvez modifier votre analyse de ce dossier de recensement autant que vous le souhaitez avant l'envoi du rapport.
+      - if @objets.any?
+        %p
+          = dsfr_link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), data: { turbo_action: "advance" }, icon_left: "arrow-left-line"
+      - else
+        %p
+          = link_to "Finaliser le rapport …", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn"
+        %p ou
+        %p
+          = dsfr_link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), data: { turbo_action: "advance" }, icon_left: "arrow-left-line"
+    .fr-col-md-5
+      = vite_image_tag "images/illustrations/people-clap.svg", class: "co--width-max-100"
+
   - if @objets.any?
-    .fr-container.fr-grid-row.fr-grid-row--center.co-background--light-teal.fr-py-6w
+    .fr-grid-row.fr-grid-row--center.co-background--light-teal.fr-py-6w
       .fr-col-md-10
         %h3.co-text--center
           = t("recensement.analyse.remaining_count", count: @objets.count, commune: @commune.nom)

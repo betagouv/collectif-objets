@@ -35,7 +35,7 @@ RSpec.feature "Conservateurs - Reject Dossier", type: :feature, js: true do
 
   scenario "full" do
     login_as(conservateur, scope: :conservateur)
-    visit "/conservateurs/departements"
+    visit "/"
     click_on "26 - Drôme"
     click_on "Albon"
 

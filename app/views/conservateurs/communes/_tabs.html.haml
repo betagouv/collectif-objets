@@ -1,0 +1,30 @@
+-# locals: :current_tab_title, :dossier
+
+- commune = dossier.commune
+- departement = dossier.departement
+- content_for(:head_title) { "#{current_tab_title} - #{commune}" }
+
+%main.fr-container.fr-pb-8w
+  = render "shared/breadcrumbs",
+    links: [["Départements", conservateurs_departements_path],
+      [commune.departement.nom, conservateurs_departement_path(departement)],
+      [commune.to_s, conservateurs_commune_path(commune)]],
+    current_page_label: current_tab_title
+
+  .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-1w
+    %h1= commune
+    - if dossier
+      .co-flex--shrink-0
+        %div= dossier_status_badge dossier
+
+  .fr-mb-4w= t("activerecord.attributes.commune.statuses.#{commune.status}")
+
+  = turbo_frame_tag "commune-tabs", autoscroll: true, data: { autoscroll_block: "start" } do
+    = dsfr_tabs classes: (local_assigns[:no_padding] ? ["co-tabs--no-padding"] : []) do |tabs|
+      - [["Analyse", conservateurs_commune_path(commune)],
+        ["Messagerie", conservateurs_commune_messages_path(commune)],
+        ["Rapport", conservateurs_commune_dossier_path(commune)]].each do |title, path|
+        - if title == current_tab_title
+          = tabs.with_tab(title: title, active: true, path:).with_content(yield)
+        - else
+          = tabs.with_tab title: title, path: path

@@ -2,6 +2,8 @@
 
 module Admin
   class ConservateursController < BaseController
+    skip_before_action :disconnect_impersonating_conservateur, only: [:toggle_impersonate_mode]
+
     def index
       @ransack = Conservateur.order(:last_name).ransack(params[:q])
       @query_present = params[:q].present?
@@ -41,12 +43,6 @@ module Admin
       redirect_to conservateurs_departements_path
     end
 
-    def stop_impersonating
-      session.delete(:conservateur_impersonate_write)
-      stop_impersonating_conservateur
-      redirect_to "/", notice: "Vous n'incarnez plus de conservateur", status: :see_other
-    end
-
     def toggle_impersonate_mode
       if session[:conservateur_impersonate_write].present?
         session.delete(:conservateur_impersonate_write)
@@ -61,5 +57,7 @@ module Admin
     def conservateur_params
       params.require(:conservateur).permit(:email, :phone_number, :first_name, :last_name, departement_ids: [])
     end
+
+    def active_nav_links = %w[Conservateurs]
   end
 end

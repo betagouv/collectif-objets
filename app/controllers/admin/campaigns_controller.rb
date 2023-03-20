@@ -68,5 +68,6 @@ module Admin
     end
 
     def after_destroy_path = admin_campaigns_path
+    def active_nav_links = %w[Campagnes]
   end
 end

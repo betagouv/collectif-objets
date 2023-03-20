@@ -61,4 +61,8 @@ module ApplicationHelper
     title = "Accessibilité validée #{type_str}"
     icon_span("checkbox", contour:, title:)
   end
+
+  def active_nav_link?(link)
+    active_nav_links&.include?(link)
+  end
 end

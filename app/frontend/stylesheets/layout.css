@@ -1,3 +1,7 @@
+.fr-header .fr-logo {
+  white-space: pre-line;
+}
+
 .fr-nav__item.active {
   background-color: rgba(100, 100, 100, 0.3);
 }

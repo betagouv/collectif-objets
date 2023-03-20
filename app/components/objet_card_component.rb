@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ObjetCardComponent < ViewComponent::Base
+  using HTMLAttributesUtils
+
   with_collection_parameter :objet
 
   def initialize(objet = nil, **kwargs)
@@ -10,6 +12,7 @@ class ObjetCardComponent < ViewComponent::Base
     @main_photo = kwargs[:main_photo]
     @tags = kwargs[:tags]
     @commune = kwargs[:commune] || @objet.commune # pass to avoid n+1 queries
+    @link_html_attributes_custom = kwargs[:link_html_attributes] || {}
     super
   end
 
@@ -29,5 +32,11 @@ class ObjetCardComponent < ViewComponent::Base
 
   def main_photo
     @main_photo || palissy_photos&.first
+  end
+
+  def link_html_attributes
+    { class: "fr-card__link" }
+      .deep_merge_html_attributes(@link_html_attributes_custom)
+      .deep_tidy_html_attributes
   end
 end

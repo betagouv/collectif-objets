@@ -6,7 +6,7 @@ describe Conservateurs::DossierPolicy do
   subject { described_class }
 
   permissions :show? do
-    context "dossier accepté d'un departement du conservateur" do
+    context "dossier d'un departement du conservateur" do
       let(:dossier) { build(:dossier, status: :accepted) }
       let(:conservateur) { build(:conservateur, departements: [dossier.departement] + build_list(:departement, 2)) }
       it { should permit(conservateur, dossier) }
@@ -18,10 +18,10 @@ describe Conservateurs::DossierPolicy do
       it { should_not permit(conservateur, dossier) }
     end
 
-    context "dossier rejeté" do
+    context "dossier rejeté du département du conservateur" do
       let(:dossier) { build(:dossier, status: :rejected) }
       let(:conservateur) { build(:conservateur, departements: [dossier.departement] + build_list(:departement, 2)) }
-      it { should_not permit(conservateur, dossier) }
+      it { should permit(conservateur, dossier) }
     end
   end
 end

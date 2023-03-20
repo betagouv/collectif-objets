@@ -11,7 +11,7 @@ module Conservateurs
     end
 
     def call
-      render ::ObjetCardComponent.new(objet, commune:, badges:, main_photo:, path:, tags:)
+      render ::ObjetCardComponent.new(objet, commune:, badges:, main_photo:, path:, tags:, link_html_attributes:)
     end
 
     private
@@ -51,33 +51,33 @@ module Conservateurs
     end
 
     def not_recensed_badge
-      badge_struct.new("warning", "Pas encore recensé") if recensement.nil?
+      return nil if recensement.present?
+
+      badge_struct.new("warning", "Pas encore recensé")
     end
 
     def missing_photos_badge
       return nil unless recensement&.missing_photos?
 
-      badge_struct.new(
-        "warning", I18n.t("recensement.photos.missing")
-      )
+      badge_struct.new "warning", "photos manquantes"
     end
 
     def analysed_badge
       return nil unless recensement&.analysed?
 
-      badge_struct.new(
-        "success",
-        I18n.t("conservateurs.objet_card_component.analysed_badge")
-      )
+      badge_struct.new "success", "Analysé"
     end
 
     def prioritaire_badge
       return nil unless recensement&.prioritaire?
 
-      badge_struct.new(
-        "warning",
-        I18n.t("conservateurs.objet_card_component.prioritaire_badge")
-      )
+      badge_struct.new "warning", "Prioritaire"
+    end
+
+    def link_html_attributes
+      @link_html_attributes = { data: { turbo_action: "advance" } }
+      @link_html_attributes[:data][:turbo_frame] = "_top" unless can_analyse
+      @link_html_attributes
     end
   end
 end

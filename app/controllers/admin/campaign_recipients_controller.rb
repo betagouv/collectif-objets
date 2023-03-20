@@ -9,5 +9,6 @@ module Admin
     def routes_prefix = :admin
 
     def authorize_recipient = true
+    def active_nav_links = %w[Campagnes]
   end
 end

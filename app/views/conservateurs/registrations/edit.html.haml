@@ -1,4 +1,5 @@
 - content_for(:head_title) { "Mon compte" }
+
 %main.fr-container.fr-py-4w.fr-grid-row.fr-grid-row--center{"data-controller" => "devise--sessions"}
   .fr-col-md-8
     = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Mon compte")
@@ -29,14 +30,3 @@
             %span Notifications mails pour les messages reçus
         .fr-input-group
           = f.submit "Sauvegarder"
-
-    .fr-my-8w
-      %h2 Visites prévues
-      - if current_conservateur.dossiers.to_visit.blank?
-        %i Aucune visite prévue
-      - else
-        %ul
-          - current_conservateur.dossiers.to_visit.each do |dossier|
-            %li
-              = link_to dossier.commune, conservateurs_dossier_path(dossier)
-              = dossier_visit_badge(dossier)

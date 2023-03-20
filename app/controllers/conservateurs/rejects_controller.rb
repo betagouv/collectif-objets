@@ -9,7 +9,7 @@ module Conservateurs
     def create
       if @dossier.reject!
         UserMailer.with(dossier: @dossier).dossier_rejected_email.deliver_later
-        redirect_to conservateurs_commune_path(@commune, warning: "Le dossier a été renvoyé à la commune")
+        redirect_to conservateurs_commune_path(@commune)
       else
         render "conservateurs/rejects/new", status: :unprocessable_entity
       end
@@ -51,5 +51,7 @@ module Conservateurs
         .permit(:notes_conservateur)
         .merge(conservateur_id: current_conservateur.id)
     end
+
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

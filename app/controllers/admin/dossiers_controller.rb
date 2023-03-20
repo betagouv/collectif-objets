@@ -9,5 +9,9 @@ module Admin
       @dossier.return_to_construction!
       redirect_to admin_commune_path(@dossier.commune), notice: "Dossier repassé en construction"
     end
+
+    private
+
+    def active_nav_links = %w[Communes]
   end
 end
