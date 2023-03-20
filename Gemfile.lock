@@ -1,16 +1,3 @@
-GIT
-  remote: https://github.com/betagouv/dsfr-view-components.git
-  revision: 50f400035c8702a49728d7e578f73fc2cf9e25cb
-  branch: components/tabs
-  specs:
-    dsfr-view-components (0.2.1)
-      actionpack (>= 6.1)
-      activemodel (>= 6.1)
-      html-attributes-utils (~> 1)
-      pagy (~> 6)
-      railties (>= 6.1)
-      view_component (~> 2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -171,6 +158,13 @@ GEM
       devise (>= 4.9.0)
     diff-lcs (1.5.0)
     dry-cli (1.0.0)
+    dsfr-view-components (0.2.1)
+      actionpack (>= 6.1)
+      activemodel (>= 6.1)
+      html-attributes-utils (~> 1)
+      pagy (~> 6)
+      railties (>= 6.1)
+      view_component (~> 2)
     dumb_delegator (1.0.0)
     erubi (1.12.0)
     erubis (2.7.0)
@@ -483,7 +477,7 @@ DEPENDENCIES
   debug (>= 1.0.0)
   devise (~> 4.8)
   devise-i18n (~> 1.11)
-  dsfr-view-components!
+  dsfr-view-components
   factory_bot_rails
   foreman
   front_matter_parser

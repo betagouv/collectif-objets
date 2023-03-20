@@ -16,7 +16,7 @@ gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false
 gem "devise", "~> 4.8"
 gem "devise-i18n", "~> 1.11"
-gem "dsfr-view-components", github: "betagouv/dsfr-view-components", branch: "components/tabs"
+gem "dsfr-view-components"
 gem "factory_bot_rails"
 gem "front_matter_parser"
 gem "haml-rails"
