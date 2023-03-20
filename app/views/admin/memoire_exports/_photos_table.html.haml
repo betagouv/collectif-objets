@@ -3,19 +3,19 @@
     %thead
       %tr
         %th Photo
-        %th.fixed Pré-existante
+        %th Pré-existante
         %th Commune
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:nom]
       %tr.fr-text--sm
         %th
-        %th.fixed Déjà dans Mémoire
+        %th Déjà dans Mémoire
         %th
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:desc]
       %tr.fr-text--sm
         %th
-        %th.fixed
+        %th
         %th ex: Vouziers
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:desc2]
@@ -23,7 +23,7 @@
       - ([nil] + photos_recensement).each_cons(2) do |previous_row_photo, photo|
         %tr{id: "attachment-#{photo.attachment.id}"}
           %td= render "photo", photo: photo.attachment
-          %td.fixed
+          %td
             - if photo.recensement.objet.palissy_photos.any?
               = image_tag photo.recensement.objet.palissy_photos.first.url, style: "max-height: 150px;"
             - else
@@ -34,26 +34,23 @@
             %td= link_to photo.recensement.commune, admin_commune_path(photo.recensement.commune)
             %td
               %div= photo.recensement.objet.palissy_REF
-              .fixed= photo.recensement.objet.palissy_TICO
-              .fixed= link_to "voir sur POP", palissy_url(photo.recensement.objet), target: "_blank", rel: "noopener"
+              = photo.recensement.objet.palissy_TICO
+              = link_to "voir sur POP", palissy_url(photo.recensement.objet), target: "_blank", rel: "noopener"
           %td.co-word-break-all= photo.memoire_REF
           %td.co-word-break-all= photo.memoire_REFIMG
           %td= photo.memoire_NUMP
           %td= photo.memoire_DATPV
-          %td.fixed Oui
-          %td.fixed Photographie fournie lors du recensement réalisé par Collectif Objets
+          %td Oui
+          %td Photographie fournie lors du recensement réalisé par Collectif Objets
           %td= photo.recensement.commune.nom
-          %td.fixed objet
+          %td objet
           %td= photo.recensement.objet.edifice.nom
-          %td.fixed © Ministère de la Culture (France), Collectif Objets – Tous droits réservés
-          %td.fixed Image numérique native
-          %td.fixed MHCO008
-          %td.fixed Collectif Objets
+          %td © Ministère de la Culture (France), Collectif Objets – Tous droits réservés
+          %td Image numérique native
+          %td MHCO008
+          %td Collectif Objets
 
 :css
-  .fr-table:not(.display-fixed) .fixed {
-    display: none;
-  }
   .fr-table thead tr:not(:first-child) th {
     font-size: 0.6rem;
     line-height: 1rem;
