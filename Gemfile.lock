@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/betagouv/dsfr-view-components.git
-  revision: 41cc54ead51f7aaf91b77c6ef8807c1b3b683c70
+  revision: 50f400035c8702a49728d7e578f73fc2cf9e25cb
   branch: components/tabs
   specs:
-    dsfr-view-components (0.1.1)
+    dsfr-view-components (0.2.1)
       actionpack (>= 6.1)
       activemodel (>= 6.1)
       html-attributes-utils (~> 1)
@@ -292,7 +292,7 @@ GEM
     rack (2.2.6.4)
     rack-proxy (0.7.6)
       rack
-    rack-test (2.0.2)
+    rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.4.3)
       actioncable (= 7.0.4.3)
