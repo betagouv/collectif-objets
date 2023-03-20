@@ -168,14 +168,14 @@ Durée à prévoir : 15 minutes
 - [ ] lire le mail envoyé depuis MailHog sur [localhost:8025](http://localhost:8025)
 - [ ] renvoyer un dossier à la commune pour lui demander de nouvelles photos
 
-### URLs du site web
+## URLs du site web
 
 - En production [collectif-objets.beta.gouv.fr](https://collectif-objets.beta.gouv.fr/)
 - En staging [staging.collectifobjets.org](https://staging.collectifobjets.org/) 
 - En local [localhost:3000](http://localhost:3000) héberge le site et [localhost:8025](http://localhost:8025) héberge 
   MailHog pour voir les emails simulés
 
-### Outils & services externes
+## Outils & services externes
 
 - [Metabase](https://metabase.collectifobjets.org) - Stats et visualisations
 - [Dashboard Scalingo](https://dashboard.scalingo.com/)
@@ -185,7 +185,7 @@ Durée à prévoir : 15 minutes
 - [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
 - [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
 
-### Config DNS & Serveurs Mails
+## Config DNS & Serveurs Mails
 
 - La configuration des domaines en .beta.gouv.fr est gérée par l'équipe transverse de beta.gouv.fr
 - Idem pour les domaines en `.incubateur.net`
