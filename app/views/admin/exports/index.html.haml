@@ -11,8 +11,7 @@
             %th Recensements analysés
             %th dont disparus ou introuvables
             %th Photos
-            %th Palissy
-            %th Mémoire
+            %th Exports
         %tbody
           - @departements.each do |departement|
             %tr
@@ -20,21 +19,29 @@
               %td= departement.dossiers.length
               %td= departement.recensements.length
               %td= departement.recensements.to_a.reject(&:pop_export_palissy_id).reject(&:edifice_initial?).length
-              %td= departement.recensements.to_a.reject(&:pop_export_memoire_id).sum { _1.photos.length }
+              %td
+                - photos_count = departement.recensements.to_a.reject(&:pop_export_memoire_id).sum { _1.photos.length }
+                - new_photos_count = departement.recensements.to_a.reject(&:pop_export_memoire_id).reject { |r| r.objet.palissy_photos.any? }.sum { _1.photos.length }
+                %div #{photos_count} photos
+                %div dont #{(new_photos_count.to_f * 100 / photos_count).round}% de premières photos
+                %div soit #{new_photos_count} premières photos
               %td.co-white-space-nowrap
                 - departement.pop_exports.palissy.each do |pop_export|
                   .fr-mb-2w= link_to pop_export, admin_palissy_export_path(pop_export), class: "fr-link"
-                %div= link_to "nouvel export Palissy …", new_admin_palissy_export_path(departement_code: departement.code), class: "fr-btn fr-btn--secondary"
-              %td.co-white-space-nowrap
+                %div= link_to "nouvel export Palissy …", new_admin_palissy_export_path(departement_code: departement.code), class: "fr-link"
                 - departement.pop_exports.memoire.each do |pop_export|
                   .fr-mb-2w= link_to pop_export, admin_memoire_export_path(pop_export), class: "fr-link"
-                %div= link_to "nouvel export Mémoire…", new_admin_memoire_export_path(departement_code: departement.code), class: "fr-btn fr-btn--secondary"
+                %div= link_to "nouvel export Mémoire…", new_admin_memoire_export_path(departement_code: departement.code), class: "fr-link"
         %tfooter
           %tr
             %th Totaux
             %th= @departements.sum { _1.dossiers.length }
             %th= @departements.sum { _1.recensements.length }
             %th= @departements.sum { _1.recensements.to_a.reject(&:pop_export_palissy_id).reject(&:edifice_initial?).length }
-            %th= @departements.sum { |d| d.recensements.to_a.reject(&:pop_export_memoire_id).sum { |r| r.photos.length } }
+            %th
+              - photos_count = @departements.sum { |d| d.recensements.to_a.reject(&:pop_export_memoire_id).sum { |r| r.photos.length } }
+              - new_photos_count = @departements.sum { |d| d.recensements.to_a.reject(&:pop_export_memoire_id).reject { |r| r.objet.palissy_photos.any? }.sum { |r| r.photos.length } }
+              %div #{photos_count} photos
+              %div #{(new_photos_count.to_f * 100 / photos_count).round}% premières photos (#{new_photos_count} photos)
             %th
             %th

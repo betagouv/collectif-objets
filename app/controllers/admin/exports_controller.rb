@@ -8,7 +8,7 @@ module Admin
         .includes(:dossiers)
         .where.not(dossiers: { accepted_at: nil })
         .where(recensements: Recensement.absent_or_recensable)
-        .includes(recensements: [:photos_attachments])
+        .includes(recensements: %i[photos_attachments objet])
     end
   end
 end
