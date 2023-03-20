@@ -21,7 +21,7 @@
           %th{class: col[:fixed] ? "fixed" : ""}= col[:desc2]
     %tbody
       - ([nil] + photos_recensement).each_cons(2) do |previous_row_photo, photo|
-        %tr
+        %tr{id: "attachment-#{photo.attachment.id}"}
           %td= render "photo", photo: photo.attachment
           %td.fixed
             - if photo.recensement.objet.palissy_photos.any?

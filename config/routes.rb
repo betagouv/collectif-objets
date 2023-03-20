@@ -162,7 +162,7 @@ Rails.application.routes.draw do
     resources :exports, only: [:index]
     resources :palissy_exports, only: %i[new create show destroy]
     resources :memoire_exports, only: %i[new create show destroy]
-    resources :attachments, only: [] do
+    resources :attachments, only: [:destroy] do
       post :rotate
     end
     resources :messages, only: [:create] do
