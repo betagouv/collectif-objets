@@ -12,6 +12,7 @@ module Admin
 
     def new
       @pagy, attachments = pagy(attachments_arel, items: 50)
+      @exportable_count = attachments_arel.where(exportable: true).count
       @photos = MemoireExportPhoto.from_attachments(attachments)
     end
 

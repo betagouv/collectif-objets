@@ -164,6 +164,7 @@ Rails.application.routes.draw do
     resources :memoire_exports, only: %i[new create show destroy]
     resources :attachments, only: [:destroy] do
       post :rotate
+      put :exportable
     end
     resources :messages, only: [:create] do
       resources :email_attachments, only: [:show]

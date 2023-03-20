@@ -5,13 +5,12 @@
     %h1 Export Mémoire pour #{@departement}
 
     .co-flex.co-flex--space-between
-      %h4 #{@pagy.count} Photos à exporter
+      %h4 #{@exportable_count} Photos à exporter
 
-      %div
-        %a.fr-btn.fr-btn{href: admin_memoire_exports_path(departement_code: @departement), "data-turbo-method": "POST", "data-turbo-confirm": "Attention, les recensements seront marqués comme exportés !"}
-          Générer l'export
-        %button.fr-btn.fr-btn--secondary{href: "#", onclick: "document.getElementById('photos').classList.toggle('display-fixed');"}
-          Voir toutes les colonnes
+      - if @exportable_count.positive?
+        %div
+          %a.fr-btn.fr-btn{href: admin_memoire_exports_path(departement_code: @departement), "data-turbo-method": "POST", "data-turbo-confirm": "Attention, les recensements seront marqués comme exportés !"}
+            Générer l'export
 
   = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
   = render "photos_table", photos_recensement: @photos

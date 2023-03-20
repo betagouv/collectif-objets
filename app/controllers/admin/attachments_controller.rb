@@ -12,6 +12,12 @@ module Admin
       render partial: "admin/memoire_exports/photo", locals: { photo: @attachment }
     end
 
+    def exportable
+      @attachment.update!(exportable: params[:exportable] == "true")
+
+      render partial: "admin/memoire_exports/photo", locals: { photo: @attachment }
+    end
+
     def destroy
       @attachment.purge
 
