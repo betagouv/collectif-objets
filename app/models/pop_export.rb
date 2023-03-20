@@ -17,7 +17,7 @@ class PopExport < ApplicationRecord
     inverse_of: :pop_export_palissy,
     dependent: :nullify
   )
-  has_many :photos_attachments, through: :recensements_memoire
+  has_many :photos_attachments, -> { where(exportable: true) }, through: :recensements_memoire
   has_one_attached :zip
   has_one_attached :csv
   scope :palissy, -> { where(base: "palissy") }
@@ -25,7 +25,7 @@ class PopExport < ApplicationRecord
 
   def recensement_photos_attachments
     ActiveStorage::Attachment
-      .where(record_type: "Recensement")
+      .where(record_type: "Recensement", exportable: true)
       .joins("LEFT JOIN recensements ON recensements.id = active_storage_attachments.record_id")
       .joins("LEFT JOIN objets ON objets.id = recensements.objet_id")
       .joins('LEFT JOIN communes ON communes.code_insee = objets."palissy_INSEE"')

@@ -30,7 +30,9 @@ class MemoireExportPhoto
       .includes(:photos_attachments, :photos_blobs)
       .map do |recensement|
         palissy_objet = palissy_data.find { _1["REF"] == recensement.objet.palissy_REF }
-        recensement.photos.map { MemoireExportPhoto.new(attachment: _1, recensement:, palissy_objet:) }
+        recensement.photos.where(exportable: true).map do |attachment|
+          MemoireExportPhoto.new(attachment:, recensement:, palissy_objet:)
+        end
       end.flatten
   end
 

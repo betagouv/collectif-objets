@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_071516) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_201126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_071516) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.integer "memoire_number"
+    t.boolean "exportable", default: true
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end

@@ -28,10 +28,6 @@
     .co-flex.co-flex--space-between.fr-mt-8w
       %h4 #{@pagy.count} Photos exportées
 
-      %div
-        %button.fr-btn.fr-btn--secondary{href: "#", onclick: "document.getElementById('photos').classList.toggle('display-fixed');"}
-          Voir toutes les colonnes
-
   = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
   = render "photos_table", photos_recensement: @photos
   = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
