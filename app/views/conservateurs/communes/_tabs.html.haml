@@ -1,7 +1,6 @@
--# locals: :current_tab_title, :dossier
+-# locals: :current_tab_title, :dossier, :commune
 
-- commune = dossier.commune
-- departement = dossier.departement
+- departement = commune.departement
 - content_for(:head_title) { "#{current_tab_title} - #{commune}" }
 
 %main.fr-container.fr-pb-8w
@@ -13,7 +12,7 @@
 
   .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-1w
     %h1= commune
-    - if dossier
+    - if local_assigns[:dossier]
       .co-flex--shrink-0
         %div= dossier_status_badge dossier
 
