@@ -158,7 +158,7 @@ GEM
       devise (>= 4.9.0)
     diff-lcs (1.5.0)
     dry-cli (1.0.0)
-    dsfr-view-components (0.2.1)
+    dsfr-view-components (0.3.0)
       actionpack (>= 6.1)
       activemodel (>= 6.1)
       html-attributes-utils (~> 1)
