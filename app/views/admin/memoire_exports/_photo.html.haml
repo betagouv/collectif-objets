@@ -1,6 +1,13 @@
 = turbo_frame_tag photo do
   = link_to url_for(photo), target: "_blank", rel: "noopener" do
     = image_tag url_for(photo.variant(:small))
+  - if photo.metadata[:width].present? && photo.metadata[:height].present?
+    .fr-text--sm.co-text--muted.fr-mb-1w.fixed
+      = number_to_human_size photo.blob.byte_size
+      ·
+      = photo.filename
+      ·
+      #{photo.metadata[:width]}x#{photo.metadata[:height]}px
   %ul.fr-btns-group.fr-btns-group--inline.fr-btns-group--sm
     %li= button_to "", admin_attachment_rotate_path(photo.id, degrees: "-90"), class: "fr-btn fr-btn--secondary fr-btn--sm fr-btn--icon-left fr-icon-arrow-go-back-line"
     %li= button_to "⤸", admin_attachment_rotate_path(photo.id, degrees: 90), class: "fr-btn fr-btn--secondary fr-btn--sm fr-btn--icon-left fr-icon-arrow-go-forward-line"
