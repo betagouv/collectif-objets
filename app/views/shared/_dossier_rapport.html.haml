@@ -9,7 +9,7 @@
 %p
   Dossier de recensement analysé le #{l(@dossier.accepted_at.to_date)}
   par #{@dossier.conservateur}
-  (#{link_to @dossier.conservateur.email, "mailto:#{@dossier.conservateur.email}"})
+  (#{link_to(@dossier.conservateur.email, "mailto:#{@dossier.conservateur.email}", data: { turbo_frame: "_top" })})
 
 %h4 Table des matières
 %ul.fr-mb-8w
@@ -34,9 +34,9 @@
       .fr-col-md-6
         %p.fr-text--sm
           - if current_user
-            = link_to "voir lʼobjet", commune_objet_path(@dossier.commune, recensement.objet)
+            = link_to "voir lʼobjet", commune_objet_path(@dossier.commune, recensement.objet), data: { turbo_frame: "_top" }
           - elsif current_conservateur
-            = link_to "voir lʼobjet", objet_path(recensement.objet)
+            = link_to "voir lʼobjet", objet_path(recensement.objet), data: { turbo_frame: "_top" }
           ·
           Référence POP Palissy : #{recensement.objet.palissy_REF}
         - if recensement.missing_photos?
@@ -77,7 +77,7 @@
             = t("dossier.rapport.recensement.analyse_fiches")
           %ul
             - recensement.analyse_fiches_objects.each do |fiche|
-              %li= link_to "Fiche #{fiche.title}", fiche_path(fiche.id)
+              %li= link_to "Fiche #{fiche.title}", fiche_path(fiche.id), data: { turbo_frame: "_top" }
 
       .fr-col-md-6.co-flex-md-reverse-order
         = render "shared/recensement_photos_gallery", recensement:
