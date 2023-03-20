@@ -13,6 +13,7 @@ module Admin
     def set_instance_vars
       @departement = Departement.find(params[:departement_code])
       @recensements = Recensement
+        .completed
         .joins(:dossier)
         .includes(objet: [:commune])
         .absent_or_recensable

@@ -49,8 +49,8 @@ module Admin
         .joins(recensement: { objet: [:commune], dossier: {} })
         .where(dossiers: { status: "accepted" })
         .where(communes: { departement_code: @departement })
-        .where(recensements: { pop_export_memoire_id: nil })
-        .order("communes.nom ASC")
+        .where(recensements: { status: "completed", pop_export_memoire_id: nil })
+        .order('communes.nom ASC, objets."palissy_REF" ASC')
     end
 
     def recensements
@@ -58,6 +58,7 @@ module Admin
         .joins(:objet, dossier: %i[commune])
         .where(dossiers: { status: "accepted" })
         .where(communes: { departement_code: @departement })
+        .where(recensements: { status: "completed", pop_export_memoire_id: nil })
     end
   end
 end

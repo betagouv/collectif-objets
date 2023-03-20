@@ -30,7 +30,7 @@ class PopExport < ApplicationRecord
       .joins("LEFT JOIN objets ON objets.id = recensements.objet_id")
       .joins('LEFT JOIN communes ON communes.code_insee = objets."palissy_INSEE"')
       .where(recensements: { pop_export_memoire_id: id })
-      .order("communes.nom ASC")
+      .order('communes.nom ASC, objets."palissy_REF" ASC')
   end
 
   def timestamp = created_at.strftime("%Y_%m_%d-%HH%M")

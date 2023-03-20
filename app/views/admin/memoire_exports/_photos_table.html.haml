@@ -17,11 +17,14 @@
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:desc2]
     %tbody
-      - photos_recensement.each do |photo|
+      - ([nil] + photos_recensement).each_cons(2) do |previous_row_photo, photo|
         %tr
           %td= render "photo", photo: photo.attachment
-          %td= photo.recensement.commune
-          %td #{photo.recensement.objet.palissy_REF}
+          - if previous_row_photo.present? && photo.recensement.objet == previous_row_photo.recensement.objet
+            %td.co-text--italic.co-text--muted{colspan: 2} Même objet
+          - else
+            %td= link_to photo.recensement.commune, admin_commune_path(photo.recensement.commune)
+            %td #{photo.recensement.objet.palissy_REF}
           %td.co-word-break-all= photo.memoire_REF
           %td.co-word-break-all= photo.memoire_REFIMG
           %td= photo.memoire_NUMP
