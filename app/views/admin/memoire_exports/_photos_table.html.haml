@@ -28,7 +28,6 @@
               = image_tag photo.recensement.objet.palissy_photos.first.url, style: "max-height: 150px;"
             - else
               %i aucune photo
-          %td.fixed
           - if previous_row_photo.present? && photo.recensement.objet == previous_row_photo.recensement.objet
             %td.co-text--italic.co-text--muted{colspan: 2} Même objet
           - else
