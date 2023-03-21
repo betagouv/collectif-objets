@@ -4,9 +4,9 @@ class MemoireExportPhoto
   COLS = %w[LBASE REF REFIMG NUMP DATPV COULEUR OBS COM DOM EDIF COPY TYPDOC IDPROD LIEUCOR
             LEG TECHOR DATOEU SCLE AUTOEU INSEE ADRESSE LIEU].freeze
 
-  attr_reader :attachment, :recensement, :palissy_objet
+  attr_reader :attachment, :recensement, :palissy_objet, :annee_versement
 
-  def initialize(attachment:, recensement:, palissy_objet: {})
+  def initialize(attachment:, recensement:, palissy_objet: {}, annee_versement: nil)
     @attachment = attachment
     raise ArgumentError, "missing attachment" if @attachment.nil?
 
@@ -15,23 +15,25 @@ class MemoireExportPhoto
 
     @palissy_objet = palissy_objet
     raise ArgumentError, "missing palissy_objet" if @palissy_objet.nil?
+
+    @annee_versement = annee_versement || Time.zone.today.year
   end
 
-  def self.from_attachments(attachments_arel)
+  def self.from_attachments(attachments_arel, annee_versement: nil)
     attachments = attachments_arel.to_a
     raise if (attachments.pluck(:record_type) - ["Recensement"]).any?
 
     map = Recensement.where(id: attachments.pluck(:record_id)).to_a.index_by(&:id)
-    attachments.map { new(attachment: _1, recensement: map.fetch(_1.record_id)) }
+    attachments.map { new(attachment: _1, recensement: map.fetch(_1.record_id), annee_versement:) }
   end
 
-  def self.from_recensements(recensements_arel, palissy_data:)
+  def self.from_recensements(recensements_arel, palissy_data:, annee_versement: nil)
     recensements_arel
       .includes(:photos_attachments, :photos_blobs)
       .map do |recensement|
         palissy_objet = palissy_data.find { _1["REF"] == recensement.objet.palissy_REF }
         recensement.photos.where(exportable: true).map do |attachment|
-          MemoireExportPhoto.new(attachment:, recensement:, palissy_objet:)
+          MemoireExportPhoto.new(attachment:, recensement:, palissy_objet:, annee_versement:)
         end
       end.flatten
   end
@@ -62,7 +64,7 @@ class MemoireExportPhoto
 
   def memoire_NUMP
     [
-      memoire_DATPV,
+      annee_versement,
       recensement.departement.code.rjust(3, "0"),
       attachment.memoire_number.to_s.rjust(6, "0")
     ].join

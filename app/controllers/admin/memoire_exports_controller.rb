@@ -7,7 +7,7 @@ module Admin
 
     def show
       @pagy, attachments = pagy(@pop_export.recensement_photos_attachments, items: 50)
-      @photos = MemoireExportPhoto.from_attachments(attachments)
+      @photos = MemoireExportPhoto.from_attachments(attachments, annee_versement: @pop_export.created_at.year)
     end
 
     def new
