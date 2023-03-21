@@ -1,83 +1,37 @@
+-# local_assigns: (:rapport)
+
 %h1 Rapport de recensement
 
 .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w
   %div
-    %h2.fr-mb-0= @dossier.commune
+    %h2.fr-mb-0= rapport.commune
   - if current_conservateur
-    = dossier_visit_badge(@dossier)
+    = dossier_visit_badge(rapport.dossier)
 
 %p
-  Dossier de recensement analysé le #{l(@dossier.accepted_at.to_date)}
-  par #{@dossier.conservateur}
-  (#{link_to(@dossier.conservateur.email, "mailto:#{@dossier.conservateur.email}", data: { turbo_frame: "_top" })})
+  Dossier de recensement analysé le #{l(rapport.accepted_at.to_date)}
+  par #{rapport.conservateur}
+  (#{link_to(rapport.conservateur.email, "mailto:#{rapport.conservateur.email}", data: { turbo_frame: "_top" })})
 
 %h4 Table des matières
 %ul.fr-mb-8w
   %li
     %a{href: "#commentaires"} Commentaires
-  - @dossier.recensements.each_with_index do |recensement, index|
+  - rapport.recensement_items.each do |item|
     %li
-      %a{href: "##{recensement.objet.palissy_REF}"}
-        \#{index + 1} - #{recensement.objet.nom}
+      %a{href: "##{item.objet.palissy_REF}"}
+        \#{item.index} - #{item.objet.nom}
 
 %h4= t('activerecord.attributes.dossier.notes_commune')
-%p= blockquote(@dossier.notes_commune.presence || "Aucun commentaire")
+%p= blockquote(rapport.notes_commune.presence || "Aucun commentaire")
 
 %h4= t('activerecord.attributes.dossier.notes_conservateur')
-%p= blockquote(@dossier.notes_conservateur.presence || "Aucun commentaire")
+%p= blockquote(rapport.notes_conservateur.presence || "Aucun commentaire")
 
-- @dossier.recensements.each_with_index do |recensement, index|
-  - presenter = RecensementPresenter.new(recensement)
-  .fr-my-8w{id: "#{recensement.objet.palissy_REF}"}
-    %h4 #{index + 1} - #{recensement.objet.nom}
-    .fr-grid-row
-      .fr-col-md-6
-        %p.fr-text--sm
-          - if current_user
-            = link_to "voir lʼobjet", commune_objet_path(@dossier.commune, recensement.objet), data: { turbo_frame: "_top" }
-          - elsif current_conservateur
-            = link_to "voir lʼobjet", objet_path(recensement.objet), data: { turbo_frame: "_top" }
-          ·
-          Référence POP Palissy : #{recensement.objet.palissy_REF}
-        - if recensement.missing_photos?
-          %span.fr-badge.fr-badge--sm.fr-badge--warning
-            = t("recensement.photos.taken_count", count: 0)
-        %p
-          .co-text--bold
-            = t("activerecord.attributes.recensement.localisation")
-          = presenter.localisation
+- rapport.fiches.each do |fiche|
+  %h2 Fiche #{fiche.title}
+  - fiche.recensement_items.each do |item|
+    = item.objet.palissy_TICO
 
-        %p
-          .co-text--bold
-            = t("activerecord.attributes.recensement.recensable")
-          = presenter.recensable
-
-        - if recensement.recensable?
-          %p
-            .co-text--bold
-              = t("activerecord.attributes.recensement.etat_sanitaire").html_safe
-            = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :etat_sanitaire
-          %p
-            .co-text--bold
-              = t("activerecord.attributes.recensement.securisation").html_safe
-            = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
-
-        %p
-          .co-text--bold
-            = t("activerecord.attributes.recensement.notes")
-          = blockquote(recensement.notes.presence || "Aucun commentaire")
-
-        %p
-          .co-text--bold
-            = t("dossier.rapport.recensement.analyse_notes")
-          = blockquote(recensement.analyse_notes.presence || "Aucun commentaire")
-
-        - if recensement.analyse_fiches.any?
-          .co-text--bold
-            = t("dossier.rapport.recensement.analyse_fiches")
-          %ul
-            - recensement.analyse_fiches_objects.each do |fiche|
-              %li= link_to "Fiche #{fiche.title}", fiche_path(fiche.id), data: { turbo_frame: "_top" }
-
-      .fr-col-md-6.co-flex-md-reverse-order
-        = render "shared/recensement_photos_gallery", recensement:
+- rapport.recensement_items.each do |item|
+  = render "shared/rapport/recensement", **item.to_h, commune: rapport.commune
