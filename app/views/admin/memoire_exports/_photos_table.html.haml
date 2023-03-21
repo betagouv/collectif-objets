@@ -5,11 +5,13 @@
         %th Photo
         %th Pré-existante
         %th Commune
+        %th Commentaires
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:nom]
       %tr.fr-text--sm
         %th
         %th Déjà dans Mémoire
+        %th
         %th
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:desc]
@@ -17,6 +19,7 @@
         %th
         %th
         %th ex: Vouziers
+        %th
         - memoire_export_columns.each do |col|
           %th{class: col[:fixed] ? "fixed" : ""}= col[:desc2]
     %tbody
@@ -29,13 +32,22 @@
             - else
               %i aucune photo
           - if previous_row_photo.present? && photo.recensement.objet == previous_row_photo.recensement.objet
-            %td.co-text--italic.co-text--muted{colspan: 2} Même objet
+            %td.co-text--italic.co-text--muted{colspan: 3} Même objet
           - else
             %td= link_to photo.recensement.commune, admin_commune_path(photo.recensement.commune)
             %td
               %div= photo.recensement.objet.palissy_REF
               = photo.recensement.objet.palissy_TICO
               = link_to "voir sur POP", palissy_url(photo.recensement.objet), target: "_blank", rel: "noopener"
+            %td
+              - if photo.recensement.notes.present? || photo.recensement.analyse_notes.present?
+                .co-width-20rem
+                  - if photo.recensement.notes.present?
+                    .co-text--italic commentaires commune
+                    .fr-ml-1w= photo.recensement.notes
+                  - if photo.recensement.analyse_notes.present?
+                    .co-text--italic commentaires conservateur
+                    .fr-ml-1w= photo.recensement.analyse_notes
           %td.co-word-break-all= photo.memoire_REF
           %td.co-word-break-all= photo.memoire_REFIMG
           %td= photo.memoire_NUMP
