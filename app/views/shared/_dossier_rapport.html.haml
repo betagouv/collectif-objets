@@ -13,25 +13,46 @@
   par #{rapport.conservateur}
   (#{link_to(rapport.conservateur.email, "mailto:#{rapport.conservateur.email}", data: { turbo_frame: "_top" })})
 
-%h4 Table des matières
-%ul.fr-mb-8w
-  %li
-    %a{href: "#commentaires"} Commentaires
-  - rapport.recensement_items.each do |item|
-    %li
-      %a{href: "##{item.objet.palissy_REF}"}
-        \#{item.index} - #{item.objet.nom}
+.fr-grid-row.fr-mb-8w
+  .fr-col-md-8
+    = render DsfrComponent::AccordionComponent.new do |accordion|
+      - accordion.section title: "Afficher la table des matières" do
+        %ul.fr-mb-8w
+          %li
+            %a{href: "#commentaires"} Commentaires
+          %li
+            %a{href: "#fiches"} Objets par fiches
+            %ul
+              - rapport.fiche_items.each do |fiche_item|
+                %li
+                  %a{href: "#fiche-#{fiche_item.fiche.id}"}
+                    Fiche #{fiche_item.index} · #{fiche_item.fiche.title} (#{fiche_item.recensement_items.count} objets)
+          %li
+            %a{href: "#objets"} Détail objet par objet
+            %ul
+              - rapport.recensement_items.each do |item|
+                %li
+                  %a{href: "##{item.objet.palissy_REF}"}
+                    Objet #{item.index} · #{item.objet.nom}
 
-%h4= t('activerecord.attributes.dossier.notes_commune')
-%p= blockquote(rapport.notes_commune.presence || "Aucun commentaire")
+.co-background--light-teal.fr-p-4w.fr-mb-4w
+  .fr-grid-row
+    .fr-col-md-8
+      %h3.fr-text--md.fr-mb-0 Commentaires de la commune
+      .fr-mb-4w= rapport.notes_commune.presence || "Aucun commentaire"
 
-%h4= t('activerecord.attributes.dossier.notes_conservateur')
-%p= blockquote(rapport.notes_conservateur.presence || "Aucun commentaire")
+      %h3.fr-text--md.fr-mb-0 Commentaires des conservateurs à destination de la commune
+      = rapport.notes_conservateur.presence || "Aucun commentaire"
 
-- rapport.fiches.each do |fiche|
-  %h2 Fiche #{fiche.title}
-  - fiche.recensement_items.each do |item|
-    = item.objet.palissy_TICO
+%h4#fiches Objets par fiches
+- rapport.fiche_items.each do |fiche_item|
+  %h5 Fiche #{fiche_item.index} · #{fiche_item.fiche.title}
+  .fr-mb-2w
+    = link_to "Voir la fiche #{fiche_item.fiche.title}", fiche_path(fiche_item.fiche.id), class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+  .fr-mb-4w.fr-grid-row
+    - fiche_item.recensement_items.each do |item|
+      .fr-col-md-3= render ObjetCardComponent.new(item.objet, commune: item.objet.commune, path:nil)
 
+%h4.fr-mt-8w#objets Objet par objet
 - rapport.recensement_items.each do |item|
   = render "shared/rapport/recensement", **item.to_h, commune: rapport.commune

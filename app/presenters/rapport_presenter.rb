@@ -2,7 +2,7 @@
 
 class RapportPresenter
   RecensementItem = Struct.new(:recensement, :objet, :presenter, :index)
-  FicheItem = Struct.new(:fiche, :recensement_items)
+  FicheItem = Struct.new(:fiche, :recensement_items, :index)
 
   delegate :commune, :accepted_at, :conservateur, :notes_commune, :notes_conservateur, to: :dossier
 
@@ -16,11 +16,12 @@ class RapportPresenter
     end
   end
 
-  def fiches
-    ordered_recensements.map(&:analyse_fiches).flatten.sort.map do |fiche_id|
+  def fiche_items
+    ordered_recensements.map(&:analyse_fiches).flatten.uniq.sort.each_with_index.map do |fiche_id, index|
       FicheItem.new(
         Fiche.load_from_id(fiche_id),
-        ordered_recensements.select { _1.analyse_fiches.include?(fiche_id) }
+        ordered_recensements.select { _1.analyse_fiches.include?(fiche_id) },
+        index + 1
       )
     end
   end
