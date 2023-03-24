@@ -4,7 +4,6 @@ source: La Dépêche
 date: 20.11.2022
 logo: /contenus/articles_presse/images/logo-depeche-du-midi.png
 url: https://www.ladepeche.fr/2022/11/20/le-mobilier-protege-recense-10814844.php
-resume: Le mobilier protégé recensé
 ---
 
 Le mobilier protégé recensé
