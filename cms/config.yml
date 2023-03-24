@@ -40,7 +40,6 @@ collections:
       - { label: "Date", name: "date", widget: "string" }
       - { label: "Logo", name: "logo", widget: "image" }
       - { label: "URL", name: "url", widget: "string" }
-      - { label: "Résumé", name: "resume", widget: "string" }
       - { label: "Corps de l'article", name: "body", widget: "markdown"}
   - name: "fiches"
     label: "Fiches"

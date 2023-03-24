@@ -11,6 +11,5 @@ class ArticlePresse
   def date = frontmatter_data[:date]
   def logo = frontmatter_data[:logo]
   def url = frontmatter_data[:url]
-  def summary = frontmatter_data[:resume]
   def video = frontmatter_data[:video]
 end
