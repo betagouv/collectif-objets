@@ -1,0 +1,27 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Rails Server
+    init: >
+      bundle install &&
+      npm install &&
+      rails db:setup &&
+      gp sync-done bundle
+    command: bundle exec rails server
+
+  - name: Vite dev server
+    init: gp sync-await bundle
+    command: bundle exec vite dev
+
+  - name: Redis
+    command: redis-server
+
+  - name: Mailhog
+    init: sudo apt-get install mailhog
+    command: mailhog
+
+ports:
+  - name: web server
+    port: 3000
+    onOpen: open-preview

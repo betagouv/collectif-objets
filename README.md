@@ -2,6 +2,10 @@
 
 ![CI](https://github.com/adipasquale/collectif-objets/actions/workflows/ci.yml/badge.svg)
 
+<a href="https://gitpod.io/#https://github.com/betagouv/collectif-objets/tree/feature/gitpod">
+<img src="https://img.shields.io/badge/Ouvrir%20avec-Gitpod-908a85?logo=gitpod" alt="Ouvrir avec Gitpod" />
+</a>
+
 Collectif Objets est un site web permettant aux communes françaises de recenser leur patrimoine mobilier monument 
 historiques et aux conservateurs d'analyser ces recensements.
 
