@@ -21,19 +21,19 @@
           %li
             %a{href: "#commentaires"} Commentaires
           %li
-            %a{href: "#fiches"} Objets par fiches
+            %a{href: "#fiches"} Liste des objets regroupés par fiche conseil
             %ul
-              - rapport.fiche_items.each do |fiche_item|
+              - rapport.each_fiche_item do |index:, fiche:, recensements:|
                 %li
-                  %a{href: "#fiche-#{fiche_item.fiche.id}"}
-                    Fiche #{fiche_item.index} · #{fiche_item.fiche.title} (#{fiche_item.recensement_items.count} objets)
+                  %a{href: "#fiche-#{fiche.id}"}
+                    Fiche #{index} · #{fiche.title} (#{recensements.count} objets)
           %li
             %a{href: "#objets"} Détail objet par objet
             %ul
-              - rapport.recensement_items.each do |item|
+              - rapport.each_recensement_item do |objet:, index:, **|
                 %li
-                  %a{href: "##{item.objet.palissy_REF}"}
-                    Objet #{item.index} · #{item.objet.nom}
+                  %a{href: "##{objet.palissy_REF}"}
+                    Objet #{index} · #{objet.nom}
 
 .co-background--light-teal.fr-p-4w.fr-mb-4w
   .fr-grid-row
@@ -44,15 +44,24 @@
       %h3.fr-text--md.fr-mb-0 Commentaires des conservateurs à destination de la commune
       = rapport.notes_conservateur.presence || "Aucun commentaire"
 
-%h4#fiches Objets par fiches
-- rapport.fiche_items.each do |fiche_item|
-  %h5 Fiche #{fiche_item.index} · #{fiche_item.fiche.title}
+%h4#fiches Liste des objets regroupés par fiche conseil
+- rapport.each_fiche_item do |fiche:, recensements:, index:|
+  %h5 Fiche #{index} · #{fiche.title}
   .fr-mb-2w
-    = link_to "Voir la fiche #{fiche_item.fiche.title}", fiche_path(fiche_item.fiche.id), class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
-  .fr-mb-4w.fr-grid-row
-    - fiche_item.recensement_items.each do |item|
-      .fr-col-md-3= render ObjetCardComponent.new(item.objet, commune: item.objet.commune, path:nil)
+    = link_to "Voir la fiche conseil \"#{fiche.title}\"",
+      fiche_path(fiche.id),
+      data: { turbo_frame: "_top" },
+      class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+
+  .fr-mb-4w.fr-grid-row.fr-grid-row--gutters
+    - recensements.each do |recensement|
+      - { objet: recensement.objet, commune: recensement.commune } => { objet:, commune: }
+      .fr-col-md-3
+        = render ::ObjetCardComponent.new objet,
+          commune: commune,
+          path: current_user ? commune_objet_path(commune, objet) : objet_path(objet),
+          link_html_attributes: { data: { turbo_frame: "_top" } }
 
 %h4.fr-mt-8w#objets Objet par objet
-- rapport.recensement_items.each do |item|
-  = render "shared/rapport/recensement", **item.to_h, commune: rapport.commune
+- rapport.each_recensement_item do |**recensement_item|
+  = render "shared/rapport/recensement", **recensement_item
