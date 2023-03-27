@@ -11,7 +11,9 @@ module Conservateurs
     end
 
     def call
-      render ::ObjetCardComponent.new(objet, commune:, badges:, main_photo:, path:, tags:, link_html_attributes:)
+      render ::ObjetCardComponent.new(
+        objet, commune:, badges:, main_photo_origin: :recensement_or_memoire, path:, tags:, link_html_attributes:
+      )
     end
 
     private
@@ -36,14 +38,6 @@ module Conservateurs
       return [] unless can_analyse
 
       @tags ||= [not_recensed_badge, missing_photos_badge].compact
-    end
-
-    def main_photo
-      return if recensement&.photos.blank?
-
-      Photo.new \
-        url: recensement&.photos&.first&.variant(:medium),
-        description: "Photo de recensement de l’objet #{objet.nom}"
     end
 
     def badge_struct

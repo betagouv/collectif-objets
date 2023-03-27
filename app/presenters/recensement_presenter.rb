@@ -33,12 +33,12 @@ class RecensementPresenter
     end
   end
 
-  def localisation_sentence
+  def localisation_sentence(full: false)
     case @recensement.localisation
     when Recensement::LOCALISATION_EDIFICE_INITIAL
-      text { "L'objet est bien présent dans l'édifice #{@recensement.objet.edifice_nom}" }
+      text { "L'objet est bien présent dans l'édifice «#{@recensement.objet.edifice_nom}»" }
     when Recensement::LOCALISATION_AUTRE_EDIFICE
-      text { "L'objet a été déplacé dans un autre édifice" }
+      text { "L'objet a été déplacé dans un autre édifice #{": «#{@recensement.edifice_nom}»" if full}" }
     when Recensement::LOCALISATION_ABSENT
       badge("warning") { "L'objet est introuvable" }
     end

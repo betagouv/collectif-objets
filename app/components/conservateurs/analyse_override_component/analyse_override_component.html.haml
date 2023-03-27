@@ -1,0 +1,6 @@
+.co-flex.co-flex--gap-1rem
+  %span{class: ("co-text--strikethrough co-semi-transparent" if overrode?)}
+    = recensement_presenter.send(original_attribute_name)
+
+  - if overrode?
+    %span= recensement_presenter.send(analyse_attribute_name)

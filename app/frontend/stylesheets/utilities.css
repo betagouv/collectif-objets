@@ -361,6 +361,10 @@ img.co-object-fit-contain,
   border: 1px solid #ccc;
 }
 
+.co-border--bottom {
+  border-bottom: 1px solid #ccc;
+}
+
 a.co-external-link--without-decoration {
   text-decoration: none !important;
   background-image: none !important;
@@ -432,5 +436,24 @@ html[data-fr-scheme="dark"] .fr-stepper.co-stepper--skip-steps .fr-stepper__step
 
 img.co-object-fit--contain,
 .fr-card img.co-object-fit--contain{
+  object-fit: contain;
+}
+
+.co-rapport-photo {
+  height: 10rem;
+  border: 1px solid #ccc;
+}
+.co-rapport-photo a[href] {
+  background: none;
+  height: 100%;
+  display: block;
+  padding: 5px;
+}
+.co-rapport-photo a[href]:hover {
+  background-color: #ddddf5;
+}
+.co-rapport-photo a img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }

@@ -1,55 +1,57 @@
 -# local_assigns: (:objet, :recensement, :presenter, :commune, :index)
 
-.fr-mb-8w{id: "#{objet.palissy_REF}"}
-  %h5 Objet #{index} · #{objet.nom}
+.fr-pb-6w.co-border--bottom{id: "#{objet.palissy_REF}", class: ("fr-mt-6w" if index > 1)}
+  %h5.fr-mt-0.fr-mb-1w Objet #{index} · #{objet.nom}
+
+  .fr-mb-2w
+    - path = current_user ? commune_objet_path(commune, objet) : objet_path(objet)
+    = link_to "voir lʼobjet", path , data: { turbo_frame: "_top" }
+    %span.fr-text--sm · Référence POP Palissy : #{objet.palissy_REF}
+
+  .fr-mb-1w
+    - if recensement.missing_photos?
+      %span.fr-badge.fr-badge--sm.fr-badge--warning
+        = t("recensement.photos.taken_count", count: 0)
+    - elsif recensement.photos.count.positive?
+      .co-text--bold= t("recensement.photos.taken_count", count: recensement.photos.count)
+  - if recensement.photos.count.positive?
+    .fr-grid-row
+      - recensement.photos.each_with_index do |photo, index|
+        .fr-col-md-3.co-rapport-photo
+          = link_to photo.url,
+            data: {action: "gallery-component#show", index: index + 2 },
+            class: "co-cursor--zoom-in" do
+            = vite_or_raw_image_tag photo.variant(:medium), alt: "© Licence ouverte"
+
   .fr-grid-row
     .fr-col-md-6
-      %p.fr-text--sm
-        - if current_user
-          = link_to "voir lʼobjet", commune_objet_path(commune, objet), data: { turbo_frame: "_top" }
-        - elsif current_conservateur
-          = link_to "voir lʼobjet", objet_path(objet), data: { turbo_frame: "_top" }
-        ·
-        Référence POP Palissy : #{objet.palissy_REF}
-      - if recensement.missing_photos?
-        %span.fr-badge.fr-badge--sm.fr-badge--warning
-          = t("recensement.photos.taken_count", count: 0)
-      %p
-        .co-text--bold
-          = t("activerecord.attributes.recensement.localisation")
-        = presenter.localisation
+      .co-text--bold.fr-mt-2w Où se trouve l’objet ?
+      = presenter.localisation_sentence(full: true)
 
-      %p
-        .co-text--bold
-          = t("activerecord.attributes.recensement.recensable")
+      - unless recensement.absent?
+        .co-text--bold.fr-mt-2w L’objet peut-il être recensé ?
         = presenter.recensable
 
       - if recensement.recensable?
-        %p
-          .co-text--bold
-            = t("activerecord.attributes.recensement.etat_sanitaire").html_safe
-          = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :etat_sanitaire
-        %p
-          .co-text--bold
-            = t("activerecord.attributes.recensement.securisation").html_safe
-          = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
+        .co-text--bold.fr-mt-2w Dans quel état est l’objet ?
+        = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :etat_sanitaire
 
-      %p
-        .co-text--bold
-          = t("activerecord.attributes.recensement.notes")
-        = blockquote(recensement.notes.presence || "Aucun commentaire")
+        .co-text--bold.fr-mt-2w Est-il facile de voler cet objet ?
+        = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
 
-      %p
-        .co-text--bold
-          = t("dossier.rapport.recensement.analyse_notes")
-        = blockquote(recensement.analyse_notes.presence || "Aucun commentaire")
-
-      - if recensement.analyse_fiches.any?
-        .co-text--bold
-          = t("dossier.rapport.recensement.analyse_fiches")
-        %ul
+    .fr-col-md-6
+      .co-background--light-teal.fr-p-4w.fr-mb-4w
+        %div
+          .co-text--bold Commentaires de la commune
+          = recensement.notes.presence || "Aucun commentaire"
+        .fr-mt-4w
+          .co-text--bold Commentaires du conservateur
+          = recensement.analyse_notes.presence || "Aucun commentaire"
+        - if recensement.analyse_fiches.any?
+          .co-text--bold.fr-mt-4w.fr-mb-1w Fiches conseillées par le conservateur pour cet objet
           - recensement.analyse_fiches_objects.each do |fiche|
-            %li= link_to "Fiche #{fiche.title}", fiche_path(fiche.id), data: { turbo_frame: "_top" }
-
-    .fr-col-md-6.co-flex-md-reverse-order
-      = render "shared/recensement_photos_gallery", recensement:
+            .fr-mb-1w
+              = link_to fiche.title,
+                fiche_path(fiche.id),
+                data: { turbo_frame: "_top" },
+                class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"

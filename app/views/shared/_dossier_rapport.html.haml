@@ -8,45 +8,49 @@
   - if current_conservateur
     = dossier_visit_badge(rapport.dossier)
 
-%p
-  Dossier de recensement analysé le #{l(rapport.accepted_at.to_date)}
-  par #{rapport.conservateur}
-  (#{link_to(rapport.conservateur.email, "mailto:#{rapport.conservateur.email}", data: { turbo_frame: "_top" })})
 
-.fr-grid-row.fr-mb-8w
+.fr-grid-row.fr-mt-4w.fr-mb-4w
   .fr-col-md-8
+    .fr-mb-4w
+      Dossier de recensement analysé le #{l(rapport.accepted_at.to_date)} par #{rapport.conservateur}
+      (#{link_to(rapport.conservateur.email, "mailto:#{rapport.conservateur.email}", data: { turbo_frame: "_top" })})
+
     = render DsfrComponent::AccordionComponent.new do |accordion|
       - accordion.section title: "Afficher la table des matières" do
         %ul.fr-mb-8w
           %li
             %a{href: "#commentaires"} Commentaires
           %li
-            %a{href: "#fiches"} Liste des objets regroupés par fiche conseil
+            %a{href: "#fiches"} Vue des objets regroupés par fiche conseil
             %ul
               - rapport.each_fiche_item do |index:, fiche:, recensements:|
                 %li
                   %a{href: "#fiche-#{fiche.id}"}
                     Fiche #{index} · #{fiche.title} (#{recensements.count} objets)
           %li
-            %a{href: "#objets"} Détail objet par objet
+            %a{href: "#objets"} Vue détaillée objet par objet
             %ul
               - rapport.each_recensement_item do |objet:, index:, **|
                 %li
                   %a{href: "##{objet.palissy_REF}"}
                     Objet #{index} · #{objet.nom}
 
-.co-background--light-teal.fr-p-4w.fr-mb-4w
-  .fr-grid-row
-    .fr-col-md-8
+    .co-background--light-teal.fr-p-4w.fr-mb-8w.fr-mt-4w
       %h3.fr-text--md.fr-mb-0 Commentaires de la commune
       .fr-mb-4w= rapport.notes_commune.presence || "Aucun commentaire"
 
-      %h3.fr-text--md.fr-mb-0 Commentaires des conservateurs à destination de la commune
+      %h3.fr-text--md.fr-mb-0 Commentaires du conservateur
       = rapport.notes_conservateur.presence || "Aucun commentaire"
 
-%h4#fiches Liste des objets regroupés par fiche conseil
+%h4#fiches Vue des objets regroupés par fiche conseil
 - rapport.each_fiche_item do |fiche:, recensements:, index:|
   %h5 Fiche #{index} · #{fiche.title}
+  .fr-mb-2w
+    Le conservateur vous a recommandé la lecture de la fiche conseil suivante pour
+    - if recensements.count == 1
+      cet objet
+    - else
+      ces #{recensements.count} objets
   .fr-mb-2w
     = link_to "Voir la fiche conseil \"#{fiche.title}\"",
       fiche_path(fiche.id),
@@ -60,8 +64,9 @@
         = render ::ObjetCardComponent.new objet,
           commune: commune,
           path: current_user ? commune_objet_path(commune, objet) : objet_path(objet),
+          main_photo_origin: :recensement,
           link_html_attributes: { data: { turbo_frame: "_top" } }
 
-%h4.fr-mt-8w#objets Objet par objet
+%h4.fr-mt-8w#objets Vue détaillée objet par objet
 - rapport.each_recensement_item do |**recensement_item|
   = render "shared/rapport/recensement", **recensement_item
