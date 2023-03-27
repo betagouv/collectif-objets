@@ -2,6 +2,10 @@
 
 ![CI](https://github.com/adipasquale/collectif-objets/actions/workflows/ci.yml/badge.svg)
 
+<a href="https://gitpod.io/#https://github.com/betagouv/collectif-objets/tree/feature/gitpod">
+<img src="https://img.shields.io/badge/Ouvrir%20avec-Gitpod-908a85?logo=gitpod" alt="Ouvrir avec Gitpod" />
+</a>
+
 Collectif Objets est un site web permettant aux communes françaises de recenser leur patrimoine mobilier monument 
 historiques et aux conservateurs d'analyser ces recensements.
 
@@ -119,6 +123,14 @@ Voici le schéma du cycle de vie d'un dossier.
 
 ## Installation
 
+### Gitpod
+
+Gitpod est un environnement de développement en ligne.
+Toutes les dépendances sont installées et préconfigurées.
+En un clic et quelques minutes d’attente, VSCode s’ouvrira avec le serveur web lancé, vite-dev, mailhog, redis etc…
+
+[![Ouvrir dans Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/betagouv/collectif-objets)
+
 ### Installation via Docker
 
 ```
@@ -208,7 +220,7 @@ scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL
 
 # Le dump peut alors être importé en local
 rails db:drop db:create db:schema:load
-rails runner config/initializers/postgres_sequences.rb
+rails runner scripts/create_postgres_sequences_memoire_photos_numbers.rb
 pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=collectif_objets_dev tmp/dump.pgsql
 ```
 

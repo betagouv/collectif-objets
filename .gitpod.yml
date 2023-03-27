@@ -1,0 +1,56 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: >
+      docker pull postgis/postgis:14-3.3 &&
+      docker run -d -p 5432:5432 --name postgres-container -e POSTGRES_HOST_AUTH_METHOD=trust postgis/postgis:14-3.3 &&
+      sleep 5s &&
+      docker exec -it postgres-container psql -U postgres -c "CREATE ROLE gitpod WITH LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE REPLICATION;" &&
+      gp sync-done database-running
+    command: docker logs -f postgres
+
+  - name: Rails Server
+    init: >
+      bundle install &&
+      npm install &&
+      gp sync-await database-running &&
+      rails db:create &&
+      rails runner scripts/create_postgres_sequences_memoire_photos_numbers.rb &&
+      rails db:schema:load db:seed &&
+      gp sync-done bundle
+    command: GITPOD_WORKSPACE_URL=`gp url 3000` bundle exec rails server
+
+  - name: Vite dev server
+    init: gp sync-await bundle
+    command: bundle exec vite dev
+
+  - name: Redis
+    command: redis-server
+
+  - name: Mailhog
+    command: ~/go/bin/MailHog
+
+ports:
+  - name: web
+    port: 3000
+    onOpen: open-preview
+  - name: mailhog-web
+    port: 8025
+    onOpen: open-preview
+  - name: postgres
+    port: 5432
+    onOpen: ignore
+    visibility: private
+  - name: redis
+    port: 6379
+    onOpen: ignore
+    visibility: private
+  - name: mailhog-smtp
+    port: 1025
+    onOpen: ignore
+    visibility: private
+  - name: vite-dev-server
+    port: 3036
+    onOpen: ignore
+    visibility: private
