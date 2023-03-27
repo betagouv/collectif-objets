@@ -123,6 +123,14 @@ Voici le schéma du cycle de vie d'un dossier.
 
 ## Installation
 
+### Gitpod
+
+Gitpod est un environnement de développement en ligne.
+Toutes les dépendances sont installées et préconfigurées.
+En un clic et quelques minutes d’attente, VSCode s’ouvrira avec le serveur web lancé, vite-dev, mailhog, redis etc…
+
+[![Ouvrir dans Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/betagouv/collectif-objets)
+
 ### Installation via Docker
 
 ```
@@ -212,7 +220,7 @@ scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL
 
 # Le dump peut alors être importé en local
 rails db:drop db:create db:schema:load
-rails runner config/initializers/postgres_sequences.rb
+rails runner scripts/create_postgres_sequences_memoire_photos_numbers.rb
 pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=collectif_objets_dev tmp/dump.pgsql
 ```
 

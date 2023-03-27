@@ -88,6 +88,7 @@ Rails.application.configure do
   config.x.inbound_emails_domain = "reponse-loophole.collectifobjets.org"
 
   config.hosts += %w[collectifobjets.loophole.site collectifobjets-mail-inbound.loophole.site]
+  config.hosts << ENV["GITPOD_WORKSPACE_URL"].gsub("https://", "") if ENV["GITPOD_WORKSPACE_URL"].present?
 
   config.log_file_size = 100_000_000
 
