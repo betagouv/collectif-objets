@@ -39,6 +39,8 @@ jobs:
       - run: npm ci
       - name: Set up database schema
         run: bin/rails db:schema:load
+      - name: Set up database sequences
+        run: bin/rails runner scripts/create_postgres_sequences_memoire_photos_numbers.rb
       - name: Run tests
         run: bundle exec rspec
         env:
