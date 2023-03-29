@@ -16,5 +16,5 @@
     %ul
       - @dossiers.each do |dossier|
         %li
-          = link_to dossier.commune, conservateurs_dossier_path(dossier)
+          = link_to dossier.commune, conservateurs_commune_dossier_path(dossier.commune, dossier)
           = dossier_visit_badge(dossier)

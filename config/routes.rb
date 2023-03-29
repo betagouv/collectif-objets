@@ -105,7 +105,7 @@ Rails.application.routes.draw do
         resource :analyse, only: %i[edit update]
       end
     end
-    resources :dossiers do
+    resources :dossiers, only: [] do
       resource :accept, only: %i[new create update]
       resource :reject, only: %i[new create update]
     end
