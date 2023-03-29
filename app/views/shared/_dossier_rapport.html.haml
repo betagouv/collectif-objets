@@ -1,6 +1,13 @@
 -# local_assigns: (:rapport)
 
-%h1 Rapport de recensement
+.co-flex.co-flex--space-between
+  %div
+    %h1 Rapport de recensement
+  %div
+    = link_to "Imprimer le rapport",
+      "#",
+      class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-printer-line",
+      onclick: "window.print(); return false;"
 
 .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w
   %div

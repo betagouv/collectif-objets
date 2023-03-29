@@ -457,3 +457,20 @@ img.co-object-fit--contain,
   height: 100%;
   object-fit: contain;
 }
+
+
+/*  do not display on print */
+@media print {
+  .co-print-hide {
+    display: none;
+  }
+  .fr-tabs::before {
+    display: none;
+  }
+  .fr-tabs__panel {
+    padding: 4rem 0;
+  }
+  .fr-collapse {
+    display: block;
+  }
+}
