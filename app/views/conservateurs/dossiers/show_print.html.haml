@@ -1,0 +1,14 @@
+.co-print-hide.co-flex.co-flex--space-between
+  %div
+    = link_to "Revenir à la vue normale",
+      conservateurs_commune_dossier_path(@dossier.commune, @dossier),
+      class: "fr-link fr-fi-arrow-left-line fr-link--icon-left"
+  %div
+    = link_to "Imprimer",
+      "#",
+      class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-printer-line",
+      onclick: "window.print(); return false;"
+
+%h1 Rapport de recensement (vue imprimable)
+
+= render "shared/dossier_rapport", rapport: RapportPresenter.new(@dossier), toc_expanded: true

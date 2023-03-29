@@ -4,7 +4,11 @@ module Conservateurs
   class DossiersController < BaseController
     before_action :set_commune, :set_dossier
 
-    def show; end
+    def show
+      return unless params[:view] == "print"
+
+      render :show_print, layout: "application_print"
+    end
 
     protected
 

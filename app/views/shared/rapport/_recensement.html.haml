@@ -40,7 +40,7 @@
         = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
 
     .fr-col-md-6
-      .co-background--light-teal.fr-p-4w.fr-mb-4w
+      .co-background--light-teal.fr-p-4w.fr-mb-4w.co-print-no-padding
         %div
           .co-text--bold Commentaires de la commune
           = recensement.notes.presence || "Aucun commentaire"
