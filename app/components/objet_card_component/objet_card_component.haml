@@ -15,7 +15,7 @@
                 %p{class: "fr-tag fr-tag--#{tag.color}"}
                   = tag.text
   .fr-card__header
-    = render("shared/card_photo", photo: main_photo)
+    = render partial: "shared/card_photo", locals: { photo: main_photo }, formats: :html
     - if badges
       %ul.fr-badges-group
         = render partial: "shared/badge_li", collection: badges, as: :badge

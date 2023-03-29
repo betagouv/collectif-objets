@@ -4,7 +4,14 @@ module Conservateurs
   class DossiersController < BaseController
     before_action :set_commune, :set_dossier
 
-    def show; end
+    def show
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: "rapport"
+        end
+      end
+    end
 
     protected
 

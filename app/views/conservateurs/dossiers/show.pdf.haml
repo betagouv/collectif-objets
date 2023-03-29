@@ -1,0 +1,54 @@
+
+- rapport = RapportPresenter.new(@dossier)
+-# = render partial: "shared/dossier_rapport", formats: :html, locals: { rapport: }
+
+.co-flex.co-flex--space-between
+  %div
+    %h1 Rapport de recensement
+
+.co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w
+  %div
+    %h2.fr-mb-0= rapport.commune
+  - if current_conservateur
+    = dossier_visit_badge(rapport.dossier)
+
+.fr-grid-row.fr-mt-4w.fr-mb-4w
+  .fr-col-md-8
+    .fr-mb-4w
+      Dossier de recensement analysé le #{l(rapport.accepted_at.to_date)} par #{rapport.conservateur}
+      (#{link_to(rapport.conservateur.email, "mailto:#{rapport.conservateur.email}", data: { turbo_frame: "_top" })})
+
+
+    .fr-mb-8w
+      %h2 Table des matières
+      = render partial: "shared/rapport/table_of_contents", formats: :html, locals: { rapport: }
+
+    .co-background--light-teal.fr-p-4w.fr-mb-8w.fr-mt-4w
+      %h3.fr-text--md.fr-mb-0 Commentaires de la commune
+      .fr-mb-4w= rapport.notes_commune.presence || "Aucun commentaire"
+
+      %h3.fr-text--md.fr-mb-0 Commentaires du conservateur
+      = rapport.notes_conservateur.presence || "Aucun commentaire"
+
+%h2#fiches Vue des objets regroupés par fiche conseil
+- rapport.each_fiche_item do |fiche:, recensements:, index:|
+  %h3 Fiche #{index} · #{fiche.title}
+  .fr-mb-2w
+    Le conservateur vous a recommandé la lecture de la fiche conseil «#{fiche.title}» pour
+    - if recensements.count == 1
+      cet objet
+    - else
+      ces #{recensements.count} objets
+  .fr-mb-2w
+  .fr-mb-4w.fr-grid-row.fr-grid-row--gutters
+    - recensements.each do |recensement|
+      - { objet: recensement.objet, commune: recensement.commune } => { objet:, commune: }
+      .fr-col-md-3
+        - if recensement.photos.any?
+          = wicked_pdf_image_tag recensement.photos.first.variant(:medium).processed.url
+
+:css
+  img {
+    max-width: 100px;
+    max-height: 100px;
+  }

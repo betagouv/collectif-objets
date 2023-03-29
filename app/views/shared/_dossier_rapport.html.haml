@@ -1,13 +1,19 @@
 -# local_assigns: (:rapport)
 
-%h1 Rapport de recensement
+.co-flex.co-flex--space-between
+  %div
+    %h1 Rapport de recensement
+  %div
+    = link_to "Télécharger le rapport",
+      conservateurs_commune_dossier_path(rapport.commune, rapport.dossier, format: :pdf),
+      class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-download-line",
+      data: { turbo_frame: "_top" }
 
 .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w
   %div
     %h2.fr-mb-0= rapport.commune
   - if current_conservateur
     = dossier_visit_badge(rapport.dossier)
-
 
 .fr-grid-row.fr-mt-4w.fr-mb-4w
   .fr-col-md-8
@@ -17,23 +23,7 @@
 
     = render DsfrComponent::AccordionComponent.new do |accordion|
       - accordion.section title: "Afficher la table des matières" do
-        %ul.fr-mb-8w
-          %li
-            %a{href: "#commentaires"} Commentaires
-          %li
-            %a{href: "#fiches"} Vue des objets regroupés par fiche conseil
-            %ul
-              - rapport.each_fiche_item do |index:, fiche:, recensements:|
-                %li
-                  %a{href: "#fiche-#{fiche.id}"}
-                    Fiche #{index} · #{fiche.title} (#{recensements.count} objets)
-          %li
-            %a{href: "#objets"} Vue détaillée objet par objet
-            %ul
-              - rapport.each_recensement_item do |objet:, index:, **|
-                %li
-                  %a{href: "##{objet.palissy_REF}"}
-                    Objet #{index} · #{objet.nom}
+        .fr-mb-8w= render "shared/rapport/table_of_contents", rapport:
 
     .co-background--light-teal.fr-p-4w.fr-mb-8w.fr-mt-4w
       %h3.fr-text--md.fr-mb-0 Commentaires de la commune
