@@ -11,12 +11,28 @@ class Conservateur < ApplicationRecord
 
   attr_accessor :impersonating
 
-  def self.ransackable_scopes(_auth_object = nil)
-    [:with_departement]
-  end
-
   def to_s
     [first_name, last_name].join(" ")
   end
   alias full_name to_s
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[email first_name last_name]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[departements]
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    [:with_departement]
+  end
+
+  ransacker :first_name, type: :string do
+    Arel.sql("unaccent(first_name)")
+  end
+
+  ransacker :last_name, type: :string do
+    Arel.sql("unaccent(last_name)")
+  end
 end

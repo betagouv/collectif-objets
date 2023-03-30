@@ -103,4 +103,12 @@ class Commune < ApplicationRecord
     parts << inbound_email_token
     "#{parts.join('-')}@#{Rails.configuration.x.inbound_emails_domain}"
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[nom code_insee departement_code status]
+  end
+
+  ransacker :nom, type: :string do
+    Arel.sql("unaccent(nom)")
+  end
 end

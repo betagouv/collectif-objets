@@ -58,8 +58,8 @@
         .fr-mb-2w= link_to "réinitialiser les filtres", admin_conservateurs_path
       = search_form_for @ransack, url: admin_conservateurs_path, builder: FormBuilderDsfr do |f|
         .fr-input-group
-          = f.label :last_name_cont, "Nom contient"
-          = f.search_field :last_name_cont
+          = f.label :first_name_or_last_name_cont, "Nom contient"
+          = f.search_field :first_name_or_last_name_cont
         .fr-input-group
           = f.label :departements_code_eq, "Département"
           = f.select :departements_code_eq, [["", ""]] + Departement.order(:code).map { [_1.to_s, _1.code] }

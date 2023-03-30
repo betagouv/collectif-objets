@@ -134,4 +134,8 @@ class Campaign < ApplicationRecord
 
     send(status_event) && save
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[departement_code status recipients_count date_lancement]
+  end
 end
