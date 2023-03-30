@@ -57,4 +57,8 @@ class Departement < ApplicationRecord
   def current_campaign
     campaigns.where("date_lancement <= ? AND date_fin >= ?", Time.zone.now.to_date, Time.zone.now.to_date).first
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[code]
+  end
 end
