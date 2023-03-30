@@ -4,11 +4,7 @@ module Communes
   class DossiersController < BaseController
     before_action :authorize_dossier
 
-    def show
-      return unless params[:view] == "print"
-
-      render :show_print, layout: "application_print"
-    end
+    def show; end
 
     protected
 

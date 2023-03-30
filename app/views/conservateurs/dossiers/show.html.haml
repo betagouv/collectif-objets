@@ -1,14 +1,7 @@
 = render layout: "conservateurs/communes/tabs",
-  locals: { commune: @commune, dossier: @dossier, current_tab_title: "Rapport" } do
+  locals: { commune: @commune, dossier: @dossier, current_tab_title: "Rapport", hide_for_print: true } do
 
   - if @dossier&.accepted?
-    .co-flex.co-flex--space-between
-      %div
-        %h1 Rapport de recensement
-      %div.co-print-hide
-        = link_to "Version imprimable",
-          conservateurs_commune_dossier_path(@commune, @dossier, view: :print),
-          class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-printer-line"
     = render "shared/dossier_rapport", rapport: RapportPresenter.new(@dossier)
   - else
     .co-readable

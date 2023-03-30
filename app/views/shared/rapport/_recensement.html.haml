@@ -1,6 +1,6 @@
 -# local_assigns: (:objet, :recensement, :presenter, :commune, :index)
 
-.fr-pb-6w.co-border--bottom{id: "#{objet.palissy_REF}", class: ("fr-mt-6w" if index > 1)}
+.fr-pb-6w.co-border--bottom.co-border--none-for-last.co-print-no-border.co-break-after-page{id: "#{objet.palissy_REF}", class: ("fr-mt-6w" if index > 1)}
   %h5.fr-mt-0.fr-mb-1w Objet #{index} · #{objet.nom}
 
   .fr-mb-2w
@@ -8,7 +8,7 @@
     = link_to "voir lʼobjet", path , data: { turbo_frame: "_top" }
     %span.fr-text--sm · Référence POP Palissy : #{objet.palissy_REF}
 
-  .fr-mb-1w
+  .fr-mb-1w.co-break-inside-avoid
     - if recensement.missing_photos?
       %span.fr-badge.fr-badge--sm.fr-badge--warning
         = t("recensement.photos.taken_count", count: 0)
@@ -25,33 +25,39 @@
 
   .fr-grid-row
     .fr-col-md-6
-      .co-text--bold.fr-mt-2w Où se trouve l’objet ?
-      = presenter.localisation_sentence(full: true)
+      .co-break-inside-avoid
+        .co-text--bold.fr-mt-2w Où se trouve l’objet ?
+        = presenter.localisation_sentence(full: true)
 
       - unless recensement.absent?
-        .co-text--bold.fr-mt-2w L’objet peut-il être recensé ?
-        = presenter.recensable
+        .co-break-inside-avoid
+          .co-text--bold.fr-mt-2w L’objet peut-il être recensé ?
+          = presenter.recensable
 
       - if recensement.recensable?
-        .co-text--bold.fr-mt-2w Dans quel état est l’objet ?
-        = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :etat_sanitaire
+        .co-break-inside-avoid
+          .co-text--bold.fr-mt-2w Dans quel état est l’objet ?
+          = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :etat_sanitaire
 
-        .co-text--bold.fr-mt-2w Est-il facile de voler cet objet ?
-        = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
+        .co-break-inside-avoid
+          .co-text--bold.fr-mt-2w Est-il facile de voler cet objet ?
+          = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
 
     .fr-col-md-6
       .co-background--light-teal.fr-p-4w.fr-mb-4w.co-print-no-padding
-        %div
+        .co-break-inside-avoid
           .co-text--bold Commentaires de la commune
           = recensement.notes.presence || "Aucun commentaire"
-        .fr-mt-4w
+        .fr-mt-4w.co-break-inside-avoid
           .co-text--bold Commentaires du conservateur
           = recensement.analyse_notes.presence || "Aucun commentaire"
+
         - if recensement.analyse_fiches.any?
-          .co-text--bold.fr-mt-4w.fr-mb-1w Fiches conseillées par le conservateur pour cet objet
-          - recensement.analyse_fiches_objects.each do |fiche|
-            .fr-mb-1w
-              = link_to fiche.title,
-                fiche_path(fiche.id),
-                data: { turbo_frame: "_top" },
-                class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+          .co-break-inside-avoid
+            .co-text--bold.fr-mt-4w.fr-mb-1w Fiches conseillées par le conservateur pour cet objet
+            - recensement.analyse_fiches_objects.each do |fiche|
+              .fr-mb-1w
+                = link_to fiche.title,
+                  fiche_path(fiche.id),
+                  data: { turbo_frame: "_top" },
+                  class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"

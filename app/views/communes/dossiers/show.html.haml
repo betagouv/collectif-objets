@@ -5,13 +5,6 @@
     current_page_label: "Rapport"
 
   - if @dossier&.accepted?
-    .co-flex.co-flex--space-between
-      %div
-        %h1 Rapport de recensement
-      %div.co-print-hide
-        = link_to "Version imprimable",
-          commune_dossier_path(@commune, view: :print),
-          class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-printer-line"
     = render "shared/dossier_rapport", rapport: RapportPresenter.new(@dossier)
   - else
     .fr-grid-row.co-flex--align-items-stretch.fr-mb-16w
