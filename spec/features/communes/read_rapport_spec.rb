@@ -56,6 +56,18 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
     expect(page).to have_text(/Jean Lobo/i)
     expect(page).to have_text(/jeanne@culture.gouv.fr/i)
     expect(page).to have_text(/Les photos sont superbes/i)
+
+    expect(page).to have_text(/Fiche 1 · Entretien de l’édifice et lutte contre les infestations/i)
+    within(find("#fiche-entretien_edifices")) do
+      expect(page).to have_text(/Bouquet d'autel/i)
+      expect(page).not_to have_text(/Ciboire des malades/i)
+    end
+    expect(page).to have_text(/Fiche 2 · Sécuriser vos objets/i)
+    within(find("#fiche-securisation")) do
+      expect(page).to have_text(/Bouquet d'autel/i)
+      expect(page).not_to have_text(/Ciboire des malades/i)
+    end
+
     within(find("#PM51001253")) do
       expect(page).to have_text(/Bouquet d'autel/i)
       expect(page).to have_text(/objet très doux/i)
@@ -63,8 +75,8 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       strikethrough = find(".co-text--strikethrough", text: /L’objet est en bon état/i)
       expect(strikethrough).to be_truthy
       expect(page).to have_text(/L’objet est en péril/i)
-      expect(page).to have_text(/Fiche Sécuriser vos objets/i)
-      expect(page).to have_text(/Fiche Entretien de l’édifice et lutte contre les infestations/i)
+      expect(page).to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
+      expect(page).to have_text(/Sécuriser vos objets/i)
     end
     within(find("#PM51001254")) do
       expect(page).to have_text(/Ciboire des malades/i)
@@ -72,7 +84,7 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       expect(page).to have_text(/Aucune photo de recensement/i)
       expect(page).to have_text(/Musée/i)
       expect(page).not_to have_text(/L’objet est en péril/i)
-      expect(page).not_to have_text(/Fiche Sécuriser vos objets/i)
+      expect(page).not_to have_text(/Sécuriser vos objets/i)
       expect(page).to have_text(/L’objet est en bon état/i)
       expect(page).to have_text(/Aucun commentaire/i)
     end

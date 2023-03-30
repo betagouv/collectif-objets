@@ -5,7 +5,7 @@
     current_page_label: "Rapport"
 
   - if @dossier&.accepted?
-    = render "shared/dossier_rapport", dossier: @dossier
+    = render "shared/dossier_rapport", rapport: RapportPresenter.new(@dossier)
   - else
     .fr-grid-row.co-flex--align-items-stretch.fr-mb-16w
       .fr-col-md-8

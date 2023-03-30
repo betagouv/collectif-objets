@@ -13,7 +13,7 @@ module Communes
     end
 
     def call
-      render ::ObjetCardComponent.new(objet, commune:, badges:, main_photo:, path:)
+      render ::ObjetCardComponent.new(objet, commune:, badges:, path:, main_photo_origin: :recensement_or_memoire)
     end
 
     private
@@ -28,14 +28,6 @@ module Communes
 
     def badges
       @badges ||= [recensement_badge, analyse_notes_badge].compact
-    end
-
-    def main_photo
-      return if recensement&.photos.blank?
-
-      Photo.new \
-        url: recensement&.photos&.first&.variant(:medium),
-        description: "Photo de recensement de l’objet #{objet.nom}"
     end
 
     def badge_struct

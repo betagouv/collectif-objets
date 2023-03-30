@@ -14,10 +14,8 @@
   <% c.with_cta do %>
     <%= link_to(
       "Voir le rapport",
-      commune_dossier_path(dossier.commune, dossier),
+      commune_dossier_path(dossier.commune),
       class: "fr-btn"
     ) %>
   <% end %>
 <% end %>
-
-

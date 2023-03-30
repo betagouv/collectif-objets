@@ -1,8 +1,8 @@
 = render layout: "conservateurs/communes/tabs",
-  locals: { commune: @commune, dossier: @dossier, current_tab_title: "Rapport" } do
+  locals: { commune: @commune, dossier: @dossier, current_tab_title: "Rapport", hide_for_print: true } do
 
   - if @dossier&.accepted?
-    = render "shared/dossier_rapport", dossier: @dossier
+    = render "shared/dossier_rapport", rapport: RapportPresenter.new(@dossier)
   - else
     .co-readable
       %p

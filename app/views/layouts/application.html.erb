@@ -22,7 +22,9 @@
     <%= render "shared/header" %>
     <%= render "shared/flashes" %>
     <%= content_for?(:content) ? yield(:content) : yield %>
-    <%= render "shared/footer" %>
-    <%= render "shared/tracking_scripts" %>
+    <div class="co-print-hide">
+      <%= render "shared/footer" %>
+      <%= render "shared/tracking_scripts" %>
+    </div>
   </body>
 </html>

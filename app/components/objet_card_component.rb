@@ -12,13 +12,15 @@ class ObjetCardComponent < ViewComponent::Base
     @main_photo = kwargs[:main_photo]
     @tags = kwargs[:tags]
     @commune = kwargs[:commune] || @objet.commune # pass to avoid n+1 queries
+    @main_photo_origin = kwargs[:main_photo_origin] || :memoire
     @link_html_attributes_custom = kwargs[:link_html_attributes] || {}
+    @recensement = kwargs[:recensement] || @objet.current_recensement
     super
   end
 
   private
 
-  attr_reader :objet, :badges, :tags, :commune
+  attr_reader :objet, :badges, :tags, :commune, :recensement, :main_photo_origin
 
   delegate :nom, :palissy_DENO, :edifice_nom, :palissy_photos, to: :objet
 
@@ -31,12 +33,28 @@ class ObjetCardComponent < ViewComponent::Base
   end
 
   def main_photo
-    @main_photo || palissy_photos&.first
+    return @main_photo if @main_photo.present?
+
+    {
+      memoire: main_photo_palissy,
+      recensement: main_photo_recensement,
+      recensement_or_memoire: main_photo_recensement || main_photo_palissy
+    }[main_photo_origin]
   end
 
   def link_html_attributes
     { class: "fr-card__link" }
       .deep_merge_html_attributes(@link_html_attributes_custom)
       .deep_tidy_html_attributes
+  end
+
+  def main_photo_palissy = palissy_photos&.first
+
+  def main_photo_recensement
+    return unless recensement&.photos&.any?
+
+    Photo.new \
+      url: recensement.photos.first.variant(:medium),
+      description: "Photo de recensement de l’objet #{objet.nom}"
   end
 end
