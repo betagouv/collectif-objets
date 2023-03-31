@@ -61,6 +61,8 @@ module CampaignHelper
   end
 
   def email_color(email)
+    return if email.blank?
+
     return "red" if email.error?
 
     return "green" if email.delivered?

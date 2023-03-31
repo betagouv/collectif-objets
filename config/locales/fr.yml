@@ -323,9 +323,9 @@ fr:
           started: Recensement démarré
           completed: Recensement terminé
           step_lancement: Mail de lancement envoyé
-          step_relance1: Première relance envoyée
-          step_relance2: Seconde relance envoyée
-          step_relance3: Troisième relance envoyée
+          step_relance1: Première relance
+          step_relance2: Seconde relance
+          step_relance3: Troisième relance
           step_fin: Mail de clotûre envoyé, n'a pas participé
         opt_out_reason:
           postponed: La commune s'occupera du recensement à une date ultérieure
