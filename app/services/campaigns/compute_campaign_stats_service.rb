@@ -18,8 +18,9 @@ module Campaigns
 
     def objets_stats
       total = campaign.objets.count
-      recensed = campaign.objets.where_assoc_exists(:recensements).count
-      recensed_with_photo = campaign.objets.where_assoc_exists(%i[recensements photos_attachments]).count
+      recensed = campaign.objets.where.associated(:recensements).count
+      recensed_with_photo = campaign
+        .objets.where.associated(:recensements).where.not(recensements: { photos_count: 0 }).count
       {
         total:,
         recensed:,

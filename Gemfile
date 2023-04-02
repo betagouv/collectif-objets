@@ -9,7 +9,6 @@ gem "aasm"
 gem "actioncable"
 gem "active_model_validates_intersection_of"
 gem "activerecord-postgis-adapter"
-gem "activerecord_where_assoc"
 gem "active_storage_validations"
 gem "after_commit_everywhere"
 gem "aws-sdk-s3", require: false

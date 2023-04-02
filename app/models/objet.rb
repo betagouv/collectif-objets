@@ -8,7 +8,6 @@ class Objet < ApplicationRecord
   belongs_to :edifice, optional: true
   has_many :recensements, dependent: :restrict_with_exception
 
-  scope :with_photos_first, -> { order('cardinality(palissy_photos) DESC, LOWER(objets."palissy_TICO") ASC') }
   scope :order_by_recensement_priorite, -> { joins(:recensements).order(Arel.sql(Recensement::SQL_ORDER_PRIORITE)) }
   def self.order_by_recensement_priorite_array(objets_arel)
     objets_arel.to_a.sort_by { _1.recensements.to_a.any?(&:prioritaire?) ? 0 : 1 }
