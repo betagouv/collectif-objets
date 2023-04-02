@@ -4,13 +4,20 @@ class AdminMailer < ApplicationMailer
   def sanity_check_alert(email, commune, text)
     @text = text
     @commune = commune
-    mail to: email, subject: "Admin - Sanity Check Alert - #{commune}"
+    @title = "#{title_prefix} - Sanity Check Alert - #{commune}"
+    mail to: email, subject: title
   end
 
   def campaign_planned(conservateur, campaign)
     @conservateur = conservateur
     @campaign = campaign
-    mail to: "collectifobjets@beta.gouv.fr",
-         subject: "Admin - Campagne planifiée par un conservateur - #{campaign.departement}"
+    @subject = "#{title_prefix} - Campagne planifiée par un conservateur dans le #{campaign.departement}"
+    mail to: "collectifobjets@beta.gouv.fr", subject: @subject
+  end
+
+  private
+
+  def title_prefix
+    "CO Admin [#{Rails.configuration.x.environment_specific_name}]"
   end
 end
