@@ -497,16 +497,19 @@ Les particularités de ce CMS sont :
 Il n'y a donc pas de base de données supplémentaire à gérer ou de serveur d'API de contenu à maintenir, tous les 
 contenus restent présents dans le dépôt Git.
 
-Nous utilisons ce CMS pour permettre à l'équipe d'éditer les articles de presse et les fiches de conseil.
+Nous utilisons ce CMS pour permettre à l'équipe d'éditer les articles de presse, les fiches de conseil et les pages de documentation.
 
 Le CMS est hébergé sur [Netlify](https://www.netlify.com/) et est accessible à l'adresse 
 [collectif-objets-cms.netlify.app](https://collectif-objets-cms.netlify.app).
 
-Ce site Netlify est configuré pour déployer le répertoire `/cms` à la racine de ce dépôt Git courant. 
-Le fichier `/cms/config.yml` configure Netlify CMS pour notre cas. 
+Le projet Netlify est configuré pour déployer le répertoire `/cms` à la racine de ce dépôt Git courant. 
+Le fichier `/cms/config.yml` configure Netlify CMS pour notre cas.
 Nous utilisons Netlify Identity pour authentifier les accès au CMS, et un user github robot pour réaliser les commits 
 et les PRs émanant de Netlify CMS.
 Cette configuration est décrite sur [ce pad](https://pad.incubateur.net/zdhV1dI-RBivCfmwXq-hVw#).
+
+⚠️ Après modification de `/cms/config.yml` il faut réactiver les builds sur Netlify. 
+Ils sont désactivés en temps normal puisque ce fichier est très rarement modifié.
 
 Si l’erreur `Git Gateway Error: Please ask your site administrator to reissue the Git Gateway token` apparaît, il faut 
 - renouveller le token du user GitHub robot@collectifobjets.org depuis [sur cette page GitHub](https://github.com/settings/tokens) (Settings > Developer settings > Personal Access Tokens (classic)) avec le droit `repo` uniquement
