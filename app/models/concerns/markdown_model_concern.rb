@@ -39,4 +39,20 @@ module MarkdownModelConcern
   end
 
   delegate :to_html, to: :kramdown_doc
+
+  def table_of_contents_html
+    kramdown_elt_to_list_html(kramdown_doc.to_toc)
+  end
+
+  private
+
+  def kramdown_elt_to_list_html(elt)
+    return nil if elt.children.empty?
+
+    "<ul>\n#{elt.children.map { kramdown_elt_to_list_item_html(_1) }.join("\n")}\n</ul>\n"
+  end
+
+  def kramdown_elt_to_list_item_html(elt)
+    "<li><a href='##{elt.attr[:id]}'>#{elt.value.options[:raw_text]}</a>#{kramdown_elt_to_list_html(elt)}</li>"
+  end
 end

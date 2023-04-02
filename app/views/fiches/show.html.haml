@@ -20,4 +20,5 @@
                 .fr-col-md-4
                   = render Communes::ObjetCardComponent.new(objet, commune: current_user.commune, recensement: objet.current_recensement, badges: [])
 
-      != @fiche.to_html
+      .co-markdown-content
+        != @fiche.to_html
