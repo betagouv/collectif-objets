@@ -52,3 +52,14 @@ collections:
     fields:
       - { label: "Titre", name: "titre", widget: "string" }
       - {label: "Corps de la fiche", name: "body", widget: "markdown"}
+  - name: "content_blobs"
+    label: "Contenus"
+    folder: "/contenus/content_blobs"
+    media_folder: "/contenus/content_blobs/images"
+    public_folder: "/contenus/content_blobs/images"
+    create: false
+    slug: "{{slug}}"
+    identifier_field: titre
+    fields:
+      - { label: "Titre", name: "titre", widget: "string" }
+      - {label: "Contenu", name: "body", widget: "markdown"}

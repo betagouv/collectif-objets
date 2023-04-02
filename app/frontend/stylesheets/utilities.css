@@ -518,3 +518,7 @@ img.co-object-fit--contain,
 .fr-collapse::before {
   transition: none !important;
 }
+
+.co-markdown-content img {
+  max-width: 100%;
+}
