@@ -17,8 +17,8 @@ Les communes sont outillées pour préserver leur patrimoine remarquable.
 
 ## Quel lien avec les bases de données nationales sur le patrimoine ?
 
-* Les notices sur les objets protégés au titre des monuments historiques se trouvant sur la plateforme Collectif Objets contiennent des informations issues de [la base de données nationale sur le patrimoine mobilier français nommée “Palissy”](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Palissy-consultable-depuis-le-moteur-Collections). 
-* Les photos des objets visibles sur Collectif Objets sont issues de [la base des photographies conservées par le ministère de la Culture “Mémoire”](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Memoire-des-fonds-graphiques-et-photographiques-illustrant-le-patrimoine-francais).
+* Les notices sur les objets protégés au titre des monuments historiques se trouvant sur la plateforme Collectif Objets contiennent des informations issues de [la base de données nationale sur le patrimoine mobilier français nommée Palissy](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Palissy-consultable-depuis-le-moteur-Collections). 
+* Les photos des objets visibles sur Collectif Objets sont issues de [la base des photographies conservées par le ministère de la Culture nommée Mémoire](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Memoire-des-fonds-graphiques-et-photographiques-illustrant-le-patrimoine-francais).
 * Les données recueillies lors des campagnes de recensement avec Collectif Objets et validées par les conservateurs sont reversées dans le système d’information patrimonial de l’Etat. Collectif Objets travaille en collaboration avec la Médiathèque du patrimoine et de la photographie (MPP) dans cet objectif.
 
 ## Quels sont les objets concernés par Collectif Objets ?
@@ -64,14 +64,14 @@ Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès de
 
 *Cette section s’adresse aux conservateurs et conservatrices ayant une campagne en cours ou planifiée sur le territoire.*
 
-## Comment créer mon compte “conservateur” sur la plateforme ?
+## Comment créer mon compte « conservateur » sur la plateforme ?
 
-Les comptes “conservateurs” sont déjà créés sur Collectif Objet à partir de l’annuaire des conservateurs. Pour se connecter à la plateforme pour la première fois, vous devez :
+Les comptes « conservateurs » sont déjà créés sur Collectif Objet à partir de l’annuaire des conservateurs. Pour se connecter à la plateforme pour la première fois, vous devez :
 
 * Vous rendre sur le site [Collectif Objets](https://collectif-objets.beta.gouv.fr/).
-* Cliquer sur “[connexion conservateur](https://collectif-objets.beta.gouv.fr/conservateurs/sign_in)” en haut à droite.
-* Cliquer sur “Première connexion / Je n’ai pas de mot de passe“.
-* Cliquer sur ”[Réinitialiser mon mot de passe](https://collectif-objets.beta.gouv.fr/conservateurs/password/new)” et renseigner votre adresse mél professionnelle.
+* Cliquer sur « [connexion conservateur](https://collectif-objets.beta.gouv.fr/conservateurs/sign_in) » en haut à droite.
+* Cliquer sur « Première connexion / Je n’ai pas de mot de passe ».
+* Cliquer sur « [Réinitialiser mon mot de passe](https://collectif-objets.beta.gouv.fr/conservateurs/password/new) » et renseigner votre adresse mél professionnelle.
 * Vous recevrez un mél avec un lien de connexion vous invitant à définir votre mot de passe.
 
 ## Comment créer une campagne de recensement ?
@@ -79,12 +79,12 @@ Les comptes “conservateurs” sont déjà créés sur Collectif Objet à parti
 Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. P﻿our lancer votre campagne de recensement, voici les étapes à suivre : 
 
 * **[C﻿onnectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
-* **Cliquez sur le lien “Créer une nouvelle campagne” et configurez la campagne :**
+* **Cliquez sur le lien « Créer une nouvelle campagne » et configurez la campagne :**
 
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates. 
-  * **Cliquez sur le bouton "Créér la campagne"** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées. 
-* **Définissez la liste des communes destinataires** : en cliquant sur le bouton "Définir les communes destinataires”. N'oubliez pas de cliquer sur le bouton "Sauvegarder" pour enregistrer la liste mise à jour.
-* **C﻿liquez sur le bouton "Planifier la campagne"**. Votre campagne est planifiée : les communes destinataires recevront un mél à la date définie les invitant à recenser les objets protégés abrités sur leur territoire. 
+  * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées. 
+* **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder »  pour enregistrer la liste mise à jour.
+* **C﻿liquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mél à la date définie les invitant à recenser les objets protégés abrités sur leur territoire. 
 
 ## Comment accéder aux dossiers de recensement des communes ?
 
@@ -92,10 +92,10 @@ Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la
 
 Pour accéder aux dossiers de recensement des communes :
 
-* **[Connectez-vous à votre compte “conservateur”](#comment-crer-mon-compte-conservateur-sur-collectif-objets-) sur Collectif Objets.** Vous arrivez sur la page “Mes départements.”
-* **Sélectionnez le département qui vous intéresse.** Vous accédez alors au tableau de bord de la campagne de recensement communal dans ce département.\
+* **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-) sur Collectif Objets.** Vous arrivez sur la page « Mes départements ».
+* **Sélectionnez le département qui vous intéresse.** Vous accédez alors au tableau de bord de la campagne de recensement communal dans ce département.
 
-  Les dossiers de recensement transmis par les communes sont présentés soit dans un tableau ([”Vue Tableau”](#comment-fonctionne-la-vue-tableau-dun-dpartement-)), soit sous forme de carte (”Vue Carte”).
+  Les dossiers de recensement transmis par les communes sont présentés soit dans un tableau (« [Vue Tableau](#comment-fonctionne-la-vue-tableau-dun-dpartement-) »), soit sous forme de carte (« Vue Carte »).
 * **Cliquez sur le nom de la commune qui vous intéresse pour accéder à son dossier de recensement.** 
 
   P﻿our information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel. 
@@ -110,13 +110,13 @@ Pour accéder aux dossiers de recensement des communes :
 
   * **Analysez les informations transmises par la commune :** à partir des photos récentes transmises par la commune, vous pouvez valider ou corriger les informations renseignées.
 
-    Pour corriger une information, il vous suffit de cliquer sur “Modifier” et de sélectionner la réponse appropriée.
+    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée.
 
     **Si la commune s’est trompée d’objet, reportez-vous à cette section. De la même manière, si la commune n’a pas transmis de photos, reportez-vous à cette section.**
   * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée :  *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)* ; *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)* ; *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)* ; *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans le rapport transmis à la commune après analyse.
 
-    Un champ libre “commentaires pour la mairie” est à votre disposition si vous souhaitez préciser certains points à la commune.
-  * **Enregistrez votre travail :** cliquez sur le bouton “Sauvegarder”.
+    Un champ libre « commentaires pour la mairie » est à votre disposition si vous souhaitez préciser certains points à la commune.
+  * **Enregistrez votre travail :** cliquez sur le bouton « Sauvegarder ».
 
     ![Analyse d’un recensement](/contenus/content_blobs/images/conservateurs_analyse.png)
 * **Répétez ce processus pour chaque objet abrité par la commune.**
@@ -196,7 +196,7 @@ Vous pouvez choisir de désactiver les notifications automatiques reçues sur vo
 * R﻿endez-vous sur votre profil Collectif Objets en cliquant sur votre nom (en haut à droite de l'écran). 
 * C﻿ochez la case "Désactiver les notifications automatiques" et enregistrer votre choix; 
 
-## Où est la liste des communes à visiter ? 
+## Où est la liste des communes à visiter ?
 
 V﻿ous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après analyse de leur recensement, en cliquant sur l'onglet "Mes actions". 
 
@@ -204,7 +204,7 @@ Cette page affiche les communes que vous avez indiqué vouloir visiter lors de l
 
 ![](/contenus/content_blobs/images/capture-ecran-mes_actions.png)
 
-## Qui prévenir si des informations sur un objet sont incorrectes ? 
+## Qui prévenir si des informations sur un objet sont incorrectes ?
 
 Les informations sur les objets monuments historiques sur Collectif Objets sont issues des bases de données du patrimoine Palissy et Mémoire (pour les photos).
 
