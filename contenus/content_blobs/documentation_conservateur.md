@@ -78,7 +78,7 @@ Les comptes “conservateurs” sont déjà créés sur Collectif Objet à parti
 
 Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. P﻿our lancer votre campagne de recensement, voici les étapes à suivre : 
 
-* **C﻿onnectez-vous à votre compte conservateur** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
+* **[C﻿onnectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
 * **Cliquez sur le lien “Créer une nouvelle campagne” et configurez la campagne :**
 
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates. 
