@@ -104,7 +104,7 @@ Pour accéder aux dossiers de recensement des communes :
 
 ![Carte du département](/contenus/content_blobs/images/conservateurs_carte_departement.png)
 
-## Comment analyser le dossier de recensement transmis par la commune ?
+## Comment analyser le dossier de recensement de la commune ?
 
 * **Cliquez sur** **l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
 
@@ -136,7 +136,7 @@ Cliquez sur le bouton "Renvoyer le dossier", accessible depuis la page de la com
 
 ﻿Suivez la même procédure que si la commune s'est trompée d'objet : renvoyez-lui le dossier afin qu'elle ajoute les photos nécessaires pour réaliser votre analyse.
 
-## Comment envoyer mon rapport à la commune après analyse du dossier de recensement ?
+## Comment envoyer mon rapport à la commune ?
 
 Après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. 
 
@@ -170,4 +170,66 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
 
 ![Vue liste des communes triable](/contenus/content_blobs/images/conservateurs_vue_communes_triable.png)
 
-t
+## C﻿omment fonctionne la messagerie ?
+
+Une messagerie instantanée est intégrée dans le site Collectif Objets.
+
+Elle permet aux conservateurs et communes d’échanger par mél directement depuis notre interface afin de centraliser l’ensemble des informations liées aux objets.
+
+Pour y accéder :
+
+* [Sélectionnez la commune de votre choix](#comment-accder-aux-dossiers-de-recensement-des-communes-) et rendez-vous sur sa page.
+* Cliquez sur l’onglet “Messagerie”.
+* Vous pouvez alors rédiger votre message dans le champ dédié “Nouveau message” et y ajouter éventuellement une pièce-jointe.
+* Cliquez enfin sur le bouton “Envoyer” pour transmettre votre mél.
+
+  La mairie sera directement informée sur sa boîte mél - par une notification - que vous lui avez écrit. De la même manière, lorsque la commune vous répondra, vous recevrez une notification sur votre boîte mél.
+
+L’équipe de Collectif Objets a également accès aux échanges afin de pouvoir assister les communes lorsqu’elles rencontrent des problèmes avec le fonctionnement de Collectif Objets.
+
+![](/contenus/content_blobs/images/capture-ecran-messagerie.png)
+
+## Comment désactiver les notifications de Collectif Objets ?
+
+Vous pouvez choisir de désactiver les notifications automatiques reçues sur votre boîte mél lorsque les communes vous écrivent. Pour cela : 
+
+* R﻿endez-vous sur votre profil Collectif Objets en cliquant sur votre nom (en haut à droite de l'écran). 
+* C﻿ochez la case "Désactiver les notifications automatiques" et enregistrer votre choix; 
+
+## Où est la liste des communes à visiter ? 
+
+V﻿ous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après analyse de leur recensement, en cliquant sur l'onglet "Mes actions". 
+
+Cette page affiche les communes que vous avez indiqué vouloir visiter lors de la finalisation de l’analyse d’un dossier, et le degré de priorité que vous avez attribué à chaque visite prévue.
+
+![](/contenus/content_blobs/images/capture-ecran-mes_actions.png)
+
+## Qui prévenir si des informations sur un objet sont incorrectes ? 
+
+Les informations sur les objets monuments historiques sur Collectif Objets sont issues des bases de données du patrimoine Palissy et Mémoire (pour les photos).
+
+Si des informations semblent prescrites ou erronnées sur Collectif Objets, nous vous invitons à les signaler directement à la Médiathèque du Patrimoine et de la Photographie (MPP) afin que les données soient corrigées à la source. Pour contacter la MPP : [mediatheque.patrimoine@culture.gouv.fr](mailto:mediatheque.patrimoine@culture.gouv.fr) .
+
+**Que faire si un objet est attribué à une commune autre que celle qui l’abrite ?**
+
+Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mél à : [collectifobjets@beta.gouv.fr](mailto:collectifobjets@beta.gouv.fr) .
+
+Si le changement de localisation de l’objet n’est pas détecté en amont de la campagne, c’est la commune indiquée sur la notice Palissy de l’objet qui recevra la demande de recensement. 
+
+Po ur information, les notices Palissy indiquent généralement la commune qui abritait un objet à l’époque de sa protection, qui peut remonter à près de deux siècles. L’objet peut désormais être abrité au sein d’une autre commune.
+
+# Autres
+
+## Crédits photographiques
+
+Les photos prises par les communes dans le cadre d’une campagne de recensement Collectif Objets sont sous le régime de [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) et peuvent donc être réutilisées librement, à condition qu’elles ne soient pas dénaturées et que la source soit citée.
+
+Dans le cadre d’une création d’œuvre par un agent de l'État dans l’exercice de ses fonctions et répondant à l’accomplissement d’une mission de service public, l’État bénéficie de façon automatique d’un droit d’exploitation sur l’œuvre.
+
+La [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) est libre, gratuite et apporte la sécurité juridique nécessaire aux producteurs et aux réutilisateurs des données publiques. Elle garantit au "réutilisateur" le droit non exclusif, personnel et gratuit d'utiliser les informations sans limites géographiques ni temporelles.
+
+## Qu’est-ce qu’un “objet prioritaire” dans Collectif Objets ?
+
+Il s’agit d’un objet qui a été désigné par la commune qui l’abrite (ou qui devrait l’abriter) comme : disparu, en mauvais état de conservation ou en péril.
+
+Les objets prioritaires sont donc les objets qui semblent mériter une attention particulière dans un délai restreint.
