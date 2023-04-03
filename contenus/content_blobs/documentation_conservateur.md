@@ -92,8 +92,10 @@ Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la
 
 Pour accéder aux dossiers de recensement des communes :
 
-* **Connectez-vous à votre compte “conservateur” sur Collectif Objets.** Vous arrivez sur la page “Mes départements.”
-* **Sélectionnez le département qui vous intéresse.** Vous accédez alors au tableau de bord de la campagne de recensement communal dans ce département.  Les dossiers de recensement transmis par les communes sont présentés soit dans un tableau (”Vue Tableau”), soit sous forme de carte (”Vue Carte”).
+* **[Connectez-vous à votre compte “conservateur”](#comment-crer-mon-compte-conservateur-sur-collectif-objets-) sur Collectif Objets.** Vous arrivez sur la page “Mes départements.”
+* **Sélectionnez le département qui vous intéresse.** Vous accédez alors au tableau de bord de la campagne de recensement communal dans ce département.\
+
+  Les dossiers de recensement transmis par les communes sont présentés soit dans un tableau ([”Vue Tableau”](#comment-fonctionne-la-vue-tableau-dun-dpartement-)), soit sous forme de carte (”Vue Carte”).
 * **Cliquez sur le nom de la commune qui vous intéresse pour accéder à son dossier de recensement.** 
 
   P﻿our information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel. 
@@ -111,7 +113,7 @@ Pour accéder aux dossiers de recensement des communes :
     Pour corriger une information, il vous suffit de cliquer sur “Modifier” et de sélectionner la réponse appropriée.
 
     **Si la commune s’est trompée d’objet, reportez-vous à cette section. De la même manière, si la commune n’a pas transmis de photos, reportez-vous à cette section.**
-  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet :** il vous suffit de cocher l’action appropriée parmi la liste proposée :  *informer la commune sur les mesures d’entretien préventives* ; *informer la commune sur les étapes préalables à la restauration* ; *informer la commune sur les mesures d’entretien des édifices* et *informer la commune sur les mesures de sécurisation des objets.* Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans le rapport transmis à la commune après analyse.
+  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée :  *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)* ; *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)* ; *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)* ; *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans le rapport transmis à la commune après analyse.
 
     Un champ libre “commentaires pour la mairie” est à votre disposition si vous souhaitez préciser certains points à la commune.
   * **Enregistrez votre travail :** cliquez sur le bouton “Sauvegarder”.
@@ -122,23 +124,25 @@ Pour accéder aux dossiers de recensement des communes :
 
 ## Comment faire si la commune n’a pas recensé le bon objet ?
 
-brouillon d’avant : Dans un cas où une commune se serait trompée dans les informations communiquées nous vous invitons à leur renvoyer le dossier avec vos remarques pour qu’elle puisse modifier les informations en question et que vous puissiez à nouveau analyser le dossier avec les bonnes informations (bons objets ou meilleures photos par exemple). En ce qui concerne les informations envoyées sur l’état sanitaire vous avez la possibilité de les modifier en y ajoutant votre expertise.
+Si la commune vous a transmis des informations erronées ou insuffisantes, ne commencez pas l'analyse ! Renvoyez-lui le dossier afin qu'elle puisse faire les corrections nécessaires. 
 
-## 5) Comment faire si la commune n’a pas pris de photos ou qu’elles ne sont pas de qualité suffisante pour être exploitées ?
+**E﻿n effet, il ne faut pas "finaliser" les dossiers des communes où des éléments sont insatisfaisants car  cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)**
 
-Il ne faut pas accepter (ou “finaliser”) les dossiers des communes dans lesquels des éléments sont insatisfaisants : absence de photos, photos de mauvaise qualité, mauvais objet recensé…
+Cliquez sur le bouton "Renvoyer le dossier", accessible depuis la page de la commune concernée. S﻿i nécessaire, vous pouvez faire part à la commune de remarques complémentaires pour l'aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
 
-Il ne faut donc pas envoyer votre rapport final à la commune, car cela revient à accepter / valider son dossier.
+![](/contenus/content_blobs/images/capture_ecran_page_analyse.jpg)
 
-Ainsi, lorsque des modifications vous paraissent nécessaires (par exemple : ajout ou changement de photographie) nous vous invitons à écrire à la commune via la messagerie et à lui demander d’effectuer les modifications souhaitées.
+## Comment faire si la commune n’a pas pris de photos ?
 
-<!--EndFragment-->
+﻿Suivez la même procédure que si la commune s'est trompée d'objet : renvoyez-lui le dossier afin qu'elle ajoute les photos nécessaires pour réaliser votre analyse.
 
 ## Comment envoyer mon rapport à la commune après analyse du dossier de recensement ?
 
-Après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport.
+Après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. 
 
-* Rendez-vous sur la page de la commune concernée. Pour accéder au rapport, vous devez avoir analysé chaque objet recensé.
+**Lorsque vous envoyez votre rapport final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l'Etat.** 
+
+* [Rendez-vous sur la page de la commune concernée. ](#comment-accder-aux-dossiers-de-recensement-des-communes-)Pour accéder au rapport, vous devez avoir analysé chaque objet recensé.
 * **Cliquez sur le bouton “Finaliser le rapport”.**
 
   ![Analyse terminée](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
@@ -165,3 +169,5 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
   * “Communes inactives” : celles qui n’ont pas démarré leur recensement.
 
 ![Vue liste des communes triable](/contenus/content_blobs/images/conservateurs_vue_communes_triable.png)
+
+t﻿
