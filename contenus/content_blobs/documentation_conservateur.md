@@ -126,9 +126,9 @@ Pour accéder aux dossiers de recensement des communes :
 
 Si la commune vous a transmis des informations erronées ou insuffisantes, ne commencez pas l'analyse ! Renvoyez-lui le dossier afin qu'elle puisse faire les corrections nécessaires. 
 
-**E﻿n effet, il ne faut pas "finaliser" les dossiers des communes où des éléments sont insatisfaisants car  cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)**
+**E﻿n effet, il ne faut pas «** **finaliser » les dossiers des communes où des éléments sont insatisfaisants car  cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)**
 
-Cliquez sur le bouton "Renvoyer le dossier", accessible depuis la page de la commune concernée. S﻿i nécessaire, vous pouvez faire part à la commune de remarques complémentaires pour l'aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
+Cliquez sur le bouton « Renvoyer le dossier », accessible depuis la page de la commune concernée. S﻿i nécessaire, vous pouvez faire part à la commune de remarques complémentaires pour l'aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
 
 ![](/contenus/content_blobs/images/capture_ecran_page_analyse.jpg)
 
@@ -143,30 +143,30 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
 **Lorsque vous envoyez votre rapport final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l'Etat.** 
 
 * [Rendez-vous sur la page de la commune concernée. ](#comment-accder-aux-dossiers-de-recensement-des-communes-)Pour accéder au rapport, v[ous devez avoir analysé chaque objet recensé](#comment-analyser-le-dossier-de-recensement-transmis-par-la-commune-).
-* **Cliquez sur le bouton “Finaliser le rapport”.**
+* **Cliquez sur le bouton « Finaliser le rapport ».**
 
   ![Analyse terminée](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
-* **Décidez de si vous souhaiter prévoir une visite sur le terrain** : en cochant la case appropriée : “*pas de visite prévue*” ; “*visite souhaitable*” et “*visite prioritaire*”.
+* **Décidez de si vous souhaiter prévoir une visite sur le terrain** : en cochant la case appropriée : « *pas de visite prévue* » ; « *visite souhaitable* » et « *visite prioritaire* ».
 
-  Un champ libre “commentaire global” est à votre disposition si vous souhaitez préciser certains points à la commune.
-* **Cliquez sur le bouton “Finaliser et envoyer le rapport à la commune”** pour lui transmettre votre rapport.
+  Un champ libre « commentaire global » est à votre disposition si vous souhaitez préciser certains points à la commune.
+* **Cliquez sur le bouton « Finaliser et envoyer le rapport à la commune »** pour lui transmettre votre rapport.
 
   ![Envoyer le rapport de recensement](/contenus/content_blobs/images/conservateurs_envoyer_rapport.png)
 
-## Comment fonctionne la “Vue Tableau” d’un département ?
+## Comment fonctionne la « Vue Tableau » d’un département ?
 
-* Vous pouvez directement taper le nom de la commune qui vous intéresse dans la barre de recherche “Nom de commune”, puis cliquez sur la loupe.
+* Vous pouvez directement taper le nom de la commune qui vous intéresse dans la barre de recherche « Nom de commune », puis cliquez sur la loupe.
 * Vous pouvez modifier l’ordre d’apparition des communes de votre département par :
 
-  * Ordre alphabétique : en cliquant sur la flèche de la colonne “Commune”.
-  * Nombre d’objets MH abrités par commune : en cliquant sur la flèche de la colonne “Objets”.
-  * Nombre d’objets MH indiqués comme prioritaires par la commune : en cliquant sur la flèche de la colonne “Objets prioritaires”.
-  * L’état de traitement du dossier de recensement : en cliquant sur la flèche de la colonne “Analyse”. Lorsque le dossier de recensement d’une commune vous est transmis pour expertise, il porte le statut “à analyser”. Lorsque vous avez analysé un dossier de recensement et l’avez transmis à la commune recenseuse, son statut est indiqué comme “rapport envoyé à la commune”.
-* Par défaut, seules les communes vous ayant envoyé leur dossier de recensement vous sont présentées (”recensement terminé”). Toutefois, vous pouvez également afficher l’ensemble des communes contactées en cliquant sur la flèche du filtre “Etat du recensement”.
+  * Ordre alphabétique : en cliquant sur la flèche de la colonne « Commune ».
+  * Nombre d’objets MH abrités par commune : en cliquant sur la flèche de la colonne « Objets ».
+  * Nombre d’objets MH indiqués comme prioritaires par la commune : en cliquant sur la flèche de la colonne « Objets prioritaires ».
+  * L’état de traitement du dossier de recensement : en cliquant sur la flèche de la colonne « Analyse ». Lorsque le dossier de recensement d’une commune vous est transmis pour expertise, il porte le statut « à analyser ». Lorsque vous avez analysé un dossier de recensement et l’avez transmis à la commune recenseuse, son statut est indiqué comme « rapport envoyé à la commune ».
+* Par défaut, seules les communes vous ayant envoyé leur dossier de recensement vous sont présentées (« recensement terminé »). Toutefois, vous pouvez également afficher l’ensemble des communes contactées en cliquant sur la flèche du filtre « Etat du recensement ».
 
-  * “Recensement démarré” : s communes qui ont démarré leur recensement mais ne l’ont pas terminé.
-  * “Toutes les communes” : l’ensemble des communes de votre département qui abritent des objets MH.
-  * “Communes inactives” : celles qui n’ont pas démarré leur recensement.
+  * « Recensement démarré » : les communes qui ont démarré leur recensement mais ne l’ont pas terminé.
+  * « Toutes les communes » : l’ensemble des communes de votre département qui abritent des objets MH.
+  * « Communes inactives » : celles qui n’ont pas démarré leur recensement.
 
 ![Vue liste des communes triable](/contenus/content_blobs/images/conservateurs_vue_communes_triable.png)
 
@@ -179,9 +179,9 @@ Elle permet aux conservateurs et communes d’échanger par mél directement dep
 Pour y accéder :
 
 * [Sélectionnez la commune de votre choix](#comment-accder-aux-dossiers-de-recensement-des-communes-) et rendez-vous sur sa page.
-* Cliquez sur l’onglet “Messagerie”.
-* Vous pouvez alors rédiger votre message dans le champ dédié “Nouveau message” et y ajouter éventuellement une pièce-jointe.
-* Cliquez enfin sur le bouton “Envoyer” pour transmettre votre mél.
+* Cliquez sur l’onglet « Messagerie ».
+* Vous pouvez alors rédiger votre message dans le champ dédié « Nouveau message » et y ajouter éventuellement une pièce-jointe.
+* Cliquez enfin sur le bouton « Envoyer » pour transmettre votre mél.
 
   La mairie sera directement informée sur sa boîte mél - par une notification - que vous lui avez écrit. De la même manière, lorsque la commune vous répondra, vous recevrez une notification sur votre boîte mél.
 
@@ -194,11 +194,11 @@ L’équipe de Collectif Objets a également accès aux échanges afin de pouvoi
 Vous pouvez choisir de désactiver les notifications automatiques reçues sur votre boîte mél lorsque les communes vous écrivent. Pour cela : 
 
 * R﻿endez-vous sur votre profil Collectif Objets en cliquant sur votre nom (en haut à droite de l'écran). 
-* C﻿ochez la case "Désactiver les notifications automatiques" et enregistrer votre choix; 
+* C﻿ochez la case « Désactiver les notifications automatiques » et enregistrer votre choix; 
 
 ## Où est la liste des communes à visiter ?
 
-V﻿ous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après analyse de leur recensement, en cliquant sur l'onglet "Mes actions". 
+V﻿ous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après analyse de leur recensement, en cliquant sur l'onglet « Mes actions ». 
 
 Cette page affiche les communes que vous avez indiqué vouloir visiter lors de la finalisation de l’analyse d’un dossier, et le degré de priorité que vous avez attribué à chaque visite prévue.
 
@@ -226,9 +226,9 @@ Les photos prises par les communes dans le cadre d’une campagne de recensement
 
 Dans le cadre d’une création d’œuvre par un agent de l'État dans l’exercice de ses fonctions et répondant à l’accomplissement d’une mission de service public, l’État bénéficie de façon automatique d’un droit d’exploitation sur l’œuvre.
 
-La [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) est libre, gratuite et apporte la sécurité juridique nécessaire aux producteurs et aux réutilisateurs des données publiques. Elle garantit au "réutilisateur" le droit non exclusif, personnel et gratuit d'utiliser les informations sans limites géographiques ni temporelles.
+La [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) est libre, gratuite et apporte la sécurité juridique nécessaire aux producteurs et aux réutilisateurs des données publiques. Elle garantit au « réutilisateur » le droit non exclusif, personnel et gratuit d'utiliser les informations sans limites géographiques ni temporelles.
 
-## Qu’est-ce qu’un “objet prioritaire” dans Collectif Objets ?
+## Qu’est-ce qu’un « objet prioritaire » dans Collectif Objets ?
 
 Il s’agit d’un objet qui a été désigné par la commune qui l’abrite (ou qui devrait l’abriter) comme : disparu, en mauvais état de conservation ou en péril.
 
