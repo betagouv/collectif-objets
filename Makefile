@@ -4,7 +4,9 @@ install:
 	npm install
 	npx husky install
 	brew install mailhog redis libvips
-	rails db:reset
+	rails db:drop db:create db:schema:load
+	rails r scripts/create_postgres_sequences_memoire_photos_numbers.rb
+	rails db:seed
 
 dev:
 	bin/dev
