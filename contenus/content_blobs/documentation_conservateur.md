@@ -1,9 +1,9 @@
 ---
 titre: Documentation Conservateur
 ---
-# I. En quoi consiste Collectif Objets ?
+# En quoi consiste Collectif Objets ?
 
-## 1) Collectif Objets : c’est qui ? c’est quoi ?
+## Collectif Objets : c’est quoi ?
 
 Collectif Objets est un **service public numérique** du ministère de la Culture pour faciliter le dialogue entre les acteurs de la chaîne patrimoniale.
 
@@ -15,13 +15,13 @@ Par la collecte de ces données, Collectif Objets permet aux conservateurs d'avo
 
 Les communes sont outillées pour préserver leur patrimoine remarquable.
 
-## 2) Quel est le lien entre Collectif Objets et les bases de données nationales sur le patrimoine ?
+## Quel lien avec les bases de données nationales sur le patrimoine ?
 
 * Les notices sur les objets protégés au titre des monuments historiques se trouvant sur la plateforme Collectif Objets contiennent des informations issues de [la base de données nationale sur le patrimoine mobilier français nommée “Palissy”](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Palissy-consultable-depuis-le-moteur-Collections). 
 * Les photos des objets visibles sur Collectif Objets sont issues de [la base des photographies conservées par le ministère de la Culture “Mémoire”](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Memoire-des-fonds-graphiques-et-photographiques-illustrant-le-patrimoine-francais).
 * Les données recueillies lors des campagnes de recensement avec Collectif Objets et validées par les conservateurs sont reversées dans le système d’information patrimonial de l’Etat. Collectif Objets travaille en collaboration avec la Médiathèque du patrimoine et de la photographie (MPP) dans cet objectif.
 
-## 3) Quels sont les objets concernés par Collectif Objets ?
+## Quels sont les objets concernés par Collectif Objets ?
 
 Collectif Objets s’adresse aux communes abritant des objets protégés au titre des monuments historiques (classés et inscrits) sur leur territoire.
 
@@ -31,40 +31,40 @@ Dans la majorité des cas, les communes entretiennent des relations avec les pro
 
 Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
 
-## 4) Le recensement effectué par les communes est-il fiable ?
+## Le recensement effectué par les communes est-il fiable ?
 
 Oui. Plus de 90% des informations transmises par les communes sont validées sans correction par les conservateurs. Nous guidons les communes dans leur démarche de recensement.
 
-# II. Comment lancer une campagne de recensement communal sur mon territoire ?
+# Comment lancer une campagne de recensement communal ?
 
-## 1) Comment déployer une campagne de recensement communal dans mon département ?
+## Comment déployer une campagne dans mon département ?
 
 C’est simple : contactez-nous à l’adresse [collectifobjets@beta.gouv.fr](mailto:collectifobjets@beta.gouv.fr) pour prendre rendez-vous avec notre équipe de déploiement.
 
 Collectif Objets est un service destiné aux conservateurs des Monuments Historiques et conservateurs des Antiquités et Objets d’Art.
 
-## 2) Quelles sont les grandes étapes d’une campagne de recensement ?
+## Quelles sont les grandes étapes d’une campagne ?
 
 * **Les conservateurs lancent la campagne de recensement.** Les communes sont invitées par mail à se rendre sur le site Collectif Objets pour prendre connaissance des objets MH qu’elles abritent.
 * **Les communes recensent en ligne les objets MH qu’elles abritent.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur dossier de recensement.
 * **Les conservateurs analysent les informations et photos transmises.** Pour chaque objet, ils peuvent alors valider les informations et engager des actions sur le terrain le cas échéant. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune.
 * **Les données validées par les conservateurs sont reversées dans le système d’information patrimonial.**
 
-## 3) Quelles sont les communes concernées par une campagne de recensement ?
+## Quelles sont les communes concernées par la campagne ?
 
 Par défaut, l’ensemble des communes d’un département abritant des objets MH sont intégrées à la campagne de recensement.
 
 Toutefois, il est possible d’exclure certaines communes de la liste des destinataires (par exemple, parce qu’un récolement y a déjà été effectué récemment).
 
-## **4) Que se passe-t-il après la première campagne de recensement communal ?**
+## **Que se passe-t-il après la première campagne ?**
 
 Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu. L’objectif est qu’en 5 ans l’ensemble des communes d’un département abritant des monuments MH aient recensé leurs objets.
 
-# III. Comment se servir de Collectif Objets ?
+# Comment se servir de Collectif Objets ?
 
 *Cette section s’adresse aux conservateurs et conservatrices ayant une campagne en cours ou planifiée sur le territoire.*
 
-## 1) Comment créer mon compte “conservateur” sur Collectif Objets ?
+## Comment créer mon compte “conservateur” sur la plateforme ?
 
 Les comptes “conservateurs” sont déjà créés sur Collectif Objet à partir de l’annuaire des conservateurs. Pour se connecter à la plateforme pour la première fois, vous devez :
 
@@ -74,7 +74,7 @@ Les comptes “conservateurs” sont déjà créés sur Collectif Objet à parti
 * Cliquer sur ”[Réinitialiser mon mot de passe](https://collectif-objets.beta.gouv.fr/conservateurs/password/new)” et renseigner votre adresse mél professionnelle.
 * Vous recevrez un mél avec un lien de connexion vous invitant à définir votre mot de passe.
 
-## 2) Comment accéder aux dossiers de recensement des communes ?
+## Comment accéder aux dossiers de recensement des communes ?
 
 Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la commune vous transmet son dossier de recensement. Il n’y a qu’un seul dossier de recensement par commune, peu importe le nombre d’objets.
 
@@ -88,7 +88,7 @@ Pour accéder aux dossiers de recensement des communes :
 
 ![Carte du département](/contenus/content_blobs/images/conservateurs_carte_departement.png)
 
-## 3) Comment analyser le dossier de recensement transmis par la commune ?
+## Comment analyser le dossier de recensement transmis par la commune ?
 
 * **Cliquez sur** **l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
 
@@ -106,7 +106,7 @@ Pour accéder aux dossiers de recensement des communes :
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez le rapport final de recensement à la commune :** après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. Pour cela, référez-vous à la section : lien.
 
-## 4) Comment envoyer mon rapport à la commune après analyse de son dossier de recensement ?
+## Comment envoyer mon rapport à la commune après analyse du dossier de recensement ?
 
 Après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport.
 
@@ -121,7 +121,7 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
 
   ![Envoyer le rapport de recensement](/contenus/content_blobs/images/conservateurs_envoyer_rapport.png)
 
-## 5) Comment fonctionne la “Vue tableau” d’un département ?
+## Comment fonctionne la “Vue Tableau” d’un département ?
 
 * Vous pouvez directement taper le nom de la commune qui vous intéresse dans la barre de recherche “Nom de commune”, puis cliquez sur la loupe.
 * Vous pouvez modifier l’ordre d’apparition des communes de votre département par :
