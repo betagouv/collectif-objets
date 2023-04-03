@@ -74,6 +74,18 @@ Les comptes “conservateurs” sont déjà créés sur Collectif Objet à parti
 * Cliquer sur ”[Réinitialiser mon mot de passe](https://collectif-objets.beta.gouv.fr/conservateurs/password/new)” et renseigner votre adresse mél professionnelle.
 * Vous recevrez un mél avec un lien de connexion vous invitant à définir votre mot de passe.
 
+## Comment créer une campagne de recensement ?
+
+Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. P﻿our lancer votre campagne de recensement, voici les étapes à suivre : 
+
+* **C﻿onnectez-vous à votre compte conservateur** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
+* **Cliquez sur le lien “Créer une nouvelle campagne” et configurez la campagne :**
+
+  * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates. 
+  * **Cliquez sur le bouton "Créér la campagne"** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées. 
+* **Définissez la liste des communes destinataires** : en cliquant sur le bouton "Définir les communes destinataires”. N'oubliez pas de cliquer sur le bouton "Sauvegarder" pour enregistrer la liste mise à jour.
+* **C﻿liquez sur le bouton "Planifier la campagne"**. Votre campagne est planifiée : les communes destinataires recevront un mél à la date définie les invitant à recenser les objets protégés abrités sur leur territoire. 
+
 ## Comment accéder aux dossiers de recensement des communes ?
 
 Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la commune vous transmet son dossier de recensement. Il n’y a qu’un seul dossier de recensement par commune, peu importe le nombre d’objets.
@@ -82,7 +94,9 @@ Pour accéder aux dossiers de recensement des communes :
 
 * **Connectez-vous à votre compte “conservateur” sur Collectif Objets.** Vous arrivez sur la page “Mes départements.”
 * **Sélectionnez le département qui vous intéresse.** Vous accédez alors au tableau de bord de la campagne de recensement communal dans ce département.  Les dossiers de recensement transmis par les communes sont présentés soit dans un tableau (”Vue Tableau”), soit sous forme de carte (”Vue Carte”).
-* **Cliquez sur le nom de la commune qui vous intéresse pour accéder à son dossier de recensement.**
+* **Cliquez sur le nom de la commune qui vous intéresse pour accéder à son dossier de recensement.** 
+
+  P﻿our information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel. 
 
 ![Liste des communes](/contenus/content_blobs/images/conservateurs_liste_communes.png)
 
@@ -105,6 +119,20 @@ Pour accéder aux dossiers de recensement des communes :
     ![Analyse d’un recensement](/contenus/content_blobs/images/conservateurs_analyse.png)
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez le rapport final de recensement à la commune :** après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. Pour cela, référez-vous à la section : lien.
+
+## Comment faire si la commune n’a pas recensé le bon objet ?
+
+brouillon d’avant : Dans un cas où une commune se serait trompée dans les informations communiquées nous vous invitons à leur renvoyer le dossier avec vos remarques pour qu’elle puisse modifier les informations en question et que vous puissiez à nouveau analyser le dossier avec les bonnes informations (bons objets ou meilleures photos par exemple). En ce qui concerne les informations envoyées sur l’état sanitaire vous avez la possibilité de les modifier en y ajoutant votre expertise.
+
+## 5) Comment faire si la commune n’a pas pris de photos ou qu’elles ne sont pas de qualité suffisante pour être exploitées ?
+
+Il ne faut pas accepter (ou “finaliser”) les dossiers des communes dans lesquels des éléments sont insatisfaisants : absence de photos, photos de mauvaise qualité, mauvais objet recensé…
+
+Il ne faut donc pas envoyer votre rapport final à la commune, car cela revient à accepter / valider son dossier.
+
+Ainsi, lorsque des modifications vous paraissent nécessaires (par exemple : ajout ou changement de photographie) nous vous invitons à écrire à la commune via la messagerie et à lui demander d’effectuer les modifications souhaitées.
+
+<!--EndFragment-->
 
 ## Comment envoyer mon rapport à la commune après analyse du dossier de recensement ?
 
