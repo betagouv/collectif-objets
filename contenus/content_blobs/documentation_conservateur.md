@@ -142,7 +142,7 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
 
 **Lorsque vous envoyez votre rapport final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l'Etat.** 
 
-* [Rendez-vous sur la page de la commune concernée. ](#comment-accder-aux-dossiers-de-recensement-des-communes-)Pour accéder au rapport, vous devez avoir analysé chaque objet recensé.
+* [Rendez-vous sur la page de la commune concernée. ](#comment-accder-aux-dossiers-de-recensement-des-communes-)Pour accéder au rapport, v[ous devez avoir analysé chaque objet recensé](#comment-analyser-le-dossier-de-recensement-transmis-par-la-commune-).
 * **Cliquez sur le bouton “Finaliser le rapport”.**
 
   ![Analyse terminée](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
@@ -170,4 +170,4 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
 
 ![Vue liste des communes triable](/contenus/content_blobs/images/conservateurs_vue_communes_triable.png)
 
-t﻿
+t
