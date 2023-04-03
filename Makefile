@@ -1,6 +1,7 @@
 install:
 	bundle install
 	npm install --global husky
+	npm install
 	npx husky install
 	brew install mailhog redis libvips
 	rails db:reset
