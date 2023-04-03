@@ -91,6 +91,6 @@ class InboundEmail < ApplicationRecord
 
   def author_user
     scoped = commune.users
-    scoped.find_by(email: from_email) || scoped.first
+    scoped.find_by("email ILIKE", from_email) || scoped.first
   end
 end

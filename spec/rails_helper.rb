@@ -11,6 +11,8 @@ require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 require "axe-rspec"
 
+require 'devise'
+
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
@@ -29,6 +31,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Warden::Test::Helpers
+
+  config.include Devise::Test::ControllerHelpers, :type => :controller
 
   config.after(type: :feature) do |example_group|
     save_screenshot if example_group.exception

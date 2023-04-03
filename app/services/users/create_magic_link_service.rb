@@ -18,7 +18,7 @@ module Users
     protected
 
     def user
-      @user ||= User.find_by(email: @email)
+      @user ||= User.find_by("email ILIKE ?", @email)
     end
   end
 end
