@@ -33,7 +33,7 @@ module Conservateurs
 
     def set_commune
       @commune = @dossier.commune
-      @objets = @commune.objets.with_photos_first.includes(:commune, recensements: %i[photos_attachments photos_blobs])
+      @objets = @commune.objets.includes(:commune, recensements: %i[photos_attachments photos_blobs])
     end
 
     def redirect_with_alert(alert)
