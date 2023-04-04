@@ -64,8 +64,7 @@ class Commune < ApplicationRecord
   def self.status_value_counts
     group(:status)
       .select("status, count(id) as communes_count")
-      .map { [_1.status, _1.communes_count] }
-      .to_h
+      .to_h { [_1.status, _1.communes_count] }
   end
 
   def active?

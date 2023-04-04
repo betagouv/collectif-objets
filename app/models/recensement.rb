@@ -96,8 +96,7 @@ class Recensement < ApplicationRecord
   def self.etats_sanitaires_value_counts
     group("etat_sanitaire")
       .select("etat_sanitaire, count(recensements.id) as recensements_count")
-      .map { [_1.etat_sanitaire, _1.recensements_count] }
-      .to_h
+      .to_h { [_1.etat_sanitaire, _1.recensements_count] }
   end
 
   def self.possible_values_for(attribute_name)

@@ -32,7 +32,7 @@ module Co
       end
 
       def headers
-        message.header.map { [_1.name, _1.value] }.to_h
+        message.header.to_h { [_1.name, _1.value] }
       end
 
       def raw_html

@@ -74,7 +74,7 @@ class UserMailer < ApplicationMailer
   protected
 
   def set_login_url
-    @login_url = \
+    @login_url =
       if @user.magic_token.present?
         magic_authentication_url("magic-token" => @user.magic_token)
       else
