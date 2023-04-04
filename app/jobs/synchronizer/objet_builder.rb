@@ -25,7 +25,7 @@ module Synchronizer
     attr_reader :row
 
     def attributes
-      @attributes ||= { "palissy_REF" => row["REF"] } \
+      @attributes ||= { "palissy_REF" => row["REF"] }
         .merge(json_fields)
         .merge(text_fields)
         .merge({ "palissy_REFA" => ref_merimee })

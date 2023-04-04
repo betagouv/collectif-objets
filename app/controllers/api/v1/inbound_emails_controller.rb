@@ -36,7 +36,7 @@ module Api
 
       def validate_ip
         # cf https://developers.sendinblue.com/docs/how-to-use-webhooks#securing-your-webhooks
-        return true if \
+        return true if
           (Rails.env.development? && request.ip == "127.0.0.1") ||
           request.ip.start_with?("185.107.232.") ||
           request.ip.start_with?("1.179.112.")

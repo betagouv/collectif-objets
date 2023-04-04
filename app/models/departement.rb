@@ -45,7 +45,7 @@ class Departement < ApplicationRecord
 
   def to_h
     # DEPRECATE
-    %i[code nom communes_count objets_count].map { [_1, send(_1)] }.to_h
+    %i[code nom communes_count objets_count].to_h { [_1, send(_1)] }
   end
 
   def memoire_sequence_name
