@@ -222,7 +222,7 @@ GEM
     loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lookbook (2.0.0.beta.9)
+    lookbook (2.0.0.rc.1)
       activemodel
       css_parser
       htmlbeautifier (~> 1.3)
@@ -489,7 +489,7 @@ DEPENDENCIES
   kramdown
   launchy
   listen
-  lookbook (~> 2.0.0.beta.9)
+  lookbook (~> 2.0.0.rc.1)
   matrix
   mjml-rails (~> 4.8)
   pagy (~> 6.0)
