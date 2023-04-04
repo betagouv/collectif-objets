@@ -9,12 +9,6 @@ fr:
           one: Il reste un objet protégé à recenser
           other: Il reste %{count} objets protégés à recenser
         tous_les_objets_recenses: Tous les objets ont été recensés
-      rejected_callout:
-        explanation:
-          one: "Le recensement de '%{objet_name}' que vous avez envoyé le %{date_submitted_at} n'a pas pu être analysé par les conservateurs en l'état."
-          other: "Le dossier de recensement de %{count} objets que vous avez envoyé le %{date_submitted_at} n'a pas pu être analysé par les conservateurs en l'état."
-        note: "Voici le commentaire laissé à votre intention par %{conservateur} le %{date_rejected_at} :"
-        action: Vous pouvez modifier les informations de recensements et renvoyer le dossier au conservateur.
       accepted_callout:
         title: Dossier accepté par le conservateur
         content: "%{conservateur} a analysé votre dossier le %{date}."
@@ -25,10 +19,6 @@ fr:
         cta:
           one: Envoyer le recensement
           other: Envoyer les recensements
-      recensement_saved_after_reject:
-        title: Votre recensement a bien été mis à jour
-        cta: Renvoyer le dossier…
-        back: Revenir à la liste d’objets de ma commune
       objets_manquants:
         pourquoi_n_objets:
           one: Pourquoi cette liste ne contient qu'un objet ?
@@ -58,25 +48,6 @@ fr:
       prioritaires:
         one: 1 objet prioritaire
         other: "%{count} objets prioritaires"
-    rejects:
-      form:
-        error: "Une erreur s'est produite :"
-        notes_conservateur:
-          undo: Restaurer le message précédent
-        default_messages:
-          label: "Messages prédéfinis :"
-          missing_photos:
-            button: Photos non disponibles
-            message: "Pour analyser votre recensement, le conservateur a absolument besoin d'une photo de l’objet. Or, il semblerait qu'aucune photo n'ait été soumise pour cet objet. Pourriez-vous s'il-vous-plaît en prendre et les ajouter à votre recensement ?"
-          blurry_photos:
-            button: Photos floues
-            message: "Une partie des photos que vous avez envoyées sont trop floues pour permettre l'analyse du conservateur. Pourriez-vous s'il-vous-plaît en prendre de nouvelles et les ajouter à votre recensement ?"
-          wrong_objects:
-            button: Mauvais objets
-            message: "Les photos soumises ne semblent pas correspondre à l'objet mentionné. Si elles existent, vous pouvez vous référer aux photographies présentes dans la base nationale pour retrouver l'objet. Elles vous sont présentées juste avant le questionnaire."
-        submit_preview_initial: Préparer le mail de renvoi
-        submit_preview: Rafraîchir la prévisualisation du mail
-        submit: Renvoyer le dossier
     departements:
       index:
         head_title: Départements
@@ -139,7 +110,6 @@ fr:
     status_badge:
       construction: Recensement en cours
       submitted: À analyser
-      rejected: Dossier renvoyé à la commune
       accepted: Rapport envoyé à la commune
     rapport:
       recensement:
@@ -627,13 +597,6 @@ fr:
     tagline: Préservez votre patrimoine mobilier
     politesse: Bien cordialement,
   conservateur_mailer:
-    commune_recompleted:
-      subject: "%{nom_commune} vous a retourné le dossier de recensement"
-      bonjour: Bonjour %{nom},
-      intro: La commune %{nom_commune} a modifié et renvoyé son dossier de recensement de %{objets_count} objet(s) protégé(s).
-      aucun_commentaire: Aucun commentaire
-      rejected_at: "Le dossier avait été retourné à la commune le %{date} avec le commentaire suivant :"
-      cta: Voir le dossier sur Collectif Objets
     message_received:
       subject: "%{nom_commune} vous a envoyé un message"
       bonjour: Bonjour %{nom},
@@ -669,12 +632,6 @@ fr:
       rapport: Vous trouverez sur Collectif Objets le rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
       cta: Voir le rapport de recensement
       merci: Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
-    dossier_rejected:
-      subject: "Compléments nécessaires pour le dossier de recensement des objets protégés de %{commune_nom}"
-      merci: Merci pour le dossier de recensement des objets protégés de %{commune_nom} que vous avez envoyé.
-      rejected: Malheureusement, les conservateurs ne sont pas en mesure de lʼanalyser en lʼétat.
-      connexion: "Vous pouvez vous connecter à Collectif Objets pour modifier ou compléter les recensements des objets en suivant ce lien :"
-      cta: Compléter le dossier de recensement
     validate:
       subject: Collectif Objets - Votre lien de connexion
       lien: "Voici votre lien de connexion à Collectif Objets :"

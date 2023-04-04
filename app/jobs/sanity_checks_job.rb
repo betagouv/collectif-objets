@@ -23,10 +23,10 @@ class SanityChecksJob
 
   def check_commune_completed_dossier_submitted
     Commune.completed.joins(:dossier)
-      .where.not(dossiers: { status: %i[submitted accepted rejected] })
+      .where.not(dossiers: { status: %i[submitted accepted] })
       .each do |commune|
       text = "La commune #{commune} est en `completed` mais son dossier est " \
-             "`#{commune.dossier.status}` au lieu de `submitted`, `accepted` ou `rejected`"
+             "`#{commune.dossier.status}` au lieu de `submitted` ou `accepted`"
       logger.info text
       AdminMailer.sanity_check_alert(EMAIL, commune, text).deliver_later
     end

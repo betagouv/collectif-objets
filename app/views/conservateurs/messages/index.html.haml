@@ -1,5 +1,5 @@
 = render layout: "conservateurs/communes/tabs",
-  locals: { commune: @commune, dossier: @dossier, current_tab_title: "Messagerie" } do
+  locals: { commune: @commune, dossier: @dossier, current_tab: :messagerie } do
 
   = render "shared/messages/list", messages: @messages, viewed_by: current_conservateur
   = render "shared/messages/form", url: conservateurs_commune_messages_path(@commune), message: @new_message

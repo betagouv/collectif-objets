@@ -115,11 +115,9 @@ La version complète du diagramme d'entités de la base de données est visible 
 
 Voici le schéma du cycle de vie d'un dossier.
 
-![cycle de vie dossier drawio](https://user-images.githubusercontent.com/883348/203020939-f920f379-4e39-4653-bdaa-4fb7d968c87f.svg)
+![cycle de vie dossier drawio](/doc/cycle-vie-dossier.drawio.svg)
 
-[éditer](https://app.diagrams.net/?client=1#Uhttps%3A%2F%2Fuser-images.githubusercontent.com%2F883348%2F203020939-f920f379-4e39-4653-bdaa-4fb7d968c87f.svg)
-
-⚠️ Ce cycle va bientôt être grandement simplifié
+[éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Fcycle-vie-dossier.drawio.svg)
 
 ## Installation
 

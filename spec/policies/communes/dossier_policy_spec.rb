@@ -17,11 +17,5 @@ describe Communes::DossierPolicy do
       let(:user) { build(:user, commune: build(:commune)) }
       it { should_not permit(user, dossier) }
     end
-
-    context "dossier rejeté" do
-      let(:dossier) { build(:dossier, status: :rejected) }
-      let(:user) { build(:user, commune: dossier.commune) }
-      it { should permit(user, dossier) }
-    end
   end
 end

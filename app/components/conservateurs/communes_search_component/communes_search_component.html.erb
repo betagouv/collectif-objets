@@ -85,7 +85,7 @@
                 </td>
                 <td>
                   <% if commune.dossier %>
-                    <%= dossier_status_badge(commune.dossier) %><br />
+                    <%= dossier_status_badge(commune.dossier, small: true) %><br />
                     <% if commune.dossier.submitted? %>
                       <%= commune.recensements_analysed_percentage.round %>% des recensements revus
                     <% end %>

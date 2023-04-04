@@ -23,21 +23,11 @@ describe Communes::RecensementPolicy do
     end
 
     context "objet n'a pas de recensement + commune completed" do
+      # this is a rare case where an object is created after the commune is completed
       let(:commune) { build(:commune, status: :completed) }
       let(:objet) { build(:objet, commune:) }
       let(:recensement) { build(:recensement, objet:) }
       let(:user) { build(:user, commune:) }
-      it { should_not permit(user, recensement) }
-    end
-
-    context "objet n'a pas de recensement + commune completed + dossier rejected" do
-      let(:commune) { build(:commune, status: :completed) }
-      let(:dossier) { build(:dossier, status: :rejected, commune:) }
-      before { commune.dossier = dossier }
-      let(:objet) { build(:objet, commune:) }
-      let(:recensement) { build(:recensement, objet:) }
-      let(:user) { build(:user, commune:) }
-
       it { should permit(user, recensement) }
     end
 
@@ -78,18 +68,18 @@ describe Communes::RecensementPolicy do
       let(:recensement) { build(:recensement, objet:) }
       let(:user) { build(:user, commune:) }
 
-      it { should_not permit(user, recensement) }
+      it { should permit(user, recensement) }
     end
 
-    context "commune completed + dossier rejected" do
+    context "commune completed + dossier accepted" do
       let(:commune) { build(:commune, status: :completed) }
-      let(:dossier) { build(:dossier, status: :rejected, commune:) }
+      let(:dossier) { build(:dossier, status: :accepted, commune:) }
       before { commune.dossier = dossier }
       let(:objet) { build(:objet, commune:) }
       let(:recensement) { build(:recensement, objet:) }
       let(:user) { build(:user, commune:) }
 
-      it { should permit(user, recensement) }
+      it { should_not permit(user, recensement) }
     end
   end
 end

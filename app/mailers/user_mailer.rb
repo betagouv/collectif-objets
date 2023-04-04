@@ -35,19 +35,6 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def dossier_rejected_email
-    @dossier = params[:dossier]
-    @commune = @dossier.commune
-    @conservateur = @dossier.conservateur
-    @user = @commune.users.first
-    set_login_url
-    dossier_mail(
-      user: @user,
-      conservateur: @conservateur,
-      subject: I18n.t("user_mailer.dossier_rejected.subject", commune_nom: @commune.nom)
-    )
-  end
-
   def dossier_auto_submitted_email
     @user = params[:user]
     @commune = params[:commune]

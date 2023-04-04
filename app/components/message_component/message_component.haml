@@ -14,6 +14,9 @@
           %p
             != Kramdown::Document.new(message.inbound_email.signature_md).to_html
     - else
+      - if message.rejection?
+        %p.co-text--italic
+          Votre dossier demande des modifications.
       = simple_format message.text
   - if message.files.any?
     .fr-my-2w.fr-pl-4w

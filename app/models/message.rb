@@ -5,16 +5,18 @@ class Message < ApplicationRecord
   belongs_to :inbound_email, optional: true
   belongs_to :author, polymorphic: true
 
-  validates :origin, inclusion: { in: %w[web inbound_email] }
+  validates :origin, inclusion: { in: %w[web inbound_email rejection] }
 
   has_many_attached :files do |attachable|
     attachable.variant :small, resize_to_limit: [300, 400], saver: { strip: true }
   end
 
-  after_create_commit :enqueue_mattermost_notification
+  scope :from_conservateur, -> { where(author_type: "Conservateur") }
 
+  after_create_commit :enqueue_mattermost_notification, unless: :rejection?
+
+  def rejection? = origin == "rejection"
   def inbound_email? = origin == "inbound_email"
-
   def web? = origin == "web"
 
   def enqueue_message_received_emails

@@ -112,13 +112,11 @@
 
 - @commune.past_dossiers.each do |dossier|
   .fr-container
-    %h5 Dossier ##{dossier.id} #{dossier_status_badge(dossier)}
+    %h5 Dossier ##{dossier.id} #{dossier_status_badge(dossier, small: true)}
     %ul.fr-mb-2w
       %li démarré le #{l(dossier.created_at, format: :long_with_weekday)}
       - if dossier.submitted_at.present?
         %li envoyé le #{l(dossier.submitted_at, format: :long_with_weekday)}
-      - if dossier.rejected_at.present?
-        %li rejeté le #{l(dossier.rejected_at, format: :long_with_weekday)}
       - if dossier.accepted_at.present?
         %li accepté le #{l(dossier.accepted_at, format: :long_with_weekday)}
     %p #{dossier.recensements.count} recensements

@@ -1,5 +1,5 @@
 = render layout: "conservateurs/communes/tabs",
-  locals: { commune: @commune, dossier: @dossier, current_tab_title: "Analyse" } do
+  locals: { commune: @commune, dossier: @dossier, current_tab: :analyse } do
 
   = render "conservateurs/dossiers/accept_cta", dossier: @dossier
 
@@ -12,17 +12,29 @@
           Le parcours est terminé pour cette commune !
         = link_to "Voir le rapport", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
 
-  - if @dossier&.rejected?
-    .fr-mb-4w
-      = dsfr_alert type: :warning, title: "Dossier renvoyé à la commune" do
-        %p
-          Ce dossier a été renvoyé à la commune le #{l(@dossier.rejected_at.to_date)} par #{@conservateur} avec le commentaire suivant
-        = blockquote(@dossier.notes_conservateur)
-        %p.fr-mt-4w
-          :markdown
-            Tant que la commune ne retourne pas le dossier, **vous ne pouvez pas l'analyser**
-
   - if @commune.completed? && !@dossier.accepted?
+    - if @dossier.rejected_at?
+      .fr-mb-4w
+        = dsfr_alert type: :info, title: "Dossier renvoyé précédemment" do
+          :markdown
+            Le fonctionnement de l’analyse a récemment été modifié.
+
+            Vous aviez renvoyé ce dossier à la commune pour correction mais ce n’est plus nécessaire.
+            La commune peut maintenant corriger les recensements concernés même si le dossier n’est pas renvoyé.
+
+            A l’avenir, vous pouvez simplement signaler à la commune qu’elle doit corriger des recensements dans la messagerie.
+
+    - elsif current_conservateur.dossiers.rejected.any?
+      .fr-mb-4w
+        = dsfr_alert type: :info, title: "Renvoi des dossiers" do
+          :markdown
+            Le fonctionnement de l’analyse a récemment été modifié.
+
+            Le renvoi du dossier à la commune pour correction n’est plus nécessaire.
+            En cas de problème avec les recensements ou d’informations incomplètes, vous pouvez maintenant simplement le signaler à la commune dans la messagerie.
+
+            La commune pourra alors corriger les recensements concernés.
+
     .fr-mb-4w
       - if @dossier.notes_commune.present?
         %p
@@ -50,14 +62,3 @@
           new_conservateurs_dossier_accept_path(@dossier),
           class: "fr-btn",
           disabled: !@dossier.can_generate_rapport?
-
-    - if @dossier&.submitted?
-      %div ou
-      %div
-        = link_to "Renvoyer le dossier à la commune …",
-        new_conservateurs_dossier_reject_path(@dossier),
-        class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-error-warning-line",
-        data: { turbo_action: "advance" }
-
-        %p.text-muted.co-text--italic.fr-text--sm
-          pour demander des informations manquantes

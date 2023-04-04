@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 module DossierHelper
-  def dossier_status_badge(dossier)
+  def dossier_status_badge(dossier, small: false)
     color = {
       construction: "new",
       submitted: "info",
-      rejected: "warning",
       accepted: "success"
     }[dossier.status.to_sym]
     content_tag(
       "p",
       t("dossier.status_badge.#{dossier.status}"),
-      class: "fr-badge fr-badge--sm fr-badge--#{color}"
+      class: "fr-badge fr-badge--#{color} #{small ? 'fr-badge--sm' : ''}"
     )
   end
   # rubocop:enable Metrics/MethodLength
