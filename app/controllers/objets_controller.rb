@@ -9,7 +9,8 @@ class ObjetsController < ApplicationController
       @objets_list = Co::Communes::ObjetsList.new(@filters[:commune])
       @pagy, @objets = pagy(@objets_list.objets)
     else
-      @pagy, @objets = pagy(Objet.where_assoc_exists(:commune).with_photos_first)
+      @pagy, @objets = pagy \
+        Objet.where.associated(:commune).order(Arel.sql(("MD5(TEXT(objets.id + #{Time.zone.today.yday}))")))
     end
   end
 

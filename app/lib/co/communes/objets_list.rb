@@ -30,7 +30,6 @@ module Co
         @objets ||= begin
           objets = scoped_objets
             .where(commune: @commune)
-            .with_photos_first
             .includes(:commune, recensements: %i[photos_attachments photos_blobs])
           objets = objets.without_completed_recensements if @exclude_recensed
           objets = objets.where.not(id: @exclude_ids) if @exclude_ids.any?

@@ -11,7 +11,7 @@ module Co
     end
 
     def objets_recenses_count
-      @objets_recenses_count ||= Objet.where(palissy_DPT: @departement).where_assoc_exists(:recensements).count
+      @objets_recenses_count ||= Objet.where(palissy_DPT: @departement).where.associated(:recensements).count
     end
 
     def objets_recenses_percentage

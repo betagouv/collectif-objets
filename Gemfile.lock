@@ -69,8 +69,6 @@ GEM
     activerecord-postgis-adapter (8.0.1)
       activerecord (~> 7.0.0)
       rgeo-activerecord (~> 7.0.0)
-    activerecord_where_assoc (1.1.3)
-      activerecord (>= 4.1.0)
     activestorage (7.0.4.3)
       actionpack (= 7.0.4.3)
       activejob (= 7.0.4.3)
@@ -467,7 +465,6 @@ DEPENDENCIES
   active_model_validates_intersection_of
   active_storage_validations
   activerecord-postgis-adapter
-  activerecord_where_assoc
   after_commit_everywhere
   aws-sdk-s3
   axe-core-capybara
