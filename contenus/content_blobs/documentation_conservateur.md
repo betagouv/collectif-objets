@@ -3,7 +3,7 @@ titre: Documentation Conservateur
 ---
 # En quoi consiste Collectif Objets ?
 
-## Collectif Objets : c’est quoi ?
+## Collectif Objets en quelques mots
 
 Collectif Objets est un **service public numérique** du ministère de la Culture pour faciliter le dialogue entre les acteurs de la chaîne patrimoniale.
 
@@ -15,13 +15,13 @@ Par la collecte de ces données, Collectif Objets permet aux conservateurs d'avo
 
 Les communes sont outillées pour préserver leur patrimoine remarquable.
 
-## Quel lien avec les bases de données nationales sur le patrimoine ?
+## Le lien avec les bases de données nationales sur le patrimoine
 
 * Les notices sur les objets protégés au titre des monuments historiques se trouvant sur la plateforme Collectif Objets contiennent des informations issues de [la base de données nationale sur le patrimoine mobilier français nommée Palissy](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Palissy-consultable-depuis-le-moteur-Collections). 
 * Les photos des objets visibles sur Collectif Objets sont issues de [la base des photographies conservées par le ministère de la Culture nommée Mémoire](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Memoire-des-fonds-graphiques-et-photographiques-illustrant-le-patrimoine-francais).
 * Les données recueillies lors des campagnes de recensement avec Collectif Objets et validées par les conservateurs sont reversées dans le système d’information patrimonial de l’Etat. Collectif Objets travaille en collaboration avec la Médiathèque du patrimoine et de la photographie (MPP) dans cet objectif.
 
-## Quels sont les objets concernés par Collectif Objets ?
+## Les objets concernés par Collectif Objets
 
 Collectif Objets s’adresse aux communes abritant des objets protégés au titre des monuments historiques (classés et inscrits) sur leur territoire.
 
@@ -31,13 +31,13 @@ Dans la majorité des cas, les communes entretiennent des relations avec les pro
 
 Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
 
-## Le recensement effectué par les communes est-il fiable ?
+## Fiabilité du recensement effectué par les communes
 
-Oui. Plus de 90% des informations transmises par les communes sont validées sans correction par les conservateurs. Nous guidons les communes dans leur démarche de recensement.
+Plus de 90% des informations transmises par les communes sont validées sans correction par les conservateurs. Nous guidons les communes dans leur démarche de recensement.
 
-# Comment lancer une campagne de recensement communal ?
+# Lancement d'une campagne de recensement
 
-## Comment déployer une campagne dans mon département ?
+## Si vous souhaitez déployer une campagne dans votre département 
 
 C’est simple : contactez-nous à l’adresse [collectifobjets@beta.gouv.fr](mailto:collectifobjets@beta.gouv.fr) pour prendre rendez-vous avec notre équipe de déploiement.
 
