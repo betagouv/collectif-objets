@@ -13,8 +13,8 @@ class UserMailer < ApplicationMailer
   end
 
   def commune_completed_email
-    @user = User.find(params[:user_id])
-    @commune = Commune.find(params[:commune_id])
+    @user = params[:user]
+    @commune = params[:commune]
     set_login_url
     mail(
       to: @user.email,
