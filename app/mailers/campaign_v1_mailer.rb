@@ -20,7 +20,7 @@ class CampaignV1Mailer < ApplicationMailer
       mail(subject: "[DRAC #{@campaign.nom_drac}] #{t("campaign_v1_mailer.#{name}.subject", **i18n_args)}")
     end
   end
-  git
+
   def ct(key, **kwargs)
     I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**kwargs)).html_safe
   end
