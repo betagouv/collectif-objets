@@ -13,7 +13,7 @@ class DossierCompletion
     return false unless dossier.submit!(notes_commune:)
 
     SendMattermostNotificationJob.perform_async("commune_completed", { "commune_id" => commune.id })
-    UserMailer.with(user_id: user.id, commune_id: commune.id).commune_completed_email.deliver_later
+    UserMailer.with(user:, commune:).commune_completed_email.deliver_later
     true
   end
 end

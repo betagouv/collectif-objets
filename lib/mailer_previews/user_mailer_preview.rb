@@ -8,9 +8,9 @@ class UserMailerPreview < ApplicationMailerPreview
   end
 
   def commune_completed_email
-    user_id = User.order(Arel.sql("RANDOM()")).first.id
-    commune_id = Commune.order(Arel.sql("RANDOM()")).first.id
-    UserMailer.with(user_id:, commune_id:).commune_completed_email
+    user = User.order(Arel.sql("RANDOM()")).first
+    commune = Commune.order(Arel.sql("RANDOM()")).first
+    UserMailer.with(user:, commune:).commune_completed_email
   end
 
   def dossier_accepted_email(dossier = nil, conservateur = nil)

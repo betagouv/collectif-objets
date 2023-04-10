@@ -23,7 +23,7 @@ RSpec.describe UserMailer, type: :mailer do
   describe "commune_completed_email" do
     let(:commune) { create(:commune, nom: "Marseille") }
     let(:user) { create(:user, email: "jean@user.fr", commune:) }
-    let(:mail) { UserMailer.with(user_id: user.id, commune_id: commune.id).commune_completed_email }
+    let(:mail) { UserMailer.with(user:, commune:).commune_completed_email }
 
     include_examples(
       "both parts contain",
