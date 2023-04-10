@@ -22,7 +22,7 @@ module Users
     end
 
     def user
-      @user ||= User.find_by(email:)
+      @user ||= User.find_by("email ILIKE ?", email)
     end
 
     def prevent_admin
