@@ -122,9 +122,9 @@ Pour accéder aux dossiers de recensement des communes :
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez le rapport final de recensement à la commune :** après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. Pour cela, référez-vous à la section : lien.
 
-## Si la commune n’a pas recensé le bon objet 
+## Si la commune n’a pas recensé le bon objet
 
-Si la commune vous a transmis des informations erronées ou insuffisantes, ne commencez pas l'analyse ! Renvoyez-lui son dossier afin qu'elle puisse faire les corrections nécessaires. 
+Si la commune vous a transmis des informations erronées ou insuffisantes, ne commencez pas l'analyse ! Envoyez-lui un message afin qu'elle puisse faire les corrections nécessaires.
 
 **E﻿n effet, il ne faut pas «** **finaliser » les dossiers des communes où des éléments sont insatisfaisants car cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)**
 
@@ -134,7 +134,7 @@ Cliquez sur le bouton « Renvoyer le dossier », accessible depuis la page de la
 
 ## Si la commune n’a pas pris de photos
 
-﻿Suivez la même procédure que si la commune s'est trompée d'objet : renvoyez-lui le dossier afin qu'elle ajoute les photos nécessaires pour réaliser votre analyse.
+﻿Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre analyse.
 
 ## Envoyer mon rapport d'analyse à la commune
 
@@ -153,7 +153,7 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
 
   ![Envoyer le rapport de recensement](/contenus/content_blobs/images/conservateurs_envoyer_rapport.png)
 
-## Fonctionnement de la « Vue Tableau » d’un département 
+## Fonctionnement de la « Vue Tableau » d’un département
 
 * Vous pouvez directement taper le nom de la commune qui vous intéresse dans la barre de recherche « Nom de commune », puis cliquez sur la loupe.
 * Vous pouvez modifier l’ordre d’apparition des communes de votre département par :
