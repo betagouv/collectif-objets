@@ -35,15 +35,5 @@ describe Conservateurs::AnalysePolicy do
       let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3)) }
       it { should_not permit(conservateur, analyse) }
     end
-
-    context "analyse dossier rejected" do
-      let(:commune) { build(:commune, status: :completed) }
-      let(:objet) { build(:objet, commune:) }
-      let(:dossier) { build(:dossier, commune:, status: :rejected) }
-      let(:recensement) { build(:recensement, objet:, dossier:) }
-      let(:analyse) { Analyse.new(recensement:) }
-      let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3) + [analyse.departement]) }
-      it { should_not permit(conservateur, analyse) }
-    end
   end
 end

@@ -8,5 +8,13 @@ module CommuneHelper
     text = I18n.t("activerecord.attributes.commune.statuses.#{commune.status}")
     "<p class=\"fr-badge fr-badge--sm fr-badge--#{color}\">#{text}</p>".html_safe
   end
+
+  def commune_messagerie_title(commune)
+    if commune.messages.count.positive?
+      "Messagerie (#{commune.messages.count})"
+    else
+      "Messagerie"
+    end
+  end
 end
 # rubocop:enable Rails/OutputSafety

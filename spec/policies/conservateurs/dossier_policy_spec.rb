@@ -17,11 +17,5 @@ describe Conservateurs::DossierPolicy do
       let(:conservateur) { build(:conservateur, departements: build_list(:departement, 2)) }
       it { should_not permit(conservateur, dossier) }
     end
-
-    context "dossier rejeté du département du conservateur" do
-      let(:dossier) { build(:dossier, status: :rejected) }
-      let(:conservateur) { build(:conservateur, departements: [dossier.departement] + build_list(:departement, 2)) }
-      it { should permit(conservateur, dossier) }
-    end
   end
 end

@@ -28,7 +28,7 @@ module ObjetHelper
   def objet_recensement_badge_color_and_text(objet)
     recensement = objet.current_recensement
     dossier = recensement&.dossier
-    return nil if dossier&.rejected? || dossier&.accepted?
+    return nil if dossier&.accepted?
 
     {
       nil => ["", "Pas encore recensé"],

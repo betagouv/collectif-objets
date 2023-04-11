@@ -6,10 +6,9 @@ module Communes
 
     def index
       @objets_list = objets_list
-      return unless recensement_saved?
+      return unless display_only_next_objets?
 
-      render(:recensement_saved) if @dossier.construction?
-      render(:recensement_saved_after_reject) if @dossier.rejected?
+      render(:recensement_saved)
     end
 
     def show
@@ -36,9 +35,9 @@ module Communes
       @objets_list ||= Co::Communes::ObjetsList.new(
         @commune,
         scoped_objets: policy_scope(Objet),
-        exclude_recensed: recensement_saved?,
-        exclude_ids: [previous_objet&.id].compact,
-        edifice: previous_objet&.edifice
+        exclude_recensed: display_only_next_objets?,
+        exclude_ids: display_only_next_objets? ? [previous_objet&.id].compact : [],
+        edifice: display_only_next_objets? ? previous_objet&.edifice : nil
       )
     end
 
@@ -49,5 +48,9 @@ module Communes
     end
 
     def active_nav_links = %w[Recensement]
+
+    def display_only_next_objets?
+      @dossier&.construction? && recensement_saved?
+    end
   end
 end

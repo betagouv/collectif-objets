@@ -34,7 +34,7 @@ module Communes
     end
 
     def commune_can_edit?
-      !commune.completed? || commune.dossier&.rejected?
+      !commune.dossier&.accepted?
     end
   end
 end

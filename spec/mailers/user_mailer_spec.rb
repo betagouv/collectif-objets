@@ -58,29 +58,6 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe "dossier_rejected" do
-    let(:commune) { build(:commune, nom: "Marseille") }
-    let(:user) { build(:user, email: "jean@user.fr", commune:) }
-    let(:conservateur) { build(:conservateur, email: "marc@conservateur.fr") }
-    let(:dossier) { build(:dossier, commune:, conservateur:) }
-    let(:mail) { UserMailer.with(dossier:).dossier_rejected_email }
-
-    before { allow(commune).to receive(:users).and_return([user]) }
-
-    include_examples(
-      "both parts contain",
-      "Malheureusement, les conservateurs ne sont pas en mesure de lʼanalyser en lʼétat"
-    )
-
-    it "behaves as expected" do
-      expect(mail.subject).to include(
-        "Compléments nécessaires pour le dossier de recensement des objets protégés de Marseille"
-      )
-      expect(mail.to).to eq(["jean@user.fr"])
-      expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
-    end
-  end
-
   describe "dossier_auto_submitted_email" do
     let(:commune) { create(:commune, nom: "Marseille") }
     let(:user) { create(:user, email: "jean@user.fr", commune:) }

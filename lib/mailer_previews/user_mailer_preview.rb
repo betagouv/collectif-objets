@@ -35,28 +35,6 @@ class UserMailerPreview < ApplicationMailerPreview
     UserMailer.with(dossier:, conservateur:).dossier_accepted_email
   end
 
-  def dossier_rejected_email(dossier = nil)
-    dossier = dossier&.clone || Dossier.new(
-      commune: Commune.new(
-        nom: "Martigues",
-        users: [
-          User.new(
-            email: "jean-lou@mairie-martigues.gov.fr"
-          )
-        ]
-      ).tap(&:readonly!),
-      status: "rejected",
-      notes_conservateur: "Veuillez rajouter des photos sur les objets",
-      conservateur: Conservateur.new(
-        first_name: "Léa",
-        last_name: "Dupond",
-        email: "lea-dupond@drac-de-la-france.gouv.fr"
-      ).tap(&:readonly!)
-    ).tap(&:readonly!)
-
-    UserMailer.with(dossier:).dossier_rejected_email
-  end
-
   def dossier_auto_submitted
     user = User.order(Arel.sql("RANDOM()")).first
     commune = Commune.order(Arel.sql("RANDOM()")).first

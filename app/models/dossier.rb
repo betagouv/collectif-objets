@@ -10,15 +10,10 @@ class Dossier < ApplicationRecord
   aasm column: :status, timestamps: true do
     state :construction, initial: true, display: "En construction"
     state :submitted, display: "En attente d'analyse"
-    state :rejected, display: "Renvoyé à la commune"
     state :accepted, display: "Accepté"
 
     event :submit, after_commit: :aasm_after_commit_complete_commune do
       transitions from: :construction, to: :submitted
-      transitions from: :rejected, to: :submitted
-    end
-    event :reject, after_commit: :aasm_after_commit_update do
-      transitions from: :submitted, to: :rejected
     end
     event :accept, after_commit: :aasm_after_commit_update do
       transitions from: :submitted, to: :accepted
@@ -39,6 +34,7 @@ class Dossier < ApplicationRecord
   scope :in_departement, ->(d) { joins(:commune).where(communes: { departement: d }) }
   scope :auto_submittable, -> { where(id: auto_submittable_ids) }
   scope :to_visit, -> { where.not(visit: nil) }
+  scope :rejected, -> { where.not(rejected_at: nil) }
 
   def self.auto_submittable_ids
     construction.includes(:recensements, commune: [:objets])

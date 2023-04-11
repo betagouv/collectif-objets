@@ -69,7 +69,6 @@ Rails.application.routes.draw do
 
   resources :communes, module: :communes, only: [] do
     resource :completion, only: %i[new create show]
-    resource :recompletion, only: %i[new create]
     resources :objets, only: %i[index show] do
       resources :recensements, only: %i[create edit update destroy] do
         resources :photos, only: %i[create destroy], controller: "recensement_photos"
@@ -108,7 +107,6 @@ Rails.application.routes.draw do
     end
     resources :dossiers, only: [] do
       resource :accept, only: %i[new create update]
-      resource :reject, only: %i[new create update]
     end
     resources :campaigns, except: %i[new index] do
       get :edit_recipients

@@ -57,15 +57,6 @@ RSpec.describe Dossier, type: :model do
       end
     end
 
-    context "dossier gets rejected" do
-      let!(:dossier) { create(:dossier, :submitted) }
-      it "should set timestamps" do
-        dossier.reject!
-        expect(dossier.status).to eq("rejected")
-        expect(dossier.rejected_at).to be_within(2.seconds).of(Time.zone.now)
-      end
-    end
-
     context "dossier gets accepted but missing conservateur" do
       let!(:dossier) { create(:dossier, :submitted) }
       it "should be invalid" do

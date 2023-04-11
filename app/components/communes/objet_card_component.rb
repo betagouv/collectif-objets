@@ -40,8 +40,6 @@ module Communes
     end
 
     def analyse_notes_badge
-      return nil unless dossier&.rejected?
-
       badge_struct.new("info", "Commentaires") if recensement&.analyse_notes.present?
     end
   end
