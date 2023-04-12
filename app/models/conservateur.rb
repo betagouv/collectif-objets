@@ -35,4 +35,8 @@ class Conservateur < ApplicationRecord
   ransacker :last_name, type: :string do
     Arel.sql("unaccent(last_name)")
   end
+
+  def romuald?
+    email == "romuald.goudeseune@culture.gouv.fr"
+  end
 end

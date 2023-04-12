@@ -38,6 +38,10 @@ module Recensements
       commune.completed?
     end
 
+    def mauvaise_securisation?
+      securisation == Recensement::SECURISATION_MAUVAISE
+    end
+
     def first? = commune.recensements.completed.empty?
 
     def completed? = status == "completed"
