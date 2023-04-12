@@ -99,6 +99,7 @@ Rails.application.routes.draw do
         resources :email_attachments, only: [:show]
       end
       resource :dossier, only: %i[show]
+      resources :bordereaux, only: %i[new create]
     end
     resources :objets, only: [] do
       resources :recensements, only: [] do

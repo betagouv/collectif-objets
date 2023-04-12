@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "bordereau-#{@edifice.id}" do %>
+  <%= render "conservateurs/bordereaux/edifice", edifice: @edifice, commune: @commune %>
+<% end %>

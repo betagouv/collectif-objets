@@ -1,0 +1,27 @@
+-# locals: :commune, :edifice
+
+.co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w{id: "bordereau-#{edifice.id}"}
+  %span #{edifice.nom} (#{edifice.objets.count} objet(s))
+  - if edifice.bordereau.present?
+    %span
+      = link_to "Télécharger",
+        rails_blob_path(edifice.bordereau, disposition: "attachment"),
+        class: "fr-btn fr-btn--sm"
+    %span
+      = button_to "Regénérer",
+        conservateurs_commune_bordereaux_path(commune, edifice_id: edifice.id),
+        method: :post,
+        class: "fr-btn fr-btn--sm fr-btn--secondary"
+  - elsif edifice.bordereau_generation_enqueued_at.present?
+    %span
+      = render DsfrComponent::BadgeComponent.new status: :info do
+        Génération en cours
+    - if edifice.bordereau_generation_enqueued_at < 5.minutes.ago
+      %span
+        La génération prend beaucoup de temps, il y a peut-être un problème.
+  - else
+    %span
+      = button_to "Générer",
+        conservateurs_commune_bordereaux_path(commune, edifice_id: edifice.id),
+        method: :post,
+        class: "fr-btn fr-btn--sm"

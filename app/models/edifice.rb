@@ -3,6 +3,7 @@
 class Edifice < ApplicationRecord
   belongs_to :commune, foreign_key: :code_insee, primary_key: :code_insee, optional: true, inverse_of: :edifices
   has_many :objets, dependent: :restrict_with_error
+  has_one_attached :bordereau, dependent: :destroy
 
   validates :merimee_REF, uniqueness: true, if: -> { merimee_REF.present? }
   validates :slug, uniqueness: { scope: :code_insee }, if: -> { code_insee.present? }

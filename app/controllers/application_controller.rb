@@ -70,8 +70,10 @@ class ApplicationController < ActionController::Base
     admin_path
   end
 
-  def user_not_authorized
-    flash[:alert] = "Vous n'avez pas le droit de faire cette action"
+  def user_not_authorized(exception)
+    message = "Vous n'avez pas le droit de faire cette action"
+    message += " : #{exception.message}" if Rails.env.development?
+    flash[:alert] = message
     redirect_back(fallback_location: root_path)
   end
 
