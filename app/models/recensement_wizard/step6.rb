@@ -6,7 +6,7 @@ module RecensementWizard
     TITLE = "Récapitulatif"
 
     def update(_params)
-      Communes::CreateRecensementService.new(recensement).perform
+      recensement.complete
     end
 
     def after_success_path
