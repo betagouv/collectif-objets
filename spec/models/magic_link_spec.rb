@@ -2,11 +2,11 @@
 
 require "rails_helper"
 
-RSpec.describe Users::CreateMagicLinkService, type: :service do
-  describe "#perform" do
+RSpec.describe MagicLink, type: :service do
+  describe "#create" do
     context "matching email" do
       let!(:user) { create(:user, email: "jean@valjean.fr", login_token: nil, login_token_valid_until: nil) }
-      subject { Users::CreateMagicLinkService.new("jean@valjean.fr").perform }
+      subject { MagicLink.new("jean@valjean.fr").create }
 
       before do
         mailer_double = double(deliver_now: true)
@@ -24,7 +24,7 @@ RSpec.describe Users::CreateMagicLinkService, type: :service do
 
     context "matching email but different capitalization" do
       let!(:user) { create(:user, email: "jean@valjean.fr", login_token: nil, login_token_valid_until: nil) }
-      subject { Users::CreateMagicLinkService.new("JEAN@valjean.fr").perform }
+      subject { MagicLink.new("JEAN@valjean.fr").create }
 
       before do
         mailer_double = double(deliver_now: true)
@@ -42,7 +42,7 @@ RSpec.describe Users::CreateMagicLinkService, type: :service do
 
     context "mismatching emails" do
       let!(:user) { create(:user, email: "martine@valjean.fr", login_token: nil, login_token_valid_until: nil) }
-      subject { Users::CreateMagicLinkService.new("jean@valjean.fr").perform }
+      subject { MagicLink.new("jean@valjean.fr").create }
 
       before do
         expect(UserMailer).not_to receive(:validate_email)
