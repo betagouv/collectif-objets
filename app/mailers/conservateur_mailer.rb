@@ -5,13 +5,11 @@ class ConservateurMailer < ApplicationMailer
   helper :messages
 
   def message_received_email
-    @message = params[:message]
-    @conservateur = params[:conservateur]
+    @message, @conservateur = params.values_at(:message, :conservateur)
     @commune = @message.commune
-    mail(
+    mail \
       to: @conservateur.email,
       reply_to: email_address_with_name(@commune.support_email(role: :conservateur), "Collectif Objets Messagerie"),
-      subject: I18n.t("conservateur_mailer.message_received.subject", nom_commune: @commune.nom)
-    )
+      subject: "#{@commune.nom} vous a envoyé un message"
   end
 end

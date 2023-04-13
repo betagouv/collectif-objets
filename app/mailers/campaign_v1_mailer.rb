@@ -33,12 +33,8 @@ class CampaignV1Mailer < ApplicationMailer
 
   private
 
-  def mail_with_subject(subject); end
-
   def set_campaign_commune_and_user
-    @campaign = params[:campaign]
-    @commune = params[:commune]
-    @user = params[:user]
+    @campaign, @commune, @user = params.values_at(:campaign, :commune, :user)
     @departement = @campaign.departement
   end
 
@@ -55,5 +51,4 @@ class CampaignV1Mailer < ApplicationMailer
       fin_dans_n_jours: Time.zone.today.upto(@campaign.date_fin).count
     }
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end

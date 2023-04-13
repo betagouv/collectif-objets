@@ -17,7 +17,7 @@ class SanityChecksJob
       text = "La commune #{commune} est en `started` mais son dossier est " \
              "`#{commune.dossier.status}` au lieu de `construction`"
       logger.info text
-      AdminMailer.sanity_check_alert(EMAIL, commune, text).deliver_later
+      AdminMailer.with(email: EMAIL, commune:, text:).sanity_check_alert.deliver_later
     end
   end
 
@@ -28,7 +28,7 @@ class SanityChecksJob
       text = "La commune #{commune} est en `completed` mais son dossier est " \
              "`#{commune.dossier.status}` au lieu de `submitted` ou `accepted`"
       logger.info text
-      AdminMailer.sanity_check_alert(EMAIL, commune, text).deliver_later
+      AdminMailer.with(email: EMAIL, commune:, text:).sanity_check_alert.deliver_later
     end
   end
 end

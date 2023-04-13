@@ -598,7 +598,6 @@ fr:
     politesse: Bien cordialement,
   conservateur_mailer:
     message_received:
-      subject: "%{nom_commune} vous a envoyé un message"
       bonjour: Bonjour %{nom},
       intro: "Un usager de la commune %{nom_commune} vous a envoyé un nouveau message le %{date} :"
       attachments:
@@ -612,7 +611,6 @@ fr:
     shared:
       bonjour: Madame, Monsieur le Maire,
     commune_completed:
-      subject: "%{commune_nom}, merci dʼavoir contribué à Collectif Objets"
       participation: Comme de nombreuses communes de votre département, vous avez participé à l’opération de recensement participatif des objets monuments historiques.
       merci: Nous vous remercions pour votre engagement.
       visibilite: Ce recensement nous permet d’avoir une plus grande visibilité sur le parc d’objets monuments historiques du département et d’assurer un meilleur suivi de notre patrimoine.
@@ -621,26 +619,22 @@ fr:
       consulter: Vous pouvez consulter les recensements que vous nous avez envoyés sur le site Collectif Objets.
       cta: Accéder à Collectif Objets
     dossier_auto_submitted:
-      subject: "Vos recensements d'objets ont été transmis aux conservateurs"
       intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs ne l'avaient pas encore reçu.
       auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’analyser et revenir vers vous avec un rapport, en temps voulu.
       cta: Voir les données envoyées
       contact: Nous restons à votre disposition pour toute question ou demande de clarification.
     dossier_accepted:
-      subject: "Rapport de recensement des objets protégés de %{commune_nom}"
       submitted: Vous avez envoyé un dossier de recensement des objets protégés de %{commune_nom} et je vous en remercie.
       rapport: Vous trouverez sur Collectif Objets le rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
       cta: Voir le rapport de recensement
       merci: Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
     validate:
-      subject: Collectif Objets - Votre lien de connexion
       lien: "Voici votre lien de connexion à Collectif Objets :"
       cta: Connexion
       one_hour: Ce lien est valide une heure.
       nouveau_html: Vous pouvez en demander un nouveau depuis <a href="%{url}">la page de connexion</a>.
       nouveau: Vous pouvez en demander un nouveau depuis la page de connexion
     message_received:
-      subject: "%{author} vous a envoyé un message sur Collectif Objets"
       bonjour: Bonjour %{nom_commune},
       from_conservateur: "%{author}, conservateur de votre département, vous a envoyé un message sur Collectif Objets le %{date} :"
       from_admin_user: "%{author} de l'équipe support de Collectif Objets vous a envoyé un message le %{date} :"
