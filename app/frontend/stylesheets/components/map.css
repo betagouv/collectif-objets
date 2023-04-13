@@ -1,0 +1,16 @@
+.map-legend-icon {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  display: inline-block;
+  top: 5px;
+  margin-right: .5rem;
+}
+
+.map-legend-icon.commune-completed {
+  background-color: #6b6af4;
+}
+
+.map-legend-icon.commune-prioritaire {
+  background-color: #b34001;
+}

@@ -1,0 +1,16 @@
+/*
+  utilities are one-line CSS classes that are very explicit like
+  `.co-font-weight--bold { font-weight: bold; }`
+
+  on the opposite `.co-recensement-notes` would rather be a CSS component
+
+  by default utilities go in the `various_utilities.css` file.
+
+  if a lot of them are about the same topic, they can be extracted into an isolated file
+  for example flexbox classes are grouped in `flex.css`
+*/
+
+@import url(./backgrounds.css);
+@import url(./flex.css);
+@import url(./text.css);
+@import url(./various_utilities.css);

@@ -1,0 +1,8 @@
+.co-rotating, .co-rotating::before {
+  animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}

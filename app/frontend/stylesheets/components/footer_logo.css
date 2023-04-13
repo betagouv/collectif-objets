@@ -1,0 +1,9 @@
+.co-footer-logo {
+  /* overrides DSFR default that wraps logos for sm viewports */
+  flex-basis: auto;
+}
+
+.co-footer-logo img {
+  max-width: 120px;
+  max-height: 120px;
+}

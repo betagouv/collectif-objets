@@ -1,0 +1,40 @@
+/* BACKGROUNDS */
+
+.co-background--light-grey {
+  background-color: #F9F8F6;
+}
+html[data-fr-scheme="dark"] .co-background--light-grey {
+  background-color: #171326;
+}
+
+.co-background--teal {
+  background-color: rgb(185, 185, 251);
+}
+html[data-fr-scheme="dark"] .co-background--teal {
+  background-color: rgb(19, 19, 109);
+}
+
+.co-background--grey {
+  background-color: #f6f6f6;
+}
+html[data-fr-scheme="dark"] .co-background--grey {
+  background-color: #280404;
+}
+
+.co-background--light-teal {
+  background-color: #F5F5FE;
+}
+html[data-fr-scheme="dark"] .co-background--light-teal {
+  background-color: #10106a;
+}
+
+.co-background--white {
+  background-color: #fff;
+}
+html[data-fr-scheme="dark"] .co-background--white {
+  background-color: #000;
+}
+
+.co-background-color-inherit {
+  background-color: inherit;
+}

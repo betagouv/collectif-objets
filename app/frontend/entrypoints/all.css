@@ -1,9 +1,4 @@
-@import url(../stylesheets/layout.css);
-@import url(../stylesheets/utilities.css);
-
-/* PAGES */
-
-@import url(../stylesheets/views/conservateurs.css);
-@import url(../stylesheets/views/maps.css);
-@import url(../stylesheets/views/pages.css);
-@import url(../stylesheets/views/recensements.css);
+@import url(../stylesheets/dsfr_overrides.css);
+@import url(../stylesheets/print.css);
+@import url(../stylesheets/components/all.css);
+@import url(../stylesheets/utilities/all.css);

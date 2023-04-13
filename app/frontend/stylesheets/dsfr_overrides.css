@@ -1,0 +1,15 @@
+.fr-header .fr-logo { white-space: pre-line; }
+
+.fr-nav__item.active { background-color: rgba(100, 100, 100, 0.3); }
+
+.fr-card__body .fr-tags-group { gap: 5px; }
+
+.fr-input-group--disabled .fr-error-text { display: none; }
+
+.fr-collapse { transition: none !important; }
+.fr-collapse::before { transition: none !important; }
+
+.fr-footer__brand {
+  margin-right: 1rem;
+  padding-right: 0 !important;
+}

@@ -1,0 +1,7 @@
+a.co-external-link--without-decoration {
+  text-decoration: none !important;
+  background-image: none !important;
+}
+a.co-external-link--without-decoration::after {
+  display: none;
+}
