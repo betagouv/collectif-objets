@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe Campaigns::ComputeCampaignStatsService, type: :service do
-  subject { Campaigns::ComputeCampaignStatsService.new(campaign).perform }
+RSpec.describe CampaignStats, type: :model do
+  subject { CampaignStats.new(campaign).stats }
 
   context "some various state" do
     let!(:campaign) { create(:campaign) }
