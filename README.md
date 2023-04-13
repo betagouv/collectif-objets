@@ -76,6 +76,51 @@ Il n'y a pas de données sensible sur cette base de données et elle peut être 
 
 Une liste complète d'URLs des environnements et des outils externes est disponible (plus bas)[#urls]
 
+## Style du code, principes suivis et choix faits
+
+_Tout ce qui est décrit ci-dessous est évidemment discutable et peut évoluer librement._
+
+Les objectifs principaux de ce code sont :
+
+- permettre d’itérer rapidement ;
+- requérir peu de maintenance ;
+- être facilement compréhensible, corrigeable et modifiable par d’autres développeur·se·s Rails.
+
+La seule documentation existante est ce README.
+C’est volontairement un fichier unique plutôt qu’un wiki pour que les nouveaux arrivants réalisent que cette documentation existe.
+
+Les controlleurs sont légers.
+Les modèles contiennent la logique métier. Il y a des modèles ActiveRecord et d’autres PORO.
+On utilise les concerns pour isoler des comportements de modèles. cf [doctrine 37signals](https://dev.37signals.com/vanilla-rails-is-plenty). 
+Cela peut évidemment évoluer.
+
+La couverture des tests est modérée. 
+Il y a des tests E2E pour les chemins les plus importants, principalement pour les cas de succès.
+Il y a des tests unitaires pour les modèles quand cela semble nécessaire ou que ça aide l’écriture du code.
+Il n’y a pas de tests de controlleurs, on favorisera les tests E2E ou pas de tests.
+Il n’y a pas de tests pour les fonctionnalités natives de Rails ni ActiveRecord.
+Les appels ActiveRecord ne sont pas mockés, ils font partie de ce qui est couvert par les tests.  
+
+L’ajout de dépendances se fait avec parcimonie, les dépendances transitives sont étudiées à chaque fois.
+Cela vaut pour les services tiers, les gems, et les packages JS.
+
+L’introduction de comportements JS custom hors DSFR et Turbo est faite avec parcimonie.
+Le site peut en grande partie fonctionner sans JS.
+De nombreux usagers sont peu à l’aise avec le numérique, le site doit être aussi standard et sans surprise que possible.
+Le site n’est pour l’instant pas tout à fait responsive, c’est une erreur à corriger.
+
+Les règles rubocop basées uniquement sur la longueur des méthodes ou des classes sont volontairement désactivées.
+En général il ne faut pas hésiter à désactiver les règles rubocop si on juge qu’elles n’aident pas.
+
+Avec le recul, certains choix méritent d’être revus :
+
+- Le modèle Dossier est peut-être superflu. On pourrait utiliser uniquement le modèle Commune. Aujourd’hui il y a un lien 1:1 dans beaucoup de cas entre ces deux modèles. Il avait été pensé pour permettre à une commune d’ouvrir plusieurs dossiers de recensement mais ce n’est pas le cas aujourd’hui. En année n+5, il est probable qu’on aura déjà supprimé le dossier précédent de notre base de données pour des raisons RGPD.
+- Netlify CMS pour le contenu peut être remplacé par des contenus stockés en DB et édités via des textarea ActionText / Trix.
+- Sidekiq peut être remplacé par GoodJob pour supprimer la dépendance à Redis et simplifier les [CRON-like jobs](https://github.com/bensheldon/good_job#cron-style-repeatingrecurring-jobs).
+- Le choix de vite pour le build JS est peut–être trop exotique. Il faudrait réévaluer l’usage des importmaps pour éviter tout build system.
+- L’utilisation de I18n est à proscrire, ce projet n’a aucune vocation internationale, et l’isolation des contenus dans les fichiers yml ralentit plus qu’elle n’aide. (seule utilité à remplacer : la pluralisation).
+- Le mélange de français et d’anglais dans le code et la DB est désagréable. Il faudrait harmoniser les choix, mais la direction à suivre n’est pas encore claire.
+
 ## Diagramme d'entités de la base de données
 
 ![](/doc/erd-simple.drawio.svg)
@@ -155,20 +200,19 @@ optionnel: pour une utilisation de rubocop plus rapide en local,
 
 Durée à prévoir : 15 minutes 
 
-### Découverte interface administrateurs
+**Découverte interface administrateurs**
 
 - [ ] aller sur [localhost:3000/admin](http://localhost:3000/admin)
 - [ ] se connecter avec le compte de seed `admin@collectif.local` mot de passe `123456`
 - [ ] trouver un lien de connexion magique à une commune dans la Marne 51 et le suivre
 
-### Découverte interface communes
+**Découverte interface communes**
 
-- [ ] se connecter depuis un lien magique depuis l'admin
-- pour info, dans les seeds, le code du lien magique est le code INSEE
+- [ ] se connecter depuis un lien magique depuis l'admin (pour info, dans les seeds, le code du lien magique est le code INSEE)
 - [ ] recenser un objet en uploadant une photo
 - [ ] recenser tous les objets d'une commune et finaliser un dossier
 
-### Découverte interface conservateurs
+**Découverte interface conservateurs**
 
 - [ ] se déconnecter en tant que commune
 - [ ] se connecter en tant que conservateur depuis le lien de connexion sur le site avec le compte suivant : `conservateur@collectif.local` mot de passe `123456789 123456789 123456789`
@@ -176,7 +220,6 @@ Durée à prévoir : 15 minutes
 - [ ] analyser un recensement
 - [ ] analyser tous les recensements d'un dossier et l'accepter
 - [ ] lire le mail envoyé depuis MailHog sur [localhost:8025](http://localhost:8025)
-- [ ] renvoyer un dossier à la commune pour lui demander de nouvelles photos
 
 ## URLs du site web
 
