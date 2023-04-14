@@ -6,7 +6,7 @@ module Campaigns
 
     def perform(campaign_id)
       @campaign = Campaign.find(campaign_id)
-      @campaign.update_columns(stats: Campaigns::ComputeCampaignStatsService.new(@campaign).perform)
+      @campaign.update_columns(stats: CampaignStats.new(@campaign).stats)
     end
   end
 end

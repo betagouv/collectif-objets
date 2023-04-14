@@ -3,6 +3,7 @@
 class Recensement < ApplicationRecord
   include Recensements::AnalyseConcern
   include Recensements::BooleansConcern
+  include Recensements::CompleteConcern
 
   belongs_to :objet
   belongs_to :user

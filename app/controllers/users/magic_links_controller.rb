@@ -5,7 +5,7 @@ module Users
     before_action :prevent_missing_email, :prevent_admin
 
     def create
-      Users::CreateMagicLinkService.new(email).perform => {success:, error:}
+      MagicLink.new(email).create => {success:, error:}
 
       if success
         flash.notice = "Un lien de connexion valide 24 heures vous a été envoyé"
