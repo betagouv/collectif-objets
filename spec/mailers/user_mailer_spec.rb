@@ -6,7 +6,7 @@ require_relative "shared_examples"
 RSpec.describe UserMailer, type: :mailer do
   describe "validate_email" do
     let(:user) { build(:user, email: "jean@user.fr", login_token: "asdfjk29") }
-    let(:mail) { UserMailer.validate_email(user) }
+    let(:mail) { UserMailer.with(user:).validate_email }
 
     include_examples(
       "both parts contain",
