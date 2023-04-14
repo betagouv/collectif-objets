@@ -1,0 +1,21 @@
+.co-rapport-photo {
+  height: 10rem;
+  border: 1px solid #ccc;
+}
+
+.co-rapport-photo a[href] {
+  background: none;
+  height: 100%;
+  display: block;
+  padding: 5px;
+}
+
+.co-rapport-photo a[href]:hover {
+  background-color: #ddddf5;
+}
+
+.co-rapport-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

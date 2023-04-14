@@ -1,0 +1,34 @@
+.co-blockquote {
+  border-left: 1px solid #ccc;
+  margin-left: .2rem;
+  padding-left: 1rem;
+}
+
+.co-pagination-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.fr-callout .co-callout-cta .fr-btn { margin-top: 0; }
+
+.co-copy-to-clipboard--active { color: blue; }
+
+.fr-btn--tertiary-no-outline {  /* this seems broken */ box-shadow: none; }
+
+.co-tabs--no-padding .fr-tabs__panel { padding: 0; }
+
+.co-edit-button {
+  position: relative;
+  top: 2px;
+}
+
+.co-markdown-content img { max-width: 100%; }
+
+.co-home-section-steps a.fr-link { margin-left: -12px; }
+
+.co-nanobar .bar {
+  background: green;
+  transition: height .3s;
+}
+
+.co-textarea--high.fr-input { min-height: 10rem; }

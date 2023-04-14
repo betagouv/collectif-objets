@@ -1,0 +1,27 @@
+/*
+  CSS components are CSS classes that have a semantic rather than stylistic name
+  and are usually longer than a one-liner. They can be composed of multiple CSS rules.
+
+  ie `.co-recensement-notes` is a component, while `.co-font-weight--bold` would rather be a utility.
+
+  CSS Components should not match View Components, since View Components can embed their own isolated CSS.
+  If the CSS component is a single short rule, it can go into `small_components.css`
+
+  by default we should try to use only DSFR classes, or CO utilities, and CO Components should come last.
+*/
+
+@import url(./completion_summary.css);
+@import url(./conservateur_map.css);
+@import url(./external_link_without_decoration.css);
+@import url(./footer_logo.css);
+@import url(./header_search.css);
+@import url(./mail_preview.css);
+@import url(./map.css);
+@import url(./objet_summary.css);
+@import url(./photo_preview.css);
+@import url(./rapport_photo.css);
+@import url(./small_components.css);
+@import url(./spinner.css);
+@import url(./stepper_skips.css);
+@import url(./testimonials.css);
+@import url(./unfold.css);

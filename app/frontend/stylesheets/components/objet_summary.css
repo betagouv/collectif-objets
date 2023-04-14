@@ -1,0 +1,19 @@
+.co-objet-summary-wrapper {
+  display: flex;
+}
+
+.co-objet-summary {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.co-objet-summary .co-objet-desc {
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.co-objet-summary .co-objet-thumb img {
+  max-height: 8rem;
+}
