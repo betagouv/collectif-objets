@@ -8,17 +8,15 @@ RSpec.describe MagicLink, type: :service do
       let!(:user) { create(:user, email: "jean@valjean.fr", login_token: nil, login_token_valid_until: nil) }
       subject { MagicLink.new("jean@valjean.fr").create }
 
-      before do
-        mailer_double = double(deliver_now: true)
-        expect(mailer_double).to receive(:deliver_now)
-        expect(UserMailer).to receive(:validate_email).and_return(mailer_double)
-      end
-
-      it "should work" do
+      it "should update login token" do
         res = subject
         expect(res).to eq({ success: true, error: nil })
         expect(user.reload.login_token).not_to be_nil
         expect(user.reload.login_token_valid_until).to be > Time.zone.now
+      end
+
+      it "should send an email" do
+        expect { subject }.to have_enqueued_email(UserMailer, :validate_email)
       end
     end
 
@@ -26,17 +24,15 @@ RSpec.describe MagicLink, type: :service do
       let!(:user) { create(:user, email: "jean@valjean.fr", login_token: nil, login_token_valid_until: nil) }
       subject { MagicLink.new("JEAN@valjean.fr").create }
 
-      before do
-        mailer_double = double(deliver_now: true)
-        expect(mailer_double).to receive(:deliver_now)
-        expect(UserMailer).to receive(:validate_email).and_return(mailer_double)
-      end
-
       it "should work" do
         res = subject
         expect(res).to eq({ success: true, error: nil })
         expect(user.reload.login_token).not_to be_nil
         expect(user.reload.login_token_valid_until).to be > Time.zone.now
+      end
+
+      it "should send an email" do
+        expect { subject }.to have_enqueued_email(UserMailer, :validate_email)
       end
     end
 
@@ -44,10 +40,11 @@ RSpec.describe MagicLink, type: :service do
       let!(:user) { create(:user, email: "martine@valjean.fr", login_token: nil, login_token_valid_until: nil) }
       subject { MagicLink.new("jean@valjean.fr").create }
 
-      before do
-        expect(UserMailer).not_to receive(:validate_email)
-      end
       it { should eq({ success: false, error: :no_user_found }) }
+
+      it "should not send an email" do
+        expect { subject }.not_to have_enqueued_email(UserMailer, :validate_email)
+      end
     end
   end
 end

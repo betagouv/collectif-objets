@@ -10,7 +10,7 @@ class MagicLink
 
     return { success: false, error: :rotate_failed } unless user&.rotate_login_token
 
-    UserMailer.validate_email(user).deliver_now
+    UserMailer.with(user:).validate_email.deliver_later
     { success: true, error: nil }
   end
 

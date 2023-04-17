@@ -3,23 +3,18 @@
 class UserMailer < ApplicationMailer
   helper :messages, :user
   layout "user_mailer"
+  default to: -> { @user.email }
 
-  def validate_email(user)
-    @user = user
-    @login_url = users_sign_in_with_token_url(
-      login_token: @user.login_token
-    )
-    mail to: @user.email, subject: I18n.t("user_mailer.validate.subject")
+  def validate_email
+    @user = params[:user]
+    @login_url = users_sign_in_with_token_url(login_token: @user.login_token)
+    mail subject: "Collectif Objets - Votre lien de connexion"
   end
 
   def commune_completed_email
-    @user = params[:user]
-    @commune = params[:commune]
+    @user, @commune = params.values_at(:user, :commune)
     set_login_url
-    mail(
-      to: @user.email,
-      subject: I18n.t("user_mailer.commune_completed.subject", commune_nom: @commune.nom)
-    )
+    mail subject: "#{@commune.nom}, merci dʼavoir contribué à Collectif Objets"
   end
 
   def dossier_accepted_email
@@ -28,34 +23,27 @@ class UserMailer < ApplicationMailer
     @user = @commune.users.first
     @conservateur = @dossier.conservateur || params[:conservateur]
     set_login_url
-    dossier_mail(
-      user: @commune.users.first,
-      conservateur: @conservateur,
-      subject: I18n.t("user_mailer.dossier_accepted.subject", commune_nom: @commune.nom)
-    )
+    mail \
+      subject: "Rapport de recensement des objets protégés de #{@commune.nom}",
+      from: email_address_with_name("collectifobjets@beta.gouv.fr", @conservateur.to_s),
+      reply_to: @conservateur.email
   end
 
   def dossier_auto_submitted_email
     @user = params[:user]
     @commune = params[:commune]
     set_login_url
-    mail(
-      to: @user.email,
-      subject: I18n.t("user_mailer.dossier_auto_submitted.subject", commune_nom: @commune.nom)
-    )
+    mail subject: "Vos recensements d'objets ont été transmis aux conservateurs"
   end
 
   def message_received_email
     @message, @user = params.values_at(:message, :user)
     @author = @message.author
     @commune = @message.commune
-
     set_login_url
-    mail(
-      to: @user.email,
+    mail \
       reply_to: email_address_with_name(@commune.support_email(role: :user), "Collectif Objets Messagerie"),
-      subject: I18n.t("user_mailer.message_received.subject", author: @author.to_s)
-    )
+      subject: "#{@author} vous a envoyé un message sur Collectif Objets"
   end
 
   protected
@@ -67,14 +55,5 @@ class UserMailer < ApplicationMailer
       else
         new_user_session_url
       end
-  end
-
-  def dossier_mail(user:, conservateur:, subject:)
-    mail(
-      to: user.email,
-      subject:,
-      from: email_address_with_name("collectifobjets@beta.gouv.fr", conservateur.to_s),
-      reply_to: conservateur.email
-    )
   end
 end

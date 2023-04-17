@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class AdminMailer < ApplicationMailer
-  def sanity_check_alert(email, commune, text)
-    @text = text
-    @commune = commune
-    @title = "#{title_prefix} - Sanity Check Alert - #{commune}"
-    mail to: email, subject: title
+  def sanity_check_alert
+    @email, @commune, @text = params.values_at(:email, :commune, :text)
+    mail to: @email, subject: "#{title_prefix} - Sanity Check Alert - #{@commune}"
   end
 
   def campaign_planned(conservateur, campaign)
@@ -17,7 +15,5 @@ class AdminMailer < ApplicationMailer
 
   private
 
-  def title_prefix
-    "CO Admin [#{Rails.configuration.x.environment_specific_name}]"
-  end
+  def title_prefix = "CO Admin [#{Rails.configuration.x.environment_specific_name}]".freeze
 end
