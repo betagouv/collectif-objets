@@ -124,13 +124,11 @@ Pour accéder aux dossiers de recensement des communes :
 
 ## Si la commune n’a pas recensé le bon objet
 
-Si la commune vous a transmis des informations erronées ou insuffisantes, ne commencez pas l'analyse ! Envoyez-lui un message afin qu'elle puisse faire les corrections nécessaires.
+Si la commune vous a transmis des informations erronées ou insuffisantes, envoyez-lui un message afin qu'elle puisse faire les corrections nécessaires.
 
 **E﻿n effet, il ne faut pas «** **finaliser » les dossiers des communes où des éléments sont insatisfaisants car cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)**
 
-Cliquez sur le bouton « Renvoyer le dossier », accessible depuis la page de la commune concernée. S﻿i nécessaire, vous pouvez faire part à la commune de remarques complémentaires pour l'aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
-
-![](/contenus/content_blobs/images/capture_ecran_page_analyse.jpg)
+Vous pouvez faire part à la commune de remarques pour l'aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
 
 ## Si la commune n’a pas pris de photos
 
