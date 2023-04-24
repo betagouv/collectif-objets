@@ -61,6 +61,10 @@ class Commune < ApplicationRecord
     [:recensements_photos_presence_in]
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    %i[dossier dossiers objets]
+  end
+
   def self.status_value_counts
     group(:status)
       .select("status, count(id) as communes_count")
@@ -104,10 +108,12 @@ class Commune < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[nom code_insee departement_code status]
+    %w[nom code_insee departement_code status objets_count recensements_prioritaires_count]
   end
 
   ransacker :nom, type: :string do
     Arel.sql("unaccent(nom)")
   end
+
+  # ransacker(:dossier_status) { Arel.sql("dossiers.status") }
 end

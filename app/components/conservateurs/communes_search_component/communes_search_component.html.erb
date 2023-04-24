@@ -1,16 +1,9 @@
 <%= turbo_frame_tag "communes-search" do %>
-  <%= form_for(
-    filters,
-    url: conservateurs_departement_communes_path(departement),
-    method: "GET",
-    builder: FormBuilderDsfr,
-    as: "",
-  ) do |f| %>
-    <%= f.hidden_field :order, value: order %>
+  <%= search_form_for ransack, url: conservateurs_departement_path(departement), method: "GET", builder: FormBuilderDsfr do |f| %>
     <div class="co-flex co-flex--align-items-end">
       <div>
-        <%= f.label :nom, "Nom de commune" %>
-        <%= f.text_field :nom, onchange: "this.form.requestSubmit()" %>
+        <%= f.label :nom_cont, "Nom de commune" %>
+        <%= f.text_field :nom_cont, onchange: "this.form.requestSubmit()" %>
       </div>
       <div>
         <button class="fr-btn fr-btn--tertiary fr-icon-search-line"></button>

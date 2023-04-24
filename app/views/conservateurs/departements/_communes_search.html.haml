@@ -1,0 +1,49 @@
+-# autoscroll: true, autoscroll_block: "start"
+= turbo_frame_tag "communes-search" do
+  = search_form_for ransack, url: conservateurs_departement_path(departement), method: "GET", builder: FormBuilderDsfr, data: { turbo_action: "advance" } do |f|
+    .co-flex.co-flex--align-items-end
+      %div
+        = f.label :nom_cont, "Nom de commune"
+        = f.text_field :nom_cont, onchange: "this.form.requestSubmit()"
+      %div
+        %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
+      .fr-pl-3w
+        = f.label :status_eq, "État du recensement"
+        = f.select :status_eq, communes_statuses_options_for_select(departement:), {}, onchange: "this.form.requestSubmit()"
+    - if pagy.count == 0
+      %p.co-text--italic.fr-py-8w
+        Aucune commune trouvée
+    - else
+      .fr-table
+        %table
+          %thead
+            %tr
+              %th= sort_link @ransack, :nom, "Commune", data: { turbo_action: "advance" }
+              %th= sort_link @ransack, :objets_count, "Objets", data: { turbo_action: "advance" }
+              %th= sort_link @ransack, :recensements_prioritaires_count, "Objets prioritaires", data: { turbo_action: "advance" }
+              %th= sort_link @ransack, "communes.status", "Recensement", data: { turbo_action: "advance" }
+              %th= sort_link @ransack, "dossiers.status", "Analyse", data: { turbo_action: "advance" }
+          %tbody
+            - communes.each do |commune|
+              %tr
+                %td
+                  = link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top"
+                %td= commune.objets_count
+                %td
+                  - if commune.recensements_prioritaires_count.positive?
+                    %span.fr-badge.fr-badge--sm.fr-badge--warning
+                      - if commune.recensements_prioritaires_count == 1
+                        1 objet prioritaire
+                      - else
+                        \#{commune.recensements_prioritaires_count} objets prioritaires
+                  - else
+                    0
+                %td= t("activerecord.attributes.commune.statuses.#{commune.status}")
+                %td
+                  - if commune.dossier
+                    %div= dossier_status_badge(commune.dossier, small: true)
+                    - if commune.dossier.submitted?
+                      \#{commune.recensements_analysed_percentage.round}% des recensements revus
+    - if pagy.pages > 1
+      .fr-mt-8w.co-pagination-wrapper
+        != render partial: 'shared/pagy_nav', locals: {pagy:}

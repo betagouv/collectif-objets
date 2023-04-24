@@ -3,16 +3,7 @@
 module Conservateurs
   class CommunesController < BaseController
     before_action :set_commune, :set_dossier, only: [:show]
-    before_action :set_departement, only: [:index]
     skip_after_action :verify_authorized, only: [:autocomplete]
-
-    def index
-      @communes_search = Co::Conservateurs::CommunesSearch.new(
-        @departement,
-        params,
-        scoped_communes: policy_scope(Commune)
-      )
-    end
 
     def show
       return show_analyse_saved if params[:analyse_saved].present?

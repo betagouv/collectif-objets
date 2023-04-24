@@ -3,6 +3,6 @@
     <h1>
       <%= t("conservateurs.communes.index.title", departement: @departement) %>
     </h1>
-    <%= render Conservateurs::CommunesSearchComponent.new(communes_search: @communes_search) %>
+    <%= render Conservateurs::CommunesSearchComponent.new(ransack: @ransack) %>
   </div>
 </div>

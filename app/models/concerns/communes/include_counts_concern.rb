@@ -25,6 +25,8 @@ module Communes
         ).select("communes.*, COALESCE(a.objets_count, 0) AS objets_count")
       end
 
+      ransacker(:objets_count) { Arel.sql("objets_count") }
+
       def self.include_objets_recenses_count
         joins(
           %{
@@ -71,10 +73,12 @@ module Communes
               LEFT JOIN objets ON recensements.objet_id = objets.id
               WHERE (#{RECENSEMENT_PRIORITAIRE_SQL})
               GROUP BY "palissy_INSEE"
-            ) b ON b."palissy_INSEE" = communes.code_insee
+            ) d ON d."palissy_INSEE" = communes.code_insee
           }
         ).select("communes.*, COALESCE(b.recensements_prioritaires_count, 0) AS recensements_prioritaires_count")
       end
+
+      ransacker(:recensements_prioritaires_count) { Arel.sql("recensements_prioritaires_count") }
     end
   end
 end

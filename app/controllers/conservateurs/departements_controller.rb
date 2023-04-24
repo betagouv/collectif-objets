@@ -15,9 +15,13 @@ module Conservateurs
         set_departement_json
         render "show_map"
       else
-        @communes_search = Co::Conservateurs::CommunesSearch.new(
-          @departement, params, scoped_communes: policy_scope(Commune)
-        )
+        # @communes_search = Co::Conservateurs::CommunesSearch.new(
+        #   @departement, params, scoped_communes: policy_scope(Commune)
+        # )
+        @ransack = Commune.ransack(params[:q])
+        @pagy, @communes = pagy \
+          @ransack.result.include_objets_count.include_objets_recenses_count.joins(:dossier),
+          items: 20
       end
     end
 
