@@ -76,15 +76,15 @@ Les comptes « conservateurs » sont déjà créés sur Collectif Objet à parti
 
 ## Comment créer une campagne de recensement ?
 
-Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. P﻿our lancer votre campagne de recensement, voici les étapes à suivre : 
+Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. Pour lancer votre campagne de recensement, voici les étapes à suivre : 
 
-* **[C﻿onnectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
+* **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
 * **Cliquez sur le lien « Créer une nouvelle campagne » et configurez la campagne :**
 
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates. 
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées. 
 * **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder »  pour enregistrer la liste mise à jour.
-* **C﻿liquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mél, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire. 
+* **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mél, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire. 
 
 ## Accéder aux dossiers de recensement des communes
 
@@ -124,17 +124,15 @@ Pour accéder aux dossiers de recensement des communes :
 
 ## Si la commune n’a pas recensé le bon objet
 
-Si la commune vous a transmis des informations erronées ou insuffisantes, ne commencez pas l'analyse ! Envoyez-lui un message afin qu'elle puisse faire les corrections nécessaires.
+Si la commune vous a transmis des informations erronées ou insuffisantes, envoyez-lui un message afin qu'elle puisse faire les corrections nécessaires.
 
-**E﻿n effet, il ne faut pas «** **finaliser » les dossiers des communes où des éléments sont insatisfaisants car cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)**
+En effet, il ne faut pas « finaliser » les dossiers des communes où des éléments sont insatisfaisants car cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)
 
-Cliquez sur le bouton « Renvoyer le dossier », accessible depuis la page de la commune concernée. S﻿i nécessaire, vous pouvez faire part à la commune de remarques complémentaires pour l'aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
-
-![](/contenus/content_blobs/images/capture_ecran_page_analyse.jpg)
+Vous pouvez faire part à la commune de remarques pour l’aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
 
 ## Si la commune n’a pas pris de photos
 
-﻿Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre analyse.
+Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre analyse.
 
 ## Envoyer mon rapport d'analyse à la commune
 
