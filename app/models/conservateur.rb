@@ -36,7 +36,7 @@ class Conservateur < ApplicationRecord
     Arel.sql("unaccent(last_name)")
   end
 
-  def romuald?
-    email == "romuald.goudeseune@culture.gouv.fr"
+  def can_generate_bordereau?
+    %w[romuald.goudeseune@culture.gouv.fr stephanie.barioz@pays-valleeduloir.fr].include? email
   end
 end

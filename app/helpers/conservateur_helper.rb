@@ -8,7 +8,7 @@ module ConservateurHelper
       tab.new(:messagerie, commune_messagerie_title(commune), conservateurs_commune_messages_path(commune)),
       tab.new(:rapport, "Rapport", conservateurs_commune_dossier_path(commune))
     ]
-    if current_conservateur.romuald?
+    if current_conservateur.can_generate_bordereau?
       tabs << tab.new(:bordereau, "Bordereaux de récolement", new_conservateurs_commune_bordereau_path(commune))
     end
     tabs
