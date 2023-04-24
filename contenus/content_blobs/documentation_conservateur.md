@@ -128,7 +128,7 @@ Si la commune vous a transmis des informations erronées ou insuffisantes, envoy
 
 En effet, il ne faut pas « finaliser » les dossiers des communes où des éléments sont insatisfaisants car cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)
 
-Vous pouvez faire part à la commune de remarques pour l'aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
+Vous pouvez faire part à la commune de remarques pour l’aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-). 
 
 ## Si la commune n’a pas pris de photos
 
