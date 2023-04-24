@@ -25,8 +25,7 @@
       .fr-mt-4w
         = render DsfrComponent::AccordionComponent.new do |accordion|
           - accordion.section title: "Afficher la table des matières",
-            expanded: local_assigns[:toc_expanded],
-            html_attributes: { "data-print-target": "accordionMember" } do
+            expanded: local_assigns[:toc_expanded] do
             %ul
               %li
                 %a{href: "#commentaires"} Commentaires
