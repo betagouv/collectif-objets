@@ -11,6 +11,8 @@ module Users
     end
 
     def sign_in_with_token
+      return redirect_to(root_path, alert: "Mauvais lien de connexion") if params[:login_token].blank?
+
       user = User.find_by(login_token: params[:login_token])
 
       if user.present?
@@ -25,6 +27,8 @@ module Users
     end
 
     def sign_in_with_magic_token
+      return redirect_to(root_path, alert: "Mauvais lien de connexion") if params["magic-token"].blank?
+
       # the magic token is never rotated
       user = User.find_by(magic_token: params["magic-token"])
       if user.present?
