@@ -37,6 +37,6 @@ class Conservateur < ApplicationRecord
   end
 
   def can_generate_bordereau?
-    %w[romuald.goudeseune@culture.gouv.fr stephanie.barioz@pays-valleeduloir.fr].include? email
+    %w[romuald.goudeseune@culture.gouv.fr stephanie.barioz@pays-valleeduloir.fr chloe.cazalet@yonne.fr].include? email
   end
 end
