@@ -6,4 +6,4 @@
   %h1.co-text--blue= title
   %p
     = link_to "Télécharger", pdf_download_url(pdf: @pdf_name), class: "fr-link fr-link--icon-right fr-icon-file-download-line", download: "#{@pdf_name}.pdf"
-  %embed.co-pdf-embed{src: "#{pdf_download_url(pdf: @pdf_name)}", title: title, type: "application/pdf", width: "100%"}
+  %embed.co-pdf-embed{src: "#{pdf_download_url(pdf: @pdf_name)}", title: title, type: "application/pdf", width: "100%", style: "height: 60vh;" }
