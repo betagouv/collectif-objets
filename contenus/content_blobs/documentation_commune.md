@@ -85,9 +85,9 @@ En cliquant sur chacun des objets, vous obtiendrez des informations complémenta
 
 Ensuite, les étapes sont les suivantes : 
 
-- Se rendre sur les lieux où se trouvent les objets pour les recenser et les prendre en photo
-- Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet
-- Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
+* Se rendre sur les lieux où se trouvent les objets pour les recenser et les prendre en photo
+* Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet
+* Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
 
 ## 2 - Si vous n’avez pas reçu d’email(s) vous invitant à recenser
 
@@ -105,8 +105,8 @@ Si le ou la maire, ou la personne responsable du patrimoine de la commune, vous 
 
 Si vous avez la possibilité d’être deux personnes pour effectuer le recensement des objets, nous vous recommandons de former un tandem avec un observateur et un rédacteur : 
 
-- L'observateur est idéalement quelqu'un qui connait déjà l'édifice. Il ausculte minutieusement les objets (en manipulant le minimum et avec des gants si cela est nécessaire) et fournit ses observations au rédacteur ;
-- Le rédacteur se consacre au remplissage des questionnaires et la prise de photo pendant l'examen des œuvres, afin de restituer fidèlement les observations.
+* L'observateur est idéalement quelqu'un qui connait déjà l'édifice. Il ausculte minutieusement les objets (en manipulant le minimum et avec des gants si cela est nécessaire) et fournit ses observations au rédacteur ;
+* Le rédacteur se consacre au remplissage des questionnaires et la prise de photo pendant l'examen des œuvres, afin de restituer fidèlement les observations.
 
 Si des doutes subsistent sur ce que vous devez faire, vous pouvez poser des questions via la messagerie. Les conservateurs ou l’équipe support de Collectif Objets vous répondront.
 
@@ -116,10 +116,10 @@ Il faudra compter le temps de trajet pour vous rendre dans chaque édifice, ensu
 
 ## 5 - Matériel à prévoir pour le recensement
 
-- De quoi prendre des photos : un smartphone suffit si la qualité des images prises est satisfaisante, les photos doivent être nettes.
-- Un appareil avec une connexion à internet pour remplir les questionnaires en ligne : un smartphone suffit
-- Éventuellement des gants en coton (ou en latex ou en vinyle) pour manipuler l'orfèvrerie ou protéger vos mains, et des vêtements qui ne craignent pas la poussière
-- Éventuellement un escabeau pour vous rapprocher des objets si cela est nécessaire (attention de ne pas vous mettre en danger et de ne pas effectuer le recensement seul dans ce cas)
+* De quoi prendre des photos : un smartphone suffit si la qualité des images prises est satisfaisante, les photos doivent être nettes.
+* Un appareil avec une connexion à internet pour remplir les questionnaires en ligne : un smartphone suffit
+* Éventuellement des gants en coton (ou en latex ou en vinyle) pour manipuler l'orfèvrerie ou protéger vos mains, et des vêtements qui ne craignent pas la poussière
+* Éventuellement un escabeau pour vous rapprocher des objets si cela est nécessaire (attention de ne pas vous mettre en danger et de ne pas effectuer le recensement seul dans ce cas)
 
 ## 3 - Nombre d’objets affichés sur Collectif Objets
 
@@ -139,16 +139,16 @@ Afin de savoir si l’objet a été déplacé ou s’il a disparu depuis longtem
 
 Après ces recherches, si l’objet n'est toujours pas retrouvé : 
 
-- indiquez-le comme “introuvable” via la plateforme Collectif Objets ;
-- après échanges avec les conservateurs il faut peut-être déposer une plainte auprès de la gendarmerie en spécifiant la disparition d'un objet protégé au titre des monuments historiques. Il n'y a aucune prescription pour ce genre de vol. Les trésors nationaux ne peuvent pas quitter le domaine public, ils sont imprescriptibles.
+* indiquez-le comme “introuvable” via la plateforme Collectif Objets ;
+* après échanges avec les conservateurs il faut peut-être déposer une plainte auprès de la gendarmerie en spécifiant la disparition d'un objet protégé au titre des monuments historiques. Il n'y a aucune prescription pour ce genre de vol. Les trésors nationaux ne peuvent pas quitter le domaine public, ils sont imprescriptibles.
 
 Dans tous les cas vous avez la possibilité de discuter de cela avec vos conservateurs depuis la messagerie de la plateforme.
 
 Quelques ressources supplémentaires à ce sujet :
 
-- [Procédures en cas de vol](https://www.culture.gouv.fr/Sites-thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol)
-- [Sécurité et sureté des Monuments Historiques](https://www.culture.gouv.fr/Sites-thematiques/Securite-Surete/Securite-et-surete-des-biens/Securite-et-surete-des-monuments-historiques)
-- [Sécurité des biens culturels : de la prévention du vol à la restitution de l'objet volé](https://www.culture.gouv.fr/Sites-thematiques/Conservation-restauration/Plans-de-sauvegarde-Securite-Surete/Surete/Securite-des-biens-culturels-de-la-prevention-du-vol-a-la-restitution-de-l-objet-vole)
+* [Procédures en cas de vol](https://www.culture.gouv.fr/Sites-thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol)
+* [Sécurité et sureté des Monuments Historiques](https://www.culture.gouv.fr/Sites-thematiques/Securite-Surete/Securite-et-surete-des-biens/Securite-et-surete-des-monuments-historiques)
+* [Sécurité des biens culturels : de la prévention du vol à la restitution de l'objet volé](https://www.culture.gouv.fr/Sites-thematiques/Conservation-restauration/Plans-de-sauvegarde-Securite-Surete/Surete/Securite-des-biens-culturels-de-la-prevention-du-vol-a-la-restitution-de-l-objet-vole)
 
 ## 2 - Évaluer l’état d’un objet
 
@@ -166,14 +166,14 @@ Si vous avez un doute sur quel objet est le bon, vous pouvez prendre des photos 
 
 À moins que cela ne vous soit impossible, nous vous demandons systématiquement d’ajouter des photos lors du recensement de vos objets protégés. Ces photos constituent une source d’information précieuse pour les conservateurs et leur permettent de mieux évaluer l’état de l’objet et l’opportunité d’entamer un travail de restauration ou de sécurisation de l’objet, par exemple.
 
-- Pensez bien à vérifier que vos photos sont nettes ;
-- S'il vous est impossible de faire autrement, le flash peut être utilisé s'il améliore la visibilité. Attention à ne pas surexposer votre photo
+* Pensez bien à vérifier que vos photos sont nettes ;
+* S'il vous est impossible de faire autrement, le flash peut être utilisé s'il améliore la visibilité. Attention à ne pas surexposer votre photo
 
 Exemples d’un ensemble de photos à prendre pour une statue : 
 
-- une vue de face
-- de profil
-- un ou des zoom(s) sur un détail qui vous questionne
+* une vue de face
+* de profil
+* un ou des zoom(s) sur un détail qui vous questionne
 
 ![Exemple de photos de recensement](/contenus/content_blobs/images/exemple_photos.png)
 
