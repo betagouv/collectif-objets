@@ -268,7 +268,7 @@ GEM
     parser (3.2.2.0)
       ast (~> 2.4.1)
     pdf-core (0.9.0)
-    pg (1.4.6)
+    pg (1.5.1)
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
@@ -495,7 +495,7 @@ DEPENDENCIES
   matrix
   mjml-rails (~> 4.8)
   pagy (~> 6.0)
-  pg (~> 1.4)
+  pg (~> 1.5)
   pg_search
   prawn (~> 2.4)
   prawn-table (~> 0.2.2)
