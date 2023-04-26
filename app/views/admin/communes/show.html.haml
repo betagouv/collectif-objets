@@ -25,10 +25,13 @@
           - if @commune.completed_at.present?
             %br
             et terminé le #{l(@commune.completed_at, format: :long_with_weekday)}
-
-      %h4
-        = icon_span("account-circle")
-        #{@commune.users.count} Usager(s)
+      %div.co-flex
+        %h4
+          = icon_span("account-circle")
+          #{@commune.users.count} Usager(s)
+        %div.fr-ml-1w
+          = link_to "Ajouter un usager", new_admin_user_path(commune_id: @commune.id), class: "fr-btn fr-btn--sm fr-btn--secondary"
+        
       - if @commune.users.empty?
         %p Aucun usager
         %p

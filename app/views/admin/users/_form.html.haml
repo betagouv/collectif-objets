@@ -13,5 +13,6 @@
     = f.text_field :email, required: true
   .fr-input-group
     = f.label :commune, "Commune"
+    = f.hidden_field :commune_id
     %input{disabled: true, id: "commune", name: "users[commune]", value: user.commune, class: "fr-input"}
   = f.submit "Enregistrer"
