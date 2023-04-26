@@ -51,45 +51,46 @@
       %h3.fr-text--md.fr-mb-0 Commentaires du conservateur
       = rapport.notes_conservateur.presence || "Aucun commentaire"
 
-  %h4.fr-mt-4w#fiches Vue des objets regroupés par fiche conseil
-  .co-break-after-page
-    - rapport.each_fiche_item do |fiche:, recensements:, index:|
-      %div.co-break-inside-avoid{id: "fiche-#{fiche.id}"}
-        %h5 Fiche #{index} · #{fiche.title}
-        .fr-mb-2w
-          Le conservateur vous a recommandé la lecture de la fiche conseil suivante pour
-          - if recensements.count == 1
-            cet objet
-          - else
-            ces #{recensements.count} objets
-        .co-print-hide.fr-mb-2w
-          = link_to "Voir la fiche conseil \"#{fiche.title}\"",
-            fiche_path(fiche.id),
-            data: { turbo_frame: "_top" },
-            class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+  - if rapport.fiches.any?
+    %h4.fr-mt-4w#fiches Vue des objets regroupés par fiche conseil
+    .co-break-after-page.co-break-after-auto--last-child
+      - rapport.each_fiche_item do |fiche:, recensements:, index:|
+        %div.co-break-inside-avoid{id: "fiche-#{fiche.id}"}
+          %h5 Fiche #{index} · #{fiche.title}
+          .fr-mb-2w
+            Le conservateur vous a recommandé la lecture de la fiche conseil suivante pour
+            - if recensements.count == 1
+              cet objet
+            - else
+              ces #{recensements.count} objets
+          .co-print-hide.fr-mb-2w
+            = link_to "Voir la fiche conseil \"#{fiche.title}\"",
+              fiche_path(fiche.id),
+              data: { turbo_frame: "_top" },
+              class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
 
-        .co-print-hide
-          .fr-mb-4w.fr-grid-row.fr-grid-row--gutters
-            - recensements.each do |recensement|
-              - { objet: recensement.objet, commune: recensement.commune } => { objet:, commune: }
-              .fr-col-md-3
-                = render ::ObjetCardComponent.new objet,
-                  commune: commune,
-                  path: current_user ? commune_objet_path(commune, objet) : objet_path(objet),
-                  main_photo_origin: :recensement,
-                  link_html_attributes: { data: { turbo_frame: "_top" } }
-
-        .hide.co-print-display.fr-mb-4w
-          - recensements.each_slice(4) do |recensements|
-            .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-center
+          .co-print-hide
+            .fr-mb-4w.fr-grid-row.fr-grid-row--gutters
               - recensements.each do |recensement|
                 - { objet: recensement.objet, commune: recensement.commune } => { objet:, commune: }
-                .fr-col-sm-4
-                  .co-rapport-photo
-                    - if recensement.photos.any?
-                      = vite_or_raw_image_tag recensement.photos.first.variant(:medium), alt: "© Licence ouverte"
-                  #{objet.nom} (#{objet.palissy_EDIF}) ·
-                  %span.fr-text--sm #{objet.palissy_REF}
+                .fr-col-md-3
+                  = render ::ObjetCardComponent.new objet,
+                    commune: commune,
+                    path: current_user ? commune_objet_path(commune, objet) : objet_path(objet),
+                    main_photo_origin: :recensement,
+                    link_html_attributes: { data: { turbo_frame: "_top" } }
+
+          .hide.co-print-display.fr-mb-4w
+            - recensements.each_slice(4) do |recensements|
+              .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-center
+                - recensements.each do |recensement|
+                  - { objet: recensement.objet, commune: recensement.commune } => { objet:, commune: }
+                  .fr-col-sm-4
+                    .co-rapport-photo
+                      - if recensement.photos.any?
+                        = vite_or_raw_image_tag recensement.photos.first.variant(:medium), alt: "© Licence ouverte"
+                    #{objet.nom} (#{objet.palissy_EDIF}) ·
+                    %span.fr-text--sm #{objet.palissy_REF}
 
   %h4.fr-mt-8w#objets.co-break-after-avoid Vue détaillée objet par objet
   - rapport.each_recensement_item do |**recensement_item|

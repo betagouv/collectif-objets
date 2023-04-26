@@ -18,14 +18,18 @@ class RapportPresenter
   end
 
   def each_fiche_item
-    ordered_recensements.map(&:analyse_fiches).flatten.uniq.sort.each_with_index do |fiche_id, index|
-      yield fiche: Fiche.load_from_id(fiche_id),
-            recensements: ordered_recensements.select { _1.analyse_fiches.include?(fiche_id) },
+    fiches.each_with_index do |fiche, index|
+      yield fiche:,
+            recensements: ordered_recensements.select { _1.analyse_fiches.include?(fiche.id) },
             index: index + 1
     end
   end
 
   attr_reader :dossier
+
+  def fiches
+    @fiches ||= fiche_ids.map { Fiche.load_from_id(_1) }
+  end
 
   private
 
@@ -34,5 +38,9 @@ class RapportPresenter
       .recensements
       .includes(:objet)
       .order('objets."palissy_EDIF" ASC, objets."palissy_REF"')
+  end
+
+  def fiche_ids
+    @fiche_ids ||= ordered_recensements.map(&:analyse_fiches).flatten.uniq.sort
   end
 end
