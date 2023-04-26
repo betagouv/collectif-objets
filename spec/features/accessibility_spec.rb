@@ -143,6 +143,11 @@ feature "accessibility public pages", js: true do
     before { visit content_blob_path(:documentation_conservateur) }
     it_behaves_like "an accessible page"
   end
+
+  describe "Documentation commune" do
+    before { visit content_blob_path(:documentation_commune) }
+    it_behaves_like "an accessible page"
+  end
 end
 
 feature "accessibility communes", js: true do

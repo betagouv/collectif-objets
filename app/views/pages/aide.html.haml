@@ -144,9 +144,11 @@
                 #faq-sur-place.fr-collapse
                   %p= t(".faq.sur_place.content")
 
-    %section.co-background--light-grey.fr-py-8w.fr-mt-8w
-      .fr-container.fr-grid-row.fr-grid-row--middle
-        .fr-col-md-8.fr-text--lg.co-text--blue.fr-px-4w
-          Vous avez une question qui n'est pas dans la liste ? N'hésitez pas à nous contacter.
-        .fr-col-md-4
-          = link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-icon-mail-line fr-btn--icon-right"
+    %section.co-background--light-grey.fr-py-8w.fr-mt-8w.co-text--center
+      = link_to "Lire la documentation complète", content_blob_path(:documentation_commune), class: "fr-btn fr-btn--lg"
+
+
+    %section.fr-py-8w.fr-mt-8w.co-text--center
+      Vous avez une question qui n'est pas dans la liste ? N'hésitez pas à nous contacter.
+      %div
+        = link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-link"
