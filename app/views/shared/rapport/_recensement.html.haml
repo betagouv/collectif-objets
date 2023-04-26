@@ -1,11 +1,11 @@
 -# local_assigns: (:objet, :recensement, :presenter, :commune, :index)
 
-.fr-pb-6w.co-border--bottom.co-border--none-for-last.co-print-no-border.co-break-after-page{id: "#{objet.palissy_REF}", class: ("fr-mt-6w" if index > 1)}
+.fr-pb-6w.co-border--bottom.co-border--none-for-last.co-print-no-border.co-break-after-page.co-break-after-auto--last-child{id: "#{objet.palissy_REF}", class: ("fr-mt-6w" if index > 1)}
   %h5.fr-mt-0.fr-mb-1w Objet #{index} · #{objet.nom}
 
   .fr-mb-2w
     - path = current_user ? commune_objet_path(commune, objet) : objet_path(objet)
-    = link_to "voir lʼobjet", path , data: { turbo_frame: "_top" }
+    .co-print-hide= link_to "voir lʼobjet", path , data: { turbo_frame: "_top" }
     %span.fr-text--sm · Référence POP Palissy : #{objet.palissy_REF}
 
   .fr-mb-1w.co-break-inside-avoid
@@ -23,7 +23,7 @@
             class: "co-cursor--zoom-in" do
             = vite_or_raw_image_tag photo.variant(:medium), alt: "© Licence ouverte"
 
-  .fr-grid-row
+  .fr-grid-row.fr-grid-row--gutters.fr-mt-1w
     .fr-col-md-6
       .co-break-inside-avoid
         .co-text--bold.fr-mt-2w Où se trouve l’objet ?
@@ -44,11 +44,11 @@
           = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
 
     .fr-col-md-6
-      .co-background--light-teal.fr-p-4w.fr-mb-4w.co-print-no-padding
-        .co-break-inside-avoid
+      .co-background--light-teal.fr-px-4w.fr-pb-4w.fr-pt-2w.fr-mb-4w.co-print-no-padding
+        .fr-mt-2w.co-break-inside-avoid
           .co-text--bold Commentaires de la commune
           = recensement.notes.presence || "Aucun commentaire"
-        .fr-mt-4w.co-break-inside-avoid
+        .fr-mt-2w.co-break-inside-avoid
           .co-text--bold Commentaires du conservateur
           = recensement.analyse_notes.presence || "Aucun commentaire"
 

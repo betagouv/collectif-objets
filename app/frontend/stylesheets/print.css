@@ -7,9 +7,12 @@
   .co-print-invisible { visibility: hidden; }
   .fr-grid-row .fr-card { height: 300px; }
   .hide.co-print-display { display: block !important; }
-  .fr-p-4w.co-print-no-padding { padding: 0 !important; }
+  .co-print-no-padding { padding: 0 !important; }
   .co-print-no-border { border: none; }
-  .fr-tabs { display: block; }
+  .fr-tabs {
+    display: block;
+    height: auto;
+  }
   .fr-tabs__panel {
     padding: 0;
     margin: 0;
@@ -19,4 +22,6 @@
 
 .co-break-after-page { break-after: page; }
 .co-break-after-avoid { break-after: avoid; }
+.co-break-after-auto--last-child:last-child { break-after: auto; }
+
 .co-break-inside-avoid { break-inside: avoid; }
