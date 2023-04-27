@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "patch-package": "^7.0.0",
-    "vite": "^4.3.2",
+    "vite": "^4.3.3",
     "vite-plugin-ruby": "^3.2.1",
     "vite-plugin-stimulus-hmr": "^3.0.0"
   }
