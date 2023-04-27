@@ -55,9 +55,14 @@
         - if recensement.analyse_fiches.any?
           .co-break-inside-avoid
             .co-text--bold.fr-mt-4w.fr-mb-1w Fiches conseillées par le conservateur pour cet objet
-            - recensement.analyse_fiches_objects.each do |fiche|
-              .fr-mb-1w
-                = link_to fiche.title,
-                  fiche_path(fiche.id),
-                  data: { turbo_frame: "_top" },
-                  class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+            .co-print-hide
+              - recensement.analyse_fiches_objects.each do |fiche|
+                .fr-mb-1w
+                  = link_to fiche.title,
+                    fiche_path(fiche.id),
+                    data: { turbo_frame: "_top" },
+                    class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+            .hide.co-print-display
+              %ul
+                - recensement.analyse_fiches_objects.each do |fiche|
+                  %li= fiche.title
