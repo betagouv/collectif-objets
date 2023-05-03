@@ -77,7 +77,11 @@ La protection au titre des monuments historiques n’a pas vocation à s’appli
 
 # II - Le recensement sur Collectif Objets
 
-## 1 - Vous avez reçu un ou des emails vous invitant à recenser les objets de votre commune
+## 1 - Comment effectuer un recensement ?
+
+<div style="position: relative; padding-bottom: 62.5%; height: 0;margin-bottom: 2em;"><iframe src="https://www.loom.com/embed/51b594929e9141f7bfb76275e38577d7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+
+## 2 - Vous avez reçu un ou des emails vous invitant à recenser les objets de votre commune
 
 Lorsque votre commune est invitée à recenser ses objets protégés, un email vous permettra d’accéder à votre espace dédié sur la plateforme Collectif Objets. Depuis cet espace, vous pourrez voir la liste des objets protégés de votre commune.
 
@@ -89,7 +93,7 @@ Ensuite, les étapes sont les suivantes :
 * Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet
 * Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
 
-## 2 - Si vous n’avez pas reçu d’email(s) vous invitant à recenser
+## 3 - Si vous n’avez pas reçu d’email(s) vous invitant à recenser
 
 Pour qu’une commune puisse effectuer un recensement de ses objets protégés, il faut qu’une campagne de recensement ait été initiée dans son département via Collectif Objets, en collaboration avec les conservateurs des antiquités et des objets d’art du département.
 
@@ -97,7 +101,7 @@ Lorsqu’une campagne de recensement départementale est lancée, si elle concer
 
 Une commune ne peut pour l’instant pas entamer un recensement via Collectif Objets en dehors du cadre d’une campagne départementale.
 
-## 3 - Légitimé et personnes impliquées pour le recensement
+## 4 - Légitimé et personnes impliquées pour le recensement
 
 Si aucun élu n'est disponible pour effectuer ce recensement, il peut être effectué par une personne de confiance : par exemple la personne qui gère les accès à l’édifice abritant les objets protégés ou encore une association.
 
@@ -110,18 +114,18 @@ Si vous avez la possibilité d’être deux personnes pour effectuer le recensem
 
 Si des doutes subsistent sur ce que vous devez faire, vous pouvez poser des questions via la messagerie. Les conservateurs ou l’équipe support de Collectif Objets vous répondront.
 
-## 4 - Durée d’un recensement
+## 5 - Durée d’un recensement
 
 Il faudra compter le temps de trajet pour vous rendre dans chaque édifice, ensuite cela dépend du nombre d’objets à recenser au sein de votre commune et du nombre d’édifices dans lesquels ils se situent. Vous pouvez compter moins de 5 minutes par objet, une fois que vous avez l’objet devant vous.
 
-## 5 - Matériel à prévoir pour le recensement
+## 6 - Matériel à prévoir pour le recensement
 
 * De quoi prendre des photos : un smartphone suffit si la qualité des images prises est satisfaisante, les photos doivent être nettes.
 * Un appareil avec une connexion à internet pour remplir les questionnaires en ligne : un smartphone suffit
 * Éventuellement des gants en coton (ou en latex ou en vinyle) pour manipuler l'orfèvrerie ou protéger vos mains, et des vêtements qui ne craignent pas la poussière
 * Éventuellement un escabeau pour vous rapprocher des objets si cela est nécessaire (attention de ne pas vous mettre en danger et de ne pas effectuer le recensement seul dans ce cas)
 
-## 3 - Nombre d’objets affichés sur Collectif Objets
+## 7 - Nombre d’objets affichés sur Collectif Objets
 
 Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet mobilier concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
 

@@ -76,7 +76,7 @@ Les comptes « conservateurs » sont déjà créés sur Collectif Objet à parti
 
 ## Comment créer une campagne de recensement ?
 
-Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. Pour lancer votre campagne de recensement, voici les étapes à suivre : 
+Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. Pour lancer votre campagne de recensement, suivez les étapes ou visionnez la vidéo ci-dessous : 
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
 * **Cliquez sur le lien « Créer une nouvelle campagne » et configurez la campagne :**
@@ -85,6 +85,10 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées. 
 * **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder »  pour enregistrer la liste mise à jour.
 * **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mél, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire. 
+
+Voici également un tutoriel vidéo :
+<div style="position: relative; padding-bottom: 62.5%; height: 0;margin-bottom: 2em;"><iframe src="https://www.loom.com/embed/0514439ae8434001953205f47e041bfa" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div> 
+
 
 ## Accéder aux dossiers de recensement des communes
 
@@ -106,6 +110,8 @@ Pour accéder aux dossiers de recensement des communes :
 
 ## Analyser le dossier de recensement d'une commune
 
+Suivez les étapes ou visionnez la vidéo ci-dessous :
+
 * **Cliquez sur** **l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
 
   * **Analysez les informations transmises par la commune :** à partir des photos récentes transmises par la commune, qui sont zoomables pour en examiner les détails, vous pouvez valider ou corriger les informations renseignées.
@@ -121,6 +127,8 @@ Pour accéder aux dossiers de recensement des communes :
     ![Analyse d’un recensement](/contenus/content_blobs/images/conservateurs_analyse.png)
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez le rapport final de recensement à la commune :** après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. Pour cela, référez-vous à la section : lien.
+
+<div style="position: relative; padding-bottom: 62.5%; height: 0;margin-bottom: 2em;"><iframe src="https://www.loom.com/embed/c7b1c11e533a4c2b8b3d839dcb2b0168" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div> 
 
 ## Si la commune n’a pas recensé le bon objet
 
