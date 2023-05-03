@@ -79,7 +79,7 @@ La protection au titre des monuments historiques n’a pas vocation à s’appli
 
 ## 1 - Comment effectuer un recensement ?
 
-<div style="position: relative; padding-bottom: 62.5%; height: 0;margin-bottom: 2em;"><iframe src="https://www.loom.com/embed/51b594929e9141f7bfb76275e38577d7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<div style="position: relative; padding-bottom: 62.5%; height: 0;margin-bottom: 2em;"><iframe title="Comment effectuer un recensement ?" src="https://www.loom.com/embed/51b594929e9141f7bfb76275e38577d7" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ## 2 - Vous avez reçu un ou des emails vous invitant à recenser les objets de votre commune
 
