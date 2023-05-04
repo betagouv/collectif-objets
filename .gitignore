@@ -41,3 +41,6 @@ node_modules
 *.local
 
 /wiki
+
+# Ignore IDE config
+.vscode

@@ -6,14 +6,14 @@
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-md-4
       %nav{style: "position: sticky; top: 2rem;", "aria-label": "Table des matières de la fiche"}
-        - if @objets
-          = link_to "Objets concernés par cette fiche", "#objets", class: "fr-ml-3w"
+        - if @objets.present?
+          = link_to titre_objets_concernes, "#objets", class: "fr-ml-3w"
         != @fiche.table_of_contents_html
 
     .fr-col-md-8
-      - if @objets
+      - if @objets.present?
         .fr-mb-4w
-          %h2#objets Objets concernés par cette fiche
+          %h2#objets= titre_objets_concernes
           - @objets.each_slice(3) do |objets|
             .fr-grid-row.fr-grid-row--gutters
               - objets.each do |objet|
