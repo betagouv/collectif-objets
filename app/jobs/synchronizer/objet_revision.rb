@@ -66,7 +66,7 @@ module Synchronizer
     end
 
     def validate_commune_inactive
-      return true if @commune.inactive? || minor_changes?
+      return true if @commune.inactive? || commune.dossier&.accepted? || minor_changes?
 
       @errors.add(:base, "la commune #{@commune} est #{@commune.status}")
     end
@@ -88,8 +88,7 @@ module Synchronizer
     end
 
     def minor_changes?
-      objet.persisted? && (objet.changed - %w[palissy_DENQ palissy_COM palissy_REFA]).empty?
-      # TODO: remove palissy_REFA
+      objet.persisted? && (objet.changed - %w[palissy_DENQ palissy_COM palissy_TICO]).empty?
     end
 
     def ref = objet.palissy_REF
