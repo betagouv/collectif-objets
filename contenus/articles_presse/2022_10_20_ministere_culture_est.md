@@ -3,7 +3,7 @@ titre: Communiqué de Presse DRAC Grand Est
 source: Ministère de la Culture
 date: 20.10.2022
 logo: /contenus/articles_presse/images/logo-ministere-culture.png
-url: https://www.culture.gouv.fr/Regions/Drac-Grand-Est/actu/plan-relance/Patrimoine/Cathedrale-Troyes/2022/collectif-Objets
+url: "https://www.culture.gouv.fr/Regions/DRAC-Grand-Est/actu/an/2022/collectif-Objets"
 ---
 
 Le ministère de la Culture invite les communes auboises, vosgiennes, ardennaises et de Meurthe-et-Moselle à recenser leurs objets protégés
