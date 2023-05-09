@@ -556,6 +556,47 @@ Si l’erreur `Git Gateway Error: Please ask your site administrator to reissue 
 - renouveller le token du user GitHub robot@collectifobjets.org depuis [sur cette page GitHub](https://github.com/settings/tokens) (Settings > Developer settings > Personal Access Tokens (classic)) avec le droit `repo` uniquement
 - copiez le sur [la configuration Netlify Identity](https://app.netlify.com/sites/collectif-objets-cms/settings/identity) dans Git Gateway
 
+## Rajouter une vidéo sur le site
+
+Commencez par télécharger la vidéo au format MP4.
+Pour les vidéos Loom il faut avoir un compte, mais pas nécessairement celui du créateur de la vidéo.
+
+Prenez une capture d’écran d’un moment clé de la vidéo à utiliser comme poster.
+Convertissez la en WEBP avec `convert titre.png titre.webm` ou bien utilisez imageoptim pour compresser le PNG.
+
+Renommez les fichiers MP4 et PNG/WEBM au format suivant `2023_05_titre_video.mp4`.
+
+Puis convertissez en local la vidéo au format WEBM (conservez le fichier MP4) :
+
+```bash
+ffmpeg -i 2023_05_titre_video.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus 2023_05_titre_video.webm
+```
+
+Uploadez les fichiers MP4 et WEBM sur le bucket S3 `collectif-objets-public`.
+Donnez les permissions ACL en lecture pour tous les visiteurs pour les fichiers uploadés.
+
+Enfin vous pouvez insérer et adapter l’un des deux snippets suivants en HAML ou HTML :
+
+```haml
+%video.co-cursor-pointer{controls:"", width:"100%", preload:"none", poster:vite_asset_path("images/2023_05_titre_video.webp"), href:"#"}
+  / the href is a fix for a bad rule in DSFR
+  %source(src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.webm" type="video/webm")
+  %source(src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.mp4" type="video/mp4")
+  %a(href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.mp4")
+    Télécharger la vidéo au format MP4
+```
+
+```html
+<video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.png" href="#">
+  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.webm" type="video/webm">
+  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.mp4" type="video/mp4">
+  <a href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.mp4">
+    Télécharger la vidéo au format MP4
+  </a>
+</video>
+```
+
+
 ## Debug local via tunneling
 
 Le tunneling consiste à exposer votre environnement local sur une URL publiquement accessible.

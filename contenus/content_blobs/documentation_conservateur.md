@@ -87,7 +87,14 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 * **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mél, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire. 
 
 Voici également un tutoriel vidéo :
-<div style="position: relative; padding-bottom: 62.5%; height: 0;margin-bottom: 2em;"><iframe title="Comment créer une campagne de recensement?" src="https://www.loom.com/embed/0514439ae8434001953205f47e041bfa" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div> 
+
+<video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_lancement_campagne.png" href="#">
+  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_lancement_campagne.webm" type="video/webm">
+  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_lancement_campagne.mp4" type="video/mp4">
+  <a href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_lancement_campagne.mp4">
+    Télécharger le reportage au format MP4
+  </a>
+</video>
 
 
 ## Accéder aux dossiers de recensement des communes
@@ -128,7 +135,13 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez le rapport final de recensement à la commune :** après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. Pour cela, référez-vous à la section : lien.
 
-<div style="position: relative; padding-bottom: 62.5%; height: 0;margin-bottom: 2em;"><iframe title="Comment analyser le dossier de recensement d'une commune?" src="https://www.loom.com/embed/c7b1c11e533a4c2b8b3d839dcb2b0168" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div> 
+<video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.png" href="#">
+  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.webm" type="video/webm">
+  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.mp4" type="video/mp4">
+  <a href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.mp4">
+    Télécharger la vidéo au format MP4
+  </a>
+</video>
 
 ## Si la commune n’a pas recensé le bon objet
 
