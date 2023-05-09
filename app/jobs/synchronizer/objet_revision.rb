@@ -66,7 +66,7 @@ module Synchronizer
     end
 
     def validate_commune_inactive
-      return true if @commune.inactive? || minor_changes?
+      return true if @commune.inactive? || commune.dossier&.accepted? || minor_changes?
 
       @errors.add(:base, "la commune #{@commune} est #{@commune.status}")
     end

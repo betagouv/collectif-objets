@@ -11,9 +11,10 @@ module Synchronizer
     def perform(params = {})
       @logfile = File.open("tmp/synchronize-objets-#{timestamp}.log", "a+")
       limit = params.with_indifferent_access[:limit]
-      @dry_run = params.with_indifferent_access["dry_run"]
-      @interactive = params.with_indifferent_access["interactive"]
-      ApiClientSql.objets(logger:, limit:).iterate_batches { synchronize_rows(_1) }
+      @dry_run = params.with_indifferent_access[:dry_run]
+      @interactive = params.with_indifferent_access[:interactive]
+      code_insee = params.with_indifferent_access[:code_insee]
+      ApiClientSql.objets(logger:, limit:, code_insee:).iterate_batches { synchronize_rows(_1) }
       close
     end
 
