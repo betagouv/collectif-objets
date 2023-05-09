@@ -88,8 +88,7 @@ module Synchronizer
     end
 
     def minor_changes?
-      objet.persisted? && (objet.changed - %w[palissy_DENQ palissy_COM palissy_REFA]).empty?
-      # TODO: remove palissy_REFA
+      objet.persisted? && (objet.changed - %w[palissy_DENQ palissy_COM palissy_TICO]).empty?
     end
 
     def ref = objet.palissy_REF
