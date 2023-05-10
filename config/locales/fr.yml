@@ -589,9 +589,6 @@ fr:
   recensements:
     etapes:
       unfold: Comment ça marche ?
-      etape1_html: <b>Je me rends sur place</b> pour recenser mes objets protégés et les prendre en photo
-      etape2_html: <b>Je remplis le formulaire en ligne</b> sur l’emplacement et l’état actuel des objets
-      etape3_html: <b>Je reçois des conseils d’un conservateur</b> pour assurer la pérennité de mes objets
       cta: En savoir plus…
   application_mailer_layout:
     tagline: Préservez votre patrimoine mobilier

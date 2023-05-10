@@ -1,22 +1,20 @@
-.fr-card.fr-enlarge-link.fr-card--horizontal.fr-card--sm
-  .fr-card__body
-    .fr-card__title
-      %h2.fr-text--md.fr-mb-0= link_to objet.nom, commune_objet_path(objet.commune, objet)
-    %p.fr-card__desc
-      #{objet.edifice_nom}
-      - if objet.palissy_EMPL
-        (#{objet.palissy_EMPL})
-      - if objet.palissy_CATE
-        %br
-        #{objet.palissy_CATE}
-      - if objet.palissy_SCLE
-        %br
-        #{objet.palissy_SCLE.gsub(";", " - ")}
-      %br
-      %span.co-text--muted= objet.palissy_REF
-  .fr-card__header
-    .fr-card__img
-      - if objet.palissy_photos.any?
-        = image_tag objet.palissy_photos.first.url, alt: objet.palissy_photos.first.description, class: "fr-responsive-img co-object-fit--contain"
-      - else
-        = vite_image_tag "images/illustrations/photo-manquante.png", alt: "image manquante", class: "fr-responsive-img co-object-fit--contain"
+.co-flex.co-box-shadow.co-recensement-objet-summary.fr-px-2w.fr-px-md-0
+  .co-recensement-objet-summary__photo
+    - if objet.palissy_photos.any?
+      = image_tag objet.palissy_photos.first.url, alt: objet.palissy_photos.first.description, class: "co-height--100 co-width--100 co-object-fit-contain"
+    - else
+      = vite_image_tag "images/illustrations/photo-manquante.png", alt: "image manquante", class: "co-height--100 co-width--100 co-object-fit-contain"
+  .fr-p-2w
+    .co-position-relative.co-height--100
+      .co-height--100.co-overflow--hidden
+        = objet.nom
+        .co-text--muted.fr-mt-1w
+          #{objet.edifice_nom}
+          - if objet.palissy_EMPL
+            (#{objet.palissy_EMPL})
+          · #{objet.palissy_REF}
+      .co-position-absolute.co-bottom-0.co-width--100.co-flex.co-flex--justify-content-end.co-background--white.fr-pt-1w
+        %div
+          = link_to "revenir à la fiche objet",
+            commune_objet_path(objet.commune, objet),
+            class: "fr-link fr-link--sm fr-link--icon-left fr-icon-arrow-go-back-line"

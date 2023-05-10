@@ -67,6 +67,9 @@ Rails.application.routes.draw do
   ## --------
 
   resources :communes, module: :communes, only: [] do
+    controller :pages do
+      get :premiere_visite
+    end
     resource :completion, only: %i[new create show]
     resources :objets, only: %i[index show] do
       resources :recensements, only: %i[create edit update destroy] do
