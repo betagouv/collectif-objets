@@ -7,6 +7,6 @@
   .co-position-sticky.co-bottom-0.co-box-shadow-top.co-background--white
     .fr-container.fr-py-4w.co-flex.co-flex--justify-content-end
       %div
-        = link_to commune_recenser_objets_text(current_user.commune),
-          commune_objets_path(current_user.commune),
+        = link_to commune_recenser_objets_text(@commune),
+          commune_objets_path(@commune),
           class: "fr-btn fr-btn--icon-right fr-icon-arrow-right-line"

@@ -121,6 +121,10 @@
         %p Ces pages sont visibles uniquement pour les communes connectées. Les liens présents sont des pages de démonstration avec des données de test.
         %ul
           %li
+            Page d’embarquement ·
+            = link_to "Démo", demo_path(namespace: "communes", name: "premiere_visite")
+            = accessible_icon_span
+          %li
             Liste des objets de la commune ·
             = link_to "3 objets sans photos", demo_path(namespace: "communes", name: "objets_index")
             = accessible_icon_span
