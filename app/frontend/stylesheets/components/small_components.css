@@ -32,3 +32,6 @@
 }
 
 .co-textarea--high.fr-input { min-height: 10rem; }
+
+.co-recensement-objet-summary { max-height: min(20vh, 180px); }
+.co-recensement-objet-summary__photo { max-width: min(30vw, 200px) }

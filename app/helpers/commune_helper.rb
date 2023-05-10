@@ -16,5 +16,10 @@ module CommuneHelper
       "Messagerie"
     end
   end
+
+  def commune_recenser_objets_text(commune)
+    text = commune.objets.count > 1 ? "Recenser les objets" : "Recenser l’objet"
+    text + " de #{commune.nom}"
+  end
 end
 # rubocop:enable Rails/OutputSafety

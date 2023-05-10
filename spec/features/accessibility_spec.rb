@@ -151,6 +151,11 @@ feature "accessibility public pages", js: true do
 end
 
 feature "accessibility communes", js: true do
+  describe "communes/objets#premiere_visite - Page d’embarquement" do
+    before { visit demo_path(namespace: "communes", name: "premiere_visite") }
+    it_behaves_like "an accessible page"
+  end
+
   describe "communes/objets#index - Démo 3 objets sans photos" do
     before { visit demo_path(namespace: "communes", name: "objets_index") }
     it_behaves_like "an accessible page"

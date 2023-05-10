@@ -1,6 +1,6 @@
 - content_for(:head_title) { "Recensement · #{truncate(@wizard.objet.nom, length: 20)}" }
-%main.fr-container.co-container--sm-px-0.fr-pb-10w
-  .fr-px-1w.fr-px-md-0
+%main.fr-container.fr-pb-10w.co-container--sm-px-0
+  .fr-px-2w.fr-px-md-0
     = render "shared/breadcrumbs",
       links: [["Accueil", root_path],
         ["Objets de #{current_user.commune.nom}", commune_objets_path(current_user.commune)],
@@ -9,12 +9,9 @@
 
   .fr-grid-row
     .fr-col-md-8.fr-col-offset-md-2
-      .fr-px-1w.fr-px-md-0
-        %h1 Recensement de l’objet #{truncate(@wizard.objet.nom, length: 20)}
-
-        .fr-mb-4w= render "communes/recensements/objet", objet: @wizard.objet
-
-        = render "recensements/etapes", expanded: @wizard.step_number == 1 && @recensement.first?
+      .fr-px-2w.fr-px-md-0
+        %h1 Recensement
+      .fr-mb-4w= render "communes/recensements/objet", objet: @wizard.objet
 
       = turbo_frame_tag "recensement_form_step",
         data: { controller: "recensement-form-step",

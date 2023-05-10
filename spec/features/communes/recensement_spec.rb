@@ -31,8 +31,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Recenser cet objet"
 
     # STEP 1
-    # "comment ça marche" accordion should be opened for first recensement
-    expect(page).to have_text("Je me rends sur place pour recenser mes objets protégés et les prendre en photo")
     expect(page).to have_text("Étape 1 sur 6")
     expect(page).to have_text("Recherche")
     expect(page).to have_text("Étape suivante : Localisation")

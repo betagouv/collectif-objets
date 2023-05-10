@@ -57,7 +57,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for_user(user)
-    commune_objets_path(user.commune)
+    if user.commune.recensements.completed.empty?
+      commune_premiere_visite_path(user.commune)
+    else
+      commune_objets_path(user.commune)
+    end
   end
 
   def after_sign_in_path_for_conservateur(conservateur)
