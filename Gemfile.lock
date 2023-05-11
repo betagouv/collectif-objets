@@ -217,10 +217,10 @@ GEM
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.20.0)
+    loofah (2.21.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lookbook (2.0.1)
+    lookbook (2.0.2)
       activemodel
       css_parser
       htmlbeautifier (~> 1.3)
@@ -492,7 +492,7 @@ DEPENDENCIES
   kramdown
   launchy
   listen
-  lookbook (~> 2.0.1)
+  lookbook (~> 2.0.2)
   matrix
   mjml-rails (~> 4.8)
   pagy (~> 6.0)
