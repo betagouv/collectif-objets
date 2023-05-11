@@ -6,7 +6,7 @@ class PresseController < ApplicationController
   end
 
   def show
-    raise ArgumentError if ArticlePresse.all_ids.exclude? params[:id]
+    raise ActionController::RoutingError, "Article inexistant" if ArticlePresse.all_ids.exclude? params[:id]
 
     @article = ArticlePresse.load_from_id(params[:id])
   end
