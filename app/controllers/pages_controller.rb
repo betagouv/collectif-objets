@@ -58,5 +58,9 @@ class PagesController < ApplicationController
     @active_nav_links = ["À propos", "Statistiques"]
   end
 
+  def accueil_conservateurs
+    @active_nav_links = ["Je suis conservateur"]
+  end
+
   attr_reader :active_nav_links
 end
