@@ -1,0 +1,12 @@
+- url_without_ext = "https://s3.fr-par.scw.cloud/collectif-objets-public/#{filename}"
+
+%video.co-cursor-pointer{controls:"",
+  width:"100%",
+  preload:"none",
+  poster: "#{url_without_ext}.png",
+  href:"#"}
+  / the href is a fix for a bad rule in DSFR
+  %source{src: "#{url_without_ext}.webm", type:"video/webm"}
+  %source{src: "#{url_without_ext}.mp4", type:"video/mp4"}
+  %a{href: "#{url_without_ext}.mp4"}
+    Télécharger la vidéo au format MP4

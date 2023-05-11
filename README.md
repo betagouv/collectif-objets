@@ -572,6 +572,12 @@ Puis convertissez en local la vidéo au format WEBM (conservez le fichier MP4) :
 ffmpeg -i 2023_05_titre_video.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus 2023_05_titre_video.webm
 ```
 
+Si le fichier MP4 lui-même est trop gros, vous pouvez le compresser :
+
+```bash
+ffmpeg -i 2023_05_titre_video.mp4 -vcodec libx265 -crf 30 2023_05_titre_video.mp4
+```
+
 Uploadez les fichiers MP4 et WEBM sur le bucket S3 `collectif-objets-public`.
 Donnez les permissions ACL en lecture pour tous les visiteurs pour les fichiers uploadés.
 

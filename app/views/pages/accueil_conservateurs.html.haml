@@ -1,0 +1,57 @@
+- content_for(:head_title) { "Accueil conservateurs" }
+%main.fr-container.fr-pt-2w.fr-pb-8w
+  .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-center
+    .fr-col-md-7
+      %h1 Pourquoi rejoindre Collectif&nbsp;Objets&nbsp;?
+      %p
+        :markdown
+          Collectif Objets vous permet d’organiser des campagnes de recensement des objets monuments historiques auprès des communes de votre département.
+
+          Outre la sensibilisation des élus à leur patrimoine mobilier, ces campagnes vous permettent d’**entrer en relation avec l’ensemble des communes** de votre territoire, de **recueillir des informations actuelles sur les objets** et de disposer ainsi d’**une vue globale et actuelle du parc pour guider votre action**.
+
+          Collectif Objets est un service porté par le Bureau de la Conservation des Monuments Historiques Mobiliers du ministère de la Culture.
+    .fr-col-md-5
+      %div= render "shared/video_embed", filename: "2023_05_entretiens_conservateurs_journee_bcmhm"
+      .co-text--center
+        Compilation de témoignages à l’occasion de la journée du BCMHM du 12 mai 2023
+
+
+  %h2.fr-mt-8w
+    Découvrez les témoignages de conservateurs utilisateurs de Collectif Objets
+
+  .fr-grid-row.fr-grid-row--gutters.fr-mt-2w
+    .fr-col-md-4
+      %div= render "shared/video_embed", filename: "2023_05_entretien_jacques_antoine"
+      .co-text--center
+        .co-text--bold Jacques-Antoine
+        .co-text--muted CAOA en Meurthe-et-Moselle
+
+    .fr-col-md-4
+      %div= render "shared/video_embed", filename: "2023_05_entretien_eric_blanchegorge"
+      .co-text--center
+        .co-text--bold Eric Blanchegorge
+        .co-text--muted CAOA de l’Aude
+
+    .fr-col-md-4
+      %div= render "shared/video_embed", filename: "2023_05_entretien_emmanuel_moureau"
+      .co-text--center
+        .co-text--bold Emmanuel Moureau
+        .co-text--muted CAOA du Tarn-et-Garonne
+
+  .fr-grid-row.fr-grid-row--center
+    .fr-col-md-8
+      .co-text--center.fr-mt-8w
+        :markdown
+          Collectif Objets est l'outil de recensement pour préparer les récolements, à destination des conservateurs d'antiquités et objets d'objets.
+
+          C'est un outil qui évolue rapidement en fonction des retours des utilisateurs-conservateurs qui en sont les bâtisseurs.
+
+          Lancer une campagne de déploiement dans votre département est simple et rapide.
+
+        = link_to "Demander une démonstration", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-mt-2w"
+
+  .fr-grid-row.fr-grid-row--gutters.fr-mt-8w
+    .fr-col-md-8
+      Vous souhaitez en savoir plus sur l'outil, une documentation plus complète est à destination des conservateurs
+    .fr-col-md-4.co-flex.co-flex--justify-content-end
+      = link_to "Consulter la documentation", content_blob_path(:documentation_conservateur), class: "fr-btn fr-btn--secondary"

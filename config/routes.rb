@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     get :plan
     get :declaration_accessibilite
     get :schema_pluriannuel_accessibilite
+    get :accueil_conservateurs
   end
   get "campaigns.ics", to: "pages#campaigns_ics", as: :campaigns_ics
   resources :fiches, only: %i[index show]
