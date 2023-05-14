@@ -6,23 +6,19 @@ module Synchronizer
 
     include ActiveModel::Validations
     validate :validate_objet
-    validate :validate_commune_inactive
-    validate :validate_initial_commune_inactive
+    validate :validate_commune_safe
+    validate :validate_commune_before_update_safe
     validate :validate_tico_en_cours
 
     attr_reader :objet
 
-    def self.from_row(row, commune: nil, persisted_objet: nil)
-      commune_before_update = persisted_objet&.commune
-      objet = ObjetBuilder.new(row, persisted_objet:).objet
-      commune ||= objet.commune
-      new(objet:, commune:, commune_before_update:)
-    end
-
-    def initialize(objet:, commune: nil, commune_before_update: nil)
-      @objet = objet
-      @commune = commune || objet.commune || raise(ArgumentError, "missing commune for objet #{objet.palissy_REF}")
-      @commune_before_update = commune_before_update
+    def initialize(row, commune: nil, persisted_objet: nil, on_sensitive_change: :log)
+      @commune = commune ||
+                 Commune.find_by(code_insee: row["INSEE"]) ||
+                 raise(ArgumentError, "missing commune for objet #{row['REF']}")
+      @commune_before_update = persisted_objet&.commune
+      safe_fields_only = !communes_safe? && on_sensitive_change == :apply_safe_changes
+      @objet = ObjetBuilder.new(row, persisted_objet:, safe_fields_only:).objet
     end
 
     def action
@@ -65,14 +61,14 @@ module Synchronizer
       @errors.add(:base, "l'objet est en cours de traitement par POP")
     end
 
-    def validate_commune_inactive
-      return true if @commune.inactive? || commune.dossier&.accepted? || minor_changes?
+    def validate_commune_safe
+      return true if commune_safe? || update_with_safe_changes?
 
-      @errors.add(:base, "la commune #{@commune} est #{@commune.status}")
+      @errors.add(:base, "la commune #{commune} est #{commune.status}")
     end
 
-    def validate_initial_commune_inactive
-      return true if !commune_changed? || commune_before_update.inactive?
+    def validate_commune_before_update_safe
+      return true if commune_before_update_safe?
 
       @errors.add(
         :base,
@@ -87,20 +83,15 @@ module Synchronizer
       changed? ? :update : :not_changed
     end
 
-    def minor_changes?
-      objet.persisted? && (objet.changed - %w[palissy_DENQ palissy_COM palissy_TICO]).empty?
-    end
-
     def ref = objet.palissy_REF
-
     def errors_s = errors.full_messages.to_sentence
 
-    def objet_attributes_s
-      objet.attributes.except("palissy_REF").compact
-    end
-
-    def commune_changed?
-      commune_before_update.present? && commune_before_update != commune_after_update
-    end
+    def objet_attributes_s = objet.attributes.except("palissy_REF").compact
+    def update_with_safe_changes? = objet.persisted? && sensitive_changes.empty?
+    def sensitive_changes = objet.changed - ObjetBuilder::SAFE_FIELDS.map { "palissy_#{_1}" }
+    def commune_safe? = commune.inactive? || commune.dossier&.accepted?
+    def commune_before_update_safe? = !commune_changed? || commune_before_update.inactive?
+    def commune_changed? = commune_before_update.present? && commune_before_update != commune_after_update
+    def communes_safe? = commune_safe? && commune_before_update_safe?
   end
 end

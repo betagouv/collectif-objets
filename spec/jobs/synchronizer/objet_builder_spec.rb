@@ -208,5 +208,19 @@ RSpec.describe Synchronizer::ObjetBuilder do
         expect(objet.changes).not_to be_empty
       end
     end
+
+    context "some changes with safe_fields_only" do
+      let(:row) { base_row.merge("DENO" => '["tableau bleu et jaune"]', "INSEE" => "01201", "EDIF" => "mairie") }
+      let(:objet) { described_class.new(row, persisted_objet:, safe_fields_only: true).objet }
+      it "should have applied safe changes only" do
+        expect(objet.palissy_DENO).to eq "tableau bleu et jaune" # DENO is safe to change
+        expect(objet.palissy_INSEE).to eq "01004" # INSEE is not safe to change
+        expect(objet.palissy_EDIF).to eq "chapelle des Allymes" # EDIF is not safe to change
+        expect(objet.new_record?).to eq false
+        expect(objet.persisted?).to eq true
+        expect(objet.changed?).to eq true
+        expect(objet.changes).not_to be_empty
+      end
+    end
   end
 end

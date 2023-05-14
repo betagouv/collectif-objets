@@ -6,22 +6,25 @@ module Synchronizer
   class ObjetRevisionsBatch
     attr_reader :revisions_by_action
 
-    def initialize(rows)
+    def initialize(rows, on_sensitive_change:)
       @rows = rows
       @revisions_by_action = {}
+      @on_sensitive_change = on_sensitive_change
     end
 
     def prepare
       @rows.each { prepare_row(_1) }
     end
 
-    def self.from_rows(rows)
-      o = new(rows)
+    def self.from_rows(rows, on_sensitive_change:)
+      o = new(rows, on_sensitive_change:)
       o.prepare
       o
     end
 
     private
+
+    attr_reader :on_sensitive_change
 
     def prepare_row(row)
       revision = build_revision(row)
@@ -37,7 +40,7 @@ module Synchronizer
       commune = all_communes[row["INSEE"]]
       return nil if commune.nil?
 
-      ObjetRevision.from_row(row, persisted_objet:, commune:)
+      ObjetRevision.new(row, persisted_objet:, commune:, on_sensitive_change:)
     end
 
     def to_s

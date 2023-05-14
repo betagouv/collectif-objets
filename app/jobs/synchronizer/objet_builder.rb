@@ -5,10 +5,12 @@ module Synchronizer
     JSON_FIELDS = %w[DENO CATE SCLE DENQ].freeze
     TEXT_FIELDS = %w[COM INSEE DPT DOSS EDIF EMPL TICO DPRO PROT].freeze
     ALL_FIELDS = (JSON_FIELDS + TEXT_FIELDS).freeze
+    SAFE_FIELDS = %w[DENO CATE SCLE DENQ TICO DPRO PROT].freeze
 
-    def initialize(row, persisted_objet: nil)
+    def initialize(row, persisted_objet: nil, safe_fields_only: false)
       @row = row
       @persisted_objet = persisted_objet
+      @safe_fields_only = safe_fields_only
     end
 
     def objet
@@ -22,26 +24,27 @@ module Synchronizer
 
     private
 
-    attr_reader :row
+    attr_reader :row, :safe_fields_only
 
     def attributes
       @attributes ||= { "palissy_REF" => row["REF"] }
-        .merge(json_fields)
-        .merge(text_fields)
+        .merge(json_values)
+        .merge(text_values)
         .merge({ "palissy_REFA" => ref_merimee })
         .merge(edifice_id.present? ? { "edifice_id" => edifice_id } : {})
     end
 
-    def json_fields
-      JSON_FIELDS.to_h do |field|
+    def json_values
+      json_fields.to_h do |field|
         arr = row[field] ? JSON.parse(row[field]) : []
         ["palissy_#{field}", arr&.any? ? arr&.join(";") : nil]
       end
     end
 
-    def text_fields
-      TEXT_FIELDS.to_h { ["palissy_#{_1}", row[_1]] }
-    end
+    def text_values = text_fields.to_h { ["palissy_#{_1}", row[_1]] }
+
+    def json_fields = safe_fields_only ? JSON_FIELDS & SAFE_FIELDS : JSON_FIELDS
+    def text_fields = safe_fields_only ? TEXT_FIELDS & SAFE_FIELDS : TEXT_FIELDS
 
     def ref_merimee
       return nil if row["REFS_MERIMEE"].blank?

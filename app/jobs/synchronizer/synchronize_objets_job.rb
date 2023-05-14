@@ -8,11 +8,13 @@ module Synchronizer
       @counters = Hash.new(0)
     end
 
+    # on_sensitive_change : :log | :apply_safe_changes | :interactive
+
     def perform(params = {})
       @logfile = File.open("tmp/synchronize-objets-#{timestamp}.log", "a+")
       limit = params.with_indifferent_access[:limit]
       @dry_run = params.with_indifferent_access[:dry_run]
-      @interactive = params.with_indifferent_access[:interactive]
+      @on_sensitive_change = params.with_indifferent_access[:on_sensitive_change]&.to_sym || :log
       code_insee = params.with_indifferent_access[:code_insee]
       ApiClientSql.objets(logger:, limit:, code_insee:).iterate_batches { synchronize_rows(_1) }
       close
@@ -20,8 +22,10 @@ module Synchronizer
 
     private
 
+    attr_reader :on_sensitive_change
+
     def synchronize_rows(rows)
-      batch = ObjetRevisionsBatch.from_rows(rows)
+      batch = ObjetRevisionsBatch.from_rows(rows, on_sensitive_change:)
       batch.revisions_by_action.each do |action, revisions|
         @counters[action] += revisions.count
         revisions.each { synchronize_revision(_1) }
@@ -48,7 +52,7 @@ module Synchronizer
 
       return true if revision.save?
 
-      return false unless @interactive
+      return false unless interactive?
 
       return false unless revision.action.to_s.ends_with?("_invalid")
 
@@ -67,6 +71,8 @@ module Synchronizer
       end
       response
     end
+
+    def interactive? = on_sensitive_change == :interactive
   end
   # rubocop:enable Rails/Output
 end
