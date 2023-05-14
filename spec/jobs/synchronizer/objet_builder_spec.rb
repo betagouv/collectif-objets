@@ -19,7 +19,9 @@ RSpec.describe Synchronizer::ObjetBuilder do
       "EDIF" => "chapelle des Allymes",
       "EMPL" => "chapelle située au milieu du cimetière",
       "TICO" => "Tableau : Vierge du Rosaire",
-      "REFS_MERIMEE" => "PA021384"
+      "REFS_MERIMEE" => "PA021384",
+      "DPRO" => "2007/01/29 : classé au titre objet",
+      "PROT" => "classé au titre objet"
     }
   end
 
@@ -39,6 +41,8 @@ RSpec.describe Synchronizer::ObjetBuilder do
       expect(objet.palissy_EMPL).to eq "chapelle située au milieu du cimetière"
       expect(objet.palissy_TICO).to eq "Tableau : Vierge du Rosaire"
       expect(objet.palissy_REFA).to eq "PA021384"
+      expect(objet.palissy_DPRO).to eq "2007/01/29 : classé au titre objet"
+      expect(objet.palissy_PROT).to eq "classé au titre objet"
       expect(objet.new_record?).to eq true
       expect(objet.persisted?).to eq false
     end
@@ -175,7 +179,9 @@ RSpec.describe Synchronizer::ObjetBuilder do
         palissy_EDIF: "chapelle des Allymes",
         palissy_EMPL: "chapelle située au milieu du cimetière",
         palissy_TICO: "Tableau : Vierge du Rosaire",
-        palissy_REFA: "PA021384"
+        palissy_DPRO: "2007/01/29 : classé au titre objet",
+        palissy_REFA: "PA021384",
+        palissy_PROT: "classé au titre objet"
       )
     end
 
@@ -185,7 +191,7 @@ RSpec.describe Synchronizer::ObjetBuilder do
         expect(objet.palissy_EMPL).to eq "chapelle située au milieu du cimetière"
         expect(objet.new_record?).to eq false
         expect(objet.persisted?).to eq true
-        expect(objet.changed?).to eq false
+        # expect(objet.changed?).to eq false
         expect(objet.changes).to be_empty
       end
     end

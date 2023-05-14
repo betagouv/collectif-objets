@@ -17,7 +17,7 @@ AllCops:
     - "lib/tasks/**/*"
     - ".irbrc"
     - "spec/rails_helper.rb"
-    
+
   SuggestExtensions: false
 
 Style/StringLiterals:
@@ -51,4 +51,7 @@ Metrics/AbcSize:
   Enabled: false
 
 Metrics/ClassLength:
+  Enabled: false
+
+Naming/AsciiIdentifiers:
   Enabled: false

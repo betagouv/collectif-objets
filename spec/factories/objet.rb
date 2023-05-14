@@ -6,14 +6,12 @@ FactoryBot.define do
     memoire_REF { "AP80L043503" }
     palissy_TICO { "La Sainte-Famille" }
     palissy_CATE { "Peinture" }
-    # palissy_INSEE { "" }
-    # palissy_COM { "" }
-    # palissy_DPT { "" }
     palissy_SCLE { "16e siècle" }
-    # palissy_DENQ { "" }
     palissy_DOSS { "Dossier individuel" }
     palissy_EDIF { "Eglise Notre-Dame-en-Vaux" }
     palissy_EMPL { "dans la nef droite" }
+    palissy_DPRO { "2007/01/29 : classé au titre objet" }
+    palissy_PROT { "classé au titre objet" }
 
     association :commune
     association :edifice

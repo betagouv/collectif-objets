@@ -10,7 +10,7 @@ class GenerateBordereauPdfJob
     dossier = Dossier.find(dossier_id)
     edifice = Edifice.find(edifice_id)
     raise unless edifice.commune == dossier.commune
-    raise unless edifice.objets.count.positive?
+    raise unless edifice.objets.classés.count.positive?
     raise unless dossier.accepted?
 
     prawn_doc = Bordereau::Pdf.new(dossier, edifice).build_prawn_doc

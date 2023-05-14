@@ -1,7 +1,12 @@
 -# locals: :commune, :edifice
 
 .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w{id: "bordereau-#{edifice.id}"}
-  %span #{edifice.nom} (#{edifice.objets.count} objet(s))
+  %span
+    #{edifice.nom}
+    - if edifice.objets.classés.count > 1
+      · #{edifice.objets.classés.count} objets classés
+    - else
+      · 1 objet classé
   - if edifice.bordereau.present?
     %span
       = link_to "Télécharger",

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_122429) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_070126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -263,6 +263,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_122429) do
     t.json "palissy_photos", default: [], array: true
     t.string "palissy_REFA"
     t.bigint "edifice_id"
+    t.string "palissy_PROT"
+    t.string "palissy_DPRO"
     t.index ["edifice_id"], name: "index_objets_on_edifice_id"
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
