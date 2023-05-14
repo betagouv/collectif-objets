@@ -30,6 +30,7 @@ module Synchronizer
 
     def synchronize_revision(revision)
       @logfile.puts(revision.log_message) if revision.log_message.present?
+      @logfile.flush
       revision.objet.save! if save_revision?(revision)
     end
 

@@ -38,6 +38,7 @@ module Bordereau
         .recensements
         .joins(:objet)
         .where(objets: { edifice_id: edifice.id })
+        .merge(Objet.classés)
         .order('objets."palissy_REF"')
     end
 

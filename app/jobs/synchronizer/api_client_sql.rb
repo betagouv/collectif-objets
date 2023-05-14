@@ -14,7 +14,7 @@ module Synchronizer
           table: "palissy",
           select_cols: "
             palissy.rowid,
-            REF, DENO, CATE, SCLE, DENQ, COM, INSEE, DPT, DOSS, EDIF, EMPL, TICO,
+            REF, DENO, CATE, SCLE, DENQ, COM, INSEE, DPT, DOSS, EDIF, EMPL, TICO, DPRO, PROT,
             group_concat(ptmerimee.REF_MERIMEE) as REFS_MERIMEE
           ",
           join: <<~SQL.squish,

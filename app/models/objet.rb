@@ -17,6 +17,7 @@ class Objet < ApplicationRecord
     joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.status = 'completed'")
       .where(recensements: { id: nil })
   }
+  scope :classés, -> { where(%("palissy_PROT" LIKE 'classé%')).where.not(%("palissy_PROT" LIKE 'déclassé%')) }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }

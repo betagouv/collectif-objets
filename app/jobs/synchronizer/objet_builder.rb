@@ -3,7 +3,7 @@
 module Synchronizer
   class ObjetBuilder
     JSON_FIELDS = %w[DENO CATE SCLE DENQ].freeze
-    TEXT_FIELDS = %w[COM INSEE DPT DOSS EDIF EMPL TICO].freeze
+    TEXT_FIELDS = %w[COM INSEE DPT DOSS EDIF EMPL TICO DPRO PROT].freeze
     ALL_FIELDS = (JSON_FIELDS + TEXT_FIELDS).freeze
 
     def initialize(row, persisted_objet: nil)
