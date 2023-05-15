@@ -586,10 +586,6 @@ fr:
     mailer:
       define_password_instructions:
         subject: "Bienvenue sur Collectif Objets, définissez votre mot de passe pour accéder à votre compte"
-  recensements:
-    etapes:
-      unfold: Comment ça marche ?
-      cta: En savoir plus…
   application_mailer_layout:
     tagline: Préservez votre patrimoine mobilier
     politesse: Bien cordialement,

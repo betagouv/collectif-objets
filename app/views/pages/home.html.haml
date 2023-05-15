@@ -57,12 +57,16 @@
       .fr-col-md-5.fr-px-12w.fr-pb-2w.co-text--center
         = vite_image_tag "images/illustrations/counter-01.svg" , class: "co--width-max-100", alt: "étape 1"
       .fr-col-md-5
-        %p.fr-text--lg= t("recensements.etapes.etape1_html")
+        %p.fr-text--lg
+          %b Je me rends sur place
+          pour recenser mes objets protégés et les prendre en photo
         %p
           = link_to "Voir les objets de ma commune", objets_path, class: "fr-icon-arrow-right-line fr-link--icon-right"
     .fr-container.fr-grid-row.fr-grid-row-gutters.fr-grid-row--middle.fr-grid-row--center.fr-my-12w
       .fr-col-md-5
-        %p.fr-text--lg= t("recensements.etapes.etape2_html")
+        %p.fr-text--lg
+          %b Je remplis le formulaire en ligne
+          sur l’emplacement et l’état actuel des objets
         %p
           = link_to "Lire le guide", guide_url
       .fr-col-md-5.fr-px-12w.fr-pb-2w.co-text--center.co-flex-md-reverse-order
@@ -71,7 +75,9 @@
       .fr-col-md-5.fr-px-12w.fr-pb-2w.co-text--center
         = vite_image_tag "images/illustrations/counter-03.svg" , class: "co--width-max-100", alt: "étape 3"
       .fr-col-md-5
-        %p.fr-text--lg= t("recensements.etapes.etape3_html")
+        %p.fr-text--lg
+          %b Je reçois des conseils d’un conservateur
+          pour assurer la pérennité de mes objets
 
   / SECTION STATS
   .co-background--light-grey.fr-py-12w.co-text--center
