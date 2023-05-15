@@ -2,8 +2,8 @@
   %section.fr-accordion
     %h3.fr-accordion__title.fr-px-1w
       %button.fr-accordion__btn{"aria-controls": "etapes-accordion", "aria-expanded": local_assigns.fetch(:expanded, false).to_s}
-        = t(".unfold")
+        Comment ça marche ?
     #etapes-accordion.fr-collapse
       = render "recensements/etapes_contenu"
       .co-text--center.fr-pt-4w
-        = link_to t(".cta"), aide_path, class: "fr-btn fr-btn--secondary"
+        = link_to "En savoir plus…", aide_path, class: "fr-btn fr-btn--secondary"
