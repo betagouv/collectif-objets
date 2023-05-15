@@ -8,6 +8,8 @@ class Edifice < ApplicationRecord
   validates :merimee_REF, uniqueness: true, if: -> { merimee_REF.present? }
   validates :slug, uniqueness: { scope: :code_insee }, if: -> { code_insee.present? }
 
+  scope :with_objets_classés, -> { where.associated(:objets).merge(Objet.classés).group("edifices.id") }
+
   def self.ordered_by_nom
     order(Arel.sql("LOWER(UNACCENT(edifices.nom))"))
   end

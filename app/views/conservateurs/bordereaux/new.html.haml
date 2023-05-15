@@ -8,11 +8,16 @@
           Vous pouvez générer des bordereaux de récolement pour les différents édifices de la commune.
           Les champs seront préremplis avec les données de recensement que vous avez précédemment analysées et acceptées.
         %p.fr-mb-4w
-          💡
-          %b Seuls les objets classés apparaissent dans le bordereau de récolement
+          %span.fr-icon-info-line(aria-hidden="true")
+          %b Seuls les objets classés apparaissent dans les bordereaux de récolement
           , pas les objets inscrits.
 
-          - @commune.edifices.order(:nom).each do |edifice|
+          - if @commune.edifices.with_objets_classés.empty?
+            %p
+              %span.fr-icon-warning-line(aria-hidden="true")
+              Il n’y a aucun objet classé dans cette commune.
+
+          - @commune.edifices.with_objets_classés.order(:nom).each do |edifice|
             = turbo_stream_from edifice
             = render "conservateurs/bordereaux/edifice", edifice:, commune: @commune
   - else
