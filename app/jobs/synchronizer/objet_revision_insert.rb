@@ -4,10 +4,6 @@ module Synchronizer
   class ObjetRevisionInsert
     include ObjetRevisionConcern
 
-    validate :validate_objet
-    validate :validate_tico_en_cours
-    validate :validate_commune_inactive_or_accepted
-
     def initialize(row, commune:, interactive: false, logfile: nil, dry_run: false)
       @row = row
       @commune = commune
@@ -16,40 +12,42 @@ module Synchronizer
       @dry_run = dry_run
     end
 
-    def objet
-      @objet ||= ObjetBuilder.new(row).objet
-    end
-
-    def action
-      return :not_changed unless changed?
-
-      valid? ? :create : :create_invalid
-    end
-
     def synchronize
-      log log_message
-      objet.save! if should_save?
+      return false unless check_objet_valid && check_safe_insert
+
+      objet.save! unless dry_run?
+      @action = :create
+      log "création de l’objet #{palissy_ref} avec #{objet_builder.attributes.except('palissy_REF')}"
+      true
     end
 
-    def log_message
-      case action
-      when :create
-        "création de l’objet #{ref} avec #{objet_attributes_s}"
-      when :create_invalid
-        "création interdite de l’objet #{ref} car #{errors_s}. attributs : #{objet_attributes_s}"
-      end
+    def objet
+      @objet ||= Objet.new(objet_builder.attributes)
     end
 
     private
 
-    def should_save?
-      !@dry_run && changed? && (valid? || interactive_validation?)
+    def check_objet_valid
+      return true if objet.valid?
+
+      @action = :create_rejected_invalid
+      log "création de l'objet #{palissy_ref} rejetée car l’objet n'est pas valide " \
+          ": #{objet.errors.full_messages.to_sentence}"
+      false
     end
 
-    def validate_commune_inactive_or_accepted
-      return true if commune.inactive? || commune.dossier&.accepted?
+    def check_safe_insert
+      return true if commune.inactive? || commune.dossier&.accepted? || interactive_validation?
 
-      @errors.add(:base, "la commune #{commune} est #{commune.status}")
+      @action = :create_rejected_commune_active
+      message = "création de l'objet #{palissy_ref} rejetée car la commune #{commune} est #{commune.status}"
+      message += " et son dossier est #{commune.dossier.status}" if commune.completed?
+      log message
+      false
+    end
+
+    def objet_builder
+      @objet_builder ||= ObjetBuilder.new(row)
     end
   end
 end

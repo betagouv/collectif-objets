@@ -5,8 +5,9 @@ module Synchronizer
     extend ActiveSupport::Concern
 
     included do
-      include ActiveModel::Validations
-      delegate :changed?, to: :objet
+      delegate :changed?, :changes, :palissy_ref, to: :objet_builder
+
+      attr_reader :action
 
       private
 
@@ -14,18 +15,6 @@ module Synchronizer
     end
 
     private
-
-    def validate_objet
-      return true if objet.valid?
-
-      @errors.add(:base, "l'objet n'est pas valide : ")
-    end
-
-    def validate_tico_en_cours
-      return true if objet.palissy_TICO != "Traitement en cours"
-
-      @errors.add(:base, "l'objet est en cours de traitement par POP")
-    end
 
     def log(message)
       return if logfile.nil? || message.blank?
@@ -52,10 +41,7 @@ module Synchronizer
     end
     # rubocop:enable Rails/Output
 
-    def ref = objet.palissy_REF
-    def errors_s = errors.full_messages.to_sentence
-    def objet_attributes_s = objet.attributes.except("palissy_REF").compact
     def interactive? = interactive
-    def dry_run? = interactive
+    def dry_run? = dry_run
   end
 end

@@ -6,20 +6,9 @@ module Synchronizer
     TEXT_FIELDS = %w[COM INSEE DPT DOSS EDIF EMPL TICO DPRO PROT].freeze
     ALL_FIELDS = (JSON_FIELDS + TEXT_FIELDS).freeze
 
-    def initialize(row, persisted_objet: nil, without_commune_change: false)
+    def initialize(row, persisted_objet: nil)
       @row = row
       @persisted_objet = persisted_objet
-      @without_commune_change = without_commune_change
-    end
-
-    def attributes
-      if persisted_objet
-        except_fields = ["REF"]
-        except_fields += %w[COM INSEE DPT EDIF EMPL] if without_commune_change
-        all_attributes.except(*except_fields.map { "palissy_#{_1}" })
-      else
-        all_attributes
-      end
     end
 
     def changes
@@ -28,17 +17,21 @@ module Synchronizer
       attributes.diff persisted_objet.attributes.slice(*attributes.keys)
     end
 
-    private
+    def changed? = !changes.empty?
 
-    attr_reader :row, :without_commune_change, :persisted_objet
-
-    def all_attributes
-      @all_attributes ||= { "palissy_REF" => row["REF"] }
+    def attributes
+      @attributes ||= { "palissy_REF" => row["REF"] }
         .merge(json_values)
         .merge(text_values)
         .merge({ "palissy_REFA" => ref_merimee })
         .merge(edifice_id.present? ? { "edifice_id" => edifice_id } : {})
     end
+
+    def palissy_ref = attributes["palissy_REF"]
+
+    private
+
+    attr_reader :row, :without_commune_change, :persisted_objet
 
     def json_values
       JSON_FIELDS.to_h do |field|
