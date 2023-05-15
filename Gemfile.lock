@@ -244,7 +244,7 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.2)
     minitest (5.18.0)
-    mjml-rails (4.8.0)
+    mjml-rails (4.9.0)
     msgpack (1.6.0)
     net-imap (0.3.4)
       date
@@ -494,7 +494,7 @@ DEPENDENCIES
   listen
   lookbook (~> 2.0.1)
   matrix
-  mjml-rails (~> 4.8)
+  mjml-rails (~> 4.9)
   pagy (~> 6.0)
   pg (~> 1.5)
   pg_search
