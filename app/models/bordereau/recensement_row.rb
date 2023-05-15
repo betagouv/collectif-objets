@@ -10,7 +10,7 @@ module Bordereau
       [
         palissy_REF,
         denomination_cell,
-        "", # date de protection
+        palissy_DPRO, # date de protection
         etat_sanitaire_cell,
         recensement.analyse_notes,
         observations_proprietaire_cell,
@@ -24,7 +24,7 @@ module Bordereau
 
     delegate :objet, :absent?, :autre_edifice?, :recensable?, :analyse_etat_sanitaire, :etat_sanitaire, :localisation,
              :mauvaise_securisation?, to: :recensement
-    delegate :palissy_REF, :palissy_DENO, :palissy_SCLE, :palissy_CATE, to: :objet
+    delegate :palissy_REF, :palissy_DENO, :palissy_SCLE, :palissy_CATE, :palissy_DPRO, to: :objet
 
     def denomination_cell
       materiaux = palissy_CATE ? palissy_CATE.split(";").compact_blank.join(", ") : ""
