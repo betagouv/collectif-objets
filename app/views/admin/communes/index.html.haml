@@ -50,8 +50,8 @@
         .fr-mb-2w= link_to "réinitialiser les filtres", admin_communes_path
       = search_form_for @ransack, url: admin_communes_path, builder: FormBuilderDsfr do |f|
         .fr-input-group
-          = f.label :nom_cont, "Nom contient"
-          = f.search_field :nom_cont
+          = f.label :nom_unaccented_cont, "Nom contient"
+          = f.search_field :nom_unaccented_cont
         .fr-input-group
           = f.label :code_insee_eq, "Code INSEE égal à"
           = f.search_field :code_insee_eq
