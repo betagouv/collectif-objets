@@ -1,30 +1,28 @@
 # frozen_string_literal: true
 
-class MissingCommuneError < StandardError; end
-
 module Synchronizer
   class ObjetRevisionsBatch
     attr_reader :revisions_by_action
 
-    def initialize(rows, on_sensitive_change:)
+    def initialize(rows, revision_kwargs:)
       @rows = rows
       @revisions_by_action = {}
-      @on_sensitive_change = on_sensitive_change
+      @revision_kwargs = revision_kwargs
     end
 
     def prepare
       @rows.each { prepare_row(_1) }
     end
 
-    def self.from_rows(rows, on_sensitive_change:)
-      o = new(rows, on_sensitive_change:)
+    def self.from_rows(rows, revision_kwargs:)
+      o = new(rows, revision_kwargs:)
       o.prepare
       o
     end
 
     private
 
-    attr_reader :on_sensitive_change
+    attr_reader :revision_kwargs
 
     def prepare_row(row)
       revision = build_revision(row)
@@ -36,11 +34,14 @@ module Synchronizer
 
     def build_revision(row)
       persisted_objet = persisted_objets[row["REF"]]
-      # commune = all_communes[row["INSEE"]] || raise(MissingCommuneError, row)
       commune = all_communes[row["INSEE"]]
       return nil if commune.nil?
 
-      ObjetRevision.new(row, persisted_objet:, commune:, on_sensitive_change:)
+      if persisted_objet
+        ObjetRevisionUpdate.new(row, persisted_objet:, commune:, **revision_kwargs)
+      else
+        ObjetRevisionInsert.new(row, commune:, **revision_kwargs)
+      end
     end
 
     def to_s

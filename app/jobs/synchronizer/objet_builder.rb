@@ -5,29 +5,35 @@ module Synchronizer
     JSON_FIELDS = %w[DENO CATE SCLE DENQ].freeze
     TEXT_FIELDS = %w[COM INSEE DPT DOSS EDIF EMPL TICO DPRO PROT].freeze
     ALL_FIELDS = (JSON_FIELDS + TEXT_FIELDS).freeze
-    SAFE_FIELDS = %w[DENO CATE SCLE DENQ TICO DPRO PROT].freeze
 
-    def initialize(row, persisted_objet: nil, safe_fields_only: false)
+    def initialize(row, persisted_objet: nil, without_commune_change: false)
       @row = row
       @persisted_objet = persisted_objet
-      @safe_fields_only = safe_fields_only
+      @without_commune_change = without_commune_change
     end
 
-    def objet
-      if @persisted_objet.present?
-        @persisted_objet.assign_attributes(attributes.except("palissy_REF"))
-        @persisted_objet
+    def attributes
+      if persisted_objet
+        except_fields = ["REF"]
+        except_fields += %w[COM INSEE DPT EDIF EMPL] if without_commune_change
+        all_attributes.except(*except_fields.map { "palissy_#{_1}" })
       else
-        Objet.new(attributes)
+        all_attributes
       end
+    end
+
+    def changes
+      return nil unless persisted_objet
+
+      attributes.diff persisted_objet.attributes.slice(*attributes.keys)
     end
 
     private
 
-    attr_reader :row, :safe_fields_only
+    attr_reader :row, :without_commune_change, :persisted_objet
 
-    def attributes
-      @attributes ||= { "palissy_REF" => row["REF"] }
+    def all_attributes
+      @all_attributes ||= { "palissy_REF" => row["REF"] }
         .merge(json_values)
         .merge(text_values)
         .merge({ "palissy_REFA" => ref_merimee })
@@ -35,16 +41,13 @@ module Synchronizer
     end
 
     def json_values
-      json_fields.to_h do |field|
+      JSON_FIELDS.to_h do |field|
         arr = row[field] ? JSON.parse(row[field]) : []
         ["palissy_#{field}", arr&.any? ? arr&.join(";") : nil]
       end
     end
 
-    def text_values = text_fields.to_h { ["palissy_#{_1}", row[_1]] }
-
-    def json_fields = safe_fields_only ? JSON_FIELDS & SAFE_FIELDS : JSON_FIELDS
-    def text_fields = safe_fields_only ? TEXT_FIELDS & SAFE_FIELDS : TEXT_FIELDS
+    def text_values = TEXT_FIELDS.to_h { ["palissy_#{_1}", row[_1]] }
 
     def ref_merimee
       return nil if row["REFS_MERIMEE"].blank?
@@ -56,7 +59,7 @@ module Synchronizer
     end
 
     def edifice_id
-      return nil if @persisted_objet&.edifice_id&.present? || row["INSEE"].nil?
+      return nil if persisted_objet&.edifice_id&.present? || row["INSEE"].nil?
 
       merimee_edifice&.id || custom_edifice.id
     end
@@ -66,7 +69,9 @@ module Synchronizer
 
       edifice = Edifice.find_or_create_and_synchronize!(ref_merimee)
 
-      return edifice if edifice.code_insee == row["INSEE"]
+      return nil if edifice.code_insee != row["INSEE"]
+
+      edifice
     end
 
     def custom_edifice

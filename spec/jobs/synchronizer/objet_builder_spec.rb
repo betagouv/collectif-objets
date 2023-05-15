@@ -26,25 +26,23 @@ RSpec.describe Synchronizer::ObjetBuilder do
   end
 
   context "all fields are present" do
-    let(:objet) { described_class.new(base_row).objet }
+    let(:attributes) { described_class.new(base_row).attributes }
     it "parses correctly" do
-      expect(objet.palissy_REF).to eq("PM01000001")
-      expect(objet.palissy_DENO).to eq "tableau"
-      expect(objet.palissy_CATE).to eq "peinture"
-      expect(objet.palissy_COM).to eq "Ambérieu-en-Bugey"
-      expect(objet.palissy_INSEE).to eq "01004"
-      expect(objet.palissy_DPT).to eq "01"
-      expect(objet.palissy_SCLE).to eq "1er quart 17e siècle"
-      expect(objet.palissy_DENQ).to eq "2001"
-      expect(objet.palissy_DOSS).to eq "dossier individuel"
-      expect(objet.palissy_EDIF).to eq "chapelle des Allymes"
-      expect(objet.palissy_EMPL).to eq "chapelle située au milieu du cimetière"
-      expect(objet.palissy_TICO).to eq "Tableau : Vierge du Rosaire"
-      expect(objet.palissy_REFA).to eq "PA021384"
-      expect(objet.palissy_DPRO).to eq "2007/01/29 : classé au titre objet"
-      expect(objet.palissy_PROT).to eq "classé au titre objet"
-      expect(objet.new_record?).to eq true
-      expect(objet.persisted?).to eq false
+      expect(attributes["palissy_REF"]).to eq "PM01000001"
+      expect(attributes["palissy_DENO"]).to eq "tableau"
+      expect(attributes["palissy_CATE"]).to eq "peinture"
+      expect(attributes["palissy_COM"]).to eq "Ambérieu-en-Bugey"
+      expect(attributes["palissy_INSEE"]).to eq "01004"
+      expect(attributes["palissy_DPT"]).to eq "01"
+      expect(attributes["palissy_SCLE"]).to eq "1er quart 17e siècle"
+      expect(attributes["palissy_DENQ"]).to eq "2001"
+      expect(attributes["palissy_DOSS"]).to eq "dossier individuel"
+      expect(attributes["palissy_EDIF"]).to eq "chapelle des Allymes"
+      expect(attributes["palissy_EMPL"]).to eq "chapelle située au milieu du cimetière"
+      expect(attributes["palissy_TICO"]).to eq "Tableau : Vierge du Rosaire"
+      expect(attributes["palissy_REFA"]).to eq "PA021384"
+      expect(attributes["palissy_DPRO"]).to eq "2007/01/29 : classé au titre objet"
+      expect(attributes["palissy_PROT"]).to eq "classé au titre objet"
     end
   end
 
@@ -52,9 +50,9 @@ RSpec.describe Synchronizer::ObjetBuilder do
     let(:row) do
       base_row.merge("REFS_MERIMEE" => "PI0389756,PA012893")
     end
-    let(:objet) { described_class.new(row).objet }
+    let(:attributes) { described_class.new(row).attributes }
     it "should get the PA as REFA" do
-      expect(objet.palissy_REFA).to eq "PA012893"
+      expect(attributes["palissy_REFA"]).to eq "PA012893"
     end
   end
 
@@ -62,9 +60,9 @@ RSpec.describe Synchronizer::ObjetBuilder do
     let(:row) do
       base_row.merge("REFS_MERIMEE" => "PA0389756,PA012893")
     end
-    let(:objet) { described_class.new(row).objet }
+    let(:attributes) { described_class.new(row).attributes }
     it "should not get any REFA" do
-      expect(objet.palissy_REFA).to eq nil
+      expect(attributes["palissy_REFA"]).to eq nil
     end
   end
 
@@ -75,13 +73,13 @@ RSpec.describe Synchronizer::ObjetBuilder do
         Edifice.where(merimee_REF: "PA021384").update!(code_insee: "01004")
       end
     end
-    it "should create the edifice and set the objet.edifice_id" do
+    it "should create the edifice and set the edifice_id" do
       expect(Edifice.count).to eq 0
-      objet = described_class.new(base_row).objet
+      attributes = described_class.new(base_row).attributes
       edifice = Edifice.find_by(merimee_REF: "PA021384")
       expect(edifice.merimee_REF).to eq "PA021384"
       expect(edifice.code_insee).to eq "01004"
-      expect(objet.edifice).to eq edifice
+      expect(attributes["edifice_id"]).to eq edifice.id
     end
   end
 
@@ -94,13 +92,13 @@ RSpec.describe Synchronizer::ObjetBuilder do
     end
     it "should create both edifice and set the objet.edifice_id" do
       expect(Edifice.count).to eq 0
-      objet = described_class.new(row).objet
+      attributes = described_class.new(row).attributes
       edifice_merimee = Edifice.find_by(merimee_REF: "PA021384")
       expect(edifice_merimee.code_insee).to eq "01005"
       edifice_custom = Edifice.find_by(code_insee: "01004")
       expect(edifice_custom).not_to eq edifice_merimee
       expect(edifice_custom.merimee_REF).to eq nil
-      expect(objet.edifice).to eq edifice_custom
+      expect(attributes["edifice_id"]).to eq edifice_custom.id
     end
   end
 
@@ -110,10 +108,10 @@ RSpec.describe Synchronizer::ObjetBuilder do
     it "should re-use the existing edifice" do
       expect(Synchronizer::SynchronizeEdificeJob).not_to receive(:perform_inline)
       expect(Edifice.count).to eq 1
-      objet = described_class.new(row).objet
+      attributes = described_class.new(row).attributes
       expect(Edifice.count).to eq 1
-      expect(objet.edifice).to eq edifice
-      expect(objet.edifice.nom).to eq "Montmir"
+      expect(attributes["edifice_id"]).to eq edifice.id
+      expect(Edifice.find(attributes["edifice_id"]).nom).to eq "Montmir"
     end
   end
 
@@ -123,12 +121,13 @@ RSpec.describe Synchronizer::ObjetBuilder do
     it "should create a custom edifice" do
       expect(Synchronizer::SynchronizeEdificeJob).not_to receive(:perform_inline)
       expect(Edifice.count).to eq 1
-      objet = described_class.new(row).objet
+      attributes = described_class.new(row).attributes
       expect(Edifice.count).to eq 2
-      expect(objet.edifice).not_to eq edifice
-      expect(objet.edifice.merimee_REF).to eq nil
-      expect(objet.edifice.code_insee).to eq "01004"
-      expect(objet.edifice.nom).to eq "eglise de montmirail"
+      expect(attributes["edifice_id"]).not_to eq edifice.id
+      edifice2 = Edifice.find(attributes["edifice_id"])
+      expect(edifice2.merimee_REF).to eq nil
+      expect(edifice2.code_insee).to eq "01004"
+      expect(edifice2.nom).to eq "eglise de montmirail"
     end
   end
 
@@ -139,12 +138,12 @@ RSpec.describe Synchronizer::ObjetBuilder do
     it "should create both edifice and set the objet.edifice_id" do
       expect(Synchronizer::SynchronizeEdificeJob).not_to receive(:perform_inline)
       expect(Edifice.count).to eq 2
-      objet = described_class.new(row).objet
+      attributes = described_class.new(row).attributes
       expect(Edifice.count).to eq 3
-      edifice_custom = objet.edifice
-      expect(edifice_custom.nom).to eq "eglise de montmirail"
-      expect(edifice_custom.slug).to eq "eglise-montmirail"
-      expect(edifice_custom.merimee_REF).to eq nil
+      edifice2 = Edifice.find attributes["edifice_id"]
+      expect(edifice2.nom).to eq "eglise de montmirail"
+      expect(edifice2.slug).to eq "eglise-montmirail"
+      expect(edifice2.merimee_REF).to eq nil
     end
   end
 
@@ -155,10 +154,11 @@ RSpec.describe Synchronizer::ObjetBuilder do
     it "should re-use the existing edifice" do
       expect(Synchronizer::SynchronizeEdificeJob).not_to receive(:perform_inline)
       expect(Edifice.count).to eq 2
-      objet = described_class.new(row).objet
+      attributes = described_class.new(row).attributes
       expect(Edifice.count).to eq 2
-      expect(objet.edifice).to eq edifice
-      expect(objet.edifice.nom).to eq "Montmir"
+      edifice2 = Edifice.find attributes["edifice_id"]
+      expect(edifice2).to eq edifice
+      expect(edifice2.nom).to eq "Montmir"
     end
   end
 
@@ -184,42 +184,66 @@ RSpec.describe Synchronizer::ObjetBuilder do
         palissy_PROT: "classé au titre objet"
       )
     end
+    let(:objet_builder) { described_class.new(base_row, persisted_objet:) }
+    let(:attributes) { objet_builder.attributes }
+    let(:changes) { objet_builder.changes }
 
     context "no changes" do
-      let(:objet) { described_class.new(base_row, persisted_objet:).objet }
       it "should have no changes" do
-        expect(objet.palissy_EMPL).to eq "chapelle située au milieu du cimetière"
-        expect(objet.new_record?).to eq false
-        expect(objet.persisted?).to eq true
-        # expect(objet.changed?).to eq false
-        expect(objet.changes).to be_empty
+        expect(attributes["palissy_EMPL"]).to eq "chapelle située au milieu du cimetière"
+        expect(changes).to be_empty
       end
     end
 
     context "some changes" do
-      let(:row) { base_row.merge("DENO" => '["tableau bleu et jaune"]', "EDIF" => "mairie") }
-      let(:objet) { described_class.new(row, persisted_objet:).objet }
+      let(:row) { base_row.merge("DENO" => '["tableau bleu et jaune"]', "DENQ" => %(["2021"])) }
+      let(:attributes) { described_class.new(row, persisted_objet:).attributes }
       it "should have applied changes" do
-        expect(objet.palissy_DENO).to eq "tableau bleu et jaune"
-        expect(objet.palissy_EDIF).to eq "mairie"
-        expect(objet.new_record?).to eq false
-        expect(objet.persisted?).to eq true
-        expect(objet.changed?).to eq true
-        expect(objet.changes).not_to be_empty
+        expect(attributes["palissy_DENO"]).to eq "tableau bleu et jaune"
+        expect(attributes["palissy_DENQ"]).to eq "2021"
+        expect(attributes["changes"]).not_to be_empty
       end
     end
 
-    context "some changes with safe_fields_only" do
-      let(:row) { base_row.merge("DENO" => '["tableau bleu et jaune"]', "INSEE" => "01201", "EDIF" => "mairie") }
-      let(:objet) { described_class.new(row, persisted_objet:, safe_fields_only: true).objet }
-      it "should have applied safe changes only" do
-        expect(objet.palissy_DENO).to eq "tableau bleu et jaune" # DENO is safe to change
-        expect(objet.palissy_INSEE).to eq "01004" # INSEE is not safe to change
-        expect(objet.palissy_EDIF).to eq "chapelle des Allymes" # EDIF is not safe to change
-        expect(objet.new_record?).to eq false
-        expect(objet.persisted?).to eq true
-        expect(objet.changed?).to eq true
-        expect(objet.changes).not_to be_empty
+    context "commune change" do
+      let(:row) do
+        base_row.merge(
+          "INSEE" => "01299",
+          "COM" => "Nogent",
+          "EDIF" => "Église st-Jean",
+          "EMPL" => "au fond à gauche",
+          "TICO" => "Rosarium"
+        )
+      end
+      let(:attributes) { described_class.new(row, persisted_objet:).attributes }
+      it "should have applied changes" do
+        expect(attributes["palissy_INSEE"]).to eq "01299"
+        expect(attributes["palissy_COM"]).to eq "Nogent"
+        expect(attributes["palissy_EDIF"]).to eq "Église st-Jean"
+        expect(attributes["palissy_EMPL"]).to eq "au fond à gauche"
+        expect(attributes["palissy_TICO"]).to eq "Rosarium"
+        expect(attributes["changes"]).not_to be_empty
+      end
+    end
+
+    context "commune change" do
+      let(:row) do
+        base_row.merge(
+          "INSEE" => "01299",
+          "COM" => "Nogent",
+          "EDIF" => "Église st-Jean",
+          "EMPL" => "au fond à gauche",
+          "TICO" => "Rosarium"
+        )
+      end
+      let(:attributes) { described_class.new(row, persisted_objet:, without_commune_change: true).attributes }
+      it "should have applied changes" do
+        expect(attributes["palissy_INSEE"]).to eq "01004"
+        expect(attributes["palissy_COM"]).to eq "Ambérieu-en-Bugey"
+        expect(attributes["palissy_EDIF"]).to eq "chapelle des Allymes"
+        expect(attributes["palissy_EMPL"]).to eq "chapelle située au milieu du cimetière"
+        expect(attributes["palissy_TICO"]).to eq "Rosarium"
+        expect(attributes["changes"]).not_to be_empty
       end
     end
   end
