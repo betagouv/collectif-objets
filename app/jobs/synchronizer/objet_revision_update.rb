@@ -60,15 +60,15 @@ module Synchronizer
     end
 
     def unsafe_commune_change_reason
-      return "changement de commune vers commune en cours de recensement" if commune_after_update.started?
+      return "commune destinataire en cours de recensement" if commune_after_update.started?
 
       if commune_after_update.completed? && commune_after_update.dossier.submitted?
-        return "changement de commune vers commune avec dossier en cours d’analyse"
+        return "commune destinataire avec dossier en cours d’analyse"
       end
 
-      return "changement de commune depuis une commune en cours de recensement" if commune_before_update.started?
+      return "commune d’origine en cours de recensement" if commune_before_update.started?
 
-      return "changement de commune depuis une commune ayant fini de recenser" if commune_before_update.completed?
+      return "commune d’origine ayant fini de recenser" if commune_before_update.completed?
 
       nil
     end
@@ -81,10 +81,11 @@ module Synchronizer
     def set_update_action_and_log
       message = "mise à jour de l’objet #{palissy_ref}"
       if apply_commune_change?
-        message += "avec changement de commune appliqué"
+        message += " avec changement de commune appliqué #{commune_before_update} → #{commune_after_update} "
         @action = :update_with_commune_change
       elsif ignore_commune_change?
-        message += "(changement de commune imprudent ignoré)"
+        message += " avec changement de commune ignoré #{commune_before_update} → #{commune_after_update} " \
+                   "(#{unsafe_commune_change_reason})"
         @action = :update_ignoring_commune_change
       else
         @action = :update

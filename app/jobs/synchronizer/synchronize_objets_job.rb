@@ -20,14 +20,16 @@ module Synchronizer
 
     private
 
-    attr_reader :interactive, :logfile
+    attr_reader :interactive, :logfile, :dry_run
 
     def synchronize_rows(rows)
-      batch = ObjetRevisionsBatch.from_rows(rows, revision_kwargs: { interactive:, logfile: })
-      batch.revisions_by_action.each do |action, revisions|
-        @counters[action] += revisions.count
-        revisions.each(&:synchronize)
-      end
+      ObjetRevisionsBatch
+        .new(rows, revision_kwargs: { interactive:, logfile:, dry_run: })
+        .revisions
+        .each do |revision|
+          revision.synchronize
+          @counters[revision.action] += 1
+        end
     end
 
     def close
@@ -35,8 +37,6 @@ module Synchronizer
       @logfile.close
     end
 
-    def timestamp
-      Time.zone.now.strftime("%Y_%m_%d_%HH%M")
-    end
+    def timestamp = Time.zone.now.strftime("%Y_%m_%d_%HH%M")
   end
 end

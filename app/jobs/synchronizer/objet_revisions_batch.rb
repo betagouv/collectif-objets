@@ -2,35 +2,18 @@
 
 module Synchronizer
   class ObjetRevisionsBatch
-    attr_reader :revisions_by_action
-
     def initialize(rows, revision_kwargs:)
       @rows = rows
-      @revisions_by_action = {}
       @revision_kwargs = revision_kwargs
     end
 
-    def prepare
-      @rows.each { prepare_row(_1) }
-    end
-
-    def self.from_rows(rows, revision_kwargs:)
-      o = new(rows, revision_kwargs:)
-      o.prepare
-      o
+    def revisions
+      rows.map { build_revision(_1) }.compact
     end
 
     private
 
-    attr_reader :revision_kwargs
-
-    def prepare_row(row)
-      revision = build_revision(row)
-      return if revision.nil?
-
-      @revisions_by_action[revision.action] ||= []
-      @revisions_by_action[revision.action] << revision
-    end
+    attr_reader :rows, :revision_kwargs
 
     def build_revision(row)
       persisted_objet = persisted_objets[row["REF"]]
