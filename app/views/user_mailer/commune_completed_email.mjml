@@ -25,7 +25,7 @@
       <%= I18n.t("user_mailer.commune_completed.consulter") %>
     </mj-text>
 
-    <mj-button href="<%= root_url %>" background-color="rgb(0,0,145)">
+    <mj-button href="<%= @login_url %>" background-color="rgb(0,0,145)">
       <%= I18n.t("user_mailer.commune_completed.cta") %>
       </mj-button>
   </mj-column>
