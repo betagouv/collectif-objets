@@ -3,8 +3,8 @@
   = search_form_for ransack, url: conservateurs_departement_path(departement), method: "GET", builder: FormBuilderDsfr, data: { turbo_action: "advance" } do |f|
     .co-flex.co-flex--align-items-end
       %div
-        = f.label :nom_cont, "Nom de commune"
-        = f.text_field :nom_cont, onchange: "this.form.requestSubmit()"
+        = f.label :nom_unaccented_cont, "Nom de commune"
+        = f.text_field :nom_unaccented_cont, onchange: "this.form.requestSubmit()"
       %div
         %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
       .fr-pl-3w

@@ -18,9 +18,9 @@ module Conservateurs
         # @communes_search = Co::Conservateurs::CommunesSearch.new(
         #   @departement, params, scoped_communes: policy_scope(Commune)
         # )
-        @ransack = Commune.ransack(params[:q])
+        @ransack = policy_scope(Commune).where(departement_code: @departement.code).ransack(params[:q])
         @pagy, @communes = pagy \
-          @ransack.result.include_objets_count.include_objets_recenses_count.joins(:dossier),
+          @ransack.result.include_objets_count.include_objets_recenses_count.includes(:dossier),
           items: 20
       end
     end
