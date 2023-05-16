@@ -21,8 +21,8 @@
               %th= sort_link @ransack, :nom, "Commune", data: { turbo_action: "advance" }
               %th= sort_link @ransack, :objets_count, "Objets", data: { turbo_action: "advance" }
               %th= sort_link @ransack, :recensements_prioritaires_count, "Objets prioritaires", data: { turbo_action: "advance" }
-              %th= sort_link @ransack, "communes.status", "Recensement", data: { turbo_action: "advance" }
-              %th= sort_link @ransack, "dossiers.status", "Analyse", data: { turbo_action: "advance" }
+              %th= sort_link @ransack, "status", "Recensement", data: { turbo_action: "advance" }
+              %th= sort_link @ransack, "dossier_status", "Analyse", data: { turbo_action: "advance" }
           %tbody
             - communes.each do |commune|
               %tr

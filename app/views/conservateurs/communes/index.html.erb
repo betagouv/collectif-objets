@@ -1,8 +1,0 @@
-<div class="fr-container fr-grid-row fr-grid-row--center">
-  <div class="fr-col-md-8">
-    <h1>
-      <%= t("conservateurs.communes.index.title", departement: @departement) %>
-    </h1>
-    <%= render Conservateurs::CommunesSearchComponent.new(ransack: @ransack) %>
-  </div>
-</div>

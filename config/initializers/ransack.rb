@@ -9,4 +9,11 @@ Ransack.configure do |config|
      validator: proc { |s| s.present? },
      compounds: true,
      type: :string
+
+
+  config.custom_arrows = {
+    up_arrow: '<span class="fr-icon-arrow-up-s-fill" aria-hidden="true"></span>',
+    down_arrow: '<span class="fr-icon-arrow-down-s-fill" aria-hidden="true"></span>',
+    default_arrow: '<span class="fr-icon-arrow-down-s-line" aria-hidden="true"></span>'
+  }
 end

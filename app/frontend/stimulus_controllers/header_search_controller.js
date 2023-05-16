@@ -24,10 +24,10 @@ export default class extends Controller {
 
   hideSpinner() {
     this.toggleSpinner(false)
-    this.resultsTarget.classList.toggle("hide", false)
+    this.hasResultsTarget && this.resultsTarget.classList.toggle("hide", false)
   }
 
   hideResults() {
-    this.resultsTarget.classList.toggle("hide", true)
+    this.hasResultsTarget && this.resultsTarget.classList.toggle("hide", true)
   }
 }
