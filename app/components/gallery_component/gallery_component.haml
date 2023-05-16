@@ -19,7 +19,7 @@
 
     - if count > 1
       .co-thumbs
-        - photos.from(1).to(thumbs_count - 1).each_with_index do |photo, index|
+        - photos.from(1).to(thumbs_count).each_with_index do |photo, index|
           .co-gallery-thumb
             = link_to( |
               photo.url, |
@@ -56,3 +56,8 @@
 - if display_description? && first_description
   %p.co-text--italic.fr-text--sm.fr-mt-2w
     = first_description
+
+- if display_credits? && credits.any?
+  .co-text--muted.fr-mt-1w.fr-text--sm
+    - credits.each do |credit|
+      %div= credit
