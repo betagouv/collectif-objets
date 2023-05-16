@@ -1,6 +1,7 @@
--# autoscroll: true, autoscroll_block: "start"
+-# locals: (ransack:, departement:, communes:, pagy:, query_present:)
+
 = turbo_frame_tag "communes-search" do
-  = search_form_for ransack, url: conservateurs_departement_path(departement), method: "GET", builder: FormBuilderDsfr, data: { turbo_action: "advance" } do |f|
+  = search_form_for ransack, url: conservateurs_departement_path(departement), method: "GET", builder: FormBuilderDsfr, data: { turbo_action: "replace" } do |f|
     .co-flex.co-flex--align-items-end
       %div
         = f.label :nom_unaccented_cont, "Nom de commune"
@@ -10,6 +11,9 @@
       .fr-pl-3w
         = f.label :status_eq, "État du recensement"
         = f.select :status_eq, communes_statuses_options_for_select(departement:), {}, onchange: "this.form.requestSubmit()"
+      - if query_present
+        .fr-pl-3w
+          = link_to "réinitialiser les filtres", conservateurs_departement_path(departement), class: "fr-link"
     - if pagy.count == 0
       %p.co-text--italic.fr-py-8w
         Aucune commune trouvée
@@ -18,11 +22,11 @@
         %table
           %thead
             %tr
-              %th= sort_link @ransack, :nom, "Commune", data: { turbo_action: "advance" }
-              %th= sort_link @ransack, :objets_count, "Objets", data: { turbo_action: "advance" }
-              %th= sort_link @ransack, :recensements_prioritaires_count, "Objets prioritaires", data: { turbo_action: "advance" }
-              %th= sort_link @ransack, "status", "Recensement", data: { turbo_action: "advance" }
-              %th= sort_link @ransack, "dossier_status", "Analyse", data: { turbo_action: "advance" }
+              %th= sort_link ransack, :nom, "Commune", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :objets_count, "Objets", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :recensements_prioritaires_count, "Objets prioritaires", data: { turbo_action: "replace" }
+              %th= sort_link ransack, "status", "Recensement", data: { turbo_action: "replace" }
+              %th= sort_link ransack, "dossier_status", "Analyse", data: { turbo_action: "replace" }
           %tbody
             - communes.each do |commune|
               %tr

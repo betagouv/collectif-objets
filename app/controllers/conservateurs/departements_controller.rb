@@ -22,6 +22,7 @@ module Conservateurs
           .include_objets_recenses_count
           .ransack(params[:q])
         @pagy, @communes = pagy @ransack.result, items: 20
+        @query_present = params[:q].present?
       end
     end
 
