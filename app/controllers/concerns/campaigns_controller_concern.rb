@@ -2,6 +2,7 @@
 
 module CampaignsControllerConcern
   extend ActiveSupport::Concern
+  include ActionView::Helpers::SanitizeHelper
 
   def show; end
 
@@ -10,7 +11,7 @@ module CampaignsControllerConcern
   def edit; end
 
   def create
-    @campaign = Campaign.new(**campaign_params)
+    @campaign = Campaign.new campaign_params_sanitized
     @departement = @campaign.departement
     authorize_campaign
     if @campaign.save
@@ -22,7 +23,7 @@ module CampaignsControllerConcern
   end
 
   def update
-    if @campaign.update(campaign_params)
+    if @campaign.update campaign_params_sanitized
       redirect_to send("#{routes_prefix}_campaign_path", @campaign), notice: "La campagne a été modifiée"
     else
       render :edit, status: :unprocessable_entity
@@ -85,6 +86,11 @@ module CampaignsControllerConcern
         :date_relance2, :date_relance3, :date_fin,
         :sender_name, :signature, :nom_drac
       )
+  end
+
+  def campaign_params_sanitized
+    campaign_params.merge \
+      %i[sender_name signature nom_drac].index_with { sanitize(campaign_params[_1]) }
   end
 
   def redirect_planned_campaign
