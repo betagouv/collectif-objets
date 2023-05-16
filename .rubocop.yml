@@ -53,5 +53,8 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Enabled: false
 
+Metrics/ParameterLists:
+  Enabled: false
+
 Naming/AsciiIdentifiers:
   Enabled: false

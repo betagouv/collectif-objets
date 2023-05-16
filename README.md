@@ -387,12 +387,48 @@ Le code est disponible [sur GitHub](https://github.com/adipasquale/collectif-obj
 `rails runner Synchronizer::SynchronizeObjetsJob.perform_inline` importe les données depuis la 
 collectif-objets-datasette.fly.dev vers la base de donnée locale de Collectif Objets.
 
-
 La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :
 
 - Les infos personnelles des conservateurs (email, numéro de téléphone)
 - Les données de recensements. avant d'être validées et republiées sur POP, elles peuvent contenir des données à ne pas
   publier.
+
+```mermaid
+flowchart TD
+  palissy[[pour chaque notice Palissy]]
+  palissy -->code_insee_existe[une commune existe pour le code INSEE ?]
+  code_insee_existe -.->|non| ne_pas_importer[Ne pas importer]
+  code_insee_existe -->|oui| pm_existe[PM existe déjà ?]
+
+  pm_existe -->|oui| changement_de_commune[Code INSEE a changé ?]
+  pm_existe -.->|non| commune_ok[commune inactive \n ou dossier accepté ?]
+  
+  subgraph nouvel objet
+  commune_ok -->|oui| import_nouvel_objet(Importer nouvel objet)
+  commune_ok -.->|non| interactive1[Acceptation interactive manuelle ?]
+
+  interactive1 -.->|non| ne_pas_importer_nouvel_objet(Ne pas importer \nle nouvel objet)
+  interactive1 -->|oui| import_nouvel_objet
+  end
+  
+  subgraph Mise à jour d'objet
+  changement_de_commune -.->|non| mise_a_jour(Mise à jour de l'objet)
+  changement_de_commune -->|oui| 2_communes_ok[Commune destinataire inactive ou dossier accepté \n+ commune d'origine inactive ?]
+  
+  2_communes_ok -->|oui| mise_a_jour_et_changement_commune(Changement de commune\net mise à jour de l'objet)
+  2_communes_ok -.->|non| interactive2[Acceptation interactive manuelle ?]
+
+  interactive2 -->|oui| mise_a_jour_et_changement_commune
+  interactive2 -.->|non| mise_a_jour_prudente(Mise à jour des champs sûrs\npas de changement de commune)
+  end
+
+  style mise_a_jour fill:#006600
+  style import_nouvel_objet fill:#006600
+  style mise_a_jour_et_changement_commune fill:#006600
+  style mise_a_jour_prudente fill:#003300
+  style ne_pas_importer fill:#660000
+  style ne_pas_importer_nouvel_objet fill:#660000
+```
 
 ## Frontend : Vite, View Components, Stimulus
 

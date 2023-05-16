@@ -33,6 +33,7 @@ module Synchronizer
         and ("PROT" IS NULL OR "PROT" != 'déclassé')
         and "propriété de l'Etat" not in (select value from json_each([palissy].[STAT]))
         and "propriété de l'Etat (?)" not in (select value from json_each([palissy].[STAT]))
+        and "TICO" != 'Traitement en cours'
       SQL
       sql += %(and [palissy].[INSEE] = '#{code_insee}') if code_insee
       sql

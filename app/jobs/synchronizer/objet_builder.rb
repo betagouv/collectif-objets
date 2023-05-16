@@ -11,37 +11,36 @@ module Synchronizer
       @persisted_objet = persisted_objet
     end
 
-    def objet
-      if @persisted_objet.present?
-        @persisted_objet.assign_attributes(attributes.except("palissy_REF"))
-        @persisted_objet
-      else
-        Objet.new(attributes)
-      end
+    def changes
+      return nil unless persisted_objet
+
+      attributes.diff persisted_objet.attributes.slice(*attributes.keys)
     end
 
-    private
-
-    attr_reader :row
+    def changed? = !changes.empty?
 
     def attributes
       @attributes ||= { "palissy_REF" => row["REF"] }
-        .merge(json_fields)
-        .merge(text_fields)
+        .merge(json_values)
+        .merge(text_values)
         .merge({ "palissy_REFA" => ref_merimee })
         .merge(edifice_id.present? ? { "edifice_id" => edifice_id } : {})
     end
 
-    def json_fields
+    def palissy_ref = attributes["palissy_REF"]
+
+    private
+
+    attr_reader :row, :without_commune_change, :persisted_objet
+
+    def json_values
       JSON_FIELDS.to_h do |field|
         arr = row[field] ? JSON.parse(row[field]) : []
         ["palissy_#{field}", arr&.any? ? arr&.join(";") : nil]
       end
     end
 
-    def text_fields
-      TEXT_FIELDS.to_h { ["palissy_#{_1}", row[_1]] }
-    end
+    def text_values = TEXT_FIELDS.to_h { ["palissy_#{_1}", row[_1]] }
 
     def ref_merimee
       return nil if row["REFS_MERIMEE"].blank?
@@ -53,7 +52,7 @@ module Synchronizer
     end
 
     def edifice_id
-      return nil if @persisted_objet&.edifice_id&.present? || row["INSEE"].nil?
+      return nil if persisted_objet&.edifice_id&.present? || row["INSEE"].nil?
 
       merimee_edifice&.id || custom_edifice.id
     end
@@ -63,7 +62,9 @@ module Synchronizer
 
       edifice = Edifice.find_or_create_and_synchronize!(ref_merimee)
 
-      return edifice if edifice.code_insee == row["INSEE"]
+      return nil if edifice.code_insee != row["INSEE"]
+
+      edifice
     end
 
     def custom_edifice
