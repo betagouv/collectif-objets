@@ -129,12 +129,6 @@ class Campaign < ApplicationRecord
     draft? || planned?
   end
 
-  def update_status(status_event)
-    raise ArgumentError if TRANSITIONS.exclude?(status_event.to_sym)
-
-    send(status_event) && save
-  end
-
   def self.ransackable_attributes(_auth_object = nil)
     %w[departement_code status recipients_count date_lancement]
   end
