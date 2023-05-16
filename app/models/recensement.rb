@@ -90,10 +90,6 @@ class Recensement < ApplicationRecord
 
   accepts_nested_attributes_for :dossier
 
-  def self.ransackable_scopes(_auth_object = nil)
-    [:photos_presence_in]
-  end
-
   def self.etats_sanitaires_value_counts
     group("etat_sanitaire")
       .select("etat_sanitaire, count(recensements.id) as recensements_count")
@@ -107,4 +103,6 @@ class Recensement < ApplicationRecord
       SECURISATIONS
     end
   end
+
+  def self.ransackable_scopes(_ = nil) = [:photos_presence_in]
 end

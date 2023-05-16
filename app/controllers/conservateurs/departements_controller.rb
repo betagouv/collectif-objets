@@ -17,7 +17,7 @@ module Conservateurs
       else
         @ransack = policy_scope(Commune)
           .where(departement_code: @departement.code)
-          .left_joins(:dossier)
+          .includes(:dossier)
           .include_objets_count
           .include_objets_recenses_count
           .ransack(params[:q])
@@ -42,9 +42,11 @@ module Conservateurs
 
     def set_communes
       fields = %w[code_insee nom status objets_count recensements_prioritaires_count latitude longitude]
-      @communes = @departement.communes
+      @communes = policy_scope(Commune)
+        .where(departement_code: @departement.code)
         .includes(:dossier)
         .include_objets_count
+        # .include_objets_recenses_count
         .include_recensements_prioritaires_count
         .select(fields)
         .to_a

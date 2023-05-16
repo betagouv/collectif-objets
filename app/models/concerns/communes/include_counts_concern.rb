@@ -75,7 +75,7 @@ module Communes
               GROUP BY "palissy_INSEE"
             ) d ON d."palissy_INSEE" = communes.code_insee
           }
-        ).select("communes.*, COALESCE(b.recensements_prioritaires_count, 0) AS recensements_prioritaires_count")
+        ).select("communes.*, COALESCE(d.recensements_prioritaires_count, 0) AS recensements_prioritaires_count")
       end
 
       ransacker(:recensements_prioritaires_count) { Arel.sql("recensements_prioritaires_count") }

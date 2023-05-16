@@ -82,7 +82,5 @@ class Dossier < ApplicationRecord
     commune.return_to_started!
   end
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[status]
-  end
+  def self.ransackable_attributes(_ = nil) = %w[status]
 end

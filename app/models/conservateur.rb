@@ -16,27 +16,17 @@ class Conservateur < ApplicationRecord
   end
   alias full_name to_s
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[email first_name last_name]
-  end
-
-  def self.ransackable_associations(_auth_object = nil)
-    %w[departements]
-  end
-
-  def self.ransackable_scopes(_auth_object = nil)
-    [:with_departement]
-  end
-
-  ransacker :first_name, type: :string do
-    Arel.sql("unaccent(first_name)")
-  end
-
-  ransacker :last_name, type: :string do
-    Arel.sql("unaccent(last_name)")
-  end
-
   def can_generate_bordereau?
     %w[romuald.goudeseune@culture.gouv.fr stephanie.barioz@pays-valleeduloir.fr chloe.cazalet@yonne.fr].include? email
   end
+
+  # -------
+  # RANSACK
+  # -------
+
+  def self.ransackable_attributes(_ = nil) = %w[email first_name last_name]
+  def self.ransackable_associations(_ = nil) = %w[departements]
+  def self.ransackable_scopes(_ = nil) = %i[with_departement]
+  ransacker(:first_name, type: :string) { Arel.sql("unaccent(first_name)") }
+  ransacker(:last_name, type: :string) { Arel.sql("unaccent(last_name)") }
 end
