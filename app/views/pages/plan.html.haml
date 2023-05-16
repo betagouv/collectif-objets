@@ -106,6 +106,10 @@
                 %li
                   = link_to fiche.title, fiche_path(fiche.id)
                   = accessible_icon_span
+
+          %li
+            = link_to "Page d’accueil pour les conservateurs", accueil_conservateurs_path
+            = accessible_icon_span
           %li
             = link_to "Déclaration d’accessibilité", declaration_accessibilite_path
             = accessible_icon_span

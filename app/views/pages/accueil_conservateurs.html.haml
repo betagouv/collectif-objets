@@ -38,17 +38,28 @@
         .co-text--bold Emmanuel Moureau
         .co-text--muted CAOA du Tarn-et-Garonne
 
-  .fr-grid-row.fr-grid-row--center
-    .fr-col-md-8
-      .co-text--center.fr-mt-8w
-        :markdown
-          Collectif Objets est l'outil de recensement pour préparer les récolements, à destination des conservateurs d'antiquités et objets d'objets.
+  .fr-grid-row.fr-grid-row--center.fr-mt-8w.fr-grid-row--gutters
+    .fr-col-md-6
+      %h2 Découverte
+      :markdown
+        Collectif Objets est l'outil de recensement pour préparer les récolements, à destination des conservateurs d'antiquités et objets d'objets.
 
-          C'est un outil qui évolue rapidement en fonction des retours des utilisateurs-conservateurs qui en sont les bâtisseurs.
+        C'est un outil qui évolue rapidement en fonction des retours des utilisateurs-conservateurs qui en sont les bâtisseurs.
 
-          Lancer une campagne de déploiement dans votre département est simple et rapide.
+        Lancer une campagne de déploiement dans votre département est simple et rapide.
 
-        = link_to "Demander une démonstration", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-mt-2w"
+      = link_to "Demander une démonstration", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-mt-2w"
+    .fr-col-md-6
+      %h2 Infolettres
+      Abonnez-vous pour recevoir des nouvelles environ tous les mois de l’actualité de Collectif Objets
+      %ul
+        %li
+          = link_to "Infolettre n°2 - avril 2023", "https://sh1.sendinblue.com/vtnrw798lpfe.html", target: "_blank", class: "fr-link"
+        %li
+          = link_to "Infolettre n°1 - février 2023", "https://sh1.sendinblue.com/vtnrw798lpfe.html", target: "_blank", class: "fr-link"
+
+      .fr-mt-4w
+        = link_to "Recevoir les futures infolettres", "https://10ef9a11.sibforms.com/serve/MUIEAOT2Dbx7cezoDXWeEFB0fJpqxxmIlpaW3XKwjF2qM4CnanWkNld7tKvD-B7Aa17MLz5d0I4lVD9miKS6DqWPsZUozvrypr4XDWnBr_yBqd2YB4UcNNaOghgNjKUcAqqHFZ9wsxxYFww-Khdo77EGp2RGRezFfGcYrGSUo57rHYhDDHJUbrK7PyWKMWp5_RchI7HNcO7IJ0hi", class: "fr-btn"
 
   .fr-grid-row.fr-grid-row--gutters.fr-mt-8w
     .fr-col-md-8

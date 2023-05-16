@@ -148,6 +148,11 @@ feature "accessibility public pages", js: true do
     before { visit content_blob_path(:documentation_commune) }
     it_behaves_like "an accessible page"
   end
+
+  describe "Page d’accueil conservateurs" do
+    before { visit accueil_conservateurs_path }
+    it_behaves_like "an accessible page"
+  end
 end
 
 feature "accessibility communes", js: true do
