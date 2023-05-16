@@ -69,18 +69,13 @@ class GalleryComponent < ViewComponent::Base
   end
 
   def json_data
-    photos.map { { src: _1.url, description: _1.description.presence }.compact }.to_json
+    photos.map { { src: _1.url, description: _1.alt }.compact }.to_json
   end
 
-  def first_description
-    photos.first&.description&.presence
-  end
+  def first_description = photos.first&.description&.presence
+  def credits = photos.map(&:credit).uniq
 
-  def display_description?
-    @options.fetch(:display_description, false)
-  end
-
-  def display_gallery_link?
-    @options.fetch(:display_gallery_link, false)
-  end
+  def display_description? = @options.fetch(:display_description, false)
+  def display_gallery_link? = @options.fetch(:display_gallery_link, false)
+  def display_credits? = @options.fetch(:display_credits, true)
 end

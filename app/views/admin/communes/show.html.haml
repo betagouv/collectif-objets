@@ -31,7 +31,7 @@
           #{@commune.users.count} Usager(s)
         %div.fr-ml-1w
           = link_to "Ajouter un usager", new_admin_user_path(commune_id: @commune.id), class: "fr-btn fr-btn--sm fr-btn--secondary"
-        
+
       - if @commune.users.empty?
         %p Aucun usager
         %p
@@ -103,7 +103,7 @@
                 %td= objet.palissy_TICO
                 %td= objet.palissy_EMPL
                 %td
-                  = render GalleryComponent.palissy_photos_from_objet(objet, template: :small, display_description: false, display_gallery_link: false)
+                  = render GalleryComponent.palissy_photos_from_objet(objet, template: :small, display_description: false, display_gallery_link: false, display_credits: false)
                 %td= objet.palissy_CATE
                 %td= objet.palissy_SCLE
 

@@ -1,7 +1,7 @@
 .fr-grid-row.fr-pb-4w.fr-grid-row--gutters
   .fr-col-md-6
     .hide.co-display--md
-      = render GalleryComponent.palissy_photos_from_objet(objet, template: :small)
+      = render GalleryComponent.palissy_photos_from_objet(objet, template: :small, display_gallery_link: true)
     - if cta
       .fr-mb-4w= cta
     %p

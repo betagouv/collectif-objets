@@ -2,7 +2,6 @@
 
 class Photo
   attr_reader :url, :description, :credit
-  alias alt description
 
   def initialize(url:, description: nil, credit: nil, thumb_url: nil)
     @url = url
@@ -11,7 +10,7 @@ class Photo
     @credit = credit
   end
 
-  def thumb_url
-    @thumb_url || @url
-  end
+  def thumb_url = @thumb_url || @url
+
+  def alt = [description, credit].map(&:presence).compact.join(" - ")
 end
