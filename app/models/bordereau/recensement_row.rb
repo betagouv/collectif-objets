@@ -58,7 +58,7 @@ module Bordereau
     def photo_cell
       return unless recensement.photos.attached?
 
-      image = StringIO.new(recensement.photos.first.variant(:small).processed.blob.download)
+      image = StringIO.new(recensement.photos.first.variant(:small).processed.download)
       { image:, fit: [65, 65] }
     end
   end
