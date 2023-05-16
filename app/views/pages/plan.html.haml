@@ -111,6 +111,12 @@
             = link_to "Page d’accueil pour les conservateurs", accueil_conservateurs_path
             = accessible_icon_span
           %li
+            = link_to "Documentation Conservateurs", content_blob_path(:documentation_conservateur)
+            = accessible_icon_span
+          %li
+            = link_to "Documentation Communes", content_blob_path(:documentation_commune)
+            = accessible_icon_span
+          %li
             = link_to "Déclaration d’accessibilité", declaration_accessibilite_path
             = accessible_icon_span
           %li
