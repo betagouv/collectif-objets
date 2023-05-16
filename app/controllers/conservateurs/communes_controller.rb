@@ -3,16 +3,7 @@
 module Conservateurs
   class CommunesController < BaseController
     before_action :set_commune, :set_dossier, only: [:show]
-    before_action :set_departement, only: [:index]
     skip_after_action :verify_authorized, only: [:autocomplete]
-
-    def index
-      @communes_search = Co::Conservateurs::CommunesSearch.new(
-        @departement,
-        params,
-        scoped_communes: policy_scope(Commune)
-      )
-    end
 
     def show
       return show_analyse_saved if params[:analyse_saved].present?
@@ -24,11 +15,10 @@ module Conservateurs
     end
 
     def autocomplete
-      render_turbo_stream_update(
+      render_turbo_stream_update \
         "js-header-search-results",
         partial: "conservateurs/communes/autocomplete_results",
         locals: { communes: communes_autocomplete_arel, search_query: params[:nom] }
-      )
     end
 
     protected
@@ -57,10 +47,9 @@ module Conservateurs
 
     def communes_autocomplete_arel
       policy_scope(Commune)
-        .where(departement: current_conservateur.departements)
-        .search_by_nom(params[:nom])
-        .order("nom ASC")
-        .first(5)
+        .limit(5)
+        .ransack(nom_cont: params[:nom], s: "nom asc")
+        .result
     end
 
     def active_nav_links = ["Mes départements"] + (@commune ? [@commune.departement.to_s] : [])

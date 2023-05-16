@@ -14,6 +14,9 @@
   %div{class: ("co-print-hide" if local_assigns[:hide_for_print])}
     .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-1w
       %h1= commune
+      - if commune.inactive?
+        .co-flex--shrink-0
+          .fr-badge Commune inactive
       - if local_assigns[:dossier]
         .co-flex--shrink-0
           %div= dossier_status_badge dossier

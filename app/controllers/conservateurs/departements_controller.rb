@@ -15,9 +15,14 @@ module Conservateurs
         set_departement_json
         render "show_map"
       else
-        @communes_search = Co::Conservateurs::CommunesSearch.new(
-          @departement, params, scoped_communes: policy_scope(Commune)
-        )
+        @ransack = policy_scope(Commune)
+          .where(departement_code: @departement.code)
+          .includes(:dossier)
+          .include_objets_count
+          .include_objets_recenses_count
+          .ransack(params[:q])
+        @pagy, @communes = pagy @ransack.result, items: 20
+        @query_present = params[:q].present?
       end
     end
 
@@ -38,9 +43,11 @@ module Conservateurs
 
     def set_communes
       fields = %w[code_insee nom status objets_count recensements_prioritaires_count latitude longitude]
-      @communes = @departement.communes
+      @communes = policy_scope(Commune)
+        .where(departement_code: @departement.code)
         .includes(:dossier)
         .include_objets_count
+        # .include_objets_recenses_count
         .include_recensements_prioritaires_count
         .select(fields)
         .to_a

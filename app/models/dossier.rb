@@ -81,4 +81,6 @@ class Dossier < ApplicationRecord
     aasm_after_commit_update(*args, **kwargs)
     commune.return_to_started!
   end
+
+  def self.ransackable_attributes(_ = nil) = %w[status]
 end

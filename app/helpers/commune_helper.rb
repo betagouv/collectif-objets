@@ -21,5 +21,15 @@ module CommuneHelper
     text = commune.objets.count > 1 ? "Recenser les objets" : "Recenser l’objet"
     text + " de #{commune.nom}"
   end
+
+  def communes_statuses_options_for_select(departement:)
+    counts = Commune.where(departement:).status_value_counts.merge("" => Commune.where(departement:).count)
+    [
+      ["Toutes les communes", ""],
+      ["Communes inactives", "inactive"],
+      ["Recensement démarré", "started"],
+      ["Recensement terminé", "completed"]
+    ].map { |label, key| ["#{label} (#{counts[key]})", key] }
+  end
 end
 # rubocop:enable Rails/OutputSafety

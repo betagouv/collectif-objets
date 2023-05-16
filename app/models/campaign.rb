@@ -129,7 +129,7 @@ class Campaign < ApplicationRecord
     draft? || planned?
   end
 
-  def self.ransackable_attributes(_auth_object = nil)
+  def self.ransackable_attributes(_ = nil)
     %w[departement_code status recipients_count date_lancement]
   end
 end

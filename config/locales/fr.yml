@@ -39,15 +39,6 @@ fr:
           content:
             one: "Vous avez analysé l'unique recensement de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune"
             other: Vous avez analysé l'ensemble des %{count} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
-    communes_search_component:
-      status_options:
-        all: Toutes les communes
-        inactive: Communes inactives
-        started: Recensement démarré
-        completed: Recensement terminé
-      prioritaires:
-        one: 1 objet prioritaire
-        other: "%{count} objets prioritaires"
     departements:
       index:
         head_title: Départements

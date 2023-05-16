@@ -270,9 +270,6 @@ GEM
       ast (~> 2.4.1)
     pdf-core (0.9.0)
     pg (1.5.3)
-    pg_search (2.3.6)
-      activerecord (>= 5.2)
-      activesupport (>= 5.2)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
@@ -497,7 +494,6 @@ DEPENDENCIES
   mjml-rails (~> 4.9)
   pagy (~> 6.0)
   pg (~> 1.5)
-  pg_search
   prawn (~> 2.4)
   prawn-table (~> 0.2.2)
   progressbar

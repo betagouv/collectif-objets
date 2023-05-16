@@ -45,8 +45,6 @@ class Commune < ApplicationRecord
     inverse_of: :commune, dependent: :restrict_with_exception
   )
 
-  include PgSearch::Model
-  pg_search_scope :search_by_nom, against: :nom, using: { tsearch: { prefix: true } }
   accepts_nested_attributes_for :dossier, :users
 
   validate do |commune|
@@ -56,10 +54,6 @@ class Commune < ApplicationRecord
   end
 
   before_create { self.inbound_email_token ||= SecureRandom.hex(10) }
-
-  def self.ransackable_scopes(_auth_object = nil)
-    [:recensements_photos_presence_in]
-  end
 
   def self.status_value_counts
     group(:status)
@@ -103,11 +97,16 @@ class Commune < ApplicationRecord
     "#{parts.join('-')}@#{Rails.configuration.x.inbound_emails_domain}"
   end
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[nom code_insee departement_code status]
+  # -------
+  # RANSACK
+  # -------
+
+  def self.ransackable_attributes(_ = nil)
+    %w[nom code_insee departement_code status objets_count recensements_prioritaires_count]
   end
 
-  ransacker :nom, type: :string do
-    Arel.sql("unaccent(nom)")
-  end
+  def self.ransackable_scopes(_ = nil) = [:recensements_photos_presence_in]
+  def self.ransackable_associations(_ = nil) = %i[dossier dossiers objets]
+  ransacker(:dossier_status) { Arel.sql("dossiers.status") }
+  ransacker(:nom, type: :string) { Arel.sql("unaccent(nom)") }
 end

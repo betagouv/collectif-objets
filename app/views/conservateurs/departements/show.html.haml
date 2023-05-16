@@ -17,4 +17,4 @@
             Vue Carte
       #tabpanel-tableau.fr-tabs__panel.fr-tabs__panel--selected{"aria-labelledby" => "tab-tableau", role: "tabpanel", tabindex: "0"}
         = turbo_frame_tag "communes-search" do
-          = render Conservateurs::CommunesSearchComponent.new(communes_search: @communes_search)
+          = render "communes_search", ransack: @ransack, departement: @departement, communes: @communes, pagy: @pagy, query_present: @query_present
