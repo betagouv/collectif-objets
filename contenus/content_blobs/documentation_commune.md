@@ -1,5 +1,5 @@
 ---
-titre: Documentation Commune
+titre: Documentation Communes
 ---
 # I - Qu’est-ce que Collectif Objets ?
 
