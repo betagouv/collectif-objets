@@ -15,23 +15,23 @@ Par la collecte de ces données, Collectif Objets permet aux conservateurs d'avo
 
 Les communes sont outillées pour préserver leur patrimoine remarquable.
 
-## 2- Ce qu’est un “objet protégé au titre des monuments historiques”
+## 2- Ce qu’est un “objet protégé au titre des Monuments historiques”
 
-À l’instar des immeubles, un objet peut être inscrit ou classé monument historique du fait de son intérêt historique, artistique, scientifique ou technique. Cette protection est encadrée par le Code du patrimoine.
+À l’instar des immeubles, un objet peut être inscrit ou classé Monument historique du fait de son intérêt historique, artistique, scientifique ou technique. Cette protection est encadrée par le Code du patrimoine.
 
 Du fait de cet intérêt patrimonial, ce statut juridique confère à l’objet une protection d’ordre public afin d’assurer sa préservation et transmission aux générations futures.
 
 Il appartient ainsi au propriétaire de veiller à l’entretien d’un objet protégé au titre des monuments historiques. De la même manière, toute intervention sur l’objet doit être réalisée de concert avec les services de l’État (déplacement, restauration, travaux…).
 
-Le recensement participatif proposé sur la plateforme Collectif Objets s’inscrit dans cette démarche de préservation des œuvres, en facilitant la relation entre les propriétaires d’objets monuments historiques et les services experts de l’État (les conservateurs des antiquités et objets d’art).
+Le recensement participatif proposé sur la plateforme Collectif Objets s’inscrit dans cette démarche de préservation des œuvres, en facilitant la relation entre les propriétaires d’objets Monuments historiques et les services experts de l’État (les conservateurs des antiquités et objets d’art et les conservateurs des Monuments historiques).
 
-Il existe deux niveaux de protection au titre des monuments historiques : l’inscription et le classement. L’inscription constitue le premier niveau de protection, et le classement le niveau le plus élevé.
+Il existe deux niveaux de protection au titre des Monuments historiques : l’inscription et le classement. L’inscription constitue le premier niveau de protection, et le classement le niveau le plus élevé.
 
-[En savoir plus sur la protection au titre des monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
+[En savoir plus sur la protection au titre des Monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
 
 ## 3 - Pourquoi recenser les objets protégés ?
 
-La France compte plus de 285 000 objets protégés au titre des monuments historiques. D'une certaine manière, il s'agit de l'un des "plus grands musées" de notre pays. Ces objets font pleinement partie de notre patrimoine national ou du patrimoine d’une région française. De ce fait, il est important de s’assurer qu’ils ne soient pas dégradés ou dérobés. Il s’agit même d’un devoir fixé par le Code du patrimoine ([Article L622-8](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006845887)).
+La France compte plus de 285 000 objets protégés au titre des Monuments historiques. D'une certaine manière, il s'agit de l'un des "plus grands musées" de notre pays. Ces objets font pleinement partie de notre patrimoine national ou du patrimoine d’une région française. De ce fait, il est important de s’assurer qu’ils ne soient pas dégradés ou dérobés. Il s’agit même d’un devoir fixé par le Code du patrimoine ([Article L622-8](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006845887)).
 
 Il est impossible pour les conservateurs de visiter régulièrement tous ces objets, qui sont répartis dans les trois quarts des communes françaises. Afin d’éviter vols et  dégradations, il est important de les inspecter régulièrement. Vous le faites sans doute déjà, mais l’information à ce sujet n’est pas centralisée et actualisée en temps réel. D'où l’émergence du service public Collectif Objets et son invitation au dialogue et au partage de données.
 
@@ -61,7 +61,7 @@ Collectif Objets contacte les mairies des communes pour effectuer le recensement
 
 ## 7 - Destination des données récoltées sur Collectif Objets
 
-Les données transférées par les communes sont à destination des conservateurs des antiquités et objets d’art et conservateurs des monuments historiques du département dont fait partie la commune.
+Les données transférées par les communes sont à destination des conservateurs des antiquités et objets d’art et conservateurs des Monuments historiques du département dont fait partie la commune.
 
 L’accès aux données est également possible par l’équipe de Collectif Objets, il est contrôlé et exclusivement réservé dans un but d’amélioration du service.
 
@@ -207,7 +207,7 @@ Ils pourront vous recontacter par la suite à travers la messagerie (qui est cou
 
 ## 1 - Après l’envoi de vos réponses
 
-Vos réponses seront traitées par les conservateurs de votre département : les Conservateurs des antiquités et objets d’arts (CAOA) ou les Conservateurs des Monuments Historiques (CMH).
+Vos réponses seront traitées par les conservateurs de votre département : les Conservateurs des antiquités et objets d’arts (CAOA) ou les Conservateurs des Monuments historiques (CMH).
 
 Lorsque les conservateurs auront analysé votre dossier de recensement, un compte-rendu vous sera adressé par email. L’objet de cet email contiendra les mots : “Rapport de recensement des objets protégés”.
 
