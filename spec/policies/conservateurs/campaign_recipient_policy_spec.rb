@@ -5,7 +5,7 @@ require "rails_helper"
 describe Conservateurs::CampaignRecipientPolicy do
   subject { described_class }
 
-  permissions :show? do
+  permissions :show?, :update? do
     context "departement du conservateur" do
       let(:departements) { build_list(:departement, 3) }
       let(:campaign) { build(:campaign, departement: departements[1]) }

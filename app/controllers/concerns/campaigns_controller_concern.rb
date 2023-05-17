@@ -4,10 +4,16 @@ module CampaignsControllerConcern
   extend ActiveSupport::Concern
   include ActionView::Helpers::SanitizeHelper
 
+  included do
+    before_action \
+      :set_campaign,
+      only: %i[show mail_previews edit edit_recipients update_recipients update_status update destroy]
+    before_action :set_excluded_communes, only: %i[show update_status]
+    before_action :redirect_planned_campaign, only: %i[edit_recipients]
+  end
+
   def show; end
-
   def edit_recipients; end
-
   def edit; end
 
   def create

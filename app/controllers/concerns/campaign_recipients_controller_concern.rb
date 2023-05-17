@@ -25,7 +25,8 @@ module CampaignRecipientsControllerConcern
       .send("#{mail_name}_email")
     render \
       partial: "shared/campaign_recipients/mail_preview",
-      locals: { campaign: @campaign, recipient: @recipient, step: params[:step], variant: params[:variant], mail: }
+      locals: { campaign: @campaign, recipient: @recipient, step: params[:step], variant: params[:variant], mail:,
+                routes_prefix: }
   end
 
   private
