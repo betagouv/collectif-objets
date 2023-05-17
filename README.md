@@ -25,13 +25,13 @@ Ces 3 interfaces sont accessibles sur un unique site : https://collectif-objets.
 
 | | |
 | - | - |
-| ![](/doc/interface-communes1.webp) | ![](/doc/interface-communes2.webp) |
+| ![](doc/interface-communes1.webp) | ![](/doc/interface-communes2.webp) |
 
 2. **Interface conservateurs**
 
 | | |
 | - | - |
-| ![](/doc/interface-conservateurs1.webp) | ![](/doc/interface-conservateurs2.webp) |
+| ![](/doc/interface-conservateurs1.webp) | ![](doc/interface-conservateurs2.webp) |
 
 
 3. **Interface administrateurs**
