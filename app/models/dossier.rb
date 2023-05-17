@@ -34,7 +34,6 @@ class Dossier < ApplicationRecord
   scope :in_departement, ->(d) { joins(:commune).where(communes: { departement: d }) }
   scope :auto_submittable, -> { where(id: auto_submittable_ids) }
   scope :to_visit, -> { where.not(visit: nil) }
-  scope :rejected, -> { where.not(rejected_at: nil) }
 
   def self.auto_submittable_ids
     construction.includes(:recensements, commune: [:objets])

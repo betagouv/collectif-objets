@@ -12,29 +12,7 @@
           Le parcours est terminé pour cette commune !
         = link_to "Voir le rapport", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
 
-  - if @commune.completed? && !@dossier.accepted?
-    - if @dossier.rejected_at?
-      .fr-mb-4w
-        = dsfr_alert type: :info, title: "Dossier renvoyé précédemment" do
-          :markdown
-            Le fonctionnement de l’analyse a récemment été modifié.
-
-            Vous aviez renvoyé ce dossier à la commune pour correction mais ce n’est plus nécessaire.
-            La commune peut maintenant corriger les recensements concernés même si le dossier n’est pas renvoyé.
-
-            A l’avenir, vous pouvez simplement signaler à la commune qu’elle doit corriger des recensements dans la messagerie.
-
-    - elsif current_conservateur.dossiers.rejected.any?
-      .fr-mb-4w
-        = dsfr_alert type: :info, title: "Renvoi des dossiers" do
-          :markdown
-            Le fonctionnement de l’analyse a récemment été modifié.
-
-            Le renvoi du dossier à la commune pour correction n’est plus nécessaire.
-            En cas de problème avec les recensements ou d’informations incomplètes, vous pouvez maintenant simplement le signaler à la commune dans la messagerie.
-
-            La commune pourra alors corriger les recensements concernés.
-
+  - elsif @commune.completed?
     .fr-mb-4w
       - if @dossier.notes_commune.present?
         %p
