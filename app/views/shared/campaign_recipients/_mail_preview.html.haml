@@ -1,8 +1,10 @@
+-# locals: (campaign:, recipient:, step:, routes_prefix:, mail: nil)
+
 - possible_variants = Co::Campaigns::Mail.possible_variants_for(step, recipient.commune)
 
 = turbo_frame_tag "#{step}_email" do
   - if local_assigns[:mail].nil? || possible_variants.count > 1
-    = form_with url: admin_campaign_recipient_mail_preview_path(campaign, recipient), builder: FormBuilderDsfr, method: :get do |f|
+    = form_with url: send("#{routes_prefix}_campaign_recipient_mail_preview_path", campaign, recipient), builder: FormBuilderDsfr, method: :get do |f|
       - if possible_variants.count > 1
         .fr-form-group
           %fieldset.fr-fieldset.fr-fieldset--inline

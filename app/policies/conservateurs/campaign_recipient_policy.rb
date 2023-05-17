@@ -5,8 +5,9 @@ module Conservateurs
     alias recipient record
 
     def show?
-      conservateur.departements.include?(recipient.departement)
+      conservateur.departements.include? recipient.departement
     end
     alias mail_preview? show?
+    alias update? show?
   end
 end

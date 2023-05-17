@@ -151,8 +151,8 @@ Rails.application.routes.draw do
       if Rails.configuration.x.environment_specific_name != "production"
         post :force_start
         post :force_step_up
+        post :update_all_recipients_emails
       end
-      post :refresh_stats
       resources :recipients, controller: "campaign_recipients", only: %i[show update] do
         get :mail_preview
       end

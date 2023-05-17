@@ -12,7 +12,7 @@
     %p
       = campaign_recipient_status_badge(recipient)
       = t("activerecord.attributes.campaign_recipient.statuses.#{recipient.status}")
-  - if current_admin_user
+  - if !current_conservateur && current_admin_user
     %span.fr-icon-lock-line.fr-text--sm{"aria-hidden" => "true"}
     Actions réservées aux admins :
     = link_to("Incarner un usager de cette commune", send("#{routes_prefix}_user_impersonate_path", user), class: "fr-btn fr-btn--tertiary fr-btn--sm" )
@@ -60,4 +60,4 @@
               sauf si la commune commence à recenser avant, alors la première relance est sautée
             - elsif %w[relance2 relance3].include?(step)
               sauf si la commune a recensé un objet dans les 5 jours précédents
-          = render "shared/campaign_recipients/mail_preview", campaign: campaign, recipient: recipient, step: step
+          = render "shared/campaign_recipients/mail_preview", campaign:, recipient:, step:, routes_prefix:

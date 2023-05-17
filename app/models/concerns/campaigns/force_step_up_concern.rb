@@ -6,6 +6,12 @@ module Campaigns
   module ForceStepUpConcern
     extend ActiveSupport::Concern
 
+    def can_update_all_recipients_emails?
+      return false if Rails.configuration.x.environment_specific_name == "production"
+
+      (draft? || planned?) && communes.any?
+    end
+
     def can_force_start?
       return false if Rails.configuration.x.environment_specific_name == "production"
 
