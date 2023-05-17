@@ -2,41 +2,44 @@
 
 ![CI](https://github.com/adipasquale/collectif-objets/actions/workflows/ci.yml/badge.svg)
 
-<a href="https://gitpod.io/#https://github.com/betagouv/collectif-objets/tree/feature/gitpod">
-<img src="https://img.shields.io/badge/Ouvrir%20avec-Gitpod-908a85?logo=gitpod" alt="Ouvrir avec Gitpod" />
-</a>
+[![](https://img.shields.io/badge/Ouvrir%20avec-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/betagouv/collectif-objets/tree/feature/gitpod)
 
 Collectif Objets est un site web permettant aux communes françaises de recenser leur patrimoine mobilier monument 
 historiques et aux conservateurs d'analyser ces recensements.
 
-## Interfaces & Usagers
+{% note %}
 
-Le site expose trois interfaces pour trois types d'usagers différents :
+**Note:** Ce README est volontairement un long fichier unique pour être découvrable facilement.
 
-1. **Interface communes** : permet aux agents municipaux des communes de réaliser les recensements d'objets ;
-2. **Interface conservateurs** : permet aux conservateurs d'analyser les recensements réalisés ;
-3. **Interface administrateurs** : permet à l'équipe technique de faire le support
+{% endnote %}
 
-Ces 3 interfaces sont accessibles sur un unique site : https://collectif-objets.beta.gouv.fr
+## Types d’usagers captures d'écran 
 
-## Captures d'écran
+Le site expose trois interfaces pour trois types d'usagers différents, toutes accessibles depuis un 
+site commun unique : https://collectif-objets.beta.gouv.fr
 
 1. **Interface communes**
+ 
+permet aux agents municipaux des communes de réaliser les recensements d'objets ;
 
 | | |
 | - | - |
-| ![](/doc/interface-communes1.webp) | ![](/doc/interface-communes2.webp) |
+| ![](doc/interface-communes1.webp) | ![](doc/interface-communes2.webp) |
 
 2. **Interface conservateurs**
 
+permet aux conservateurs d'analyser les recensements réalisés ;
+
 | | |
 | - | - |
-| ![](/doc/interface-conservateurs1.webp) | ![](/doc/interface-conservateurs2.webp) |
+| ![](doc/interface-conservateurs1.webp) | ![](doc/interface-conservateurs2.webp) |
 
 
 3. **Interface administrateurs**
 
-![](/doc/interface-admin1.webp)
+permet à l'équipe technique de faire le support
+
+![](doc/interface-admin1.webp)
 
 
 ## Frameworks et dépendances
@@ -64,17 +67,29 @@ Côté Javascript les principaux packages utilisés sont :
 - `frappe-charts` : diagrammes SVG
 - `spotlight.js` : galeries de photos d'objets
 
-## Infrastructure, Écosystème et environnements
+## Infrastructure, environnements, écosystème et services externes
 
-![](/doc/infrastructure-simple.drawio.svg)
+![](doc/infrastructure.drawio.svg)
 
-*Diagramme d'infrastructure simplifié* · [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Finfrastructure-simple.drawio.svg)
+*Schéma d’infrastructure simplifié* · [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Finfrastructure-simple.drawio.svg)
 
-Un environnement de recette (ou staging) est disponible à l'adresse 
-[staging.collectif-objets.incubateur.net](https://staging.collectif-objets.incubateur.net). 
-Il n'y a pas de données sensible sur cette base de données et elle peut être réinitialisée à tout moment.
+3 environnements :
 
-Une liste complète d'URLs des environnements et des outils externes est disponible (plus bas)[#urls]
+- production : [collectif-objets.beta.gouv.fr](https://collectif-objets.beta.gouv.fr/)
+- staging : [staging.collectifobjets.org](https://staging.collectifobjets.org/) - aussi appelé recette ou 
+  bac à sable - Il n'y a pas de données sensibles sur cette base de données et elle peut être réinitialisée à tout moment. 
+- local : [localhost:3000](http://localhost:3000) - héberge le site et [localhost:8025](http://localhost:8025) héberge
+  MailHog pour voir les emails simulés
+  
+Outils & services externes
+
+- [Metabase](https://metabase.collectifobjets.org) - Stats et visualisations
+- [Dashboard Scalingo](https://dashboard.scalingo.com/)
+- [Sentry de beta.gouv.fr](https://sentry.incubateur.net)
+- [SendinBlue](https://my.sendinblue.com/) - Campagnes et mails transactionnel
+- [Scaleway - buckets S3](https://console.scaleway.com/)
+- [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
+- [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
 
 ## Style du code, principes suivis et choix faits
 
@@ -86,8 +101,7 @@ Les objectifs principaux de ce code sont :
 - requérir peu de maintenance ;
 - être facilement compréhensible, corrigeable et modifiable par d’autres développeur·se·s Rails.
 
-La seule documentation existante est ce README.
-C’est volontairement un fichier unique plutôt qu’un wiki pour que les nouveaux arrivants réalisent que cette documentation existe.
+Les commentaires dans le code sont à limiter au minimum, on préfère refactorer le code pour qu’il soit plus clair.
 
 Les controlleurs sont légers.
 Les modèles contiennent la logique métier. Il y a des modèles ActiveRecord et d’autres PORO.
@@ -123,7 +137,7 @@ Avec le recul, certains choix méritent d’être revus :
 
 ## Diagramme d'entités de la base de données
 
-![](/doc/erd-simple.drawio.svg)
+![](doc/erd-simple.drawio.svg)
 
 *Diagramme d'entités simplifié de la base de données* · 
 [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Ferd-simple.drawio.svg)
@@ -143,13 +157,13 @@ Avec le recul, certains choix méritent d’être revus :
   Elle est gérée et visible uniquement par les administrateurs.
 
 La version complète du diagramme d'entités de la base de données est visible ici 
-[doc/entity-relationship-diagram.svg](/doc/entity-relationship-diagram.svg)
+[doc/entity-relationship-diagram.svg](doc/entity-relationship-diagram.svg)
 
 ## Machines à états finis
 
 | Communes | Dossiers | Campaigns |
 | - | - | - |
-| ![](/doc/commune_state_machine_diagram.png) | ![](/doc/dossier_state_machine_diagram.png) | ![](/doc/campaign_state_machine_diagram.png) |
+| ![](doc/commune_state_machine_diagram.png) | ![](doc/dossier_state_machine_diagram.png) | ![](doc/campaign_state_machine_diagram.png) |
 
 - Un `Dossier` est d'abord en construction, puis est soumis aux conservateurs et enfin accepté ou rejeté.
 - L'état d'une `Commune` est lié à l'état de son `Dossier`. 
@@ -160,7 +174,7 @@ La version complète du diagramme d'entités de la base de données est visible 
 
 Voici le schéma du cycle de vie d'un dossier.
 
-![cycle de vie dossier drawio](/doc/cycle-vie-dossier.drawio.svg)
+![cycle de vie dossier drawio](doc/cycle-vie-dossier.drawio.svg)
 
 [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Fcycle-vie-dossier.drawio.svg)
 
@@ -221,33 +235,18 @@ Durée à prévoir : 15 minutes
 - [ ] analyser tous les recensements d'un dossier et l'accepter
 - [ ] lire le mail envoyé depuis MailHog sur [localhost:8025](http://localhost:8025)
 
-## URLs du site web
+## Configurations DNS, boites mails, et serveurs mails
 
-- En production [collectif-objets.beta.gouv.fr](https://collectif-objets.beta.gouv.fr/)
-- En staging [staging.collectifobjets.org](https://staging.collectifobjets.org/) 
-- En local [localhost:3000](http://localhost:3000) héberge le site et [localhost:8025](http://localhost:8025) héberge 
-  MailHog pour voir les emails simulés
+La configuration des domaines en `.beta.gouv.fr` est gérée par l'équipe transverse de beta.gouv.fr, 
+idem pour les domaines en `.incubateur.net`
 
-## Outils & services externes
+L'adresse `collectifobjets@beta.gouv.fr` est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost 
+de beta cf https://doc.incubateur.net/communaute/travailler-a-beta-gouv/jutilise-les-outils-de-la-communaute/outils/liste-de-diffusion-et-adresses-de-contact#la-commande-mattermost-emails
 
-- [Metabase](https://metabase.collectifobjets.org) - Stats et visualisations
-- [Dashboard Scalingo](https://dashboard.scalingo.com/)
-- [Sentry de beta.gouv.fr](https://sentry.incubateur.net)
-- [SendinBlue](https://my.sendinblue.com/) - Campagnes et mails transactionnel
-- [Scaleway - buckets S3](https://console.scaleway.com/)
-- [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
-- [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
+L'adresse `support@collectif-objets.beta.gouv.fr` est gérée en délégation de service par l'incubateur du ministère de 
+  la Culture (référent : Ned Baldessin). Idem pour tout le sous-domaine `collectif-objets.beta.gouv.fr`
 
-## Config DNS & Serveurs Mails
-
-- La configuration des domaines en .beta.gouv.fr est gérée par l'équipe transverse de beta.gouv.fr
-- Idem pour les domaines en `.incubateur.net`
-- L'adresse collectifobjets@beta.gouv.fr est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost 
-  de beta cf https://doc.incubateur.net/communaute/travailler-a-beta-gouv/jutilise-les-outils-de-la-communaute/outils/liste-de-diffusion-et-adresses-de-contact#la-commande-mattermost-emails
-- L'adresse support@collectif-objets.beta.gouv.fr est gérée en délégation de service par l'incubateur du ministère de 
-  la Culture (référent : Ned Baldessin).
-- Idem pour tout le sous-domaine collectif-objets.beta.gouv.fr
-- Le domaine collectifobjets.org, le sous domaine de redirection des emails de réponse, et les adresses mails associées
+Le domaine `collectifobjets.org`, le sous domaine de redirection des emails de réponse, et les adresses mails associées
   de l'équipe sont gérées par Adrien et son compte Gandi.
 
 ## Dumps des bases de données
@@ -265,17 +264,20 @@ rails runner scripts/create_postgres_sequences_memoire_photos_numbers.rb
 pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=collectif_objets_dev tmp/dump.pgsql
 ```
 
-### Mise à jour du fichier `seeds.pgsql` pour les Review Apps
+Pour mettre à jour le fichier `seeds.pgsql` pour les review apps : 
 
-- Créer et importer un dump de staging (voir section précédente)
-- lancer `rails runner scripts/reset_recensements_dossiers_communes.rb`
-- créer le dump de seeds via `./scripts/pg_dump_data_anonymous.sh collectif_objets_dev tmp/seeds.pgsql`
-- uploader `tmp/seeds.pgsql` sur le bucket S3 `collectif-objets-public`, par exemple avec Cyberduck
+1. Créer et importer un dump de staging (voir section précédente)
+2. lancer `rails runner scripts/reset_recensements_dossiers_communes.rb`
+3. créer le dump de seeds via `./scripts/pg_dump_data_anonymous.sh collectif_objets_dev tmp/seeds.pgsql`
+4. uploader `tmp/seeds.pgsql` sur le bucket S3 `collectif-objets-public`, par exemple avec Cyberduck
 
 en local `rails db:reset` : détruit puis recréé les bases locales, charge le schéma puis les seeds qui se téléchargent 
 depuis le bucket S3 `collectif-objets-public`.
 
 ## Review apps
+
+Les review apps ne sont pas activées automatiquement pour toutes les PRs car elles sont coûteuses en ressources et pas
+utiles
 
 ```sh
   # Création :
@@ -364,7 +366,9 @@ Avec le fichier suivant
 
 ## Données (Origine, Transformations, Republications)
 
-![Schéma d'infrastructure général](https://github.com/betagouv/collectif-objets/raw/main/doc/infrastructure.drawio.png)
+![Schéma de transformation des données](doc/data-pipeline.drawio.svg)
+
+*Schéma de transformation des données* · [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Finfrastructure-simple.drawio.svg)
 
 Les données sur les communes (email de la mairie, numéro de téléphone etc…) proviennent
 de [service-public.fr](https://www.service-public.fr/).
