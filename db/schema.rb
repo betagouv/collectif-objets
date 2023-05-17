@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_070126) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_090225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -187,7 +187,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_070126) do
     t.bigint "commune_id", null: false
     t.string "status", default: "construction", null: false
     t.datetime "submitted_at"
-    t.datetime "rejected_at"
     t.datetime "accepted_at"
     t.string "notes_commune"
     t.string "notes_conservateur"
