@@ -14,7 +14,7 @@ module Co
       end
 
       def message
-        "Nouveau recensement !" \
+        "Nouveau recensement ! " \
           "[Commune #{@recensement.commune}](#{admin_commune_url(@recensement.commune)})" \
           "- Objet #{truncate(@recensement.objet.nom, length: 30)} " \
           "- #{@recensement.photos.any? ? "#{@recensement.photos.count} photos" : '❌ Photos absentes'}"
