@@ -577,6 +577,13 @@ fr:
     mailer:
       define_password_instructions:
         subject: "Bienvenue sur Collectif Objets, définissez votre mot de passe pour accéder à votre compte"
+        intro: "Pour accéder à votre compte conservateur sur Collectif Objets, il vous suffit de définir un mot de passe :"
+        contact: N'hésitez pas à répondre à cet email pour nous contacter en cas de problème.
+      reset_password_instructions:
+        voici_votre_lien: "Vous avez demandé un lien de réinitialisation de mot de passe sur Collectif Objets, le voici :"
+        ignorer: Si vous n'avez pas émis cette demande, merci d'ignorer cet email.
+        mdp_ne_changera_pas_avant: Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur ce lien et renseigné un nouveau mot de passe.
+
   application_mailer_layout:
     tagline: Préservez votre patrimoine mobilier
     politesse: Bien cordialement,
