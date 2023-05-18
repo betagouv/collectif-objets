@@ -8,7 +8,7 @@ module Users
       MagicLink.new(email).create => {success:, error:}
 
       if success
-        flash.notice = "Un lien de connexion valide 24 heures vous a été envoyé"
+        flash.notice = "Un lien de connexion vous a été envoyé, il est valide pendant une heure"
       elsif error == :no_user_found
         flash.alert = "Aucun compte n'a été trouvé pour l'email #{email}"
       end
