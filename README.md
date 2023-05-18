@@ -746,30 +746,33 @@ Si l’erreur `Git Gateway Error: Please ask your site administrator to reissue 
 
 ## Rajouter une vidéo sur le site
 
-Commencez par télécharger la vidéo au format MP4.
+Télécharger la vidéo au format MP4.
 Pour les vidéos Loom il faut avoir un compte, mais pas nécessairement celui du créateur de la vidéo.
 
-Prenez une capture d’écran d’un moment clé de la vidéo à utiliser comme poster.
-Convertissez la en WEBP avec `convert titre.png titre.webm` ou bien utilisez imageoptim pour compresser le PNG.
+Prendre une capture d’écran d’un moment clé de la vidéo à utiliser comme poster.
+La convertir en WEBP avec `convert titre.png titre.webm` ou bien la compresser avec imageoptim.
 
-Renommez les fichiers MP4 et PNG/WEBM au format suivant `2023_05_titre_video.mp4`.
+Renommer les fichiers MP4 et PNG/WEBM au format suivant `2023_05_titre_video.mp4`.
 
-Puis convertissez en local la vidéo au format WEBM (conservez le fichier MP4) :
+Puis convertir en local la vidéo au format WEBM (bien conserver le fichier MP4) :
 
 ```bash
 ffmpeg -i 2023_05_titre_video.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus 2023_05_titre_video.webm
 ```
 
-Si le fichier MP4 lui-même est trop gros, vous pouvez le compresser :
+Compresser le fichier MP4 lui-même s’il est trop lourd :
 
 ```bash
 ffmpeg -i 2023_05_titre_video.mp4 -vcodec libx265 -crf 30 2023_05_titre_video.mp4
 ```
 
-Uploadez les fichiers MP4 et WEBM sur le bucket S3 `collectif-objets-public`.
-Donnez les permissions ACL en lecture pour tous les visiteurs pour les fichiers uploadés.
+💡[Ce gist](https://gist.github.com/adipasquale/af5684a3d70f10a4b59b2d75a002fafa) 
+contient des scripts pour des raccourcis de conversion dans Mac Os Finder 
 
-Enfin vous pouvez insérer et adapter l’un des deux snippets suivants en HAML ou HTML :
+Uploader les fichiers MP4 et WEBM sur le bucket S3 `collectif-objets-public`.
+Donner les permissions ACL en lecture pour tous les visiteurs pour les fichiers uploadés.
+
+Enfin insérer et adapter l’un des deux snippets suivants en HAML ou HTML :
 
 ```haml
 %video.co-cursor-pointer{controls:"", width:"100%", preload:"none", poster:vite_asset_path("images/2023_05_titre_video.webp"), href:"#"}
