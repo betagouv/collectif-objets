@@ -24,7 +24,12 @@ RSpec.feature "Reset password", type: :feature, js: true do
     )
     email = ActionMailer::Base.deliveries.last
     expect(email.subject).to eq("Instructions pour changer le mot de passe")
-    res = email.body.raw_source.match(%r{/conservateurs/password/edit\?reset_password_token=[a-zA-Z0-9\-_]+})
+    email_html_part = email.body.parts.find do |part|
+      part.header.fields.find do |field|
+        field.field.name == "Content-Type" && field.field.value == "text/html"
+      end
+    end
+    res = email_html_part.body.raw_source.match(%r{/conservateurs/password/edit\?reset_password_token=[a-zA-Z0-9\-_]+})
     expect(res).not_to be_nil
     reset_password_path = res[0]
     visit(reset_password_path)
