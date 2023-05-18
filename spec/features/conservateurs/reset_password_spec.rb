@@ -18,12 +18,10 @@ RSpec.feature "Reset password", type: :feature, js: true do
     click_on "Mot de passe oublié ?"
     fill_in "Email", with: "jeanne.michel@culture.gouv.fr"
     click_on "Recevoir un lien de réinitialisation du mot de passe"
-    expect(page).to have_text(
-      "Vous allez recevoir sous quelques minutes un email vous " \
-      "indiquant comment réinitialiser votre mot de passe."
-    )
+    expect(page).to have_text \
+      "Un email vient de vous être envoyé avec un lien permettant de réinitialiser votre mot de passe"
     email = ActionMailer::Base.deliveries.last
-    expect(email.subject).to eq("Instructions pour changer le mot de passe")
+    expect(email.subject).to eq("Collectif Objets - Réinitialisation de votre mot de passe")
     email_html_part = email.body.parts.find do |part|
       part.header.fields.find do |field|
         field.field.name == "Content-Type" && field.field.value == "text/html"
