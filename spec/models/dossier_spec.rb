@@ -20,40 +20,58 @@ RSpec.describe Dossier, type: :model do
       it { should be false }
     end
 
-    context "dossier gets submitted" do
-      let!(:dossier) { create(:dossier) }
-      it "should set timestamps" do
-        dossier.submit!
-        expect(dossier.status).to eq("submitted")
-        expect(dossier.submitted_at).to be_within(2.seconds).of(Time.zone.now)
-      end
-    end
-
-    context "dossier gets submitted with notes" do
-      let!(:dossier) { create(:dossier) }
+    context "dossier gets submitted for started commune with notes" do
+      let!(:commune) { create(:commune, status: :started) }
+      let!(:dossier) { create(:dossier, commune:) }
       it "should set the notes" do
         dossier.submit!(notes_commune: "blah blah")
+        expect(commune.reload.status.to_sym).to eq(:completed)
         expect(dossier.reload.notes_commune).to eq("blah blah")
+        expect(commune.reload.completed_at).to be_within(2.seconds).of(Time.zone.now)
       end
     end
 
-    context "dossier gets submitted for started commune" do
-      let!(:commune) { create(:commune, status: Commune::STATE_STARTED) }
-      let!(:dossier) { create(:dossier, commune:) }
-      it "should complete the commune" do
-        dossier.submit!
-        expect(commune.status.to_sym).to eq(Commune::STATE_COMPLETED)
-        expect(commune.completed_at).to be_within(2.seconds).of(Time.zone.now)
+    context "dossier gets submitted for inactive commune - should be impossible" do
+      let!(:commune) { create(:commune, status: :inactive) }
+      let!(:dossier) { create(:dossier, status: :construction, commune:, notes_commune: nil) }
+      it "should raise" do
+        expect { dossier.submit!(notes_commune: "blah blah") }.to raise_error(Dossier::CommuneCannotComplete)
+        expect(dossier.reload.status.to_sym).to eq :construction
+        expect(dossier.reload.notes_commune).to be_nil
+        expect(commune.reload.completed_at).to be_nil
       end
     end
 
-    context "dossier gets submitted for completed commune" do
-      let!(:commune) { create(:commune, status: Commune::STATE_COMPLETED, completed_at: 2.days.ago) }
-      let!(:dossier) { create(:dossier, commune:) }
-      it "should not re-complete the commune" do
+    context "dossier gets submitted for completed commune - should be impossible" do
+      let!(:commune) { create(:commune, status: :completed) }
+      let!(:dossier) { create(:dossier, status: :construction, commune:, notes_commune: nil) }
+      it "should raise" do
+        expect { dossier.submit!(notes_commune: "blah blah") }.to raise_error(Dossier::CommuneCannotComplete)
+        expect(dossier.reload.status.to_sym).to eq :construction
+        expect(dossier.reload.notes_commune).to be_nil
+        expect(commune.reload.completed_at).to be_nil
+      end
+    end
+
+    context "dossier gets submitted for started commune without notes" do
+      let!(:commune) { create(:commune, status: :started) }
+      let!(:dossier) { create(:dossier, status: :construction, commune:, notes_commune: "existing notes") }
+      it "should complete commune without overwriting existing notes" do
         dossier.submit!
-        expect(commune.status.to_sym).to eq(Commune::STATE_COMPLETED)
-        expect(commune.completed_at).not_to be_within(2.seconds).of(Time.zone.now)
+        expect(dossier.reload.status.to_sym).to eq :submitted
+        expect(dossier.reload.notes_commune).to eq "existing notes"
+        expect(commune.reload.status.to_sym).to eq :completed
+      end
+    end
+
+    context "dossier gets submitted for started commune but commune completion fails" do
+      let!(:commune) { create(:commune, status: :started) }
+      let!(:dossier) { create(:dossier, commune:, status: :construction) }
+      before { expect(commune).to receive(:complete!).and_raise(ActiveRecord::RecordInvalid) }
+      it "should raise and rollback" do
+        expect { dossier.submit! }.to raise_error ActiveRecord::RecordInvalid
+        expect(dossier.reload.status.to_sym).to eq(:construction)
+        expect(commune.reload.status.to_sym).to eq(:started)
       end
     end
 
@@ -82,8 +100,8 @@ RSpec.describe Dossier, type: :model do
       it "should complete the commune" do
         expect(commune).to receive(:complete!).and_raise(ActiveRecord::RecordInvalid)
         expect { dossier.submit! }.to raise_error(ActiveRecord::RecordInvalid)
-        expect(commune.status.to_sym).to eq(:started)
-        expect(dossier.status.to_sym).to eq(:construction)
+        expect(commune.reload.status.to_sym).to eq(:started)
+        expect(dossier.reload.status.to_sym).to eq(:construction)
       end
     end
   end

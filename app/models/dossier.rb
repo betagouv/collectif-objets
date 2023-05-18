@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Dossier < ApplicationRecord
+  class CommuneCannotComplete < StandardError; end
+
   belongs_to :commune
   has_many :recensements, dependent: :nullify
   has_many :objets, through: :recensements
@@ -12,13 +14,13 @@ class Dossier < ApplicationRecord
     state :submitted, display: "En attente d'analyse"
     state :accepted, display: "Accepté"
 
-    event :submit, after_commit: :aasm_after_commit_complete_commune do
+    event :submit, after: :aasm_after_complete_commune do
       transitions from: :construction, to: :submitted
     end
-    event :accept, after_commit: :aasm_after_commit_update do
+    event :accept do
       transitions from: :submitted, to: :accepted
     end
-    event :return_to_construction, aasm_fire_event: :aasm_after_commit_return_to_started_commune do
+    event :return_to_construction do
       transitions from: :submitted, to: :construction do
         guard { not_analysed? }
       end
@@ -71,14 +73,11 @@ class Dossier < ApplicationRecord
     recensements.filter(&:analyse_overrides?).count
   end
 
-  def aasm_after_commit_complete_commune(*_args, **_kwargs)
-    # aasm_after_commit_update(*args, **kwargs)
-    commune.complete! if commune.may_complete?
-  end
+  def aasm_after_complete_commune(updates = {}, **_kwargs)
+    raise CommuneCannotComplete, commune.to_s unless commune.may_complete?
 
-  def aasm_after_commit_return_to_started_commune(*args, **kwargs)
-    aasm_after_commit_update(*args, **kwargs)
-    commune.return_to_started!
+    update(notes_commune: updates[:notes_commune]) if updates.key?(:notes_commune)
+    commune.complete!
   end
 
   def self.ransackable_attributes(_ = nil) = %w[status]
