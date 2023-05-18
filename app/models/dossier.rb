@@ -18,7 +18,7 @@ class Dossier < ApplicationRecord
     event :accept, after_commit: :aasm_after_commit_update do
       transitions from: :submitted, to: :accepted
     end
-    event :return_to_construction, after_commit: :aasm_after_commit_return_to_started_commune do
+    event :return_to_construction, aasm_fire_event: :aasm_after_commit_return_to_started_commune do
       transitions from: :submitted, to: :construction do
         guard { not_analysed? }
       end
@@ -71,8 +71,8 @@ class Dossier < ApplicationRecord
     recensements.filter(&:analyse_overrides?).count
   end
 
-  def aasm_after_commit_complete_commune(*args, **kwargs)
-    aasm_after_commit_update(*args, **kwargs)
+  def aasm_after_commit_complete_commune(*_args, **_kwargs)
+    # aasm_after_commit_update(*args, **kwargs)
     commune.complete! if commune.may_complete?
   end
 

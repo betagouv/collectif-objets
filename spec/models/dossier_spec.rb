@@ -75,6 +75,17 @@ RSpec.describe Dossier, type: :model do
         expect(dossier.accepted_at).to be_within(2.seconds).of(Time.zone.now)
       end
     end
+
+    context "dossier gets submitted but commune completion fails" do
+      let!(:commune) { create(:commune, status: :started) }
+      let!(:dossier) { create(:dossier, commune:, status: :construction) }
+      it "should complete the commune" do
+        expect(commune).to receive(:complete!).and_raise(ActiveRecord::RecordInvalid)
+        expect { dossier.submit! }.to raise_error(ActiveRecord::RecordInvalid)
+        expect(commune.status.to_sym).to eq(:started)
+        expect(dossier.status.to_sym).to eq(:construction)
+      end
+    end
   end
 
   describe "commune unicity" do
