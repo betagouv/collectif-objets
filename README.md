@@ -258,20 +258,20 @@ La version complète du diagramme d'entités de la base de données est visible 
 
 ## Machines à états finis
 
-| Communes | Dossiers | Campaigns |
-| - | - | - |
-| ![](doc/commune_state_machine_diagram.png) | ![](doc/dossier_state_machine_diagram.png) | ![](doc/campaign_state_machine_diagram.png) |
+| Communes                                   | Recensements                                   | Dossiers                                   | Campaigns                                   |
+|--------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|
+| ![](doc/commune_state_machine_diagram.png) | ![](doc/recensement_state_machine_diagram.png) | ![](doc/dossier_state_machine_diagram.png) | ![](doc/campaign_state_machine_diagram.png) |
 
 - Un `Dossier` est d'abord en construction, puis est soumis aux conservateurs et enfin accepté ou rejeté.
 - L'état d'une `Commune` est lié à l'état de son `Dossier`.
   La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque
   le dossier est soumis.
 
-| communes.status | dossiers.status           |
-|-----------------|---------------------------|
-| `inactive`      | _aucun dossier_           |
-| `started`       | `construction`            |
-| `completed`     | `submitted` ou `accepted` |
+| commune     | recensement(s)                          | dossier                       |
+|-------------|-----------------------------------------|-------------------------------|
+| `inactive`  | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_               |
+| `started`   | 1+ `completed`                          | `construction`                |
+| `completed` | tous `completed`                        | `submitted` <br>ou `accepted` |
 
 `bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
 

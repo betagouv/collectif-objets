@@ -61,21 +61,6 @@ RSpec.describe Dossier, type: :model do
     end
   end
 
-  context "#submit! avec notes pour une commune déjà completed" do
-    let!(:commune) { create(:commune, status: :completed) }
-    let!(:dossier) { create(:dossier, status: :construction, commune:) }
-    before { commune.update!(dossier:) }
-    subject(:do_submit) { dossier.submit!(notes_commune: "joli village") }
-    it "échoue avec une exception et annule les changements" do
-      expect { do_submit }.to(raise_error { AASM::InvalidTransition })
-      # communes.status inactive → completed n’est pas une transition valide
-      expect(dossier.reload.status.to_sym).to eq :construction
-      expect(commune.reload.status.to_sym).to eq :completed
-      expect(dossier.reload.notes_commune).to be_nil
-      expect(commune.reload.completed_at).to be_nil
-    end
-  end
-
   context "#submit! avec notes mais la commune n’est pas valide" do
     let!(:commune) { create(:commune, status: :started) }
     let!(:dossier) { create(:dossier, commune:, status: :construction) }
