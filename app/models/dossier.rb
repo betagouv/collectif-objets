@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 class Dossier < ApplicationRecord
-  class CommuneCannotComplete < StandardError; end
-
   belongs_to :commune
   has_many :recensements, dependent: :nullify
   has_many :objets, through: :recensements
   belongs_to :conservateur, optional: true
 
   include AASM
-  aasm column: :status, timestamps: true do
+  aasm column: :status, timestamps: true, whiny_persistence: true do
     state :construction, initial: true, display: "En construction"
     state :submitted, display: "En attente d'analyse"
     state :accepted, display: "Accepté"
@@ -20,7 +18,7 @@ class Dossier < ApplicationRecord
     event :accept do
       transitions from: :submitted, to: :accepted
     end
-    event :return_to_construction do
+    event :return_to_construction, after: :aasm_after_return_to_construction do
       transitions from: :submitted, to: :construction do
         guard { not_analysed? }
       end
@@ -74,10 +72,12 @@ class Dossier < ApplicationRecord
   end
 
   def aasm_after_complete_commune(updates = {}, **_kwargs)
-    raise CommuneCannotComplete, commune.to_s unless commune.may_complete?
-
     update(notes_commune: updates[:notes_commune]) if updates.key?(:notes_commune)
-    commune.complete!
+    commune.complete! unless commune.completed?
+  end
+
+  def aasm_after_return_to_construction
+    commune.return_to_started! unless commune.started?
   end
 
   def self.ransackable_attributes(_ = nil) = %w[status]

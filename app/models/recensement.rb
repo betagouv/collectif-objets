@@ -3,7 +3,6 @@
 class Recensement < ApplicationRecord
   include Recensements::AnalyseConcern
   include Recensements::BooleansConcern
-  include Recensements::CompleteConcern
 
   belongs_to :objet
   belongs_to :user
@@ -18,6 +17,15 @@ class Recensement < ApplicationRecord
 
   delegate :commune, to: :objet
   delegate :departement, to: :objet
+
+  include AASM
+  aasm column: :status, whiny_persistence: true do
+    state :draft, initial: true, display: "Brouillon"
+    state :completed, display: "Complet et validé"
+    event :complete, after: :aasm_after_complete, after_commit: :aasm_after_commit_complete do
+      transitions from: :draft, to: :completed
+    end
+  end
 
   LOCALISATION_EDIFICE_INITIAL = "edifice_initial"
   LOCALISATION_AUTRE_EDIFICE = "autre_edifice"
@@ -86,6 +94,20 @@ class Recensement < ApplicationRecord
   scope :order_by_priorite, -> { order(Arel.sql(SQL_ORDER_PRIORITE)) }
   def self.order_by_priorite_array(recensements_arel)
     recensements_arel.to_a.sort_by { prioritaire? ? 0 : 1 }
+  end
+
+  def aasm_after_complete
+    commune.start! unless commune.started?
+
+    if !commune.dossier&.persisted? || !commune.dossier&.valid?
+      raise ActiveRecord::RecordInvalid, "cannot complete recensement before dossier is created"
+    end
+
+    update(dossier: commune.dossier)
+  end
+
+  def aasm_after_commit_complete
+    SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => id })
   end
 
   accepts_nested_attributes_for :dossier

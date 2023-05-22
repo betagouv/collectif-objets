@@ -267,6 +267,12 @@ La version complète du diagramme d'entités de la base de données est visible 
   La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque
   le dossier est soumis.
 
+| communes.status | dossiers.status           |
+|-----------------|---------------------------|
+| `inactive`      | _aucun dossier_           |
+| `started`       | `construction`            |
+| `completed`     | `submitted` ou `accepted` |
+
 `bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
 
 Voici le schéma du cycle de vie d'un dossier.

@@ -6,14 +6,20 @@ class Commune < ApplicationRecord
   include Communes::IncludeCountsConcern
 
   include AASM
-  aasm(column: :status, timestamps: true) do
+  aasm column: :status, timestamps: true, whiny_persistence: true do
     state :inactive, initial: true, display: "Commune inactive"
     state :started, display: "Recensement démarré"
     state :completed, display: "Recensement terminé"
 
-    event(:start) { transitions from: :inactive, to: :started }
-    event(:complete) { transitions from: :started, to: :completed }
-    event(:return_to_started) { transitions from: :completed, to: :started }
+    event :start, before: :aasm_before_start do
+      transitions from: :inactive, to: :started
+    end
+    event :complete, after: :aasm_after_complete do
+      transitions from: :started, to: :completed
+    end
+    event :return_to_started, after: :aasm_after_return_to_started do
+      transitions from: :completed, to: :started
+    end
   end
 
   has_many :users, dependent: :restrict_with_exception
@@ -95,6 +101,20 @@ class Commune < ApplicationRecord
     parts << "conservateur" if role == :conservateur
     parts << inbound_email_token
     "#{parts.join('-')}@#{Rails.configuration.x.inbound_emails_domain}"
+  end
+
+  def aasm_before_start
+    raise AASM::InvalidTransition if dossier.present?
+
+    update!(dossier: Dossier.create!(commune: self))
+  end
+
+  def aasm_after_complete
+    dossier.submit! unless dossier.submitted?
+  end
+
+  def aasm_after_return_to_started
+    dossier.return_to_construction! unless dossier.construction?
   end
 
   # -------

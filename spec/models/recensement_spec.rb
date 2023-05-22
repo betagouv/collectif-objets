@@ -162,102 +162,63 @@ RSpec.describe Recensement, type: :model do
     end
   end
 
-  describe "#complete" do
-    subject { recensement.complete }
+  describe "#complete!" do
+    subject(:do_complete!) { recensement.complete! }
 
-    context "success for first recensement" do
+    describe "#complete! pour une commune inactive" do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:objet) { create(:objet, commune:) }
-      let!(:user) { create(:user, commune:) }
-
-      let(:recensement) do
-        Recensement.new(
-          objet:,
-          user:,
-          confirmation_sur_place: true,
-          localisation: Recensement::LOCALISATION_EDIFICE_INITIAL,
-          recensable: true,
-          edifice_nom: nil,
-          etat_sanitaire: Recensement::ETAT_BON,
-          securisation: Recensement::SECURISATION_CORRECTE,
-          notes: "objet très doux"
-        )
-      end
-
-      before do
-        expect(commune).to receive(:start!).and_return(true)
-        expect(SendMattermostNotificationJob).to receive(:perform_async)
-      end
-
-      it "should work" do
-        res = subject
-        expect(res).to be true
-        expect(recensement.persisted?).to be true
+      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
+      it "change le statut du recensement et de la commune et créé un dossier" do
+        expect(SendMattermostNotificationJob).to \
+          receive(:perform_async).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
+        do_complete!
+        expect(recensement.reload.status.to_sym).to eq :completed
+        expect(recensement.reload.dossier).to be_present
+        expect(recensement.reload.dossier.status.to_sym).to eq :construction
+        expect(recensement.reload.dossier.commune.status.to_sym).to eq :started
+        expect(commune.reload.dossier).to eq recensement.reload.dossier
       end
     end
 
-    context "success for successive recensement" do
+    describe "#complete! pour une commune started" do
       let!(:commune) { create(:commune, status: "started") }
-      let!(:dossier) { create(:dossier, commune:, status: "construction") }
+      let!(:dossier) { create(:dossier, status: "construction", commune:) }
       before { commune.update!(dossier:) }
       let!(:objet) { create(:objet, commune:) }
-      let!(:user) { create(:user, commune:) }
-
-      let(:recensement) do
-        Recensement.new(
-          objet:,
-          user:,
-          confirmation_sur_place: true,
-          localisation: Recensement::LOCALISATION_EDIFICE_INITIAL,
-          recensable: true,
-          edifice_nom: nil,
-          etat_sanitaire: Recensement::ETAT_BON,
-          securisation: Recensement::SECURISATION_CORRECTE,
-          notes: "objet très doux"
-        )
-      end
-
-      before do
-        expect(commune).not_to receive(:start!)
-        expect(SendMattermostNotificationJob).to receive(:perform_async)
-      end
-
-      it "should work" do
-        res = subject
-        expect(res).to be true
-        expect(recensement.persisted?).to be true
-        expect(recensement.dossier).to eq dossier
+      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
+      it "change le statut du recensement et réutilise le dossier existant" do
+        expect(SendMattermostNotificationJob).to \
+          receive(:perform_async).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
+        initial_dossier_count = Dossier.count
+        do_complete!
+        expect(recensement.reload.status.to_sym).to eq :completed
+        expect(recensement.reload.dossier).to be_present
+        expect(recensement.reload.dossier.status.to_sym).to eq :construction
+        expect(commune.reload.status.to_sym).to eq :started
+        expect(commune.reload.dossier).to eq recensement.reload.dossier
+        expect(Dossier.count).to eq initial_dossier_count
       end
     end
 
-    context "failure - wrong params" do
+    describe "#complete! pour une commune inactive mais une erreur se produit" do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:objet) { create(:objet, commune:) }
-      let!(:user) { create(:user, commune:) }
-
-      let(:recensement) do
-        Recensement.new(
-          objet:,
-          user:,
-          localisation: Recensement::LOCALISATION_EDIFICE_INITIAL,
-          recensable: true,
-          edifice_nom: nil,
-          # etat_sanitaire: Recensement::ETAT_BON,
-          securisation: Recensement::SECURISATION_CORRECTE,
-          notes: "objet très doux"
-        )
-      end
-
+      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
       before do
-        expect(commune).not_to receive(:start!)
-        expect(SendMattermostNotificationJob).not_to receive(:perform_async)
+        def recensement.aasm_after_complete
+          super
+          raise ActiveRecord::RecordInvalid
+        end
       end
-
-      it "should work" do
-        res = subject
-        expect(res).to be false
-        expect(recensement.persisted?).to be false
-        expect(recensement.errors.count).to be > 1
+      it "annule tous les changements" do
+        expect(SendMattermostNotificationJob).not_to receive(:perform_async)
+        initial_dossier_count = Dossier.count
+        expect { do_complete! }.to raise_error(ActiveRecord::RecordInvalid)
+        expect(recensement.reload.status.to_sym).to eq :draft
+        expect(commune.reload.status.to_sym).to eq :inactive
+        expect(commune.reload.dossier).to be_nil
+        expect(Dossier.count).to eq initial_dossier_count
       end
     end
   end
