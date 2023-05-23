@@ -36,6 +36,8 @@ module Communes
 
     def recensement_badge
       color, text = objet_recensement_badge_color_and_text(objet)
+      return nil unless color && text
+
       badge_struct.new(color, text)
     end
 
