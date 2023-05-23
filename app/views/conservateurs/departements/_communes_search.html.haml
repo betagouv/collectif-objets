@@ -5,12 +5,12 @@
     .co-flex.co-flex--align-items-end
       %div
         = f.label :nom_unaccented_cont, "Nom de commune"
-        = f.text_field :nom_unaccented_cont, onchange: "this.form.requestSubmit()"
+        = f.text_field :nom_unaccented_cont, data: { controller: "input-autosubmit", action: "change->input-autosubmit#submit" }
       %div
         %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
       .fr-pl-3w
         = f.label :status_eq, "État du recensement"
-        = f.select :status_eq, communes_statuses_options_for_select(departement:), {}, onchange: "this.form.requestSubmit()"
+        = f.select :status_eq, communes_statuses_options_for_select(departement:), {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
       - if query_present
         .fr-pl-3w
           = link_to "réinitialiser les filtres", conservateurs_departement_path(departement), class: "fr-link"

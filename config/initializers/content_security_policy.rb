@@ -1,36 +1,39 @@
 # frozen_string_literal: true
-# Be sure to restart your server when you modify this file.
 
-# Define an application-wide content security policy
-# For further information see the following documentation
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+Rails.application.configure do
+  # We will only report breaches for a while, then actually enforce these CSP rules by removing this line
+  config.content_security_policy_report_only = true
 
-# Rails.application.configure do
-#   config.content_security_policy do |policy|
-#     policy.default_src :self, :https
-#     policy.font_src    :self, :https, :data
-#     policy.img_src     :self, :https, :data
-#     policy.object_src  :none
-#     policy.script_src  :self, :https
-    # Allow @vite/client to hot reload javascript changes in development
-#    policy.script_src *policy.script_src, :unsafe_eval, "http://#{ ViteRuby.config.host_with_port }" if Rails.env.development?
+  s3_buckets = %w[development2 staging2 production public photos-overrides].map { "collectif-objets-#{_1}" }
 
-    # You may need to enable this in production as well depending on your setup.
-#    policy.script_src *policy.script_src, :blob if Rails.env.test?
+  config.content_security_policy do |policy|
+    # Specify URI for violation reports
+    policy.report_uri "https://sentry.incubateur.net/api/40/security/?sentry_key=5f6f9cf638ac413b82d1d9c8a9ba2025"
 
-#     policy.style_src   :self, :https
-    # Allow @vite/client to hot reload style changes in development
-#    policy.style_src *policy.style_src, :unsafe_inline if Rails.env.development?
+    policy.default_src :self, :https
+    policy.script_src  :self, :https
+    policy.img_src :self, :data,
+                   "https://s3.eu-west-3.amazonaws.com/pop-phototeque/",
+                   *s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" },
+                   "https://collectif-objets.beta.gouv.fr/" # for mail previews
+    policy.connect_src "https://sentry.incubateur.net", *s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
+    policy.object_src  :none
+    policy.style_src   :self, :https
+    policy.font_src    :self, :https, :data
 
-#     # Specify URI for violation reports
-#     # policy.report_uri "/csp-violation-report-endpoint"
-#   end
-#
-#   # Generate session nonces for permitted importmap and inline scripts
-#   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-#   config.content_security_policy_nonce_directives = %w(script-src)
-#
-#   # Report CSP violations to a specified URI. See:
-#   # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
-#   # config.content_security_policy_report_only = true
-# end
+    if Rails.env.development?
+      # tweaks for vite-dev HMR
+      policy.script_src *policy.script_src, :unsafe_eval, "http://#{ ViteRuby.config.host_with_port }"
+      # policy.style_src *policy.style_src, :unsafe_inline, "ws://#{ ViteRuby.config.host_with_port }"
+      policy.connect_src *policy.connect_src, :self, "ws://#{ ViteRuby.config.host_with_port }", "http://#{ ViteRuby.config.host_with_port }"
+      # policy.script_src *policy.script_src, :unsafe_eval,
+      policy.style_src *policy.style_src, :unsafe_inline
+    elsif Rails.env.test?
+      policy.script_src *policy.script_src, :blob
+    end
+  end
+
+  # Generate session nonces for permitted importmap and inline scripts
+  config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+  config.content_security_policy_nonce_directives = %w(script-src)
+end
