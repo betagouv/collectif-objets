@@ -21,7 +21,9 @@ Rails.application.configure do
                        "https://stats.data.gouv.fr",
                        *s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
     policy.object_src  :none
-    policy.style_src   :self, :https
+    policy.style_src   :self, :https,
+                       "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='", # for frappe-charts cf https://github.com/frappe/charts/issues/378
+                       "'sha256-CssDN67+wdcVeOo1+UBDlTtUvWjUmBJyiyqqRJHhrTQ='"  # same
     policy.font_src    :self, :https, :data
 
     if Rails.env.development?
