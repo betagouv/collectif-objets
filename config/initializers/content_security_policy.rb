@@ -16,24 +16,27 @@ Rails.application.configure do
                    "https://s3.eu-west-3.amazonaws.com/pop-phototeque/",
                    *s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" },
                    "https://collectif-objets.beta.gouv.fr/" # for mail previews
-    policy.connect_src "https://sentry.incubateur.net", *s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
+    policy.connect_src :self,
+                       "https://sentry.incubateur.net",
+                       "https://stats.data.gouv.fr",
+                       *s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
     policy.object_src  :none
     policy.style_src   :self, :https
     policy.font_src    :self, :https, :data
 
     if Rails.env.development?
       # tweaks for vite-dev HMR
-      policy.script_src *policy.script_src, :unsafe_eval, "http://#{ ViteRuby.config.host_with_port }"
+      # policy.script_src *policy.script_src, :unsafe_eval, "http://#{ ViteRuby.config.host_with_port }"
       # policy.style_src *policy.style_src, :unsafe_inline, "ws://#{ ViteRuby.config.host_with_port }"
-      policy.connect_src *policy.connect_src, :self, "ws://#{ ViteRuby.config.host_with_port }", "http://#{ ViteRuby.config.host_with_port }"
+      policy.connect_src *policy.connect_src, "ws://#{ ViteRuby.config.host_with_port }", "http://#{ ViteRuby.config.host_with_port }"
       # policy.script_src *policy.script_src, :unsafe_eval,
-      policy.style_src *policy.style_src, :unsafe_inline
+      # policy.style_src *policy.style_src, :unsafe_inline
     elsif Rails.env.test?
       policy.script_src *policy.script_src, :blob
     end
   end
 
   # Generate session nonces for permitted importmap and inline scripts
-  config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  config.content_security_policy_nonce_directives = %w(script-src)
+  config.content_security_policy_nonce_generator = ->(request) { SecureRandom.base64(16) }
+  config.content_security_policy_nonce_directives = %w(script-src style-src)
 end
