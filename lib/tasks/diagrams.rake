@@ -7,6 +7,7 @@ namespace :diagrams do
     AASMDiagram::Diagram.new(Commune.new.aasm, 'doc/commune_state_machine_diagram.png')
     AASMDiagram::Diagram.new(Dossier.new.aasm, 'doc/dossier_state_machine_diagram.png')
     AASMDiagram::Diagram.new(Campaign.new.aasm, 'doc/campaign_state_machine_diagram.png')
+    AASMDiagram::Diagram.new(Recensement.new.aasm, 'doc/recensement_state_machine_diagram.png')
     # bundle exec erd
     # mv entity-relationship-diagram.svg doc
   end
