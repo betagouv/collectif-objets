@@ -6,7 +6,7 @@
   %h1= @article.title
 
   .co-flex.co-flex--align-items-center.co-flex--gap-1rem
-    = image_tag @article.logo, alt: "Logo #{@article.source}", style: "max-width: 150px; max-height: 80px;"
+    = image_tag @article.logo, alt: "Logo #{@article.source}", class: "co-max-width-150px co-max-height-80px"
     %span.co-text--italic= @article.date
     = @article.source
 
@@ -14,7 +14,7 @@
     != @article.to_html
 
   - if @article.video == "reportage_canal32"
-    .fr-my-2w{style: "max-width: 45rem;"}
+    .fr-my-2w.co-max-width-40rem
       = render("shared/video_reportage_canal32")
 
   .fr-mt-4w

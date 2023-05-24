@@ -38,7 +38,7 @@
           %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
       - @commune.users.each do |user|
         %h4= user.email
-        %ul{style: "list-style-type: none; padding-left: 0;"}
+        %ul.co-list-unstyled
           %li= link_to "envoyer un email", "mailto:#{user.email}", class: "fr-link fr-link--icon-left fr-icon-mail-line"
           %li= link_to "incarner cet usager", admin_user_impersonate_path(user), class: "fr-link fr-link--icon-left fr-icon-eye-line"
           %li= link_to "modifier cet usager", edit_admin_user_path(user), class: "fr-link fr-link--icon-left fr-icon-pencil-line"

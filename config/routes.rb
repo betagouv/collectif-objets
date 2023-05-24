@@ -193,13 +193,9 @@ Rails.application.routes.draw do
   # HEALTH & DEBUG
   # --------------
 
-  namespace :health do
-    scope controller: :health do
-      get :raise_on_purpose
-      get :js_error
-      get :slow_image if Rails.env.development?
-    end
-  end
+  get "health/raise_on_purpose", to: "health#raise_on_purpose"
+  get "health/js_error", to: "health#js_error"
+  get "health/slow_image", to: "health#slow_image" if Rails.env.development?
 
   mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
 

@@ -7,7 +7,7 @@
 
   .fr-grid-row.fr-grid-row--center.fr-mb-4w
     .fr-col-md-6
-      .fr-pl-2w.co-text--italic{style: "border-left: 1px solid #ccc;"}
+      .fr-pl-2w.co-text--italic.co-border--left
         “Quelques clics suffisent. […] La facilité de mise en oeuvre a suscité une adhésion plus importante que prévue !”
       .fr-my-2w= render("shared/video_reportage_canal32")
       .co-text--muted.fr-text--sm
@@ -24,4 +24,3 @@
             image_src: url_for(article.logo),
             description: article.date,
             heading_level: 2
-          -# html_attributes: {style: "max-width: 20rem;"})
