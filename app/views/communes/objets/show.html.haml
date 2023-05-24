@@ -7,7 +7,7 @@
     %h1.fr-mb-0= @objet.nom
     = objet_recensement_badge(@objet)
 
-  - if @commune.dossier.accepted? && @objet.current_recensement.analyse_notes.present?
+  - if @commune.dossier&.accepted? && @objet.current_recensement.analyse_notes.present?
     .fr-mb-8w.co-break-inside-avoid
       .co-text--bold Commentaires du conservateur
       .co-blockquote= @objet.current_recensement.analyse_notes
