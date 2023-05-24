@@ -7,7 +7,8 @@ module Admin
       raise if params[:status] != "construction"
 
       @dossier.return_to_construction!
-      redirect_to admin_commune_path(@dossier.commune), notice: "Dossier repassé en construction"
+      redirect_to admin_commune_path(@dossier.commune),
+                  notice: "Commune repassée en recensement & dossier repassé en construction"
     end
 
     private

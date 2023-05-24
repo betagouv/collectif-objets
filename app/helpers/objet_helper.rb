@@ -39,6 +39,8 @@ module ObjetHelper
 
   def objet_recensement_badge(objet)
     color, text = objet_recensement_badge_color_and_text(objet)
+    return nil unless color && text
+
     content_tag(:span, class: "fr-badge fr-badge--md fr-badge--#{color}") { text }
   end
 
