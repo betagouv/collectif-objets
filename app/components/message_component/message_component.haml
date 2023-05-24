@@ -1,4 +1,4 @@
-.co-background--white.fr-pt-2w.fr-px-1w.fr-mb-4w{style: "max-width: 80%;", class: css_classes}
+.co-background--white.fr-pt-2w.fr-px-1w.fr-mb-4w.co-max-width-80{class: css_classes}
   .co-flex.co-flex--space-between.co-flex--align-items-center
     .co-text--bold
       = icon_span(author_icon)
@@ -29,7 +29,7 @@
         - message.files.each do |file|
           - if file.variable?
             = link_to url_for(file), target: "_blank", rel: "noopener", class: "co-external-link--without-decoration" do
-              = image_tag url_for(file.variant(:small)), style: "max-height: 150px; max-width: 150px;"
+              = image_tag url_for(file.variant(:small)), class: "co-max-height-150px co-max-width-150px"
           - else
             .fr-py-2w.fr-px-1w.co-border.co-text--center
               = link_to url_for(file), target: "_blank", rel: "noopener", class: "co-external-link--without-decoration" do
