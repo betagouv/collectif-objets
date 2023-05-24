@@ -21,35 +21,33 @@ Rails.application.configure do
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/",
       *s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" },
       "https://collectif-objets.beta.gouv.fr/" # for mail previews
+
     policy.connect_src \
       :self,
       "https://sentry.incubateur.net",
       "https://stats.data.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
-      *s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
+      *s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" },
+      *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
+
     policy.object_src  :none
-    policy.style_src \
-      :self, :https,
-      "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='", # for frappe-charts cf https://github.com/frappe/charts/issues/378
-      "'sha256-CssDN67+wdcVeOo1+UBDlTtUvWjUmBJyiyqqRJHhrTQ='"  # same
     policy.font_src :self, :https, :data
     policy.child_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
     policy.worker_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
 
-
-    if Rails.env.development?
-      # tweaks for vite-dev HMR
-      # policy.script_src *policy.script_src, :unsafe_eval, "http://#{ ViteRuby.config.host_with_port }"
-      # policy.style_src *policy.style_src, :unsafe_inline, "ws://#{ ViteRuby.config.host_with_port }"
-      policy.connect_src *policy.connect_src, "ws://#{ ViteRuby.config.host_with_port }"
-      # policy.script_src *policy.script_src, :unsafe_eval,
-      # policy.style_src *policy.style_src, :unsafe_inline
-    elsif Rails.env.test?
-      policy.script_src *policy.script_src, :blob
-    end
+    inline_css_hashes = %w(
+      'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='
+      'sha256-CssDN67+wdcVeOo1+UBDlTtUvWjUmBJyiyqqRJHhrTQ='
+    )
+    # for frappe-charts cf https://github.com/frappe/charts/issues/378
+    # NOTE: single quotes are important
+    policy.style_src :self, :https, *(Rails.env.development? ? [:unsafe_inline] : inline_css_hashes)
   end
 
   # Generate session nonces for permitted importmap and inline scripts
   config.content_security_policy_nonce_generator = ->(request) { SecureRandom.base64(16) }
-  config.content_security_policy_nonce_directives = %w(script-src style-src)
+
+  nonce_directives = %w(script-src)
+  nonce_directives += %w(style-src) unless Rails.env.development?
+  config.content_security_policy_nonce_directives = nonce_directives
 end
