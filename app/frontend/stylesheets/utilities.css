@@ -23,18 +23,32 @@
 
 /* WIDTHS & HEIGHTS */
 
-.co--width-max-100 { max-width: 100%; }
 .co-width--100 { width: 100%; }
 .co-width-20rem { width: 20rem; }
+.co-min-width-200px { min-width: 200px; }
 .co--width-auto,
 .fr-select.co--width-auto { width: auto; }
+.co-max-width-40rem { max-width: 40rem; }
+.co-max-width-90 { max-width: 90% }
+.co-max-width-150px { max-width: 150px; }
+.co--width-max-100 { max-width: 100%; }
 
 .co-height--100 { height: 100%; }
+.co-height--100vh { height: 100vh; }
+.co-height--60vh { height: 60vh; }
+.co-height-600px { height: 600px; }
 .co-max-height-40vh { max-height: 40vh; }
+.co-max-height-50vh { max-height: 50vh; }
+.co-max-height-80px { max-height: 80px; }
+
+.co-max-height-150px { max-height: 150px; }
+.co-max-height-13rem { max-height: 13rem; }
+.co-min-height-50vh { min-height: 50vh; }
 
 /* MARGINS */
 
 .co-margin-left-auto { margin-left: auto; }
+.co-margin-auto { margin: auto }
 
 /* COLUMNS */
 
@@ -52,8 +66,10 @@
 .co-display--inline { display: inline; }
 
 .co-top-0 { top: 0; }
+.co-top-2rem { top: 2rem; }
 .co-bottom-0 { bottom: 0; }
 .co-z-index-600 { z-index: 600; }
+.co-z-index-1 { z-index: 1; }
 
 /* IMAGES */
 
@@ -75,6 +91,7 @@ img.co-object-fit-contain,
 .co-border { border: 1px solid #ccc; }
 .co-border--bottom { border-bottom: 1px solid #ccc; }
 .co-border--none-for-last:last-child { border: none; }
+.co-border--left { border-left: 1px solid #ccc; }
 
 /* BOX SHADOWS */
 
@@ -149,6 +166,22 @@ html[data-fr-scheme="dark"] .co-background--white { background-color: #000; }
 html[data-fr-scheme="dark"] .co-text--blue {
   color: rgb(137, 137, 203) !important;
 }
+
+/* BACKGROUND COLORS */
+
+:root {
+  --background-color-map-bin-green-0: #F4F269;
+  --background-color-map-bin-green-1: #CEE26B;
+  --background-color-map-bin-green-2: #A8D26D;
+  --background-color-map-bin-green-3: #82C26E;
+  --background-color-map-bin-green-4: #5CB270;
+}
+
+.co-background-color-map-bin-green-0 { background-color: var(--background-color-map-bin-green-0); }
+.co-background-color-map-bin-green-1 { background-color: var(--background-color-map-bin-green-1); }
+.co-background-color-map-bin-green-2 { background-color: var(--background-color-map-bin-green-2); }
+.co-background-color-map-bin-green-3 { background-color: var(--background-color-map-bin-green-3); }
+.co-background-color-map-bin-green-4 { background-color: var(--background-color-map-bin-green-4); }
 
 /* TEXT ALIGNS */
 

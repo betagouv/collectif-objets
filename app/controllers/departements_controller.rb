@@ -14,11 +14,11 @@ class DepartementsController < ApplicationController
 
   def set_departements_map_bins
     @map_bins = [
-      { threshold: 2000, color: "#F4F269", legend: "moins de 2000 objets protégés" },
-      { threshold: 3000, color: "#CEE26B", legend: "de 2000 à 3000 objets protégés" },
-      { threshold: 4000, color: "#A8D26D", legend: "de 3000 à 4000 objets protégés" },
-      { threshold: 5000, color: "#82C26E", legend: "de 4000 à 5000 objets protégés" },
-      { threshold: 10_000, color: "#5CB270", legend: "plus de 5000 objets protégés" }
+      { threshold: 2000, legend: "moins de 2000 objets protégés" },
+      { threshold: 3000, legend: "de 2000 à 3000 objets protégés" },
+      { threshold: 4000, legend: "de 3000 à 4000 objets protégés" },
+      { threshold: 5000, legend: "de 4000 à 5000 objets protégés" },
+      { threshold: 10_000, legend: "plus de 5000 objets protégés" }
     ]
   end
 

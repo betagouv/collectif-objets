@@ -36,8 +36,8 @@
         %tbody
           - @campaigns.each do |campaign|
             %tr
-              %td(style="min-width: 200px")= link_to campaign_title(campaign), admin_campaign_path(campaign)
-              %td(style="min-width: 200px")= campaign.departement
+              %td.co-min-width-200px= link_to campaign_title(campaign), admin_campaign_path(campaign)
+              %td.co-min-width-200px= campaign.departement
               %td= campaign_status_badge(campaign)
               %td= campaign.recipients_count
               %td du&nbsp;#{l(campaign.date_lancement)}&nbsp;au&nbsp;#{l(campaign.date_fin)}

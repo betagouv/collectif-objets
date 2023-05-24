@@ -8,7 +8,12 @@ export default class extends Controller {
   static targets = ["container"]
 
   connect() {
+    const bodyStyle = getComputedStyle(document.body)
     this.objetsCountBins = JSON.parse(this.containerTarget.dataset.binsJson)
+      .map((bin, index) => {
+        const color = bodyStyle.getPropertyValue(`--background-color-map-bin-green-${index}`)
+        return { ...bin, color: color }
+      })
     const { layers: defaultLayers, ...defaultStyle } = OpenmaptilesStyle
 
     this.map = new maplibregl.Map({

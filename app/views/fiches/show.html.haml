@@ -5,7 +5,7 @@
 
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-md-4
-      %nav{style: "position: sticky; top: 2rem;", "aria-label": "Table des matières de la fiche"}
+      %nav.co-position-sticky.co-top-2rem{"aria-label": "Table des matières de la fiche"}
         - if @objets.present?
           = link_to titre_objets_concernes, "#objets", class: "fr-ml-3w"
         != @fiche.table_of_contents_html

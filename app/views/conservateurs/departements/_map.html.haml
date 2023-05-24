@@ -12,7 +12,7 @@
   "data-departement-json" => "#{@departement_json}"}
   .conservateur-map-sidebar{"data-collapsed" => "true", "data-conservateur-map-target" => "sidebar"}
   .co-position-relative
-    .conservateur-map-container{"data-conservateur-map-target" => "container", style: "max-width: 90%; margin: auto;"}
+    .conservateur-map-container.co-max-width-90.co-margin-auto{"data-conservateur-map-target" => "container"}
     .tooltip{"data-conservateur-map-target" => "tooltip"}
   - communes.select { _1.status == "completed" }.each do |commune|
     = render "map_sidebar_commune_template", commune:
