@@ -13,8 +13,16 @@
   - if current_conservateur.dossiers.to_visit.blank?
     %i Aucune visite prévue
   - else
-    %ul
-      - @dossiers.each do |dossier|
-        %li
-          = link_to dossier.commune, conservateurs_commune_dossier_path(dossier.commune, dossier)
-          = dossier_visit_badge(dossier)
+    .fr-table
+      %table
+        %thead
+          %tr
+            %th Commune
+            %th Déplacements prévus
+        %tbody
+          - @dossiers.each do |dossier|
+            %tr
+              %td
+                = link_to dossier.commune.nom, conservateurs_commune_path(dossier.commune), "data-turbo-frame": "_top"
+              %td
+                = dossier_visit_badge(dossier)
