@@ -3,44 +3,53 @@
 ![CI](https://github.com/adipasquale/collectif-objets/actions/workflows/ci.yml/badge.svg)
 &nbsp;&nbsp;[![](https://img.shields.io/badge/Ouvrir%20avec-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/betagouv/collectif-objets/tree/feature/gitpod)
 
-Collectif Objets est un site web permettant aux communes françaises de recenser leur patrimoine mobilier monument
+[Collectif Objets est un site web](collectif-objets.beta.gouv.fr/) permettant aux communes françaises de recenser leur patrimoine mobilier monument
 historiques et aux conservateurs d'analyser ces recensements.
 
 ---
 
 💡 *Toute la documentation est contenue dans ce long README pour être facilement découvrable*
 
+---
+
 <!-- TOC -->
-* [Types d’usagers captures d'écran](#types-dusagers-captures-décran)
+* [Installation](#installation)
+* [Découverte du service, captures d'écran, types d’usagers, premiers pas](#découverte-du-service-captures-décran-types-dusagers-premiers-pas)
 * [Frameworks et dépendances](#frameworks-et-dépendances)
 * [Infrastructure, environnements, écosystème et services externes](#infrastructure-environnements-écosystème-et-services-externes)
-* [Style du code, principes suivis et choix faits](#style-du-code-principes-suivis-et-choix-faits)
 * [Diagramme d'entités de la base de données](#diagramme-dentités-de-la-base-de-données)
-* [Machines à états finis](#machines-à-états-finis)
-* [Installation](#installation)
-  * [Gitpod](#gitpod)
-  * [Installation via Docker](#installation-via-docker)
-  * [Installation en local via rbenv et bundle](#installation-en-local-via-rbenv-et-bundle)
-* [Premiers pas - Découverte du produit](#premiers-pas---découverte-du-produit)
-* [Configurations DNS, boites mails, et serveurs mails](#configurations-dns-boites-mails-et-serveurs-mails)
-* [Dumps des bases de données](#dumps-des-bases-de-données)
-* [Review apps](#review-apps)
-* [Préparation d'une astreinte dev](#préparation-dune-astreinte-dev)
-* [Buckets S3 : ACLs et CORS](#buckets-s3--acls-et-cors)
-* [Données (Origine, Transformations, Republications)](#données-origine-transformations-republications)
-* [Frontend : Vite, View Components, Stimulus](#frontend--vite-view-components-stimulus)
-* [Intégration du Design Système de l'État Français (DSFR)](#intégration-du-design-système-de-létat-français-dsfr)
-* [Overrides de Photos Palissy](#overrides-de-photos-palissy)
-  * [Préparer des overrides de photos en local](#préparer-des-overrides-de-photos-en-local)
-  * [Importer des overrides de photos en production](#importer-des-overrides-de-photos-en-production)
-* [Messagerie](#messagerie)
-* [Accessibilité, Plan du site et Pages démos](#accessibilité-plan-du-site-et-pages-démos)
-* [Netlify CMS](#netlify-cms)
-* [Rajouter une vidéo sur le site](#rajouter-une-vidéo-sur-le-site)
-* [Debug local via tunneling](#debug-local-via-tunneling)
+* [Machines à états finis (*state machines*)](#machines-à-états-finis-state-machines)
+* [Code](#code)
+  * [Style du code, principes suivis et choix faits](#style-du-code-principes-suivis-et-choix-faits)
+  * [Dumps des bases de données](#dumps-des-bases-de-données)
+  * [Review apps](#review-apps)
+  * [Préparation d'une astreinte dev](#préparation-dune-astreinte-dev)
+  * [Données (Origine, Transformations, Republications)](#données-origine-transformations-republications)
+  * [Frontend : Vite, View Components, Stimulus](#frontend--vite-view-components-stimulus)
+  * [Intégration du Design Système de l'État Français (DSFR)](#intégration-du-design-système-de-létat-français-dsfr)
+  * [Messagerie](#messagerie)
+  * [Accessibilité, Plan du site et Pages démos](#accessibilité-plan-du-site-et-pages-démos)
+  * [Netlify CMS](#netlify-cms)
+  * [Rajouter une vidéo sur le site](#rajouter-une-vidéo-sur-le-site)
+  * [Debug local via tunneling](#debug-local-via-tunneling)
+  * [Overrides de Photos Palissy](#overrides-de-photos-palissy)
+* [Configurations](#configurations)
+  * [Configurations DNS, boites mails, et serveurs mails](#configurations-dns-boites-mails-et-serveurs-mails)
+  * [Configurations des permissions ACLs et CORS des buckets S3 Scaleway](#configurations-des-permissions-acls-et-cors-des-buckets-s3-scaleway)
 <!-- TOC -->
 
-## Types d’usagers captures d'écran
+# Installation
+
+**Avec Gitpod** (environnement de développement en ligne configuré automatiquement) : [Ouvrir sur Gitpod ↗️](https://gitpod.io/#https://github.com/betagouv/collectif-objets)
+
+**Avec Docker**: `docker compose up && docker compose run web rails db:setup`
+
+**En local avec rbenv**: ```rbenv install `cat .ruby-version` && make install && make dev```
+
+*optionnel*: pour une utilisation de rubocop plus rapide en local,
+[voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
+
+# Découverte du service, captures d'écran, types d’usagers, premiers pas
 
 Le site expose trois interfaces pour trois types d'usagers différents, toutes accessibles depuis un
 site commun unique : https://collectif-objets.beta.gouv.fr
@@ -67,7 +76,29 @@ permet à l'équipe technique de faire le support
 
 ![](doc/interface-admin1.webp)
 
-## Frameworks et dépendances
+
+Découverte de l’interface administrateurs
+
+- [ ] aller sur [localhost:3000/admin](http://localhost:3000/admin)
+- [ ] se connecter avec le compte de seed `admin@collectif.local` mot de passe `123456`
+- [ ] trouver un lien de connexion magique à une commune dans la Marne 51 et le suivre
+
+Découverte de l’interface communes
+
+- [ ] se connecter depuis un lien magique depuis l'admin (pour info, dans les seeds, le code du lien magique est le code INSEE)
+- [ ] recenser un objet en uploadant une photo
+- [ ] recenser tous les objets d'une commune et finaliser un dossier
+
+Découverte de l’interface conservateurs
+
+- [ ] se déconnecter en tant que commune
+- [ ] se connecter en tant que conservateur depuis le lien de connexion sur le site avec le compte suivant : `conservateur@collectif.local` mot de passe `123456789 123456789 123456789`
+- [ ] ouvrir un dossier de recensement à analyser
+- [ ] analyser un recensement
+- [ ] analyser tous les recensements d'un dossier et l'accepter
+- [ ] lire le mail envoyé depuis MailHog sur [localhost:8025](http://localhost:8025)
+
+# Frameworks et dépendances
 
 Les 3 interfaces sont servies par une seule et unique application Ruby On Rails 7.
 
@@ -92,27 +123,11 @@ Côté Javascript les principaux packages utilisés sont :
 - `frappe-charts` : diagrammes SVG
 - `spotlight.js` : galeries de photos d'objets
 
-## Infrastructure, environnements, écosystème et services externes
-
+# Infrastructure, environnements, écosystème et services externes
 
 ```mermaid
-flowchart LR
-  subgraph scalingo[Scalingo]
-      subgraph rails[Rails App]
-        web[Web dynos]
-        worker[Sidekiq worker dynos]
-        cron[Cron tasks]
-      end
-      rails <--> redis[(Redis)]
-      rails <--> postgres[(Postgres)]
-      postgres -- read-only --> metabase[Metabase]
-  end
-  subgraph github[GitHub Actions]
-    ci[CI\nLint et Tests]
-    codeql[CodeQL\nStatic Analysis]
-    dependabot[Dependabot]
-  end
-  rails <--> github
+flowchart TB
+
   subgraph ext[Services Externes]
     dashlord
     updown.io
@@ -122,8 +137,24 @@ flowchart LR
     brevo[Brevo - ex Send In Blue]
     datasette[collectif-objets-datasette.fly.dev]
   end
+  subgraph scalingo[Scalingo]
+    subgraph rails[Rails App]
+      direction TB
+      web[Web dynos]
+      worker[Sidekiq worker dynos]
+      cron[Cron tasks]
+    end
+    rails <--> redis[(Redis)]
+    rails <--> postgres[(Postgres)]
+    postgres -- read-only --> metabase[Metabase]
+  end
+  subgraph github[GitHub Actions]
+    ci[CI\nLint et Tests]
+    codeql[CodeQL\nStatic Analysis]
+    dependabot[Dependabot]
+  end
+  rails <--> github
   rails <--> ext
-
 ```
 
 3 environnements :
@@ -145,51 +176,7 @@ Outils & services externes
 - [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
 - [datasette sur fly.io](collectif-objets-datasette.fly.dev)
 
-## Style du code, principes suivis et choix faits
-
-_Tout ce qui est décrit ci-dessous est évidemment discutable et peut évoluer librement._
-
-Les objectifs principaux de ce code sont :
-
-- permettre d’itérer rapidement ;
-- requérir peu de maintenance ;
-- être facilement compréhensible, corrigeable et modifiable par d’autres développeur·se·s Rails.
-
-Les commentaires dans le code sont à limiter au minimum, on préfère refactorer le code pour qu’il soit plus clair.
-
-Les controlleurs sont légers.
-Les modèles contiennent la logique métier. Il y a des modèles ActiveRecord et d’autres PORO.
-On utilise les concerns pour isoler des comportements de modèles. cf [doctrine 37signals](https://dev.37signals.com/vanilla-rails-is-plenty).
-Cela peut évidemment évoluer.
-
-La couverture des tests est modérée.
-Il y a des tests E2E pour les chemins les plus importants, principalement pour les cas de succès.
-Il y a des tests unitaires pour les modèles quand cela semble nécessaire ou que ça aide l’écriture du code.
-Il n’y a pas de tests de controlleurs, on favorisera les tests E2E ou pas de tests.
-Il n’y a pas de tests pour les fonctionnalités natives de Rails ni ActiveRecord.
-Les appels ActiveRecord ne sont pas mockés, ils font partie de ce qui est couvert par les tests.
-
-L’ajout de dépendances se fait avec parcimonie, les dépendances transitives sont étudiées à chaque fois.
-Cela vaut pour les services tiers, les gems, et les packages JS.
-
-L’introduction de comportements JS custom hors DSFR et Turbo est faite avec parcimonie.
-Le site peut en grande partie fonctionner sans JS.
-De nombreux usagers sont peu à l’aise avec le numérique, le site doit être aussi standard et sans surprise que possible.
-Le site n’est pour l’instant pas tout à fait responsive, c’est une erreur à corriger.
-
-Les règles rubocop basées uniquement sur la longueur des méthodes ou des classes sont volontairement désactivées.
-En général il ne faut pas hésiter à désactiver les règles rubocop si on juge qu’elles n’aident pas.
-
-Avec le recul, certains choix méritent d’être revus :
-
-- Le modèle Dossier est peut-être superflu. On pourrait utiliser uniquement le modèle Commune. Aujourd’hui il y a un lien 1:1 dans beaucoup de cas entre ces deux modèles. Il avait été pensé pour permettre à une commune d’ouvrir plusieurs dossiers de recensement mais ce n’est pas le cas aujourd’hui. En année n+5, il est probable qu’on aura déjà supprimé le dossier précédent de notre base de données pour des raisons RGPD.
-- Netlify CMS pour le contenu peut être remplacé par des contenus stockés en DB et édités via des textarea ActionText / Trix.
-- Sidekiq peut être remplacé par GoodJob pour supprimer la dépendance à Redis et simplifier les [CRON-like jobs](https://github.com/bensheldon/good_job#cron-style-repeatingrecurring-jobs).
-- Le choix de vite pour le build JS est peut–être trop exotique. Il faudrait réévaluer l’usage des importmaps pour éviter tout build system.
-- L’utilisation de I18n est à proscrire, ce projet n’a aucune vocation internationale, et l’isolation des contenus dans les fichiers yml ralentit plus qu’elle n’aide. (seule utilité à remplacer : la pluralisation).
-- Le mélange de français et d’anglais dans le code et la DB est désagréable. Il faudrait harmoniser les choix, mais la direction à suivre n’est pas encore claire.
-
-## Diagramme d'entités de la base de données
+# Diagramme d'entités de la base de données
 
 ```mermaid
 classDiagram
@@ -256,7 +243,10 @@ Commune "*" --> "*" Campaign
 La version complète du diagramme d'entités de la base de données est visible ici
 [doc/entity-relationship-diagram.svg](doc/entity-relationship-diagram.svg)
 
-## Machines à états finis
+💡Les colonnes SQL comportant des majuscules doivent être entourées de guillemets doubles dans les requêtes SQL.
+Exemple : `SELECT "palissy_REF" FROM objets;`
+
+# Machines à états finis (*state machines*)
 
 | Communes                                   | Recensements                                   | Dossiers                                   | Campaigns                                   |
 |--------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|
@@ -267,90 +257,69 @@ La version complète du diagramme d'entités de la base de données est visible 
   La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque
   le dossier est soumis.
 
-| commune     | recensement(s)                          | dossier                       |
-|-------------|-----------------------------------------|-------------------------------|
-| `inactive`  | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_               |
-| `started`   | 1+ `completed`                          | `construction`                |
-| `completed` | tous `completed`                        | `submitted` <br>ou `accepted` |
+| situation | commune        | recensement(s)                          | dossier         |
+|-----------|----------------|-----------------------------------------|-----------------|
+| 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_ |
+| 2         | `started`      | au moins un `completed`                 | `construction`  |
+| 3         | `completed`    | tous `completed`                        | `submitted`     |
+| 4         | `completed`    | tous `completed` et tous analysés       | `accepted`      |
+
+- Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements"
+- Le passage de 3 à 4 se fait par une action manuelle des conservateurs "Accepter le dossier"
 
 `bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
 
-Voici le schéma du cycle de vie d'un dossier.
+Schéma du cycle de vie d'un dossier :
 
 ![cycle de vie dossier drawio](doc/cycle-vie-dossier.drawio.svg)
 
 [éditer](https://app.diagrams.net/#Uhttps%3A%2F%2Fgithub.com%2Fbetagouv%2Fcollectif-objets%2Fraw%2Fmain%2Fdoc%2Fcycle-vie-dossier.drawio.svg)
 
-## Installation
+# Code
 
-### Gitpod
+## Style du code, principes suivis et choix faits
 
-Gitpod est un environnement de développement en ligne.
-Toutes les dépendances sont installées et préconfigurées.
-En un clic et quelques minutes d’attente, VSCode s’ouvrira avec le serveur web lancé, vite-dev, mailhog, redis etc…
+_Tout ce qui est décrit ci-dessous est évidemment discutable et peut évoluer librement._
 
-[![Ouvrir dans Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/betagouv/collectif-objets)
+Les objectifs principaux de ce code sont :
 
-### Installation via Docker
+- permettre d’itérer rapidement ;
+- requérir peu de maintenance ;
+- être facilement compréhensible, corrigeable et modifiable par d’autres développeur·se·s Rails.
 
-```
-docker compose up
-# CTRL-C to break
+Les commentaires dans le code sont à limiter au minimum, on préfère refactorer le code pour qu’il soit plus clair.
 
-docker compose run web rails db:setup
-```
+Les controlleurs sont légers.
+Les modèles contiennent la logique métier. Il y a des modèles ActiveRecord et d’autres PORO.
+On utilise les concerns pour isoler des comportements de modèles. cf [doctrine 37signals](https://dev.37signals.com/vanilla-rails-is-plenty).
+Cela peut évidemment évoluer.
 
-### Installation en local via rbenv et bundle
+La couverture des tests est modérée.
+Il y a des tests E2E pour les chemins les plus importants, principalement pour les cas de succès.
+Il y a des tests unitaires pour les modèles quand cela semble nécessaire ou que ça aide l’écriture du code.
+Il n’y a pas de tests de controlleurs, on favorisera les tests E2E ou pas de tests.
+Il n’y a pas de tests pour les fonctionnalités natives de Rails ni ActiveRecord.
+Les appels ActiveRecord ne sont pas mockés, ils font partie de ce qui est couvert par les tests.
 
-- installer manuellement [`rbenv`](https://github.com/rbenv/rbenv#installation)
+L’ajout de dépendances se fait avec parcimonie, les dépendances transitives sont étudiées à chaque fois.
+Cela vaut pour les services tiers, les gems, et les packages JS.
 
-```sh
-rbenv install `cat .ruby-version`
-make install
-make dev
-```
+L’introduction de comportements JS custom hors DSFR et Turbo est faite avec parcimonie.
+Le site peut en grande partie fonctionner sans JS.
+De nombreux usagers sont peu à l’aise avec le numérique, le site doit être aussi standard et sans surprise que possible.
+Le site n’est pour l’instant pas tout à fait responsive, c’est une erreur à corriger.
 
-optionnel: pour une utilisation de rubocop plus rapide en local,
-[voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
+Les règles rubocop basées uniquement sur la longueur des méthodes ou des classes sont volontairement désactivées.
+En général il ne faut pas hésiter à désactiver les règles rubocop si on juge qu’elles n’aident pas.
 
-## Premiers pas - Découverte du produit
+Avec le recul, certains choix méritent d’être revus :
 
-Durée à prévoir : 15 minutes
-
-**Découverte interface administrateurs**
-
-- [ ] aller sur [localhost:3000/admin](http://localhost:3000/admin)
-- [ ] se connecter avec le compte de seed `admin@collectif.local` mot de passe `123456`
-- [ ] trouver un lien de connexion magique à une commune dans la Marne 51 et le suivre
-
-**Découverte interface communes**
-
-- [ ] se connecter depuis un lien magique depuis l'admin (pour info, dans les seeds, le code du lien magique est le code INSEE)
-- [ ] recenser un objet en uploadant une photo
-- [ ] recenser tous les objets d'une commune et finaliser un dossier
-
-**Découverte interface conservateurs**
-
-- [ ] se déconnecter en tant que commune
-- [ ] se connecter en tant que conservateur depuis le lien de connexion sur le site avec le compte suivant : `conservateur@collectif.local` mot de passe `123456789 123456789 123456789`
-- [ ] ouvrir un dossier de recensement à analyser
-- [ ] analyser un recensement
-- [ ] analyser tous les recensements d'un dossier et l'accepter
-- [ ] lire le mail envoyé depuis MailHog sur [localhost:8025](http://localhost:8025)
-
-## Configurations DNS, boites mails, et serveurs mails
-
-La configuration des domaines en `.beta.gouv.fr` est gérée par l'équipe transverse de beta.gouv.fr,
-idem pour les domaines en `.incubateur.net`
-
-L'adresse `collectifobjets@beta.gouv.fr` est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost
-de beta cf https://doc.incubateur.net/communaute/travailler-a-beta-gouv/jutilise-les-outils-de-la-communaute/outils/liste-de-diffusion-et-adresses-de-contact#la-commande-mattermost-emails
-
-L'adresse `support@collectif-objets.beta.gouv.fr` est gérée en délégation de service par l'incubateur du ministère de
-  la Culture (référent : Ned Baldessin). Idem pour tout le sous-domaine `collectif-objets.beta.gouv.fr`
-
-Le domaine `collectifobjets.org`, le sous domaine de redirection des emails de réponse, et les adresses mails associées
-  de l'équipe sont gérées par Adrien et son compte Gandi.
+- Le modèle Dossier est peut-être superflu. On pourrait utiliser uniquement le modèle Commune. Aujourd’hui il y a un lien 1:1 dans beaucoup de cas entre ces deux modèles. Il avait été pensé pour permettre à une commune d’ouvrir plusieurs dossiers de recensement mais ce n’est pas le cas aujourd’hui. En année n+5, il est probable qu’on aura déjà supprimé le dossier précédent de notre base de données pour des raisons RGPD.
+- Netlify CMS pour le contenu peut être remplacé par des contenus stockés en DB et édités via des textarea ActionText / Trix.
+- Sidekiq peut être remplacé par GoodJob pour supprimer la dépendance à Redis et simplifier les [CRON-like jobs](https://github.com/bensheldon/good_job#cron-style-repeatingrecurring-jobs).
+- Le choix de vite pour le build JS est peut–être trop exotique. Il faudrait réévaluer l’usage des importmaps pour éviter tout build system.
+- L’utilisation de I18n est à proscrire, ce projet n’a aucune vocation internationale, et l’isolation des contenus dans les fichiers yml ralentit plus qu’elle n’aide. (seule utilité à remplacer : la pluralisation).
+- Le mélange de français et d’anglais dans le code et la DB est désagréable. Il faudrait harmoniser les choix, mais la direction à suivre n’est pas encore claire.
 
 ## Dumps des bases de données
 
@@ -420,52 +389,6 @@ Optionnel :
 
 - [ ] demander un accès Scaleway
 - [ ] demander les identifiants partagés Send In Blue de l'équipe
-
-## Buckets S3 : ACLs et CORS
-
-Les buckets de photos uploadés doivent être configurés pour le CORS
-
-cf https://www.scaleway.com/en/docs/storage/object/api-cli/setting-cors-rules/
-
-```sh
-aws s3api put-bucket-cors --bucket collectif-objets-development2 --cors-configuration file://scripts/s3buckets/cors-development.json
-aws s3api put-bucket-cors --bucket collectif-objets-staging2 --cors-configuration file://scripts/s3buckets/cors-staging.json
-aws s3api put-bucket-cors --bucket collectif-objets-production --cors-configuration file://scripts/s3buckets/cors-production.json
-```
-
-Il y a deux buckets où tous les fichiers sont publics
-
-- `collectif-objets-public` : contient le fichier seeds.pgsql pour les review apps ainsi que les vidéos des articles de presse
-- `collectif-objets-photos-overrides` : contient des photos d'objets à utiliser préférentiellement par rapport à POP
-
-Pour configurer l'accès public de ces buckets utilisez la commande suivante :
-
-`aws s3api put-bucket-policy --bucket collectif-objets-photos-overrides --policy file://bucket-policy-objet-overrides.json`
-
-Avec le fichier suivant
-
-```json
-{
-  "Version": "2022-09-21",
-  "Id": "collectifobjets",
-  "Statement": [
-    {
-      "Sid": "Allow public access on all photos overrides",
-      "Effect": "Allow",
-      "Principal": {
-        "SCW": "project_id:xxxx-xxxx-xxxx"
-      },
-      "Action": [
-        "s3:GetObject"
-      ],
-      "Resource": [
-        "collectif-objets-public",
-        "collectif-objets-photos-overrides"
-      ]
-    }
-  ]
-}
-```
 
 ## Données (Origine, Transformations, Republications)
 
@@ -631,29 +554,6 @@ En revanche ce n'est vraiment pas standard et risque de poser des soucis de main
 
 C'est discuté ici : https://mattermost.incubateur.net/betagouv/pl/ehsuormqztnr3fz6ncuqt9f5ac
 
-## Overrides de Photos Palissy
-
-Les overrides de photos permettent d'intégrer des photos de bases locales non reversées dans POP.
-
-### Préparer des overrides de photos en local
-
-- récupérer les photos et le lien avec la référence palissy depuis le département
-- s'assurer que les noms de fichiers sont corrects et présents
-- isoler les photos qui nous concernent
-- les uploader sur S3 public
-- lancer le script pour importer les ObjetsOverrides dans la db
-- resynchroniser les objets
-
-### Importer des overrides de photos en production
-
-`scalingo --app collectif-objets-prod --region osc-secnum-fr1 run bash`
-
-```sh
-curl https://transfer.sh/url-du-fichier.csv > tmp.csv
-rake objet_overrides:import[tmp.csv]
-rails runner "SynchronizeObjetsJob.perform_inline('52')"
-```
-
 ## Messagerie
 
 La messagerie permet des échanges entre les usagers, les conservateurs et l'équipe support de Collectif Objets.
@@ -772,8 +672,8 @@ Compresser le fichier MP4 lui-même s’il est trop lourd :
 ffmpeg -i 2023_05_titre_video.mp4 -vcodec libx265 -crf 30 2023_05_titre_video.mp4
 ```
 
-💡[Ce gist](https://gist.github.com/adipasquale/af5684a3d70f10a4b59b2d75a002fafa) 
-contient des scripts pour des raccourcis de conversion dans Mac Os Finder 
+💡[Ce gist](https://gist.github.com/adipasquale/af5684a3d70f10a4b59b2d75a002fafa)
+contient des scripts pour des raccourcis de conversion dans Mac Os Finder
 
 Uploader les fichiers MP4 et WEBM sur le bucket S3 `collectif-objets-public`.
 Donner les permissions ACL en lecture pour tous les visiteurs pour les fichiers uploadés.
@@ -810,3 +710,89 @@ Une fois installé vous pouvez utiliser :
 
 - `make tunnel` tunnel général du port 3000 accessible sur https://collectifobjets.loophole.site. Cela permet par exemple de tester le rendu sur un mobile.
 - `make tunnel_webhooks` expose uniquement l’URL racine https://collectifobjets-mail-inbound.loophole.site qui est configurée sur un webhook inbound parsing sur Send In Blue.
+
+
+## Overrides de Photos Palissy
+
+Les overrides de photos permettent d'intégrer des photos de bases locales non reversées dans POP.
+
+**Préparer des overrides de photos en local**
+
+- récupérer les photos et le lien avec la référence palissy depuis le département
+- s'assurer que les noms de fichiers sont corrects et présents
+- isoler les photos qui nous concernent
+- les uploader sur S3 public
+- lancer le script pour importer les ObjetsOverrides dans la db
+- resynchroniser les objets
+
+**Importer des overrides de photos en production**
+
+`scalingo --app collectif-objets-prod --region osc-secnum-fr1 run bash`
+
+```sh
+curl https://transfer.sh/url-du-fichier.csv > tmp.csv
+rake objet_overrides:import[tmp.csv]
+rails runner "SynchronizeObjetsJob.perform_inline('52')"
+```
+
+# Configurations
+
+## Configurations DNS, boites mails, et serveurs mails
+
+La configuration des domaines en `.beta.gouv.fr` est gérée par l'équipe transverse de beta.gouv.fr,
+idem pour les domaines en `.incubateur.net`
+
+L'adresse `collectifobjets@beta.gouv.fr` est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost
+de beta cf https://doc.incubateur.net/communaute/travailler-a-beta-gouv/jutilise-les-outils-de-la-communaute/outils/liste-de-diffusion-et-adresses-de-contact#la-commande-mattermost-emails
+
+L'adresse `support@collectif-objets.beta.gouv.fr` est gérée en délégation de service par l'incubateur du ministère de
+  la Culture (référent : Ned Baldessin). Idem pour tout le sous-domaine `collectif-objets.beta.gouv.fr`
+
+Le domaine `collectifobjets.org`, le sous domaine de redirection des emails de réponse, et les adresses mails associées
+  de l'équipe sont gérées par Adrien et son compte Gandi.
+
+## Configurations des permissions ACLs et CORS des buckets S3 Scaleway
+
+Les buckets de photos uploadés doivent être configurés pour le CORS
+
+cf https://www.scaleway.com/en/docs/storage/object/api-cli/setting-cors-rules/
+
+```sh
+aws s3api put-bucket-cors --bucket collectif-objets-development2 --cors-configuration file://scripts/s3buckets/cors-development.json
+aws s3api put-bucket-cors --bucket collectif-objets-staging2 --cors-configuration file://scripts/s3buckets/cors-staging.json
+aws s3api put-bucket-cors --bucket collectif-objets-production --cors-configuration file://scripts/s3buckets/cors-production.json
+```
+
+Il y a deux buckets où tous les fichiers sont publics
+
+- `collectif-objets-public` : contient le fichier seeds.pgsql pour les review apps ainsi que les vidéos des articles de presse
+- `collectif-objets-photos-overrides` : contient des photos d'objets à utiliser préférentiellement par rapport à POP
+
+Pour configurer l'accès public de ces buckets utilisez la commande suivante :
+
+`aws s3api put-bucket-policy --bucket collectif-objets-photos-overrides --policy file://bucket-policy-objet-overrides.json`
+
+Avec le fichier suivant
+
+```json
+{
+  "Version": "2022-09-21",
+  "Id": "collectifobjets",
+  "Statement": [
+    {
+      "Sid": "Allow public access on all photos overrides",
+      "Effect": "Allow",
+      "Principal": {
+        "SCW": "project_id:xxxx-xxxx-xxxx"
+      },
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "collectif-objets-public",
+        "collectif-objets-photos-overrides"
+      ]
+    }
+  ]
+}
+```
