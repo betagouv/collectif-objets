@@ -27,9 +27,7 @@ class EmailAttachment
       %w[jpg zip pdf].include?(extension)
   end
 
-  def skip_download?
-    !should_download?
-  end
+  def skip_download? = !should_download?
 
   def already_downloaded?
     message.files_blobs.any? { _1.filename == filename }

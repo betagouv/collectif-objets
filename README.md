@@ -256,6 +256,9 @@ Commune "*" --> "*" Campaign
 La version complète du diagramme d'entités de la base de données est visible ici
 [doc/entity-relationship-diagram.svg](doc/entity-relationship-diagram.svg)
 
+💡Les colonnes SQL comportant des majuscules doivent être entourées de guillemets doubles dans les requêtes SQL. 
+Exemple : `SELECT "palissy_REF" FROM objets;`
+
 ## Machines à états finis
 
 | Communes                                   | Recensements                                   | Dossiers                                   | Campaigns                                   |
@@ -267,11 +270,15 @@ La version complète du diagramme d'entités de la base de données est visible 
   La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque
   le dossier est soumis.
 
-| commune     | recensement(s)                          | dossier                       |
-|-------------|-----------------------------------------|-------------------------------|
-| `inactive`  | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_               |
-| `started`   | 1+ `completed`                          | `construction`                |
-| `completed` | tous `completed`                        | `submitted` <br>ou `accepted` |
+| situation | commune        | recensement(s)                          | dossier         |
+|-----------|----------------|-----------------------------------------|-----------------|
+| 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_ |
+| 2         | `started`      | au moins un `completed`                 | `construction`  |
+| 3         | `completed`    | tous `completed`                        | `submitted`     |
+| 4         | `completed`    | tous `completed` et tous analysés       | `accepted`      |
+
+Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements" 
+Le passage de 3 à 4 se fait par une action manuelle des conservateurs "Accepter le dossier" 
 
 `bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
 
