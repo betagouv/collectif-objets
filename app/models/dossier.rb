@@ -12,7 +12,7 @@ class Dossier < ApplicationRecord
     state :submitted, display: "En attente d'analyse"
     state :accepted, display: "Accepté"
 
-    event :submit, after: :aasm_after_complete_commune do
+    event :submit, after: :aasm_after_submit do
       transitions from: :construction, to: :submitted
     end
     event :accept do
@@ -71,7 +71,7 @@ class Dossier < ApplicationRecord
     recensements.filter(&:analyse_overrides?).count
   end
 
-  def aasm_after_complete_commune(updates = {}, **_kwargs)
+  def aasm_after_submit(updates = {}, **_kwargs)
     update(notes_commune: updates[:notes_commune]) if updates.key?(:notes_commune)
     commune.complete! unless commune.completed?
   end

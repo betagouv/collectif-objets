@@ -243,9 +243,6 @@ Commune "*" --> "*" Campaign
 La version complète du diagramme d'entités de la base de données est visible ici
 [doc/entity-relationship-diagram.svg](doc/entity-relationship-diagram.svg)
 
-💡Les colonnes SQL comportant des majuscules doivent être entourées de guillemets doubles dans les requêtes SQL.
-Exemple : `SELECT "palissy_REF" FROM objets;`
-
 # Machines à états finis (*state machines*)
 
 | Communes                                   | Recensements                                   | Dossiers                                   | Campaigns                                   |
