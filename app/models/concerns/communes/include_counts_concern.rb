@@ -6,6 +6,7 @@ module Communes
   module IncludeCountsConcern
     extend ActiveSupport::Concern
 
+    # L'objet est prioritaire s'il a disparu, ou s'il est dans un état mauvais ou en péril, jugé par la commune ou le conservateur
     RECENSEMENT_PRIORITAIRE_SQL = <<-SQL.squish
       recensements.localisation = 'absent'
       OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
@@ -13,6 +14,7 @@ module Communes
     SQL
 
     included do
+      # Tous les objets de la commune
       def self.include_objets_count
         joins(
           %{
@@ -27,6 +29,7 @@ module Communes
 
       ransacker(:objets_count) { Arel.sql("objets_count") }
 
+      # Objets recensés sur CO
       def self.include_objets_recenses_count
         joins(
           %{
@@ -64,6 +67,7 @@ module Communes
         )
       end
 
+      # Objets recensés et prioritaires d'une commune
       def self.include_recensements_prioritaires_count
         joins(
           %{
