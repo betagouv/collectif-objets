@@ -6,7 +6,8 @@ module Communes
   module IncludeCountsConcern
     extend ActiveSupport::Concern
 
-    # L'objet est prioritaire s'il a disparu, ou s'il est dans un état mauvais ou en péril, jugé par la commune ou le conservateur
+    # L'objet est prioritaire s'il a disparu, ou s'il est dans un état mauvais ou en péril,
+    # jugé par la commune ou le conservateur
     RECENSEMENT_PRIORITAIRE_SQL = <<-SQL.squish
       recensements.localisation = 'absent'
       OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
