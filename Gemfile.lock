@@ -136,7 +136,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.2.2)
-    connection_pool (2.4.0)
+    connection_pool (2.4.1)
     crass (1.0.6)
     css_parser (1.14.0)
       addressable
@@ -396,7 +396,7 @@ GEM
       sentry-ruby (~> 5.9.0)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
-    sidekiq (7.1.0)
+    sidekiq (7.1.1)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
