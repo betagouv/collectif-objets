@@ -34,21 +34,9 @@ module Co
       @communes_completed_percentage ||= (communes_completed_count.to_f / communes_count * 100).round
     end
 
-    def etats_sanitaires_chart_values
-      [
-        Recensement::ETAT_PERIL,
-        Recensement::ETAT_MAUVAIS,
-        Recensement::ETAT_MOYEN,
-        Recensement::ETAT_BON
-      ].map { etats_sanitaires_value_counts[_1] }
-    end
-
-    protected
-
     def etats_sanitaires_value_counts
-      @etats_sanitaires_value_counts ||= Recensement
-        .in_departement(@departement)
-        .etats_sanitaires_value_counts
+      @etats_sanitaires_value_counts ||=
+        Recensement.in_departement(@departement).etats_sanitaires_value_counts
     end
   end
 end
