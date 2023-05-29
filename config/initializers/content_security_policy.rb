@@ -5,6 +5,8 @@ Rails.application.configure do
   config.content_security_policy_report_only = true
 
   s3_buckets = %w[development2 staging2 production public photos-overrides].map { "collectif-objets-#{_1}" }
+  s3_uris1 = s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" }
+  s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
 
   config.content_security_policy do |policy|
     # Specify URI for violation reports
@@ -18,8 +20,9 @@ Rails.application.configure do
       :self,
       :data,
       :blob, # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
+      *s3_uris1,
+      *s3_uris2,
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/",
-      *s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" },
       "https://collectif-objets.beta.gouv.fr/" # for mail previews
 
     policy.connect_src \
@@ -27,7 +30,7 @@ Rails.application.configure do
       "https://sentry.incubateur.net",
       "https://stats.data.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
-      *s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" },
+      *s3_uris2,
       *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
 
     policy.object_src  :none
