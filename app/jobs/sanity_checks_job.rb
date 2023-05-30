@@ -3,7 +3,7 @@
 class SanityChecksJob
   include Sidekiq::Job
 
-  EMAIL = "adrien.di_pasquale@beta.gouv.fr"
+  EMAIL = "brice.durand@beta.gouv.fr"
 
   def perform
     check_commune_started_dossier_construction
