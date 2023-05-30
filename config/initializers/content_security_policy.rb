@@ -39,6 +39,8 @@ Rails.application.configure do
     policy.worker_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
 
     policy.style_src :self, :https, *(Rails.env.development? ? [:unsafe_inline] : [])
+
+    policy.frame_src "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/"
   end
 
   # Generate session nonces for permitted importmap and inline scripts
