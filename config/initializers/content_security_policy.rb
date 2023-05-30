@@ -45,6 +45,8 @@ Rails.application.configure do
     # for frappe-charts cf https://github.com/frappe/charts/issues/378
     # NOTE: single quotes are important
     policy.style_src :self, :https, *(Rails.env.development? ? [:unsafe_inline] : inline_css_hashes)
+
+    policy.frame_src "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/"
   end
 
   # Generate session nonces for permitted importmap and inline scripts
