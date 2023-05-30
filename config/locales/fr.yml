@@ -51,8 +51,6 @@ fr:
         head_title: Carte du %{departement}
       title:
         campaign: Campagne de recensement du %{date_lancement} au %{date_fin}
-      stats:
-        etats_sanitaires_distribution_title: États sanitaires des objets recensés
       map_sidebar_commune_template:
         prioritaires_count:
           one: 1 objet prioritaire

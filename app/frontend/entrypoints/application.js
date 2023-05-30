@@ -39,3 +39,6 @@ Object.entries(componentControllers).forEach(([path, controllerModule]) => {
   if (!identifier || typeof controllerModule.default !== 'function') return
   window.Stimulus.register(identifier, controllerModule.default)
 })
+
+import "chartkick"
+import "chartkick/chart.js"

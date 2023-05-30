@@ -120,7 +120,7 @@ Côté Javascript les principaux packages utilisés sont :
 - `@rails/activestorage` : Gestion des uploads de photos
 - `@hotwired/stimulus` : Simplifie le lien entre HTML et JS
 - `maplibre-gl` : permet d'afficher une carte des objets en France
-- `frappe-charts` : diagrammes SVG
+- `Chart.js` : diagrammes
 - `spotlight.js` : galeries de photos d'objets
 
 # Infrastructure, environnements, écosystème et services externes

@@ -38,13 +38,7 @@ Rails.application.configure do
     policy.child_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
     policy.worker_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
 
-    inline_css_hashes = %w(
-      'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='
-      'sha256-CssDN67+wdcVeOo1+UBDlTtUvWjUmBJyiyqqRJHhrTQ='
-    )
-    # for frappe-charts cf https://github.com/frappe/charts/issues/378
-    # NOTE: single quotes are important
-    policy.style_src :self, :https, *(Rails.env.development? ? [:unsafe_inline] : inline_css_hashes)
+    policy.style_src :self, :https, *(Rails.env.development? ? [:unsafe_inline] : [])
 
     policy.frame_src "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/"
   end
