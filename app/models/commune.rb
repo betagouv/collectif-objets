@@ -45,6 +45,13 @@ class Commune < ApplicationRecord
     presence ? all : has_recensements_with_missing_photos
   }
   scope :completed, -> { where(status: STATE_COMPLETED) }
+
+  # these 2 scopes are a hack for ransack sorting on dossier_status from conservateurs/departements#show
+  # from my understanding it should work out of the box with `dossier_status` but it doesn't ¯\_(ツ)_/¯
+  # cf https://github.com/activerecord-hackery/ransack/blob/main/lib/ransack/adapters/active_record/context.rb#L211
+  scope :sort_by_dossier_status_asc, -> { order("dossiers.status ASC") }
+  scope :sort_by_dossier_status_desc, -> { order("dossiers.status DESC") }
+
   has_many(
     :edifices,
     foreign_key: :code_insee, primary_key: :code_insee,
@@ -127,6 +134,6 @@ class Commune < ApplicationRecord
 
   def self.ransackable_scopes(_ = nil) = [:recensements_photos_presence_in]
   def self.ransackable_associations(_ = nil) = %i[dossier dossiers objets]
-  ransacker(:dossier_status) { Arel.sql("dossiers.status") }
+
   ransacker(:nom, type: :string) { Arel.sql("unaccent(nom)") }
 end
