@@ -5,7 +5,7 @@ updates:
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
     ignore:
       - dependency-name: "sentry-ruby"
         versions: ["5.x"]
@@ -16,7 +16,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
     ignore:
       - dependency-name: "@sentry/browser"
         versions: ["7.x"]
@@ -27,4 +27,4 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
