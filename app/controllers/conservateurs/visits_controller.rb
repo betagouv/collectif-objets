@@ -3,7 +3,7 @@
 module Conservateurs
   class VisitsController < BaseController
     def index
-      @dossiers = policy_scope(Dossier).where(conservateur: current_conservateur).to_visit
+      @dossiers = policy_scope(Dossier).where(conservateur: current_conservateur).to_visit.includes(:commune)
     end
 
     private

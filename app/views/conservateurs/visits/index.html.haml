@@ -18,11 +18,13 @@
         %thead
           %tr
             %th Commune
+            %th Nombre d'objets
+            %th Objets prioritaires
             %th Déplacements prévus
         %tbody
           - @dossiers.each do |dossier|
             %tr
-              %td
-                = link_to dossier.commune.nom, conservateurs_commune_path(dossier.commune), "data-turbo-frame": "_top"
-              %td
-                = dossier_visit_badge(dossier)
+              %td= link_to dossier.commune.nom, conservateurs_commune_path(dossier.commune), "data-turbo-frame": "_top"
+              %td= dossier.commune.objets.count
+              %td= dossier.recensements.where("recensements.localisation = 'absent' OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL) OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')").count
+              %td= dossier_visit_badge(dossier)
