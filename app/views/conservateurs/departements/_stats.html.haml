@@ -1,3 +1,5 @@
+-
+
 .fr-grid-row.fr-grid-row--gutters.fr-mb-4w
   .fr-col-md-3
     .co-background--grey.co-height--100.fr-p-4w
@@ -11,5 +13,9 @@
       .fr-h2 #{stats.objets_recenses_percentage}%
   .fr-col-md-6
     .co-background--grey.co-height--100.fr-p-4w
-      %b= t(".etats_sanitaires_distribution_title")
-      .objets-chart{"data-controller" => "objets-chart", "data-objets-chart-target" => "wrapper", "data-type" => "etats-sanitaires", "data-values" => "#{stats.etats_sanitaires_chart_values.to_json}"}
+      %b États sanitaires des objets recensés
+      = bar_chart [{name: "En péril", color: "rgba(179, 64, 1, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_PERIL]]] },
+                   {name: "Mauvais état", color: "rgba(133, 133, 247, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MAUVAIS]]]  },
+                   {name: "État moyen", color: "rgba(174, 173, 249, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MOYEN]]]  },
+                   {name: "Bon état", color: "rgba(205, 206, 252, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_BON]]] }],
+        stacked: true, height: 200, xtitle: "nombre d’objets"

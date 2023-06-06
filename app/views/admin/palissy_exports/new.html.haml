@@ -25,7 +25,7 @@
                 = recensement.edifice_nom
               - elsif recensement.absent?
                 disparu
-            %td{style: "max-width: 40rem;"}
+            %td.co-max-width-40rem
               - if recensement.notes.present?
                 %div Commentaire de la commune:
                 .fr-pl-1w.co-text--italic= recensement.notes

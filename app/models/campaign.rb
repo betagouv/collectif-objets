@@ -35,25 +35,15 @@ class Campaign < ApplicationRecord
   validate :validate_weekdays, if: :dates_are_present?
   validate :validate_no_overlapping_campaigns, if: -> { dates_are_present? && planned? }
 
-  include Campaigns::ForceStepUpConcern
-
   def step_for_date(date)
     return nil if date < date_lancement
 
     STEPS.reverse.find { date >= send("date_#{_1}") }
   end
 
-  def current_step
-    step_for_date(Time.zone.today)
-  end
-
-  def previous_step
-    Campaign.previous_step_for(current_step)
-  end
-
-  def next_step
-    Campaign.next_step_for(current_step)
-  end
+  def current_step = step_for_date(Time.zone.today)
+  def previous_step = Campaign.previous_step_for(current_step)
+  def next_step = Campaign.next_step_for(current_step)
 
   def self.previous_step_for(step)
     return nil if step == "lancement"
@@ -106,14 +96,6 @@ class Campaign < ApplicationRecord
     @date_range ||= Range.new date_lancement, date_fin
   end
 
-  def only_inactive_communes?
-    return true if communes.where.not(status: "inactive").empty?
-  end
-
-  def stats
-    super&.with_indifferent_access
-  end
-
   def past_steps
     index = DATE_FIELDS.rindex { send(_1) <= Time.zone.today }
     return [] if index.blank?
@@ -121,15 +103,23 @@ class Campaign < ApplicationRecord
     STEPS[0..index]
   end
 
-  def dates_are_present?
-    DATE_FIELDS.map { send(_1) }.all?(&:present?)
-  end
-
-  def draft_or_planned?
-    draft? || planned?
-  end
+  def dates_are_present? = DATE_FIELDS.map { send(_1) }.all?(&:present?)
+  def draft_or_planned? = draft? || planned?
+  def only_inactive_communes? = communes.where.not(status: "inactive").empty?
+  def stats = super&.with_indifferent_access
 
   def self.ransackable_attributes(_ = nil)
     %w[departement_code status recipients_count date_lancement]
   end
+
+  # these next methods are used in the admin to force step up or start a campaign
+
+  def can_update_all_recipients_emails? = !prod? && draft_or_planned? && communes.any?
+  def can_force_start? = !prod? && draft_or_planned? && communes.any? && safe_emails?
+  def can_force_step_up? = !prod? && next_step && communes.any? && safe_emails?
+
+  private
+
+  def prod? = Rails.configuration.x.environment_specific_name == "production"
+  def safe_emails? = communes.map(&:users).flatten.all?(&:safe_email?)
 end

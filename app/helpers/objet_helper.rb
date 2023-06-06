@@ -1,16 +1,6 @@
 # frozen_string_literal: true
 
 module ObjetHelper
-  def objet_first_image_or_recensement_photo_url(objet)
-    return objet.palissy_photos.first["url"] if objet.palissy_photos.any?
-
-    if objet.current_recensement&.photos&.attached? && can_see_recensement_for(objet)
-      return objet.current_recensement.photos.first.variant(:medium)
-    end
-
-    "images/illustrations/photo-manquante.png"
-  end
-
   def edifice_nom(nom)
     return nom.capitalize if nom.present?
 
@@ -39,12 +29,8 @@ module ObjetHelper
 
   def objet_recensement_badge(objet)
     color, text = objet_recensement_badge_color_and_text(objet)
+    return nil unless color && text
+
     content_tag(:span, class: "fr-badge fr-badge--md fr-badge--#{color}") { text }
-  end
-
-  private
-
-  def can_see_recensement_for(objet)
-    current_user&.commune == objet.commune
   end
 end

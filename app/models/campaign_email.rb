@@ -13,9 +13,7 @@ class CampaignEmail < ApplicationRecord
       .new(headers.transform_keys(&:downcase), subject)
   end
 
-  def i18n_name
-    email_name.gsub(/_email$/, "")
-  end
+  def i18n_name = email_name.gsub(/_email$/, "")
 
   def redirect_to_sib_path
     return nil if created_at < 30.days.ago # limit in SIB API

@@ -14,10 +14,10 @@
       .co-flex.co-flex--align-items-center.co-flex--justify-content-center.fr-mt-2w
         %div Filtres
         .fr-ml-2w
-          = f.select(:status_eq, [["tous les statuts", nil]] + campaigns_statuses_options, {}, onchange: "this.form.submit()" )
+          = f.select :status_eq, [["tous les statuts", nil]] + campaigns_statuses_options, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
 
         .fr-ml-2w
-          = f.select(:departement_code_eq, [["tous les départements", nil]] + departements_options, {}, onchange: "this.form.submit()")
+          = f.select :departement_code_eq, [["tous les départements", nil]] + departements_options, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
 
         - if @query_present
           .fr-ml-2w
@@ -36,8 +36,8 @@
         %tbody
           - @campaigns.each do |campaign|
             %tr
-              %td(style="min-width: 200px")= link_to campaign_title(campaign), admin_campaign_path(campaign)
-              %td(style="min-width: 200px")= campaign.departement
+              %td.co-min-width-200px= link_to campaign_title(campaign), admin_campaign_path(campaign)
+              %td.co-min-width-200px= campaign.departement
               %td= campaign_status_badge(campaign)
               %td= campaign.recipients_count
               %td du&nbsp;#{l(campaign.date_lancement)}&nbsp;au&nbsp;#{l(campaign.date_fin)}

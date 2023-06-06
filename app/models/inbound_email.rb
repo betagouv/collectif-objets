@@ -20,7 +20,7 @@ class InboundEmail < ApplicationRecord
   def self.from_raw(raw)
     to_emails = (raw.fetch("To", []) + raw.fetch("Cc", [])).pluck("Address")
     to_email = to_emails.find { _1.match(SUPPORT_EMAIL_REGEX) } || to_emails.first
-    new(
+    new \
       id: raw["MessageId"],
       body_html: raw["RawHtmlBody"],
       body_text: raw["RawTextBody"],
@@ -30,22 +30,13 @@ class InboundEmail < ApplicationRecord
       to_email:,
       sent_at: raw["SentAtDate"],
       raw: raw.except("RawHtmlBody", "RawTextBody", "ExtractedMarkdownMessage", "ExtractedMarkdownSignature")
-    )
   end
-
-  # rubocop:enable Metrics/MethodLength
 
   # cf https://developers.sendinblue.com/docs/inbound-parse-webhooks#sample-payload
 
   def author_type = regex_match[:conservateur] ? :conservateur : :user
-
   def commune_token = regex_match[:token]
-
   def commune_code_insee = regex_match[:code_insee]
-
-  def regex_match
-    @regex_match ||= to_email&.match(SUPPORT_EMAIL_REGEX)
-  end
 
   def commune
     return nil unless regex_match
@@ -72,9 +63,7 @@ class InboundEmail < ApplicationRecord
     raw.fetch("Attachments", []).each_with_index.map { |raw, index| EmailAttachment.new(raw, id, index:) }
   end
 
-  def skipped_attachments
-    attachments.select(&:skip_download?)
-  end
+  def skipped_attachments = attachments.select(&:skip_download?)
 
   def enqueue_download_attachments
     attachments
@@ -83,6 +72,10 @@ class InboundEmail < ApplicationRecord
   end
 
   private
+
+  def regex_match
+    @regex_match ||= to_email&.match(SUPPORT_EMAIL_REGEX)
+  end
 
   def author_conservateur
     scoped = Conservateur.joins(:departements).where(departements: { code: commune.departement_code })

@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.0"
+ruby "3.2.2"
 
 gem "aasm"
 gem "actioncable"
@@ -13,6 +13,7 @@ gem "active_storage_validations"
 gem "after_commit_everywhere"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false
+gem "chartkick", "~> 5.0"
 gem "devise"
 gem "dsfr-view-components"
 gem "factory_bot_rails"
@@ -30,7 +31,7 @@ gem "prawn-table", "~> 0.2.2"
 gem "progressbar"
 gem "puma", "~> 6.2"
 gem "pundit"
-gem "rails", "~> 7.0.4"
+gem "rails", "~> 7.0.5"
 gem "ransack"
 gem "redis"
 gem "rubyzip"
@@ -58,7 +59,7 @@ group :development do
   gem "html2haml"
   gem "htmlbeautifier"
   gem "listen" # for lookbook
-  gem "lookbook", "~> 2.0.2"
+  gem "lookbook", "~> 2.0.3"
   gem "pry"
   gem "rails-erd", require: false
   gem "web-console"

@@ -6,7 +6,7 @@ module RecensementWizard
     TITLE = "Récapitulatif"
 
     def update(_params)
-      recensement.complete
+      recensement.complete!
     end
 
     def after_success_path

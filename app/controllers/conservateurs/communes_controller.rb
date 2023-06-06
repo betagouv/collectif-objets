@@ -48,7 +48,7 @@ module Conservateurs
     def communes_autocomplete_arel
       policy_scope(Commune)
         .limit(5)
-        .ransack(nom_cont: params[:nom], s: "nom asc")
+        .ransack(nom_unaccented_cont: params[:nom], s: "nom asc")
         .result
     end
 

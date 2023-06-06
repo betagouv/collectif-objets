@@ -7,18 +7,18 @@ class Dossier < ApplicationRecord
   belongs_to :conservateur, optional: true
 
   include AASM
-  aasm column: :status, timestamps: true do
+  aasm column: :status, timestamps: true, whiny_persistence: true do
     state :construction, initial: true, display: "En construction"
     state :submitted, display: "En attente d'analyse"
     state :accepted, display: "Accepté"
 
-    event :submit, after_commit: :aasm_after_commit_complete_commune do
+    event :submit, after: :aasm_after_submit do
       transitions from: :construction, to: :submitted
     end
-    event :accept, after_commit: :aasm_after_commit_update do
+    event :accept do
       transitions from: :submitted, to: :accepted
     end
-    event :return_to_construction, after_commit: :aasm_after_commit_return_to_started_commune do
+    event :return_to_construction, after: :aasm_after_return_to_construction do
       transitions from: :submitted, to: :construction do
         guard { not_analysed? }
       end
@@ -71,14 +71,13 @@ class Dossier < ApplicationRecord
     recensements.filter(&:analyse_overrides?).count
   end
 
-  def aasm_after_commit_complete_commune(*args, **kwargs)
-    aasm_after_commit_update(*args, **kwargs)
-    commune.complete! if commune.may_complete?
+  def aasm_after_submit(updates = {}, **_kwargs)
+    update(notes_commune: updates[:notes_commune]) if updates.key?(:notes_commune)
+    commune.complete! unless commune.completed?
   end
 
-  def aasm_after_commit_return_to_started_commune(*args, **kwargs)
-    aasm_after_commit_update(*args, **kwargs)
-    commune.return_to_started!
+  def aasm_after_return_to_construction
+    commune.return_to_started! unless commune.started?
   end
 
   def self.ransackable_attributes(_ = nil) = %w[status]

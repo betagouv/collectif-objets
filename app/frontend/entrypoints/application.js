@@ -39,3 +39,8 @@ Object.entries(componentControllers).forEach(([path, controllerModule]) => {
   if (!identifier || typeof controllerModule.default !== 'function') return
   window.Stimulus.register(identifier, controllerModule.default)
 })
+
+import Chartkick from "chartkick"
+import "chartkick/chart.js"
+
+Chartkick.configure({ autoDestroy: false }) // do not clean up previous charts before Turbolinks loads a new page

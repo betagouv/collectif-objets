@@ -35,28 +35,12 @@ class Departement < ApplicationRecord
     ).select("departements.*, COALESCE(b.objets_count, 0) AS objets_count")
   end
 
-  def self.admin_select_options
-    all.map { [_1.to_s] }
-  end
-
-  def to_s
-    [code, nom].join(" - ")
-  end
-
-  def to_h
-    # DEPRECATE
-    %i[code nom communes_count objets_count].to_h { [_1, send(_1)] }
-  end
-
-  def memoire_sequence_name
-    "memoire_photos_number_#{code}"
-  end
-
-  alias display_name to_s
-
   def current_campaign
     campaigns.where("date_lancement <= ? AND date_fin >= ?", Time.zone.now.to_date, Time.zone.now.to_date).first
   end
 
+  def to_s = [code, nom].join(" - ")
+  alias display_name to_s
+  def memoire_sequence_name = "memoire_photos_number_#{code}"
   def self.ransackable_attributes(_ = nil) = %w[code]
 end
