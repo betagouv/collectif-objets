@@ -2,7 +2,7 @@
 titre: Communiqué de presse DRAC Bretagne
 source: DRAC Bretagne
 date: 17 mai 2023
-logo: /contenus/articles_presse/images/min_culture_cmjn.jpg
+logo: /contenus/articles_presse/images/logo-ministere-culture.png
 url: https://www.culture.gouv.fr/Regions/DRAC-Bretagne/La-DRAC-Bretagne-invite-les-communes-d-Ille-et-Vilaine-a-recenser-leurs-objets-proteges-au-titre-des-Monuments-Historiques
 ---
 ## « Collectif objets », une campagne participative et un site web pour accompagner les communes dans la préservation de leur patrimoine mobilier.
