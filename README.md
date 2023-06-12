@@ -174,7 +174,7 @@ Outils & services externes
 - [Scaleway - buckets S3](https://console.scaleway.com/)
 - [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
 - [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
-- [datasette sur fly.io](collectif-objets-datasette.fly.dev)
+- [datasette sur fly.io](https://collectif-objets-datasette.fly.dev/)
 
 # Diagramme d'entités de la base de données
 
