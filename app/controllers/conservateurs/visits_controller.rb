@@ -27,6 +27,7 @@ module Conservateurs
           ) AS nombre_objets_prioritaires_par_dossier
           ON nombre_objets_prioritaires_par_dossier.dossier_id = dossiers.id
         }).select("COALESCE(nombre_objets_prioritaires, 0) AS nombre_objets_prioritaires")
+        .order(:visit)
     end
 
     private
