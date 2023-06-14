@@ -23,4 +23,9 @@ module DossierHelper
       content_tag(:span, "Visite prioritaire", class: "fr-badge fr-badge--warning")
     end
   end
+
+  def dossier_visit_tag(dossier)
+    titre = "Déplacement #{dossier.visit == 'prioritaire' ? 'prioritaire' : 'souhaitable'}"
+    dsfr_tag(title: titre)
+  end
 end
