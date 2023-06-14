@@ -51,10 +51,10 @@ module Bordereau
 
     def render_intermediate_row_center
       text <<~TEXT, size: 8
-        Propriétaire, affectataire,
+        Signataires du présent bordereau,
         Préfecture du département, conservation des antiquités et objets d'art
         Direction régionaledes affaires culturelles - conservation régionaledes monuments historiques
-        Direction générale des patrimoines (Service du patrimoine - Sous-direction des monuments historiques et espaces protégés - bureau de la conservation du patrimoine mobilier et instrumental
+        Direction générale des patrimoines et de l’architecture – Bureau de la conservation des monuments historiques mobiliers – Médiathèque du patrimoine et de la photographie
       TEXT
     end
 
@@ -62,12 +62,12 @@ module Bordereau
       table \
         [
           [
-            "<b>Numéros</b>",
+            "<b>Référence Palissy</b>",
             "<b>Dénomination</b>",
-            "<b>Protection¹</b>",
-            "<b>Etat de conservation²</b>",
-            "<b>Observations du conservateur³</b>",
-            "<b>Observations du propriétaire</b>",
+            "<b>Date de Classement</b>",
+            "<b>Etat de conservation¹</b>",
+            "<b>Observations du conservateur²</b>",
+            "<b>Observations sur le terrain³</b>",
             "<b>Photographie</b>"
           ],
           [
@@ -87,9 +87,9 @@ module Bordereau
 
     def render_footnotes
       text <<~TEXT, size: 8
-        1    Le récolement périodique concerne les objets mobiliers classés. Indiquer CL pour classement au titre des monuments historiques. Le bordereau peut être utilisé pour mentionner les objets mobiliers inscrits. Indiquer alors IS pour une inscription au titre des monuments historiques
-        2    Appreciation sur 4 niveaux : bon, moyen, mauvais, péril
-        3    Précisions sur l'état de conservation et préconisations de mesures et actions de conservation préventive, curative ou de restauration"
+        1    Estimation transmise par la commune au moment du recensement communal « Collectif Objets », éventuellement corrigée par le CAOA au vue des photographies
+        2    Expertise du CAOA à la suite du recensement communal
+        3    Observations effectuées sur place lors du récolement
       TEXT
     end
   end
