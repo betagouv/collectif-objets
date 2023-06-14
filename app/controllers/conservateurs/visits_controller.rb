@@ -32,6 +32,6 @@ module Conservateurs
 
     private
 
-    def active_nav_links = ["Mes actions", "Visites prévues"]
+    def active_nav_links = ["Mes actions", "Déplacements prévus"]
   end
 end
