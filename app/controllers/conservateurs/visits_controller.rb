@@ -20,9 +20,7 @@ module Conservateurs
           LEFT JOIN (
             SELECT recensements.dossier_id, COUNT(*) AS nombre_objets_prioritaires
             FROM recensements
-            WHERE recensements.localisation = 'absent'
-            OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
-            OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
+            WHERE #{Recensement::RECENSEMENT_PRIORITAIRE_SQL}
             GROUP BY recensements.dossier_id
           ) AS nombre_objets_prioritaires_par_dossier
           ON nombre_objets_prioritaires_par_dossier.dossier_id = dossiers.id

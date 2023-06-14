@@ -6,14 +6,6 @@ module Communes
   module IncludeCountsConcern
     extend ActiveSupport::Concern
 
-    # L'objet est prioritaire s'il a disparu, ou s'il est dans un état mauvais ou en péril,
-    # jugé par la commune ou le conservateur
-    RECENSEMENT_PRIORITAIRE_SQL = <<-SQL.squish
-      recensements.localisation = 'absent'
-      OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
-      OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
-    SQL
-
     included do
       # Tous les objets de la commune
       def self.include_objets_count
@@ -53,7 +45,7 @@ module Communes
             SELECT objets."palissy_INSEE", COUNT(*) recensements_prioritaires_count
             FROM recensements
             INNER JOIN objets ON objets.id = recensements.objet_id
-            WHERE (#{RECENSEMENT_PRIORITAIRE_SQL})
+            WHERE (#{Recensement::RECENSEMENT_PRIORITAIRE_SQL})
             GROUP BY objets."palissy_INSEE"
           ) d ON d."palissy_INSEE" = communes.code_insee
         }
@@ -76,7 +68,7 @@ module Communes
               SELECT objets."palissy_INSEE", COUNT(*) recensements_prioritaires_count
               FROM recensements
               LEFT JOIN objets ON recensements.objet_id = objets.id
-              WHERE (#{RECENSEMENT_PRIORITAIRE_SQL})
+              WHERE (#{Recensement::RECENSEMENT_PRIORITAIRE_SQL})
               GROUP BY "palissy_INSEE"
             ) d ON d."palissy_INSEE" = communes.code_insee
           }
