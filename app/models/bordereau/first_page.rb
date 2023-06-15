@@ -69,16 +69,6 @@ module Bordereau
             "<b>Observations du conservateur²</b>",
             "<b>Observations sur le terrain³</b>",
             "<b>Photographie</b>"
-          ],
-          [
-            "Identifiant Agrégée / référence Palissy",
-            "Titre courant\nSiècle ou date\nAuteur ou Atelier\nMatériaux et techniques\nDimensions",
-            "date de decision de classement (arrêté ou décret) <b>en format aaaa/mm/jj</b> ou ID avec la date " \
-            "de protection de l'immeuble",
-            "",
-            "",
-            "",
-            ""
           ]
         ],
         column_widths: COLUMN_WIDTHS,
