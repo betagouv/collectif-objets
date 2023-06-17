@@ -18,6 +18,7 @@ class Objet < ApplicationRecord
       .where(recensements: { id: nil })
   }
   scope :classés, -> { where(%("palissy_PROT" LIKE 'classé%')).where.not(%("palissy_PROT" LIKE 'déclassé%')) }
+  scope :inscrits, -> { where(%("palissy_PROT" ILIKE '%inscrit au titre objet%')) }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
