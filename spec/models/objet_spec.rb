@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Objet, type: :model do
-  it "doit filtrer les objets inscrits et classés au patrimoine" do
+  it "filtre les objets inscrits et classés au patrimoine" do
     create(:objet, palissy_PROT: "inscrit au titre objet")
     create(:objet, palissy_PROT: "classé au titre objet")
     create(:objet, palissy_PROT: "classé au titre objet ; classé au titre objet")
