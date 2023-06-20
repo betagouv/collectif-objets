@@ -6,13 +6,8 @@ module Communes
   module IncludeCountsConcern
     extend ActiveSupport::Concern
 
-    RECENSEMENT_PRIORITAIRE_SQL = <<-SQL.squish
-      recensements.localisation = 'absent'
-      OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
-      OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
-    SQL
-
     included do
+      # Tous les objets de la commune
       def self.include_objets_count
         joins(
           %{
@@ -27,6 +22,7 @@ module Communes
 
       ransacker(:objets_count) { Arel.sql("objets_count") }
 
+      # Objets recensés sur CO
       def self.include_objets_recenses_count
         joins(
           %{
@@ -49,7 +45,7 @@ module Communes
             SELECT objets."palissy_INSEE", COUNT(*) recensements_prioritaires_count
             FROM recensements
             INNER JOIN objets ON objets.id = recensements.objet_id
-            WHERE (#{RECENSEMENT_PRIORITAIRE_SQL})
+            WHERE (#{Recensement::RECENSEMENT_PRIORITAIRE_SQL})
             GROUP BY objets."palissy_INSEE"
           ) d ON d."palissy_INSEE" = communes.code_insee
         }
@@ -64,6 +60,7 @@ module Communes
         )
       end
 
+      # Objets recensés et prioritaires d'une commune
       def self.include_recensements_prioritaires_count
         joins(
           %{
@@ -71,7 +68,7 @@ module Communes
               SELECT objets."palissy_INSEE", COUNT(*) recensements_prioritaires_count
               FROM recensements
               LEFT JOIN objets ON recensements.objet_id = objets.id
-              WHERE (#{RECENSEMENT_PRIORITAIRE_SQL})
+              WHERE (#{Recensement::RECENSEMENT_PRIORITAIRE_SQL})
               GROUP BY "palissy_INSEE"
             ) d ON d."palissy_INSEE" = communes.code_insee
           }

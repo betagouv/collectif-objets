@@ -1,9 +1,9 @@
-- content_for(:head_title) { "Visites prévues" }
+- content_for(:head_title) { "Déplacements prévus" }
 
 %main.fr-container.fr-mb-8w
-  = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Visites prévues")
+  = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Déplacements prévus")
 
-  %h2 Visites prévues
+  %h1 Déplacements prévus
 
   .co-readable
     :markdown
@@ -13,8 +13,18 @@
   - if current_conservateur.dossiers.to_visit.blank?
     %i Aucune visite prévue
   - else
-    %ul
-      - @dossiers.each do |dossier|
-        %li
-          = link_to dossier.commune, conservateurs_commune_dossier_path(dossier.commune, dossier)
-          = dossier_visit_badge(dossier)
+    .fr-table
+      %table
+        %thead
+          %tr
+            %th Commune
+            %th Nombre d'objets
+            %th Objets prioritaires
+            %th Déplacements prévus
+        %tbody
+          - @dossiers.each do |dossier|
+            %tr
+              %td= link_to dossier.nom_commune, conservateurs_commune_path(dossier.commune), "data-turbo-frame": "_top"
+              %td= dossier.nombre_objets
+              %td= dossier.nombre_objets_prioritaires
+              %td= dossier_visit_tag(dossier)
