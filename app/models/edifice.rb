@@ -9,6 +9,11 @@ class Edifice < ApplicationRecord
   validates :slug, uniqueness: { scope: :code_insee }, if: -> { code_insee.present? }
 
   scope :with_objets_classés, -> { where.associated(:objets).merge(Objet.classés).group("edifices.id") }
+  scope :with_objets_classés_ou_inscrits, lambda {
+    where.associated(:objets)
+    .merge(Objet.classés.or(Objet.inscrits))
+    .group("edifices.id")
+  }
 
   def self.ordered_by_nom
     order(Arel.sql("LOWER(UNACCENT(edifices.nom))"))
