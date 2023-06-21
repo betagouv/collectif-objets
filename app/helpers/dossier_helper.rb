@@ -18,9 +18,9 @@ module DossierHelper
   def dossier_visit_badge(dossier)
     case dossier.visit
     when "souhaitable"
-      content_tag(:span, "Visite souhaitable", class: "fr-badge fr-badge--info")
+      dsfr_badge(status: :info, classes: ["fr-badge--no-icon"]) { "Déplacement souhaitable" }
     when "prioritaire"
-      content_tag(:span, "Visite prioritaire", class: "fr-badge fr-badge--warning")
+      dsfr_badge(status: :warning, classes: ["fr-badge--no-icon"]) { "Déplacement prioritaire" }
     end
   end
 
