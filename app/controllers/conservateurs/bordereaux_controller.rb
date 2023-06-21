@@ -4,7 +4,9 @@ module Conservateurs
   class BordereauxController < BaseController
     before_action :set_commune, :set_dossier
 
-    def new; end
+    def new
+      @edifices = @commune.edifices.with_objets_classés_ou_inscrits.ordered_by_nom
+    end
 
     def create
       @edifice = Edifice.find(params[:edifice_id])
