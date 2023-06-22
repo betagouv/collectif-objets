@@ -17,8 +17,14 @@ class Objet < ApplicationRecord
     joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.status = 'completed'")
       .where(recensements: { id: nil })
   }
-  scope :classés, -> { where(%("palissy_PROT" LIKE 'classé%')).where.not(%("palissy_PROT" LIKE 'déclassé%')) }
-  scope :inscrits, -> { where(%("palissy_PROT" ILIKE '%inscrit au titre objet%')) }
+
+  MIS_DE_COTE_SQL = %("palissy_PROT" ILIKE '%inscrit%classé%' OR "palissy_PROT" ILIKE '%classé%inscrit%')
+  scope :classés, -> { where(%("palissy_PROT" ILIKE 'classé%')).where.not(MIS_DE_COTE_SQL) }
+  scope :inscrits, lambda {
+                     where(%("palissy_PROT" ILIKE '%inscr%'))
+                     .where.not(%("palissy_PROT" LIKE 'désinscrit%'))
+                     .where.not(MIS_DE_COTE_SQL)
+                   }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
