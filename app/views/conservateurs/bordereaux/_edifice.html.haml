@@ -2,11 +2,8 @@
 
 .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w{id: "bordereau-#{edifice.id}"}
   %span
-    #{edifice.nom}
-    - if edifice.objets.classés.count > 1
-      · #{edifice.objets.classés.count} objets classés
-    - else
-      · 1 objet classé
+    = "#{edifice.nom} · #{nombre_objets_classés_et_inscrits(edifice)}"
+
   - if edifice.bordereau.present?
     %span
       = link_to "Télécharger (PDF de #{number_to_human_size edifice.bordereau.byte_size})",
