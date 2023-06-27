@@ -2,7 +2,7 @@
 
 module Bordereau
   class Pdf
-    include Prawn::View
+    include Prawn::View # Permet d'utiliser directement les méthodes de Prawn::Document
     attr_reader :dossier, :edifice
 
     delegate :commune, to: :dossier
@@ -15,6 +15,7 @@ module Bordereau
       @edifice = edifice
     end
 
+    # Utilisé comme référence par Prawn::View
     def document
       @document ||= Prawn::Document.new page_layout: :landscape, page_size: "A4"
     end
