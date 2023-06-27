@@ -10,7 +10,7 @@ module Bordereau
 
     attr_reader :bordereau
 
-    delegate :dossier, :prawn_doc, :edifice, :commune, to: :bordereau
-    delegate :define_grid, :grid, :image, :move_down, :text, :grid, :stroke_horizontal_rule, :table, to: :prawn_doc
+    delegate :dossier, :document, :edifice, :commune, to: :bordereau
+    delegate :define_grid, :grid, :image, :move_down, :text, :grid, :stroke_horizontal_rule, :table, to: :document
   end
 end
