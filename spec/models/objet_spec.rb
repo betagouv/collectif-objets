@@ -87,5 +87,6 @@ RSpec.describe Objet, type: :model do
 
     expect(Objet.classés.count).to eq(objets_considérés_comme_classés.size)
     expect(Objet.inscrits.count).to eq(objets_considérés_comme_inscrits.size)
+    expect(Objet.protégés.count).to eq(objets_considérés_comme_classés.size + objets_considérés_comme_inscrits.size)
   end
 end
