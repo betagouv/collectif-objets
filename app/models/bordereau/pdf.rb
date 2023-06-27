@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Bordereau
-  COLUMN_WIDTHS = [75, 122, 122, 122, 122, 122, 75].freeze
-  CELL_STYLE = { size: 8, border_color: "CCCCCC" }.freeze
-
   class Pdf
     include Prawn::View
     attr_reader :dossier, :edifice
 
     delegate :commune, to: :dossier
+
+    COLUMN_WIDTHS = [75, 122, 122, 122, 122, 122, 75].freeze
+    CELL_STYLE = { size: 8, border_color: "CCCCCC" }.freeze
 
     def initialize(dossier, edifice)
       @dossier = dossier
@@ -21,7 +21,82 @@ module Bordereau
 
     def build_prawn_doc
       setup_fonts
-      FirstPage.new(self).render
+      define_grid(columns: 5, rows: 8, gutter: 0)
+
+      # Partie en haut à gauche avec les logos
+      grid([0, 0], [2, 0]).bounding_box do
+        image Rails.root.join("prawn_assets/logo-ministere-culture.png"), width: 100
+        move_down 20
+        image Rails.root.join("prawn_assets/logo-monument-historique.png"), width: 100
+      end
+
+      # Partie en haut et centrée avec les titres
+      grid([0, 1], [2, 3]).bounding_box do
+        text "Direction régionale des affaires culturelles de Grand Est", align: :center, style: :bold
+        move_down 10
+        text "CONSERVATION DES ANTIQUITÉS ET OBJETS D'ART", align: :center, style: :bold
+        move_down 30
+        stroke_horizontal_rule
+        move_down 50
+        text "RÉCOLEMENT", align: :center, style: :bold, size: 20
+        text "des objets mobiliers, soit meubles proprement dits, soit immeubles par destination, \n" \
+             "classés au titre des monuments historiques dans l’immeuble de localisation désigné ci-contre",
+             align: :center, style: :bold, size: 8
+        text "En application des articles L 622-8 et R 622-25 du Code du Patrimoine",
+             align: :center, style: :italic, size: 8
+      end
+
+      # Partie en haut à droite avec les informations sur l'édifice
+      grid([0, 4], [2, 4]).bounding_box do
+        text "<b>DÉPARTEMENT</b> : #{dossier.departement}", inline_format: true
+        move_down 10
+        text "<b>COMMUNE</b>: #{dossier.commune.nom}", inline_format: true
+        move_down 10
+        text "<b>Code INSEE</b>: #{dossier.commune.code_insee}", inline_format: true
+        move_down 10
+        text "<b>Immeuble de localisation</b> :", inline_format: true
+        text edifice.nom
+        move_down 10
+        text "<b>Adresse :</b>", inline_format: true
+      end
+
+      # Partie avec les signataires et destinataires
+      grid(3, 0).bounding_box { text "Diffusion du bordereau :", style: :bold }
+      grid([3, 1], [3, 3]).bounding_box do
+        text <<~TEXT, size: 8
+          Signataires du présent bordereau,
+          Préfecture du département, conservation des antiquités et objets d'art
+          Direction régionaledes affaires culturelles - conservation régionaledes monuments historiques
+          Direction générale des patrimoines et de l’architecture – Bureau de la conservation des monuments historiques mobiliers – Médiathèque du patrimoine et de la photographie
+        TEXT
+      end
+
+      # Nom des colonnes de la table d'objets classés
+      grid([4, 0], [5, 4]).bounding_box do
+        table \
+          [
+            [
+              "<b>Référence Palissy</b>",
+              "<b>Dénomination</b>",
+              "<b>Date de protection</b>",
+              "<b>Etat de conservation¹</b>",
+              "<b>Observations du conservateur²</b>",
+              "<b>Observations sur le terrain³</b>",
+              "<b>Photographie</b>"
+            ]
+          ],
+          column_widths: COLUMN_WIDTHS,
+          cell_style: { inline_format: true, size: 8, border_color: "CCCCCC" }
+      end
+
+      # Notes de bas de page
+      grid([7, 0], [7, 4]).bounding_box do
+        text <<~TEXT, size: 8
+          1    Estimation transmise par la commune au moment du recensement communal « Collectif Objets », éventuellement corrigée par le CAOA au vue des photographies
+          2    Expertise du CAOA à la suite du recensement communal
+          3    Observations effectuées sur place lors du récolement
+        TEXT
+      end
 
       # Page de la liste des objets classés
       recensements_objets_classés = recensements_des_objets_de_l_edifice_typés("classés")
@@ -44,7 +119,32 @@ module Bordereau
 
       # Page de signature
       start_new_page
-      LastPage.new(self).render
+      define_grid(columns: 5, rows: 8, gutter: 0)
+      text "Participants au récolement⁴ :", style: :bold
+      move_down 20
+      text <<~TEXT, inline_format: true
+        Les soussignés (<i>nom, prénom en toutes lettres, fonction et signature</i>) certifient que les objets mobiliers ou immeubles par destination portés au present etat figurent dans l’édifice «#{edifice.nom}», #{commune}, lors du récolement en date du #{ellipsis}
+      TEXT
+      move_down 40
+      text "Fait à #{ellipsis}, le #{ellipsis}", align: :right
+      move_down 40
+      table \
+        [
+          [
+            "<i>Le propriétaire⁵ ou son représentant,</i>",
+            "<i>L’affectataire⁶,</i>",
+            "<i>Le Conservateur des Antiquités et Objets d’Art,</i>"
+          ]
+        ],
+        column_widths: [256, 256, 256],
+        cell_style: { border_color: "FFFFFF", style: :italic, inline_format: true, size: 11 }
+      grid([7, 0], [7, 4]).bounding_box do
+        text <<~TEXT, size: 8
+          4    Le cas échéant, indiquer les autres personnes présentes participant au récolement.
+          5    Le propriétaire peut être une personne publique ou privée. Préciser, s’il y a lieu, l’affectataire domanial.
+          6    Pour les biens affectés au culte au sens de la loi du 9 décembre 1905 concernant la séparation des Églises et de l’État.
+        TEXT
+      end
       document
     end
 
@@ -75,6 +175,10 @@ module Bordereau
           bold: Rails.root.join("prawn_assets/Marianne-Bold.ttf")
         }
       font "Marianne"
+    end
+
+    def ellipsis
+      @ellipsis ||= "." * 30
     end
   end
 end
