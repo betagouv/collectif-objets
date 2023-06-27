@@ -32,32 +32,18 @@ module Bordereau
 
       # Partie en haut et centrée avec les titres
       grid([0, 1], [2, 3]).bounding_box do
-        text "Direction régionale des affaires culturelles de Grand Est", align: :center, style: :bold
+        text "Direction régionale des affaires culturelles", align: :center, style: :bold
         move_down 10
-        text "CONSERVATION DES ANTIQUITÉS ET OBJETS D'ART", align: :center, style: :bold
-        move_down 30
-        stroke_horizontal_rule
-        move_down 50
-        text "RÉCOLEMENT", align: :center, style: :bold, size: 20
-        text "des objets mobiliers, soit meubles proprement dits, soit immeubles par destination, \n" \
-             "classés au titre des monuments historiques dans l’immeuble de localisation désigné ci-contre",
-             align: :center, style: :bold, size: 8
-        text "En application des articles L 622-8 et R 622-25 du Code du Patrimoine",
-             align: :center, style: :italic, size: 8
+        text "Conservation des antiquités et objets d’art", align: :center, style: :bold
+        move_down 10
+        text "Département : #{dossier.departement}", align: :center
+        move_down 5
+        text "Commune de : #{dossier.commune.nom}", align: :center
+        move_down 20
       end
 
-      # Partie en haut à droite avec les informations sur l'édifice
-      grid([0, 4], [2, 4]).bounding_box do
-        text "<b>DÉPARTEMENT</b> : #{dossier.departement}", inline_format: true
-        move_down 10
-        text "<b>COMMUNE</b>: #{dossier.commune.nom}", inline_format: true
-        move_down 10
-        text "<b>Code INSEE</b>: #{dossier.commune.code_insee}", inline_format: true
-        move_down 10
-        text "<b>Immeuble de localisation</b> :", inline_format: true
-        text edifice.nom
-        move_down 10
-        text "<b>Adresse :</b>", inline_format: true
+      grid([2, 1], [2, 3]).bounding_box do
+        text "Récolement des objets classés de l'édifice #{edifice.nom}", align: :center, style: :bold
       end
 
       # Partie avec les signataires et destinataires
