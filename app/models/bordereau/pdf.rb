@@ -138,7 +138,8 @@ module Bordereau
                        "<b>Photographie</b>"
                      ])
       table(lignes, column_widths: [75, 122, 122, 122, 122, 122, 75],
-                    cell_style: { size: 8, border_color: "CCCCCC", inline_format: true })
+                    cell_style: { size: 8, border_color: "CCCCCC", inline_format: true },
+                    header: true)
     end
 
     def setup_fonts
