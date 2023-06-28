@@ -51,7 +51,7 @@ module Bordereau
       # Page de signature
       start_new_page
       define_grid(columns: 5, rows: 8, gutter: 0)
-      text "Participants au récolement⁴ :", style: :bold
+      text "Participants au récolement¹ :", style: :bold
       move_down 20
       text <<~TEXT, inline_format: true
         Les soussignés (<i>nom, prénom en toutes lettres, fonction et signature</i>) certifient que les objets mobiliers ou immeubles par destination portés au present etat figurent dans l’édifice «#{edifice.nom}», #{commune}, lors du récolement en date du #{ellipsis}
@@ -62,8 +62,8 @@ module Bordereau
       table \
         [
           [
-            "<i>Le propriétaire⁵ ou son représentant,</i>",
-            "<i>L’affectataire⁶,</i>",
+            "<i>Le propriétaire² ou son représentant,</i>",
+            "<i>L’affectataire³,</i>",
             "<i>Le Conservateur des Antiquités et Objets d’Art,</i>"
           ]
         ],
@@ -85,9 +85,9 @@ module Bordereau
       grid([7, 0], [7, 4]).bounding_box do
         move_down 20
         text <<~TEXT, size: 8
-          4    Le cas échéant, indiquer les autres personnes présentes participant au récolement.
-          5    Le propriétaire peut être une personne publique ou privée. Préciser, s’il y a lieu, l’affectataire domanial.
-          6    Pour les biens affectés au culte au sens de la loi du 9 décembre 1905 concernant la séparation des Églises et de l’État.
+          1    Le cas échéant, indiquer les autres personnes présentes participant au récolement.
+          2    Le propriétaire peut être une personne publique ou privée. Préciser, s’il y a lieu, l’affectataire domanial.
+          3    Pour les biens affectés au culte au sens de la loi du 9 décembre 1905 concernant la séparation des Églises et de l’État.
         TEXT
       end
 
