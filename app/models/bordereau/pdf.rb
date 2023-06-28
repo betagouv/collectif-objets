@@ -7,9 +7,6 @@ module Bordereau
 
     delegate :commune, to: :dossier
 
-    COLUMN_WIDTHS = [75, 122, 122, 122, 122, 122, 75].freeze
-    CELL_STYLE = { size: 8, border_color: "CCCCCC" }.freeze
-
     def initialize(dossier, edifice)
       @dossier = dossier
       @edifice = edifice
@@ -47,24 +44,6 @@ module Bordereau
         text "Récolement des objets classés de l'édifice #{edifice.nom}", align: :center, style: :bold
       end
 
-      # Nom des colonnes de la table d'objets classés
-      grid([4, 0], [5, 4]).bounding_box do
-        table \
-          [
-            [
-              "<b>Référence Palissy</b>",
-              "<b>Dénomination</b>",
-              "<b>Date de protection</b>",
-              "<b>Etat de conservation¹</b>",
-              "<b>Observations du conservateur²</b>",
-              "<b>Observations sur le terrain³</b>",
-              "<b>Photographie</b>"
-            ]
-          ],
-          column_widths: COLUMN_WIDTHS,
-          cell_style: { inline_format: true, size: 8, border_color: "CCCCCC" }
-      end
-
       # Notes de bas de page
       grid([7, 0], [7, 4]).bounding_box do
         text <<~TEXT, size: 8
@@ -76,10 +55,7 @@ module Bordereau
 
       # Page de la liste des objets classés
       recensements_objets_classés = recensements_des_objets_de_l_edifice_typés("classés")
-      if recensements_objets_classés.present?
-        start_new_page
-        ajout_table_objets_recensés(recensements_objets_classés)
-      end
+      ajout_table_objets_recensés(recensements_objets_classés) if recensements_objets_classés.present?
 
       # Page de la liste des objets inscrits
       recensements_objets_inscrits = recensements_des_objets_de_l_edifice_typés("inscrits")
@@ -151,10 +127,18 @@ module Bordereau
     end
 
     def ajout_table_objets_recensés(recencements)
-      table \
-        recencements.map { RecensementRow.new(_1).to_a },
-        column_widths: COLUMN_WIDTHS,
-        cell_style: CELL_STYLE
+      lignes = recencements.map { RecensementRow.new(_1).to_a }
+      lignes.prepend([
+                       "<b>Référence Palissy</b>",
+                       "<b>Dénomination</b>",
+                       "<b>Date de protection</b>",
+                       "<b>Etat de conservation¹</b>",
+                       "<b>Observations du conservateur²</b>",
+                       "<b>Observations sur le terrain³</b>",
+                       "<b>Photographie</b>"
+                     ])
+      table(lignes, column_widths: [75, 122, 122, 122, 122, 122, 75],
+                    cell_style: { size: 8, border_color: "CCCCCC", inline_format: true })
     end
 
     def setup_fonts
