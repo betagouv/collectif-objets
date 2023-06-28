@@ -47,17 +47,6 @@ module Bordereau
         text "Récolement des objets classés de l'édifice #{edifice.nom}", align: :center, style: :bold
       end
 
-      # Partie avec les signataires et destinataires
-      grid(3, 0).bounding_box { text "Diffusion du bordereau :", style: :bold }
-      grid([3, 1], [3, 3]).bounding_box do
-        text <<~TEXT, size: 8
-          Signataires du présent bordereau,
-          Préfecture du département, conservation des antiquités et objets d'art
-          Direction régionaledes affaires culturelles - conservation régionaledes monuments historiques
-          Direction générale des patrimoines et de l’architecture – Bureau de la conservation des monuments historiques mobiliers – Médiathèque du patrimoine et de la photographie
-        TEXT
-      end
-
       # Nom des colonnes de la table d'objets classés
       grid([4, 0], [5, 4]).bounding_box do
         table \
@@ -125,7 +114,21 @@ module Bordereau
         ],
         column_widths: [256, 256, 256],
         cell_style: { border_color: "FFFFFF", style: :italic, inline_format: true, size: 11 }
+
+      # Partie avec les signataires et destinataires
+      grid([6, 0], [6, 4]).bounding_box do
+        text "Diffusion du bordereau :", style: :bold, size: 10
+        text <<~TEXT, size: 8
+          Signataires du présent bordereau,
+          Préfecture du département, conservation des antiquités et objets d'art
+          Direction régionaledes affaires culturelles - conservation régionaledes monuments historiques
+          Direction générale des patrimoines et de l’architecture – Bureau de la conservation des monuments historiques mobiliers – Médiathèque du patrimoine et de la photographie
+        TEXT
+      end
+
+      # Légendes, notes de bas de page
       grid([7, 0], [7, 4]).bounding_box do
+        move_down 20
         text <<~TEXT, size: 8
           4    Le cas échéant, indiquer les autres personnes présentes participant au récolement.
           5    Le propriétaire peut être une personne publique ou privée. Préciser, s’il y a lieu, l’affectataire domanial.
