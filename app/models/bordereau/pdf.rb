@@ -95,7 +95,7 @@ module Bordereau
       recensements_objets_inscrits = recensements_des_objets_de_l_edifice_typés("inscrits")
       if recensements_objets_inscrits.present?
         start_new_page
-        text "LISTE DES OBJETS INSCRITS", align: :center, style: :bold, size: 16
+        text "Liste des objets inscrits de l'édifice #{edifice.nom}", align: :center, style: :bold, size: 12
         text "Toutes les informations liées à ces objets figurent dans Collectif Objets " \
              "et dans le rapport transmis par vos CMH et CAOA",
              align: :center, size: 10
