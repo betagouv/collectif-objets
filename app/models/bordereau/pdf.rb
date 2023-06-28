@@ -44,30 +44,9 @@ module Bordereau
         text "Récolement des objets classés de l'édifice #{edifice.nom}", align: :center, style: :bold
       end
 
-      # Notes de bas de page
-      grid([7, 0], [7, 4]).bounding_box do
-        text <<~TEXT, size: 8
-          1    Estimation transmise par la commune au moment du recensement communal « Collectif Objets », éventuellement corrigée par le CAOA au vue des photographies
-          2    Expertise du CAOA à la suite du recensement communal
-          3    Observations effectuées sur place lors du récolement
-        TEXT
-      end
-
       # Page de la liste des objets classés
       recensements_objets_classés = recensements_des_objets_de_l_edifice_typés("classés")
       ajout_table_objets_recensés(recensements_objets_classés) if recensements_objets_classés.present?
-
-      # Page de la liste des objets inscrits
-      recensements_objets_inscrits = recensements_des_objets_de_l_edifice_typés("inscrits")
-      if recensements_objets_inscrits.present?
-        start_new_page
-        text "LISTE DES OBJETS INSCRITS", align: :center, style: :bold, size: 16
-        text "Toutes les informations liées à ces objets figurent dans Collectif Objets " \
-             "et dans le rapport transmis par vos CMH et CAOA",
-             align: :center, size: 10
-        move_down(10)
-        ajout_table_objets_recensés(recensements_objets_inscrits)
-      end
 
       # Page de signature
       start_new_page
@@ -111,6 +90,19 @@ module Bordereau
           6    Pour les biens affectés au culte au sens de la loi du 9 décembre 1905 concernant la séparation des Églises et de l’État.
         TEXT
       end
+
+      # Page de la liste des objets inscrits
+      recensements_objets_inscrits = recensements_des_objets_de_l_edifice_typés("inscrits")
+      if recensements_objets_inscrits.present?
+        start_new_page
+        text "LISTE DES OBJETS INSCRITS", align: :center, style: :bold, size: 16
+        text "Toutes les informations liées à ces objets figurent dans Collectif Objets " \
+             "et dans le rapport transmis par vos CMH et CAOA",
+             align: :center, size: 10
+        move_down(10)
+        ajout_table_objets_recensés(recensements_objets_inscrits)
+      end
+
       document
     end
 
@@ -132,9 +124,9 @@ module Bordereau
                        "<b>Référence Palissy</b>",
                        "<b>Dénomination</b>",
                        "<b>Date de protection</b>",
-                       "<b>Etat de conservation¹</b>",
-                       "<b>Observations du conservateur²</b>",
-                       "<b>Observations sur le terrain³</b>",
+                       "<b>Etat de conservation</b>",
+                       "<b>Observations du conservateur</b>",
+                       "<b>Observations sur le terrain</b>",
                        "<b>Photographie</b>"
                      ])
       table(lignes, column_widths: [75, 122, 122, 122, 122, 122, 75],
