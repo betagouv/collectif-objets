@@ -25,6 +25,7 @@ class Objet < ApplicationRecord
                      .where.not(%("palissy_PROT" LIKE 'désinscrit%'))
                      .where.not(MIS_DE_COTE_SQL)
                    }
+  scope :protégés, -> { classés.or(inscrits) }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
