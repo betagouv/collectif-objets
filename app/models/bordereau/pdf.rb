@@ -22,14 +22,14 @@ module Bordereau
       define_grid(columns: 5, rows: 8, gutter: 0)
 
       # Partie en haut à gauche avec les logos
-      grid([0, 0], [2, 0]).bounding_box do
+      grid([0, 0], [1, 0]).bounding_box do
         image Rails.root.join("prawn_assets/logo-ministere-culture.png"), width: 100
         move_down 20
         image Rails.root.join("prawn_assets/logo-monument-historique.png"), width: 100
       end
 
       # Partie en haut et centrée avec les titres
-      grid([0, 1], [2, 3]).bounding_box do
+      grid([0, 1], [1, 3]).bounding_box do
         text "Direction régionale des affaires culturelles", align: :center, style: :bold
         move_down 10
         text "Conservation des antiquités et objets d’art", align: :center, style: :bold
@@ -37,14 +37,11 @@ module Bordereau
         text "Département : #{dossier.departement}", align: :center
         move_down 5
         text "Commune de : #{dossier.commune.nom}", align: :center
-        move_down 20
       end
 
-      grid([2, 1], [2, 3]).bounding_box do
-        text "Récolement des objets classés de l'édifice #{edifice.nom}", align: :center, style: :bold
-      end
-
-      # Page de la liste des objets classés
+      # Liste des objets classés
+      text "Récolement des objets classés de l'édifice #{edifice.nom}", align: :center, style: :bold
+      move_down 10
       recensements_objets_classés = recensements_des_objets_de_l_edifice_typés("classés")
       ajout_table_objets_recensés(recensements_objets_classés) if recensements_objets_classés.present?
 
