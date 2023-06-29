@@ -73,7 +73,7 @@ module Bordereau
         text <<~TEXT, size: 8
           Signataires du présent bordereau,
           Préfecture du département, conservation des antiquités et objets d'art
-          Direction régionaledes affaires culturelles - conservation régionaledes monuments historiques
+          Direction régionale des affaires culturelles - conservation régionale des monuments historiques
           Direction générale des patrimoines et de l’architecture – Bureau de la conservation des monuments historiques mobiliers – Médiathèque du patrimoine et de la photographie
         TEXT
       end
