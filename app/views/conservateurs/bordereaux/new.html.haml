@@ -4,10 +4,13 @@
   - if @dossier&.accepted?
     .fr-grid-row
       .fr-col-md-8
-        %p
-          Vous pouvez générer des bordereaux de récolement pour les différents édifices de la commune.
-          Les champs seront préremplis avec les données de recensement que vous avez précédemment analysées et acceptées.
-
+        = dsfr_alert(type: :info, size: :sm, classes: [""]) do
+          %p
+            Vous pouvez générer des bordereaux de récolement pour les différents édifices de la commune. 
+            Les champs seront préremplis avec les données de recensement que vous avez précédemment analysées et acceptées. 
+            %br
+            En cas d’erreur pour les édifices, veuillez nous envoyer un mail à l’adresse : collectifobjets@beta.gouv.fr.
+        
         - if @edifices.empty?
           %p
             %span.fr-icon-warning-line(aria-hidden="true")
