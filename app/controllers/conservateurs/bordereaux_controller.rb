@@ -35,8 +35,9 @@ module Conservateurs
 
     def set_commune
       @commune = Commune.find(params[:commune_id])
+      authorize(@commune, :show?)
     end
 
-    def active_nav_links = ["Mes départements", @dossier.departement.to_s]
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

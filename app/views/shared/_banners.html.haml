@@ -3,7 +3,7 @@
     .fr-container.co-flex.co-flex--space-between.fr-mb-1w{data: { controller: "visibility-toggle", "visibility-toggle-target": "section" }}
       %div.co-flex--grow
         - if banners.include?(:environment)
-          .fr-alert.fr-alert--sm.fr-icon-alarm-warning-line.co-white-space-nowrap
+          %div{class: "fr-alert fr-alert--sm fr-alert--#{Rails.configuration.x.environment_specific_name == "staging" ? "warning" : "error"} fr-icon-alarm-warning-line co-white-space-nowrap"}
             .co-environment-banner.co-flex.co-flex--space-between
               %div Environnement #{Rails.configuration.x.environment_specific_name}
               - if Rails.env.development?

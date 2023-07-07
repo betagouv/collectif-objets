@@ -1,24 +1,23 @@
 = render layout: "conservateurs/communes/tabs",
   locals: { commune: @commune, dossier: @dossier, current_tab: :bordereau } do
 
-  - if @dossier&.accepted?
-    .fr-grid-row
-      = dsfr_alert(type: :info, size: :sm, classes: ["fr-mb-4w"]) do
-        %p
-          Vous pouvez générer des bordereaux de récolement pour les différents édifices de la commune. 
-          Les champs seront préremplis avec les données de recensement que vous avez précédemment analysées et acceptées. 
-          %br
-          En cas d’erreur pour les édifices, veuillez nous envoyer un mail à l’adresse : collectifobjets@beta.gouv.fr.
-      
-      - if @edifices.empty?
-        %p
-          %span.fr-icon-warning-line(aria-hidden="true")
-          Il n’y a aucun objet classé ou inscrit dans cette commune.
+  - if @dossier&.accepted? 
+    = dsfr_alert(type: :info, size: :sm, classes: ["fr-mb-4w"]) do
+      %p
+        Vous pouvez générer des bordereaux de récolement pour les différents édifices de la commune. 
+        Les champs seront préremplis avec les données de recensement que vous avez précédemment analysées et acceptées. 
+        %br
+        En cas d’erreur pour les édifices, veuillez nous envoyer un mail à l’adresse : collectifobjets@beta.gouv.fr.
+    
+    - if @edifices.empty?
+      %p
+        %span.fr-icon-warning-line(aria-hidden="true")
+        Il n’y a aucun objet classé ou inscrit dans cette commune.
 
-      - else 
-        - @edifices.each do |edifice|
-          = turbo_stream_from edifice
-          = render "conservateurs/bordereaux/edifice", edifice:, commune: @commune
+    - else 
+      - @edifices.each do |edifice|
+        = turbo_stream_from edifice
+        = render "conservateurs/bordereaux/edifice", edifice:, commune: @commune
   - else
     .co-readable
       %p

@@ -26,7 +26,19 @@ RSpec.describe Objet, type: :model do
       "classé comme ensemble historique mobilier",
       "classé MH",
       "classé MH ; classé au titre objet",
-      "classé Monument Historique"
+      "classé Monument Historique",
+      "classé au titre immeuble ; inscrit au titre objet",
+      "classé au titre objet ; classé au titre objet ; inscrit au titre objet",
+      "classé au titre objet ; inscrit au titre immeuble",
+      "classé au titre objet ; inscrit au titre objet",
+      "classé au titre objet ; inscrit au titre objet partiellement",
+      "inscrit au titre objet ; classé au titre immeuble",
+      "inscrit au titre objet ; classé au titre objet",
+      "inscrit au titre objet : classé au titre objet",
+      "inscrit au titre objet ; classé au titre objet ; classé au titre objet",
+      "inscrit au titre objet ; classé au titre objet partiellement",
+      "inscrit au titre objet ; classé au titre objet partiellement",
+      "inscrit au titre objet partiellement ; classé au titre objet partiellement"
     ]
     objets_considérés_comme_inscrits = [
       "1993/01/11 : inscrit au titre objet",
@@ -56,24 +68,12 @@ RSpec.describe Objet, type: :model do
       "inscrit MH"
     ]
     objets_mis_à_part = [
-      "classé au titre immeuble ; inscrit au titre objet",
-      "classé au titre objet ; classé au titre objet ; inscrit au titre objet",
-      "classé au titre objet ; inscrit au titre immeuble",
-      "classé au titre objet ; inscrit au titre objet",
-      "classé au titre objet ; inscrit au titre objet partiellement",
       "déclassé au titre objet",
       "désinscrit",
       "devenu non protégé",
       "fleur",
       "i",
       "immeuble par nature",
-      "inscrit au titre objet ; classé au titre immeuble",
-      "inscrit au titre objet ; classé au titre objet",
-      "inscrit au titre objet : classé au titre objet",
-      "inscrit au titre objet ; classé au titre objet ; classé au titre objet",
-      "inscrit au titre objet ; classé au titre objet partiellement",
-      "inscrit au titre objet ; classé au titre objet partiellement",
-      "inscrit au titre objet partiellement ; classé au titre objet partiellement",
       "non protégé",
       "non protégé ?",
       "sans protection"
