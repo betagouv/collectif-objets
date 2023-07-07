@@ -18,11 +18,15 @@ class Objet < ApplicationRecord
       .where(recensements: { id: nil })
   }
 
-  MIS_DE_COTE_SQL = %("palissy_PROT" ILIKE '%inscrit%classé%' OR "palissy_PROT" ILIKE '%classé%inscrit%')
-  scope :classés, -> { where(%("palissy_PROT" ILIKE 'classé%')).where.not(MIS_DE_COTE_SQL) }
+  MIS_DE_COTE_SQL = %("palissy_PROT" LIKE 'déclassé au titre objet'
+                      OR "palissy_PROT" LIKE 'désinscrit'
+                      OR "palissy_PROT" LIKE '%non protégé%'
+                      OR "palissy_PROT" LIKE 'sans protection'
+                    )
+  scope :classés, -> { where(%("palissy_PROT" ILIKE '%classé%')).where.not(MIS_DE_COTE_SQL) }
   scope :inscrits, lambda {
                      where(%("palissy_PROT" ILIKE '%inscr%'))
-                     .where.not(%("palissy_PROT" LIKE 'désinscrit%'))
+                     .where.not(%("palissy_PROT" ILIKE '%classé%'))
                      .where.not(MIS_DE_COTE_SQL)
                    }
   scope :protégés, -> { classés.or(inscrits) }
