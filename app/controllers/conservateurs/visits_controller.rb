@@ -7,15 +7,7 @@ module Conservateurs
         .joins(:commune)
         .includes(:commune)
         .select("dossiers.*, communes.nom AS nom_commune")
-        .joins(%{
-          LEFT JOIN (
-            SELECT communes.id, COUNT(*) AS nombre_objets
-              FROM communes
-              INNER JOIN objets ON communes.code_insee = "objets"."palissy_INSEE"
-              GROUP BY communes.id
-          ) AS nombre_objets_par_commune
-          ON nombre_objets_par_commune.id = dossiers.commune_id
-        }).select("COALESCE(nombre_objets, 0) AS nombre_objets")
+        .include_objets_count
         .joins(%{
           LEFT JOIN (
             SELECT recensements.dossier_id, COUNT(*) AS nombre_objets_prioritaires
