@@ -1,0 +1,6 @@
+- content_for(:head_title) { "Fiches attribuées" }
+
+%main.fr-container.fr-mb-8w
+  = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Fiches attribuées")
+
+  %h1 Fiches attribuées

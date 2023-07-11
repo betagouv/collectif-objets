@@ -122,6 +122,7 @@ Rails.application.routes.draw do
     end
     resource :conservateur, only: [:update]
     resources :visits, only: [:index]
+    resources :fiches, only: :index
   end
 
   ## -----
