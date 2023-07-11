@@ -4,3 +4,6 @@
   = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Fiches attribuées")
 
   %h1 Fiches attribuées
+
+  - if @dossiers.blank?
+    %i Aucune fiche attribuée
