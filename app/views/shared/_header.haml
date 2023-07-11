@@ -12,10 +12,8 @@
       - current_conservateur.departements.each do |departement|
         - c.with_direct_link_simple title: departement, path: conservateurs_departement_path(departement.code), active: active_nav_link?(departement.to_s)
     
-    -# Ce menu sera utile lorsque la page sur les fiches sera là
-    -# - c.with_direct_link_dropdown title: "Mes actions", active: current_page?(controller: '/conservateurs/visits', action: 'index') do |dropdown|
-    -#   - dropdown.with_link title: "Visites prévues", path: conservateurs_visits_path
-    - c.with_direct_link_simple title: "Déplacements prévus", path: conservateurs_visits_path, active: active_nav_link?("Déplacements prévus")
+    - c.with_direct_link_dropdown title: "Mes actions", active: current_page?(controller: '/conservateurs/visits', action: 'index') do |dropdown|
+      - dropdown.with_link title: "Déplacements prévus", path: conservateurs_visits_path
     
     - c.with_direct_link_simple title: "Documentation", path: content_blob_path(:documentation_conservateur), active: active_nav_link?("Documentation")
 
