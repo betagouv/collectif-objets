@@ -3,7 +3,7 @@
 module Conservateurs
   class FichesController < BaseController
     def index
-      policy_scope(Dossier)
+      @dossiers = policy_scope(Dossier).where(conservateur: current_conservateur)
     end
 
     private
