@@ -14,6 +14,7 @@
     
     - c.with_direct_link_dropdown title: "Mes actions", active: current_page?(controller: '/conservateurs/visits', action: 'index') do |dropdown|
       - dropdown.with_link title: "Déplacements prévus", path: conservateurs_visits_path
+      - dropdown.with_link title: "Fiches attribuées", path: conservateurs_fiches_path
     
     - c.with_direct_link_simple title: "Documentation", path: content_blob_path(:documentation_conservateur), active: active_nav_link?("Documentation")
 
