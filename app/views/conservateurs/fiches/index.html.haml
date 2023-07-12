@@ -5,7 +5,7 @@
 
   %h1 Fiches attribuées
 
-  - if @dossiers.blank?
+  - if @communes.blank?
     %i Aucune fiche attribuée
   - else 
     .fr-table
@@ -16,8 +16,8 @@
             %th Nombre d'objets
             %th Fiches attribuées
         %tbody
-          - @dossiers.each do |dossier|
+          - @communes.each do |commune|
             %tr
-              %td= link_to dossier.nom_commune, conservateurs_commune_path(dossier.commune), "data-turbo-frame": "_top"
-              %td= dossier.objets_count
+              %td= link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top"
+              %td= commune.objets_count
               %td
