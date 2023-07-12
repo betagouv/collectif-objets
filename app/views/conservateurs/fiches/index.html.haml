@@ -15,4 +15,9 @@
             %th Commune
             %th Nombre d'objets
             %th Fiches attribuées
-
+        %tbody
+          - @dossiers.each do |dossier|
+            %tr
+              %td= link_to dossier.nom_commune, conservateurs_commune_path(dossier.commune), "data-turbo-frame": "_top"
+              %td= dossier.objets_count
+              %td
