@@ -63,6 +63,7 @@ group :development do
   gem "pry"
   gem "rails-erd", require: false
   gem "web-console"
+  gem "solargraph"
 end
 
 group :test do
