@@ -1,0 +1,25 @@
+- content_for(:head_title) { "Fiches attribuées" }
+
+%main.fr-container.fr-mb-8w
+  = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Fiches attribuées")
+
+  %h1 Fiches attribuées
+
+  - if @communes.blank?
+    %i Aucune fiche attribuée
+  - else 
+    .fr-table
+      %table
+        %thead
+          %tr
+            %th Commune
+            %th Nombre d'objets
+            %th Fiches attribuées
+        %tbody
+          - @communes.each do |commune|
+            %tr
+              %td= link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top"
+              %td= commune.objets_count
+              %td
+                - commune.recensements.pluck(:analyse_fiches).flatten.uniq.each do |fiche_id| 
+                  = dsfr_tag(title: Fiche.load_from_id(fiche_id).title) 
