@@ -62,8 +62,8 @@ group :development do
   gem "lookbook", "~> 2.0.3"
   gem "pry"
   gem "rails-erd", require: false
-  gem "web-console"
   gem "solargraph"
+  gem "web-console"
 end
 
 group :test do
