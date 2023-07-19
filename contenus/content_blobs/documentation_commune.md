@@ -203,6 +203,18 @@ Une fois vos informations transmises aux conservateurs vous n’avez plus rien �
 
 Ils pourront vous recontacter par la suite à travers la messagerie (qui est couplé d’un email) afin de vous demander des modifications, plus de détails, vous recommander des actions ou encore la prise d’un rendez-vous pour envisager une visite.
 
+## 7 - Modifier le recensement / envoyer de nouvelles photos pour les objets recensés
+
+S﻿i vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas analysé et validé votre dossier de recensement. 
+
+Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela : 
+
+<https://www.youtube.com/watch?v=fvYSmimaLUw&ab_channel=AntoineClairefond>
+
+S﻿i un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'analyse de votre dossier. C'est donc cette procédure que vous devrez suivre.
+
+
+
 # IV - Après le recensement
 
 ## 1 - Après l’envoi de vos réponses
