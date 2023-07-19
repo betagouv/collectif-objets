@@ -22,6 +22,7 @@ module Conservateurs
 
     # Pour ré ouvrir un dossier
     def destroy
+      @dossier.reopen!
       redirect_to conservateurs_commune_path(@commune), notice: "Le dossier a été ré ouvert"
     end
 
