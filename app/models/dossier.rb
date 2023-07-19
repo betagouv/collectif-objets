@@ -25,6 +25,9 @@ class Dossier < ApplicationRecord
         guard { not_analysed? }
       end
     end
+    event :reopen do
+      transitions from: :accepted, to: :submitted
+    end
   end
 
   validates :conservateur, presence: true, if: :accepted?

@@ -7,15 +7,25 @@ module Conservateurs
     delegate :dossier, to: :dossier_accept
 
     def new?
-      conservateur.departements.include?(dossier.departement) &&
-        dossier.submitted? &&
-        dossier.commune.completed? &&
-        dossier.recensements.not_analysed.empty?
+      can_change_dossier_state? && dossier.submitted?
     end
 
     def create?
       new? && !impersonating?
     end
     alias update? create?
+
+    # Pour ré ouvrir un dossier
+    def destroy?
+      can_change_dossier_state? && dossier.accepted? && !impersonating?
+    end
+
+    private
+
+    def can_change_dossier_state?
+      conservateur.departements.include?(dossier.departement) &&
+        dossier.commune.completed? &&
+        dossier.recensements.not_analysed.empty?
+    end
   end
 end
