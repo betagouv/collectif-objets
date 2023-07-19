@@ -25,7 +25,7 @@
         = dsfr_modal(title: "Êtes-vous sûr de vouloir réouvrir le dossier?",  html_attributes: { id: "modal-dossier-reouverture" }) do |component|
           %p La réouverture du dossier amènera une possibilité de modification de celui-ci pour vous ainsi que pour les communes, qui seront alors notifiées de cette révouverture.
           - component.with_button do
-            = dsfr_link_to "Oui je veux réouvrir le dossier", "#", class: "fr-btn"
+            = button_to "Oui je veux réouvrir le dossier", conservateurs_dossier_accept_path(dossier), method: :delete, class: "fr-btn"
           - component.with_button do
             = dsfr_button label: "Annuler", level: :secondary, html_attributes: { "aria-controls": "modal-dossier-reouverture" }
         = dsfr_button(label: "Réouvrir le dossier", html_attributes: { "data-fr-opened": false, "aria-controls": "modal-dossier-reouverture" })

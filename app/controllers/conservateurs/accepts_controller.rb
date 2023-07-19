@@ -20,6 +20,11 @@ module Conservateurs
       render partial: "form", locals: { dossier: @dossier, preview_expanded: params[:preview_expanded] }
     end
 
+    # Pour ré ouvrir un dossier
+    def destroy
+      redirect_to conservateurs_commune_path(@commune), notice: "Le dossier a été ré ouvert"
+    end
+
     protected
 
     def set_dossier
