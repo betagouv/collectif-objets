@@ -209,11 +209,9 @@ S﻿i vous souhaitez effectuer des changements dans les recensements de vos obje
 
 Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela : 
 
-<https://www.youtube.com/watch?v=fvYSmimaLUw&ab_channel=AntoineClairefond>
+<iframe width="917" height="573" src="https://www.youtube.com/embed/fvYSmimaLUw" title="Collectif Objets - Modifier son recensement (ou ses photos) en tant que commune" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 S﻿i un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'analyse de votre dossier. C'est donc cette procédure que vous devrez suivre.
-
-
 
 # IV - Après le recensement
 
