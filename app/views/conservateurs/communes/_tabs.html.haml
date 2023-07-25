@@ -23,7 +23,7 @@
             %div= dossier_status_badge dossier
       - if local_assigns[:dossier] && dossier.accepted?
         = dsfr_modal(title: "Êtes-vous sûr de vouloir réouvrir le dossier?",  html_attributes: { id: "modal-dossier-reouverture" }) do |component|
-          %p La réouverture du dossier amènera une possibilité de modification de celui-ci pour vous ainsi que pour les communes, qui seront alors notifiées de cette révouverture.
+          %p La réouverture du dossier vous permet de modifier votre analyse. Une fois votre analyse terminée, n’oubliez pas d’envoyer à la commune le rapport corrigé et de mettre à jour le bordereau de récolement en cliquant sur le bouton « regénérer ».
           - component.with_button do
             = button_to "Oui je veux réouvrir le dossier", conservateurs_dossier_accept_path(dossier), method: :delete, class: "fr-btn"
           - component.with_button do
