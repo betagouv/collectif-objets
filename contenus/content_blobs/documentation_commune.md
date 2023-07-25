@@ -141,18 +141,18 @@ Seuls les objets protégés au titre des monuments historiques (classés ou insc
 
 ## 1 - Si l'objet à recenser est manquant
 
-Il arrive que la localisation indiquée dans les fiches sur Collectif Objets contiennent une erreur ou une information datée.
+Il arrive que la localisation indiquée pour un objet sur Collectif Objets contienne une erreur ou une information datée. 
 
-La plupart du temps, l'objet a été déplacé sans que vous en soyez informés.
+La plupart du temps, l'objet a été déplacé sans que vous en soyez informé.
 
 Afin de savoir si l’objet a été déplacé ou s’il a disparu depuis longtemps, il convient d’interroger certaines personnes : les habitués du lieu d’emplacement indiqué dans la fiche, un représentant de la paroisse ou le curé s’il s’agit d’un édifice religieux, les personnes en charge de l’accès ou de l’entretien de l’édifice supposé abriter l’objet…
 
 Après ces recherches, si l’objet n'est toujours pas retrouvé : 
 
 * indiquez-le comme “introuvable” via la plateforme Collectif Objets ;
-* après échanges avec les conservateurs il faut peut-être déposer une plainte auprès de la gendarmerie en spécifiant la disparition d'un objet protégé au titre des monuments historiques. Il n'y a aucune prescription pour ce genre de vol. Les trésors nationaux ne peuvent pas quitter le domaine public, ils sont imprescriptibles.
+* après échanges avec les conservateurs, il vous faudra peut-être déposer une plainte auprès de la gendarmerie en spécifiant la disparition d'un objet protégé au titre des monuments historiques. Il n'y a aucune prescription pour ce type de vol. Les trésors nationaux ne peuvent pas quitter le domaine public, ils sont imprescriptibles. 
 
-Dans tous les cas vous avez la possibilité de discuter de cela avec vos conservateurs depuis la messagerie de la plateforme.
+Dans tous les cas, vous avez la possibilité de discuter de cela avec vos conservateurs depuis la messagerie de la plateforme.
 
 Quelques ressources supplémentaires à ce sujet :
 
@@ -189,11 +189,11 @@ Exemples d’un ensemble de photos à prendre pour une statue :
 
 ## 5 - Savoir si les données sur les objets ont bien été transmises
 
-Les informations que vous rentrez sur la plateforme ne sont pas transmises aux conservateurs tant que vous n’avez complété les questionnaires pour tous les objets protégés de votre commune.
+Les informations que vous rentrez sur la plateforme ne peuvent être transmises aux conservateurs qu'une fois que vous avez complété les questionnaires pour tous les objets protégés de votre commune. 
 
 Lorsque vous avez terminé le recensement pour votre commune - c’est à dire : rempli les questionnaires pour la totalité des objets protégés abrités par votre commune - il vous est proposé de “Finaliser le recensement”.
 
-En effectuant cela, votre dossier de recensement, qui comprend les informations et photos que vous avez indiquées pour chaque objet protégé, sera directement envoyé aux conservateurs de votre département.
+En effectuant cela, votre dossier de recensement, qui comprend les informations et photos que vous avez indiquées pour chaque objet protégé, sera envoyé aux conservateurs de votre département.
 
 Les conservateurs pourront ainsi effectuer l’analyse de votre dossier, et éventuellement vous demander plus d’informations ou des corrections avant de le valider.
 
@@ -205,7 +205,7 @@ Ils pourront vous recontacter par la suite à travers la messagerie (qui est cou
 
 ## 7 - Modifier le recensement / envoyer de nouvelles photos pour les objets recensés
 
-S﻿i vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas analysé et validé votre dossier de recensement. 
+S﻿i vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas fini d'analyser votre dossier de recensement.
 
 Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela : 
 
