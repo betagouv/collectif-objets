@@ -1,0 +1,18 @@
+name: "Déploiement"
+  
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [staging]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} && !contains(github.event.head_commit.message, '[skip-deploy]')
+    steps:
+      - name: Install Scalingo CLI
+        run: curl -O https://cli-dl.scalingo.com/install && bash install
+      - run: scalingo login --api-token ${{ secrets.SCALINGO_TOKEN }}
+      - name: Déploiement sur Scalingo
+        run: scalingo --app collectif-objets-staging integration-link-manual-deploy main
