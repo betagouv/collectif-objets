@@ -12,7 +12,7 @@
       - current_conservateur.departements.each do |departement|
         - c.with_direct_link_simple title: departement, path: conservateurs_departement_path(departement.code), active: active_nav_link?(departement.to_s)
     
-    - c.with_direct_link_dropdown title: "Mes actions", active: current_page?(controller: '/conservateurs/visits', action: 'index') do |dropdown|
+    - c.with_direct_link_dropdown title: "Mes actions", active: active_nav_link?("Mes actions") do |dropdown|
       - dropdown.with_link title: "Déplacements prévus", path: conservateurs_visits_path
       - dropdown.with_link title: "Fiches attribuées", path: conservateurs_fiches_path
     
