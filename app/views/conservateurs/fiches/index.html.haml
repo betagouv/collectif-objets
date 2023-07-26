@@ -21,5 +21,6 @@
               %td= link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top"
               %td= commune.objets_count
               %td
-                - commune.recensements.pluck(:analyse_fiches).flatten.uniq.each do |fiche_id| 
-                  = dsfr_tag(title: Fiche.load_from_id(fiche_id).title, classes: ["co-blue-tag"]) 
+                .co-flex.co-flex--wrap.co-flex--gap-05rem
+                  - commune.recensements.pluck(:analyse_fiches).flatten.uniq.each do |fiche_id| 
+                    = dsfr_tag(title: Fiche.load_from_id(fiche_id).title, classes: ["co-blue-tag"]) 
