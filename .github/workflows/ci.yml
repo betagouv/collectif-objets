@@ -6,7 +6,7 @@ on:
   pull_request:
 jobs:
   test:
-    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
+    if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -52,7 +52,7 @@ jobs:
           path: tmp/artifacts/capybara
 
   lint:
-    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
+    if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -77,4 +77,3 @@ jobs:
         run: curl -O https://cli-dl.scalingo.com/install && bash install
       - run: scalingo login --api-token ${{ secrets.SCALINGO_TOKEN }}
       - run: scalingo --app collectif-objets-prod --region osc-secnum-fr1 integration-link-manual-deploy main
-      - run: scalingo --app collectif-objets-staging integration-link-manual-deploy main
