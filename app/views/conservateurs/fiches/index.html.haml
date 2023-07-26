@@ -22,4 +22,4 @@
               %td= commune.objets_count
               %td
                 - commune.recensements.pluck(:analyse_fiches).flatten.uniq.each do |fiche_id| 
-                  = dsfr_tag(title: Fiche.load_from_id(fiche_id).title) 
+                  = dsfr_tag(title: Fiche.load_from_id(fiche_id).title, classes: ["co-blue-tag"]) 
