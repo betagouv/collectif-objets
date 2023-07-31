@@ -12,8 +12,9 @@ Ce programme organise des campagnes de recensement auprès des communes abritant
 Les mairies sont invitées à recenser *in situ* les objets protégés de leur territoire. Pour cela, elles répondent à un questionnaire en ligne et transmettent des photos attestant de leur état. Ces informations sont ensuite transmises aux conservateurs (conservateurs des antiquités et objets d’art et conservateurs des monuments historiques) pour expertise. 
 
 Par la collecte de ces données, Collectif Objets permet aux conservateurs :\
-- d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ; \
--﻿ de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
+
+* d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ; \
+  -﻿ de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
 
 Les communes sont accompagnées et outillées pour préserver leur patrimoine remarquable.
 
@@ -155,7 +156,7 @@ C﻿elle-ci est directement disponible dès que vous vous connectez à votre esp
 
 Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le champ dédié « Nouveau message » et y ajouter éventuellement une pièce-jointe en cliquant sur le petit rectangle gris "Parcourir..."
 
-![](/contenus/content_blobs/images/capture-d’écran-2023-07-26-à-14.56.35.png)
+![](/contenus/content_blobs/images/2023-07-31-capture-d-écran-messagerie-commune-la-desirade.png)
 
 Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message.
 
