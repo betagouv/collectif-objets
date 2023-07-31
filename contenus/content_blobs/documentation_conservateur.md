@@ -211,7 +211,7 @@ L’équipe de Collectif Objets a également accès aux échanges afin de pouvoi
 
 Une fois l’analyse d’une commune finalisée vous retrouverez la génération du bordereau dans l’onglet dédié. Les bordereaux de récolement peuvent être édités seulement une fois que vous avez analysé les recensements et accepté le dossier. Il vous est alors possible de générer un bordereau pour chaque édifice abritant des objets protégés.
 
-![Liste des communes](/contenus/content_blobs/images/capture-d’écran-2023-07-11-à-16.23.50.png)
+![Liste des communes](/contenus/content_blobs/images/2023-07-11-capture-d-écran-liste-des-communes.png)
 
 ## Désactiver les notifications de Collectif Objets
 
