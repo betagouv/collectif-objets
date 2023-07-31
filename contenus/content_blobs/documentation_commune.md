@@ -156,7 +156,7 @@ C﻿elle-ci est directement disponible dès que vous vous connectez à votre esp
 
 Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le champ dédié « Nouveau message » et y ajouter éventuellement une pièce-jointe en cliquant sur le petit rectangle gris "Parcourir..."
 
-![](/contenus/content_blobs/images/2023-07-31-capture-d-écran-messagerie-commune-la-desirade.png)
+![Messagerie commune](/contenus/content_blobs/images/2023-07-31-capture-d-écran-messagerie-commune-la-desirade.png)
 
 Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message.
 
