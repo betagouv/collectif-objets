@@ -11,10 +11,10 @@ Ce programme organise des campagnes de recensement auprès des communes abritant
 
 Les mairies sont invitées à recenser *in situ* les objets protégés de leur territoire. Pour cela, elles répondent à un questionnaire en ligne et transmettent des photos attestant de leur état. Ces informations sont ensuite transmises aux conservateurs (conservateurs des antiquités et objets d’art et conservateurs des monuments historiques) pour expertise. 
 
-Par la collecte de ces données, Collectif Objets permet aux conservateurs :\
+Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 
-* d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ; \
-  -﻿ de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
+*  d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ; 
+* de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
 
 Les communes sont accompagnées et outillées pour préserver leur patrimoine remarquable.
 
