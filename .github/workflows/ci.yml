@@ -2,11 +2,11 @@ name: "CI"
 
 on:
   push:
-    branches: [ main ]
+    branches-ignore: ['cms/**'] # Pas besoin car Netlify génère une pull request
   pull_request:
 jobs:
   test:
-    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
+    if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -52,7 +52,7 @@ jobs:
           path: tmp/artifacts/capybara
 
   lint:
-    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
+    if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -67,14 +67,19 @@ jobs:
 #         run: bin/brakeman -q -w2
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
-
   deploy:
+    name: Déploiement sur Scalingo
     runs-on: ubuntu-latest
     needs: [test, lint]
-    if: github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[skip-deploy]')
+    if: ${{ (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging') && !contains(github.event.head_commit.message, '[skip-deploy]') }}
     steps:
       - name: Install Scalingo CLI
         run: curl -O https://cli-dl.scalingo.com/install && bash install
       - run: scalingo login --api-token ${{ secrets.SCALINGO_TOKEN }}
-      - run: scalingo --app collectif-objets-prod --region osc-secnum-fr1 integration-link-manual-deploy main
-      - run: scalingo --app collectif-objets-staging integration-link-manual-deploy main
+      - name: Déploiement sur staging
+        if: ${{ github.ref == 'refs/heads/staging' }}
+        run: scalingo --app collectif-objets-staging integration-link-manual-deploy main
+      - name: Déploiement en production
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: scalingo --app collectif-objets-prod --region osc-secnum-fr1 integration-link-manual-deploy main
+      

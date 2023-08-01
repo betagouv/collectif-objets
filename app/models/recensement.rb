@@ -82,6 +82,14 @@ class Recensement < ApplicationRecord
   scope :absent_or_recensable, -> { where(recensable: true).or(absent) }
   scope :completed, -> { where(status: "completed") }
 
+  # L'objet est prioritaire s'il a disparu, ou s'il est dans un état mauvais ou en péril,
+  # jugé par la commune ou le conservateur
+  RECENSEMENT_PRIORITAIRE_SQL = <<-SQL.squish
+    recensements.localisation = 'absent'
+    OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
+    OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
+  SQL
+
   SQL_ORDER_PRIORITE = <<-SQL.squish
     CASE WHEN (
       recensements.localisation = 'absent'
@@ -97,7 +105,7 @@ class Recensement < ApplicationRecord
   end
 
   def aasm_after_complete
-    commune.start! unless commune.started?
+    commune.start! if commune.inactive?
 
     if !commune.dossier&.persisted? || !commune.dossier&.valid?
       raise ActiveRecord::RecordInvalid, "cannot complete recensement before dossier is created"

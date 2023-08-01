@@ -109,7 +109,7 @@ Rails.application.routes.draw do
       end
     end
     resources :dossiers, only: [] do
-      resource :accept, only: %i[new create update]
+      resource :accept, only: %i[new create update destroy]
     end
     resources :campaigns, except: %i[new index] do
       get :edit_recipients
@@ -122,6 +122,7 @@ Rails.application.routes.draw do
     end
     resource :conservateur, only: [:update]
     resources :visits, only: [:index]
+    resources :fiches, only: :index
   end
 
   ## -----

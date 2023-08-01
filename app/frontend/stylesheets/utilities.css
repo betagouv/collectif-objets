@@ -217,3 +217,9 @@ html[data-fr-scheme="dark"] .co-text--blue {
 .co-readable ul {
   max-width: 45rem;
 }
+
+/* DSFR Tag blue mais non cliquable */
+.co-blue-tag {
+  background-color: #e3e3fd;
+  color: var(--text-action-high-blue-france, #000091);
+}

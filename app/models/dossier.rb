@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Dossier < ApplicationRecord
+  include Dossiers::IncludeCountsConcern
+
   belongs_to :commune
   has_many :recensements, dependent: :nullify
   has_many :objets, through: :recensements
@@ -22,6 +24,9 @@ class Dossier < ApplicationRecord
       transitions from: :submitted, to: :construction do
         guard { not_analysed? }
       end
+    end
+    event :reopen do
+      transitions from: :accepted, to: :submitted
     end
   end
 

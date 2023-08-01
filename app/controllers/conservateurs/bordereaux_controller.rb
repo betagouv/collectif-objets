@@ -4,7 +4,9 @@ module Conservateurs
   class BordereauxController < BaseController
     before_action :set_commune, :set_dossier
 
-    def new; end
+    def new
+      @edifices = @commune.edifices.with_objets_classés_ou_inscrits.ordered_by_nom
+    end
 
     def create
       @edifice = Edifice.find(params[:edifice_id])
@@ -33,8 +35,9 @@ module Conservateurs
 
     def set_commune
       @commune = Commune.find(params[:commune_id])
+      authorize(@commune, :show?)
     end
 
-    def active_nav_links = ["Mes départements", @dossier.departement.to_s]
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

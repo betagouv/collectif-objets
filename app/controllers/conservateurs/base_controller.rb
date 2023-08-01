@@ -14,8 +14,11 @@ module Conservateurs
     private
 
     def pundit_user
+      # impersonating est à true quand tu incarnes en lecture seule. Il est à false si incarnation en écriture
       current_conservateur.impersonating =
+        # Si connecté en tant qu'admin true_conservateur est nil, et current_conservateur est le conservateur incarné
         current_conservateur != true_conservateur &&
+        # si n'existe pas -> lecture seule (par défaut)
         session[:conservateur_impersonate_write].blank?
       current_conservateur
     end

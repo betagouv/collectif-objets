@@ -12,14 +12,23 @@
     current_page_label: current_tab_title
 
   %div{class: ("co-print-hide" if local_assigns[:hide_for_print])}
-    .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-1w
-      %h1= commune
-      - if commune.inactive?
-        .co-flex--shrink-0
-          .fr-badge Commune inactive
-      - if local_assigns[:dossier]
-        .co-flex--shrink-0
-          %div= dossier_status_badge dossier
+    .co-flex.co-flex--align-items-center.co-flex--space-between
+      %div.co-flex.co-flex--align-items-center.co-flex--gap-1rem 
+        %h1= commune
+        - if commune.inactive?
+          .co-flex--shrink-0
+            .fr-badge Commune inactive
+        - if local_assigns[:dossier]
+          .co-flex--shrink-0
+            %div= dossier_status_badge dossier
+      - if local_assigns[:dossier] && dossier.accepted?
+        = dsfr_modal(title: "Êtes-vous sûr de vouloir réouvrir le dossier?",  html_attributes: { id: "modal-dossier-reouverture" }) do |component|
+          %p La réouverture du dossier vous permet de modifier votre analyse. Une fois votre analyse terminée, n’oubliez pas d’envoyer à la commune le rapport corrigé et de mettre à jour le bordereau de récolement en cliquant sur le bouton « regénérer ».
+          - component.with_button do
+            = button_to "Oui je veux réouvrir le dossier", conservateurs_dossier_accept_path(dossier), method: :delete, class: "fr-btn"
+          - component.with_button do
+            = dsfr_button label: "Annuler", level: :secondary, html_attributes: { "aria-controls": "modal-dossier-reouverture" }
+        = dsfr_button(label: "Réouvrir le dossier", html_attributes: { "data-fr-opened": false, "aria-controls": "modal-dossier-reouverture" })
 
   = turbo_frame_tag "commune-tabs", autoscroll: true, data: { autoscroll_block: "start" } do
     = dsfr_tabs classes: (local_assigns[:no_padding] ? ["co-tabs--no-padding"] : []) do |tabs|

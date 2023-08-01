@@ -52,6 +52,7 @@ class Campaign < ApplicationRecord
   end
 
   def self.next_step_for(step)
+    return "lancement" if step.nil?
     return nil if step == "fin"
 
     STEPS[STEPS.find_index(step) + 1]
@@ -116,7 +117,7 @@ class Campaign < ApplicationRecord
 
   def can_update_all_recipients_emails? = !prod? && draft_or_planned? && communes.any?
   def can_force_start? = !prod? && draft_or_planned? && communes.any? && safe_emails?
-  def can_force_step_up? = !prod? && next_step && communes.any? && safe_emails?
+  def can_force_step_up? = !prod? && ongoing? && next_step.present? && communes.any? && safe_emails?
 
   private
 

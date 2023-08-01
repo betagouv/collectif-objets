@@ -96,7 +96,6 @@ Voici également un tutoriel vidéo :
   </a>
 </video>
 
-
 ## Accéder aux dossiers de recensement des communes
 
 Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la commune vous transmet son dossier de recensement. Il n’y a qu’un seul dossier de recensement par commune, peu importe le nombre d’objets.
@@ -206,7 +205,13 @@ Pour y accéder :
 
 L’équipe de Collectif Objets a également accès aux échanges afin de pouvoir assister les communes lorsqu’elles rencontrent des problèmes avec le fonctionnement de Collectif Objets.
 
-![](/contenus/content_blobs/images/capture-ecran-messagerie.png)
+![Messagerie conservateur](/contenus/content_blobs/images/capture-ecran-messagerie.png)
+
+## Fonctionnement du bordereau de récolement
+
+Une fois l’analyse d’une commune finalisée vous retrouverez la génération du bordereau dans l’onglet dédié. Les bordereaux de récolement peuvent être édités seulement une fois que vous avez analysé les recensements et accepté le dossier. Il vous est alors possible de générer un bordereau pour chaque édifice abritant des objets protégés.
+
+![Bordereau de récolement](/contenus/content_blobs/images/2023-07-11-capture-ecran-liste-des-communes.png)
 
 ## Désactiver les notifications de Collectif Objets
 

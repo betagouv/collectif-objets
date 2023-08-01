@@ -16,10 +16,6 @@ class Conservateur < ApplicationRecord
   end
   alias full_name to_s
 
-  def can_generate_bordereau?
-    %w[romuald.goudeseune@culture.gouv.fr stephanie.barioz@pays-valleeduloir.fr chloe.cazalet@yonne.fr].include? email
-  end
-
   # -------
   # RANSACK
   # -------
