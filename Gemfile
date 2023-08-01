@@ -59,7 +59,7 @@ group :development do
   gem "html2haml"
   gem "htmlbeautifier"
   gem "listen" # for lookbook
-  gem "lookbook", "~> 2.0.3"
+  gem "lookbook", "~> 2.0.5"
   gem "pry"
   gem "rails-erd", require: false
   gem "solargraph"
