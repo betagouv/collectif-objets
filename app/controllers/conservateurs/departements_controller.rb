@@ -16,7 +16,7 @@ module Conservateurs
         render "show_map"
       else
         @ransack = policy_scope(Commune)
-          .where(departement_code: @departement.code)
+          .where(departement: @departement)
           .includes(:dossier)
           .include_objets_count
           .include_objets_recenses_count
