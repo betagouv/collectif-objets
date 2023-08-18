@@ -35,19 +35,20 @@
                 %td= commune.objets_count
                 %td
                   - if commune.recensements_prioritaires_count.positive?
-                    %span.fr-badge.fr-badge--sm.fr-badge--warning
-                      - if commune.recensements_prioritaires_count == 1
-                        1 objet prioritaire
-                      - else
-                        \#{commune.recensements_prioritaires_count} objets prioritaires
+                    - recensements_en_peril_count = commune.recensements.en_peril.count
+                    - if recensements_en_peril_count.positive?
+                      = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{recensements_en_peril_count} PERIL" }
+                    - recensements_absent_count = commune.recensements.absent.count
+                    - if recensements_absent_count.positive? 
+                      = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.recensements.absent.count} DISPARU" }
                   - else
-                    0
+                    0              
                 %td= t("activerecord.attributes.commune.statuses.#{commune.status}")
                 %td
                   - if commune.dossier
                     %div= dossier_status_badge(commune.dossier, small: true)
-                    - if commune.dossier.submitted?
-                      \#{commune.recensements_analysed_percentage.round}% des recensements revus
+                    -# - if commune.dossier.submitted?
+                    -#   \#{commune.recensements_analysed_percentage.round}% des recensements revus
     - if pagy.pages > 1
       .fr-mt-8w.co-pagination-wrapper
         != render partial: 'shared/pagy_nav', locals: {pagy:}

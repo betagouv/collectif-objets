@@ -19,7 +19,7 @@ module Conservateurs
           .where(departement: @departement)
           .includes(:dossier)
           .include_objets_count
-          .include_objets_recenses_count
+          .include_recensements_prioritaires_count
           .ransack(params[:q])
         @pagy, @communes = pagy @ransack.result, items: 20
         @query_present = params[:q].present?
