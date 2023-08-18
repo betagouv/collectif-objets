@@ -97,9 +97,9 @@ fr:
       en_danger: Facile à voler
   dossier:
     status_badge:
-      construction: Recensement en cours
-      submitted: À analyser
-      accepted: Rapport envoyé à la commune
+      construction: Partiellement recensé
+      submitted: En cours d'analyse
+      accepted: Accepté
     rapport:
       recensement:
         notes: Commentaires de la commune

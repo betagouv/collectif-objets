@@ -39,11 +39,8 @@
                       = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.recensements.absent.count} DISPARU" }
                   - else
                     0              
-                %td
-                  - if commune.dossier
-                    %div= dossier_status_badge(commune.dossier, small: true)
-                    -# - if commune.dossier.submitted?
-                    -#   \#{commune.recensements_analysed_percentage.round}% des recensements revus
+                %td= dossier_status_badge(commune.dossier, small: true)
+
     - if pagy.pages > 1
       .fr-mt-8w.co-pagination-wrapper
         != render partial: 'shared/pagy_nav', locals: {pagy:}
