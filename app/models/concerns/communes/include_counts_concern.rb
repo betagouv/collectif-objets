@@ -16,7 +16,7 @@ module Communes
             FROM objets
             GROUP BY "palissy_INSEE"
           ) a ON a."palissy_INSEE" = communes.code_insee
-        }
+          }.squish
         ).select("communes.*, COALESCE(a.objets_count, 0) AS objets_count")
       end
 
@@ -71,7 +71,7 @@ module Communes
               WHERE (#{Recensement::RECENSEMENT_PRIORITAIRE_SQL})
               GROUP BY "palissy_INSEE"
             ) d ON d."palissy_INSEE" = communes.code_insee
-          }
+          }.squish
         ).select("communes.*, COALESCE(d.recensements_prioritaires_count, 0) AS recensements_prioritaires_count")
       end
 
