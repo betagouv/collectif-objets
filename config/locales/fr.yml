@@ -98,8 +98,8 @@ fr:
   dossier:
     status_badge:
       construction: Partiellement recensé
-      submitted: En cours d'analyse
-      accepted: Accepté
+      submitted: Non analysé
+      accepted: Analysé
     rapport:
       recensement:
         notes: Commentaires de la commune

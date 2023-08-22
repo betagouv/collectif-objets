@@ -8,6 +8,9 @@
         = f.text_field :nom_unaccented_cont, data: { controller: "input-autosubmit", action: "change->input-autosubmit#submit" }
       %div
         %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
+      .fr-pl-3w
+        = f.label :dossier_status_eq, "Statut de l'analyse"
+        = f.select :dossier_status_eq, Dossier.aasm.states_for_select.prepend(["Sélectionnez une option", ""]), {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
       - if query_present
         .fr-pl-3w
           = link_to "réinitialiser les filtres", conservateurs_departement_path(departement), class: "fr-link"
