@@ -133,7 +133,7 @@ class Commune < ApplicationRecord
   end
 
   def self.ransackable_scopes(_ = nil) = [:recensements_photos_presence_in]
-  def self.ransackable_associations(_ = nil) = %i[dossier dossiers objets]
+  def self.ransackable_associations(_ = nil) = %w[dossier dossiers objets]
 
   ransacker(:nom, type: :string) { Arel.sql("unaccent(nom)") }
 end
