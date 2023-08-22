@@ -17,11 +17,10 @@ module Conservateurs
       else
         @ransack = policy_scope(Commune)
           .where(departement: @departement)
-          .includes(:dossier)
           .include_objets_count
           .include_recensements_prioritaires_count
           .ransack(params[:q])
-        @pagy, @communes = pagy @ransack.result, items: 20
+        @pagy, @communes = pagy @ransack.result.includes(:dossier), items: 20
         @query_present = params[:q].present?
       end
     end
