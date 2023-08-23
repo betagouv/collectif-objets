@@ -67,13 +67,25 @@ module Communes
             LEFT OUTER JOIN (
               #{Recensement.select(%{objets."palissy_INSEE", COUNT(*) })
                 .left_outer_joins(:objet)
-                .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
+                .where(Recensement::RECENSEMENT_EN_PERIL_SQL)
                 .group(:palissy_INSEE).to_sql}
-            ) AS recensements_prioritaires
-            ON recensements_prioritaires."palissy_INSEE" = communes.code_insee
+            ) AS recensements_en_peril
+            ON recensements_en_peril."palissy_INSEE" = communes.code_insee
+
+            LEFT OUTER JOIN (
+              #{Recensement.select(%{objets."palissy_INSEE", COUNT(*) })
+                .left_outer_joins(:objet)
+                .where(Recensement::RECENSEMENT_ABSENT_SQL)
+                .group(:palissy_INSEE).to_sql}
+            ) AS recensements_disparus
+            ON recensements_disparus."palissy_INSEE" = communes.code_insee
           }.squish
         ).select(%{communes.*,
-          COALESCE(recensements_prioritaires.count, 0) AS recensements_prioritaires_count })
+          COALESCE(recensements_en_peril.count, 0) AS recensements_en_peril_count,
+          COALESCE(recensements_disparus.count, 0) AS recensements_disparus_count,
+          COALESCE(recensements_en_peril.count, 0) + COALESCE(recensements_disparus.count, 0)
+            AS recensements_prioritaires_count
+          })
       end
 
       ransacker(:recensements_prioritaires_count) { Arel.sql("recensements_prioritaires_count") }
