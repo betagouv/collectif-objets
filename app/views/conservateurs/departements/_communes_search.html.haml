@@ -11,6 +11,9 @@
       .fr-pl-3w
         = f.label :dossier_status_eq, "Statut de l'analyse"
         = f.select :dossier_status_eq, Dossier.aasm.states_for_select.prepend(["Sélectionnez une option", ""]), {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
+      .fr-pl-3w
+        = f.label :types_recensements_prioritaires_cont, "Statut de l'analyse"
+        = f.select :types_recensements_prioritaires_cont, options_for_select([["Sélectionnez une option", ""], ["DISPARU", "disparu"], ["PERIL", "peril"]]), {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
       - if query_present
         .fr-pl-3w
           = link_to "réinitialiser les filtres", conservateurs_departement_path(departement), class: "fr-link"
@@ -34,12 +37,12 @@
                 %td= commune.objets_count
                 %td
                   - if commune.recensements_prioritaires_count.positive?
-                    - recensements_en_peril_count = commune.recensements.en_peril.count
+                    - recensements_en_peril_count = commune.recensements_en_peril_count
                     - if recensements_en_peril_count.positive?
                       = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{recensements_en_peril_count} PERIL" }
-                    - recensements_absent_count = commune.recensements.absent.count
-                    - if recensements_absent_count.positive? 
-                      = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.recensements.absent.count} DISPARU" }
+                    - recensements_disparus_count = commune.recensements_disparus_count
+                    - if recensements_disparus_count.positive? 
+                      = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{recensements_disparus_count} DISPARU" }
                   - else
                     0              
                 %td= dossier_status_badge(commune.dossier, small: true)

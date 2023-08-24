@@ -84,11 +84,18 @@ module Communes
           COALESCE(recensements_en_peril.count, 0) AS recensements_en_peril_count,
           COALESCE(recensements_disparus.count, 0) AS recensements_disparus_count,
           COALESCE(recensements_en_peril.count, 0) + COALESCE(recensements_disparus.count, 0)
-            AS recensements_prioritaires_count
-          })
+            AS recensements_prioritaires_count,
+            CASE
+              WHEN recensements_en_peril.count > 0 AND recensements_disparus.count > 0 THEN 'peril_disparu'
+              WHEN recensements_en_peril.count > 0 AND recensements_disparus.count IS NULL THEN 'peril'
+              WHEN recensements_en_peril.count IS NULL AND recensements_disparus.count > 0 THEN 'disparu'
+              ELSE NULL
+            END AS types_recensements_prioritaires
+        }.squish)
       end
 
       ransacker(:recensements_prioritaires_count) { Arel.sql("recensements_prioritaires_count") }
+      ransacker(:types_recensements_prioritaires) { Arel.sql("types_recensements_prioritaires") }
     end
   end
 end

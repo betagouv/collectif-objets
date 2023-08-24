@@ -129,7 +129,8 @@ class Commune < ApplicationRecord
   # -------
 
   def self.ransackable_attributes(_ = nil)
-    %w[nom code_insee departement_code status objets_count recensements_prioritaires_count]
+    %w[nom code_insee departement_code status objets_count recensements_prioritaires_count
+       types_recensements_prioritaires]
   end
 
   def self.ransackable_scopes(_ = nil) = [:recensements_photos_presence_in]
