@@ -13,9 +13,7 @@ module Communes
         joins(
           %{
           LEFT OUTER JOIN (
-            SELECT "palissy_INSEE", COUNT(*) objets_count
-            FROM objets
-            GROUP BY "palissy_INSEE"
+            #{Objet.select(:palissy_INSEE, 'COUNT(*) AS objets_count').group(:palissy_INSEE).to_sql}
           ) a ON a."palissy_INSEE" = communes.code_insee
           }.squish
         ).select("communes.*, COALESCE(a.objets_count, 0) AS objets_count")
