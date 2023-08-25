@@ -89,9 +89,9 @@ module Communes
           CASE
             WHEN recensements_prioritaires.en_peril_count > 0 AND recensements_prioritaires.disparus_count > 0
               THEN 'peril_disparu'
-            WHEN recensements_prioritaires.en_peril_count > 0 AND recensements_prioritaires.disparus_count IS NULL
+            WHEN recensements_prioritaires.en_peril_count > 0 AND recensements_prioritaires.disparus_count = 0
               THEN 'peril'
-            WHEN recensements_prioritaires.en_peril_count IS NULL AND recensements_prioritaires.disparus_count > 0
+            WHEN recensements_prioritaires.en_peril_count = 0 AND recensements_prioritaires.disparus_count > 0
               THEN 'disparu'
             ELSE NULL
           END).squish)
