@@ -37,12 +37,10 @@
                 %td= commune.objets_count
                 %td
                   - if commune.recensements_prioritaires_count.positive?
-                    - recensements_en_peril_count = commune.recensements_en_peril_count
-                    - if recensements_en_peril_count.positive?
-                      = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{recensements_en_peril_count} PERIL" }
-                    - recensements_disparus_count = commune.recensements_disparus_count
-                    - if recensements_disparus_count.positive? 
-                      = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{recensements_disparus_count} DISPARU" }
+                    - if commune.en_peril_count.positive?
+                      = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.en_peril_count} PERIL" }
+                    - if commune.disparus_count.positive? 
+                      = dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU" }
                   - else
                     0              
                 %td= dossier_status_badge(commune.dossier, small: true)

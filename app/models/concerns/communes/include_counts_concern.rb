@@ -8,6 +8,7 @@ module Communes
 
     included do
       # Tous les objets de la commune
+      # À terme, ajouter un compteur d'objets dans la table de communes pour éviter cette requête
       def self.include_objets_count
         joins(
           %{
@@ -65,35 +66,33 @@ module Communes
         joins(
           %{
             LEFT OUTER JOIN (
-              #{Recensement.select(%{objets."palissy_INSEE", COUNT(*) })
+              #{Recensement.select(%{objets."palissy_INSEE",
+                COUNT(*),
+                SUM(CASE WHEN #{Recensement::RECENSEMENT_ABSENT_SQL} THEN 1 ELSE 0 END) AS disparus_count,
+                SUM(CASE WHEN #{Recensement::RECENSEMENT_EN_PERIL_SQL} THEN 1 ELSE 0 END) AS en_peril_count
+                 })
                 .left_outer_joins(:objet)
-                .where(Recensement::RECENSEMENT_EN_PERIL_SQL)
+                .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
                 .group(:palissy_INSEE).to_sql}
-            ) AS recensements_en_peril
-            ON recensements_en_peril."palissy_INSEE" = communes.code_insee
-
-            LEFT OUTER JOIN (
-              #{Recensement.select(%{objets."palissy_INSEE", COUNT(*) })
-                .left_outer_joins(:objet)
-                .where(Recensement::RECENSEMENT_ABSENT_SQL)
-                .group(:palissy_INSEE).to_sql}
-            ) AS recensements_disparus
-            ON recensements_disparus."palissy_INSEE" = communes.code_insee
+            ) AS recensements_prioritaires
+            ON recensements_prioritaires."palissy_INSEE" = communes.code_insee
           }.squish
-        ).select(%{communes.*,
-          COALESCE(recensements_en_peril.count, 0) AS recensements_en_peril_count,
-          COALESCE(recensements_disparus.count, 0) AS recensements_disparus_count,
-          COALESCE(recensements_en_peril.count, 0) + COALESCE(recensements_disparus.count, 0)
-            AS recensements_prioritaires_count }.squish)
+        ).select(%(COALESCE(recensements_prioritaires.count, 0) AS recensements_prioritaires_count,
+              COALESCE(disparus_count, 0) AS disparus_count,
+              COALESCE(en_peril_count, 0) AS en_peril_count
+        ).squish)
       end
 
       ransacker(:recensements_prioritaires_count) { Arel.sql("recensements_prioritaires_count") }
       ransacker(:types_recensements_prioritaires) do
         Arel.sql(%(
           CASE
-            WHEN recensements_en_peril.count > 0 AND recensements_disparus.count > 0 THEN 'peril_disparu'
-            WHEN recensements_en_peril.count > 0 AND recensements_disparus.count IS NULL THEN 'peril'
-            WHEN recensements_en_peril.count IS NULL AND recensements_disparus.count > 0 THEN 'disparu'
+            WHEN recensements_prioritaires.en_peril_count > 0 AND recensements_prioritaires.disparus_count > 0
+              THEN 'peril_disparu'
+            WHEN recensements_prioritaires.en_peril_count > 0 AND recensements_prioritaires.disparus_count IS NULL
+              THEN 'peril'
+            WHEN recensements_prioritaires.en_peril_count IS NULL AND recensements_prioritaires.disparus_count > 0
+              THEN 'disparu'
             ELSE NULL
           END).squish)
       end
