@@ -31,4 +31,8 @@ module DossierHelper
     titre = "Déplacement #{dossier.visit == 'prioritaire' ? 'prioritaire' : 'souhaitable'}"
     dsfr_tag(title: titre)
   end
+
+  def dossier_states
+    Dossier.aasm.states_for_select.prepend(["Sélectionnez une option", ""])
+  end
 end
