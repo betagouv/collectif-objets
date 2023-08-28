@@ -105,4 +105,29 @@ RSpec.describe Commune, type: :model do
       expect(Commune.include_objets_count.first.objets_count).to eq 2
     end
   end
+
+  describe ".include_recensements_prioritaires_count" do
+    before do
+      commune = create(:commune)
+      create(:objet, :with_recensement, commune:)
+      objet_en_peril = create(:objet, commune:)
+      create(:recensement, :en_peril, objet: objet_en_peril)
+      2.times do
+        objet_disparu = create(:objet, commune:)
+        create(:recensement, :disparu, objet: objet_disparu)
+      end
+    end
+
+    it "fournit un compteur d'objets prioritaires" do
+      expect(Commune.include_recensements_prioritaires_count.first.recensements_prioritaires_count).to eq 3
+    end
+
+    it "fournit un compteur d'objets disparus" do
+      expect(Commune.include_recensements_prioritaires_count.first.disparus_count).to eq 2
+    end
+
+    it "fournit un compteur d'objets en péril" do
+      expect(Commune.include_recensements_prioritaires_count.first.en_peril_count).to eq 1
+    end
+  end
 end

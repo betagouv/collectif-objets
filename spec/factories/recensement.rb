@@ -55,5 +55,16 @@ FactoryBot.define do
         )
       end
     end
+
+    trait :disparu do
+      recensable { false }
+      localisation { Recensement::LOCALISATION_ABSENT }
+      etat_sanitaire { nil }
+      securisation { nil }
+    end
+
+    trait :en_peril do
+      etat_sanitaire { Recensement::ETAT_PERIL }
+    end
   end
 end
