@@ -100,6 +100,7 @@ fr:
       construction: Partiellement recensé
       submitted: Non analysé
       accepted: Analysé
+      none: Non recensé
     rapport:
       recensement:
         notes: Commentaires de la commune

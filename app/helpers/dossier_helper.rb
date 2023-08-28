@@ -2,18 +2,19 @@
 
 module DossierHelper
   def dossier_status_badge(dossier, small: false)
-    color = ""
-    if dossier.nil?
-      libellé = "Non recensé"
-    else
-      libellé = t("dossier.status_badge.#{dossier.status}")
-      if dossier.accepted?
-        color = "success"
-      elsif dossier.submitted?
-        color = "blue-ecume"
-      end
-    end
-    content_tag("p", libellé, class: "fr-badge #{small ? 'fr-badge--sm' : ''} fr-badge--#{color}")
+    status = dossier&.status || "none"
+
+    color = {
+      construction: "",
+      submitted: "blue-ecume",
+      accepted: "success",
+      none: ""
+    }[status.to_sym]
+    content_tag(
+      "p",
+      t("dossier.status_badge.#{status}"),
+      class: "fr-badge fr-badge--#{color} #{small ? 'fr-badge--sm' : ''}"
+    )
   end
   # rubocop:enable Metrics/MethodLength
 
