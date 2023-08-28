@@ -90,4 +90,19 @@ RSpec.describe Commune, type: :model do
       expect(dossier.reload.status.to_sym).to eq :submitted
     end
   end
+
+  describe ".include_objets_count" do
+    before do
+      commune = create(:commune)
+      create_list(:objet, 2, commune:)
+    end
+
+    it "a un compteur d'objets" do
+      expect(Commune.include_objets_count.first.has_attribute?(:objets_count)).to be true
+    end
+
+    it "fournit un compteur avec 2 objets" do
+      expect(Commune.include_objets_count.first.objets_count).to eq 2
+    end
+  end
 end
