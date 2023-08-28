@@ -110,12 +110,8 @@ RSpec.describe Commune, type: :model do
     before do
       commune = create(:commune)
       create(:objet, :with_recensement, commune:)
-      objet_en_peril = create(:objet, commune:)
-      create(:recensement, :en_peril, objet: objet_en_peril)
-      2.times do
-        objet_disparu = create(:objet, commune:)
-        create(:recensement, :disparu, objet: objet_disparu)
-      end
+      create(:objet, :en_peril, commune:)
+      create_list(:objet, 2, :disparu, commune:)
     end
 
     it "fournit un compteur d'objets prioritaires" do
