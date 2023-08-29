@@ -4,9 +4,9 @@
       %h5= commune.nom
       %div= dossier_status_badge(commune.dossier, small: true)
     .fr-mb-6w
-      - if commune.recensements_prioritaires_count
+      - if commune.en_peril_count
         .co-text--bold
-          = t(".prioritaires_count", count: commune.recensements_prioritaires_count)
+          = t(".en_peril_count", count: commune.en_peril_count)
         %div sur #{t(".recensed_count", count: commune.objets_count)}
       - else
         = t(".recensed_count", count: commune.objets_count)

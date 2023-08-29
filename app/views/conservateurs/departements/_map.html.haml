@@ -5,8 +5,8 @@
       Commune ayant soumis un dossier de recensement
     .fr-pb-2w
       .map-legend-icon.commune-prioritaire
-      Commune ayant soumis un dossier de recensement avec des objets prioritaires
-.co-position-relative{"data-communes-json" => "#{communes.map { _1.slice(%w[code_insee status objets_count recensements_prioritaires_count]) }.to_json}",
+      Commune ayant soumis un dossier de recensement avec des objets en péril
+.co-position-relative{"data-communes-json" => "#{communes.map { _1.slice(%w[code_insee status objets_count en_peril_count]) }.to_json}",
   "data-conservateur-map-target" => "wrapper",
   "data-controller" => "conservateur-map",
   "data-departement-json" => "#{@departement_json}"}

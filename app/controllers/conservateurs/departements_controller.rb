@@ -42,7 +42,7 @@ module Conservateurs
     end
 
     def set_communes
-      fields = %w[code_insee nom status objets_count recensements_prioritaires_count latitude longitude]
+      fields = %w[code_insee nom status objets_count en_peril_count latitude longitude]
       @communes = policy_scope(Commune)
         .where(departement_code: @departement.code)
         .includes(:dossier)

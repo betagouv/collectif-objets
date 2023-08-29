@@ -52,9 +52,9 @@ fr:
       title:
         campaign: Campagne de recensement du %{date_lancement} au %{date_fin}
       map_sidebar_commune_template:
-        prioritaires_count:
-          one: 1 objet prioritaire
-          other: "%{count} objets prioritaires"
+        en_peril_count:
+          one: 1 objet en péril
+          other: "%{count} objets en péril"
         recensed_count:
           one: 1 objet recensé
           other: "%{count} objets recensés"

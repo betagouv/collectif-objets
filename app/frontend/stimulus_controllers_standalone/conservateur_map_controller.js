@@ -112,8 +112,8 @@ export default class extends Controller {
   hydrateStatuses() {
     const communes = JSON.parse(this.wrapperTarget.dataset.communesJson)
     communes.filter(c => c.status == "completed").forEach(commune => {
-      const isPrioritaire = (commune.recensements_prioritaires_count || 0) > 0
-      const status = isPrioritaire ? "prioritaire" : "completed"
+      const prioritaire = (commune.en_peril_count || 0) > 0
+      const status = prioritaire ? "prioritaire" : "completed"
       this.setCommuneState(commune.code_insee, { selectable: true, status })
     })
   }
