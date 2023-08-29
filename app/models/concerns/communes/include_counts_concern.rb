@@ -82,18 +82,6 @@ module Communes
       end
 
       ransacker(:recensements_prioritaires_count) { Arel.sql("recensements_prioritaires_count") }
-      ransacker(:types_recensements_prioritaires) do
-        Arel.sql(%(
-          CASE
-            WHEN recensements_prioritaires.en_peril_count > 0 AND recensements_prioritaires.disparus_count > 0
-              THEN 'peril_disparu'
-            WHEN recensements_prioritaires.en_peril_count > 0 AND recensements_prioritaires.disparus_count = 0
-              THEN 'peril'
-            WHEN recensements_prioritaires.en_peril_count = 0 AND recensements_prioritaires.disparus_count > 0
-              THEN 'disparu'
-            ELSE NULL
-          END).squish)
-      end
     end
   end
 end

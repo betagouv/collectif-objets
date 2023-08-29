@@ -11,9 +11,6 @@
       .fr-pl-3w
         = f.label :dossier_status_eq, "Statut de l'analyse"
         = f.select :dossier_status_eq, dossier_states, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
-      .fr-pl-3w
-        = f.label :types_recensements_prioritaires_cont, "Objets prioritaires"
-        = f.select :types_recensements_prioritaires_cont, options_for_select([["Sélectionnez une option", ""], ["DISPARU", "disparu"], ["PERIL", "peril"]]), {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
       - if query_present
         .fr-pl-3w
           = link_to "réinitialiser les filtres", conservateurs_departement_path(departement), class: "fr-link"
