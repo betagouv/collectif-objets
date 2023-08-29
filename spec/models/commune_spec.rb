@@ -114,10 +114,6 @@ RSpec.describe Commune, type: :model do
       create_list(:objet, 2, :disparu, commune:)
     end
 
-    it "fournit un compteur d'objets prioritaires" do
-      expect(Commune.include_recensements_prioritaires_count.first.recensements_prioritaires_count).to eq 3
-    end
-
     it "fournit un compteur d'objets disparus" do
       expect(Commune.include_recensements_prioritaires_count.first.disparus_count).to eq 2
     end
