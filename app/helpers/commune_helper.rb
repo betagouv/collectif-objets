@@ -24,11 +24,11 @@ module CommuneHelper
 
   def communes_statuses_options_for_select
     [["Veuillez sélectionner une option", ""],
-     ["Non recensé", "inactive"],
-     ["En cours de recensement", "started"],
-     ["Non analysé", "submitted"],
-     ["En cours d'analyse", "analyse_started"],
-     ["Analysé", "accepted"]]
+     ["Non recensé", Commune::STATUT_GLOBAL_NON_RECENSÉ],
+     ["En cours de recensement", Commune::STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT],
+     ["Non analysé", Commune::STATUT_GLOBAL_NON_ANALYSÉ],
+     ["En cours d'analyse", Commune::STATUT_GLOBAL_EN_COURS_D_ANALYSE],
+     ["Analysé", Commune::STATUT_GLOBAL_ANALYSÉ]]
   end
 end
 # rubocop:enable Rails/OutputSafety

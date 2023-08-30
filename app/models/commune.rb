@@ -60,12 +60,18 @@ class Commune < ApplicationRecord
 
   accepts_nested_attributes_for :dossier, :users
 
+  STATUT_GLOBAL_NON_RECENSÉ = 0
+  STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = 1
+  STATUT_GLOBAL_NON_ANALYSÉ = 2
+  STATUT_GLOBAL_EN_COURS_D_ANALYSE = 3
+  STATUT_GLOBAL_ANALYSÉ = 4
+
   STATUT_GLOBAL_SQL = %(CASE
-    WHEN communes.status = 'inactive' THEN 'inactive'
-    WHEN communes.status = 'started' THEN 'started'
-    WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0 THEN 'submitted'
-    WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0 THEN 'analyse_started'
-    WHEN dossiers.status = 'accepted' then 'accepted'
+    WHEN communes.status = 'inactive' THEN #{STATUT_GLOBAL_NON_RECENSÉ}
+    WHEN communes.status = 'started' THEN #{STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT}
+    WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0 THEN #{STATUT_GLOBAL_NON_ANALYSÉ}
+    WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0 THEN #{STATUT_GLOBAL_EN_COURS_D_ANALYSE}
+    WHEN dossiers.status = 'accepted' THEN #{STATUT_GLOBAL_ANALYSÉ}
   END).squish
 
   validate do |commune|
