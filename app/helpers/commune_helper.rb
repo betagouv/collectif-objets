@@ -22,14 +22,13 @@ module CommuneHelper
     text + " de #{commune.nom}"
   end
 
-  def communes_statuses_options_for_select(departement:)
-    counts = Commune.where(departement:).status_value_counts.merge("" => Commune.where(departement:).count)
-    [
-      ["Toutes les communes", ""],
-      ["Communes inactives", "inactive"],
-      ["Recensement démarré", "started"],
-      ["Recensement terminé", "completed"]
-    ].map { |label, key| ["#{label} (#{counts[key]})", key] }
+  def communes_statuses_options_for_select
+    [["Veuillez sélectionner une option", ""],
+     ["Non recensé", "inactive"],
+     ["En cours de recensement", "started"],
+     ["Non analysé", "submitted"],
+     ["En cours d'analyse", "analyse_started"],
+     ["Analysé", "accepted"]]
   end
 end
 # rubocop:enable Rails/OutputSafety

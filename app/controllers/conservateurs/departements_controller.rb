@@ -16,10 +16,11 @@ module Conservateurs
         render "show_map"
       else
         @ransack = policy_scope(Commune)
-          .select("nom, code_insee")
+          .select("nom")
           .where(departement: @departement)
           .include_objets_count
           .include_recensements_prioritaires_count
+          .include_statut_global
           .ransack(params[:q])
         @pagy, @communes = pagy @ransack.result.includes(:dossier), items: 20
         @query_present = params[:q].present?

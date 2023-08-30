@@ -9,8 +9,9 @@
       %div
         %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
       .fr-pl-3w
-        = f.label :dossier_status_eq, "Statut de l'analyse"
-        = f.select :dossier_status_eq, dossier_states, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
+        = f.label :statut_global_eq, "Statut de l'analyse"
+        = f.select :statut_global_eq, communes_statuses_options_for_select, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
+
       - if query_present
         .fr-pl-3w
           = link_to "réinitialiser les filtres", conservateurs_departement_path(departement), class: "fr-link"
@@ -26,7 +27,7 @@
               %th= sort_link ransack, :objets_count, "Objets", data: { turbo_action: "replace" }
               %th= sort_link ransack, :en_peril_count, "En péril", data: { turbo_action: "replace" }
               %th= sort_link ransack, :disparus_count, "Disparus", data: { turbo_action: "replace" }
-              %th= sort_link ransack, "dossier_status", "Analyse", data: { turbo_action: "replace" }
+              %th= sort_link ransack, "statut_global", "Analyse", data: { turbo_action: "replace" }
           %tbody
             - communes.each do |commune|
               %tr
@@ -35,7 +36,7 @@
                 %td= commune.objets_count
                 %td= commune.en_peril_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.en_peril_count} PERIL" } : 0
                 %td= commune.disparus_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU#{commune.disparus_count > 1 ? "S" : ""}" } : 0          
-                %td= dossier_status_badge(commune.dossier, small: true)
+                %td= commune.statut_global
 
     - if pagy.pages > 1
       .fr-mt-8w.co-pagination-wrapper

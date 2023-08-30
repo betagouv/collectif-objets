@@ -110,6 +110,8 @@ module Communes
         }.squish)
         .select("statut_global")
       end
+
+      ransacker(:statut_global) { Arel.sql("statut_global") }
     end
   end
 end
