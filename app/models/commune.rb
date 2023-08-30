@@ -60,6 +60,14 @@ class Commune < ApplicationRecord
 
   accepts_nested_attributes_for :dossier, :users
 
+  STATUT_GLOBAL_SQL = %(CASE
+    WHEN communes.status = 'inactive' THEN 'inactive'
+    WHEN communes.status = 'started' THEN 'started'
+    WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0 THEN 'submitted'
+    WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0 THEN 'analyse_started'
+    WHEN dossiers.status = 'accepted' then 'accepted'
+  END).squish
+
   validate do |commune|
     next if commune.nom.blank? || commune.nom == commune.nom.strip
 
