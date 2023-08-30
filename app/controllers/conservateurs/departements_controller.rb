@@ -22,7 +22,7 @@ module Conservateurs
           .include_recensements_prioritaires_count
           .include_statut_global
           .ransack(params[:q])
-        @pagy, @communes = pagy @ransack.result.includes(:dossier), items: 20
+        @pagy, @communes = pagy @ransack.result, items: 20
         @query_present = params[:q].present?
       end
     end

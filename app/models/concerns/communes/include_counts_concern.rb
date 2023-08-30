@@ -84,9 +84,8 @@ module Communes
       ransacker(:disparus_count) { Arel.sql("disparus_count") }
 
       def self.include_statut_global
-        joins(%{
-            LEFT OUTER JOIN dossiers
-            ON communes.dossier_id = dossiers.id
+        left_outer_joins(:dossier)
+        .joins(%{
             LEFT OUTER JOIN (
               SELECT dossiers.id,
                 SUM(CASE WHEN recensements.analysed_at IS NOT NULL THEN 1 ELSE 0 END) AS recensements_analysed_count
