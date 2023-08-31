@@ -68,23 +68,23 @@ class Commune < ApplicationRecord
 
   scope :sort_by_statut_global_asc,
         lambda {
-          %(CASE
-            WHEN statut_global = #{STATUT_GLOBAL_NON_RECENSÉ} THEN 1
-            WHEN statut_global = #{STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT} THEN 2
-            WHEN statut_global = #{STATUT_GLOBAL_NON_ANALYSÉ} THEN 3
-            WHEN statut_global = #{sanitize_sql(['%s', STATUT_GLOBAL_EN_COURS_D_ANALYSE])} THEN 4
-            WHEN statut_global = #{STATUT_GLOBAL_ANALYSÉ} THEN 5
-          END)
+          order(Arel.sql(%(CASE
+            WHEN statut_global = '#{STATUT_GLOBAL_NON_RECENSÉ}' THEN 1
+            WHEN statut_global = '#{STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT}' THEN 2
+            WHEN statut_global = '#{STATUT_GLOBAL_NON_ANALYSÉ}' THEN 3
+            WHEN statut_global = '#{sanitize_sql(['%s', STATUT_GLOBAL_EN_COURS_D_ANALYSE])}' THEN 4
+            WHEN statut_global = '#{STATUT_GLOBAL_ANALYSÉ}' THEN 5
+          END).squish))
         }
   scope :sort_by_statut_global_desc,
         lambda {
-          %(CASE
-            WHEN statut_global = #{STATUT_GLOBAL_NON_RECENSÉ} THEN 5
-            WHEN statut_global = #{STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT} THEN 4
-            WHEN statut_global = #{STATUT_GLOBAL_NON_ANALYSÉ} THEN 3
-            WHEN statut_global = #{sanitize_sql(['%s', STATUT_GLOBAL_EN_COURS_D_ANALYSE])} THEN 2
-            WHEN statut_global = #{STATUT_GLOBAL_ANALYSÉ} THEN 1
-          END)
+          order(Arel.sql(%(CASE
+            WHEN statut_global = '#{STATUT_GLOBAL_NON_RECENSÉ}' THEN 5
+            WHEN statut_global = '#{STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT}' THEN 4
+            WHEN statut_global = '#{STATUT_GLOBAL_NON_ANALYSÉ}' THEN 3
+            WHEN statut_global = '#{sanitize_sql(['%s', STATUT_GLOBAL_EN_COURS_D_ANALYSE])}' THEN 2
+            WHEN statut_global = '#{STATUT_GLOBAL_ANALYSÉ}' THEN 1
+          END).squish))
         }
 
   validate do |commune|
