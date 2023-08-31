@@ -87,13 +87,11 @@ module Communes
         joins(%{
           LEFT OUTER JOIN (
             SELECT communes.code_insee, (CASE
-                WHEN communes.status = 'inactive' THEN '#{Commune::STATUT_GLOBAL_NON_RECENSÉ}'
-                WHEN communes.status = 'started' THEN '#{Commune::STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT}'
-                WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0 THEN
-                  '#{Commune::STATUT_GLOBAL_NON_ANALYSÉ}'
-                WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0 THEN
-                  '#{sanitize_sql(['%s', Commune::STATUT_GLOBAL_EN_COURS_D_ANALYSE])}'
-                WHEN dossiers.status = 'accepted' then '#{Commune::STATUT_GLOBAL_ANALYSÉ}'
+                WHEN communes.status = 'inactive' THEN #{Commune::ORDRE_NON_RECENSÉ}
+                WHEN communes.status = 'started' THEN #{Commune::ORDRE_EN_COURS_DE_RECENSEMENT}
+                WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0 THEN #{Commune::ORDRE_NON_ANALYSÉ}
+                WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0 THEN #{Commune::ORDRE_EN_COURS_D_ANALYSE}
+                WHEN dossiers.status = 'accepted' then #{Commune::ORDRE_ANALYSÉ}
               END) AS statut_global
             FROM communes
             LEFT OUTER JOIN dossiers
