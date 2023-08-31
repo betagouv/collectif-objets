@@ -84,8 +84,20 @@ module Communes
       ransacker(:disparus_count) { Arel.sql("disparus_count") }
 
       def self.include_statut_global
-        left_outer_joins(:dossier)
-        .joins(%{
+        joins(%{
+          LEFT OUTER JOIN (
+            SELECT communes.code_insee, (CASE
+                WHEN communes.status = 'inactive' THEN '#{Commune::STATUT_GLOBAL_NON_RECENSÉ}'
+                WHEN communes.status = 'started' THEN '#{Commune::STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT}'
+                WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0 THEN
+                  '#{Commune::STATUT_GLOBAL_NON_ANALYSÉ}'
+                WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0 THEN
+                  '#{sanitize_sql(['%s', Commune::STATUT_GLOBAL_EN_COURS_D_ANALYSE])}'
+                WHEN dossiers.status = 'accepted' then '#{Commune::STATUT_GLOBAL_ANALYSÉ}'
+              END) AS statut_global
+            FROM communes
+            LEFT OUTER JOIN dossiers
+            ON communes.dossier_id = dossiers.id
             LEFT OUTER JOIN (
               SELECT dossiers.id,
                 SUM(CASE WHEN recensements.analysed_at IS NOT NULL THEN 1 ELSE 0 END) AS recensements_analysed_count
@@ -95,11 +107,13 @@ module Communes
               GROUP BY dossiers.id
             ) AS nb_recensements_par_dossiers
             ON dossiers.id = nb_recensements_par_dossiers.id
+          ) AS communes_statut_global
+          ON communes.code_insee = communes_statut_global.code_insee
         }.squish)
-        .select("#{Commune::STATUT_GLOBAL_SQL} AS statut_global")
+        .select("statut_global")
       end
 
-      ransacker(:statut_global) { Arel.sql(Commune::STATUT_GLOBAL_SQL) }
+      ransacker(:statut_global) { Arel.sql("statut_global") }
     end
   end
 end

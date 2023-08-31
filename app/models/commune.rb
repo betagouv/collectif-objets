@@ -60,19 +60,11 @@ class Commune < ApplicationRecord
 
   accepts_nested_attributes_for :dossier, :users
 
-  STATUT_GLOBAL_NON_RECENSÉ = 0
-  STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = 1
-  STATUT_GLOBAL_NON_ANALYSÉ = 2
-  STATUT_GLOBAL_EN_COURS_D_ANALYSE = 3
-  STATUT_GLOBAL_ANALYSÉ = 4
-
-  STATUT_GLOBAL_SQL = %(CASE
-    WHEN communes.status = 'inactive' THEN #{STATUT_GLOBAL_NON_RECENSÉ}
-    WHEN communes.status = 'started' THEN #{STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT}
-    WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0 THEN #{STATUT_GLOBAL_NON_ANALYSÉ}
-    WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0 THEN #{STATUT_GLOBAL_EN_COURS_D_ANALYSE}
-    WHEN dossiers.status = 'accepted' THEN #{STATUT_GLOBAL_ANALYSÉ}
-  END).squish
+  STATUT_GLOBAL_NON_RECENSÉ = "Non recensé"
+  STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de rencensement"
+  STATUT_GLOBAL_NON_ANALYSÉ = "Non analysé"
+  STATUT_GLOBAL_EN_COURS_D_ANALYSE = "En cours d'analyse"
+  STATUT_GLOBAL_ANALYSÉ = "Analysé"
 
   validate do |commune|
     next if commune.nom.blank? || commune.nom == commune.nom.strip
