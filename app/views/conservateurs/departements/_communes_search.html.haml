@@ -27,7 +27,7 @@
               %th= sort_link ransack, :objets_count, "Objets", data: { turbo_action: "replace" }
               %th= sort_link ransack, :en_peril_count, "En péril", data: { turbo_action: "replace" }
               %th= sort_link ransack, :disparus_count, "Disparus", data: { turbo_action: "replace" }
-              %th= sort_link ransack, "statut_global", "Analyse", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :statut_global, "Analyse", data: { turbo_action: "replace" }
           %tbody
             - communes.each do |commune|
               %tr
