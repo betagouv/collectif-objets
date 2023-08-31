@@ -30,5 +30,14 @@ module CommuneHelper
      [Commune::STATUT_GLOBAL_EN_COURS_D_ANALYSE, Commune::ORDRE_EN_COURS_D_ANALYSE],
      [Commune::STATUT_GLOBAL_ANALYSÉ, Commune::ORDRE_ANALYSÉ]]
   end
+
+  def commune_statut_global_badge(commune, small: false)
+    colors = ["", "", "blue-ecume", "blue-ecume", "success"]
+    content_tag(
+      "p",
+      commune.statut_global_texte,
+      class: "fr-badge fr-badge--#{colors[commune.statut_global]} #{small ? 'fr-badge--sm' : ''}"
+    )
+  end
 end
 # rubocop:enable Rails/OutputSafety

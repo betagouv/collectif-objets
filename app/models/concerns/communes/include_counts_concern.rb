@@ -89,8 +89,10 @@ module Communes
             SELECT communes.code_insee, (CASE
                 WHEN communes.status = 'inactive' THEN #{Commune::ORDRE_NON_RECENSÉ}
                 WHEN communes.status = 'started' THEN #{Commune::ORDRE_EN_COURS_DE_RECENSEMENT}
-                WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0 THEN #{Commune::ORDRE_NON_ANALYSÉ}
-                WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0 THEN #{Commune::ORDRE_EN_COURS_D_ANALYSE}
+                WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0
+                  THEN #{Commune::ORDRE_NON_ANALYSÉ}
+                WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0
+                  THEN #{Commune::ORDRE_EN_COURS_D_ANALYSE}
                 WHEN dossiers.status = 'accepted' then #{Commune::ORDRE_ANALYSÉ}
               END) AS statut_global
             FROM communes

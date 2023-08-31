@@ -61,15 +61,27 @@ class Commune < ApplicationRecord
   accepts_nested_attributes_for :dossier, :users
 
   STATUT_GLOBAL_NON_RECENSÉ = "Non recensé"
-  ORDRE_NON_RECENSÉ = 1
+  ORDRE_NON_RECENSÉ = 0
   STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de rencensement"
-  ORDRE_EN_COURS_DE_RECENSEMENT = 2
+  ORDRE_EN_COURS_DE_RECENSEMENT = 1
   STATUT_GLOBAL_NON_ANALYSÉ = "Non analysé"
-  ORDRE_NON_ANALYSÉ = 3
+  ORDRE_NON_ANALYSÉ = 2
   STATUT_GLOBAL_EN_COURS_D_ANALYSE = "En cours d'analyse"
-  ORDRE_EN_COURS_D_ANALYSE = 4
+  ORDRE_EN_COURS_D_ANALYSE = 3
   STATUT_GLOBAL_ANALYSÉ = "Analysé"
-  ORDRE_ANALYSÉ = 5
+  ORDRE_ANALYSÉ = 4
+
+  STATUT_GLOBAUX = [
+    STATUT_GLOBAL_NON_RECENSÉ,
+    STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT,
+    STATUT_GLOBAL_NON_ANALYSÉ,
+    STATUT_GLOBAL_EN_COURS_D_ANALYSE,
+    STATUT_GLOBAL_ANALYSÉ
+  ].freeze
+
+  def statut_global_texte
+    STATUT_GLOBAUX[statut_global]
+  end
 
   validate do |commune|
     next if commune.nom.blank? || commune.nom == commune.nom.strip
