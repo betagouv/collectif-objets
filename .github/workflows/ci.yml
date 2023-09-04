@@ -78,7 +78,7 @@ jobs:
       - run: scalingo login --api-token ${{ secrets.SCALINGO_TOKEN }}
       - name: Déploiement sur staging
         if: ${{ github.ref == 'refs/heads/staging' }}
-        run: scalingo --app collectif-objets-staging integration-link-manual-deploy main
+        run: scalingo --app collectif-objets-staging integration-link-manual-deploy staging
       - name: Déploiement en production
         if: ${{ github.ref == 'refs/heads/main' }}
         run: scalingo --app collectif-objets-prod --region osc-secnum-fr1 integration-link-manual-deploy main
