@@ -21,6 +21,7 @@ module Conservateurs
           .include_objets_count
           .include_recensements_prioritaires_count
           .include_statut_global
+          .includes(:dossier)
           .ransack(params[:q])
         @pagy, @communes = pagy @ransack.result, items: 20
         @query_present = params[:q].present?

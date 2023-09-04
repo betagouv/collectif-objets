@@ -85,5 +85,5 @@ class Dossier < ApplicationRecord
     commune.return_to_started! unless commune.started?
   end
 
-  def self.ransackable_attributes(_ = nil) = %w[status]
+  def self.ransackable_attributes(_ = nil) = %w[status submitted_at]
 end

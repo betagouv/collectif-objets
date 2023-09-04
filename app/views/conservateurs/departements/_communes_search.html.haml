@@ -28,6 +28,7 @@
               %th= sort_link ransack, :en_peril_count, "Objets en péril", data: { turbo_action: "replace" }
               %th= sort_link ransack, :disparus_count, "Objets disparus", data: { turbo_action: "replace" }
               %th= sort_link ransack, :statut_global, "Analyse", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :dossier_submitted_at, "Date du recensement", data: { turbo_action: "replace" }
           %tbody
             - communes.each do |commune|
               %tr
@@ -37,6 +38,7 @@
                 %td= commune.en_peril_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.en_peril_count} PERIL" } : 0
                 %td= commune.disparus_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU#{commune.disparus_count > 1 ? "S" : ""}" } : 0          
                 %td= commune_statut_global_badge(commune)
+                %td= commune.dossier&.submitted_at&.strftime("%d/%m/%y")
 
     - if pagy.pages > 1
       .fr-mt-8w.co-pagination-wrapper
