@@ -62,7 +62,7 @@ class Commune < ApplicationRecord
 
   STATUT_GLOBAL_NON_RECENSÉ = "Non recensé"
   ORDRE_NON_RECENSÉ = 0
-  STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de rencensement"
+  STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de recensement"
   ORDRE_EN_COURS_DE_RECENSEMENT = 1
   STATUT_GLOBAL_NON_ANALYSÉ = "Non analysé"
   ORDRE_NON_ANALYSÉ = 2
