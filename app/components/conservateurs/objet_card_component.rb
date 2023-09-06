@@ -65,7 +65,7 @@ module Conservateurs
     def prioritaire_badge
       return nil unless recensement&.prioritaire?
 
-      badge_struct.new "warning", "Prioritaire"
+      badge_struct.new "warning", recensement&.en_peril? ? "PERIL" : "DISPARU"
     end
 
     def link_html_attributes
