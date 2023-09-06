@@ -33,7 +33,7 @@ module Conservateurs
     end
 
     def set_commune
-      @commune = Commune.find(params[:id])
+      @commune = Commune.include_statut_global.find(params[:id])
       authorize(@commune)
     end
 

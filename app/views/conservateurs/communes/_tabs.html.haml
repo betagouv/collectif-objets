@@ -15,12 +15,7 @@
     .co-flex.co-flex--align-items-center.co-flex--space-between
       %div.co-flex.co-flex--align-items-center.co-flex--gap-1rem 
         %h1= commune
-        - if commune.inactive?
-          .co-flex--shrink-0
-            .fr-badge Commune inactive
-        - if local_assigns[:dossier]
-          .co-flex--shrink-0
-            %div= dossier_status_badge dossier
+        = commune_statut_global_badge(commune)
       - if local_assigns[:dossier] && dossier.accepted?
         = dsfr_modal(title: "Êtes-vous sûr de vouloir réouvrir le dossier?",  html_attributes: { id: "modal-dossier-reouverture" }) do |component|
           %p La réouverture du dossier vous permet de modifier votre analyse. Une fois votre analyse terminée, n’oubliez pas d’envoyer à la commune le rapport corrigé et de mettre à jour le bordereau de récolement en cliquant sur le bouton « regénérer ».
