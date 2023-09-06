@@ -20,7 +20,7 @@
         Aucune commune trouvée
     - else
       .fr-table
-        %table
+        %table.co-header-title-vertical-align
           %thead
             %tr
               %th= sort_link ransack, :nom, "Commune", data: { turbo_action: "replace" }
