@@ -34,7 +34,7 @@
                   %td= commune.code_insee
                   %td= link_to commune.nom, admin_commune_path(commune)
                   %td= commune.objets_count
-                  %td= commune_status_badge(commune)
+                  %td= commune_statut_global_badge(commune, small: true)
                   %td
                     - if commune.recensement_ratio.present?
                       #{commune.recensement_ratio}%
