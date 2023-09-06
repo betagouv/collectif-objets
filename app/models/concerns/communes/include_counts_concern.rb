@@ -110,7 +110,7 @@ module Communes
           ) AS communes_statut_global
           ON communes.code_insee = communes_statut_global.code_insee
         }.squish)
-        .select("statut_global")
+        .select("communes.*, statut_global")
       end
 
       ransacker(:statut_global) { Arel.sql("statut_global") }

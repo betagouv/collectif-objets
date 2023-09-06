@@ -12,8 +12,7 @@
   .fr-grid-row
     .fr-col-md-8
       %p
-        = commune_status_badge(@commune)
-        = dossier_status_badge(@commune.dossier, small: true) if @commune.dossier.present?
+        = commune_statut_global_badge(@commune, small: true)
 
       - if @commune.started? && @commune.recensement_ratio.present?
         %p
