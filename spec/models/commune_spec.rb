@@ -92,8 +92,8 @@ RSpec.describe Commune, type: :model do
   end
 
   describe ".include_objets_count" do
+    let!(:commune) { create(:commune) }
     before do
-      commune = create(:commune)
       create_list(:objet, 2, commune:)
     end
 
@@ -103,8 +103,8 @@ RSpec.describe Commune, type: :model do
   end
 
   describe ".include_recensements_prioritaires_count" do
+    let!(:commune) { create(:commune) }
     before do
-      commune = create(:commune)
       create(:objet, :with_recensement, commune:)
       create(:objet, :en_peril, commune:)
       create_list(:objet, 2, :disparu, commune:)
