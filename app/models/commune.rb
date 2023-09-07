@@ -83,6 +83,25 @@ class Commune < ApplicationRecord
     STATUT_GLOBAUX[statut_global]
   end
 
+  def statut_global
+    if has_attribute?(:statut_global)
+      read_attribute(:statut_global)
+    elsif inactive?
+      ORDRE_NON_RECENSÉ
+    elsif started?
+      ORDRE_EN_COURS_DE_RECENSEMENT
+    elsif dossier.submitted?
+      recensements_analysed_count = recensements.where.not(analysed_at: nil).count
+      if recensements_analysed_count.zero?
+        ORDRE_NON_ANALYSÉ
+      else # recensements_analysed_count > 0
+        ORDRE_EN_COURS_D_ANALYSE
+      end
+    else # dossiers.accepted?
+      ORDRE_ANALYSÉ
+    end
+  end
+
   validate do |commune|
     next if commune.nom.blank? || commune.nom == commune.nom.strip
 

@@ -118,4 +118,47 @@ RSpec.describe Commune, type: :model do
       expect(Commune.include_recensements_prioritaires_count.first.en_peril_count).to eq 1
     end
   end
+
+  describe ".statut_global" do
+    let!(:commune) { create(:commune, status: :inactive) }
+    let!(:objet) { create(:objet, commune:) }
+
+    it "a un statut global sur le recensement et l'analyse à Non recensé" do
+      expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_RECENSÉ
+      expect(Commune.first.statut_global).to eq Commune::ORDRE_NON_RECENSÉ
+    end
+
+    context "lorsque la commune a démarré son recensement" do
+      before { commune.start! }
+
+      it "a un statut global sur le recensement et l'analyse à En cours de recensement" do
+        expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_DE_RECENSEMENT
+        expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_DE_RECENSEMENT
+      end
+
+      context "lorsque la commune a terminé son recensement" do
+        before { commune.complete! }
+
+        it "a un statut global sur le recensement et l'analyse à Non analysé" do
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
+        end
+
+        it "a un statut global sur le recensement et l'analyse à En cours d'analyse" do
+          create(:recensement, dossier: commune.dossier, objet:)
+
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
+        end
+
+        it "a un statut global sur le recensement et l'analyse à Analysé" do
+          create(:recensement, dossier: commune.dossier, objet:, analysed_at: Time.zone.now)
+          commune.dossier.accept!
+
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
+        end
+      end
+    end
+  end
 end
