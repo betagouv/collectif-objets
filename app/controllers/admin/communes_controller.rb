@@ -11,7 +11,7 @@ module Admin
     end
 
     def show
-      @commune = Commune.include_statut_global.find(params[:id])
+      @commune = Commune.find(params[:id])
       @messages = Message.where(commune: @commune).order(created_at: :asc)
     end
 
