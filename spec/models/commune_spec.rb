@@ -137,7 +137,11 @@ RSpec.describe Commune, type: :model do
       end
 
       context "lorsque la commune a terminé son recensement" do
-        before { commune.complete! }
+        let!(:conservateur) { create(:conservateur) }
+        before do
+          commune.complete!
+          commune.dossier.conservateur = conservateur
+        end
 
         it "a un statut global sur le recensement et l'analyse à Non analysé" do
           expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
@@ -145,14 +149,13 @@ RSpec.describe Commune, type: :model do
         end
 
         it "a un statut global sur le recensement et l'analyse à En cours d'analyse" do
-          create(:recensement, dossier: commune.dossier, objet:)
+          create(:recensement, analysed_at: Time.zone.now, dossier: commune.dossier, objet:, conservateur:)
 
           expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
           expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
         end
 
         it "a un statut global sur le recensement et l'analyse à Analysé" do
-          create(:recensement, dossier: commune.dossier, objet:, analysed_at: Time.zone.now)
           commune.dossier.accept!
 
           expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
