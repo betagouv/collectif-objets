@@ -92,13 +92,9 @@ RSpec.describe Commune, type: :model do
   end
 
   describe ".include_objets_count" do
+    let!(:commune) { create(:commune) }
     before do
-      commune = create(:commune)
       create_list(:objet, 2, commune:)
-    end
-
-    it "a un compteur d'objets" do
-      expect(Commune.include_objets_count.first.has_attribute?(:objets_count)).to be true
     end
 
     it "fournit un compteur avec 2 objets" do
@@ -107,8 +103,8 @@ RSpec.describe Commune, type: :model do
   end
 
   describe ".include_recensements_prioritaires_count" do
+    let!(:commune) { create(:commune) }
     before do
-      commune = create(:commune)
       create(:objet, :with_recensement, commune:)
       create(:objet, :en_peril, commune:)
       create_list(:objet, 2, :disparu, commune:)
@@ -120,6 +116,52 @@ RSpec.describe Commune, type: :model do
 
     it "fournit un compteur d'objets en péril" do
       expect(Commune.include_recensements_prioritaires_count.first.en_peril_count).to eq 1
+    end
+  end
+
+  describe ".statut_global" do
+    let!(:commune) { create(:commune, status: :inactive) }
+    let!(:objet) { create(:objet, commune:) }
+
+    it "a un statut global sur le recensement et l'analyse à Non recensé" do
+      expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_RECENSÉ
+      expect(Commune.first.statut_global).to eq Commune::ORDRE_NON_RECENSÉ
+    end
+
+    context "lorsque la commune a démarré son recensement" do
+      before { commune.start! }
+
+      it "a un statut global sur le recensement et l'analyse à En cours de recensement" do
+        expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_DE_RECENSEMENT
+        expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_DE_RECENSEMENT
+      end
+
+      context "lorsque la commune a terminé son recensement" do
+        let!(:conservateur) { create(:conservateur) }
+        before do
+          commune.complete!
+          commune.dossier.conservateur = conservateur
+        end
+
+        it "a un statut global sur le recensement et l'analyse à Non analysé" do
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
+        end
+
+        it "a un statut global sur le recensement et l'analyse à En cours d'analyse" do
+          create(:recensement, analysed_at: Time.zone.now, dossier: commune.dossier, objet:, conservateur:)
+
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
+        end
+
+        it "a un statut global sur le recensement et l'analyse à Analysé" do
+          commune.dossier.accept!
+
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
+        end
+      end
     end
   end
 end

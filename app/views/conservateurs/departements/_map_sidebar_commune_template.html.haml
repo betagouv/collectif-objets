@@ -2,7 +2,7 @@
   .co-flex.co-flex--column.co-flex--justify-content-center.co-height--100.fr-p-4w
     .fr-mb-6w
       %h5= commune.nom
-      %div= dossier_status_badge(commune.dossier, small: true)
+      %div= commune_statut_global_badge(commune)
     .fr-mb-6w
       - if commune.en_peril_count
         .co-text--bold

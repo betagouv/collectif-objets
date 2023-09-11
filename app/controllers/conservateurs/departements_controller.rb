@@ -49,8 +49,8 @@ module Conservateurs
         .where(departement_code: @departement.code)
         .includes(:dossier)
         .include_objets_count
-        # .include_objets_recenses_count
         .include_recensements_prioritaires_count
+        .include_statut_global
         .select(fields)
         .to_a
     end

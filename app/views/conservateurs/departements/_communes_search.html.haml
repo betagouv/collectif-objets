@@ -20,7 +20,7 @@
         Aucune commune trouvée
     - else
       .fr-table
-        %table
+        %table.co-header-title-vertical-align
           %thead
             %tr
               %th= sort_link ransack, :nom, "Commune", data: { turbo_action: "replace" }
@@ -37,7 +37,7 @@
                 %td= commune.objets_count
                 %td= commune.en_peril_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.en_peril_count} PERIL" } : 0
                 %td= commune.disparus_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU#{commune.disparus_count > 1 ? "S" : ""}" } : 0          
-                %td= commune_statut_global_badge(commune)
+                %td= commune_statut_global_badge(commune, small: true)
                 %td= commune.dossier&.submitted_at&.strftime("%d/%m/%y")
 
     - if pagy.pages > 1
