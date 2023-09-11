@@ -4,6 +4,7 @@ class Commune < ApplicationRecord
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :communes
 
   include Communes::IncludeCountsConcern
+  include Communes::IncludeStatutGlobalConcern
 
   include AASM
   aasm column: :status, timestamps: true, whiny_persistence: true do
