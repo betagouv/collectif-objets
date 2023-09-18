@@ -12,7 +12,8 @@ module Conservateurs
 
     def call
       render ::ObjetCardComponent.new(
-        objet, commune:, badges:, main_photo_origin: :recensement_or_memoire, path:, tags:, link_html_attributes:
+        objet, commune:,
+               badges:, detail_badge:, main_photo_origin: :recensement_or_memoire, path:, tags:, link_html_attributes:
       )
     end
 
@@ -31,7 +32,7 @@ module Conservateurs
     def badges
       return [] unless can_analyse
 
-      @badges ||= [analysed_badge, prioritaire_badge].compact
+      @badges ||= [analysed_badge].compact
     end
 
     def tags
@@ -62,7 +63,7 @@ module Conservateurs
       badge_struct.new "success", "Analysé"
     end
 
-    def prioritaire_badge
+    def detail_badge
       return nil unless recensement&.prioritaire?
 
       badge_struct.new "warning", recensement&.en_peril? ? "PERIL" : "DISPARU"
