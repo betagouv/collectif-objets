@@ -26,7 +26,7 @@
   - @edifices.each do |edifice|
     %h4{id: "#{edifice.slug}"}
       = edifice_nom(edifice.nom).html_safe
-      · #{edifice.objets.length} objets
+      · #{t("objets.count", count: edifice.objets.length)}
     = render layout: "objets/cards_grid_layout", locals: { count: edifice.objets.length } do
       - reordered = @dossier ? Objet::order_by_recensement_priorite_array(edifice.objets) : edifice.objets
       - reordered.each do |objet|
