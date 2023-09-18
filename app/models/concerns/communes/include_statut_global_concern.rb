@@ -7,6 +7,7 @@ module Communes
     extend ActiveSupport::Concern
 
     included do
+      # Permet de récupérer le "statut global" sur toutes les communes
       def self.include_statut_global
         joins(%{
           LEFT OUTER JOIN (
