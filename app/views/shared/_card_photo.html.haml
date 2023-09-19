@@ -1,7 +1,5 @@
 - photo ||= Photo.new(url: "images/illustrations/photo-manquante.png", description: "Photo manquante")
 
-.fr-card__img.co-position-relative
-  .co-position-relative.co-z-index-1.co-height--100
-    = vite_or_raw_image_tag(photo.url, class: "fr-responsive-img co-object-fit-contain", alt: photo.alt)
-  .co-spinner-bg
+.fr-card__img
+  = vite_or_raw_image_tag(photo.url, class: "fr-responsive-img co-object-fit-contain", alt: photo.alt)
   = yield
