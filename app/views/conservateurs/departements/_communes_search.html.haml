@@ -14,7 +14,8 @@
 
       - if query_present
         .fr-pl-3w
-          = link_to "réinitialiser les filtres", conservateurs_departement_path(departement), class: "fr-link"
+          -# Le q: {statut_global_eq: ""} permet d'écraser le statut conservé en session
+          = link_to "réinitialiser les filtres", conservateurs_departement_path(departement, q: {statut_global_eq: ""}), class: "fr-link"
     - if pagy.count == 0
       %p.co-text--italic.fr-py-8w
         Aucune commune trouvée
