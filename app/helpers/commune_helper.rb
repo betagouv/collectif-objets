@@ -24,7 +24,7 @@ module CommuneHelper
 
   def communes_statuses_options_for_select
     [
-      ["Veuillez sélectionner une option", ""],
+      ["Tout sélectionner", ""],
       [Commune::STATUT_GLOBAL_ANALYSÉ, Commune::ORDRE_ANALYSÉ],
       [Commune::STATUT_GLOBAL_EN_COURS_D_ANALYSE, Commune::ORDRE_EN_COURS_D_ANALYSE],
       [Commune::STATUT_GLOBAL_NON_ANALYSÉ, Commune::ORDRE_NON_ANALYSÉ],
