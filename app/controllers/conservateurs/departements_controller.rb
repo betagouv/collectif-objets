@@ -15,11 +15,14 @@ module Conservateurs
         set_departement_json
         render "show_map"
       else
+        set_status_global_filter
         @ransack = policy_scope(Commune)
-          .where(departement_code: @departement.code)
-          .includes(:dossier)
+          .select("nom")
+          .where(departement: @departement)
           .include_objets_count
-          .include_objets_recenses_count
+          .include_recensements_prioritaires_count
+          .include_statut_global
+          .includes(:dossier)
           .ransack(params[:q])
         @pagy, @communes = pagy @ransack.result, items: 20
         @query_present = params[:q].present?
@@ -42,15 +45,24 @@ module Conservateurs
     end
 
     def set_communes
-      fields = %w[code_insee nom status objets_count recensements_prioritaires_count latitude longitude]
+      fields = %w[code_insee nom status objets_count en_peril_count latitude longitude]
       @communes = policy_scope(Commune)
         .where(departement_code: @departement.code)
         .includes(:dossier)
         .include_objets_count
-        # .include_objets_recenses_count
         .include_recensements_prioritaires_count
+        .include_statut_global
         .select(fields)
         .to_a
+    end
+
+    def set_status_global_filter
+      # Si l'utilisateur choisit un statut à filtrer, le conserver en session
+      if params[:q] && params[:q][:statut_global_eq]
+        session[:statut_global_eq] = params[:q][:statut_global_eq]
+      else # sinon, on le renvoie sur le statut choisi précédemment
+        redirect_to conservateurs_departement_path(@departement, q: { statut_global_eq: session[:statut_global_eq] })
+      end
     end
 
     def active_nav_links = ["Mes départements"] + (@departement ? [@departement.to_s] : [])

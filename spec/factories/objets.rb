@@ -58,5 +58,13 @@ FactoryBot.define do
         ]
       end
     end
+
+    trait :en_peril do
+      recensements { [association(:recensement, :en_peril)] }
+    end
+
+    trait :disparu do
+      recensements { [association(:recensement, :disparu)] }
+    end
   end
 end

@@ -31,7 +31,7 @@ gem "prawn-table", "~> 0.2.2"
 gem "progressbar"
 gem "puma", "~> 6.2"
 gem "pundit"
-gem "rails", "~> 7.0.5"
+gem "rails", "~> 7.0.6"
 gem "ransack"
 gem "redis"
 gem "rubyzip"
@@ -59,7 +59,7 @@ group :development do
   gem "html2haml"
   gem "htmlbeautifier"
   gem "listen" # for lookbook
-  gem "lookbook", "~> 2.0.3"
+  gem "lookbook", "~> 2.0.5"
   gem "pry"
   gem "rails-erd", require: false
   gem "solargraph"

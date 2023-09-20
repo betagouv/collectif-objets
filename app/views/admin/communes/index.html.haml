@@ -34,7 +34,7 @@
                   %td= commune.code_insee
                   %td= link_to commune.nom, admin_commune_path(commune)
                   %td= commune.objets_count
-                  %td= commune_status_badge(commune)
+                  %td= commune_statut_global_badge(commune, small: true)
                   %td
                     - if commune.recensement_ratio.present?
                       #{commune.recensement_ratio}%
@@ -59,12 +59,8 @@
           = f.label :departement_code_eq, "Département"
           = f.select :departement_code_eq, [["", ""]] + Departement.order(:code).map { [_1.to_s, _1.code] }
         .fr-input-group
-          = f.label :status_eq, "Statut"
-          = f.select :status_eq, [["", ""]] + [ |
-            ["Commune inactive", Commune::STATE_INACTIVE], |
-            ["Recensement démarré", Commune::STATE_STARTED], |
-            ["Recensement terminé", Commune::STATE_COMPLETED] |
-          ] |
+          = f.label :statut_global_eq, "Statut"
+          = f.select :statut_global_eq, communes_statuses_options_for_select
         / .fr-input-group
         /   = f.check_box :recensements_photos_presence_in, {}, "1"
         /   = f.label :recensements_photos_presence_in, "Photos manquantes"

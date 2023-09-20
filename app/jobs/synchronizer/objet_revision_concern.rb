@@ -28,7 +28,7 @@ module Synchronizer
       return false unless interactive?
 
       @interactive_validation ||= begin
-        puts "\n----\n#{log_message}\n----"
+        puts "\n----\n#{row}\n----"
         response = nil
         while response.nil?
           puts "voulez-vous forcer la sauvegarde de cet objet ? 'oui' : 'non'"

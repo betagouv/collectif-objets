@@ -4,6 +4,7 @@ class Commune < ApplicationRecord
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :communes
 
   include Communes::IncludeCountsConcern
+  include Communes::IncludeStatutGlobalConcern
 
   include AASM
   aasm column: :status, timestamps: true, whiny_persistence: true do
@@ -59,6 +60,59 @@ class Commune < ApplicationRecord
   )
 
   accepts_nested_attributes_for :dossier, :users
+
+  # Le "statut global" est une sorte de fusion des champs status de la commune, du dossier et de l'analyse,
+  # et permet l'affichage d'un statut unique dans les vues et un filtre facile via Ransack.
+  #
+  # Pour éviter trop de changements dans le code, il est récupéré à la volée sans modifier le champ "status" actuel.
+  # Idéalement, il faudrait utiliser le champ status, en modifiant les états suivants :
+  # inactive -> non_recensé, started -> en_cours_de_recensement, completed -> non_analysé
+  # et en ajoutant les états en_cours_d_analyse et analysé.
+  #
+  # Ou à minima, ajouter un nouveau champ statut_global, mis à jour comme la commune et en fonction de l'avancement de
+  # l'analyse côté conservateur.
+  STATUT_GLOBAL_NON_RECENSÉ = "Non recensé"
+  ORDRE_NON_RECENSÉ = 0
+  STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de recensement"
+  ORDRE_EN_COURS_DE_RECENSEMENT = 1
+  STATUT_GLOBAL_NON_ANALYSÉ = "Non analysé"
+  ORDRE_NON_ANALYSÉ = 2
+  STATUT_GLOBAL_EN_COURS_D_ANALYSE = "En cours d'analyse"
+  ORDRE_EN_COURS_D_ANALYSE = 3
+  STATUT_GLOBAL_ANALYSÉ = "Analysé"
+  ORDRE_ANALYSÉ = 4
+
+  STATUT_GLOBAUX = [
+    STATUT_GLOBAL_NON_RECENSÉ,
+    STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT,
+    STATUT_GLOBAL_NON_ANALYSÉ,
+    STATUT_GLOBAL_EN_COURS_D_ANALYSE,
+    STATUT_GLOBAL_ANALYSÉ
+  ].freeze
+
+  def statut_global_texte
+    STATUT_GLOBAUX[statut_global]
+  end
+
+  def statut_global
+    # Dans le cas où on appelle include_statut_global, le champ existe déjà
+    if has_attribute?(:statut_global)
+      read_attribute(:statut_global)
+    elsif inactive?
+      ORDRE_NON_RECENSÉ
+    elsif started?
+      ORDRE_EN_COURS_DE_RECENSEMENT
+    elsif dossier.submitted?
+      recensements_analysed_count = recensements.where.not(analysed_at: nil).count
+      if recensements_analysed_count.zero?
+        ORDRE_NON_ANALYSÉ
+      else # recensements_analysed_count > 0
+        ORDRE_EN_COURS_D_ANALYSE
+      end
+    else # dossiers.accepted?
+      ORDRE_ANALYSÉ
+    end
+  end
 
   validate do |commune|
     next if commune.nom.blank? || commune.nom == commune.nom.strip
@@ -129,11 +183,11 @@ class Commune < ApplicationRecord
   # -------
 
   def self.ransackable_attributes(_ = nil)
-    %w[nom code_insee departement_code status objets_count recensements_prioritaires_count]
+    %w[nom code_insee departement_code status objets_count en_peril_count disparus_count statut_global]
   end
 
   def self.ransackable_scopes(_ = nil) = [:recensements_photos_presence_in]
-  def self.ransackable_associations(_ = nil) = %i[dossier dossiers objets]
+  def self.ransackable_associations(_ = nil) = %w[dossier dossiers objets]
 
   ransacker(:nom, type: :string) { Arel.sql("unaccent(nom)") }
 end

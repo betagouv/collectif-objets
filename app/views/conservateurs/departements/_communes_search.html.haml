@@ -9,45 +9,38 @@
       %div
         %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
       .fr-pl-3w
-        = f.label :status_eq, "État du recensement"
-        = f.select :status_eq, communes_statuses_options_for_select(departement:), {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
+        = f.label :statut_global_eq, "Statut de l'analyse"
+        = f.select :statut_global_eq, communes_statuses_options_for_select, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
+
       - if query_present
         .fr-pl-3w
-          = link_to "réinitialiser les filtres", conservateurs_departement_path(departement), class: "fr-link"
+          -# Le q: {statut_global_eq: ""} permet d'écraser le statut conservé en session
+          = link_to "réinitialiser les filtres", conservateurs_departement_path(departement, q: {statut_global_eq: ""}), class: "fr-link"
     - if pagy.count == 0
       %p.co-text--italic.fr-py-8w
         Aucune commune trouvée
     - else
       .fr-table
-        %table
+        %table.co-header-title-vertical-align
           %thead
             %tr
               %th= sort_link ransack, :nom, "Commune", data: { turbo_action: "replace" }
-              %th= sort_link ransack, :objets_count, "Objets", data: { turbo_action: "replace" }
-              %th= sort_link ransack, :recensements_prioritaires_count, "Objets prioritaires", data: { turbo_action: "replace" }
-              %th= sort_link ransack, "status", "Recensement", data: { turbo_action: "replace" }
-              %th= sort_link ransack, "dossier_status", "Analyse", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :objets_count, "Nombre d'objets", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :en_peril_count, "Objets en péril", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :disparus_count, "Objets disparus", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :statut_global, "Analyse", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :dossier_submitted_at, "Date du recensement", data: { turbo_action: "replace" }
           %tbody
             - communes.each do |commune|
               %tr
                 %td
                   = link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top"
                 %td= commune.objets_count
-                %td
-                  - if commune.recensements_prioritaires_count.positive?
-                    %span.fr-badge.fr-badge--sm.fr-badge--warning
-                      - if commune.recensements_prioritaires_count == 1
-                        1 objet prioritaire
-                      - else
-                        \#{commune.recensements_prioritaires_count} objets prioritaires
-                  - else
-                    0
-                %td= t("activerecord.attributes.commune.statuses.#{commune.status}")
-                %td
-                  - if commune.dossier
-                    %div= dossier_status_badge(commune.dossier, small: true)
-                    - if commune.dossier.submitted?
-                      \#{commune.recensements_analysed_percentage.round}% des recensements revus
+                %td= commune.en_peril_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.en_peril_count} PERIL" } : 0
+                %td= commune.disparus_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU#{commune.disparus_count > 1 ? "S" : ""}" } : 0          
+                %td= commune_statut_global_badge(commune, small: true)
+                %td= commune.dossier&.submitted_at&.strftime("%d/%m/%y")
+
     - if pagy.pages > 1
       .fr-mt-8w.co-pagination-wrapper
         != render partial: 'shared/pagy_nav', locals: {pagy:}

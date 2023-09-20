@@ -8,6 +8,7 @@ class ObjetCardComponent < ViewComponent::Base
   def initialize(objet = nil, **kwargs)
     @objet = objet || kwargs[:objet]
     @badges = kwargs[:badges]
+    @detail_badge = kwargs[:detail_badge]
     @path = kwargs[:path]
     @main_photo = kwargs[:main_photo]
     @tags = kwargs[:tags]
@@ -20,7 +21,7 @@ class ObjetCardComponent < ViewComponent::Base
 
   private
 
-  attr_reader :objet, :badges, :tags, :commune, :recensement, :main_photo_origin
+  attr_reader :objet, :badges, :detail_badge, :tags, :commune, :recensement, :main_photo_origin
 
   delegate :nom, :palissy_DENO, :edifice_nom, :palissy_photos, to: :objet
 

@@ -21,16 +21,16 @@
   },
   "homepage": "https://github.com/adipasquale/collectif-objets#readme",
   "dependencies": {
-    "@gouvfr/dsfr": "^1.9.3",
+    "@gouvfr/dsfr": "^1.10.0",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
-    "@rails/activestorage": "^7.0.5",
+    "@rails/activestorage": "^7.0.6",
     "@sentry/browser": "^7.35.0",
     "@sentry/cli": "^2.12.0",
     "@sentry/tracing": "^7.36.0",
     "chart.js": "^4.3.0",
     "chartkick": "^5.0.1",
-    "maplibre-gl": "^3.0.1",
+    "maplibre-gl": "^3.2.1",
     "mjml": "^4.14.1",
     "nanobar": "^0.4.2",
     "spotlight.js": "^0.7.8",
@@ -38,7 +38,7 @@
     "throttle-debounce": "^5.0.0"
   },
   "devDependencies": {
-    "patch-package": "^7.0.0",
+    "patch-package": "^8.0.0",
     "vite": "^4.3.9",
     "vite-plugin-ruby": "^3.2.2",
     "vite-plugin-stimulus-hmr": "^3.0.0"

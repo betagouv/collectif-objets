@@ -31,7 +31,7 @@ module Recensements
     end
 
     def prioritaire?
-      en_mauvais_etat? || en_peril? || absent?
+      en_peril? || absent?
     end
 
     def analysable?

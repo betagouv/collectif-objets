@@ -22,14 +22,24 @@ module CommuneHelper
     text + " de #{commune.nom}"
   end
 
-  def communes_statuses_options_for_select(departement:)
-    counts = Commune.where(departement:).status_value_counts.merge("" => Commune.where(departement:).count)
+  def communes_statuses_options_for_select
     [
-      ["Toutes les communes", ""],
-      ["Communes inactives", "inactive"],
-      ["Recensement démarré", "started"],
-      ["Recensement terminé", "completed"]
-    ].map { |label, key| ["#{label} (#{counts[key]})", key] }
+      ["Tout sélectionner", ""],
+      [Commune::STATUT_GLOBAL_ANALYSÉ, Commune::ORDRE_ANALYSÉ],
+      [Commune::STATUT_GLOBAL_EN_COURS_D_ANALYSE, Commune::ORDRE_EN_COURS_D_ANALYSE],
+      [Commune::STATUT_GLOBAL_NON_ANALYSÉ, Commune::ORDRE_NON_ANALYSÉ],
+      [Commune::STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT, Commune::ORDRE_EN_COURS_DE_RECENSEMENT],
+      [Commune::STATUT_GLOBAL_NON_RECENSÉ, Commune::ORDRE_NON_RECENSÉ]
+    ]
+  end
+
+  def commune_statut_global_badge(commune, small: false)
+    colors = ["", "", "blue-ecume", "blue-ecume", "success"]
+    content_tag(
+      "p",
+      commune.statut_global_texte,
+      class: "fr-badge fr-badge--#{colors[commune.statut_global]} #{small ? 'fr-badge--sm' : ''}"
+    )
   end
 end
 # rubocop:enable Rails/OutputSafety

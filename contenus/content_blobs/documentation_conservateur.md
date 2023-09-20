@@ -254,6 +254,6 @@ La [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-lice
 
 ## Qu’est-ce qu’un « objet prioritaire » dans Collectif Objets ?
 
-Il s’agit d’un objet qui a été désigné par la commune qui l’abrite (ou qui devrait l’abriter) comme : disparu, en mauvais état de conservation ou en péril.
+Il s’agit d’un objet qui a été désigné par la commune qui l’abrite (ou qui devrait l’abriter) comme : disparu ou en péril.
 
 Les objets prioritaires sont donc les objets qui semblent mériter une attention particulière dans un délai restreint.

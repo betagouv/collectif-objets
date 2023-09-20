@@ -10,9 +10,9 @@ class Dossier < ApplicationRecord
 
   include AASM
   aasm column: :status, timestamps: true, whiny_persistence: true do
-    state :construction, initial: true, display: "En construction"
-    state :submitted, display: "En attente d'analyse"
-    state :accepted, display: "Accepté"
+    state :construction, initial: true, display: I18n.t("dossier.status_badge.construction")
+    state :submitted, display: I18n.t("dossier.status_badge.submitted")
+    state :accepted, display: I18n.t("dossier.status_badge.accepted")
 
     event :submit, after: :aasm_after_submit do
       transitions from: :construction, to: :submitted
@@ -85,5 +85,5 @@ class Dossier < ApplicationRecord
     commune.return_to_started! unless commune.started?
   end
 
-  def self.ransackable_attributes(_ = nil) = %w[status]
+  def self.ransackable_attributes(_ = nil) = %w[status submitted_at]
 end

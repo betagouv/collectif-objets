@@ -72,6 +72,7 @@ class Recensement < ApplicationRecord
   }
   scope :photos_presence_in, ->(presence) { presence ? all : missing_photos }
   scope :absent, -> { where(localisation: LOCALISATION_ABSENT) }
+  scope :en_peril, -> { where(RECENSEMENT_EN_PERIL_SQL) }
   scope :recensable, -> { where(recensable: true) }
   scope :not_recensable, -> { where.not(recensable: true) }
   scope :in_departement, lambda { |departement|
@@ -82,13 +83,13 @@ class Recensement < ApplicationRecord
   scope :absent_or_recensable, -> { where(recensable: true).or(absent) }
   scope :completed, -> { where(status: "completed") }
 
-  # L'objet est prioritaire s'il a disparu, ou s'il est dans un état mauvais ou en péril,
+  # L'objet est prioritaire s'il a disparu ou s'il est en péril,
   # jugé par la commune ou le conservateur
-  RECENSEMENT_PRIORITAIRE_SQL = <<-SQL.squish
-    recensements.localisation = 'absent'
-    OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
-    OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
-  SQL
+  RECENSEMENT_ABSENT_SQL = %("recensements"."localisation" = '#{LOCALISATION_ABSENT}').freeze
+  RECENSEMENT_EN_PERIL_SQL = %(("recensements"."etat_sanitaire" = '#{ETAT_PERIL}'
+    AND "recensements"."analyse_etat_sanitaire" IS NULL)
+    OR "recensements"."analyse_etat_sanitaire" = '#{ETAT_PERIL}').squish.freeze
+  RECENSEMENT_PRIORITAIRE_SQL = "#{RECENSEMENT_ABSENT_SQL} OR #{RECENSEMENT_EN_PERIL_SQL}".freeze
 
   SQL_ORDER_PRIORITE = <<-SQL.squish
     CASE WHEN (

@@ -2,11 +2,11 @@
   .co-flex.co-flex--column.co-flex--justify-content-center.co-height--100.fr-p-4w
     .fr-mb-6w
       %h5= commune.nom
-      %div= dossier_status_badge(commune.dossier, small: true)
+      %div= commune_statut_global_badge(commune)
     .fr-mb-6w
-      - if commune.recensements_prioritaires_count
+      - if commune.en_peril_count
         .co-text--bold
-          = t(".prioritaires_count", count: commune.recensements_prioritaires_count)
+          = t(".en_peril_count", count: commune.en_peril_count)
         %div sur #{t(".recensed_count", count: commune.objets_count)}
       - else
         = t(".recensed_count", count: commune.objets_count)
