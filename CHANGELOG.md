@@ -7,6 +7,28 @@ le projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Non publié]
 
+### [1.1.0] - 2023-09-20
+
+### Changé
+- Un objet dit "prioritaire" est soit disparu soit en péril (et pas en mauvais état)
+- Refonte de la vue département côté conservateur
+  - Fusion des colonnes "État du recensement" et "Analyse"
+  - Filtre et tri sur la nouvelle colonne "Analyse"
+  - Colonne Objets disparus scindées en 2 colonnes "disparus" et "péril", avec tri par nombre d'objets
+  - Ajout d'une colonne "Date du recensement", avec tri par date
+- Harmonisation des badges d'analyse et d'objet prioritaire dans la page commune, dans l'admin et sur la carte du département
+- Nouveau design du composant carte d'un objet
+- Coquilles de texte : "classés" -> "protégés", "réouvrir" -> "rouvrir"
+
+### Ajouté
+- Lettre d'informations #3 sur la page d'accueil conservateur
+
+### Supprimé
+- Liste des édifices sur la page d'une commune, si la commune a moins de 3 édifices, et que les édifices ont moins de 6 objets. 
+
+### Corrigé
+- Bug lors de la synchronisation de POP en mode interactif
+
 ### Mises à jour
 - @gouvfr/dsfr : 1.9.3 à 1.10.0
 - rails : 7.0.5 à 7.0.6
