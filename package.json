@@ -28,7 +28,7 @@
     "@sentry/browser": "^7.35.0",
     "@sentry/cli": "^2.12.0",
     "@sentry/tracing": "^7.36.0",
-    "chart.js": "^4.3.0",
+    "chart.js": "^4.4.0",
     "chartkick": "^5.0.1",
     "maplibre-gl": "^3.2.1",
     "mjml": "^4.14.1",
