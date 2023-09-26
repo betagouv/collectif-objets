@@ -23,8 +23,8 @@
 
 
   = render "edifices/list", edifices: @edifices
-  - @edifices.each do |edifice|
-    %h4{id: "#{edifice.slug}"}
+  - @edifices.each_with_index do |edifice, index|
+    %h4{id: "#{edifice.slug}", class: "#{index == 0 ? "" : "fr-mt-7w"} fr-mb-4w"}
       = edifice_nom(edifice.nom).html_safe
       · #{t("objets.count", count: edifice.objets.length)}
     = render layout: "objets/cards_grid_layout", locals: { count: edifice.objets.length } do
