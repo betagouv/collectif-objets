@@ -254,15 +254,25 @@ La version complète du diagramme d'entités de la base de données est visible 
   La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque
   le dossier est soumis.
 
-| situation | commune        | recensement(s)                          | dossier         |
-|-----------|----------------|-----------------------------------------|-----------------|
-| 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_ |
-| 2         | `started`      | au moins un `completed`                 | `construction`  |
-| 3         | `completed`    | tous `completed`                        | `submitted`     |
-| 4         | `completed`    | tous `completed` et tous analysés       | `accepted`      |
+**Note sur le statut global de la commune**
+Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Analyse" ont été fusionnées.
+
+Cette colonne unique est appelée "statut global" dans le code. Il est calculé en fonction du statut de la commune, de son dossier et de ses recensements. Afin de faciliter le filtre et tri via Ransack, il est également remonté via une requête SQL dans le concern "include_statut_global".
+
+Ce choix a été fait pour aller plus vite, sans avoir à créer de nouveau champ ni modifier l'existant. Cette dernière option nécessite beaucoup de changements dans le code, notamment à tous les endroits qui dépendent du "status" actuel de la commune.
+
+Cependant, ces calculs à la volée peuvent être lents, comparé à un simple champ en base. Ils le seront de plus en plus, sachant qu'ils dépendent du nombre de recensements, qui va continuer d'augmenter avec le temps.
+
+| situation | commune        | recensement(s)                          | dossier         | statut global |
+|-----------|----------------|-----------------------------------------|-----------------|-----------------|
+| 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_ | Non recensé |
+| 2         | `started`      | au moins un `completed`                 | `construction`  | En cours de recensement |
+| 3         | `completed`    | tous `completed`                        | `submitted`     | Non analysé |
+|4 | `completed` | au moins un `completed` et analysé | `submitted`     | En cours d'analyse |
+| 5         | `completed`    | tous `completed` et tous analysés       | `accepted`      | Analysé |
 
 - Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements"
-- Le passage de 3 à 4 se fait par une action manuelle des conservateurs "Accepter le dossier"
+- Le passage de 4 à 5 se fait par une action manuelle des conservateurs "Accepter le dossier"
 
 `bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
 
