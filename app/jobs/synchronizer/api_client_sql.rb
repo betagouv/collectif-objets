@@ -27,6 +27,7 @@ module Synchronizer
     end
 
     def self.objets_where_clause(code_insee: nil)
+      # Le code SQL ci-dessous contient des règles d'import. Il devrait plutôt se trouver dans le model Objet
       sql = <<~SQL.squish
         WHERE "DOSS" IN ('dossier individuel', 'dossier avec sous-dossier', 'individuel', 'dossier indiviuel', 'dossier avec sous-dossiers')
         and ("MANQUANT" is NULL OR "MANQUANT" NOT IN ('manquant', 'volé'))
