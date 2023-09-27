@@ -47,6 +47,8 @@
     %p
       = link_to_palissy(objet, class: "co-text--blue") do
         Voir plus de détails sur la Plateforme Ouverte du Patrimoine
+    %p
+      = link_to("Signalez-nous une erreur sur cette fiche objet", "https://tally.so/r/mO4gbK", class: "fr-link", target: "_blank")
 
   .fr-col-md-6.co-hide--md
     = render GalleryComponent.palissy_photos_from_objet(objet, template: :full)
