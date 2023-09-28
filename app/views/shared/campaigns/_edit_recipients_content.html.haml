@@ -14,24 +14,25 @@
   %ul.co-columns--4
     - campaign.departement.communes.order("communes.nom").each do |commune|
       - checked = campaign.commune_ids.include?(commune.id)
-      .fr-checkbox-group
-        %input{type: "checkbox",
-          name: "campaign[recipients_attributes][][commune_id]",
-          id: "campaign_recipients_attributes_commune_#{commune.id}",
-          value: "#{commune.id}",
-          checked: checked,
-          "data-multichecker-target": "checkbox",
-          disabled: !checked && !commune.can_be_campaign_recipient? }
-        %label.fr-label{for: "campaign_recipients_attributes_commune_#{commune.id}"}
-          %span= commune.nom
-          &nbsp;
-          - if commune.active?
-            %span.co-text--sm (déjà active)
-          - if commune.users.empty?
-            %span.co-text--sm (pas d'email)
-          - if commune.objets.empty?
-            %span.co-text--sm (pas d'objets)
-          %span.fr-ml-1w.fr-badge.fr-badge--sm= commune.code_insee
+      .fr-fieldset__element
+        .fr-checkbox-group
+          %input{type: "checkbox",
+            name: "campaign[recipients_attributes][][commune_id]",
+            id: "campaign_recipients_attributes_commune_#{commune.id}",
+            value: "#{commune.id}",
+            checked: checked,
+            "data-multichecker-target": "checkbox",
+            disabled: !checked && !commune.can_be_campaign_recipient? }
+          %label.fr-label{for: "campaign_recipients_attributes_commune_#{commune.id}"}
+            %span= commune.nom
+            &nbsp;
+            - if commune.active?
+              %span.co-text--sm (déjà active)
+            - if commune.users.empty?
+              %span.co-text--sm (pas d'email)
+            - if commune.objets.empty?
+              %span.co-text--sm (pas d'objets)
+            %span.fr-ml-1w.fr-badge.fr-badge--sm= commune.code_insee
 
   .fr-input-group.co-text--center
     = f.submit "Sauvegarder les communes"
