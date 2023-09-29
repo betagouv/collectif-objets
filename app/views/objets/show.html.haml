@@ -2,4 +2,4 @@
 %main.fr-container.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Accueil", root_path],["Objets de #{@objet.commune.nom}",objets_path(commune_code_insee: @objet.commune.code_insee)]], current_page_label: @objet.nom
   %h1= @objet.nom
-  = render ObjetPageComponent.new(objet: @objet)
+  = render ObjetPageComponent.new(objet: @objet, avec_lien_signalement: current_conservateur.present?)

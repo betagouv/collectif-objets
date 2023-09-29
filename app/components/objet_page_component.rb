@@ -6,8 +6,9 @@ class ObjetPageComponent < ViewComponent::Base
 
   renders_one :cta
 
-  def initialize(objet:)
+  def initialize(objet:, avec_lien_signalement: false)
     @objet = objet
+    @avec_lien_signalement = avec_lien_signalement
     super
   end
 end
