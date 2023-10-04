@@ -88,13 +88,7 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 
 Voici également un tutoriel vidéo :
 
-<video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_lancement_campagne.png" href="#">
-  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_lancement_campagne.webm" type="video/webm">
-  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_lancement_campagne.mp4" type="video/mp4">
-  <a href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_lancement_campagne.mp4">
-    Télécharger le reportage au format MP4
-  </a>
-</video>
+<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/c2a889e2194945c496d3071ae498637b?sid=ca3a1f17-514e-452b-8093-3b67dfaf7f0a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ## Accéder aux dossiers de recensement des communes
 
