@@ -1,4 +1,4 @@
 <h4 id="<%= edifice.slug %>">
   <%= edifice_nom(edifice.nom) %> ·
-  <%= edifice.objets.length %> objets
+  <%= t("objets.count", count: edifice.objets.length) %>
 </h4>
