@@ -22,6 +22,7 @@ module Co
       def edifices
         @edifices ||= commune
           .edifices
+          .with_objets
           .includes(objets: { recensements: %i[photos_attachments photos_blobs] })
           .ordered_by_nom
       end
