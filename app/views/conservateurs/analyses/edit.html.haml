@@ -29,8 +29,8 @@
                 = @objet.crafted_at.presence || "N/A"
                 %br
                 %br
-                = link_to "Voir sur POP",
-                  "https://www.pop.culture.gouv.fr/notice/palissy/#{@objet.palissy_REF}",
+                = link_to "Voir la fiche objet",
+                  objet_path(@objet),
                   target: "_blank",
                   rel: "noopener"
           .fr-card__header
