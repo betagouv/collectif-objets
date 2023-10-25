@@ -7,7 +7,17 @@ le projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Non publié]
 
-### [1.1.0] - 2023-09-20
+## [1.2.0] - 2023-10-25
+
+### Changé
+- Meilleur espacement entre les édifices sur la page commune
+- Harmonisation de l'affichage du nombre d'objets sur les différentes pages
+
+### Ajouté
+- Lien vers la fiche POP sur une fiche objet, et lien vers la fiche objet sur la page de recensement
+- Documentation sur le statut global d'une commune et sur les règles d'import
+
+## [1.1.0] - 2023-09-20
 
 ### Changé
 - Un objet dit "prioritaire" est soit disparu soit en péril (et pas en mauvais état)
