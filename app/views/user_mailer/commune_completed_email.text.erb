@@ -1,15 +1,31 @@
 <%= I18n.t("user_mailer.shared.bonjour") %>
 
-<%= I18n.t("user_mailer.commune_completed.participation") %>
+Nous vous remercions d’avoir pris part à la campagne de recensement 
+des objets monuments historiques avec Collectif Objets.
 
-<%= I18n.t("user_mailer.commune_completed.merci") %>
+En participant à ce programme, vous vous inscrivez dans une approche collaborative 
+de la préservation du patrimoine. 
 
-<%= I18n.t("user_mailer.commune_completed.visibilite") %>
+Le partage des connaissances entre l’ensemble des acteurs de la chaîne patrimoniale 
+permet d’assurer un meilleur suivi de notre patrimoine et d’identifier plus rapidement 
+les situations problématiques nécessitant une prise en charge urgente. 
+Nous vous remercions vivement pour votre engagement !
 
-<%= I18n.t("user_mailer.commune_completed.a_venir") %>
+Vous avez indiqué que les objets protégés de votre commune sont dans un état 
+qui n’appelle pas une prise en charge urgente. C’est une très bonne nouvelle 
+pour le patrimoine. Pour l'instant, il n'y a donc pas lieu de prendre 
+des mesures particulières. 
 
-<%= I18n.t("user_mailer.commune_completed.contact") %>
+Toutefois, si la situation de l’un de vos objets protégés venait à changer 
+dans les prochains mois, n’hésitez pas à nous en avertir. 
+Pour cela, vous pouvez directement contacter les conservateurs via 
+la messagerie de Collectif Objets : <%= commune_messages_url(@commune) %>.
 
-<%= I18n.t("user_mailer.commune_completed.consulter") %>
+Par ailleurs, la plateforme met à disposition des ressources pédagogiques
+pour vous aider à entretenir votre patrimoine mobilier <%= fiches_url %> :
 
-<%= I18n.t("user_mailer.commune_completed.cta") %> : <%= @login_url %>
+- Comment entretenir ses objets mobiliers ? <%= fiche_url('entretien_objets') %>
+- Quels sont les devoirs des communes propriétaires d’objets protégés?
+
+Nous restons à votre disposition pour toute information complémentaire 
+et sommes joignables à cette adresse email : collectifobjets@beta.gouv.fr

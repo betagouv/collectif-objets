@@ -5,28 +5,48 @@
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.participation") %>
+      Nous vous remercions d’avoir pris part à la campagne de recensement des
+       objets monuments historiques avec Collectif Objets.
+    </mj-text>
+
+    <mj-text>
+      En participant à ce programme, vous vous inscrivez dans une approche collaborative 
+      de la préservation du patrimoine. 
+    </mj-text>
+
+    <mj-text>
+      Le partage des connaissances entre l’ensemble des acteurs de la chaîne patrimoniale 
+      permet d’assurer un meilleur suivi de notre patrimoine et d’identifier plus rapidement 
+      les situations problématiques nécessitant une prise en charge urgente. 
+      Nous vous remercions vivement pour votre engagement !
     </mj-text>
 
     <mj-text font-weight="800">
-      <%= I18n.t("user_mailer.commune_completed.merci") %>
+      Vous avez indiqué que les objets protégés de votre commune sont dans un état 
+      qui n’appelle pas une prise en charge urgente. C’est une très bonne nouvelle 
+      pour le patrimoine. Pour l'instant, il n'y a donc pas lieu de prendre 
+      des mesures particulières. 
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.visibilite") %>
+      Toutefois, si la situation de l’un de vos objets protégés venait à changer 
+      dans les prochains mois, n’hésitez pas à nous en avertir. 
+      Pour cela, vous pouvez directement contacter les conservateurs via la 
+      <%= link_to "messagerie de Collectif Objets", commune_messages_url(@commune) %>.
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.a_venir") %>
+      Par ailleurs, la plateforme met à disposition des <%= link_to "ressources pédagogiques", fiches_url %> 
+      pour vous aider à entretenir votre patrimoine mobilier :
+      <ul>
+        <li>Comment <%= link_to "entretenir ses objets mobiliers", fiche_url('entretien_objets') %> ?</li>
+        <li>Quels sont les devoirs des communes propriétaires d’objets protégés ?</li>
+      </ul>
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.contact") %>
-      <%= I18n.t("user_mailer.commune_completed.consulter") %>
+      Nous restons à votre disposition pour toute information complémentaire 
+      et sommes joignables à cette adresse email : <%= mail_to "collectifobjets@beta.gouv.fr" %>
     </mj-text>
-
-    <mj-button href="<%= @login_url %>" background-color="rgb(0,0,145)">
-      <%= I18n.t("user_mailer.commune_completed.cta") %>
-      </mj-button>
   </mj-column>
 </mj-section>
