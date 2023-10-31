@@ -1,31 +1,34 @@
-<%= I18n.t("user_mailer.shared.bonjour") %>
+Chère madame, cher monsieur, 
 
-Nous vous remercions d’avoir pris part à la campagne de recensement 
-des objets monuments historiques avec Collectif Objets.
+Comme de nombreuses communes de votre département, vous avez participé à l’opération de recensement des objets protégés au titre des monuments historiques.
 
-En participant à ce programme, vous vous inscrivez dans une approche collaborative 
-de la préservation du patrimoine. 
+Vos informations ont été transmises aux conservateurs de votre département. Elles  permettent d’avoir une meilleure visibilité sur le parc d’objets protégés du département et d’assurer un meilleur suivi de notre patrimoine.
 
-Le partage des connaissances entre l’ensemble des acteurs de la chaîne patrimoniale 
-permet d’assurer un meilleur suivi de notre patrimoine et d’identifier plus rapidement 
-les situations problématiques nécessitant une prise en charge urgente. 
-Nous vous remercions vivement pour votre engagement !
+Au cours des prochains mois, les conservateurs de votre département vont analyser les données collectées.
 
-Vous avez indiqué que les objets protégés de votre commune sont dans un état 
-qui n’appelle pas une prise en charge urgente. C’est une très bonne nouvelle 
-pour le patrimoine. Pour l'instant, il n'y a donc pas lieu de prendre 
-des mesures particulières. 
+<% if @commune.dossier.a_des_objets_prioritaires? %>
+*Vous avez indiqué qu’au moins un de vos objets est dans un état préoccupant,* soit car il est dans un mauvais état de conservation soit car il pourrait être facilement dérobé. De ce fait, votre dossier fera partie des priorités à analyser pour les conservateurs de votre département. Mais la quantité d’informations à traiter est grande et cela pourrait prendre jusqu’à plusieurs mois. 
 
-Toutefois, si la situation de l’un de vos objets protégés venait à changer 
-dans les prochains mois, n’hésitez pas à nous en avertir. 
-Pour cela, vous pouvez directement contacter les conservateurs via 
-la messagerie de Collectif Objets : <%= commune_messages_url(@commune) %>.
+<% else %> <%# recensement avec que des objets verts %>
+*Vous avez indiqué que les objets protégés de votre commune sont en sécurité et en bon état*. C’est une très bonne nouvelle pour le patrimoine. 
 
-Par ailleurs, la plateforme met à disposition des ressources pédagogiques
-pour vous aider à entretenir votre patrimoine mobilier <%= fiches_url %> :
+Les conservateurs ayant une importante charge d’informations à traiter, ils analysent en priorité les dossiers indiquant des situations préoccupantes. 
 
-- Comment entretenir ses objets mobiliers ? <%= fiche_url('entretien_objets') %>
-- Quels sont les devoirs des communes propriétaires d’objets protégés?
+<% end %>
+Si la situation de l’un de vos objets protégés vient à changer dans les prochains temps, ou si vous avez une question pour un conservateur, vous pouvez leur écrire directement via la messagerie dans la plateforme Collectif Objets : <%= commune_messages_url(@commune) %>. 
 
-Nous restons à votre disposition pour toute information complémentaire 
-et sommes joignables à cette adresse email : collectifobjets@beta.gouv.fr
+<% if @commune.dossier.a_des_objets_prioritaires? %>
+Si vous souhaitez connaître les étapes préalables à la constitution d’un dossier pour demander une restauration d’un objet protégé, cliquez ici (*lien vers la fiche étapes préalables*).
+
+Si vous souhaitez savoir comment il est possible de sécuriser vos objets, cliquez ici <%= fiche_url('securisation') %>
+
+Attention : vous ne devez pas déplacer ou réparer vous-même un objet protégé, cela est interdit par la loi ! Les services du patrimoine de la DRAC de votre région doivent vous accompagner dans ces démarches.
+
+<% end %>
+Pour connaître les devoirs qui incombent aux communes propriétaires d’objets protégés, cliquez ici (*lien vers texte sur devoirs des propriétaires*). 
+
+Afin de connaitre les aides à votre disposition pour préserver votre patrimoine, cliquez ici <%= content_blob_url(:documentation_commune) %>. 
+
+Nous restons à votre disposition pour toute information complémentaire que vous pourriez souhaiter et joignables à cette adresse email : collectifobjets@beta.gouv.fr 
+
+Merci encore pour votre engagement qui nous aide à préserver le patrimoine mobilier.
