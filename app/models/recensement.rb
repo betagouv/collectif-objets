@@ -73,6 +73,7 @@ class Recensement < ApplicationRecord
   scope :photos_presence_in, ->(presence) { presence ? all : missing_photos }
   scope :absent, -> { where(localisation: LOCALISATION_ABSENT) }
   scope :en_peril, -> { where(RECENSEMENT_EN_PERIL_SQL) }
+  scope :prioritaires, -> { where(RECENSEMENT_PRIORITAIRE_SQL) }
   scope :recensable, -> { where(recensable: true) }
   scope :not_recensable, -> { where.not(recensable: true) }
   scope :in_departement, lambda { |departement|

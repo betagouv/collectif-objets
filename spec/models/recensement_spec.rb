@@ -222,4 +222,23 @@ RSpec.describe Recensement, type: :model do
       end
     end
   end
+
+  describe ".prioritaires" do
+    subject { Recensement.prioritaires.count }
+
+    context "aucun recensement prioritaire" do
+      let!(:recensement) { create(:recensement) }
+      it { should eq 0 }
+    end
+
+    context "avec un recensement en peril" do
+      let!(:recensement) { create(:recensement, :en_peril) }
+      it { should eq 1 }
+    end
+
+    context "avec un recensement disparu" do
+      let!(:recensement) { create(:recensement, :disparu) }
+      it { should eq 1 }
+    end
+  end
 end
