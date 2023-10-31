@@ -52,7 +52,7 @@
     </mj-text>
     
     <mj-text>
-      Afin de connaitre les aides à votre disposition pour préserver votre patrimoine, <%= "cliquez ici", content_blob_url(:documentation_commune) %>. 
+      Afin de connaitre les aides à votre disposition pour préserver votre patrimoine, <%= link_to "cliquez ici", content_blob_url(:documentation_commune) %>. 
     </mj-text>
 
     <mj-text>
