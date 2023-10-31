@@ -76,6 +76,10 @@ class Dossier < ApplicationRecord
     recensements.filter(&:analyse_overrides?).count
   end
 
+  def a_des_objets_prioritaires?
+    recensements.prioritaires.count.positive?
+  end
+
   def aasm_after_submit(updates = {}, **_kwargs)
     update(notes_commune: updates[:notes_commune]) if updates.key?(:notes_commune)
     commune.complete! unless commune.completed?
