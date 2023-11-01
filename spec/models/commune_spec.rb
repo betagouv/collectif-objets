@@ -144,22 +144,22 @@ RSpec.describe Commune, type: :model do
         end
 
         it "a un statut global sur le recensement et l'analyse à Non analysé" do
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
         end
 
         it "a un statut global sur le recensement et l'analyse à En cours d'analyse" do
           create(:recensement, analysed_at: Time.zone.now, dossier: commune.dossier, objet:, conservateur:)
 
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
         end
 
         it "a un statut global sur le recensement et l'analyse à Analysé" do
           commune.dossier.accept!
 
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
         end
       end
     end

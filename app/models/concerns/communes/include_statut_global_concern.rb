@@ -15,10 +15,10 @@ module Communes
                 WHEN communes.status = 'inactive' THEN #{Commune::ORDRE_NON_RECENSÉ}
                 WHEN communes.status = 'started' THEN #{Commune::ORDRE_EN_COURS_DE_RECENSEMENT}
                 WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0
-                  THEN #{Commune::ORDRE_NON_ANALYSÉ}
+                  THEN #{Commune::ORDRE_A_EXAMINER}
                 WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0
-                  THEN #{Commune::ORDRE_EN_COURS_D_ANALYSE}
-                WHEN dossiers.status = 'accepted' then #{Commune::ORDRE_ANALYSÉ}
+                  THEN #{Commune::ORDRE_EN_COURS_D_EXAMEN}
+                WHEN dossiers.status = 'accepted' then #{Commune::ORDRE_EXAMINÉ}
               END) AS statut_global
             FROM communes
             LEFT OUTER JOIN dossiers

@@ -75,19 +75,19 @@ class Commune < ApplicationRecord
   ORDRE_NON_RECENSÉ = 0
   STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de recensement"
   ORDRE_EN_COURS_DE_RECENSEMENT = 1
-  STATUT_GLOBAL_NON_ANALYSÉ = "Non analysé"
-  ORDRE_NON_ANALYSÉ = 2
-  STATUT_GLOBAL_EN_COURS_D_ANALYSE = "En cours d'analyse"
-  ORDRE_EN_COURS_D_ANALYSE = 3
-  STATUT_GLOBAL_ANALYSÉ = "Analysé"
-  ORDRE_ANALYSÉ = 4
+  STATUT_GLOBAL_A_EXAMINER = "À examiner"
+  ORDRE_A_EXAMINER = 2
+  STATUT_GLOBAL_EN_COURS_D_EXAMEN = "En cours d'examen"
+  ORDRE_EN_COURS_D_EXAMEN = 3
+  STATUT_GLOBAL_EXAMINÉ = "Examiné"
+  ORDRE_EXAMINÉ = 4
 
   STATUT_GLOBAUX = [
     STATUT_GLOBAL_NON_RECENSÉ,
     STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT,
-    STATUT_GLOBAL_NON_ANALYSÉ,
-    STATUT_GLOBAL_EN_COURS_D_ANALYSE,
-    STATUT_GLOBAL_ANALYSÉ
+    STATUT_GLOBAL_A_EXAMINER,
+    STATUT_GLOBAL_EN_COURS_D_EXAMEN,
+    STATUT_GLOBAL_EXAMINÉ
   ].freeze
 
   def statut_global_texte
@@ -105,12 +105,12 @@ class Commune < ApplicationRecord
     elsif dossier.submitted?
       recensements_analysed_count = recensements.where.not(analysed_at: nil).count
       if recensements_analysed_count.zero?
-        ORDRE_NON_ANALYSÉ
+        ORDRE_A_EXAMINER
       else # recensements_analysed_count > 0
-        ORDRE_EN_COURS_D_ANALYSE
+        ORDRE_EN_COURS_D_EXAMEN
       end
     else # dossiers.accepted?
-      ORDRE_ANALYSÉ
+      ORDRE_EXAMINÉ
     end
   end
 
