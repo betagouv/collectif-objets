@@ -75,16 +75,19 @@ class Commune < ApplicationRecord
   ORDRE_NON_RECENSÉ = 0
   STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de recensement"
   ORDRE_EN_COURS_DE_RECENSEMENT = 1
+  STATUT_GLOBAL_REPONSE_AUTOMATIQUE = "Réponse automatique"
+  ORDRE_REPONSE_AUTOMATIQUE = 2
   STATUT_GLOBAL_A_EXAMINER = "À examiner"
-  ORDRE_A_EXAMINER = 2
+  ORDRE_A_EXAMINER = 3
   STATUT_GLOBAL_EN_COURS_D_EXAMEN = "En cours d'examen"
-  ORDRE_EN_COURS_D_EXAMEN = 3
+  ORDRE_EN_COURS_D_EXAMEN = 4
   STATUT_GLOBAL_EXAMINÉ = "Examiné"
-  ORDRE_EXAMINÉ = 4
+  ORDRE_EXAMINÉ = 5
 
   STATUT_GLOBAUX = [
     STATUT_GLOBAL_NON_RECENSÉ,
     STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT,
+    STATUT_GLOBAL_REPONSE_AUTOMATIQUE,
     STATUT_GLOBAL_A_EXAMINER,
     STATUT_GLOBAL_EN_COURS_D_EXAMEN,
     STATUT_GLOBAL_EXAMINÉ
@@ -103,11 +106,15 @@ class Commune < ApplicationRecord
     elsif started?
       ORDRE_EN_COURS_DE_RECENSEMENT
     elsif dossier.submitted?
-      recensements_analysed_count = recensements.where.not(analysed_at: nil).count
-      if recensements_analysed_count.zero?
-        ORDRE_A_EXAMINER
-      else # recensements_analysed_count > 0
-        ORDRE_EN_COURS_D_EXAMEN
+      if dossier.a_des_objets_prioritaires?
+        recensements_analysed_count = recensements.where.not(analysed_at: nil).count
+        if recensements_analysed_count.zero?
+          ORDRE_A_EXAMINER
+        else # recensements_analysed_count > 0
+          ORDRE_EN_COURS_D_EXAMEN
+        end
+      else # que des objets verts
+        ORDRE_REPONSE_AUTOMATIQUE
       end
     else # dossiers.accepted?
       ORDRE_EXAMINÉ

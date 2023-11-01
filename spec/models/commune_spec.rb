@@ -143,19 +143,31 @@ RSpec.describe Commune, type: :model do
           commune.dossier.conservateur = conservateur
         end
 
-        it "a un statut global sur le recensement et l'analyse à Non analysé" do
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+        it "a un statut global sur le recensement et l'analyse à Réponse automatique" do
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
         end
 
-        it "a un statut global sur le recensement et l'analyse à En cours d'analyse" do
-          create(:recensement, analysed_at: Time.zone.now, dossier: commune.dossier, objet:, conservateur:)
+        context "recensement avec des objets en peril" do
+          let!(:recensement) do
+            create(:recensement,
+                   etat_sanitaire: Recensement::ETAT_PERIL, dossier: commune.dossier, objet:, conservateur:)
+          end
 
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
+          it "a un statut global sur le recensement et l'analyse à À examiner" do
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+          end
+
+          it "a un statut global sur le recensement et l'analyse à En cours d'examen" do
+            recensement.update(analysed_at: Time.zone.now)
+
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
+          end
         end
 
-        it "a un statut global sur le recensement et l'analyse à Analysé" do
+        it "a un statut global sur le recensement et l'analyse à Examiné" do
           commune.dossier.accept!
 
           expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
