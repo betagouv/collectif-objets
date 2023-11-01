@@ -21,13 +21,14 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe "commune_completed_email" do
-    let(:commune) { create(:commune, nom: "Marseille") }
+    let(:dossier) { create(:dossier, :submitted) }
+    let(:commune) { create(:commune, nom: "Marseille", dossier:) }
     let(:user) { create(:user, email: "jean@user.fr", commune:) }
     let(:mail) { UserMailer.with(user:, commune:).commune_completed_email }
 
     include_examples(
       "both parts contain",
-      "Nous vous remercions pour votre engagement"
+      "Merci encore pour votre engagement"
     )
 
     it "behaves as expected" do
