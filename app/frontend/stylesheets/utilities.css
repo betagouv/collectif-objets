@@ -228,7 +228,23 @@ html[data-fr-scheme="dark"] .co-text--blue {
   color: var(--text-action-high-blue-france, #000091);
 }
 
-/* Table avec titre des colonnes alginés en haut  */
+/* TABLE */
+/* Table avec titre des colonnes alignées en haut  */
 .co-header-title-vertical-align thead tr th {
   vertical-align: text-top;
+}
+
+/* Table en blanc*/
+.co-table-white {
+  thead {
+    background-color: white;
+  }
+  tbody {
+    background-color: white;
+    color: black;
+
+    tr:nth-child(2n) {
+      background-color: white;
+    }
+  }
 }
