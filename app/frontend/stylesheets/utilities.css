@@ -16,6 +16,10 @@
   .co-display--md.hide { display: block !important; }
 }
 
+@media (max-width: 480px) {
+  .co-hide--sm { display: none !important; }
+}
+
 /* OVERFLOWS */
 
 .co-overflow-auto { overflow: auto; }
