@@ -92,15 +92,12 @@ class Recensement < ApplicationRecord
     OR "recensements"."analyse_etat_sanitaire" = '#{ETAT_PERIL}').squish.freeze
   RECENSEMENT_PRIORITAIRE_SQL = "#{RECENSEMENT_ABSENT_SQL} OR #{RECENSEMENT_EN_PERIL_SQL}".freeze
 
-  SQL_ORDER_PRIORITE = <<-SQL.squish
+  SQL_ORDER_PRIORITE = %(
     CASE WHEN (
-      recensements.localisation = 'absent'
-      OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
-      OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
+      #{RECENSEMENT_PRIORITAIRE_SQL}
     ) THEN 0
     ELSE 1
-    END
-  SQL
+    END).squish.freeze
   scope :order_by_priorite, -> { order(Arel.sql(SQL_ORDER_PRIORITE)) }
   def self.order_by_priorite_array(recensements_arel)
     recensements_arel.to_a.sort_by { prioritaire? ? 0 : 1 }
