@@ -1,14 +1,18 @@
-.co-hide--sm.fr-grid-row.fr-grid-row--gutters.fr-mb-4w
+.co-hide--sm.fr-grid-row.fr-grid-row--gutters.fr-mb-4w.fr-background-alt--blue-france
   .fr-col-md-3
-    .co-background--grey.co-height--100.fr-p-4w
-      .fr-mb-2w
-        %b #{stats.communes_completed_count} communes ont recensé sur #{stats.communes_count}
-      .fr-h2 #{stats.communes_completed_percentage}%
+    .fr-card
+      .fr-card__body
+        .fr-card__content
+          %h2.fr-card__title.fr-text-title--blue-france #{stats.communes_completed_percentage}%
+          %p.fr-card__desc De communes recenseuses, soit #{stats.communes_completed_count} sur #{stats.communes_count}
+
   .fr-col-md-3
-    .co-background--grey.co-height--100.fr-p-4w
-      .fr-mb-2w
-        %b #{stats.objets_recenses_count} objets recensés sur #{stats.objets_count}
-      .fr-h2 #{stats.objets_recenses_percentage}%
+    .fr-card
+      .fr-card__body
+        .fr-card__content
+          %h2.fr-card__title.fr-text-title--blue-france #{stats.objets_recenses_percentage}%
+          %p.fr-card__desc D'objets recensés, soit #{stats.objets_recenses_count} sur #{stats.objets_count}
+
   .fr-col-md-6
     .co-background--grey.co-height--100.fr-p-4w
       %b États sanitaires des objets recensés
