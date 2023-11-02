@@ -14,10 +14,13 @@
           %p.fr-card__desc D'objets recensés, soit #{stats.objets_recenses_count} sur #{stats.objets_count}
 
   .fr-col-md-6
-    .co-background--grey.co-height--100.fr-p-4w
-      %b États sanitaires des objets recensés
-      = bar_chart [{name: "En péril", color: "rgba(179, 64, 1, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_PERIL]]] },
-                   {name: "Mauvais état", color: "rgba(133, 133, 247, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MAUVAIS]]]  },
-                   {name: "État moyen", color: "rgba(174, 173, 249, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MOYEN]]]  },
-                   {name: "Bon état", color: "rgba(205, 206, 252, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_BON]]] }],
-        stacked: true, height: 200, xtitle: "nombre d’objets"
+    .fr-card
+      .fr-card__body
+        .fr-card__content
+          %h2.fr-card__title.fr-text-title--blue-france États sanitaires des objets recensés
+          .fr-card__desc
+            = bar_chart [{name: "En péril", color: "rgba(179, 64, 1, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_PERIL]]] },
+                        {name: "Mauvais état", color: "rgba(133, 133, 247, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MAUVAIS]]]  },
+                        {name: "État moyen", color: "rgba(174, 173, 249, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MOYEN]]]  },
+                        {name: "Bon état", color: "rgba(205, 206, 252, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_BON]]] }],
+              stacked: true, height: 200, xtitle: "nombre d’objets"
