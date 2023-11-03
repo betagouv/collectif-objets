@@ -7,6 +7,14 @@ le projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Non publié]
 
+### Ajouté
+- Envoi d'un email spécifique adressé aux communes ayant fini leur recensement, selon la présence d'objets prioritaires ou non
+- Statut "Réponse automatique" pour les communes ayant uniquement des objets verts
+
+### Changé
+- Amélioration du design des stats et du tableau de bord du département côté conservateur
+- Tri des objets des communes par ordre de priorité. Les objest prioritaires sont affichés en premier
+
 ## [1.2.0] - 2023-10-25
 
 ### Changé
