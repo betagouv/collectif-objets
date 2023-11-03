@@ -14,6 +14,7 @@ le projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changé
 - Amélioration du design des stats et du tableau de bord du département côté conservateur
 - Tri des objets des communes par ordre de priorité. Les objest prioritaires sont affichés en premier
+- Le tableau des communes n'affiche que 2 colonnes sur mobile
 
 ## [1.2.0] - 2023-10-25
 
