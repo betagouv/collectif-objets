@@ -1,66 +1,35 @@
 <mj-section>
   <mj-column>
     <mj-text>
-      Chère madame, cher monsieur, 
+      <%= I18n.t("user_mailer.shared.bonjour") %>
     </mj-text>
 
     <mj-text>
-      Comme de nombreuses communes de votre département, vous avez participé à l’opération de recensement des objets protégés au titre des monuments historiques.
+      <%= I18n.t("user_mailer.commune_completed.participation") %>
+    </mj-text>
+
+    <mj-text font-weight="800">
+      <%= I18n.t("user_mailer.commune_completed.merci") %>
     </mj-text>
 
     <mj-text>
-      Vos informations ont été transmises aux conservateurs de votre département. Elles  permettent d’avoir une meilleure visibilité sur le parc d’objets protégés du département et d’assurer un meilleur suivi de notre patrimoine.
+      <%= I18n.t("user_mailer.commune_completed.visibilite") %>
     </mj-text>
 
     <mj-text>
-      Au cours des prochains mois, les conservateurs de votre département vont analyser les données collectées.
+      <%= I18n.t("user_mailer.commune_completed.a_venir") %>
     </mj-text>
-    <% if @commune.dossier.a_des_objets_prioritaires? %>
-      <mj-text>
-        <strong>Vous avez indiqué qu’au moins un de vos objets est dans un état préoccupant</strong>, soit car il est dans un mauvais état de conservation soit car il pourrait être facilement dérobé. De ce fait, votre dossier fera partie des priorités à analyser pour les conservateurs de votre département. Mais la quantité d’informations à traiter est grande et cela pourrait prendre jusqu’à plusieurs mois. 
-      </mj-text>
-    <% else %> <%# recensement avec que des objets verts %>
-      <mj-text>
-        <strong>Vous avez indiqué que les objets protégés de votre commune sont en sécurité et en bon état</strong>. C’est une très bonne nouvelle pour le patrimoine. 
-      </mj-text>
-
-      <mj-text>
-        Les conservateurs ayant une importante charge d’informations à traiter, ils analysent en priorité les dossiers indiquant des situations préoccupantes. 
-      </mj-text>
-    <% end %>
 
     <mj-text>
-      Si la situation de l’un de vos objets protégés vient à changer dans les prochains temps, ou si vous avez une question pour un conservateur, vous pouvez leur écrire directement via la <%= link_to "messagerie de Collectif Objets", commune_messages_url(@commune) %>. 
-    </mj-text>
-    
-    <% if @commune.dossier.a_des_objets_prioritaires? %>
-      <mj-text>
-        Si vous souhaitez connaître les étapes préalables à la constitution d’un dossier pour demander une restauration d’un objet protégé, cliquez ici (*lien vers la fiche étapes préalables*).
-      </mj-text>
-
-      <mj-text>
-        Si vous souhaitez savoir comment il est possible de sécuriser vos objets, <%= link_to "cliquez ici", fiche_url('securisation') %>.
-      </mj-text>
-
-      <mj-text>
-        Attention : vous ne devez pas déplacer ou réparer vous-même un objet protégé, cela est interdit par la loi ! Les services du patrimoine de la DRAC de votre région doivent vous accompagner dans ces démarches.
-      </mj-text>
-    <% end %>
-
-    <mj-text>
-      Pour connaître les devoirs qui incombent aux communes propriétaires d’objets protégés, cliquez ici (*lien vers texte sur devoirs des propriétaires*). 
+      <%= I18n.t("user_mailer.commune_completed.documentation") %> (<%= link_to nil, content_blob_url(:documentation_commune) %>)
     </mj-text>
     
     <mj-text>
-      Afin de connaitre les aides à votre disposition pour préserver votre patrimoine, <%= link_to "cliquez ici", content_blob_url(:documentation_commune) %>. 
+      <%= I18n.t("user_mailer.commune_completed.contact") %> (<%= link_to nil, commune_messages_url(@commune) %>)
     </mj-text>
 
-    <mj-text>
-      Nous restons à votre disposition pour toute information complémentaire que vous pourriez souhaiter et joignables à cette adresse email : <%= mail_to "collectifobjets@beta.gouv.fr" %>
-    </mj-text>
-
-    <mj-text>   
-      Merci encore pour votre engagement qui nous aide à préserver le patrimoine mobilier.
-    </mj-text>
+    <mj-button href="<%= @login_url %>" background-color="rgb(0,0,145)">
+      <%= I18n.t("user_mailer.commune_completed.cta") %>
+      </mj-button>
   </mj-column>
 </mj-section>

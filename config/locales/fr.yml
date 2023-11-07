@@ -616,6 +616,14 @@ fr:
   user_mailer:
     shared:
       bonjour: Madame, Monsieur le Maire,
+    commune_completed:
+      participation: Comme de nombreuses communes de votre département, vous avez participé à l’opération de recensement participatif des objets monuments historiques.
+      merci: Nous vous remercions pour votre engagement.
+      visibilite: Ce recensement nous permet d’avoir une plus grande visibilité sur le parc d’objets monuments historiques du département et d’assurer un meilleur suivi de notre patrimoine.
+      a_venir: Si la situation l'exige, vos conservateurs vous proposeront des recommandations pour assurer une meilleure conservation des objets monuments historiques de votre commune.
+      documentation: Pour toute question, n'hésitez pas à consulter notre documentation.
+      contact: Vous pouvez directement contacter vos conservateurs via la messagerie de Collectif Objets. 
+      cta: Accéder à Collectif Objets
     dossier_auto_submitted:
       intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs ne l'avaient pas encore reçu.
       auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’analyser et revenir vers vous avec un rapport, en temps voulu.
