@@ -28,7 +28,7 @@ RSpec.describe UserMailer, type: :mailer do
 
     include_examples(
       "both parts contain",
-      "Merci encore pour votre engagement"
+      "Nous vous remercions pour votre engagement"
     )
 
     it "behaves as expected" do
