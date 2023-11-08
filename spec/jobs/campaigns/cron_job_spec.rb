@@ -57,4 +57,22 @@ RSpec.describe Campaigns::CronJob, type: :job do
       expect(campaign5.reload.status).to eq("finished") # finished because date_fin < today
     end
   end
+
+  describe "pour les campagnes en cours ayant atteint la date de fin" do
+    before do
+      dossier = create(:dossier)
+      create(:recensement, :en_peril, dossier:)
+      commune = create(:commune_with_user, dossier:)
+      campagne_en_cours_apres_date_fin = create(:campaign, status: "ongoing",
+                                                           date_lancement: Time.zone.today - 2.months,
+                                                           date_fin: Date.yesterday)
+
+      campagne_en_cours_apres_date_fin.communes << commune
+    end
+
+    it "envoie un email aux communes avec uniquement des objets verts" do
+      expect { Campaigns::CronJob.new.perform }
+        .to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+  end
 end

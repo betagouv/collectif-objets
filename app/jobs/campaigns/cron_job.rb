@@ -14,10 +14,10 @@ module Campaigns
       Campaign.ongoing.where("date_fin < ?", date).each do |campaign|
         campaign.finish!
 
-        communes.each do |commune|
+        campaign.communes.each do |commune|
           user = commune.users.first
           if user.present? && commune.dossier.a_des_objets_prioritaires?
-            UserMailer.with(user:, commune:).commune_avec_objets_verts.deliver_later
+            UserMailer.with(user:, commune:).commune_avec_objets_verts.deliver_now
           end
         end
       end
