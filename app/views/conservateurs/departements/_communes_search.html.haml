@@ -25,9 +25,9 @@
           %thead
             %tr
               %th= sort_link ransack, :nom, "Commune", data: { turbo_action: "replace" }
-              %th.co-hide--sm= sort_link ransack, :objets_count, "Nombre d'objets", data: { turbo_action: "replace" }
-              %th.co-hide--sm= sort_link ransack, :en_peril_count, "Objets en péril", data: { turbo_action: "replace" }
-              %th.co-hide--sm= sort_link ransack, :disparus_count, "Objets disparus", data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link ransack, :objets_count, "Nombre d'objets", default_order: :desc, data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link ransack, :en_peril_count, "Objets en péril", default_order: :desc, data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link ransack, :disparus_count, "Objets disparus", default_order: :desc, data: { turbo_action: "replace" }
               %th= sort_link ransack, :statut_global, "Analyse", data: { turbo_action: "replace" }
               %th.co-hide--sm= sort_link ransack, :dossier_submitted_at, "Date du recensement", data: { turbo_action: "replace" }
           %tbody
