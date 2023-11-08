@@ -32,7 +32,7 @@ module Conservateurs
     def badges
       return [] unless can_analyse
 
-      @badges ||= [analysed_badge].compact
+      @badges ||= [analyse_badge].compact
     end
 
     def tags
@@ -57,10 +57,14 @@ module Conservateurs
       badge_struct.new "warning", "photos manquantes"
     end
 
-    def analysed_badge
-      return nil unless recensement&.analysed?
-
-      badge_struct.new "success", "Examiné"
+    def analyse_badge
+      if recensement&.analysed?
+        badge_struct.new "success", "Examiné"
+      elsif recensement&.prioritaire?
+        badge_struct.new "blue-ecume", "À examiner"
+      else
+        badge_struct.new "success", "Examen optionnel"
+      end
     end
 
     def detail_badge
