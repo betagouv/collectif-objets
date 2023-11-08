@@ -60,7 +60,7 @@ module Conservateurs
     def analysed_badge
       return nil unless recensement&.analysed?
 
-      badge_struct.new "success", "Analysé"
+      badge_struct.new "success", "Examiné"
     end
 
     def detail_badge
