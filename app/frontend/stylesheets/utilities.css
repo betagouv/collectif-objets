@@ -235,16 +235,15 @@ html[data-fr-scheme="dark"] .co-text--blue {
 }
 
 /* Table en blanc*/
-.co-table-white {
-  thead {
+.co-table-white thead {
     background-color: white;
-  }
-  tbody {
+}
+
+.co-table-white tbody {
     background-color: white;
     color: black;
+}
 
-    tr:nth-child(2n) {
-      background-color: white;
-    }
-  }
+.co-table-white tbody tr:nth-child(2n) {
+  background-color: white;
 }
