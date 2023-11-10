@@ -1,26 +1,25 @@
 = render layout: "conservateurs/communes/tabs",
   locals: { commune: @commune, dossier: @dossier, current_tab: :analyse } do
 
-  = render "conservateurs/dossiers/accept_cta", dossier: @dossier
-
   - if @dossier&.accepted?
     .fr-mb-4w
       = dsfr_alert type: :success, size: :sm do
         Tous les recensements ont été examinés.
         = link_to "Voir l'examen", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
 
-  - elsif @commune.completed?
-    - unless @commune.dossier.a_des_objets_prioritaires?
-      .fr-mb-4w 
-        =dsfr_alert type: :success, size: :sm do
-          Il n'y a pas d'objet à revoir, la commune a déjà reçu un email automatique, vous pouvez tout de même modifier ou commenter les recensements pour envoyer votre examen à la commune.
-    .fr-mb-4w
-      - if @dossier.notes_commune.present?
-        %p
-          = t("activerecord.attributes.dossier.notes_commune")
-        = blockquote(@dossier.notes_commune)
-      - else
-        %i Aucun commentaire laissé par la commune
+  - elsif @dossier&.can_generate_rapport?
+      = render "conservateurs/dossiers/accept_cta", dossier: @dossier
+  - else
+    .fr-mb-4w 
+      =dsfr_alert type: :success, size: :sm do
+        Il n'y a pas d'objet à revoir, la commune a déjà reçu un email automatique, vous pouvez tout de même modifier ou commenter les recensements pour envoyer votre examen à la commune.
+  .fr-mb-4w
+    - if @dossier.notes_commune.present?
+      %p
+        = t("activerecord.attributes.dossier.notes_commune")
+      = blockquote(@dossier.notes_commune)
+    - else
+      %i Aucun commentaire laissé par la commune
 
 
   = render "edifices/list", edifices: @edifices
