@@ -13,6 +13,11 @@
     .fr-mb-4w 
       =dsfr_alert type: :success, size: :sm do
         Il n'y a pas d'objet à revoir, la commune a déjà reçu un email automatique, vous pouvez tout de même modifier ou commenter les recensements pour envoyer votre examen à la commune.
+  - elsif @commune.statut_global == Commune::ORDRE_A_EXAMINER || Commune::ORDRE_EN_COURS_D_EXAMEN
+    .fr-mb-4w 
+      = dsfr_alert type: :info, size: :sm do
+        Examinez l’ensemble des objets périls et/ou disparus pour envoyer des informations complémentaires à la commune.
+        = link_to_button "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", disabled: true, data: { turbo_action: "advance" }
   .fr-mb-4w
     - if @dossier.notes_commune.present?
       %p
