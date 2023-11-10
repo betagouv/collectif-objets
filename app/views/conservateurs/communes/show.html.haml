@@ -18,13 +18,12 @@
       = dsfr_alert type: :info, size: :sm do
         Examinez l’ensemble des objets périls et/ou disparus pour envoyer des informations complémentaires à la commune.
         = link_to_button "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", disabled: true, data: { turbo_action: "advance" }
+  
   .fr-mb-4w
     - if @dossier.notes_commune.present?
       %p
         = t("activerecord.attributes.dossier.notes_commune")
       = blockquote(@dossier.notes_commune)
-    - else
-      %i Aucun commentaire laissé par la commune
 
 
   = render "edifices/list", edifices: @edifices
