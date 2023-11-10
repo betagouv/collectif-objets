@@ -5,11 +5,8 @@
 
   - if @dossier&.accepted?
     .fr-mb-4w
-      = dsfr_alert type: :success, title: "Analyse terminée" do
-        :markdown
-          Tous les recensements ont été analysés et le rapport a été généré et envoyé.
-
-          Le parcours est terminé pour cette commune !
+      = dsfr_alert type: :success, size: :sm do
+        Tous les recensements ont été analysés et le rapport a été généré et envoyé.
         = link_to "Voir le rapport", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
 
   - elsif @commune.completed?
