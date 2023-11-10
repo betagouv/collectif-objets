@@ -34,11 +34,3 @@
       - reordered.each do |objet|
         .fr-col-md-4
           = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.current_recensement, can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?, commune: @commune
-
-  .fr-mt-4w
-    - if @dossier && !@dossier&.accepted?
-      %div
-        = link_to_button "Finaliser le rapport …",
-          new_conservateurs_dossier_accept_path(@dossier),
-          class: "fr-btn",
-          disabled: !@dossier.can_generate_rapport?
