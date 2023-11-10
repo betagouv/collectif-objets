@@ -34,11 +34,6 @@ fr:
       no_results: Aucune commune trouvée
       index:
         title: "Communes dans le %{departement}"
-      show:
-        can_generate_rapport:
-          content:
-            one: "Vous avez analysé l'unique recensement de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune"
-            other: Vous avez analysé l'ensemble des %{count} recensements de cette commune. Il ne vous reste plus qu'à envoyer le rapport à la commune.
     departements:
       index:
         head_title: Départements

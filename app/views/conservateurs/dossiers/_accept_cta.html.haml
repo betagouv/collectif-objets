@@ -1,5 +1,5 @@
 - if @commune.completed? && @dossier&.can_generate_rapport?
   .fr-mb-4w
     = dsfr_alert type: :info, size: :sm do
-      = t "conservateurs.communes.show.can_generate_rapport.content", count: @commune.recensements.count
-      = link_to "Finaliser le rapport …", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
+      Vous avez examiné l'ensemble des objets en péril et/ou disparus de cette commune. Il ne vous reste plus qu'à envoyer votre examen à la commune
+      = link_to "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
