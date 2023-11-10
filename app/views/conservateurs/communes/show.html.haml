@@ -6,8 +6,8 @@
   - if @dossier&.accepted?
     .fr-mb-4w
       = dsfr_alert type: :success, size: :sm do
-        Tous les recensements ont été analysés et le rapport a été généré et envoyé.
-        = link_to "Voir le rapport", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
+        Tous les recensements ont été examinés.
+        = link_to "Voir l'examen", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
 
   - elsif @commune.completed?
     - unless @commune.dossier.a_des_objets_prioritaires?
