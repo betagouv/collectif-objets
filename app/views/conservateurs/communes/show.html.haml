@@ -11,7 +11,7 @@
 
   - elsif @commune.completed?
     - unless @commune.dossier.a_des_objets_prioritaires?
-      %p.fr-background-contrast--success.fr-p-2w.fr-text-title--blue-france Il n'y a pas d'objets à revoir, la commune a déjà reçu un email automatique ou votre examen daté, vous pouvez tout de même modifier ou commenter les recensements pour envoyer un nouvel examen à la commune.
+      %p.fr-background-contrast--success.fr-p-2w.fr-text-title--blue-france Il n'y a pas d'objet à revoir, la commune a déjà reçu un email automatique, vous pouvez tout de même modifier ou commenter les recensements pour envoyer votre examen à la commune.
     .fr-mb-4w
       - if @dossier.notes_commune.present?
         %p
