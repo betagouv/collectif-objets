@@ -1,4 +1,5 @@
 - if @commune.completed? && @dossier&.can_generate_rapport?
-  .co-background--light-teal.fr-mb-4w.fr-p-2w
-    %p= t "conservateurs.communes.show.can_generate_rapport.content", count: @commune.recensements.count
-    = link_to "Finaliser le rapport …", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
+  .fr-mb-4w
+    = dsfr_alert type: :info, size: :sm do
+      = t "conservateurs.communes.show.can_generate_rapport.content", count: @commune.recensements.count
+      = link_to "Finaliser le rapport …", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
