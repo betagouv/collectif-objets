@@ -235,6 +235,10 @@ html[data-fr-scheme="dark"] .co-text--blue {
 }
 
 /* Table en blanc*/
+.co-table-white table {
+  border-collapse: collapse;
+}
+
 .co-table-white thead {
     background-color: white;
 }
@@ -246,4 +250,8 @@ html[data-fr-scheme="dark"] .co-text--blue {
 
 .co-table-white tbody tr:nth-child(2n) {
   background-color: white;
+}
+
+.co-table-white tr {
+  border-bottom: 1px solid var(--background-contrast-grey);
 }
