@@ -17,7 +17,7 @@ module Campaigns
         campaign.communes.each do |commune|
           user = commune.users.first
           if user.present? && commune.dossier.a_des_objets_prioritaires?
-            UserMailer.with(user:, commune:).commune_avec_objets_verts.deliver_now
+            UserMailer.with(user:, commune:).commune_avec_objets_verts_email.deliver_now
           end
         end
       end

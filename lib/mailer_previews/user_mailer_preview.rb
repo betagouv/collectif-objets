@@ -16,7 +16,7 @@ class UserMailerPreview < ApplicationMailerPreview
   def commune_avec_objets_verts_email
     user = User.order(Arel.sql("RANDOM()")).first
     commune = Commune.order(Arel.sql("RANDOM()")).first
-    UserMailer.with(user:, commune:).commune_avec_objets_verts
+    UserMailer.with(user:, commune:).commune_avec_objets_verts_email
   end
 
   def dossier_accepted_email(dossier = nil, conservateur = nil)

@@ -17,7 +17,7 @@ class UserMailer < ApplicationMailer
     mail subject: "#{@commune.nom}, merci dʼavoir contribué à Collectif Objets"
   end
 
-  def commune_avec_objets_verts
+  def commune_avec_objets_verts_email
     @user, @commune = params.values_at(:user, :commune)
     mail subject: "Suite à votre participation à la campagne de recensement " \
                   "des objets monuments historique #{@commune.departement.dans_nom}"
