@@ -13,6 +13,12 @@ class UserMailerPreview < ApplicationMailerPreview
     UserMailer.with(user:, commune:).commune_completed_email
   end
 
+  def commune_avec_objets_verts_email
+    user = User.order(Arel.sql("RANDOM()")).first
+    commune = Commune.order(Arel.sql("RANDOM()")).first
+    UserMailer.with(user:, commune:).commune_avec_objets_verts
+  end
+
   def dossier_accepted_email(dossier = nil, conservateur = nil)
     dossier = dossier&.clone || Dossier.new(
       commune: Commune.new(
