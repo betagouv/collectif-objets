@@ -19,7 +19,8 @@ class UserMailer < ApplicationMailer
 
   def commune_avec_objets_verts
     @user, @commune = params.values_at(:user, :commune)
-    mail subject: ""
+    mail subject: "Suite à votre participation à la campagne de recensement " \
+                  "des objets monuments historique #{@commune.departement.dans_nom}"
   end
 
   def dossier_accepted_email

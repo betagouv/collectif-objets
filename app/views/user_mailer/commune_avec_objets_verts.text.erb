@@ -1,16 +1,12 @@
-Madame, Monsieur le Maire, 
+<%= I18n.t("user_mailer.shared.bonjour") %>
 
-Nous vous remercions d’avoir pris part à la campagne de recensement des objets monuments historiques avec Collectif Objets [EN/ DANS LE/LA/L’/LES DEPARTEMENT] qui vient de s’achever.
+<%= I18n.t("user_mailer.commune_avec_objets_verts.remerciements", dans_departement: @commune.departement.dans_nom) %>
 
-En participant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine. 
+<%= I18n.t("user_mailer.commune_avec_objets_verts.preservation_patrimoine") %>
 
-Le partage des connaissances entre l’ensemble des acteurs de la chaîne patrimoniale permet d’assurer un meilleur suivi de notre patrimoine et d’identifier plus rapidement les situations problématiques nécessitant une prise en charge urgente. Nous vous remercions vivement pour votre engagement !
+<%= I18n.t("user_mailer.commune_avec_objets_verts.engagement") %>
 
-*Vous avez indiqué que les objets protégés de votre commune sont dans un état qui n’appelle pas une prise en charge urgente.*
+<%= I18n.t("user_mailer.commune_avec_objets_verts.que_des_objets_verts") %>
 
-Toutefois, si la situation de l’un de vos objets protégés venait à changer dans les prochains mois, n’hésitez pas à en avertir vos conservateurs. Vous  pouvez directement les contacter via la messagerie de Collectif Objets (*lien vers onglet messagerie*). 
-
-Par ailleurs, la plateforme met à disposition des ressources pédagogiques pour vous aider à entretenir ou sécuriser votre patrimoine mobilier : 
-
-- Comment entretenir ses objets mobiliers (*lien*) ?
-- Comment sécuriser vos objets mobiliers (*lien*) ?
+<%= I18n.t("user_mailer.commune_avec_objets_verts.contacter_caoa") %>
+(<%= commune_messages_url(@commune) %>)
