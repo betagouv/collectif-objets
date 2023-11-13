@@ -239,6 +239,11 @@ Commune "*" --> "*" Campaign
   Il doit être finalisé par la commune pour être analysable par les conservateurs.
 - Une `Campagne` contient les dates et les communes à démarcher pour une campagne mail avec plusieurs relances.
   Elle est gérée et visible uniquement par les administrateurs.
+- Un `AdminUser` est un compte permettant l'accès à l'interface d'admin
+Pour créer un nouveau compte, utiliser cette commande dans une console Rails :
+```ruby
+AdminUser.create(email: "email@de.ladmin", first_name: "Prénom de l'admin", last_name: "Nom de l'admin", password: "mot_de_passe_de_ladmin") 
+```
 
 La version complète du diagramme d'entités de la base de données est visible ici
 [doc/entity-relationship-diagram.svg](doc/entity-relationship-diagram.svg)
