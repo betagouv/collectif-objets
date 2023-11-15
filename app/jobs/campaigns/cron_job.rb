@@ -16,9 +16,11 @@ module Campaigns
 
         campaign.communes.each do |commune|
           user = commune.users.first
-          if user.present? && commune.dossier.a_des_objets_prioritaires?
-            UserMailer.with(user:, commune:).commune_avec_objets_verts_email.deliver_now
-          end
+          next unless user.present? && commune.statut_global == Commune::ORDRE_A_EXAMINER \
+            && !commune.dossier.a_des_objets_prioritaires?
+
+          commune.dossier.update(replied_automatically_at: Time.zone.now)
+          UserMailer.with(user:, commune:).commune_avec_objets_verts_email.deliver_now
         end
       end
     end
