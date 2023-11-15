@@ -83,8 +83,8 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     click_on "Envoyer le rapport à la commune"
 
     # visualisation rapport
-    expect(page).to have_text(/le rapport a été généré et envoyé/i)
-    click_on "Voir le rapport"
+    expect(page).to have_text(/Tous les recensements ont été examinés/i)
+    click_on "Voir l'examen"
     expect(page).to have_text(/Ciboire des malades/i)
     expect(page).to have_text(/Merci pour ce joli dossier/i)
     expect(page).to have_text(/pepito bleu/i)
