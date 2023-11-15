@@ -144,6 +144,8 @@ RSpec.describe Commune, type: :model do
         end
 
         it "a un statut global sur le recensement et l'analyse à Réponse automatique" do
+          commune.dossier.update(replied_automatically_at: Time.zone.now)
+
           expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
           expect(Commune.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
         end
