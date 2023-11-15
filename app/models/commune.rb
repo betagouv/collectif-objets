@@ -105,18 +105,16 @@ class Commune < ApplicationRecord
       ORDRE_NON_RECENSÉ
     elsif started?
       ORDRE_EN_COURS_DE_RECENSEMENT
+    elsif dossier.replied_automatically?
+      ORDRE_REPONSE_AUTOMATIQUE
     elsif dossier.submitted?
-      if dossier.a_des_objets_prioritaires?
-        recensements_analysed_count = recensements.where.not(analysed_at: nil).count
-        if recensements_analysed_count.zero?
-          ORDRE_A_EXAMINER
-        else # recensements_analysed_count > 0
-          ORDRE_EN_COURS_D_EXAMEN
-        end
-      else # que des objets verts
-        ORDRE_REPONSE_AUTOMATIQUE
+      recensements_analysed_count = recensements.where.not(analysed_at: nil).count
+      if recensements_analysed_count.zero?
+        ORDRE_A_EXAMINER
+      else # recensements_analysed_count > 0
+        ORDRE_EN_COURS_D_EXAMEN
       end
-    else # dossiers.accepted?
+    else # dossier.accepted?
       ORDRE_EXAMINÉ
     end
   end
