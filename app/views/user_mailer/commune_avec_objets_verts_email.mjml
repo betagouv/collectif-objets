@@ -22,7 +22,7 @@
       
     <mj-text>
       <%= I18n.t("user_mailer.commune_avec_objets_verts.contacter_caoa") %>
-      (<%= link_to nil, commune_messages_url(@commune) %>)
+      <%= link_to "la messagerie Collectif Objets", commune_messages_url(@commune) %>.
     </mj-text>
   </mj-column>
 </mj-section>
