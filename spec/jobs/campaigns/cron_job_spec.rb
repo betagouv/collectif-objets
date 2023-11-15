@@ -60,12 +60,14 @@ RSpec.describe Campaigns::CronJob, type: :job do
 
   describe "pour les campagnes en cours ayant atteint la date de fin" do
     before do
-      commune = create(:commune_completed)
+      commune_sans_objets_prioritaires = create(:commune_completed)
+      commune_avec_objets_prioritaires = create(:commune_completed)
+      create(:recensement, :en_peril, dossier: commune_avec_objets_prioritaires.dossier)
       campagne_en_cours_apres_date_fin = create(:campaign, status: "ongoing",
                                                            date_lancement: Date.new(2023, 9, 1),
                                                            date_fin: Date.new(2023, 11, 10))
 
-      campagne_en_cours_apres_date_fin.communes << commune
+      campagne_en_cours_apres_date_fin.communes = [commune_sans_objets_prioritaires, commune_avec_objets_prioritaires]
     end
 
     it "envoie un email aux communes avec uniquement des objets verts" do
