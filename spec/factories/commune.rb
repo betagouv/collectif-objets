@@ -19,5 +19,6 @@ FactoryBot.define do
     end
 
     factory :commune_with_user, traits: [:with_user]
+    factory :commune_completed, traits: %i[with_user completed]
   end
 end

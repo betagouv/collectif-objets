@@ -60,9 +60,7 @@ RSpec.describe Campaigns::CronJob, type: :job do
 
   describe "pour les campagnes en cours ayant atteint la date de fin" do
     before do
-      dossier = create(:dossier, status: "submitted")
-      create(:recensement, dossier:)
-      commune = create(:commune_with_user, dossier:, status: "completed")
+      commune = create(:commune_completed)
       campagne_en_cours_apres_date_fin = create(:campaign, status: "ongoing",
                                                            date_lancement: Date.new(2023, 9, 1),
                                                            date_fin: Date.new(2023, 11, 10))
