@@ -66,5 +66,10 @@ FactoryBot.define do
     trait :en_peril do
       etat_sanitaire { Recensement::ETAT_PERIL }
     end
+
+    trait :examiné do
+      analysed_at { 1.minute.ago }
+      conservateur
+    end
   end
 end
