@@ -8,10 +8,10 @@
 
 <%= I18n.t("user_mailer.commune_completed.a_venir") %>
 
-<%= I18n.t("user_mailer.commune_completed.documentation") %>
+<%= I18n.t("user_mailer.commune_completed.documentation") %> notre documentation :
 <%= content_blob_url(:documentation_commune) %>
 
-<%= I18n.t("user_mailer.commune_completed.contact") %>
+<%= I18n.t("user_mailer.commune_completed.contact") %> la messagerie de Collectif Objets :
 <%= commune_messages_url(@commune) %>
 
 <%= I18n.t("user_mailer.commune_completed.cta") %> : <%= @login_url %>
