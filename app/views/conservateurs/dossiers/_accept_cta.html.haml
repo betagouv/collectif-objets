@@ -2,4 +2,4 @@
   .fr-mb-4w
     = dsfr_alert type: :info, size: :sm do
       Vous avez examiné l'ensemble des objets en péril et/ou disparus de cette commune. Il ne vous reste plus qu'à envoyer votre examen à la commune
-      = link_to "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
+      = link_to_button "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
