@@ -5,10 +5,10 @@
     .fr-col-md-5
       %h2
         - if @objets.any?
-          Votre analyse a bien été sauvegardée
+          Votre examen a bien été sauvegardé
         - else
-          Vous avez analysé tous les recensements de #{@commune.nom}
-      %p Vous pouvez modifier votre analyse de ce dossier de recensement autant que vous le souhaitez avant l'envoi du rapport.
+          Vous avez examiné tous les recensements de #{@commune.nom}
+      %p Vous pouvez modifier ces informations autant que vous le souhaitez avant l’envoi à la commune.
       - if @objets.any?
         %p
           = dsfr_link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), data: { turbo_action: "advance" }, icon_left: "arrow-left-line"
