@@ -20,6 +20,6 @@
                   = tag.text
   .fr-card__header
     = render("shared/card_photo", photo: main_photo)
-    - if badges
+    - if header_badges
       %ul.fr-badges-group
-        = render partial: "shared/badge_li", collection: badges, as: :badge
+        = render partial: "shared/badge_li", collection: header_badges, as: :badge

@@ -18,7 +18,7 @@
             .fr-grid-row.fr-grid-row--gutters
               - objets.each do |objet|
                 .fr-col-md-4
-                  = render Communes::ObjetCardComponent.new(objet, commune: current_user.commune, recensement: objet.current_recensement, badges: [])
+                  = render Communes::ObjetCardComponent.new(objet, commune: current_user.commune, recensement: objet.current_recensement)
 
       .co-markdown-content
         != @fiche.to_html

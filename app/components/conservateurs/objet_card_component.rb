@@ -12,7 +12,7 @@ module Conservateurs
 
     def call
       render ::ObjetCardComponent.new(
-        objet, commune:, badges:, start_badges:,
+        objet, commune:, header_badges:, start_badges:,
                main_photo_origin: :recensement_or_memoire, path:, tags:, link_html_attributes:
       )
     end
@@ -29,10 +29,10 @@ module Conservateurs
       end
     end
 
-    def badges
+    def header_badges
       return [] unless can_analyse
 
-      @badges ||= [analyse_badge].compact
+      [analyse_badge].compact
     end
 
     def start_badges
