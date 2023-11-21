@@ -1,5 +1,5 @@
 - if @commune.completed? && @dossier&.can_generate_rapport?
   .fr-mb-4w
     = dsfr_alert type: :info, size: :sm do
-      Vous avez examiné l'ensemble des objets en péril et/ou disparus de cette commune. Il ne vous reste plus qu'à envoyer votre examen à la commune
+      L’ensemble des objets en péril ou disparus ont été examinés. Vous pouvez envoyer votre examen à la commune.
       = link_to_button "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }

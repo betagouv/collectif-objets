@@ -27,7 +27,7 @@ module Conservateurs
       @objets = @dossier
         .objets
         .includes(:edifice, recensements: %i[photos_attachments photos_blobs])
-        .where(recensements: { analysed_at: nil })
+        .a_examiner
         .order_by_recensement_priorite
       render "show_analyse_saved"
     end

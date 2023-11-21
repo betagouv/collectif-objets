@@ -20,6 +20,12 @@ class Objet < ApplicationRecord
       .where(recensements: { id: nil })
   }
 
+  scope :a_examiner, lambda {
+                       joins(:recensements)
+                       .where(recensements: { analysed_at: nil })
+                       .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
+                     }
+
   MIS_DE_COTE_SQL = %("palissy_PROT" LIKE 'déclassé au titre objet'
                       OR "palissy_PROT" LIKE 'désinscrit'
                       OR "palissy_PROT" LIKE '%non protégé%'

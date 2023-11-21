@@ -52,12 +52,8 @@ class Dossier < ApplicationRecord
     recensements.count == commune.objets.count
   end
 
-  def all_recensements_analysed?
-    recensements.where(analysed_at: nil).empty?
-  end
-
   def can_generate_rapport?
-    submitted? && all_recensements_analysed?
+    submitted? && recensements.prioritaires.not_analysed.empty?
   end
 
   def not_analysed?
