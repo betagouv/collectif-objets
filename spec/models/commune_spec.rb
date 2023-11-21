@@ -143,11 +143,20 @@ RSpec.describe Commune, type: :model do
           commune.dossier.conservateur = conservateur
         end
 
-        it "a un statut global sur le recensement et l'analyse à Réponse automatique" do
-          commune.dossier.update(replied_automatically_at: Time.zone.now)
+        context "lorsque la commune a reçu une réponse automatique" do
+          before { commune.dossier.update(replied_automatically_at: Time.zone.now) }
 
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
+          it "a un statut global sur le recensement et l'analyse à Réponse automatique" do
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
+          end
+
+          it "passe en Examiné si le conservateur décide de faire l'examen tout de même" do
+            commune.dossier.accept!
+
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
+          end
         end
 
         context "recensement avec des objets en peril" do
