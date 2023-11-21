@@ -12,7 +12,7 @@ class Objet < ApplicationRecord
         lambda {
           joins(:recensements)
           .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
-          .order(analysed_at: :desc)
+          .order("recensements.analysed_at DESC")
         }
 
   scope :without_completed_recensements, lambda {

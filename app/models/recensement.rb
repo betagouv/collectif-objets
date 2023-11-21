@@ -92,6 +92,7 @@ class Recensement < ApplicationRecord
     OR "recensements"."analyse_etat_sanitaire" = '#{ETAT_PERIL}').squish.freeze
   RECENSEMENT_PRIORITAIRE_SQL = "#{RECENSEMENT_ABSENT_SQL} OR #{RECENSEMENT_EN_PERIL_SQL}".freeze
 
+  ## Le code suivant semble mort
   SQL_ORDER_PRIORITE = %(
     CASE WHEN (
       #{RECENSEMENT_PRIORITAIRE_SQL}
@@ -102,6 +103,7 @@ class Recensement < ApplicationRecord
   def self.order_by_priorite_array(recensements_arel)
     recensements_arel.to_a.sort_by { prioritaire? ? 0 : 1 }
   end
+  ## fin du code qui semble mort
 
   def aasm_after_complete
     commune.start! if commune.inactive?
