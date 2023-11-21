@@ -7,11 +7,12 @@
         = commune.nom
         %br/
         = edifice_nom
-      - if tags
-        .fr-card__start
-          - if detail_badge
-            %p{class: "fr-badge fr-badge--sm fr-badge--#{detail_badge.color}"}
-              = detail_badge.text
+      
+      .fr-card__start
+        - if start_badges
+          %ul.fr-badges-group
+            = render partial: "shared/badge_li", collection: start_badges, as: :badge
+        - if tags
           %ul.fr-tags-group
             - tags.each do |tag|
               %li
