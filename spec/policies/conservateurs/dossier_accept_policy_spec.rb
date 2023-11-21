@@ -46,16 +46,30 @@ describe Conservateurs::DossierAcceptPolicy do
       it { should_not permit(conservateur, dossier_accept) }
     end
 
-    context "acceptation du dossier mais certains recensements n'ont pas été analysés " do
+    context "acceptation du dossier mais certains recensements prioritaires n'ont pas été analysés " do
       let!(:commune) { create(:commune, status: :completed) }
       let!(:objet1) { create(:objet, commune:) }
       let!(:objet2) { create(:objet, commune:) }
       let!(:dossier) { create(:dossier, commune:, status: :submitted) }
       let!(:recensement1) { create(:recensement, objet: objet1, dossier:, analysed_at: 2.days.ago, conservateur:) }
-      let!(:recensement2) { create(:recensement, objet: objet2, dossier:, analysed_at: nil) }
+      let!(:recensement2) { create(:recensement, :disparu, objet: objet2, dossier:, analysed_at: nil) }
       let!(:dossier_accept) { DossierAccept.new(dossier:) }
       let!(:conservateur) { create(:conservateur, departements: build_list(:departement, 3) + [dossier.departement]) }
       it { should_not permit(conservateur, dossier_accept) }
+    end
+
+    context "acceptation du dossier des objets verts non analysés " do
+      let!(:commune) { create(:commune, status: :completed) }
+      let!(:objet1) { create(:objet, commune:) }
+      let!(:objet2) { create(:objet, commune:) }
+      let!(:dossier) { create(:dossier, commune:, status: :submitted) }
+      let!(:recensement1) do
+        create(:recensement, :disparu, objet: objet1, dossier:, analysed_at: 2.days.ago, conservateur:)
+      end
+      let!(:recensement2) { create(:recensement, objet: objet2, dossier:, analysed_at: nil) }
+      let!(:dossier_accept) { DossierAccept.new(dossier:) }
+      let!(:conservateur) { create(:conservateur, departements: build_list(:departement, 3) + [dossier.departement]) }
+      it { should permit(conservateur, dossier_accept) }
     end
   end
 end
