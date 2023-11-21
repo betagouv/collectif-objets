@@ -57,7 +57,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     fill_in "recensement[analyse_notes]", with: "Est-ce qu'il est le pepito bleu?"
 
     click_on "Sauvegarder"
-    expect(page).to have_text("Votre analyse a bien été sauvegardée")
+    expect(page).to have_text("Votre examen a bien été sauvegardé")
 
     # analyse second recensement
     click_on "Ciboire des malades"
