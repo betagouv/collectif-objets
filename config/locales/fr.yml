@@ -68,8 +68,8 @@ fr:
     analyse:
       not_completed: L'analyse ne peut se faire que pour les communes ayant terminé et confirmé leur recensement
       remaining_count:
-        one: "Il reste 1 recensement à examiner à %{commune}"
-        other: "Il reste %{count} recensements à examiner à %{commune}"
+        one: "Il reste 1 objet signalé en péril ou disparu à examiner à %{commune}"
+        other: "Il reste %{count} objets signalés en péril ou disparus à examiner à %{commune}"
     investigation_choices:
       true: Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet
       false: Je ne trouve pas l’objet
