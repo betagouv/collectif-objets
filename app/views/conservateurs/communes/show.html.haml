@@ -5,7 +5,7 @@
     .fr-mb-4w
       = dsfr_alert type: :success, size: :sm do
         Tous les recensements ont été examinés.
-        = link_to "Voir l'examen", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
+        = link_to_button "Voir l'examen", conservateurs_commune_dossier_path(@commune), class: "fr-btn", data: { turbo_action: "advance" }
 
   - elsif @dossier&.can_generate_rapport?
     = render "conservateurs/dossiers/accept_cta", dossier: @dossier
@@ -32,7 +32,7 @@
       = edifice_nom(edifice.nom).html_safe
       · #{t("objets.count", count: edifice.objets.length)}
     = render layout: "objets/cards_grid_layout", locals: { count: edifice.objets.length } do
-      - reordered = @dossier ? Objet::order_by_recensement_priorite_array(edifice.objets) : edifice.objets
+      - reordered = @dossier ? edifice.objets.order_by_recensement_priorite : edifice.objets
       - reordered.each do |objet|
         .fr-col-md-4
           = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.current_recensement, can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?, commune: @commune

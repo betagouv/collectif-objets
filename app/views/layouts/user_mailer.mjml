@@ -33,12 +33,5 @@
         </mj-text>
       </mj-column>
     </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-text>
-          <%= link_to I18n.t("user_mailer.layout.unsubscribe"), user_mailer_unsubscribe_url(@user) %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
   </mj-body>
 </mjml>

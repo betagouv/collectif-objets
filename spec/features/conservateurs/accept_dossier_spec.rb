@@ -27,7 +27,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     create(
       :recensement,
       objet: objet_ciboire, user:, dossier:,
-      etat_sanitaire: Recensement::ETAT_BON,
+      etat_sanitaire: Recensement::ETAT_PERIL,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil
     )
@@ -57,7 +57,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     fill_in "recensement[analyse_notes]", with: "Est-ce qu'il est le pepito bleu?"
 
     click_on "Sauvegarder"
-    expect(page).to have_text("Votre analyse a bien été sauvegardée")
+    expect(page).to have_text("Votre examen a bien été sauvegardé")
 
     # analyse second recensement
     click_on "Ciboire des malades"
@@ -69,10 +69,10 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     end
 
     click_on "Sauvegarder"
-    expect(page).to have_text("Vous avez analysé tous les recensements de Albon")
+    expect(page).to have_text("L’ensemble des objets en péril ou disparus ont été examinés")
 
     # envoi rapport
-    click_on "Finaliser le rapport …"
+    click_on "Envoyer l'examen à la commune"
     bouquet_row = find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")
     expect(bouquet_row).to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     expect(bouquet_row.all("td")[1]).to have_text(/Bon/i)

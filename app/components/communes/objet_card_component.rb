@@ -4,16 +4,16 @@ module Communes
   class ObjetCardComponent < ViewComponent::Base
     include ObjetHelper
 
-    def initialize(objet, commune:, recensement: nil, badges: nil)
+    def initialize(objet, commune:, recensement: nil)
       @objet = objet
       @recensement = recensement
       @commune = commune
-      @badges = badges
       super
     end
 
     def call
-      render ::ObjetCardComponent.new(objet, commune:, badges:, path:, main_photo_origin: :recensement_or_memoire)
+      render ::ObjetCardComponent.new(objet, commune:, header_badges:,
+                                             path:, main_photo_origin: :recensement_or_memoire)
     end
 
     private
@@ -26,8 +26,8 @@ module Communes
       commune_objet_path(commune, objet)
     end
 
-    def badges
-      @badges ||= [recensement_badge, analyse_notes_badge].compact
+    def header_badges
+      [recensement_badge, analyse_notes_badge].compact
     end
 
     def badge_struct
