@@ -58,7 +58,7 @@ module Conservateurs
     def missing_photos_badge
       return nil unless recensement&.missing_photos?
 
-      badge_struct.new "warning", "photos manquantes"
+      badge_struct.new "", "photos manquantes"
     end
 
     def analyse_badge
