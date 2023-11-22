@@ -55,6 +55,8 @@ end
 Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
 Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
 
+Capybara.default_max_wait_time = 10
+
 begin
   require "pry"
 rescue LoadError
