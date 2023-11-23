@@ -3,15 +3,16 @@
 
   .fr-grid-row.fr-mb-4w.fr-grid-row--middle.fr-grid-row--center.fr-mb-6w
     .fr-col-md-5
+      %h2 Votre examen a bien été sauvegardé
       - if @objets.any?
-        %h2 Votre examen a bien été sauvegardé
         %p Vous pouvez modifier ces informations autant que vous le souhaitez avant l’envoi à la commune.
-        %p= dsfr_link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), data: { turbo_action: "advance" }, icon_left: "arrow-left-line"
       - else
-        = render "conservateurs/dossiers/accept_cta", dossier: @dossier
+        %p 
+          L’ensemble des objets en péril ou disparus ont été examinés. Vous pouvez envoyer votre examen à la commune. 
+          = link_to_button "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
         %p ou
-        %p
-          = dsfr_link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), data: { turbo_action: "advance" }, icon_left: "arrow-left-line"
+      %p
+        = dsfr_link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), data: { turbo_action: "advance" }, icon_left: "arrow-left-line"
     .fr-col-md-5
       = vite_image_tag "images/illustrations/people-clap.svg", class: "co--width-max-100"
 
