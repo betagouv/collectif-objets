@@ -15,7 +15,7 @@
               = dossier.errors.messages_for(attribute).first
 
     .fr-input-group
-      = label_tag "dossier[notes_conservateur]", "Vous pouvez laisser un commentaire qui sera envoyé dans le mail envoyé à la commune et inscrit dans le rapport de recensement", class: "fr-label", form: "mainForm"
+      = label_tag "dossier[notes_conservateur]", "Vous pouvez laisser un commentaire qui sera envoyé dans le mail envoyé à la commune et inscrit dans l'examen du recensement", class: "fr-label", form: "mainForm"
       .co-position-relative.fr-mt-1w
         = text_area_tag "dossier[notes_conservateur]", dossier.notes_conservateur, class: "co-textarea--high fr-input", form: "mainForm", "data-rapport-notes-form-target": "notesTextarea", "data-action": "rapport-notes-form#closePreview"
 
@@ -42,4 +42,4 @@
       .fr-radio-group
         = f.radio_button :visit, "prioritaire", form: "mainForm"
         = f.label "visit_prioritaire", "Visite prioritaire", form: "mainForm"
-  %div= submit_tag "Finaliser et Envoyer le rapport à la commune", form: "mainForm", class: "fr-btn"
+  %div= submit_tag "Finaliser et envoyer l'examen à la commune", form: "mainForm", class: "fr-btn"

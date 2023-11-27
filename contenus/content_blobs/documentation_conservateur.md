@@ -119,14 +119,14 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
     Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée.
 
     **Si la commune s’est trompée d’objet, reportez-vous à cette section. De la même manière, si la commune n’a pas transmis de photos, reportez-vous à cette section.**
-  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée : *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)* ; *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)* ; *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)* ; *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans le rapport transmis à la commune après analyse.
+  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée : *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)* ; *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)* ; *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)* ; *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après analyse.
 
     Un champ libre « commentaires pour la mairie » est à votre disposition si vous souhaitez préciser certains points à la commune.
   * **Enregistrez votre travail :** cliquez sur le bouton « Sauvegarder ».
 
     ![Analyse d’un recensement](/contenus/content_blobs/images/conservateurs_analyse.png)
 * **Répétez ce processus pour chaque objet abrité par la commune.**
-* **Envoyez le rapport final de recensement à la commune :** après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. Pour cela, référez-vous à la section : lien.
+* **Envoyez l'examen final du recensement à la commune :** après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
 
 <video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.png" href="#">
   <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.webm" type="video/webm">
@@ -148,22 +148,22 @@ Vous pouvez faire part à la commune de remarques pour l’aider dans son recens
 
 Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre analyse.
 
-## Envoyer mon rapport d'analyse à la commune
+## Envoyer mon examen à la commune
 
-Après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre rapport. 
+Après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. 
 
-**Lorsque vous envoyez votre rapport final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l’État.** 
+**Lorsque vous envoyez votre examen final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l’État.** 
 
-* [Rendez-vous sur la page de la commune concernée.](#comment-accder-aux-dossiers-de-recensement-des-communes-) Pour accéder au rapport, **vous devez avoir analysé chaque objet recensé.**
-* **Cliquez sur le bouton « Finaliser le rapport ».**
+* [Rendez-vous sur la page de la commune concernée.](#comment-accder-aux-dossiers-de-recensement-des-communes-) Pour accéder à l'examen, **vous devez avoir analysé chaque objet recensé.**
+* **Cliquez sur le bouton « Envoyer l'examen ».**
 
   ![Analyse terminée](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
 * **Décidez de si vous souhaiter prévoir une visite sur le terrain** en cochant la case appropriée : « *pas de visite prévue* » ; « *visite souhaitable* » et « *visite prioritaire* ». Cette option n'est pas diffusée aux communes, elle est uniquement pour votre usage personnel et votre suivi.
 
   Un champ libre « commentaire global » est à votre disposition si vous souhaitez préciser certains points à la commune.
-* **Cliquez sur le bouton « Finaliser et envoyer le rapport à la commune »** pour lui transmettre votre rapport.
+* **Cliquez sur le bouton « Finaliser et envoyer l'examen à la commune »** pour lui transmettre votre examen.
 
-  ![Envoyer le rapport de recensement](/contenus/content_blobs/images/conservateurs_envoyer_rapport.png)
+  ![Envoyer l'examen du recensement](/contenus/content_blobs/images/conservateurs_envoyer_rapport.png)
 
 ## Fonctionnement de la « Vue Tableau » d’un département
 
@@ -173,7 +173,7 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
   * Ordre alphabétique : en cliquant sur la flèche de la colonne « Commune ».
   * Nombre d’objets MH abrités par commune : en cliquant sur la flèche de la colonne « Objets ».
   * Nombre d’objets MH indiqués comme prioritaires par la commune : en cliquant sur la flèche de la colonne « Objets prioritaires ».
-  * L’état de traitement du dossier de recensement : en cliquant sur la flèche de la colonne « Analyse ». Lorsque le dossier de recensement d’une commune vous est transmis pour expertise, il porte le statut « à analyser ». Lorsque vous avez analysé un dossier de recensement et l’avez transmis à la commune recenseuse, son statut est indiqué comme « rapport envoyé à la commune ».
+  * L’état de traitement du dossier de recensement : en cliquant sur la flèche de la colonne « Analyse ». Lorsque le dossier de recensement d’une commune vous est transmis pour expertise, il porte le statut « à analyser ». Lorsque vous avez analysé un dossier de recensement et l’avez transmis à la commune recenseuse, son statut est indiqué comme « examen envoyé à la commune ».
 * Par défaut, seules les communes vous ayant envoyé leur dossier de recensement vous sont présentées (« recensement terminé »). Toutefois, vous pouvez également afficher l’ensemble des communes contactées en cliquant sur la flèche du filtre « Etat du recensement ».
 
   * « Recensement démarré » : les communes qui ont démarré leur recensement mais ne l’ont pas terminé.

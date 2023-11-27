@@ -244,7 +244,7 @@ S﻿i un conservateur remarque que vous avez commis une erreur, il est probable 
 
 Vos réponses seront traitées par les conservateurs de votre département : les Conservateurs des antiquités et objets d’arts (CAOA) ou les Conservateurs des Monuments historiques (CMH).
 
-Lorsque les conservateurs auront analysé votre dossier de recensement, un compte-rendu vous sera adressé par email. L’objet de cet email contiendra les mots : “Rapport de recensement des objets protégés”.
+Lorsque les conservateurs auront analysé votre dossier de recensement, un compte-rendu vous sera adressé par email. L’objet de cet email contiendra les mots : Examen du recensement des objets protégés”.
 
 Cet email contiendra un lien qui vous permettra d’accéder aux retours des conservateurs au sujet de votre dossier de recensement. Si votre dossier semble exact et n’appelle pas des mesures exceptionnelles, il n’y aura peut-être pas de message ou de remarque des conservateurs.
 

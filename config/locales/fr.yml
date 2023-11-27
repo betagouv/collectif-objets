@@ -134,7 +134,7 @@ fr:
       faq:
         retours:
           title: Que se passe-t-il après lʼenvoi de mes réponses ?
-          content: Vos réponses seront traitées par les conservatrices et conservateurs des antiquités et objets dʼart (CAOA). Un rapport vous sera adressé. Il facilitera lʼétablissement du récolement réglementaire. Pour les objets affectés aux cultes, celui-ci doit être signé par le propriétaire, lʼaffectataire et la/le CAOA.
+          content: Vos réponses seront traitées par les conservatrices et conservateurs des antiquités et objets dʼart (CAOA). Un examen vous sera adressé. Il facilitera lʼétablissement du récolement réglementaire. Pour les objets affectés aux cultes, celui-ci doit être signé par le propriétaire, lʼaffectataire et la/le CAOA.
         restauration:
           title: Comment lancer un projet de restauration ?
           veuillez_consulter: "Veuillez consulter ces pages dédiées sur le site du Ministère de la Culture :"
@@ -627,13 +627,13 @@ fr:
       contacter_caoa: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur des antiquités et objets d'art. Vous  pouvez directement le contacter via 
     dossier_auto_submitted:
       intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs ne l'avaient pas encore reçu.
-      auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’analyser et revenir vers vous avec un rapport, en temps voulu.
+      auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’analyser et revenir vers vous avec un examen, en temps voulu.
       cta: Voir les données envoyées
       contact: Nous restons à votre disposition pour toute question ou demande de clarification.
     dossier_accepted:
       submitted: Vous avez envoyé un dossier de recensement des objets protégés de %{commune_nom} et je vous en remercie.
-      rapport: Vous trouverez sur Collectif Objets le rapport de recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
-      cta: Voir le rapport de recensement
+      rapport: Vous trouverez sur Collectif Objets l'examen du recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
+      cta: Voir l'examen du recensement
       merci: Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
     validate:
       lien: "Voici votre lien de connexion à Collectif Objets :"
