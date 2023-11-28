@@ -61,16 +61,16 @@ class Commune < ApplicationRecord
 
   accepts_nested_attributes_for :dossier, :users
 
-  # Le "statut global" est une sorte de fusion des champs status de la commune, du dossier et de l'analyse,
+  # Le "statut global" est une sorte de fusion des champs status de la commune, du dossier et de l'examen,
   # et permet l'affichage d'un statut unique dans les vues et un filtre facile via Ransack.
   #
   # Pour éviter trop de changements dans le code, il est récupéré à la volée sans modifier le champ "status" actuel.
   # Idéalement, il faudrait utiliser le champ status, en modifiant les états suivants :
-  # inactive -> non_recensé, started -> en_cours_de_recensement, completed -> non_analysé
-  # et en ajoutant les états en_cours_d_analyse et analysé.
+  # inactive -> non_recensé, started -> en_cours_de_recensement, completed -> non_examiné
+  # et en ajoutant les états en_cours_d_examen et examiné.
   #
   # Ou à minima, ajouter un nouveau champ statut_global, mis à jour comme la commune et en fonction de l'avancement de
-  # l'analyse côté conservateur.
+  # l'examen côté conservateur.
   STATUT_GLOBAL_NON_RECENSÉ = "Non recensé"
   ORDRE_NON_RECENSÉ = 0
   STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de recensement"

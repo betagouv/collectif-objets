@@ -11,7 +11,7 @@ fr:
         tous_les_objets_recenses: Tous les objets ont été recensés
       accepted_callout:
         title: Dossier accepté par le conservateur
-        content: "%{conservateur} a analysé votre dossier le %{date}."
+        content: "%{conservateur} a examiné votre dossier le %{date}."
       complete_callout:
         hint:
           one: Il ne vous reste plus qu'à envoyer le recensement aux conservateurs
@@ -66,7 +66,7 @@ fr:
         one: "1 photo prise lors du recensement"
         other: "%{count} photos prises lors du recensement"
     analyse:
-      not_completed: L'analyse ne peut se faire que pour les communes ayant terminé et confirmé leur recensement
+      not_completed: L'examen ne peut se faire que pour les communes ayant terminé et confirmé leur recensement
       remaining_count:
         one: "Il reste 1 objet signalé en péril ou disparu à examiner à %{commune}"
         other: "Il reste %{count} objets signalés en péril ou disparus à examiner à %{commune}"
@@ -93,8 +93,8 @@ fr:
   dossier:
     status_badge:
       construction: Partiellement recensé
-      submitted: Non analysé
-      accepted: Analysé
+      submitted: Non examiné
+      accepted: Examiné
       none: Non recensé
     rapport:
       recensement:
@@ -152,7 +152,7 @@ fr:
           page_proteger: Protéger des objets mobiliers au titre des monuments historiques
         sur_place:
           title: Pourquoi dois-je me rendre sur place ?
-          content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre Conservateur des Antiquités et Objets d’Art (CAOA) puisse réaliser un premier niveau d’analyse et vous guider dans la préservation de ces objets.
+          content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre Conservateur des Antiquités et Objets d’Art (CAOA) puisse réaliser un premier niveau d’examen et vous guider dans la préservation de ces objets.
         entretien:
           title: Comment entretenir mes objets ?
           content: Au delà de l'entretien courant qui consiste à nettoyer l'espace autour des objets, il convient de ne pas toucher aux objets protégés. Seul un professionnel habilité assurera une prise en charge optimale.
@@ -514,7 +514,7 @@ fr:
       title: "Mail de troisième relance - commune doit finaliser"
       subject: N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}
       intro: La campagne de recensement des objets monuments historiques pour laquelle vous avez participé prendra fin le %{date_fin}. Nous vous remercions encore pour votre investissement dans la protection du patrimoine mobilier français.
-      finalisez: <b>Pour que les conservateurs reçoivent votre contribution et l'analysent, n’oubliez pas de finaliser votre recensement !</b>
+      finalisez: <b>Pour que les conservateurs reçoivent votre contribution et l'examinent, n’oubliez pas de finaliser votre recensement !</b>
     fin_to_complete:
       title: "Mail de clotûre - commune doit finaliser"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
@@ -627,7 +627,7 @@ fr:
       contacter_caoa: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur des antiquités et objets d'art. Vous  pouvez directement le contacter via 
     dossier_auto_submitted:
       intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs ne l'avaient pas encore reçu.
-      auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’analyser et revenir vers vous avec un examen, en temps voulu.
+      auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’examiner et revenir vers vous avec un examen, en temps voulu.
       cta: Voir les données envoyées
       contact: Nous restons à votre disposition pour toute question ou demande de clarification.
     dossier_accepted:

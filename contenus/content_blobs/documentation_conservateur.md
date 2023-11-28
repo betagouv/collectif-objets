@@ -47,7 +47,7 @@ Collectif Objets est un service destiné aux conservateurs des Monuments Histori
 
 * **Les conservateurs lancent la campagne de recensement.** Les communes sont invitées par mél à se rendre sur le site Collectif Objets pour prendre connaissance des objets MH qu’elles abritent.
 * **Les communes recensent en ligne les objets MH qu’elles abritent.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur dossier de recensement.
-* **Les conservateurs analysent les informations et photos transmises.** Pour chaque objet, ils peuvent alors valider les informations et engager des actions sur le terrain le cas échéant. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune.
+* **Les conservateurs examinent les informations et photos transmises.** Pour chaque objet, ils peuvent alors valider les informations et engager des actions sur le terrain le cas échéant. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune.
 * **Les données validées par les conservateurs sont reversées dans le système d’information patrimonial.**
 
 ## Les communes concernées par la campagne
@@ -108,25 +108,25 @@ Pour accéder aux dossiers de recensement des communes :
 
 ![Carte du département](/contenus/content_blobs/images/conservateurs_carte_departement.png)
 
-## Analyser le dossier de recensement d'une commune
+## Examiner le dossier de recensement d'une commune
 
 Suivez les étapes ou visionnez la vidéo ci-dessous :
 
 * **Cliquez sur** **l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
 
-  * **Analysez les informations transmises par la commune :** à partir des photos récentes transmises par la commune, qui sont zoomables pour en examiner les détails, vous pouvez valider ou corriger les informations renseignées.
+  * **Examinez les informations transmises par la commune :** à partir des photos récentes transmises par la commune, qui sont zoomables pour en examiner les détails, vous pouvez valider ou corriger les informations renseignées.
 
     Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée.
 
     **Si la commune s’est trompée d’objet, reportez-vous à cette section. De la même manière, si la commune n’a pas transmis de photos, reportez-vous à cette section.**
-  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée : *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)* ; *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)* ; *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)* ; *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après analyse.
+  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée : *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)* ; *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)* ; *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)* ; *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen.
 
     Un champ libre « commentaires pour la mairie » est à votre disposition si vous souhaitez préciser certains points à la commune.
   * **Enregistrez votre travail :** cliquez sur le bouton « Sauvegarder ».
 
-    ![Analyse d’un recensement](/contenus/content_blobs/images/conservateurs_analyse.png)
+    ![Examen d’un recensement](/contenus/content_blobs/images/conservateurs_analyse.png)
 * **Répétez ce processus pour chaque objet abrité par la commune.**
-* **Envoyez l'examen final du recensement à la commune :** après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
+* **Envoyez l'examen final du recensement à la commune :** après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
 
 <video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.png" href="#">
   <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.webm" type="video/webm">
@@ -146,18 +146,18 @@ Vous pouvez faire part à la commune de remarques pour l’aider dans son recens
 
 ## Si la commune n’a pas pris de photos
 
-Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre analyse.
+Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre examen.
 
 ## Envoyer mon examen à la commune
 
-Après avoir analysé les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. 
+Après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. 
 
 **Lorsque vous envoyez votre examen final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l’État.** 
 
-* [Rendez-vous sur la page de la commune concernée.](#comment-accder-aux-dossiers-de-recensement-des-communes-) Pour accéder à l'examen, **vous devez avoir analysé chaque objet recensé.**
+* [Rendez-vous sur la page de la commune concernée.](#comment-accder-aux-dossiers-de-recensement-des-communes-) Pour accéder à l'examen, **vous devez avoir examiné chaque objet recensé.**
 * **Cliquez sur le bouton « Envoyer l'examen ».**
 
-  ![Analyse terminée](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
+  ![Examen terminé](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
 * **Décidez de si vous souhaiter prévoir une visite sur le terrain** en cochant la case appropriée : « *pas de visite prévue* » ; « *visite souhaitable* » et « *visite prioritaire* ». Cette option n'est pas diffusée aux communes, elle est uniquement pour votre usage personnel et votre suivi.
 
   Un champ libre « commentaire global » est à votre disposition si vous souhaitez préciser certains points à la commune.
@@ -173,7 +173,7 @@ Après avoir analysé les informations transmises par la commune pour chaque obj
   * Ordre alphabétique : en cliquant sur la flèche de la colonne « Commune ».
   * Nombre d’objets MH abrités par commune : en cliquant sur la flèche de la colonne « Objets ».
   * Nombre d’objets MH indiqués comme prioritaires par la commune : en cliquant sur la flèche de la colonne « Objets prioritaires ».
-  * L’état de traitement du dossier de recensement : en cliquant sur la flèche de la colonne « Analyse ». Lorsque le dossier de recensement d’une commune vous est transmis pour expertise, il porte le statut « à analyser ». Lorsque vous avez analysé un dossier de recensement et l’avez transmis à la commune recenseuse, son statut est indiqué comme « examen envoyé à la commune ».
+  * L’état de traitement du dossier de recensement : en cliquant sur la flèche de la colonne « Examen ». Lorsque le dossier de recensement d’une commune vous est transmis pour expertise, il porte le statut « à examiner ». Lorsque vous avez examiné un dossier de recensement et l’avez transmis à la commune recenseuse, son statut est indiqué comme « examen envoyé à la commune ».
 * Par défaut, seules les communes vous ayant envoyé leur dossier de recensement vous sont présentées (« recensement terminé »). Toutefois, vous pouvez également afficher l’ensemble des communes contactées en cliquant sur la flèche du filtre « Etat du recensement ».
 
   * « Recensement démarré » : les communes qui ont démarré leur recensement mais ne l’ont pas terminé.
@@ -203,7 +203,7 @@ L’équipe de Collectif Objets a également accès aux échanges afin de pouvoi
 
 ## Fonctionnement du bordereau de récolement
 
-Une fois l’analyse d’une commune finalisée vous retrouverez la génération du bordereau dans l’onglet dédié. Les bordereaux de récolement peuvent être édités seulement une fois que vous avez analysé les recensements et accepté le dossier. Il vous est alors possible de générer un bordereau pour chaque édifice abritant des objets protégés.
+Une fois l’examen d’une commune finalisée vous retrouverez la génération du bordereau dans l’onglet dédié. Les bordereaux de récolement peuvent être édités seulement une fois que vous avez examiné les recensements et accepté le dossier. Il vous est alors possible de générer un bordereau pour chaque édifice abritant des objets protégés.
 
 ![Bordereau de récolement](/contenus/content_blobs/images/2023-07-11-capture-ecran-liste-des-communes.png)
 
@@ -216,9 +216,9 @@ Vous pouvez choisir de désactiver les notifications automatiques reçues sur vo
 
 ## Retrouver votre liste des communes à visiter
 
-V﻿ous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après analyse de leur recensement, en cliquant sur l'onglet « Mes actions ». 
+V﻿ous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après examen de leur recensement, en cliquant sur l'onglet « Mes actions ». 
 
-Cette page affiche les communes que vous avez indiqué vouloir visiter lors de la finalisation de l’analyse d’un dossier, et le degré de priorité que vous avez attribué à chaque visite prévue.
+Cette page affiche les communes que vous avez indiqué vouloir visiter lors de la finalisation de l'examen d’un dossier, et le degré de priorité que vous avez attribué à chaque visite prévue.
 
 ![](/contenus/content_blobs/images/capture-ecran-mes_actions.png)
 

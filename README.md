@@ -4,7 +4,7 @@
 &nbsp;&nbsp;[![](https://img.shields.io/badge/Ouvrir%20avec-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/betagouv/collectif-objets/tree/feature/gitpod)
 
 [Collectif Objets est un site web](collectif-objets.beta.gouv.fr/) permettant aux communes françaises de recenser leur patrimoine mobilier monument
-historiques et aux conservateurs d'analyser ces recensements.
+historiques et aux conservateurs d'examiner ces recensements.
 
 ---
 
@@ -64,7 +64,7 @@ permet aux agents municipaux des communes de réaliser les recensements d'objets
 
 2. **Interface conservateurs**
 
-permet aux conservateurs d'analyser les recensements réalisés ;
+permet aux conservateurs d'examiner les recensements réalisés ;
 
 | | |
 | - | - |
@@ -93,9 +93,9 @@ Découverte de l’interface conservateurs
 
 - [ ] se déconnecter en tant que commune
 - [ ] se connecter en tant que conservateur depuis le lien de connexion sur le site avec le compte suivant : `conservateur@collectif.local` mot de passe `123456789 123456789 123456789`
-- [ ] ouvrir un dossier de recensement à analyser
-- [ ] analyser un recensement
-- [ ] analyser tous les recensements d'un dossier et l'accepter
+- [ ] ouvrir un dossier de recensement à examiner
+- [ ] examiner un recensement
+- [ ] examiner tous les recensements d'un dossier et l'accepter
 - [ ] lire le mail envoyé depuis MailHog sur [localhost:8025](http://localhost:8025)
 
 # Frameworks et dépendances
@@ -220,7 +220,7 @@ Objet "*" --> "1" Edifice
 Recensement "*" --> "1" Objet
 Recensement "*" --> "0..1" Dossier
 Dossier "*" --> "1" Commune
-Dossier "*" --> "1" Conservateur : est analysé par
+Dossier "*" --> "1" Conservateur : est examiné par
 Campaign "*" --> "1" Departement
 Commune "*" --> "*" Campaign
 
@@ -260,7 +260,7 @@ La version complète du diagramme d'entités de la base de données est visible 
   le dossier est soumis.
 
 **Note sur le statut global de la commune**
-Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Analyse" ont été fusionnées.
+Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées.
 
 Cette colonne unique est appelée "statut global" dans le code. Il est calculé en fonction du statut de la commune, de son dossier et de ses recensements. Afin de faciliter le filtre et tri via Ransack, il est également remonté via une requête SQL dans le concern "include_statut_global".
 
@@ -272,9 +272,9 @@ Cependant, ces calculs à la volée peuvent être lents, comparé à un simple c
 |-----------|----------------|-----------------------------------------|-----------------|-----------------|
 | 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_ | Non recensé |
 | 2         | `started`      | au moins un `completed`                 | `construction`  | En cours de recensement |
-| 3         | `completed`    | tous `completed`                        | `submitted`     | Non analysé |
-|4 | `completed` | au moins un `completed` et analysé | `submitted`     | En cours d'analyse |
-| 5         | `completed`    | tous `completed` et tous analysés       | `accepted`      | Analysé |
+| 3         | `completed`    | tous `completed`                        | `submitted`     | Non examiné |
+|4 | `completed` | au moins un `completed` et examiné | `submitted`     | En cours d'examen |
+| 5         | `completed`    | tous `completed` et tous examinés       | `accepted`      | Examiné |
 
 - Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements"
 - Le passage de 4 à 5 se fait par une action manuelle des conservateurs "Accepter le dossier"

@@ -220,23 +220,23 @@ Lorsque vous avez terminé le recensement pour votre commune - c’est à dire :
 
 En effectuant cela, votre dossier de recensement, qui comprend les informations et photos que vous avez indiquées pour chaque objet protégé, sera envoyé aux conservateurs de votre département.
 
-Les conservateurs pourront ainsi effectuer l’analyse de votre dossier, et éventuellement vous demander plus d’informations ou des corrections avant de le valider.
+Les conservateurs pourront ainsi effectuer l’examen de votre dossier, et éventuellement vous demander plus d’informations ou des corrections avant de le valider.
 
 ## 7 - Ce qu’il se passe une fois les informations transmises
 
-Une fois vos informations transmises aux conservateurs vous n’avez plus rien à faire en ce qui concerne le recensement des objets en attendant que les conservateurs procèdent à l’analyse de ce dernier.
+Une fois vos informations transmises aux conservateurs vous n’avez plus rien à faire en ce qui concerne le recensement des objets en attendant que les conservateurs procèdent à l’examen de ce dernier.
 
 Ils pourront vous recontacter par la suite à travers la messagerie (qui est couplé d’un email) afin de vous demander des modifications, plus de détails, vous recommander des actions ou encore la prise d’un rendez-vous pour envisager une visite.
 
 ## 8 - Modifier le recensement / envoyer de nouvelles photos pour les objets recensés
 
-S﻿i vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas fini d'analyser votre dossier de recensement.
+S﻿i vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas fini d'examiner votre dossier de recensement.
 
 Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela : 
 
 <iframe width="917" height="573" src="https://www.youtube.com/embed/fvYSmimaLUw" title="Collectif Objets - Modifier son recensement (ou ses photos) en tant que commune" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-S﻿i un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'analyse de votre dossier. C'est donc cette procédure que vous devrez suivre.
+Si un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'examen de votre dossier. C'est donc cette procédure que vous devrez suivre.
 
 # IV - Après le recensement
 
@@ -244,7 +244,7 @@ S﻿i un conservateur remarque que vous avez commis une erreur, il est probable 
 
 Vos réponses seront traitées par les conservateurs de votre département : les Conservateurs des antiquités et objets d’arts (CAOA) ou les Conservateurs des Monuments historiques (CMH).
 
-Lorsque les conservateurs auront analysé votre dossier de recensement, un compte-rendu vous sera adressé par email. L’objet de cet email contiendra les mots : Examen du recensement des objets protégés”.
+Lorsque les conservateurs auront examiné votre dossier de recensement, un compte-rendu vous sera adressé par email. L’objet de cet email contiendra les mots : Examen du recensement des objets protégés”.
 
 Cet email contiendra un lien qui vous permettra d’accéder aux retours des conservateurs au sujet de votre dossier de recensement. Si votre dossier semble exact et n’appelle pas des mesures exceptionnelles, il n’y aura peut-être pas de message ou de remarque des conservateurs.
 

@@ -45,7 +45,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(page).to have_text("Bouquet d'Autel")
     expect(page).to have_text("Ciboire des malades")
 
-    # analyse first recensement
+    # examen first recensement
     click_on "Bouquet d'Autel"
     etat_sanitaire_group = find("div", text: /État de l’objet/, class: "co-text--bold")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
@@ -59,7 +59,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     click_on "Sauvegarder"
     expect(page).to have_text("Votre examen a bien été sauvegardé")
 
-    # analyse second recensement
+    # examen second recensement
     click_on "Ciboire des malades"
     securisation_group = find("div", text: /Sécurisation de l’objet/, class: "co-text--bold")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")

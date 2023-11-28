@@ -9,7 +9,7 @@
           = f.text_field :nom_unaccented_cont, data: { controller: "input-autosubmit", action: "change->input-autosubmit#submit" }
           %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
       .fr-col-12.fr-col-sm-4
-        = f.label :statut_global_eq, "Statut de l'analyse"
+        = f.label :statut_global_eq, "Statut de l'examen"
         = f.select :statut_global_eq, communes_statuses_options_for_select, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
 
       - if query_present
@@ -28,7 +28,7 @@
               %th.co-hide--sm= sort_link ransack, :objets_count, "Nombre d'objets", default_order: :desc, data: { turbo_action: "replace" }
               %th.co-hide--sm= sort_link ransack, :en_peril_count, "Objets en péril", default_order: :desc, data: { turbo_action: "replace" }
               %th.co-hide--sm= sort_link ransack, :disparus_count, "Objets disparus", default_order: :desc, data: { turbo_action: "replace" }
-              %th= sort_link ransack, :statut_global, "Analyse", data: { turbo_action: "replace" }
+              %th= sort_link ransack, :statut_global, "Examen", data: { turbo_action: "replace" }
               %th.co-hide--sm= sort_link ransack, :dossier_submitted_at, "Date du recensement", data: { turbo_action: "replace" }
           %tbody
             - communes.each do |commune|
