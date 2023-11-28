@@ -80,7 +80,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     ciboire_row = find_link("Ciboire des malades").find(:xpath, "ancestor::tr")
     expect(ciboire_row).not_to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     fill_in("dossier[notes_conservateur]", with: "Merci pour ce joli dossier")
-    click_on "Envoyer l'examen à la commune"
+    click_on "Finaliser et envoyer l'examen à la commune"
 
     # visualisation rapport
     expect(page).to have_text(/Tous les recensements ont été examinés/i)

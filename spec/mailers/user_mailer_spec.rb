@@ -49,7 +49,7 @@ RSpec.describe UserMailer, type: :mailer do
 
     include_examples(
       "both parts contain",
-      "Vous trouverez sur Collectif Objets l'examen du recensement"
+      "Vous avez envoyé un dossier de recensement"
     )
 
     it "behaves as expected" do
