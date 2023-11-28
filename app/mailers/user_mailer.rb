@@ -30,7 +30,7 @@ class UserMailer < ApplicationMailer
     @conservateur = @dossier.conservateur || params[:conservateur]
     set_login_url
     mail \
-      subject: "Rapport de recensement des objets protégés de #{@commune.nom}",
+      subject: "Examen du recensement des objets protégés de #{@commune.nom}",
       from: email_address_with_name("collectifobjets@beta.gouv.fr", @conservateur.to_s),
       reply_to: @conservateur.email
   end

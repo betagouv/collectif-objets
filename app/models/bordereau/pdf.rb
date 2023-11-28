@@ -98,7 +98,7 @@ module Bordereau
 
         text "Liste des objets inscrits de l'édifice #{edifice.nom}", align: :center, style: :bold, size: 12
         text "Toutes les informations liées à ces objets figurent dans Collectif Objets " \
-             "et dans le rapport transmis par vos CMH et CAOA",
+             "et dans l'examen transmis par vos CMH et CAOA",
              align: :center, size: 10
         move_down(10)
         ajout_table_objets_recensés(recensements_objets_inscrits)

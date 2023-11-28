@@ -1,7 +1,7 @@
 = render layout: "conservateurs/communes/tabs",
   locals: { commune: @commune, dossier: @dossier, current_tab: :rapport } do
 
-  %h2 Rapport de recensement pour #{@commune.nom}
+  %h2 Examen du recensement pour #{@commune.nom}
 
   = render "summary", recensements: @dossier.recensements
 

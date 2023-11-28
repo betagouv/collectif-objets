@@ -123,7 +123,7 @@ RSpec.describe Commune, type: :model do
     let!(:commune) { create(:commune, status: :inactive) }
     let!(:objet) { create(:objet, commune:) }
 
-    it "a un statut global sur le recensement et l'analyse à Non recensé" do
+    it "a un statut global sur le recensement et l'examen à Non recensé" do
       expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_RECENSÉ
       expect(Commune.first.statut_global).to eq Commune::ORDRE_NON_RECENSÉ
     end
@@ -131,7 +131,7 @@ RSpec.describe Commune, type: :model do
     context "lorsque la commune a démarré son recensement" do
       before { commune.start! }
 
-      it "a un statut global sur le recensement et l'analyse à En cours de recensement" do
+      it "a un statut global sur le recensement et l'examen à En cours de recensement" do
         expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_DE_RECENSEMENT
         expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_DE_RECENSEMENT
       end
@@ -146,7 +146,7 @@ RSpec.describe Commune, type: :model do
         context "lorsque la commune a reçu une réponse automatique" do
           before { commune.dossier.update(replied_automatically_at: Time.zone.now) }
 
-          it "a un statut global sur le recensement et l'analyse à Réponse automatique" do
+          it "a un statut global sur le recensement et l'examen à Réponse automatique" do
             expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
             expect(Commune.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
           end
@@ -165,12 +165,12 @@ RSpec.describe Commune, type: :model do
                    etat_sanitaire: Recensement::ETAT_PERIL, dossier: commune.dossier, objet:, conservateur:)
           end
 
-          it "a un statut global sur le recensement et l'analyse à À examiner" do
+          it "a un statut global sur le recensement et l'examen à À examiner" do
             expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
             expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
           end
 
-          it "a un statut global sur le recensement et l'analyse à En cours d'examen" do
+          it "a un statut global sur le recensement et l'examen à En cours d'examen" do
             recensement.update(analysed_at: Time.zone.now)
 
             expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
@@ -178,7 +178,7 @@ RSpec.describe Commune, type: :model do
           end
         end
 
-        it "a un statut global sur le recensement et l'analyse à Examiné" do
+        it "a un statut global sur le recensement et l'examen à Examiné" do
           commune.dossier.accept!
 
           expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMINÉ

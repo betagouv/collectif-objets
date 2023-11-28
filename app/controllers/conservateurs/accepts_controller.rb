@@ -9,7 +9,7 @@ module Conservateurs
     def create
       if @dossier.update(**dossier_params) && @dossier.accept!
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
-        redirect_to conservateurs_commune_path(@commune), notice: "Le rapport a été envoyé à la commune"
+        redirect_to conservateurs_commune_path(@commune), notice: "L'examen a été envoyé à la commune"
       else
         render "conservateurs/accepts/new", status: :unprocessable_entity
       end

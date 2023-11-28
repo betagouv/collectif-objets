@@ -46,7 +46,7 @@ describe Conservateurs::DossierAcceptPolicy do
       it { should_not permit(conservateur, dossier_accept) }
     end
 
-    context "acceptation du dossier mais certains recensements prioritaires n'ont pas été analysés " do
+    context "acceptation du dossier mais certains recensements prioritaires n'ont pas été examinés " do
       let!(:commune) { create(:commune, status: :completed) }
       let!(:objet1) { create(:objet, commune:) }
       let!(:objet2) { create(:objet, commune:) }
@@ -58,7 +58,7 @@ describe Conservateurs::DossierAcceptPolicy do
       it { should_not permit(conservateur, dossier_accept) }
     end
 
-    context "acceptation du dossier des objets verts non analysés " do
+    context "acceptation du dossier des objets verts non examinés " do
       let!(:commune) { create(:commune, status: :completed) }
       let!(:objet1) { create(:objet, commune:) }
       let!(:objet2) { create(:objet, commune:) }

@@ -7,7 +7,7 @@
         conservateurs_commune_path(@dossier.commune),
         icon_left: "arrow-left-line", data: { turbo_action: "advance" }
 
-    %h2 Analyse du recensement - #{@objet.nom}
+    %h2 Examen du recensement - #{@objet.nom}
     .fr-grid-row
       .fr-col-md-8
         .fr-card.fr-card--horizontal.fr-card--horizontal-tier
@@ -67,7 +67,7 @@
             %p= t("recensement.analyse.not_completed")
         - if @recensement.errors.any?
           .fr-alert.fr-alert--error.fr-mb-6w
-            %p Votre analyse n'a pas pu être enregistrée :
+            %p Votre examen n'a pas pu être enregistrée :
             %ul
               - @recensement.errors.attribute_names.each do |attribute|
                 %li
@@ -84,7 +84,7 @@
           .fr-text--sm.fr-mt-1w
             %i
               Ces informations ne seront pas envoyées à la mairie tout de suite.
-              Vous pourrez les modifier avant de valider votre rapport dans son ensemble.
+              Vous pourrez les modifier avant de valider votre examen dans son ensemble.
 
   .fr-px-4w.fr-mb-2w
     = dsfr_link_to "Retour à la liste des recensements",

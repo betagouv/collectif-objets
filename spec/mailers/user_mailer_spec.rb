@@ -49,11 +49,11 @@ RSpec.describe UserMailer, type: :mailer do
 
     include_examples(
       "both parts contain",
-      "Vous trouverez sur Collectif Objets le rapport de recensement"
+      "Vous avez envoyé un dossier de recensement"
     )
 
     it "behaves as expected" do
-      expect(mail.subject).to include "Rapport de recensement des objets protégés de Marseille"
+      expect(mail.subject).to include "Examen du recensement des objets protégés de Marseille"
       expect(mail.to).to eq(["jean@user.fr"])
       expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
     end

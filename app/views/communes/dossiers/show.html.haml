@@ -2,7 +2,7 @@
   = render "shared/breadcrumbs",
     links: [["Accueil", root_path],
       ["Objets de #{current_user.commune.nom}", commune_objets_path(current_user.commune)]],
-    current_page_label: "Rapport"
+    current_page_label: "Examen"
 
   - if @dossier&.accepted?
     = render "shared/dossier_rapport", rapport: RapportPresenter.new(@dossier)
@@ -10,21 +10,21 @@
     .fr-grid-row.co-flex--align-items-stretch.fr-mb-16w
       .fr-col-md-8
         - if @dossier&.submitted?
-          %h1 Le rapport n’est pas encore disponible
+          %h1 L'examen n’est pas encore disponible
           :markdown
-            Votre conservateur a reçu votre recensement et doit les analyser puis vous envoyer son rapport.
+            Votre conservateur a reçu votre recensement et doit les examiner puis vous envoyer son examen.
 
-            Vous serez averti par mail lorsque le conservateur aura produit le rapport.
+            Vous serez averti par mail lorsque le conservateur aura produit l'examen.
             Vous pouvez éventuellement relancer le conservateur dans la messagerie si vous le souhaitez.
 
           = link_to "Contacter le conservateur", commune_messages_path(@commune), class: "fr-btn"
         - else
-          %h1 Le rapport n’est pas encore disponible
+          %h1 L'examen n’est pas encore disponible
           :markdown
-             Votre conservateur ne pourra produire ce rapport que suite à l’envoi de votre recensement.
+             Votre conservateur ne pourra produire cet examen que suite à l’envoi de votre recensement.
 
             Envoyez votre recensement pour obtenir les conseils de votre conservateur.
-            Suite à l’envoi de votre recensement, vous serez averti par mail lorsque le conservateur aura produit le rapport.
+            Suite à l’envoi de votre recensement, vous serez averti par mail lorsque le conservateur aura produit l'examen.
 
           = link_to "Recenser les objets de ma commune", commune_objets_path(@commune), class: "fr-btn"
       .fr-col-md-4.fr-px-8w
