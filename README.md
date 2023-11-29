@@ -279,7 +279,7 @@ Cependant, ces calculs à la volée peuvent être lents, comparé à un simple c
 | 6         | `completed`    | tous `completed` et tous examinés       | `accepted`      | Examiné |
 
 - Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements"
-- Le passage de 4 à 5 se fait par une action manuelle des conservateurs "Accepter le dossier"
+- Le passage à l'étape 6 se fait par une action manuelle des conservateurs "Accepter le dossier"
 
 `bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
 
