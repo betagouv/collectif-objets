@@ -273,9 +273,10 @@ Cependant, ces calculs à la volée peuvent être lents, comparé à un simple c
 |-----------|----------------|-----------------------------------------|-----------------|-----------------|
 | 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_ | Non recensé |
 | 2         | `started`      | au moins un `completed`                 | `construction`  | En cours de recensement |
-| 3         | `completed`    | tous `completed`                        | `submitted`     | Non examiné |
-|4 | `completed` | au moins un `completed` et examiné | `submitted`     | En cours d'examen |
-| 5         | `completed`    | tous `completed` et tous examinés       | `accepted`      | Examiné |
+| 3         | `completed`    | tous `completed`                        | `submitted`     | À examiner |
+| 4         | `completed` | tous `completed`                        | `submitted`  et `replied_automatically_at` présent   | Réponse automatique |
+| 5 | `completed` | au moins un `completed` et examiné | `submitted`     | En cours d'examen |
+| 6         | `completed`    | tous `completed` et tous examinés       | `accepted`      | Examiné |
 
 - Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements"
 - Le passage de 4 à 5 se fait par une action manuelle des conservateurs "Accepter le dossier"
