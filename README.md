@@ -33,6 +33,7 @@ historiques et aux conservateurs d'examiner ces recensements.
   * [Rajouter une vidéo sur le site](#rajouter-une-vidéo-sur-le-site)
   * [Debug local via tunneling](#debug-local-via-tunneling)
   * [Overrides de Photos Palissy](#overrides-de-photos-palissy)
+  * [Vocabulaire](#vocabulaire)
 * [Configurations](#configurations)
   * [Configurations DNS, boites mails, et serveurs mails](#configurations-dns-boites-mails-et-serveurs-mails)
   * [Configurations des permissions ACLs et CORS des buckets S3 Scaleway](#configurations-des-permissions-acls-et-cors-des-buckets-s3-scaleway)
@@ -746,6 +747,16 @@ curl https://transfer.sh/url-du-fichier.csv > tmp.csv
 rake objet_overrides:import[tmp.csv]
 rails runner "SynchronizeObjetsJob.perform_inline('52')"
 ```
+
+## Vocabulaire
+
+Un objet dit *prioritaire* est un objet en péril ou disparu. Le cas contraire, on parle d'*objet vert*.
+
+**Historique**
+
+Le fait d'*examiner* le recensement d'une commune par un conservateur s'appelait précédemment *l'analyse*. De même, on appelait *rapport* la page de synthèse de l'examen.
+
+On retrouve ces termes encore dans le code, il faudrait idéalement les renommer. Attention à bien migrer les champs en base de données contenant le mot "analyse" sur la table recensements, comme par exemple analyse_etat_sanitaire ou analysed_at.
 
 # Configurations
 
