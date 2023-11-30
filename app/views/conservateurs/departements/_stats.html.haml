@@ -1,21 +1,30 @@
--
+.fr-accordion.fr-mb-2w
+  %h3.fr-accordion__title
+    %button.fr-accordion__btn{"aria-expanded" => "false", "aria-controls" => "accordion-stats"} Voir les statistiques de la campagne
+  .fr-collapse{id: "accordion-stats"}
+    .fr-grid-row.fr-grid-row--gutters.fr-mb-4w.fr-background-alt--blue-france
+      .fr-col-md-3.fr-col-12
+        .fr-card
+          .fr-card__body
+            .fr-card__content
+              %h2.fr-card__title.fr-text-title--blue-france #{stats.communes_completed_percentage}%
+              %p.fr-card__desc de communes recenseuses, soit #{stats.communes_completed_count} communes sur #{stats.communes_count}
 
-.fr-grid-row.fr-grid-row--gutters.fr-mb-4w
-  .fr-col-md-3
-    .co-background--grey.co-height--100.fr-p-4w
-      .fr-mb-2w
-        %b #{stats.communes_completed_count} communes ont recensé sur #{stats.communes_count}
-      .fr-h2 #{stats.communes_completed_percentage}%
-  .fr-col-md-3
-    .co-background--grey.co-height--100.fr-p-4w
-      .fr-mb-2w
-        %b #{stats.objets_recenses_count} objets recensés sur #{stats.objets_count}
-      .fr-h2 #{stats.objets_recenses_percentage}%
-  .fr-col-md-6
-    .co-background--grey.co-height--100.fr-p-4w
-      %b États sanitaires des objets recensés
-      = bar_chart [{name: "En péril", color: "rgba(179, 64, 1, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_PERIL]]] },
-                   {name: "Mauvais état", color: "rgba(133, 133, 247, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MAUVAIS]]]  },
-                   {name: "État moyen", color: "rgba(174, 173, 249, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MOYEN]]]  },
-                   {name: "Bon état", color: "rgba(205, 206, 252, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_BON]]] }],
-        stacked: true, height: 200, xtitle: "nombre d’objets"
+      .fr-col-md-3.fr-col-12
+        .fr-card
+          .fr-card__body
+            .fr-card__content
+              %h2.fr-card__title.fr-text-title--blue-france #{stats.objets_recenses_percentage}%
+              %p.fr-card__desc d'objets recensés, soit #{stats.objets_recenses_count} objets sur #{stats.objets_count}
+
+      .fr-col-md-6.co-hide--sm
+        .fr-card
+          .fr-card__body
+            .fr-card__content
+              %h2.fr-card__title.fr-text-title--blue-france État sanitaire des objets recensés
+              .fr-card__desc
+                = bar_chart [{name: "En péril", color: "rgba(179, 64, 1, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_PERIL]]] },
+                            {name: "Mauvais état", color: "rgba(133, 133, 247, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MAUVAIS]]]  },
+                            {name: "État moyen", color: "rgba(174, 173, 249, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_MOYEN]]]  },
+                            {name: "Bon état", color: "rgba(205, 206, 252, 1)", data: [["", stats.etats_sanitaires_value_counts[Recensement::ETAT_BON]]] }],
+                  stacked: true, height: 200, xtitle: "nombre d’objets"

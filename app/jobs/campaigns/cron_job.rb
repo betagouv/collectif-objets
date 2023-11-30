@@ -10,8 +10,19 @@ module Campaigns
 
       Campaign.ongoing.each { Campaigns::RunCampaignJob.perform_inline(_1.id) }
 
-      Campaign.ongoing.where("date_fin < ?", date).each(&:finish!)
       # strict comparison here so that it closes day after end
+      Campaign.ongoing.where("date_fin < ?", date).each do |campaign|
+        campaign.finish!
+
+        campaign.communes.each do |commune|
+          user = commune.users.first
+          next unless user.present? && commune.statut_global == Commune::ORDRE_A_EXAMINER \
+            && !commune.dossier.a_des_objets_prioritaires?
+
+          commune.dossier.update(replied_automatically_at: Time.zone.now)
+          UserMailer.with(user:, commune:).commune_avec_objets_verts_email.deliver_now
+        end
+      end
     end
   end
 end

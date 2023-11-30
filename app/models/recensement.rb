@@ -73,6 +73,7 @@ class Recensement < ApplicationRecord
   scope :photos_presence_in, ->(presence) { presence ? all : missing_photos }
   scope :absent, -> { where(localisation: LOCALISATION_ABSENT) }
   scope :en_peril, -> { where(RECENSEMENT_EN_PERIL_SQL) }
+  scope :prioritaires, -> { where(RECENSEMENT_PRIORITAIRE_SQL) }
   scope :recensable, -> { where(recensable: true) }
   scope :not_recensable, -> { where.not(recensable: true) }
   scope :in_departement, lambda { |departement|
@@ -91,19 +92,18 @@ class Recensement < ApplicationRecord
     OR "recensements"."analyse_etat_sanitaire" = '#{ETAT_PERIL}').squish.freeze
   RECENSEMENT_PRIORITAIRE_SQL = "#{RECENSEMENT_ABSENT_SQL} OR #{RECENSEMENT_EN_PERIL_SQL}".freeze
 
-  SQL_ORDER_PRIORITE = <<-SQL.squish
+  ## Le code suivant semble mort
+  SQL_ORDER_PRIORITE = %(
     CASE WHEN (
-      recensements.localisation = 'absent'
-      OR (recensements.etat_sanitaire IN ('mauvais', 'peril') AND recensements.analyse_etat_sanitaire IS NULL)
-      OR recensements.analyse_etat_sanitaire IN ('mauvais', 'peril')
+      #{RECENSEMENT_PRIORITAIRE_SQL}
     ) THEN 0
     ELSE 1
-    END
-  SQL
+    END).squish.freeze
   scope :order_by_priorite, -> { order(Arel.sql(SQL_ORDER_PRIORITE)) }
   def self.order_by_priorite_array(recensements_arel)
     recensements_arel.to_a.sort_by { prioritaire? ? 0 : 1 }
   end
+  ## fin du code qui semble mort
 
   def aasm_after_complete
     commune.start! if commune.inactive?

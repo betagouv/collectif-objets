@@ -17,6 +17,12 @@ class UserMailer < ApplicationMailer
     mail subject: "#{@commune.nom}, merci dʼavoir contribué à Collectif Objets"
   end
 
+  def commune_avec_objets_verts_email
+    @user, @commune = params.values_at(:user, :commune)
+    mail subject: "Suite à votre participation à la campagne de recensement " \
+                  "des objets monuments historique #{@commune.departement.dans_nom}"
+  end
+
   def dossier_accepted_email
     @dossier = params[:dossier]
     @commune = @dossier.commune
@@ -24,7 +30,7 @@ class UserMailer < ApplicationMailer
     @conservateur = @dossier.conservateur || params[:conservateur]
     set_login_url
     mail \
-      subject: "Rapport de recensement des objets protégés de #{@commune.nom}",
+      subject: "Examen du recensement des objets protégés de #{@commune.nom}",
       from: email_address_with_name("collectifobjets@beta.gouv.fr", @conservateur.to_s),
       reply_to: @conservateur.email
   end

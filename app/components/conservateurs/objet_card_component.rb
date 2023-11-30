@@ -12,8 +12,8 @@ module Conservateurs
 
     def call
       render ::ObjetCardComponent.new(
-        objet, commune:,
-               badges:, detail_badge:, main_photo_origin: :recensement_or_memoire, path:, tags:, link_html_attributes:
+        objet, commune:, header_badges:, start_badges:,
+               main_photo_origin: :recensement_or_memoire, path:, tags:, link_html_attributes:
       )
     end
 
@@ -29,16 +29,20 @@ module Conservateurs
       end
     end
 
-    def badges
+    def header_badges
       return [] unless can_analyse
 
-      @badges ||= [analysed_badge].compact
+      [analyse_badge].compact
+    end
+
+    def start_badges
+      @start_badges ||= [detail_badge, missing_photos_badge].compact
     end
 
     def tags
       return [] unless can_analyse
 
-      @tags ||= [not_recensed_badge, missing_photos_badge].compact
+      @tags ||= [not_recensed_badge].compact
     end
 
     def badge_struct
@@ -54,13 +58,17 @@ module Conservateurs
     def missing_photos_badge
       return nil unless recensement&.missing_photos?
 
-      badge_struct.new "warning", "photos manquantes"
+      badge_struct.new "", "photos manquantes"
     end
 
-    def analysed_badge
-      return nil unless recensement&.analysed?
-
-      badge_struct.new "success", "Analysé"
+    def analyse_badge
+      if recensement&.analysed?
+        badge_struct.new "success", "Examiné"
+      elsif recensement&.prioritaire?
+        badge_struct.new "blue-ecume", "À examiner"
+      else
+        badge_struct.new "success", "Examen optionnel"
+      end
     end
 
     def detail_badge

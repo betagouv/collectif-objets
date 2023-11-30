@@ -16,6 +16,6 @@ module Communes
       end
     end
 
-    def active_nav_links = ["Rapport du conservateur"]
+    def active_nav_links = ["Examen du conservateur"]
   end
 end

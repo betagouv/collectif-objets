@@ -5,7 +5,28 @@
 Format basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 le projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Non publié]
+## [1.3.0] - 2023-11-30
+
+### Ajouté
+- Envoi d'un email spécifique adressé aux communes ayant fini leur recensement, selon la présence d'objets prioritaires ou non
+- Statut "Réponse automatique" pour les communes ayant uniquement des objets verts
+- Les statistiques sont dans un accordéon pour gagner de la place
+- Hook de post déploiement pour migrer la base de données
+
+### Changé
+- Amélioration du design des stats et du tableau de bord du département côté conservateur
+- Tri des objets des communes par ordre de priorité. Les objets prioritaires sont affichés en premier
+- Sur la page d'une commune, les objets à examiner sont affichés en premier
+- Le tableau des communes en version mobile n'affiche que 2 colonnes et les filtres sont alignés verticalement
+- Les statistiques des états des objets sont masqués sur mobile
+- Le tableau des communes est en blanc
+- Les vocabulaire "rapport" et "analyse" devient "examen"
+- Les bandeaux d'alerte précisant le statut d'une commune et les actions possibles sont harmonisés avec le DSFR
+- Le tag "photos manquantes" de vient un badge
+
+### Supprimé
+- Lien de désinscription pour les emails transactionnels (non marketing)
+- Bouton "finaliser le rapport" en bas de page d'une commune
 
 ## [1.2.0] - 2023-10-25
 

@@ -2,44 +2,44 @@
 
 = turbo_frame_tag "communes-search" do
   = search_form_for ransack, url: conservateurs_departement_path(departement), method: "GET", builder: FormBuilderDsfr, data: { turbo_action: "replace" } do |f|
-    .co-flex.co-flex--align-items-end
-      %div
-        = f.label :nom_unaccented_cont, "Nom de commune"
-        = f.text_field :nom_unaccented_cont, data: { controller: "input-autosubmit", action: "change->input-autosubmit#submit" }
-      %div
-        %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
-      .fr-pl-3w
-        = f.label :statut_global_eq, "Statut de l'analyse"
+    .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-end
+      .fr-col-12.fr-col-sm-4
+        = f.label :nom_unaccented_cont, "Nom de commune", class: "fr-mb-1w"
+        .co-flex 
+          = f.text_field :nom_unaccented_cont, data: { controller: "input-autosubmit", action: "change->input-autosubmit#submit" }
+          %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
+      .fr-col-12.fr-col-sm-4
+        = f.label :statut_global_eq, "Statut de l'examen"
         = f.select :statut_global_eq, communes_statuses_options_for_select, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
 
       - if query_present
-        .fr-pl-3w
+        .fr-col-12.fr-col-sm-4
           -# Le q: {statut_global_eq: ""} permet d'écraser le statut conservé en session
           = link_to "réinitialiser les filtres", conservateurs_departement_path(departement, q: {statut_global_eq: ""}), class: "fr-link"
     - if pagy.count == 0
       %p.co-text--italic.fr-py-8w
         Aucune commune trouvée
     - else
-      .fr-table
+      .fr-table.co-table-white
         %table.co-header-title-vertical-align
           %thead
             %tr
               %th= sort_link ransack, :nom, "Commune", data: { turbo_action: "replace" }
-              %th= sort_link ransack, :objets_count, "Nombre d'objets", data: { turbo_action: "replace" }
-              %th= sort_link ransack, :en_peril_count, "Objets en péril", data: { turbo_action: "replace" }
-              %th= sort_link ransack, :disparus_count, "Objets disparus", data: { turbo_action: "replace" }
-              %th= sort_link ransack, :statut_global, "Analyse", data: { turbo_action: "replace" }
-              %th= sort_link ransack, :dossier_submitted_at, "Date du recensement", data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link ransack, :objets_count, "Nombre d'objets", default_order: :desc, data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link ransack, :en_peril_count, "Objets en péril", default_order: :desc, data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link ransack, :disparus_count, "Objets disparus", default_order: :desc, data: { turbo_action: "replace" }
+              %th= sort_link ransack, :statut_global, "Examen", data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link ransack, :dossier_submitted_at, "Date du recensement", data: { turbo_action: "replace" }
           %tbody
             - communes.each do |commune|
               %tr
                 %td
                   = link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top"
-                %td= commune.objets_count
-                %td= commune.en_peril_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.en_peril_count} PERIL" } : 0
-                %td= commune.disparus_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU#{commune.disparus_count > 1 ? "S" : ""}" } : 0          
+                %td.co-hide--sm= commune.objets_count
+                %td.co-hide--sm= commune.en_peril_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.en_peril_count} PERIL" } : 0
+                %td.co-hide--sm= commune.disparus_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU#{commune.disparus_count > 1 ? "S" : ""}" } : 0          
                 %td= commune_statut_global_badge(commune, small: true)
-                %td= commune.dossier&.submitted_at&.strftime("%d/%m/%y")
+                %td.co-hide--sm= commune.dossier&.submitted_at&.strftime("%d/%m/%y")
 
     - if pagy.pages > 1
       .fr-mt-8w.co-pagination-wrapper

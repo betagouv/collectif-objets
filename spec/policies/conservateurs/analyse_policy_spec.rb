@@ -6,7 +6,7 @@ describe Conservateurs::AnalysePolicy do
   subject { described_class }
 
   permissions :edit?, :update? do
-    context "analyse d'une commune completed dossier submitted d'un departement du conservateur" do
+    context "examen d'une commune completed dossier submitted d'un departement du conservateur" do
       let(:commune) { build(:commune, status: :completed) }
       let(:objet) { build(:objet, commune:) }
       let(:dossier) { build(:dossier, commune:, status: :submitted) }
@@ -16,7 +16,7 @@ describe Conservateurs::AnalysePolicy do
       it { should permit(conservateur, analyse) }
     end
 
-    context "analyse d'une commune started" do
+    context "examen d'une commune started" do
       let(:commune) { build(:commune, status: :started) }
       let(:objet) { build(:objet, commune:) }
       let(:dossier) { build(:dossier, commune:, status: :submitted) }
@@ -26,7 +26,7 @@ describe Conservateurs::AnalysePolicy do
       it { should_not permit(conservateur, analyse) }
     end
 
-    context "analyse d'une commune d'un autre departement" do
+    context "examen d'une commune d'un autre departement" do
       let(:commune) { build(:commune, status: :completed) }
       let(:objet) { build(:objet, commune:) }
       let(:dossier) { build(:dossier, commune:, status: :submitted) }

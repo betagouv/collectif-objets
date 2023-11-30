@@ -8,15 +8,23 @@ class Objet < ApplicationRecord
   belongs_to :edifice, optional: true
   has_many :recensements, dependent: :restrict_with_exception
 
-  scope :order_by_recensement_priorite, -> { joins(:recensements).order(Arel.sql(Recensement::SQL_ORDER_PRIORITE)) }
-  def self.order_by_recensement_priorite_array(objets_arel)
-    objets_arel.to_a.sort_by { _1.recensements.to_a.any?(&:prioritaire?) ? 0 : 1 }
-  end
+  scope :order_by_recensement_priorite,
+        lambda {
+          joins(:recensements)
+          .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
+          .order("recensements.analysed_at DESC")
+        }
 
   scope :without_completed_recensements, lambda {
     joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.status = 'completed'")
       .where(recensements: { id: nil })
   }
+
+  scope :a_examiner, lambda {
+                       joins(:recensements)
+                       .where(recensements: { analysed_at: nil })
+                       .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
+                     }
 
   MIS_DE_COTE_SQL = %("palissy_PROT" LIKE 'déclassé au titre objet'
                       OR "palissy_PROT" LIKE 'désinscrit'

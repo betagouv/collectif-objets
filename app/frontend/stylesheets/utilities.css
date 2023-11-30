@@ -16,6 +16,10 @@
   .co-display--md.hide { display: block !important; }
 }
 
+@media (max-width: 576px) {
+  .co-hide--sm { display: none !important; }
+}
+
 /* OVERFLOWS */
 
 .co-overflow-auto { overflow: auto; }
@@ -224,7 +228,30 @@ html[data-fr-scheme="dark"] .co-text--blue {
   color: var(--text-action-high-blue-france, #000091);
 }
 
-/* Table avec titre des colonnes alginés en haut  */
+/* TABLE */
+/* Table avec titre des colonnes alignées en haut  */
 .co-header-title-vertical-align thead tr th {
   vertical-align: text-top;
+}
+
+/* Table en blanc*/
+.co-table-white table {
+  border-collapse: collapse;
+}
+
+.co-table-white thead {
+    background-color: white;
+}
+
+.co-table-white tbody {
+    background-color: white;
+    color: black;
+}
+
+.co-table-white tbody tr:nth-child(2n) {
+  background-color: white;
+}
+
+.co-table-white tr {
+  border-bottom: 1px solid var(--background-contrast-grey);
 }

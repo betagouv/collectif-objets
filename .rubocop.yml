@@ -56,5 +56,8 @@ Metrics/ClassLength:
 Metrics/ParameterLists:
   Enabled: false
 
+Metrics/PerceivedComplexity:
+  Enabled: false
+
 Naming/AsciiIdentifiers:
   Enabled: false

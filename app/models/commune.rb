@@ -61,33 +61,36 @@ class Commune < ApplicationRecord
 
   accepts_nested_attributes_for :dossier, :users
 
-  # Le "statut global" est une sorte de fusion des champs status de la commune, du dossier et de l'analyse,
+  # Le "statut global" est une sorte de fusion des champs status de la commune, du dossier et de l'examen,
   # et permet l'affichage d'un statut unique dans les vues et un filtre facile via Ransack.
   #
   # Pour éviter trop de changements dans le code, il est récupéré à la volée sans modifier le champ "status" actuel.
   # Idéalement, il faudrait utiliser le champ status, en modifiant les états suivants :
-  # inactive -> non_recensé, started -> en_cours_de_recensement, completed -> non_analysé
-  # et en ajoutant les états en_cours_d_analyse et analysé.
+  # inactive -> non_recensé, started -> en_cours_de_recensement, completed -> non_examiné
+  # et en ajoutant les états en_cours_d_examen et examiné.
   #
   # Ou à minima, ajouter un nouveau champ statut_global, mis à jour comme la commune et en fonction de l'avancement de
-  # l'analyse côté conservateur.
+  # l'examen côté conservateur.
   STATUT_GLOBAL_NON_RECENSÉ = "Non recensé"
   ORDRE_NON_RECENSÉ = 0
   STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de recensement"
   ORDRE_EN_COURS_DE_RECENSEMENT = 1
-  STATUT_GLOBAL_NON_ANALYSÉ = "Non analysé"
-  ORDRE_NON_ANALYSÉ = 2
-  STATUT_GLOBAL_EN_COURS_D_ANALYSE = "En cours d'analyse"
-  ORDRE_EN_COURS_D_ANALYSE = 3
-  STATUT_GLOBAL_ANALYSÉ = "Analysé"
-  ORDRE_ANALYSÉ = 4
+  STATUT_GLOBAL_REPONSE_AUTOMATIQUE = "Réponse automatique"
+  ORDRE_REPONSE_AUTOMATIQUE = 2
+  STATUT_GLOBAL_A_EXAMINER = "À examiner"
+  ORDRE_A_EXAMINER = 3
+  STATUT_GLOBAL_EN_COURS_D_EXAMEN = "En cours d'examen"
+  ORDRE_EN_COURS_D_EXAMEN = 4
+  STATUT_GLOBAL_EXAMINÉ = "Examiné"
+  ORDRE_EXAMINÉ = 5
 
   STATUT_GLOBAUX = [
     STATUT_GLOBAL_NON_RECENSÉ,
     STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT,
-    STATUT_GLOBAL_NON_ANALYSÉ,
-    STATUT_GLOBAL_EN_COURS_D_ANALYSE,
-    STATUT_GLOBAL_ANALYSÉ
+    STATUT_GLOBAL_REPONSE_AUTOMATIQUE,
+    STATUT_GLOBAL_A_EXAMINER,
+    STATUT_GLOBAL_EN_COURS_D_EXAMEN,
+    STATUT_GLOBAL_EXAMINÉ
   ].freeze
 
   def statut_global_texte
@@ -102,15 +105,17 @@ class Commune < ApplicationRecord
       ORDRE_NON_RECENSÉ
     elsif started?
       ORDRE_EN_COURS_DE_RECENSEMENT
-    elsif dossier.submitted?
+    elsif dossier.accepted?
+      ORDRE_EXAMINÉ
+    elsif dossier.replied_automatically?
+      ORDRE_REPONSE_AUTOMATIQUE
+    else # dossier.submitted?
       recensements_analysed_count = recensements.where.not(analysed_at: nil).count
       if recensements_analysed_count.zero?
-        ORDRE_NON_ANALYSÉ
+        ORDRE_A_EXAMINER
       else # recensements_analysed_count > 0
-        ORDRE_EN_COURS_D_ANALYSE
+        ORDRE_EN_COURS_D_EXAMEN
       end
-    else # dossiers.accepted?
-      ORDRE_ANALYSÉ
     end
   end
 

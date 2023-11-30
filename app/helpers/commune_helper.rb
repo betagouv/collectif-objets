@@ -25,16 +25,17 @@ module CommuneHelper
   def communes_statuses_options_for_select
     [
       ["Tout sélectionner", ""],
-      [Commune::STATUT_GLOBAL_ANALYSÉ, Commune::ORDRE_ANALYSÉ],
-      [Commune::STATUT_GLOBAL_EN_COURS_D_ANALYSE, Commune::ORDRE_EN_COURS_D_ANALYSE],
-      [Commune::STATUT_GLOBAL_NON_ANALYSÉ, Commune::ORDRE_NON_ANALYSÉ],
+      [Commune::STATUT_GLOBAL_EXAMINÉ, Commune::ORDRE_EXAMINÉ],
+      [Commune::STATUT_GLOBAL_EN_COURS_D_EXAMEN, Commune::ORDRE_EN_COURS_D_EXAMEN],
+      [Commune::STATUT_GLOBAL_REPONSE_AUTOMATIQUE, Commune::ORDRE_REPONSE_AUTOMATIQUE],
+      [Commune::STATUT_GLOBAL_A_EXAMINER, Commune::ORDRE_A_EXAMINER],
       [Commune::STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT, Commune::ORDRE_EN_COURS_DE_RECENSEMENT],
       [Commune::STATUT_GLOBAL_NON_RECENSÉ, Commune::ORDRE_NON_RECENSÉ]
     ]
   end
 
   def commune_statut_global_badge(commune, small: false)
-    colors = ["", "", "blue-ecume", "blue-ecume", "success"]
+    colors = ["", "", "success", "blue-ecume", "blue-ecume", "success"]
     content_tag(
       "p",
       commune.statut_global_texte,

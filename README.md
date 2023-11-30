@@ -4,7 +4,7 @@
 &nbsp;&nbsp;[![](https://img.shields.io/badge/Ouvrir%20avec-Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/betagouv/collectif-objets/tree/feature/gitpod)
 
 [Collectif Objets est un site web](collectif-objets.beta.gouv.fr/) permettant aux communes françaises de recenser leur patrimoine mobilier monument
-historiques et aux conservateurs d'analyser ces recensements.
+historiques et aux conservateurs d'examiner ces recensements.
 
 ---
 
@@ -33,6 +33,7 @@ historiques et aux conservateurs d'analyser ces recensements.
   * [Rajouter une vidéo sur le site](#rajouter-une-vidéo-sur-le-site)
   * [Debug local via tunneling](#debug-local-via-tunneling)
   * [Overrides de Photos Palissy](#overrides-de-photos-palissy)
+  * [Vocabulaire](#vocabulaire)
 * [Configurations](#configurations)
   * [Configurations DNS, boites mails, et serveurs mails](#configurations-dns-boites-mails-et-serveurs-mails)
   * [Configurations des permissions ACLs et CORS des buckets S3 Scaleway](#configurations-des-permissions-acls-et-cors-des-buckets-s3-scaleway)
@@ -64,7 +65,7 @@ permet aux agents municipaux des communes de réaliser les recensements d'objets
 
 2. **Interface conservateurs**
 
-permet aux conservateurs d'analyser les recensements réalisés ;
+permet aux conservateurs d'examiner les recensements réalisés ;
 
 | | |
 | - | - |
@@ -93,9 +94,9 @@ Découverte de l’interface conservateurs
 
 - [ ] se déconnecter en tant que commune
 - [ ] se connecter en tant que conservateur depuis le lien de connexion sur le site avec le compte suivant : `conservateur@collectif.local` mot de passe `123456789 123456789 123456789`
-- [ ] ouvrir un dossier de recensement à analyser
-- [ ] analyser un recensement
-- [ ] analyser tous les recensements d'un dossier et l'accepter
+- [ ] ouvrir un dossier de recensement à examiner
+- [ ] examiner un recensement
+- [ ] examiner tous les recensements d'un dossier et l'accepter
 - [ ] lire le mail envoyé depuis MailHog sur [localhost:8025](http://localhost:8025)
 
 # Frameworks et dépendances
@@ -220,7 +221,7 @@ Objet "*" --> "1" Edifice
 Recensement "*" --> "1" Objet
 Recensement "*" --> "0..1" Dossier
 Dossier "*" --> "1" Commune
-Dossier "*" --> "1" Conservateur : est analysé par
+Dossier "*" --> "1" Conservateur : est examiné par
 Campaign "*" --> "1" Departement
 Commune "*" --> "*" Campaign
 
@@ -239,6 +240,11 @@ Commune "*" --> "*" Campaign
   Il doit être finalisé par la commune pour être analysable par les conservateurs.
 - Une `Campagne` contient les dates et les communes à démarcher pour une campagne mail avec plusieurs relances.
   Elle est gérée et visible uniquement par les administrateurs.
+- Un `AdminUser` est un compte permettant l'accès à l'interface d'admin
+Pour créer un nouveau compte, utiliser cette commande dans une console Rails :
+```ruby
+AdminUser.create(email: "email@de.ladmin", first_name: "Prénom de l'admin", last_name: "Nom de l'admin", password: "mot_de_passe_de_ladmin") 
+```
 
 La version complète du diagramme d'entités de la base de données est visible ici
 [doc/entity-relationship-diagram.svg](doc/entity-relationship-diagram.svg)
@@ -255,7 +261,7 @@ La version complète du diagramme d'entités de la base de données est visible 
   le dossier est soumis.
 
 **Note sur le statut global de la commune**
-Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Analyse" ont été fusionnées.
+Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées.
 
 Cette colonne unique est appelée "statut global" dans le code. Il est calculé en fonction du statut de la commune, de son dossier et de ses recensements. Afin de faciliter le filtre et tri via Ransack, il est également remonté via une requête SQL dans le concern "include_statut_global".
 
@@ -267,9 +273,10 @@ Cependant, ces calculs à la volée peuvent être lents, comparé à un simple c
 |-----------|----------------|-----------------------------------------|-----------------|-----------------|
 | 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_ | Non recensé |
 | 2         | `started`      | au moins un `completed`                 | `construction`  | En cours de recensement |
-| 3         | `completed`    | tous `completed`                        | `submitted`     | Non analysé |
-|4 | `completed` | au moins un `completed` et analysé | `submitted`     | En cours d'analyse |
-| 5         | `completed`    | tous `completed` et tous analysés       | `accepted`      | Analysé |
+| 3         | `completed`    | tous `completed`                        | `submitted`     | À examiner |
+| 4         | `completed` | tous `completed`                        | `submitted`  et `replied_automatically_at` présent   | Réponse automatique |
+| 5 | `completed` | au moins un `completed` et examiné | `submitted`     | En cours d'examen |
+| 6         | `completed`    | tous `completed` et tous examinés       | `accepted`      | Examiné |
 
 - Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements"
 - Le passage de 4 à 5 se fait par une action manuelle des conservateurs "Accepter le dossier"
@@ -741,6 +748,16 @@ curl https://transfer.sh/url-du-fichier.csv > tmp.csv
 rake objet_overrides:import[tmp.csv]
 rails runner "SynchronizeObjetsJob.perform_inline('52')"
 ```
+
+## Vocabulaire
+
+Un objet dit *prioritaire* est un objet en péril ou disparu. Le cas contraire, on parle d'*objet vert*.
+
+**Historique**
+
+Le fait d'*examiner* le recensement d'une commune par un conservateur s'appelait précédemment *l'analyse*. De même, on appelait *rapport* la page de synthèse de l'examen.
+
+On retrouve ces termes encore dans le code, il faudrait idéalement les renommer. Attention à bien migrer les champs en base de données contenant le mot "analyse" sur la table recensements, comme par exemple analyse_etat_sanitaire ou analysed_at.
 
 # Configurations
 

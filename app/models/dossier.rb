@@ -52,12 +52,8 @@ class Dossier < ApplicationRecord
     recensements.count == commune.objets.count
   end
 
-  def all_recensements_analysed?
-    recensements.where(analysed_at: nil).empty?
-  end
-
   def can_generate_rapport?
-    submitted? && all_recensements_analysed?
+    submitted? && recensements.prioritaires.not_analysed.empty?
   end
 
   def not_analysed?
@@ -74,6 +70,14 @@ class Dossier < ApplicationRecord
 
   def analyse_overrides_count
     recensements.filter(&:analyse_overrides?).count
+  end
+
+  def a_des_objets_prioritaires?
+    recensements.prioritaires.count.positive?
+  end
+
+  def replied_automatically?
+    replied_automatically_at.present?
   end
 
   def aasm_after_submit(updates = {}, **_kwargs)

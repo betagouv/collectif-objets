@@ -3,7 +3,7 @@
 %div{ data: { controller: "print" } }
   .fr-grid-row
     .fr-col-md-10
-      %h1 Rapport de recensement
+      %h1 Examen du recensement
     .fr-col-md-2.co-text--right.co-print-hide
       = link_to "Imprimer",
         commune_dossier_path(@commune, view: :print),
@@ -19,7 +19,7 @@
   .fr-grid-row.fr-mt-4w.co-break-after-page
     .fr-col-md-8
       %div
-        Dossier de recensement analysé le #{l(rapport.accepted_at.to_date)} par #{rapport.conservateur}
+        Dossier de recensement examiné le #{l(rapport.accepted_at.to_date)} par #{rapport.conservateur}
         (#{link_to(rapport.conservateur.email, "mailto:#{rapport.conservateur.email}", data: { turbo_frame: "_top" })})
 
       .fr-mt-4w

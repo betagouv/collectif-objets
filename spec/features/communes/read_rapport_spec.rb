@@ -52,7 +52,7 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
     visit "/"
     within("header") { click_on "Voir les objets de Albon" }
     expect(page).to have_text(/Dossier accepté par le conservateur/i)
-    click_on "Voir le rapport"
+    click_on "Voir l'examen"
     expect(page).to have_text(/Jean Lobo/i)
     expect(page).to have_text(/jeanne@culture.gouv.fr/i)
     expect(page).to have_text(/Les photos sont superbes/i)

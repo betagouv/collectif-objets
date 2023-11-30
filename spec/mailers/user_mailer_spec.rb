@@ -21,7 +21,8 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe "commune_completed_email" do
-    let(:commune) { create(:commune, nom: "Marseille") }
+    let(:dossier) { create(:dossier, :submitted) }
+    let(:commune) { create(:commune, nom: "Marseille", dossier:) }
     let(:user) { create(:user, email: "jean@user.fr", commune:) }
     let(:mail) { UserMailer.with(user:, commune:).commune_completed_email }
 
@@ -48,11 +49,11 @@ RSpec.describe UserMailer, type: :mailer do
 
     include_examples(
       "both parts contain",
-      "Vous trouverez sur Collectif Objets le rapport de recensement"
+      "Vous avez envoyé un dossier de recensement"
     )
 
     it "behaves as expected" do
-      expect(mail.subject).to include "Rapport de recensement des objets protégés de Marseille"
+      expect(mail.subject).to include "Examen du recensement des objets protégés de Marseille"
       expect(mail.to).to eq(["jean@user.fr"])
       expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
     end

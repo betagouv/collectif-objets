@@ -11,9 +11,10 @@ Ransack.configure do |config|
      type: :string
 
 
+  # Le sens des flèches up et down est à priori inversé, mais cela semble plus cohérent sur l'interface
   config.custom_arrows = {
-    up_arrow: '<span class="fr-icon-arrow-up-s-fill" aria-hidden="true"></span>',
-    down_arrow: '<span class="fr-icon-arrow-down-s-fill" aria-hidden="true"></span>',
+    up_arrow: '<span class="fr-icon-arrow-down-s-fill" aria-hidden="true"></span>',
+    down_arrow: '<span class="fr-icon-arrow-up-s-fill" aria-hidden="true"></span>',
     default_arrow: '<span class="fr-icon-arrow-down-s-line" aria-hidden="true"></span>'
   }
 end

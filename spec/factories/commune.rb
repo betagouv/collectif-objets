@@ -9,8 +9,16 @@ FactoryBot.define do
     phone_number { "01 01 01 01 01" }
     inbound_email_token { "12345678901234567890" }
 
-    factory :commune_with_user do
+    trait :with_user do
       users { [association(:user)] }
     end
+
+    trait :completed do
+      status { "completed" }
+      association :dossier, :submitted
+    end
+
+    factory :commune_with_user, traits: [:with_user]
+    factory :commune_completed, traits: %i[with_user completed]
   end
 end

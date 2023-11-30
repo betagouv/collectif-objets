@@ -108,7 +108,7 @@ Vous pouvez joindre ces photos directement sur le questionnaire de recensement p
 
 Après échange avec votre CAOA, vous pourrez isoler les objets infestés dans un lieu propice pour éviter de contaminer d’autres éléments.
 
-Votre CAOA indiquera dans son rapport les mesures spécifiques à prendre pour chaque objet, avec des niveaux d’urgence sur l’ensemble de vos objets.
+Votre CAOA indiquera dans son examen les mesures spécifiques à prendre pour chaque objet, avec des niveaux d’urgence sur l’ensemble de vos objets.
 
 Si vous souhaitez améliorer l’état sanitaire à l’intérieur des édifices qui abritent vos objets, vous pouvez prendre contact avec l’UDAP de votre département.
 

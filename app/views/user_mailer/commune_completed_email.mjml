@@ -21,8 +21,11 @@
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.contact") %>
-      <%= I18n.t("user_mailer.commune_completed.consulter") %>
+      <%= I18n.t("user_mailer.commune_completed.documentation") %> <%= link_to "notre documentation", content_blob_url(:documentation_commune) %>.
+    </mj-text>
+    
+    <mj-text>
+      <%= I18n.t("user_mailer.commune_completed.contact") %> <%= link_to "la messagerie de Collectif Objets", commune_messages_url(@commune) %>.
     </mj-text>
 
     <mj-button href="<%= @login_url %>" background-color="rgb(0,0,145)">

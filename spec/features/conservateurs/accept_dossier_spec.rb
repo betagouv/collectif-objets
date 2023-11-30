@@ -27,7 +27,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     create(
       :recensement,
       objet: objet_ciboire, user:, dossier:,
-      etat_sanitaire: Recensement::ETAT_BON,
+      etat_sanitaire: Recensement::ETAT_PERIL,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil
     )
@@ -45,7 +45,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(page).to have_text("Bouquet d'Autel")
     expect(page).to have_text("Ciboire des malades")
 
-    # analyse first recensement
+    # examen first recensement
     click_on "Bouquet d'Autel"
     etat_sanitaire_group = find("div", text: /État de l’objet/, class: "co-text--bold")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
@@ -57,9 +57,9 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     fill_in "recensement[analyse_notes]", with: "Est-ce qu'il est le pepito bleu?"
 
     click_on "Sauvegarder"
-    expect(page).to have_text("Votre analyse a bien été sauvegardée")
+    expect(page).to have_text("Votre examen a bien été sauvegardé")
 
-    # analyse second recensement
+    # examen second recensement
     click_on "Ciboire des malades"
     securisation_group = find("div", text: /Sécurisation de l’objet/, class: "co-text--bold")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
@@ -69,10 +69,10 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     end
 
     click_on "Sauvegarder"
-    expect(page).to have_text("Vous avez analysé tous les recensements de Albon")
+    expect(page).to have_text("L’ensemble des objets en péril ou disparus ont été examinés")
 
     # envoi rapport
-    click_on "Finaliser le rapport …"
+    click_on "Envoyer l'examen à la commune"
     bouquet_row = find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")
     expect(bouquet_row).to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     expect(bouquet_row.all("td")[1]).to have_text(/Bon/i)
@@ -80,11 +80,11 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     ciboire_row = find_link("Ciboire des malades").find(:xpath, "ancestor::tr")
     expect(ciboire_row).not_to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     fill_in("dossier[notes_conservateur]", with: "Merci pour ce joli dossier")
-    click_on "Envoyer le rapport à la commune"
+    click_on "Finaliser et envoyer l'examen à la commune"
 
     # visualisation rapport
-    expect(page).to have_text(/le rapport a été généré et envoyé/i)
-    click_on "Voir le rapport"
+    expect(page).to have_text(/Tous les recensements ont été examinés/i)
+    click_on "Voir l'examen"
     expect(page).to have_text(/Ciboire des malades/i)
     expect(page).to have_text(/Merci pour ce joli dossier/i)
     expect(page).to have_text(/pepito bleu/i)

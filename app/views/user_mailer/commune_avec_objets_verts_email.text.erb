@@ -1,0 +1,11 @@
+<%= I18n.t("user_mailer.shared.bonjour") %>
+
+<%= I18n.t("user_mailer.commune_avec_objets_verts.remerciements", dans_departement: @commune.departement.dans_nom) %>
+
+<%= I18n.t("user_mailer.commune_avec_objets_verts.preservation_patrimoine") %>
+
+<%= I18n.t("user_mailer.commune_avec_objets_verts.engagement") %>
+
+<%= I18n.t("user_mailer.commune_avec_objets_verts.que_des_objets_verts") %>
+
+<%= I18n.t("user_mailer.commune_avec_objets_verts.contacter_caoa") %> la messagerie Collectif Objets accessible ici : <%= commune_messages_url(@commune) %>.

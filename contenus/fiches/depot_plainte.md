@@ -36,7 +36,7 @@ Vous pouvez déposer une pré-plainte en ligne, vous devrez ensuite vous rendre 
 Rappelez à l’agent de police judiciaire qui va vous recevoir que votre plainte se réfère au code NATINF 27479 “Vol d’un objet mobilier classé ou inscrit”.
 
 ### La liste de documents à apporter au commissariat pour le dépôt de plainte
-- Le rapport de recensement
+- L'examen du recensement
 - La fiche POP/Palissy que vous pourrez retrouver en cliquant sur l'objet concerné dans Collectif Objets et en suivant le lien "Voir plus de détails sur la Plateforme Ouverte du Patrimoine"
 - Toutes les autres photos de l’objet prises avant celles du recensement (si vous en disposez)
 - Les documents qui prouvent la propriété de l’œuvre par la commune (si vous en disposez)

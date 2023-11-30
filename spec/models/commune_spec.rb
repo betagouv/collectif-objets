@@ -123,7 +123,7 @@ RSpec.describe Commune, type: :model do
     let!(:commune) { create(:commune, status: :inactive) }
     let!(:objet) { create(:objet, commune:) }
 
-    it "a un statut global sur le recensement et l'analyse à Non recensé" do
+    it "a un statut global sur le recensement et l'examen à Non recensé" do
       expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_RECENSÉ
       expect(Commune.first.statut_global).to eq Commune::ORDRE_NON_RECENSÉ
     end
@@ -131,7 +131,7 @@ RSpec.describe Commune, type: :model do
     context "lorsque la commune a démarré son recensement" do
       before { commune.start! }
 
-      it "a un statut global sur le recensement et l'analyse à En cours de recensement" do
+      it "a un statut global sur le recensement et l'examen à En cours de recensement" do
         expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_DE_RECENSEMENT
         expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_DE_RECENSEMENT
       end
@@ -143,23 +143,46 @@ RSpec.describe Commune, type: :model do
           commune.dossier.conservateur = conservateur
         end
 
-        it "a un statut global sur le recensement et l'analyse à Non analysé" do
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_NON_ANALYSÉ
+        context "lorsque la commune a reçu une réponse automatique" do
+          before { commune.dossier.update(replied_automatically_at: Time.zone.now) }
+
+          it "a un statut global sur le recensement et l'examen à Réponse automatique" do
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
+          end
+
+          it "passe en Examiné si le conservateur décide de faire l'examen tout de même" do
+            commune.dossier.accept!
+
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
+          end
         end
 
-        it "a un statut global sur le recensement et l'analyse à En cours d'analyse" do
-          create(:recensement, analysed_at: Time.zone.now, dossier: commune.dossier, objet:, conservateur:)
+        context "recensement avec des objets en peril" do
+          let!(:recensement) do
+            create(:recensement,
+                   etat_sanitaire: Recensement::ETAT_PERIL, dossier: commune.dossier, objet:, conservateur:)
+          end
 
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_ANALYSE
+          it "a un statut global sur le recensement et l'examen à À examiner" do
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+          end
+
+          it "a un statut global sur le recensement et l'examen à En cours d'examen" do
+            recensement.update(analysed_at: Time.zone.now)
+
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_EN_COURS_D_EXAMEN
+          end
         end
 
-        it "a un statut global sur le recensement et l'analyse à Analysé" do
+        it "a un statut global sur le recensement et l'examen à Examiné" do
           commune.dossier.accept!
 
-          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
-          expect(Commune.first.statut_global).to eq Commune::ORDRE_ANALYSÉ
+          expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
+          expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMINÉ
         end
       end
     end

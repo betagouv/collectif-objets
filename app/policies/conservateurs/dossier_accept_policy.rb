@@ -25,7 +25,7 @@ module Conservateurs
     def can_change_dossier_state?
       conservateur.departements.include?(dossier.departement) &&
         dossier.commune.completed? &&
-        dossier.recensements.not_analysed.empty?
+        dossier.recensements.prioritaires.not_analysed.empty?
     end
   end
 end

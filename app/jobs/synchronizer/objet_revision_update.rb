@@ -63,7 +63,7 @@ module Synchronizer
       return "commune destinataire en cours de recensement" if commune_after_update.started?
 
       if commune_after_update.completed? && commune_after_update.dossier.submitted?
-        return "commune destinataire avec dossier en cours d’analyse"
+        return "commune destinataire avec dossier en cours d'examen"
       end
 
       return "commune d’origine en cours de recensement" if commune_before_update.started?
