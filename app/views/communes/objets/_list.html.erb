@@ -1,11 +1,7 @@
-<% if objets_list.group_by_edifice? %>
-  <%= render "edifices/list", edifices: objets_list.edifices %>
-  <% objets_list.edifices.each do |edifice| %>
-    <div class="fr-my-4w">
-      <%= render "edifices/title", edifice: %>
-      <%= render "communes/objets/cards", objets: edifice.objets, commune:  %>
-    </div>
-  <% end %>
-<% else %>
-  <%= render "communes/objets/cards", objets: @objets_list.objets, card_objets_manquants: true, commune: %>
+<%= render "edifices/list", edifices: objets_list.edifices %>
+<% objets_list.edifices.each do |edifice| %>
+  <div class="fr-my-4w">
+    <%= render "edifices/title", edifice: %>
+    <%= render "communes/objets/cards", objets: edifice.objets, commune:  %>
+  </div>
 <% end %>
