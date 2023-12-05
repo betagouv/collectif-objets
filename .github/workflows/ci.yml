@@ -2,8 +2,6 @@ name: "CI"
 
 on:
   push:
-    branches-ignore: ['cms/**'] # Pas besoin car Netlify génère une pull request
-  pull_request:
 jobs:
   test:
     if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
