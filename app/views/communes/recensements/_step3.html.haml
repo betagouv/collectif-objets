@@ -8,9 +8,12 @@
 
   - if @modal == "confirmation-no-photos"
     = dsfr_modal(title: "Êtes-vous sûr de ne pas pouvoir prendre de photos ?",
+          opened: true,
           html_attributes: { id: "modal-confirmation-no-photos",
             "data-controller": "modal-auto-open",
             "data-modal-auto-open-target": "modal"}) do |m|
+      - m.with_header do
+        = link_to "Fermer", wizard.confirmation_modal_close_path, class: "fr-link--close fr-link"
       %p Attention : votre recensement risque de ne pas être exploitable par le conservateur sans photos.
 
       %p
