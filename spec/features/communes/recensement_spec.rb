@@ -163,6 +163,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     find("label", text: "Je ne trouve pas l’objet").click
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme ne pas trouver l’objet")
+    sleep 1 # sleep and check modal is still present to make sure it does not autoclose
+    expect(page).to have_text("Je confirme ne pas trouver l’objet")
     click_on "Annuler"
     expect(page).to have_text("Avez-vous trouvé l’objet ?")
     find("label", text: "Je ne trouve pas l’objet").click
@@ -218,6 +220,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     find("label", text: "L’objet se trouve dans l’édifice indiqué initialement").click
     find("label", text: "L’objet n’est pas recensable").click
     click_on "Passer à l’étape suivante"
+    expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
+    sleep 1 # sleep and check modal is still present to make sure it does not autoclose
     expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
     click_on "Annuler"
     find("label", text: "L’objet n’est pas recensable").click
@@ -282,6 +286,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Étape 3 sur 6")
     click_on "Passer à l’étape suivante"
+    expect(page).to have_text("Êtes-vous sûr de ne pas pouvoir prendre de photos ?")
+    sleep 1 # sleep and check modal is still present to make sure it does not autoclose
     expect(page).to have_text("Êtes-vous sûr de ne pas pouvoir prendre de photos ?")
     click_on "Annuler" # same here
     click_on "Passer à l’étape suivante"
