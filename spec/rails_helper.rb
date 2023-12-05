@@ -35,24 +35,7 @@ RSpec.configure do |config|
   end
 end
 
-Capybara.register_driver :headless_firefox do |app|
-  options = Selenium::WebDriver::Firefox::Options.new
-  options.add_argument "-headless"
-  Capybara::Selenium::Driver.new app, browser: :firefox, options:
-end
-
-Capybara.register_driver :firefox do |app|
-  options = Selenium::WebDriver::Firefox::Options.new
-  Capybara::Selenium::Driver.new app, browser: :firefox, options:
-end
-
-Capybara.register_driver :chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  Capybara::Selenium::Driver.new app, browser: :chrome, options:
-end
-
-
-Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
+Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "selenium_headless").to_sym
 Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
 
 Capybara.default_max_wait_time = 10
