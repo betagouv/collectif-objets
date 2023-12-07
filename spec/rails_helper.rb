@@ -9,6 +9,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/rspec'
+require "capybara/cuprite"
 require "axe-rspec"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -22,7 +24,6 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.fixture_path = Rails.root.join("/spec/fixtures")
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
@@ -31,29 +32,18 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
 
   config.after(type: :feature) do |example_group|
-    save_screenshot if example_group.exception
+    next unless example_group.exception
+    path = save_screenshot
+    puts "DEBUG: screenshot saved to #{path}"
   end
 end
 
-Capybara.register_driver :headless_firefox do |app|
-  options = Selenium::WebDriver::Firefox::Options.new
-  options.add_argument "-headless"
-  Capybara::Selenium::Driver.new app, browser: :firefox, options:
-end
-
-Capybara.register_driver :firefox do |app|
-  options = Selenium::WebDriver::Firefox::Options.new
-  Capybara::Selenium::Driver.new app, browser: :firefox, options:
-end
-
-Capybara.register_driver :chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  Capybara::Selenium::Driver.new app, browser: :chrome, options:
-end
-
-
-Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
+Capybara.raise_server_errors = true
 Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
+Capybara.javascript_driver = :cuprite
+Capybara.register_driver :cuprite do |app|
+  Capybara::Cuprite::Driver.new(app, window_size: [1920, 1080])
+end
 
 Capybara.default_max_wait_time = 10
 

@@ -70,6 +70,5 @@ group :test do
   gem "axe-core-capybara"
   gem "axe-core-rspec"
   gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
+  gem "cuprite"
 end
