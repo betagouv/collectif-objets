@@ -32,8 +32,11 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
 
-  # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = true
+  # Render exception templates for rescuable exceptions and raise for other exceptions.
+  config.action_dispatch.show_exceptions = :rescuable
+  config.action_dispatch.rescue_responses.merge!({
+    "OnPurposeError" => :internal_server_error
+  })
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
