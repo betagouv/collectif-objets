@@ -257,7 +257,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    nio4r (2.5.9)
+    nio4r (2.7.0)
     nokogiri (1.15.2)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
@@ -282,7 +282,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (5.0.1)
-    puma (6.2.2)
+    puma (6.4.0)
       nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
@@ -521,7 +521,7 @@ DEPENDENCIES
   prawn-table (~> 0.2.2)
   progressbar
   pry
-  puma (~> 6.2)
+  puma (~> 6.4)
   pundit
   rails (~> 7.0.6)
   rails-erd
