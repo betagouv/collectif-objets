@@ -35,6 +35,9 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 120
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Set up database sequences
