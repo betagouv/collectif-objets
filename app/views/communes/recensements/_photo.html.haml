@@ -1,4 +1,4 @@
--# locals: (recensement:, photo:)
+-# locals: (recensement:, photo:, delete_button: false)
 
 .co-photo-preview.fr-mb-2w{id: "photo-#{photo.id}",
   data: { recensement_form_step_target: "existingPhoto",
@@ -15,7 +15,7 @@
         data: { action: "load->photo-preview#onImageLoad", photo_preview_target: "image" }
     - else
       %span Image corrompue
-  - if local_assigns[:delete_button]
+  - if delete_button
     = button_to "Supprimer",
       commune_objet_recensement_photo_path(recensement.commune, recensement.objet, recensement, photo),
       class: "fr-link fr-link--icon-left fr-icon-delete-line",
