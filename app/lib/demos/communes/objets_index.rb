@@ -12,7 +12,6 @@ module Demos
 
       def edifice = nil
       def edifices = []
-      def group_by_edifice? = false
 
       delegate :count, :any?, to: :objets
     end

@@ -29,7 +29,7 @@
     .co-background--teal.fr-pb-12w
       .fr-container.fr-py-4w
         %h3.co-text--blue
-          - if @objets_list.group_by_edifice? && @objets_list.edifice.present?
+          - if @objets_list.edifice.present?
             Ces objets sont encore à recenser dans l’édifice #{@objets_list.edifice.nom} :
           - else
             Ces objets sont encore à recenser :
