@@ -1,7 +1,7 @@
 - if departement.current_campaign
-  = render CalloutWithCtaComponent.new do |c|
-    - c.with_text { "Une campagne est en cours dans ce département" }
-    - c.with_cta { link_to "Voir la campagne", conservateurs_campaign_path(departement.current_campaign), class: "fr-btn" }
+  %p
+    Une campagne est en cours dans ce département ·
+    = link_to "Voir la campagne", conservateurs_campaign_path(departement.current_campaign), class: "fr-link"
 - elsif departement.campaigns.planned.any?
   - campaign = departement.campaigns.planned.first
   %p
