@@ -28,7 +28,7 @@ Rails.application.configure do
     policy.connect_src \
       :self,
       "https://sentry.incubateur.net",
-      "https://stats.data.gouv.fr",
+      "https://stats.beta.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
       *s3_uris2,
       *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
