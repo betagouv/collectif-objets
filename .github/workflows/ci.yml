@@ -2,8 +2,6 @@ name: "CI"
 
 on:
   push:
-    branches-ignore: ['cms/**'] # Pas besoin car Netlify génère une pull request
-  pull_request:
 jobs:
   test:
     if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') }}
@@ -28,12 +26,12 @@ jobs:
     steps:
       - run: mkdir -p tmp/artifacts/capybara
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
       - run: npm ci
@@ -56,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:

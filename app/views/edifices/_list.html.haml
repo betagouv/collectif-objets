@@ -1,4 +1,4 @@
-- unless edifices.count <= 3 && edifices.reduce { |a_moins_de_6_objets, edifice| a_moins_de_6_objets && edifice.objets.count <= 6  }
+- unless edifices.count <= 3 && edifices.all? { _1.objets.count <= 6 }
   %p.fr-h4 Liste des #{edifices.count} édifices
 
   %ul.fr-mb-8w
