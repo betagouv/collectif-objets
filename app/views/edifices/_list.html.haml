@@ -1,5 +1,5 @@
 - unless edifices.count <= 3 && edifices.reduce { |a_moins_de_6_objets, edifice| a_moins_de_6_objets && edifice.objets.count <= 6  }
-  %h4 Liste des #{edifices.count} édifices
+  %p.fr-h4 Liste des #{edifices.count} édifices
 
   %ul.fr-mb-8w
     - edifices.each do |edifice|
