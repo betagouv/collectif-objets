@@ -27,6 +27,8 @@ jobs:
       - run: mkdir -p tmp/artifacts/capybara
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Install libvips
+        uses: sudo apt-get install -y libvips-dev
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
@@ -80,4 +82,3 @@ jobs:
       - name: Déploiement en production
         if: ${{ github.ref == 'refs/heads/main' }}
         run: scalingo --app collectif-objets-prod --region osc-secnum-fr1 integration-link-manual-deploy main
-      
