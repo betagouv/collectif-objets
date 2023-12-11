@@ -8,6 +8,7 @@ class SanityChecksJob
   def perform
     check_commune_started_dossier_construction
     check_commune_completed_dossier_submitted
+    check_campaign_statuses_and_dates
   end
 
   protected
@@ -29,6 +30,21 @@ class SanityChecksJob
              "`#{commune.dossier.status}` au lieu de `submitted` ou `accepted`"
       logger.info text
       AdminMailer.with(email: EMAIL, commune:, text:).sanity_check_alert.deliver_later
+    end
+  end
+
+  def check_campaign_statuses_and_dates
+    Campaign.ongoing.where("date_fin < ?", Time.zone.today).each do |campaign|
+      text = "La campagne #{campaign} est en en cours mais sa date de fin est " \
+             "#{campaign.date_fin} au lieu d'être dans le futur"
+      logger.info text
+      AdminMailer.with(email: EMAIL, campaign:, text:).sanity_check_alert.deliver_later
+    end
+    Campaign.planned.where("date_lancement < ?", Time.zone.today).each do |campaign|
+      text = "La campagne #{campaign} est planifiée mais sa date de lancement est " \
+             "#{campaign.date_lancement} au lieu d'être dans le futur"
+      logger.info text
+      AdminMailer.with(email: EMAIL, campaign:, text:).sanity_check_alert.deliver_later
     end
   end
 end
