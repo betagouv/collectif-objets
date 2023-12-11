@@ -2,5 +2,3 @@
   - objets.each do |objet|
     .fr-col-md-3
       = render Communes::ObjetCardComponent.new(objet, commune:, recensement: objet.current_recensement)
-  - if local_assigns[:card_objets_manquants]
-    = render "objets/card_objets_manquants", objets:
