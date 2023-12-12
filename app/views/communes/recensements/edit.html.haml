@@ -25,4 +25,4 @@
               max: 6,
               next_title: @wizard.next_step_title,
               html_attributes: { class: @wizard.skipped_steps_class })
-          = render "communes/recensements/step#{@wizard.step_number}", wizard: @wizard
+          = render "communes/recensements/step#{@wizard.step_number}", wizard: @wizard, recensement: @recensement

@@ -1,11 +1,11 @@
--# locals: (ransack:, departement:, communes:, pagy:, query_present: false)
+-# locals: (ransack:, departement:, communes:, pagy:, query_present:)
 
 = turbo_frame_tag "communes-search" do
   = search_form_for ransack, url: conservateurs_departement_path(departement), method: "GET", builder: FormBuilderDsfr, data: { turbo_action: "replace" } do |f|
     .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-end
       .fr-col-12.fr-col-sm-4
         = f.label :nom_unaccented_cont, "Nom de commune", class: "fr-mb-1w"
-        .co-flex
+        .co-flex 
           = f.text_field :nom_unaccented_cont, data: { controller: "input-autosubmit", action: "change->input-autosubmit#submit" }
           %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
       .fr-col-12.fr-col-sm-4
@@ -37,7 +37,7 @@
                   = link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top"
                 %td.co-hide--sm= commune.objets_count
                 %td.co-hide--sm= commune.en_peril_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.en_peril_count} PERIL" } : 0
-                %td.co-hide--sm= commune.disparus_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU#{commune.disparus_count > 1 ? "S" : ""}" } : 0
+                %td.co-hide--sm= commune.disparus_count.positive? ? dsfr_badge(status: :warning, classes: ["fr-badge--sm"]) { "#{commune.disparus_count} DISPARU#{commune.disparus_count > 1 ? "S" : ""}" } : 0          
                 %td= commune_statut_global_badge(commune, small: true)
                 %td.co-hide--sm= commune.dossier&.submitted_at&.strftime("%d/%m/%y")
 
