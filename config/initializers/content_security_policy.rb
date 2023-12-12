@@ -4,7 +4,7 @@ Rails.application.configure do
   # We will only report breaches for a while, then actually enforce these CSP rules by removing this line
   config.content_security_policy_report_only = true
 
-  s3_buckets = %w[development2 staging2 production public photos-overrides].map { "collectif-objets-#{_1}" }
+  s3_buckets = %w[development2 staging2 production public].map { "collectif-objets-#{_1}" }
   s3_uris1 = s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" }
   s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
 

@@ -32,7 +32,6 @@ historiques et aux conservateurs d'examiner ces recensements.
   * [Netlify CMS](#netlify-cms)
   * [Rajouter une vidéo sur le site](#rajouter-une-vidéo-sur-le-site)
   * [Debug local via tunneling](#debug-local-via-tunneling)
-  * [Overrides de Photos Palissy](#overrides-de-photos-palissy)
   * [Vocabulaire](#vocabulaire)
 * [Configurations](#configurations)
   * [Configurations DNS, boites mails, et serveurs mails](#configurations-dns-boites-mails-et-serveurs-mails)
@@ -726,29 +725,6 @@ Une fois installé vous pouvez utiliser :
 - `make tunnel_webhooks` expose uniquement l’URL racine https://collectifobjets-mail-inbound.loophole.site qui est configurée sur un webhook inbound parsing sur Send In Blue.
 
 
-## Overrides de Photos Palissy
-
-Les overrides de photos permettent d'intégrer des photos de bases locales non reversées dans POP.
-
-**Préparer des overrides de photos en local**
-
-- récupérer les photos et le lien avec la référence palissy depuis le département
-- s'assurer que les noms de fichiers sont corrects et présents
-- isoler les photos qui nous concernent
-- les uploader sur S3 public
-- lancer le script pour importer les ObjetsOverrides dans la db
-- resynchroniser les objets
-
-**Importer des overrides de photos en production**
-
-`scalingo --app collectif-objets-prod --region osc-secnum-fr1 run bash`
-
-```sh
-curl https://transfer.sh/url-du-fichier.csv > tmp.csv
-rake objet_overrides:import[tmp.csv]
-rails runner "SynchronizeObjetsJob.perform_inline('52')"
-```
-
 ## Vocabulaire
 
 Un objet dit *prioritaire* est un objet en péril ou disparu. Le cas contraire, on parle d'*objet vert*.
@@ -790,11 +766,10 @@ aws s3api put-bucket-cors --bucket collectif-objets-production --cors-configurat
 Il y a deux buckets où tous les fichiers sont publics
 
 - `collectif-objets-public` : contient le fichier seeds.pgsql pour les review apps ainsi que les vidéos des articles de presse
-- `collectif-objets-photos-overrides` : contient des photos d'objets à utiliser préférentiellement par rapport à POP
 
 Pour configurer l'accès public de ces buckets utilisez la commande suivante :
 
-`aws s3api put-bucket-policy --bucket collectif-objets-photos-overrides --policy file://bucket-policy-objet-overrides.json`
+`aws s3api put-bucket-policy --bucket collectif-objets-public --policy file://bucket-policy-public.json`
 
 Avec le fichier suivant
 
@@ -804,7 +779,7 @@ Avec le fichier suivant
   "Id": "collectifobjets",
   "Statement": [
     {
-      "Sid": "Allow public access on all photos overrides",
+      "Sid": "Allow public access on all files",
       "Effect": "Allow",
       "Principal": {
         "SCW": "project_id:xxxx-xxxx-xxxx"
@@ -813,8 +788,7 @@ Avec le fichier suivant
         "s3:GetObject"
       ],
       "Resource": [
-        "collectif-objets-public",
-        "collectif-objets-photos-overrides"
+        "collectif-objets-public"
       ]
     }
   ]
