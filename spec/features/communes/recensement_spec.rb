@@ -9,8 +9,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
-  let!(:objet_bouquet) { create(:objet, palissy_TICO: "Bouquet d’Autel", palissy_EDIF: "Eglise st Jean", commune:) }
-  let!(:objet_ciboire) { create(:objet, palissy_TICO: "Ciboire des malades", palissy_EDIF: "Musée", commune:) }
+  let!(:edifice) { create(:edifice, code_insee: commune.code_insee) }
+  let!(:objet_bouquet) do
+    create(:objet, palissy_TICO: "Bouquet d’Autel", palissy_EDIF: "Eglise st Jean", commune:, edifice:)
+  end
+  let!(:objet_ciboire) do
+    create(:objet, palissy_TICO: "Ciboire des malades", palissy_EDIF: "Musée", commune:, edifice:)
+  end
 
   def navigate_to_objets
     login_as(user, scope: :user)

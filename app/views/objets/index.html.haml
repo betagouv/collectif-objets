@@ -32,12 +32,11 @@
     - if @pagy.pages > 1
       = render 'shared/pagy_nav', pagy: @pagy, label: "Pagination bas de page"
 
-  - elsif @objets_list.group_by_edifice?
+  - else  
     = render "edifices/list", edifices: @objets_list.edifices
     - @objets_list.edifices.each do |edifice|
       .fr-my-4w
         = render "edifices/title", edifice:
         = render "objets/cards", objets: edifice.objets, commune: @objets_list.commune
+    = render "communes/objets/pourquoi_n_objets_callout", objets_list: @objets_list
 
-  - else
-    = render "objets/cards", objets: @objets_list.objets, card_objets_manquants: true, commune: @objets_list.commune
