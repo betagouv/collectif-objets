@@ -34,7 +34,9 @@ class SanityChecksJob
   end
 
   def check_campaign_statuses_and_dates
-    Campaign.ongoing.where("date_fin < ?", Time.zone.today).each do |campaign|
+    Campaign.ongoing.where("date_fin < ?", Time.zone.today - 1.day).each do |campaign|
+      # this will warn for campaigns that should have ended the day before yesterday
+      # because the cron job that closes them runs later in the day than this job
       text = "La campagne #{campaign} est en en cours mais sa date de fin est " \
              "#{campaign.date_fin} au lieu d'être dans le futur"
       logger.info text
