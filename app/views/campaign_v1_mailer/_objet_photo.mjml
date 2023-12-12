@@ -1,7 +1,7 @@
-<% photo = objet.palissy_photos&.first %>
+<% photo_presenter = objet.palissy_photos_presenters&.first %>
 <mj-section>
   <mj-column>
-    <mj-image width="300px" src="<%= photo&.url || "https://collectif-objets.beta.gouv.fr/image-non-renseignee.jpeg" %>" />
+    <mj-image width="300px" src="<%= photo_presenter&.url || "https://collectif-objets.beta.gouv.fr/image-non-renseignee.jpeg" %>" />
     <mj-text align="center">
       <%= objet.palissy_TICO %>
       <br />
@@ -9,10 +9,10 @@
       <br />
       <b><%= objet.edifice_nom_formatted %></b>
       <%= objet.emplacement %>
-      <% if photo&.credit.present? %>
+      <% if photo_presenter&.credit.present? %>
         <br />
         <i>
-          <%= photo.credit %>
+          <%= photo_presenter.credit %>
         </i>
       <% end %>
     </mj-text>

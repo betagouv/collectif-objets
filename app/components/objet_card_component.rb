@@ -23,7 +23,7 @@ class ObjetCardComponent < ViewComponent::Base
 
   attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin
 
-  delegate :nom, :palissy_DENO, :edifice_nom, :palissy_photos, to: :objet
+  delegate :nom, :palissy_DENO, :edifice_nom, :palissy_photos_presenters, to: :objet
 
   def path
     @path ||= objet_path(@objet)
@@ -49,12 +49,12 @@ class ObjetCardComponent < ViewComponent::Base
       .deep_tidy_html_attributes
   end
 
-  def main_photo_palissy = palissy_photos&.first
+  def main_photo_palissy = palissy_photos_presenters&.first
 
   def main_photo_recensement
     return unless recensement&.photos&.any?
 
-    Photo.new \
+    PhotoPresenter.new \
       url: recensement.photos.first.variant(:medium),
       description: "Photo de recensement de l’objet #{objet.nom}"
   end

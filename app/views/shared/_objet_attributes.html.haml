@@ -1,0 +1,45 @@
+-# locals: (objet:)
+
+%p
+  %b Emplacement
+  %br
+  Se situe dans l'édifice
+  %b= objet.edifice_nom
+  %br
+  %i= objet.emplacement
+
+%p
+  %b Dénomination
+  %br
+  = objet.palissy_DENO
+
+%p
+  %b Catégorie
+  %br
+  = objet.categorie
+
+%p
+  %b Époque
+  %br
+  = objet.crafted_at || "N/A"
+
+%p
+  %b Protection
+  %br
+  = objet.palissy_DPRO || "N/A"
+
+%p
+  %b Récolement
+  %br
+  Dernier récolement :
+  = objet.last_recolement_at || "N/A"
+
+%p
+  %b Références
+  %br
+  POP (Base Palissy) :
+  = objet.palissy_REF
+
+%p
+  = link_to_palissy(objet, class: "co-text--blue") do
+    Voir plus de détails sur la Plateforme Ouverte du Patrimoine

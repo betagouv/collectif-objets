@@ -34,7 +34,7 @@
                   target: "_blank",
                   rel: "noopener"
           .fr-card__header
-            - photo = Photo.new(url: @objet.palissy_photos.any? ? @objet.first_palissy_photo_url : "images/illustrations/photo-manquante-pop.png")
+            - photo = PhotoPresenter.new(url: @objet.palissy_photos.any? ? @objet.palissy_photos_presenters.first&.url : "images/illustrations/photo-manquante-pop.png")
             = render("shared/card_photo", photo:)
 
   = form_for @recensement,
@@ -44,7 +44,8 @@
     #recensement
       .co-background--light-teal.fr-my-2w.fr-px-4w.fr-py-2w
         %h3 Recensement
-        .fr-grid-row.fr-grid-row--gutters.fr-pb-6w
+
+        .fr-grid-row.fr-grid-row--gutters.fr-pb-6w.fr-mt-3w
           %div{class: @recensement.photos.any? ? "fr-col-md-8" : "fr-col-md-12"}
             - if @recensement.missing_photos?
               %p.fr-badge.fr-badge--sm.fr-badge--warning.fr-mb-4w
@@ -59,7 +60,8 @@
                 %p.co-text--italic Aucune commentaire laissé par la commune pour cet objet
           - if @recensement.photos.any?
             .fr-col-md-4.co-flex-md-reverse-order
-              = render "shared/recensement_photos_gallery", recensement: @recensement
+              = render galerie_recensement(@recensement)
+
     .fr-grid-row
       .fr-col-md-12
         - unless @recensement.objet.commune.completed?

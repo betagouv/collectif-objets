@@ -122,7 +122,6 @@ Côté Javascript les principaux packages utilisés sont :
 - `@hotwired/stimulus` : Simplifie le lien entre HTML et JS
 - `maplibre-gl` : permet d'afficher une carte des objets en France
 - `Chart.js` : diagrammes
-- `spotlight.js` : galeries de photos d'objets
 
 # Infrastructure, environnements, écosystème et services externes
 
@@ -547,16 +546,16 @@ Les fichiers `.rb` des composants View Components sont dans `/app/components`.
 Pour chaque composant, tous les fichiers liés (JS, CSS, preview) sont dans un dossier du même nom dans
 `/app/components`.
 
-Par exemple un composant GalleryComponent pourra être composé les fichiers suivants:
+Par exemple un composant GalerieComponent pourra être composé les fichiers suivants:
 
-- `/app/components/gallery_component.rb`
-- `/app/components/gallery_component/gallery_component.css`
-- `/app/components/gallery_component/gallery_component_controller.js`
-- `/app/components/gallery_component/gallery_component_preview.rb`
+- `/app/components/galerie_component.rb`
+- `/app/components/galerie_component/galerie_component.css`
+- `/app/components/galerie_component/lightbox_component_controller.js`
+- `/app/components/galerie_component/galerie_component_preview.rb`
 
-Le format du nom du fichier `gallery_component_controller.js` est important : il ne sera importé que s'il respecte ce format.
+Le format du nom du fichier `lightbox_component_controller.js` est important : il ne sera importé que s'il respecte ce format.
 Ce fichier doit exporter un controlleur Stimulus et est responsable d'importer le fichier CSS.
-La classe de preview doit malheureusement être préfixée par le nom du composant, ici `GalleryComponent::GalleryComponentPreview`.
+La classe de preview doit malheureusement être préfixée par le nom du composant, ici `GalerieComponent::GalerieComponentPreview`.
 Cette configuration s'inspire partiellement de [view_component-contrib](https://github.com/palkan/view_component-contrib).
 
 Des controlleurs Stimulus non liés à des composants existent dans :

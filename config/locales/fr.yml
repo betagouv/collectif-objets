@@ -401,25 +401,20 @@ fr:
       long_with_weekday: "%A %e %B %Y à %Hh%M"
     pm: pm
   objets:
-    palissy_photos_count:
-      zero: Aucune photo connue pour cet objet
-      one: 1 photo connue pour cet objet
-      other: "%{count} photos connues pour cet objet"
     count:
       zero: aucun objet
       one: 1 objet
       other: "%{count} objets"
-  gallery_component:
-    open:
-      one: Agrandir
-    title:
-      zero: Aucune photo
-      one: 1 photo
-      other: "%{count} photos"
-    last_thumb:
-      zero: "voir la galerie"
-      one: "1 autre photo …"
-      other: "%{count} autres photos …"
+    photos_count:
+      zero: Aucune photo connue pour cet objet
+      one: 1 photo connue pour cet objet
+      other: "%{count} photos connues pour cet objet"
+  galerie:
+    miniatures:
+      last_thumb:
+        zero: "voir la galerie"
+        one: "1 autre photo …"
+        other: "%{count} autres photos …"
   pdf_embed_component:
     download: Télécharger le fichier PDF
   campaign_v1_mailer:
@@ -617,14 +612,14 @@ fr:
       visibilite: Ce recensement nous permet d’avoir une plus grande visibilité sur le parc d’objets monuments historiques du département et d’assurer un meilleur suivi de notre patrimoine.
       a_venir: Si la situation l'exige, les conservateurs des antiquités et objets d’art vous proposeront des recommandations pour assurer une meilleure conservation des objets monuments historiques de votre commune.
       documentation: Pour toute question, n'hésitez pas à consulter
-      contact: Vous pouvez directement contacter les conservateurs via 
+      contact: Vous pouvez directement contacter les conservateurs via
       cta: Accéder à Collectif Objets
     commune_avec_objets_verts:
       remerciements: Nous vous remercions d'avoir pris part à la campagne de recensement des objets monuments historiques avec Collectif Objets %{dans_departement} qui vient de s'achever.
-      preservation_patrimoine: En participant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine. 
+      preservation_patrimoine: En participant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine.
       engagement: Le partage des connaissances entre l'ensemble des acteurs de la chaîne patrimoniale permet d'assurer un meilleur suivi des objets protégés et d'identifier les situations problématiques nécessitant une prise en charge urgente. Nous vous remercions vivement pour votre engagement.
       que_des_objets_verts: Vous avez indiqué que les objets protégés de votre commune sont dans un état qui n'appelle pas une prise en charge urgente.
-      contacter_caoa: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur des antiquités et objets d'art. Vous  pouvez directement le contacter via 
+      contacter_caoa: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur des antiquités et objets d'art. Vous  pouvez directement le contacter via
     dossier_auto_submitted:
       intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs ne l'avaient pas encore reçu.
       auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’examiner et revenir vers vous avec un examen, en temps voulu.

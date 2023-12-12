@@ -64,10 +64,6 @@ class Objet < ApplicationRecord
     end
   end
 
-  def first_palissy_photo_url
-    palissy_photos.first&.url
-  end
-
   def nom_with_ref_pop
     truncate("#{palissy_REF} #{nom}", length: 40)
   end
@@ -94,8 +90,8 @@ class Objet < ApplicationRecord
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
-  def palissy_photos
-    super.map { Photo.new(url: _1["url"], description: _1["name"], credit: _1["credit"]) }
+  def palissy_photos_presenters
+    palissy_photos.each_with_index.map { |photo, index| PhotoPresenter.from_palissy_photo(photo, index) }
   end
 
   def to_s = palissy_TICO

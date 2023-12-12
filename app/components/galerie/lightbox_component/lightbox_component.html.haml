@@ -1,0 +1,34 @@
+.co-galerie{data: { controller: "galerie--lightbox-component", close_path:, next_photo_path:, previous_photo_path:, turbo_frame: turbo_frame, action: "keydown.esc@document->galerie--lightbox-component#close keydown.left@document->galerie--lightbox-component#previous keydown.right@document->galerie--lightbox-component#next" } }
+  .header
+    .left
+      Photo #{current_index + 1} / #{count}
+    .right
+      = link_to "Télécharger", current_photo.download_url, class: "fr-btn fr-btn--sm fr-btn--secondary action fr-btn--icon-left fr-icon-download-line"
+      - if display_actions
+        %button.fr-btn.fr-btn--sm.fr-btn--secondary.action.fr-btn--icon-left.fr-icon-arrow-go-forward-line
+          Pivoter
+        %button.fr-btn.fr-btn--sm.fr-btn--secondary.action.fr-btn--icon-left.fr-icon-delete-line
+          Supprimer
+        %button.fr-btn.fr-btn--sm.fr-btn--secondary.action.fr-btn--icon-left.fr-icon-add-line
+          Ajouter
+      = link_to close_path, class: "fr-link close" do
+        %span Fermer
+        = icon_span 'close'
+  .content
+    .arrow-link
+      - if previous_photo_path
+        = link_to "", previous_photo_path, class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-left-s-line fr-btn--sm", title: "photo précédente"
+      - else
+        %button.fr-btn.fr-btn--sm.fr-btn--secondary.fr-btn--icon.fr-icon-arrow-left-s-line(disabled title="photo précédente")
+    .photo
+      = vite_or_raw_image_tag current_photo.url, alt: current_photo.alt
+    .arrow-link
+      - if next_photo_path
+        = link_to "", next_photo_path, class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-right-s-line fr-btn--sm", title: "photo suivante"
+      - else
+        %button.fr-btn.fr-btn--sm.fr-btn--secondary.fr-btn--icon.fr-icon-arrow-right-s-line(disabled title="photo suivante")
+    .footer
+      = current_photo.credit || "Aucun crédit photo renseigné"
+      - if current_photo.description
+        = "·"
+        = current_photo.description

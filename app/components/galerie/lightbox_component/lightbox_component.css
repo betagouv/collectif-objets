@@ -1,0 +1,77 @@
+.co-galerie {
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 600;
+}
+
+.co-galerie > .header {
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.co-galerie > .header .left {
+  color: var(--text-action-high-blue-france);
+}
+
+.co-galerie > .header > .right {
+  display: flex;
+  gap: 1rem;
+}
+
+.co-galerie > .header .close {
+  margin-left: 1rem;
+}
+
+.co-galerie > .header .action {
+  margin-right: 1rem;
+}
+
+.co-galerie > .content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  position: relative;
+}
+
+.co-galerie > .content > .photo {
+  flex-grow: 1;
+  text-align: center;
+  height: 100%;
+}
+
+.co-galerie > .content > .photo img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.co-galerie > .content > .arrow-link {
+  flex-grow: 0;
+  padding: 1em;
+}
+
+.co-galerie > .content > .arrow-link a,
+.co-galerie > .content > .arrow-link button {
+  background: white;
+}
+
+.co-galerie > .content .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #ccc;
+  padding: 1rem .5rem;
+  text-align: center;
+}

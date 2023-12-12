@@ -7,8 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "patch-package"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -33,12 +32,10 @@
     "maplibre-gl": "^3.6.2",
     "mjml": "^4.14.1",
     "nanobar": "^0.4.2",
-    "spotlight.js": "^0.7.8",
     "stimulus-vite-helpers": "^3.0.1",
     "throttle-debounce": "^5.0.0"
   },
   "devDependencies": {
-    "patch-package": "^8.0.0",
     "vite": "^4.3.9",
     "vite-plugin-ruby": "^3.2.2",
     "vite-plugin-stimulus-hmr": "^3.0.0"

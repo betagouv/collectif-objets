@@ -1,0 +1,122 @@
+.co-galerie-miniatures .title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.co-galerie-miniatures .photo {
+  overflow: hidden;
+  text-decoration: none !important;
+  background-image: none !important;
+}
+
+.co-galerie-miniatures .first {
+  margin-bottom: 1rem;
+}
+
+.co-galerie-miniatures .first {
+  position: relative;
+}
+
+.co-galerie-miniatures .magnifier-icon {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: white;
+}
+
+/* small viewports only */
+@media only screen and (max-width: 767px) {
+  .co-galerie-miniatures .photo img {
+    max-width: 100%;
+  }
+
+  .co-galerie-miniatures .missing-photo {
+    display: none;
+  }
+
+  .co-galerie-miniatures .thumbs {
+    display: none;
+  }
+
+  .co-galerie-miniatures .title-link {
+    display: none;
+  }
+}
+
+/* big viewports only */
+@media only screen and (min-width: 768px) {
+  .co-galerie-miniatures {
+    text-align: center;
+  }
+
+  .co-galerie-miniatures .first {
+    border: 1px solid #ccc;
+  }
+
+  .co-galerie-miniatures .first img {
+    max-width: 100%;
+    max-height: 400px;
+  }
+
+  .co-galerie-miniatures .thumbs {
+    display: flex;
+    height: 150px;
+    overflow: hidden;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .co-galerie-miniatures .thumbs > div {
+    border: 1px solid #ccc;
+    height: 100%;
+    width: 150px;
+  }
+
+  .co-galerie-miniatures .thumbs > div:hover {
+    background-color: #eee;
+  }
+
+  .co-galerie-miniatures .thumbs img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+  }
+
+  .co-galerie-miniatures .thumb-link {
+    border: 1px solid #ccc;
+  }
+
+  .co-galerie-miniatures .thumb-link > a {
+    height: 100%;
+  }
+
+  .co-galerie-miniatures .cursor--zoom-in {
+    cursor: zoom-in;
+  }
+
+  .co-galerie-miniatures .bottom-link {
+    display: none;
+  }
+}
+
+
+/* MINIMAL VERSION FOR ADMIN */
+
+.co-galerie-miniatures--minimal .co-galerie-miniatures .title {
+  display: none;
+}
+.co-galerie-miniatures--minimal .co-galerie-miniatures .first {
+  border: none;
+  display: inline-block;
+  margin-bottom: 0;
+}
+.co-galerie-miniatures--minimal .co-galerie-miniatures .first img {
+  max-width: 150px;
+  max-height: 150px;
+}
+.co-galerie-miniatures--minimal .co-galerie-miniatures .thumbs {
+  display: inline-block;
+}
+.co-galerie-miniatures--minimal .co-galerie-miniatures .thumbs > div {
+  border: none;
+}
