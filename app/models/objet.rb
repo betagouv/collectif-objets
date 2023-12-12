@@ -10,7 +10,7 @@ class Objet < ApplicationRecord
 
   scope :order_by_recensement_priorite,
         lambda {
-          joins(:recensements)
+          left_outer_joins(:recensements)
           .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
           .order("recensements.analysed_at DESC")
         }
