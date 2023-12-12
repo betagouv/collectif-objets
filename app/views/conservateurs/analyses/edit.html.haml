@@ -44,6 +44,9 @@
     #recensement
       .co-background--light-teal.fr-my-2w.fr-px-4w.fr-py-2w
         %h3 Recensement
+
+        = turbo_frame_tag "gallery"
+
         .fr-grid-row.fr-grid-row--gutters.fr-pb-6w
           %div{class: @recensement.photos.any? ? "fr-col-md-8" : "fr-col-md-12"}
             - if @recensement.missing_photos?
@@ -59,7 +62,11 @@
                 %p.co-text--italic Aucune commentaire laissé par la commune pour cet objet
           - if @recensement.photos.any?
             .fr-col-md-4.co-flex-md-reverse-order
-              = render "shared/recensement_photos_gallery", recensement: @recensement
+              .co-gallery.fr-mb-4w
+                %p.co-text--bold
+                  = t("objets.palissy_photos_count", count: @recensement.photos.count)
+                = link_to "Voir la galerie", conservateurs_objet_recensement_photo_path(@objet, @recensement, @recensement.photos.first.blob_id), data: { turbo_frame: "gallery" }
+
     .fr-grid-row
       .fr-col-md-12
         - unless @recensement.objet.commune.completed?

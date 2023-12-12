@@ -106,6 +106,7 @@ Rails.application.routes.draw do
     resources :objets, only: [] do
       resources :recensements, only: [] do
         resource :analyse, only: %i[edit update]
+        resources :photos, only: %i[show]
       end
     end
     resources :dossiers, only: [] do

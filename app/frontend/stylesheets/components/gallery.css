@@ -1,0 +1,63 @@
+.gallery {
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.gallery > header {
+  padding-bottom: .5rem;
+  background-color: #fff;
+}
+
+.gallery > header > .top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: .5rem;
+}
+
+.gallery > header > .utilities-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .2em;
+}
+
+.gallery > .content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.gallery > .content > .photo {
+  flex-grow: 1;
+  text-align: center;
+  height: 100%;
+}
+
+.gallery > .content > .photo img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.gallery > .content > .arrow-link {
+  flex-grow: 0;
+  padding: 1em;
+}
+
+.gallery > .content > .arrow-link a,
+.gallery > .content > .arrow-link button {
+  background: white;
+}

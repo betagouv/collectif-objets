@@ -1,0 +1,32 @@
+= turbo_frame_tag "gallery" do
+  .gallery
+    %header
+      .top-row
+        %h1.fr-text--md.fr-p-0.fr-m-0 Collectif Objets
+        %div #{@objet.nom}
+        %div Photo #{@index + 1} / #{@gallery.count}
+        %div
+          = link_to edit_conservateurs_objet_recensement_analyse_path(@objet, @recensement), class: "fr-link" do
+            %span Retour au recensement
+            = icon_span 'close'
+      .utilities-row
+        = link_to "Télécharger", rails_blob_path(@photo.attachment, disposition: 'attachment'), class: "fr-btn fr-btn--sm fr-btn--secondary fr-mr-1w fr-btn--icon-left fr-icon-download-line"
+        %button.fr-btn.fr-btn--sm.fr-btn--secondary.fr-mr-1w.fr-btn--icon-left.fr-icon-arrow-go-forward-line
+          Pivoter
+        %button.fr-btn.fr-btn--sm.fr-btn--secondary.fr-mr-1w.fr-btn--icon-left.fr-icon-delete-line
+          Supprimer
+        %button.fr-btn.fr-btn--sm.fr-btn--secondary.fr-mr-1w.fr-btn--icon-left.fr-icon-add-line
+          Ajouter
+    .content
+      .arrow-link
+        - if @previous_link
+          = link_to "", @previous_link, class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-left-s-line fr-btn--sm"
+        - else
+          %button.fr-btn.fr-btn--sm.fr-btn--secondary.fr-btn--icon.fr-icon-arrow-left-s-line(disabled)
+      .photo
+        = vite_or_raw_image_tag @photo.url, alt: @photo.alt
+      .arrow-link
+        - if @next_link
+          = link_to "", @next_link, class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-right-s-line fr-btn--sm"
+        - else
+          %button.fr-btn.fr-btn--sm.fr-btn--secondary.fr-btn--icon.fr-icon-arrow-right-s-line(disabled)
