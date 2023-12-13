@@ -18,6 +18,7 @@
 
 @media (max-width: 576px) {
   .co-hide--sm { display: none !important; }
+  .co-display--sm { display: block !important; }
 }
 
 /* OVERFLOWS */
