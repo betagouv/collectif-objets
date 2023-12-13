@@ -119,6 +119,10 @@ class Campaign < ApplicationRecord
   def can_force_start? = !prod? && draft_or_planned? && communes.any? && safe_emails?
   def can_force_step_up? = !prod? && ongoing? && next_step.present? && communes.any? && safe_emails?
 
+  def to_s
+    "Campagne #{departement} du #{date_lancement} au #{date_fin}"
+  end
+
   private
 
   def prod? = Rails.configuration.x.environment_specific_name == "production"
