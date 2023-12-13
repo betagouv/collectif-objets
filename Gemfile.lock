@@ -503,64 +503,64 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  aasm
-  aasm-diagram
-  actioncable
-  active_model_validates_intersection_of
-  active_storage_validations
-  activerecord-postgis-adapter
-  after_commit_everywhere
-  aws-sdk-s3
-  axe-core-capybara
-  axe-core-rspec
-  bootsnap
-  capybara
+  aasm (~> 5.5)
+  aasm-diagram (~> 0.1)
+  actioncable (~> 7.1)
+  active_model_validates_intersection_of (~> 3.0)
+  active_storage_validations (~> 1.0)
+  activerecord-postgis-adapter (~> 9.0)
+  after_commit_everywhere (~> 1.3)
+  aws-sdk-s3 (~> 1.132)
+  axe-core-capybara (~> 4.7)
+  axe-core-rspec (~> 4.7)
+  bootsnap (~> 1.16)
+  capybara (~> 3.39)
   chartkick (~> 5.0)
-  debug (>= 1.0.0)
-  devise
-  dsfr-view-components
-  factory_bot_rails
-  foreman
-  front_matter_parser
-  haml-rails
-  html2haml
-  htmlbeautifier
-  icalendar
-  image_processing
-  kramdown
-  launchy
-  listen
-  lookbook (~> 2.0.5)
-  matrix
+  debug (>= 1.0)
+  devise (~> 4.9)
+  dsfr-view-components (~> 0.4)
+  factory_bot_rails (~> 6.2)
+  foreman (~> 0.87)
+  front_matter_parser (~> 1.0)
+  haml-rails (~> 2.1)
+  html2haml (~> 2.3)
+  htmlbeautifier (~> 1.4)
+  icalendar (~> 2.10)
+  image_processing (~> 1.12)
+  kramdown (~> 2.4)
+  launchy (~> 2.5)
+  listen (~> 3.8)
+  lookbook (~> 2.0)
+  matrix (~> 0.4)
   mjml-rails (~> 4.9)
   pagy (~> 6.0)
   pg (~> 1.5)
   prawn (~> 2.4)
-  prawn-table (~> 0.2.2)
-  progressbar
-  pry
+  prawn-table (~> 0.2)
+  progressbar (~> 1.0)
+  pry (~> 0.14)
   puma (~> 6.4)
-  pundit
+  pundit (~> 2.3)
   rails (~> 7.1)
-  rails-erd
+  rails-erd (~> 1.7)
   ransack (~> 4.1)
-  redis
+  redis (~> 5.0)
   rspec-rails (~> 6.0)
-  rubocop
-  rubocop-rails
-  rubyzip
+  rubocop (~> 1.51)
+  rubocop-rails (~> 2.19)
+  rubyzip (~> 2.3)
   selenium-webdriver (~> 4.16)
-  sentry-rails
+  sentry-rails (~> 5.15)
   sentry-ruby (~> 5.15)
-  sentry-sidekiq
-  sidekiq
-  solargraph
-  turbo-rails
-  typhoeus
-  tzinfo-data
-  view_component
-  vite_rails
-  web-console
+  sentry-sidekiq (~> 5.15)
+  sidekiq (~> 7.2)
+  solargraph (~> 0.49)
+  turbo-rails (~> 1.4)
+  typhoeus (~> 1.4)
+  tzinfo-data (~> 1.0)
+  view_component (~> 2.82)
+  vite_rails (~> 3.0)
+  web-console (~> 4.2)
 
 RUBY VERSION
    ruby 3.2.2p53
