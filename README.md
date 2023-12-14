@@ -25,6 +25,7 @@ historiques et aux conservateurs d'examiner ces recensements.
   * [Review apps](#review-apps)
   * [Préparation d'une astreinte dev](#préparation-dune-astreinte-dev)
   * [Données (Origine, Transformations, Republications)](#données-origine-transformations-republications)
+  * [Photos](#photos)
   * [Frontend : Vite, View Components, Stimulus](#frontend--vite-view-components-stimulus)
   * [Intégration du Design Système de l'État Français (DSFR)](#intégration-du-design-système-de-létat-français-dsfr)
   * [Messagerie](#messagerie)
@@ -35,7 +36,7 @@ historiques et aux conservateurs d'examiner ces recensements.
   * [Vocabulaire](#vocabulaire)
 * [Configurations](#configurations)
   * [Configurations DNS, boites mails, et serveurs mails](#configurations-dns-boites-mails-et-serveurs-mails)
-  * [Configurations des permissions ACLs et CORS des buckets S3 Scaleway](#configurations-des-permissions-acls-et-cors-des-buckets-s3-scaleway)
+  * [Buckets S3, permissions ACLs et CORS](#buckets-s3-permissions-acls-et-cors)
 <!-- TOC -->
 
 # Installation
@@ -524,8 +525,10 @@ flowchart TD
   style ne_pas_importer_nouvel_objet fill:#660000
 ```
 
-### Photos
-Les photos venant de Palissy sont répertoriées dans le champ palissy_photos de la table objets en format JSON, par exemple :
+## Photos
+
+Les métadonnées des photos venant de Mémoire sont stockées dans le champ `objets.palissy_photos` dans un champ JSON, par exemple :
+
 ```
 [
   {
@@ -536,16 +539,7 @@ Les photos venant de Palissy sont répertoriées dans le champ palissy_photos de
 ]
 ```
 
-Les photos mises en ligne par les communes ou les conservateurs lors du recensement sont des répertoriées dans `ActiveStorage::Attachment` et `ActiveStorage::Blob`, liés à l'objet `Recensement`. Les fichiers sont sur un bucket S3.
-
-### Buckets S3
-
-Les buckets suivants sont sur Scaleway dans le projet nommé "Collectif objets" :
-- collectif-objets-production (dans le projet nommé "default") : stocke les photos et les bordereaux de récolement en PDF
-- collectif-objets-development2 : même chose mais en developement
-- collectif-objets-staging2 : même chose mais en staging
-- collectif-objets-public : pour stocker des contenus éditoriaux visibles sur le site, dans la documentation par exemple
-- collectif-objets-private : pour du stockage en interne
+Les métadonnées des photos mises en ligne par les communes ou les conservateurs lors du recensement sont des stockées dans `ActiveStorage::Attachment` et `ActiveStorage::Blob`, liés à l'objet `Recensement`. Les fichiers sont sur un bucket S3.
 
 ## Frontend : Vite, View Components, Stimulus
 
@@ -774,9 +768,20 @@ L'adresse `support@collectif-objets.beta.gouv.fr` est gérée en délégation de
 Le domaine `collectifobjets.org`, le sous domaine de redirection des emails de réponse, et les adresses mails associées
   de l'équipe sont gérées par Adrien et son compte Gandi.
 
-## Configurations des permissions ACLs et CORS des buckets S3 Scaleway
+## Buckets S3, permissions ACLs et CORS
 
-Les buckets de photos uploadés doivent être configurés pour le CORS
+Les buckets suivants sont sur Scaleway dans le projet nommé "Collectif objets" :
+
+- `collectif-objets-development2` : photos de recensement et les bordereaux de récolement en PDF ;
+- `collectif-objets-staging2` : photos de recensement et les bordereaux de récolement en PDF ;
+- `collectif-objets-public` : contenus éditoriaux visibles sur le site (documentation par exemple) et fichier seeds.pgsql ;
+- `collectif-objets-private` : pour du stockage en interne
+
+Le bucket le plus important est dans le projet nommé "default" car il y a été créé et ne peut pas être migré facilement :
+
+- `collectif-objets-production` : photos de recensement et les bordereaux de récolement en PDF
+
+Les buckets de photos et bordereaux doivent être configurés pour le CORS
 
 cf https://www.scaleway.com/en/docs/storage/object/api-cli/setting-cors-rules/
 
@@ -786,11 +791,7 @@ aws s3api put-bucket-cors --bucket collectif-objets-staging2 --cors-configuratio
 aws s3api put-bucket-cors --bucket collectif-objets-production --cors-configuration file://scripts/s3buckets/cors-production.json
 ```
 
-Il y a deux buckets où tous les fichiers sont publics
-
-- `collectif-objets-public` : contient le fichier seeds.pgsql pour les review apps ainsi que les vidéos des articles de presse
-
-Pour configurer l'accès public de ces buckets utilisez la commande suivante :
+Pour configurer l'accès du bucket `collectif-objets-public` utilisez la commande suivante :
 
 `aws s3api put-bucket-policy --bucket collectif-objets-public --policy file://bucket-policy-public.json`
 
