@@ -97,7 +97,7 @@ Vous pouvez recenser en 4 étapes :
 * Commencez par vous connecter à votre commune. 
 * Ensuite, vous y retrouverez la liste de(s) objet(s) monument(s) historique(s) à recenser dans votre commune.
 * Vous pouvez cliquer sur un objet. Le bouton “Recenser cet objet” pour répondre au questionnaire de recensement se trouve sur cette page de détail de l’objet.
-* Une fois l’ensemble des recensements effectuée vous pourrez transmettre votre dossier aux conservateurs qui pourront ainsi revenir vers vous avec une analyse
+* Une fois l’ensemble des recensements effectué vous pourrez transmettre votre dossier aux conservateurs qui pourront ainsi revenir vers vous avec un examen.
 
 
 
