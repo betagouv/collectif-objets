@@ -524,6 +524,29 @@ flowchart TD
   style ne_pas_importer_nouvel_objet fill:#660000
 ```
 
+### Photos
+Les photos venant de Palissy sont répertoriées dans le champ palissy_photos de la table objets en format JSON, par exemple :
+```
+[
+  {
+    "url" : "https://s3.eu-west-3.amazonaws.com/pop-phototeque/memoire/AP01W00056/sap83_01w00056_p.jpg",
+    "name" : "vue de la nef",
+    "credit" : "© Ministère de la Culture (France), Médiathèque du patrimoine et de la photographie (objets mobiliers), tous droits réservés"
+  }
+]
+```
+
+Les photos mises en ligne par les communes ou les conservateurs lors du recensement sont des répertoriées dans `ActiveStorage::Attachment` et `ActiveStorage::Blob`, liés à l'objet `Recensement`. Les fichiers sont sur un bucket S3.
+
+### Buckets S3
+
+Les buckets suivants sont sur Scaleway dans le projet nommé "Collectif objets" :
+- collectif-objets-production (dans le projet nommé "default") : stocke les photos et les bordereaux de récolement en PDF
+- collectif-objets-development2 : même chose mais en developement
+- collectif-objets-staging2 : même chose mais en staging
+- collectif-objets-public : pour stocker des contenus éditoriaux visibles sur le site, dans la documentation par exemple
+- collectif-objets-private : pour du stockage en interne
+
 ## Frontend : Vite, View Components, Stimulus
 
 Les fichiers `.rb` des composants View Components sont dans `/app/components`.
