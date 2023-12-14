@@ -90,6 +90,17 @@ La protection au titre des monuments historiques n’a pas vocation à s’appli
   </a>
 </video>
 
+
+
+Vous pouvez recenser en 4 étapes : 
+
+* Commencez par vous connecter à votre commune. 
+* Ensuite, vous y retrouverez la liste de(s) objet(s) monument(s) historique(s) à recenser dans votre commune.
+* Vous pouvez cliquer sur un objet. Le bouton “Recenser cet objet” pour répondre au questionnaire de recensement se trouve sur cette page de détail de l’objet.
+* Une fois l’ensemble des recensements effectué vous pourrez transmettre votre dossier aux conservateurs qui pourront ainsi revenir vers vous avec un examen.
+
+
+
 ## 2 - Vous avez reçu un ou des emails vous invitant à recenser les objets de votre commune
 
 Lorsque votre commune est invitée à recenser ses objets protégés, un email vous permettra d’accéder à votre espace dédié sur la plateforme Collectif Objets. Depuis cet espace, vous pourrez voir la liste des objets protégés de votre commune.
