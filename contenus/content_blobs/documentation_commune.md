@@ -293,6 +293,6 @@ Pour plus d'informations, veuillez consulter cette page du site du Ministère de
 
 ## 6 - Lancer un projet de restauration pour un objet
 
-Nous vous invitons dans un premier temps à effectuer le recensement qui vous ai demandé puis à prendre contact avec vos conservateurs à travers la messagerie prévue à cet effet. Ces derniers pourront vous accompagner dans vos projets de restaurations.
+Nous vous invitons dans un premier temps à effectuer le recensement qui vous est demandé puis à prendre contact avec vos conservateurs à travers la messagerie prévue à cet effet. Ces derniers pourront vous accompagner dans vos projets de restaurations.
 
 Pour aller plus loin vous pouvez consulter cette page dédiée, du site du ministère de la Culture : [intervenir sur un objet mobilier classé ou inscrit](https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit).
