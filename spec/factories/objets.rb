@@ -21,9 +21,7 @@ FactoryBot.define do
     end
 
     trait :with_recensement do
-      after(:create) do |objet|
-        create(:recensement, objet:)
-      end
+      recensements { [association(:recensement)] }
     end
 
     trait :with_recensement_with_photos_mocked do
@@ -32,19 +30,18 @@ FactoryBot.define do
         recensement_photos_start_number { 1 }
       end
       recensements do
-        after(:create) do |objet|
-          create(:recensement, :with_photos_mocked,
-                 photos_start_number: recensement_photos_start_number,
-                 photos_count: recensement_photos_count,
-                 objet:)
-        end
+        [
+          association(
+            :recensement, :with_photos_mocked,
+            photos_start_number: recensement_photos_start_number,
+            photos_count: recensement_photos_count
+          )
+        ]
       end
     end
 
     trait :with_recensement_without_photo do
-      after(:create) do |objet|
-        create(:recensement, :without_photo, objet:)
-      end
+      recensements { [association(:recensement, :without_photo)] }
     end
 
     trait :with_palissy_photo do
@@ -63,15 +60,11 @@ FactoryBot.define do
     end
 
     trait :en_peril do
-      after(:create) do |objet|
-        create(:recensement, :en_peril, objet:)
-      end
+      recensements { [association(:recensement, :en_peril)] }
     end
 
     trait :disparu do
-      after(:create) do |objet|
-        create(:recensement, :disparu, objet:)
-      end
+      recensements { [association(:recensement, :disparu)] }
     end
   end
 end
