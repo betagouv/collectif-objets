@@ -27,7 +27,7 @@ fr:
         en_savoir_plus: En savoir plus…
       submitted_callout:
         title: Le recensement de vos objets est terminé, merci !
-        content: Un conservateur a été prévenu et étudiera les données que vous avez renvoyées puis vous recontactera.
+        content: Vos données vont être transmises aux conservateurs de votre département pour examen.
         cta: Voir les données envoyées
   conservateurs:
     communes:
