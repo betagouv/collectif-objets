@@ -92,8 +92,10 @@ RSpec.describe Objet, type: :model do
 
   it ".order_by_recensement_priorite" do
     _objet_non_recensé = create(:objet)
-    _objet_recensé_vert = create(:objet, :with_recensement)
-    objet_recensé_prioritaire = create(:objet, :en_peril)
+    objet_recensé_vert = create(:objet)
+    create(:recensement, objet: objet_recensé_vert)
+    objet_recensé_prioritaire = create(:objet)
+    create(:recensement, :en_peril, objet: objet_recensé_prioritaire)
 
     expect(Objet.order_by_recensement_priorite.count).to eq 3
     expect(Objet.order_by_recensement_priorite.first).to eq(objet_recensé_prioritaire)
