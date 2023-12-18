@@ -89,4 +89,15 @@ RSpec.describe Objet, type: :model do
     expect(Objet.inscrits.count).to eq(objets_considérés_comme_inscrits.size)
     expect(Objet.protégés.count).to eq(objets_considérés_comme_classés.size + objets_considérés_comme_inscrits.size)
   end
+
+  it ".order_by_recensement_priorite" do
+    _objet_non_recensé = create(:objet)
+    objet_recensé_vert = create(:objet)
+    create(:recensement, objet: objet_recensé_vert)
+    objet_recensé_prioritaire = create(:objet)
+    create(:recensement, :en_peril, objet: objet_recensé_prioritaire)
+
+    expect(Objet.order_by_recensement_priorite.count).to eq 3
+    expect(Objet.order_by_recensement_priorite.first).to eq(objet_recensé_prioritaire)
+  end
 end

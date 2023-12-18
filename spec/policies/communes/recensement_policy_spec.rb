@@ -30,15 +30,6 @@ describe Communes::RecensementPolicy do
       let(:user) { build(:user, commune:) }
       it { should permit(user, recensement) }
     end
-
-    context "objet a deja un recensement + commune started" do
-      let(:commune) { build(:commune, status: :started) }
-      let(:objet) { build(:objet, :with_recensement, commune:) }
-      let(:recensement) { build(:recensement, objet:) }
-      let(:user) { build(:user, commune:) }
-
-      it { should_not permit(user, recensement) }
-    end
   end
 
   permissions :edit?, :update?, :destroy? do

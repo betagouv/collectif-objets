@@ -59,7 +59,7 @@ FactoryBot.define do
       end
     end
 
-    trait :en_peril do
+    factory :objet_en_peril do
       recensements { [association(:recensement, :en_peril)] }
     end
 
