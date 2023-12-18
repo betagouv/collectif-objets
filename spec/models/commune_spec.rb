@@ -106,7 +106,7 @@ RSpec.describe Commune, type: :model do
     let!(:commune) { create(:commune) }
     before do
       create(:objet, :with_recensement, commune:)
-      create(:objet, :en_peril, commune:)
+      create(:objet_en_peril, commune:)
       create_list(:objet, 2, :disparu, commune:)
     end
 
