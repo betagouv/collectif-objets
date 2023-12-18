@@ -15,10 +15,6 @@ module Co
         @scoped_objets = scoped_objets
       end
 
-      def group_by_edifice?
-        @group_by_edifice ||= @commune.objets.count > 10 && edifices_count > 2
-      end
-
       def edifices
         @edifices ||= commune
           .edifices
@@ -34,7 +30,7 @@ module Co
             .includes(:commune, recensements: %i[photos_attachments photos_blobs])
           objets = objets.without_completed_recensements if @exclude_recensed
           objets = objets.where.not(id: @exclude_ids) if @exclude_ids.any?
-          objets = objets.where(edifice: @edifice) if group_by_edifice? && @edifice.present?
+          objets = objets.where(edifice: @edifice) if @edifice.present?
           objets
         end
       end
