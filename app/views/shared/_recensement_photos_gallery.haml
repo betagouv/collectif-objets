@@ -1,6 +1,0 @@
-- if recensement.photos.any?
-  - title = t("recensement.photos.taken_count", count: recensement.photos.count)
-  .co-hide--md
-    = render GalleryComponent.from_attachments(recensement.photos, title:, template: :full)
-  .hide.co-display--md
-    = render GalleryComponent.from_attachments(recensement.photos, title:, template: :small)

@@ -59,6 +59,18 @@ FactoryBot.define do
       end
     end
 
+    trait :with_palissy_photos do
+      palissy_photos do
+        (1..3).map do |i|
+          {
+            "url" => "/demo/objets/objet#{i}.jpg",
+            "credit" => "© Médiathèque Paris",
+            "name" => "Vase bleu"
+          }
+        end
+      end
+    end
+
     factory :objet_en_peril do
       recensements { [association(:recensement, :en_peril)] }
     end

@@ -18,9 +18,8 @@
     .fr-grid-row
       - recensement.photos.each_with_index do |photo, index|
         .fr-col-md-3.co-rapport-photo
-          = link_to photo.url,
-            data: {action: "gallery-component#show", index: index + 2 },
-            class: "co-cursor--zoom-in" do
+          -# TODO: replace with galerie
+          = link_to photo.url, class: "co-cursor--zoom-in" do
             = vite_or_raw_image_tag photo.variant(:medium), alt: "© Licence ouverte"
 
   .fr-grid-row.fr-grid-row--gutters.fr-mt-1w

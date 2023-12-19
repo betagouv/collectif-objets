@@ -12,13 +12,13 @@
       - objets.each do |objet|
         - recensement = objet.current_recensement
         - presenter = RecensementPresenter.new(recensement)
-        - palissy_photo = recensement.objet.palissy_photos.first
+        - palissy_photo_presenter = recensement.objet.palissy_photos_presenters.first
         %tr
           %td
             %div
               %div
-                - if palissy_photo
-                  %img.co--width-max-100{alt: palissy_photo.alt, src: palissy_photo.url}
+                - if palissy_photo_presenter
+                  %img.co--width-max-100{alt: palissy_photo_presenter.alt, src: palissy_photo_presenter.url}
                 - else
                   = vite_image_tag "images/illustrations/photo-manquante.png"
               %div

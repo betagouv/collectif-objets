@@ -136,4 +136,8 @@ class Recensement < ApplicationRecord
   end
 
   def self.ransackable_scopes(_ = nil) = [:photos_presence_in]
+
+  def photos_presenters
+    photos.order(:created_at).map { PhotoPresenter.from_attachment(_1) }
+  end
 end

@@ -28,7 +28,7 @@
           %td= render "photo", photo: photo.attachment
           %td
             - if photo.recensement.objet.palissy_photos.any?
-              = image_tag photo.recensement.objet.palissy_photos.first.url, class: "co-max-height-150px"
+              = image_tag photo.recensement.objet.palissy_photos_presenters.first.url, class: "co-max-height-150px"
             - else
               %i aucune photo
           - if previous_row_photo.present? && photo.recensement.objet == previous_row_photo.recensement.objet

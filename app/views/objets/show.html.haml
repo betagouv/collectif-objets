@@ -2,4 +2,14 @@
 %main.fr-container.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Accueil", root_path],["Objets de #{@objet.commune.nom}",objets_path(commune_code_insee: @objet.commune.code_insee)]], current_page_label: @objet.nom
   %h1= @objet.nom
-  = render ObjetPageComponent.new(objet: @objet, avec_lien_signalement: current_conservateur.present?)
+
+  .fr-grid-row.fr-pb-4w.fr-grid-row--gutters
+    .fr-col-md-6
+      = render "shared/objet_attributes", objet: @objet
+
+      - if current_conservateur.present?
+        %p
+          = link_to("Signaler une erreur sur cette notice objet", "https://tally.so/r/mO4gbK", class: "fr-link", target: "_blank")
+
+    .fr-col-md-6.co-flex-md-reverse-order
+      = render galerie_objet(@objet)

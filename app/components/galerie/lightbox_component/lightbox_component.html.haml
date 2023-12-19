@@ -1,0 +1,34 @@
+.co-galerie{data: { controller: "galerie--lightbox-component", close_path:, next_photo_path: next_photo&.lightbox_path, previous_photo_path: previous_photo&.lightbox_path, turbo_frame: turbo_frame, action: "keydown.esc@document->galerie--lightbox-component#close keydown.left@document->galerie--lightbox-component#previous keydown.right@document->galerie--lightbox-component#next" } }
+  .header.fr-background-default--grey
+    .left
+      Photo #{current_index + 1} / #{count}
+    .right
+      = link_to "Télécharger", current_photo.download_url, class: "fr-btn fr-btn--sm fr-btn--secondary action fr-btn--icon-left fr-icon-download-line"
+      - if display_actions
+        -# TODO
+      = link_to "Fermer", close_path, class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-right fr-icon-close-line"
+
+  .content
+    .arrow-link
+      = button_to("",
+        path_without_query,
+        class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-left-s-line fr-btn--sm",
+        title: "photo précédente",
+        method: :get,
+        params: previous_photo&.lightbox_path_params,
+        disabled: previous_photo.nil?)
+    .photo
+      = vite_or_raw_image_tag current_photo.url, alt: current_photo.alt
+    .arrow-link
+      = button_to("",
+        path_without_query,
+        class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-right-s-line fr-btn--sm",
+        title: "photo suivante",
+        method: :get,
+        params: next_photo&.lightbox_path_params,
+        disabled: next_photo.nil?)
+    .footer
+      = current_photo.credit || "Aucun crédit photo renseigné"
+      - if current_photo.description
+        = "·"
+        = current_photo.description
