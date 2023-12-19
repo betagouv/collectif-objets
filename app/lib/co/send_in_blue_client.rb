@@ -101,9 +101,9 @@ module Co
       run_request_raw(request, current_retry: current_retry + 1)
     end
 
-    def build_request(url, method: :get, **kwargs)
+    def build_request(url, method: :get, **)
       headers = { Accept: "application/json", "api-key": api_key }
-      Typhoeus::Request.new(url, method:, headers:, **kwargs)
+      Typhoeus::Request.new(url, method:, headers:, **)
     end
 
     def api_key

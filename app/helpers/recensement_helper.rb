@@ -104,8 +104,8 @@ module RecensementHelper
     end
   end
 
-  def edit_recensement_step_link(recensement, step, **kwargs)
-    button_to \
+  def edit_recensement_step_link(recensement, step, **)
+    button_to( \
       "",
       edit_commune_objet_recensement_path(recensement.commune, recensement.objet, recensement),
       params: { step: },
@@ -113,7 +113,8 @@ module RecensementHelper
       data: { turbo_action: "advance" },
       form_class: "co-display--inline co-edit-button",
       method: :get,
-      **kwargs
+      **
+    )
   end
 
   def recensement_nom_edifice(recensement)

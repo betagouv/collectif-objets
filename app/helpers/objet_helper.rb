@@ -11,8 +11,8 @@ module ObjetHelper
     "https://www.pop.culture.gouv.fr/notice/palissy/#{objet.palissy_REF}"
   end
 
-  def link_to_palissy(objet, **kwargs, &)
-    link_to(palissy_url(objet), target: "_blank", rel: "noopener", **kwargs, &)
+  def link_to_palissy(objet, **, &)
+    link_to(palissy_url(objet), target: "_blank", rel: "noopener", **, &)
   end
 
   def objet_recensement_badge_color_and_text(objet)

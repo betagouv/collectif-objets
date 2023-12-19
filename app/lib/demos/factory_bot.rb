@@ -2,9 +2,9 @@
 
 module Demos
   module FactoryBot
-    def build(*args, **kwargs)
+    def build(*, **)
       ::FactoryBot
-        .build(*args, **kwargs)
+        .build(*, **)
         .tap(&:readonly!)
         .tap { _1.assign_attributes(id: -1) }
     end

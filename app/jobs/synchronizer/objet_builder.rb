@@ -52,7 +52,7 @@ module Synchronizer
     end
 
     def edifice_id
-      return nil if persisted_objet&.edifice_id&.present? || row["INSEE"].nil?
+      return nil if persisted_objet&.edifice_id.present? || row["INSEE"].nil?
 
       merimee_edifice&.id || custom_edifice.id
     end

@@ -21,13 +21,13 @@ class CampaignV1Mailer < ApplicationMailer
     end
   end
 
-  def ct(key, **kwargs)
-    I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**kwargs)).html_safe
+  def ct(key, **)
+    I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**)).html_safe
   end
   helper_method :ct
 
-  def tt(key, **kwargs)
-    I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**kwargs)).gsub("<b>", "").gsub("</b>", "")
+  def tt(key, **)
+    I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**)).gsub("<b>", "").gsub("</b>", "")
   end
   helper_method :tt
 
