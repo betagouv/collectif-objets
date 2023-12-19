@@ -3,11 +3,13 @@
 class PhotoPresenter
   attr_reader :url, :description, :credit, :embed_path, :id, :thumb_url, :download_url
 
+  attr_accessor :lightbox_path_params, :lightbox_path
+
   def initialize(url:, description: nil, credit: nil, thumb_url: nil, download_url: nil, id: nil)
     @url = url
     @thumb_url = thumb_url || url
     @description = description
-    @download_url = download_url
+    @download_url = download_url || url
     @credit = credit
     @id = id
   end

@@ -6,7 +6,7 @@ module Galerie
 
     attr_reader :parent_galerie
 
-    delegate :photos, :title, :lightbox_photo_path, :count, to: :parent_galerie
+    delegate :photos, :title, :count, to: :parent_galerie
 
     MAX_PHOTOS_SHOWN = 4
 
@@ -28,7 +28,6 @@ module Galerie
     end
 
     def credits = photos.map(&:credit).uniq
-
     def texte_lien_titre = count > 1 ? "Voir la galerie" : "Agrandir"
   end
 end

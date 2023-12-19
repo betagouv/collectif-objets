@@ -7,8 +7,8 @@ module Galerie
     attr_reader :parent_galerie
 
     delegate(
-      :photos, :current_photo_id, :display_actions, :close_path, :turbo_frame, :lightbox_photo_path,
-      :count, to: :parent_galerie
+      :photos, :current_photo_id, :display_actions, :close_path, :turbo_frame, :count,
+      :path_without_query, to: :parent_galerie
     )
 
     def initialize(parent_galerie)
@@ -20,20 +20,14 @@ module Galerie
       photos.find_index { _1.id == current_photo_id.to_i }
     end
 
-    def current_photo
-      photos[current_index]
+    def current_photo = photos[current_index]
+
+    def previous_photo
+      photos[current_index - 1] if current_index.positive?
     end
 
-    def previous_photo_path
-      return if current_index <= 0
-
-      lightbox_photo_path(photos[current_index - 1].id)
-    end
-
-    def next_photo_path
-      return unless current_index + 1 < count
-
-      lightbox_photo_path(photos[current_index + 1].id)
+    def next_photo
+      photos[current_index + 1] if current_index + 1 < count
     end
   end
 end

@@ -5,7 +5,6 @@
   top: 0;
   left: 0;
   width: 100vw;
-  background: #fff;
   display: flex;
   flex-direction: column;
   z-index: 600;
@@ -24,14 +23,6 @@
 .co-galerie > .header > .right {
   display: flex;
   gap: 1rem;
-}
-
-.co-galerie > .header .close {
-  margin-left: 1rem;
-}
-
-.co-galerie > .header .action {
-  margin-right: 1rem;
 }
 
 .co-galerie > .content {
