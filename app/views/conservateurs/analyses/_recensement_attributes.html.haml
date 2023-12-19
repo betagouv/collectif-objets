@@ -10,9 +10,9 @@
   - elsif recensement.absent?
     .fr-checkbox-group.fr-mt-2w
       = check_box_tag "recensement[analyse_fiches][]", "depot_plainte", recensement.analyse_fiches.include?("depot_plainte"), id: "recensement_analyse_fiches_depot_plainte"
-      = f.label :analyse_fiches_depot_plainte do
-        Informer la commune sur le&nbsp;
-        = link_to "dépôt de plainte", fiche_path("depot_plainte"), target: "_blank", rel: "noopener"
+      = f.label :analyse_fiches_depot_plainte, "Informer la commune sur le dépôt de plainte"
+    .fr-mt-2w
+      = link_to "Voir le contenu de cette fiche conseil", fiche_path("depot_plainte"), target: "_blank", rel: "noopener"
 
 - if recensement.recensable?
   .fr-my-4w.attribute-group
