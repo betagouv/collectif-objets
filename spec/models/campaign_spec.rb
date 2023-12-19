@@ -156,6 +156,22 @@ RSpec.describe Campaign, type: :model do
       let(:date_lancement) { Date.current.next_week(:saturday) }
       it { should eq false }
     end
+
+    context "same dates in the past for an ongoing campaign" do
+      let(:date_lancement) { Date.new(2022, 1, 3) } # monday
+      let(:date_relance1) { date_lancement } # this can happen in staging when force stepping up
+      let(:date_relance2) { date_lancement }
+      let(:date_relance3) { date_lancement }
+      let(:date_fin) { date_lancement + 1.week }
+      let(:campaign) do
+        build(
+          :campaign,
+          status: :ongoing, date_lancement:, date_relance1:, date_relance2:,
+          date_relance3:, date_fin:
+        )
+      end
+      it { should eq true }
+    end
   end
 
   describe "validate no overlap for planned" do

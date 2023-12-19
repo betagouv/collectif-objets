@@ -59,11 +59,12 @@ class Campaign < ApplicationRecord
   end
 
   def validate_successive_dates
-    DATE_FIELDS.each_cons(2) do |d1, d2|
-      next unless send(d2) <= send(d1)
+    DATE_FIELDS.each_cons(2) do |field1, field2|
+      date1, date2 = [field1, field2].map { send(_1) }
+      next if date2 > date1 || date1 < Time.zone.today # no need to validate past dates
 
-      t1, t2 = [d1, d2].map { I18n.t("activerecord.attributes.campaign.#{_1}").downcase }
-      return errors.add(d2, "La #{t2} doit être postérieure à la #{t1}")
+      t1, t2 = [field1, field2].map { I18n.t("activerecord.attributes.campaign.#{_1}").downcase }
+      return errors.add(field2, "La #{t2} doit être postérieure à la #{t1}")
     end
   end
 
