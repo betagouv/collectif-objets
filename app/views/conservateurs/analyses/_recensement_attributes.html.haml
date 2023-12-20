@@ -9,8 +9,14 @@
       %input.fr-input.co-text--black{disabled: "disabled", type: "text", value: "#{recensement.edifice_nom}"}
   - elsif recensement.absent?
     .fr-checkbox-group.fr-mt-2w
-      = check_box_tag "recensement[analyse_fiches][]", "depot_plainte", recensement.analyse_fiches.include?("depot_plainte"), id: "recensement_analyse_fiches_depot_plainte"
-      = f.label :analyse_fiches_depot_plainte, "Informer la commune sur le dépôt de plainte"
+      = check_box_tag("recensement[analyse_fiches][]",
+        "depot_plainte",
+        recensement.analyse_fiches.include?("depot_plainte"),
+        id: "recensement_analyse_fiches_depot_plainte",
+        form: "recensement")
+      = f.label(:analyse_fiches_depot_plainte,
+        "Informer la commune sur le dépôt de plainte",
+        form: "recensement")
     .fr-mt-2w
       = link_to "Voir le contenu de cette fiche conseil", fiche_path("depot_plainte"), target: "_blank", rel: "noopener"
 
@@ -20,15 +26,33 @@
       État de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "etat_sanitaire")
     .fr-checkbox-group.fr-mt-2w
-      = check_box_tag "recensement[analyse_fiches][]", "entretien_objets", recensement.analyse_fiches.include?("entretien_objets"), id: "recensement_analyse_fiches_entretien_objets"
-      = f.label :analyse_fiches_entretien_objets, "Informer la commune sur les mesures d’entretien préventives"
+      = check_box_tag("recensement[analyse_fiches][]",
+        "entretien_objets",
+        recensement.analyse_fiches.include?("entretien_objets"),
+        id: "recensement_analyse_fiches_entretien_objets",
+        form: "recensement")
+      = f.label(:analyse_fiches_entretien_objets,
+        "Informer la commune sur les mesures d’entretien préventives",
+        form: "recensement")
 
     .fr-checkbox-group.fr-mt-2w
-      = check_box_tag "recensement[analyse_fiches][]", "restauration", recensement.analyse_fiches.include?("restauration"), id: "recensement_analyse_fiches_restauration"
-      = f.label :analyse_fiches_restauration, "Informer la commune sur les étapes préalables à la restauration"
+      = check_box_tag("recensement[analyse_fiches][]",
+        "restauration",
+        recensement.analyse_fiches.include?("restauration"),
+        id: "recensement_analyse_fiches_restauration",
+        form: "recensement")
+      = f.label(:analyse_fiches_restauration,
+        "Informer la commune sur les étapes préalables à la restauration",
+        form: "recensement")
     .fr-checkbox-group.fr-mt-2w
-      = check_box_tag "recensement[analyse_fiches][]", "entretien_edifices", recensement.analyse_fiches.include?("entretien_edifices"), id: "recensement_analyse_fiches_nuisibles"
-      = f.label :analyse_fiches_nuisibles, "Informer la commune sur les mesures d’entretien des édifices et de prévention d’attaques de nuisibles"
+      = check_box_tag("recensement[analyse_fiches][]",
+        "entretien_edifices",
+        recensement.analyse_fiches.include?("entretien_edifices"),
+        id: "recensement_analyse_fiches_nuisibles",
+        form: "recensement")
+      = f.label(:analyse_fiches_nuisibles,
+        "Informer la commune sur les mesures d’entretien des édifices et de prévention d’attaques de nuisibles",
+        form: "recensement")
     .fr-mt-2w
       = link_to "Voir le contenu de ces fiches conseils", fiches_path, target: "_blank", rel: "noopener"
 
@@ -37,8 +61,14 @@
       Sécurisation de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "securisation")
     .fr-checkbox-group.fr-mt-2w
-      = check_box_tag "recensement[analyse_fiches][]", "securisation", recensement.analyse_fiches.include?("securisation"), id: "recensement_analyse_fiches_securisation"
-      = f.label :analyse_fiches_securisation, "Informer la commune sur les mesures de sécurisation des objets"
+      = check_box_tag("recensement[analyse_fiches][]",
+        "securisation",
+        recensement.analyse_fiches.include?("securisation"),
+        id: "recensement_analyse_fiches_securisation",
+        form: "recensement")
+      = f.label(:analyse_fiches_securisation,
+        "Informer la commune sur les mesures de sécurisation des objets",
+        form: "recensement")
     .fr-mt-2w
       = link_to "Voir le contenu de cette fiche conseil", fiche_path("securisation"), target: "_blank", rel: "noopener"
 
@@ -48,5 +78,5 @@
     .fr-badge.fr-badge--sm.fr-badge--warning
       Recensement impossible
 
-%input{name:"recensement[analyse_fiches][]", type:"hidden", value: ""}
+%input{name:"recensement[analyse_fiches][]", type:"hidden", value: "", form: "recensement"}
 -# to make sure the array is sent even if empty

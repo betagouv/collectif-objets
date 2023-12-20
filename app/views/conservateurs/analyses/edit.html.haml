@@ -37,56 +37,51 @@
             - photo = PhotoPresenter.new(url: @objet.palissy_photos.any? ? @objet.palissy_photos_presenters.first&.url : "images/illustrations/photo-manquante-pop.png")
             = render("shared/card_photo", photo:)
 
-  = form_for @recensement,
-    url: conservateurs_objet_recensement_analyse_path(@objet, @recensement),
-    builder: FormBuilderDsfr,
-    data: { turbo_action: "advance" } do |f|
-    #recensement
-      .co-background--light-teal.fr-my-2w.fr-px-4w.fr-py-2w
-        %h3 Recensement
+  - f = nil
+  = form_with(model: @recensement, url: conservateurs_objet_recensement_analyse_path(@objet, @recensement), builder: FormBuilderDsfr, id: "recensement", data: { turbo_action: "advance" }) do |fb|
+    - f = fb
 
-        .fr-grid-row.fr-grid-row--gutters.fr-pb-6w.fr-mt-3w
-          %div{class: @recensement.photos.any? ? "fr-col-md-8" : "fr-col-md-12"}
-            - if @recensement.missing_photos?
-              %p.fr-badge.fr-badge--sm.fr-badge--warning.fr-mb-4w
-                = t("recensement.photos.taken_count", count: 0)
-            = render "recensement_attributes", recensement_presenter: @recensement_presenter, recensement: @recensement, f:
-            .fr-pb-1w
-              %b= t("activerecord.attributes.recensement.notes")
-            %div
-              - if @recensement.notes.present?
-                = blockquote(@recensement.notes, class: "fr-my-2w")
-              - else
-                %p.co-text--italic Aucune commentaire laissé par la commune pour cet objet
-          - if @recensement.photos.any?
-            .fr-col-md-4.co-flex-md-reverse-order
-              = render galerie_recensement(@recensement)
-
-    .fr-grid-row
-      .fr-col-md-12
-        - unless @recensement.objet.commune.completed?
-          .fr-alert.fr-alert--error.fr-mb-4w
-            %p= t("recensement.analyse.not_completed")
-        - if @recensement.errors.any?
-          .fr-alert.fr-alert--error.fr-mb-6w
-            %p Votre examen n'a pas pu être enregistrée :
-            %ul
-              - @recensement.errors.attribute_names.each do |attribute|
-                %li
-                  = attribute
-                  = @recensement.errors.messages_for(attribute).first
-    .fr-px-4w
-      .fr-grid-row.fr-mb-4w
-        .fr-col-md-6
-          = f.label :analyse_notes
-          = f.text_area :analyse_notes, disabled: !@recensement.analysable?
-      .fr-grid-row
+  #recensement
+    .co-background--light-teal.fr-my-2w.fr-px-4w.fr-py-2w
+      %h3 Recensement
+      .fr-grid-row.fr-grid-row--gutters.fr-pb-6w.fr-mt-3w
         .fr-col-md-8
-          = f.submit "Sauvegarder", disabled: !@recensement.analysable?
-          .fr-text--sm.fr-mt-1w
-            %i
-              Ces informations ne seront pas envoyées à la mairie tout de suite.
-              Vous pourrez les modifier avant de valider votre examen dans son ensemble.
+          = render "recensement_attributes", recensement_presenter: @recensement_presenter, recensement: @recensement, f:
+          .fr-pb-1w
+            %b= t("activerecord.attributes.recensement.notes")
+          %div
+            - if @recensement.notes.present?
+              = blockquote(@recensement.notes, class: "fr-my-2w")
+            - else
+              %p.co-text--italic Aucune commentaire laissé par la commune pour cet objet
+        .fr-col-md-4.co-flex-md-reverse-order
+          = render galerie_recensement(@recensement, display_actions: false)
+
+  .fr-grid-row
+    .fr-col-md-12
+      - unless @recensement.objet.commune.completed?
+        .fr-alert.fr-alert--error.fr-mb-4w
+          %p= t("recensement.analyse.not_completed")
+      - if @recensement.errors.any?
+        .fr-alert.fr-alert--error.fr-mb-6w
+          %p Votre examen n'a pas pu être enregistrée :
+          %ul
+            - @recensement.errors.attribute_names.each do |attribute|
+              %li
+                = attribute
+                = @recensement.errors.messages_for(attribute).first
+  .fr-px-4w
+    .fr-grid-row.fr-mb-4w
+      .fr-col-md-6
+        = f.label :analyse_notes, form: "recensement"
+        = f.text_area :analyse_notes, disabled: !@recensement.analysable?, form: "recensement"
+    .fr-grid-row
+      .fr-col-md-8
+        = f.submit "Sauvegarder", disabled: !@recensement.analysable?, form: "recensement"
+        .fr-text--sm.fr-mt-1w
+          %i
+            Ces informations ne seront pas envoyées à la mairie tout de suite.
+            Vous pourrez les modifier avant de valider votre examen dans son ensemble.
 
   .fr-px-4w.fr-mb-2w
     = dsfr_link_to "Retour à la liste des recensements",
