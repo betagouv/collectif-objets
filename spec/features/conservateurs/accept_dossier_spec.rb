@@ -53,7 +53,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
       click_on "Modifier"
       select "L’objet est en péril", from: "recensement[analyse_etat_sanitaire]"
     end
-    find("a", text: /entretien des édifices/).find(:xpath, "ancestor::label").click
+    find("label", text: /Informer la commune sur les mesures d’entretien des édifices/).click
     fill_in "recensement[analyse_notes]", with: "Est-ce qu'il est le pepito bleu?"
 
     click_on "Sauvegarder"

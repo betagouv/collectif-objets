@@ -10,9 +10,9 @@
   - elsif recensement.absent?
     .fr-checkbox-group.fr-mt-2w
       = check_box_tag "recensement[analyse_fiches][]", "depot_plainte", recensement.analyse_fiches.include?("depot_plainte"), id: "recensement_analyse_fiches_depot_plainte"
-      = f.label :analyse_fiches_depot_plainte do
-        Informer la commune sur le&nbsp;
-        = link_to "dépôt de plainte", fiche_path("depot_plainte"), target: "_blank", rel: "noopener"
+      = f.label :analyse_fiches_depot_plainte, "Informer la commune sur le dépôt de plainte"
+    .fr-mt-2w
+      = link_to "Voir le contenu de cette fiche conseil", fiche_path("depot_plainte"), target: "_blank", rel: "noopener"
 
 - if recensement.recensable?
   .fr-my-4w.attribute-group
@@ -21,20 +21,16 @@
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "etat_sanitaire")
     .fr-checkbox-group.fr-mt-2w
       = check_box_tag "recensement[analyse_fiches][]", "entretien_objets", recensement.analyse_fiches.include?("entretien_objets"), id: "recensement_analyse_fiches_entretien_objets"
-      = f.label :analyse_fiches_entretien_objets do
-        Informer la commune sur les&nbsp;
-        = link_to "mesures d’entretien préventives", fiche_path("entretien_objets"), target: "_blank", rel: "noopener"
+      = f.label :analyse_fiches_entretien_objets, "Informer la commune sur les mesures d’entretien préventives"
+
     .fr-checkbox-group.fr-mt-2w
       = check_box_tag "recensement[analyse_fiches][]", "restauration", recensement.analyse_fiches.include?("restauration"), id: "recensement_analyse_fiches_restauration"
-      = f.label :analyse_fiches_restauration do
-        Informer la commune sur les&nbsp;
-        = link_to "étapes préalables à la restauration", fiche_path("restauration"), target: "_blank", rel: "noopener"
+      = f.label :analyse_fiches_restauration, "Informer la commune sur les étapes préalables à la restauration"
     .fr-checkbox-group.fr-mt-2w
       = check_box_tag "recensement[analyse_fiches][]", "entretien_edifices", recensement.analyse_fiches.include?("entretien_edifices"), id: "recensement_analyse_fiches_nuisibles"
-      = f.label :analyse_fiches_nuisibles do
-        Informer la commune sur les&nbsp;
-        = link_to "mesures d’entretien des édifices", fiche_path("entretien_edifices"), target: "_blank", rel: "noopener"
-        et de prévention d’attaques de nuisibles
+      = f.label :analyse_fiches_nuisibles, "Informer la commune sur les mesures d’entretien des édifices et de prévention d’attaques de nuisibles"
+    .fr-mt-2w
+      = link_to "Voir le contenu de ces fiches conseils", fiches_path, target: "_blank", rel: "noopener"
 
   .fr-my-4w.attribute-group
     .fr-pb-1w.co-text--bold
@@ -42,9 +38,9 @@
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "securisation")
     .fr-checkbox-group.fr-mt-2w
       = check_box_tag "recensement[analyse_fiches][]", "securisation", recensement.analyse_fiches.include?("securisation"), id: "recensement_analyse_fiches_securisation"
-      = f.label :analyse_fiches_securisation do
-        Informer la commune sur les&nbsp;
-        = link_to "mesures de sécurisation des objets", fiche_path("securisation"), target: "_blank", rel: "noopener"
+      = f.label :analyse_fiches_securisation, "Informer la commune sur les mesures de sécurisation des objets"
+    .fr-mt-2w
+      = link_to "Voir le contenu de cette fiche conseil", fiche_path("securisation"), target: "_blank", rel: "noopener"
 
 - elsif !recensement.absent?
   -# only display the badge when it's found but not recensable
