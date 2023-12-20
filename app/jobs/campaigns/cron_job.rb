@@ -11,16 +11,15 @@ module Campaigns
       Campaign.ongoing.each { Campaigns::RunCampaignJob.perform_inline(_1.id) }
 
       # strict comparison here so that it closes day after end
-      Campaign.ongoing.where("date_fin < ?", date).each do |campaign|
-        campaign.finish!
+      Campaign.ongoing.where("date_fin < ?", date).each(&:finish!)
 
+      # Envoi de la réponse automatique pour les communes n'ayant recensé que des objets verts
+      Campaign.finished.each do |campaign|
         campaign.communes.each do |commune|
-          user = commune.users.first
-          next unless user.present? && commune.statut_global == Commune::ORDRE_A_EXAMINER \
-            && !commune.dossier.a_des_objets_prioritaires?
+          next unless commune.shall_receive_email_objets_verts(date)
 
-          commune.dossier.update(replied_automatically_at: Time.zone.now)
-          UserMailer.with(user:, commune:).commune_avec_objets_verts_email.deliver_now
+          commune.dossier.update(replied_automatically_at: date)
+          UserMailer.with(user: commune.users.first, commune:).commune_avec_objets_verts_email.deliver_now
         end
       end
     end

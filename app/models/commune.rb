@@ -162,6 +162,15 @@ class Commune < ApplicationRecord
     inactive? && users.any? && objets.any?
   end
 
+  def shall_receive_email_objets_verts(date)
+    users.any? &&
+      statut_global == Commune::ORDRE_A_EXAMINER &&
+      !dossier.a_des_objets_prioritaires? &&
+      dossier.replied_automatically_at.nil? &&
+      dossier.submitted_at < date - 1.week.ago &&
+      !date.on_weekend?
+  end
+
   def support_email(role:)
     parts = ["mairie", code_insee]
     parts << "conservateur" if role == :conservateur
