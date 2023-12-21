@@ -167,7 +167,7 @@ class Commune < ApplicationRecord
       statut_global == Commune::ORDRE_A_EXAMINER &&
       !dossier.a_des_objets_prioritaires? &&
       dossier.replied_automatically_at.nil? &&
-      dossier.submitted_at < date - 1.week.ago &&
+      dossier.submitted_at < date - 1.week &&
       !date.on_weekend?
   end
 
