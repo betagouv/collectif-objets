@@ -10,10 +10,12 @@
   z-index: 600;
 }
 
-.co-galerie > .header {
+.co-galerie > .header,
+.co-galerie > .footer {
   padding: 1rem 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .co-galerie > .header .left {
@@ -65,4 +67,23 @@
   color: #ccc;
   padding: 1rem .5rem;
   text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .co-galerie .footer {
+    display: none;
+  }
+  .co-galerie .close-button {
+    /* copied from .fr-btn--sm because there are no responsive classes like .fr-btn--sm@md */
+    font-size: .875rem;
+    line-height: 1.5rem;
+    min-height: 2rem;
+    padding: .25rem .75rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .co-galerie .header .action {
+    display: none;
+  }
 }

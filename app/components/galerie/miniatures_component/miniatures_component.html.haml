@@ -24,7 +24,11 @@
           %span.co-flex--grow
             = t("galerie.miniatures.last_thumb", count: hidden_photos_count)
 
-  - if count >= 1
+  - if count == 0 && actions&.upload_confirmation && actions&.upload_button
+    = render actions.upload_confirmation
+    = render actions.upload_button
+
+  - elsif count >= 1
     .bottom-link
       = link_to photos[0].lightbox_path, class: "fr-link fr-link--icon-right fr-icon-zoom-in-line" do
         = t("galerie.miniatures.open", count:)

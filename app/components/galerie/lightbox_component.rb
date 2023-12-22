@@ -7,11 +7,11 @@ module Galerie
     delegate(
       :photos,
       :current_photo_id,
-      :display_actions,
       :close_path,
       :turbo_frame,
       :count,
       :path_without_query,
+      :actions,
       :current_photo,
       :previous_photo,
       :next_photo,

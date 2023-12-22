@@ -4,18 +4,20 @@
   previous_photo_path: previous_photo&.lightbox_path,
   turbo_frame: turbo_frame,
   action: "keydown.esc@document->galerie--lightbox-component#close keydown.left@document->galerie--lightbox-component#previous keydown.right@document->galerie--lightbox-component#next" } }
+
+  - actions&.confirmations&.each do |component|
+    = render component
+
   .header.fr-background-default--grey
     .left
       Photo #{current_index + 1} / #{count}
     .right
-      = link_to("Télécharger",
-        current_photo.download_url,
-        class: "fr-btn fr-btn--sm fr-btn--secondary action fr-btn--icon-left fr-icon-download-line")
-      - if display_actions
-        -# TODO
-      = link_to("Fermer",
+      - actions&.buttons&.each do |component|
+        = render component
+      = button_to("Fermer",
         close_path,
-        class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-right fr-icon-close-line")
+        method: :get,
+        class: "fr-btn fr-btn--tertiary fr-btn--icon-right fr-icon-close-line close-button")
 
   .content
     .arrow-link
@@ -41,3 +43,7 @@
       - if current_photo.description
         = "·"
         = current_photo.description
+
+  .footer.fr-background-default--grey
+    - actions&.buttons(with_text: false)&.each do |component|
+      = render component

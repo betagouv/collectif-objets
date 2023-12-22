@@ -9,19 +9,19 @@ module Galerie
       :title,
       :turbo_frame,
       :current_photo_id,
-      :path_without_query,
-      :display_actions
+      :path_without_query
     )
 
     delegate :count, to: :photos
+
+    attr_accessor :actions
 
     def initialize(
       photos:,
       title:,
       turbo_frame:,
       current_photo_id:,
-      path_without_query:,
-      display_actions: false
+      path_without_query:
     )
       super
       @photos = photos
@@ -29,7 +29,6 @@ module Galerie
       @turbo_frame = turbo_frame
       @current_photo_id = current_photo_id
       @path_without_query = path_without_query
-      @display_actions = display_actions
       @photos.each { augment_photo_presenter(_1) }
     end
 

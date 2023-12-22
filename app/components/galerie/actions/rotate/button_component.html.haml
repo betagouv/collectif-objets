@@ -1,0 +1,5 @@
+= button_to(with_text ? "Pivoter" : "",
+  attachment_path,
+  method: :patch,
+  params: { operation: "rotate", degrees: "90", redirect_path: },
+  class: "#{button_icon_class} fr-icon-arrow-go-forward-line")

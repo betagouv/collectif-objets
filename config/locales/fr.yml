@@ -416,8 +416,8 @@ fr:
         one: "1 autre photo …"
         other: "%{count} autres photos …"
       open:
-        one: Agrandir
-        other: Voir la galerie
+        one: Voir ou modifier cette photo
+        other: Voir ou modifier les %{count} photos
   pdf_embed_component:
     download: Télécharger le fichier PDF
   campaign_v1_mailer:

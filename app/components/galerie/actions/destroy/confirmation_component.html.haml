@@ -1,0 +1,16 @@
+= dsfr_modal(title: "Êtes-vous sûr de vouloir supprimer cette photo ?", html_attributes: { id: "confirmation-suppression" }) do |component|
+  - component.with_button do
+    = button_to("Supprimer",
+        attachment_path,
+        method: :delete,
+        params: { redirect_path: redirect_path },
+        type: "button",
+        class: "fr-btn fr-btn--sm fr-btn",
+        "aria-controls": "confirmation-suppression")
+  - component.with_button do
+    = button_tag("Annuler",
+      type: "button",
+      class: "fr-btn fr-btn--sm fr-btn--secondary",
+      "aria-controls": "confirmation-suppression")
+  %p
+    Attention: cette action est définitive, vous ne pourrez pas la récupérer.
