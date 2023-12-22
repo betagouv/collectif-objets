@@ -31,7 +31,10 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
 
   config.after(type: :feature) do |example_group|
-    save_screenshot if example_group.exception
+    next unless example_group.exception
+
+    r = save_screenshot
+    puts "saved screenshot to #{r}"
   end
 end
 
