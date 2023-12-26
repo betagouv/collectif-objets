@@ -58,10 +58,14 @@ module Galerie
       end
 
       def upload_button(with_text: true)
+        return nil unless @recensement.recensable?
+
         Galerie::Actions::Upload::ButtonComponent.new(with_text:)
       end
 
       def upload_confirmation
+        return nil unless @recensement.recensable?
+
         Galerie::Actions::Upload::ConfirmationComponent.new(
           attachments_path: conservateurs_attachments_path,
           create_params: { recensement_id: @recensement.id },
