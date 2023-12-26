@@ -56,6 +56,23 @@ FactoryBot.define do
       end
     end
 
+    trait :with_photos do
+      transient do
+        photos_count { 2 }
+      end
+
+      after(:build) do |recensement, evaluator|
+        evaluator.photos_count.times do |i|
+          recensement.photos.attach(
+            io: Rails.root.join("spec/fixture_files/tableau#{i + 1}.jpg").open,
+            filename: "tableau#{i + 1}.jpg",
+            content_type: "image/jpeg",
+            service_name: "test"
+          )
+        end
+      end
+    end
+
     trait :disparu do
       recensable { false }
       localisation { Recensement::LOCALISATION_ABSENT }

@@ -16,6 +16,8 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
   let!(:recensement_bouquet) do
     create(
       :recensement,
+      :with_photos,
+      photos_count: 3,
       objet: objet_bouquet, user:, dossier:,
       etat_sanitaire: Recensement::ETAT_BON,
       securisation: Recensement::SECURISATION_CORRECTE,

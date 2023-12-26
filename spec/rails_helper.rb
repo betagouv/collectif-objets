@@ -59,6 +59,7 @@ Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox")
 Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
 
 Capybara.default_max_wait_time = 10
+Capybara.server_port = 31337
 
 begin
   require "pry"
