@@ -2,8 +2,10 @@
   close_path:,
   next_photo_path: next_photo&.lightbox_path,
   previous_photo_path: previous_photo&.lightbox_path,
-  turbo_frame: turbo_frame,
   action: "keydown.esc@document->galerie--lightbox-component#close keydown.left@document->galerie--lightbox-component#previous keydown.right@document->galerie--lightbox-component#next" } }
+
+  .spinner.fr-background-default--grey
+    %span.fr-icon-refresh-line.co-rotating{"aria-hidden": "true"}
 
   - actions&.confirmations&.each do |component|
     = render component

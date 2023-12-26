@@ -61,7 +61,7 @@ module Galerie
     end
 
     def call
-      turbo_frame_tag turbo_frame do
+      turbo_frame_tag(turbo_frame, class: "co-galerie-turbo-frame") do
         if current_photo_id
           render Galerie::LightboxComponent.new(self)
         else

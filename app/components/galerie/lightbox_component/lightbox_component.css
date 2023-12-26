@@ -73,6 +73,20 @@
   margin: 0 auto;
 }
 
+.spinner {
+  display: none;
+}
+.co-galerie-turbo-frame[busy] .spinner {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  padding: 1rem;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
 @media only screen and (min-width: 768px) {
   .co-galerie .footer {
     display: none;
