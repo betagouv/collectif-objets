@@ -16,11 +16,11 @@
   = dsfr_modal(title: "Ajouter une photo du recensement", html_attributes: { id: "galerie--actions--upload--modal-confirmation-ajout" }) do |component|
     - component.with_button do
       = button_tag("Ajouter une photo",
-              type: "button",
-              class: "fr-btn fr-btn--sm fr-btn",
-              data: { action: "click->galerie--actions--upload--confirmation-component#triggerSelectFile",
-                galerie__actions__upload__confirmation_component_target: "uploadButton" },
-              "aria-controls": "galerie--actions--upload--modal-confirmation-ajout")
+        type: "button",
+        class: "fr-btn fr-btn--sm fr-btn",
+        data: { action: "click->galerie--actions--upload--confirmation-component#triggerSelectFile",
+          galerie__actions__upload__confirmation_component_target: "uploadButton" },
+        "aria-controls": "galerie--actions--upload--modal-confirmation-ajout")
     - component.with_button do
       = button_tag("Annuler",
         type: "button",

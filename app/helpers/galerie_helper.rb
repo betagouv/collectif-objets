@@ -3,13 +3,15 @@
 module GalerieHelper
   def galerie_objet(objet)
     turbo_frame = "galerie_objet_#{objet.id}"
-    Galerie::FrameComponent.new(
+    galerie = Galerie::FrameComponent.new(
       photos: objet.palissy_photos_presenters,
       title: t("objets.photos_count", count: objet.palissy_photos_presenters.count),
       turbo_frame:,
       current_photo_id: params["#{turbo_frame}_photo_id"],
       path_without_query: request.path
     )
+    galerie.actions = Galerie::Actions::Basic.new(galerie:)
+    galerie
   end
 
   def galerie_recensement(recensement, actions_routes_scope: nil)
@@ -22,9 +24,12 @@ module GalerieHelper
       path_without_query: request.path,
       turbo_frame:
     )
-    if actions_routes_scope == :conservateurs
-      galerie.actions = Galerie::Actions::ConservateurRecensement.new(recensement:, galerie:)
-    end
+    galerie.actions =
+      if actions_routes_scope == :conservateurs
+        Galerie::Actions::ConservateurRecensement.new(recensement:, galerie:)
+      else
+        Galerie::Actions::Basic.new(galerie:)
+      end
     galerie
   end
 end

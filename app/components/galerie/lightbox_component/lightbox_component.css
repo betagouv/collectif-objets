@@ -69,6 +69,10 @@
   text-align: center;
 }
 
+.co-galerie > .footer .action:only-child {
+  margin: 0 auto;
+}
+
 @media only screen and (min-width: 768px) {
   .co-galerie .footer {
     display: none;
