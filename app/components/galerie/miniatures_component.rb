@@ -4,15 +4,13 @@ module Galerie
   class MiniaturesComponent < ViewComponent::Base
     include ApplicationHelper
 
-    attr_reader :parent_galerie
-
-    delegate :photos, :title, :count, to: :parent_galerie
+    delegate :photos, :title, :count, :actions, to: :@galerie
 
     MAX_PHOTOS_SHOWN = 4
 
-    def initialize(parent_galerie)
+    def initialize(galerie)
       super
-      @parent_galerie = parent_galerie
+      @galerie = galerie
     end
 
     def thumbs_count
@@ -28,6 +26,5 @@ module Galerie
     end
 
     def credits = photos.map(&:credit).uniq
-    def texte_lien_titre = count > 1 ? "Voir la galerie" : "Agrandir"
   end
 end
