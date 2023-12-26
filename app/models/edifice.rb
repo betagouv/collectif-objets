@@ -34,7 +34,7 @@ class Edifice < ApplicationRecord
 
     s = nom_edifice.parameterize
     %w[le la l de d du paroissiale et].each { s = s.gsub("-#{_1}-", "-") }
-    s = s.sub(/-paroissiale-/, "")
+    s = s.sub("-paroissiale-", "")
     s.sub(/-paroissiale$/, "")
     s
   end

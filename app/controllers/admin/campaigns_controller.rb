@@ -72,7 +72,7 @@ module Admin
     end
 
     def update_dates_up_to(up_to_date_field)
-      dates_attributes = \
+      dates_attributes =
         Campaign::DATE_FIELDS[0..Campaign::DATE_FIELDS.index(up_to_date_field)]
           .each_with_index.to_h do |date_field, index|
           weeks_ago = 5 - index

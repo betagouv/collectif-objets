@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
   before_action :set_sentry_context
   before_action :redirect_if_demo_link
 
-  def render_turbo_stream_update(*args, **kwargs)
-    render(turbo_stream: [turbo_stream.update(*args, **kwargs)])
+  def render_turbo_stream_update(*, **)
+    render(turbo_stream: [turbo_stream.update(*, **)])
   end
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

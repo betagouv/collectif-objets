@@ -3,12 +3,12 @@
 class ApplicationMailerPreview < ActionMailer::Preview
   private
 
-  def build(*args, **kwargs)
-    FactoryBot.build(*args, **kwargs).tap(&:readonly!)
+  def build(*, **)
+    FactoryBot.build(*, **).tap(&:readonly!)
   end
 
-  def build_list(*args, **kwargs)
-    list = FactoryBot.build_list(*args, **kwargs)
+  def build_list(*, **)
+    list = FactoryBot.build_list(*, **)
     list.each(&:readonly!)
     list
   end
