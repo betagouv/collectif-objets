@@ -1,10 +1,11 @@
 .fr-mb-8w
-  %p.fr-text--sm
-    Commune #{commune.code_insee} destinataire de la campagne
-    = link_to campaign_title(campaign), send("#{routes_prefix}_campaign_path", campaign)
-  %p.co-text--monospace.fr-text--sm
-    = user.email
-  %p
+  %ul
+    %li
+      Commune destinataire de la campagne
+      = link_to campaign_title(campaign), send("#{routes_prefix}_campaign_path", campaign)
+  %li= Code INSEE : #{commune.code_insee}
+  %li= user.email
+  %li
     = t("objets.count", count: commune.objets.count)
     = link_to "voir les objets", send("#{routes_prefix}_commune_path", commune)
 
