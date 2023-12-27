@@ -37,6 +37,7 @@
             - photo = PhotoPresenter.new(url: @objet.palissy_photos.any? ? @objet.palissy_photos_presenters.first&.url : "images/illustrations/photo-manquante-pop.png")
             = render("shared/card_photo", photo:)
 
+  -# hack to unnest the form but still use the form builder outside of the form_with block
   - f = nil
   = form_with(model: @recensement, url: conservateurs_objet_recensement_analyse_path(@objet, @recensement), builder: FormBuilderDsfr, id: "recensement", data: { turbo_action: "advance" }) do |fb|
     - f = fb
