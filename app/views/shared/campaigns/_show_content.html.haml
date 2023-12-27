@@ -13,7 +13,12 @@
     .fr-callout
       %p.fr-callout__text
         Cette campagne est en brouillon. Pour qu'elle soit active et démarre effectivement le #{l(campaign.date_lancement, format: :long_with_weekday)}, il faut la marquer comme planifiée. Vous pourrez repasser la campagne en brouillon si nécessaire.
-      = f.submit "Planifier la campagne"
+
+        - if campaign.communes.any?(&:active?)
+          .fr-mt-2w
+            ⚠️ Attention : certaines communes destinataires ont déjà commencé à recenser, il faut les retirer des destinataires avant de pouvoir planifier la campagne.
+
+      = f.submit "Planifier la campagne", disabled: campaign.communes.any?(&:active?)
 
 - elsif campaign.planned? && campaign.date_lancement > Time.zone.today
   = form_for campaign, builder: FormBuilderDsfr, url: send("#{r}_campaign_update_status_path", campaign) do |f|
@@ -69,10 +74,14 @@
       %h2 #{campaign.communes.count} communes destinataires :
       %ul.co-columns--4
         - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
-          %li{class: recipient.commune.active? && (campaign.draft? || campaign.planned?) ? "co-text--red" : ""}
+          %li
             = link_to recipient.commune.nom, send("#{r}_campaign_recipient_path", campaign, recipient)
             = campaign_recipient_status_badge(recipient)
             = campaign_recipient_opt_out_badge(recipient)
+            - if recipient.commune.active? && campaign.draft?
+              %span.fr-icon--sm.fr-icon-warning-line.fr-text--sm.co-text--red{"aria-hidden" => "true"}
+                active
+
             %span.fr-text--sm.co-text--muted= recipient.commune.code_insee
       - if excluded_communes.any?
         .fr-mt-4w
