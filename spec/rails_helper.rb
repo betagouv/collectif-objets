@@ -31,7 +31,10 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
 
   config.after(type: :feature) do |example_group|
-    save_screenshot if example_group.exception
+    next unless example_group.exception
+
+    r = save_screenshot
+    puts "saved screenshot to #{r}"
   end
 end
 
@@ -56,6 +59,7 @@ Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox")
 Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
 
 Capybara.default_max_wait_time = 10
+Capybara.server_port = 31337
 
 begin
   require "pry"

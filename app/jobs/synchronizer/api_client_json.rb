@@ -6,16 +6,16 @@ module Synchronizer
 
     BASE_PARAMS = { _size: 1000, _shape: "objects" }.freeze
 
-    def self.objets_photos(params: nil, **kwargs)
-      new("data/palissy_to_memoire.json", BASE_PARAMS.merge(params), **kwargs)
+    def self.objets_photos(params: nil, **)
+      new("data/palissy_to_memoire.json", BASE_PARAMS.merge(params), **)
     end
 
-    def self.edifices(params: nil, **kwargs)
-      new("data/merimee.json", BASE_PARAMS.merge(params), **kwargs)
+    def self.edifices(params: nil, **)
+      new("data/merimee.json", BASE_PARAMS.merge(params), **)
     end
 
-    def self.objets(params: nil, **kwargs)
-      new("data/palissy.json", BASE_PARAMS.merge(params), **kwargs)
+    def self.objets(params: nil, **)
+      new("data/palissy.json", BASE_PARAMS.merge(params), **)
     end
 
     def initialize(path, params, logger:, limit:)
@@ -37,7 +37,7 @@ module Synchronizer
     def first
       @request_number = 1
       parsed = fetch_and_parse_url(build_url(@path, @params))
-      return parsed["rows"][0] if parsed["rows"].count >= 1
+      parsed["rows"][0] if parsed["rows"].count >= 1
     end
 
     def to_a

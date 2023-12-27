@@ -16,7 +16,7 @@ module Synchronizer
       if departement.present?
         synchronize_departement(departement)
       else
-        Departement.all.each { synchronize_departement(_1.code) }
+        Departement.find_each { synchronize_departement(_1.code) }
       end
     end
 

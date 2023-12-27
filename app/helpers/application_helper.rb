@@ -18,9 +18,9 @@ module ApplicationHelper
     content_tag("p", yield, **html_opts)
   end
 
-  def link_to_button(content, path, **kwargs)
+  def link_to_button(content, path, **)
     content_tag("form", method: "GET", action: path) do
-      content_tag("button", **kwargs) { content }
+      content_tag("button", **) { content }
     end
   end
 
@@ -38,10 +38,10 @@ module ApplicationHelper
     I18n.t("#{scope}.other")
   end
 
-  def vite_or_raw_image_tag(src, **kwargs)
-    return vite_image_tag(src, **kwargs) if src.is_a?(String) && src.start_with?("images/")
+  def vite_or_raw_image_tag(src, **)
+    return vite_image_tag(src, **) if src.is_a?(String) && src.start_with?("images/")
 
-    image_tag(src, **kwargs)
+    image_tag(src, **)
   end
 
   def communes_policy(*args)
@@ -52,8 +52,8 @@ module ApplicationHelper
     policy([:conservateurs] + args)
   end
 
-  def icon_span(name, contour: :line, **kwargs)
-    content_tag(:span, "", class: "fr-icon-#{name}-#{contour}", "aria-hidden": "true", **kwargs)
+  def icon_span(name, contour: :line, **)
+    content_tag(:span, "", class: "fr-icon-#{name}-#{contour}", "aria-hidden": "true", **)
   end
 
   def accessible_icon_span(type: :auto)

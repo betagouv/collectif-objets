@@ -6,12 +6,13 @@ module Campaigns
 
     # this job should be executed daily around 10am
     def perform(date = Time.zone.today)
-      Campaign.planned.where("date_lancement <= ?", date).each(&:start!)
+      Campaign.planned.where("date_lancement <= ?", date).find_each(&:start!)
 
       Campaign.ongoing.each { Campaigns::RunCampaignJob.perform_inline(_1.id) }
 
       # strict comparison here so that it closes day after end
-      Campaign.ongoing.where("date_fin < ?", date).each(&:finish!)
+      Campaign.ongoing.where("date_fin < ?", date).find_each(&:finish!)
+
 
       # Envoi de la réponse automatique pour les communes n'ayant recensé que des objets verts
       Campaign.finished.each do |campaign|

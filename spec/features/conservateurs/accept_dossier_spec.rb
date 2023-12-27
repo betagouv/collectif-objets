@@ -16,6 +16,8 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
   let!(:recensement_bouquet) do
     create(
       :recensement,
+      :with_photos,
+      photos_count: 3,
       objet: objet_bouquet, user:, dossier:,
       etat_sanitaire: Recensement::ETAT_BON,
       securisation: Recensement::SECURISATION_CORRECTE,
@@ -53,7 +55,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
       click_on "Modifier"
       select "L’objet est en péril", from: "recensement[analyse_etat_sanitaire]"
     end
-    find("a", text: /entretien des édifices/).find(:xpath, "ancestor::label").click
+    find("label", text: /Informer la commune sur les mesures d’entretien des édifices/).click
     fill_in "recensement[analyse_notes]", with: "Est-ce qu'il est le pepito bleu?"
 
     click_on "Sauvegarder"
