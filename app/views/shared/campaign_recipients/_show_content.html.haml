@@ -1,12 +1,23 @@
 .fr-mb-8w
-  %p.fr-text--sm
-    Commune #{commune.code_insee} destinataire de la campagne
-    = link_to campaign_title(campaign), send("#{routes_prefix}_campaign_path", campaign)
-  %p.co-text--monospace.fr-text--sm
-    = user.email
-  %p
-    = t("objets.count", count: commune.objets.count)
-    = link_to "voir les objets", send("#{routes_prefix}_commune_path", commune)
+  - if recipient.commune.active? && campaign.draft?
+    .fr-grid-row
+      .fr-col-md-8.fr-mb-2w
+        = dsfr_alert(type: :warning, title: "Commune déjà active") do
+          Cette commune a déjà commencé à recenser.
+          %br
+          La campagne ne pourra pas être planifiée tant qu'elle n’a pas été retirée des destinataires.
+
+  %ul
+    %li
+      campagne
+      = link_to campaign_title(campaign), send("#{routes_prefix}_campaign_path", campaign)
+    %li= "Code INSEE : #{commune.code_insee}"
+    %li
+      email:
+      %span.co-text--monospace= user.email
+    %li
+      Cette commune abrite
+      = link_to t("objets.count", count: commune.objets.count), send("#{routes_prefix}_commune_path", commune)
 
   - if recipient.status.present?
     %p
