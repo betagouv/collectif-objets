@@ -2,7 +2,7 @@
 
 module Galerie
   module Actions
-    module Destroy
+    class Destroy
       class ConfirmationComponent < ViewComponent::Base
         attr_reader :attachment_path, :redirect_path
 

@@ -12,18 +12,28 @@ module Galerie
       end
 
       def buttons(responsive_variant: :desktop)
-        [download_button(responsive_variant:)]
+        all(responsive_variant:).map(&:button_component)
       end
 
-      def confirmations = []
-      def upload_confirmation = nil
-      def upload_button = nil
+      def confirmations(responsive_variant: :desktop)
+        all(responsive_variant:).map(&:confirmation_component).compact
+      end
 
-      def download_button(responsive_variant: :desktop)
-        Galerie::Actions::Download::ButtonComponent.new(
+      def download(responsive_variant:)
+        Galerie::Actions::Download.new(
           url: current_photo.download_url,
           responsive_variant:
         )
+      end
+
+      def upload = nil
+      def rotate = nil
+      def destroy = nil
+
+      private
+
+      def all(responsive_variant: :desktop)
+        [download(responsive_variant:)]
       end
     end
   end

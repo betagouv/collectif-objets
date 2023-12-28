@@ -2,7 +2,7 @@
 
 module Galerie
   module Actions
-    module Upload
+    class Upload
       class ButtonComponent < ViewComponent::Base
         include ButtonConcern
 

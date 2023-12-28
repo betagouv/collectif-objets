@@ -46,7 +46,11 @@ module Galerie
       photos.find_index { _1.id == current_photo_id.to_i }
     end
 
-    def current_photo = current_index.present? && photos[current_index]
+    def current_photo
+      return nil if current_index.blank?
+
+      photos[current_index]
+    end
 
     def previous_photo
       return nil if current_photo.nil? || current_index.zero?

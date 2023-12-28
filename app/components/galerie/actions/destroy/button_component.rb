@@ -2,7 +2,7 @@
 
 module Galerie
   module Actions
-    module Destroy
+    class Destroy
       class ButtonComponent < ViewComponent::Base
         include ButtonConcern
 

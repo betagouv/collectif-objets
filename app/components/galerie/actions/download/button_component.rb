@@ -2,7 +2,7 @@
 
 module Galerie
   module Actions
-    module Download
+    class Download
       class ButtonComponent < ViewComponent::Base
         include ButtonConcern
 

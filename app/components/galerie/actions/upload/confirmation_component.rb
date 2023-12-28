@@ -2,7 +2,7 @@
 
 module Galerie
   module Actions
-    module Upload
+    class Upload
       class ConfirmationComponent < ViewComponent::Base
         attr_reader :attachments_path, :recensement_id, :redirect_path, :message
 

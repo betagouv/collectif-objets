@@ -2,7 +2,7 @@
 
 module Galerie
   module Actions
-    module Rotate
+    class Rotate
       class ButtonComponent < ViewComponent::Base
         include ButtonConcern
 
