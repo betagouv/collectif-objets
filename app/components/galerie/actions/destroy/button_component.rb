@@ -6,9 +6,9 @@ module Galerie
       class ButtonComponent < ViewComponent::Base
         include ButtonConcern
 
-        def initialize(with_text: true)
+        def initialize(responsive_variant: :desktop)
           super
-          @with_text = with_text
+          @responsive_variant = responsive_variant
         end
       end
     end

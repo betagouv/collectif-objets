@@ -8,9 +8,9 @@ module Galerie
 
         attr_reader :url
 
-        def initialize(url:, with_text: true)
+        def initialize(url:, responsive_variant: :desktop)
           super
-          @with_text = with_text
+          @responsive_variant = responsive_variant
           @url = url
         end
       end

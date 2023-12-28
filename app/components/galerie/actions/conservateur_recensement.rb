@@ -12,12 +12,12 @@ module Galerie
         @recensement = recensement
       end
 
-      def buttons(with_text: true)
+      def buttons(responsive_variant: :desktop)
         [
-          download_button(with_text:),
-          rotate_button(with_text:),
-          destroy_button(with_text:),
-          upload_button(with_text:)
+          download_button(responsive_variant:),
+          rotate_button(responsive_variant:),
+          destroy_button(responsive_variant:),
+          upload_button(responsive_variant:)
         ].compact
       end
 
@@ -25,27 +25,27 @@ module Galerie
         [destroy_confirmation, upload_confirmation].compact
       end
 
-      def download_button(with_text: true)
+      def download_button(responsive_variant: :desktop)
         Galerie::Actions::Download::ButtonComponent.new(
           url: current_photo.download_url,
-          with_text:
+          responsive_variant:
         )
       end
 
-      def rotate_button(with_text: true)
+      def rotate_button(responsive_variant: :desktop)
         return nil if current_photo.nil?
 
         Galerie::Actions::Rotate::ButtonComponent.new(
           attachment_path: conservateurs_attachment_path(current_photo.id),
           redirect_path: current_photo.lightbox_path,
-          with_text:
+          responsive_variant:
         )
       end
 
-      def destroy_button(with_text: true)
+      def destroy_button(responsive_variant: :desktop)
         return nil if current_photo.nil?
 
-        Galerie::Actions::Destroy::ButtonComponent.new(with_text:)
+        Galerie::Actions::Destroy::ButtonComponent.new(responsive_variant:)
       end
 
       def destroy_confirmation
@@ -57,10 +57,10 @@ module Galerie
         )
       end
 
-      def upload_button(with_text: true)
+      def upload_button(responsive_variant: :desktop)
         return nil unless @recensement.recensable?
 
-        Galerie::Actions::Upload::ButtonComponent.new(with_text:)
+        Galerie::Actions::Upload::ButtonComponent.new(responsive_variant:)
       end
 
       def upload_confirmation

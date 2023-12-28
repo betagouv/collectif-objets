@@ -11,18 +11,18 @@ module Galerie
         @galerie = galerie
       end
 
-      def buttons(with_text: true)
-        [download_button(with_text:)]
+      def buttons(responsive_variant: :desktop)
+        [download_button(responsive_variant:)]
       end
 
       def confirmations = []
       def upload_confirmation = nil
       def upload_button = nil
 
-      def download_button(with_text: true)
+      def download_button(responsive_variant: :desktop)
         Galerie::Actions::Download::ButtonComponent.new(
           url: current_photo.download_url,
-          with_text:
+          responsive_variant:
         )
       end
     end

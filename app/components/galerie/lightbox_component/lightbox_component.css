@@ -7,7 +7,7 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
-  z-index: 600;
+  z-index: 800;
 }
 
 .co-galerie > .header,

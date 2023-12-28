@@ -8,9 +8,9 @@ module Galerie
 
         attr_reader :attachment_path, :redirect_path
 
-        def initialize(attachment_path:, redirect_path:, with_text: true)
+        def initialize(attachment_path:, redirect_path:, responsive_variant: :desktop)
           super
-          @with_text = with_text
+          @responsive_variant = responsive_variant
           @attachment_path = attachment_path
           @redirect_path = redirect_path
         end

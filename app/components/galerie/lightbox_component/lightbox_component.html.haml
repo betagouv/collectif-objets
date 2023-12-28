@@ -47,5 +47,5 @@
         = current_photo.description
 
   .footer.fr-background-default--grey
-    - actions&.buttons(with_text: false)&.each do |component|
+    - actions&.buttons(responsive_variant: :mobile)&.each do |component|
       = render component
