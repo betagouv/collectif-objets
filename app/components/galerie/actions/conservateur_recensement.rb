@@ -68,7 +68,7 @@ module Galerie
 
         Galerie::Actions::Upload::ConfirmationComponent.new(
           attachments_path: conservateurs_attachments_path,
-          create_params: { recensement_id: @recensement.id },
+          recensement_id: @recensement.id,
           message:
             "Vous pouvez ajouter des photos récentes liées à ce recensement. " \
             "Merci de ne pas ajouter de photos d’archives.",

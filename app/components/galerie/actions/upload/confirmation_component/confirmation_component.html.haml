@@ -3,8 +3,7 @@
   -# invisible upload form and field triggered via JS
   = form_with(url: attachments_path,
     data: { galerie__actions__upload__confirmation_component_target: "uploadForm" }) do |f|
-    - create_params.each do |key, value|
-      = f.hidden_field key, value: value
+    = f.hidden_field :recensement_id, value: recensement_id
     = f.hidden_field :redirect_path, value: redirect_path
     = f.file_field(:new_blob_id,
       class: "fr-file-input hide",
