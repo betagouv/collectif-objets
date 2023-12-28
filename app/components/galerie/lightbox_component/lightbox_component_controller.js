@@ -16,7 +16,7 @@ export default class extends Controller {
   close(_event) {
     // this should prevent closing the lightbox when a dialog is open but it doesn't work
     // because the dialog is closed first
-    if (document.querySelector("dialog[open]")) return;
+    // if (document.querySelector("dialog[open]")) return;
 
     Turbo.visit(this.element.dataset.closePath, { frame: this.element.dataset.turboFrame })
   }
