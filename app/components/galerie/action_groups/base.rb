@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Galerie
-  module Actions
-    class Basic
+  module ActionGroups
+    class Base
       include Rails.application.routes.url_helpers
 
       delegate :current_photo, to: :@galerie

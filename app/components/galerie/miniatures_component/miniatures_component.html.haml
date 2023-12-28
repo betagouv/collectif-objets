@@ -31,7 +31,7 @@
   - elsif count >= 1
     .bottom-link
       = link_to photos[0].lightbox_path, class: "fr-link fr-link--icon-right fr-icon-zoom-in-line" do
-        - if actions&.is_a?(Galerie::Actions::Basic)
+        - if actions&.is_a?(Galerie::ActionGroups::Base)
           = t("galerie.miniatures.open", count:)
         - else
           = t("galerie.miniatures.open_with_actions", count:)

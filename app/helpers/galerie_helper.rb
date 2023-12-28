@@ -10,7 +10,7 @@ module GalerieHelper
       current_photo_id: params["#{turbo_frame}_photo_id"],
       path_without_query: request.path
     )
-    galerie.actions = Galerie::Actions::Basic.new(galerie:)
+    galerie.actions = Galerie::ActionGroups::Base.new(galerie:)
     galerie
   end
 
@@ -26,9 +26,9 @@ module GalerieHelper
     )
     galerie.actions =
       if actions_routes_scope == :conservateurs
-        Galerie::Actions::ConservateurRecensement.new(recensement:, galerie:)
+        Galerie::ActionGroups::ConservateurRecensement.new(recensement:, galerie:)
       else
-        Galerie::Actions::Basic.new(galerie:)
+        Galerie::ActionGroups::Base.new(galerie:)
       end
     galerie
   end

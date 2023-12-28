@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 module Galerie
-  module Actions
-    class ConservateurRecensement
-      include Rails.application.routes.url_helpers
-
-      delegate :close_path, :current_photo, :next_photo, :previous_photo, to: :@galerie
+  module ActionGroups
+    class ConservateurRecensement < Base
+      delegate :close_path, :next_photo, to: :@galerie
 
       def initialize(galerie:, recensement:)
-        @galerie = galerie
+        super(galerie:)
         @recensement = recensement
       end
 
@@ -23,13 +21,6 @@ module Galerie
 
       def confirmations
         [destroy_confirmation, upload_confirmation].compact
-      end
-
-      def download_button(responsive_variant: :desktop)
-        Galerie::Actions::Download::ButtonComponent.new(
-          url: current_photo.download_url,
-          responsive_variant:
-        )
       end
 
       def rotate_button(responsive_variant: :desktop)
