@@ -31,7 +31,7 @@
         params: previous_photo&.lightbox_path_params,
         disabled: previous_photo.nil?)
     .photo
-      = vite_or_raw_image_tag current_photo.url, alt: current_photo.alt
+      = image_tag current_photo.url, alt: current_photo.alt
     .arrow-link
       = button_to("",
         path_without_query,

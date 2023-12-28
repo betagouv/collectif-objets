@@ -3,7 +3,7 @@
     - if objet.palissy_photos_presenters.any?
       = image_tag objet.palissy_photos_presenters.first.url, alt: objet.palissy_photos_presenters.first.description, class: "co-height--100 co-width--100 co-object-fit-contain"
     - else
-      = vite_image_tag "images/illustrations/photo-manquante.png", alt: "image manquante", class: "co-height--100 co-width--100 co-object-fit-contain"
+      = image_tag "illustrations/photo-manquante.png", alt: "image manquante", class: "co-height--100 co-width--100 co-object-fit-contain"
   .fr-p-2w
     .co-position-relative.co-height--100
       .co-height--100.co-overflow--hidden

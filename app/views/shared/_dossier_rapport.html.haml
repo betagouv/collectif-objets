@@ -88,7 +88,7 @@
                   .fr-col-sm-4
                     .co-rapport-photo
                       - if recensement.photos.any?
-                        = vite_or_raw_image_tag recensement.photos.first.variant(:medium), alt: "© Licence ouverte"
+                        = image_tag recensement.photos.first.variant(:medium), alt: "© Licence ouverte"
                     #{objet.nom} (#{objet.palissy_EDIF}) ·
                     %span.fr-text--sm #{objet.palissy_REF}
 

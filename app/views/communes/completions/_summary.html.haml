@@ -20,7 +20,7 @@
                 - if palissy_photo_presenter
                   %img.co--width-max-100{alt: palissy_photo_presenter.alt, src: palissy_photo_presenter.url}
                 - else
-                  = vite_image_tag "images/illustrations/photo-manquante.png"
+                  = image_tag "illustrations/photo-manquante.png"
               %div
                 = link_to truncate(recensement.objet.nom, length: 30), commune_objet_path(objet.commune, recensement.objet)
           %td= presenter.localisation

@@ -1,5 +1,5 @@
-- photo ||= PhotoPresenter.new(url: "images/illustrations/photo-manquante.png", description: "Photo manquante")
+- photo ||= PhotoPresenter.new(url: "illustrations/photo-manquante.png", description: "Photo manquante")
 
 .fr-card__img
-  = vite_or_raw_image_tag(photo.url, class: "fr-responsive-img co-object-fit-contain", alt: photo.alt)
+  = image_tag(photo.url, class: "fr-responsive-img co-object-fit-contain", alt: photo.alt)
   = yield

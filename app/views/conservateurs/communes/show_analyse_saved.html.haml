@@ -7,14 +7,14 @@
       - if @objets.any?
         %p Vous pouvez modifier ces informations autant que vous le souhaitez avant l’envoi à la commune.
       - else
-        %p 
-          L’ensemble des objets en péril ou disparus ont été examinés. Vous pouvez envoyer votre examen à la commune. 
+        %p
+          L’ensemble des objets en péril ou disparus ont été examinés. Vous pouvez envoyer votre examen à la commune.
           = link_to_button "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
         %p ou
       %p
         = dsfr_link_to "Retour à la liste des recensements de la commune", conservateurs_commune_path(@commune), data: { turbo_action: "advance" }, icon_left: "arrow-left-line"
     .fr-col-md-5
-      = vite_image_tag "images/illustrations/people-clap.svg", class: "co--width-max-100"
+      = image_tag "illustrations/people-clap.svg", class: "co--width-max-100"
 
   - if @objets.any?
     .fr-grid-row.fr-grid-row--center.co-background--light-teal.fr-py-6w

@@ -48,5 +48,7 @@ module CollectifObjets
     config.action_controller.raise_on_missing_callback_actions = false
 
     config.i18n.raise_on_missing_translations = true
+
+    config.assets.paths << Rails.root.join("app/components")
   end
 end

@@ -1,7 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { DirectUpload } from "@rails/activestorage"
 import Nanobar from "nanobar"
-import "./photo_upload_component.css"
 
 function humanFileSize(number) {
   if (number < 1024) {
@@ -14,7 +13,7 @@ function humanFileSize(number) {
 }
 
 export default class extends Controller {
-  static targets = ["wrapper", "input", "submit",  "nanobar", "progressText"]
+  static targets = ["wrapper", "input", "submit", "nanobar", "progressText"]
 
   connect() {
     this.formTarget = this.inputTarget.closest("form")

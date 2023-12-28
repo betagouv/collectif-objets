@@ -5,19 +5,19 @@
   - if count > 0
     .first
       = link_to photos[0].lightbox_path, class: "photo cursor--zoom-in" do
-        = vite_or_raw_image_tag photos[0].thumb_url, alt: photos[0].alt
+        = image_tag photos[0].thumb_url, alt: photos[0].alt
         %span.fr-icon-zoom-in-line.magnifier-icon(aria-hidden="true")
   - else
     .first
       .photo
-        = vite_image_tag "images/illustrations/photo-manquante.png", class: "missing-photo", alt: "Photo manquante"
+        = image_tag "illustrations/photo-manquante.png", class: "missing-photo", alt: "Photo manquante"
 
   - if count > 1
     .thumbs
       - photos.from(1).to(thumbs_count).each_with_index do |photo, index|
         .thumb
           = link_to photo.lightbox_path, class: "photo cursor--zoom-in" do
-            = vite_or_raw_image_tag photo.thumb_url, alt: photo.alt
+            = image_tag photo.thumb_url, alt: photo.alt
 
       .thumb-link
         = link_to photos[0].lightbox_path, class: "photo co-flex co-flex--align-items-center" do

@@ -21,10 +21,6 @@ tasks:
       gp sync-done bundle
     command: GITPOD_WORKSPACE_URL=`gp url 3000` bundle exec rails server
 
-  - name: Vite dev server
-    init: gp sync-await bundle
-    command: bundle exec vite dev
-
   - name: Redis
     command: redis-server
 
@@ -48,9 +44,5 @@ ports:
     visibility: private
   - name: mailhog-smtp
     port: 1025
-    onOpen: ignore
-    visibility: private
-  - name: vite-dev-server
-    port: 3036
     onOpen: ignore
     visibility: private

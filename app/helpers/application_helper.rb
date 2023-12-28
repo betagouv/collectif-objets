@@ -38,12 +38,6 @@ module ApplicationHelper
     I18n.t("#{scope}.other")
   end
 
-  def vite_or_raw_image_tag(src, **)
-    return vite_image_tag(src, **) if src.is_a?(String) && src.start_with?("images/")
-
-    image_tag(src, **)
-  end
-
   def communes_policy(*args)
     policy([:communes] + args)
   end

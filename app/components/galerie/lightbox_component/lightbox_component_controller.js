@@ -1,8 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { Turbo } from "@hotwired/turbo-rails"
 
-import "./lightbox_component.css"
-
 export default class extends Controller {
   connect() {
     // prevent body from being scrollable when modal is open

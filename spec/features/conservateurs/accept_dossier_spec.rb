@@ -116,6 +116,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
 
     # envoi rapport
     click_on "Envoyer l'examen à la commune"
+    sleep 1
     bouquet_row = find_link("Bouquet d'Autel").find(:xpath, "ancestor::tr")
     expect(bouquet_row).to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
     expect(bouquet_row.all("td")[1]).to have_text(/Bon/i)

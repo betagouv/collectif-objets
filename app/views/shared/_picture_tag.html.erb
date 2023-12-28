@@ -1,14 +1,14 @@
 <picture>
   <source
     type="image/webp"
-    srcset="<%= vite_asset_path "images/#{filename_without_extension}.webp" %>"
+    srcset="<%= asset_path "#{filename_without_extension}.webp" %>"
   >
   <source
     type="image/png"
-    srcset="<%= vite_asset_path "images/#{filename_without_extension}.png" %>"
+    srcset="<%= asset_path "#{filename_without_extension}.png" %>"
   >
   <img
-    src="<%= vite_asset_path "images/#{filename_without_extension}.png" %>"
+    src="<%= asset_path "#{filename_without_extension}.png" %>"
     alt="<%= alt %>"
     class="<%= local_assigns[:img_class] %>"
   >

@@ -1,3 +1,2 @@
 web: bundle exec rails server -p 3000
 mailhog: mailhog 1> /dev/null
-vite: bin/vite dev

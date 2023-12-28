@@ -26,7 +26,7 @@ historiques et aux conservateurs d'examiner ces recensements.
   * [Préparation d'une astreinte dev](#préparation-dune-astreinte-dev)
   * [Données (Origine, Transformations, Republications)](#données-origine-transformations-republications)
   * [Photos](#photos)
-  * [Frontend : Vite, View Components, Stimulus](#frontend--vite-view-components-stimulus)
+  * [Frontend : importmaps, View Components, Stimulus](#frontend--importmaps-view-components-stimulus)
   * [Intégration du Design Système de l'État Français (DSFR)](#intégration-du-design-système-de-létat-français-dsfr)
   * [Messagerie](#messagerie)
   * [Accessibilité, Plan du site et Pages démos](#accessibilité-plan-du-site-et-pages-démos)
@@ -176,7 +176,6 @@ Les gems principales dont dépend cette application Rails sont :
 - `devise` : Authentification des usagers. Il y a trois modèles Devise `User` (Communes), `Conservateur` et `Admin`.
 - `pundit` : droits et règles d'accès selon les profils
 - `good_job` : Gestion des tâches asynchrones
-- `vite_rails` : Compilation des assets JS et images
 - `turbo_rails` : Interactions JS simplifiées
 - `mjml-rails` : Templates de mails en MJML
 - `AASM` : Machines à états finis pour les statuts des modèles
@@ -397,7 +396,6 @@ Avec le recul, certains choix méritent d’être revus :
 
 - Le modèle Dossier est peut-être superflu. On pourrait utiliser uniquement le modèle Commune. Aujourd’hui il y a un lien 1:1 dans beaucoup de cas entre ces deux modèles. Il avait été pensé pour permettre à une commune d’ouvrir plusieurs dossiers de recensement mais ce n’est pas le cas aujourd’hui. En année n+5, il est probable qu’on aura déjà supprimé le dossier précédent de notre base de données pour des raisons RGPD.
 - Netlify CMS pour le contenu peut être remplacé par des contenus stockés en DB et édités via des textarea ActionText / Trix.
-- Le choix de vite pour le build JS est peut–être trop exotique. Il faudrait réévaluer l’usage des importmaps pour éviter tout build system.
 - L’utilisation de I18n est à proscrire, ce projet n’a aucune vocation internationale, et l’isolation des contenus dans les fichiers yml ralentit plus qu’elle n’aide. (seule utilité à remplacer : la pluralisation).
 - Le mélange de français et d’anglais dans le code et la DB est désagréable. Il faudrait harmoniser les choix, mais la direction à suivre n’est pas encore claire.
 
@@ -612,7 +610,7 @@ Les métadonnées des photos venant de Mémoire sont stockées dans le champ `ob
 
 Les métadonnées des photos mises en ligne par les communes ou les conservateurs lors du recensement sont des stockées dans `ActiveStorage::Attachment` et `ActiveStorage::Blob`, liés à l'objet `Recensement`. Les fichiers sont sur un bucket S3.
 
-## Frontend : Vite, View Components, Stimulus
+## Frontend : Importmaps, View Components, Stimulus
 
 Les fichiers `.rb` des composants View Components sont dans `/app/components`.
 Pour chaque composant, tous les fichiers liés (JS, CSS, preview) sont dans un dossier du même nom dans
@@ -633,27 +631,10 @@ Cette configuration s'inspire partiellement de [view_component-contrib](https://
 Des controlleurs Stimulus non liés à des composants existent dans :
 
 - `/app/frontend/stimulus_controllers` : importés par défaut dans l'entrypoint `application.js`
-- `/app/frontend/stimulus_controllers_standalone` : doivent être importés dans des entrypoints spécifiques
 
 ## Intégration du Design Système de l'État Français (DSFR)
 
-L'intégration du DSFR est faite par des liens symboliques définis dans `/public` qui pointent vers les assets
-précompilés du package node :
-
-```
-/public/dsfr/dsfr.min.css -> /node_modules/@gouvfr/dsfr/dist/dsfr.min.css
-/public/dsfr/fonts -> /node_modules/@gouvfr/dsfr/dist/fonts/
-/public/dsfr/icons -> /node_modules/@gouvfr/dsfr/dist/icons/
-/public/dsfr/utility/utility.min.css -> /../node_modules/@gouvfr/dsfr/dist/utility/utility.min.css
-```
-
-Cela permet :
-- de ne pas repasser inutilement par un compilateur d'assets (vite dans ce projet)
-- de rester à jour avec le DSFR plus facilement en utilisant les upgrades de packages JS
-
-En revanche ce n'est vraiment pas standard et risque de poser des soucis de maintenance.
-
-C'est discuté ici : https://mattermost.incubateur.net/betagouv/pl/ehsuormqztnr3fz6ncuqt9f5ac
+TODO describe
 
 ## Messagerie
 
@@ -782,7 +763,7 @@ Donner les permissions ACL en lecture pour tous les visiteurs pour les fichiers 
 Enfin insérer et adapter l’un des deux snippets suivants en HAML ou HTML :
 
 ```haml
-%video.co-cursor-pointer{controls:"", width:"100%", preload:"none", poster:vite_asset_path("images/2023_05_titre_video.webp"), href:"#"}
+%video.co-cursor-pointer{controls:"", width:"100%", preload:"none", poster: asset_path("2023_05_titre_video.webp"), href:"#"}
   / the href is a fix for a bad rule in DSFR
   %source(src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.webm" type="video/webm")
   %source(src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_titre_video.mp4" type="video/mp4")

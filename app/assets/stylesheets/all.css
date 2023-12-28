@@ -1,0 +1,8 @@
+@import url(dsfr_overrides.css);
+@import url(print.css);
+@import url(components/all.css);
+@import url(utilities.css);
+
+@import url(galerie/miniatures_component/miniatures_component.css);
+@import url(galerie/lightbox_component/lightbox_component.css);
+@import url(photo_upload_component/photo_upload_component.css);

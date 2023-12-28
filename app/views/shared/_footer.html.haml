@@ -9,7 +9,7 @@
             de la Culture
       .fr-footer__brand.fr-enlarge-link.co-footer-logo
         = link_to "https://beta.gouv.fr/communaute/#/incubators/culture", title: "Incubateur Atelier Numérique" do
-          = vite_image_tag "images/logo-atelier-numerique.svg", alt: "Logo Atelier Numérique"
+          = image_tag "logo-atelier-numerique.svg", alt: "Logo Atelier Numérique"
       .fr-footer__brand.fr-enlarge-link.co-footer-logo
         = link_to "https://beta.gouv.fr", title: "beta.gouv.fr" do
           = render "shared/picture_tag", filename_without_extension: "logo-beta-gouv", img_class: "co--width-max-100", alt: "logo beta.gouv.fr"
@@ -73,18 +73,18 @@
                       %input#fr-radios-theme-light{name: "fr-radios-theme", type: "radio", value: "light"}
                       %label.fr-label{for: "fr-radios-theme-light"}
                         Thème clair
-                      .fr-radio-rich__img{"data-fr-inject-svg": ""}
-                        = vite_image_tag "images/dsfr/artwork/light.svg", alt: ""
+                      .fr-radio-rich__img
+                        = image_tag "dsfr/artwork/light.svg", alt: ""
                     .fr-radio-group.fr-radio-rich
                       %input#fr-radios-theme-dark{name: "fr-radios-theme", type: "radio", value: "dark"}
                       %label.fr-label{for: "fr-radios-theme-dark"}
                         Thème sombre
-                      .fr-radio-rich__img{"data-fr-inject-svg": ""}
-                        = vite_image_tag "images/dsfr/artwork/dark.svg", alt: ""
+                      .fr-radio-rich__img
+                        = image_tag "dsfr/artwork/dark.svg", alt: ""
                     .fr-radio-group.fr-radio-rich
                       %input#fr-radios-theme-system{name: "fr-radios-theme", type: "radio", value: "system"}
                       %label.fr-label{for: "fr-radios-theme-system"}
                         Système
                         %span.fr-hint-text Utilise les paramètres système.
-                      .fr-radio-rich__img{"data-fr-inject-svg": ""}
-                        = vite_image_tag "images/dsfr/artwork/system.svg", alt: ""
+                      .fr-radio-rich__img
+                        = image_tag "dsfr/artwork/system.svg", alt: ""

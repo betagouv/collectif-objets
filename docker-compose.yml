@@ -44,15 +44,6 @@ services:
       DATABASE_PASSWORD: objets
       REDIS_URL: redis://redis:6379
       MAILHOG_HOST: mailhog
-  vite_dev:
-    build: .
-    command: bundle exec vite dev
-    volumes:
-      - .:/app
-      - node_modules:/app/node_modules
-    depends_on:
-      - db
-      - redis
   mailhog:
     image: mailhog/mailhog
     ports:
