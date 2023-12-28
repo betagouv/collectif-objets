@@ -47,7 +47,17 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 **En local avec rbenv**: ```rbenv install `cat .ruby-version` && make install && make dev```
 
-*optionnel*: pour une utilisation de rubocop plus rapide en local,
+**Sous Linux avec asdf**
+
+`sudo apt get curl git install build-essential libc-dev libz-dev libffi-dev libssl-dev libreadline-dev libyaml-dev`
+
+Installer asdf en suivant ces instructions : https://asdf-vm.com/guide/getting-started.html
+
+Installer la version de ruby spécifiée dans le Gemfile. Exemple :
+
+`asdf install ruby 3.2.2`
+
+_**optionnel**_: pour une utilisation de rubocop plus rapide en local,
 [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
 
 # Découverte du service, captures d'écran, types d’usagers, premiers pas
