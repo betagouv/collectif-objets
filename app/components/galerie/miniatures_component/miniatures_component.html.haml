@@ -31,10 +31,10 @@
   - elsif count >= 1
     .bottom-link
       = link_to photos[0].lightbox_path, class: "fr-link fr-link--icon-right fr-icon-zoom-in-line" do
-        - if actions&.rotate
-          = t("galerie.miniatures.open", count:)
-        - else
+        - if actions&.is_a?(Galerie::ActionGroups::ConservateurRecensement)
           = t("galerie.miniatures.open_with_actions", count:)
+        - else
+          = t("galerie.miniatures.open", count:)
 
   - if credits.any?
     .co-text--muted.fr-mt-1w.fr-text--sm
