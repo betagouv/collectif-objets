@@ -10,7 +10,7 @@
       autocomplete: "off",
       direct_upload: true,
       data: { galerie__actions__upload__confirmation_component_target: "uploadFileInput",
-        action: "change->galerie--actions--upload--confirmation-component#triggerUpload" })
+        action: "change->galerie--actions--upload--confirmation-component#triggerSubmit" })
 
   = dsfr_modal(title: "Ajouter une photo du recensement", html_attributes: { id: "galerie--actions--upload--modal-confirmation-ajout" }) do |component|
     - component.with_button do

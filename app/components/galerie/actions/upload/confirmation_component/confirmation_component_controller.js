@@ -8,7 +8,7 @@ export default class extends Controller {
     this.uploadFileInputTarget.click()
   }
 
-  triggerUpload(_event) {
+  triggerSubmit(_event) {
     this.uploadButtonTarget.disabled = true
     this.uploadFormTarget.requestSubmit()
   }
