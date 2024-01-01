@@ -46,7 +46,7 @@ jobs:
         env:
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
           RUBYOPT: -W0 # Disable Ruby warnings for libvips uninitialized constant cf https://github.com/customink/ruby-vips-lambda/issues/15
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: artifacts-capybara
           path: tmp/artifacts/capybara
