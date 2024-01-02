@@ -1,29 +1,30 @@
 ---
 titre: Entretien de l’édifice et lutte contre les infestations
 ---
-
 ## Introduction
 
-Les objets monuments historiques sont des trésors nationaux (article L. 111-1 du Code du patrimoine).
-Il est du ressort de chacun - et en particulier des communes abritant des objets protégés - de s’assurer de leur préservation et de leur transmission aux générations futures.
+Les “objets monuments historiques” (désignés ainsi par l'article L. 111-1 du Code du patrimoine), sont considérés comme des trésors nationaux. Il est important que tout le monde, notamment les communes qui abritent ces objets, prenne part à leur préservation pour les générations futures.
 
-Le bon entretien de l’édifice dans lequel ces objets sont conservés est nécessaire pour leur préservation.
+Un entretien approprié de l'édifice où ces objets sont conservés est crucial. Cela implique des actions régulières de maintenance et de protection pour s'assurer qu'ils restent en bon état. Cette responsabilité collective aide à maintenir notre héritage culturel vivant et accessible pour tous.
 
 ## Conseils génériques pour l’entretien d’un édifice
 
-**Température** : Pour la bonne préservation des oeuvres, essayez de maintenir une température comprise entre 15 et 18°C dans votre édifice.
-Si vous déplacez une oeuvre, évitez les changements brusques de températures qui peuvent accélérer la détérioration des peintures et anticipez les déplacements d’oeuvres en échangeant avec votre CAOA au préalable.
+**Température** : Il est essentiel de garder votre édifice à une température stable pour protéger les œuvres d'art qu'il contient. Idéalement, cette température devrait être maintenue entre 15 et 18°C. Un environnement stable aide à prévenir les dommages.
+
+Si vous devez déplacer une œuvre, faites attention aux changements soudains de température. Des variations rapides peuvent nuire aux peintures, les rendant plus susceptibles de se détériorer. Avant de déplacer une œuvre, il est recommandé de consulter votre CAOA (Conservateur des Antiquités et Objets d'Art). Cette précaution permet de s'assurer que le déplacement se fait dans les meilleures conditions possibles pour préserver l'intégrité de l'œuvre.
 
 ### Hygrométrie
 
-L’humidité est un agent de détérioration rapide des oeuvres.
-Elle entraîne des risques accrus de moisissures, corrosions ou déformations.
-Surveillez les fuites d’eau, les phénomènes de condensation liés aux changements de température et les infiltrations d’eau.
-Pour mesurer le niveau d’humidité vous pouvez utiliser un hygromètre.
-Si vous constatez un niveau anormalement élevé d’humidité, éloignez les oeuvres de la source d’humidité.
-En tout état de cause, ne pas faire de ménage à grande eau dans des édifices qui abritent des oeuvres.
+L'humidité est un facteur majeur qui peut endommager rapidement les œuvres d'art. Elle peut provoquer des moisissures, de la corrosion (rouille sur les métaux), ou faire gonfler et se déformer les matériaux. Pour protéger vos œuvres, il est important de surveiller attentivement toute présence d'humidité.
+
+Surveillez les fuites d’eau, les phénomènes de condensation liés aux changements de température et les infiltrations d’eau. Pour suivre le niveau d'humidité, l'utilisation d'un hygromètre, un appareil qui mesure l'humidité de l'air, est recommandée.
+
+Si vous remarquez un taux d'humidité anormalement élevé, il est important d'éloigner les œuvres de la source de cette humidité. 
+
+De plus, il est important de ne pas utiliser de grandes quantités d'eau pour le nettoyage dans les zones où sont conservées les œuvres, car cela pourrait augmenter l'humidité de l'air et causer des dommages. 
 
 ### Luminosité
+
 La lumière du soleil directe est un agent qui peut modifier, voire faire disparaitre, les couleurs des oeuvres (les spécialistes parlent de polychromie).
 Attention à ne pas positionner vos objets directement à proximité d’une fenêtre ou d’un puits de lumière, notamment les textiles et autres matériaux très photosensibles.
 
@@ -93,9 +94,9 @@ En cas de doute sur le niveau d’humidité dans l’air à différents moments,
 
 Rongeurs, pigeons… Les bâtiments peuvent abriter bien du monde à votre insu !
 
-- Inspectez régulièrement l’intérieur des bâtiments pour s’assurer qu’ils ne sont pas infestés.
-- Attention aux appâts souricides qui font que l’animal peut se décomposer derrière un meuble ou un objet et ainsi générer une infestation de moisissures.
-- Les fientes de pigeon peuvent notamment endommager les œuvres en raison de leur acidité ; elles sont par ailleurs très difficiles à nettoyer et dangereuses pour les humains par inhalation.
+* Inspectez régulièrement l’intérieur des bâtiments pour s’assurer qu’ils ne sont pas infestés.
+* Attention aux appâts souricides qui font que l’animal peut se décomposer derrière un meuble ou un objet et ainsi générer une infestation de moisissures.
+* Les fientes de pigeon peuvent notamment endommager les œuvres en raison de leur acidité ; elles sont par ailleurs très difficiles à nettoyer et dangereuses pour les humains par inhalation.
 
 ## Que faire?
 
@@ -112,13 +113,12 @@ Votre CAOA indiquera dans son examen les mesures spécifiques à prendre pour ch
 
 Si vous souhaitez améliorer l’état sanitaire à l’intérieur des édifices qui abritent vos objets, vous pouvez prendre contact avec l’UDAP de votre département.
 
-
 ## Sources
 
 **Insectes :** les noms fournis par ce site sont en latin, mais l’appellation en français figure au sein de chaque fiche :
 
-- Bois d'ouvrage | CICRP · voir sur http://insectes-nuisibles.cicrp.fr/fr/bois-douvrage
-- Fibres textiles | CICRP ·  voir sur http://insectes-nuisibles.cicrp.fr/fr/fibres-textiles
+* Bois d'ouvrage | CICRP · voir sur http://insectes-nuisibles.cicrp.fr/fr/bois-douvrage
+* Fibres textiles | CICRP ·  voir sur http://insectes-nuisibles.cicrp.fr/fr/fibres-textiles
 
 **Moisissures** :
 
