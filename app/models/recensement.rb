@@ -58,8 +58,8 @@ class Recensement < ApplicationRecord
 
   validates :conservateur_id, presence: true, if: -> { completed? && analysed? }
 
-  after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) }
+  after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) }
+  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) }
 
   scope :present_and_recensable, lambda {
     where(
@@ -116,7 +116,7 @@ class Recensement < ApplicationRecord
   end
 
   def aasm_after_commit_complete
-    SendMattermostNotificationJob.perform_async("recensement_created", { "recensement_id" => id })
+    SendMattermostNotificationJob.perform_later("recensement_created", { "recensement_id" => id })
   end
 
   accepts_nested_attributes_for :dossier

@@ -32,10 +32,9 @@ class Message < ApplicationRecord
 
   def enqueue_mattermost_notification
     delay = inbound_email? && inbound_email.attachments.any? ? 3.minutes : 0
-    SendMattermostNotificationJob.perform_in(
-      delay, # to give time for attachments to be downloaded in case there are any
-      "message_created", "message_id" => id
-    )
+    SendMattermostNotificationJob
+      .set(wait: delay) # to give time for attachments to be downloaded in case there are any
+      .perform_later("message_created", "message_id" => id)
   end
 
   def files_and_skipped_attachments_count

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationJob < ActiveJob::Base
+  retry_on StandardError, Exception, wait: :polynomially_longer, attempts: 5
+
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked
 

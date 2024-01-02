@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "sidekiq/web"
-
 Rails.application.routes.draw do
   ## -----
   ## DEVISE
@@ -9,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, skip: [:registrations]
   authenticate :admin_user do
-    mount Sidekiq::Web => "/sidekiq"
+    mount GoodJob::Engine => "/good_job"
   end
 
   devise_for :users, skip: [:registrations], controllers: {

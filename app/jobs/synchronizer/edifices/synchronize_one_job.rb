@@ -2,9 +2,7 @@
 
 module Synchronizer
   module Edifices
-    class SynchronizeOneJob
-      include Sidekiq::Job
-
+    class SynchronizeOneJob < ApplicationJob
       def perform(params = {})
         @params = params
         raise ArgumentError, "missing ref param" if params_i[:ref].blank?

@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 module Campaigns
-  class RunCampaignJob
-    include Sidekiq::Job
-
+  class RunCampaignJob < ApplicationJob
     def perform(campaign_id)
       @campaign = Campaign.find(campaign_id)
       return unless @campaign.ongoing?
 
       recipients_to_step_up.each do |recipient|
-        Campaigns::StepUpRecipientJob.perform_async(recipient.id, current_step)
+        Campaigns::StepUpRecipientJob.perform_later(recipient.id, current_step)
       end
     end
 

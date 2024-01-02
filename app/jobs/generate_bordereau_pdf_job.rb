@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-class GenerateBordereauPdfJob
-  include Sidekiq::Job
-
-  # do not retry
-  sidekiq_options retry: false
+class GenerateBordereauPdfJob < ApplicationJob
+  discard_on StandardError, Exception
 
   def perform(dossier_id, edifice_id)
     dossier = Dossier.find(dossier_id)

@@ -12,10 +12,10 @@ RSpec.describe Campaigns::CronJob, type: :job do
     let!(:campaign4) { create(:campaign, status: "planned", date_lancement: Date.new(2031, 7, 10)) }
 
     it "should start only planned campaign with lancement date in the past" do
-      expect(Campaigns::RunCampaignJob).not_to receive(:perform_inline).with(campaign1.id)
-      expect(Campaigns::RunCampaignJob).to receive(:perform_inline).with(campaign2.id)
-      expect(Campaigns::RunCampaignJob).to receive(:perform_inline).with(campaign3.id)
-      expect(Campaigns::RunCampaignJob).not_to receive(:perform_inline).with(campaign4.id)
+      expect(Campaigns::RunCampaignJob).not_to receive(:perform_now).with(campaign1.id)
+      expect(Campaigns::RunCampaignJob).to receive(:perform_now).with(campaign2.id)
+      expect(Campaigns::RunCampaignJob).to receive(:perform_now).with(campaign3.id)
+      expect(Campaigns::RunCampaignJob).not_to receive(:perform_now).with(campaign4.id)
 
       Campaigns::CronJob.new.perform(Date.new(2031, 5, 15))
 
@@ -44,11 +44,11 @@ RSpec.describe Campaigns::CronJob, type: :job do
     end
 
     it "should enqueue ongoing campaigns only" do
-      expect(Campaigns::RunCampaignJob).not_to receive(:perform_inline).with(campaign1.id)
-      expect(Campaigns::RunCampaignJob).to receive(:perform_inline).with(campaign2.id)
-      expect(Campaigns::RunCampaignJob).to receive(:perform_inline).with(campaign3.id)
-      expect(Campaigns::RunCampaignJob).to receive(:perform_inline).with(campaign4.id)
-      expect(Campaigns::RunCampaignJob).to receive(:perform_inline).with(campaign5.id)
+      expect(Campaigns::RunCampaignJob).not_to receive(:perform_now).with(campaign1.id)
+      expect(Campaigns::RunCampaignJob).to receive(:perform_now).with(campaign2.id)
+      expect(Campaigns::RunCampaignJob).to receive(:perform_now).with(campaign3.id)
+      expect(Campaigns::RunCampaignJob).to receive(:perform_now).with(campaign4.id)
+      expect(Campaigns::RunCampaignJob).to receive(:perform_now).with(campaign5.id)
 
       Campaigns::CronJob.new.perform(Date.new(2031, 5, 15))
 

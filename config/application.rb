@@ -3,6 +3,8 @@
 require_relative "boot"
 
 require "rails"
+require "good_job/engine"
+
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
@@ -37,7 +39,7 @@ module CollectifObjets
 
     config.action_mailer.preview_paths << Rails.root.join("lib/mailer_previews")
 
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :good_job
 
     config.x.inbound_emails_domain = "test.domain.fr"
 

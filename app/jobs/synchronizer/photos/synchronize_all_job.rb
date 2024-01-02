@@ -2,9 +2,7 @@
 
 module Synchronizer
   module Photos
-    class SynchronizeAllJob
-      include Sidekiq::Job
-
+    class SynchronizeAllJob < ApplicationJob
       MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
 
       def perform(params = {})

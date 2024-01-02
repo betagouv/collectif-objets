@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class SanityChecksJob
-  include Sidekiq::Job
-
+class SanityChecksJob < ApplicationJob
   EMAIL = "brice.durand@beta.gouv.fr"
 
   def perform

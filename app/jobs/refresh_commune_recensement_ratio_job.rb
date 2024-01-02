@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
-class RefreshCommuneRecensementRatioJob
-  include Sidekiq::Job
-
+class RefreshCommuneRecensementRatioJob < ApplicationJob
   def perform(commune_id)
     @commune_id = commune_id
     communes.find_each do |commune|
       recensement_ratio = compute_recensement_ratio(commune)
       commune.update_columns(recensement_ratio:)
-      Sidekiq.logger.info "updated ratio to #{recensement_ratio} for #{commune.nom}"
+      GoodJob.logger.info "updated ratio to #{recensement_ratio} for #{commune.nom}"
     end
   end
 
@@ -22,7 +20,7 @@ class RefreshCommuneRecensementRatioJob
 
   def communes
     if @commune_id == "all"
-      Sidekiq.logger.info "loading communes..."
+      GoodJob.logger.info "loading communes..."
       Commune.all
     else
       Commune.where(id: @commune_id)

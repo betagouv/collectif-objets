@@ -57,7 +57,7 @@ class CreateEdifices < ActiveRecord::Migration[7.0]
 
   def synchronize_merimee_edifices
     start_step 3, "will synchronize #{Edifice.count} merimee edifices with datasette API..."
-    Synchronizer::Edifices::SynchronizeOneJob.perform_inline
+    Synchronizer::Edifices::SynchronizeOneJob.perform_now
     puts "done synchronizing #{Edifice.count} merimee edifices with datasette API!"
   end
 

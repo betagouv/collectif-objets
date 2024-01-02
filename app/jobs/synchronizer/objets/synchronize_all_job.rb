@@ -2,10 +2,9 @@
 
 module Synchronizer
   module Objets
-    class SynchronizeAllJob
-      include Sidekiq::Job
-
+    class SynchronizeAllJob < ApplicationJob
       def initialize
+        super
         @counters = Hash.new(0)
       end
 

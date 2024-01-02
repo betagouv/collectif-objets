@@ -1,4 +1,3 @@
 web: bundle exec rails server -p 3000
-worker: bundle exec sidekiq -q default -q step_up_recipients
-mailhog: mailhog
+mailhog: mailhog 1> /dev/null
 vite: bin/vite dev

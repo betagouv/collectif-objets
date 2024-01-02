@@ -11,7 +11,5 @@ Sentry.init do |config|
 
   config.environment = Rails.configuration.x.environment_specific_name
 
-  config.sidekiq.report_after_job_retries = true
-
   config.release = ENV["CONTAINER_VERSION"] if ENV["CONTAINER_VERSION"].present?
 end
