@@ -6,10 +6,10 @@
         - if stats[:statuses].present?
           %p
             Statut des #{@campaign.communes.count} communes
-          = bar_chart [{name: "Inactive", color: "rgba(254, 238, 113, 1)", data: [["", stats[:statuses].fetch("inactive", 0)]] },
-                   {name: "Recensement démarré", color: "rgba(94, 100, 255, 1)", data: [["", stats[:statuses].fetch("started", 0)]]  },
-                   {name: "Recensement terminé", color: "rgba(30, 100, 30, 1)", data: [["", stats[:statuses].fetch("completed", 0)]] }],
-            stacked: true, height: 150, xtitle: "nombre de communes"
+          %canvas{data: { controller: "stacked-line-chart",
+            datasets: campaign_communes_statuses_line_chart_datasets(stats[:statuses]).to_json,
+            "unit-suffix": "commune(s)",
+            "x-title": "nombre de communes"} }
 
       - if stats[:objets].present?
         .fr-col-md-6
@@ -17,9 +17,10 @@
             = stats[:objets][:total]
             objets à recenser
 
-          = bar_chart [{name: "Pas encore recensé", color: "rgba(254, 238, 113, 1)", data: [["", stats[:objets].fetch("not_recensed", 0)]] },
-                   {name: "Recensé", color: "rgba(94, 100, 255, 1)", data: [["", stats[:objets].fetch("recensed", 0)]]  }],
-            stacked: true, height: 150, xtitle: "nombre d’objets"
+          %canvas{data: { controller: "stacked-line-chart",
+            datasets: campaign_objets_statuses_line_chart_datasets(stats[:objets]).to_json,
+            "unit-suffix": "objet(s)",
+            "x-title": "nombre d’objets"} }
 
           - if stats[:objets][:recensements_with_photos_ratio].present?
             %p.fr-mt-2w
