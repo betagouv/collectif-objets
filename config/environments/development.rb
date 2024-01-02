@@ -93,6 +93,4 @@ Rails.application.configure do
   config.log_file_size = 100_000_000
 
   config.view_component.preview_paths << Rails.root.join("app/components/")
-
-  config.action_controller.raise_on_missing_callback_actions = true
 end

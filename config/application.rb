@@ -42,5 +42,7 @@ module CollectifObjets
     config.x.inbound_emails_domain = "test.domain.fr"
 
     config.view_component.default_preview_layout = "component_preview"
+
+    config.action_controller.raise_on_missing_callback_actions = false
   end
 end
