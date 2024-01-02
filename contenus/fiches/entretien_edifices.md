@@ -31,7 +31,9 @@ Il est crucial de faire attention à l'emplacement de vos œuvres. Évitez de le
 
 ### Les polluants (poussière, micro-particules)
 
-Ces polluants ne doivent pas entrer au contact de l’objet. Passez le balais et dépoussiérez régulièrement votre édifice. Attention lors de la manipulation d'objets d'art de prendre les mesures nécessaires (cela peut-être le port de gants).
+Ces polluants ne doivent pas entrer au contact de l’objet. Passez le balais et dépoussiérez régulièrement votre édifice. 
+
+Attention toutefois, il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial.
 
 ## Prévenir les infestations de nuisibles
 
@@ -47,10 +49,8 @@ Agir vite est essentiel pour la préservation des œuvres.
 
 ## Les insectes
 
-Certains objets monuments historiques (en bois, en tissu) sont très prisés des insectes.
-Généralement, vous ne verrez pas ces insectes à la surface des objets, car ils commencent souvent par attaquer l’intérieur.
-En revanche vous pourrez constater des dégradations à la surface de l’objet, des traces de sciure, des trous, ou des déjections…
-Ils apprécient les environnements sombres, humides et chauds.
+Certains objets monuments historiques (en bois, en tissu, autre) sont très prisés des insectes.
+Généralement, vous ne verrez pas ces insectes à la surface des objets, car ils commencent souvent par attaquer l’intérieur. En revanche vous pourrez constater des dégradations à la surface de l’objet, des traces de sciure, des trous, ou des déjections. Ils apprécient les environnements sombres, humides et chauds. 
 
 Une surveillance régulière permet de détecter généralement à temps les infestations.
 Ce repérage, puis un traitement approprié permettent d’éviter que l’infestation se propage dans l’environnement de l’objet : boiseries et charpentes par exemple pour les insectes xylophages.
@@ -103,7 +103,7 @@ Rongeurs, pigeons… Les bâtiments peuvent abriter bien du monde à votre insu 
 * Attention aux appâts souricides qui font que l’animal peut se décomposer derrière un meuble ou un objet et ainsi générer une infestation de moisissures.
 * Les fientes de pigeon peuvent notamment endommager les œuvres en raison de leur acidité ; elles sont par ailleurs très difficiles à nettoyer et dangereuses pour les humains par inhalation.
 
-## Que faire?
+## Que faire ?
 
 **Il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial.**
 Pour le reste du mobilier présent dans l’édifice, l’entretien courant suffit généralement à éloigner les nuisibles.
