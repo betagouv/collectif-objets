@@ -24,7 +24,7 @@ Bundler.require(*Rails.groups)
 module CollectifObjets
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -32,9 +32,10 @@ module CollectifObjets
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
-    config.eager_load_paths << Rails.root.join("lib/mailer_previews")
 
-    config.action_mailer.preview_path = Rails.root.join "lib/mailer_previews"
+    config.autoload_lib(ignore: %w[assets tasks])
+
+    config.action_mailer.preview_paths << Rails.root.join("lib/mailer_previews")
 
     config.active_job.queue_adapter = :sidekiq
 
