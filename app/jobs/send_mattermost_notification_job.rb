@@ -2,9 +2,7 @@
 
 class MattermostApiError < StandardError; end
 
-class SendMattermostNotificationJob
-  include Sidekiq::Job
-
+class SendMattermostNotificationJob < ApplicationJob
   HOOKS_URL = "https://mattermost.incubateur.net/hooks/#{Rails.application.credentials.mattermost&.hook_id}".freeze
   HANDLED_EVENTS = %w[commune_completed recensement_created dossier_auto_submitted message_created].freeze
 

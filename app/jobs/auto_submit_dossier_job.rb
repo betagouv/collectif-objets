@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class AutoSubmitDossierJob
-  include Sidekiq::Job
-
+class AutoSubmitDossierJob < ApplicationJob
   def perform(dossier_id)
     @dossier = Dossier.find(dossier_id)
     dossier.submit!(notes_commune: "Dossier soumis automatiquement 1 mois après le dernier recensement")

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 module Synchronizer
-  class SynchronizeObjetsJob
-    include Sidekiq::Job
-
+  class SynchronizeObjetsJob < ApplicationJob
     def initialize
+      super
       @counters = Hash.new(0)
     end
 

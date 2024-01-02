@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Campaigns
-  class CronJob
-    include Sidekiq::Job
-
+  class CronJob < ApplicationJob
     # this job should be executed daily around 10am
     def perform(date = Time.zone.today)
       Campaign.planned.where("date_lancement <= ?", date).find_each(&:start!)

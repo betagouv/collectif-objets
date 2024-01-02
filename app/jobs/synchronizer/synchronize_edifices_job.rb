@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Synchronizer
-  class SynchronizeEdificesJob
-    include Sidekiq::Job
-
+  class SynchronizeEdificesJob < ApplicationJob
     def perform(params = {})
       limit = params.with_indifferent_access[:limit]
       @dry_run = params.with_indifferent_access[:dry_run]

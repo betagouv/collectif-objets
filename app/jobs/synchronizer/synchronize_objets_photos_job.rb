@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Synchronizer
-  class SynchronizeObjetsPhotosJob
-    include Sidekiq::Job
-
+  class SynchronizeObjetsPhotosJob < ApplicationJob
     MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
 
     def perform(params = {})

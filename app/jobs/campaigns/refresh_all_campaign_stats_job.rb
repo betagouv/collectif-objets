@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Campaigns
-  class RefreshAllCampaignStatsJob
-    include Sidekiq::Job
-
+  class RefreshAllCampaignStatsJob < ApplicationJob
     def perform
       Campaign.ongoing.or(finished_campaigns).select(:id).each do |campaign|
         Campaigns::RefreshCampaignStatsJob.perform_async(campaign.id)

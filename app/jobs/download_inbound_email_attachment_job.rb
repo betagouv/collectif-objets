@@ -2,9 +2,7 @@
 
 class DownloadError < StandardError; end
 
-class DownloadInboundEmailAttachmentJob
-  include Sidekiq::Job
-
+class DownloadInboundEmailAttachmentJob < ApplicationJob
   def perform(attachment_raw, inbound_email_id)
     @email_attachment = EmailAttachment.new(attachment_raw, inbound_email_id)
     return Sidekiq.logger.info("skipping download #{attachment_raw}") if skip_download?

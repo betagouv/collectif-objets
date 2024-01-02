@@ -2,8 +2,7 @@
 
 require "zip"
 
-class ExportMemoireZipJob
-  include Sidekiq::Job
+class ExportMemoireZipJob < ApplicationJob
   sidekiq_options retry: 0
 
   def perform(pop_export_id)

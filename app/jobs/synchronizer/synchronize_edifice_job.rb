@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Synchronizer
-  class SynchronizeEdificeJob
-    include Sidekiq::Job
-
+  class SynchronizeEdificeJob < ApplicationJob
     def perform(params = {})
       @params = params
       raise ArgumentError, "missing ref param" if params_i[:ref].blank?

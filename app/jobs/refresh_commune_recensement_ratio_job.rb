@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class RefreshCommuneRecensementRatioJob
-  include Sidekiq::Job
-
+class RefreshCommuneRecensementRatioJob < ApplicationJob
   def perform(commune_id)
     @commune_id = commune_id
     communes.find_each do |commune|

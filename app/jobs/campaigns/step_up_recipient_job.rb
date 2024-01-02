@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Campaigns
-  class StepUpRecipientJob
-    include Sidekiq::Job
-    include ActiveSupport::Rescuable
+  class StepUpRecipientJob < ApplicationJob
 
     sidekiq_options queue: "step_up_recipients", retry: 0
 

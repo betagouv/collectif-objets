@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class RefreshRecensementPhotosCountJob
-  include Sidekiq::Job
-
+class RefreshRecensementPhotosCountJob < ApplicationJob
   def perform
     Recensement.where.missing(:photos_attachments).update_all(photos_count: 0)
     Recensement.joins(:photos_attachments).includes(:photos_attachments).find_each do |recensement|

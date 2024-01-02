@@ -2,8 +2,7 @@
 
 require "csv"
 
-class ExportMemoireCsvJob
-  include Sidekiq::Job
+class ExportMemoireCsvJob < ApplicationJob
   sidekiq_options retry: 0
 
   def perform(pop_export_id)

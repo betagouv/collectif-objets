@@ -2,9 +2,7 @@
 
 class OnPurposeError < StandardError; end
 
-class FailOnPurposeJob
-  include Sidekiq::Job
-
+class FailOnPurposeJob < ApplicationJob
   sidekiq_retry_in { 30 }
 
   def perform

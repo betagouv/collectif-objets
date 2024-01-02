@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Synchronizer
-  class SynchronizeCommunesJob
-    include Sidekiq::Job
-
+  class SynchronizeCommunesJob < ApplicationJob
     API_URL = "https://collectif-objets-datasette.fly.dev/data/mairies.json"
     BASE_PARAMS = {
       _size: "1000",

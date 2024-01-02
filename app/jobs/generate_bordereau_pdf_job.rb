@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-class GenerateBordereauPdfJob
-  include Sidekiq::Job
-
-  # do not retry
+class GenerateBordereauPdfJob < ApplicationJob
   sidekiq_options retry: false
 
   def perform(dossier_id, edifice_id)

@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Campaigns
-  class RunCampaignJob
-    include Sidekiq::Job
-
+  class RunCampaignJob < ApplicationJob
     def perform(campaign_id)
       @campaign = Campaign.find(campaign_id)
       return unless @campaign.ongoing?
