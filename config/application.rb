@@ -39,5 +39,7 @@ module CollectifObjets
     config.active_job.queue_adapter = :sidekiq
 
     config.x.inbound_emails_domain = "test.domain.fr"
+
+    config.view_component.default_preview_layout = "component_preview"
   end
 end
