@@ -37,6 +37,7 @@ historiques et aux conservateurs d'examiner ces recensements.
 * [Configurations](#configurations)
   * [Configurations DNS, boites mails, et serveurs mails](#configurations-dns-boites-mails-et-serveurs-mails)
   * [Buckets S3, permissions ACLs et CORS](#buckets-s3-permissions-acls-et-cors)
+  * [Configurations des CSP Content Security Policy](#configurations-des-csp-content-security-policy)
 <!-- TOC -->
 
 # Installation
@@ -242,7 +243,7 @@ Commune "*" --> "*" Campaign
 - Un `AdminUser` est un compte permettant l'accès à l'interface d'admin
 Pour créer un nouveau compte, utiliser cette commande dans une console Rails :
 ```ruby
-AdminUser.create(email: "email@de.ladmin", first_name: "Prénom de l'admin", last_name: "Nom de l'admin", password: "mot_de_passe_de_ladmin") 
+AdminUser.create(email: "email@de.ladmin", first_name: "Prénom de l'admin", last_name: "Nom de l'admin", password: "mot_de_passe_de_ladmin")
 ```
 
 La version complète du diagramme d'entités de la base de données est visible ici
@@ -817,3 +818,24 @@ Avec le fichier suivant
   ]
 }
 ```
+
+## Configurations des CSP Content Security Policy
+
+Toute la configuration se trouve dans `config/initializers/content_security_policy.rb`.
+Actuellement les règles ne sont pas appliquées, elles sont encore en "report-only" c’est à dire qu’en cas d’infraction, les navigateurs ne vont pas empêcher la ressource de se charger, mais simplement envoyer l’information à Sentry.
+
+Les ressources problématiques peuvent [être filtrées sur Sentry avec `event.type:csp`](https://sentry.incubateur.net/organizations/betagouv/issues/?query=is%3Aunresolved+event.type%3Acsp&referrer=search-bar&sort=date).
+Lorsque de nouvelles apparaissent il convient de s’assurer qu’elles proviennent bien de notre code :
+
+- vérifier que le `source_file` de l’évènement n’indique pas quelque chose de suspect comme une extension navigateur
+- vérifier que la ressource qui n’a pas pu être chargée est une ressource utilisée dans CO. Par exemple on n’utilise jamais de google fonts, donc une URL en fonts.google bloquée n’est pas un problème de notre code. C’est probablement une extension navigateur aussi
+- depuis l’issue, cliquer sur Open in Discover en haut à gauche permet de chercher des points communs entre les occurences du problème, par exemple des URLs similaires ou bien une famille de navigateurs impactés.
+
+Sentry est déjà configuré pour ignorer les problèmes dont le source_file est `moz_extension` ou `sandbox eval code`, cf [config Sentry](https://sentry.incubateur.net/settings/betagouv/projects/collectif-objets/security-headers/csp/).
+
+Pour débugger les CSPs en local, il peut être utile de désactiver vite dev dans le Procfile.dev et les exceptions spécifiques à l’environnement de dev en haut de `config/initializers/content_security_policy.rb`.
+
+💡 La règle d’or est de tout faire pour ne jamais avoir à rajouter de règle `unsafe inline` pour le style ou pour les scripts.
+L’intérêt est en effet que les CSP protègent les usagers d’injections de code.
+
+
