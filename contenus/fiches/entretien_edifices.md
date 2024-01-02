@@ -26,19 +26,24 @@ De plus, il est important de ne pas utiliser de grandes quantités d'eau pour le
 ### Luminosité
 
 La lumière du soleil directe est un agent qui peut modifier, voire faire disparaitre, les couleurs des oeuvres (les spécialistes parlent de polychromie).
-Attention à ne pas positionner vos objets directement à proximité d’une fenêtre ou d’un puits de lumière, notamment les textiles et autres matériaux très photosensibles.
+
+Il est crucial de faire attention à l'emplacement de vos œuvres. Évitez de les placer près des fenêtres ou sous des puits de lumière. Ceci est particulièrement important pour les textiles et autres matériaux très sensibles à la lumière (photosensibles). Une exposition directe au soleil peut les endommager rapidement.
 
 ### Les polluants (poussière, micro-particules)
 
-Ces polluants ne doivent pas entrer au contact de l’objet.
-Passez le balais et dépoussiérez régulièrement votre édifice.
+Ces polluants ne doivent pas entrer au contact de l’objet. Passez le balais et dépoussiérez régulièrement votre édifice. Attention lors de la manipulation d'objets d'art de prendre les mesures nécessaires (cela peut-être le port de gants).
 
 ## Prévenir les infestations de nuisibles
 
-Ils peuvent faire l’objet de détériorations liées à différents types d’infestations (insectes, rongeurs, moisissures…).
-Celles-ci seront à signaler rapidement à la Conservation départementale des Antiquités et Objets d’Art.
+Les œuvres d'art peuvent être endommagées par des nuisibles comme les insectes er les rongeurs. \
+\
+Pour protéger vos œuvres :
 
-Les étapes à suivre sont détaillées à la fin de cette fiche.
+* **Surveillez** : gardez un œil sur les signes d'infestation.
+* **Signalez** : en cas de problème, contactez rapidement la Conservation départementale des Antiquités et Objets d'Art.
+* **Suivez les instructions** : consultez la suite de cette fiche pour des conseils sur comment réagir en cas d'infestation.
+
+Agir vite est essentiel pour la préservation des œuvres.
 
 ## Les insectes
 
@@ -52,7 +57,7 @@ Ce repérage, puis un traitement approprié permettent d’éviter que l’infes
 
 Vous trouverez ci-dessous des marques typiques de la présence d’insectes :
 
-### Insectes friands de bois (xylophages)
+### Insectes qui aiment le bois (xylophages) 
 
 Les insectes xylophages les plus fréquents sont la petite vrillette, la grande vrillette, le capricorne et les termites.
 
@@ -64,11 +69,11 @@ Trous marqueurs de la présence de petite vrillette
 
 Sciure au pied du meuble, illustrant la présence de vrillette
 
-### Insectes friands de tissus :
+### Insectes qui aiment les tissus :
 
 Les mites, les blattes et les poissons d’argents peuvent infester des supports très divers (toiles des tableaux…).
 
-![Trou de mite sur un tissus](/contenus/fiches/images/mite-trou-tissu.jpg)
+![Trou de mite sur un tissu](/contenus/fiches/images/mite-trou-tissu.jpg)
 
 Trou de mite sur un tissu
 
@@ -122,4 +127,4 @@ Si vous souhaitez améliorer l’état sanitaire à l’intérieur des édifices
 
 **Moisissures** :
 
-[Préconisations et conseils suite aux inondations (culture.gouv.fr)](https://www.culture.gouv.fr/Regions/Drac-Hauts-de-France/Actualites/Preconisations-et-conseils-suite-aux-inondations)
+* [Préconisations et conseils suite aux inondations (culture.gouv.fr)](https://www.culture.gouv.fr/Regions/Drac-Hauts-de-France/Actualites/Preconisations-et-conseils-suite-aux-inondations)
