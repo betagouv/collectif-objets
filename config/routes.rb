@@ -198,8 +198,6 @@ Rails.application.routes.draw do
   get "health/js_error", to: "health#js_error"
   get "health/slow_image", to: "health#slow_image" if Rails.env.development?
 
-  mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
-
   resources :mail_previews, only: [:index] if Rails.configuration.x.environment_specific_name != "production"
 end
 

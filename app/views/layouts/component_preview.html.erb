@@ -10,7 +10,16 @@
     <link rel="stylesheet" href="/dsfr/utility/utility.min.css">
     <%= csrf_meta_tags %>
   </head>
-  <body class="fr-p-2w">
-    <%= yield %>
+  <body class="fr-p-2w container">
+    <div class="fr-grid-row fr-grid-row--center">
+      <div class="fr-col-md-8">
+        <h1>
+          <a href="/rails/view_components">
+            View Component Previews
+          </a>
+        </h1>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

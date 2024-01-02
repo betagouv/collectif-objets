@@ -58,8 +58,6 @@ group :development do
   gem "foreman", "~> 0.87"
   gem "html2haml", "~> 2.3"
   gem "htmlbeautifier", "~> 1.4"
-  gem "listen", "~> 3.8" # for lookbook
-  gem "lookbook", "~> 2.0"
   gem "pry", "~> 0.14"
   gem "rails-erd", "~> 1.7", require: false
   gem "solargraph", "~> 0.49"
