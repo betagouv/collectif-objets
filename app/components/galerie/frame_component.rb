@@ -9,19 +9,19 @@ module Galerie
       :title,
       :turbo_frame,
       :current_photo_id,
-      :path_without_query,
-      :display_actions
+      :path_without_query
     )
 
     delegate :count, to: :photos
+
+    attr_accessor :actions
 
     def initialize(
       photos:,
       title:,
       turbo_frame:,
       current_photo_id:,
-      path_without_query:,
-      display_actions: false
+      path_without_query:
     )
       super
       @photos = photos
@@ -29,7 +29,6 @@ module Galerie
       @turbo_frame = turbo_frame
       @current_photo_id = current_photo_id
       @path_without_query = path_without_query
-      @display_actions = display_actions
       @photos.each { augment_photo_presenter(_1) }
     end
 
@@ -47,7 +46,11 @@ module Galerie
       photos.find_index { _1.id == current_photo_id.to_i }
     end
 
-    def current_photo = current_index.present? && photos[current_index]
+    def current_photo
+      return nil if current_index.blank?
+
+      photos[current_index]
+    end
 
     def previous_photo
       return nil if current_photo.nil? || current_index.zero?
@@ -62,7 +65,7 @@ module Galerie
     end
 
     def call
-      turbo_frame_tag turbo_frame do
+      turbo_frame_tag(turbo_frame, class: "co-galerie-turbo-frame") do
         if current_photo_id
           render Galerie::LightboxComponent.new(self)
         else

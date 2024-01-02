@@ -123,6 +123,7 @@ Rails.application.routes.draw do
     resource :conservateur, only: [:update]
     resources :visits, only: [:index]
     resources :fiches, only: :index
+    resources :attachments, only: %i[create update destroy]
   end
 
   ## -----

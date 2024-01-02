@@ -24,10 +24,17 @@
           %span.co-flex--grow
             = t("galerie.miniatures.last_thumb", count: hidden_photos_count)
 
-  - if count >= 1
+  - if count == 0 && actions&.upload
+    = render actions.upload.confirmation_component
+    = render actions.upload.button_component
+
+  - elsif count >= 1
     .bottom-link
       = link_to photos[0].lightbox_path, class: "fr-link fr-link--icon-right fr-icon-zoom-in-line" do
-        = t("galerie.miniatures.open", count:)
+        - if actions&.is_a?(Galerie::ActionGroups::ConservateurRecensement)
+          = t("galerie.miniatures.open_with_actions", count:)
+        - else
+          = t("galerie.miniatures.open", count:)
 
   - if credits.any?
     .co-text--muted.fr-mt-1w.fr-text--sm

@@ -49,6 +49,47 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
 
     # examen first recensement
     click_on "Bouquet d'Autel"
+    # galerie - navigation
+    #  find(".co-galerie .content .photo img")[:src].match(%r{blobs/proxy/(.*)/(.*.jpg)})[1] }
+    def current_img
+      find(".co-galerie .content .photo img")[:src]
+        .match(%r{blobs/proxy/(?<blob_id>.*)/(?<filename>.*)$})
+    end
+    click_on "Voir ou modifier les 3 photos"
+    expect(page).to have_css('button[title="photo précédente"][disabled]')
+    expect(page).to have_text("Photo 1 / 3")
+    expect(current_img[:filename]).to eq "tableau1.jpg"
+    find('button[title="photo suivante"]').click
+    expect(page).to have_text("Photo 2 / 3")
+    expect(current_img[:filename]).to eq "tableau2.jpg"
+    expect(page).to have_css('button[title="photo précédente"]:not([disabled])')
+    find('button[title="photo suivante"]').click
+    expect(page).to have_text("Photo 3 / 3")
+    expect(current_img[:filename]).to eq "tableau3.jpg"
+    expect(page).to have_css('button[title="photo suivante"][disabled]')
+    find('button[title="photo précédente"]').click
+    expect(page).to have_text("Photo 2 / 3")
+    expect(current_img[:filename]).to eq "tableau2.jpg"
+    # galerie - pivoter
+    blob_id_before_rotate = find(".co-galerie .content .photo img")[:src].match(%r{blobs/proxy/(.*)/tableau2.jpg})[1]
+    find("button", text: /Pivoter/).click
+    blob_id_after_rotate = find(".co-galerie .content .photo img")[:src].match(%r{blobs/proxy/(.*)/tableau2.jpg})[1]
+    expect(blob_id_before_rotate).not_to eq(blob_id_after_rotate)
+    expect(current_img[:filename]).to eq "tableau2.jpg"
+    # galerie - supprimer
+    find("button", text: /Supprimer/).click
+    expect(page).to have_text("Êtes-vous sûr de vouloir supprimer cette photo ?")
+    find(".fr-modal__footer").click_on "Supprimer"
+    expect(page).to have_text("Photo 2 / 2")
+    expect(current_img[:filename]).to eq "tableau3.jpg" # 2 -> ø, 3 -> 2
+    # galerie - ajout
+    find("button", text: /Ajouter/).click
+    # click_on "Ajouter une photo" # not necessary when using `make_visible: true`
+    attach_file("new_blob_id", Rails.root.join("spec/fixture_files/tableau2.jpg"), make_visible: true)
+    expect(page).to have_text("Photo 3 / 3")
+    expect(current_img[:filename]).to eq "tableau2.jpg"
+    find("button", text: /Fermer/).click
+
     etat_sanitaire_group = find("div", text: /État de l’objet/, class: "co-text--bold")
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(etat_sanitaire_group) do

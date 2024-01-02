@@ -56,7 +56,7 @@
             - else
               %p.co-text--italic Aucune commentaire laissé par la commune pour cet objet
         .fr-col-md-4.co-flex-md-reverse-order
-          = render galerie_recensement(@recensement, display_actions: false)
+          = render galerie_recensement(@recensement, actions_routes_scope: :conservateurs)
 
   .fr-grid-row
     .fr-col-md-12
