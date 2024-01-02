@@ -378,6 +378,7 @@ utiles
   # on n’a pas les droits pour dropper la db ni l’app
   scalingo --app collectif-objets-staging-pr701 run bash
   rails runner scripts/truncate_all_tables.rb
+  rails runner scripts/create_postgres_sequences_memoire_photos_numbers.rb
   rails db:seed
 ```
 
