@@ -63,60 +63,54 @@ Les insectes xylophages les plus fréquents sont la petite vrillette, la grande 
 
 ![Trous marqueurs de la présence de petite vrillette](/contenus/fiches/images/vrillette-trous.jpg)
 
-Trous marqueurs de la présence de petite vrillette
+*Trous marqueurs de la présence de petite vrillette*
 
 ![Sciure au pied du meuble, illustrant la présence de vrillette](/contenus/fiches/images/vrillette-sciure.jpg)
 
-Sciure au pied du meuble, illustrant la présence de vrillette
+*Sciure au pied du meuble, illustrant la présence de vrillette.*
 
 ### Insectes qui aiment les tissus :
 
-Les mites, les blattes et les poissons d’argents peuvent infester des supports très divers (toiles des tableaux…).
+Les mites, les blattes et les poissons d’argents peuvent infester des supports textiles très divers. Dont les toiles des tableaux.  
 
 ![Trou de mite sur un tissu](/contenus/fiches/images/mite-trou-tissu.jpg)
 
-Trou de mite sur un tissu
+*Trou de mite sur un tissu.* 
 
 ## Les moisissures
 
-Il s’agit de champignons microscopiques, généralement de couleur verdâtre ou blanchâtre lorsqu’ils se sont développés.
-Ils ressemblent à de la poussière lorsqu’ils manquent d’eau.
-Visibles à la surface de l’objet, ils sont redoutables.
-N’essayez surtout pas d’intervenir directement, sinon en les brossant à sec et délicatement loin de toute autre surface pouvant être infestée.
+Les moisissures sont des champignons microscopiques. Généralement de couleur verdâtre ou blanchâtre lorsqu’ils se sont développés. Ils ressemblent à de la poussière lorsqu’ils manquent d’eau.
 
-### Astuces pour éviter la moisissure
+Ils sont visibles à la surface des objets et sont redoutables pour leur conservation. Il ne faut pas intervenir soi même, sauf pour les brosser doucement et à sec, loin d'autres surfaces qui pourraient être contaminées.
 
-Pas de variations de température brusques, car ceci favorise l’humidité et leur développement.
+**Astuces pour éviter la moisissure :** 
 
-En prévention, aérez les pièces où vous conservez les objets.
-Dépoussiérez régulièrement et délicatement vos objets.
+* Éviter les variation de température brusques. Ceci favorise l’humidité et leur développement.
+* Aérer les pièces où vous conservez les objets, en prévention.
+* Dépoussiérez régulièrement et délicatement vos objets.
+* N’utilisez pas d’eau sur l’objet ou à proximité. Pas de lavage du sol à grande eau et pas de vase trop près d’une statue en bois ou d’un tableau par exemple.
 
-N’utilisez pas d’eau sur l’objet ou à proximité (pas de lavage du sol à grande eau, pas de vase trop près d’une statue en bois ou d’un tableau…).
+En cas de doute sur le niveau d’humidité dans l’air à différents moments : utilisez un hydromètre. Il sert à mesurer les variations du taux d’humidité relative de l’air.
 
-En cas de doute sur le niveau d’humidité dans l’air à différents moments, il est possible d’acheter un hydromètre qui sert à mesurer les variations du taux d’humidité relative de l’air.
+## Les animaux
 
-## Les animaux et oiseaux
+Des animaux peuvent se cacher dans les bâtiments sans qu'on le sache. Comme les rongeurs et pigeons.
 
-Rongeurs, pigeons… Les bâtiments peuvent abriter bien du monde à votre insu !
-
-* Inspectez régulièrement l’intérieur des bâtiments pour s’assurer qu’ils ne sont pas infestés.
-* Attention aux appâts souricides qui font que l’animal peut se décomposer derrière un meuble ou un objet et ainsi générer une infestation de moisissures.
-* Les fientes de pigeon peuvent notamment endommager les œuvres en raison de leur acidité ; elles sont par ailleurs très difficiles à nettoyer et dangereuses pour les humains par inhalation.
+* Vérifiez souvent l'intérieur pour voir s'il y a des infestations.
+* Faites attention avec les poisons pour rongeurs. L'animal peut mourir derrière un meuble, causant des moisissures.
+* Les fientes de pigeon sont acides et peuvent abîmer les œuvres d'art. Elles sont aussi dures à nettoyer et sont dangereuses si on les respire.
 
 ## Que faire ?
 
 **Il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial.**
-Pour le reste du mobilier présent dans l’édifice, l’entretien courant suffit généralement à éloigner les nuisibles.
-Vous pouvez par exemple utiliser des produits répulsifs, appliquer des produits insecticides sur les bancs, chaises et autres tables de sacristie, fermer toutes les issues contre les pigeons, installer un système de double portes pour empêcher leur intrusion, … Pensez à bien respecter les consignes d’utilisation indiquées sur les produits employés.
 
-Photographiez l’objet et ses dégradations pour échanger avec votre Conservation départementale des Antiquités et Objets d’Art (moisissures, trous d’envol, sciures suspectes ou toute trace de détériorations).
-Vous pouvez joindre ces photos directement sur le questionnaire de recensement pour documenter l’histoire de l’objet.
+Pour les autres meubles dans le bâtiment, un entretien régulier suffit pour éloigner les nuisibles. Utilisez des répulsifs ou des insecticides sur les bancs, chaises, et tables. Suivez toujours les instructions sur les produits utilisés. Fermez toutes les ouvertures pour bloquer les pigeons et envisagez l’installation de doubles portes pour les empêcher d’entrer.
 
-Après échange avec votre CAOA, vous pourrez isoler les objets infestés dans un lieu propice pour éviter de contaminer d’autres éléments.
+Prenez des photos de l’objet et de ses dommages pour les montrer à vos Conservateurs d’Antiquités et Objets d’Art. Ces photos de moisissures, trous, sciures suspectes ou autres dégâts aideront à documenter l’état de l’objet. Joignez-les au questionnaire de recensement ou utilisez la messagerie.
 
-Votre CAOA indiquera dans son examen les mesures spécifiques à prendre pour chaque objet, avec des niveaux d’urgence sur l’ensemble de vos objets.
+Après avoir discuté avec votre CAOA, vous pourrez isoler les objets infestés pour ne pas contaminer d’autres éléments. Votre CAOA vous dira quelles actions spécifiques entreprendre pour chaque objet et leur niveau d’urgence. 
 
-Si vous souhaitez améliorer l’état sanitaire à l’intérieur des édifices qui abritent vos objets, vous pouvez prendre contact avec l’UDAP de votre département.
+Pour améliorer l’état sanitaire des bâtiments où se trouvent les objets, vous pouvez contacter l’UDAP de votre département.
 
 ## Sources
 
