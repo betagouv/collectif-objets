@@ -50,11 +50,10 @@ Agir vite est essentiel pour la préservation des œuvres.
 
 ## Les insectes
 
-Certains objets monuments historiques (en bois, en tissu, autre) sont très prisés des insectes.
-Généralement, vous ne verrez pas ces insectes à la surface des objets, car ils commencent souvent par attaquer l’intérieur. En revanche vous pourrez constater des dégradations à la surface de l’objet, des traces de sciure, des trous, ou des déjections. Ils apprécient les environnements sombres, humides et chauds. 
+Des insectes peuvent endommager les objets historiques, comme ceux en bois ou en tissu. Souvent, ces insectes attaquent d'abord l'intérieur, donc on ne les voit pas. Mais on peut remarquer des signes de dégâts : sciure, trous, ou déjections. Ils aiment les environnements sombres, humides et chauds.
 
-Une surveillance régulière permet de détecter généralement à temps les infestations.
-Ce repérage, puis un traitement approprié permettent d’éviter que l’infestation se propage dans l’environnement de l’objet : boiseries et charpentes par exemple pour les insectes xylophages.
+Une surveillance régulière permet généralement de détecter à temps les infestations.
+Ce repérage, suivi d'un traitement approprié permet d’éviter que l’infestation se propage dans l’environnement de l’objet. Il s'agit par exemple des boiseries et charpentes pour les insectes xylophages.
 
 Vous trouverez ci-dessous des marques typiques de la présence d’insectes :
 
