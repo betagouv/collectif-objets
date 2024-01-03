@@ -3,15 +3,16 @@ titre: Entretien de l’édifice et lutte contre les infestations
 ---
 ## Introduction
 
-Les “objets monuments historiques” (désignés ainsi par l'article L. 111-1 du Code du patrimoine), sont considérés comme des trésors nationaux. Il est important que tout le monde, notamment les communes qui abritent ces objets, prenne part à leur préservation pour les générations futures.
+Les “objets monuments historiques” sont considérés comme des trésors nationaux. Ils sont désignés ainsi par l'article L. 111-1 du Code du patrimoine. Il est important que tout le monde, notamment les communes qui abritent ces objets, prenne part à leur préservation pour les générations futures.
 
 Un entretien approprié de l'édifice où ces objets sont conservés est crucial. Cela implique des actions régulières de maintenance et de protection pour s'assurer qu'ils restent en bon état. Cette responsabilité collective aide à maintenir notre héritage culturel vivant et accessible pour tous.
 
 ## Conseils génériques pour l’entretien d’un édifice
 
-**Température** : Il est essentiel de garder votre édifice à une température stable pour protéger les œuvres d'art qu'il contient. Idéalement, cette température devrait être maintenue entre 15 et 18°C. Un environnement stable aide à prévenir les dommages.
+**Température** : Pour la bonne préservation des oeuvres, essayez de maintenir une température comprise entre 15 et 18°C dans votre édifice.
+Si vous déplacez une oeuvre, évitez les changements brusques de températures qui peuvent accélérer la détérioration des peintures et anticipez les déplacements d’oeuvres en échangeant avec votre CAOA au préalable.
 
-Si vous devez déplacer une œuvre, faites attention aux changements soudains de température. Des variations rapides peuvent nuire aux peintures, les rendant plus susceptibles de se détériorer. Avant de déplacer une œuvre, il est recommandé de consulter votre CAOA (Conservateur des Antiquités et Objets d'Art). Cette précaution permet de s'assurer que le déplacement se fait dans les meilleures conditions possibles pour préserver l'intégrité de l'œuvre.
+Si vous devez déplacer une œuvre, faites attention aux changements soudains de température. Des variations rapides peuvent nuire aux peintures, les rendant plus susceptibles de se détériorer. Avant de déplacer une œuvre, il est recommandé de consulter votre CAOA (Conservateur des Antiquités et Objets d'Art). 
 
 ### Hygrométrie
 
@@ -29,15 +30,15 @@ La lumière du soleil directe est un agent qui peut modifier, voire faire dispar
 
 Il est crucial de faire attention à l'emplacement de vos œuvres. Évitez de les placer près des fenêtres ou sous des puits de lumière. Ceci est particulièrement important pour les textiles et autres matériaux très sensibles à la lumière (photosensibles). Une exposition directe au soleil peut les endommager rapidement.
 
-### Les polluants (poussière, micro-particules)
+### Les polluants (poussière et micro-particules)
 
-Ces polluants ne doivent pas entrer au contact de l’objet. Passez le balais et dépoussiérez régulièrement votre édifice. 
+Les poussière et micro-particules ne doivent pas entrer au contact de l’objet. Passez le balai et dépoussiérez régulièrement votre édifice. 
 
-Attention toutefois, il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial.
+Attention toutefois, il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial. Voir section "Que faire". 
 
 ## Prévenir les infestations de nuisibles
 
-Les œuvres d'art peuvent être endommagées par des nuisibles comme les insectes er les rongeurs. \
+Les œuvres d'art peuvent être endommagées par des nuisibles comme les insectes et les rongeurs. \
 \
 Pour protéger vos œuvres :
 
@@ -57,7 +58,7 @@ Ce repérage, puis un traitement approprié permettent d’éviter que l’infes
 
 Vous trouverez ci-dessous des marques typiques de la présence d’insectes :
 
-### Insectes qui aiment le bois (xylophages) 
+### Insectes qui aiment le bois (xylophages)
 
 Les insectes xylophages les plus fréquents sont la petite vrillette, la grande vrillette, le capricorne et les termites.
 
