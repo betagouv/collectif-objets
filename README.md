@@ -85,7 +85,11 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 - Lancer PostgreSQL : 
 
-  `brew services start postgresql@13`
+  `brew services start postgresql`
+
+- Lancer Redis
+
+  `brew services start redis`
 
 - Installer le CLI de Scalingo :
 
