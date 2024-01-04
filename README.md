@@ -83,13 +83,20 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 **Sous Linux avec asdf**
 
-`sudo apt get curl git install build-essential libc-dev libz-dev libffi-dev libssl-dev libreadline-dev libyaml-dev`
+- Installer les build essentials
 
-Installer asdf en suivant ces instructions : https://asdf-vm.com/guide/getting-started.html
+   `sudo apt get curl git install build-essential libc-dev libz-dev libffi-dev libssl-dev libreadline-dev libyaml-dev`
 
-Installer la version de ruby spécifiée dans le Gemfile. Exemple :
+- Installer asdf : https://asdf-vm.com/guide/getting-started.html
 
-`asdf install ruby 3.2.2`
+  `brew install asdf`
+
+
+- Installer la version de ruby spécifiée dans le Gemfile. Exemple :
+  
+  `asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git`
+
+  `asdf install ruby 3.2.2`
 
 _**optionnel**_: pour une utilisation de rubocop plus rapide en local,
 [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
