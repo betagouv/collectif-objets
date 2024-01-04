@@ -79,13 +79,17 @@ historiques et aux conservateurs d'examiner ces recensements.
 
   `make dev`
 
-- Installer PostgreSQL, idéalement la même version qu'en production : https://www.postgresql.org/.
+- Installer PostgreSQL et Postgis, idéalement la même version qu'en production : https://www.postgresql.org/. (la commande va installer postgresql car postgis a une dépendance dessus)
 
-  `brew install postgresql@13`
+  `brew install postgis`
 
 - Lancer PostgreSQL : 
 
   `brew services start postgresql@13`
+
+- Installer le CLI de Scalingo :
+
+  `curl -O https://cli-dl.scalingo.com/install && bash install`
 
 **Sous Linux avec asdf**
 
