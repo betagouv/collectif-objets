@@ -54,6 +54,8 @@ historiques et aux conservateurs d'examiner ces recensements.
 - Installer rbenv : brew install rbenv ruby-build : https://github.com/rbenv/rbenv
 
   `brew install rbenv ruby-build`
+  
+  `rbenv init`
 
 - Installer Ruby avec rbenv
 
