@@ -45,7 +45,7 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 **Avec Docker**: `docker compose up && docker compose run web rails db:setup`
 
-**Sous Mac avec rbenv (devrait fonctionner sous Linux)**: 
+**Sous Mac / Linux**: 
 
 - Installer Homebrew : https://brew.sh/
 
@@ -71,14 +71,6 @@ historiques et aux conservateurs d'examiner ces recensements.
 
   `nvm install 18`
 
-- Installer Rails et les dépendances
-
-  `make install`
-
-- Lancer le serveur
-
-  `make dev`
-
 - Installer PostgreSQL et Postgis, idéalement la même version qu'en production : https://www.postgresql.org/. (la commande va installer postgresql car postgis a une dépendance dessus)
 
   `brew install postgis`
@@ -90,6 +82,14 @@ historiques et aux conservateurs d'examiner ces recensements.
 - Lancer Redis
 
   `brew services start redis`
+
+- Installer Rails et les dépendances
+
+  `make install`
+
+- Lancer le serveur
+
+  `make dev`
 
 - Installer le CLI de Scalingo :
 
