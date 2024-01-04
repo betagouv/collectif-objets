@@ -65,6 +65,12 @@ historiques et aux conservateurs d'examiner ces recensements.
 
   `gem install bundler:2.4.13`
 
+- Installer NodeJS, idéalement la même version qu'en production : https://github.com/nvm-sh/nvm#installing-and-updating
+
+  `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+
+  `nvm install 18`
+
 - Installer Rails et les dépendances
 
   `make install`
@@ -73,7 +79,7 @@ historiques et aux conservateurs d'examiner ces recensements.
 
   `make dev`
 
-- Installer PostgreSQL : https://www.postgresql.org/. Idéalement utiliser la même version qu'en production.
+- Installer PostgreSQL, idéalement la même version qu'en production : https://www.postgresql.org/.
 
   `brew install postgresql@13`
 
