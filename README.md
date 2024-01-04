@@ -49,13 +49,35 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 - Installer Homebrew : https://brew.sh/
 
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+  `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
 - Installer rbenv : brew install rbenv ruby-build : https://github.com/rbenv/rbenv
 
-`brew install rbenv ruby-build`
+  `brew install rbenv ruby-build`
 
-```rbenv install `cat .ruby-version` && make install && make dev```
+- Installer Ruby avec rbenv
+
+  ```rbenv install `cat .ruby-version` ```
+
+- Installer Bundler avec la version précisée dans le Gemfile.lock : 
+
+  `gem install bundler:2.4.13`
+
+- Installer Rails et les dépendances
+
+  `make install`
+
+- Lancer le serveur
+
+  `make dev`
+
+- Installer PostgreSQL : https://www.postgresql.org/. Idéalement utiliser la même version qu'en production.
+
+  `brew install postgresql@13`
+
+- Lancer PostgreSQL : 
+
+  `brew services start postgresql@13`
 
 **Sous Linux avec asdf**
 
