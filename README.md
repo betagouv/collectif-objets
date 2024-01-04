@@ -45,7 +45,17 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 **Avec Docker**: `docker compose up && docker compose run web rails db:setup`
 
-**En local avec rbenv**: ```rbenv install `cat .ruby-version` && make install && make dev```
+**Sous Mac avec rbenv (devrait fonctionner sous Linux)**: 
+
+- Installer Homebrew : https://brew.sh/
+
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+- Installer rbenv : brew install rbenv ruby-build : https://github.com/rbenv/rbenv
+
+`brew install rbenv ruby-build`
+
+```rbenv install `cat .ruby-version` && make install && make dev```
 
 **Sous Linux avec asdf**
 
