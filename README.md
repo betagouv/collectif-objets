@@ -98,6 +98,16 @@ historiques et aux conservateurs d'examiner ces recensements.
 
   `asdf install ruby 3.2.2`
 
+- Installer Node.js, idéalement la même version qu'en production
+
+  `asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git`
+
+  `asdf install nodejs 18.19.0`
+
+- Installer les packages JS 
+
+  `asdf exec npm install`
+
 _**optionnel**_: pour une utilisation de rubocop plus rapide en local,
 [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
 
