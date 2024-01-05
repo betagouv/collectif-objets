@@ -410,21 +410,16 @@ Optionnel :
 ```mermaid
 flowchart TB
 
-service_public[service-public.fr]
+api_service_public[api-lannuaire.service-public.fr]
 pop[pop.culture.gouv.fr]
 fly[collectif-objets-datasette.fly.dev]
 
-subgraph annuaire_api[annuaire-api - JS]
-  annuaire_api_run>yarn build]
-  dataset_json[[dataset.json]]
-end
 
 subgraph scraper[pop-scraper - python]
   scraper_run>poetry run scrapy crawl pop_api \n-a base_pop=palissy/memoire/merimee]
 end
 
 subgraph datasette[collectif-objets-datasette - python]
-  datasette_run_mairies>poetry run python \nscripts/prepare_mairies_csv.py dataset.json]
   datasette_run_sqlite>make prepare_sqlite]
   datasette_run_deploy>make deploy]
   csvs[[data_scrapped/*.csv]]
@@ -432,40 +427,43 @@ subgraph datasette[collectif-objets-datasette - python]
 end
 
 subgraph rails[collectif-objets - rails]
-  rails_run>rails runner SynchronizeObjetsJob.perform_inline]
+  rails_run_edifices>SynchronizeEdificesJob]
+  rails_run_objets>SynchronizeObjetsJob]
+  rails_run_communes>SynchronizeCommunesJob]
   postgres[(Postgres DB)]
 end
 
 pop --> scraper_run
 scraper_run --> csvs
 
-annuaire_api_run --> dataset_json
-service_public --> annuaire_api_run
-dataset_json --> datasette_run_mairies
-datasette_run_mairies --> csvs
 csvs --> datasette_run_sqlite
 datasette_run_sqlite --> sqlite
 sqlite --> datasette_run_deploy
 datasette_run_deploy --> fly
-fly --> rails_run
-rails_run --> postgres
+fly --> rails_run_objets
+rails_run_objets --> postgres
+
+api_service_public --> rails_run_communes
+rails_run_communes --> postgres
+
+fly --> rails_run_edifices
+rails_run_edifices --> postgres
+
 
 style pop fill:#6666cc
 style fly fill:#6666cc
-style service_public fill:#6666cc
+style api_service_public fill:#6666cc
 
-style annuaire_api_run fill:#888833
-style datasette_run_mairies fill:#888833
 style datasette_run_sqlite fill:#888833
 style datasette_run_deploy fill:#888833
-style rails_run fill:#888833
+style rails_run_objets fill:#888833
+style rails_run_communes fill:#888833
+style rails_run_edifices fill:#888833
 style scraper_run fill:#888833
 ```
 
 Les données sur les communes (email de la mairie, numéro de téléphone etc…) proviennent
-de [service-public.fr](https://www.service-public.fr/).
-Nous utilisons [BaseAdresseNationale/annuaire-api](https://github.com/BaseAdresseNationale/annuaire-api), un outil qui
-récupère et parse les exports XML de service-public.fr.
+de [l’API de service-public.fr](https://api-lannuaire.service-public.fr/explore/dataset/api-lannuaire-administration/api/)
 
 Les données sur les objets monuments historiques sont celles de Palissy, la base patrimoniale hébergée sur la
 [Plateforme Ouverte du Patrimoine (POP)](https://www.pop.culture.gouv.fr/).
@@ -474,7 +472,7 @@ Nous scrappons donc POP via [pop-scraper](https://github.com/adipasquale/pop-scr
 
 Les données sur les conservateurs nous ont été transmises personnellement via un annuaire national en PDF.
 
-Pour simplifier la réutilisation des données de service-public.fr et de POP, nous avons déployé une plateforme de
+Pour simplifier la réutilisation des données scrappées de POP, nous avons déployé une plateforme de
 données publique : [collectif-objets-datasette.fly.dev](https://collectif-objets-datasette.fly.dev) qui fournit une
 interface visuelle web avec des filtres, et une API JSON.
 Le code est disponible [sur GitHub](https://github.com/adipasquale/collectif-objets-datasette) et utilise la librairie
