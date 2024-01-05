@@ -35,7 +35,7 @@ module Synchronizer
     end
 
     def api_query(where_clauses:, offset:)
-      parsed = fetch_and_parse(where_clauses)
+      parsed = fetch_and_parse(where_clauses:, offset:)
       logger.info "-- total rows filtered: #{parsed['total_count']}" if offset.zero?
 
       parsed["results"].each { create_new_commune(_1) }
@@ -43,8 +43,11 @@ module Synchronizer
       trigger_next_query(where_clauses:, total_count: parsed["total_count"], offset:)
     end
 
-    def fetch_and_parse(where_clauses)
-      params = BASE_PARAMS.merge(where: (BASE_WHERE_CLAUSES + where_clauses).join(" AND "))
+    def fetch_and_parse(where_clauses:, offset:)
+      params = BASE_PARAMS.merge(
+        where: (BASE_WHERE_CLAUSES + where_clauses).join(" AND "),
+        offset:
+      )
       url = "#{API_URL}?#{URI.encode_www_form(params)}"
 
       logger.info "fetching #{url} ..."
@@ -62,7 +65,7 @@ module Synchronizer
       {
         code_insee: result["code_insee_commune"],
         departement_code: parse_departement(result["code_insee_commune"]),
-        nom: result["nom"].gsub(/^Mairie - ?/, ""),
+        nom: result["nom"].gsub(/^Mairie - ?/, "").strip,
         phone_number: result["telephone"].present? && JSON.parse(result["telephone"]).first["valeur"],
         email: result["adresse_courriel"]
       }
@@ -75,7 +78,6 @@ module Synchronizer
     def create_new_commune(raw_mairie)
       return if should_skip_commune?(raw_mairie[:code_insee])
 
-      logger.info "upserting commune #{raw_mairie}"
       commune = upsert_commune(**raw_mairie)
       unless commune.persisted?
         logger.info "error when upserting commune : #{commune.errors.full_messages.join} (#{raw_mairie})"
@@ -90,7 +92,11 @@ module Synchronizer
       commune.assign_attributes(departement_code:, nom:, phone_number:)
       if commune.changed?
         logger.info "saving changes to #{commune.new_record? ? 'new' : 'existing'} commune #{commune.changes}"
-        commune.save!
+        commune.save
+        if commune.errors.any?
+          logger.error "error when saving commune : #{commune.attributes}"
+          raise commune.errors.full_messages.join(", ")
+        end
       end
       commune
     end
