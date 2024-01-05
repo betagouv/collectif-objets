@@ -62,13 +62,15 @@ module Synchronizer
     end
 
     def parse_result(result)
-      {
+      raw_mairie = {
         code_insee: result["code_insee_commune"],
         departement_code: parse_departement(result["code_insee_commune"]),
         nom: result["nom"].gsub(/^Mairie - ?/, "").strip,
         phone_number: result["telephone"].present? && JSON.parse(result["telephone"]).first["valeur"],
         email: result["adresse_courriel"]
       }
+      raw_mairie[:phone_number] = nil if raw_mairie[:phone_number].blank? || raw_mairie[:phone_number] == "f"
+      raw_mairie
     end
 
     def parse_departement(code_insee)
@@ -91,7 +93,8 @@ module Synchronizer
       commune = Commune.find_or_initialize_by(code_insee:)
       commune.assign_attributes(departement_code:, nom:, phone_number:)
       if commune.changed?
-        logger.info "saving changes to #{commune.new_record? ? 'new' : 'existing'} commune #{commune.changes}"
+        logger.info "saving changes to #{commune.new_record? ? 'new' : 'existing'} " \
+                    "commune #{code_insee} #{commune.changes}"
         commune.save
         if commune.errors.any?
           logger.error "error when saving commune : #{commune.attributes}"
