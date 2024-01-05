@@ -95,6 +95,8 @@ historiques et aux conservateurs d'examiner ces recensements.
 
   `curl -O https://cli-dl.scalingo.com/install && bash install`
 
+  Ajouter sa clé SSH dans son compte Scalingo en suivant ces instructions : https://doc.scalingo.com/platform/getting-started/setup-ssh-linux
+
 **Sous Linux avec asdf**
 
 - Installer les build essentials
