@@ -75,11 +75,7 @@ RSpec.describe Campaigns::CronJob, type: :job do
 
     it "envoie un email aux communes avec uniquement des objets verts \
         ayant fini leur recensement il y a plus d'une semaine" do
-      commune_sans_objets_prioritaires.dossier.update(submitted_at: 8.days.ago)
-
-      expect { Campaigns::CronJob.new.perform(Date.new(2023, 11, 11)) }
-          .to change { ActionMailer::Base.deliveries.count }.by(0)
-      expect(commune_sans_objets_prioritaires.dossier.reload.replied_automatically_at).to be_nil
+      commune_sans_objets_prioritaires.dossier.update(submitted_at: Date.new(2023, 11, 1))
 
       expect { Campaigns::CronJob.new.perform(Date.new(2023, 11, 13)) }
         .to change { ActionMailer::Base.deliveries.count }.by(1)

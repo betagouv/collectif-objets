@@ -13,7 +13,6 @@ module Campaigns
       # strict comparison here so that it closes day after end
       Campaign.ongoing.where("date_fin < ?", date).find_each(&:finish!)
 
-
       # Envoi de la réponse automatique pour les communes n'ayant recensé que des objets verts
       Campaign.finished.each do |campaign|
         campaign.communes.each do |commune|
