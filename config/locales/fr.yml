@@ -618,7 +618,7 @@ fr:
       contact: Vous pouvez directement contacter les conservateurs via
       cta: Accéder à Collectif Objets
     commune_avec_objets_verts:
-      remerciements: Nous vous remercions d'avoir pris part à la campagne de recensement des objets monuments historiques avec Collectif Objets %{dans_departement} qui vient de s'achever.
+      remerciements: Nous vous remercions d'avoir pris part à la campagne de recensement des objets monuments historiques avec Collectif Objets %{dans_departement}.
       preservation_patrimoine: En participant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine.
       engagement: Le partage des connaissances entre l'ensemble des acteurs de la chaîne patrimoniale permet d'assurer un meilleur suivi des objets protégés et d'identifier les situations problématiques nécessitant une prise en charge urgente. Nous vous remercions vivement pour votre engagement.
       que_des_objets_verts: Vous avez indiqué que les objets protégés de votre commune sont dans un état qui n'appelle pas une prise en charge urgente.
