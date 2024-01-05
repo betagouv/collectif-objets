@@ -97,32 +97,11 @@ historiques et aux conservateurs d'examiner ces recensements.
 
   Ajouter sa clé SSH dans son compte Scalingo en suivant ces instructions : https://doc.scalingo.com/platform/getting-started/setup-ssh-linux
 
-**Sous Linux avec asdf**
+**Utilisation d'asdf**
 
-- Installer les build essentials
+Il est possible d'utiliser [asdf](https://asdf-vm.com/guide/getting-started.html) pour installer la bonne version de Ruby et NodeJS. Cela évite d'avoir 2 outils différents (rbenv et nvm ou autres).
 
-   `sudo apt get curl git install build-essential libc-dev libz-dev libffi-dev libssl-dev libreadline-dev libyaml-dev`
-
-- Installer asdf : https://asdf-vm.com/guide/getting-started.html
-
-  `brew install asdf`
-
-
-- Installer la version de ruby spécifiée dans le Gemfile. Exemple :
-  
-  `asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git`
-
-  `asdf install ruby 3.2.2`
-
-- Installer Node.js, idéalement la même version qu'en production
-
-  `asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git`
-
-  `asdf install nodejs 18.19.0`
-
-- Installer les packages JS 
-
-  `asdf exec npm install`
+Cependant le Makefile n'est pas adapté à son utilisation, il faudrait donc lancer les commandes une à une et préfixer celles avec npm par `asdf exec`
 
 _**optionnel**_: pour une utilisation de rubocop plus rapide en local,
 [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
