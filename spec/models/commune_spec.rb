@@ -91,14 +91,14 @@ RSpec.describe Commune, type: :model do
     end
   end
 
-  describe "#shall_receive_email_objets_verts" do
+  describe "#shall_receive_email_objets_verts?" do
     let!(:commune) { create(:commune_with_user) }
 
     it "returns false si la commune n'a pas fini son recensement" do
-      expect(commune.shall_receive_email_objets_verts(Time.zone.today)).to be_falsy
+      expect(commune.shall_receive_email_objets_verts?(Time.zone.today)).to be_falsy
 
       commune.start!
-      expect(commune.shall_receive_email_objets_verts(Time.zone.today)).to be_falsy
+      expect(commune.shall_receive_email_objets_verts?(Time.zone.today)).to be_falsy
     end
 
     context "commune a terminé son recensement" do
@@ -110,11 +110,11 @@ RSpec.describe Commune, type: :model do
 
       it "returns false si soumis il y a moins d'une semaine" do
         dossier.update(submitted_at: Date.new(2023, 11, 9))
-        expect(commune.shall_receive_email_objets_verts(Date.new(2023, 11, 10))).to be_falsy
+        expect(commune.shall_receive_email_objets_verts?(Date.new(2023, 11, 10))).to be_falsy
       end
 
       it "returns false si c'est le weekend" do
-        expect(commune.shall_receive_email_objets_verts(Date.new(2023, 11, 13))).to be_falsy
+        expect(commune.shall_receive_email_objets_verts?(Date.new(2023, 11, 13))).to be_falsy
       end
 
       context "le recensement est terminé il y a plus d'une semaine et la date d'envoi est hors weekend" do
@@ -123,22 +123,22 @@ RSpec.describe Commune, type: :model do
 
         it "returns false si la commune a des objets prioritaires" do
           create(:recensement, :en_peril, dossier:)
-          expect(commune.shall_receive_email_objets_verts(date_envoi)).to be_falsy
+          expect(commune.shall_receive_email_objets_verts?(date_envoi)).to be_falsy
         end
 
         it "returns true si la commune n'a pas d'objest prioritaires" do
-          expect(commune.shall_receive_email_objets_verts(date_envoi)).to be_truthy
+          expect(commune.shall_receive_email_objets_verts?(date_envoi)).to be_truthy
         end
 
         it "returns false si la commune est en cours d'examen" do
           objet = create(:objet, commune:)
           create(:recensement, :examiné, objet:)
-          expect(commune.shall_receive_email_objets_verts(date_envoi)).to be_falsey
+          expect(commune.shall_receive_email_objets_verts?(date_envoi)).to be_falsey
         end
 
         it "returns false si la commune a déjà reçu un email objets verts" do
           dossier.update(replied_automatically_at: Date.yesterday)
-          expect(commune.shall_receive_email_objets_verts(date_envoi)).to be_falsey
+          expect(commune.shall_receive_email_objets_verts?(date_envoi)).to be_falsey
         end
       end
     end

@@ -162,7 +162,7 @@ class Commune < ApplicationRecord
     inactive? && users.any? && objets.any?
   end
 
-  def shall_receive_email_objets_verts(date)
+  def shall_receive_email_objets_verts?(date)
     users.any? &&
       statut_global == Commune::ORDRE_A_EXAMINER &&
       !dossier.a_des_objets_prioritaires? &&
