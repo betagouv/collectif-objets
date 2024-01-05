@@ -15,7 +15,7 @@ module Campaigns
 
       # Envoi de la réponse automatique pour les communes n'ayant recensé que des objets verts
       Campaign.finished.each do |campaign|
-        campaign.communes.each do |commune|
+        campaign.communes.includes(:users).find_each do |commune|
           next unless commune.shall_receive_email_objets_verts(date)
 
           commune.dossier.update(replied_automatically_at: date)
