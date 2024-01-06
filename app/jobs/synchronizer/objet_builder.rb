@@ -58,9 +58,9 @@ module Synchronizer
     end
 
     def merimee_edifice
-      return nil if ref_merimee.blank?
+      return nil if ref_merimee.blank? || row["INSEE"].blank?
 
-      edifice = Edifice.find_or_create_and_synchronize!(ref_merimee)
+      edifice = Edifice.find_or_create_and_synchronize!(merimee_REF: ref_merimee, code_insee: row["INSEE"])
 
       return nil if edifice.code_insee != row["INSEE"]
 
