@@ -5,6 +5,7 @@ class Edifice < ApplicationRecord
   has_many :objets, dependent: :restrict_with_error
   has_one_attached :bordereau, dependent: :destroy
 
+  validates :code_insee, presence: true
   validates :merimee_REF, uniqueness: true, if: -> { merimee_REF.present? }
   validates :slug, uniqueness: { scope: :code_insee }, if: -> { code_insee.present? }
 
@@ -20,14 +21,16 @@ class Edifice < ApplicationRecord
     order(Arel.sql("LOWER(UNACCENT(edifices.nom))"))
   end
 
-  def self.find_or_create_and_synchronize!(ref)
-    edifice = find_by(merimee_REF: ref)
+  # rubocop:disable Naming/MethodParameterName, Naming/VariableName
+  def self.find_or_create_and_synchronize!(merimee_REF:, code_insee:)
+    edifice = find_by(merimee_REF:)
     if edifice.nil?
-      edifice = create!(merimee_REF: ref)
-      Synchronizer::SynchronizeEdificeJob.perform_inline(ref:)
+      edifice = create!(merimee_REF:, code_insee:)
+      Synchronizer::SynchronizeEdificeJob.perform_inline(ref: merimee_REF)
     end
     edifice
   end
+  # rubocop:enable Naming/MethodParameterName, Naming/VariableName
 
   def self.slug_for(nom_edifice)
     return "" if nom_edifice.blank?
