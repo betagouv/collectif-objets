@@ -9,6 +9,7 @@ module Synchronizer
     def lazy_iterator
       first_line = File.open(csv_path, &:gets)
       headers = first_line.split(";").map(&:downcase)
+      puts "headers is #{headers}"
       CSV.foreach(csv_path, headers:, col_sep: ";").lazy.drop(1)
       # drop first line because we explicitly pass the headers
     end
@@ -20,6 +21,19 @@ module Synchronizer
         Rails.logger.info "counting all rows in #{csv_path} ..."
         CSV.foreach(csv_path, headers: true, col_sep: ";").count
       end
+    end
+
+    def find_by(where)
+      url = "#{BASE_URL}/records?#{{ where: }.to_query}"
+      response = JSON.parse(Net::HTTP.get(URI(url)))
+
+      raise "API error: #{response['error_code']} #{response['message']}" if response["error_code"]
+
+      return nil if response["total_count"].zero?
+
+      raise "too many results" if response["total_count"] > 1
+
+      response["results"].first
     end
 
     private

@@ -10,10 +10,6 @@ module Synchronizer
       new("data/palissy_to_memoire.json", BASE_PARAMS.merge(params), **)
     end
 
-    def self.edifices(params: nil, **)
-      new("data/merimee.json", BASE_PARAMS.merge(params), **)
-    end
-
     def self.objets(params: nil, **)
       new("data/palissy.json", BASE_PARAMS.merge(params), **)
     end
