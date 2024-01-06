@@ -171,6 +171,7 @@ fr:
           attributes:
             email:
               invalid: "invalide"
+              taken: "déjà utilisé"
         recensement:
           attributes:
             localisation:
