@@ -46,9 +46,53 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 **Avec Docker**: `docker compose up && docker compose run web rails db:setup`
 
-**En local avec rbenv**: ```rbenv install `cat .ruby-version` && make install && make dev```
+**Sous Mac / Linux**: 
 
-*optionnel*: pour une utilisation de rubocop plus rapide en local,
+- Installer Homebrew : https://brew.sh/
+
+  `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+- Installer rbenv : brew install rbenv ruby-build : https://github.com/rbenv/rbenv
+
+  `brew install rbenv ruby-build`
+  
+  `rbenv init`
+
+- Installer Ruby avec rbenv
+
+  ```rbenv install `cat .ruby-version` ```
+
+- Installer Bundler avec la version précisée dans le Gemfile.lock : 
+
+  `gem install bundler:2.4.13`
+
+- Installer NodeJS, idéalement la même version qu'en production : https://github.com/nvm-sh/nvm#installing-and-updating
+
+  `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+
+  `nvm install 18`
+
+- Installer Rails et les dépendances
+
+  `make install`
+
+- Lancer le serveur
+
+  `make dev`
+
+- Installer le CLI de Scalingo :
+
+  `curl -O https://cli-dl.scalingo.com/install && bash install`
+
+  Ajouter sa clé SSH dans son compte Scalingo en suivant ces instructions : https://doc.scalingo.com/platform/getting-started/setup-ssh-linux
+
+**Utilisation d'asdf**
+
+Il est possible d'utiliser [asdf](https://asdf-vm.com/guide/getting-started.html) pour installer la bonne version de Ruby et NodeJS. Cela évite d'avoir 2 outils différents (rbenv et nvm ou autres).
+
+Cependant le Makefile n'est pas adapté à son utilisation, il faudrait donc lancer les commandes une à une et préfixer celles avec npm par `asdf exec`
+
+_**optionnel**_: pour une utilisation de rubocop plus rapide en local,
 [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
 
 # Découverte du service, captures d'écran, types d’usagers, premiers pas
