@@ -10,7 +10,7 @@ module Synchronizer
       def perform
         Rails.logger.info("starting iteration by batch of #{BATCH_SIZE}...")
         @progressbar = ProgressBar.create(total: client.count_all, format: "%t: |%B| %p%% %e %c/%u")
-        client.each_slice(BATCH_SIZE) { synchronize_batch(batch) }
+        client.each_slice(BATCH_SIZE) { synchronize_batch(_1) }
 
         return if revisions_for_code_insees_with_multiple_communes.empty?
 
@@ -63,9 +63,10 @@ module Synchronizer
 
           counts[revision.code_insee] += 1
         end
-        counts.select { |_code, count| count > 1 }.map(&:first)
+        codes = counts.select { |_code, count| count > 1 }.map(&:first)
         Rails.logger.info "found #{codes.count} codes insees that match " \
                           "multiple mairies principales : #{codes[0..10]}..."
+        codes
       end
 
       def revisions_for_code_insees_with_multiple_communes
