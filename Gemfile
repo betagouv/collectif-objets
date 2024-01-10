@@ -41,7 +41,7 @@ gem "sidekiq", "~> 7.2"
 gem "turbo-rails", "~> 1.4"
 gem "typhoeus", "~> 1.4"
 gem "tzinfo-data", "~> 1.0", platforms: %i[mingw mswin x64_mingw jruby]
-gem "view_component", "~> 2.82"
+gem "view_component", "~> 2.83"
 gem "vite_rails", "~> 3.0"
 
 group :development, :test do
