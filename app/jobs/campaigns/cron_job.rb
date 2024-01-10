@@ -14,7 +14,7 @@ module Campaigns
       Campaign.ongoing.where("date_fin < ?", date).find_each(&:finish!)
 
       # Envoi de la réponse automatique pour les communes n'ayant recensé que des objets verts
-      Campaign.finished.each do |campaign|
+      Campaign.finished.find_each do |campaign|
         campaign.communes.includes(:users).find_each do |commune|
           next unless commune.shall_receive_email_objets_verts?(date)
 
