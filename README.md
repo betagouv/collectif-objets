@@ -71,18 +71,6 @@ historiques et aux conservateurs d'examiner ces recensements.
 
   `nvm install 18`
 
-- Installer PostgreSQL et Postgis, idéalement la même version qu'en production : https://www.postgresql.org/. (la commande va installer postgresql car postgis a une dépendance dessus)
-
-  `brew install postgis`
-
-- Lancer PostgreSQL : 
-
-  `brew services start postgresql`
-
-- Lancer Redis
-
-  `brew services start redis`
-
 - Installer Rails et les dépendances
 
   `make install`
