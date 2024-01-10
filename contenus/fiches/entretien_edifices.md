@@ -1,125 +1,124 @@
 ---
 titre: Entretien de l’édifice et lutte contre les infestations
 ---
-
 ## Introduction
 
-Les objets monuments historiques sont des trésors nationaux (article L. 111-1 du Code du patrimoine).
-Il est du ressort de chacun - et en particulier des communes abritant des objets protégés - de s’assurer de leur préservation et de leur transmission aux générations futures.
+Les “objets monuments historiques” sont considérés comme des trésors nationaux. Ils sont désignés ainsi par l'article L. 111-1 du Code du patrimoine. Il est important que tout le monde, notamment les communes qui abritent ces objets, prenne part à leur préservation pour les générations futures.
 
-Le bon entretien de l’édifice dans lequel ces objets sont conservés est nécessaire pour leur préservation.
+Un entretien approprié de l'édifice où ces objets sont conservés est crucial. Cela implique des actions régulières de maintenance et de protection pour s'assurer qu'ils restent en bon état. Cette responsabilité collective aide à maintenir notre héritage culturel vivant et accessible pour tous.
 
 ## Conseils génériques pour l’entretien d’un édifice
 
 **Température** : Pour la bonne préservation des oeuvres, essayez de maintenir une température comprise entre 15 et 18°C dans votre édifice.
 Si vous déplacez une oeuvre, évitez les changements brusques de températures qui peuvent accélérer la détérioration des peintures et anticipez les déplacements d’oeuvres en échangeant avec votre CAOA au préalable.
 
+Si vous devez déplacer une œuvre, faites attention aux changements soudains de température. Des variations rapides peuvent nuire aux peintures, les rendant plus susceptibles de se détériorer. Avant de déplacer une œuvre, il est recommandé de consulter votre CAOA (Conservateur des Antiquités et Objets d'Art). 
+
 ### Hygrométrie
 
-L’humidité est un agent de détérioration rapide des oeuvres.
-Elle entraîne des risques accrus de moisissures, corrosions ou déformations.
-Surveillez les fuites d’eau, les phénomènes de condensation liés aux changements de température et les infiltrations d’eau.
-Pour mesurer le niveau d’humidité vous pouvez utiliser un hygromètre.
-Si vous constatez un niveau anormalement élevé d’humidité, éloignez les oeuvres de la source d’humidité.
-En tout état de cause, ne pas faire de ménage à grande eau dans des édifices qui abritent des oeuvres.
+L'humidité est un facteur majeur qui peut endommager rapidement les œuvres d'art. Elle peut provoquer des moisissures, de la corrosion (rouille sur les métaux), ou faire gonfler et se déformer les matériaux. Pour protéger vos œuvres, il est important de surveiller attentivement toute présence d'humidité.
+
+Surveillez les fuites d’eau, les phénomènes de condensation liés aux changements de température et les infiltrations d’eau. Pour suivre le niveau d'humidité, l'utilisation d'un hygromètre, un appareil qui mesure l'humidité de l'air, est recommandée.
+
+Si vous remarquez un taux d'humidité anormalement élevé, il est important d'éloigner les œuvres de la source de cette humidité. 
+
+De plus, il est important de ne pas utiliser de grandes quantités d'eau pour le nettoyage dans les zones où sont conservées les œuvres, car cela pourrait augmenter l'humidité de l'air et causer des dommages. 
 
 ### Luminosité
+
 La lumière du soleil directe est un agent qui peut modifier, voire faire disparaitre, les couleurs des oeuvres (les spécialistes parlent de polychromie).
-Attention à ne pas positionner vos objets directement à proximité d’une fenêtre ou d’un puits de lumière, notamment les textiles et autres matériaux très photosensibles.
 
-### Les polluants (poussière, micro-particules)
+Il est crucial de faire attention à l'emplacement de vos œuvres. Évitez de les placer près des fenêtres ou sous des puits de lumière. Ceci est particulièrement important pour les textiles et autres matériaux très sensibles à la lumière (photosensibles). Une exposition directe au soleil peut les endommager rapidement.
 
-Ces polluants ne doivent pas entrer au contact de l’objet.
-Passez le balais et dépoussiérez régulièrement votre édifice.
+### Les polluants (poussière et micro-particules)
+
+Les poussière et micro-particules ne doivent pas entrer au contact de l’objet. Passez le balai et dépoussiérez régulièrement votre édifice. 
+
+Attention toutefois, il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial. Voir section "Que faire". 
 
 ## Prévenir les infestations de nuisibles
 
-Ils peuvent faire l’objet de détériorations liées à différents types d’infestations (insectes, rongeurs, moisissures…).
-Celles-ci seront à signaler rapidement à la Conservation départementale des Antiquités et Objets d’Art.
+Les œuvres d'art peuvent être endommagées par des nuisibles comme les insectes et les rongeurs. \
+\
+Pour protéger vos œuvres :
 
-Les étapes à suivre sont détaillées à la fin de cette fiche.
+* **Surveillez** : gardez un œil sur les signes d'infestation.
+* **Signalez** : en cas de problème, contactez rapidement la Conservation départementale des Antiquités et Objets d'Art.
+* **Suivez les instructions** : consultez la suite de cette fiche pour des conseils sur comment réagir en cas d'infestation.
+
+Agir vite est essentiel pour la préservation des œuvres.
 
 ## Les insectes
 
-Certains objets monuments historiques (en bois, en tissu) sont très prisés des insectes.
-Généralement, vous ne verrez pas ces insectes à la surface des objets, car ils commencent souvent par attaquer l’intérieur.
-En revanche vous pourrez constater des dégradations à la surface de l’objet, des traces de sciure, des trous, ou des déjections…
-Ils apprécient les environnements sombres, humides et chauds.
+Des insectes peuvent endommager les objets historiques, comme ceux en bois ou en tissu. Souvent, ces insectes attaquent d'abord l'intérieur, donc on ne les voit pas. Mais on peut remarquer des signes de dégâts : sciure, trous, ou déjections. Ils aiment les environnements sombres, humides et chauds.
 
-Une surveillance régulière permet de détecter généralement à temps les infestations.
-Ce repérage, puis un traitement approprié permettent d’éviter que l’infestation se propage dans l’environnement de l’objet : boiseries et charpentes par exemple pour les insectes xylophages.
+Une surveillance régulière permet généralement de détecter à temps les infestations.
+Ce repérage, suivi d'un traitement approprié permet d’éviter que l’infestation se propage dans l’environnement de l’objet. Il s'agit par exemple des boiseries et charpentes pour les insectes xylophages.
 
 Vous trouverez ci-dessous des marques typiques de la présence d’insectes :
 
-### Insectes friands de bois (xylophages)
+### Insectes qui aiment le bois (xylophages)
 
 Les insectes xylophages les plus fréquents sont la petite vrillette, la grande vrillette, le capricorne et les termites.
 
 ![Trous marqueurs de la présence de petite vrillette](/contenus/fiches/images/vrillette-trous.jpg)
 
-Trous marqueurs de la présence de petite vrillette
+*Trous marqueurs de la présence de petite vrillette*
 
 ![Sciure au pied du meuble, illustrant la présence de vrillette](/contenus/fiches/images/vrillette-sciure.jpg)
 
-Sciure au pied du meuble, illustrant la présence de vrillette
+*Sciure au pied du meuble, illustrant la présence de vrillette.*
 
-### Insectes friands de tissus :
+### Insectes qui aiment les tissus :
 
-Les mites, les blattes et les poissons d’argents peuvent infester des supports très divers (toiles des tableaux…).
+Les mites, les blattes et les poissons d’argents peuvent infester des supports textiles très divers. Dont les toiles des tableaux.  
 
-![Trou de mite sur un tissus](/contenus/fiches/images/mite-trou-tissu.jpg)
+![Trou de mite sur un tissu](/contenus/fiches/images/mite-trou-tissu.jpg)
 
-Trou de mite sur un tissu
+*Trou de mite sur un tissu.* 
 
 ## Les moisissures
 
-Il s’agit de champignons microscopiques, généralement de couleur verdâtre ou blanchâtre lorsqu’ils se sont développés.
-Ils ressemblent à de la poussière lorsqu’ils manquent d’eau.
-Visibles à la surface de l’objet, ils sont redoutables.
-N’essayez surtout pas d’intervenir directement, sinon en les brossant à sec et délicatement loin de toute autre surface pouvant être infestée.
+Les moisissures sont des champignons microscopiques. Généralement de couleur verdâtre ou blanchâtre lorsqu’ils se sont développés. Ils ressemblent à de la poussière lorsqu’ils manquent d’eau.
 
-### Astuces pour éviter la moisissure
+Ils sont visibles à la surface des objets et sont redoutables pour leur conservation. Il ne faut pas intervenir soi même, sauf pour les brosser doucement et à sec, loin d'autres surfaces qui pourraient être contaminées.
 
-Pas de variations de température brusques, car ceci favorise l’humidité et leur développement.
+**Astuces pour éviter la moisissure :** 
 
-En prévention, aérez les pièces où vous conservez les objets.
-Dépoussiérez régulièrement et délicatement vos objets.
+* Éviter les variation de température brusques. Ceci favorise l’humidité et leur développement.
+* Aérer les pièces où vous conservez les objets, en prévention.
+* Dépoussiérez régulièrement et délicatement vos objets.
+* N’utilisez pas d’eau sur l’objet ou à proximité. Pas de lavage du sol à grande eau et pas de vase trop près d’une statue en bois ou d’un tableau par exemple.
 
-N’utilisez pas d’eau sur l’objet ou à proximité (pas de lavage du sol à grande eau, pas de vase trop près d’une statue en bois ou d’un tableau…).
+En cas de doute sur le niveau d’humidité dans l’air à différents moments : utilisez un hydromètre. Il sert à mesurer les variations du taux d’humidité relative de l’air.
 
-En cas de doute sur le niveau d’humidité dans l’air à différents moments, il est possible d’acheter un hydromètre qui sert à mesurer les variations du taux d’humidité relative de l’air.
+## Les animaux
 
-## Les animaux et oiseaux
+Des animaux peuvent se cacher dans les bâtiments sans qu'on le sache. Comme les rongeurs et pigeons.
 
-Rongeurs, pigeons… Les bâtiments peuvent abriter bien du monde à votre insu !
+* Vérifiez souvent l'intérieur pour voir s'il y a des infestations.
+* Faites attention avec les poisons pour rongeurs. L'animal peut mourir derrière un meuble, causant des moisissures.
+* Les fientes de pigeon sont acides et peuvent abîmer les œuvres d'art. Elles sont aussi dures à nettoyer et sont dangereuses si on les respire.
 
-- Inspectez régulièrement l’intérieur des bâtiments pour s’assurer qu’ils ne sont pas infestés.
-- Attention aux appâts souricides qui font que l’animal peut se décomposer derrière un meuble ou un objet et ainsi générer une infestation de moisissures.
-- Les fientes de pigeon peuvent notamment endommager les œuvres en raison de leur acidité ; elles sont par ailleurs très difficiles à nettoyer et dangereuses pour les humains par inhalation.
-
-## Que faire?
+## Que faire ?
 
 **Il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial.**
-Pour le reste du mobilier présent dans l’édifice, l’entretien courant suffit généralement à éloigner les nuisibles.
-Vous pouvez par exemple utiliser des produits répulsifs, appliquer des produits insecticides sur les bancs, chaises et autres tables de sacristie, fermer toutes les issues contre les pigeons, installer un système de double portes pour empêcher leur intrusion, … Pensez à bien respecter les consignes d’utilisation indiquées sur les produits employés.
 
-Photographiez l’objet et ses dégradations pour échanger avec votre Conservation départementale des Antiquités et Objets d’Art (moisissures, trous d’envol, sciures suspectes ou toute trace de détériorations).
-Vous pouvez joindre ces photos directement sur le questionnaire de recensement pour documenter l’histoire de l’objet.
+Pour les autres meubles dans le bâtiment, un entretien régulier suffit pour éloigner les nuisibles. Utilisez des répulsifs ou des insecticides sur les bancs, chaises, et tables. Suivez toujours les instructions sur les produits utilisés. Fermez toutes les ouvertures pour bloquer les pigeons et envisagez l’installation de doubles portes pour les empêcher d’entrer.
 
-Après échange avec votre CAOA, vous pourrez isoler les objets infestés dans un lieu propice pour éviter de contaminer d’autres éléments.
+Prenez des photos de l’objet et de ses dommages pour les montrer à vos Conservateurs d’Antiquités et Objets d’Art. Ces photos de moisissures, trous, sciures suspectes ou autres dégâts aideront à documenter l’état de l’objet. Joignez-les au questionnaire de recensement ou utilisez la messagerie.
 
-Votre CAOA indiquera dans son examen les mesures spécifiques à prendre pour chaque objet, avec des niveaux d’urgence sur l’ensemble de vos objets.
+Après avoir discuté avec votre CAOA, vous pourrez isoler les objets infestés pour ne pas contaminer d’autres éléments. Votre CAOA vous dira quelles actions spécifiques entreprendre pour chaque objet et leur niveau d’urgence. 
 
-Si vous souhaitez améliorer l’état sanitaire à l’intérieur des édifices qui abritent vos objets, vous pouvez prendre contact avec l’UDAP de votre département.
-
+Pour améliorer l’état sanitaire des bâtiments où se trouvent les objets, vous pouvez contacter l’UDAP de votre département.
 
 ## Sources
 
 **Insectes :** les noms fournis par ce site sont en latin, mais l’appellation en français figure au sein de chaque fiche :
 
-- Bois d'ouvrage | CICRP · voir sur http://insectes-nuisibles.cicrp.fr/fr/bois-douvrage
-- Fibres textiles | CICRP ·  voir sur http://insectes-nuisibles.cicrp.fr/fr/fibres-textiles
+* Bois d'ouvrage | CICRP · voir sur http://insectes-nuisibles.cicrp.fr/fr/bois-douvrage
+* Fibres textiles | CICRP ·  voir sur http://insectes-nuisibles.cicrp.fr/fr/fibres-textiles
 
 **Moisissures** :
 
-[Préconisations et conseils suite aux inondations (culture.gouv.fr)](https://www.culture.gouv.fr/Regions/Drac-Hauts-de-France/Actualites/Preconisations-et-conseils-suite-aux-inondations)
+* [Préconisations et conseils suite aux inondations (culture.gouv.fr)](https://www.culture.gouv.fr/Regions/Drac-Hauts-de-France/Actualites/Preconisations-et-conseils-suite-aux-inondations)
