@@ -46,7 +46,7 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 **Avec Docker**: `docker compose up && docker compose run web rails db:setup`
 
-**Sous Mac / Linux**: 
+**Sous Mac / Linux**:
 
 - Installer Homebrew : https://brew.sh/
 
@@ -55,14 +55,14 @@ historiques et aux conservateurs d'examiner ces recensements.
 - Installer rbenv : brew install rbenv ruby-build : https://github.com/rbenv/rbenv
 
   `brew install rbenv ruby-build`
-  
+
   `rbenv init`
 
 - Installer Ruby avec rbenv
 
   ```rbenv install `cat .ruby-version` ```
 
-- Installer Bundler avec la version précisée dans le Gemfile.lock : 
+- Installer Bundler avec la version précisée dans le Gemfile.lock :
 
   `gem install bundler:2.4.13`
 
@@ -471,9 +471,10 @@ subgraph datasette[collectif-objets-datasette - python]
 end
 
 subgraph rails[collectif-objets - rails]
-  rails_run_edifices>SynchronizeEdificesJob]
-  rails_run_objets>SynchronizeObjetsJob]
-  rails_run_communes>SynchronizeCommunesJob]
+  rails_run_edifices>Synchronizer::Edifices::SynchronizeAllJob]
+  rails_run_objets>Synchronizer::Objets::SynchronizeAllJob]
+  rails_run_communes>Synchronizer::Communes::SynchronizeAllJob]
+  rails_run_photos>Synchronizer::Photos::SynchronizeAllJob]
   postgres[(Postgres DB)]
 end
 
@@ -493,6 +494,8 @@ rails_run_communes --> postgres
 fly --> rails_run_edifices
 rails_run_edifices --> postgres
 
+fly --> rails_run_photos
+rails_run_photos --> postgres
 
 style pop fill:#6666cc
 style fly fill:#6666cc
@@ -503,6 +506,7 @@ style datasette_run_deploy fill:#888833
 style rails_run_objets fill:#888833
 style rails_run_communes fill:#888833
 style rails_run_edifices fill:#888833
+style rails_run_photos fill:#888833
 style scraper_run fill:#888833
 ```
 

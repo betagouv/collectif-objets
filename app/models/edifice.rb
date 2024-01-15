@@ -26,7 +26,7 @@ class Edifice < ApplicationRecord
     edifice = find_by(merimee_REF:)
     if edifice.nil?
       edifice = create!(merimee_REF:, code_insee:)
-      Synchronizer::SynchronizeEdificeJob.perform_inline(ref: merimee_REF)
+      Synchronizer::Edifices::SynchronizeOneJob.perform_inline(ref: merimee_REF)
     end
     edifice
   end
