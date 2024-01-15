@@ -293,8 +293,7 @@ Nous vous invitons dans un premier temps à effectuer le recensement qui vous es
 
 Pour aller plus loin vous pouvez consulter cette page dédiée, du site du ministère de la Culture : [intervenir sur un objet mobilier classé ou inscrit](https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit).
 
-## \
-7﻿ - Trouver des aides pour financer des travaux sur un objet protégé
+## 7﻿ - Trouver des aides pour financer des travaux sur un objet protégé
 
 S﻿i l'un de vos objets protégés mérite de bénéficier de travaux (restauration, réparation, sécurisation...) il vous est possible de demander une aide de l'Etat auprès de votre DRAC (Direction régionale des affaires culturelles). \
 De plus, la majorité des régions et départements proposent des aides complémentaires qui peuvent s'ajouter à l'aide du ministère de la Culture. \
