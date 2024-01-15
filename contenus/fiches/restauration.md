@@ -1,7 +1,6 @@
 ---
 titre: Étapes préalables à la restauration
 ---
-
 Chaque année vos conservateurs traitent un large volume de demandes de restaurations. Des échanges approfondis avec les communes leur permettront de mieux prioriser les objets qui feront effectivement l’objet d’une démarche de restauration. Les échanges préalables avec vos conservateurs sont ainsi essentiels **avant** de déposer les demandes d’autorisation et de subvention.
 
 La présente fiche vise à vous informer sur la procédure pour lancer une restauration.
@@ -32,8 +31,17 @@ Après ces échanges avec vos conservateurs, vous pouvez solliciter plusieurs de
 Pour ces deux étapes, il convient d’utiliser le [CERFA unique](https://www.formulaires.service-public.fr/gf/cerfa_15459.do){:target="_blank" rel="noopener"} et sa [notice explicative dédiée](https://www.formulaires.service-public.fr/gf/getNotice.do?cerfaNotice=52040&cerfaFormulaire=15459){:target="_blank" rel="noopener"}. Les réponses vous seront apportées séparément après traitements administratifs :
 
 1. Concernant l’autorisation :
-    1. **Pour les objets classés** : l’autorisation prend la forme d’un arrêté du préfet de région. Vous ne pouvez pas entamer les travaux avant sa signature.
-    2. **Pour les objets inscrits** : un courrier accusant réception de votre déclaration préalable et comportant parfois des préconisations vous sera adressé.
+
+   1. **Pour les objets classés** : l’autorisation prend la forme d’un arrêté du préfet de région. Vous ne pouvez pas entamer les travaux avant sa signature.
+   2. **Pour les objets inscrits** : un courrier accusant réception de votre déclaration préalable et comportant parfois des préconisations vous sera adressé.
 2. Concernant la subvention, un arrêté de subvention vous sera adressé à la fin de l’examen administratif si votre projet est retenu dans la programmation budgétaire de l’année
 
 Pour en savoir plus, rendez-vous sur [la page dédiée aux monuments historiques du ministère de la Culture](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Monuments-historiques-sites-patrimoniaux/Les-monuments-historiques){:target="_blank" rel="noopener"}.
+
+## S﻿i votre projet de travaux est approuvé par la DRAC, vous êtes peut-être éligible pour des aides complémentaires 
+
+D﻿es régions et des départements proposent des aides complémentaires pour les travaux menés sur les objets protégés au titre des monuments historiques. Mais l'autorisation de travaux de la DRAC est un document nécessaire pour demander ces aides. 
+
+A﻿fin de savoir si votre région ou votre département propose une aide complémentaire, vous pouvez vous renseigner en vous rendant[ ICI](https://aides-territoires.beta.gouv.fr/portails/patrimoinemobilier/). \
+Attention : les informations ne sont pas disponibles pour toutes les collectivités. \
+Votre conservateurs des antiquités et objets d'art pourra probablement vous renseigner à ce sujet également.
