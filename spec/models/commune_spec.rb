@@ -91,6 +91,63 @@ RSpec.describe Commune, type: :model do
     end
   end
 
+  describe "#shall_receive_email_objets_verts?" do
+    let!(:commune) { create(:commune_with_user) }
+    let(:date) { Time.zone.today }
+    subject { commune.shall_receive_email_objets_verts?(date) }
+
+    it "returns false si la commune n'a pas fini son recensement" do
+      is_expected.to be_falsey
+
+      commune.start!
+      is_expected.to be_falsey
+    end
+
+    context "commune a terminé son recensement" do
+      let!(:dossier) { create(:dossier, :submitted, commune:) }
+      before do
+        commune.update(dossier:)
+        commune.update(status: "completed")
+      end
+
+      context "dossier soumis il y a moins d'une semaine" do
+        let(:date) { Date.new(2023, 11, 10) }
+        before { dossier.update(submitted_at: Date.new(2023, 11, 9)) }
+        it { is_expected.to be_falsey }
+      end
+
+      context "on est le weekend" do
+        let(:date) { Date.new(2023, 11, 13) }
+        it { is_expected.to be_falsey }
+      end
+
+      context "le recensement est terminé il y a plus d'une semaine et la date d'envoi est hors weekend" do
+        let(:date) { Date.new(2023, 11, 13) }
+        before { dossier.update(submitted_at: Date.new(2023, 11, 3)) }
+
+        it "returns false si la commune a des objets prioritaires" do
+          create(:recensement, :en_peril, dossier:)
+          is_expected.to be_falsey
+        end
+
+        it "returns true si la commune n'a pas d'objest prioritaires" do
+          is_expected.to be_truthy
+        end
+
+        it "returns false si la commune est en cours d'examen" do
+          objet = create(:objet, commune:)
+          create(:recensement, :examiné, objet:)
+          is_expected.to be_falsey
+        end
+
+        it "returns false si la commune a déjà reçu un email objets verts" do
+          dossier.update(replied_automatically_at: Date.yesterday)
+          is_expected.to be_falsey
+        end
+      end
+    end
+  end
+
   describe ".include_objets_count" do
     let!(:commune) { create(:commune) }
     before do

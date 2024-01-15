@@ -58,24 +58,32 @@ RSpec.describe Campaigns::CronJob, type: :job do
     end
   end
 
-  describe "pour les campagnes en cours ayant atteint la date de fin" do
+  describe "pour les campagnes ayant atteint la date de fin" do
+    let!(:commune_sans_objets_prioritaires) { create(:commune_completed) }
+    let!(:commune_avec_objets_prioritaires) { create(:commune_completed) }
+    let!(:recensement_en_peril) { create(:recensement, :en_peril, dossier: commune_avec_objets_prioritaires.dossier) }
+    let!(:commune_en_cours_dexamen) { create(:commune_completed) }
+    let!(:recensement_examiné) { create(:recensement, :examiné, dossier: commune_en_cours_dexamen.dossier) }
+    let!(:campagne_en_cours_apres_date_fin) do
+      create(:campaign, status: "ongoing", date_lancement: Date.new(2023, 10, 10), date_fin: Date.new(2023, 11, 10))
+    end
+    let!(:campagne_non_concernee) { create(:campaign, status: :finished, date_lancement: Date.new(2023, 9, 1)) }
+    let!(:commune_sans_objets_prioritaires2) { create(:commune_completed) }
+
     before do
-      commune_sans_objets_prioritaires = create(:commune_completed)
-      commune_avec_objets_prioritaires = create(:commune_completed)
-      create(:recensement, :en_peril, dossier: commune_avec_objets_prioritaires.dossier)
-      commune_en_cours_dexamen = create(:commune_completed)
-      create(:recensement, :examiné, dossier: commune_en_cours_dexamen.dossier)
-
-      campagne_en_cours_apres_date_fin = create(:campaign, status: "ongoing",
-                                                           date_lancement: Date.new(2023, 9, 1),
-                                                           date_fin: Date.new(2023, 11, 10))
-
-      campagne_en_cours_apres_date_fin.communes = [commune_sans_objets_prioritaires, commune_avec_objets_prioritaires]
+      campagne_en_cours_apres_date_fin.communes = [commune_sans_objets_prioritaires, commune_avec_objets_prioritaires,
+                                                   commune_en_cours_dexamen]
+      campagne_non_concernee.communes << commune_sans_objets_prioritaires2
     end
 
-    it "envoie un email aux communes avec uniquement des objets verts" do
-      expect { Campaigns::CronJob.new.perform }
+    it "envoie un email aux communes avec uniquement des objets verts \
+        ayant fini leur recensement il y a plus d'une semaine et ayant démarré après le 05/10/2023" do
+      commune_sans_objets_prioritaires.dossier.update(submitted_at: Date.new(2023, 11, 1))
+      commune_sans_objets_prioritaires2.dossier.update(submitted_at: Date.new(2023, 9, 15))
+
+      expect { Campaigns::CronJob.new.perform(Date.new(2023, 11, 13)) }
         .to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect(commune_sans_objets_prioritaires.dossier.reload.replied_automatically_at).not_to be_nil
     end
   end
 end
