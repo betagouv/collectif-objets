@@ -38,8 +38,7 @@ Pour ces deux étapes, il convient d’utiliser le [CERFA unique](https://www.fo
 
 Pour en savoir plus, rendez-vous sur [la page dédiée aux monuments historiques du ministère de la Culture](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Monuments-historiques-sites-patrimoniaux/Les-monuments-historiques){:target="_blank" rel="noopener"}.
 
-## \
-S﻿i votre projet de travaux est approuvé par la DRAC, vous êtes peut-être éligible pour des aides complémentaires 
+## S﻿i votre projet de travaux est approuvé par la DRAC, vous êtes peut-être éligible pour des aides complémentaires 
 
 D﻿es régions et des départements proposent des aides complémentaires pour les travaux menés sur les objets protégés au titre des monuments historiques. Mais l'autorisation de travaux de la DRAC est un document nécessaire pour demander ces aides. 
 
