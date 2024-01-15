@@ -2,7 +2,7 @@
 
 module Synchronizer
   module Communes
-    class SynchronizeJob
+    class SynchronizeAllJob
       include Sidekiq::Job
 
       BATCH_SIZE = 1000

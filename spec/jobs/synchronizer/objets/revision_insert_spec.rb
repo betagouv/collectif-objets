@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Synchronizer::ObjetRevisionInsert do
+RSpec.describe Synchronizer::Objets::RevisionInsert do
   let(:base_row) do
     {
       "REF" => "PM01000001",
