@@ -4,7 +4,7 @@ Rails.application.config.active_storage.resolve_model_to_route = :rails_storage_
 
 class UnsafePurgeError < StandardError
   def initialize(blob)
-    super "Purge of from service #{blob.service_name} is not allowed from env #{Rails.env}"
+    super "Purging a file from Active Storage service '#{blob.service_name}' is not allowed from env #{Rails.env}"
   end
 end
 
@@ -17,7 +17,7 @@ module PreventErroneousPurgeBlob
   end
 
   def safe_purge?
-    Rails.env.production? || %w[scaleway_production scaleway].exclude?(service_name)
+    Rails.env.production? || %w[scaleway_development test local].include?(service_name)
   end
 end
 
@@ -29,7 +29,7 @@ module PreventErroneousPurgeAttachment
   end
 
   def safe_purge?
-    Rails.env.production? || %w[scaleway_production scaleway].exclude?(blob.service_name)
+    Rails.env.production? || %w[scaleway_development test local].include?(blob.service_name)
   end
 end
 
@@ -98,6 +98,6 @@ end
 ActiveSupport.on_load(:active_storage_attachment) do
   ActiveStorage::Attachment.include Rotation
   ActiveStorage::Attachment.include RecensementPhoto
-  ActiveStorage::Attachment.include PreventErroneousPurgeAttachment
-  ActiveStorage::Blob.include PreventErroneousPurgeBlob
+  ActiveStorage::Attachment.prepend PreventErroneousPurgeAttachment
+  ActiveStorage::Blob.prepend PreventErroneousPurgeBlob
 end
