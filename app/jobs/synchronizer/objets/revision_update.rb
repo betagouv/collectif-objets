@@ -23,7 +23,10 @@ module Synchronizer
         return false unless check_objet_valid
 
         set_update_action_and_log
-        persisted_objet.save! unless dry_run?
+        unless dry_run?
+          destroy_recensements
+          persisted_objet.save!
+        end
         true
       end
 
@@ -60,39 +63,28 @@ module Synchronizer
         @objet_builder ||= Synchronizer::Objets::Builder.new(row, persisted_objet:)
       end
 
-      def unsafe_commune_change_reason
-        return "commune destinataire en cours de recensement" if commune_after_update.started?
-
-        if commune_after_update.completed? && commune_after_update.dossier.submitted?
-          return "commune destinataire avec dossier en cours d'examen"
-        end
-
-        return "commune d’origine en cours de recensement" if commune_before_update.started?
-
-        return "commune d’origine ayant fini de recenser" if commune_before_update.completed?
-
-        nil
-      end
-
       def commune_changed? = commune_before_update != commune_after_update
-      def safe_commune_change? = unsafe_commune_change_reason.nil?
-      def apply_commune_change? = commune_changed? && (safe_commune_change? || interactive_validation?)
-      def ignore_commune_change? = commune_changed? && !apply_commune_change?
 
       def set_update_action_and_log
         message = "mise à jour de l’objet #{palissy_ref}"
-        if apply_commune_change?
+        if commune_changed? && persisted_objet.recensements.empty?
+          message += " avec changement de commune appliqué #{commune_before_update} → #{commune_after_update}" \
+                     "et #{persisted_objet.recensements.count} recensements supprimés"
+          @action = :update_with_commune_change_and_recensements_destroyed
+        elsif commune_changed?
           message += " avec changement de commune appliqué #{commune_before_update} → #{commune_after_update} "
           @action = :update_with_commune_change
-        elsif ignore_commune_change?
-          message += " avec changement de commune ignoré #{commune_before_update} → #{commune_after_update} " \
-                     "(#{unsafe_commune_change_reason})"
-          @action = :update_ignoring_commune_change
         else
           @action = :update
         end
         message += " : #{persisted_objet.changes}"
         log message
+      end
+
+      def destroy_recensements
+        nil if !commune_changed? || persisted_objet.recensements.empty?
+
+        persisted_objet.recensements.each(&:destroy!)
       end
     end
   end
