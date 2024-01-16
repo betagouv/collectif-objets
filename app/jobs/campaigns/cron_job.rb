@@ -20,7 +20,7 @@ module Campaigns
           next unless commune.shall_receive_email_objets_verts?(date)
 
           commune.dossier.update(replied_automatically_at: date)
-          UserMailer.with(user: commune.users.first, commune:).commune_avec_objets_verts_email.deliver_now
+          UserMailer.with(user: commune.users.first, commune:).commune_avec_objets_verts_email.deliver_later
         end
       end
     end
