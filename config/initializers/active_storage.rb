@@ -8,28 +8,39 @@ class UnsafePurgeError < StandardError
   end
 end
 
+module SafePurge
+  def safe_purge?(blob)
+    Rails.env.production? || %w[scaleway_development test local].include?(blob.service_name)
+  end
+end
 
 module PreventErroneousPurgeBlob
-  def purge
-    return super if safe_purge?
+  include SafePurge
+
+  def delete
+    return super if safe_purge?(self)
 
     raise UnsafePurgeError, self
-  end
-
-  def safe_purge?
-    Rails.env.production? || %w[scaleway_development test local].include?(service_name)
   end
 end
 
 module PreventErroneousPurgeAttachment
+  include SafePurge
+
   def purge
-    return super if safe_purge?
+    return super if safe_purge?(blob)
 
     raise UnsafePurgeError, blob
   end
+end
 
-  def safe_purge?
-    Rails.env.production? || %w[scaleway_development test local].include?(blob.service_name)
+module PreventErroneousPurgeJob
+  include SafePurge
+
+  def perform(blob)
+    return super if safe_purge?(blob)
+
+    Sidekiq.logger.warn "skipping purge of blob from Active Storage service #{blob.service_name} in env #{Rails.env}"
   end
 end
 
@@ -99,5 +110,9 @@ ActiveSupport.on_load(:active_storage_attachment) do
   ActiveStorage::Attachment.include Rotation
   ActiveStorage::Attachment.include RecensementPhoto
   ActiveStorage::Attachment.prepend PreventErroneousPurgeAttachment
+end
+
+ActiveSupport.on_load(:active_storage_blob) do
+  ActiveStorage::PurgeJob.prepend PreventErroneousPurgeJob
   ActiveStorage::Blob.prepend PreventErroneousPurgeBlob
 end
