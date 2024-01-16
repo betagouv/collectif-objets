@@ -17,7 +17,7 @@ class Dossier < ApplicationRecord
     event :submit, after: :aasm_after_submit do
       transitions from: :construction, to: :submitted
     end
-    event :accept do
+    event :accept, after: :aasm_after_accept do
       transitions from: :submitted, to: :accepted
     end
     event :return_to_construction, after: :aasm_after_return_to_construction do
@@ -87,6 +87,10 @@ class Dossier < ApplicationRecord
 
   def aasm_after_return_to_construction
     commune.return_to_started! unless commune.started?
+  end
+
+  def aasm_after_accept
+    commune.recensements.where.not(status: "completed").find_each(&:destroy!)
   end
 
   def self.ransackable_attributes(_ = nil) = %w[status submitted_at]

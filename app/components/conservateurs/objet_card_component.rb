@@ -40,8 +40,6 @@ module Conservateurs
     end
 
     def tags
-      return [] unless can_analyse
-
       @tags ||= [not_recensed_badge].compact
     end
 
@@ -50,7 +48,7 @@ module Conservateurs
     end
 
     def not_recensed_badge
-      return nil if recensement.present?
+      return nil if recensement&.completed?
 
       badge_struct.new("warning", "Pas encore recensé")
     end
