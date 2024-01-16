@@ -42,8 +42,8 @@ Pour en savoir plus, rendez-vous sur [la page dédiée aux monuments historiques
 
 D﻿es régions et des départements proposent des aides complémentaires pour les travaux menés sur les objets protégés au titre des monuments historiques. Mais l'autorisation de travaux de la DRAC est un document nécessaire pour demander ces aides. 
 
-A﻿fin de savoir si votre région ou votre département propose une aide complémentaire, vous pouvez vous renseigner en vous rendant[ ICI](https://aides-territoires.beta.gouv.fr/portails/patrimoinemobilier/). 
-
-Attention : les informations ne sont pas disponibles pour toutes les collectivités. 
-
+A﻿fin de savoir si votre région ou votre département propose une aide complémentaire, vous pouvez vous renseigner en vous rendant[ ICI](https://aides-territoires.beta.gouv.fr/portails/patrimoinemobilier/). \
+\
+Attention : les informations ne sont pas disponibles pour toutes les collectivités. \
+\
 Votre conservateurs des antiquités et objets d'art pourra probablement vous renseigner à ce sujet également.
