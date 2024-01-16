@@ -3,8 +3,6 @@
 Rails.application.config.active_storage.resolve_model_to_route = :rails_storage_proxy
 
 module PreventErroneousPurgeBlob
-  include SafePurge
-
   # monkey patch delete rather than purge because it seems to be the lowest level method
   def delete
     return super if Rails.env.production? || %w[scaleway_development test local].include?(service_name)
