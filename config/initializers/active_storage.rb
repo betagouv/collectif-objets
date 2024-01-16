@@ -2,41 +2,18 @@
 
 Rails.application.config.active_storage.resolve_model_to_route = :rails_storage_proxy
 
-class UnsafePurgeError < StandardError
-  def initialize(blob)
-    super "Purge of from service #{blob.service_name} is not allowed from env #{Rails.env}"
-  end
-end
-
-
 module PreventErroneousPurgeBlob
-  def purge
-    return super if safe_purge?
+  # monkey patch delete rather than purge because it seems to be the lowest level method
+  def delete
+    return super if Rails.env.production? || %w[scaleway_development test local].include?(service_name)
 
-    raise UnsafePurgeError, self
-  end
-
-  def safe_purge?
-    Rails.env.production? || %w[scaleway_production scaleway].exclude?(service_name)
-  end
-end
-
-module PreventErroneousPurgeAttachment
-  def purge
-    return super if safe_purge?
-
-    raise UnsafePurgeError, blob
-  end
-
-  def safe_purge?
-    Rails.env.production? || %w[scaleway_production scaleway].exclude?(blob.service_name)
+    Rails.logger.warn "silently skipping unsafe file deletion from Active Storage service #{service_name} in env #{Rails.env}"
+    return false
   end
 end
 
 module Rotation
   def rotate!(degrees: 90)
-    raise UnsafePurgeError, blob unless safe_purge?
-
     rotated_tempfile = nil
     blob.open do |original_tempfile|
       rotated_tempfile = ImageProcessing::Vips.source(original_tempfile).rotate(degrees).call
@@ -98,6 +75,8 @@ end
 ActiveSupport.on_load(:active_storage_attachment) do
   ActiveStorage::Attachment.include Rotation
   ActiveStorage::Attachment.include RecensementPhoto
-  ActiveStorage::Attachment.include PreventErroneousPurgeAttachment
-  ActiveStorage::Blob.include PreventErroneousPurgeBlob
+end
+
+ActiveSupport.on_load(:active_storage_blob) do
+  ActiveStorage::Blob.prepend PreventErroneousPurgeBlob
 end
