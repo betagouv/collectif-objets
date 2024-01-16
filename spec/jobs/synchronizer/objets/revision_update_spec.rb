@@ -94,8 +94,9 @@ RSpec.describe Synchronizer::Objets::RevisionUpdate do
     end
   end
 
-  context "changement de commune depuis commune avec recensement en cours vers commune inactive" do
+  context "changement de commune + objet déjà recensé" do
     let!(:commune_before_update) { create(:commune, code_insee: "01004", status: :started) }
+    let!(:recensement) { create(:recensement, objet: persisted_objet) }
     let!(:commune_after_update) { create(:commune, code_insee: "01999", status: :inactive) }
     let(:row) do
       base_row.merge(
@@ -107,7 +108,7 @@ RSpec.describe Synchronizer::Objets::RevisionUpdate do
       )
     end
     let(:revision) { described_class.new(row, commune: commune_after_update, persisted_objet:) }
-    it "sauvegarde uniquement les changements sûrs" do
+    it "sauvegarde uniquement les changements sûrs, pas le changement de commune" do
       expect(revision.synchronize).to eq true
       expect(revision.action).to eq :update_ignoring_commune_change
       expect(revision.objet.reload.palissy_INSEE).to eq("01004")
@@ -118,7 +119,7 @@ RSpec.describe Synchronizer::Objets::RevisionUpdate do
     end
   end
 
-  context "changement de commune depuis une inactive vers une autre inactive" do
+  context "changement de commune mais objet jamais recensé" do
     let!(:commune_before_update) { create(:commune, code_insee: "01004", status: :inactive) }
     let!(:commune_after_update) { create(:commune, code_insee: "01999", status: :inactive) }
     let(:row) do
@@ -142,7 +143,7 @@ RSpec.describe Synchronizer::Objets::RevisionUpdate do
     end
   end
 
-  context "changement de commune depuis une inactive vers une autre en cours de recensement" do
+  context "changement de commune mais objet jamais recensé, commune destinataire en cours de recensement" do
     let!(:commune_before_update) { create(:commune, code_insee: "01004", status: :inactive) }
     let!(:commune_after_update) { create(:commune, code_insee: "01999", status: :started) }
     let(:row) do
@@ -155,13 +156,13 @@ RSpec.describe Synchronizer::Objets::RevisionUpdate do
       )
     end
     let(:revision) { described_class.new(row, commune: commune_after_update, persisted_objet:) }
-    it "ne change pas la commune, mais met à jour champs sûrs" do
+    it "change pas la commune et met à jour les champs" do
       expect(revision.synchronize).to eq true
-      expect(revision.action).to eq :update_ignoring_commune_change
-      expect(revision.objet.reload.palissy_INSEE).to eq("01004")
-      expect(revision.objet.reload.palissy_COM).to eq("Ambérieu-en-Bugey")
-      expect(revision.objet.reload.palissy_EDIF).to eq("chapelle des Allymes")
-      expect(revision.objet.reload.palissy_EMPL).to eq("chapelle située au milieu du cimetière")
+      expect(revision.action).to eq :update_with_commune_change
+      expect(revision.objet.reload.palissy_INSEE).to eq("01999")
+      expect(revision.objet.reload.palissy_COM).to eq("Nogent")
+      expect(revision.objet.reload.palissy_EDIF).to eq("Église st-Jean")
+      expect(revision.objet.reload.palissy_EMPL).to eq("au fond à gauche")
       expect(revision.objet.reload.palissy_TICO).to eq("Rosarium")
     end
   end

@@ -543,25 +543,15 @@ flowchart TD
   code_insee_existe -->|oui| pm_existe[PM existe déjà ?]
 
   pm_existe -->|oui| changement_de_commune[Code INSEE a changé ?]
-  pm_existe -.->|non| commune_ok[commune inactive \n ou dossier accepté ?]
+  pm_existe -.->|non| import_nouvel_objet(Import du nouvel objet)
 
-  subgraph nouvel objet
-  commune_ok -->|oui| import_nouvel_objet(Importer nouvel objet)
-  commune_ok -.->|non| interactive1[Acceptation interactive manuelle ?]
-
-  interactive1 -.->|non| ne_pas_importer_nouvel_objet(Ne pas importer \nle nouvel objet)
-  interactive1 -->|oui| import_nouvel_objet
-  end
 
   subgraph Mise à jour d'objet
   changement_de_commune -.->|non| mise_a_jour(Mise à jour de l'objet)
-  changement_de_commune -->|oui| 2_communes_ok[Commune destinataire inactive ou dossier accepté \n+ commune d'origine inactive ?]
+  changement_de_commune -->|oui| 2_communes_ok[la commune d’origine a déjà recensé l’objet ?]
 
-  2_communes_ok -->|oui| mise_a_jour_et_changement_commune(Changement de commune\net mise à jour de l'objet)
-  2_communes_ok -.->|non| interactive2[Acceptation interactive manuelle ?]
-
-  interactive2 -->|oui| mise_a_jour_et_changement_commune
-  interactive2 -.->|non| mise_a_jour_prudente(Mise à jour des champs sûrs\npas de changement de commune)
+  2_communes_ok -.->|oui| mise_a_jour_prudente(Mise à jour des champs sûrs\npas de changement de commune)
+  2_communes_ok -->|non| mise_a_jour_et_changement_commune(Changement de commune\net mise à jour de l'objet)
   end
 
   style mise_a_jour fill:#006600
@@ -569,7 +559,6 @@ flowchart TD
   style mise_a_jour_et_changement_commune fill:#006600
   style mise_a_jour_prudente fill:#003300
   style ne_pas_importer fill:#660000
-  style ne_pas_importer_nouvel_objet fill:#660000
 ```
 
 ## Photos

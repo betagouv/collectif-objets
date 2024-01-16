@@ -12,7 +12,7 @@ module Synchronizer
 
         private
 
-        attr_reader :row, :commune, :logfile, :interactive, :dry_run
+        attr_reader :row, :commune, :logfile, :dry_run
       end
 
       private
@@ -24,25 +24,6 @@ module Synchronizer
         logfile.flush
       end
 
-      # rubocop:disable Rails/Output
-      def interactive_validation?
-        return false unless interactive?
-
-        @interactive_validation ||= begin
-          puts "\n----\n#{row}\n----"
-          response = nil
-          while response.nil?
-            puts "voulez-vous forcer la sauvegarde de cet objet ? 'oui' : 'non'"
-            raw = gets.chomp
-            response = false if raw == "non"
-            response = true if raw == "oui"
-          end
-          response
-        end
-      end
-      # rubocop:enable Rails/Output
-
-      def interactive? = interactive
       def dry_run? = dry_run
     end
   end

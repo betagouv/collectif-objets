@@ -5,10 +5,9 @@ module Synchronizer
     class RevisionInsert
       include RevisionConcern
 
-      def initialize(row, commune:, interactive: false, logfile: nil, dry_run: false)
+      def initialize(row, commune:, logfile: nil, dry_run: false)
         @row = row
         @commune = commune
-        @interactive = interactive
         @logfile = logfile
         @dry_run = dry_run
       end
