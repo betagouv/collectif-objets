@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe Campaigns::CronJob, type: :job do
+  include ActiveJob::TestHelper
+
   describe "for planned campaigns" do
     let!(:campaign1) { create(:campaign, status: "planned", date_lancement: Date.new(2031, 6, 10)) }
     let!(:campaign2) { create(:campaign, status: "planned", date_lancement: Date.new(2031, 4, 10)) }
@@ -81,8 +83,10 @@ RSpec.describe Campaigns::CronJob, type: :job do
       commune_sans_objets_prioritaires.dossier.update(submitted_at: Date.new(2023, 11, 1))
       commune_sans_objets_prioritaires2.dossier.update(submitted_at: Date.new(2023, 9, 15))
 
-      expect { Campaigns::CronJob.new.perform(Date.new(2023, 11, 13)) }
-        .to change { ActionMailer::Base.deliveries.count }.by(1)
+      Campaigns::CronJob.new.perform(Date.new(2023, 11, 13))
+      perform_enqueued_jobs
+
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
       expect(commune_sans_objets_prioritaires.dossier.reload.replied_automatically_at).not_to be_nil
     end
   end
