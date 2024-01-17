@@ -8,18 +8,13 @@ module Synchronizer
       end
 
       def synchronize
+        return unless row_valid?
+
         find_edifice
         return unless @edifice
 
         @edifice.assign_attributes(merimee_REF:, nom:, code_insee:, slug:)
-        # merimee_PRODUCTEUR: @row["PRODUCTEUR"],
         return unless @edifice.changed?
-
-        if @edifice.code_insee_was.present? && @edifice.code_insee.nil?
-          Sidekiq.logger.warn "edifice #{@identified_by} would lose its code_insee " \
-                              "(#{@edifice.code_insee_was} -> #{code_insee})"
-          return
-        end
 
         Sidekiq.logger.info "edifice #{@identified_by} changed : #{@edifice.changes}, saving..."
         @edifice.save!
@@ -37,9 +32,13 @@ module Synchronizer
         code_insee.is_a?(Array) ? code_insee[0] : code_insee
       end
 
-      def find_edifice
-        raise "missing merimee_REF in #{row.to_h}" if merimee_REF.blank?
+      def row_valid?
+        raise "missing merimee_REF in #{row.to_h}" if merimee_REF.blank? # maybe we should just skip
 
+        code_insee.present?
+      end
+
+      def find_edifice
         @edifice, @identified_by = find_edifice_by_merimee_REF || find_edifice_by_slug_and_code_insee
       end
 
