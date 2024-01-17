@@ -23,7 +23,7 @@ module Synchronizer
     end
 
     def find_by(where)
-      url = "#{BASE_URL}/records?#{{ where: }.to_query}"
+      url = "#{base_url}/records?#{{ where: }.to_query}"
       response = JSON.parse(Net::HTTP.get(URI(url)))
 
       raise "API error: #{response['error_code']} #{response['message']}" if response["error_code"]
@@ -38,6 +38,7 @@ module Synchronizer
     private
 
     def csv_path
+      # useful to iterate, make sure to download the csv with ?with_bom=false
       return ENV["USE_LOCAL_FILE"] if ENV["USE_LOCAL_FILE"].present?
 
       @csv_path ||= begin

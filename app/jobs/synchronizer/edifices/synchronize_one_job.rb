@@ -17,7 +17,7 @@ module Synchronizer
       private
 
       def row
-        @row ||= ApiClientMerimee.find_by_reference(params_i[:ref]) # rubocop:disable Rails/DynamicFindBy
+        @row ||= ApiClientMerimee.new.find_by_reference(params_i[:ref]) # rubocop:disable Rails/DynamicFindBy
       end
 
       def params_i

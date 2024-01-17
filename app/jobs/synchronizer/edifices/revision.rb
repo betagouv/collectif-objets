@@ -16,7 +16,7 @@ module Synchronizer
         @edifice.assign_attributes(merimee_REF:, nom:, code_insee:, slug:)
         return unless @edifice.changed?
 
-        Sidekiq.logger.info "edifice #{@identified_by} changed : #{@edifice.changes}, saving..."
+        Rails.logger.info "edifice #{@identified_by} changed : #{@edifice.changes}, saving..."
         @edifice.save!
       end
 
@@ -27,9 +27,11 @@ module Synchronizer
       def slug = Edifice.slug_for(@row["titre_editorial_de_la_notice"])
 
       def code_insee
-        # code_insee is a single string value using the CSV but an array using the API 🤷‍♂️
-        code_insee = @row["cog_insee_lors_de_la_protection"]
-        code_insee.is_a?(Array) ? code_insee[0] : code_insee
+        if @row["cog_insee_lors_de_la_protection"].is_a?(String)
+          @row["cog_insee_lors_de_la_protection"].split(",")[0] # when from CSV
+        elsif @row["cog_insee_lors_de_la_protection"].is_a?(Array)
+          @row["cog_insee_lors_de_la_protection"][0] # when from API
+        end
       end
 
       def row_valid?
