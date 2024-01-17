@@ -487,9 +487,7 @@ datasette_run_sqlite --> sqlite
 sqlite --> datasette_run_deploy
 datasette_run_deploy --> fly
 fly --> rails_run_objets
-fly --> rails_run_photos
 rails_run_objets --> postgres
-rails_run_photos --> postgres
 
 api_service_public --> rails_run_communes
 rails_run_communes --> postgres
@@ -508,7 +506,6 @@ style api_data_culture_gouv fill:#6666cc
 style datasette_run_sqlite fill:#888833
 style datasette_run_deploy fill:#888833
 style rails_run_objets fill:#888833
-style rails_run_photos fill:#888833
 style rails_run_communes fill:#888833
 style rails_run_edifices fill:#888833
 style rails_run_photos fill:#888833

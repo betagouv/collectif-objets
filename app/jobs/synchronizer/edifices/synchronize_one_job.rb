@@ -9,9 +9,7 @@ module Synchronizer
         @params = params
         raise ArgumentError, "missing ref param" if params_i[:ref].blank?
 
-        @dry_run = params_i[:dry_run]
-
-        return Synchronizer::Edifices::Row.new(row).synchronize if row
+        return Revision.new(row).synchronize if row
 
         logger.warn "l'API n'a pas renvoyé d'édifices pour la REF '#{params_i[:ref]}'"
       end
@@ -19,10 +17,7 @@ module Synchronizer
       private
 
       def row
-        @row ||=
-          ApiClientJson
-            .edifices(params: { REF__exact: params_i[:ref] }, logger:, limit: params_i[:limit])
-            .first
+        @row ||= ApiClientMerimee.find_by_reference(params_i[:ref]) # rubocop:disable Rails/DynamicFindBy
       end
 
       def params_i
