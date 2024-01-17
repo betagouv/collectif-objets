@@ -97,7 +97,7 @@ _**optionnel**_: pour une utilisation de rubocop plus rapide en local,
 
 **Outils de débogage**
 
-Dans VSCode, installer [l'extension RDBG](https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg) qui permet de déboger pas à pas directement dans l'IDE.
+Dans VSCode, installer [l'extension RDBG](https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg) qui permet de déboguer pas à pas directement dans l'IDE.
 
 Il faut d'abord lancer le serveur depuis le terminal dans VSCode (View > Terminal) avec cette commande :
 `rdbg -n -c --open=vscode -- bin/rails s`
