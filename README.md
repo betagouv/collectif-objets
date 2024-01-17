@@ -95,6 +95,29 @@ Cependant le Makefile n'est pas adapté à son utilisation, il faudrait donc lan
 _**optionnel**_: pour une utilisation de rubocop plus rapide en local,
 [voir le mode serveur](https://docs.rubocop.org/rubocop/usage/server.html)
 
+**Outils de débogage**
+
+Dans VSCode, installer [l'extension RDBG](https://marketplace.visualstudio.com/items?itemName=KoichiSasada.vscode-rdbg) qui permet de déboger pas à pas directement dans l'IDE.
+
+Il faut d'abord lancer le serveur depuis le terminal dans VSCode (View > Terminal) avec cette commande :
+`rdbg -n -c --open=vscode -- bin/rails s`
+
+Puis attacher le débogeur via le menu Run and Debug dans la sidebar. Pour ce faire, éditer le fichier `.vscode/launch.json` pour qu'il ait la configuration suivante :
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "rdbg",
+            "name": "Attach with rdbg",
+            "request": "attach"
+        }
+    ]
+}
+```
+
+Vous pourrez ainsi placer des breakpoints depuis VSCode, voir le contenu des variables en les survolant etc.
+
 # Découverte du service, captures d'écran, types d’usagers, premiers pas
 
 Le site expose trois interfaces pour trois types d'usagers différents, toutes accessibles depuis un
