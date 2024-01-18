@@ -133,8 +133,7 @@ RSpec.describe CampaignV1Mailer, type: :mailer do
     "a campaign email",
     :fin_started_email,
     "Dernier jour pour recenser les objets monuments historiques de Joinville",
-    "Seul un dossier complet pourra être envoyé au conservateur d’antiquités et d’objets d’art \
-    pour qu’il puisse vous faire ses retours"
+    "Seul un dossier complet pourra être envoyé au conservateur d’antiquités et d’objets d’art pour qu’il puisse vous faire ses retours" # rubocop:disable Layout/LineLength
   )
 
   it_behaves_like(
