@@ -295,9 +295,8 @@ Pour aller plus loin vous pouvez consulter cette page dédiée, du site du minis
 
 ## 7﻿ - Trouver des aides pour financer des travaux sur un objet protégé
 
-S﻿i l'un de vos objets protégés mérite de bénéficier de travaux (restauration, réparation, sécurisation...) il vous est possible de demander une aide de l'Etat auprès de votre DRAC (Direction régionale des affaires culturelles). \
-De plus, la majorité des régions et départements proposent des aides complémentaires qui peuvent s'ajouter à l'aide du ministère de la Culture. \
-\
-A﻿fin de vous renseigner sur ces aides, vous pouvez vous rendre sur une page web dédiée en cliquant [ICI.](https://aides-territoires.beta.gouv.fr/portails/patrimoinemobilier/)\
-\
+S﻿i l'un de vos objets protégés mérite de bénéficier de travaux (restauration, réparation, sécurisation...) il vous est possible de demander une aide de l'Etat auprès de votre DRAC (Direction régionale des affaires culturelles). De plus, la majorité des régions et départements proposent des aides complémentaires qui peuvent s'ajouter à l'aide du ministère de la Culture.
+
+A﻿fin de vous renseigner sur ces aides, vous pouvez vous rendre sur une page web dédiée en cliquant [ICI.](https://aides-territoires.beta.gouv.fr/portails/patrimoinemobilier/)
+
 **A﻿ttention** : avant d'entamer une demande d'aide pour travaux, nous vous invitons à en discuter avec le Conservateur des antiquités et objets d'art de votre département qui saura vous conseiller. Son appui sera nécessaire pour effectuer la demande d'aide auprès de la DRAC.
