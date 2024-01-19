@@ -52,21 +52,21 @@
     .fr-col-md-4
       %h4 Commentaires admin
       .fr-mb-2w
-        = form_for [:admin, @commune.active_admin_comments.build], builder: FormBuilderDsfr, as: :comment do |f|
+        = form_for [:admin, @commune.admin_comments.build], builder: FormBuilderDsfr, as: :comment do |f|
           = f.hidden_field :resource_type
           = f.hidden_field :resource_id
           .fr-input-group
             = f.text_area :body
           = f.submit "Créer un nouveau commentaire"
-      - if @commune.active_admin_comments.count.zero?
+      - if @commune.admin_comments.count.zero?
         .co-text--italic Aucun commentaire pour l'instant
       - else
         = render UnfoldComponent.new(max_height_px: 200) do
-          - @commune.active_admin_comments.order(updated_at: :desc).each do |comment|
+          - @commune.admin_comments.order(updated_at: :desc).each do |comment|
             .fr-mb-2w
               %span.co-text--bold= comment.author&.first_name || "Admin supprimé"
               %span.fr-text--sm le #{l(comment.updated_at)}
-              %span.fr-text--sm= link_to "Supprimer", admin_active_admin_comment_path(comment), "data-turbo-method": "delete"
+              %span.fr-text--sm= link_to "Supprimer", admin_admin_comment_path(comment), "data-turbo-method": "delete"
               = blockquote comment.body
 
   %h4.fr-mt-4w

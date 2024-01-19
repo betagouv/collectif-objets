@@ -4,7 +4,7 @@ class AdminUser < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
 
-  has_many :active_admin_comments, as: :author, dependent: :nullify
+  has_many :admin_comments, as: :author, dependent: :nullify
 
   validates :first_name, :last_name, presence: true
 

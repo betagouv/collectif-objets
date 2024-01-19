@@ -162,7 +162,7 @@ Rails.application.routes.draw do
         get :redirect_to_sib_preview
       end
     end
-    resources :active_admin_comments, only: %i[create destroy], controller: "comments"
+    resources :admin_comments, only: %i[create destroy], controller: "comments"
     resources :exports, only: [:index]
     resources :palissy_exports, only: %i[new create show destroy]
     resources :memoire_exports, only: %i[new create show destroy]

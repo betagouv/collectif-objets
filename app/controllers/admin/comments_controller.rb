@@ -3,7 +3,7 @@
 module Admin
   class CommentsController < BaseController
     def create
-      comment = ActiveAdminComment.new(**comment_params, namespace: "admin_old", author: current_admin_user)
+      comment = AdminComment.new(**comment_params, author: current_admin_user)
       if comment.save
         redirect_to [:admin, comment.resource], notice: "commentaire créé !"
       else
@@ -12,7 +12,7 @@ module Admin
     end
 
     def destroy
-      comment = ActiveAdminComment.find(params[:id])
+      comment = AdminComment.find(params[:id])
       if comment.destroy
         redirect_to [:admin, comment.resource], notice: "commentaire supprimé !"
       else
