@@ -12,7 +12,7 @@ gem "activerecord-postgis-adapter", "~> 9.0"
 gem "active_storage_validations", "~> 1.0"
 gem "after_commit_everywhere", "~> 1.3"
 gem "aws-sdk-s3", "~> 1.132", require: false
-gem "bootsnap", "~> 1.16", require: false
+gem "bootsnap", "~> 1.17", require: false
 gem "devise", "~> 4.9"
 gem "dsfr-view-components", "~> 0.4"
 gem "factory_bot_rails", "~> 6.2"
