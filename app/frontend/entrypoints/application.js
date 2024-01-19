@@ -1,21 +1,8 @@
-import * as Sentry from "@sentry/browser";
-import { BrowserTracing } from "@sentry/tracing";
 import "@hotwired/turbo-rails"
 import "@gouvfr/dsfr/dist/dsfr.module"
 import { Application } from '@hotwired/stimulus'
 import * as ActiveStorage from '@rails/activestorage'
 import { registerControllers } from "stimulus-vite-helpers";
-
-// Sentry
-const environmentSpecificName = document.querySelector('meta[name="environment-specific-name"]')?.getAttribute("content")
-if (environmentSpecificName && environmentSpecificName != "development") {
-  Sentry.init({
-    dsn: "https://99d2b66bbb984049aeaa1ec14866be65@sentry.incubateur.net/41",
-    integrations: [new BrowserTracing()],
-    tracesSampleRate: .2,
-    environment: environmentSpecificName
-  });
-}
 
 // Active Storage
 ActiveStorage.start()
