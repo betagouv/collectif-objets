@@ -103,4 +103,6 @@ Rails.application.configure do
   else
     config.active_storage.service = :scaleway
   end
+
+  config.sandbox_by_default = true # for the console
 end
