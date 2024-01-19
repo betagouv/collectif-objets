@@ -13,7 +13,7 @@ module Admin
     end
 
     def create
-      @user = User.new(email: params[:user][:email], commune_id: params[:user][:commune_id], role: "mairie",
+      @user = User.new(email: params[:user][:email], commune_id: params[:user][:commune_id],
                        magic_token: SecureRandom.hex(10))
       if @user.save
         redirect_to admin_commune_path(id: params[:user][:commune_id]), notice: "L'usager a été ajouté"

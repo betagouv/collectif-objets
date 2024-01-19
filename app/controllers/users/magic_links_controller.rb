@@ -2,7 +2,7 @@
 
 module Users
   class MagicLinksController < ApplicationController
-    before_action :prevent_missing_email, :prevent_admin
+    before_action :prevent_missing_email
 
     def create
       MagicLink.new(email).create => {success:, error:}
@@ -23,12 +23,6 @@ module Users
 
     def user
       @user ||= User.find_by("email ILIKE ?", email)
-    end
-
-    def prevent_admin
-      return true if user.nil? || user&.mairie?
-
-      redirect_to(new_user_session_path, alert: "Impossible de se connecter avec un compte d'administrateur")
     end
 
     def prevent_missing_email

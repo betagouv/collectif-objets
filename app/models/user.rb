@@ -8,7 +8,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, :registerable
 
   belongs_to :commune, optional: true
-  validates :role, presence: true, inclusion: { in: ROLES }
 
   accepts_nested_attributes_for :commune
 
@@ -22,7 +21,6 @@ class User < ApplicationRecord
   end
 
   def password_required? = false
-  def mairie? = role == ROLE_MAIRIE
   def safe_email? = SAFE_DOMAINS.include?(email.split("@").last)
   def to_s = email.split("@")[0]
 end
