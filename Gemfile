@@ -9,7 +9,7 @@ gem "aasm", "~> 5.5"
 gem "actioncable", "~> 7.1"
 gem "active_model_validates_intersection_of", "~> 3.0"
 gem "activerecord-postgis-adapter", "~> 9.0"
-gem "active_storage_validations", "~> 1.0"
+gem "active_storage_validations", "~> 1.1"
 gem "after_commit_everywhere", "~> 1.3"
 gem "aws-sdk-s3", "~> 1.132", require: false
 gem "bootsnap", "~> 1.16", require: false
