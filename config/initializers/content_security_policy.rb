@@ -9,7 +9,6 @@ Rails.application.configure do
   s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
 
   config.content_security_policy do |policy|
-    # Specify URI for violation reports
     if Rails.configuration.x.environment_specific_name == "production"
       policy.report_uri "https://sentry.incubateur.net/api/40/security/?sentry_key=5f6f9cf638ac413b82d1d9c8a9ba2025"
     end
@@ -27,7 +26,6 @@ Rails.application.configure do
 
     policy.connect_src \
       :self,
-      "https://sentry.incubateur.net",
       "https://stats.beta.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
       *s3_uris2,
