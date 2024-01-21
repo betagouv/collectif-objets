@@ -40,7 +40,8 @@ Rails.application.configure do
     policy.style_src :self, :https, *(Rails.env.development? ? [:unsafe_inline] : [])
 
     policy.frame_src :self, # for the PDFs served by the rails server through <embed> cf https://stackoverflow.com/a/69147536
-      "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/"
+      "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/",
+      "https://tube.numerique.gouv.fr/"
   end
 
   # Generate session nonces for permitted importmap and inline scripts
