@@ -241,7 +241,13 @@ S﻿i vous souhaitez effectuer des changements dans les recensements de vos obje
 
 Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela : 
 
-<iframe width="917" height="573" src="https://www.youtube.com/embed/fvYSmimaLUw" title="Collectif Objets - Modifier son recensement (ou ses photos) en tant que commune" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_07_modifier_son_recensement.png" href="#">
+  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_07_modifier_son_recensement.webm" type="video/webm">
+  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_07_modifier_son_recensement.mp4" type="video/mp4">
+  <a href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_07_modifier_son_recensement.mp4">
+    Télécharger la vidéo au format MP4
+  </a>
+</video>
 
 Si un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'examen de votre dossier. C'est donc cette procédure que vous devrez suivre.
 

@@ -22,7 +22,8 @@ Rails.application.configure do
       *s3_uris1,
       *s3_uris2,
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/",
-      "https://collectif-objets.beta.gouv.fr/" # for mail previews
+      "https://collectif-objets.beta.gouv.fr/", # for mail previews
+      "https://stats.beta.gouv.fr"
 
     policy.connect_src \
       :self,
@@ -31,14 +32,15 @@ Rails.application.configure do
       *s3_uris2,
       *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
 
-    policy.object_src  :none
+    policy.object_src :self # for the PDFs served by the rails server
     policy.font_src :self, :https, :data
     policy.child_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
     policy.worker_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
 
     policy.style_src :self, :https, *(Rails.env.development? ? [:unsafe_inline] : [])
 
-    policy.frame_src "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/"
+    policy.frame_src :self, # for the PDFs served by the rails server through <embed> cf https://stackoverflow.com/a/69147536
+      "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/"
   end
 
   # Generate session nonces for permitted importmap and inline scripts
