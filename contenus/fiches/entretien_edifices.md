@@ -3,20 +3,19 @@ titre: Entretien de l’édifice et lutte contre les infestations
 ---
 ## Introduction
 
-Les “objets monuments historiques” sont considérés comme des trésors nationaux. Ils sont désignés ainsi par l'article L. 111-1 du Code du patrimoine. Il est important que tout le monde, notamment les communes qui abritent ces objets, prenne part à leur préservation pour les générations futures.
+Les objets classés monuments historiques sont considérés comme des trésors nationaux. Ils sont désignés ainsi par l'article L. 111-1 du Code du patrimoine. Il est important que tout le monde, notamment les communes qui abritent ces objets, prenne part à leur préservation pour les générations futures.
 
-Un entretien approprié de l'édifice où ces objets sont conservés est crucial. Cela implique des actions régulières de maintenance et de protection pour s'assurer qu'ils restent en bon état. Cette responsabilité collective aide à maintenir notre héritage culturel vivant et accessible pour tous.
+Un entretien approprié de l'édifice où ces objets sont conservés est crucial. Cela implique des actions régulières de maintenance et de protection pour s'assurer qu'ils restent en bon état. Cette responsabilité collective aide à maintenir notre héritage culturel vivant et accessible à tous.
 
 ## Conseils génériques pour l’entretien d’un édifice
 
 **Température** : Pour la bonne préservation des oeuvres, essayez de maintenir une température comprise entre 15 et 18°C dans votre édifice.
-Si vous déplacez une oeuvre, évitez les changements brusques de températures qui peuvent accélérer la détérioration des peintures et anticipez les déplacements d’oeuvres en échangeant avec votre CAOA au préalable.
 
-Si vous devez déplacer une œuvre, faites attention aux changements soudains de température. Des variations rapides peuvent nuire aux peintures, les rendant plus susceptibles de se détériorer. Avant de déplacer une œuvre, il est recommandé de consulter votre CAOA (Conservateur des Antiquités et Objets d'Art). 
+Si vous devez déplacer une œuvre, faites attention aux changements soudains de température. Des variations rapides peuvent nuire aux peintures, les rendant plus susceptibles de se détériorer. Avant de déplacer une œuvre, consultez le CAOA (Conservateur des Antiquités et Objets d'Art) de votre département.
 
 ### Hygrométrie
 
-L'humidité est un facteur majeur qui peut endommager rapidement les œuvres d'art. Elle peut provoquer des moisissures, de la corrosion (rouille sur les métaux), ou faire gonfler et se déformer les matériaux. Pour protéger vos œuvres, il est important de surveiller attentivement toute présence d'humidité.
+L'humidité est un facteur majeur qui peut endommager rapidement les œuvres d'art. Elle peut provoquer des moisissures, de la corrosion (rouille sur les métaux) ou faire gonfler et se déformer les matériaux. Pour protéger vos œuvres, il est important de surveiller attentivement toute présence d'humidité.
 
 Surveillez les fuites d’eau, les phénomènes de condensation liés aux changements de température et les infiltrations d’eau. Pour suivre le niveau d'humidité, l'utilisation d'un hygromètre, un appareil qui mesure l'humidité de l'air, est recommandée.
 
@@ -106,9 +105,9 @@ Des animaux peuvent se cacher dans les bâtiments sans qu'on le sache. Comme les
 
 Pour les autres meubles dans le bâtiment, un entretien régulier suffit pour éloigner les nuisibles. Utilisez des répulsifs ou des insecticides sur les bancs, chaises, et tables. Suivez toujours les instructions sur les produits utilisés. Fermez toutes les ouvertures pour bloquer les pigeons et envisagez l’installation de doubles portes pour les empêcher d’entrer.
 
-Prenez des photos de l’objet et de ses dommages pour les montrer à vos Conservateurs d’Antiquités et Objets d’Art. Ces photos de moisissures, trous, sciures suspectes ou autres dégâts aideront à documenter l’état de l’objet. Joignez-les au questionnaire de recensement ou utilisez la messagerie.
+Prenez des photos de l’objet et de ses dommages pour les montrer à vos Conservateurs des Antiquités et Objets d’Art. Ces photos de moisissures, trous, sciures suspectes ou autres dégâts aideront à documenter l’état de l’objet. Joignez-les au questionnaire de recensement ou utilisez la messagerie pour envoyer vos photos.
 
-Après avoir discuté avec votre CAOA, vous pourrez isoler les objets infestés pour ne pas contaminer d’autres éléments. Votre CAOA vous dira quelles actions spécifiques entreprendre pour chaque objet et leur niveau d’urgence. 
+Après avoir discuté avec votre CAOA, vous pourrez isoler les objets infestés pour ne pas contaminer d’autres éléments. Votre CAOA vous dira quelles actions spécifiques entreprendre pour chaque objet et leurs niveaux d’urgence. 
 
 Pour améliorer l’état sanitaire des bâtiments où se trouvent les objets, vous pouvez contacter l’UDAP de votre département.
 
