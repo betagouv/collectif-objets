@@ -82,7 +82,6 @@ module Synchronizer
         user = User.create(
           email:,
           magic_token: SecureRandom.hex(10),
-          role: User::ROLE_MAIRIE,
           commune_id: commune.id
         )
         return unless user.errors.any?

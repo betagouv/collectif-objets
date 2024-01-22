@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.feature "Sign in with token", type: :feature, js: true do
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement:) }
-  let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:, magic_token: "magiemagie") }
+  let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:, magic_token: "magiemagie") }
 
   include ActiveJob::TestHelper
 

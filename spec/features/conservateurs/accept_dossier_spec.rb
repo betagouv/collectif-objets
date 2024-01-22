@@ -11,7 +11,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
   let!(:edifice) { create(:edifice, code_insee: "26002", nom: "Église St Jean", slug: "eglise-st-jean") }
   let!(:dossier) { create(:dossier, :submitted, commune:) }
   before { commune.update!(dossier:) }
-  let!(:user) { create(:user, email: "mairie-albon@test.fr", role: "mairie", commune:) }
+  let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:) }
   let!(:objet_bouquet) { create(:objet, palissy_TICO: "Bouquet d'Autel", edifice:, commune:) }
   let!(:recensement_bouquet) do
     create(
