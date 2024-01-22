@@ -45,6 +45,6 @@ module CollectifObjets
 
     config.action_controller.raise_on_missing_callback_actions = false
 
-    config.i18n.raise_on_missing_translations
+    config.i18n.raise_on_missing_translations = true
   end
 end
