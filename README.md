@@ -455,12 +455,13 @@ Optionnel :
 flowchart TB
 
 api_service_public[api-lannuaire.service-public.fr]
+api_data_culture_gouv[data.culture.gouv.fr]
 pop[pop.culture.gouv.fr]
 fly[collectif-objets-datasette.fly.dev]
 
 
 subgraph scraper[pop-scraper - python]
-  scraper_run>poetry run scrapy crawl pop_api \n-a base_pop=palissy/memoire/merimee]
+  scraper_run>poetry run scrapy crawl pop_api]
 end
 
 subgraph datasette[collectif-objets-datasette - python]
@@ -491,7 +492,7 @@ rails_run_objets --> postgres
 api_service_public --> rails_run_communes
 rails_run_communes --> postgres
 
-fly --> rails_run_edifices
+api_data_culture_gouv --> rails_run_edifices
 rails_run_edifices --> postgres
 
 fly --> rails_run_photos
@@ -500,6 +501,7 @@ rails_run_photos --> postgres
 style pop fill:#6666cc
 style fly fill:#6666cc
 style api_service_public fill:#6666cc
+style api_data_culture_gouv fill:#6666cc
 
 style datasette_run_sqlite fill:#888833
 style datasette_run_deploy fill:#888833

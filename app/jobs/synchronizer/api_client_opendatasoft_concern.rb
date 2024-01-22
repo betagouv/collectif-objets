@@ -22,9 +22,23 @@ module Synchronizer
       end
     end
 
+    def find_by(where)
+      url = "#{base_url}/records?#{{ where: }.to_query}"
+      response = JSON.parse(Net::HTTP.get(URI(url)))
+
+      raise "API error: #{response['error_code']} #{response['message']}" if response["error_code"]
+
+      return nil if response["total_count"].zero?
+
+      raise "too many results" if response["total_count"] > 1
+
+      response["results"].first
+    end
+
     private
 
     def csv_path
+      # useful to iterate, make sure to download the csv with ?with_bom=false
       return ENV["USE_LOCAL_FILE"] if ENV["USE_LOCAL_FILE"].present?
 
       @csv_path ||= begin

@@ -61,3 +61,8 @@ Metrics/PerceivedComplexity:
 
 Naming/AsciiIdentifiers:
   Enabled: false
+
+# we use method names like merimee_REF in the synchronizer
+Naming/MethodName:
+  Exclude:
+    - app/jobs/synchronizer/**/*

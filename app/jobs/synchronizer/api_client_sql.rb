@@ -40,17 +40,6 @@ module Synchronizer
       sql
     end
 
-    def self.edifices(logger:, limit:)
-      new(
-        QUERY.new(
-          table: "merimee",
-          select_cols: "REF, INSEE, TICO, PRODUCTEUR",
-          join: "INNER JOIN palissy_to_merimee ptm ON merimee.REF = ptm.REF_MERIMEE",
-          group: "group by REF, INSEE, TICO, PRODUCTEUR"
-        ), logger:, limit:
-      )
-    end
-
     def initialize(query, logger:, limit:)
       @query = query
       @logger = logger
