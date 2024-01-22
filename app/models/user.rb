@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  ROLE_MAIRIE = "mairie"
-  ROLES = [ROLE_MAIRIE].freeze
   SAFE_DOMAINS = %w[beta.gouv.fr dipasquale.fr failfail.fr mailcatch.com gmail.com].freeze
 
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, :registerable
