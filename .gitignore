@@ -43,5 +43,4 @@ node_modules
 /wiki
 
 # Ignore IDE config
-.vscode/*
-!.vscode/launch.json.example
+.vscode
