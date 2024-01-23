@@ -128,13 +128,8 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez l'examen final du recensement à la commune :** après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
 
-<video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.png" href="#">
-  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.webm" type="video/webm">
-  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.mp4" type="video/mp4">
-  <a href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateurs_analyse.mp4">
-    Télécharger la vidéo au format MP4
-  </a>
-</video>
+<iframe title="Examen de dossier par un conservateur  - Collectif Objets" width="100%" height="400" src="https://tube.numerique.gouv.fr/videos/embed/06b0a89c-9226-438e-9d0f-a6c81e7cbff6" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+
 
 ## Si la commune n’a pas recensé le bon objet
 

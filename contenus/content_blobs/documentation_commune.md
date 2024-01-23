@@ -82,13 +82,7 @@ La protection au titre des monuments historiques n’a pas vocation à s’appli
 
 ## 1 - Comment effectuer un recensement ?
 
-<video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_recensement.png" href="#">
-  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_recensement.webm" type="video/webm">
-  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_recensement.mp4" type="video/mp4">
-  <a href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_05_conservateur_recensement.mp4">
-    Télécharger la vidéo au format MP4
-  </a>
-</video>
+<iframe title="Recensement pour les conservateurs - Collectif Objets" width="100%" height="400" src="https://tube.numerique.gouv.fr/videos/embed/94656718-84e6-498b-9726-8a6ceb8d0aa5" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
 Vous pouvez recenser en 4 étapes : 
 
@@ -241,13 +235,7 @@ S﻿i vous souhaitez effectuer des changements dans les recensements de vos obje
 
 Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela : 
 
-<video class="co-cursor-pointer" controls="" width="100%" preload="none" poster="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_07_modifier_son_recensement.png" href="#">
-  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_07_modifier_son_recensement.webm" type="video/webm">
-  <source src="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_07_modifier_son_recensement.mp4" type="video/mp4">
-  <a href="https://s3.fr-par.scw.cloud/collectif-objets-public/2023_07_modifier_son_recensement.mp4">
-    Télécharger la vidéo au format MP4
-  </a>
-</video>
+<iframe title="Modifier son recensement - Collectif Objets" width="100%" height="400" src="https://tube.numerique.gouv.fr/videos/embed/f4f8f996-8219-4d6f-b531-b25f7356e014" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
 Si un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'examen de votre dossier. C'est donc cette procédure que vous devrez suivre.
 

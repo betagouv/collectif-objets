@@ -9,7 +9,8 @@
     .fr-col-md-6
       .fr-pl-2w.co-text--italic.co-border--left
         “Quelques clics suffisent. […] La facilité de mise en oeuvre a suscité une adhésion plus importante que prévue !”
-      .fr-my-2w= render("shared/video_reportage_canal32")
+      .fr-my-2w
+        = render "shared/video_embed", title: "Reportage Canal 32", video_id: "114c5786-72a6-4c25-9638-cf4d87861963"
       .co-text--muted.fr-text--sm
         Canal 32, 02.11.2022
         %br

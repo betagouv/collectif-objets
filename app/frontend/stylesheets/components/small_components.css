@@ -23,6 +23,7 @@
 }
 
 .co-markdown-content img { max-width: 100%; }
+.co-markdown-content iframe { margin-bottom: 1rem; }
 
 .co-home-section-steps a.fr-link { margin-left: -12px; }
 

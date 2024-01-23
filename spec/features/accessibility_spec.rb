@@ -10,6 +10,14 @@ shared_examples "an accessible page" do
   end
 end
 
+shared_examples "an accessible page except iframes" do
+  it "should be axe clean except iframes" do
+    expect(page).not_to have_text(/erreur 500/i)
+    expect(page).not_to have_text(/error 500/i)
+    expect(page).to be_axe_clean.excluding "iframe"
+  end
+end
+
 feature "accessibility public pages", js: true do
   # PUBLIC
 
@@ -77,13 +85,13 @@ feature "accessibility public pages", js: true do
 
   describe "On parle de nous" do
     before { visit presse_path }
-    it_behaves_like "an accessible page"
+    it_behaves_like "an accessible page except iframes"
   end
 
   ArticlePresse.load_all.each do |article_presse|
     describe "Article de Presse #{article_presse.title}" do
       before { visit article_presse_path(article_presse.id) }
-      it_behaves_like "an accessible page"
+      it_behaves_like "an accessible page except iframes"
     end
   end
 
@@ -139,20 +147,19 @@ feature "accessibility public pages", js: true do
     end
   end
 
-  # TODO: Faire en sorte de pouvoir incruster des vidéos Loom ou autre de manière accessible
-  # describe "Documentation conservateur" do
-  #   before { visit content_blob_path(:documentation_conservateur) }
-  #   it_behaves_like "an accessible page"
-  # end
+  describe "Documentation conservateur" do
+    before { visit content_blob_path(:documentation_conservateur) }
+    it_behaves_like "an accessible page except iframes"
+  end
 
-  # describe "Documentation commune" do
-  #   before { visit content_blob_path(:documentation_commune) }
-  #   it_behaves_like "an accessible page"
-  # end
+  describe "Documentation commune" do
+    before { visit content_blob_path(:documentation_commune) }
+    it_behaves_like "an accessible page except iframes"
+  end
 
   describe "Page d’accueil conservateurs" do
     before { visit accueil_conservateurs_path }
-    it_behaves_like "an accessible page"
+    it_behaves_like "an accessible page except iframes"
   end
 end
 
