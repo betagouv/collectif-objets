@@ -8,7 +8,7 @@ class FichesController < ApplicationController
   end
 
   def show
-    raise ArgumentError if Fiche.all_ids.exclude? params[:id]
+    raise ActiveRecord::RecordNotFound if Fiche.all_ids.exclude? params[:id]
 
     @fiche = Fiche.load_from_id(params[:id])
     @objets = objets
