@@ -43,8 +43,7 @@ module Conservateurs
     def set_departement_json
       @departement_json = {
         code: @departement.code,
-        bounding_box_ne: @departement.bounding_box_ne.coordinates,
-        bounding_box_sw: @departement.bounding_box_sw.coordinates
+        boundingBox: @departement.bounding_box
       }.to_json
     end
 

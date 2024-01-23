@@ -12,7 +12,7 @@ export default class extends Controller {
     const departement = JSON.parse(this.wrapperTarget.dataset.departementJson)
     this.map = new maplibregl.Map({
       container: this.containerTarget,
-      bounds: [departement.bounding_box_sw, departement.bounding_box_ne],
+      bounds: departement.boundingBox,
       minZoom: 8,
       maxZoom: 12,
       zoom: 8,
@@ -77,7 +77,7 @@ export default class extends Controller {
       this.hydrateStatuses()
     })
 
-    this.map.addControl(new maplibregl.NavigationControl({showCompass: false}));
+    this.map.addControl(new maplibregl.NavigationControl({ showCompass: false }));
   }
 
   initHover() {
