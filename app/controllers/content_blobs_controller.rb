@@ -2,7 +2,7 @@
 
 class ContentBlobsController < ApplicationController
   def show
-    raise ArgumentError if ContentBlob.all_ids.exclude? params[:id]
+    raise ActiveRecord::RecordNotFound if ContentBlob.all_ids.exclude? params[:id]
 
     @content_blob = ContentBlob.load_from_id(params[:id])
   end
