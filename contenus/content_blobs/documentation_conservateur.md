@@ -88,7 +88,7 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 
 Voici également un tutoriel vidéo :
 
-<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/c2a889e2194945c496d3071ae498637b?sid=ca3a1f17-514e-452b-8093-3b67dfaf7f0a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<iframe title="Lancement campagne" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/761cc7e8-80df-4489-be5b-c3f5feb253a0?stop=2m20s" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
 ## Accéder aux dossiers de recensement des communes
 
@@ -128,8 +128,7 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez l'examen final du recensement à la commune :** après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
 
-<iframe title="Examen de dossier par un conservateur  - Collectif Objets" width="100%" height="400" src="https://tube.numerique.gouv.fr/videos/embed/06b0a89c-9226-438e-9d0f-a6c81e7cbff6" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
-
+<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/c2a889e2194945c496d3071ae498637b?sid=ca3a1f17-514e-452b-8093-3b67dfaf7f0a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 ## Si la commune n’a pas recensé le bon objet
 
