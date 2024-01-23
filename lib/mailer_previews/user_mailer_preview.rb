@@ -4,7 +4,7 @@ class UserMailerPreview < ApplicationMailerPreview
   def validate_email
     user = User.new(email: "mairie@thoiry.fr", login_token: "a1r2b95")
     user.readonly!
-    UserMailer.validate_email(user)
+    UserMailer.with(user:).validate_email
   end
 
   def commune_completed_email
