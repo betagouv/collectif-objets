@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   db:
-    image: postgis/postgis
+    image: postgres:14
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:

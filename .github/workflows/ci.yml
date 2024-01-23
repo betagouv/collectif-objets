@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgis/postgis:13-3.3
+        image: postgres:14
         ports:
           - "5432:5432"
         env:
@@ -21,7 +21,7 @@ jobs:
           - 6379/tcp
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgis://rails:password@localhost:5432/rails_test"
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       DISABLE_BOOTSNAP: "1"
     steps:
       - run: mkdir -p tmp/artifacts/capybara
