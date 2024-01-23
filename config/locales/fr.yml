@@ -111,7 +111,7 @@ fr:
     aide:
       intro:
         title: Le recensement
-        content1: Mener un recensement, c’est aller vérifier la présence d’un objet au sein de son édifice et constater son état en répondant à un questionnaire simplifié. C’est une opération rapide à mener (5 à 10 min par objet) et qui ne demande aucune expertise ou formation particulière. Les données collectées permettent aux conservateurs en charge de votre territoire de mieux connaître votre patrimoine, de vous aider à le valoriser et d’intervenir à temps pour le protéger.
+        content1: Mener un recensement, c’est aller vérifier la présence d’un objet au sein de son édifice et constater son état en répondant à un questionnaire simplifié. C’est une opération rapide à mener (5 à 10 min par objet) et qui ne demande aucune expertise ou formation particulière. Les données collectées permettent aux conservateurs d’antiquités et d’objets d’art en charge de votre territoire de mieux connaître votre patrimoine, de vous aider à le valoriser et d’intervenir à temps pour le protéger.
         content2: Vous êtes élu·e ou agent municipal ? Vous êtes en charge du patrimoine de votre commune ? Sur Collectif Objets vous pouvez retrouver la liste des objets protégés Monuments Historiques abrités par votre commune à la page “les objets de ma commune” afin de les recenser.
       etape1:
         title: Étape 1 - Je me rends sur place
@@ -125,16 +125,16 @@ fr:
           question1: L’objet est-il présent ?
           question2: Dans quel état est-il ?
           question3: Est-il facile à voler ?
-        photo: Il est aussi important de joindre une photo de l’état actuel de l’objet afin de permettre au conservateur en charge de votre dossier de valider votre recensement.
+        photo: Il est aussi important de joindre une photo de l’état actuel de l’objet afin de permettre au conservateur d’antiquités et d’objets d’art en charge de votre dossier de valider votre recensement.
         hors_ligne: Vous n’avez pas accès à internet dans l’édifice ? Nous avons préparé une version imprimable de la liste de vos objets et des questionnaires à emporter lors de vos déplacements que vous n’aurez plus qu’à saisir en ligne à votre retour.
       etape3:
         title: Étape 3 - Je reçois des recommandations d’un conservateur
-        conseils: Une fois le recensement terminé, le conservateur en charge de votre territoire reviendra vers vous pour valider votre recensement et - si besoin - vous guider vers des opérations d’entretien, de sauvegarde ou de sécurisation de vos objets.
+        conseils: Une fois le recensement terminé, le conservateur d’antiquités et d’objets d’art en charge de votre territoire reviendra vers vous pour valider votre recensement et - si besoin - vous guider vers des opérations d’entretien, de sauvegarde ou de sécurisation de vos objets.
         fiches: Des fiches explicatives et/ou des commentaires du conservateur pourront vous être délivrés pour faciliter ces opérations.
       faq:
         retours:
           title: Que se passe-t-il après lʼenvoi de mes réponses ?
-          content: Vos réponses seront traitées par les conservatrices et conservateurs des antiquités et objets dʼart (CAOA). Un examen vous sera adressé. Il facilitera lʼétablissement du récolement réglementaire. Pour les objets affectés aux cultes, celui-ci doit être signé par le propriétaire, lʼaffectataire et la/le CAOA.
+          content: Vos réponses seront traitées par les conservatrices et conservateurs d’antiquités et d’objets d’art (CAOA). Un examen vous sera adressé. Il facilitera lʼétablissement du récolement réglementaire. Pour les objets affectés aux cultes, celui-ci doit être signé par le propriétaire, lʼaffectataire et la/le CAOA.
         restauration:
           title: Comment lancer un projet de restauration ?
           veuillez_consulter: "Veuillez consulter ces pages dédiées sur le site du Ministère de la Culture :"
@@ -152,7 +152,7 @@ fr:
           page_proteger: Protéger des objets mobiliers au titre des monuments historiques
         sur_place:
           title: Pourquoi dois-je me rendre sur place ?
-          content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre Conservateur des Antiquités et Objets d’Art (CAOA) puisse réaliser un premier niveau d’examen et vous guider dans la préservation de ces objets.
+          content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre conservateur d’antiquités et d’objets d’art (CAOA) puisse réaliser un premier niveau d’examen et vous guider dans la préservation de ces objets.
         entretien:
           title: Comment entretenir mes objets ?
           content: Au delà de l'entretien courant qui consiste à nettoyer l'espace autour des objets, il convient de ne pas toucher aux objets protégés. Seul un professionnel habilité assurera une prise en charge optimale.
@@ -442,7 +442,7 @@ fr:
         one: "%{nom_commune} abrite un objet protégé au titre des monuments historiques :"
         other: "%{nom_commune} abrite %{count} objets protégés au titre des monuments historiques, comme celui-ci :"
       simple: Le recensement est court et simple. Il se fait en ligne sur le site dédié Collectif Objets. Il consiste à vérifier la présence de l’objet, le photographier et répondre à un rapide questionnaire visant à évaluer son état. Il se différencie donc des précédents inventaires.
-      conseils: "À la lecture de vos réponses, les conservateurs pourront vous conseiller sur :"
+      conseils: "À la lecture de vos réponses, les conservateurs d’antiquités et d’objets d’art pourront vous conseiller sur :"
       conseil1: "l'entretien de vos objets et leur restauration éventuelle,"
       conseil2: "leur sécurisation et leur valorisation,"
       conseil3: "les possibilités de financement auprès des différents acteurs du patrimoine."
@@ -455,7 +455,7 @@ fr:
         other: "%{nom_commune} abrite %{count} objets monuments historiques."
       accompagnement: Pour vous accompagner dans la préservation et la mise en valeur de votre patrimoine, la DRAC %{nom_drac} vous invite à recenser vos objets protégés sur le site dédié Collectif Objets.
       simple: Ce recensement est simple et ne vous prendra que quelques minutes par objet.
-      conseils: Suite à celui-ci, vous pourrez bénéficier de conseils et de l’expertise des conservateurs pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
+      conseils: Suite à celui-ci, vous pourrez bénéficier de conseils et de l’expertise des conservateurs d’antiquités et d’objets d’art pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
       decouvrez:
         one: "<b>Découvrez l'objet monument historique à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
         other: "Découvrez les objets monuments historiques à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
@@ -465,16 +465,16 @@ fr:
       subject: "%{nom_commune}, le recensement des objets monuments historiques %{dans_departement} est en cours"
       intro: "La campagne de recensement des objets monuments historiques %{dans_departement} se termine dans %{fin_dans_n_semaines} semaines."
       simple: Le recensement est simple et ne vous prendra que quelques minutes par objet.
-      conseils: En plus de (re)découvrir le patrimoine de votre commune, vous pourrez bénéficier de conseils et de l’expertise des conservateurs pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
+      conseils: En plus de (re)découvrir le patrimoine de votre commune, vous pourrez bénéficier de conseils et de l’expertise des conservateurs d’antiquités et d’objets d’art pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
     relance3_inactive:
       title: "Mail de dernière relance - commune inactive"
       subject: "Plus que %{fin_dans_n_jours} jours pour recenser les objets monuments historiques de %{nom_commune}"
       intro: Nous nous permettons de vous relancer une dernière fois à propos de la campagne de recensement participatif lancée par la DRAC %{nom_drac} sur %{nombre_communes} communes %{dans_departement}.
       role_elu: <b>Pour les protéger des vols et des dégradations, votre rôle d’élu est essentiel.</b>
       simple: Le recensement est simple et ne vous prendra que quelques minutes par objet.
-      contact: À partir de vos informations, les conservateurs prendront directement contact avec vous pour vous guider dans la protection et la mise en valeur de votre patrimoine.
+      contact: À partir de vos informations, les conservateurs d’antiquités et d’objets d’art prendront directement contact avec vous pour vous guider dans la protection et la mise en valeur de votre patrimoine.
       meme_si_bon_etat: <b>Nous vous invitons à prendre part à ce recensement même si vous estimez que vos objets protégés sont en bon état.</b>
-      operation_nationale: Cette opération nationale doit permettre aux conservateurs d'avoir une vue globale sur l'état du parc mobilier, dans le cadre du récolement quinquennal des objets monuments historiques. 
+      operation_nationale: Cette opération nationale doit permettre aux conservateurs d’antiquités et d’objets d’art d'avoir une vue globale sur l'état du parc mobilier, dans le cadre du récolement quinquennal des objets monuments historiques. 
       connectez_vous: "<b>Connectez-vous à votre espace dédié sur Collectif Objets</b> pour recenser : "
     fin_inactive:
       title: "Mail de clotûre - commune inactive"
@@ -482,7 +482,7 @@ fr:
       fin_aujourdhui: La campagne de recensement participatif %{dans_departement} prend fin aujourd’hui.
       vous_navez_pas_souhaite: Sauf erreur de notre part, vous n’avez pas souhaité participer à la campagne de recensement des objets monuments historiques pour laquelle nous vous avons sollicité il y a quelques semaines.
       raison: "Dans une démarche d’amélioration, nous vous serions reconnaissants de nous indiquer pourquoi. Il vous suffit de cliquer sur un de ces liens :"
-      vous_pouvez_finaliser: Par ailleurs, <b>si vous aviez commencé les démarches de recensement, sachez que votre compte sur Collectif Objets vous est toujours accessible pour le finaliser et le transmettre aux conservateurs</b>. Votre travail n’est pas perdu !
+      vous_pouvez_finaliser: Par ailleurs, <b>si vous aviez commencé les démarches de recensement, sachez que votre compte sur Collectif Objets vous est toujours accessible pour le finaliser et le transmettre aux conservateurs d’antiquités et d’objets d’art</b>. Votre travail n’est pas perdu !
       annee_prochaine: "Si vous n’avez pas pu participer cette année, ne vous inquiétez pas : votre commune sera recontactée ultérieurement pour une prochaine campagne."
       a_votre_disposition: Nous restons à votre disposition pour toute information complémentaire.
     relance2_started:
@@ -495,7 +495,7 @@ fr:
       title: "Mail de clotûre - recensement démarré"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
       objets_restants: <b>Sauf erreur de notre part, nous n’avons enregistré qu’une partie des recensements des objets protégés présents dans votre commune.</b>
-      dossier_complet: Seul un dossier complet pourra être envoyé au conservateur pour qu’il puisse vous faire ses retours.
+      dossier_complet: Seul un dossier complet pourra être envoyé au conservateur d’antiquités et d’objets d’art pour qu’il puisse vous faire ses retours.
       pas_trop_tard: <b>Sachez qu’il n’est pas trop tard pour compléter votre contribution.</b>
       toujours_accessible: Votre compte reste ouvert si vous souhaitez rajouter les photos ou les recensements d’objets manquants.
       finalisez: Une fois ces compléments faits, n’oubliez pas de cliquer sur le bouton “finaliser mon recensement”.
@@ -504,24 +504,24 @@ fr:
       subject: "N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}"
       merci: Nous vous remercions de contribuer à cette campagne de recensement participatif %{dans_departement}.
       date_fin: <b>Pour rappel, la campagne prendra fin le %{date_fin}.</b>
-      finalisez: Nous vous invitons donc à finaliser le recensement de l’ensemble de vos objets protégés avant cette échéance, afin que les conservateurs puissent prendre connaissance de vos réponses et vous accompagner au mieux.
+      finalisez: Nous vous invitons donc à finaliser le recensement de l’ensemble de vos objets protégés avant cette échéance, afin que les conservateurs d’antiquités et d’objets d’art puissent prendre connaissance de vos réponses et vous accompagner au mieux.
       photos: <b>Il est important d’y joindre des photos récentes pour permettre aux conservateurs d’évaluer l’état des objets recensés.</b>
       besoin_daide: Si vous avez besoin d’aide pour terminer le recensement, notre équipe se tient à votre disposition, il vous suffit de répondre à cet email.
     relance2_to_complete:
       title: "Mail de deuxième relance - commune doit finaliser"
       subject: Il reste une dernière étape pour envoyer le dossier de recensement de %{nom_commune}
       merci: Nous vous remercions d’avoir pris le temps de participer à la campagne de recensement et de vous investir dans la protection de notre patrimoine mobilier.
-      toutefois: Toutefois, <b>il semblerait que vous n’ayez pas encore effectué la dernière étape qui consiste à envoyer le dossier aux conservateurs pour qu’ils puissent l’étudier.</b>
+      toutefois: Toutefois, <b>il semblerait que vous n’ayez pas encore effectué la dernière étape qui consiste à envoyer le dossier aux conservateurs d’antiquités et d’objets d’art pour qu’ils puissent l’étudier.</b>
     relance3_to_complete:
       title: "Mail de troisième relance - commune doit finaliser"
       subject: N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}
       intro: La campagne de recensement des objets monuments historiques pour laquelle vous avez participé prendra fin le %{date_fin}. Nous vous remercions encore pour votre investissement dans la protection du patrimoine mobilier français.
-      finalisez: <b>Pour que les conservateurs reçoivent votre contribution et l'examinent, n’oubliez pas de finaliser votre recensement !</b>
+      finalisez: <b>Pour que les conservateurs d’antiquités et d’objets d’art reçoivent votre contribution et l'examinent, n’oubliez pas de finaliser votre recensement !</b>
     fin_to_complete:
       title: "Mail de clotûre - commune doit finaliser"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
       sauf_erreur: Sauf erreur de notre part, vous n’avez pas effectué la dernière étape qui permet l’envoi du dossier de recensement.
-      pas_trop_tard: "Il n’est pas trop tard : <b>pour que les conservateurs reçoivent votre contribution et puissent vous accompagner, il suffit de suivre ce lien :</b>"
+      pas_trop_tard: "Il n’est pas trop tard : <b>pour que les conservateurs d’antiquités et d’objets d’art reçoivent votre contribution et puissent vous accompagner, il suffit de suivre ce lien :</b>"
     fin_shared:
       fin_aujourdhui: <b>La campagne de recensement participatif des objets monuments historiques %{dans_departement} prend fin aujourd’hui.</b>
       merci: Nous vous remercions pour votre engagement en faveur du patrimoine mobilier protégé.
@@ -617,7 +617,7 @@ fr:
       participation: Comme de nombreuses communes de votre département, vous avez participé à l’opération de recensement participatif des objets monuments historiques.
       merci: Nous vous remercions pour votre engagement.
       visibilite: Ce recensement nous permet d’avoir une plus grande visibilité sur le parc d’objets monuments historiques du département et d’assurer un meilleur suivi de notre patrimoine.
-      a_venir: Si la situation l'exige, les conservateurs des antiquités et objets d’art vous proposeront des recommandations pour assurer une meilleure conservation des objets monuments historiques de votre commune.
+      a_venir: Si la situation l'exige, les conservateurs d’antiquités et d’objets d’art vous proposeront des recommandations pour assurer une meilleure conservation des objets monuments historiques de votre commune.
       documentation: Pour toute question, n'hésitez pas à consulter
       contact: Vous pouvez directement contacter les conservateurs via
       cta: Accéder à Collectif Objets
@@ -626,15 +626,15 @@ fr:
       preservation_patrimoine: En participant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine.
       engagement: Le partage des connaissances entre l'ensemble des acteurs de la chaîne patrimoniale permet d'assurer un meilleur suivi des objets protégés et d'identifier les situations problématiques nécessitant une prise en charge urgente. Nous vous remercions vivement pour votre engagement.
       que_des_objets_verts: Vous avez indiqué que les objets protégés de votre commune sont dans un état qui n'appelle pas une prise en charge urgente.
-      contacter_caoa: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur des antiquités et objets d'art. Vous  pouvez directement le contacter via
+      contacter_caoa: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur d’antiquités et d’objets d’art. Vous  pouvez directement le contacter via
     dossier_auto_submitted:
-      intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs ne l'avaient pas encore reçu.
+      intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs d’antiquités et d’objets d’art ne l'avaient pas encore reçu.
       auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’examiner et revenir vers vous avec un examen, en temps voulu.
       cta: Voir les données envoyées
       contact: Nous restons à votre disposition pour toute question ou demande de clarification.
     dossier_accepted:
       submitted: Vous avez envoyé un dossier de recensement des objets protégés de %{commune_nom} et je vous en remercie.
-      rapport: Vous trouverez sur Collectif Objets l'examen du recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs.
+      rapport: Vous trouverez sur Collectif Objets l'examen du recensement contenant les informations et photos que vous nous avez envoyées, ainsi que des commentaires et des conseils spécifiques pour chaque objet de la part de vos conservateurs d’antiquités et d’objets d’art.
       cta: Voir l'examen du recensement
       merci: Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
     validate:

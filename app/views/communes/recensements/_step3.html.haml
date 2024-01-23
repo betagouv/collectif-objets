@@ -14,10 +14,10 @@
             "data-modal-auto-open-target": "modal"}) do |m|
       - m.with_header do
         = link_to "Fermer", wizard.confirmation_modal_close_path, class: "fr-link--close fr-link"
-      %p Attention : votre recensement risque de ne pas être exploitable par le conservateur sans photos.
+      %p Attention : votre recensement risque de ne pas être exploitable par les conservateurs sans photos.
 
       %p
-        En cas de difficultés, n’hésitez pas à contacter votre conservateur sur la
+        En cas de difficultés, n’hésitez pas à contacter vos conservateurs sur la
         = link_to "messagerie", commune_messages_path(wizard.commune)
 
       - m.with_button do
