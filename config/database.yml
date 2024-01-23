@@ -1,5 +1,5 @@
 default: &default
-  adapter: postgis
+  adapter: postgres
   encoding: unicode
   host: <%= ENV.fetch("DATABASE_HOST", "127.0.0.1") %>
   username: <%= ENV.fetch("DATABASE_USERNAME", "") %>
@@ -18,4 +18,3 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
-  url: <%= ENV["DATABASE_URL"]&.sub(/^postgres/, "postgis") %>
