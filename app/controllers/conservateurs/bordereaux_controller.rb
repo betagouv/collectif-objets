@@ -14,7 +14,7 @@ module Conservateurs
 
       @edifice.bordereau&.purge
 
-      GenerateBordereauPdfJob.perform_async(@dossier.id, @edifice.id)
+      GenerateBordereauPdfJob.perform_later(@dossier.id, @edifice.id)
       @edifice.update!(bordereau_generation_enqueued_at: Time.zone.now)
 
       respond_to do |format|

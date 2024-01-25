@@ -39,8 +39,8 @@ class Objet < ApplicationRecord
                    }
   scope :protégés, -> { classés.or(inscrits) }
 
-  after_create { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_async(commune.id) if commune }
+  after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
+  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
 
   delegate :departement, to: :commune
 

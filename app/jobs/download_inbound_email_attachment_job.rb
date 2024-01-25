@@ -2,14 +2,12 @@
 
 class DownloadError < StandardError; end
 
-class DownloadInboundEmailAttachmentJob
-  include Sidekiq::Job
-
+class DownloadInboundEmailAttachmentJob < ApplicationJob
   def perform(attachment_raw, inbound_email_id)
     @email_attachment = EmailAttachment.new(attachment_raw, inbound_email_id)
-    return Sidekiq.logger.info("skipping download #{attachment_raw}") if skip_download?
+    return GoodJob.logger.info("skipping download #{attachment_raw}") if skip_download?
 
-    return Sidekiq.logger.info("skipping already downloaded #{attachment_raw}") if already_downloaded?
+    return GoodJob.logger.info("skipping already downloaded #{attachment_raw}") if already_downloaded?
 
     Co::SendInBlueClient.instance.download_inbound_attachment(download_token) { download_callback(_1) }
   end
@@ -30,4 +28,4 @@ class DownloadInboundEmailAttachmentJob
   end
 end
 
-# reload!; DownloadInboundEmailAttachmentJob.perform_inline("<E64ACF4E-304D-4023-B832-4451FECC8AEF@dipasquale.fr>")
+# reload!; DownloadInboundEmailAttachmentJob.perform_now("<E64ACF4E-304D-4023-B832-4451FECC8AEF@dipasquale.fr>")

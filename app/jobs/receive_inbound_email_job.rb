@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class ReceiveInboundEmailJob
-  include Sidekiq::Job
-
+class ReceiveInboundEmailJob < ApplicationJob
   def perform(raw)
     @raw = raw
     validate_inbound_email!

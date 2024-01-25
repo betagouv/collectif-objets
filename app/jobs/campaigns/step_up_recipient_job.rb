@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 module Campaigns
-  class StepUpRecipientJob
-    include Sidekiq::Job
-    include ActiveSupport::Rescuable
+  class StepUpRecipientJob < ApplicationJob
+    include GoodJob::ActiveJobExtensions::Concurrency
 
-    sidekiq_options queue: "step_up_recipients", retry: 0
+    good_job_control_concurrency_with perform_limit: 1
+
+    discard_on StandardError, Exception
 
     attr_reader :to_step
 

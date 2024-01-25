@@ -3,7 +3,7 @@ class RemoveRecensementsConfirmationPasDePhotos < ActiveRecord::Migration[7.0]
     remove_column :recensements, :confirmation_pas_de_photos
     add_column :recensements, :photos_count, :integer, default: 0
     Recensement.reset_column_information
-    RefreshRecensementPhotosCountJob.perform_inline
+    RefreshRecensementPhotosCountJob.perform_now
   end
 
   def down

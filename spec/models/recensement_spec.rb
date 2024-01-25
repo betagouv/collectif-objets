@@ -171,7 +171,7 @@ RSpec.describe Recensement, type: :model do
       let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
       it "change le statut du recensement et de la commune et créé un dossier" do
         expect(SendMattermostNotificationJob).to \
-          receive(:perform_async).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
+          receive(:perform_later).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
         do_complete!
         expect(recensement.reload.status.to_sym).to eq :completed
         expect(recensement.reload.dossier).to be_present
@@ -189,7 +189,7 @@ RSpec.describe Recensement, type: :model do
       let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
       it "change le statut du recensement et réutilise le dossier existant" do
         expect(SendMattermostNotificationJob).to \
-          receive(:perform_async).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
+          receive(:perform_later).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
         initial_dossier_count = Dossier.count
         do_complete!
         expect(recensement.reload.status.to_sym).to eq :completed
@@ -212,7 +212,7 @@ RSpec.describe Recensement, type: :model do
         end
       end
       it "annule tous les changements" do
-        expect(SendMattermostNotificationJob).not_to receive(:perform_async)
+        expect(SendMattermostNotificationJob).not_to receive(:perform_later)
         initial_dossier_count = Dossier.count
         expect { do_complete! }.to raise_error(ActiveRecord::RecordInvalid)
         expect(recensement.reload.status.to_sym).to eq :draft

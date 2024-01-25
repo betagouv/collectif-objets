@@ -7,7 +7,7 @@ RSpec.describe RefreshCommuneRecensementRatioJob, type: :job do
     let!(:commune) { create(:commune) }
 
     subject do
-      RefreshCommuneRecensementRatioJob.perform_inline(commune.id)
+      RefreshCommuneRecensementRatioJob.perform_now(commune.id)
       commune.reload.recensement_ratio
     end
 

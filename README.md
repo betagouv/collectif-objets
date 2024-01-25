@@ -175,7 +175,7 @@ Les gems principales dont dépend cette application Rails sont :
 
 - `devise` : Authentification des usagers. Il y a trois modèles Devise `User` (Communes), `Conservateur` et `Admin`.
 - `pundit` : droits et règles d'accès selon les profils
-- `sidekiq` : Gestion des tâches asynchrones via Redis
+- `good_job` : Gestion des tâches asynchrones
 - `vite_rails` : Compilation des assets JS et images
 - `turbo_rails` : Interactions JS simplifiées
 - `mjml-rails` : Templates de mails en MJML
@@ -209,7 +209,7 @@ flowchart TB
     subgraph rails[Rails App]
       direction TB
       web[Web dynos]
-      worker[Sidekiq worker dynos]
+      worker[GoodJob worker dynos]
       cron[Cron tasks]
     end
     rails <--> redis[(Redis)]
@@ -397,7 +397,6 @@ Avec le recul, certains choix méritent d’être revus :
 
 - Le modèle Dossier est peut-être superflu. On pourrait utiliser uniquement le modèle Commune. Aujourd’hui il y a un lien 1:1 dans beaucoup de cas entre ces deux modèles. Il avait été pensé pour permettre à une commune d’ouvrir plusieurs dossiers de recensement mais ce n’est pas le cas aujourd’hui. En année n+5, il est probable qu’on aura déjà supprimé le dossier précédent de notre base de données pour des raisons RGPD.
 - Netlify CMS pour le contenu peut être remplacé par des contenus stockés en DB et édités via des textarea ActionText / Trix.
-- Sidekiq peut être remplacé par GoodJob pour supprimer la dépendance à Redis et simplifier les [CRON-like jobs](https://github.com/bensheldon/good_job#cron-style-repeatingrecurring-jobs).
 - Le choix de vite pour le build JS est peut–être trop exotique. Il faudrait réévaluer l’usage des importmaps pour éviter tout build system.
 - L’utilisation de I18n est à proscrire, ce projet n’a aucune vocation internationale, et l’isolation des contenus dans les fichiers yml ralentit plus qu’elle n’aide. (seule utilité à remplacer : la pluralisation).
 - Le mélange de français et d’anglais dans le code et la DB est désagréable. Il faudrait harmoniser les choix, mais la direction à suivre n’est pas encore claire.
@@ -551,7 +550,7 @@ interface visuelle web avec des filtres, et une API JSON.
 Le code est disponible [sur GitHub](https://github.com/adipasquale/collectif-objets-datasette) et utilise la librairie
 [datasette](https://github.com/simonw/datasette/).
 
-`rails runner Synchronizer::SynchronizeObjetsJob.perform_inline` importe les données depuis la
+`rails runner Synchronizer::SynchronizeObjetsJob.perform_now` importe les données depuis la
 collectif-objets-datasette.fly.dev vers la base de donnée locale de Collectif Objets.
 
 La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :

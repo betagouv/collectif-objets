@@ -2,9 +2,8 @@
 
 require "csv"
 
-class ExportMemoireCsvJob
-  include Sidekiq::Job
-  sidekiq_options retry: 0
+class ExportMemoireCsvJob < ApplicationJob
+  discard_on StandardError, Exception
 
   def perform(pop_export_id)
     @pop_export = PopExport.find(pop_export_id)

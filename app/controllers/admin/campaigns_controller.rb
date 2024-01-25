@@ -61,8 +61,8 @@ module Admin
     private
 
     def enqueue_campaign_jobs
-      Campaigns::CronJob.perform_inline
-      Campaigns::RefreshCampaignStatsJob.perform_in(10.minutes, @campaign.id)
+      Campaigns::CronJob.perform_now
+      Campaigns::RefreshCampaignStatsJob.set(wait: 10.minutes).perform_later(@campaign.id)
     end
 
     def search_params

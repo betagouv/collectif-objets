@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Synchronizer::Objets::Builder do
-  before { allow(Synchronizer::Edifices::SynchronizeOneJob).to receive(:perform_inline) }
+  before { allow(Synchronizer::Edifices::SynchronizeOneJob).to receive(:perform_now) }
 
   let(:base_row) do
     {
@@ -69,7 +69,7 @@ RSpec.describe Synchronizer::Objets::Builder do
   context "1 ref Mérimée est passée, et correspond à un édifice de la bonne commune" do
     let(:row) { base_row.merge("INSEE" => "01004", "REFS_MERIMEE" => "PA021384") }
     before do
-      allow(Synchronizer::Edifices::SynchronizeOneJob).to receive(:perform_inline) do
+      allow(Synchronizer::Edifices::SynchronizeOneJob).to receive(:perform_now) do
         Edifice.where(merimee_REF: "PA021384").update!(code_insee: "01004")
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe Synchronizer::Objets::Builder do
   context "1 ref Mérimée correspondant à un édifice d’une autre commune" do
     let(:row) { base_row.merge("INSEE" => "01004", "REFS_MERIMEE" => "PA021384") }
     before do
-      allow(Synchronizer::Edifices::SynchronizeOneJob).to receive(:perform_inline) do
+      allow(Synchronizer::Edifices::SynchronizeOneJob).to receive(:perform_now) do
         Edifice.where(merimee_REF: "PA021384").update!(code_insee: "01005")
       end
     end
@@ -106,7 +106,7 @@ RSpec.describe Synchronizer::Objets::Builder do
     let(:row) { base_row.merge("INSEE" => "01004", "EDIF" => "eglise de montmirail", "REFS_MERIMEE" => "PA021384") }
     let!(:edifice) { create(:edifice, merimee_REF: "PA021384", code_insee: "01004", nom: "Montmir") }
     it "associe l’objet à l’édifice existant" do
-      expect(Synchronizer::Edifices::SynchronizeOneJob).not_to receive(:perform_inline)
+      expect(Synchronizer::Edifices::SynchronizeOneJob).not_to receive(:perform_now)
       expect(Edifice.count).to eq 1
       attributes = described_class.new(row).attributes
       expect(Edifice.count).to eq 1
@@ -119,7 +119,7 @@ RSpec.describe Synchronizer::Objets::Builder do
     let(:row) { base_row.merge("INSEE" => "01004", "EDIF" => "eglise de montmirail", "REFS_MERIMEE" => "PA021384") }
     let!(:edifice) { create(:edifice, merimee_REF: "PA021384", code_insee: "01005", nom: "Montmir") }
     it "n’utilise pas l’édifice existant mais en créé un nouveau sans ref" do
-      expect(Synchronizer::Edifices::SynchronizeOneJob).not_to receive(:perform_inline)
+      expect(Synchronizer::Edifices::SynchronizeOneJob).not_to receive(:perform_now)
       expect(Edifice.count).to eq 1
       attributes = described_class.new(row).attributes
       expect(Edifice.count).to eq 2
@@ -136,7 +136,7 @@ RSpec.describe Synchronizer::Objets::Builder do
     let!(:edifice_mismatch2) { create(:edifice, code_insee: "01005", slug: "eglise-montmirail", nom: "Montmir") }
     let(:row) { base_row.merge("INSEE" => "01004", "EDIF" => "eglise de montmirail", "REFS_MERIMEE" => nil) }
     it "créé un nouvel édifice sans REF et l’utilise" do
-      expect(Synchronizer::Edifices::SynchronizeOneJob).not_to receive(:perform_inline)
+      expect(Synchronizer::Edifices::SynchronizeOneJob).not_to receive(:perform_now)
       expect(Edifice.count).to eq 2
       attributes = described_class.new(row).attributes
       expect(Edifice.count).to eq 3
@@ -152,7 +152,7 @@ RSpec.describe Synchronizer::Objets::Builder do
     let!(:edifice) { create(:edifice, code_insee: "01004", slug: "eglise-montmirail", nom: "Montmir") }
     let!(:edifice_mismatch) { create(:edifice, code_insee: "01004", slug: "eglise-jean", nom: "Jean") }
     it "réutilise l’édifice sans REF existant" do
-      expect(Synchronizer::Edifices::SynchronizeOneJob).not_to receive(:perform_inline)
+      expect(Synchronizer::Edifices::SynchronizeOneJob).not_to receive(:perform_now)
       expect(Edifice.count).to eq 2
       attributes = described_class.new(row).attributes
       expect(Edifice.count).to eq 2

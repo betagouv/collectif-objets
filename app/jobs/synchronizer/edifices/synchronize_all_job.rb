@@ -2,9 +2,7 @@
 
 module Synchronizer
   module Edifices
-    class SynchronizeAllJob
-      include Sidekiq::Job
-
+    class SynchronizeAllJob < ApplicationJob
       def perform
         @progressbar = ProgressBar.create(total: client.count_all, format: "%t: |%B| %p%% %e %c/%u")
         client.each do |row|

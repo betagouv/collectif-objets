@@ -68,7 +68,7 @@ class InboundEmail < ApplicationRecord
   def enqueue_download_attachments
     attachments
       .select(&:should_download?)
-      .each { DownloadInboundEmailAttachmentJob.perform_async(_1.raw, id) }
+      .each { DownloadInboundEmailAttachmentJob.perform_later(_1.raw, id) }
   end
 
   private

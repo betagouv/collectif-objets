@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Campaigns
-  class RefreshCampaignStatsJob
-    include Sidekiq::Job
-
+  class RefreshCampaignStatsJob < ApplicationJob
     def perform(campaign_id)
       @campaign = Campaign.find(campaign_id)
       @campaign.update_columns(stats: CampaignStats.new(@campaign).stats)

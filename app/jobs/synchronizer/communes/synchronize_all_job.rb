@@ -2,9 +2,7 @@
 
 module Synchronizer
   module Communes
-    class SynchronizeAllJob
-      include Sidekiq::Job
-
+    class SynchronizeAllJob < ApplicationJob
       BATCH_SIZE = 1000
 
       def perform
