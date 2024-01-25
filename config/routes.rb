@@ -185,12 +185,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # ------
-  # DEMOS
-  # ------
-
-  get "demos/:namespace/:name", to: "demos#show", as: :demo
-
   # --------------
   # HEALTH & DEBUG
   # --------------

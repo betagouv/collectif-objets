@@ -682,21 +682,7 @@ La démarche d'accessibilité est de réaliser une couverture quasi exhaustive d
 automatisés, puis de faire réaliser des tests manuels dans un second temps.
 Actuellement (février 2023) nous sommes à environ 70% de couverture des pages par des tests automatisés.
 
-Les tests automatisés sont réalisés avec [aXe](https://www.deque.com/axe/).
-Pour les pages publiques, les tests sont lancées de manière classique sur des pages avec des seeds générées à chaque
-test via FactoryBot.
-
-Pour les pages privées accessibles uniquement aux communes et aux conservateurs, l'approche est différente.
-Pour chaque page privée, une version de "démo" est accessible publiquement sur une route parallèle, par exemple
-[`demos/communes/completion_new`](https://collectif-objets.beta.gouv.fr/demos/communes/completion_new).
-Ces pages de démo présentent des données de test générées à la volée par FactoryBot.
-Elles simulent la connexion de la commune ou du conservateur.
-Des précautions sont prises pour ne pas générer de données en base de données en freezant tous les objets de seeds et en
-limitant les clics sur les boutons d'actions.
-
-Ce sont ces pages de démos qui sont testées automatiquement par aXe.
-Leur accessibilité publique comme des vraies pages permet aussi de présenter l'application plus facilement, ou bien de
-faire tester l'accessibilité de ces pages à des intervenants externes ou à des outils en ligne.
+Les tests automatisés sont réalisés avec [aXe](https://www.deque.com/axe/). Plus d’infos sur https://collectif-objets.beta.gouv.fr/declaration_accessibilite
 
 ## Netlify CMS
 

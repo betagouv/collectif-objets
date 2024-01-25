@@ -128,20 +128,17 @@
 
 
         %h2.fr-mt-4w#communes 2. Interface Communes
-        %p Ces pages sont visibles uniquement pour les communes connectées. Les liens présents sont des pages de démonstration avec des données de test.
+        %p Ces pages sont visibles uniquement pour les communes connectées.
         %ul
           %li
             Page d’embarquement ·
-            = link_to "Démo", demo_path(namespace: "communes", name: "premiere_visite")
             = accessible_icon_span
           %li
             Liste des objets de la commune ·
-            = link_to "3 objets sans photos", demo_path(namespace: "communes", name: "objets_index")
             = accessible_icon_span
             %ul
               %li
                 Objet 1 à protéger
-                = link_to "Sans photos", demo_path(namespace: "communes", name: "objet_show")
                 = accessible_icon_span
                 %ul
                   %li
@@ -149,43 +146,34 @@
                     %ul
                       %li
                         Étape 1 - Recherche
-                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step1")
                         = accessible_icon_span
                       %li
                         Étape 2 - Localisation
-                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step2")
                         = accessible_icon_span
                       %li
                         Étape 3 - Photos
-                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step3")
                         = accessible_icon_span
                       %li
                         Étape 4 - Objet
-                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step4")
                         = accessible_icon_span
                       %li
                         Étape 5 - Commentaires
-                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step5")
                         = accessible_icon_span
                       %li
                         Étape 6 - Récapitulatif
-                        = link_to "Démo", demo_path(namespace: "communes", name: "recensement_step6")
                         = accessible_icon_span
 
               %li Autres objets …
           %li
             Finalisation du recensement
-            = link_to "2 recensements avec photos", demo_path(namespace: "communes", name: "completion_new")
             = accessible_icon_span
           %li
             Voir les recensements envoyés
-            = link_to "2 recensements avec photos", demo_path(namespace: "communes", name: "completion_show")
             = accessible_icon_span
           %li Voir l'examen du recensement
           %li Mon compte
           %li
             Messagerie
-            = link_to "Quelques messages", demo_path(namespace: "communes", name: "messagerie")
             = accessible_icon_span
 
         %h2.fr-mt-4w#conservateurs 3. Interface conservateurs
