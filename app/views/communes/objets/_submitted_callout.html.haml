@@ -1,0 +1,6 @@
+= render CalloutWithCtaComponent.new do |c|
+  - c.with_text do
+    .fr-callout__title= t(".title")
+    %p.fr-callout__text= t(".content")
+  - c.with_cta do
+    = link_to t(".cta"), commune_completion_path(commune), class: "fr-btn"

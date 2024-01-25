@@ -2,14 +2,22 @@
 
 require "rails_helper"
 
-RSpec.feature "Sign in with token", type: :feature, js: true do
+RSpec.feature "Communes sign-in", type: :feature, js: true do
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement:) }
   let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:, magic_token: "magiemagie") }
 
   include ActiveJob::TestHelper
 
-  scenario "sign in with token" do
+  scenario "sign in with magic token + première visite" do
+    visit magic_authentication_path("magic-token": "magiemagie")
+    expect(page).to have_text("Vous êtes maintenant connecté")
+    expect(page).to have_text("Recensez vos objets en 3 étapes")
+    expect(page).to have_link("Recenser l’objet de Albon")
+    expect(page).to be_axe_clean
+  end
+
+  scenario "sign in with regular rotating login token" do
     visit "/"
     click_on "Connexion commune"
     expect(page).to have_text("Connexion")

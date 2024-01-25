@@ -2,25 +2,7 @@
 
 require "rails_helper"
 
-shared_examples "an accessible page" do
-  it "should be axe clean" do
-    expect(page).not_to have_text(/erreur 500/i)
-    expect(page).not_to have_text(/error 500/i)
-    expect(page).to be_axe_clean
-  end
-end
-
-shared_examples "an accessible page except iframes" do
-  it "should be axe clean except iframes" do
-    expect(page).not_to have_text(/erreur 500/i)
-    expect(page).not_to have_text(/error 500/i)
-    expect(page).to be_axe_clean.excluding "iframe"
-  end
-end
-
 feature "accessibility public pages", js: true do
-  # PUBLIC
-
   describe "objets#index" do
     let!(:objets1) { create_list(:objet, 10, :with_palissy_photo) }
     let!(:objets2) { create_list(:objet, 12, :without_image) }
