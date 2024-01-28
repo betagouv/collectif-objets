@@ -47,3 +47,11 @@ A﻿fin de savoir si votre région ou votre département propose une aide compl�
 Attention : les informations ne sont pas disponibles pour tous les départements ni toutes les régions.
 
 Votre conservateur départemental des antiquités et objets d'art peut vous renseigner à ce sujet également.
+
+## I﻿dentifier un restaurateur qualifié pour effectuer des travaux sur un objet protégé
+
+Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. 
+
+Afin de trouver un restaurateur habilité à travailler sur un objet protégé, vous pouvez consulter l’annuaire de la Fédération Française des Conservateurs-Restaurateurs (FFCR) et chercher parmi les restaurateurs qualifiés de votre région : <https://ffcr.fr/liste-par-regions> 
+
+L﻿e choix final du restaurateur doit être effectué en accord avec le conservateur des antiquités et objets d'art de votre département.
