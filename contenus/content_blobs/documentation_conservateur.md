@@ -242,6 +242,22 @@ La [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-lice
 
 ## Qu’est-ce qu’un « objet prioritaire » dans Collectif Objets ?
 
-Il s’agit d’un objet qui a été désigné par la commune qui l’abrite (ou qui devrait l’abriter) comme : disparu ou en péril.
+Il s’agit d’un objet qui a été désigné par la commune qui l’abrite (ou qui devrait l’abriter) comme étant disparu (introuvable) ou en péril. 
 
-Les objets prioritaires sont donc les objets qui semblent mériter une attention particulière dans un délai restreint.
+Les objets prioritaires sont les objets qui semblent mériter une attention particulière dans un délai restreint.
+
+## Comment trouver un restaurateur ayant les qualifications requises pour effectuer des travaux sur un objet protégé au titre des monuments historiques ? 
+
+En France, le titre de “restaurateur” n’étant pas protégé, un artiste ou un artisan sans formation particulière peut se dire restaurateur. Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. Il s’agit des diplômes suivants : 
+
+\- diplôme de l’Institut National du Patrimoine – département de formation des restaurateurs (I.F.R.O.A.)
+
+\- maîtrise de sciences et techniques en conservation-restauration des biens culturels (Université de Paris I) 
+
+\- diplôme de l’Ecole Supérieure des Beaux-Arts de Tours en conservation-restauration des oeuvres sculptées 
+
+\- diplôme de l’Ecole Supérieure des Beaux-Arts d’Avignon en conservation-restauration des oeuvres peintes.
+
+Les personnes ayant obtenu l’un de ces diplômes sont des restaurateurs de “niveau 7” et peuvent recevoir une autorisation d’une DRAC pour mener un travail sur un objet protégé. 
+
+Afin de trouver un restaurateur habilité à travailler sur un objet protégé, vous pouvez consulter l’annuaire de la Fédération Française des Conservateurs-Restaurateurs (FFCR) et chercher parmi les restaurateurs qualifiés de votre région : <https://ffcr.fr/liste-par-regions>
