@@ -34,9 +34,11 @@ RSpec.describe Synchronizer::Objets::RevisionInsert do
   context "commune en cours de recensement" do
     let(:commune) { build(:commune, code_insee: "01004", status: :started) }
     let(:revision) { described_class.new(base_row, commune:) }
-    it "ne créé pas l’objet" do
-      expect(revision.synchronize).to eq false
-      expect(revision.action).to eq :create_rejected_commune_active
+    it "créé l’objet" do
+      expect(revision.synchronize).to eq true
+      expect(revision.action).to eq :create
+      expect(revision.objet.palissy_REF).to eq "PM01000001"
+      expect(revision.objet.palissy_DENO).to eq "tableau"
     end
   end
 
@@ -45,9 +47,11 @@ RSpec.describe Synchronizer::Objets::RevisionInsert do
     let!(:dossier) { create(:dossier, :submitted, commune:) }
     before { commune.update!(dossier:) }
     let(:revision) { described_class.new(base_row, commune:) }
-    it "ne créé pas l’objet" do
-      expect(revision.synchronize).to eq false
-      expect(revision.action).to eq :create_rejected_commune_active
+    it "créé l’objet" do
+      expect(revision.synchronize).to eq true
+      expect(revision.action).to eq :create
+      expect(revision.objet.palissy_REF).to eq "PM01000001"
+      expect(revision.objet.palissy_DENO).to eq "tableau"
     end
   end
 
@@ -59,6 +63,8 @@ RSpec.describe Synchronizer::Objets::RevisionInsert do
     it "créé l’objet" do
       expect(revision.synchronize).to eq true
       expect(revision.action).to eq :create
+      expect(revision.objet.palissy_REF).to eq "PM01000001"
+      expect(revision.objet.palissy_DENO).to eq "tableau"
     end
   end
 end

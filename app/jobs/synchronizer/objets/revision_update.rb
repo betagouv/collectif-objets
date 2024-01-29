@@ -5,11 +5,10 @@ module Synchronizer
     class RevisionUpdate
       include RevisionConcern
 
-      def initialize(row, commune: nil, persisted_objet: nil, interactive: false, logfile: nil, dry_run: false)
+      def initialize(row, commune: nil, persisted_objet: nil, logfile: nil, dry_run: false)
         @row = row
         @commune = commune
         @persisted_objet = persisted_objet
-        @interactive = interactive
         @logfile = logfile
         @dry_run = dry_run
         @commune_before_update = persisted_objet.commune
@@ -60,23 +59,12 @@ module Synchronizer
         @objet_builder ||= Synchronizer::Objets::Builder.new(row, persisted_objet:)
       end
 
-      def unsafe_commune_change_reason
-        return "commune destinataire en cours de recensement" if commune_after_update.started?
-
-        if commune_after_update.completed? && commune_after_update.dossier.submitted?
-          return "commune destinataire avec dossier en cours d'examen"
-        end
-
-        return "commune d’origine en cours de recensement" if commune_before_update.started?
-
-        return "commune d’origine ayant fini de recenser" if commune_before_update.completed?
-
-        nil
+      def existing_recensement?
+        @existing_recensement ||= persisted_objet.recensements.any?
       end
 
       def commune_changed? = commune_before_update != commune_after_update
-      def safe_commune_change? = unsafe_commune_change_reason.nil?
-      def apply_commune_change? = commune_changed? && (safe_commune_change? || interactive_validation?)
+      def apply_commune_change? = commune_changed? && !existing_recensement?
       def ignore_commune_change? = commune_changed? && !apply_commune_change?
 
       def set_update_action_and_log
@@ -86,7 +74,7 @@ module Synchronizer
           @action = :update_with_commune_change
         elsif ignore_commune_change?
           message += " avec changement de commune ignoré #{commune_before_update} → #{commune_after_update} " \
-                     "(#{unsafe_commune_change_reason})"
+                     "car l’objet a déjà un recensement associé"
           @action = :update_ignoring_commune_change
         else
           @action = :update

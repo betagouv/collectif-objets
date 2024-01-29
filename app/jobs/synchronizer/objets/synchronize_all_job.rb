@@ -12,7 +12,6 @@ module Synchronizer
         @logfile = File.open("tmp/synchronize-objets-#{timestamp}.log", "a+")
         limit = params.with_indifferent_access[:limit]
         @dry_run = params.with_indifferent_access[:dry_run]
-        @interactive = params.with_indifferent_access[:interactive] || false
         code_insee = params.with_indifferent_access[:code_insee]
         ApiClientSql.objets(logger:, limit:, code_insee:).iterate_batches { synchronize_rows(_1) }
         close
@@ -20,11 +19,11 @@ module Synchronizer
 
       private
 
-      attr_reader :interactive, :logfile, :dry_run
+      attr_reader :logfile, :dry_run
 
       def synchronize_rows(rows)
         RevisionsBatch
-          .new(rows, revision_kwargs: { interactive:, logfile:, dry_run: })
+          .new(rows, revision_kwargs: { logfile:, dry_run: })
           .revisions
           .each do |revision|
             revision.synchronize
