@@ -16,9 +16,13 @@ eagerLoadControllersFrom("stimulus_controllers", application)
 // for the stimulus controllers attached to viewcomponents we cannot use the eager load
 // because the viewcomponent folder structure is not compatible, the registered name would be
 // stupidly long
+// tip: useful shell command: find app/components -type f -name '*_controller.js'
 
 import LightboxComponentController from "components/galerie/lightbox_component/lightbox_component_controller"
 application.register("galerie--lightbox-component", LightboxComponentController)
+
+import GalerieUploadComponentController from "components/galerie/actions/upload/confirmation_component/confirmation_component_controller"
+application.register("galerie--actions--upload--confirmation-component", GalerieUploadComponentController)
 
 import PhotoUploadComponentController from "components/photo_upload_component/photo_upload_component_controller"
 application.register("photo-upload-component", PhotoUploadComponentController)
