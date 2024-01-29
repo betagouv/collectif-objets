@@ -28,11 +28,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     navigate_to_objets
     expect(page).to have_text("Bouquet d’Autel")
     expect(page).to have_text("Ciboire des malades")
+    expect(page).to be_axe_clean
 
     # PREMIER OBJET
     click_on "Bouquet d’Autel"
     expect(page).to have_text("PAS ENCORE RECENSÉ")
     expect(page).to have_text("st Jean")
+    expect(page).to be_axe_clean
     click_on "Recenser cet objet"
 
     # STEP 1
@@ -42,6 +44,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Avez-vous trouvé l’objet ?")
     scroll_to(find("#recensement_form_step"))
     find("label", text: "Je confirme que je me suis bien déplacé").click
+    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
     # STEP 2
@@ -52,6 +55,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     find("label", text: "L’objet se trouve dans l’édifice indiqué initialement").click
     expect(page).to have_text("L’objet est-il recensable ?")
     find("label", text: "L’objet est recensable").click
+    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
     # STEP 3
@@ -66,6 +70,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(tableau2).to be_present
     tableau2.ancestor(".co-photo-preview").click_on "Supprimer"
     expect(page).not_to have_selector("img[src*='tableau2.jpg']")
+    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
     # Step 4
@@ -76,6 +81,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     find("label", text: "L’objet est en état moyen").click
     expect(page).to have_text("L’objet est-il en sécurité ?")
     find("label", text: "L’objet est difficile à voler").click
+    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
     # Step 5
@@ -84,6 +90,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Étape suivante : Récapitulatif")
     expect(page).to have_text("Avez-vous des commentaires ?")
     fill_in "Avez-vous des commentaires ?", with: "Cette peinture est magnifique"
+    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
     # Step 6 - Recap
@@ -97,11 +104,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("L’objet est en état moyen")
     expect(page).to have_text("L’objet est difficile à voler")
     expect(page).to have_text("Cette peinture est magnifique")
+    expect(page).to be_axe_clean
     click_on "Valider le recensement de cet objet"
 
     # Confirmation page
     expect(page).to have_text("Votre recensement a bien été enregistré")
     expect(page).to have_text("Ciboire des malades")
+    expect(page).to be_axe_clean
     find("a", text: "Revenir à la liste d’objets de ma commune", match: :first).click
 
     # Objets index
@@ -140,6 +149,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # Confirmation
     expect(page).to have_text("Vous avez recensé tous les objets de votre commune")
+    expect(page).to be_axe_clean
     click_on "Finaliser le recensement…"
 
     # Completion page
@@ -154,9 +164,16 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(row_ciboire).to have_text(/Difficile à voler/i)
     expect(row_ciboire).to have_selector("img[src*='peinture1.jpg']")
     fill_in("Vos commentaires", with: "C’était fort sympathique")
+    expect(page).to be_axe_clean
     click_on "Je valide le recensement des objets de ma commune"
 
     expect(page).to have_text("Le recensement de vos objets est terminé, merci !")
+    expect(page).to be_axe_clean
+    click_on "Voir les données envoyées"
+
+    expect(page).to have_text("Recensements de Albon")
+    expect(page).to have_text("Un conservateur a été prévenu et reviendra vers vous.")
+    expect(page).to be_axe_clean
   end
 
   scenario "recensement introuvable" do

@@ -12,7 +12,8 @@
     - if photo.variable?
       = image_tag photo.variant(:small),
         class: "fr-p-1w",
-        data: { action: "load->photo-preview#onImageLoad", photo_preview_target: "image" }
+        data: { action: "load->photo-preview#onImageLoad", photo_preview_target: "image" },
+        alt: "Photo de recensement de l’objet #{recensement.objet.nom_with_ref_pop} à #{recensement.commune.nom}"
     - else
       %span Image corrompue
   - if delete_button

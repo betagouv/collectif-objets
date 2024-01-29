@@ -20,13 +20,6 @@
             mode: session[:user_impersonate_write].present? ? :write : :read,
             toggle_path: toggle_impersonate_mode_admin_users_path
 
-        - if banners.include?(:demo)
-          .fr-alert.fr-alert--warning.fr-alert--sm
-            .co-flex.co-flex--space-between.co-flex--align-items-center
-              %div Vous parcourez une page de démo, les liens, les boutons et les formulaires ne fonctionneront pas
-              %div
-                = link_to "Revenir au plan du site", plan_path, class: "fr-link fr-link--sm fr-link--icon-left fr-icon-arrow-left-line"
-
       .co-text--right
         %button{type: "button",
           data: { action: "visibility-toggle#toggle" },

@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   before_action :init_banners
   before_action :set_locale
   before_action :set_sentry_context
-  before_action :redirect_if_demo_link
 
   def render_turbo_stream_update(*, **)
     render(turbo_stream: [turbo_stream.update(*, **)])
@@ -79,13 +78,6 @@ class ApplicationController < ActionController::Base
     message += " : #{exception.message}" if Rails.env.development?
     flash[:alert] = message
     redirect_back(fallback_location: root_path)
-  end
-
-  def redirect_if_demo_link
-    return if params[:id] != "-1" &&
-              params.keys.select { _1.end_with?("_id") }.none? { params[_1] == "-1" }
-
-    redirect_to plan_path, alert: "Les liens et les formulaires des pages de démonstration ne fonctionnent pas"
   end
 
   helper_method :active_nav_links
