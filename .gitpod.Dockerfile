@@ -1,7 +1,7 @@
 FROM gitpod/workspace-ruby-3.2
 USER gitpod
 
-RUN sudo install-packages libvips42 golang-go redis postgresql postgresql-contrib
+RUN sudo install-packages libvips42 golang-go postgresql postgresql-contrib
 RUN sudo curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs
 RUN go get github.com/mailhog/MailHog
 
