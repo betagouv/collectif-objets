@@ -2,7 +2,15 @@
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
 
-  = render "communes/recensements/fields/investigation", form_builder:
+  = render RecensementRadiosFieldsetComponent.new(form_builder:, field: :investigation) do |c|
+    - c.with_legend do
+      Avez-vous trouvé l’objet ?
+      .fr-hint-text
+        L’intérêt de ce recensement est de constater l’état actuel de l’objet.
+        Il est donc nécessaire de vous déplacer pour faire vos observations.
+    - c.with_option value: :confirmation_sur_place, label: t("recensement.investigation_choices.true")
+    - c.with_option value: :introuvable, label: t("recensement.investigation_choices.false")
+
 
   = form_builder.hidden_field :confirmation_introuvable
 
