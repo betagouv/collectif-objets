@@ -2,8 +2,6 @@
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
 
-  = render "communes/recensements/fields/localisation", form_builder:
-
   = render "communes/recensements/fields/recensable", form_builder:
 
   = form_builder.hidden_field :confirmation_not_recensable
