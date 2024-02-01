@@ -508,7 +508,8 @@ csvs --> datasette_run_sqlite
 datasette_run_sqlite --> sqlite
 sqlite --> datasette_run_deploy
 datasette_run_deploy --> fly
-fly --> rails_run_objets
+
+api_data_culture_gouv --> rails_run_objets
 rails_run_objets --> postgres
 
 api_service_public --> rails_run_communes

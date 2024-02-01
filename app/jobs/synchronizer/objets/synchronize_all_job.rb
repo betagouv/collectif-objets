@@ -3,32 +3,31 @@
 module Synchronizer
   module Objets
     class SynchronizeAllJob < ApplicationJob
+      BATCH_SIZE = 1000
+
       def initialize
         super
         @counters = Hash.new(0)
       end
 
-      def perform(params = {})
+      def perform
         @logfile = File.open("tmp/synchronize-objets-#{timestamp}.log", "a+")
-        limit = params.with_indifferent_access[:limit]
-        @dry_run = params.with_indifferent_access[:dry_run]
-        code_insee = params.with_indifferent_access[:code_insee]
-        ApiClientSql.objets(logger:, limit:, code_insee:).iterate_batches { synchronize_rows(_1) }
+        @progressbar = ProgressBar.create(total: client.count_all, format: "%t: |%B| %p%% %e %c/%u")
+        client.each_slice(BATCH_SIZE) { synchronize_batch(_1) }
         close
       end
 
       private
 
-      attr_reader :logfile, :dry_run
+      attr_reader :logfile
 
-      def synchronize_rows(rows)
-        RevisionsBatch
-          .new(rows, revision_kwargs: { logfile:, dry_run: })
-          .revisions
-          .each do |revision|
-            revision.synchronize
-            @counters[revision.action] += 1
-          end
+      def synchronize_batch(csv_rows)
+        batch = Batch::Base.new(csv_rows, logfile:)
+        batch.synchronize_each_revision do |revision|
+          @counters[revision.action] += 1
+          @progressbar.increment
+        end
+        batch.skipped_rows_count.times { @progressbar.increment }
       end
 
       def close
@@ -37,6 +36,10 @@ module Synchronizer
       end
 
       def timestamp = Time.zone.now.strftime("%Y_%m_%d_%HH%M")
+
+      def client
+        @client ||= ApiClientPalissy.new
+      end
     end
   end
 end
