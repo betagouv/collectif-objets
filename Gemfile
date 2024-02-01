@@ -57,7 +57,7 @@ group :development do
   gem "htmlbeautifier", "~> 1.4"
   gem "pry", "~> 0.14"
   gem "rails-erd", "~> 1.7", require: false
-  gem "solargraph", "~> 0.49"
+  gem "solargraph", "~> 0.50"
   gem "web-console", "~> 4.2"
 end
 
