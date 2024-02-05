@@ -25,7 +25,7 @@ module Synchronizer
           .merge(json_values)
           .merge(text_values)
           .merge({ "palissy_REFA" => ref_merimee })
-          .merge(edifice_id.present? ? { "edifice_id" => edifice_id } : {})
+        # .merge(edifice_id.present? ? { "edifice_id" => edifice_id } : {})
       end
 
       def palissy_ref = attributes["palissy_REF"]

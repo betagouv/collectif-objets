@@ -3,7 +3,7 @@
 module Synchronizer
   module Objets
     class RevisionsBatch
-      def initialize(rows, revision_kwargs:)
+      def initialize(rows, revision_kwargs: {})
         @rows = rows
         @revision_kwargs = revision_kwargs
       end

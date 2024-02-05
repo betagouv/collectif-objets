@@ -15,17 +15,17 @@ module Synchronizer
     end
 
     def fetch_and_parse_url(url)
-      @logger.debug "fetching #{url} ..."
+      @logger&.debug "fetching #{url} ..."
       res = Net::HTTP.get_response(URI.parse(url))
       raise "received #{res.code} on #{url}" unless res.code.starts_with?("2")
 
       parsed = JSON.parse(res.body)
-      @logger.debug "request took #{parsed['query_ms'].round} ms"
+      @logger&.debug "request took #{parsed['query_ms'].round} ms"
       parsed
     end
 
     def create_progress_bar(total)
-      @logger.info "-- total rows filtered: #{total}"
+      @logger&.info "-- total rows filtered: #{total}"
       total = @limit if @limit.present? && @limit < total
       @progressbar = ProgressBar.create(total:, format: "%t: |%B| %p%% %e")
     end

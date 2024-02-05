@@ -6,7 +6,7 @@ module Synchronizer
       extend ActiveSupport::Concern
 
       included do
-        delegate :changed?, :changes, :palissy_ref, to: :objet_builder
+        delegate :changed?, :changes, :attributes, :palissy_ref, to: :objet_builder
 
         attr_reader :action
 

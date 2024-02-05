@@ -8,7 +8,7 @@ module Synchronizer
 
     QUERY = Struct.new(:table, :select_cols, :join, :where, :group, keyword_init: true)
 
-    def self.objets(logger:, limit:, code_insee: nil)
+    def self.objets(logger: nil, limit: nil, code_insee: nil)
       new(
         QUERY.new(
           table: "palissy",
@@ -60,13 +60,13 @@ module Synchronizer
 
     def total_rows
       sql = "select count(*) as c from (select REF from #{@query.table} #{@query.join} #{@query.where} #{@query.group})"
-      @logger.info sql
+      @logger&.info sql
       fetch_and_parse(API_PATH, { sql: })["rows"][0][0]
     end
 
     def api_query(after_ref: nil)
       sql = get_sql_query(after_ref:)
-      @logger.debug sql
+      @logger&.debug sql
       parsed = fetch_and_parse(API_PATH, sql:)
       parsed["rows"] = parsed["rows"].map { parsed["columns"].zip(_1).to_h }
       yield parsed["rows"]
