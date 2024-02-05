@@ -5,7 +5,7 @@ module RecensementWizard
     STEP_NUMBER = 1
     TITLE = "Localisation"
 
-    attr_accessor :localisation, :confirmation_introuvable
+    attr_accessor :confirmation_introuvable
 
     validates :localisation, presence: { message: "Veuillez préciser où se trouve l’objet" }
 
