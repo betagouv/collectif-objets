@@ -3,7 +3,7 @@
 class AdminMailer < ApplicationMailer
   def sanity_check_alert
     @email, @commune, @text = params.values_at(:email, :commune, :text)
-    mail to: @email, subject: "#{title_prefix} - Sanity Check Alert - #{@commune}"
+    mail to: @email, subject: [title_prefix, "Sanity Check Alert", @commune].compact.join(" - ")
   end
 
   def campaign_planned(conservateur, campaign)
