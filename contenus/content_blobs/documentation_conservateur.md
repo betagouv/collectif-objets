@@ -5,21 +5,17 @@ titre: Documentation Conservateur
 
 ## Collectif Objets en quelques mots
 
-Collectif Objets est un **service public numérique** du ministère de la Culture pour faciliter le dialogue entre les acteurs de la chaîne patrimoniale.
+Collectif Objets est un **service public numérique** du ministère de la Culture. Son but est de faciliter le dialogue entre les acteurs de la chaîne patrimoniale.
 
-Ce programme organise des campagnes de recensement auprès des communes abritant des objets monuments historiques.
+Ce service organise des actions pour identifier les objets historiques dans les communes. Les mairies sont invitées à lister ces objets directement sur le terrain. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les experts en conservation reçoivent ensuite ces informations pour les évaluer.
 
-Les mairies sont invitées à recenser *in situ* les objets protégés de leur territoire. Elles répondent à un questionnaire en ligne et transmettent des photos attestant de leur état. Ces informations sont ensuite transmises aux conservateurs pour expertise.
-
-Par la collecte de ces données, Collectif Objets permet aux conservateurs d'avoir une vision globale et actuelle du parc mobilier.
-
-Les communes sont outillées pour préserver leur patrimoine remarquable.
+Grâce à Collectif Objets, les experts peuvent avoir une vue d'ensemble claire et à jour des objets historiques. Cela aide les communes à prendre soin de leur patrimoine mobilier remarquable. 
 
 ## Le lien avec les bases de données nationales sur le patrimoine
 
-* Les notices sur les objets protégés au titre des monuments historiques se trouvant sur la plateforme Collectif Objets contiennent des informations issues de [la base de données nationale sur le patrimoine mobilier français nommée Palissy](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Palissy-consultable-depuis-le-moteur-Collections). 
+* Les notices des objets protégés au titre des monuments historiques se trouvant sur la plateforme Collectif Objets contiennent des informations issues de [la base de données nationale sur le patrimoine mobilier français nommée Palissy](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Palissy-consultable-depuis-le-moteur-Collections). 
 * Les photos des objets visibles sur Collectif Objets sont issues de [la base des photographies conservées par le ministère de la Culture nommée Mémoire](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Memoire-des-fonds-graphiques-et-photographiques-illustrant-le-patrimoine-francais).
-* Les données recueillies lors des campagnes de recensement avec Collectif Objets et validées par les conservateurs sont reversées dans le système d’information patrimonial de l’Etat. Collectif Objets travaille en collaboration avec la Médiathèque du patrimoine et de la photographie (MPP) dans cet objectif.
+* Après validation par les conservateurs, les données recueillies lors des campagnes de recensement avec Collectif Objets sont reversées dans le système d’information patrimonial de l’Etat. Collectif Objets travaille en collaboration avec la Médiathèque du patrimoine et de la photographie (MPP) dans cet objectif.
 
 ## Les objets concernés par Collectif Objets
 
@@ -27,13 +23,15 @@ Collectif Objets s’adresse aux communes abritant des objets protégés au titr
 
 Ce dispositif concerne les objets appartenant aux collectivités territoriales ou à des propriétaires privées (particuliers, associations…).
 
-Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement. Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir. Il est possible d’ajuster la liste des communes destinataires de la campagne.
+Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement. 
+
+Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir. Il est possible d’ajuster la liste des communes destinataires de la campagne.
 
 Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
 
 ## Fiabilité du recensement effectué par les communes
 
-Plus de 90% des informations transmises par les communes sont validées sans correction par les conservateurs. Nous guidons les communes dans leur démarche de recensement.
+Plus de 90% des informations transmises par les communes sont validées sans correction par les conservateurs. Nous guidons les communes dans leur démarche de recensement. 
 
 # Lancement d'une campagne de recensement
 
@@ -45,16 +43,16 @@ Collectif Objets est un service destiné aux conservateurs des Monuments Histori
 
 ## Les étapes d’une campagne de recensement
 
-* **Les conservateurs lancent la campagne de recensement.** Les communes sont invitées par mél à se rendre sur le site Collectif Objets pour prendre connaissance des objets MH qu’elles abritent.
-* **Les communes recensent en ligne les objets MH qu’elles abritent.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur dossier de recensement.
+* **Les conservateurs lancent la campagne de recensement.** Ils invitent les communes par email à aller sur Collectif Objets pour découvrir les objets MH qu’elles abritent.
+* **Les communes recensent en ligne les objets MH.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur dossier de recensement.
 * **Les conservateurs examinent les informations et photos transmises.** Pour chaque objet, ils peuvent alors valider les informations et engager des actions sur le terrain le cas échéant. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune.
 * **Les données validées par les conservateurs sont reversées dans le système d’information patrimonial.**
 
 ## Les communes concernées par la campagne
 
-Par défaut, l’ensemble des communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) sont intégrées à la campagne de recensement.
+Par défaut, l’ensemble des communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) sont à intégrer à la campagne de recensement. 
 
-Toutefois, il est possible d’exclure certaines communes de la liste des destinataires (par exemple, parce qu’un récolement y a déjà été effectué récemment).
+Mais, on peut choisir de ne pas inclure certaines communes si, par exemple, un inventaire a déjà été fait là-bas récemment.
 
 ## **Suite à la première campagne départementale**
 
