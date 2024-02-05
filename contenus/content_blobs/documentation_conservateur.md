@@ -43,7 +43,7 @@ Collectif Objets est un service destiné aux conservateurs des Monuments Histori
 
 ## Les étapes d’une campagne de recensement
 
-* **Les conservateurs lancent la campagne de recensement.** Ils invitent les communes par email à aller sur Collectif Objets pour découvrir les objets MH qu’elles abritent.
+* **Les conservateurs lancent la campagne de recensement.** Ils invitent les communes par mél à aller sur Collectif Objets pour découvrir les objets MH qu’elles abritent.
 * **Les communes recensent en ligne les objets MH.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur dossier de recensement.
 * **Les conservateurs examinent les informations et photos transmises.** Pour chaque objet, ils peuvent alors valider les informations et engager des actions sur le terrain le cas échéant. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune.
 * **Les données validées par les conservateurs sont reversées dans le système d’information patrimonial.**
@@ -60,7 +60,7 @@ Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès de
 
 # Se servir de Collectif Objets
 
-*Cette section s’adresse aux conservateurs et conservatrices ayant une campagne en cours ou planifiée sur le territoire.*
+*Cette section s’adresse aux conservateurs et conservatrices ayant une campagne en cours ou planifiée sur leur territoire.*
 
 ## Créer son compte « conservateur » sur la plateforme
 
@@ -81,7 +81,7 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates. 
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées. 
-* **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder »  pour enregistrer la liste mise à jour.
+* **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder » pour enregistrer la liste mise à jour.
 * **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mél, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire. 
 
 Voici également un tutoriel vidéo :
