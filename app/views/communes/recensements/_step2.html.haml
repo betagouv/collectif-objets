@@ -2,31 +2,19 @@
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
 
-  = render "communes/recensements/fields/recensable", form_builder:
+  = render RecensementRadiosFieldsetComponent.new(form_builder:, field: :edifice_id) do |c|
+    - c.with_legend do
+      Dans quel édifice se trouve maintenant l’objet ?
+    - @commune.edifices.each do |edifice|
+      - c.with_option value: edifice.id, label: edifice.nom
+    - c.with_option value: "", label: "Autre édifice…"
 
-  = form_builder.hidden_field :confirmation_not_recensable
-
-  - if @modal == "confirmation-not-recensable"
-    = dsfr_modal(title: "Je confirme que l’objet n’est pas recensable",
-      opened: true,
-      html_attributes: { id: "modal-confirmation-not-recensable",
-        "data-controller": "modal-auto-open",
-        "data-modal-auto-open-target": "modal"}) do |m|
-
-      - m.with_header do
-        = link_to "Fermer", wizard.confirmation_modal_close_path, class: "fr-link--close fr-link"
-
-      %p Cette option est à utiliser dans le cas où vous n’avez pas accès à l’objet, par exemple dans un clocher dangereusement accessible, ou bien un objet qui se trouve temporairement en restauration.
-      %p Vous allez être redirigé directement vers l’étape des commentaires.
-      %p
-        Vous pouvez aussi contacter vos conservateurs via la
-        = link_to "messagerie", commune_messages_path(wizard.commune)
-        pour lui demander de l’aide ou des conseils pour recenser l’objet.
-
-      - m.with_button do
-        = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
-      - m.with_button do
-        = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
+  .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if recensement.errors[:edifice_nom].present?)}
+    = form_builder.label :edifice_nom, "Quel est le nom de l’édifice dans lequel l’objet a été déplacé ?", class: "fr-label"
+    = form_builder.text_field :edifice_nom
+    - recensement.errors[:edifice_nom].each do |error_message|
+      %p.fr-error-text
+        = error_message
 
   .co-text--right
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"

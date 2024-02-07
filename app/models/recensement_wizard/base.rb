@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RecensementWizard
-  STEPS = [1, 2, 3, 4, 5, 6].freeze
+  STEPS = [1, 2, 3, 4, 5, 6, 7].freeze
   class InvalidStep < StandardError; end
 
   class Base
@@ -12,6 +12,7 @@ module RecensementWizard
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
       :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
+      :edifice_initial?,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
@@ -93,11 +94,12 @@ module RecensementWizard
     alias skip_save? confirmation_modal?
 
     def skipped_steps
-      return [] if step_number < 5
-      return [2, 3, 4] if absent?
-      return [3, 4] unless recensable?
-
-      []
+      # return [] if step_number <= 5 # can we comment this line ?
+      s = []
+      s += [2, 3, 4, 5] if absent?
+      s += [4, 5] unless recensable?
+      s += [2] if edifice_initial?
+      s
     end
   end
 end

@@ -24,7 +24,13 @@ module RecensementWizard
     def permitted_params = %i[localisation confirmation_introuvable]
 
     def next_step_number
-      localisation == Recensement::LOCALISATION_ABSENT ? 5 : super
+      if localisation == Recensement::LOCALISATION_ABSENT
+        5
+      elsif localisation == Recensement::LOCALISATION_EDIFICE_INITIAL
+        3
+      else
+        super
+      end
     end
 
     def confirmation_modal_path_params
