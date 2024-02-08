@@ -46,11 +46,13 @@ module RecensementWizard
 
     def assign_attributes(attributes)
       super
+
+      recensement.edifice_nom = nil unless localisation == Recensement::LOCALISATION_AUTRE_EDIFICE
+
       return unless localisation == Recensement::LOCALISATION_ABSENT && confirmation_introuvable
 
       recensement.localisation = Recensement::LOCALISATION_ABSENT
       recensement.recensable = false
-      recensement.edifice_nom = nil
       recensement.etat_sanitaire = nil
       recensement.securisation = nil
       recensement.photos = []
