@@ -5,6 +5,12 @@ module RecensementWizard
     STEP_NUMBER = 2
     TITLE = "Précisions sur la localisation"
 
+    validates \
+      :edifice_nom,
+      presence: {
+        message: "Veuillez préciser le nom de l’édifice dans lequel l’objet a été déplacé"
+      }
+
     def permitted_params = %i[edifice_id edifice_nom]
   end
 end

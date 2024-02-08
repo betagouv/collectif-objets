@@ -2,17 +2,17 @@
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
 
-  = render RecensementRadiosFieldsetComponent.new(form_builder:, field: :edifice_id) do |c|
-    - c.with_legend do
-      Dans quel édifice se trouve maintenant l’objet ?
-    - @commune.edifices.each do |edifice|
-      - c.with_option value: edifice.id, label: edifice.nom
-    - c.with_option value: "", label: "Autre édifice…"
+  -# = render RecensementRadiosFieldsetComponent.new(form_builder:, field: :edifice_id) do |c|
+  -#   - c.with_legend do
+  -#     Dans quel édifice se trouve maintenant l’objet ?
+  -#   - @commune.edifices.each do |edifice|
+  -#     - c.with_option value: edifice.id, label: edifice.nom
+  -#   - c.with_option value: "", label: "Autre édifice…"
 
-  .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if recensement.errors[:edifice_nom].present?)}
+  .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
     = form_builder.label :edifice_nom, "Quel est le nom de l’édifice dans lequel l’objet a été déplacé ?", class: "fr-label"
     = form_builder.text_field :edifice_nom
-    - recensement.errors[:edifice_nom].each do |error_message|
+    - form_builder.object.errors[:edifice_nom].each do |error_message|
       %p.fr-error-text
         = error_message
 
