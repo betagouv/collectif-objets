@@ -4,33 +4,6 @@ module Admin
   class UsersController < BaseController
     skip_before_action :disconnect_impersonating_user, only: [:toggle_impersonate_mode]
 
-    def new
-      @user = User.new(commune_id: params[:commune_id])
-    end
-
-    def edit
-      @user = User.find(params[:id])
-    end
-
-    def create
-      @user = User.new(email: params[:user][:email], commune_id: params[:user][:commune_id],
-                       magic_token: SecureRandom.hex(10))
-      if @user.save
-        redirect_to admin_commune_path(id: params[:user][:commune_id]), notice: "L'usager a été ajouté"
-      else
-        render :new
-      end
-    end
-
-    def update
-      @user = User.find(params[:id])
-      if @user.update(user_params)
-        redirect_to admin_commune_path(@user.commune), notice: "L'usager a été modifié"
-      else
-        render :edit
-      end
-    end
-
     def impersonate
       @user = User.find(params[:user_id])
       impersonate_user(@user)
@@ -47,10 +20,6 @@ module Admin
     end
 
     private
-
-    def user_params
-      params.require(:user).permit(:email)
-    end
 
     def active_nav_links = %w[Communes]
   end
