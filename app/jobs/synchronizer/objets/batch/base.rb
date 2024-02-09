@@ -39,6 +39,8 @@ module Synchronizer
         end
 
         def synchronize_each_revision
+          logfile&.puts "--- new batch ---"
+          logfile&.flush
           revisions.each do |revision|
             success = revision.synchronize
             @eager_load_store.add_edifice(revision.objet.edifice) if success && revision.new_edifice?

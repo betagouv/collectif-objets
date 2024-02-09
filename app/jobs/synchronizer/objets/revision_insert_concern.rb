@@ -15,7 +15,7 @@ module Synchronizer
 
       def set_action_and_log
         @action = :create
-        log "création de l’objet #{palissy_REF} avec #{objet_attributes.except(:palissy_REF)}"
+        log "création de l’objet #{palissy_REF} avec #{all_attributes.except(:palissy_REF)}"
       end
     end
   end

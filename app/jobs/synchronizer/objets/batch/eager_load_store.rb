@@ -44,11 +44,10 @@ module Synchronizer
         end
 
         def add_edifice(edifice)
-          if edifice.merimee_REF.present?
-            edifices_by_ref[edifice.merimee_REF] = edifice
-          else
-            edifices_by_code_insee_and_slug[[edifice.code_insee, edifice.slug]] = edifice
-          end
+          @batch.logfile&.puts "édifice créé #{edifice.attributes.slice(*%w[code_insee merimee_REF slug nom id])}"
+          @batch.logfile&.flush
+          edifices_by_code_insee_and_slug[[edifice.code_insee, edifice.slug]] = edifice
+          edifices_by_ref[edifice.merimee_REF] = edifice if edifice.merimee_REF.present?
         end
       end
     end
