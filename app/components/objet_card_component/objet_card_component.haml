@@ -1,4 +1,4 @@
-.fr-card.fr-enlarge-link
+.fr-card.fr-enlarge-link{class: "fr-card--#{size}"}
   .fr-card__body
     .fr-card__content
       %h2.fr-card__title
@@ -7,7 +7,7 @@
         = commune.nom
         %br/
         = edifice_nom
-      
+
       .fr-card__start
         - if start_badges
           %ul.fr-badges-group

@@ -49,13 +49,11 @@ class ApplicationController < ActionController::Base
     I18n.locale = I18n.default_locale
   end
 
-  def after_sign_in_path_for(resource)
-    return params[:after_sign_in_path] if params[:after_sign_in_path].present?
-
-    send("after_sign_in_path_for_#{resource.class.name.downcase}", resource)
+  def signed_in_root_path(resource)
+    send("signed_in_root_path_#{resource.class.name.downcase}", resource)
   end
 
-  def after_sign_in_path_for_user(user)
+  def signed_in_root_path_user(user)
     if user.commune.recensements.completed.empty?
       commune_premiere_visite_path(user.commune)
     else
@@ -63,13 +61,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def after_sign_in_path_for_conservateur(conservateur)
+  def signed_in_root_path_conservateur(conservateur)
     return conservateurs_departement_path(conservateur.departements.first) if conservateur.departements.count == 1
 
     conservateurs_departements_path
   end
 
-  def after_sign_in_path_for_adminuser(_admin_user)
+  def signed_in_root_path_adminuser(_admin_user)
     admin_path
   end
 
@@ -88,5 +86,15 @@ class ApplicationController < ActionController::Base
     @banners << :environment if %w[development staging].include?(Rails.configuration.x.environment_specific_name)
     @banners << :user_impersonate if current_user.present? && current_user != true_user
     @banners << :conservateur_impersonate if current_conservateur.present? && current_conservateur != true_conservateur
+  end
+
+  def require_no_authentication
+    if current_user
+      redirect_to root_path, alert: "Vous êtes déjà connecté en tant qu’usager"
+    elsif current_conservateur
+      redirect_to root_path, alert: "Vous êtes déjà connecté en tant que conservateur"
+    elsif current_admin_user
+      redirect_to root_path, alert: "Vous êtes déjà connecté en tant qu’admin"
+    end
   end
 end

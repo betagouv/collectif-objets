@@ -74,7 +74,7 @@ module Synchronizer
           elsif persisted_user
             [{ id: persisted_user.id, _destroy: true }]
           elsif user_attributes[:email].present?
-            [{ email: user_attributes[:email], magic_token: SecureRandom.hex(10) }]
+            [{ email: user_attributes[:email] }]
           end
       end
 

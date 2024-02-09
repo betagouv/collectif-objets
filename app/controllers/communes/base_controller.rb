@@ -9,7 +9,7 @@ module Communes
     after_action :verify_policy_scoped, only: :index
     # rubocop:enable Rails/LexicallyScopedActionFilter
 
-    before_action :set_commune, :set_dossier, :restrict_access
+    before_action :authenticate_user!, :set_commune, :set_dossier, :restrict_access
 
     protected
 
@@ -27,7 +27,7 @@ module Communes
     end
 
     def restrict_access
-      return true if current_user&.commune == @commune
+      return true if current_user.commune == @commune
 
       redirect_to root_path, alert: "Vous n'êtes pas connecté avec le compte de la commune #{@commune}"
     end

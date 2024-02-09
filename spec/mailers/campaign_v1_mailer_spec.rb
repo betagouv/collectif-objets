@@ -43,7 +43,7 @@ end
 
 RSpec.describe CampaignV1Mailer, type: :mailer do
   let(:departement) { build(:departement, code: "78", nom: "Yvelines", dans_nom: "dans les Yvelines") }
-  let(:commune) { build(:commune, departement:, nom: "Joinville") }
+  let!(:commune) { create(:commune, departement:, nom: "Joinville") }
   let(:objet) { build(:objet, commune:) }
   let(:user) { build(:user, commune:, email: "jean@mairie.fr") }
   let(:campaign) { build(:campaign, departement:, nom_drac: "IDF", signature: SIGNATURE, date_fin: 59.days.from_now) }

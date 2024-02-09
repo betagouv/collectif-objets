@@ -6,6 +6,6 @@
 
 <%- if @message.files_and_skipped_attachments_count > 0 %><%= I18n.t("user_mailer.message_received.attachments", count: @message.files_and_skipped_attachments_count) %><%- end %>
 
-<%= I18n.t("user_mailer.message_received.cta") %> : <%= @login_url  %>
+<%= I18n.t("user_mailer.message_received.cta") %> : <%= @cta_url  %>
 
 <%= I18n.t("user_mailer.message_received.reply_by_email") %>

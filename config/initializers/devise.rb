@@ -310,13 +310,6 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 end
 
-Devise.add_module(:passwordless_authenticatable, {
-  strategy: true,
-  controller: :sessions,
-  model: 'devise/models/passwordless_authenticatable',
-  route: :session
-})
-
 Warden::Manager.after_set_user except: :fetch do |record, warden, options|
   if record.respond_to?(:last_sign_in_at) && warden.authenticated?(options[:scope])
     record.update!(last_sign_in_at: Time.zone.now)

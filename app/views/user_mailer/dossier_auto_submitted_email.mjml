@@ -12,7 +12,7 @@
       <%= I18n.t("user_mailer.dossier_auto_submitted.auto_submitted") %>
     </mj-text>
 
-    <mj-button href="<%= @login_url %>" background-color="rgb(0,0,145)">
+    <mj-button href="<%= @cta_url %>" background-color="rgb(0,0,145)">
       <%= I18n.t("user_mailer.dossier_auto_submitted.cta") %>
     </mj-button>
 

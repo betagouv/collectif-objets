@@ -99,9 +99,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
     t.string "opt_out_reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unsubscribe_token"
     t.index ["campaign_id", "commune_id"], name: "index_campaign_recipients_on_campaign_id_and_commune_id", unique: true
     t.index ["campaign_id"], name: "index_campaign_recipients_on_campaign_id"
     t.index ["commune_id"], name: "index_campaign_recipients_on_commune_id"
+    t.index ["unsubscribe_token"], name: "index_campaign_recipients_on_unsubscribe_token", unique: true
   end
 
   create_table "campaigns", force: :cascade do |t|
@@ -388,6 +390,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
     t.index ["user_id"], name: "index_recensements_on_user_id"
   end
 
+  create_table "session_codes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "code"
+    t.datetime "used_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_session_codes_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_session_codes_on_user_id"
+  end
+
   create_table "survey_votes", force: :cascade do |t|
     t.bigint "commune_id"
     t.string "survey"
@@ -401,17 +413,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "last_sign_in_at"
-    t.string "login_token"
-    t.datetime "login_token_valid_until"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "commune_id"
-    t.string "magic_token"
+    t.string "magic_token_deprecated"
     t.string "nom"
     t.string "job_title"
     t.string "email_personal"
@@ -419,8 +426,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
     t.boolean "messages_mail_notifications", default: true
     t.index ["commune_id"], name: "index_users_on_commune_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["magic_token"], name: "index_users_on_magic_token", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["magic_token_deprecated"], name: "index_users_on_magic_token_deprecated", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -430,4 +436,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
   add_foreign_key "recensements", "objets"
   add_foreign_key "recensements", "users"
   add_foreign_key "users", "communes"
+  add_foreign_key "session_codes", "users"
 end

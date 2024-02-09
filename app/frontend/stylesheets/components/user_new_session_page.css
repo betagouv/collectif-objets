@@ -1,0 +1,34 @@
+.co-image-blue-layer {
+  background-image: url(/images/sur-place-bleu.png);
+  background-size: cover;
+  color: #fff;
+  padding: 22rem 3rem 5rem 3rem ;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: bold;
+}
+
+.fr-small-cards-overlapping[data-cards-count="1"] {
+  min-height: 400px;
+}
+
+.fr-small-cards-overlapping[data-cards-count="2"] {
+  min-height: 550px;
+}
+
+.fr-small-cards-overlapping .fr-card {
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.fr-small-cards-overlapping .fr-card:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.fr-small-cards-overlapping .fr-card:nth-child(2) {
+  top: 150px;
+  left: 150px;
+}

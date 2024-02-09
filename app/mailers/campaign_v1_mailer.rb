@@ -35,6 +35,7 @@ class CampaignV1Mailer < ApplicationMailer
 
   def set_campaign_commune_and_user
     @campaign, @commune, @user = params.values_at(:campaign, :commune, :user)
+    @campaign_recipient = @campaign.recipients.where(commune: @commune).first
     @departement = @campaign.departement
   end
 

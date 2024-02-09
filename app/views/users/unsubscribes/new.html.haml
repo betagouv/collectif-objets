@@ -1,0 +1,27 @@
+- content_for(:head_title) { "Désinscription" }
+
+%main.fr-container.fr-pt-2w.fr-pb-4w{"data-controller": "devise--sessions"}
+  = render "shared/breadcrumbs", links: [ ["Accueil", root_path]], current_page_label: "Désinscription"
+
+  %h1 Désinscription
+
+  .fr-row
+    .fr-col-md-6
+      %p
+        En cliquant sur ce bouton, vous désinscrirez la commune
+        = @recipient.commune.nom
+        = "(#{ @recipient.commune.users.first.email })"
+        de tous les prochains emails de la part de Collectif Objets au sujet de la campagne de campagne de recensement
+        = @campaign.departement.dans_nom
+        du
+        = l(@campaign.date_lancement)
+        au
+        = l(@campaign.date_fin)
+
+      = form_with url: user_unsubscribe_path, method: :post do |f|
+        = f.hidden_field :token, value: @recipient.unsubscribe_token
+        = f.submit "Désinscription",
+          class: "fr-btn fr-icon-delete-line fr-btn--icon-left"
+
+      .fr-mt-4w
+        = link_to "Annuler et revenir à l’accueil", root_path, class: "fr-btn fr-btn--secondary"

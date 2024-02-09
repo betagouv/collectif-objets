@@ -12,7 +12,7 @@
         %b Commune :
         %span= commune || "N/A"
       %p
-        = form_tag destroy_user_session_path, method: :delete, data: { turbo: false } do
+        = form_tag user_session_path, method: :delete, data: { turbo: false } do
           %button.fr-btn.fr-btn--secondary.fr-icon-logout-box-r-line.fr-btn--icon-left{type: "submit"}
             Déconnexion
 

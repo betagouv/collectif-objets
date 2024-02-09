@@ -18,11 +18,13 @@ Rails.application.routes.draw do
     get "users/edit" => "devise/registrations#edit", :as => "edit_user_registration"
     put "users" => "devise/registrations#update", :as => "user_registration"
 
-    get "users/sign_in_with_token", to: "users/sessions#sign_in_with_token"
-    get "magic-authentication", to: "users/sessions#sign_in_with_magic_token"
-    namespace :users do
-      resources :magic_links, only: [:create]
-    end
+    get "magic-authentication", to: "users/sessions#redirect_from_magic_token"
+  end
+
+  namespace :users, as: :user do
+    resources :session_codes, only: %i[new create]
+    resource :session, only: %i[new create destroy]
+    resource :unsubscribe, only: %i[new create]
   end
 
   devise_for :conservateurs, only: %i[sessions passwords]
@@ -130,7 +132,9 @@ Rails.application.routes.draw do
   ## -----
 
   namespace :admin do
-    resources :communes, only: %i[index show]
+    resources :communes, only: %i[index show] do
+      post :send_test_email
+    end
     resources :conservateurs, except: [:destroy] do
       get :impersonate
       collection do

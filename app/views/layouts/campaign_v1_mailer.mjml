@@ -49,12 +49,11 @@
       </mj-column>
     </mj-section>
 
-    <% url = magic_authentication_url("magic-token": @user.magic_token, "after_sign_in_path": "/users/edit") %>
     <mj-section>
       <mj-column>
         <mj-text color="#666">
-          <a href="<%= url %>">
-          <%= t("campaign_v1_mailer.layout.desinscription") %>
+          <a href="<%= new_user_unsubscribe_url(token: @campaign_recipient.unsubscribe_token) %>">
+            <%= t("campaign_v1_mailer.layout.desinscription") %>
           </a>
         </mj-text>
       </mj-column>

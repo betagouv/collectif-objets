@@ -20,6 +20,8 @@ class CampaignRecipient < ApplicationRecord
   validate :validate_inactive
   validate :validate_email
 
+  before_create :set_unsubscribe_token
+
   def status
     if campaign.draft? || campaign.planned?
       nil
@@ -51,6 +53,10 @@ class CampaignRecipient < ApplicationRecord
     ).any?
 
     false
+  end
+
+  def set_unsubscribe_token
+    self.unsubscribe_token ||= SecureRandom.hex(30)
   end
 
   private

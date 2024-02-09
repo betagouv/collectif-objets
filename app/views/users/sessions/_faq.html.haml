@@ -1,0 +1,29 @@
+%ul.fr-accordions-group
+  %li
+    %section.fr-accordion
+      %h2.fr-accordion__title
+        %button.fr-accordion__btn{"aria-controls": "faq1", "aria-expanded": "false"}
+          Je ne trouve pas ma commune
+      #faq1.fr-collapse
+        Seules les communes ayant au moins un objet protégé et propriété de la commune sont accessibles dans Collectif Objets.
+        Il faut aussi que la commune ait un email correctement déclaré sur
+        = link_to "service-public.fr", "https://www.service-public.fr/", target: "_blank", rel: "noopener"
+  %li
+    %section.fr-accordion
+      %h2.fr-accordion__title
+        %button.fr-accordion__btn{"aria-controls": "faq2", "aria-expanded": "false"}
+          Où sont les mots de passe ?
+      #faq2.fr-collapse
+        Pour plus de sécurité et de simplicité, Collectif Objets ne vous demande pas de mot de passe. Pour vous identifier, vous devez demander un code de connexion envoyé par email à l’adresse mail de votre commune.
+  %li
+    %section.fr-accordion
+      %h2.fr-accordion__title
+        %button.fr-accordion__btn{"aria-controls": "faq3", "aria-expanded": "false"}
+          Mauvais email / Je n'y ai pas accès
+      #faq3.fr-collapse
+        Les comptes des mairies ont été créées en utilisant les données publiées sur
+        = link_to "https://www.service-public.fr/", rel: "noopener", target: "_blank" do
+          service-public.fr
+        \.
+        Si cet email est erroné ou que vous n'y avez pas accès, veuillez le signaler à l’équipe de service-public.fr.
+        Pour cela, retrouvez la mairie principale de votre commune et suivez le lien "Demander une mise à jour de cette page"

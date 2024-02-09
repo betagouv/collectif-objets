@@ -1,0 +1,68 @@
+- content_for(:head_title) { "Connexion" }
+
+%main.fr-container.fr-pt-2w.fr-pb-4w{"data-controller": "devise--sessions"}
+  = render "shared/breadcrumbs", links: [ ["Accueil", root_path]], current_page_label: "Connexion à Collectif Objets"
+
+  = turbo_frame_tag "user-session-form" do
+    .fr-grid-row
+      .fr-col-md-5{data: { controller: "user-session-form" }}
+        %h1.fr-h2 Connexion à Collectif Objets
+        %h2.fr-h3 Recevoir un code de connexion
+        = form_with(url: new_user_session_code_path,
+          method: :get,
+          builder: FormBuilderDsfr,
+          autocomplete: "off",
+          data: {user_session_form_target: "communeForm", turbo_action: "advance"}) do |f|
+          .fr-input-group
+            .co-flex.fr-mb-1w
+              = f.label :departement, "Département"
+              - if @departement
+                .fr-ml-1w
+                  = link_to "modifier",
+                    new_user_session_code_path,
+                    data: { user_session_form_target: "changeButton" }
+            = f.select(:departement,
+              options_for_select(Departement.order(:code).map { [_1, _1.code] }, @departement&.code),
+              {include_blank: "Sélectionnez un département"},
+              required: true,
+              autocomplete: "off",
+              disabled: @departement.present?,
+              data: { action: "user-session-form#submitCommuneForm",
+                user_session_form_target: "departementSelect" })
+
+          .fr-input-group{class: ("hide" if @departement.nil?),
+            data: { user_session_form_target: "communeGroup" }}
+            .co-flex.fr-mb-1w
+              = f.label :code_insee, "Commune"
+              - if @commune
+                .fr-ml-1w
+                  = link_to "modifier",
+                    new_user_session_code_path(departement: @departement.code),
+                    data: { user_session_form_target: "changeButton" }
+            = f.select(:code_insee,
+              @departement ? options_for_select(@departement.communes.where.associated(:users).order(:nom).map { [_1.nom, _1.code_insee] }, @commune&.code_insee) : [],
+              {include_blank: true},
+              required: true,
+              autocomplete: "off",
+              disabled: @departement.blank?,
+              data: { action: "user-session-form#submitCommuneForm" })
+
+          - if !@commune
+            .fr-input-group
+              = f.submit @departement.present? ? "Choisir la commune" : "Choisir le département",
+                data: { user_session_form_target: "submitCommuneFormButton" }
+
+        - if @commune && @commune_user
+          .fr-mt-4w
+            = form_with(url: user_session_codes_path, builder: FormBuilderDsfr, data: { turbo_frame: "_top" }) do |f|
+              = f.hidden_field :email, value: @commune_user.email
+              = dsfr_alert type: :info, size: :sm do
+                L’email auquel sera envoyé le code de connexion est
+                %b= @commune_user.email
+              .fr-btns-group.fr-mt-4w
+                = f.submit "Recevoir un code de connexion"
+
+        .fr-mt-6w
+          = render "users/sessions/faq"
+
+      = render "users/sessions/right_column"

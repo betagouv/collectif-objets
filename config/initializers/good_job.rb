@@ -26,6 +26,10 @@ Rails.application.configure do
     purge_unattached_blobs: {
       cron: "0 2 * * *",
       class: "PurgeUnattachedBlobsJob"
+    },
+    remove_old_session_codes: {
+      cron: "0 4 * * *",
+      class: "Sanity::RemoveOldSessionCodesJob"
     }
   }
 end

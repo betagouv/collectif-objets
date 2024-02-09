@@ -31,7 +31,7 @@
 
 <mj-section>
   <mj-column>
-    <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= @login_url %>">
+    <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= @cta_url %>">
       <%= I18n.t("user_mailer.message_received.cta") %>
     </mj-button>
   </mj-column>
