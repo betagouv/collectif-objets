@@ -28,6 +28,19 @@
   %br
   = objet.palissy_DPRO || "N/A"
 
+- if objet.palissy_WEB.present? && objet.palissy_DEPL.present?
+  %p
+    %b Déplacement
+    %br
+    Cet objet a été déplacé depuis sa protection, il se trouvait à l’origine dans la commune #{objet.palissy_COM}.
+
+- elsif objet.palissy_WEB.present? && objet.palissy_DEPL.blank?
+  %p
+    %b Changement de code INSEE
+    %br
+    Cet objet se trouvait à l’origine dans la commune #{objet.palissy_COM} (code INSEE #{objet.palissy_INSEE}).
+    Cette commune a probablement fusionné dans la commune actuelle #{objet.commune.nom} (code INSEE #{objet.lieu_actuel_code_insee}).
+
 %p
   %b Récolement
   %br

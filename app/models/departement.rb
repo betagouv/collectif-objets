@@ -28,7 +28,7 @@ class Departement < ApplicationRecord
         LEFT OUTER JOIN (
           SELECT communes.departement_code, COUNT(objets.id) objets_count
           FROM objets
-          LEFT JOIN communes ON communes.code_insee = objets."palissy_INSEE"
+          LEFT JOIN communes ON communes.code_insee = objets.lieu_actuel_code_insee
           GROUP BY communes.departement_code
         ) b ON b."departement_code" = departements.code
       }

@@ -26,7 +26,7 @@ class Commune < ApplicationRecord
   has_many :users, dependent: :restrict_with_exception
   has_many(
     :objets,
-    foreign_key: :palissy_INSEE,
+    foreign_key: :lieu_actuel_code_insee,
     primary_key: :code_insee,
     inverse_of: :commune,
     dependent: :restrict_with_exception

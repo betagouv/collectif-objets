@@ -4,7 +4,8 @@ class Objet < ApplicationRecord
   include ActionView::Helpers::TextHelper # for truncate
 
   scope :with_images, -> { where("cardinality(palissy_photos) >= 1") }
-  belongs_to :commune, foreign_key: :palissy_INSEE, primary_key: :code_insee, optional: true, inverse_of: :objets
+  belongs_to :commune, foreign_key: :lieu_actuel_code_insee, primary_key: :code_insee, optional: true,
+                       inverse_of: :objets
   belongs_to :edifice, optional: true
   has_many :recensements, dependent: :restrict_with_exception
 
@@ -50,7 +51,7 @@ class Objet < ApplicationRecord
   alias_attribute :nom, :palissy_TICO
   alias_attribute :categorie, :palissy_CATE
   alias_attribute :commune_nom, :palissy_COM
-  alias_attribute :commune_code_insee, :palissy_INSEE
+  alias_attribute :commune_code_insee, :lieu_actuel_code_insee
   # alias_attribute :departement, :palissy_DPT
   alias_attribute :crafted_at, :palissy_SCLE
   alias_attribute :last_recolement_at, :palissy_DENQ

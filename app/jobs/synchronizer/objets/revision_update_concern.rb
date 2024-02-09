@@ -25,6 +25,12 @@ module Synchronizer
             palissy_DPT
             palissy_EDIF
             palissy_EMPL
+            palissy_DEPL
+            palissy_WEB
+            palissy_MOSA
+            lieu_actuel_code_insee
+            lieu_actuel_edifice_nom
+            lieu_actuel_edifice_ref
           ]
         end
         f

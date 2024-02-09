@@ -26,19 +26,23 @@ module Synchronizer
         end
 
         def edifices_by_code_insee_and_slug
-          @edifices_by_code_insee_and_slug ||=
-            @batch.all_objets_attributes
-              .select { _1[:palissy_INSEE].present? }
-              .map { Edifice.where(code_insee: _1[:palissy_INSEE], slug: Edifice.slug_for(_1[:palissy_EDIF])) }
-              .reduce(:or)
+          @edifices_by_code_insee_and_slug ||= begin
+            wheres = @batch.all_objets_attributes.map do |objet_attributes|
+              Edifice.where(
+                code_insee: objet_attributes[:lieu_actuel_code_insee],
+                slug: Edifice.slug_for(objet_attributes[:lieu_actuel_edifice_nom])
+              )
+            end
+            wheres.reduce(:or)
               .to_a
               .index_by { |edifice| [edifice.code_insee, edifice.slug] }
+          end
         end
 
         def edifices_by_ref
           @edifices_by_ref ||=
             Edifice
-              .where(merimee_REF: @batch.all_objets_attributes.pluck(:palissy_REFA).map(&:presence).compact)
+              .where(merimee_REF: @batch.all_objets_attributes.pluck(:lieu_actuel_edifice_ref).map(&:presence).compact)
               .to_a
               .index_by(&:merimee_REF)
         end

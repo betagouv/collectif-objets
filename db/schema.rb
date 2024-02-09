@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_08_090850) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_08_151633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -330,6 +330,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_090850) do
     t.bigint "edifice_id"
     t.string "palissy_PROT"
     t.string "palissy_DPRO"
+    t.string "palissy_DEPL"
+    t.string "palissy_WEB"
+    t.string "palissy_MOSA"
+    t.string "lieu_actuel_code_insee"
+    t.string "lieu_actuel_edifice_nom"
+    t.string "lieu_actuel_edifice_ref"
     t.index ["edifice_id"], name: "index_objets_on_edifice_id"
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
