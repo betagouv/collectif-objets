@@ -3,28 +3,9 @@
 module RecensementWizard
   class Step3 < Base
     STEP_NUMBER = 3
-    TITLE = "Localisation"
+    TITLE = "Recensabilité"
 
     attr_accessor :confirmation_not_recensable
-
-    validates \
-      :localisation,
-      presence: { message: "Veuillez préciser où se trouve l’objet" }
-
-    validates \
-      :localisation,
-      inclusion: {
-        in: [Recensement::LOCALISATION_EDIFICE_INITIAL, Recensement::LOCALISATION_AUTRE_EDIFICE],
-        message: "La localisation de l’objet n’est pas valide"
-      },
-      if: -> { localisation.present? }
-
-    validates \
-      :edifice_nom,
-      presence: {
-        message: "Veuillez préciser le nom de l’édifice dans lequel l’objet a été déplacé"
-      },
-      if: -> { localisation == Recensement::LOCALISATION_AUTRE_EDIFICE }
 
     validates \
       :recensable,
@@ -38,7 +19,7 @@ module RecensementWizard
       self.confirmation_not_recensable = recensement.recensable_was == false ? "true" : "false"
     end
 
-    def permitted_params = %i[localisation edifice_nom recensable confirmation_not_recensable]
+    def permitted_params = %i[recensable confirmation_not_recensable]
 
     def confirmation_modal_path_params
       return if recensable != false || confirmation_not_recensable
