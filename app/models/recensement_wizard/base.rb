@@ -2,6 +2,7 @@
 
 module RecensementWizard
   STEPS = [1, 2, 3, 4, 5, 6, 7].freeze
+  PHOTOS_STEP_NUMER = 4 # not ideal but a quick fix to know where to redirect in recensement photos controller
   class InvalidStep < StandardError; end
 
   class Base

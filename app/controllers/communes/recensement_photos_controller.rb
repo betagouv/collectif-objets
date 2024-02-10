@@ -43,12 +43,15 @@ module Communes
     private
 
     def redirect_to_edit
-      redirect_to(edit_commune_objet_recensement_path(@recensement.commune, @recensement.objet, @recensement, step: 3))
+      redirect_to(edit_commune_objet_recensement_path(@recensement.commune,
+                                                      @recensement.objet,
+                                                      @recensement,
+                                                      step: RecensementWizard::PHOTOS_STEP_NUMER))
     end
 
     def set_recensement_and_authorize
       @recensement = Recensement.find(params[:recensement_id])
-      @wizard = RecensementWizard::Step3.new(@recensement)
+      @wizard = RecensementWizard::Base.build_for(RecensementWizard::PHOTOS_STEP_NUMER, @recensement)
       authorize(@recensement, :update?)
     end
 
