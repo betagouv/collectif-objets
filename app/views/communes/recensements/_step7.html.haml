@@ -19,12 +19,6 @@
       Commentaires du conservateur
     .co-blockquote= recensement.analyse_notes
 
-%section.fr-mb-4w
-  %h3.fr-text--lg.fr-mb-1v
-    Avez-vous trouvé l’objet ?
-    = edit_recensement_step_link recensement, 1, "aria-label": "Modifier la réponse"
-  %div= t "recensement.investigation_choices.#{!recensement.absent?}"
-
 - if !recensement.absent?
   %section.fr-mb-4w
     %h3.fr-text--lg.fr-mb-1v
