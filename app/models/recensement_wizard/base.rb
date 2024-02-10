@@ -80,6 +80,10 @@ module RecensementWizard
       super(attrs_wizard)
     end
 
+    def confirmation_modal_close_path
+      edit_commune_objet_recensement_path(commune, objet, recensement, step: step_number)
+    end
+
     private
 
     def parse_params(params)
@@ -93,10 +97,6 @@ module RecensementWizard
     def confirmation_modal_path_params = nil
     def confirmation_modal? = confirmation_modal_path_params.present?
     alias skip_save? confirmation_modal?
-
-    def confirmation_modal_close_path
-      edit_commune_objet_recensement_path(commune, objet, recensement, step: step_number)
-    end
 
     def skipped_steps
       # return [] if step_number <= 5 # can we comment this line ?
