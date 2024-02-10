@@ -25,7 +25,7 @@ module RecensementWizard
 
     def next_step_number
       if localisation == Recensement::LOCALISATION_ABSENT
-        5
+        6
       elsif localisation == Recensement::LOCALISATION_EDIFICE_INITIAL
         3
       else
