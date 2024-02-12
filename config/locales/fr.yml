@@ -72,7 +72,7 @@ fr:
         other: "Il reste %{count} objets signalés en péril ou disparus à examiner à %{commune}"
     localisation_choices:
       edifice_initial_html: "<span>Oui, l’objet se trouve dans l’édifice indiqué initialement <b>%{nom_edifice}</b></span>"
-      autre_edifice_html: "<span>Oui, mais l’objet se trouve dans <b>un autre édifice</b> dans la commune indiquée</span>"
+      autre_edifice_html: "<span>Oui, mais l’objet se trouve dans <b>un autre édifice</b> dans la commune %{nom_commune}</span>"
       absent_html: "Non, je ne sais pas où est l’objet"
     recensable_choices:
       true: L’objet est recensable
