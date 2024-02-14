@@ -5,7 +5,11 @@ Rails.application.configure do
   config.good_job.cron = {
     sanity_checks: {
       cron: "0 5 * * *",
-      class: "SanityChecksJob"
+      class: "Sanity::ChecksJob"
+    },
+    sanity_remove_deprecated_edifices: {
+      cron: "0 3 * * 0", # every sunday at 3am
+      class: "Sanity::RemoveDeprecatedEdificesJob"
     },
     campaigns: {
       cron: "30 10 * * *",

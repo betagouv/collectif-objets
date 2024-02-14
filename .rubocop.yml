@@ -66,3 +66,7 @@ Naming/AsciiIdentifiers:
 Naming/MethodName:
   Exclude:
     - app/jobs/synchronizer/**/*
+
+Naming/VariableName:
+  Exclude:
+    - app/jobs/synchronizer/**/*

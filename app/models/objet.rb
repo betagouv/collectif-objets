@@ -8,6 +8,8 @@ class Objet < ApplicationRecord
   belongs_to :edifice, optional: true
   has_many :recensements, dependent: :restrict_with_exception
 
+  accepts_nested_attributes_for :edifice
+
   scope :order_by_recensement_priorite,
         lambda {
           left_outer_joins(:recensements)
