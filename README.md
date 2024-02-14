@@ -212,7 +212,6 @@ flowchart TB
       worker[GoodJob worker dynos]
       cron[Cron tasks]
     end
-    rails <--> redis[(Redis)]
     rails <--> postgres[(Postgres)]
     postgres -- read-only --> metabase[Metabase]
   end

@@ -3,9 +3,8 @@ install:
 	npm install --global husky
 	npm install
 	npx husky install
-	brew install mailhog redis libvips
+	brew install mailhog libvips
 	brew services start postgresql
-	brew services start redis
 	rails db:drop db:create db:schema:load
 	rails r scripts/create_postgres_sequences_memoire_photos_numbers.rb
 	rails db:seed
