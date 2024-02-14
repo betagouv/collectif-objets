@@ -6,6 +6,7 @@ RSpec.describe Synchronizer::Objets::Row do
   subject { row }
   let(:base_attributes) do
     {
+      "cog_insee" => "12345",
       "typologie_du_dossier" => "dossier individuel",
       "statut_juridique_de_l_objet" => "",
       "statut_juridique_du_proprietaire" => "propriété de la commune",
@@ -14,6 +15,29 @@ RSpec.describe Synchronizer::Objets::Row do
   end
   let(:row) { described_class.new(base_attributes.merge(row_attributes)) }
   before { row.valid? } # trigger validations
+
+  describe "scope cog_insee (INSEE)" do
+    context "quand le champ est bien rempli" do
+      let(:row_attributes) { { "cog_insee" => "12345" } }
+      it { should be_in_scope }
+    end
+
+    context "quand le champ est nil" do
+      let(:row_attributes) { { "cog_insee" => nil } }
+      it { should_not be_in_scope }
+      it "a un message d’erreur correct" do
+        expect(row.errors[:cog_insee]).to include("est manquant")
+      end
+    end
+
+    context "quand le champ est blank" do
+      let(:row_attributes) { { "cog_insee" => "" } }
+      it { should_not be_in_scope }
+      it "a un message d’erreur correct" do
+        expect(row.errors[:cog_insee]).to include("est manquant")
+      end
+    end
+  end
 
   describe "scope typologie_du_dossier (DOSS)" do
     context "quand le champ est nil" do

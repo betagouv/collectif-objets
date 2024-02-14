@@ -16,14 +16,11 @@ module Synchronizer
       end
 
       def compute_edifice_attributes
-        palissy_INSEE = @objet_attributes[:palissy_INSEE]
-        if palissy_INSEE.blank?
-          {}
-        elsif existing_edifice_by_ref && existing_edifice_by_ref.code_insee == palissy_INSEE
+        if existing_edifice_by_ref && existing_edifice_by_ref.code_insee == @objet_attributes[:palissy_INSEE]
           { edifice_id: existing_edifice_by_ref.id }
         elsif existing_edifice_by_code_insee_and_slug
           { edifice_id: existing_edifice_by_code_insee_and_slug.id }
-        elsif existing_edifice_by_ref && existing_edifice_by_ref.code_insee != palissy_INSEE
+        elsif existing_edifice_by_ref && existing_edifice_by_ref.code_insee != @objet_attributes[:palissy_INSEE]
           # l’édifice trouvé via le REFA est dans une autre commune, on ne l’utilise pas pour cet
           # objet et on en créé un nouveau dans la bonne commune sans REFA pour éviter un conflit
           { edifice_attributes: new_edifice_attributes.except(:merimee_REF) }

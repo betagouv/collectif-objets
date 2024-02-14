@@ -7,11 +7,12 @@ module Synchronizer
 
       delegate :[], :key?, to: :@values
 
-      attr_reader :typologie_du_dossier, :statut_juridique_de_l_objet, :statut_juridique_du_proprietaire,
-                  :titre_editorial, :date_et_typologie_de_la_protection
+      attr_reader :cog_insee, :typologie_du_dossier, :statut_juridique_de_l_objet,
+                  :statut_juridique_du_proprietaire, :titre_editorial, :date_et_typologie_de_la_protection
 
       def initialize(csv_row)
         @values = csv_row.to_h
+        @cog_insee = @values["cog_insee"] || ""
         @typologie_du_dossier = @values["typologie_du_dossier"] || ""
         @statut_juridique_de_l_objet = @values["statut_juridique_de_l_objet"] || ""
         @statut_juridique_du_proprietaire = @values["statut_juridique_du_proprietaire"] || ""
@@ -20,6 +21,8 @@ module Synchronizer
       end
 
       alias in_scope? valid?
+
+      validates :cog_insee, presence: { message: "est manquant" }
 
       validates \
         :typologie_du_dossier,
