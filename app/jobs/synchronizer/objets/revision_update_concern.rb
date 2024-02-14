@@ -7,10 +7,7 @@ module Synchronizer
 
       def objet
         @objet ||= begin
-          except_fields = ["REF"]
-          except_fields += %w[COM INSEE DPT EDIF EMPL] if ignore_commune_change?
-          attributes_to_assign = all_attributes.except(*except_fields.map { :"palissy_#{_1}" })
-          persisted_objet.assign_attributes(attributes_to_assign)
+          persisted_objet.assign_attributes(all_attributes.except(*except_fields))
           persisted_objet
         end
       end
@@ -18,6 +15,20 @@ module Synchronizer
       private
 
       def create_or_update = :update
+
+      def except_fields
+        f = %i[palissy_REF]
+        if ignore_commune_change?
+          f += %i[
+            palissy_COM
+            palissy_INSEE
+            palissy_DPT
+            palissy_EDIF
+            palissy_EMPL
+          ]
+        end
+        f
+      end
 
       def existing_recensement?
         @existing_recensement ||= persisted_objet.recensements.any?

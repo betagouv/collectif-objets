@@ -46,7 +46,7 @@ module Synchronizer
 
         @action = :"#{create_or_update}_rejected_invalid"
         log "#{create_or_update} de l'objet #{palissy_REF} rejeté car l’objet n'est pas valide " \
-            ": #{objet.errors.full_messages.to_sentence}"
+            ": #{objet.errors.full_messages.to_sentence} - #{all_attributes}"
         false
       end
 
