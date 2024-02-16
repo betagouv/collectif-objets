@@ -9,14 +9,13 @@ module Synchronizer
         @objet ||= Objet.new(all_attributes)
       end
 
+      def action = :create
+
       private
 
       def create_or_update = :create
 
-      def set_action_and_log
-        @action = :create
-        log "création de l’objet #{palissy_REF} avec #{all_attributes.except(:palissy_REF)}"
-      end
+      def log_message = "création de l’objet #{palissy_REF} avec #{all_attributes.except(:palissy_REF)}"
     end
   end
 end

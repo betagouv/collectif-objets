@@ -257,7 +257,7 @@ RSpec.describe Synchronizer::Objets::Revision do
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_before_update) }
       it "ne fait rien" do
         expect(revision.objet.changes).to be_empty
-        expect(revision.synchronize).to eq false
+        expect(revision.synchronize).to eq true
         expect(revision.action).to eq :not_changed
       end
     end
@@ -290,7 +290,7 @@ RSpec.describe Synchronizer::Objets::Revision do
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_before_update) }
       let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
       it "ne fait rien" do
-        expect(revision.synchronize).to eq false
+        expect(revision.synchronize).to eq true
         expect(revision.action).to eq :not_changed
       end
     end
