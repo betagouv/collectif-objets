@@ -64,9 +64,9 @@ module Synchronizer
           when :update
             m
           when :update_with_commune_change
-            "#{m} - changement de commune appliqué #{commune_before_update} → #{commune_after_update} "
+            "#{m} - changement de commune appliqué #{commune_before_update} → #{commune_after_update || 'ø'} "
           when :update_ignoring_commune_change
-            "#{m} - changement de commune ignoré #{commune_before_update} → #{commune_after_update} " \
+            "#{m} - changement de commune ignoré #{commune_before_update} → #{commune_after_update || 'ø'} " \
             "car l’objet a déjà un recensement"
           end
         end

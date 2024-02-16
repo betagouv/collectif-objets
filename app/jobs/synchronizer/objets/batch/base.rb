@@ -25,7 +25,6 @@ module Synchronizer
           @revisions ||=
             all_objets_attributes
             .map { [_1, EagerLoadedRecords.new(_1, @eager_load_store)] }
-            .select { |_objet_attributes, eager_loaded_records| eager_loaded_records.commune.present? }
             .map do |objet_attributes, eager_loaded_records|
               Revision.new(objet_attributes, eager_loaded_records:, logger:)
             end
