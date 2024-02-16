@@ -3,90 +3,105 @@
 module Synchronizer
   module Communes
     class Revision
-      attr_reader :row
-      attr_accessor :commune
+      include LogConcern
 
-      def initialize(row, commune: nil)
-        @row = row
-        @commune = commune
+      def initialize(commune_and_user_attributes, logger: nil, persisted_commune: nil)
+        @commune_and_user_attributes = commune_and_user_attributes
+        @persisted_commune = persisted_commune
+        @logger = logger
+        @persisted_user = persisted_commune&.users&.first
+        verify_eager_loaded_commune_code_insee!
       end
 
       def synchronize
-        # TODO: we should actually do something with these communes that became annexes / déléguées
-        return if !mairie? || mairie_annexe? || !commune
+        return false unless check_valid
 
-        upsert_commune
-        upsert_user
+        log_changes
+        commune.save!
       end
 
-      def code_insee = row["code_insee_commune"]
-      def nom = row["nom"].gsub(/^Mairie - ?/, "").strip
-      def email = row["adresse_courriel"]
+      def destroy_user? = users_attributes&.first&.key?(:_destroy)
 
-      def departement_code
-        code_insee.starts_with?("97") ? code_insee[0..2] : code_insee[0..1]
+      delegate :to_s, to: :all_attributes
+
+      def action_commune
+        @action_commune ||=
+          if commune.new_record?
+            :create
+          elsif commune.changed?
+            :update
+          end
       end
 
-      def phone_number
-        return nil if row["telephone"].blank?
-
-        parsed = JSON.parse(row["telephone"]).first["valeur"]
-        return nil if parsed.blank? || parsed == "f"
-
-        parsed
-      end
-
-      def type_service_local
-        JSON.parse(row["pivot"] || "[]")&.first&.dig("type_service_local")
-      rescue JSON::ParserError
-        Rails.logger.error "error when parsing pivot #{row} "
-      end
-
-      def mairie?
-        code_insee.present? && type_service_local == "mairie"
-      end
-
-      def mairie_annexe?
-        (mairie? &&
-          nom.match(/Mairi(e|é) (déléguée|annexe)/i)) ||
-          nom.match(/ - (annexe|antenne) /i) ||
-          nom.match(/bureau annexe/i)
-      end
-
-      def attributes
-        %w[code_insee nom email departement_code phone_number type_service_local].to_h { [_1, send(_1)] }
-      end
-
-      def to_s
-        "Synchronizer::Communes::Revision #{attributes.values.compact.join(',')}"
+      def action_user
+        @action_user ||=
+          if commune.persisted? && destroy_user?
+            :destroy
+          elsif commune.persisted? && persisted_user
+            :update
+          else
+            :create
+          end
       end
 
       private
 
-      def upsert_commune
-        commune.assign_attributes(departement_code:, nom:, phone_number:)
-        return unless commune.changed?
+      attr_reader :commune_and_user_attributes, :persisted_commune, :persisted_user
 
-        Rails.logger.info "saving changes to commune #{code_insee} #{commune.changes}"
-        commune.save
-        return unless commune.errors.any?
+      # def log(*, **) = puts(*, **) # for debug
 
-        Rails.logger.warn "error when saving commune #{self}"
-        raise commune.errors.full_messages.join(", ")
+      def verify_eager_loaded_commune_code_insee!
+        return if persisted_commune.nil? || persisted_commune.code_insee == commune_attributes[:code_insee]
+
+        raise "eager loaded commune #{persisted_commune.code_insee} instead of #{commune_attributes[:code_insee]}"
       end
 
-      def upsert_user
-        # TODO: this actually never updates but only inserts
-        return if email.blank? || commune.users.any?
+      def commune
+        @commune ||= (persisted_commune || Commune.new).tap { _1.assign_attributes(all_attributes) }
+      end
 
-        user = User.create(
-          email:,
-          magic_token: SecureRandom.hex(10),
-          commune_id: commune.id
-        )
-        return unless user.errors.any?
+      def commune_attributes = commune_and_user_attributes[:commune]
+      def user_attributes = commune_and_user_attributes[:user]
 
-        Rails.logger.info "error when saving user for revision #{self} : #{user.errors.full_messages.join}"
+      def all_attributes
+        commune_attributes.merge({ users_attributes: }.compact)
+      end
+
+      def users_attributes
+        @users_attributes ||=
+          if persisted_user && user_attributes[:email].present?
+            [{ id: persisted_user.id, email: user_attributes[:email] }]
+          elsif persisted_user
+            [{ id: persisted_user.id, _destroy: true }]
+          elsif user_attributes[:email].present?
+            [{ email: user_attributes[:email], magic_token: SecureRandom.hex(10) }]
+          end
+      end
+
+      def check_valid
+        return true if commune.valid?
+
+        log "commune synchro rejected : #{commune_attributes[:code_insee]} #{commune_attributes[:nom]} : " \
+            "#{commune.errors.full_messages.to_sentence} - #{all_attributes}",
+            counter: :error
+        false
+      end
+
+      def log_changes
+        if action_commune == :create
+          log "creating commune #{commune_attributes[:code_insee]} with #{all_attributes}", counter: :create_commune
+        elsif action_commune == :update
+          log "saving changes to commune #{commune_attributes[:code_insee]} #{commune.changes}",
+              counter: :update_commune
+        end
+
+        if action_user == :update
+          log "saving email change #{persisted_user.email} -> #{user_attributes[:email]}",
+              counter: :user_update_email
+        elsif action_user == :destroy
+          log "destroying user #{persisted_user.email} for commune #{commune_attributes[:code_insee]}",
+              counter: :user_destroyed
+        end
       end
     end
   end

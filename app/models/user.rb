@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :commune
 
+  has_many :recensements, dependent: :nullify
+
   attr_accessor :impersonating
 
   def rotate_login_token(valid_for: 60.minutes)

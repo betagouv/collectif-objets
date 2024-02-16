@@ -2,84 +2,64 @@
 
 module Synchronizer
   module Communes
+    # La synchronisation des communes nécessite trois parcours consécutifs du CSV :
+    # 1. le premier pour identifier les codes INSEE avec plusieurs mairies principales
+    # 2. le second pour supprimer les Users dont l’email a disparu dans le CSV
+    # 3. le troisième pour upsert toutes les communes et Users
+    # L’étape 2. permet de libérer les emails des Users supprimés pour qu’ils soient potentiellement
+    # réutilisés à l’étape 3
     class SynchronizeAllJob < ApplicationJob
       BATCH_SIZE = 1000
 
       def perform
         Rails.logger.info("starting iteration by batch of #{BATCH_SIZE}...")
-        @progressbar = ProgressBar.create(total: client.count_all, format: "%t: |%B| %p%% %e %c/%u")
-        client.each_slice(BATCH_SIZE) { synchronize_batch(_1) }
-
-        return if revisions_for_code_insees_with_multiple_communes.empty?
-
-        Rails.logger.info(
-          "iterating #{revisions_for_code_insees_with_multiple_communes} revisions" \
-          "for code insees with multiple communes..."
-        )
-        revisions_for_code_insees_with_multiple_communes.each(&:synchronize)
+        create_progressbar
+        set_code_insees_with_multiple_mairies
+        client.each_slice(BATCH_SIZE) { synchronize_batch(_1, if_block: ->(revision) { revision.destroy_user? }) }
+        client.each_slice(BATCH_SIZE) { synchronize_batch(_1) } # rubocop:disable Style/CombinableLoops
+        logger.close
       end
 
       private
 
-      def synchronize_batch(batch)
-        revisions = batch
-          .map { Revision.new(_1) }
-          .select { _1.mairie? && !_1.mairie_annexe? }
-          .select { code_insees_with_multiple_mairies.exclude?(_1.code_insee) }
+      def create_progressbar
+        return if Rails.env.test?
 
-        communes_by_code_insee = Commune
-          .joins(:objets)
-          .where(code_insee: revisions.map(&:code_insee))
-          .includes(:users)
-          .to_a
-          .index_by(&:code_insee)
+        @progressbar = ProgressBar.create(total: client.count_all * 3, format: "%t: |%B| %p%% %e %c/%u")
+      end
 
-        (batch.count - revisions.count).times { @progressbar.increment }
-        revisions.each do |revision|
-          revision.commune = communes_by_code_insee[revision.code_insee]
-          revision.synchronize if revision.commune
-          @progressbar.increment
-        end
+      def logger
+        @logger ||= Synchronizer::Logger.new(filename_prefix: "synchronize-communes")
       end
 
       def client
         @client ||= ApiClientAnnuaireAdministration.new
       end
 
-      def iterate_revisions(&block)
-        client.each { block.call(Revision.new(_1)) }
-      end
+      def set_code_insees_with_multiple_mairies
+        @code_insees_with_multiple_mairies = begin
+          logger.log "searching for code insees with multiple mairies principales..."
+          counts = Hash.new(0)
+          client.each do |csv_row|
+            @progressbar&.increment
+            row = Row.new(csv_row)
+            next if row.invalid?
 
-      def code_insees_with_multiple_mairies
-        @code_insees_with_multiple_mairies ||= compute_code_insees_with_multiple_mairies
-      end
-
-      def compute_code_insees_with_multiple_mairies
-        counts = Hash.new(0)
-        iterate_revisions do |revision|
-          next if !revision.mairie? || revision.mairie_annexe?
-
-          counts[revision.code_insee] += 1
+            counts[row["code_insee_commune"]] += 1
+          end
+          codes = counts.select { |_code, count| count > 1 }.map(&:first)
+          logger.log "found #{codes.count} codes insees that match multiple mairies principales : #{codes}"
+          codes
         end
-        codes = counts.select { |_code, count| count > 1 }.map(&:first)
-        Rails.logger.info "found #{codes.count} codes insees that match " \
-                          "multiple mairies principales : #{codes[0..10]}..."
-        codes
       end
 
-      def revisions_for_code_insees_with_multiple_communes
-        revisions_by_code_insee = Hash.new { |h, k| h[k] = [] } # code_insee => [revisions]
-        iterate_revisions do |revision|
-          next if !revision.mairie? || revision.mairie_annexe?
-          next if code_insees_with_multiple_mairies.exclude?(revision.code_insee)
+      def synchronize_batch(csv_rows, if_block: nil)
+        excluded, included = csv_rows
+          .partition { @code_insees_with_multiple_mairies.include?(_1["code_insee_commune"]) }
 
-          revisions_by_code_insee[revision.code_insee] << revision
-        end
-        # revisions_by_code_insee.each do |code_insee, revisions|
-        #   Rails.logger.info "code_insee #{code_insee}"
-        #   revisions.each { Rails.logger.info _1 }
-        # end
-        []
+        batch = Batch::Base.new(included, logger:)
+        batch.synchronize(if_block:) { @progressbar&.increment }
+        (excluded.count + batch.skipped_rows_count).times { @progressbar&.increment }
       end
     end
   end
