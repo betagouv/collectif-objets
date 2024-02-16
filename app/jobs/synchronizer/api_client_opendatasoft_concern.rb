@@ -16,16 +16,19 @@ module Synchronizer
     delegate :each, :each_slice, to: :lazy_iterator
 
     def count_all
-      @count_all ||=
+      @count_all ||= begin
         if system("xsv --version &> /dev/null")
           # in dev, if xsv is installed, it is much faster to count rows with it
           Rails.logger.info "counting all rows in #{csv_path} using xsv..."
-          `xsv count --delimiter ';' #{csv_path}`.to_i
+          count = `xsv count --delimiter ';' #{csv_path}`.to_i
         else
           Rails.logger.info "counting all rows in #{csv_path}..."
           # this is quite slow but I did not find a faster way to do it
-          CSV.foreach(csv_path, headers: true, col_sep: ";").count
+          count = CSV.foreach(csv_path, headers: true, col_sep: ";").count
         end
+        Rails.logger.info "counted #{count} rows"
+        count
+      end
     end
 
     def find_by(where)
