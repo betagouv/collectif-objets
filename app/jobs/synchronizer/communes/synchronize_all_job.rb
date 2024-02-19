@@ -2,21 +2,16 @@
 
 module Synchronizer
   module Communes
-    # La synchronisation des communes nécessite trois parcours consécutifs du CSV :
-    # 1. le premier pour identifier les codes INSEE avec plusieurs mairies principales
-    # 2. le second pour supprimer les Users dont l’email a disparu dans le CSV
-    # 3. le troisième pour upsert toutes les communes et Users
-    # L’étape 2. permet de libérer les emails des Users supprimés pour qu’ils soient potentiellement
-    # réutilisés à l’étape 3
     class SynchronizeAllJob < ApplicationJob
       BATCH_SIZE = 1000
 
       def perform
         Rails.logger.info("starting iteration by batch of #{BATCH_SIZE}...")
         create_progressbar
-        set_code_insees_with_multiple_mairies
-        client.each_slice(BATCH_SIZE) { synchronize_batch(_1, if_block: ->(revision) { revision.destroy_user? }) }
-        client.each_slice(BATCH_SIZE) { synchronize_batch(_1) } # rubocop:disable Style/CombinableLoops
+        # La synchronisation des communes nécessite trois parcours consécutifs du CSV :
+        cycle_1_set_code_insees_with_multiple_mairies
+        cycle_2_destroy_users_with_disappeared_email
+        cycle_3_upsert_all
         logger.close
       end
 
@@ -36,7 +31,8 @@ module Synchronizer
         @client ||= ApiClientAnnuaireAdministration.new
       end
 
-      def set_code_insees_with_multiple_mairies
+      def cycle_1_set_code_insees_with_multiple_mairies
+        # identifie les codes INSEE avec plusieurs mairies principales
         @code_insees_with_multiple_mairies = begin
           logger.log "searching for code insees with multiple mairies principales..."
           counts = Hash.new(0)
@@ -51,6 +47,17 @@ module Synchronizer
           logger.log "found #{codes.count} codes insees that match multiple mairies principales : #{codes}"
           codes
         end
+      end
+
+      def cycle_2_destroy_users_with_disappeared_email
+        # supprimer les Users dont l’email a disparu dans le CSV
+        # extraire ce cycle du 3ème permet de libérer les emails qui peuvent être réutilisés
+        client.each_slice(BATCH_SIZE) { synchronize_batch(_1, if_block: ->(revision) { revision.destroy_user? }) }
+      end
+
+      def cycle_3_upsert_all
+        # upsert toutes les communes et Users
+        client.each_slice(BATCH_SIZE) { synchronize_batch(_1) }
       end
 
       def synchronize_batch(csv_rows, if_block: nil)
