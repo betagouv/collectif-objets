@@ -28,13 +28,13 @@
   %br
   = objet.palissy_DPRO || "N/A"
 
-- if objet.palissy_WEB.present? && objet.palissy_DEPL.present?
+- if objet.déplacé?
   %p
     %b Déplacement
     %br
     Cet objet a été déplacé depuis sa protection, il se trouvait à l’origine dans la commune #{objet.palissy_COM}.
 
-- elsif objet.palissy_WEB.present? && objet.palissy_DEPL.blank?
+- elsif objet.code_insee_a_changé?
   %p
     %b Changement de code INSEE
     %br

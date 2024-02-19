@@ -41,6 +41,8 @@ class Objet < ApplicationRecord
                      .where.not(MIS_DE_COTE_SQL)
                    }
   scope :protégés, -> { classés.or(inscrits) }
+  scope :code_insee_a_changé, -> { where.not(palissy_WEB: nil).where.not(palissy_DEPL: nil) }
+  scope :déplacés, -> { where.not(palissy_WEB: nil).where(palissy_DEPL: nil) }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
@@ -98,4 +100,6 @@ class Objet < ApplicationRecord
   end
 
   def to_s = palissy_TICO
+  def déplacé? = palissy_WEB.present? && palissy_DEPL.present?
+  def code_insee_a_changé? = palissy_WEB.present? && palissy_DEPL.blank?
 end
