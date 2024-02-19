@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_19_175302) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_20_121849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -352,7 +352,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_175302) do
   end
 
   create_table "recensements", force: :cascade do |t|
-    t.bigint "objet_id", null: false
+    t.bigint "objet_id"
     t.string "localisation"
     t.boolean "recensable"
     t.string "edifice_nom"
@@ -375,7 +375,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_175302) do
     t.bigint "pop_export_palissy_id"
     t.string "status", default: "draft", null: false
     t.integer "photos_count", default: 0
+    t.datetime "deleted_at"
+    t.string "deleted_reason"
+    t.string "deleted_message"
+    t.jsonb "deleted_objet_snapshot"
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
+    t.index ["deleted_at"], name: "index_recensements_on_deleted_at"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true
     t.index ["user_id"], name: "index_recensements_on_user_id"

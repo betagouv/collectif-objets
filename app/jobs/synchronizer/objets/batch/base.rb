@@ -13,21 +13,25 @@ module Synchronizer
           @eager_load_store = EagerLoadStore.new(self)
         end
 
+        def all_rows
+          @all_rows ||= @csv_rows.map { Row.new(_1) }
+        end
+
         def all_objets_attributes
-          @all_objets_attributes ||=
-            @csv_rows
-              .map { Row.new(_1) }
-              .filter(&:in_scope?)
-              .map { parse_row_to_objet_attributes(_1) }
+          @all_objets_attributes ||= @csv_rows.map { parse_row_to_objet_attributes(_1) }
+        end
+
+        def all_eager_loaded_records
+          @all_eager_loaded_records ||= all_objets_attributes.map { EagerLoadedRecords.new(_1, @eager_load_store) }
         end
 
         def revisions
           @revisions ||=
-            all_objets_attributes
-            .map { [_1, EagerLoadedRecords.new(_1, @eager_load_store)] }
-            .map do |objet_attributes, eager_loaded_records|
-              Revision::Base.new(objet_attributes, eager_loaded_records:, logger:)
-            end
+            all_rows
+              .zip(all_objets_attributes, all_eager_loaded_records)
+              .map do |row, objet_attributes, eager_loaded_records|
+                Revision::Base.new(row:, objet_attributes:, eager_loaded_records:, logger:)
+              end
         end
 
         def synchronize_each_revision

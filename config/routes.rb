@@ -100,6 +100,7 @@ Rails.application.routes.draw do
       end
       resource :dossier, only: %i[show]
       resources :bordereaux, only: %i[new create]
+      resource :deleted_recensements, only: [:show]
     end
     resources :objets, only: [] do
       resources :recensements, only: [] do
