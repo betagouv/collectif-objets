@@ -17,7 +17,7 @@ module Synchronizer
 
     def count_all
       @count_all ||= begin
-        if system("xsv --version &> /dev/null")
+        if Rails.env.development? && system("xsv --version &> /dev/null")
           # in dev, if xsv is installed, it is much faster to count rows with it
           Rails.logger.info "counting all rows in #{csv_path} using xsv..."
           count = `xsv count --delimiter ';' #{csv_path}`.to_i
