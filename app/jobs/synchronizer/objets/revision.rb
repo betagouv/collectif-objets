@@ -20,6 +20,8 @@ module Synchronizer
       end
 
       def synchronize
+        return false if @objet_attributes[:lieu_actuel_code_insee].blank?
+
         return false unless check_objet_valid
 
         log log_message, counter: action
@@ -29,7 +31,7 @@ module Synchronizer
 
       private
 
-      attr_reader :objet_attributes, :persisted_objet, :commune_before_update
+      attr_reader :row, :objet_attributes, :persisted_objet, :commune_before_update
 
       def commune = @eager_loaded_records.commune
       alias commune_after_update commune
@@ -45,7 +47,7 @@ module Synchronizer
 
         log "#{create_or_update} de l'objet #{palissy_REF} rejeté car l’objet n'est pas valide " \
             ": #{objet.errors.full_messages.to_sentence} - #{all_attributes}",
-            :"#{create_or_update}_rejected_invalid"
+            counter: :"#{create_or_update}_rejected_invalid"
         false
       end
     end

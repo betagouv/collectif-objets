@@ -11,6 +11,9 @@ class Objet < ApplicationRecord
 
   accepts_nested_attributes_for :edifice
 
+  scope :in_scope, -> { where(in_scope: true) }
+  scope :out_of_scope, -> { where(in_scope: false) }
+
   scope :order_by_recensement_priorite,
         lambda {
           left_outer_joins(:recensements)

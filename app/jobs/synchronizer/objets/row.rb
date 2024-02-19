@@ -4,6 +4,7 @@ module Synchronizer
   module Objets
     class Row
       include ActiveModel::Validations
+      include Parser
 
       delegate :[], :key?, to: :@values
 
@@ -18,6 +19,12 @@ module Synchronizer
         @statut_juridique_du_proprietaire = @values["statut_juridique_du_proprietaire"] || ""
         @titre_editorial = @values["titre_editorial"] || ""
         @date_et_typologie_de_la_protection = @values["date_et_typologie_de_la_protection"] || ""
+      end
+
+      def objet_attributes
+        @objet_attributes ||=
+          parse_row_to_objet_attributes(@values)
+            .merge(in_scope: in_scope?, in_scope_errors: errors_serialized)
       end
 
       alias in_scope? valid?
@@ -70,6 +77,10 @@ module Synchronizer
         return if most_recent_typologie.exclude?("déclassé")
 
         errors.add(:date_et_typologie_de_la_protection, "est déclassé")
+      end
+
+      def errors_serialized
+        @errors_serialized ||= errors.map { { attribute: _1.attribute, type: _1.type, message: _1.message } }.presence
       end
     end
   end
