@@ -75,7 +75,7 @@ RSpec.describe Synchronizer::Communes::Revision do
       user = commune.users.first
       expect(user.email).to eq "contact@amberieu.fr"
       expect(revision.action_commune).to eq :update
-      expect(revision.action_user).to eq :update
+      expect(revision.action_user).to eq :update_email
     end
 
     context "email has disappeared" do

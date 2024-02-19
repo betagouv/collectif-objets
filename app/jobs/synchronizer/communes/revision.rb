@@ -37,8 +37,8 @@ module Synchronizer
         @action_user ||=
           if commune.persisted? && destroy_user?
             :destroy
-          elsif commune.persisted? && persisted_user
-            :update
+          elsif commune.persisted? && persisted_user&.email_changed?
+            :update_email
           else
             :create
           end
@@ -95,7 +95,7 @@ module Synchronizer
               counter: :update_commune
         end
 
-        if action_user == :update
+        if action_user == :update_email
           log "saving email change #{persisted_user.email} -> #{user_attributes[:email]}",
               counter: :user_update_email
         elsif action_user == :destroy
