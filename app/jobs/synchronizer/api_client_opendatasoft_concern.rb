@@ -72,6 +72,7 @@ module Synchronizer
         raise "Request failed with #{response.code}" if response.code != 200
       end
       request.on_body do |chunk|
+        progressbar.total += 1024 if progressbar.progress >= progressbar.total - 1024
         (chunk.size / 1024).floor.times { progressbar.increment }
         @temp_file.write(chunk)
       end
@@ -82,6 +83,8 @@ module Synchronizer
       request.run
 
       @temp_file.path
+    ensure
+      @temp_file&.close
     end
   end
 end
