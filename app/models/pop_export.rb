@@ -28,7 +28,7 @@ class PopExport < ApplicationRecord
       .where(record_type: "Recensement", exportable: true)
       .joins("LEFT JOIN recensements ON recensements.id = active_storage_attachments.record_id")
       .joins("LEFT JOIN objets ON objets.id = recensements.objet_id")
-      .joins('LEFT JOIN communes ON communes.code_insee = objets."palissy_INSEE"')
+      .joins("LEFT JOIN communes ON communes.code_insee = objets.lieu_actuel_code_insee")
       .where(recensements: { pop_export_memoire_id: id })
       .order('communes.nom ASC, objets."palissy_REF" ASC')
   end

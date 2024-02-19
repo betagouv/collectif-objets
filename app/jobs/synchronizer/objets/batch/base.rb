@@ -51,7 +51,7 @@ module Synchronizer
         def skipped_rows_count = @csv_rows.count - revisions.count
 
         def unique_palissy_REFs = @csv_rows.pluck("reference").uniq
-        def unique_code_insees = all_objets_attributes.pluck(:palissy_INSEE).uniq
+        def unique_code_insees = all_objets_attributes.pluck(:lieu_actuel_code_insee).compact.uniq
       end
     end
   end

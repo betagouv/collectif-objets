@@ -19,7 +19,10 @@ RSpec.describe Synchronizer::Objets::Parser do
       "titre_editorial" => "Tableau : Vierge du Rosaire",
       "reference_a_une_notice_merimee_mh" => "https://www.pop.culture.gouv.fr/notice/merimee/PA00113792",
       "date_et_typologie_de_la_protection" => "2007/01/29 : classé au titre objet",
-      "typologie_de_la_protection" => "classé au titre objet"
+      "typologie_de_la_protection" => "classé au titre objet",
+      "lieu_de_deplacement_de_l_objet" => "", # DEPL
+      "code_insee_commune_actuelle" => "", # WEB
+      "edifice_actuel" => "" # MOSA
     }
   end
   let(:obj) { Object.new.extend(described_class) }
@@ -42,6 +45,72 @@ RSpec.describe Synchronizer::Objets::Parser do
       expect(attributes[:palissy_REFA]).to eq "PA00113792"
       expect(attributes[:palissy_DPRO]).to eq "2007/01/29 : classé au titre objet"
       expect(attributes[:palissy_PROT]).to eq "classé au titre objet"
+      expect(attributes[:palissy_DEPL]).to eq nil
+      expect(attributes[:palissy_WEB]).to eq nil
+      expect(attributes[:palissy_MOSA]).to eq nil
+      expect(attributes[:lieu_actuel_code_insee]).to eq "01004"
+      expect(attributes[:lieu_actuel_edifice_nom]).to eq "chapelle des Allymes"
+      expect(attributes[:lieu_actuel_edifice_ref]).to eq "PA00113792"
+    end
+  end
+
+  context "fusion de commune : code_insee_commune_actuelle est rempli mais pas de lieu_de_deplacement" do
+    let(:row) do
+      base_row.merge(
+        "lieu_de_deplacement_de_l_objet" => "",
+        "code_insee_commune_actuelle" => "01235"
+      )
+    end
+    let(:attributes) { obj.parse_row_to_objet_attributes(row) }
+    it "le code insee de la commune actuelle est bien parsé" do
+      expect(attributes[:palissy_INSEE]).to eq "01004"
+      expect(attributes[:palissy_WEB]).to eq "01235"
+      expect(attributes[:palissy_DEPL]).to eq nil
+      expect(attributes[:palissy_MOSA]).to eq nil
+      expect(attributes[:lieu_actuel_code_insee]).to eq "01235"
+      expect(attributes[:lieu_actuel_edifice_nom]).to eq "chapelle des Allymes"
+      expect(attributes[:lieu_actuel_edifice_ref]).to eq "PA00113792"
+    end
+  end
+
+  context "déplacement d’objet, pas de ref merimée actuelle renseignée" do
+    let(:row) do
+      base_row.merge(
+        "lieu_de_deplacement_de_l_objet" => "bougé à Ambris-Bois au début du siècle",
+        "code_insee_commune_actuelle" => "01235",
+        "edifice_actuel" => "église Saint-Martin"
+      )
+    end
+    let(:attributes) { obj.parse_row_to_objet_attributes(row) }
+    it "le lieu de déplacement prend précédence" do
+      expect(attributes[:palissy_INSEE]).to eq "01004"
+      expect(attributes[:palissy_WEB]).to eq "01235"
+      expect(attributes[:palissy_DEPL]).to eq "bougé à Ambris-Bois au début du siècle"
+      expect(attributes[:palissy_MOSA]).to eq "église Saint-Martin"
+      expect(attributes[:lieu_actuel_code_insee]).to eq "01235"
+      expect(attributes[:lieu_actuel_edifice_nom]).to eq "église Saint-Martin"
+      expect(attributes[:lieu_actuel_edifice_ref]).to eq nil
+      # important : lieu_actuel_edifice_ref ne doit pas prendre la valeur de palissy_REFA !
+    end
+  end
+
+  context "déplacement d’objet, ref merimée renseignée" do
+    let(:row) do
+      base_row.merge(
+        "lieu_de_deplacement_de_l_objet" => "bougé à Ambris-Bois au début du siècle",
+        "code_insee_commune_actuelle" => "01235",
+        "edifice_actuel" => "église Saint-Martin ; PA00934057"
+      )
+    end
+    let(:attributes) { obj.parse_row_to_objet_attributes(row) }
+    it "le lieu de déplacement prend précédence" do
+      expect(attributes[:palissy_INSEE]).to eq "01004"
+      expect(attributes[:palissy_WEB]).to eq "01235"
+      expect(attributes[:palissy_DEPL]).to eq "bougé à Ambris-Bois au début du siècle"
+      expect(attributes[:palissy_MOSA]).to eq "église Saint-Martin ; PA00934057"
+      expect(attributes[:lieu_actuel_code_insee]).to eq "01235"
+      expect(attributes[:lieu_actuel_edifice_nom]).to eq "église Saint-Martin"
+      expect(attributes[:lieu_actuel_edifice_ref]).to eq "PA00934057"
     end
   end
 end

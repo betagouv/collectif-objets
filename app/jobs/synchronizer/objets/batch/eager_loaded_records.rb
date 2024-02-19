@@ -15,20 +15,20 @@ module Synchronizer
         end
 
         def commune
-          @eager_loader.communes_by_code_insee[@objet_attributes[:palissy_INSEE]]
+          @eager_loader.communes_by_code_insee[@objet_attributes[:lieu_actuel_code_insee]]
         end
 
         def edifice_by_ref
-          return if @objet_attributes[:palissy_REFA].blank?
+          return if @objet_attributes[:lieu_actuel_edifice_ref].blank?
 
-          @eager_loader.edifices_by_ref[@objet_attributes[:palissy_REFA]]
+          @eager_loader.edifices_by_ref[@objet_attributes[:lieu_actuel_edifice_ref]]
         end
 
         def edifice_by_code_insee_and_slug
           @eager_loader.edifices_by_code_insee_and_slug[
             [
-              @objet_attributes[:palissy_INSEE],
-              ::Edifice.slug_for(@objet_attributes[:palissy_EDIF])
+              @objet_attributes[:lieu_actuel_code_insee],
+              ::Edifice.slug_for(@objet_attributes[:lieu_actuel_edifice_nom])
             ]
           ]
         end
