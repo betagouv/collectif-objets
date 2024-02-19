@@ -12,6 +12,19 @@ module Synchronizer
         end
       end
 
+      def action
+        @action ||=
+          if apply_commune_change?
+            :update_with_commune_change
+          elsif ignore_commune_change?
+            :update_ignoring_commune_change
+          elsif objet.changed?
+            :update
+          else
+            :not_changed
+          end
+      end
+
       private
 
       def create_or_update = :update
@@ -44,20 +57,19 @@ module Synchronizer
       def apply_commune_change? = commune_changed? && !existing_recensement?
       def ignore_commune_change? = commune_changed? && !apply_commune_change?
 
-      def set_action_and_log
-        message = "mise à jour de l’objet #{palissy_REF}"
-        if apply_commune_change?
-          message += " avec changement de commune appliqué #{commune_before_update} → #{commune_after_update} "
-          @action = :update_with_commune_change
-        elsif ignore_commune_change?
-          message += " avec changement de commune ignoré #{commune_before_update} → #{commune_after_update} " \
-                     "car l’objet a déjà un recensement associé"
-          @action = :update_ignoring_commune_change
-        else
-          @action = :update
+      def log_message
+        @log_message ||= begin
+          m = "mise à jour de l’objet #{palissy_REF} : #{persisted_objet.changes}"
+          case action
+          when :update
+            m
+          when :update_with_commune_change
+            "#{m} - changement de commune appliqué #{commune_before_update} → #{commune_after_update} "
+          when :update_ignoring_commune_change
+            "#{m} - changement de commune ignoré #{commune_before_update} → #{commune_after_update} " \
+            "car l’objet a déjà un recensement"
+          end
         end
-        message += " : #{persisted_objet.changes}"
-        log message
       end
     end
   end
