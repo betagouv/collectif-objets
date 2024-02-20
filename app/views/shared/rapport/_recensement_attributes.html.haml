@@ -1,0 +1,59 @@
+-# local_assigns: (:recensement, :presenter)
+
+.fr-mb-1w.co-break-inside-avoid
+  - if recensement.missing_photos?
+    %span.fr-badge.fr-badge--sm.fr-badge--warning
+      = t("recensement.photos.taken_count", count: 0)
+  - elsif recensement.photos.count.positive?
+    .co-text--bold= t("recensement.photos.taken_count", count: recensement.photos.count)
+- if recensement.photos.count.positive?
+  .fr-grid-row
+    - recensement.photos.each_with_index do |photo, index|
+      .fr-col-md-3.co-rapport-photo
+        -# TODO: replace with galerie
+        = link_to url_for(photo), class: "co-cursor--zoom-in" do
+          = vite_or_raw_image_tag photo.variant(:medium), alt: "© Licence ouverte"
+
+.fr-grid-row.fr-grid-row--gutters.fr-mt-1w
+  .fr-col-md-6
+    .co-break-inside-avoid
+      .co-text--bold.fr-mt-2w Où se trouve l’objet ?
+      = presenter.localisation_sentence(full: true)
+
+    - unless recensement.absent?
+      .co-break-inside-avoid
+        .co-text--bold.fr-mt-2w L’objet peut-il être recensé ?
+        = presenter.recensable
+
+    - if recensement.recensable?
+      .co-break-inside-avoid
+        .co-text--bold.fr-mt-2w Dans quel état est l’objet ?
+        = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :etat_sanitaire
+
+      .co-break-inside-avoid
+        .co-text--bold.fr-mt-2w Est-il facile de voler cet objet ?
+        = render Conservateurs::AnalyseOverrideComponent.new recensement:, recensement_presenter: presenter, original_attribute_name: :securisation
+
+  .fr-col-md-6
+    .co-background--light-teal.fr-px-4w.fr-pb-4w.fr-pt-2w.fr-mb-4w.co-print-no-padding
+      .fr-mt-2w.co-break-inside-avoid
+        .co-text--bold Commentaires de la commune
+        = recensement.notes.presence || "Aucun commentaire"
+      .fr-mt-2w.co-break-inside-avoid
+        .co-text--bold Commentaires du conservateur
+        = recensement.analyse_notes.presence || "Aucun commentaire"
+
+      - if recensement.analyse_fiches.any?
+        .co-break-inside-avoid
+          .co-text--bold.fr-mt-4w.fr-mb-1w Fiches conseillées par le conservateur pour cet objet
+          .co-print-hide
+            - recensement.analyse_fiches_objects.each do |fiche|
+              .fr-mb-1w
+                = link_to fiche.title,
+                  fiche_path(fiche.id),
+                  data: { turbo_frame: "_top" },
+                  class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+          .hide.co-print-display
+            %ul
+              - recensement.analyse_fiches_objects.each do |fiche|
+                %li= fiche.title

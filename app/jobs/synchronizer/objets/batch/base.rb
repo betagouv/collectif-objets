@@ -26,7 +26,7 @@ module Synchronizer
             all_objets_attributes
             .map { [_1, EagerLoadedRecords.new(_1, @eager_load_store)] }
             .map do |objet_attributes, eager_loaded_records|
-              Revision.new(objet_attributes, eager_loaded_records:, logger:)
+              Revision::Base.new(objet_attributes, eager_loaded_records:, logger:)
             end
         end
 

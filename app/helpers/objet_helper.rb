@@ -8,7 +8,11 @@ module ObjetHelper
   end
 
   def palissy_url(objet)
-    "https://www.pop.culture.gouv.fr/notice/palissy/#{objet.palissy_REF}"
+    palissy_url_ref objet.palissy_REF
+  end
+
+  def palissy_url_ref(ref)
+    "https://www.pop.culture.gouv.fr/notice/palissy/#{ref}"
   end
 
   def link_to_palissy(objet, **, &)
