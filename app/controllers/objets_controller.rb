@@ -10,7 +10,10 @@ class ObjetsController < ApplicationController
       @pagy, @objets = pagy(@objets_list.objets)
     else
       @pagy, @objets = pagy(
-        Objet.where.associated(:commune).order(Arel.sql("MD5(TEXT(objets.id + #{Time.zone.today.yday}))"))
+        Objet
+          .where.associated(:commune)
+          .includes(:commune)
+          .order(:palissy_REF)
       )
     end
   end
