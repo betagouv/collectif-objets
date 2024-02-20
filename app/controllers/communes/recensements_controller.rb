@@ -42,7 +42,7 @@ module Communes
     protected
 
     def set_objet
-      @objet = Objet.find(params[:objet_id])
+      @objet = Objet.in_scope.find(params[:objet_id])
     end
 
     def set_recensement

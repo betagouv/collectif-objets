@@ -339,6 +339,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_19_184709) do
     t.boolean "in_scope", default: true, null: false
     t.json "in_scope_errors", array: true
     t.index ["edifice_id"], name: "index_objets_on_edifice_id"
+    t.index ["in_scope"], name: "index_objets_on_in_scope"
     t.index ["lieu_actuel_code_insee"], name: "index_objets_on_lieu_actuel_code_insee"
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"

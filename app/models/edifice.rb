@@ -9,10 +9,11 @@ class Edifice < ApplicationRecord
   validates :merimee_REF, uniqueness: true, if: -> { merimee_REF.present? }
   validates :slug, uniqueness: { scope: :code_insee }, if: -> { code_insee.present? }
 
-  scope :with_objets, -> { where.not(objets: { id: nil }) }
-  scope :with_objets_classés, -> { where.associated(:objets).merge(Objet.classés).group("edifices.id") }
+  scope :with_objets, -> { where.associated(:objets).merge(Objet.in_scope) }
+  scope :with_objets_classés, -> { with_objets.merge(Objet.classés).group("edifices.id") }
   scope :with_objets_classés_ou_inscrits, lambda {
     where.associated(:objets)
+    .merge(Objet.in_scope)
     .merge(Objet.classés.or(Objet.inscrits))
     .group("edifices.id")
   }

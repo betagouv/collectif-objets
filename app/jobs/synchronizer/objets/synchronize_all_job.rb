@@ -14,7 +14,7 @@ module Synchronizer
       private
 
       def synchronize_batch(csv_rows)
-        batch = Batch::Base.new(csv_rows, logger:)
+        batch = Synchronizer::Objets::Batch::Base.new(csv_rows, logger:)
         batch.synchronize_each_revision { @progressbar.increment }
         batch.skipped_rows_count.times { @progressbar.increment }
       end

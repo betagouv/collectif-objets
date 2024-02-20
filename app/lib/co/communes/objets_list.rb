@@ -7,7 +7,7 @@ module Co
 
       attr_reader :edifice, :commune
 
-      def initialize(commune, scoped_objets: Objet.all, exclude_recensed: false, exclude_ids: [], edifice: nil)
+      def initialize(commune, scoped_objets: Objet.in_scope, exclude_recensed: false, exclude_ids: [], edifice: nil)
         @commune = commune
         @exclude_ids = exclude_ids
         @exclude_recensed = exclude_recensed
