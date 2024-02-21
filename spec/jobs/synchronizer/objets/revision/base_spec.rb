@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Synchronizer::Objets::Revision do
+RSpec.describe Synchronizer::Objets::Revision::Base do
   let(:objet_attributes) do
     {
       palissy_REF: "PM01000001",
@@ -28,6 +28,7 @@ RSpec.describe Synchronizer::Objets::Revision do
       lieu_actuel_edifice_ref: nil
     }
   end
+  let(:logger) { instance_double(Synchronizer::Logger) }
 
   context "insertion" do
     let(:eager_loaded_records) do
@@ -42,10 +43,10 @@ RSpec.describe Synchronizer::Objets::Revision do
 
     context "commune inactive" do
       let!(:commune) { create(:commune, code_insee: "01004", status: :inactive) }
-      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
       it "créé l’objet" do
+        expect(logger).to receive(:log).with(any_args, counter: :create)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :create
         expect(revision.objet.palissy_REF).to eq "PM01000001"
         expect(revision.objet.palissy_DENO).to eq "tableau"
       end
@@ -53,10 +54,10 @@ RSpec.describe Synchronizer::Objets::Revision do
 
     context "commune en cours de recensement" do
       let(:commune) { build(:commune, code_insee: "01004", status: :started) }
-      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
       it "créé l’objet" do
+        expect(logger).to receive(:log).with(any_args, counter: :create)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :create
         expect(revision.objet.palissy_REF).to eq "PM01000001"
         expect(revision.objet.palissy_DENO).to eq "tableau"
       end
@@ -66,10 +67,10 @@ RSpec.describe Synchronizer::Objets::Revision do
       let(:commune) { build(:commune, code_insee: "01004", status: :completed) }
       let!(:dossier) { create(:dossier, :submitted, commune:) }
       before { commune.update!(dossier:) }
-      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
       it "créé l’objet" do
+        expect(logger).to receive(:log).with(any_args, counter: :create)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :create
         expect(revision.objet.palissy_REF).to eq "PM01000001"
         expect(revision.objet.palissy_DENO).to eq "tableau"
       end
@@ -79,10 +80,10 @@ RSpec.describe Synchronizer::Objets::Revision do
       let!(:commune) { create(:commune, code_insee: "01004", status: :completed) }
       let!(:dossier) { create(:dossier, :accepted, commune:, conservateur: create(:conservateur)) }
       before { commune.update!(dossier:) }
-      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
       it "créé l’objet" do
+        expect(logger).to receive(:log).with(any_args, counter: :create)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :create
         expect(revision.objet.palissy_REF).to eq "PM01000001"
         expect(revision.objet.palissy_DENO).to eq "tableau"
       end
@@ -95,11 +96,11 @@ RSpec.describe Synchronizer::Objets::Revision do
           objet_attributes[:palissy_REFA] = "PA00113792"
           objet_attributes[:lieu_actuel_edifice_ref] = "PA00113792"
         end
-        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
         it "créé un nouvel édifice" do
           expect(Edifice.count).to eq 0
+          expect(logger).to receive(:log).with(any_args, counter: :create)
           expect(revision.synchronize).to eq true
-          expect(revision.action).to eq :create
           expect(Edifice.count).to eq 1
           edifice = Edifice.first
           expect(revision.objet.edifice).to eq edifice
@@ -118,11 +119,11 @@ RSpec.describe Synchronizer::Objets::Revision do
         end
         let!(:edifice) { create(:edifice, merimee_REF: "PA00113792", code_insee: "01004", nom: "Montmir") }
         before { allow(eager_loaded_records).to receive(:edifice_by_ref).and_return(edifice) }
-        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
         it "associe l’objet à l’édifice existant" do
           expect(Edifice.count).to eq 1
+          expect(logger).to receive(:log).with(any_args, counter: :create)
           expect(revision.synchronize).to eq true
-          expect(revision.action).to eq :create
           expect(Edifice.count).to eq 1
           expect(revision.objet.edifice).to eq edifice
           expect(edifice.reload.nom).to eq "Montmir"
@@ -137,11 +138,11 @@ RSpec.describe Synchronizer::Objets::Revision do
         end
         let!(:edifice) { create(:edifice, merimee_REF: "PA00113792", code_insee: "01005", nom: "Montmir") }
         before { allow(eager_loaded_records).to receive(:edifice_by_ref).and_return(edifice) }
-        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
         it "n’utilise pas l’édifice existant mais en créé un nouveau sans ref" do
           expect(Edifice.count).to eq 1
+          expect(logger).to receive(:log).with(any_args, counter: :create)
           expect(revision.synchronize).to eq true
-          expect(revision.action).to eq :create
           expect(Edifice.count).to eq 2
           expect(revision.objet.edifice.merimee_REF).to be_nil
           expect(revision.objet.edifice.code_insee).to eq "01004"
@@ -152,7 +153,7 @@ RSpec.describe Synchronizer::Objets::Revision do
 
       context "aucune ref Mérimée dans Palissy et aucun ne correspond dans CO" do
         let!(:commune) { create(:commune, code_insee: "01004", status: :completed) }
-        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
         let(:row) do
           objet_attributes.merge(
             palissy_INSEE: "01004",
@@ -165,8 +166,8 @@ RSpec.describe Synchronizer::Objets::Revision do
         end
         it "créé un nouvel édifice et l’utilise" do
           expect(Edifice.count).to eq 0
+          expect(logger).to receive(:log).with(any_args, counter: :create)
           expect(revision.synchronize).to eq true
-          expect(revision.action).to eq :create
           expect(Edifice.count).to eq 1
           edifice = Edifice.first
           expect(revision.objet.edifice).to eq edifice
@@ -191,11 +192,11 @@ RSpec.describe Synchronizer::Objets::Revision do
         end
         let!(:edifice) { create(:edifice, code_insee: "01004", slug: "eglise-montmirail", nom: "Montmir") }
         before { allow(eager_loaded_records).to receive(:edifice_by_code_insee_and_slug).and_return(edifice) }
-        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+        let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
         it "réutilise l’édifice sans REF existant" do
           expect(Edifice.count).to eq 1
+          expect(logger).to receive(:log).with(any_args, counter: :create)
           expect(revision.synchronize).to eq true
-          expect(revision.action).to eq :create
           expect(Edifice.count).to eq 1
           expect(revision.objet.edifice).to eq edifice
           expect(edifice.reload.nom).to eq "Montmir"
@@ -253,12 +254,12 @@ RSpec.describe Synchronizer::Objets::Revision do
 
     context "aucun changement" do
       let!(:commune_before_update) { create(:commune, code_insee: "01004", status: :inactive) }
-      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_before_update) }
       it "ne fait rien" do
         expect(revision.objet.changes).to be_empty
+        expect(logger).to receive(:log).with(any_args, counter: :not_changed)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :not_changed
       end
     end
 
@@ -274,10 +275,10 @@ RSpec.describe Synchronizer::Objets::Revision do
           palissy_DENQ: nil
         )
       end
-      let(:revision) { described_class.new(row, eager_loaded_records:) }
+      let(:revision) { described_class.new(row, eager_loaded_records:, logger:) }
       it "met à jour l’objet" do
+        expect(logger).to receive(:log).with(any_args, counter: :update)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :update
         expect(revision.objet.reload.palissy_DENO).to eq "tableau bleu"
         expect(revision.objet.reload.palissy_SCLE).to eq "1er quart 18e siècle"
         expect(revision.objet.reload.palissy_DOSS).to eq "sous-dossier"
@@ -288,21 +289,21 @@ RSpec.describe Synchronizer::Objets::Revision do
     context "commune en cours de recensement + aucun changement" do
       let!(:commune_before_update) { create(:commune, code_insee: "01004", status: :started) }
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_before_update) }
-      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:) }
+      let(:revision) { described_class.new(objet_attributes, eager_loaded_records:, logger:) }
       it "ne fait rien" do
+        expect(logger).to receive(:log).with(any_args, counter: :not_changed)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :not_changed
       end
     end
 
     context "commune en cours de recensement + changements sûrs" do
       let!(:commune_before_update) { create(:commune, code_insee: "01004", status: :started) }
       let(:row) { objet_attributes.merge(palissy_DENQ: "2021") }
-      let(:revision) { described_class.new(row, eager_loaded_records:) }
+      let(:revision) { described_class.new(row, eager_loaded_records:, logger:) }
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_before_update) }
       it "met à jour" do
+        expect(logger).to receive(:log).with(any_args, counter: :update)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :update
         expect(revision.objet.reload.palissy_DENQ).to eq "2021"
       end
     end
@@ -323,10 +324,10 @@ RSpec.describe Synchronizer::Objets::Revision do
         )
       end
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_after_update) }
-      let(:revision) { described_class.new(row, eager_loaded_records:) }
+      let(:revision) { described_class.new(row, eager_loaded_records:, logger:) }
       it "sauvegarde uniquement les changements sûrs, pas le changement de commune" do
+        expect(logger).to receive(:log).with(any_args, counter: :update_ignoring_commune_change)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :update_ignoring_commune_change
         expect(revision.objet.reload.palissy_INSEE).to eq("01004")
         expect(revision.objet.reload.palissy_COM).to eq("Ambérieu-en-Bugey")
         expect(revision.objet.reload.palissy_EDIF).to eq("chapelle des Allymes")
@@ -350,10 +351,10 @@ RSpec.describe Synchronizer::Objets::Revision do
         )
       end
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_after_update) }
-      let(:revision) { described_class.new(row, eager_loaded_records:) }
+      let(:revision) { described_class.new(row, eager_loaded_records:, logger:) }
       it "change la commune et met à jour les champs" do
+        expect(logger).to receive(:log).with(any_args, counter: :update_with_commune_change)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :update_with_commune_change
         expect(revision.objet.reload.palissy_INSEE).to eq("01999")
         expect(revision.objet.reload.palissy_COM).to eq("Nogent")
         expect(revision.objet.reload.palissy_EDIF).to eq("Église st-Jean")
@@ -377,10 +378,10 @@ RSpec.describe Synchronizer::Objets::Revision do
         )
       end
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_after_update) }
-      let(:revision) { described_class.new(row, eager_loaded_records:) }
+      let(:revision) { described_class.new(row, eager_loaded_records:, logger:) }
       it "change pas la commune et met à jour les champs" do
+        expect(logger).to receive(:log).with(any_args, counter: :update_with_commune_change)
         expect(revision.synchronize).to eq true
-        expect(revision.action).to eq :update_with_commune_change
         expect(revision.objet.reload.palissy_INSEE).to eq("01999")
         expect(revision.objet.reload.palissy_COM).to eq("Nogent")
         expect(revision.objet.reload.palissy_EDIF).to eq("Église st-Jean")
