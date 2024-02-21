@@ -18,13 +18,7 @@ module Synchronizer
           return true if action == :not_changed
 
           ActiveRecord::Base.transaction do
-            if commune_changed? && existing_recensement
-              existing_recensement.destroy_or_soft_delete!(
-                reason: "changement-de-commune",
-                message: "changement de commune appliqué #{commune_before_update} → #{commune_after_update || 'ø'}",
-                objet_snapshot: @persisted_objet_snapshot_before_changes
-              )
-            end
+            destroy_or_soft_delete_existing_recensement! if commune_changed? && existing_recensement
             objet.save!
           end
           true
@@ -63,6 +57,14 @@ module Synchronizer
 
         def commune_change_message
           "changement de commune appliqué #{commune_before_update} → #{commune_after_update || 'ø'}"
+        end
+
+        def destroy_or_soft_delete_existing_recensement!
+          existing_recensement.destroy_or_soft_delete!(
+            reason: "changement-de-commune",
+            message: "changement de commune appliqué #{commune_before_update} → #{commune_after_update || 'ø'}",
+            objet_snapshot: @persisted_objet_snapshot_before_changes
+          )
         end
 
         def log_message
