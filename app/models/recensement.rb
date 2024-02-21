@@ -47,7 +47,7 @@ class Recensement < ApplicationRecord
   SECURISATION_MAUVAISE = "en_danger"
   SECURISATIONS = [SECURISATION_CORRECTE, SECURISATION_MAUVAISE].freeze
 
-  validates :objet_id, presence: true, unless: -> { deleted? }
+  validates :objet, presence: true, unless: -> { deleted? } # it is important not to use objet_id here
   validates :objet_id, uniqueness: true, if: -> { objet_id.present? }
 
   validates :confirmation_sur_place, inclusion: { in: [true], if: -> { completed? && !absent? } }
