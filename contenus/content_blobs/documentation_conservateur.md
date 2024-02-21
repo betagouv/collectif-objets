@@ -126,7 +126,9 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez l'examen final du recensement à la commune :** après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
 
-<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/c2a889e2194945c496d3071ae498637b?sid=ca3a1f17-514e-452b-8093-3b67dfaf7f0a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+## V﻿idéo tutoriel expliquant l'examen d'un dossier de recensement dans Collectif Objets :
+
+<iframe title="Examen d'un dossier d'une commune dans Collectif Objets - février 2024" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/eeb840be-5a28-4914-8a63-070b09db3c96?warningTitle=0" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
 ## Si la commune n’a pas recensé le bon objet
 
