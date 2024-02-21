@@ -47,7 +47,7 @@ class Recensement < ApplicationRecord
   SECURISATION_MAUVAISE = "en_danger"
   SECURISATIONS = [SECURISATION_CORRECTE, SECURISATION_MAUVAISE].freeze
 
-  validates :objet, presence: true, unless: -> { deleted? }
+  validates :objet_id, presence: true, unless: -> { deleted? }
   validates :objet_id, uniqueness: true, if: -> { objet_id.present? }
 
   validates :confirmation_sur_place, inclusion: { in: [true], if: -> { completed? && !absent? } }
@@ -94,7 +94,7 @@ class Recensement < ApplicationRecord
   scope :completed, -> { where(status: "completed") }
 
   # from https://medium.com/@cathmgarcia/soft-deletion-in-ruby-on-rails-a1d65d0172ab
-  default_scope { where(deleted_at: nil) }
+  default_scope { where(deleted_at: nil) } # DANGER: default scopes are INVISIBLE and can lead to unexpected results
   scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
   scope :with_deleted, -> { unscope(where: :deleted_at) }
 

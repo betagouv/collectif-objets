@@ -15,6 +15,7 @@ module Synchronizer
           true
         end
 
+        # TODO: Revision#new_edifice? should default to false, this is a code smell
         def new_edifice? = false
 
         private
