@@ -14,7 +14,7 @@ module Synchronizer
         end
 
         def synchronize
-          return false unless objet_valid?
+          return false if row.out_of_scope? || !objet_valid?
 
           log log_message, counter: action
           objet.save! if action != :not_changed

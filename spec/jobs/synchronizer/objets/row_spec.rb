@@ -26,7 +26,7 @@ RSpec.describe Synchronizer::Objets::Row do
       let(:row_attributes) { { "cog_insee" => nil } }
       it { should_not be_in_scope }
       it "a un message d’erreur correct" do
-        expect(row.errors[:cog_insee]).to include("est manquant")
+        expect(row.out_of_scope_message).to eq("la notice n’a pas de code INSEE")
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe Synchronizer::Objets::Row do
       let(:row_attributes) { { "cog_insee" => "" } }
       it { should_not be_in_scope }
       it "a un message d’erreur correct" do
-        expect(row.errors[:cog_insee]).to include("est manquant")
+        expect(row.out_of_scope_message).to eq("la notice n’a pas de code INSEE")
       end
     end
   end
@@ -43,11 +43,17 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand le champ est nil" do
       let(:row_attributes) { { "typologie_du_dossier" => nil } }
       it { should_not be_in_scope }
+      it "a un message d’erreur correct" do
+        expect(row.out_of_scope_message).to eq("la notice ne correspond pas à un dossier individuel")
+      end
     end
 
     context "quand le champ est blank" do
       let(:row_attributes) { { "typologie_du_dossier" => "" } }
       it { should_not be_in_scope }
+      it "a un message d’erreur correct" do
+        expect(row.out_of_scope_message).to eq("la notice ne correspond pas à un dossier individuel")
+      end
     end
 
     context "quand c’est un dossier individuel" do
@@ -59,7 +65,7 @@ RSpec.describe Synchronizer::Objets::Row do
       let(:row_attributes) { { "typologie_du_dossier" => "sous-dossier" } }
       it { should_not be_in_scope }
       it "a un message d’erreur correct" do
-        expect(row.errors[:typologie_du_dossier]).to include("n’est pas un dossier individuel")
+        expect(row.out_of_scope_message).to eq("la notice ne correspond pas à un dossier individuel")
       end
     end
   end
@@ -80,7 +86,7 @@ RSpec.describe Synchronizer::Objets::Row do
 
       it { should_not be_in_scope }
       it "a un message d’erreur correct" do
-        expect(row.errors[:statut_juridique_de_l_objet]).to include("est manquant ou volé")
+        expect(row.out_of_scope_message).to eq("l’objet est manquant ou volé")
       end
     end
 
@@ -88,7 +94,7 @@ RSpec.describe Synchronizer::Objets::Row do
       let(:row_attributes) { { "statut_juridique_de_l_objet" => "volé" } }
       it { should_not be_in_scope }
       it "a un message d’erreur correct" do
-        expect(row.errors[:statut_juridique_de_l_objet]).to include("est manquant ou volé")
+        expect(row.out_of_scope_message).to eq("l’objet est manquant ou volé")
       end
     end
   end
@@ -114,7 +120,7 @@ RSpec.describe Synchronizer::Objets::Row do
 
       it { should_not be_in_scope }
       it "a un message d’erreur correct" do
-        expect(row.errors[:titre_editorial]).to include("est en cours de traitement")
+        expect(row.out_of_scope_message).to eq("la notice est en cours de traitement")
       end
     end
   end
@@ -140,7 +146,7 @@ RSpec.describe Synchronizer::Objets::Row do
 
       it { should_not be_in_scope }
       it "a un message d’erreur correct" do
-        expect(row.errors[:statut_juridique_du_proprietaire]).to include("est une propriété de l’état")
+        expect(row.out_of_scope_message).to eq("l’objet est propriété de l’État")
       end
     end
   end
@@ -172,7 +178,7 @@ RSpec.describe Synchronizer::Objets::Row do
         it { should_not be_in_scope }
 
         it "a un message d’erreur correct" do
-          expect(row.errors[:date_et_typologie_de_la_protection]).to include("est déclassé")
+          expect(row.out_of_scope_message).to eq("l’objet est déclassé")
         end
       end
     end

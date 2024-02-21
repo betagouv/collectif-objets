@@ -100,4 +100,41 @@ RSpec.describe Objet, type: :model do
     expect(Objet.order_by_recensement_priorite.count).to eq 3
     expect(Objet.order_by_recensement_priorite.first).to eq(objet_recensé_prioritaire)
   end
+
+  describe "#destroy_and_soft_delete_recensement!" do
+    let!(:objet) { create(:objet) }
+    let(:reason) { "objet-devenu-hors-scope" }
+    let(:message) { "notice Palissy est un sous-dossier" }
+    subject { objet.destroy_and_soft_delete_recensement!(reason:, message:) }
+
+    context "aucun recensement" do
+      it "détruit l'objet" do
+        subject
+        expect { objet.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    context "un recensement completed existe" do
+      let(:recensement) { create(:recensement) }
+      let(:objet) { recensement.objet }
+      it "détruit l'objet et soft delete le recensement" do
+        subject
+        expect { objet.reload }.to raise_error(ActiveRecord::RecordNotFound)
+        expect(recensement.reload.deleted?).to eq true
+        expect(recensement.reload.deleted_at).to be_within(1.second).of(Time.zone.now)
+        expect(recensement.reload.deleted_reason).to eq "objet-devenu-hors-scope"
+        expect(recensement.reload.deleted_message).to eq "notice Palissy est un sous-dossier"
+      end
+
+      context "le destroy! échoue" do
+        before do
+          allow(objet).to receive(:destroy!).and_raise(ActiveRecord::RecordNotDestroyed)
+        end
+        it "should rollback and not soft delete recensement" do
+          expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
+          expect(recensement.reload.deleted?).to eq false
+        end
+      end
+    end
+  end
 end

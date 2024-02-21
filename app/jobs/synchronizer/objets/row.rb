@@ -21,8 +21,10 @@ module Synchronizer
       end
 
       alias in_scope? valid?
+      alias out_of_scope? invalid?
+      def out_of_scope_message = errors.map(&:message).to_sentence
 
-      validates :cog_insee, presence: { message: "est manquant" }
+      validates :cog_insee, presence: { message: "la notice n’a pas de code INSEE" }
 
       validates \
         :typologie_du_dossier,
@@ -35,21 +37,21 @@ module Synchronizer
             "dossier avec sous-dossiers"
           ],
           allow_blank: false,
-          message: "n’est pas un dossier individuel"
+          message: "la notice ne correspond pas à un dossier individuel"
         }
 
       validates \
         :statut_juridique_de_l_objet,
         exclusion: {
           in: %W[manquant vol\u00E9],
-          message: "est manquant ou volé"
+          message: "l’objet est manquant ou volé"
         }
 
       validates \
         :titre_editorial,
         exclusion: {
           in: ["Traitement en cours"],
-          message: "est en cours de traitement"
+          message: "la notice est en cours de traitement"
         }
 
       validate :validate_statut_juridique_du_proprietaire, :validate_date_et_typologie_de_la_protection
@@ -62,14 +64,14 @@ module Synchronizer
 
         return if out_of_scope_propriete.nil?
 
-        errors.add(:statut_juridique_du_proprietaire, "est une propriété de l’état")
+        errors.add(:statut_juridique_du_proprietaire, "l’objet est propriété de l’État")
       end
 
       def validate_date_et_typologie_de_la_protection
         most_recent_typologie = date_et_typologie_de_la_protection.split(";").last || ""
         return if most_recent_typologie.exclude?("déclassé")
 
-        errors.add(:date_et_typologie_de_la_protection, "est déclassé")
+        errors.add(:date_et_typologie_de_la_protection, "l’objet est déclassé")
       end
     end
   end

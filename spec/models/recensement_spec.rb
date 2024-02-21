@@ -241,4 +241,71 @@ RSpec.describe Recensement, type: :model do
       it { should eq 1 }
     end
   end
+
+  describe "#destroy_or_soft_delete" do
+    let(:commune) { create(:commune, code_insee: "01002") }
+    let(:objet) do
+      create(
+        :objet,
+        commune:,
+        palissy_REF: "PM02000023",
+        palissy_TICO: "grande peinture à l'huile",
+        lieu_actuel_code_insee: "01002",
+        lieu_actuel_edifice_nom: "église saint-jean"
+      )
+    end
+    subject { recensement.destroy_or_soft_delete!(reason:, message:) }
+    let(:reason) { "objet-devenu-hors-scope" }
+    let(:message) { "gros problème de sous-dossier" }
+
+    context "recensement completed" do
+      let(:recensement) { create(:recensement, objet:) }
+      it "soft deletes and stores reason and message" do
+        expect(recensement.reload.deleted_at).to be_nil
+        subject
+        expect(recensement.reload.deleted_at).to be_within(1.second).of(Time.current)
+        expect(recensement.reload.deleted_reason).to eq "objet-devenu-hors-scope"
+        expect(recensement.reload.deleted_message).to eq "gros problème de sous-dossier"
+        expect(recensement.reload.deleted_objet_snapshot["palissy_REF"]).to eq "PM02000023"
+        expect(recensement.reload.deleted_objet_snapshot["palissy_TICO"]).to eq "grande peinture à l'huile"
+        expect(recensement.reload.deleted_objet_snapshot["lieu_actuel_code_insee"]).to eq "01002"
+        expect(recensement.reload.deleted_objet_snapshot["lieu_actuel_edifice_nom"]).to eq "église saint-jean"
+      end
+    end
+
+    context "recensement completed but soft delete reason incorrect" do
+      let(:recensement) { create(:recensement, objet:) }
+      let(:reason) { "nimporte-quoi" }
+      it "does not soft delete at all" do
+        expect(recensement.reload.deleted_at).to be_nil
+        expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
+        expect(recensement.reload.deleted_at).to be_nil
+      end
+    end
+
+    context "recensement completed but no soft delete message" do
+      let(:recensement) { create(:recensement, objet:) }
+      let(:message) { nil }
+      it "soft deletes without a message" do
+        expect(recensement.reload.deleted_at).to be_nil
+        subject
+        expect(recensement.reload.deleted_at).to be_within(1.second).of(Time.current)
+        expect(recensement.reload.deleted_reason).to eq "objet-devenu-hors-scope"
+        expect(recensement.reload.deleted_message).to be_nil
+        expect(recensement.reload.deleted_objet_snapshot["palissy_REF"]).to eq "PM02000023"
+        expect(recensement.reload.deleted_objet_snapshot["palissy_TICO"]).to eq "grande peinture à l'huile"
+        expect(recensement.reload.deleted_objet_snapshot["lieu_actuel_code_insee"]).to eq "01002"
+        expect(recensement.reload.deleted_objet_snapshot["lieu_actuel_edifice_nom"]).to eq "église saint-jean"
+      end
+    end
+
+    context "recensement draft" do
+      let(:recensement) { create(:recensement, objet:, status: "draft") }
+      it "destroys" do
+        expect(recensement.reload.deleted_at).to be_nil
+        subject
+        expect { recensement.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end

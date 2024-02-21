@@ -25,7 +25,7 @@ class RecensementPresenter
   def localisation
     case @recensement.localisation
     when Recensement::LOCALISATION_EDIFICE_INITIAL
-      text { @recensement.objet.edifice_nom }
+      text { objet_edifice_nom }
     when Recensement::LOCALISATION_AUTRE_EDIFICE
       text { @recensement.edifice_nom }
     when Recensement::LOCALISATION_ABSENT
@@ -36,7 +36,7 @@ class RecensementPresenter
   def localisation_sentence(full: false)
     case @recensement.localisation
     when Recensement::LOCALISATION_EDIFICE_INITIAL
-      text { "L'objet est bien présent dans l'édifice «#{@recensement.objet.edifice_nom}»" }
+      text { "L'objet est bien présent dans l'édifice «#{objet_edifice_nom}»" }
     when Recensement::LOCALISATION_AUTRE_EDIFICE
       text { "L'objet a été déplacé dans un autre édifice #{": «#{@recensement.edifice_nom}»" if full}" }
     when Recensement::LOCALISATION_ABSENT
@@ -93,6 +93,10 @@ class RecensementPresenter
     when Recensement::SECURISATION_MAUVAISE
       badge("warning") { I18n.t("recensement.securisation_badges.en_danger") }
     end
+  end
+
+  def objet_edifice_nom
+    @recensement.objet&.edifice_nom || (@recensement.deleted_objet_snapshot || {})["lieu_actuel_edifice_nom"]
   end
 end
 

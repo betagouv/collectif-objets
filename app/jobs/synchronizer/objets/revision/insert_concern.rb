@@ -11,7 +11,7 @@ module Synchronizer
         end
 
         def synchronize
-          return false unless objet_valid?
+          return false if row.out_of_scope? || !objet_valid?
 
           log "création de l’objet #{palissy_REF} avec #{all_attributes.except(:palissy_REF)}", counter: :create
           objet.save!

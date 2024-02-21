@@ -102,4 +102,16 @@ class Objet < ApplicationRecord
   def to_s = palissy_TICO
   def déplacé? = palissy_WEB.present? && palissy_DEPL.present?
   def code_insee_a_changé? = palissy_WEB.present? && palissy_DEPL.blank?
+
+  def destroy_and_soft_delete_recensement!(**kwargs)
+    transaction do
+      recensements.each { _1.destroy_or_soft_delete!(**kwargs) }
+      recensements.reload # necessary here, objet.recensements must be empty before destroy
+      destroy!
+    end
+  end
+
+  def snapshot_attributes
+    attributes.slice("palissy_REF", "palissy_TICO", "lieu_actuel_code_insee", "lieu_actuel_edifice_nom")
+  end
 end
