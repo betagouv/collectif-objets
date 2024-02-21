@@ -10,7 +10,8 @@ module Synchronizer
           log log_message, counter: action
           persisted_objet.destroy_and_soft_delete_recensement!(
             reason: "objet-devenu-hors-scope",
-            message: soft_delete_message
+            message: soft_delete_message,
+            objet_snapshot: @persisted_objet_snapshot_before_changes
           )
           true
         end

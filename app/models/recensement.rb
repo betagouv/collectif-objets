@@ -15,8 +15,8 @@ class Recensement < ApplicationRecord
     attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }
   end
 
-  delegate :commune, to: :objet
-  delegate :departement, to: :objet
+  delegate :commune, to: :objet, allow_nil: true
+  delegate :departement, to: :objet, allow_nil: true
 
   include AASM
   aasm column: :status, whiny_persistence: true, timestamps: true do
@@ -65,10 +65,10 @@ class Recensement < ApplicationRecord
   validates :conservateur_id, presence: true, if: -> { completed? && analysed? }
 
   validates :deleted_at, presence: true, if: -> { deleted? }
-  validates :deleted_reason, inclusion: { in: %w[objet-devenu-hors-scope] }, if: -> { deleted? }
+  validates :deleted_reason, inclusion: { in: %w[objet-devenu-hors-scope changement-de-commune] }, if: -> { deleted? }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) }
+  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune.present? }
 
   scope :present_and_recensable, lambda {
     where(
@@ -166,11 +166,11 @@ class Recensement < ApplicationRecord
 
   private
 
-  def aasm_before_soft_delete_transaction(reason:, message: nil)
+  def aasm_before_soft_delete_transaction(reason:, message: nil, objet_snapshot: nil)
     assign_attributes \
       objet_id: nil,
       deleted_reason: reason,
       deleted_message: message.presence,
-      deleted_objet_snapshot: objet.snapshot_attributes
+      deleted_objet_snapshot: objet_snapshot || objet.snapshot_attributes
   end
 end
