@@ -534,56 +534,20 @@ style rails_run_photos fill:#888833
 style scraper_run fill:#888833
 ```
 
-Les données sur les communes (email de la mairie, numéro de téléphone etc…) proviennent
+Les données sur les communes et les emails des mairies proviennent
 de [l’API de service-public.fr](https://api-lannuaire.service-public.fr/explore/dataset/api-lannuaire-administration/api/)
 
-Les données sur les objets monuments historiques sont celles de Palissy, la base patrimoniale hébergée sur la
-[Plateforme Ouverte du Patrimoine (POP)](https://www.pop.culture.gouv.fr/).
-L'export publié sur data.gouv.fr est trop partiel et peu fréquent pour les besoins de Collectif Objets.
-Nous scrappons donc POP via [pop-scraper](https://github.com/adipasquale/pop-scraper).
+Les données des objets monuments historiques sont celles des bases nationales Palissy, Mérimée et Mémoire.
+Elles sont en grande partie publiées sur [data.culture.gouv.fr](https://data.culture.gouv.fr) et une petite partie est encore scrappée depuis [POP](https://www.pop.culture.gouv.fr/).
 
-Les données sur les conservateurs nous ont été transmises personnellement via un annuaire national en PDF.
+Voir plus de détails sur les processus de synchronisation des données dans [doc/synchronisation.md](doc/synchronisation.md)
 
-Pour simplifier la réutilisation des données scrappées de POP, nous avons déployé une plateforme de
-données publique : [collectif-objets-datasette.fly.dev](https://collectif-objets-datasette.fly.dev) qui fournit une
-interface visuelle web avec des filtres, et une API JSON.
-Le code est disponible [sur GitHub](https://github.com/adipasquale/collectif-objets-datasette) et utilise la librairie
-[datasette](https://github.com/simonw/datasette/).
-
-`rails runner Synchronizer::SynchronizeObjetsJob.perform_now` importe les données depuis la
-collectif-objets-datasette.fly.dev vers la base de donnée locale de Collectif Objets.
 
 La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :
 
 - Les infos personnelles des conservateurs (email, numéro de téléphone)
 - Les données de recensements. avant d'être validées et republiées sur POP, elles peuvent contenir des données à ne pas
   publier.
-
-```mermaid
-flowchart TD
-  palissy[[pour chaque notice Palissy]]
-  palissy -->code_insee_existe[une commune existe pour le code INSEE ?]
-  code_insee_existe -.->|non| ne_pas_importer[Ne pas importer]
-  code_insee_existe -->|oui| pm_existe[PM existe déjà ?]
-
-  pm_existe -->|oui| changement_de_commune[Code INSEE a changé ?]
-  pm_existe -.->|non| import_nouvel_objet(Import du nouvel objet)
-
-
-  subgraph Mise à jour d'objet
-  changement_de_commune -.->|non| mise_a_jour(Mise à jour de l'objet)
-  changement_de_commune -->|oui| 2_communes_ok[la commune d’origine a déjà recensé l’objet ?]
-
-  2_communes_ok -.->|oui| mise_a_jour_prudente(Mise à jour des champs sûrs\npas de changement de commune)
-  2_communes_ok -->|non| mise_a_jour_et_changement_commune(Changement de commune\net mise à jour de l'objet)
-  end
-
-  style mise_a_jour fill:#006600
-  style import_nouvel_objet fill:#006600
-  style mise_a_jour_et_changement_commune fill:#006600
-  style mise_a_jour_prudente fill:#003300
-  style ne_pas_importer fill:#660000
-```
 
 ## Photos
 
