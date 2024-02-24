@@ -15,13 +15,13 @@ class ObjetCardComponent < ViewComponent::Base
     @commune = kwargs[:commune] || @objet.commune # pass to avoid n+1 queries
     @main_photo_origin = kwargs[:main_photo_origin] || :memoire
     @link_html_attributes_custom = kwargs[:link_html_attributes] || {}
-    @recensement = kwargs[:recensement] || @objet.current_recensement
+    @recensement = kwargs[:recensement]
     super
   end
 
   private
 
-  attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin
+  attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :main_photo_origin
 
   delegate :nom, :palissy_DENO, :edifice_nom, :palissy_photos_presenters, to: :objet
 
@@ -36,11 +36,14 @@ class ObjetCardComponent < ViewComponent::Base
   def main_photo
     return @main_photo if @main_photo.present?
 
-    {
-      memoire: main_photo_palissy,
-      recensement: main_photo_recensement,
-      recensement_or_memoire: main_photo_recensement || main_photo_palissy
-    }[main_photo_origin]
+    case main_photo_origin
+    when :recensement
+      main_photo_recensement
+    when :memoire
+      main_photo_palissy
+    when :recensement_or_memoire
+      main_photo_recensement || main_photo_palissy
+    end
   end
 
   def link_html_attributes
@@ -57,5 +60,9 @@ class ObjetCardComponent < ViewComponent::Base
     PhotoPresenter.new \
       url: recensement.photos.first.variant(:medium),
       description: "Photo de recensement de l’objet #{objet.nom}"
+  end
+
+  def recensement
+    @recensement ||= @objet.current_recensement
   end
 end
