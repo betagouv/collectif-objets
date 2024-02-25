@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_20_121849) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_180433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -427,4 +427,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_20_121849) do
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
   add_foreign_key "recensements", "users"
+  add_foreign_key "users", "communes"
 end
