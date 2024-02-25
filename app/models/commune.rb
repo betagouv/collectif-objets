@@ -23,16 +23,15 @@ class Commune < ApplicationRecord
     end
   end
 
-  has_many :users, dependent: :restrict_with_exception
-  has_many(
+  has_many :users, dependent: :destroy
+  has_many( # rubocop:disable Rails/HasManyOrHasOneDependent
     :objets,
     foreign_key: :lieu_actuel_code_insee,
     primary_key: :code_insee,
-    inverse_of: :commune,
-    dependent: :restrict_with_exception
+    inverse_of: :commune
   )
   has_many :recensements, through: :objets
-  has_many :past_dossiers, class_name: "Dossier", dependent: :nullify
+  has_many :past_dossiers, class_name: "Dossier", dependent: :restrict_with_error
   belongs_to :dossier, optional: true
   has_many :campaign_recipients, dependent: :destroy
   has_many :admin_comments, dependent: :destroy, as: :resource
@@ -55,8 +54,10 @@ class Commune < ApplicationRecord
 
   has_many(
     :edifices,
-    foreign_key: :code_insee, primary_key: :code_insee,
-    inverse_of: :commune, dependent: :restrict_with_exception
+    foreign_key: :code_insee,
+    primary_key: :code_insee,
+    inverse_of: :commune,
+    dependent: :destroy
   )
 
   accepts_nested_attributes_for :dossier
