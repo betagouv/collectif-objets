@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_184817) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_205526) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -139,6 +139,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_184817) do
     t.float "latitude"
     t.float "longitude"
     t.string "inbound_email_token", null: false
+    t.datetime "synchronized_at"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement_code"], name: "index_communes_on_departement_code"
     t.index ["dossier_id"], name: "index_communes_on_dossier_id"

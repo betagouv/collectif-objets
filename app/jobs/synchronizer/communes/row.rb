@@ -16,6 +16,10 @@ module Synchronizer
         @nom = @values["nom"] || ""
       end
 
+      def self.get_in_scope_code_insees(csv_rows:)
+        csv_rows.map { new(_1) }.select(&:in_scope?).map(&:code_insee)
+      end
+
       alias in_scope? valid?
       alias out_of_scope? valid?
 
