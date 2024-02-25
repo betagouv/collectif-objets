@@ -17,6 +17,7 @@ module Synchronizer
       end
 
       alias in_scope? valid?
+      alias out_of_scope? valid?
 
       validates :code_insee, presence: true
       validates :type_service_local, inclusion: { in: ["mairie"] }
