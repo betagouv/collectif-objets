@@ -39,9 +39,9 @@ module Synchronizer
           client.each do |csv_row|
             @progressbar&.increment
             row = Row.new(csv_row)
-            next if row.invalid?
+            next if row.out_of_scope?
 
-            counts[row["code_insee_commune"]] += 1
+            counts[row.code_insee] += 1
           end
           codes = counts.select { |_code, count| count > 1 }.map(&:first)
           logger.log "found #{codes.count} codes insees that match multiple mairies principales : #{codes}"

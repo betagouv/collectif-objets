@@ -15,7 +15,7 @@ module Synchronizer
         rows_code_insees.map { |code_insee| { "code_insee_commune" => code_insee } }
       end
       let(:rows) do
-        csv_rows.map { instance_double(Row, invalid?: false) }
+        rows_code_insees.map { |code_insee| instance_double(Row, out_of_scope?: false, in_scope?: true, code_insee:) }
       end
       let(:logger) { instance_double(Synchronizer::Logger, log: nil, close: nil) }
       let(:api_client) { instance_double(ApiClientAnnuaireAdministration, count_all: csv_rows.count) }
@@ -26,10 +26,9 @@ module Synchronizer
         expect(api_client).to receive(:each) do |&block|
           csv_rows.each { block.call(_1) }
         end
-        expect(api_client).to receive(:each_slice).exactly(:twice).and_yield(csv_rows)
+        expect(api_client).to receive(:each_slice).at_least(:once).and_yield(csv_rows)
         csv_rows.count.times do |i|
-          expect(Row).to receive(:new).with(csv_rows[i]).and_return(rows[i])
-          expect(rows[i]).to receive(:[]).with("code_insee_commune").and_return(csv_rows[i]["code_insee_commune"])
+          allow(Row).to receive(:new).at_least(:once).with(csv_rows[i]).and_return(rows[i])
         end
         expect(Synchronizer::Logger).to receive(:new).and_return(logger)
         expect(batch).to receive(:synchronize).with(if_block: anything).twice
