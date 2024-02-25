@@ -49,25 +49,26 @@ class ApplicationController < ActionController::Base
     I18n.locale = I18n.default_locale
   end
 
-  def signed_in_root_path(resource)
-    send("signed_in_root_path_#{resource.class.name.downcase}", resource)
+  def after_sign_in_path_for(resource)
+    # after_sign_in_path_for = stored_location_for || signed_in_root_path
+    # we do not want to override the stored location if there is one
+    send("after_sign_in_path_for_#{resource.class.name.downcase}", resource)
   end
 
-  def signed_in_root_path_user(user)
-    if user.commune.recensements.completed.empty?
-      commune_premiere_visite_path(user.commune)
-    else
-      commune_objets_path(user.commune)
-    end
+  def after_sign_in_path_for_user(user)
+    return commune_premiere_visite_path(user.commune) if user.commune.recensements.completed.empty?
+
+    # NOTE: calling stored_location_for here is weird : it gets and deletes the value
+    stored_location_for(user) || commune_objets_path(user.commune)
   end
 
-  def signed_in_root_path_conservateur(conservateur)
+  def after_sign_in_path_for_conservateur(conservateur)
     return conservateurs_departement_path(conservateur.departements.first) if conservateur.departements.count == 1
 
     conservateurs_departements_path
   end
 
-  def signed_in_root_path_adminuser(_admin_user)
+  def after_sign_in_path_for_adminuser(_admin_user)
     admin_path
   end
 

@@ -20,6 +20,7 @@ module Admin
       CampaignV1Mailer.with(
         commune:,
         user: commune.users.first,
+        campaign_recipient: CampaignRecipient.new(unsubscribe_token: "g8fy3hcu3498").tap(&:readonly!),
         campaign: Campaign.new(
           departement: commune.departement,
           date_lancement: Time.zone.today,
