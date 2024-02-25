@@ -254,18 +254,20 @@ RSpec.describe Recensement, type: :model do
         lieu_actuel_edifice_nom: "église saint-jean"
       )
     end
+    let!(:user) { create(:user, commune:) }
     subject { recensement.destroy_or_soft_delete!(reason:, message:) }
     let(:reason) { "objet-devenu-hors-scope" }
     let(:message) { "gros problème de sous-dossier" }
 
     context "recensement completed" do
-      let(:recensement) { create(:recensement, objet:) }
+      let(:recensement) { create(:recensement, objet:, user:) }
       it "soft deletes and stores reason and message" do
         expect(recensement.reload.deleted_at).to be_nil
         subject
         expect(recensement.reload.deleted_at).to be_within(1.second).of(Time.current)
         expect(recensement.reload.deleted_reason).to eq "objet-devenu-hors-scope"
         expect(recensement.reload.deleted_message).to eq "gros problème de sous-dossier"
+        expect(recensement.reload.user_id).to be_nil
         expect(recensement.reload.deleted_objet_snapshot["palissy_REF"]).to eq "PM02000023"
         expect(recensement.reload.deleted_objet_snapshot["palissy_TICO"]).to eq "grande peinture à l'huile"
         expect(recensement.reload.deleted_objet_snapshot["lieu_actuel_code_insee"]).to eq "01002"

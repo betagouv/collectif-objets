@@ -5,7 +5,7 @@ class Recensement < ApplicationRecord
   include Recensements::BooleansConcern
 
   belongs_to :objet, optional: true
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :dossier, optional: true
   belongs_to :pop_export_memoire, class_name: "PopExport", inverse_of: :recensements_memoire, optional: true
   belongs_to :pop_export_palissy, class_name: "PopExport", inverse_of: :recensements_palissy, optional: true
@@ -169,6 +169,7 @@ class Recensement < ApplicationRecord
   def aasm_before_soft_delete_transaction(reason:, message: nil)
     assign_attributes \
       objet_id: nil,
+      user_id: nil,
       deleted_reason: reason,
       deleted_message: message.presence,
       deleted_objet_snapshot: objet.snapshot_attributes
