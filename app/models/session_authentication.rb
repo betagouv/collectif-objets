@@ -46,7 +46,10 @@ class SessionAuthentication
     return if errors.any? || cleaned_code.match(SessionCode::FORMAT_REGEX)
 
     errors.add(
-      :code, :invalid_format, message: "Le code de connexion doit être composé de 6 chiffres exactement"
+      :code,
+      :invalid_format,
+      message: "Le code de connexion est composé de 6 chiffres exactement. " \
+               "Vérifiez que vous n’avez pas copié deux fois le même chiffre."
     )
   end
 
@@ -55,7 +58,12 @@ class SessionAuthentication
 
     return if last_session_code.present? && last_session_code.code == cleaned_code
 
-    errors.add :code, :mismatch, message: "Code de connexion incorrect"
+    errors.add(
+      :code,
+      :mismatch,
+      message: "Code de connexion incorrect. " \
+               "Vérifiez que vous avez bien recopié le code et qu’il provient bien du dernier mail envoyé."
+    )
   end
 
   def validate_code_not_used

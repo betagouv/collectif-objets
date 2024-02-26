@@ -137,7 +137,7 @@ RSpec.describe SessionAuthentication do
         subject
         error = session_authentication.errors.first
         expect(error).to have_attributes(attribute: :code, type: :mismatch)
-        expect(session_authentication.error_message).to eq "Code de connexion incorrect"
+        expect(session_authentication.error_message).to include "Code de connexion incorrect"
       end
     end
 
@@ -153,7 +153,7 @@ RSpec.describe SessionAuthentication do
         subject
         error = session_authentication.errors.first
         expect(error).to have_attributes(attribute: :code, type: :mismatch)
-        expect(session_authentication.error_message).to eq "Code de connexion incorrect"
+        expect(session_authentication.error_message).to include "Code de connexion incorrect"
       end
     end
   end

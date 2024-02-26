@@ -2,25 +2,35 @@
   %li
     %section.fr-accordion
       %h2.fr-accordion__title
-        %button.fr-accordion__btn{"aria-controls": "faq1", "aria-expanded": "false"}
+        %button.fr-accordion__btn{"aria-controls": "faq-pas-recu", "aria-expanded": "false"}
+          Je n'ai pas reçu de code de connexion, pourquoi ?
+      #faq-pas-recu.fr-collapse
+        Le code de connexion a été envoyé à l’email de votre commune indiqué sur
+        = link_to "l’annuaire du service public", "https://www.service-public.fr/", target: "_blank", rel: "noopener"
+        = "."
+        Le code d’activation peut se trouver dans vos “Spams” / “Courrier indésirable”.
+  %li
+    %section.fr-accordion
+      %h2.fr-accordion__title
+        %button.fr-accordion__btn{"aria-controls": "faq-commune-introuvable", "aria-expanded": "false"}
           Je ne trouve pas ma commune
-      #faq1.fr-collapse
+      #faq-commune-introuvable.fr-collapse
         Seules les communes ayant au moins un objet protégé et propriété de la commune sont accessibles dans Collectif Objets.
         Il faut aussi que la commune ait un email correctement déclaré sur
         = link_to "service-public.fr", "https://www.service-public.fr/", target: "_blank", rel: "noopener"
   %li
     %section.fr-accordion
       %h2.fr-accordion__title
-        %button.fr-accordion__btn{"aria-controls": "faq2", "aria-expanded": "false"}
+        %button.fr-accordion__btn{"aria-controls": "faq-mots-de-passe", "aria-expanded": "false"}
           Où sont les mots de passe ?
-      #faq2.fr-collapse
+      #faq-mots-de-passe.fr-collapse
         Pour plus de sécurité et de simplicité, Collectif Objets ne vous demande pas de mot de passe. Pour vous identifier, vous devez demander un code de connexion envoyé par email à l’adresse mail de votre commune.
   %li
     %section.fr-accordion
       %h2.fr-accordion__title
-        %button.fr-accordion__btn{"aria-controls": "faq3", "aria-expanded": "false"}
+        %button.fr-accordion__btn{"aria-controls": "faq-mauvais-email", "aria-expanded": "false"}
           Mauvais email / Je n'y ai pas accès
-      #faq3.fr-collapse
+      #faq-mauvais-email.fr-collapse
         Les comptes des mairies ont été créées en utilisant les données publiées sur
         = link_to "https://www.service-public.fr/", rel: "noopener", target: "_blank" do
           service-public.fr

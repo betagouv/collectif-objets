@@ -1,6 +1,6 @@
-.fr-col-md-6.fr-col-offset-1.co-hide--md.co-overflow--hidden{class: ("co-image-blue-layer" unless @commune&.objets&.any?)}
+.fr-col-md-6.fr-col-offset-1.co-hide--md.co-overflow--hidden.co-background--light-teal{class: ("co-image-blue-layer" unless @commune&.objets&.any?)}
   - if @commune&.objets&.any?
-    .co-background--light-teal.fr-p-4w
+    .fr-p-4w
       .co-position-relative
         .fr-small-cards-overlapping{data: {cards_count: @commune.objets.first(2).count}}
           - @commune.objets.first(2).each do |objet|
