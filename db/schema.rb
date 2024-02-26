@@ -427,4 +427,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_184817) do
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
   add_foreign_key "recensements", "users"
+  add_foreign_key "users", "communes"
 end

@@ -35,10 +35,17 @@
             %p
               Ce recensement a été supprimé automatiquement le
               = l(recensement.deleted_at.to_date)
-              - if recensement.deleted_reason == "objet-devenu-hors-scope"
+              - case recensement.deleted_reason
+              - when "objet-devenu-hors-scope"
                 car il a été modifié dans Palissy et n’est plus concerné par Collectif Objets
                 - if recensement.deleted_message.present?
                   = " (#{recensement.deleted_message})"
+              - when "changement-de-commune"
+                car son code INSEE a changé dans Palissy.
+                Il peut s’agir d’un déplacement ou bien d’une fusion de communes.
+                - if recensement.deleted_message.present?
+                  %br
+                  = recensement.deleted_message
 
         - presenter = RecensementPresenter.new(recensement)
         = render "shared/rapport/recensement_attributes", recensement:, presenter:

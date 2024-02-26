@@ -326,14 +326,16 @@ RSpec.describe Synchronizer::Objets::Revision::Base do
       end
       before { allow(eager_loaded_records).to receive(:commune).and_return(commune_after_update) }
       let(:revision) { described_class.new(row:, objet_attributes:, eager_loaded_records:, logger:) }
-      it "sauvegarde uniquement les changements sûrs, pas le changement de commune" do
-        expect(logger).to receive(:log).with(any_args, counter: :update_ignoring_commune_change)
+      it "change l’objet de commune et soft-delete le recensement" do
+        expect(logger).to receive(:log).with(any_args, counter: :update_with_commune_change_recensement_deleted)
         expect(revision.synchronize).to eq true
-        expect(revision.objet.reload.palissy_INSEE).to eq("01004")
-        expect(revision.objet.reload.palissy_COM).to eq("Ambérieu-en-Bugey")
-        expect(revision.objet.reload.palissy_EDIF).to eq("chapelle des Allymes")
-        expect(revision.objet.reload.palissy_EMPL).to eq("chapelle située au milieu du cimetière")
-        expect(revision.objet.reload.palissy_TICO).to eq("Rosarium")
+        expect(revision.objet.reload.palissy_INSEE).to eq("01999")
+        expect(revision.objet.reload.palissy_EDIF).to eq("Église st-Jean")
+        expect(revision.objet.reload.palissy_EMPL).to eq("au fond à gauche")
+        expect(recensement.reload.deleted?).to eq true
+        expect(recensement.reload.deleted_reason).to eq "changement-de-commune"
+        expect(recensement.reload.deleted_message).to \
+          eq "changement de commune appliqué Châlons-en-Champagne (01004) → Châlons-en-Champagne (01999)"
       end
     end
 
@@ -412,7 +414,13 @@ RSpec.describe Synchronizer::Objets::Revision::Base do
           receive(:destroy_and_soft_delete_recensement!)
             .with(
               reason: "objet-devenu-hors-scope",
-              message: "la notice n’a pas de code INSEE"
+              message: "la notice n’a pas de code INSEE",
+              objet_snapshot: {
+                "lieu_actuel_code_insee" => "01004",
+                "lieu_actuel_edifice_nom" => "chapelle des Allymes",
+                "palissy_REF" => "PM01000001",
+                "palissy_TICO" => "Tableau : Vierge du Rosaire"
+              }
             )
         expect(revision.synchronize).to eq true
       end

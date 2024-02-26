@@ -12,7 +12,10 @@ module Synchronizer
           @eager_loaded_records = eager_loaded_records
           @logger = logger
           @persisted_objet = @eager_loaded_records.objet
-          @commune_before_update = persisted_objet.commune if persisted_objet
+          if persisted_objet
+            @commune_before_update = persisted_objet.commune
+            @persisted_objet_snapshot_before_changes = persisted_objet.snapshot_attributes
+          end
 
           if persisted_objet && row.out_of_scope?
             extend DestroyConcern
