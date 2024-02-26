@@ -51,6 +51,7 @@ RSpec.describe Synchronizer::Objets::Parser do
       expect(attributes[:lieu_actuel_code_insee]).to eq "01004"
       expect(attributes[:lieu_actuel_edifice_nom]).to eq "chapelle des Allymes"
       expect(attributes[:lieu_actuel_edifice_ref]).to eq "PA00113792"
+      expect(attributes[:lieu_actuel_departement_code]).to eq "01"
     end
   end
 
@@ -70,6 +71,7 @@ RSpec.describe Synchronizer::Objets::Parser do
       expect(attributes[:lieu_actuel_code_insee]).to eq "01235"
       expect(attributes[:lieu_actuel_edifice_nom]).to eq "chapelle des Allymes"
       expect(attributes[:lieu_actuel_edifice_ref]).to eq "PA00113792"
+      expect(attributes[:lieu_actuel_departement_code]).to eq "01"
     end
   end
 
@@ -90,6 +92,7 @@ RSpec.describe Synchronizer::Objets::Parser do
       expect(attributes[:lieu_actuel_code_insee]).to eq "01235"
       expect(attributes[:lieu_actuel_edifice_nom]).to eq "église Saint-Martin"
       expect(attributes[:lieu_actuel_edifice_ref]).to eq nil
+      expect(attributes[:lieu_actuel_departement_code]).to eq "01"
       # important : lieu_actuel_edifice_ref ne doit pas prendre la valeur de palissy_REFA !
     end
   end
@@ -111,6 +114,7 @@ RSpec.describe Synchronizer::Objets::Parser do
       expect(attributes[:lieu_actuel_code_insee]).to eq "01235"
       expect(attributes[:lieu_actuel_edifice_nom]).to eq "église Saint-Martin"
       expect(attributes[:lieu_actuel_edifice_ref]).to eq "PA00934057"
+      expect(attributes[:lieu_actuel_departement_code]).to eq "01"
     end
   end
 end

@@ -10,7 +10,7 @@ module Synchronizer
             code_insee:,
             nom: row["nom"].gsub(/^Mairie - ?/, "").strip,
             phone_number: parse_phone_number(row["telephone"]),
-            departement_code: code_insee.starts_with?("97") ? code_insee[0..2] : code_insee[0..1]
+            departement_code: Departement.parse_from_code_insee(code_insee)
           },
           user: {
             email: (row["adresse_courriel"] || "").split(";")[0]
