@@ -26,6 +26,11 @@ Rails.application.configure do
     purge_unattached_blobs: {
       cron: "0 2 * * *",
       class: "PurgeUnattachedBlobsJob"
+    },
+    synchronize_all: {
+      cron: "0 4 * * 0", # every sunday at 4am
+      class: "Synchronizer::Objets::SynchronizeAllJob",
+      kwargs: { enqueue_next_job_after_success: true }
     }
   }
 end

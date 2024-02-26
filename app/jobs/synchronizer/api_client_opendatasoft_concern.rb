@@ -48,7 +48,7 @@ module Synchronizer
 
     def csv_path
       # useful to iterate, make sure to download the csv with ?with_bom=false
-      return ENV["USE_LOCAL_FILE"] if ENV["USE_LOCAL_FILE"].present?
+      return "#{ENV['CSV_DIR']}/#{@dataset_name}.csv" if ENV["CSV_DIR"].present?
 
       @csv_path ||= begin
         download_csv_to_temp_file

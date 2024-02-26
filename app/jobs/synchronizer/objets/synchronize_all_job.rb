@@ -3,12 +3,15 @@
 module Synchronizer
   module Objets
     class SynchronizeAllJob < ApplicationJob
+      include EnqueueNextJobConcern
+
       BATCH_SIZE = 1000
 
-      def perform
+      def perform(enqueue_next_job_after_success: false)
         @progressbar = ProgressBar.create(total: client.count_all, format: "%t: |%B| %p%% %e %c/%u")
         client.each_slice(BATCH_SIZE) { synchronize_batch(_1) }
         logger.close
+        enqueue_next_job if enqueue_next_job_after_success
       end
 
       private

@@ -3,6 +3,8 @@
 module Synchronizer
   module Photos
     class SynchronizeAllJob < ApplicationJob
+      include EnqueueNextJobConcern
+
       MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
 
       def perform(params = {})
@@ -16,6 +18,7 @@ module Synchronizer
             unstack
           end
         update_objet(@stack) if @limit.nil? && @stack.count >= 1 # last PM
+        enqueue_next_job if params[:enqueue_next_job_after_success]
       end
 
       private

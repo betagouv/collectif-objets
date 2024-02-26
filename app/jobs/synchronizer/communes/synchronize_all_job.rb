@@ -3,9 +3,11 @@
 module Synchronizer
   module Communes
     class SynchronizeAllJob < ApplicationJob
+      include EnqueueNextJobConcern
+
       BATCH_SIZE = 1000
 
-      def perform
+      def perform(enqueue_next_job_after_success: false)
         Rails.logger.info("starting iteration by batch of #{BATCH_SIZE}...")
         create_progressbar
         # La synchronisation des communes nécessite trois parcours consécutifs du CSV :
@@ -13,6 +15,7 @@ module Synchronizer
         cycle_2_destroy_users_with_disappeared_email
         cycle_3_upsert_all
         logger.close
+        enqueue_next_job if enqueue_next_job_after_success
       end
 
       private
