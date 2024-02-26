@@ -7,17 +7,20 @@ module Synchronizer
         extend ActiveSupport::Concern
 
         def objet
-          @objet ||= begin
-            persisted_objet.assign_attributes(all_attributes.except(*except_fields))
-            persisted_objet
-          end
+          @objet ||= persisted_objet.tap { _1.assign_attributes(all_attributes) }
         end
 
         def synchronize
           return false if row.out_of_scope? || !objet_valid?
 
           log log_message, counter: action
-          objet.save! if action != :not_changed
+
+          return true if action == :not_changed
+
+          ActiveRecord::Base.transaction do
+            destroy_or_soft_delete_existing_recensement! if commune_changed? && existing_recensement
+            objet.save!
+          end
           true
         end
 
@@ -25,10 +28,10 @@ module Synchronizer
 
         def action
           @action ||=
-            if apply_commune_change?
+            if commune_changed? && existing_recensement
+              :update_with_commune_change_recensement_deleted
+            elsif commune_changed?
               :update_with_commune_change
-            elsif ignore_commune_change?
-              :update_ignoring_commune_change
             elsif objet.changed?
               :update
             else
@@ -45,47 +48,38 @@ module Synchronizer
           false
         end
 
-        def except_fields
-          f = %i[palissy_REF]
-          if ignore_commune_change?
-            f += %i[
-              palissy_COM
-              palissy_INSEE
-              palissy_DPT
-              palissy_EDIF
-              palissy_EMPL
-              palissy_DEPL
-              palissy_WEB
-              palissy_MOSA
-              lieu_actuel_code_insee
-              lieu_actuel_edifice_nom
-              lieu_actuel_edifice_ref
-            ]
-          end
-          f
-        end
-
-        def existing_recensement?
-          @existing_recensement ||= persisted_objet.recensements.any?
+        def existing_recensement
+          @existing_recensement ||= persisted_objet.recensements.first
         end
 
         def commune_after_update = @eager_loaded_records.commune
         def commune_changed? = commune_before_update != commune_after_update
-        def apply_commune_change? = commune_changed? && !existing_recensement?
-        def ignore_commune_change? = commune_changed? && !apply_commune_change?
+
+        def commune_change_message
+          "changement de commune appliqué #{commune_before_update} → #{commune_after_update || 'ø'}"
+        end
+
+        def destroy_or_soft_delete_existing_recensement!
+          existing_recensement.destroy_or_soft_delete!(
+            reason: "changement-de-commune",
+            message: "changement de commune appliqué #{commune_before_update} → #{commune_after_update || 'ø'}",
+            objet_snapshot: @persisted_objet_snapshot_before_changes
+          )
+        end
 
         def log_message
+          return nil if action == :not_changed
+
           @log_message ||= begin
-            m = "mise à jour de l’objet #{palissy_REF} : #{persisted_objet.changes}"
+            m = ["mise à jour de l’objet #{palissy_REF} : #{persisted_objet.changes}"]
             case action
-            when :update
-              m
             when :update_with_commune_change
-              "#{m} - changement de commune appliqué #{commune_before_update} → #{commune_after_update || 'ø'} "
-            when :update_ignoring_commune_change
-              "#{m} - changement de commune ignoré #{commune_before_update} → #{commune_after_update || 'ø'} " \
-              "car l’objet a déjà un recensement"
+              m << commune_change_message
+            when :update_with_commune_change_recensement_deleted
+              m << commune_change_message
+              m << "recensement associé supprimé ou soft-deleted"
             end
+            m.join(" - ")
           end
         end
       end
