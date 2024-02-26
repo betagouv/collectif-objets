@@ -45,7 +45,7 @@ class Departement < ApplicationRecord
   def self.ransackable_attributes(_ = nil) = %w[code]
 
   def self.parse_from_code_insee(code_insee)
-    if code_insee.length != 5
+    if code_insee&.length != 5
       Rails.logger.warn "le code INSEE '#{code_insee}' ne fait pas 5 caractères"
       return nil
     end

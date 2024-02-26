@@ -24,5 +24,10 @@ describe Departement, type: :model do
       let(:code_insee) { "2A004" }
       it { is_expected.to eq "2A" }
     end
+
+    context "nil" do
+      let(:code_insee) { nil }
+      it { is_expected.to eq nil }
+    end
   end
 end
