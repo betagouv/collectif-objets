@@ -261,7 +261,7 @@ RSpec.describe Recensement, type: :model do
 
     context "recensement completed" do
       let(:recensement) { create(:recensement, objet:, user:) }
-      it "soft deletes and stores reason and message" do
+      it "soft deletes and stores everything" do
         expect(recensement.reload.deleted_at).to be_nil
         subject
         expect(recensement.reload.deleted_at).to be_within(1.second).of(Time.current)
