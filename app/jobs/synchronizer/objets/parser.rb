@@ -24,7 +24,9 @@ module Synchronizer
           palissy_WEB: row["code_insee_commune_actuelle"].presence,
           palissy_MOSA: row["edifice_actuel"].presence
         }
-        parsed.merge(lieu_actuel_attributes(**parsed))
+        parsed.merge!(lieu_actuel_attributes(**parsed))
+        parsed.merge!(lieu_actuel_departement_code: Departement.parse_from_code_insee(parsed[:lieu_actuel_code_insee]))
+        parsed
       end
 
       def lieu_actuel_attributes(palissy_WEB:, palissy_MOSA:, palissy_DEPL:, palissy_INSEE:, palissy_EDIF:,

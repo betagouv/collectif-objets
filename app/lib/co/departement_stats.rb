@@ -7,11 +7,12 @@ module Co
     end
 
     def objets_count
-      @objets_count ||= Objet.where(palissy_DPT: @departement).count
+      @objets_count ||= Objet.where(lieu_actuel_departement_code: @departement).count
     end
 
     def objets_recenses_count
-      @objets_recenses_count ||= Objet.where(palissy_DPT: @departement).where.associated(:recensements).count
+      @objets_recenses_count ||=
+        Objet.where(lieu_actuel_departement_code: @departement).where.associated(:recensements).count
     end
 
     def objets_recenses_percentage

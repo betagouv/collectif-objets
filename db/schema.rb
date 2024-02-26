@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_184817) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_26_161226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -336,6 +336,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_184817) do
     t.string "lieu_actuel_code_insee"
     t.string "lieu_actuel_edifice_nom"
     t.string "lieu_actuel_edifice_ref"
+    t.string "lieu_actuel_departement_code"
     t.index ["edifice_id"], name: "index_objets_on_edifice_id"
     t.index ["lieu_actuel_code_insee"], name: "index_objets_on_lieu_actuel_code_insee"
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
