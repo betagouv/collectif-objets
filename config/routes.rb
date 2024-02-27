@@ -134,9 +134,7 @@ Rails.application.routes.draw do
   ## -----
 
   namespace :admin do
-    resources :communes, only: %i[index show] do
-      post :send_test_email
-    end
+    resources :communes, only: %i[index show]
     resources :conservateurs, except: [:destroy] do
       get :impersonate
       collection do

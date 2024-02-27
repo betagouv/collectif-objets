@@ -39,14 +39,6 @@
         = link_to "incarner cet usager",
           admin_user_impersonate_path(user),
           class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-warning-line"
-      .fr-mt-2w
-        = button_to "Envoyer un faux email de lancement de campagne",
-          admin_commune_send_test_email_path(@commune),
-          method: :post,
-          class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-mail-line"
-
-
-
 
     .fr-col-md-4
       %h4 Commentaires admin
