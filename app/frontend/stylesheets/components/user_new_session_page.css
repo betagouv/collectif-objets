@@ -2,34 +2,53 @@
   background-image: url(/images/sur-place-bleu.png);
   background-size: cover;
   color: #fff;
-  padding: 10rem 3rem 5rem 3rem ;
+  padding: 3rem 3rem 5rem 3rem ;
   font-size: 1.2rem;
   line-height: 1.4;
   font-weight: bold;
 }
 
-.fr-small-cards-overlapping[data-cards-count="1"] {
-  min-height: 300px;
+/* we center an invisible item with position relative */
+
+.co-overlapping-cards {
+  display: flex;
+  justify-content: center;
 }
 
-.fr-small-cards-overlapping[data-cards-count="2"] {
-  min-height: 450px;
-}
-
-.fr-small-cards-overlapping .fr-card {
+.co-overlapping-cards .co-overlapping-cards-item,
+.co-overlapping-cards .fr-card {
   width: 300px;
   height: 300px;
+}
+
+.co-overlapping-cards .co-overlapping-cards-item {
+  position: relative;
+}
+
+/* the cards are absolute-positioned on the centered item */
+
+.co-overlapping-cards .fr-card {
   position: absolute;
   pointer-events: none;
   overflow: hidden;
 }
 
-.fr-small-cards-overlapping .fr-card:nth-child(1) {
+.co-overlapping-cards[data-cards-count="1"] {
+  min-height: 300px;
+}
+.co-overlapping-cards[data-cards-count="1"] .fr-card:nth-child(1) {
   top: 0;
   left: 0;
 }
 
-.fr-small-cards-overlapping .fr-card:nth-child(2) {
+.co-overlapping-cards[data-cards-count="2"] {
+  min-height: 425px;
+}
+.co-overlapping-cards[data-cards-count="2"] .fr-card:nth-child(1) {
+  top: 0;
+  left: -75px;
+}
+.co-overlapping-cards[data-cards-count="2"] .fr-card:nth-child(2) {
   top: 125px;
-  left: 125px;
+  left: 75px;
 }

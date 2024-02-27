@@ -435,6 +435,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
   add_foreign_key "recensements", "users"
-  add_foreign_key "users", "communes"
   add_foreign_key "session_codes", "users"
+  add_foreign_key "users", "communes"
 end
