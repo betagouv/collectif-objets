@@ -9,7 +9,8 @@ module Communes
     after_action :verify_policy_scoped, only: :index
     # rubocop:enable Rails/LexicallyScopedActionFilter
 
-    before_action :authenticate_user!, :set_commune, :set_dossier, :restrict_access
+    before_action :authenticate_user!, unless: -> { impersonating_user? }
+    before_action :set_commune, :set_dossier, :restrict_access
 
     protected
 

@@ -85,8 +85,14 @@ class ApplicationController < ActionController::Base
   def init_banners
     @banners = []
     @banners << :environment if %w[development staging].include?(Rails.configuration.x.environment_specific_name)
-    @banners << :user_impersonate if current_user.present? && current_user != true_user
+    @banners << :user_impersonate if impersonating_user?
     @banners << :conservateur_impersonate if current_conservateur.present? && current_conservateur != true_conservateur
+  end
+
+  def impersonating_user?
+    admin_user_signed_in? &&
+      current_user.present? &&
+      current_user != true_user
   end
 
   def require_no_authentication
