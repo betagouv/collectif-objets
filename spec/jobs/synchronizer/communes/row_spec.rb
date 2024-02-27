@@ -20,6 +20,7 @@ describe Synchronizer::Communes::Row do
     it "est dans le scope" do
       expect(row.errors).to be_empty
       expect(row.in_scope?).to eq true
+      expect(row.out_of_scope?).to eq false
     end
   end
 
@@ -29,6 +30,7 @@ describe Synchronizer::Communes::Row do
     end
     it "n’est pas dans le scope" do
       expect(row.in_scope?).to eq false
+      expect(row.out_of_scope?).to eq true
       expect(row.errors).to include(:type_service_local)
     end
   end
@@ -39,6 +41,7 @@ describe Synchronizer::Communes::Row do
     end
     it "n’est pas dans le scope" do
       expect(row.in_scope?).to eq false
+      expect(row.out_of_scope?).to eq true
       expect(row.errors).to include(:nom)
     end
   end

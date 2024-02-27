@@ -20,11 +20,13 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand le champ est bien rempli" do
       let(:row_attributes) { { "cog_insee" => "12345" } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand le champ est nil" do
       let(:row_attributes) { { "cog_insee" => nil } }
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("la notice n’a pas de code INSEE")
       end
@@ -33,6 +35,7 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand le champ est blank" do
       let(:row_attributes) { { "cog_insee" => "" } }
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("la notice n’a pas de code INSEE")
       end
@@ -43,6 +46,7 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand le champ est nil" do
       let(:row_attributes) { { "typologie_du_dossier" => nil } }
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("la notice ne correspond pas à un dossier individuel")
       end
@@ -51,6 +55,7 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand le champ est blank" do
       let(:row_attributes) { { "typologie_du_dossier" => "" } }
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("la notice ne correspond pas à un dossier individuel")
       end
@@ -59,11 +64,13 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand c’est un dossier individuel" do
       let(:row_attributes) { { "typologie_du_dossier" => "dossier individuel" } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand le dossier est hors scope" do
       let(:row_attributes) { { "typologie_du_dossier" => "sous-dossier" } }
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("la notice ne correspond pas à un dossier individuel")
       end
@@ -74,17 +81,20 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand statut_juridique_de_l_objet est nil" do
       let(:row_attributes) { { "statut_juridique_de_l_objet" => nil } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand statut_juridique_de_l_objet est blank" do
       let(:row_attributes) { { "statut_juridique_de_l_objet" => "" } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand l’objet est manquant" do
       let(:row_attributes) { { "statut_juridique_de_l_objet" => "manquant" } }
 
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("l’objet est manquant ou volé")
       end
@@ -93,6 +103,7 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand l’objet est volé" do
       let(:row_attributes) { { "statut_juridique_de_l_objet" => "volé" } }
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("l’objet est manquant ou volé")
       end
@@ -103,22 +114,26 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand le champ est nil" do
       let(:row_attributes) { { "titre_editorial" => nil } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand le champ est blank" do
       let(:row_attributes) { { "titre_editorial" => "" } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand le titre_editorial est normal" do
       let(:row_attributes) { { "titre_editorial" => "Joli tableau" } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand la notice est en cours de traitement" do
       let(:row_attributes) { { "titre_editorial" => "Traitement en cours" } }
 
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("la notice est en cours de traitement")
       end
@@ -129,22 +144,26 @@ RSpec.describe Synchronizer::Objets::Row do
     context "quand le champ est blank" do
       let(:row_attributes) { { "statut_juridique_du_proprietaire" => "" } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand le champ est nil" do
       let(:row_attributes) { { "statut_juridique_du_proprietaire" => nil } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand c’est la propriété de la commune" do
       let(:row_attributes) { { "statut_juridique_du_proprietaire" => "propriété de la commune" } }
       it { should be_in_scope }
+      it { should_not be_out_of_scope }
     end
 
     context "quand statut_juridique_du_proprietaire est hors scope" do
       let(:row_attributes) { { "statut_juridique_du_proprietaire" => "propriété de l'Etat" } }
 
       it { should_not be_in_scope }
+      it { should be_out_of_scope }
       it "a un message d’erreur correct" do
         expect(row.out_of_scope_message).to eq("l’objet est propriété de l’État")
       end
@@ -163,6 +182,7 @@ RSpec.describe Synchronizer::Objets::Row do
       context "quand date_et_typologie_de_la_protection est #{dprot}" do
         let(:row_attributes) { { "date_et_typologie_de_la_protection" => dprot } }
         it { should be_in_scope }
+        it { should_not be_out_of_scope }
       end
     end
 
@@ -176,6 +196,7 @@ RSpec.describe Synchronizer::Objets::Row do
       context "quand date_et_typologie_de_la_protection est #{dprot}" do
         let(:row_attributes) { { "date_et_typologie_de_la_protection" => dprot } }
         it { should_not be_in_scope }
+        it { should be_out_of_scope }
 
         it "a un message d’erreur correct" do
           expect(row.out_of_scope_message).to eq("l’objet est déclassé")
