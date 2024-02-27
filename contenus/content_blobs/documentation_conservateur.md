@@ -5,11 +5,12 @@ titre: Documentation Conservateur
 
 ## Collectif Objets en quelques mots
 
-Collectif Objets est un **service public numérique** du ministère de la Culture. Son but est de faciliter le dialogue entre les acteurs de la chaîne patrimoniale.
+Collectif Objets est un **service public numérique** du ministère de la Culture. Son but est de favoriser la préservation du patrimoine mobilier protégé en facilitant le dialogue entre les acteurs de la chaîne patrimoniale. Il prend la forme d'un site web (ou plateforme numérique) où conservateurs et municipalités peuvent échanger.
 
-Ce service organise des actions pour identifier les objets historiques dans les communes. Les mairies sont invitées à lister ces objets directement sur le terrain. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les experts en conservation reçoivent ensuite ces informations pour les évaluer.
+Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques. \
+Ce sont les mairies qui sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer. 
 
-Grâce à Collectif Objets, les experts peuvent avoir une vue d'ensemble claire et à jour des objets historiques. Cela aide les communes à prendre soin de leur patrimoine mobilier remarquable. 
+Grâce à Collectif Objets, les conservateurs peuvent avoir une vue d'ensemble à jour des objets protégés au titre des monuments historiques de leur département. Ce service aide également les communes à prendre soin de leur patrimoine mobilier remarquable. 
 
 ## Le lien avec les bases de données nationales sur le patrimoine
 
@@ -126,9 +127,27 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez l'examen final du recensement à la commune :** après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
 
-## V﻿idéo tutoriel expliquant l'examen d'un dossier de recensement dans Collectif Objets :
+## V﻿idéo explicative : l'examen d'un dossier de recensement dans Collectif Objets
 
 <iframe title="Examen d'un dossier d'une commune dans Collectif Objets - février 2024" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/eeb840be-5a28-4914-8a63-070b09db3c96?warningTitle=0" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+
+D﻿éroulé et timing de la vidéo : 
+
+00:51 Tableau de suivi des communes et statuts des dossiers des communes
+
+02:38 Examen d'un dossier d'une commune
+
+04:50 Examen et traitement des photos provenant des communes
+
+06:08 Corriger le recensement d'une commune
+
+06:34 Transmission des fiches informatives
+
+08:22 Classer une commune comme un déplacement souhaitable ou prioritaire
+
+08:59 Générer un bordereau de récolement
+
+09:25 Retrouver la liste des déplacements envisagés
 
 ## Si la commune n’a pas recensé le bon objet
 
