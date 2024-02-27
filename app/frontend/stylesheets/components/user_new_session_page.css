@@ -1,11 +1,14 @@
+.user-sessions-column-right {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: bold;
+  padding: 3rem;
+}
+
 .co-image-blue-layer {
   background-image: url(/images/sur-place-bleu.png);
   background-size: cover;
   color: #fff;
-  padding: 3rem 3rem 5rem 3rem ;
-  font-size: 1.2rem;
-  line-height: 1.4;
-  font-weight: bold;
 }
 
 /* we center an invisible item with position relative */

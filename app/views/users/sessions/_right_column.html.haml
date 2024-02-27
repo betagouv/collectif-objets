@@ -1,17 +1,16 @@
-.fr-col-md-6.fr-col-offset-1.co-hide--md.co-overflow--hidden.co-background--light-teal{class: ("co-image-blue-layer" unless @commune&.objets&.any?)}
+.fr-col-md-6.fr-col-offset-1.co-hide--md.co-overflow--hidden.user-sessions-column-right.co-background--light-teal{class: ("co-image-blue-layer" unless @commune&.objets&.any?)}
   - if @commune&.objets&.any?
-    .fr-p-4w
-      .co-overlapping-cards.fr-mb-4w{data: {cards_count: @commune.objets.first(2).count}}
-        .co-overlapping-cards-item
-          - @commune.objets.first(2).each do |objet|
-            = render ObjetCardComponent.new(objet, size: :sm)
-      .fr-h2
-        Connectez-vous pour recenser
-        - if @commune.objets.count == 1
-          l’objet protégé de
-        - else
-          les #{@commune.objets.count}&nbsp;objets protégés de
-        %span.co-text--blue #{@commune.nom}
+    .co-overlapping-cards.fr-mb-4w{data: {cards_count: @commune.objets.first(2).count}}
+      .co-overlapping-cards-item
+        - @commune.objets.first(2).each do |objet|
+          = render ObjetCardComponent.new(objet, size: :sm)
+    %div
+      Connectez-vous pour recenser
+      - if @commune.objets.count == 1
+        l’objet protégé de
+      - else
+        les #{@commune.objets.count}&nbsp;objets protégés de
+      %span.co-text--blue #{@commune.nom}
   - else
     Connectez-vous pour recenser
     %br

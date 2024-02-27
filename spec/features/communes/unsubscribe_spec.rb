@@ -10,7 +10,7 @@ feature "Communes unsubscribe from campaign", type: :feature, js: true do
 
   include ActiveJob::TestHelper
 
-  scenario "sign in with session code" do
+  scenario "unsubscribe from campaign emails with token" do
     visit new_user_unsubscribe_path(token: "blah123")
     expect(page).to be_axe_clean
 
