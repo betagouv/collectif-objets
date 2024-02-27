@@ -37,11 +37,11 @@ module Synchronizer
         client.each_slice(BATCH_SIZE) do |csv_rows|
           Commune
             .where(code_insee: Row.get_in_scope_code_insees(csv_rows:))
-            .update_all(synchronized_at: now)
+            .update_all(last_in_scope_at: now)
           BATCH_SIZE.times { @progressbar&.increment }
         end
-        Commune.where(synchronized_at: nil)
-          .or(Commune.where("synchronized_at < ?", now - 1.minute))
+        Commune.where(last_in_scope_at: nil)
+          .or(Commune.where("last_in_scope_at < ?", now - 1.minute))
           .find_each do |commune|
             delete_commune_with(
               commune,
@@ -103,7 +103,10 @@ module Synchronizer
         messages = ["delete commune #{commune.code_insee} (#{commune.nom})"]
         messages << "reason : #{reason}"
         success = commune.destroy
-        messages << "failure : #{commune.errors.full_messages.to_sentence}" unless success
+        unless success
+          messages << "failure : #{commune.errors.full_messages.to_sentence}"
+          counter = :"#{counter}_failure"
+        end
         logger.log messages.join(" - "), counter:
       end
 

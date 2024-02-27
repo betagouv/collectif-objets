@@ -24,11 +24,12 @@ class Commune < ApplicationRecord
   end
 
   has_many :users, dependent: :destroy
-  has_many( # rubocop:disable Rails/HasManyOrHasOneDependent
+  has_many(
     :objets,
     foreign_key: :lieu_actuel_code_insee,
     primary_key: :code_insee,
-    inverse_of: :commune
+    inverse_of: :commune,
+    dependent: nil # leave the objets in the database when the commune is destroyed
   )
   has_many :recensements, through: :objets
   has_many :past_dossiers, class_name: "Dossier", dependent: :restrict_with_error
