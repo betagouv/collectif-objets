@@ -50,8 +50,14 @@ Votre conservateur départemental des antiquités et objets d'art peut vous rens
 
 ## I﻿dentifier un restaurateur qualifié pour effectuer des travaux sur un objet protégé
 
-Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. 
+Les professionnels de la conservation-restauration du patrimoine culturel sont divers tant par leurs formations, leurs diplômes et leurs niveaux de qualification que par leurs compétences et responsabilités. 
 
-Afin de trouver un restaurateur habilité à travailler sur un objet protégé, vous pouvez consulter l’annuaire de la Fédération Française des Conservateurs-Restaurateurs (FFCR) et chercher parmi les restaurateurs qualifiés de votre région : <https://ffcr.fr/liste-par-regions> 
+Sur les sites internet des associations professionnelles de restauration vous trouverez des listes de professionnels qui exercent des activités de conservation préventive ou de conservation-restauration dans votre département. En voici quelques-uns :
 
-L﻿e choix final du restaurateur doit être effectué en accord avec le conservateur des antiquités et objets d'art de votre département.
+* [ARAAFU](http://araafu.com/) : Association des restaurateurs d’art et d’archéologie de formation universitaire 
+* [FFCR ](https://ffcr.fr/liste-par-regions): Fédération française des conservateurs-restaurateurs (annuaire par région : <https://ffcr.fr/liste-par-regions>
+* [SFIIC](https://sfiic.com/) : Section française de l’Institut international de conservation (IIC)
+
+Pour des questions relatives à la **conservation préventive**, vous pouvez contacter l’Association des préventeurs universitaires et techniciens de conservation - Conservation du patrimoine : [APréVU](https://aprevu.com/)
+
+Vous pouvez prendre connaissance ici d’une liste plus riche des sites des associations professionnelles françaises et internationales : [Les acteurs professionnels (](https://www.culture.gouv.fr/Thematiques/Conservation-restauration/Acteurs-et-Formations/Les-acteurs-professionnels)<https://www.culture.gouv.fr/Thematiques/Conservation-restauration/Acteurs-et-Formations/Les-acteurs-professionnels>)
