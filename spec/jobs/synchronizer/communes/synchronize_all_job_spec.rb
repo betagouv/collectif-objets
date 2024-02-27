@@ -15,7 +15,9 @@ module Synchronizer
         rows_code_insees.map { |code_insee| { "code_insee_commune" => code_insee } }
       end
       let(:rows) do
-        rows_code_insees.map { |code_insee| instance_double(Row, out_of_scope?: false, in_scope?: true, code_insee:) }
+        rows_code_insees.zip(rows_in_scope).map do |code_insee, in_scope|
+          instance_double(Row, out_of_scope?: !in_scope, in_scope?: in_scope, code_insee:)
+        end
       end
       let(:logger) { instance_double(Synchronizer::Logger, log: nil, close: nil) }
       let(:api_client) { instance_double(ApiClientAnnuaireAdministration, count_all: csv_rows.count) }
@@ -36,6 +38,7 @@ module Synchronizer
 
       context "simple case" do
         let(:rows_code_insees) { %w[01002 03001 97201] }
+        let(:rows_in_scope) { [true, true, true] }
         it "should work" do
           expect(Batch::Base).to receive(:new).exactly(:twice).with(csv_rows, logger:).and_return(batch)
           SynchronizeAllJob.new.perform
@@ -44,9 +47,23 @@ module Synchronizer
 
       context "when there are multiple mairies principales for a single code insee" do
         let(:rows_code_insees) { %w[01002 03001 97201 97201 13001] }
+        let(:rows_in_scope) { [true, true, true, true, true] }
         it "should exclude these lines" do
           expect(Batch::Base).to \
             receive(:new).exactly(:twice).with([csv_rows[0], csv_rows[1], csv_rows[4]], logger:).and_return(batch)
+          SynchronizeAllJob.new.perform
+        end
+      end
+
+      context "when there are multiple rows for a single code insee but one is out of scope" do
+        let(:rows_code_insees) { %w[01002 03001 97201 97201 13001] }
+        let(:rows_in_scope) { [true, true, true, false, true] }
+        it "should not exclude the duplicate rows, the batch will exclude the out of scope one itself" do
+          expect(Batch::Base).to \
+            receive(:new)
+              .exactly(:twice)
+              .with(csv_rows, logger:)
+              .and_return(batch)
           SynchronizeAllJob.new.perform
         end
       end
