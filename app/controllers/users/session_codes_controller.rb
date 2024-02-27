@@ -16,7 +16,7 @@ module Users
     end
 
     def create
-      user = User.case_insensitive_find_by_email(params[:email])
+      user = User.find_by(email: params[:email])
       if user.nil?
         return redirect_to \
           new_user_session_code_path,

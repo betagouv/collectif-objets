@@ -16,7 +16,7 @@ class SessionAuthentication
     @code = code
   end
 
-  def perform(&sign_in_block)
+  def authenticate(&sign_in_block)
     sleep(rand(0.5..1)) if Rails.env.production? # To prevent timing attacks
     return false unless valid?
 

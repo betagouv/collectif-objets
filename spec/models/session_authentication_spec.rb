@@ -10,14 +10,14 @@ RSpec.describe SessionAuthentication do
   let(:used) { false }
   before { allow(user).to receive(:last_session_code).and_return(session_code) }
 
-  subject { session_authentication.perform }
+  subject { session_authentication.authenticate }
 
   context "missing email" do
     let(:email) { "" }
     let(:code) { "123456" }
     it { should eq false }
     it "should not yield" do
-      expect { |b| session_authentication.perform(&b) }.not_to(yield_control)
+      expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
     end
     it "should have blank attribute error" do
       subject
@@ -31,7 +31,7 @@ RSpec.describe SessionAuthentication do
     let(:code) { "" }
     it { should eq false }
     it "should not yield" do
-      expect { |b| session_authentication.perform(&b) }.not_to(yield_control)
+      expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
     end
     it "should have blank attribute error" do
       subject
@@ -46,7 +46,7 @@ RSpec.describe SessionAuthentication do
       let(:code) { "123456" }
       it { should eq false }
       it "should not yield" do
-        expect { |b| session_authentication.perform(&b) }.not_to(yield_control)
+        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
       end
       it "should have user not found error" do
         subject
@@ -63,13 +63,13 @@ RSpec.describe SessionAuthentication do
       # allow(user).to receive(:valid_session_code?).and_return(valid_session_code)
     end
 
-    let(:subject) { session_authentication.perform { true } }
+    let(:subject) { session_authentication.authenticate { true } }
 
     context "everything works out" do
       let(:email) { "jean@delafontaine.fr" }
       let(:code) { "123456" }
       it "should yield" do
-        expect { |b| session_authentication.perform(&b) }.to yield_control
+        expect { |b| session_authentication.authenticate(&b) }.to yield_control
       end
       it "should work" do
         expect(session_code).to receive(:mark_used!)
@@ -82,7 +82,7 @@ RSpec.describe SessionAuthentication do
       let(:email) { "jean@delafontaine.fr" }
       let(:code) { "  1 23 4 5 6  " }
       it "should yield" do
-        expect { |b| session_authentication.perform(&b) }.to yield_control
+        expect { |b| session_authentication.authenticate(&b) }.to yield_control
       end
       it "should work" do
         expect(session_code).to receive(:mark_used!)
@@ -99,7 +99,7 @@ RSpec.describe SessionAuthentication do
 
       it { should eq false }
       it "should not yield" do
-        expect { |b| session_authentication.perform(&b) }.not_to(yield_control)
+        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
       end
       it "should have expired code error" do
         subject
@@ -116,7 +116,7 @@ RSpec.describe SessionAuthentication do
 
       it { should eq false }
       it "should not yield" do
-        expect { |b| session_authentication.perform(&b) }.not_to(yield_control)
+        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
       end
       it "should have used code error" do
         subject
@@ -130,7 +130,7 @@ RSpec.describe SessionAuthentication do
       let(:email) { "jean@delafontaine.fr" }
       let(:code) { "654321" }
       it "should not yield" do
-        expect { |b| session_authentication.perform(&b) }.not_to(yield_control)
+        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
       end
       it { should eq false }
       it "should have mismatch error" do
@@ -146,7 +146,7 @@ RSpec.describe SessionAuthentication do
       let(:email) { "jean@delafontaine.fr" }
       let(:code) { "654321" }
       it "should not yield" do
-        expect { |b| session_authentication.perform(&b) }.not_to(yield_control)
+        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
       end
       it { should eq false }
       it "should have mismatch error but not expired code error" do

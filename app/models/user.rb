@@ -18,8 +18,4 @@ class User < ApplicationRecord
   def to_s = email.split("@")[0]
 
   def last_session_code = session_codes.order(created_at: :desc).first
-
-  def self.case_insensitive_find_by_email(param_email)
-    find_by("LOWER(email) = ?", param_email)
-  end
 end
