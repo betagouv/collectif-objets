@@ -248,16 +248,12 @@ Les objets prioritaires sont les objets qui semblent mériter une attention part
 
 ## Comment trouver un restaurateur ayant les qualifications requises pour effectuer des travaux sur un objet protégé au titre des monuments historiques ? 
 
-En France, le titre de “restaurateur” n’étant pas protégé, un artiste ou un artisan sans formation particulière peut se dire restaurateur. Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. Il s’agit des diplômes suivants : 
+En France, le titre de “restaurateur” n’étant pas protégé, un artiste ou un artisan sans formation particulière peut se dire restaurateur. Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. Ces professionnels sont titulaires d’un diplôme reconnu au grade master de conservation-restauration des biens culturels (niveau bac +5/niveau 7 du cadre unifié européen) :  
 
-\- diplôme de l’Institut National du Patrimoine – département de formation des restaurateurs (I.F.R.O.A.)
+\- diplôme de l’Institut National du Patrimoine – département des restaurateurs (Paris-Aubervilliers)
 
-\- maîtrise de sciences et techniques en conservation-restauration des biens culturels (Université de Paris I) 
+\- master de conservation-restauration des biens culturels (université de Paris I-Panthéon-Sorbonne)
 
-\- diplôme de l’Ecole Supérieure des Beaux-Arts de Tours en conservation-restauration des oeuvres sculptées 
+\- diplôme national supérieur d'expression plastique de l'école d'art et de design TALM de  Tours, mention conservation-restauration des oeuvres sculptées valant grade de Master
 
-\- diplôme de l’Ecole Supérieure des Beaux-Arts d’Avignon en conservation-restauration des oeuvres peintes.
-
-Les personnes ayant obtenu l’un de ces diplômes sont des restaurateurs de “niveau 7” et peuvent recevoir une autorisation d’une DRAC pour mener un travail sur un objet protégé. 
-
-Afin de trouver un restaurateur habilité à travailler sur un objet protégé, vous pouvez consulter l’annuaire de la Fédération Française des Conservateurs-Restaurateurs (FFCR) et chercher parmi les restaurateurs qualifiés de votre région : <https://ffcr.fr/liste-par-regions>
+\- diplôme national supérieur d'expression plastique de l’école supérieure d'art d’Avignon mention en conservation-restauration des biens culturels valant grade de Master
