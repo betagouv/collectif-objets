@@ -5,7 +5,7 @@ titre: Documentation Conservateur
 
 ## Collectif Objets en quelques mots
 
-Collectif Objets est un **service public numérique** du ministère de la Culture. Son but est de favoriser la préservation du patrimoine mobilier protégé en facilitant le dialogue entre les acteurs de la chaîne patrimoniale. Il prend la forme d'un site web (ou plateforme numérique) où conservateurs et municipalités peuvent échanger.
+Collectif Objets est un **service public numérique** du ministère de la Culture. Il favorise la préservation du patrimoine mobilier protégé en facilitant le dialogue entre les acteurs de la chaîne patrimoniale. Il prend la forme d'un site web (ou plateforme numérique) où conservateurs et municipalités peuvent échanger.
 
 Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques. \
 Ce sont les mairies qui sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer. 
