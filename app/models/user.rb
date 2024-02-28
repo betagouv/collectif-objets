@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   attr_accessor :impersonating
 
+  validates :email, presence: true, uniqueness: true
+
   def safe_email? = SAFE_DOMAINS.include?(email.split("@").last)
   def to_s = email.split("@")[0]
 

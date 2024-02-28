@@ -81,7 +81,7 @@ module Synchronizer
       def check_valid
         return true if commune.valid?
 
-        log "commune synchro rejected : #{commune_attributes[:code_insee]} #{commune_attributes[:nom]} : " \
+        log "error | commune synchro rejected : #{commune_attributes[:code_insee]} #{commune_attributes[:nom]} : " \
             "#{commune.errors.full_messages.to_sentence} - #{all_attributes}",
             counter: :error
         false
@@ -89,17 +89,18 @@ module Synchronizer
 
       def log_changes
         if action_commune == :create
-          log "creating commune #{commune_attributes[:code_insee]} with #{all_attributes}", counter: :create_commune
+          log "#{action_commune} | creating commune #{commune_attributes[:code_insee]} with #{all_attributes}",
+              counter: :create_commune
         elsif action_commune == :update
-          log "saving changes to commune #{commune_attributes[:code_insee]} #{commune.changes}",
+          log "#{action_commune} | saving changes to commune #{commune_attributes[:code_insee]} #{commune.changes}",
               counter: :update_commune
         end
 
         if action_user == :update_email
-          log "saving email change #{persisted_user.email} -> #{user_attributes[:email]}",
+          log "#{action_user} | saving email change #{persisted_user.email} -> #{user_attributes[:email]}",
               counter: :user_update_email
         elsif action_user == :destroy
-          log "destroying user #{persisted_user.email} for commune #{commune_attributes[:code_insee]}",
+          log "#{action_user} | destroying user #{persisted_user.email} for commune #{commune_attributes[:code_insee]}",
               counter: :user_destroyed
         end
       end

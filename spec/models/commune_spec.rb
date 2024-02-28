@@ -279,4 +279,28 @@ RSpec.describe Commune, type: :model do
       end
     end
   end
+
+  describe "validate" do
+    subject { commune.valid? }
+    context "valid commune without user attributes" do
+      let!(:departement) { create(:departement, code: "51") }
+      let(:commune) { Commune.new(nom: "Châlons", code_insee: "51023", departement:) }
+      it { should be_truthy }
+    end
+    context "valid commune with new user attributes" do
+      let!(:departement) { create(:departement, code: "51") }
+      let(:commune) do
+        Commune.new(nom: "Châlons", code_insee: "51023", departement:, users_attributes: [{ email: "jean@lol.fr" }])
+      end
+      it { should be_truthy }
+
+      context "email is taken" do
+        let!(:user) { create(:user, email: "jean@lol.fr") }
+        it "should have email taken error" do
+          expect(commune.valid?).to eq false
+          expect(commune.errors.first).to have_attributes(attribute: :"users.email", type: :taken)
+        end
+      end
+    end
+  end
 end
