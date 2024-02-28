@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_143918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -366,7 +366,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.string "analyse_etat_sanitaire"
     t.string "analyse_etat_sanitaire_edifice"
     t.string "analyse_securisation"
@@ -388,7 +387,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
     t.index ["deleted_at"], name: "index_recensements_on_deleted_at"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true
-    t.index ["user_id"], name: "index_recensements_on_user_id"
   end
 
   create_table "session_codes", force: :cascade do |t|
@@ -435,7 +433,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_171422) do
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
-  add_foreign_key "recensements", "users"
   add_foreign_key "session_codes", "users"
   add_foreign_key "users", "communes"
 end

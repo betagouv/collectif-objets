@@ -26,7 +26,8 @@ RSpec.describe "Bordereau::Pdf" do
     let!(:recensement_bouquet) do
       create(
         :recensement,
-        objet: objet_bouquet, user:, dossier:,
+        objet: objet_bouquet,
+        dossier:,
         etat_sanitaire: Recensement::ETAT_BON,
         analyse_etat_sanitaire: Recensement::ETAT_PERIL,
         securisation: Recensement::SECURISATION_CORRECTE,
@@ -40,7 +41,8 @@ RSpec.describe "Bordereau::Pdf" do
     let!(:recensement_ciboire) do
       create(
         :recensement,
-        objet: objet_ciboire, user:, dossier:,
+        objet: objet_ciboire,
+        dossier:,
         etat_sanitaire: Recensement::ETAT_BON,
         securisation: Recensement::SECURISATION_CORRECTE,
         notes: nil,

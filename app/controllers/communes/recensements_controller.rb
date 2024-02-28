@@ -11,7 +11,7 @@ module Communes
     end
 
     def create
-      @recensement = Recensement.new(objet: @objet, user: current_user, status: "draft")
+      @recensement = Recensement.new(objet: @objet, status: "draft")
       authorize(@recensement)
       if @recensement.save
         redirect_to edit_commune_objet_recensement_path(@recensement.commune, @objet, @recensement, step: 1)
