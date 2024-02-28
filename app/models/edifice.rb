@@ -41,4 +41,8 @@ class Edifice < ApplicationRecord
     s.sub(/-paroissiale$/, "")
     s
   end
+
+  def to_s
+    "Édifice #{nom} #{merimee_REF ? "(#{merimee_REF})" : '(sans référence Mérimée)'} - commune #{code_insee}"
+  end
 end
