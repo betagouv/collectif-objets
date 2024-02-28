@@ -25,6 +25,7 @@ historiques et aux conservateurs d'examiner ces recensements.
   * [Review apps](#review-apps)
   * [Préparation d'une astreinte dev](#préparation-dune-astreinte-dev)
   * [Données (Origine, Transformations, Republications)](#données-origine-transformations-republications)
+  * [Synchronizer : organisation des modules](#synchronizer--organisation-des-modules)
   * [Photos](#photos)
   * [Frontend : Vite, View Components, Stimulus](#frontend--vite-view-components-stimulus)
   * [Intégration du Design Système de l'État Français (DSFR)](#intégration-du-design-système-de-létat-français-dsfr)
@@ -480,7 +481,6 @@ api_data_culture_gouv[data.culture.gouv.fr]
 pop[pop.culture.gouv.fr]
 fly[collectif-objets-datasette.fly.dev]
 
-
 subgraph scraper[pop-scraper - python]
   scraper_run>poetry run scrapy crawl pop_api]
 end
@@ -492,11 +492,11 @@ subgraph datasette[collectif-objets-datasette - python]
   sqlite[(app/data.sqlite)]
 end
 
-subgraph rails[collectif-objets - rails]
-  rails_run_edifices>Synchronizer::Edifices::SynchronizeAllJob]
-  rails_run_objets>Synchronizer::Objets::SynchronizeAllJob]
-  rails_run_communes>Synchronizer::Communes::SynchronizeAllJob]
-  rails_run_photos>Synchronizer::Photos::SynchronizeAllJob]
+subgraph rails[collectif-objets - rails module Synchronizer]
+  rails_run_edifices>Edifices::SynchronizeAllJob]
+  rails_run_objets>Objets::SynchronizeAllJob]
+  rails_run_communes>Communes::SynchronizeAllJob]
+  rails_run_photos>Photos::SynchronizeAllJob]
   postgres[(Postgres DB)]
 end
 
@@ -546,8 +546,54 @@ Voir plus de détails sur les processus de synchronisation des données dans [do
 La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :
 
 - Les infos personnelles des conservateurs (email, numéro de téléphone)
-- Les données de recensements. avant d'être validées et republiées sur POP, elles peuvent contenir des données à ne pas
-  publier.
+- Les données de recensements. avant d'être validées et republiées sur POP, elles peuvent contenir des données non-publiques.
+
+## Synchronizer : organisation des modules
+
+Voici un schéma approximatif de l'organisation d’un modules de synchronisation (par exemple `Synchronizer::Objets`) :
+
+```mermaid
+graph TD
+
+  SynchronizeAllJob -- instancie des batchs<br> de 1000L --> Batch::Base
+  Logger --o SynchronizeAllJob
+  Logger --> log>tmp/synchronize.log]
+  ApiClient -- itère le CSV --o SynchronizeAllJob
+  data[[data.culture.gouv.fr]] -- télécharge CSV --> ApiClient
+  Parser -- parse une ligne CSV <br> en attributs AR --o Batch::Base
+  EagerLoadStore -- pré-charge les <br> records AR --o Batch::Base
+  Batch::Base -- filtre les lignes <br> dans le périmètre de CO --> Row#in_scope?
+  Batch::Base -- instancie à partir des attributs <br> parsés et des records préchargés --> Revision#synchronize
+  Revision#synchronize -- créé, met à jour, supprime --> db[(DB)]
+```
+
+> [!NOTE]
+> On détaille ici des aspects techniques du code de ces modules de synchronisation.
+> Pour des détails plus haut niveau sur la logique et le périmètre voir [doc/synchronisation.md](doc/synchronisation.md)
+
+Les méthodes `Revision#synchronize` s’appuient autant que possible sur ActiveModel.
+On veut faire un appel canonique `objet.save` et que la logique se passe à l’intérieur.
+On passe par exemple des [nested attributes](https://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html) plutôt que de faire `new_edifice.save! && objet.update(edifice: new_edifice)`.
+
+La classe `Row` est un PORO qui représente une ligne du CSV parsée et sur laquelle on applique des règles de filtrage dans la méthode `#in_scope?`.
+Par exemple pour les objets il s’agit de vérifier que la notice Palissy rentre dans le périmètre de Collectif Objets.
+On s’appuie ici sur les validations ActiveModel pour avoir une structure commune et des messages d’erreurs compréhensifs.
+
+Il y a un petit point peu agréable dans cette modélisation : `Row` fait un parsing très proche de celui fait dans `Parser` mais légèrement différent.
+Par exemple pour les objets on va filtrer sur le champ `palissy_STAT` qu’on ne stocke pas dans les modèles `Objet`.
+Il faut donc le parser dans `Row` mais pas dans `Parser`.
+Cette modélisation peut être améliorée pour éviter cette redondance.
+
+Le `EagerLoadStore` permet d’éviter les requêtes SQL N+1 en les regroupant au niveau du `Batch`.
+C’est un module d’optimisation des performances, il serait plus simple de réécrire le code sans ce préchargement mais cela serait nettement plus long, voire trop long. Il faut bien répercuter les modifications faites par `Revision#synchronize` dans le `EagerLoadStore`.
+
+Exemple :
+- les lignes 100 et 101 du batch concernent des objets avec la même référence édifice Mérimée
+- cet édifice n’existe pas encore dans notre DB
+- la ligne 100 va créer cet édifice
+- il faut mettre à jour le `Store` pour que la ligne 101 ne tente pas de recréer cet édifice mais retrouve l’édifice créé par la ligne 100
+
+
 
 ## Photos
 
