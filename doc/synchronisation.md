@@ -1,6 +1,7 @@
 # Synchronisation
 
-« Synchronisation » est plus correct qu’« import » car on ne fait pas que créer des données, on en met à jour et on en supprime
+> [!NOTE]
+> « Synchronisation » est plus correct qu’« import » car on ne fait pas que créer des données, on en met à jour et on en supprime
 
 ## Sources 🌎
 
@@ -34,13 +35,13 @@ Une fois par semaine, on exécute plusieurs processus (ou *scripts*) consécutiv
 - créé les objets (nouveaux ou mis à jour) qui rentrent pour la première fois dans notre périmètre
 - supprime les objets déjà présents dans CO mais qui ne sont plus dans notre périmètre
 
-Ce processus est aussi en charge d’associer chaque objet à un édifice.
-Il cherche un édifice existant dans notre base ou bien on en créé un (cf [détails plus bas](#identification-et-dédoublonnage-des-édifices)).
+La synchronisation des objets est aussi en charge d’associer chaque objet à un édifice existant ou en créer un nouveau (cf [détails plus bas sur l’identification des édifices](#identification-et-dédoublonnage-des-édifices)).
 
-Ce processus peut aussi supprimer des recensements existants dans deux cas :
+La synchronisation des objets peut aussi archiver des recensements existants dans deux cas (cf [détails plus bas sur l’archivage](#suppression-et-archivage-des-recensements-soft-deletes)) :
 
 - l’objet sort de notre périmètre alors qu’il a été recensé
 - l’objet change de code INSEE alors qu’il a été recensé (il peut s’agir d’une correction, d’un déplacement, ou d’une fusion de communes)
+
 
 ### Synchronisation des édifices ⛪️
 
@@ -85,6 +86,10 @@ Il s’agit de nos "règles d’import" de Palissy :
 cf implémentation de ces règles dans [`Synchronizer::Objets::Row`](https://github.com/betagouv/collectif-objets/blob/main/app/jobs/synchronizer/objets/row.rb)
 
 ### Suppression et archivage des recensements (*soft-deletes*)
+
+> [!NOTE]
+> Ce bloc détaille l’archivage des recensements lors de la [synchronisation des objets]([#synchronisation-des-objets]). 
+> Les recensements ne sont archivés que dans deux cas exceptionnels lors de cette synchronisation.
 
 Rappel : un recensement est en brouillon si l’usager n’est pas allé au bout des étapes du formulaire de recensement.
 
