@@ -30,6 +30,25 @@ Rails.application.configure do
     remove_old_session_codes: {
       cron: "0 4 * * *",
       class: "Sanity::RemoveOldSessionCodesJob"
-    }
+    },
+    synchronize_objets: {
+      cron: "0 2 * * 1", # every monday at 2am,
+      class: "Synchronizer::Objets::SynchronizeAllJob"
+    },
+    synchronize_communes: {
+      # better to do it after the objets synchronization
+      cron: "0 3 * * 1", # every monday at 3am,
+      class: "Synchronizer::Communes::SynchronizeAllJob"
+    },
+    synchronize_edifices: {
+      # better to do it after the communes synchronization
+      cron: "0 4 * * 1", # every monday at 4am,
+      class: "Synchronizer::Edifices::SynchronizeAllJob"
+    },
+    synchronize_photos: {
+      # better to do it after the objets synchronization
+      cron: "0 5 * * 1", # every monday at 5am,
+      class: "Synchronizer::Photos::SynchronizeAllJob"
+    },
   }
 end
