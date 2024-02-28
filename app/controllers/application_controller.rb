@@ -95,6 +95,7 @@ class ApplicationController < ActionController::Base
       current_user != true_user
   end
 
+  # this overrides the default devise method
   def require_no_authentication
     if current_user
       redirect_to root_path, alert: "Vous êtes déjà connecté en tant qu’usager"
