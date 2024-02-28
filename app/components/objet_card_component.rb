@@ -16,12 +16,13 @@ class ObjetCardComponent < ViewComponent::Base
     @main_photo_origin = kwargs[:main_photo_origin] || :memoire
     @link_html_attributes_custom = kwargs[:link_html_attributes] || {}
     @recensement = kwargs[:recensement] || @objet.current_recensement
+    @size = kwargs[:size] || :md
     super
   end
 
   private
 
-  attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin
+  attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin, :size
 
   delegate :nom, :palissy_DENO, :edifice_nom, :palissy_photos_presenters, to: :objet
 

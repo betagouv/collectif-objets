@@ -1,7 +1,6 @@
-<% url = magic_authentication_url("magic-token": user.magic_token, after_sign_in_path: "/communes/#{commune.id}/completion/new") %>
 <mj-section>
   <mj-column>
-    <mj-button href="<%= url %>" background-color="rgb(0,0,145)">
+    <mj-button href="<%= new_commune_completion_url(commune) %>" background-color="rgb(0,0,145)">
       <%= ct("shared.cta_complete") %>
     </mj-button>
   </mj-column>

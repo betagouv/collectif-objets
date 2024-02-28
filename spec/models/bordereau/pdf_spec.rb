@@ -7,7 +7,7 @@ RSpec.describe "Bordereau::Pdf" do
     let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
     let!(:commune) { create(:commune, status: "completed", nom: "Albon", code_insee: "26002", departement:) }
     let!(:edifice) { create(:edifice, nom: "Eglise st Jean", commune:) }
-    let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:, magic_token: "magiemagie") }
+    let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:) }
     let!(:conservateur) do
       create(:conservateur,
              first_name: "Jean", last_name: "Lobo", email: "jeanne@culture.gouv.fr",

@@ -1,4 +1,4 @@
-- if notice || alert
+- if [notice, alert].map(&:presence).any?
   .fr-container.fr-mt-1w{role: "alert"}
     .fr-alert{class: [("fr-alert--info" if notice), ("fr-alert--error" if alert)] }
       .fr-alert__content

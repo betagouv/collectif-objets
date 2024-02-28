@@ -4,17 +4,18 @@ require "rails_helper"
 require_relative "shared_examples"
 
 RSpec.describe UserMailer, type: :mailer do
-  describe "validate_email" do
-    let(:user) { build(:user, email: "jean@user.fr", login_token: "asdfjk29") }
-    let(:mail) { UserMailer.with(user:).validate_email }
+  describe "session_code_email" do
+    let(:user) { build(:user, email: "jean@user.fr") }
+    let(:session_code) { build(:session_code, user:, code: "123456") }
+    let(:mail) { UserMailer.with(session_code:).session_code_email }
 
     include_examples(
       "both parts contain",
-      "Voici votre lien de connexion à Collectif Objets"
+      "Voici votre code de connexion à Collectif Objets"
     )
 
     it "behaves as expected" do
-      expect(mail.subject).to include "Votre lien de connexion"
+      expect(mail.subject).to include "Code de connexion"
       expect(mail.to).to eq(["jean@user.fr"])
       expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
     end
@@ -39,7 +40,7 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe "dossier_accepted" do
-    let(:commune) { build(:commune, nom: "Marseille") }
+    let(:commune) { create(:commune, nom: "Marseille") }
     let(:user) { build(:user, email: "jean@user.fr", commune:) }
     let(:conservateur) { build(:conservateur, email: "marc@conservateur.fr") }
     let(:dossier) { build(:dossier, commune:, conservateur:) }
@@ -77,10 +78,10 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe "message_received_email" do
-    let(:commune) { build(:commune, id: 10, nom: "Marseille") }
+    let!(:commune) { create(:commune, id: 10, nom: "Marseille") }
     let(:user) { build(:user, email: "jean@user.fr", commune:) }
     let(:conservateur) { build(:conservateur, first_name: "Nadia", last_name: "Riza") }
-    let(:message) { build(:message, text: "quel est l'objet ?", author: conservateur, created_at: 1.day.ago) }
+    let(:message) { build(:message, text: "quel est l'objet ?", author: conservateur, created_at: 1.day.ago, commune:) }
     let(:mail) { UserMailer.with(user:, message:).message_received_email }
 
     include_examples(

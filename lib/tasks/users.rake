@@ -17,12 +17,11 @@ namespace :users do
     puts "done!"
   end
 
-  task :simple_magic_tokens_and_mailcatch_mails, [] => :environment do |_, args|
+  task :set_mailcatch_mails, [] => :environment do |_, args|
     raise if Rails.configuration.x.environment_specific_name == "production"
 
     User.includes(:commune).each do |user|
       user.update(
-        magic_token: user.commune.code_insee,
         email: "commune-#{user.commune.code_insee}@mailcatch.com"
       )
     rescue ActiveRecord::RecordNotUnique

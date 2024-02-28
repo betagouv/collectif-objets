@@ -3,24 +3,19 @@
 class User < ApplicationRecord
   SAFE_DOMAINS = %w[beta.gouv.fr dipasquale.fr failfail.fr mailcatch.com gmail.com].freeze
 
-  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :registerable
+  devise :timeoutable, timeout_in: 3.months
 
   belongs_to :commune, optional: true
 
   accepts_nested_attributes_for :commune
 
   has_many :recensements, dependent: :nullify
+  has_many :session_codes, dependent: :destroy
 
   attr_accessor :impersonating
 
-  def rotate_login_token(valid_for: 60.minutes)
-    update(
-      login_token: SecureRandom.hex(10),
-      login_token_valid_until: Time.zone.now + valid_for
-    )
-  end
-
-  def password_required? = false
   def safe_email? = SAFE_DOMAINS.include?(email.split("@").last)
   def to_s = email.split("@")[0]
+
+  def last_session_code = session_codes.order(created_at: :desc).first
 end

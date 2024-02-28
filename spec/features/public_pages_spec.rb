@@ -53,7 +53,7 @@ feature "accessibility public pages", js: true do
   # "Statistiques", :stats_path
 
   describe "Connexion Communes" do
-    before { visit new_user_session_path }
+    before { visit new_user_session_code_path }
     it { should be_axe_clean }
   end
 

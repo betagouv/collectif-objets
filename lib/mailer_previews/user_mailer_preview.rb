@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class UserMailerPreview < ApplicationMailerPreview
-  def validate_email
-    user = User.new(email: "mairie@thoiry.fr", login_token: "a1r2b95")
-    user.readonly!
-    UserMailer.with(user:).validate_email
+  def session_code_email
+    session_code = SessionCode.new(
+      user: User.new(email: "mairie@thoiry.fr").tap(&:readonly!),
+      code: "234045"
+    )
+    UserMailer.with(session_code:).session_code_email
   end
 
   def commune_completed_email

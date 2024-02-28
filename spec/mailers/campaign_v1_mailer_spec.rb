@@ -28,6 +28,8 @@ RSpec.shared_examples "campaign email commons" do
 end
 
 RSpec.shared_examples "a campaign email" do |email_name, mail_subject, content|
+  include ActiveSupport::Testing::TimeHelpers
+
   describe email_name do
     let(:mail) { mailer_configured.send(email_name) }
 
@@ -43,11 +45,25 @@ end
 
 RSpec.describe CampaignV1Mailer, type: :mailer do
   let(:departement) { build(:departement, code: "78", nom: "Yvelines", dans_nom: "dans les Yvelines") }
-  let(:commune) { build(:commune, departement:, nom: "Joinville") }
-  let(:objet) { build(:objet, commune:) }
-  let(:user) { build(:user, commune:, email: "jean@mairie.fr") }
-  let(:campaign) { build(:campaign, departement:, nom_drac: "IDF", signature: SIGNATURE, date_fin: 59.days.from_now) }
-  # let!(:campaign_recipient) { create(:campaign_recipient) }
+  let!(:commune) { create(:commune_with_user, departement:, nom: "Joinville") }
+  let!(:user) { commune.users.first }
+  before { user.update!(email: "jean@mairie.fr") }
+  before { travel_to(Time.zone.today.next_week(:monday).to_time + 10.hours) }
+  let(:objet) { create(:objet, commune:) }
+  let!(:campaign) do
+    create(
+      :campaign,
+      departement:,
+      nom_drac: "IDF",
+      signature: SIGNATURE,
+      date_lancement: Time.zone.today,
+      date_relance1: 7.days.from_now,
+      date_relance2: 14.days.from_now,
+      date_relance3: 30.days.from_now,
+      date_fin: 59.days.from_now
+    )
+  end
+  let!(:campaign_recipient) { create(:campaign_recipient, commune:, campaign:) }
 
   before do
     allow(commune).to receive(:highlighted_objet).and_return(objet)
