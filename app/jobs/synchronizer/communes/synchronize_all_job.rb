@@ -38,7 +38,7 @@ module Synchronizer
           Commune
             .where(code_insee: Row.get_in_scope_code_insees(csv_rows:))
             .update_all(last_in_scope_at: now)
-          BATCH_SIZE.times { @progressbar&.increment }
+          csv_rows.count.times { @progressbar&.increment }
         end
         Commune.where(last_in_scope_at: nil)
           .or(Commune.where("last_in_scope_at < ?", now - 1.minute))
@@ -100,13 +100,11 @@ module Synchronizer
       end
 
       def delete_commune_with(commune, reason:, counter:)
-        messages = ["delete commune #{commune.code_insee} (#{commune.nom})"]
-        messages << "reason : #{reason}"
         success = commune.destroy
-        unless success
-          messages << "failure : #{commune.errors.full_messages.to_sentence}"
-          counter = :"#{counter}_failure"
-        end
+        counter = :"#{counter}_failure" unless success
+        messages = ["#{counter} | delete commune #{commune.code_insee} (#{commune.nom})"]
+        messages << "reason : #{reason}"
+        messages << "failure : #{commune.errors.full_messages.to_sentence}" unless success
         logger.log messages.join(" - "), counter:
       end
 
