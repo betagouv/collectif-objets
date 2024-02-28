@@ -115,3 +115,16 @@ Ce mécanisme d’identification est utilisé :
 Grace à ce mécanisme :
 - on dédoublonne une partie des édifices non-protégés grace au nettoyage des noms (par exemple "église Saint-Jean" et "eglise Saint Jean" seront considérés identiques)
 - on retrouve la référence Mérimée de certains édifices : par exemple si un objet Palissy a le code INSEE 01023 et un nom d’édifice "Église Saint-Jean" et qu’on trouve dans Mérimée un édifice correspondant, on met à jour notre `edifice` avec la référence Mérimée.
+
+
+## FAQ
+
+**Quid des objets supprimés de Palissy ?**
+
+Il arrive que certains objets soient supprimés de Palissy, par exemple quand des doublons sont identifiés. On ne parle pas ici de mise à jour avec une info "déclassé" par exemple, mais bien de suppression. 
+
+Ce cas de figure n’est pas géré pour l’instant. [Un ticket kanban](https://www.notion.so/atelier-numerique/supprimer-les-objets-disparus-de-Palissy-6bf07521700f4dda8418a5484059d2d4) prévoit de le gérer et de supprimer ces objets de notre base de données. En attendant il est possible pour un·e dev de supprimer manuellement les objets de la base de donnée en production.
+
+**Est-ce que le re-recensement utilisera la même fonctionnalité de soft-delete des recensements ?**
+
+A priori non. Le soft-delete n’a pas été conçu avec ce cas d’usage en tête.
