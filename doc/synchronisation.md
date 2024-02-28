@@ -1,5 +1,8 @@
 # Synchronisation
 
+Cette page est une documentation haut-niveau de la logique de synchronisation. 
+Les aspects techniques du code sont documentés dans le [README](https://github.com/betagouv/collectif-objets?tab=readme-ov-file#synchronizer--organisation-des-modules)
+
 > [!NOTE]
 > « Synchronisation » est plus correct qu’« import » car on ne fait pas que créer des données, on en met à jour et on en supprime
 
