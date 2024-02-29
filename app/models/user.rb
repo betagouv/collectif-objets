@@ -9,7 +9,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :commune
 
-  has_many :recensements, dependent: :nullify
   has_many :session_codes, dependent: :destroy
 
   attr_accessor :impersonating

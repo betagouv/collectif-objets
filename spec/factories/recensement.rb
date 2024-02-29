@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :recensement do
     association :objet
-    association :user
     association :dossier
     confirmation_sur_place { true }
     localisation { Recensement::LOCALISATION_EDIFICE_INITIAL }
