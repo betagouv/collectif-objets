@@ -235,12 +235,12 @@ flowchart TB
 
 Outils & services externes
 
-- [Metabase](https://metabase.collectifobjets.org) - Stats et visualisations
+- [Metabase](https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/) - Stats et visualisations
 - [Dashboard Scalingo](https://dashboard.scalingo.com/)
 - [Sentry de beta.gouv.fr](https://sentry.incubateur.net)
 - [Brevo](https://app.brevo.com/) - Campagnes et mails transactionnel
 - [Scaleway - buckets S3](https://console.scaleway.com/)
-- [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
+- [Gandi](https://gandi.net) - pour le nom de domaine collectifobjets.org
 - [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
 - [datasette sur fly.io](https://collectif-objets-datasette.fly.dev/)
 
