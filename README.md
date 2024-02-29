@@ -238,7 +238,7 @@ Outils & services externes
 - [Metabase](https://metabase.collectifobjets.org) - Stats et visualisations
 - [Dashboard Scalingo](https://dashboard.scalingo.com/)
 - [Sentry de beta.gouv.fr](https://sentry.incubateur.net)
-- [SendinBlue](https://my.sendinblue.com/) - Campagnes et mails transactionnel
+- [Brevo](https://app.brevo.com/) - Campagnes et mails transactionnel
 - [Scaleway - buckets S3](https://console.scaleway.com/)
 - [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
 - [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
