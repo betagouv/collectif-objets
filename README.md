@@ -875,6 +875,11 @@ Avec le fichier suivant
 }
 ```
 
+### Création d'un nouveau bucket
+Si besoin il est possible de créer un nouveau bucket via OVH Cloud.
+
+En théorie à la création il faudrait l'associer à l'utilisateur co-rw, mais ça n'est pas possible directement (en février 2024). Il faut d'abord l'associer à l'utilisateur icdc-plateforme, le créer, puis lui ajouter l'utilisateur co-rw. 
+
 ## Configurations des CSP Content Security Policy
 
 Toute la configuration se trouve dans `config/initializers/content_security_policy.rb`.
