@@ -837,7 +837,7 @@ NB : ils étaient auparavant hébergés sur Scaleway, une migration a été fait
 
 Les buckets de photos et bordereaux doivent être [configurés pour le CORS](https://help.ovhcloud.com/csm/en-public-cloud-storage-s3-cors?id=kb_article_view&sysparm_article=KB0058291).
 
-Dans un premier temps, installer [le client AWS](https://aws.amazon.com/fr/cli/)
+Dans un premier temps, installer [le client AWS](https://aws.amazon.com/fr/cli/) et le configurer avec les clés d'accès présentes dans les credentials Rails (editables en console via `rails credentials:edit`) et le endpoint OVH.
 
 Puis lancez les commandes suivantes :
 
