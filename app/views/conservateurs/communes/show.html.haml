@@ -34,3 +34,15 @@
       - reordered.each do |objet|
         .fr-col-md-4
           = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.current_recensement, can_analyse: objet.current_recensement&.completed? && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?, commune: @commune
+
+  - deleted_recensements = @dossier&.recensements&.only_deleted
+  - if deleted_recensements&.any?
+    .fr-mt-4w
+      = dsfr_alert type: :warning, size: :sm do
+        - if deleted_recensements.count == 1
+          Un recensement a été supprimé automatiquement de ce dossier
+          - cta = "Voir le recensement supprimé"
+        - else
+          = "#{deleted_recensements.count} recensements ont été supprimés automatiquement de ce dossier"
+          - cta = "Voir les #{deleted_recensements.count} recensements supprimés"
+        = link_to cta, conservateurs_commune_deleted_recensements_path(@commune), class: "fr-link", data: { turbo_frame: "_top" }

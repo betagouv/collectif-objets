@@ -2,7 +2,7 @@
 
 class Edifice < ApplicationRecord
   belongs_to :commune, foreign_key: :code_insee, primary_key: :code_insee, optional: true, inverse_of: :edifices
-  has_many :objets, dependent: :restrict_with_error
+  has_many :objets, dependent: :nullify
   has_one_attached :bordereau, dependent: :destroy
 
   validates :code_insee, presence: true
@@ -40,5 +40,9 @@ class Edifice < ApplicationRecord
     s = s.sub("-paroissiale-", "")
     s.sub(/-paroissiale$/, "")
     s
+  end
+
+  def to_s
+    "Édifice #{nom} #{merimee_REF ? "(#{merimee_REF})" : '(sans référence Mérimée)'} - commune #{code_insee}"
   end
 end

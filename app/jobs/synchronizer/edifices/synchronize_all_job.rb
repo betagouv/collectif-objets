@@ -3,18 +3,25 @@
 module Synchronizer
   module Edifices
     class SynchronizeAllJob < ApplicationJob
+      BATCH_SIZE = 1000
+
       def perform
         @progressbar = ProgressBar.create(total: client.count_all, format: "%t: |%B| %p%% %e %c/%u")
-        client.each do |row|
-          Revision.new(row).synchronize
-          @progressbar.increment
+        client.each_slice(BATCH_SIZE) do |csv_rows|
+          batch = Synchronizer::Edifices::Batch::Base.new(csv_rows, logger:)
+          batch.synchronize { @progressbar.increment }
         end
+        logger.close
       end
 
       private
 
       def client
         @client ||= ApiClientMerimee.new
+      end
+
+      def logger
+        @logger ||= Synchronizer::Logger.new(filename_prefix: "synchronize-edifices")
       end
     end
   end

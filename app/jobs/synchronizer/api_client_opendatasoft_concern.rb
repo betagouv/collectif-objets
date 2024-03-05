@@ -8,7 +8,7 @@ module Synchronizer
 
     def lazy_iterator
       first_line = File.open(csv_path, &:gets)
-      headers = first_line.split(";").map(&:downcase)
+      headers = first_line.split(";").map(&:downcase).map(&:strip)
       CSV.foreach(csv_path, headers:, col_sep: ";").lazy.drop(1)
       # drop first line because we explicitly pass the headers
     end
@@ -17,8 +17,17 @@ module Synchronizer
 
     def count_all
       @count_all ||= begin
-        Rails.logger.info "counting all rows in #{csv_path} ..."
-        CSV.foreach(csv_path, headers: true, col_sep: ";").count
+        if Rails.env.development? && system("xsv --version &> /dev/null")
+          # in dev, if xsv is installed, it is much faster to count rows with it
+          Rails.logger.info "counting all rows in #{csv_path} using xsv..."
+          count = `xsv count --delimiter ';' #{csv_path}`.to_i
+        else
+          Rails.logger.info "counting all rows in #{csv_path}..."
+          # this is quite slow but I did not find a faster way to do it
+          count = CSV.foreach(csv_path, headers: true, col_sep: ";").count
+        end
+        Rails.logger.info "counted #{count} rows"
+        count
       end
     end
 
@@ -39,7 +48,7 @@ module Synchronizer
 
     def csv_path
       # useful to iterate, make sure to download the csv with ?with_bom=false
-      return ENV["USE_LOCAL_FILE"] if ENV["USE_LOCAL_FILE"].present?
+      return "#{ENV['CSV_DIR']}/#{@dataset_name}.csv" if ENV["CSV_DIR"].present?
 
       @csv_path ||= begin
         download_csv_to_temp_file
@@ -63,6 +72,7 @@ module Synchronizer
         raise "Request failed with #{response.code}" if response.code != 200
       end
       request.on_body do |chunk|
+        progressbar.total += 1024 if progressbar.progress >= progressbar.total - 1024
         (chunk.size / 1024).floor.times { progressbar.increment }
         @temp_file.write(chunk)
       end
@@ -73,6 +83,8 @@ module Synchronizer
       request.run
 
       @temp_file.path
+    ensure
+      @temp_file&.close
     end
   end
 end

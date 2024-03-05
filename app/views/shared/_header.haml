@@ -11,11 +11,11 @@
     - else
       - current_conservateur.departements.each do |departement|
         - c.with_direct_link_simple title: departement, path: conservateurs_departement_path(departement.code), active: active_nav_link?(departement.to_s)
-    
+
     - c.with_direct_link_dropdown title: "Mes actions", active: active_nav_link?("Mes actions") do |dropdown|
       - dropdown.with_link title: "Déplacements prévus", path: conservateurs_visits_path
       - dropdown.with_link title: "Fiches attribuées", path: conservateurs_fiches_path
-    
+
     - c.with_direct_link_simple title: "Documentation", path: content_blob_path(:documentation_conservateur), active: active_nav_link?("Documentation")
 
     - c.with_search do
@@ -23,7 +23,7 @@
 
   - elsif current_user
     - c.with_tool_link title: "Voir les objets de #{current_user.commune.nom}", path: commune_objets_path(current_user.commune), classes: ["fr-icon-eye-line"]
-    - c.with_tool_link title: "Déconnexion", path: destroy_user_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": "DELETE" }
+    - c.with_tool_link title: "Déconnexion", path: user_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": "DELETE" }
     - c.with_tool_link title: "Préférences", path: edit_user_registration_path, classes: ["fr-icon-settings-5-line"]
 
     - c.with_direct_link_simple title: "Recensement", path: commune_objets_path(current_user.commune), active: active_nav_link?("Recensement")
@@ -46,7 +46,7 @@
     - c.with_direct_link_simple title: "CMS", path: "https://collectif-objets-cms.netlify.app/", html_attributes: { target: "_blank", rel: "noopener" }
 
   - else
-    - c.with_tool_link title: "Connexion commune", path: new_user_session_path, classes: ["fr-icon-user-line"]
+    - c.with_tool_link title: "Connexion commune", path: new_user_session_code_path, classes: ["fr-icon-user-line"]
     - c.with_tool_link title: "Connexion conservateur", path: new_conservateur_session_path, classes: ["fr-icon-user-star-line"]
 
     - c.with_direct_link_simple title: "Comment ça marche ?", path: aide_path, active: active_nav_link?("Comment ça marche ?")

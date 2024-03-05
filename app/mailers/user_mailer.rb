@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 class UserMailer < ApplicationMailer
-  helper :messages, :user
+  helper :messages
   layout "user_mailer"
   default to: -> { @user.email }
 
-  def validate_email
-    @user = params[:user]
-    @login_url = users_sign_in_with_token_url(login_token: @user.login_token)
-    mail subject: "Collectif Objets - Votre lien de connexion"
+  def session_code_email
+    @session_code = params[:session_code]
+    @user = @session_code.user
+    mail subject: "Collectif Objets - Code de connexion - envoyé à #{I18n.l(Time.zone.now, format: :time_first)} " \
   end
 
   def commune_completed_email
     @user, @commune = params.values_at(:user, :commune)
-    set_login_url
+    @cta_url = commune_completion_url(@commune)
     mail subject: "#{@commune.nom}, merci dʼavoir contribué à Collectif Objets"
   end
 
@@ -28,7 +28,7 @@ class UserMailer < ApplicationMailer
     @commune = @dossier.commune
     @user = @commune.users.first
     @conservateur = @dossier.conservateur || params[:conservateur]
-    set_login_url
+    @cta_url = commune_dossier_url(@commune)
     mail \
       subject: "Examen du recensement des objets protégés de #{@commune.nom}",
       from: email_address_with_name("collectifobjets@beta.gouv.fr", @conservateur.to_s),
@@ -38,6 +38,7 @@ class UserMailer < ApplicationMailer
   def dossier_auto_submitted_email
     @user = params[:user]
     @commune = params[:commune]
+    @cta_url = commune_completion_url(@commune)
     set_login_url
     mail subject: "Vos recensements d'objets ont été transmis aux conservateurs"
   end
@@ -46,7 +47,7 @@ class UserMailer < ApplicationMailer
     @message, @user = params.values_at(:message, :user)
     @author = @message.author
     @commune = @message.commune
-    set_login_url
+    @cta_url = commune_messages_url(@commune)
     mail \
       reply_to: email_address_with_name(@commune.support_email(role: :user), "Collectif Objets Messagerie"),
       subject: "#{@author} vous a envoyé un message sur Collectif Objets"
@@ -55,11 +56,6 @@ class UserMailer < ApplicationMailer
   protected
 
   def set_login_url
-    @login_url =
-      if @user.magic_token.present?
-        magic_authentication_url("magic-token" => @user.magic_token)
-      else
-        new_user_session_url
-      end
+    @login_url = new_user_session_code_url
   end
 end

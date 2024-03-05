@@ -25,9 +25,6 @@ tasks:
     init: gp sync-await bundle
     command: bundle exec vite dev
 
-  - name: Redis
-    command: redis-server
-
   - name: Mailhog
     command: ~/go/bin/MailHog
 
@@ -40,10 +37,6 @@ ports:
     onOpen: open-preview
   - name: postgres
     port: 5432
-    onOpen: ignore
-    visibility: private
-  - name: redis
-    port: 6379
     onOpen: ignore
     visibility: private
   - name: mailhog-smtp

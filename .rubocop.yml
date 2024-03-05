@@ -66,3 +66,13 @@ Naming/AsciiIdentifiers:
 Naming/MethodName:
   Exclude:
     - app/jobs/synchronizer/**/*
+
+# we use parameter names like merimee_REF in the synchronizer
+Naming/MethodParameterName:
+  Exclude:
+    - app/jobs/synchronizer/**/*
+
+# we use variable names like merimee_REF in the synchronizer
+Naming/VariableName:
+  Exclude:
+    - app/jobs/synchronizer/**/*

@@ -18,11 +18,15 @@ Rails.application.routes.draw do
     get "users/edit" => "devise/registrations#edit", :as => "edit_user_registration"
     put "users" => "devise/registrations#update", :as => "user_registration"
 
-    get "users/sign_in_with_token", to: "users/sessions#sign_in_with_token"
-    get "magic-authentication", to: "users/sessions#sign_in_with_magic_token"
-    namespace :users do
-      resources :magic_links, only: [:create]
+    get "magic-authentication", to: "users/sessions#redirect_from_magic_token"
+    namespace :users, as: :user do
+      resource :session, only: %i[new create destroy]
     end
+  end
+
+  namespace :users, as: :user do
+    resources :session_codes, only: %i[new create]
+    resource :unsubscribe, only: %i[new create]
   end
 
   devise_for :conservateurs, only: %i[sessions passwords]
@@ -100,6 +104,7 @@ Rails.application.routes.draw do
       end
       resource :dossier, only: %i[show]
       resources :bordereaux, only: %i[new create]
+      resource :deleted_recensements, only: [:show]
     end
     resources :objets, only: [] do
       resources :recensements, only: [] do
@@ -137,7 +142,7 @@ Rails.application.routes.draw do
       end
     end
     resources :dossiers, only: [:update]
-    resources :users, only: %i[new create edit update] do
+    resources :users, only: %i[] do
       get :impersonate
       collection do
         post :toggle_impersonate_mode

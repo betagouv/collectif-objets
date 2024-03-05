@@ -16,7 +16,6 @@
 
     - else 
       - @edifices.each do |edifice|
-        = turbo_stream_from edifice
         = render "conservateurs/bordereaux/edifice", edifice:, commune: @commune
   - else
     .co-readable

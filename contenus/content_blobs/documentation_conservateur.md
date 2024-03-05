@@ -5,21 +5,18 @@ titre: Documentation Conservateur
 
 ## Collectif Objets en quelques mots
 
-Collectif Objets est un **service public numérique** du ministère de la Culture pour faciliter le dialogue entre les acteurs de la chaîne patrimoniale.
+Collectif Objets est un **service public numérique** du ministère de la Culture. Il favorise la préservation du patrimoine mobilier protégé en facilitant le dialogue entre les acteurs de la chaîne patrimoniale. Il prend la forme d'un site web (ou plateforme numérique) où conservateurs et municipalités peuvent échanger.
 
-Ce programme organise des campagnes de recensement auprès des communes abritant des objets monuments historiques.
+Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques. \
+Ce sont les mairies qui sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer. 
 
-Les mairies sont invitées à recenser *in situ* les objets protégés de leur territoire. Elles répondent à un questionnaire en ligne et transmettent des photos attestant de leur état. Ces informations sont ensuite transmises aux conservateurs pour expertise.
-
-Par la collecte de ces données, Collectif Objets permet aux conservateurs d'avoir une vision globale et actuelle du parc mobilier.
-
-Les communes sont outillées pour préserver leur patrimoine remarquable.
+Grâce à Collectif Objets, les conservateurs peuvent avoir une vue d'ensemble à jour des objets protégés au titre des monuments historiques de leur département. Ce service aide également les communes à prendre soin de leur patrimoine mobilier remarquable. 
 
 ## Le lien avec les bases de données nationales sur le patrimoine
 
-* Les notices sur les objets protégés au titre des monuments historiques se trouvant sur la plateforme Collectif Objets contiennent des informations issues de [la base de données nationale sur le patrimoine mobilier français nommée Palissy](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Palissy-consultable-depuis-le-moteur-Collections). 
+* Les notices des objets protégés au titre des monuments historiques se trouvant sur la plateforme Collectif Objets contiennent des informations issues de [la base de données nationale sur le patrimoine mobilier français nommée Palissy](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Palissy-consultable-depuis-le-moteur-Collections). 
 * Les photos des objets visibles sur Collectif Objets sont issues de [la base des photographies conservées par le ministère de la Culture nommée Mémoire](https://www.culture.gouv.fr/Espace-documentation/Bases-de-donnees/Fiches-bases-de-donnees/Memoire-des-fonds-graphiques-et-photographiques-illustrant-le-patrimoine-francais).
-* Les données recueillies lors des campagnes de recensement avec Collectif Objets et validées par les conservateurs sont reversées dans le système d’information patrimonial de l’Etat. Collectif Objets travaille en collaboration avec la Médiathèque du patrimoine et de la photographie (MPP) dans cet objectif.
+* Après validation par les conservateurs, les données recueillies lors des campagnes de recensement avec Collectif Objets sont reversées dans le système d’information patrimonial de l’Etat. Collectif Objets travaille en collaboration avec la Médiathèque du patrimoine et de la photographie (MPP) dans cet objectif.
 
 ## Les objets concernés par Collectif Objets
 
@@ -27,13 +24,15 @@ Collectif Objets s’adresse aux communes abritant des objets protégés au titr
 
 Ce dispositif concerne les objets appartenant aux collectivités territoriales ou à des propriétaires privées (particuliers, associations…).
 
-Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement. Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir. Il est possible d’ajuster la liste des communes destinataires de la campagne.
+Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement. 
+
+Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir. Il est possible d’ajuster la liste des communes destinataires de la campagne.
 
 Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
 
 ## Fiabilité du recensement effectué par les communes
 
-Plus de 90% des informations transmises par les communes sont validées sans correction par les conservateurs. Nous guidons les communes dans leur démarche de recensement.
+Plus de 90% des informations transmises par les communes sont validées sans correction par les conservateurs. Nous guidons les communes dans leur démarche de recensement. 
 
 # Lancement d'une campagne de recensement
 
@@ -45,16 +44,16 @@ Collectif Objets est un service destiné aux conservateurs des Monuments Histori
 
 ## Les étapes d’une campagne de recensement
 
-* **Les conservateurs lancent la campagne de recensement.** Les communes sont invitées par mél à se rendre sur le site Collectif Objets pour prendre connaissance des objets MH qu’elles abritent.
-* **Les communes recensent en ligne les objets MH qu’elles abritent.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur dossier de recensement.
+* **Les conservateurs lancent la campagne de recensement.** Ils invitent les communes par mél à aller sur Collectif Objets pour découvrir les objets MH qu’elles abritent.
+* **Les communes recensent en ligne les objets MH.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur dossier de recensement.
 * **Les conservateurs examinent les informations et photos transmises.** Pour chaque objet, ils peuvent alors valider les informations et engager des actions sur le terrain le cas échéant. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune.
 * **Les données validées par les conservateurs sont reversées dans le système d’information patrimonial.**
 
 ## Les communes concernées par la campagne
 
-Par défaut, l’ensemble des communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) sont intégrées à la campagne de recensement.
+Par défaut, l’ensemble des communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) sont à intégrer à la campagne de recensement. 
 
-Toutefois, il est possible d’exclure certaines communes de la liste des destinataires (par exemple, parce qu’un récolement y a déjà été effectué récemment).
+Mais, on peut choisir de ne pas inclure certaines communes si, par exemple, un inventaire a déjà été fait là-bas récemment.
 
 ## **Suite à la première campagne départementale**
 
@@ -62,7 +61,7 @@ Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès de
 
 # Se servir de Collectif Objets
 
-*Cette section s’adresse aux conservateurs et conservatrices ayant une campagne en cours ou planifiée sur le territoire.*
+*Cette section s’adresse aux conservateurs et conservatrices ayant une campagne en cours ou planifiée sur leur territoire.*
 
 ## Créer son compte « conservateur » sur la plateforme
 
@@ -83,7 +82,7 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates. 
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées. 
-* **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder »  pour enregistrer la liste mise à jour.
+* **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder » pour enregistrer la liste mise à jour.
 * **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mél, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire. 
 
 Voici également un tutoriel vidéo :
@@ -128,7 +127,27 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 * **Répétez ce processus pour chaque objet abrité par la commune.**
 * **Envoyez l'examen final du recensement à la commune :** après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
 
-<div style="position: relative; padding-bottom: 62.5%; height: 0;"><iframe src="https://www.loom.com/embed/c2a889e2194945c496d3071ae498637b?sid=ca3a1f17-514e-452b-8093-3b67dfaf7f0a" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+## V﻿idéo explicative : l'examen d'un dossier de recensement dans Collectif Objets
+
+<iframe title="Examen d'un dossier d'une commune dans Collectif Objets - février 2024" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/eeb840be-5a28-4914-8a63-070b09db3c96?warningTitle=0" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+
+D﻿éroulé et timing de la vidéo : 
+
+00:51 Tableau de suivi des communes et statuts des dossiers des communes
+
+02:38 Examen d'un dossier d'une commune
+
+04:50 Examen et traitement des photos provenant des communes
+
+06:08 Corriger le recensement d'une commune
+
+06:34 Transmission des fiches informatives
+
+08:22 Classer une commune comme un déplacement souhaitable ou prioritaire
+
+08:59 Générer un bordereau de récolement
+
+09:25 Retrouver la liste des déplacements envisagés
 
 ## Si la commune n’a pas recensé le bon objet
 
@@ -248,16 +267,12 @@ Les objets prioritaires sont les objets qui semblent mériter une attention part
 
 ## Comment trouver un restaurateur ayant les qualifications requises pour effectuer des travaux sur un objet protégé au titre des monuments historiques ? 
 
-En France, le titre de “restaurateur” n’étant pas protégé, un artiste ou un artisan sans formation particulière peut se dire restaurateur. Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. Il s’agit des diplômes suivants : 
+En France, le titre de “restaurateur” n’étant pas protégé, un artiste ou un artisan sans formation particulière peut se dire restaurateur. Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. Ces professionnels sont titulaires d’un diplôme reconnu au grade master de conservation-restauration des biens culturels (niveau bac +5/niveau 7 du cadre unifié européen) :  
 
-\- diplôme de l’Institut National du Patrimoine – département de formation des restaurateurs (I.F.R.O.A.)
+\- diplôme de l’Institut National du Patrimoine – département des restaurateurs (Paris-Aubervilliers)
 
-\- maîtrise de sciences et techniques en conservation-restauration des biens culturels (Université de Paris I) 
+\- master de conservation-restauration des biens culturels (université de Paris I-Panthéon-Sorbonne)
 
-\- diplôme de l’Ecole Supérieure des Beaux-Arts de Tours en conservation-restauration des oeuvres sculptées 
+\- diplôme national supérieur d'expression plastique de l'école d'art et de design TALM de  Tours, mention conservation-restauration des oeuvres sculptées valant grade de Master
 
-\- diplôme de l’Ecole Supérieure des Beaux-Arts d’Avignon en conservation-restauration des oeuvres peintes.
-
-Les personnes ayant obtenu l’un de ces diplômes sont des restaurateurs de “niveau 7” et peuvent recevoir une autorisation d’une DRAC pour mener un travail sur un objet protégé. 
-
-Afin de trouver un restaurateur habilité à travailler sur un objet protégé, vous pouvez consulter l’annuaire de la Fédération Française des Conservateurs-Restaurateurs (FFCR) et chercher parmi les restaurateurs qualifiés de votre région : <https://ffcr.fr/liste-par-regions>
+\- diplôme national supérieur d'expression plastique de l’école supérieure d'art d’Avignon mention en conservation-restauration des biens culturels valant grade de Master

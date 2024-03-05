@@ -1,0 +1,51 @@
+= render layout: "conservateurs/communes/tabs",
+  locals: { commune: @commune, dossier: @dossier, current_tab: :analyse } do
+
+  .fr-mb-2w
+    = dsfr_link_to "Retour à la liste des recensements",
+      conservateurs_commune_path(@dossier.commune),
+      icon_left: "arrow-left-line", data: { turbo_action: "advance" }
+
+  %h2
+    - if @deleted_recensements.empty?
+      Recensements supprimés
+    - elsif @deleted_recensements.count > 1
+      = "#{@deleted_recensements.count} recensements supprimés"
+    - else
+      = deleted_recensement_title(@deleted_recensements.first)
+
+  - if @deleted_recensements.empty?
+    Aucun recensement n'a été supprimé automatiquement de ce dossier.
+  - else
+    - @deleted_recensements.each do |recensement|
+      .fr-mb-8w
+        - palissy_REF, palissy_TICO, lieu_actuel_edifice_nom = recensement.deleted_objet_snapshot.values_at("palissy_REF", "palissy_TICO", "lieu_actuel_edifice_nom")
+        - if @deleted_recensements.count > 1
+          %h3= deleted_recensement_title(recensement)
+        .fr-row
+          .fr-col-md-6
+            %p
+              - if palissy_TICO.present?
+                .fr-mb-1w #{palissy_TICO}
+              - if lieu_actuel_edifice_nom.present?
+                .fr-mb-1w Édifice #{lieu_actuel_edifice_nom}
+
+              = link_to "voir sur POP", palissy_url_ref(palissy_REF), target: "_blank", rel: "noopener"
+
+            %p
+              Ce recensement a été supprimé automatiquement le
+              = l(recensement.deleted_at.to_date)
+              - case recensement.deleted_reason
+              - when "objet-devenu-hors-scope"
+                car il a été modifié dans Palissy et n’est plus concerné par Collectif Objets
+                - if recensement.deleted_message.present?
+                  = " (#{recensement.deleted_message})"
+              - when "changement-de-commune"
+                car son code INSEE a changé dans Palissy.
+                Il peut s’agir d’un déplacement ou bien d’une fusion de communes.
+                - if recensement.deleted_message.present?
+                  %br
+                  = recensement.deleted_message
+
+        - presenter = RecensementPresenter.new(recensement)
+        = render "shared/rapport/recensement_attributes", recensement:, presenter:

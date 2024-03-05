@@ -13,7 +13,7 @@ module Dossiers
           LEFT JOIN (
             SELECT communes.id, COUNT(*) AS objets_count
               FROM communes
-              INNER JOIN objets ON communes.code_insee = "objets"."palissy_INSEE"
+              INNER JOIN objets ON communes.code_insee = "objets".lieu_actuel_code_insee
               GROUP BY communes.id
           ) AS nombre_objets_par_commune
           ON nombre_objets_par_commune.id = dossiers.commune_id

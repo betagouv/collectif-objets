@@ -1,0 +1,57 @@
+.user-sessions-column-right {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: bold;
+  padding: 3rem;
+}
+
+.co-image-blue-layer {
+  background-image: url(/images/sur-place-bleu.png);
+  background-size: cover;
+  color: #fff;
+}
+
+/* we center an invisible item with position relative */
+
+.co-overlapping-cards {
+  display: flex;
+  justify-content: center;
+}
+
+.co-overlapping-cards .co-overlapping-cards-item,
+.co-overlapping-cards .fr-card {
+  width: 300px;
+  height: 300px;
+}
+
+.co-overlapping-cards .co-overlapping-cards-item {
+  position: relative;
+}
+
+/* the cards are absolute-positioned on the centered item */
+
+.co-overlapping-cards .fr-card {
+  position: absolute;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.co-overlapping-cards[data-cards-count="1"] {
+  min-height: 300px;
+}
+.co-overlapping-cards[data-cards-count="1"] .fr-card:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.co-overlapping-cards[data-cards-count="2"] {
+  min-height: 425px;
+}
+.co-overlapping-cards[data-cards-count="2"] .fr-card:nth-child(1) {
+  top: 0;
+  left: -75px;
+}
+.co-overlapping-cards[data-cards-count="2"] .fr-card:nth-child(2) {
+  top: 125px;
+  left: 75px;
+}

@@ -50,17 +50,16 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    return params[:after_sign_in_path] if params[:after_sign_in_path].present?
-
+    # after_sign_in_path_for = stored_location_for || signed_in_root_path
+    # we do not want to override the stored location if there is one
     send("after_sign_in_path_for_#{resource.class.name.downcase}", resource)
   end
 
   def after_sign_in_path_for_user(user)
-    if user.commune.recensements.completed.empty?
-      commune_premiere_visite_path(user.commune)
-    else
-      commune_objets_path(user.commune)
-    end
+    return commune_premiere_visite_path(user.commune) if user.commune.recensements.completed.empty?
+
+    # NOTE: calling stored_location_for here is weird : it gets and deletes the value
+    stored_location_for(user) || commune_objets_path(user.commune)
   end
 
   def after_sign_in_path_for_conservateur(conservateur)
@@ -86,7 +85,24 @@ class ApplicationController < ActionController::Base
   def init_banners
     @banners = []
     @banners << :environment if %w[development staging].include?(Rails.configuration.x.environment_specific_name)
-    @banners << :user_impersonate if current_user.present? && current_user != true_user
+    @banners << :user_impersonate if impersonating_user?
     @banners << :conservateur_impersonate if current_conservateur.present? && current_conservateur != true_conservateur
+  end
+
+  def impersonating_user?
+    admin_user_signed_in? &&
+      current_user.present? &&
+      current_user != true_user
+  end
+
+  # this overrides the default devise method
+  def require_no_authentication
+    if current_user
+      redirect_to root_path, alert: "Vous êtes déjà connecté en tant qu’usager"
+    elsif current_conservateur
+      redirect_to root_path, alert: "Vous êtes déjà connecté en tant que conservateur"
+    elsif current_admin_user
+      redirect_to root_path, alert: "Vous êtes déjà connecté en tant qu’admin"
+    end
   end
 end

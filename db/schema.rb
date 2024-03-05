@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_143918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -99,9 +99,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
     t.string "opt_out_reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unsubscribe_token"
     t.index ["campaign_id", "commune_id"], name: "index_campaign_recipients_on_campaign_id_and_commune_id", unique: true
     t.index ["campaign_id"], name: "index_campaign_recipients_on_campaign_id"
     t.index ["commune_id"], name: "index_campaign_recipients_on_commune_id"
+    t.index ["unsubscribe_token"], name: "index_campaign_recipients_on_unsubscribe_token", unique: true
   end
 
   create_table "campaigns", force: :cascade do |t|
@@ -139,6 +141,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
     t.float "latitude"
     t.float "longitude"
     t.string "inbound_email_token", null: false
+    t.datetime "last_in_scope_at"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement_code"], name: "index_communes_on_departement_code"
     t.index ["dossier_id"], name: "index_communes_on_dossier_id"
@@ -330,7 +333,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
     t.bigint "edifice_id"
     t.string "palissy_PROT"
     t.string "palissy_DPRO"
+    t.string "palissy_DEPL"
+    t.string "palissy_WEB"
+    t.string "palissy_MOSA"
+    t.string "lieu_actuel_code_insee"
+    t.string "lieu_actuel_edifice_nom"
+    t.string "lieu_actuel_edifice_ref"
+    t.string "lieu_actuel_departement_code"
     t.index ["edifice_id"], name: "index_objets_on_edifice_id"
+    t.index ["lieu_actuel_code_insee"], name: "index_objets_on_lieu_actuel_code_insee"
+    t.index ["lieu_actuel_departement_code"], name: "index_objets_on_lieu_actuel_departement_code"
     t.index ["palissy_COM"], name: "index_objets_on_palissy_COM"
     t.index ["palissy_DPT"], name: "index_objets_on_palissy_DPT"
     t.index ["palissy_INSEE"], name: "index_objets_on_palissy_INSEE"
@@ -345,7 +357,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
   end
 
   create_table "recensements", force: :cascade do |t|
-    t.bigint "objet_id", null: false
+    t.bigint "objet_id"
     t.string "localisation"
     t.boolean "recensable"
     t.string "edifice_nom"
@@ -354,7 +366,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.string "analyse_etat_sanitaire"
     t.string "analyse_etat_sanitaire_edifice"
     t.string "analyse_securisation"
@@ -368,10 +379,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
     t.bigint "pop_export_palissy_id"
     t.string "status", default: "draft", null: false
     t.integer "photos_count", default: 0
+    t.datetime "deleted_at"
+    t.string "deleted_reason"
+    t.string "deleted_message"
+    t.jsonb "deleted_objet_snapshot"
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
+    t.index ["deleted_at"], name: "index_recensements_on_deleted_at"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true
-    t.index ["user_id"], name: "index_recensements_on_user_id"
+  end
+
+  create_table "session_codes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "code"
+    t.datetime "used_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_session_codes_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_session_codes_on_user_id"
   end
 
   create_table "survey_votes", force: :cascade do |t|
@@ -387,17 +412,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "last_sign_in_at"
-    t.string "login_token"
-    t.datetime "login_token_valid_until"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "commune_id"
-    t.string "magic_token"
+    t.string "magic_token_deprecated"
     t.string "nom"
     t.string "job_title"
     t.string "email_personal"
@@ -405,8 +425,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
     t.boolean "messages_mail_notifications", default: true
     t.index ["commune_id"], name: "index_users_on_commune_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["magic_token"], name: "index_users_on_magic_token", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["magic_token_deprecated"], name: "index_users_on_magic_token_deprecated", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -414,5 +433,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_090936) do
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
-  add_foreign_key "recensements", "users"
+  add_foreign_key "session_codes", "users"
+  add_foreign_key "users", "communes"
 end

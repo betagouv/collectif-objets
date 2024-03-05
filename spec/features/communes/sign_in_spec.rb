@@ -5,33 +5,41 @@ require "rails_helper"
 RSpec.feature "Communes sign-in", type: :feature, js: true do
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement:) }
-  let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:, magic_token: "magiemagie") }
+  let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:) }
 
   include ActiveJob::TestHelper
 
-  scenario "sign in with magic token + première visite" do
-    visit magic_authentication_path("magic-token": "magiemagie")
-    expect(page).to have_text("Vous êtes maintenant connecté")
-    expect(page).to have_text("Recensez vos objets en 3 étapes")
-    expect(page).to have_link("Recenser l’objet de Albon")
-    expect(page).to be_axe_clean
-  end
-
-  scenario "sign in with regular rotating login token" do
+  scenario "sign in with session code" do
     visit "/"
     click_on "Connexion commune"
     expect(page).to have_text("Connexion")
-    fill_in "Email", with: "mairie-albon@test.fr"
-    click_on "Recevoir un lien de connexion"
-    expect(page).to have_text("Veuillez cliquer sur le lien que vous avez reçu par mail pour vous connecter")
+    select "26 - Drôme", from: "departement"
+    select "Albon", from: "code_insee"
+    # click_on "Choisir la commune ou le département"
 
+    expect(page).to have_text("mairie-albon@test.fr")
+    click_on "Recevoir un code de connexion"
+
+    expect(page).to have_text("Code de connexion")
     perform_enqueued_jobs
     email = ActionMailer::Base.deliveries.last
-    res = email.html_part.decoded.match(%r{/users/sign_in_with_token\?login_token=([a-z0-9]+)})
-    expect(res).not_to be_nil
-    sign_in_path = res[0]
+    session_code = email.text_part.decoded.match(/[0-9]{6}/)
+    expect(session_code).to be_present
 
-    visit(sign_in_path)
+    fill_in "code", with: session_code
+    click_on "Connexion"
+
     expect(page).to have_text("Vous êtes maintenant connecté")
+  end
+
+  context "user has deprecated magic token" do
+    let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:, magic_token_deprecated: "blah123") }
+    it "should redirect to connection page with commune preselected" do
+      visit "/magic-authentication?magic-token=blah123"
+      expect(page).to have_text("Connexion")
+      expect(page).to have_text("ce lien de connexion n’est plus valide")
+      expect(page).to have_text("Albon")
+      expect(page).to have_text("mairie-albon@test.fr")
+    end
   end
 end

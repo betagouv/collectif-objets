@@ -2,6 +2,8 @@
 
 Un problème a été détecté lors des sanity checks :
 
-Commune: <%= @commune %>
+<% if @commune %>
+  Commune: <%= @commune %>
+<% end %>
 
 <%= @text %>

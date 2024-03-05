@@ -15,7 +15,6 @@ require "action_mailer/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
 require "action_view/railtie"
-require "action_cable/engine"
 require "rails/test_unit/railtie"
 require "dsfr/components"
 

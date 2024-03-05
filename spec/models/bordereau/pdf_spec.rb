@@ -7,7 +7,7 @@ RSpec.describe "Bordereau::Pdf" do
     let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
     let!(:commune) { create(:commune, status: "completed", nom: "Albon", code_insee: "26002", departement:) }
     let!(:edifice) { create(:edifice, nom: "Eglise st Jean", commune:) }
-    let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:, magic_token: "magiemagie") }
+    let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:) }
     let!(:conservateur) do
       create(:conservateur,
              first_name: "Jean", last_name: "Lobo", email: "jeanne@culture.gouv.fr",
@@ -26,7 +26,8 @@ RSpec.describe "Bordereau::Pdf" do
     let!(:recensement_bouquet) do
       create(
         :recensement,
-        objet: objet_bouquet, user:, dossier:,
+        objet: objet_bouquet,
+        dossier:,
         etat_sanitaire: Recensement::ETAT_BON,
         analyse_etat_sanitaire: Recensement::ETAT_PERIL,
         securisation: Recensement::SECURISATION_CORRECTE,
@@ -40,7 +41,8 @@ RSpec.describe "Bordereau::Pdf" do
     let!(:recensement_ciboire) do
       create(
         :recensement,
-        objet: objet_ciboire, user:, dossier:,
+        objet: objet_ciboire,
+        dossier:,
         etat_sanitaire: Recensement::ETAT_BON,
         securisation: Recensement::SECURISATION_CORRECTE,
         notes: nil,

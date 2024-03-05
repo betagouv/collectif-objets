@@ -4,9 +4,12 @@ class Objet < ApplicationRecord
   include ActionView::Helpers::TextHelper # for truncate
 
   scope :with_images, -> { where("cardinality(palissy_photos) >= 1") }
-  belongs_to :commune, foreign_key: :palissy_INSEE, primary_key: :code_insee, optional: true, inverse_of: :objets
+  belongs_to :commune, foreign_key: :lieu_actuel_code_insee, primary_key: :code_insee, optional: true,
+                       inverse_of: :objets
   belongs_to :edifice, optional: true
   has_many :recensements, dependent: :restrict_with_exception
+
+  accepts_nested_attributes_for :edifice
 
   scope :order_by_recensement_priorite,
         lambda {
@@ -38,6 +41,8 @@ class Objet < ApplicationRecord
                      .where.not(MIS_DE_COTE_SQL)
                    }
   scope :protégés, -> { classés.or(inscrits) }
+  scope :code_insee_a_changé, -> { where.not(palissy_WEB: nil).where.not(palissy_DEPL: nil) }
+  scope :déplacés, -> { where.not(palissy_WEB: nil).where(palissy_DEPL: nil) }
 
   after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
   after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
@@ -48,7 +53,7 @@ class Objet < ApplicationRecord
   alias_attribute :nom, :palissy_TICO
   alias_attribute :categorie, :palissy_CATE
   alias_attribute :commune_nom, :palissy_COM
-  alias_attribute :commune_code_insee, :palissy_INSEE
+  alias_attribute :commune_code_insee, :lieu_actuel_code_insee
   # alias_attribute :departement, :palissy_DPT
   alias_attribute :crafted_at, :palissy_SCLE
   alias_attribute :last_recolement_at, :palissy_DENQ
@@ -95,4 +100,18 @@ class Objet < ApplicationRecord
   end
 
   def to_s = palissy_TICO
+  def déplacé? = palissy_WEB.present? && palissy_DEPL.present?
+  def code_insee_a_changé? = palissy_WEB.present? && palissy_DEPL.blank?
+
+  def destroy_and_soft_delete_recensement!(**kwargs)
+    transaction do
+      recensements.each { _1.destroy_or_soft_delete!(**kwargs) }
+      recensements.reload # necessary here, objet.recensements must be empty before destroy
+      destroy!
+    end
+  end
+
+  def snapshot_attributes
+    attributes.slice("palissy_REF", "palissy_TICO", "lieu_actuel_code_insee", "lieu_actuel_edifice_nom")
+  end
 end

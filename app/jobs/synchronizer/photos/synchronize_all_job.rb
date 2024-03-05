@@ -9,8 +9,8 @@ module Synchronizer
         @limit = params.with_indifferent_access[:limit]
         @dry_run = params.with_indifferent_access[:dry_run]
         @stack = []
-        ApiClientJson
-          .objets_photos(params: { _sort: "REF_PALISSY" }, logger:, limit: @limit)
+        ApiClientDatasette
+          .new(logger:, limit: @limit)
           .iterate_batches do |rows|
             @stack += rows
             unstack

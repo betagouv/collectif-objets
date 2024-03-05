@@ -27,27 +27,18 @@
             %br
             et terminé le #{l(@commune.completed_at, format: :long_with_weekday)}
 
-      %div.co-flex.fr-mt-8w
-        %h4
-          = icon_span("account-circle")
-          #{@commune.users.count} Usager(s)
-        %div.fr-ml-1w
-          = link_to "Ajouter un usager", new_admin_user_path(commune_id: @commune.id), class: "fr-btn fr-btn--sm fr-btn--secondary"
-
-      - if @commune.users.empty?
+      - user = @commune.users.first
+      - if user.nil?
         %p Aucun usager
         %p
           %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
-      - @commune.users.each do |user|
-        %h4= user.email
-        %ul.co-list-unstyled
-          %li= link_to "envoyer un email", "mailto:#{user.email}", class: "fr-link fr-link--icon-left fr-icon-mail-line"
-          %li= link_to "incarner cet usager", admin_user_impersonate_path(user), class: "fr-link fr-link--icon-left fr-icon-eye-line"
-          %li= link_to "modifier cet usager", edit_admin_user_path(user), class: "fr-link fr-link--icon-left fr-icon-pencil-line"
-          %li{"data-controller": "copy-to-clipboard"}
-            %input{type:"hidden", "data-copy-to-clipboard-target": "content", "data-value": magic_authentication_url("magic-token": user.magic_token)}
-            %a{href: "#", "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-link fr-link--icon-left fr-icon-todo-line"}
-              copier le lien magique
+      %h4
+        = icon_span("account-circle")
+        = user.email
+      %div
+        = link_to "incarner cet usager",
+          admin_user_impersonate_path(user),
+          class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-warning-line"
 
     .fr-col-md-4
       %h4 Commentaires admin

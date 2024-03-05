@@ -15,10 +15,5 @@ class GenerateBordereauPdfJob < ApplicationJob
       io: StringIO.new(prawn_doc.render),
       filename: "bordereau-#{dossier.commune.to_s.parameterize}-#{edifice.nom.parameterize}.pdf",
       content_type: "application/pdf"
-    edifice.broadcast_replace_to \
-      edifice,
-      target: "bordereau-#{edifice.id}",
-      partial: "conservateurs/bordereaux/edifice",
-      locals: { edifice:, commune: dossier.commune }
   end
 end

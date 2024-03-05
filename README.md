@@ -25,6 +25,7 @@ historiques et aux conservateurs d'examiner ces recensements.
   * [Review apps](#review-apps)
   * [Préparation d'une astreinte dev](#préparation-dune-astreinte-dev)
   * [Données (Origine, Transformations, Republications)](#données-origine-transformations-republications)
+  * [Synchronizer : organisation des modules](#synchronizer--organisation-des-modules)
   * [Photos](#photos)
   * [Frontend : Vite, View Components, Stimulus](#frontend--vite-view-components-stimulus)
   * [Intégration du Design Système de l'État Français (DSFR)](#intégration-du-design-système-de-létat-français-dsfr)
@@ -212,7 +213,6 @@ flowchart TB
       worker[GoodJob worker dynos]
       cron[Cron tasks]
     end
-    rails <--> redis[(Redis)]
     rails <--> postgres[(Postgres)]
     postgres -- read-only --> metabase[Metabase]
   end
@@ -481,7 +481,6 @@ api_data_culture_gouv[data.culture.gouv.fr]
 pop[pop.culture.gouv.fr]
 fly[collectif-objets-datasette.fly.dev]
 
-
 subgraph scraper[pop-scraper - python]
   scraper_run>poetry run scrapy crawl pop_api]
 end
@@ -493,11 +492,11 @@ subgraph datasette[collectif-objets-datasette - python]
   sqlite[(app/data.sqlite)]
 end
 
-subgraph rails[collectif-objets - rails]
-  rails_run_edifices>Synchronizer::Edifices::SynchronizeAllJob]
-  rails_run_objets>Synchronizer::Objets::SynchronizeAllJob]
-  rails_run_communes>Synchronizer::Communes::SynchronizeAllJob]
-  rails_run_photos>Synchronizer::Photos::SynchronizeAllJob]
+subgraph rails[collectif-objets - rails module Synchronizer]
+  rails_run_edifices>Edifices::SynchronizeAllJob]
+  rails_run_objets>Objets::SynchronizeAllJob]
+  rails_run_communes>Communes::SynchronizeAllJob]
+  rails_run_photos>Photos::SynchronizeAllJob]
   postgres[(Postgres DB)]
 end
 
@@ -508,7 +507,8 @@ csvs --> datasette_run_sqlite
 datasette_run_sqlite --> sqlite
 sqlite --> datasette_run_deploy
 datasette_run_deploy --> fly
-fly --> rails_run_objets
+
+api_data_culture_gouv --> rails_run_objets
 rails_run_objets --> postgres
 
 api_service_public --> rails_run_communes
@@ -534,56 +534,66 @@ style rails_run_photos fill:#888833
 style scraper_run fill:#888833
 ```
 
-Les données sur les communes (email de la mairie, numéro de téléphone etc…) proviennent
+Les données sur les communes et les emails des mairies proviennent
 de [l’API de service-public.fr](https://api-lannuaire.service-public.fr/explore/dataset/api-lannuaire-administration/api/)
 
-Les données sur les objets monuments historiques sont celles de Palissy, la base patrimoniale hébergée sur la
-[Plateforme Ouverte du Patrimoine (POP)](https://www.pop.culture.gouv.fr/).
-L'export publié sur data.gouv.fr est trop partiel et peu fréquent pour les besoins de Collectif Objets.
-Nous scrappons donc POP via [pop-scraper](https://github.com/adipasquale/pop-scraper).
+Les données des objets monuments historiques sont celles des bases nationales Palissy, Mérimée et Mémoire.
+Elles sont en grande partie publiées sur [data.culture.gouv.fr](https://data.culture.gouv.fr) et une petite partie est encore scrappée depuis [POP](https://www.pop.culture.gouv.fr/).
 
-Les données sur les conservateurs nous ont été transmises personnellement via un annuaire national en PDF.
+Voir plus de détails sur les processus de synchronisation des données dans [doc/synchronisation.md](doc/synchronisation.md)
 
-Pour simplifier la réutilisation des données scrappées de POP, nous avons déployé une plateforme de
-données publique : [collectif-objets-datasette.fly.dev](https://collectif-objets-datasette.fly.dev) qui fournit une
-interface visuelle web avec des filtres, et une API JSON.
-Le code est disponible [sur GitHub](https://github.com/adipasquale/collectif-objets-datasette) et utilise la librairie
-[datasette](https://github.com/simonw/datasette/).
-
-`rails runner Synchronizer::SynchronizeObjetsJob.perform_now` importe les données depuis la
-collectif-objets-datasette.fly.dev vers la base de donnée locale de Collectif Objets.
 
 La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :
 
 - Les infos personnelles des conservateurs (email, numéro de téléphone)
-- Les données de recensements. avant d'être validées et republiées sur POP, elles peuvent contenir des données à ne pas
-  publier.
+- Les données de recensements. avant d'être validées et republiées sur POP, elles peuvent contenir des données non-publiques.
+
+## Synchronizer : organisation des modules
+
+Voici un schéma approximatif de l'organisation d’un modules de synchronisation (par exemple `Synchronizer::Objets`) :
 
 ```mermaid
-flowchart TD
-  palissy[[pour chaque notice Palissy]]
-  palissy -->code_insee_existe[une commune existe pour le code INSEE ?]
-  code_insee_existe -.->|non| ne_pas_importer[Ne pas importer]
-  code_insee_existe -->|oui| pm_existe[PM existe déjà ?]
+graph TD
 
-  pm_existe -->|oui| changement_de_commune[Code INSEE a changé ?]
-  pm_existe -.->|non| import_nouvel_objet(Import du nouvel objet)
-
-
-  subgraph Mise à jour d'objet
-  changement_de_commune -.->|non| mise_a_jour(Mise à jour de l'objet)
-  changement_de_commune -->|oui| 2_communes_ok[la commune d’origine a déjà recensé l’objet ?]
-
-  2_communes_ok -.->|oui| mise_a_jour_prudente(Mise à jour des champs sûrs\npas de changement de commune)
-  2_communes_ok -->|non| mise_a_jour_et_changement_commune(Changement de commune\net mise à jour de l'objet)
-  end
-
-  style mise_a_jour fill:#006600
-  style import_nouvel_objet fill:#006600
-  style mise_a_jour_et_changement_commune fill:#006600
-  style mise_a_jour_prudente fill:#003300
-  style ne_pas_importer fill:#660000
+  SynchronizeAllJob -- instancie des batchs<br> de 1000L --> Batch::Base
+  Logger --o SynchronizeAllJob
+  Logger --> log>tmp/synchronize.log]
+  ApiClient -- itère le CSV --o SynchronizeAllJob
+  data[[data.culture.gouv.fr]] -- télécharge CSV --> ApiClient
+  Parser -- parse une ligne CSV <br> en attributs AR --o Batch::Base
+  EagerLoadStore -- pré-charge les <br> records AR --o Batch::Base
+  Batch::Base -- filtre les lignes <br> dans le périmètre de CO --> Row#in_scope?
+  Batch::Base -- instancie à partir des attributs <br> parsés et des records préchargés --> Revision#synchronize
+  Revision#synchronize -- créé, met à jour, supprime --> db[(DB)]
 ```
+
+> [!NOTE]
+> On détaille ici des aspects techniques du code de ces modules de synchronisation.
+> Pour des détails plus haut niveau sur la logique et le périmètre voir [doc/synchronisation.md](doc/synchronisation.md)
+
+Les méthodes `Revision#synchronize` s’appuient autant que possible sur ActiveModel.
+On veut faire un appel canonique `objet.save` et que la logique se passe à l’intérieur.
+On passe par exemple des [nested attributes](https://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html) plutôt que de faire `new_edifice.save! && objet.update(edifice: new_edifice)`.
+
+La classe `Row` est un PORO qui représente une ligne du CSV parsée et sur laquelle on applique des règles de filtrage dans la méthode `#in_scope?`.
+Par exemple pour les objets il s’agit de vérifier que la notice Palissy rentre dans le périmètre de Collectif Objets.
+On s’appuie ici sur les validations ActiveModel pour avoir une structure commune et des messages d’erreurs compréhensifs.
+
+Il y a un petit point peu agréable dans cette modélisation : `Row` fait un parsing très proche de celui fait dans `Parser` mais légèrement différent.
+Par exemple pour les objets on va filtrer sur le champ `palissy_STAT` qu’on ne stocke pas dans les modèles `Objet`.
+Il faut donc le parser dans `Row` mais pas dans `Parser`.
+Cette modélisation peut être améliorée pour éviter cette redondance.
+
+Le `EagerLoadStore` permet d’éviter les requêtes SQL N+1 en les regroupant au niveau du `Batch`.
+C’est un module d’optimisation des performances, il serait plus simple de réécrire le code sans ce préchargement mais cela serait nettement plus long, voire trop long. Il faut bien répercuter les modifications faites par `Revision#synchronize` dans le `EagerLoadStore`.
+
+Exemple :
+- les lignes 100 et 101 du batch concernent des objets avec la même référence édifice Mérimée
+- cet édifice n’existe pas encore dans notre DB
+- la ligne 100 va créer cet édifice
+- il faut mettre à jour le `Store` pour que la ligne 101 ne tente pas de recréer cet édifice mais retrouve l’édifice créé par la ligne 100
+
+
 
 ## Photos
 

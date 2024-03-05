@@ -123,5 +123,9 @@ module RecensementHelper
 
     nil
   end
+
+  def deleted_recensement_title(recensement)
+    "Recensement supprimé de l’objet #{recensement.deleted_objet_snapshot['palissy_REF']}"
+  end
 end
 # rubocop:enable Metrics/ModuleLength

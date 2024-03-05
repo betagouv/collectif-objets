@@ -3,85 +3,44 @@
 require "csv"
 
 namespace :objets do
-  # rake "objets:stats[tmp/stats_avant.txt]"
-  desc "export stats on objets"
-  task :stats, [:path] => :environment do |_, args|
-    PalissyStats.new(args[:path]).perform
-  end
-end
 
-
-class PalissyStats
-  def initialize(path)
-    @path = path
-  end
-
-  def perform
-    @file = File.open(@path, "wb")
-    @total = Objet.count
-    log "total: #{@total} objets"
-    (Synchronizer::Objets::Builder::ALL_FIELDS + ["REFA"]).each { log_field(_1) }
-    log_photos
-    @file.close
-  end
-
-  private
-
-  def log_field(field)
-    db_field = "palissy_#{field}"
-    log "\n\n---- #{field} ---\n"
-    present_count = Objet.where.not(db_field => ["", nil]).count
-    log "#{present_count} present values (#{percent(present_count)}%)"
-    top_values = Objet.pluck(db_field).tally.sort_by(&:last).reverse.first(10)
-    log "most common values:"
-    top_values.each { log "- '#{_1[0]}' (#{_1[1]} objets - #{percent(_1[1])}%)" }
-  end
-
-  def log_photos
-    log "\n\n ------ PHOTOS ------"
-    present_count = Objet.with_images.count
-    log "#{present_count}  objets have at least 1 photo (#{percent(present_count)}%)"
-    total_photos = q('select count(*) as total from objets cross join unnest("palissy_photos") photos')[0]["total"]
-    log "in total there are #{total_photos} photos"
-    %w[url credit].each do |field_name|
-      present_count = q(sql_json_present_count(field_name))[0]["total"]
-      log "\namong all photos, #{field_name} is filled on #{present_count} photos (#{percent(present_count, total: total_photos)}%)"
-      log "most common #{field_name} values:"
-      top_values = q sql_json_top_values(field_name)
-      top_values.map(&:values).each { log "- '#{_1[0]}' (#{_1[1]} objets - #{percent(_1[1])}%)" }
+  # rake objets:export
+  desc "export"
+  task :export, [:path] => :environment do
+    path = File.join(Rails.root, "tmp", "objets_data_culture.csv")
+    headers = %w(
+      palissy_REF
+      palissy_DENO
+      palissy_CATE
+      palissy_SCLE
+      palissy_DENQ
+      palissy_COM
+      palissy_INSEE
+      palissy_DPT
+      palissy_DOSS
+      palissy_EDIF
+      palissy_EMPL
+      palissy_TICO
+      palissy_DPRO
+      palissy_PROT
+      palissy_REFA
+    )
+    CSV.open(path, "wb") do |csv|
+      csv << headers
+      client = Synchronizer::Objets::ApiClientPalissy.new
+      progressbar = ProgressBar.create(total: client.count_all, format: "%t: |%B| %p%% %e %c/%u")
+      total = 0
+      client.each_slice(1000) do |rows|
+        all_objets_attributes_with_eager_loaded_records = Synchronizer::Objets::Batch.new(rows).all_objets_attributes_with_eager_loaded_records
+        all_objets_attributes_with_eager_loaded_records.each do |objet_attributes, _eager_loaded_records|
+          csv << headers.map { |header| objet_attributes[header.to_sym] }
+          progressbar.increment
+        end
+        total += all_objets_attributes_with_eager_loaded_records.count
+        (1000 - all_objets_attributes_with_eager_loaded_records.count).times { progressbar.increment }
+      end
+      puts "exported #{total} objets to #{path}"
     end
   end
-
-  def sql_json_present_count(field_name)
-    <<~SQL.squish
-      select count(*) as total
-      from objets
-      cross join unnest("palissy_photos") photos
-      where (photos -> '#{field_name}')::text != 'null';
-    SQL
-  end
-
-  def sql_json_top_values(field_name)
-    <<~SQL.squish
-      select (photo -> '#{field_name}')::text as field, count(*) as total
-      from objets
-      cross join unnest("palissy_photos") photo
-      group by field
-      order by total desc
-      limit 10;
-    SQL
-  end
-
-  def q(query)
-    ActiveRecord::Base.connection.execute(query)
-  end
-
-  def log message
-    puts message
-    @file.puts message
-  end
-
-  def percent(count, total: @total)
-    ((count.to_i * 100).to_f / total).round(2)
-  end
 end
+

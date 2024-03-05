@@ -5,6 +5,7 @@ FactoryBot.define do
     commune { association(:commune_with_user) }
     association :campaign
     current_step { nil }
+    sequence(:unsubscribe_token) { |n| 3_454_234 + n }
 
     trait :step_lancement do
       current_step { "lancement" }

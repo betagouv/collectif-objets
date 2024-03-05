@@ -4,8 +4,7 @@ class Recensement < ApplicationRecord
   include Recensements::AnalyseConcern
   include Recensements::BooleansConcern
 
-  belongs_to :objet
-  belongs_to :user
+  belongs_to :objet, optional: true
   belongs_to :dossier, optional: true
   belongs_to :pop_export_memoire, class_name: "PopExport", inverse_of: :recensements_memoire, optional: true
   belongs_to :pop_export_palissy, class_name: "PopExport", inverse_of: :recensements_palissy, optional: true
@@ -15,15 +14,20 @@ class Recensement < ApplicationRecord
     attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }
   end
 
-  delegate :commune, to: :objet
-  delegate :departement, to: :objet
+  delegate :commune, to: :objet, allow_nil: true
+  delegate :departement, to: :objet, allow_nil: true
 
   include AASM
-  aasm column: :status, whiny_persistence: true do
+  aasm column: :status, whiny_persistence: true, timestamps: true do
     state :draft, initial: true, display: "Brouillon"
     state :completed, display: "Complet et validé"
+    state :deleted, display: "Archivé"
+
     event :complete, after: :aasm_after_complete, after_commit: :aasm_after_commit_complete do
       transitions from: :draft, to: :completed
+    end
+    event :soft_delete, before_transaction: :aasm_before_soft_delete_transaction do
+      transitions from: %i[completed], to: :deleted
     end
   end
 
@@ -42,7 +46,8 @@ class Recensement < ApplicationRecord
   SECURISATION_MAUVAISE = "en_danger"
   SECURISATIONS = [SECURISATION_CORRECTE, SECURISATION_MAUVAISE].freeze
 
-  validates :objet_id, uniqueness: true
+  validates :objet, presence: true, unless: -> { deleted? } # it is important not to use objet_id here
+  validates :objet_id, uniqueness: true, if: -> { objet_id.present? }
 
   validates :confirmation_sur_place, inclusion: { in: [true], if: -> { completed? && !absent? } }
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
@@ -58,8 +63,11 @@ class Recensement < ApplicationRecord
 
   validates :conservateur_id, presence: true, if: -> { completed? && analysed? }
 
+  validates :deleted_at, presence: true, if: -> { deleted? }
+  validates :deleted_reason, inclusion: { in: %w[objet-devenu-hors-scope changement-de-commune] }, if: -> { deleted? }
+
   after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) }
+  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune.present? }
 
   scope :present_and_recensable, lambda {
     where(
@@ -83,6 +91,11 @@ class Recensement < ApplicationRecord
   scope :not_analysed, -> { where(analysed_at: nil) }
   scope :absent_or_recensable, -> { where(recensable: true).or(absent) }
   scope :completed, -> { where(status: "completed") }
+
+  # from https://medium.com/@cathmgarcia/soft-deletion-in-ruby-on-rails-a1d65d0172ab
+  default_scope { where(deleted_at: nil) } # DANGER: default scopes are INVISIBLE and can lead to unexpected results
+  scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
+  scope :with_deleted, -> { unscope(where: :deleted_at) }
 
   # L'objet est prioritaire s'il a disparu ou s'il est en péril,
   # jugé par la commune ou le conservateur
@@ -139,5 +152,24 @@ class Recensement < ApplicationRecord
 
   def photos_presenters
     photos.order(:created_at).map { PhotoPresenter.from_attachment(_1) }
+  end
+
+  def destroy_or_soft_delete!(**)
+    case status
+    when "draft"
+      destroy!
+    when "completed"
+      soft_delete!(**)
+    end
+  end
+
+  private
+
+  def aasm_before_soft_delete_transaction(reason:, message: nil, objet_snapshot: nil)
+    assign_attributes \
+      objet_id: nil,
+      deleted_reason: reason,
+      deleted_message: message.presence,
+      deleted_objet_snapshot: objet_snapshot || objet.snapshot_attributes
   end
 end

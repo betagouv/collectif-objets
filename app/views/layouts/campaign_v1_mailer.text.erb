@@ -18,4 +18,5 @@ Collectif Objets - <%= t("campaign_v1_mailer.layout.tagline") %>
 ---
 
 <%= t("campaign_v1_mailer.layout.desinscription") %>
-<%= magic_authentication_url("magic-token": @user.magic_token, "after_sign_in_path": "/users/edit") %>
+
+<%= new_user_unsubscribe_url(token: @campaign_recipient.unsubscribe_token) %>

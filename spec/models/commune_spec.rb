@@ -244,4 +244,63 @@ RSpec.describe Commune, type: :model do
       end
     end
   end
+
+  describe "#destroy" do
+    subject { commune.destroy }
+    context "commune has an associated user, edifice and objet" do
+      let!(:commune) { create(:commune) }
+      let!(:user) { create(:user, commune:) }
+      let!(:edifice) { create(:edifice, commune:) }
+      let!(:objet) { create(:objet, commune:, edifice:) }
+      before { commune.reload } # so that associations like commune.users are correctly populated
+
+      it { should be_truthy }
+
+      it "should work and destroy the user and edifice but not the objet" do
+        subject
+        expect(commune.errors).to be_empty
+        expect { user.reload }.to raise_error ActiveRecord::RecordNotFound
+        expect { edifice.reload }.to raise_error ActiveRecord::RecordNotFound
+        expect { objet.reload }.not_to raise_error
+      end
+
+      context "commune also has a dossier and recensement" do
+        let!(:dossier) { create(:dossier, commune:) }
+        let!(:recensement) { create(:recensement, dossier:, objet:) }
+
+        it { should eq false }
+
+        it "should not work and the error should be explicit" do
+          subject
+          expect(commune.errors.full_messages).to eq(
+            ["Impossible de supprimer Commune parce qu’il y a 1 ou plusieurs past dossiers"]
+          )
+        end
+      end
+    end
+  end
+
+  describe "validate" do
+    subject { commune.valid? }
+    context "valid commune without user attributes" do
+      let!(:departement) { create(:departement, code: "51") }
+      let(:commune) { Commune.new(nom: "Châlons", code_insee: "51023", departement:) }
+      it { should be_truthy }
+    end
+    context "valid commune with new user attributes" do
+      let!(:departement) { create(:departement, code: "51") }
+      let(:commune) do
+        Commune.new(nom: "Châlons", code_insee: "51023", departement:, users_attributes: [{ email: "jean@lol.fr" }])
+      end
+      it { should be_truthy }
+
+      context "email is taken" do
+        let!(:user) { create(:user, email: "jean@lol.fr") }
+        it "should have email taken error" do
+          expect(commune.valid?).to eq false
+          expect(commune.errors.first).to have_attributes(attribute: :"users.email", type: :taken)
+        end
+      end
+    end
+  end
 end

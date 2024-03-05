@@ -28,7 +28,7 @@ class Departement < ApplicationRecord
         LEFT OUTER JOIN (
           SELECT communes.departement_code, COUNT(objets.id) objets_count
           FROM objets
-          LEFT JOIN communes ON communes.code_insee = objets."palissy_INSEE"
+          LEFT JOIN communes ON communes.code_insee = objets.lieu_actuel_code_insee
           GROUP BY communes.departement_code
         ) b ON b."departement_code" = departements.code
       }
@@ -43,4 +43,13 @@ class Departement < ApplicationRecord
   alias display_name to_s
   def memoire_sequence_name = "memoire_photos_number_#{code}"
   def self.ransackable_attributes(_ = nil) = %w[code]
+
+  def self.parse_from_code_insee(code_insee)
+    if code_insee&.length != 5
+      Rails.logger.warn "le code INSEE '#{code_insee}' ne fait pas 5 caractères"
+      return nil
+    end
+
+    code_insee.starts_with?("97") ? code_insee[0..2] : code_insee[0..1]
+  end
 end
