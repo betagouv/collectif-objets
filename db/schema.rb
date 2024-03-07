@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_28_143918) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_105533) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -383,6 +383,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_143918) do
     t.string "deleted_reason"
     t.string "deleted_message"
     t.jsonb "deleted_objet_snapshot"
+    t.integer "autre_edifice_id"
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["deleted_at"], name: "index_recensements_on_deleted_at"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
