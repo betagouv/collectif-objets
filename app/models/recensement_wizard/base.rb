@@ -13,7 +13,7 @@ module RecensementWizard
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
       :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
-      :edifice_initial?,
+      :edifice_initial?, :autre_edifice_id,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
