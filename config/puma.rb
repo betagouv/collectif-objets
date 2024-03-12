@@ -43,13 +43,3 @@ pidfile ENV.fetch("PIDFILE", "tmp/pids/server.pid")
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
-
-# when using good_job in async mode locally, we need to shutdown the good_job process manually
-# cf https://github.com/bensheldon/good_job/tree/main#execute-jobs-async--in-process
-if ENV.fetch("WEB_CONCURRENCY", 0).positive?
-  before_fork { GoodJob.shutdown }
-  on_worker_boot { GoodJob.restart }
-  on_worker_shutdown { GoodJob.shutdown }
-  MAIN_PID = Process.pid
-  at_exit { GoodJob.shutdown if Process.pid == MAIN_PID }
-end
