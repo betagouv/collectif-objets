@@ -80,9 +80,30 @@ La protection au titre des monuments historiques n’a pas vocation à s’appli
 
 # II - Le recensement sur Collectif Objets
 
-## 1 - Comment effectuer un recensement ?
+## 1 - Se connecter à la plateforme grâce à un code de connexion
 
-<iframe title="Recensement pour les conservateurs - Collectif Objets" width="100%" height="400" src="https://tube.numerique.gouv.fr/videos/embed/94656718-84e6-498b-9726-8a6ceb8d0aa5" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+P﻿our effectuer un recensement via Collectif Objets, vous devez d'abord vous connecter à votre espace dédié dans le site, grâce à un code de connexion à 6 chiffres que vous recevrez par email.  
+
+La vidéo ci-dessous vous présente les deux méthodes possibles pour vous connecter.
+
+<iframe title="Connexion d'une commune à Collectif Objets" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/f0958173-b19a-48da-aa5a-84ac7a5158aa" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+
+P﻿our obtenir un code de connexion, vous pouvez : 
+
+1) Partir de l'email que vous avez reçu et qui vous invite à recenser.
+
+Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code. \
+\
+2) Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions :
+
+* Rendez-vous sur cette page internet : <https://collectif-objets.beta.gouv.fr/users/session_codes/new> 
+* Cliquez sur « Sélectionnez un département » et choisissez votre département dans la liste proposée. Puis sélectionnez le nom de votre commune dans la liste en dessous. 
+* Cliquez sur « Recevoir un code de connexion » 
+* Consultez la boite mail de votre commune. Vous recevrez un courriel contenant un code de connexion à 6 chiffres. Il faut le taper dans la page internet où vous venez de demander le code de connexion. 
+* Vous serez alors connecté à l'espace de votre commune dans la plateforme *Collectif Objets.* Lisez les rapides instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
+* Vous verrez alors s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier. \
+  \
+  Comment effectuer un recensement ?
 
 Vous pouvez recenser en 4 étapes : 
 
@@ -91,25 +112,29 @@ Vous pouvez recenser en 4 étapes :
 * Vous pouvez cliquer sur un objet. Le bouton “Recenser cet objet” pour répondre au questionnaire de recensement se trouve sur cette page de détail de l’objet.
 * Une fois l’ensemble des recensements effectué vous pourrez transmettre votre dossier aux conservateurs qui pourront ainsi revenir vers vous avec un examen.
 
-## 2 - Vous avez reçu un ou des emails vous invitant à recenser les objets de votre commune
 
-Lorsque votre commune est invitée à recenser ses objets protégés, un email vous permettra d’accéder à votre espace dédié sur la plateforme Collectif Objets. Depuis cet espace, vous pourrez voir la liste des objets protégés de votre commune.
 
-En cliquant sur chacun des objets, vous obtiendrez des informations complémentaires à son sujet : dernier emplacement connu, catégorie d’objet, dernier récolement, son numéro de référence au sein de la base de données nationale du patrimoine… Ces informations pourront vous aider à retrouver et identifier l’objet au sein de votre commune.
+## 2 - Si vous n’avez pas reçu d’email(s) vous invitant à recenser vos objets protégés
+
+S﻿i vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a deux explications plausibles : 
+
+\-﻿ il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département. 
+
+\-﻿ s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contactée. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou adresses email de contact) qui sont renseignées dans le site web de l'Etat "Annuaire du service public" : [https://lannuaire.service-public.fr/ ](https://lannuaire.service-public.fr/)
+
+S﻿i votre commune n'a pas indiqué d'adresse email de contact dans ce site, ou si l'adresse email indiquée dans le site est obsolète, nous vous invitons à effectuer une demande de mise à jour de vos coordonnées directement depuis le site de l'annuaire du service public. Pour cela, il vous faut rechercher la page de votre commune dans ce site, puis descendre en bas de la page et cliquer sur "Demander une mise à jour de cette page" e﻿t ensuite suivre les instructions.
+
+## 3 - Effectuer le recensement en ligne de ses objets protégés monuments historiques
+
+Depuis votre espace dans le site, vous pourrez voir la liste des objets protégés de votre commune. 
+
+En cliquant sur chacun des objets, vous obtiendrez des informations à son sujet : dernier emplacement connu, catégorie d’objet, dernier récolement, son numéro de référence au sein de la base de données nationale du patrimoine… Ces informations pourront vous aider à retrouver et identifier l’objet au sein de votre commune.
 
 Ensuite, les étapes sont les suivantes : 
 
 * Se rendre sur les lieux où se trouvent les objets pour les recenser et les prendre en photo
 * Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet
 * Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
-
-## 3 - Si vous n’avez pas reçu d’email(s) vous invitant à recenser
-
-Pour qu’une commune puisse effectuer un recensement de ses objets protégés, il faut qu’une campagne de recensement ait été initiée dans son département via Collectif Objets, en collaboration avec les conservateurs des antiquités et des objets d’art du département.
-
-Lorsqu’une campagne de recensement départementale est lancée, si elle concerne votre commune, un email sera envoyé à l’adresse mail principale de votre commune, invitant votre commune à recenser ses objets.
-
-Une commune ne peut pour l’instant pas entamer un recensement via Collectif Objets en dehors du cadre d’une campagne départementale.
 
 ## 4 - Légitimé et personnes impliquées pour le recensement
 
