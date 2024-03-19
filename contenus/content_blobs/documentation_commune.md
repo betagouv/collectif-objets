@@ -90,11 +90,13 @@ La vidéo ci-dessous vous présente les deux méthodes possibles pour vous conne
 
 P﻿our obtenir un code de connexion, vous pouvez : 
 
-1) Partir de l'email que vous avez reçu et qui vous invite à recenser.
+1. Partir de l'email que vous avez reçu et qui vous invite à recenser.
 
-Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code. \
-\
-2) Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions :
+Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code. 
+
+
+
+2. Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions :
 
 * Rendez-vous sur cette page internet : <https://collectif-objets.beta.gouv.fr/users/session_codes/new> 
 * Cliquez sur « Sélectionnez un département » et choisissez votre département dans la liste proposée. Puis sélectionnez le nom de votre commune dans la liste en dessous. 
@@ -111,8 +113,6 @@ Vous pouvez recenser en 4 étapes :
 * Ensuite, vous y retrouverez la liste de(s) objet(s) monument(s) historique(s) à recenser dans votre commune.
 * Vous pouvez cliquer sur un objet. Le bouton “Recenser cet objet” pour répondre au questionnaire de recensement se trouve sur cette page de détail de l’objet.
 * Une fois l’ensemble des recensements effectué vous pourrez transmettre votre dossier aux conservateurs qui pourront ainsi revenir vers vous avec un examen.
-
-
 
 ## 2 - Si vous n’avez pas reçu d’email(s) vous invitant à recenser vos objets protégés
 
