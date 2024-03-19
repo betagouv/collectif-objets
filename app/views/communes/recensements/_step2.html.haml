@@ -11,7 +11,7 @@
 
   .fr-input-group
     = form_builder.label :autre_edifice_id, "Dans quel édifice se trouve l'objet ?"
-    = form_builder.select :autre_edifice_id, wizard.commune.edifices.pluck(:nom, :id).concat([])
+    = form_builder.select :autre_edifice_id, options_for_select(wizard.commune.edifices.pluck(:nom, :id).concat([["Autre édifice", "Autre édifice"]]))
     
 
 
