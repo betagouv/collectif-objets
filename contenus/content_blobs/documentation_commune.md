@@ -94,9 +94,7 @@ P﻿our obtenir un code de connexion, vous pouvez :
 
 Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code. 
 
-
-
-2. Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions :
+2. Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions : 
 
 * Rendez-vous sur cette page internet : <https://collectif-objets.beta.gouv.fr/users/session_codes/new> 
 * Cliquez sur « Sélectionnez un département » et choisissez votre département dans la liste proposée. Puis sélectionnez le nom de votre commune dans la liste en dessous. 
