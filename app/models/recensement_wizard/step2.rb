@@ -12,5 +12,11 @@ module RecensementWizard
       }, unless: -> { edifice_id.present? }
 
     def permitted_params = %i[edifice_id edifice_nom]
+
+    def assign_attributes(attributes)
+      super
+
+      recensement.edifice_nom = nil if edifice_id.present?
+    end
   end
 end
