@@ -11,6 +11,6 @@ module RecensementWizard
         message: "Veuillez préciser le nom de l’édifice dans lequel l’objet a été déplacé"
       }
 
-    def permitted_params = %i[edifice_id edifice_nom]
+    def permitted_params = %i[autre_edifice_id edifice_nom]
   end
 end
