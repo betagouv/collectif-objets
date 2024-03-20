@@ -383,10 +383,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_105533) do
     t.string "deleted_reason"
     t.string "deleted_message"
     t.jsonb "deleted_objet_snapshot"
-    t.integer "autre_edifice_id"
+    t.bigint "edifice_id"
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["deleted_at"], name: "index_recensements_on_deleted_at"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
+    t.index ["edifice_id"], name: "index_recensements_on_edifice_id"
     t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true
   end
 
@@ -433,6 +434,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_105533) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
+  add_foreign_key "recensements", "edifices"
   add_foreign_key "recensements", "objets"
   add_foreign_key "session_codes", "users"
   add_foreign_key "users", "communes"

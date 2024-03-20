@@ -8,7 +8,7 @@
   -#   - @commune.edifices.each do |edifice|
   -#     - c.with_option value: edifice.id, label: edifice.nom
   -#   - c.with_option value: "", label: "Autre édifice…"
-  = render RecensementRadiosFieldsetComponent.new(form_builder:, field: :autre_edifice_id) do |c|
+  = render RecensementRadiosFieldsetComponent.new(form_builder:, field: :edifice_id) do |c|
     - c.with_legend do
       Dans quel édifice se trouve l'objet ?
       .fr-hint-text
@@ -20,7 +20,7 @@
           = link_to "Voir la page 10 du guide", guide_url(page: 10), target: "_blank", rel: "noopener"
       - wizard.commune.edifices.each do |edifice|
         - c.with_option value: edifice.id, label: edifice.nom
-      - c.with_option value: :autre_edifice,
+      - c.with_option value: "",
         label: "Autre édifice",
         data: { controller: "dependent-field", target: "#edifice_nom"}
   -# .fr-input-group

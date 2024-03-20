@@ -13,7 +13,7 @@ module RecensementWizard
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
       :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
-      :edifice_initial?, :autre_edifice_id,
+      :edifice_initial?, :edifice_id,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
@@ -75,7 +75,7 @@ module RecensementWizard
     def assign_attributes(attributes)
       attrs_recensement = attributes.to_h.clone.symbolize_keys
       attrs_wizard = attrs_recensement.slice! \
-        :localisation, :recensable, :autre_edifice_id, :edifice_nom, :etat_sanitaire, :securisation, :notes
+        :localisation, :recensable, :edifice_id, :edifice_nom, :etat_sanitaire, :securisation, :notes
       recensement.assign_attributes(attrs_recensement)
       super(attrs_wizard)
     end
