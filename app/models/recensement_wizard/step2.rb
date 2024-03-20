@@ -9,7 +9,7 @@ module RecensementWizard
       :edifice_nom,
       presence: {
         message: "Veuillez préciser le nom de l’édifice dans lequel l’objet a été déplacé"
-      }
+      }, unless: -> { edifice_id.present? }
 
     def permitted_params = %i[edifice_id edifice_nom]
   end
