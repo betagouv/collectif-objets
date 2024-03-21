@@ -9,7 +9,7 @@
         .fr-mb-1w
           Vous avez indiqué que l'objet se trouvait dans un autre édifice, veuillez nous indiquer l'édifice dans lequel il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
 
-    = form_builder.select :edifice_id, options_for_select(wizard.commune.edifices.pluck(:nom, :id).concat([["Autre édifice", 0, { data: { controller: "enable-field-with-option", target: "#edifice_nom" }}]])), prompt: "Sélectionner un édifice"
+    = form_builder.select :edifice_id, options_for_select([["Sélectionner un édifice", nil, { disabled: true, hidden: true, selected: form_builder.object.edifice_id.nil? }]].concat(wizard.commune.edifices.pluck(:nom, :id)).concat([["Autre édifice", 0, { data: { controller: "enable-field-with-option", target: "#edifice_nom" }}]]))
     - form_builder.object.errors[:edifice_id].each do |error_message|
       %p.fr-error-text
         = error_message
