@@ -2,14 +2,17 @@
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
 
-  .fr-input-group
+  .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_id].present?)}
     = form_builder.label :edifice_id do 
       Dans quel édifice se trouve l'objet ?
       .fr-hint-text
         .fr-mb-1w
           Vous avez indiqué que l'objet se trouvait dans un autre édifice, veuillez nous indiquer l'édifice dans lequel il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
 
-    = form_builder.select :edifice_id, options_for_select(wizard.commune.edifices.pluck(:nom, :id).concat([["Autre édifice", "Autre édifice", { data: { controller: "dependent-field", input: "wizard[autre_edifice_id]", target: "#edifice_nom" }}]])), prompt: "Sélectionner un édifice"
+    = form_builder.select :edifice_id, options_for_select(wizard.commune.edifices.pluck(:nom, :id).concat([["Autre édifice", 0, { data: { controller: "enable-field-with-option", target: "#edifice_nom" }}]])), prompt: "Sélectionner un édifice"
+    - form_builder.object.errors[:edifice_id].each do |error_message|
+      %p.fr-error-text
+        = error_message
 
   .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
     = form_builder.label :edifice_nom, "Quel est le nom de l’édifice dans lequel l’objet a été déplacé ?", class: "fr-label"
