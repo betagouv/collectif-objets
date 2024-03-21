@@ -4,8 +4,6 @@ module Campaigns
   class StepUpRecipientJob < ApplicationJob
     include GoodJob::ActiveJobExtensions::Concurrency
 
-    good_job_control_concurrency_with perform_limit: 1
-
     discard_on StandardError, Exception
 
     attr_reader :to_step
