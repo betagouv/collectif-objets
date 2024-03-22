@@ -5,8 +5,11 @@ module RecensementWizard
     STEP_NUMBER = 2
     TITLE = "Précisions sur la localisation"
 
+    attr_accessor :autre_edifice_checked
+
     validates :edifice_id,
-              presence: { message: "Veuillez sélectionner un édifice ou l'option Autre édifice." }
+              presence: { message: "Veuillez sélectionner un édifice ou \
+                cocher la case ci-dessous si l'édifice n'est pas dans la liste." }
 
     validates \
       :edifice_nom,
