@@ -7,8 +7,9 @@ titre: Documentation Conservateur
 
 Collectif Objets est un **service public numérique** du ministère de la Culture. Il favorise la préservation du patrimoine mobilier protégé en facilitant le dialogue entre les acteurs de la chaîne patrimoniale. Il prend la forme d'un site web (ou plateforme numérique) où conservateurs et municipalités peuvent échanger.
 
-Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques. \
-Ce sont les mairies qui sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer. 
+Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques. 
+
+Les mairies sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer. 
 
 Grâce à Collectif Objets, les conservateurs peuvent avoir une vue d'ensemble à jour des objets protégés au titre des monuments historiques de leur département. Ce service aide également les communes à prendre soin de leur patrimoine mobilier remarquable. 
 
@@ -22,13 +23,15 @@ Grâce à Collectif Objets, les conservateurs peuvent avoir une vue d'ensemble �
 
 Collectif Objets s’adresse aux communes abritant des objets protégés au titre des monuments historiques (classés et inscrits) sur leur territoire.
 
-Ce dispositif concerne les objets appartenant aux collectivités territoriales ou à des propriétaires privées (particuliers, associations…).
+Ce dispositif concerne les objets appartenant aux collectivités territoriales ou à des propriétaires privés (particuliers, associations…). 
+
+Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
 
 Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement. 
 
-Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir. Il est possible d’ajuster la liste des communes destinataires de la campagne.
+Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir. 
 
-Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
+Les conservateurs d'un département choisissent la liste des communes destinataires de la campagne. Vous pouvez donc exclure d'une campagne les communes qui sont des cas particuliers ou difficiles. 
 
 ## Fiabilité du recensement effectué par les communes
 
@@ -253,7 +256,7 @@ Si le changement de localisation de l’objet n’est pas détecté en amont de 
 
 Pour information, les notices Palissy indiquent généralement la commune qui abritait un objet à l’époque de sa protection, qui peut remonter à près de deux siècles. L’objet peut désormais être abrité au sein d’une autre commune.
 
-## Si vous ne recevez pas les e-mails envoyés par la plateforme Collectif Objets 
+## Si vous ne recevez pas les e-mails envoyés par la plateforme Collectif Objets
 
 Le compte de chaque conservateur dans Collectif Objets est lié à une adresse e-mail qui sert d'identifiant pour se connecter à Collectif Objets. Cette adresse sert aussi à prévenir le conservateur lorsqu'une commune lui écrit dans la messagerie intégrée à Collectif Objets, ainsi qu'à créer / réinitialiser son mot de passe pour se connecter à la plateforme. 
 
