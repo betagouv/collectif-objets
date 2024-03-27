@@ -18,7 +18,9 @@ class PhotoPresenter
     new(
       url: Rails.application.routes.url_helpers.url_for(attachment),
       thumb_url: Rails.application.routes.url_helpers.url_for(attachment.variant(:medium)),
-      download_url: Rails.application.routes.url_helpers.rails_blob_path(attachment, disposition: "attachment"),
+      download_url: Rails.application.routes.url_helpers.rails_blob_path(attachment,
+                                                                         disposition: "attachment",
+                                                                         only_path: true),
       credit: "© Licence ouverte",
       id: attachment.id
     )
