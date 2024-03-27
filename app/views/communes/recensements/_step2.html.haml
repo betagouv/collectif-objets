@@ -21,7 +21,11 @@
 
     .fr-fieldset__element{data: { "choix-edifice-target" => "edificeNom" }}
       .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
-        = form_builder.label :edifice_nom, "Quel est le nom de l’édifice dans lequel l’objet a été déplacé ?", class: "fr-label"
+        = form_builder.label :edifice_nom do 
+          Indiquez le nom de l’édifice
+          .fr-hint-text
+            .fr-mb-1w
+              Vous nous avez indiqué que l’objet n’était pas dans un édifice de la liste. Veuillez nous indiquer le nom de cet édifice, vous pourrez ajouter des indications supplémentaires en commentaire à l’étape 5 si nécéssaire.
         = form_builder.text_field :edifice_nom
         - form_builder.object.errors[:edifice_nom].each do |error_message|
           %p.fr-error-text
