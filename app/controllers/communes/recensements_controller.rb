@@ -51,7 +51,7 @@ module Communes
     end
 
     def set_wizard
-      step = params[:step] || (@recensement.draft? ? 1 : 6)
+      step = params[:step] || (@recensement.draft? ? 1 : 7)
       @wizard = RecensementWizard::Base.build_for(step, @recensement)
       @wizard.assign_attributes(params_wizard)
     end
