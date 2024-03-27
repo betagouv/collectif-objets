@@ -39,27 +39,25 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # STEP 1
     expect(page).to have_text("Étape 1 sur 7")
-    expect(page).to have_text("Recherche")
-    expect(page).to have_text("Étape suivante : Localisation")
+    expect(page).to have_text("Localisation")
+    expect(page).to have_text("Précisions sur la localisation")
     expect(page).to have_text("Avez-vous trouvé l’objet ?")
     scroll_to(find("#recensement_form_step"))
-    find("label", text: "Je confirme que je me suis bien déplacé").click
-    expect(page).to be_axe_clean
-    click_on "Passer à l’étape suivante"
-
-    # STEP 2
-    expect(page).to have_text("Étape 2 sur 7")
-    expect(page).to have_text("Localisation")
-    expect(page).to have_text("Étape suivante : Photos de l’objet")
-    expect(page).to have_text("Où se trouve l’objet ?")
-    find("label", text: "L’objet se trouve dans l’édifice indiqué initialement").click
-    expect(page).to have_text("L’objet est-il recensable ?")
-    find("label", text: "L’objet est recensable").click
+    find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
     expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
     # STEP 3
     expect(page).to have_text("Étape 3 sur 7")
+    expect(page).to have_text("Recensabilité")
+    expect(page).to have_text("Étape suivante : Photos de l’objet")
+    expect(page).to have_text("L’objet est-il recensable ?")
+    find("label", text: "L’objet est recensable").click
+    expect(page).to be_axe_clean
+    click_on "Passer à l’étape suivante"
+
+    # STEP 4
+    expect(page).to have_text("Étape 4 sur 7")
     expect(page).to have_text("Photos de l’objet")
     expect(page).to have_text("Étape suivante : Objet")
     expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
@@ -73,8 +71,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
-    # Step 4
-    expect(page).to have_text("Étape 4 sur 7")
+    # Step 5
+    expect(page).to have_text("Étape 5 sur 7")
     expect(page).to have_text("Objet")
     expect(page).to have_text("Étape suivante : Commentaires")
     expect(page).to have_text("Quel est l’état actuel de l’objet ?")
@@ -84,8 +82,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
-    # Step 5
-    expect(page).to have_text("Étape 5 sur 7")
+    # Step 6
+    expect(page).to have_text("Étape 6 sur 7")
     expect(page).to have_text("Commentaires")
     expect(page).to have_text("Étape suivante : Récapitulatif")
     expect(page).to have_text("Avez-vous des commentaires ?")
@@ -93,12 +91,11 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
-    # Step 6 - Recap
-    expect(page).to have_text("Étape 6 sur 7")
+    # Step 7 - Recap
+    expect(page).to have_text("Étape 7 sur 7")
     expect(page).to have_text("Récapitulatif")
     expect(page).not_to have_text("Étape suivante")
-    expect(page).to have_text("Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet")
-    expect(page).to have_text("L’objet se trouve dans l’édifice indiqué initialement: Eglise st Jean")
+    expect(page).to have_text("Oui, l’objet se trouve dans l’édifice indiqué initialement")
     expect(page).to have_text("L’objet est recensable")
     expect(page).to have_selector("img[src*='tableau1.jpg']")
     expect(page).to have_text("L’objet est en état moyen")
@@ -126,25 +123,23 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Recenser cet objet"
     expect(page).to have_text("Étape 1 sur 7")
     # "comment ça marche" accordion should be closed for successive recensements
-    expect(page).not_to have_text("Je me rends sur place pour recenser mes objets protégés et les prendre en photo")
-    find("label", text: "Je confirme que je me suis bien déplacé").click
-    click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 2 sur 7")
-    find("label", text: "L’objet se trouve dans l’édifice indiqué initialement").click
-    find("label", text: "L’objet est recensable").click
+    find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Étape 3 sur 7")
+    find("label", text: "L’objet est recensable").click
+    click_on "Passer à l’étape suivante"
+    expect(page).to have_text("Étape 4 sur 7")
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/peinture1.jpg"))
     expect(page).to have_selector("img[src*='peinture1.jpg']")
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 4 sur 7")
+    expect(page).to have_text("Étape 5 sur 7")
     find("label", text: "L’objet est en bon état").click
     find("label", text: "L’objet est difficile à voler").click
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 5 sur 7")
+    expect(page).to have_text("Étape 6 sur 7")
     expect(page).to have_text("Avez-vous des commentaires ?")
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 6 sur 7")
+    expect(page).to have_text("Étape 7 sur 7")
     click_on "Valider le recensement de cet objet"
 
     # Confirmation
@@ -182,52 +177,26 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Recenser cet objet"
 
     expect(page).to have_text("Étape 1 sur 7")
-    find("label", text: "Je ne trouve pas l’objet").click
+    find("label", text: "Non, je ne sais pas où est l’objet").click
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme ne pas trouver l’objet")
     sleep 1 # sleep and check modal is still present to make sure it does not autoclose
     expect(page).to have_text("Je confirme ne pas trouver l’objet")
     click_on "Annuler"
     expect(page).to have_text("Avez-vous trouvé l’objet ?")
-    find("label", text: "Je ne trouve pas l’objet").click
+    find("label", text: "Non, je ne sais pas où est l’objet").click
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme ne pas trouver l’objet")
     click_on "Confirmer et continuer"
-    expect(page).to have_text("Étape 5 sur 7")
+    expect(page).to have_text("Étape 6 sur 7")
     expect(page).to have_text("Avez-vous des commentaires ?")
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 6 sur 7")
+    expect(page).to have_text("Étape 7 sur 7")
     click_on "Valider le recensement de cet objet"
 
     find_all("a", text: "Revenir à la liste d’objets de ma commune").first.click
     card_bouquet = find(".fr-card", text: "Bouquet d’Autel")
     expect(card_bouquet).to have_text(/Recensé/i)
-    card_bouquet.click
-    click_on "Modifier le recensement"
-    expect(page).to have_text("Étape 6 sur 7")
-    expect(page).to have_text("Récapitulatif")
-    find("section", text: "Avez-vous trouvé l’objet ?").find('button[aria-label="Modifier la réponse"]').click
-    expect(page).to have_text("Étape 1 sur 7")
-    find("label", text: "Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet").click
-    click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 2 sur 7")
-    expect(page).to have_text("Où se trouve l’objet ?")
-
-    #  le recensement repasse en draft quand on change cette réponse
-    sleep 0.5
-    click_on "Objets de Albon"
-    card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
-    expect(card_bouquet).not_to be_nil
-    expect(card_bouquet).not_to have_text(/Recensé/i)
-    expect(card_bouquet).to have_text(/Recensement à compléter/i)
-    card_bouquet.click
-    click_on "Compléter le recensement"
-    expect(page).to have_text("Étape 1 sur 7")
-    expect(page).to have_text("Recherche")
-    expect(
-      find(".fr-radio-group", text: "Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet")
-        .find("input", visible: false)
-    ).to be_checked
   end
 
   scenario "recensement non recensable" do
@@ -236,10 +205,9 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Recenser cet objet"
 
     expect(page).to have_text("Étape 1 sur 7")
-    find("label", text: "Je confirme que je me suis bien déplacé").click
+    find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 2 sur 7")
-    find("label", text: "L’objet se trouve dans l’édifice indiqué initialement").click
+    expect(page).to have_text("Étape 3 sur 7")
     find("label", text: "L’objet n’est pas recensable").click
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
@@ -250,17 +218,16 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
     click_on "Confirmer et continuer"
-    expect(page).to have_text("Étape 5 sur 7")
+    expect(page).to have_text("Étape 6 sur 7")
     expect(page).to have_text("Avez-vous des commentaires ?")
     click_on "Revenir à l’étape précédente"
-    expect(page).to have_text("Étape 2 sur 7")
-    expect(page).to have_text("Localisation")
+    expect(page).to have_text("Recensabilité")
     expect(find(".fr-radio-group", text: "L’objet n’est pas recensable").find("input", visible: false)).to be_checked
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 5 sur 7")
+    expect(page).to have_text("Étape 6 sur 7")
     expect(page).to have_text("Avez-vous des commentaires ?")
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 6 sur 7")
+    expect(page).to have_text("Étape 7 sur 7")
     expect(page).to have_text("Récapitulatif")
     expect(page).to have_text("L’objet n’est pas recensable")
     expect(page).not_to have_text(/Photos/i)
@@ -271,13 +238,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(card_bouquet).to have_text(/Recensé/i)
     card_bouquet.click
     click_on "Modifier le recensement"
-    expect(page).to have_text("Étape 6 sur 7")
+    expect(page).to have_text("Étape 7 sur 7")
     expect(page).to have_text("Récapitulatif")
     find("section", text: "L’objet n’est pas recensable").find('button[aria-label="Modifier la réponse"]').click
-    expect(page).to have_text("Étape 2 sur 7")
+    expect(page).to have_text("Étape 3 sur 7")
     find("label", text: "L’objet est recensable").click
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 3 sur 7")
+    expect(page).to have_text("Étape 4 sur 7")
     expect(page).to have_text("Photos de l’objet")
     click_on "Objets de Albon"
     card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
@@ -285,13 +252,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     card_bouquet.click
     click_on "Compléter le recensement"
     expect(page).to have_text("Étape 1 sur 7")
-    expect(page).to have_text("Recherche")
-    click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 2 sur 7")
     expect(page).to have_text("Localisation")
-    expect(find(".fr-radio-group", text: "L’objet est recensable").find("input", visible: false)).to be_checked
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Étape 3 sur 7")
+    expect(page).to have_text("Recensabilité")
+    expect(find(".fr-radio-group", text: "L’objet est recensable").find("input", visible: false)).to be_checked
+    click_on "Passer à l’étape suivante"
+    expect(page).to have_text("Étape 4 sur 7")
   end
 
   scenario "recensement without photos" do
@@ -300,13 +267,12 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Recenser cet objet"
 
     expect(page).to have_text("Étape 1 sur 7")
-    find("label", text: "Je confirme que je me suis bien déplacé").click
+    find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 2 sur 7")
-    find("label", text: "L’objet se trouve dans l’édifice indiqué initialement").click
     find("label", text: "L’objet est recensable").click
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 3 sur 7")
+    expect(page).to have_text("Étape 4 sur 7")
+    expect(page).to have_text("Photos de l’objet")
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Êtes-vous sûr de ne pas pouvoir prendre de photos ?")
     sleep 1 # sleep and check modal is still present to make sure it does not autoclose
@@ -314,14 +280,14 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Annuler" # same here
     click_on "Passer à l’étape suivante"
     click_on "Confirmer et continuer"
-    expect(page).to have_text("Étape 4 sur 7")
+    expect(page).to have_text("Étape 5 sur 7")
     find("label", text: "L’objet est en bon état").click
     find("label", text: "L’objet est difficile à voler").click
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 5 sur 7")
+    expect(page).to have_text("Étape 6 sur 7")
     expect(page).to have_text("Commentaires")
     click_on "Passer à l’étape suivante"
-    expect(page).to have_text("Étape 6 sur 7")
+    expect(page).to have_text("Étape 7 sur 7")
     expect(page).to have_text("Récapitulatif")
     expect(page).to have_text(/Photos manquantes/i)
     click_on "Valider le recensement de cet objet"
@@ -336,7 +302,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
     scroll_to(find("#recensement_form_step"))
     expect(page).to have_text("Étape 1 sur 7")
-    expect(page).to have_text("Recherche")
-    expect(page).to have_text("Veuillez choisir une option")
+    expect(page).to have_text("Localisation")
+    expect(page).to have_text("Veuillez préciser où se trouve l’objet")
   end
 end
