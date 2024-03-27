@@ -88,7 +88,7 @@ module RecensementWizard
 
     def parse_params(params)
       cloned = params.clone
-      %i[recensable confirmation_not_recensable confirmation_introuvable].each do |boolean_param|
+      %i[recensable confirmation_not_recensable confirmation_introuvable confirmation_no_photos].each do |boolean_param|
         cloned[boolean_param] = cloned[boolean_param] == "true" if cloned[boolean_param].present?
       end
       cloned
