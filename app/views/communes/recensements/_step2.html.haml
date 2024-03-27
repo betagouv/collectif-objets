@@ -10,8 +10,7 @@
             .fr-mb-1w
               Vous avez indiqué que l'objet se trouvait dans un autre édifice, veuillez nous indiquer l'édifice dans lequel il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
 
-        -# = form_builder.select :edifice_id, options_for_select([["Sélectionner un édifice", nil, { disabled: true, hidden: true, selected: form_builder.object.edifice_id.nil?  }]].concat(wizard.commune.edifices.pluck(:nom, :id)).concat([["Autre édifice", 0, { data: { "choix-edifice-target" => "autreEdifice" }}]])), { selected: form_builder.object.edifice_id }, { data: { "choix-edifice-target" => "edificeId"}}
-        %select.fr-select{name: "wizard[edifice_id]", id: "wizard_edifice_id", "data-form-type" => "other", "data-choix-edifice-target" => "edificeId"}
+        %select.fr-select{name: "wizard[edifice_id]", id: "wizard_edifice_id", "data-action" => "change->choix-edifice#check_autre_edifice"}
           %option{disabled: "disabled", hidden: "hidden", value: "", selected: wizard.edifice_id.nil? && !wizard.autre_edifice_checked } Sélectionner un édifice
           - wizard.recensement.commune.edifices.each do |edifice|
             %option{value: edifice.id, selected: edifice.id == form_builder.object.recensement.edifice_id }=edifice.nom
@@ -19,11 +18,6 @@
         - form_builder.object.errors[:edifice_id].each do |error_message|
           %p.fr-error-text
             = error_message
-
-    -# .fr-fieldset__element
-    -#   .fr-checkbox-group
-    -#     = form_builder.check_box "autre_edifice_checked",{ data: { action: "input->choix-edifice#check_autre_edifice", "choix-edifice-target" => "autreEdificeCheckbox"}}
-    -#     = form_builder.label "autre_edifice_checked", "L'objet se trouve dans un autre édifice"
 
     .fr-fieldset__element{data: { "choix-edifice-target" => "edificeNom" }}
       .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
