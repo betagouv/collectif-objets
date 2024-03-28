@@ -22,22 +22,16 @@
 %section.fr-mb-4w
   %h3.fr-text--lg.fr-mb-1v
     Avez-vous trouvé l’objet ?
-    = edit_recensement_step_link recensement, 1, "aria-label": "Modifier la réponse"
-  %div= t "recensement.investigation_choices.#{!recensement.absent?}"
+    = edit_recensement_step_link recensement, 1, "aria-label": "Modifier la localisation de l’objet"
+  %div
+    = t "recensement.localisation_choices.#{recensement.localisation}_html",
+      nom_edifice: recensement_nom_edifice(recensement), nom_commune: recensement.commune.nom
 
 - if !recensement.absent?
   %section.fr-mb-4w
     %h3.fr-text--lg.fr-mb-1v
-      Où se trouve l’objet ?
-      = edit_recensement_step_link recensement, 2, "aria-label": "Modifier la localisation de l’objet"
-    %div
-      = t "recensement.localisation_choices.#{recensement.localisation}",
-        nom_edifice: recensement_nom_edifice(recensement)
-
-  %section.fr-mb-4w
-    %h3.fr-text--lg.fr-mb-1v
       L’objet est-il recensable ?
-      = edit_recensement_step_link recensement, 2, "aria-label": "Modifier la réponse"
+      = edit_recensement_step_link recensement, 3, "aria-label": "Modifier la réponse"
     %div= t "recensement.recensable_choices.#{recensement.recensable.to_s}"
 
 - if recensement.recensable?

@@ -7,7 +7,14 @@ module RecensementWizard
 
     include ActiveStorageValidations
 
-    attr_accessor :confirmation_no_photos
+    attr_accessor :confirmation_not_recensable
+
+    validates \
+      :recensable,
+      inclusion: {
+        in: [true, false],
+        message: "Veuillez renseigner si l’objet est recensable ou non"
+      }
 
     validates(
       :photos,
@@ -17,31 +24,40 @@ module RecensementWizard
 
     def initialize(recensement)
       super
-      self.confirmation_no_photos = "false"
+      self.confirmation_not_recensable = recensement.recensable_was == false ? "true" : "false"
     end
 
-    def permitted_params = %i[confirmation_no_photos photos]
-
-    # rubocop:disable Style/GuardClause
-    def assign_attributes(parsed_params)
-      if parsed_params[:photos]&.any?
-        recensement.photos = recensement.photos.map(&:signed_id) + [parsed_params[:photos][0]]
-        recensement.photos_count += 1
-      end
-      if parsed_params.key?(:confirmation_no_photos)
-        self.confirmation_no_photos = parsed_params[:confirmation_no_photos]
-      end
-    end
-    # rubocop:enable Style/GuardClause
+    def permitted_params = %i[recensable confirmation_not_recensable photos]
 
     def confirmation_modal_path_params
-      return if photos.any? || confirmation_no_photos
+      return if recensable != false || confirmation_not_recensable
 
-      { modal: "confirmation-no-photos", wizard: { confirmation_no_photos: "true" } }
+      { modal: "confirmation-not-recensable",
+        wizard: { recensable: "false", confirmation_not_recensable: "true", localisation:, edifice_nom: } }
     end
 
-    def confirmation_modal_close_path
-      edit_commune_objet_recensement_path(commune, objet, recensement, step: 3)
+    def next_step_number
+      recensable == false ? 5 : super
     end
+
+    # rubocop:disable Metrics/CyclomaticComplexity
+    def assign_attributes(attributes)
+      # not sure this is useful considering we do upload photos directly from the client
+      if attributes[:photos]&.any?
+        recensement.photos = recensement.photos.map(&:signed_id) + [attributes[:photos][0]]
+        recensement.photos_count += 1
+      end
+
+      super
+
+      if recensable == false && confirmation_not_recensable
+        recensement.etat_sanitaire = nil
+        recensement.securisation = nil
+        recensement.photos = []
+      elsif recensable == true && recensement.recensable_was == false
+        recensement.status = "draft"
+      end
+    end
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

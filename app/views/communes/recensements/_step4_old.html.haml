@@ -4,26 +4,21 @@
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
 
-  = render "communes/recensements/fields/recensable", form_builder:
+  = form_builder.hidden_field :confirmation_no_photos
 
-  = form_builder.hidden_field :confirmation_not_recensable
-
-  - if @modal == "confirmation-not-recensable"
-    = dsfr_modal(title: "Je confirme que l’objet n’est pas recensable",
-      opened: true,
-      html_attributes: { id: "modal-confirmation-not-recensable",
-        "data-controller": "modal-auto-open",
-        "data-modal-auto-open-target": "modal"}) do |m|
-
+  - if @modal == "confirmation-no-photos"
+    = dsfr_modal(title: "Êtes-vous sûr de ne pas pouvoir prendre de photos ?",
+          opened: true,
+          html_attributes: { id: "modal-confirmation-no-photos",
+            "data-controller": "modal-auto-open",
+            "data-modal-auto-open-target": "modal"}) do |m|
       - m.with_header do
         = link_to "Fermer", wizard.confirmation_modal_close_path, class: "fr-link--close fr-link"
+      %p Attention : votre recensement risque de ne pas être exploitable par les conservateurs sans photos.
 
-      %p Attention si vous avez ajouté des photos, celles-ci seront supprimée si vous confirmer que l’objet n’est pas recensable.
-      %p Nous nous invitons à laisser un commentaire expliquant la situation.
       %p
-        Vous pouvez aussi contacter vos conservateurs via la
+        En cas de difficultés, n’hésitez pas à contacter vos conservateurs sur la
         = link_to "messagerie", commune_messages_path(wizard.commune)
-        pour lui demander de l’aide ou des conseils.
 
       - m.with_button do
         = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
@@ -31,7 +26,7 @@
         = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
 
   .co-text--right
-    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", data: { recensement_form_step_target: "link" }    
+    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", data: { recensement_form_step_target: "link" }
 
 .fr-mt-2w.co-text--right
   = button_to "Revenir à l’étape précédente",

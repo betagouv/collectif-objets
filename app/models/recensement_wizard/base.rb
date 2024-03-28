@@ -2,6 +2,7 @@
 
 module RecensementWizard
   STEPS = [1, 2, 3, 4, 5, 6].freeze
+  PHOTOS_STEP_NUMER = 3 # not ideal but a quick fix to know where to redirect in recensement photos controller
   class InvalidStep < StandardError; end
 
   class Base
@@ -12,6 +13,7 @@ module RecensementWizard
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
       :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
+      :edifice_initial?, :edifice_id,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
@@ -73,9 +75,13 @@ module RecensementWizard
     def assign_attributes(attributes)
       attrs_recensement = attributes.to_h.clone.symbolize_keys
       attrs_wizard = attrs_recensement.slice! \
-        :localisation, :recensable, :edifice_nom, :etat_sanitaire, :securisation, :notes
+        :localisation, :recensable, :edifice_id, :edifice_nom, :etat_sanitaire, :securisation, :notes
       recensement.assign_attributes(attrs_recensement)
       super(attrs_wizard)
+    end
+
+    def confirmation_modal_close_path
+      edit_commune_objet_recensement_path(commune, objet, recensement, step: step_number)
     end
 
     private
@@ -93,11 +99,12 @@ module RecensementWizard
     alias skip_save? confirmation_modal?
 
     def skipped_steps
-      return [] if step_number < 5
-      return [2, 3, 4] if absent?
-      return [3, 4] unless recensable?
-
-      []
+      # return [] if step_number <= 5 # can we comment this line ?
+      s = []
+      s += [2, 3, 4] if absent?
+      s += [4] unless recensable?
+      s += [2] if edifice_initial?
+      s
     end
   end
 end

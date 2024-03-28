@@ -49,7 +49,6 @@ class Recensement < ApplicationRecord
   validates :objet, presence: true, unless: -> { deleted? } # it is important not to use objet_id here
   validates :objet_id, uniqueness: true, if: -> { objet_id.present? }
 
-  validates :confirmation_sur_place, inclusion: { in: [true], if: -> { completed? && !absent? } }
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
   validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? }
   validates :recensable, inclusion: { in: [true, false] }, if: -> { completed? }

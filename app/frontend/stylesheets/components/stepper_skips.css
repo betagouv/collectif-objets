@@ -13,6 +13,8 @@
   background-color: #f6f6f6;
 }
 
+/* TODO : delete this code ? */
+
 html[data-fr-scheme="dark"] .fr-stepper.co-stepper--skip-steps .fr-stepper__steps::before {
   background-color: #280404;
 }
