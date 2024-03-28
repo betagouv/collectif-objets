@@ -18,7 +18,7 @@ Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 
 Les communes sont accompagnées et outillées pour préserver leur patrimoine remarquable.
 
-## 2- Ce qu’est un “objet protégé au titre des monuments historiques”
+## 2- Qu’est-ce qu'un “objet protégé au titre des monuments historiques” ?
 
 À l’instar des immeubles, un objet peut être inscrit ou classé "monument historique" du fait de son intérêt historique, artistique, scientifique ou technique. Cette protection est encadrée par le Code du patrimoine.
 
@@ -34,9 +34,13 @@ Il existe deux niveaux de protection au titre des Monuments historiques : l’in
 
 ## 3 - Pourquoi recenser les objets protégés ?
 
-La France compte plus de 285 000 objets protégés au titre des Monuments historiques. D'une certaine manière, il s'agit de l'un des "plus grands musées" de notre pays. Ces objets font pleinement partie de notre patrimoine national ou du patrimoine d’une région française. De ce fait, il est important de s’assurer qu’ils ne soient pas dégradés ou dérobés. Il s’agit même d’un devoir fixé par le Code du patrimoine ([Article L622-8](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006845887)).
+La France compte plus de 285 000 objets protégés au titre des Monuments historiques. 
 
-Il est impossible pour les conservateurs de visiter régulièrement tous ces objets, qui sont répartis dans les trois quarts des communes françaises. Afin d’éviter vols et  dégradations, il est important de les inspecter régulièrement. Vous le faites sans doute déjà, mais l’information à ce sujet n’est pas centralisée et actualisée en temps réel. D'où l’émergence du service public Collectif Objets et son invitation au dialogue et au partage de données.
+Le recensement par les communes permet une certaine surveillance des objets mobiliers en s’assurant qu’ils ne sont pas dégradés ou volés et participe à leur préservation. Il constitue une étape préalable utile à la préparation du récolement quinquennal tel qu’il est défini par le code du Patrimoine (article L. 622-8). 
+
+Il est impossible pour les conservateurs de visiter régulièrement tous ces objets, qui sont répartis dans les trois quarts des communes françaises. Afin d’éviter vols et dégradations, il est important de les inspecter régulièrement. 
+
+Les conservateurs assurent cette mission au quotidien mais l’information n’est pas toujours enregistrée dans les bases de données. D'où l’émergence du service public Collectif Objets et son invitation au dialogue et au partage de données.
 
 Recenser un ensemble d'objets est une opération rapide et simple qui permet la préservation de ces derniers et donc de notre patrimoine commun.
 
