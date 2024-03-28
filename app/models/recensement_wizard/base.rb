@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module RecensementWizard
-  STEPS = [1, 2, 3, 4, 5, 6, 7].freeze
-  PHOTOS_STEP_NUMER = 4 # not ideal but a quick fix to know where to redirect in recensement photos controller
+  STEPS = [1, 2, 3, 4, 5, 6].freeze
+  PHOTOS_STEP_NUMER = 3 # not ideal but a quick fix to know where to redirect in recensement photos controller
   class InvalidStep < StandardError; end
 
   class Base
@@ -101,8 +101,8 @@ module RecensementWizard
     def skipped_steps
       # return [] if step_number <= 5 # can we comment this line ?
       s = []
-      s += [2, 3, 4, 5] if absent?
-      s += [4, 5] unless recensable?
+      s += [2, 3, 4] if absent?
+      s += [4] unless recensable?
       s += [2] if edifice_initial?
       s
     end

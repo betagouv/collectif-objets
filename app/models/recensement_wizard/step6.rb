@@ -3,8 +3,14 @@
 module RecensementWizard
   class Step6 < Base
     STEP_NUMBER = 6
-    TITLE = "Commentaires"
+    TITLE = "Récapitulatif"
 
-    def permitted_params = %i[notes]
+    def update(_params)
+      recensement.complete!
+    end
+
+    def after_success_path
+      commune_objets_path(commune, recensement_saved: true, objet_id: objet.id)
+    end
   end
 end
