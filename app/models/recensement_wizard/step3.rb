@@ -3,7 +3,7 @@
 module RecensementWizard
   class Step3 < Base
     STEP_NUMBER = 3
-    TITLE = "Recensabilité"
+    TITLE = "Accessibilité"
 
     include ActiveStorageValidations
 

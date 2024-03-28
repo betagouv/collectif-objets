@@ -49,7 +49,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # STEP 3
     expect(page).to have_text("Étape 3 sur 7")
-    expect(page).to have_text("Recensabilité")
+    expect(page).to have_text("Accessibilité")
     expect(page).to have_text("Étape suivante : Photos de l’objet")
     expect(page).to have_text("L’objet est-il recensable ?")
     find("label", text: "L’objet est recensable").click
@@ -221,7 +221,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Étape 6 sur 7")
     expect(page).to have_text("Avez-vous des commentaires ?")
     click_on "Revenir à l’étape précédente"
-    expect(page).to have_text("Recensabilité")
+    expect(page).to have_text("Accessibilité")
     expect(find(".fr-radio-group", text: "L’objet n’est pas recensable").find("input", visible: false)).to be_checked
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Étape 6 sur 7")
@@ -255,7 +255,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Localisation")
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Étape 3 sur 7")
-    expect(page).to have_text("Recensabilité")
+    expect(page).to have_text("Accessibilité")
     expect(find(".fr-radio-group", text: "L’objet est recensable").find("input", visible: false)).to be_checked
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Étape 4 sur 7")
