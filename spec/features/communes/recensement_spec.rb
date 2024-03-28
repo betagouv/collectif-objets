@@ -110,6 +110,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Étape suivante : Objet")
     step3_chose_recensable
 
+    expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau1.jpg"))
     expect(page).to have_selector("img[src*='tableau1.jpg']")
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau2.jpg"))
@@ -269,6 +270,9 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step6_validate
     find("section", text: "L’objet n’est pas recensable").find('button[aria-label="Modifier la réponse"]').click
     step3_validate
+    find("label", text: "L’objet est recensable").click
+    click_on "Passer à l’étape suivante"
+    step4_validate
     click_on "Objets de Albon"
     card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
     expect(card_bouquet).to have_text(/Recensement à compléter/i)
