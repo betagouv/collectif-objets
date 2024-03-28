@@ -18,7 +18,7 @@ Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 
 Les communes sont accompagnées et outillées pour préserver leur patrimoine remarquable.
 
-## 2- Ce qu’est un “objet protégé au titre des monuments historiques”
+## 2- Qu’est-ce qu'un “objet protégé au titre des monuments historiques” ?
 
 À l’instar des immeubles, un objet peut être inscrit ou classé "monument historique" du fait de son intérêt historique, artistique, scientifique ou technique. Cette protection est encadrée par le Code du patrimoine.
 
