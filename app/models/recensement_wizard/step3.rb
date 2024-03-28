@@ -3,7 +3,7 @@
 module RecensementWizard
   class Step3 < Base
     STEP_NUMBER = 3
-    TITLE = "Photos de l'objet"
+    TITLE = "Photos de l’objet"
 
     include ActiveStorageValidations
 
@@ -37,7 +37,7 @@ module RecensementWizard
     end
 
     def next_step_number
-      recensable == false ? 6 : super
+      recensable == false ? 5 : super
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity
