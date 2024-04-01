@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
-  s3_buckets = %w[development2 staging2 production public].map { "collectif-objets-#{_1}" }
-  s3_uris1 = s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" }
-  s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
+  # We will only report breaches for a while, then actually enforce these CSP rules by removing this line
+  config.content_security_policy_report_only = true
+  
+
+  s3_buckets = %w[development staging production public].map { "collectif-objets-#{_1}" }
+  s3_api_endpoint_uri = "https://s3.gra.io.cloud.ovh.net/"
+  s3_public_uris = s3_buckets.map { "https://#{_1}.s3.gra.io.cloud.ovh.net/" }
 
   config.content_security_policy do |policy|
     if Rails.configuration.x.environment_specific_name == "production"
@@ -16,8 +20,8 @@ Rails.application.configure do
       :self,
       :data,
       :blob, # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
-      *s3_uris1,
-      *s3_uris2,
+      s3_api_endpoint_uri,
+      *s3_public_uris,
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/",
       "https://collectif-objets.beta.gouv.fr/", # for mail previews
       "https://stats.beta.gouv.fr"
@@ -26,7 +30,7 @@ Rails.application.configure do
       :self,
       "https://stats.beta.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
-      *s3_uris2,
+      *s3_public_uris,
       *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
 
     policy.object_src :self # for the PDFs served by the rails server

@@ -825,24 +825,24 @@ Le domaine `collectifobjets.org`, le sous domaine de redirection des emails de r
 
 ## Buckets S3, permissions ACLs et CORS
 
-Les buckets suivants sont sur Scaleway dans le projet nommé "Collectif objets" :
+Les buckets s3 qui hébergent nos photos et et bordereaux de récolement en PDF sont sur OVH Cloud.
+Il y en a un par environnement, soit :
 
-- `collectif-objets-development2` : photos de recensement et les bordereaux de récolement en PDF ;
-- `collectif-objets-staging2` : photos de recensement et les bordereaux de récolement en PDF ;
-- `collectif-objets-public` : contenus éditoriaux visibles sur le site (documentation par exemple) et fichier seeds.pgsql ;
-- `collectif-objets-private` : pour du stockage en interne
+- `collectif-objets-development`
+- `collectif-objets-staging` 
+- `collectif-objets-production`
 
-Le bucket le plus important est dans le projet nommé "default" car il y a été créé et ne peut pas être migré facilement :
+NB : ils étaient auparavant hébergés sur Scaleway, une migration a été faite via l'outil Rclone.
 
-- `collectif-objets-production` : photos de recensement et les bordereaux de récolement en PDF
+Les buckets de photos et bordereaux doivent être [configurés pour le CORS](https://help.ovhcloud.com/csm/en-public-cloud-storage-s3-cors?id=kb_article_view&sysparm_article=KB0058291).
 
-Les buckets de photos et bordereaux doivent être configurés pour le CORS
+Dans un premier temps, installer [le client AWS](https://aws.amazon.com/fr/cli/) et le configurer avec les clés d'accès présentes dans les credentials Rails (editables en console via `rails credentials:edit`) et le endpoint OVH.
 
-cf https://www.scaleway.com/en/docs/storage/object/api-cli/setting-cors-rules/
+Puis lancez les commandes suivantes :
 
 ```sh
-aws s3api put-bucket-cors --bucket collectif-objets-development2 --cors-configuration file://scripts/s3buckets/cors-development.json
-aws s3api put-bucket-cors --bucket collectif-objets-staging2 --cors-configuration file://scripts/s3buckets/cors-staging.json
+aws s3api put-bucket-cors --bucket collectif-objets-development --cors-configuration file://scripts/s3buckets/cors-development.json
+aws s3api put-bucket-cors --bucket collectif-objets-staging --cors-configuration file://scripts/s3buckets/cors-staging.json
 aws s3api put-bucket-cors --bucket collectif-objets-production --cors-configuration file://scripts/s3buckets/cors-production.json
 ```
 
@@ -873,6 +873,11 @@ Avec le fichier suivant
   ]
 }
 ```
+
+### Création d'un nouveau bucket
+Si besoin il est possible de créer un nouveau bucket via OVH Cloud.
+
+En théorie à la création il faudrait l'associer à l'utilisateur co-rw, mais ça n'est pas possible directement (en février 2024). Il faut d'abord l'associer à l'utilisateur icdc-plateforme, le créer, puis lui ajouter l'utilisateur co-rw. 
 
 ## Configurations des CSP Content Security Policy
 
