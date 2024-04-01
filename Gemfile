@@ -45,7 +45,7 @@ group :development, :test do
   gem "launchy", "~> 2.5"
   gem "rspec-rails", "~> 6.1"
   gem "rubocop", "~> 1.51", require: false
-  gem "rubocop-rails", "~> 2.23", require: false
+  gem "rubocop-rails", "~> 2.24", require: false
 end
 
 group :development do
