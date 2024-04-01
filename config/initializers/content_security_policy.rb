@@ -5,7 +5,7 @@ Rails.application.configure do
   config.content_security_policy_report_only = true
   
 
-  s3_buckets = %w[development staging2 production public].map { "collectif-objets-#{_1}" }
+  s3_buckets = %w[development staging production public].map { "collectif-objets-#{_1}" }
   s3_api_endpoint_uri = "https://s3.gra.io.cloud.ovh.net/"
   s3_public_uris = s3_buckets.map { "https://#{_1}.s3.gra.io.cloud.ovh.net/" }
 
