@@ -469,7 +469,7 @@ Voici une liste à suivre pour préparer une astreinte sereine :
 Optionnel :
 
 - [ ] demander un accès Scaleway
-- [ ] demander les identifiants partagés Send In Blue de l'équipe
+- [ ] demander les identifiants partagés de Brevo à l'équipe
 
 ## Données (Origine, Transformations, Republications)
 
@@ -794,7 +794,7 @@ Les instructions d’installation sont sur [le site public de loophole](https://
 Une fois installé vous pouvez utiliser :
 
 - `make tunnel` tunnel général du port 3000 accessible sur https://collectifobjets.loophole.site. Cela permet par exemple de tester le rendu sur un mobile.
-- `make tunnel_webhooks` expose uniquement l’URL racine https://collectifobjets-mail-inbound.loophole.site qui est configurée sur un webhook inbound parsing sur Send In Blue.
+- `make tunnel_webhooks` expose uniquement l’URL racine https://collectifobjets-mail-inbound.loophole.site qui est configurée sur un webhook inbound parsing sur Brevo.
 
 
 ## Vocabulaire
