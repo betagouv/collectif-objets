@@ -25,6 +25,7 @@ module RecensementWizard
     def initialize(recensement)
       super
       self.confirmation_not_recensable = recensement.recensable_was == false ? "true" : "false"
+      recensement.recensable = true if recensement.recensable.nil?
     end
 
     def permitted_params = %i[recensable confirmation_not_recensable photos]
