@@ -41,6 +41,8 @@ module RecensementWizard
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity
+    # On n'appelle pas la méthode "super" ici à cause du direct upload des photos
+    # We do not call super here due to photo direct uploads
     def assign_attributes(attributes)
       # not sure this is useful considering we do upload photos directly from the client
       if attributes[:photos]&.any?
@@ -48,7 +50,10 @@ module RecensementWizard
         recensement.photos_count += 1
       end
 
-      super
+      if attributes.key?(:confirmation_not_recensable)
+        self.confirmation_not_recensable = attributes[:confirmation_not_recensable]
+      end
+      recensement.assign_attributes(recensable: attributes[:recensable]) if attributes.key?(:recensable)
 
       if recensable == false && confirmation_not_recensable
         recensement.etat_sanitaire = nil
