@@ -108,7 +108,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     # STEP 3
     step3_validate
     expect(page).to have_text("Étape suivante : Objet")
-    step3_chose_recensable
+    expect(find(".fr-radio-group", text: "L’objet est recensable").find("input", visible: false)).to be_checked
 
     expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau1.jpg"))
