@@ -4,7 +4,14 @@
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
 
-  = render "communes/recensements/fields/recensable", form_builder:
+  .fr-checkbox-group
+    = form_builder.check_box :recensable, { checked: !@recensement.recensable}, false, true
+    = form_builder.label :recensable do
+      Cet objet n’est pas recensable
+      .fr-hint-text
+        .fr-mb-1w
+          Attention: cette case n'est à cocher que pour les objets que vous ne pouvez pas atteindre ou prendre en photo de près
+
 
   = form_builder.hidden_field :confirmation_not_recensable
 
