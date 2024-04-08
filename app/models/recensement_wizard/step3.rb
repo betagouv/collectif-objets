@@ -42,26 +42,24 @@ module RecensementWizard
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity
-    # On n'appelle pas la méthode "super" ici à cause du direct upload des photos
-    # We do not call super here due to photo direct uploads
-    def assign_attributes(attributes)
-      # not sure this is useful considering we do upload photos directly from the client
-      if attributes[:photos]&.any?
-        recensement.photos = recensement.photos.map(&:signed_id) + [attributes[:photos][0]]
+    def assign_attributes(permitted_params)
+      # Le traitement des photos est différent car géré dans un formulaire et un controller
+      # à part (RecensementPhotosController).
+      # Photos are handled differently because they are handled in an different form
+      # and controller (RecensementPhotosController).
+      if permitted_params[:photos]&.any?
+        recensement.photos = recensement.photos.map(&:signed_id) + [permitted_params[:photos][0]]
         recensement.photos_count += 1
-      end
-
-      if attributes.key?(:confirmation_not_recensable)
-        self.confirmation_not_recensable = attributes[:confirmation_not_recensable]
-      end
-      recensement.assign_attributes(recensable: attributes[:recensable]) if attributes.key?(:recensable)
-
-      if recensable == false && confirmation_not_recensable
-        recensement.etat_sanitaire = nil
-        recensement.securisation = nil
-        recensement.photos = []
-      elsif recensable == true && recensement.recensable_was == false
-        recensement.status = "draft"
+      else
+        super
+        if recensable == false && confirmation_not_recensable
+          recensement.etat_sanitaire = nil
+          recensement.securisation = nil
+          recensement.photos = []
+          # recensement.photos_count = 0
+        elsif recensable == true && recensement.recensable_was == false
+          recensement.status = "draft"
+        end
       end
     end
     # rubocop:enable Metrics/CyclomaticComplexity
