@@ -10,9 +10,8 @@
     .fr-mt-4w
       .fr-alert.fr-alert--error
         .fr-alert__content
+          Veuillez corriger le formulaire
           - if wizard.errors[:base].present?
             %ul
               - wizard.errors[:base].each do |error_message|
                 %li= error_message
-          - else
-            Veuillez corriger le formulaire ci-dessus

@@ -22,6 +22,14 @@ module RecensementWizard
       size: { less_than: 20.megabytes }
     )
 
+    validate :photos_present, if: -> { recensable }
+    def photos_present
+      return unless recensable && photos.blank?
+
+      errors.add(:base,
+                 "Ajoutez une photo ou sinon cochez la case pour indiquer que l'objet n'est pas recensable")
+    end
+
     def initialize(recensement)
       super
       self.confirmation_not_recensable = recensement.recensable_was == false ? "true" : "false"
