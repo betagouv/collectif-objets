@@ -55,6 +55,7 @@ module RecensementWizard
       recensement.etat_sanitaire = nil
       recensement.securisation = nil
       recensement.photos = []
+      recensement.photos_count = 0
     end
   end
 end

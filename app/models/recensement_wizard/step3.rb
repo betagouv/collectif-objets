@@ -40,6 +40,8 @@ module RecensementWizard
         recensement.etat_sanitaire = nil
         recensement.securisation = nil
         recensement.photos = []
+        # TODO : voir s'il est plus judicieux d'utiliser un counter_cache
+        recensement.photos_count = 0
       elsif recensable == true && recensement.recensable_was == false
         recensement.status = "draft"
       end
