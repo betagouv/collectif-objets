@@ -40,7 +40,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def step3_validate
     expect(page).to have_text("Étape 3 sur 6")
     expect(page).to have_text("Photos de l’objet")
-    expect(page).to have_text("L’objet est-il recensable ?")
+    expect(page).to have_text("Cet objet n’est pas recensable")
     expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
   end
 
@@ -108,7 +108,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     # STEP 3
     step3_validate
     expect(page).to have_text("Étape suivante : Objet")
-    expect(find(".fr-radio-group", text: "L’objet est recensable").find("input", visible: false)).to be_checked
+    expect(page).to have_unchecked_field("wizard[recensable]", visible: false)
 
     expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau1.jpg"))
@@ -161,7 +161,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
     click_on "Passer à l’étape suivante"
     step3_validate
-    find("label", text: "L’objet est recensable").click
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/peinture1.jpg"))
     expect(page).to have_selector("img[src*='peinture1.jpg']")
     click_on "Passer à l’étape suivante"
