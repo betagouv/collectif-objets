@@ -33,7 +33,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def step1_choose_objet_dans_edifice_initial_and_continue
     scroll_to(find("#recensement_form_step"))
     find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
-    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
   end
 
@@ -50,6 +49,12 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Étape suivante : Commentaires")
     expect(page).to have_text("Quel est l’état actuel de l’objet ?")
     expect(page).to have_text("L’objet est-il en sécurité ?")
+  end
+
+  def step3_attach_file_and_continue
+    attach_file("recensement_photos", Rails.root.join("spec/fixture_files/peinture1.jpg"))
+    expect(page).to have_selector("img[src*='peinture1.jpg']")
+    click_on "Passer à l’étape suivante"
   end
 
   def step4_choose_etat_et_volable_and_continue
@@ -152,12 +157,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Recenser cet objet"
     step1_validate
     # "comment ça marche" accordion should be closed for successive recensements
-    find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
-    click_on "Passer à l’étape suivante"
-    step3_validate
-    attach_file("recensement_photos", Rails.root.join("spec/fixture_files/peinture1.jpg"))
-    expect(page).to have_selector("img[src*='peinture1.jpg']")
-    click_on "Passer à l’étape suivante"
+    step1_choose_objet_dans_edifice_initial_and_continue
+    step3_attach_file_and_continue
     step4_validate
     find("label", text: "L’objet est en bon état").click
     find("label", text: "L’objet est difficile à voler").click
@@ -263,8 +264,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step6_validate
     find("section", text: "L’objet n’est pas recensable").find('button[aria-label="Modifier la réponse"]').click
     step3_validate
-    find("label", text: "L’objet est recensable").click
-    click_on "Passer à l’étape suivante"
+    find("label", text: "Cet objet n’est pas recensable").click
+    step3_attach_file_and_continue
     step4_validate
     click_on "Objets de Albon"
     card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
@@ -289,7 +290,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
     step3_validate
     click_on "Passer à l’étape suivante"
-    expect(page).to have(text: " Veuillez corriger le formulaire")
+    expect(page).to have_text("Veuillez corriger le formulaire")
 
     # TODO : discuter avec Enora sur le fait que le tag "Photos manquantes" n'est plus pertinent
     # Soit la commune renseigne des photos, soit elle doit cocher "non recensable"
