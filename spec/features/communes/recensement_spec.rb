@@ -44,12 +44,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
   end
 
-  def step3_chose_recensable
-    scroll_to(find("#recensement_form_step"))
-    find("label", text: "L’objet est recensable").click
-    expect(page).to be_axe_clean
-  end
-
   def step4_validate
     expect(page).to have_text("Étape 4 sur 6")
     expect(page).to have_text("Objet")
@@ -238,13 +232,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step1_choose_objet_dans_edifice_initial_and_continue
     step3_validate
     expect(page).to have_text("Étape suivante : Objet")
-    find("label", text: "L’objet n’est pas recensable").click
+    find("label", text: "Cet objet n’est pas recensable").click
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
     sleep 1 # sleep and check modal is still present to make sure it does not autoclose
     expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
     click_on "Annuler"
-    find("label", text: "L’objet n’est pas recensable").click
+    find("label", text: "Cet objet n’est pas recensable").click
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
     click_on "Confirmer et continuer"
@@ -252,7 +246,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Revenir à l’étape précédente"
     step3_validate
     expect(page).to have_text("Étape suivante : Commentaires")
-    expect(find(".fr-radio-group", text: "L’objet n’est pas recensable").find("input", visible: false)).to be_checked
+    expect(page).to have_checked_field("wizard[recensable]", visible: false)
     click_on "Passer à l’étape suivante"
     step5_validate
     click_on "Passer à l’étape suivante"
@@ -280,7 +274,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step1_validate
     click_on "Passer à l’étape suivante"
     step3_validate
-    expect(find(".fr-radio-group", text: "L’objet est recensable").find("input", visible: false)).to be_checked
+    expect(page).to have_unchecked_field("wizard[recensable]", visible: false)
     click_on "Passer à l’étape suivante"
     step4_validate
   end
@@ -292,16 +286,21 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     step1_validate
     step1_choose_objet_dans_edifice_initial_and_continue
-    find("label", text: "L’objet est recensable").click
     click_on "Passer à l’étape suivante"
-    step4_validate
-    step4_choose_etat_et_volable_and_continue
-    step5_validate
+    step3_validate
     click_on "Passer à l’étape suivante"
-    step6_validate
-    expect(page).to have_text(/Photos manquantes/i)
-    click_on "Valider le recensement de cet objet"
-    expect(page).to have_text("Votre recensement a bien été enregistré")
+    expect(page).to have(text: " Veuillez corriger le formulaire")
+
+    # TODO : discuter avec Enora sur le fait que le tag "Photos manquantes" n'est plus pertinent
+    # Soit la commune renseigne des photos, soit elle doit cocher "non recensable"
+    # Supprimer le code si on part là dessus.
+    # step4_choose_etat_et_volable_and_continue
+    # step5_validate
+    # click_on "Passer à l’étape suivante"
+    # step6_validate
+    # expect(page).to have_text(/Photos manquantes/i)
+    # click_on "Valider le recensement de cet objet"
+    # expect(page).to have_text("Votre recensement a bien été enregistré")
   end
 
   scenario "aucun choix à l’étape 1" do
