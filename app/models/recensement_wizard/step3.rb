@@ -27,7 +27,7 @@ module RecensementWizard
       return if recensable != false || confirmation_not_recensable
 
       { modal: "confirmation-not-recensable",
-        wizard: { recensable: "false", confirmation_not_recensable: "true", localisation:, edifice_nom: } }
+        wizard: { recensable: "false", confirmation_not_recensable: "true" } }
     end
 
     def next_step_number
