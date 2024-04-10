@@ -134,9 +134,15 @@ En cliquant sur chacun des objets, vous obtiendrez des informations à son sujet
 
 Ensuite, les étapes sont les suivantes : 
 
-* Se rendre sur les lieux où se trouvent les objets pour les recenser et les prendre en photo
+* Se rendre sur les lieux où se trouvent les objets pour les examiner et les prendre en photo
 * Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet
 * Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
+
+#### **V﻿oici une vidéo qui explique comment effectuer le recensement de ses objets dans le site Collectif Objets :** 
+
+<iframe title="Vidéo recensement commune Collectif Objets" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/e14ce7fc-ffb8-491c-ade0-9b7a19b43690" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+
+
 
 ## 4 - Légitimé et personnes impliquées pour le recensement
 
@@ -215,7 +221,7 @@ Quelques ressources supplémentaires à ce sujet :
 
 ## 3 - Évaluer l’état d’un objet
 
-Évaluer l’état des objets permet de donner une idée globale aux conservateurs. Ils pourront corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus logique.
+Évaluer l’état des objets permet de donner une idée globale de leur état de conservation aux conservateurs. Ils pourront, si nécessaire, corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus logique. 
 
 Si des doutes subsistent, vous pouvez interroger le conservateur ou la conservatrice de votre département via la messagerie interne au site Collectif Objets.
 
