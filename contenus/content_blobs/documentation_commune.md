@@ -48,7 +48,7 @@ Recenser un ensemble d'objets est une opération rapide et simple qui permet la 
 
 Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire dans la gestion quotidienne.
 
-En faisant d'un objet un trésor national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou un affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien.
+En faisant d'un objet une pièce à part entière du patrimoine national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
 
 ## 5 - Engagements des communes
 
@@ -64,7 +64,7 @@ La liste des objets protégés au titre des Monuments Historiques est publique. 
 
 Ces données sont issues de la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) du ministère de la Culture : elles viennent des bases de données Palissy pour les informations et Mémoire pour les photographies associées.
 
-Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement a une personne tierce.  Pour effectuer ce recensement, la mairie recevra un lien authentifié lui permettant de se connecter et de réaliser les recensements.
+Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement à une personne tierce. Pour effectuer ce recensement, la mairie recevra un code de connexion sur son adresse email lui permettant de se connecter et de réaliser les recensements. 
 
 ## 7 - Destination des données récoltées sur Collectif Objets
 
