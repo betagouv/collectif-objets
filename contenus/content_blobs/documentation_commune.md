@@ -7,16 +7,16 @@ titre: Documentation Commune
 
 Collectif Objets est un **service public numérique** du ministère de la Culture qui facilite le dialogue entre les acteurs de la chaîne patrimoniale et favorise la préservation du patrimoine mobilier protégé.
 
-Ce programme organise des campagnes de recensement auprès des communes abritant des objets protégés monuments historiques. 
+Il permet aux conservateurs en charge du patrimoine d'organiser des campagnes de recensement auprès des communes abritant des objets protégés au titre des monuments historiques. 
 
-Les mairies sont invitées à recenser *in situ* les objets protégés de leur territoire. Pour cela, elles répondent à un questionnaire en ligne et transmettent des photos attestant de leur état. Ces informations sont ensuite transmises aux conservateurs (conservateurs des antiquités et objets d’art et conservateurs des monuments historiques) pour expertise. 
+Les mairies sont invitées à aller examiner *in situ* les objets protégés de leur territoire puis à les recenser en ligne dans le site Collectif Objets. Pour cela, elles répondent à un questionnaire en ligne et transmettent des photos des objets attestant de leur état. Ces informations sont ensuite transmises aux conservateurs (conservateurs des antiquités et objets d’art et conservateurs des monuments historiques) pour expertise. 
 
 Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 
 * d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ; 
 * de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
 
-Les communes sont accompagnées et outillées pour préserver leur patrimoine remarquable.
+Les communes sont accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable. 
 
 ## 2- Qu’est-ce qu'un “objet protégé au titre des monuments historiques” ?
 
@@ -48,7 +48,7 @@ Recenser un ensemble d'objets est une opération rapide et simple qui permet la 
 
 Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire dans la gestion quotidienne.
 
-En faisant d'un objet un trésor national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou un affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien.
+En faisant d'un objet une pièce à part entière du patrimoine national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
 
 ## 5 - Engagements des communes
 
@@ -64,7 +64,7 @@ La liste des objets protégés au titre des Monuments Historiques est publique. 
 
 Ces données sont issues de la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) du ministère de la Culture : elles viennent des bases de données Palissy pour les informations et Mémoire pour les photographies associées.
 
-Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement a une personne tierce.  Pour effectuer ce recensement, la mairie recevra un lien authentifié lui permettant de se connecter et de réaliser les recensements.
+Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement à une personne tierce. Pour effectuer ce recensement, la mairie recevra un code de connexion sur son adresse email lui permettant de se connecter et de réaliser les recensements. 
 
 ## 7 - Destination des données récoltées sur Collectif Objets
 
@@ -134,9 +134,15 @@ En cliquant sur chacun des objets, vous obtiendrez des informations à son sujet
 
 Ensuite, les étapes sont les suivantes : 
 
-* Se rendre sur les lieux où se trouvent les objets pour les recenser et les prendre en photo
+* Se rendre sur les lieux où se trouvent les objets pour les examiner et les prendre en photo
 * Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet
 * Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
+
+#### **V﻿oici une vidéo qui explique comment effectuer le recensement de ses objets dans le site Collectif Objets :** 
+
+<iframe title="Vidéo recensement commune Collectif Objets" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/e14ce7fc-ffb8-491c-ade0-9b7a19b43690" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+
+
 
 ## 4 - Légitimé et personnes impliquées pour le recensement
 
@@ -215,7 +221,7 @@ Quelques ressources supplémentaires à ce sujet :
 
 ## 3 - Évaluer l’état d’un objet
 
-Évaluer l’état des objets permet de donner une idée globale aux conservateurs. Ils pourront corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus logique.
+Évaluer l’état des objets permet de donner une idée globale de leur état de conservation aux conservateurs. Ils pourront, si nécessaire, corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus logique. 
 
 Si des doutes subsistent, vous pouvez interroger le conservateur ou la conservatrice de votre département via la messagerie interne au site Collectif Objets.
 
