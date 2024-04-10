@@ -59,14 +59,6 @@ class Recensement < ApplicationRecord
   validates :etat_sanitaire, inclusion: { in: [nil] }, if: -> { completed? && !recensable? }
   validates :securisation, inclusion: { in: [nil] }, if: -> { completed? && !recensable? }
 
-  # Cette validation est supprimée car elle bloquait l'ajout de photos dans le formulaire de rencesement,
-  # dans le cas où l'objet était déjà indiqué comme "non recensable" (suite à une modification d'un recensement terminé
-  # ou à un retour à l'étape photos pendant un recensement en brouillon).
-  # Ceci est dû au fait qu'il y a deux formulaires dans l'étape de photos, eux même liés à des controllers différents.
-  # Idéalement, il faudrait fusionner ces formulaires et ne garder qu'un controller.
-  # On pourrait alors remettre ce validate en place.
-  # validates :photos, inclusion: { in: [] }, if: -> { completed? && !recensable? && photos.attached? }
-
   validates :conservateur_id, presence: true, if: -> { completed? && analysed? }
 
   validates :deleted_at, presence: true, if: -> { deleted? }

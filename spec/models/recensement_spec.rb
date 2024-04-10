@@ -50,18 +50,16 @@ RSpec.describe Recensement, type: :model do
         it { should eq false }
       end
 
-      # Les 2 tests suivants ne sont plus valables suite à la suppression du validates dans l'objet Recensement.
-      # Ils sont laissés en commentaire sachant qu'idéalement cette contrainte doit ré apparaître après un refactoring.
-      # context "with existing photo" do
-      #   let(:recensement) { build(:recensement, :with_photo, attributes) }
-      #   it { should eq false }
-      # end
+      context "with existing photo" do
+        let(:recensement) { build(:recensement, :with_photo, attributes) }
+        it { should eq false }
+      end
 
-      # context "trouvable with existing photo, updating to introuvable without removing photos" do
-      #   let!(:recensement) { create(:recensement, :with_photo) }
-      #   before { recensement.assign_attributes(attributes) }
-      #   it { should eq false }
-      # end
+      context "trouvable with existing photo, updating to introuvable without removing photos" do
+        let!(:recensement) { create(:recensement, :with_photo) }
+        before { recensement.assign_attributes(attributes) }
+        it { should eq false }
+      end
 
       context "with existing photo, updating to remove it" do
         let!(:recensement) { create(:recensement, :with_photo) }
@@ -99,18 +97,16 @@ RSpec.describe Recensement, type: :model do
         it { should eq false }
       end
 
-      # Les 2 tests suivants ne sont plus valables suite à la suppression du validates dans l'objet Recensement.
-      # Ils sont laissés en commentaire sachant qu'idéalement cette contrainte doit ré apparaître après un refactoring.
-      # context "with existing photo" do
-      #   let(:recensement) { build(:recensement, :with_photo, attributes) }
-      #   it { should eq false }
-      # end
+      context "with existing photo" do
+        let(:recensement) { build(:recensement, :with_photo, attributes) }
+        it { should eq false }
+      end
 
-      # context "recensable with existing photo, updating to non recensable without removing photos" do
-      #   let!(:recensement) { create(:recensement, :with_photo) }
-      #   before { recensement.assign_attributes(attributes) }
-      #   it { should eq false }
-      # end
+      context "recensable with existing photo, updating to non recensable without removing photos" do
+        let!(:recensement) { create(:recensement, :with_photo) }
+        before { recensement.assign_attributes(attributes) }
+        it { should eq false }
+      end
 
       context "with existing photo, updating to remove it" do
         let!(:recensement) { create(:recensement, :with_photo) }
