@@ -49,7 +49,6 @@ module RecensementWizard
       recensable == false ? 5 : super
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
     def assign_attributes(permitted_params)
       # Le traitement des photos est différent car géré dans un formulaire et un controller
       # à part (RecensementPhotosController).
@@ -66,11 +65,8 @@ module RecensementWizard
           recensement.photos = []
           # TODO : voir s'il est plus judicieux d'utiliser un counter_cache
           recensement.photos_count = 0
-        elsif recensable == true && recensement.recensable_was == false
-          recensement.status = "draft"
         end
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end
