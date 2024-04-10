@@ -8,9 +8,9 @@
       .fr-hint-text
         L’intérêt de ce recensement est de constater l’état actuel de l’objet.
         Il est donc nécessaire de vous déplacer pour faire vos observations.
-    - c.with_option value: :edifice_initial, label: t("recensement.localisation_choices.edifice_initial_html", nom_edifice: form_builder.object.objet.palissy_EDIF)
-    - c.with_option value: :autre_edifice, label: t("recensement.localisation_choices.autre_edifice_html", nom_commune: form_builder.object.commune.nom)
-    - c.with_option value: :absent, label: t("recensement.localisation_choices.absent_html")
+    - c.with_option value: :edifice_initial, label: t("recensement.localisation.choices.edifice_initial_html", nom_edifice: form_builder.object.objet.palissy_EDIF)
+    - c.with_option value: :autre_edifice, label: t("recensement.localisation.choices.autre_edifice_html", nom_commune: form_builder.object.commune.nom)
+    - c.with_option value: :absent, label: t("recensement.localisation.choices.absent_html")
 
 
   = form_builder.hidden_field :confirmation_introuvable
