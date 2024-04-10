@@ -105,7 +105,8 @@ RSpec.describe SessionAuthentication do
         subject
         error = session_authentication.errors.first
         expect(error).to have_attributes(attribute: :code, type: :expired)
-        expect(session_authentication.error_message).to eq "Code de connexion expiré"
+        expect(session_authentication.error_message).to eq "Le code de connexion n'est plus valide, veuillez en " \
+                                                           "redemander un en cliquant sur le bouton ci-dessous"
       end
     end
 

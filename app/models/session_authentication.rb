@@ -79,6 +79,7 @@ class SessionAuthentication
 
     return unless last_session_code.expired?
 
-    errors.add :code, :expired, message: "Code de connexion expiré"
+    errors.add :code, :expired, message: "Le code de connexion n'est plus valide, " \
+                                         "veuillez en redemander un en cliquant sur le bouton ci-dessous"
   end
 end
