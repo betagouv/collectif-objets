@@ -49,6 +49,7 @@ module RecensementWizard
     end
 
     def update(permitted_params)
+      recensement.status = "draft" if @recensement.completed?
       assign_attributes parse_params(permitted_params)
       errors.merge!(recensement.errors) unless valid?
       return false unless valid?
