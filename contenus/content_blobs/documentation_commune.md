@@ -7,16 +7,16 @@ titre: Documentation Commune
 
 Collectif Objets est un **service public numérique** du ministère de la Culture qui facilite le dialogue entre les acteurs de la chaîne patrimoniale et favorise la préservation du patrimoine mobilier protégé.
 
-Ce programme organise des campagnes de recensement auprès des communes abritant des objets protégés monuments historiques. 
+Il permet aux conservateurs en charge du patrimoine d'organiser des campagnes de recensement auprès des communes abritant des objets protégés au titre des monuments historiques. 
 
-Les mairies sont invitées à recenser *in situ* les objets protégés de leur territoire. Pour cela, elles répondent à un questionnaire en ligne et transmettent des photos attestant de leur état. Ces informations sont ensuite transmises aux conservateurs (conservateurs des antiquités et objets d’art et conservateurs des monuments historiques) pour expertise. 
+Les mairies sont invitées à aller examiner *in situ* les objets protégés de leur territoire puis à les recenser en ligne dans le site Collectif Objets. Pour cela, elles répondent à un questionnaire en ligne et transmettent des photos des objets attestant de leur état. Ces informations sont ensuite transmises aux conservateurs (conservateurs des antiquités et objets d’art et conservateurs des monuments historiques) pour expertise. 
 
 Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 
 * d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ; 
 * de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
 
-Les communes sont accompagnées et outillées pour préserver leur patrimoine remarquable.
+Les communes sont accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable. 
 
 ## 2- Qu’est-ce qu'un “objet protégé au titre des monuments historiques” ?
 
