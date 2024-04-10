@@ -1,5 +1,7 @@
 -# locals: (wizard:)
 
+-# À faire évoluer : utiliser les nested_attributes pour ne plus avoir edifice_nom dans Recensement
+
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
   %fieldset.fr-fieldset{ data: { controller: "choix-edifice" }}
     .fr-fieldset__element
