@@ -119,7 +119,9 @@ module RecensementHelper
 
   def recensement_nom_edifice(recensement)
     return recensement.objet.palissy_EDIF if recensement.edifice_initial?
-    return recensement.edifice_nom if recensement.autre_edifice?
+    if recensement.autre_edifice?
+      return recensement.edifice_id.blank? ? recensement.edifice_nom : Edifice.find(recensement.edifice_id).nom
+    end
 
     nil
   end
