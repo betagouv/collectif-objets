@@ -138,7 +138,7 @@ Ensuite, les étapes sont les suivantes :
 * Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet
 * Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
 
-#### **V﻿oici une vidéo qui explique comment effectuer le recensement de ses objets dans le site Collectif Objets :** 
+### **V﻿oici une vidéo qui explique comment effectuer le recensement de ses objets dans le site Collectif Objets :**
 
 <iframe title="Vidéo recensement commune Collectif Objets" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/e14ce7fc-ffb8-491c-ade0-9b7a19b43690" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
