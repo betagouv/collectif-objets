@@ -9,13 +9,13 @@ gem "aasm", "~> 5.5"
 gem "active_model_validates_intersection_of", "~> 3.0"
 gem "active_storage_validations", "~> 1.1"
 gem "after_commit_everywhere", "~> 1.3"
-gem "aws-sdk-s3", "~> 1.132", require: false
+gem "aws-sdk-s3", "~> 1.143", require: false
 gem "bootsnap", "~> 1.17", require: false
 gem "devise", "~> 4.9"
 gem "dsfr-view-components", "~> 0.4"
 gem "factory_bot_rails", "~> 6.2"
 gem "front_matter_parser", "~> 1.0"
-gem "good_job", "~> 3.21"
+gem "good_job", "3.21.5"
 gem "haml-rails", "~> 2.1"
 gem "icalendar", "~> 2.10"
 gem "image_processing", "~> 1.12"

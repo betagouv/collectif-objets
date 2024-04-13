@@ -238,7 +238,7 @@ Outils & services externes
 - [Metabase](https://metabase.collectifobjets.org) - Stats et visualisations
 - [Dashboard Scalingo](https://dashboard.scalingo.com/)
 - [Sentry de beta.gouv.fr](https://sentry.incubateur.net)
-- [SendinBlue](https://my.sendinblue.com/) - Campagnes et mails transactionnel
+- [Brevo](https://app.brevo.com/) - Campagnes et mails transactionnel
 - [Scaleway - buckets S3](https://console.scaleway.com/)
 - [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
 - [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
@@ -469,7 +469,7 @@ Voici une liste à suivre pour préparer une astreinte sereine :
 Optionnel :
 
 - [ ] demander un accès Scaleway
-- [ ] demander les identifiants partagés Send In Blue de l'équipe
+- [ ] demander les identifiants partagés de Brevo à l'équipe
 
 ## Données (Origine, Transformations, Republications)
 
@@ -662,8 +662,8 @@ Les conservateurs et usagers peuvent répondre aux emails et les réponses appar
 Collectif Objets.
 
 Pour récupérer ces emails, nous utilisons la fonctionnalité
-[Inbound Parsing Webhooks de Send In Blue](https://developers.sendinblue.com/docs/inbound-parse-webhooks).
-Le script `scripts/create_sib_webhooks.sh` permet de gérer les webhooks actifs sur Send In Blue.
+[Inbound Parsing Webhooks de Brevo](https://developers.brevo.com/docs/inbound-parse-webhooks).
+Le script `scripts/create_brevo_webhooks.sh` permet de gérer les webhooks actifs sur Brevo.
 Il y a 3 webhooks actifs pour les 3 environnements (production, staging, local) :
 
 ```json
@@ -685,8 +685,7 @@ Il y a 3 webhooks actifs pour les 3 environnements (production, staging, local) 
 }]
 ```
 
-Chacun des sous domaines `reponse(-[a-z]+)` de `collectifobjets.org` hébergé sur Gandi est configuré pour rediriger
-les emails entrants vers SIB.
+Chacun des sous domaines `reponse(-[a-z]+)` de `collectifobjets.org` hébergé sur Gandi est configuré pour rediriger les emails entrants vers Brevo.
 
 Les emails entrants sont reçus sur des adresses signées (qui sont les reply-to des mails de notifications de nouveau
 message) qui permettent d'authentifier l'auteur du message :
@@ -795,7 +794,7 @@ Les instructions d’installation sont sur [le site public de loophole](https://
 Une fois installé vous pouvez utiliser :
 
 - `make tunnel` tunnel général du port 3000 accessible sur https://collectifobjets.loophole.site. Cela permet par exemple de tester le rendu sur un mobile.
-- `make tunnel_webhooks` expose uniquement l’URL racine https://collectifobjets-mail-inbound.loophole.site qui est configurée sur un webhook inbound parsing sur Send In Blue.
+- `make tunnel_webhooks` expose uniquement l’URL racine https://collectifobjets-mail-inbound.loophole.site qui est configurée sur un webhook inbound parsing sur Brevo.
 
 
 ## Vocabulaire

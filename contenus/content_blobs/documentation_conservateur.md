@@ -7,8 +7,9 @@ titre: Documentation Conservateur
 
 Collectif Objets est un **service public numérique** du ministère de la Culture. Il favorise la préservation du patrimoine mobilier protégé en facilitant le dialogue entre les acteurs de la chaîne patrimoniale. Il prend la forme d'un site web (ou plateforme numérique) où conservateurs et municipalités peuvent échanger.
 
-Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques. \
-Ce sont les mairies qui sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer. 
+Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques. 
+
+Les mairies sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer. 
 
 Grâce à Collectif Objets, les conservateurs peuvent avoir une vue d'ensemble à jour des objets protégés au titre des monuments historiques de leur département. Ce service aide également les communes à prendre soin de leur patrimoine mobilier remarquable. 
 
@@ -22,13 +23,15 @@ Grâce à Collectif Objets, les conservateurs peuvent avoir une vue d'ensemble �
 
 Collectif Objets s’adresse aux communes abritant des objets protégés au titre des monuments historiques (classés et inscrits) sur leur territoire.
 
-Ce dispositif concerne les objets appartenant aux collectivités territoriales ou à des propriétaires privées (particuliers, associations…).
+Ce dispositif concerne les objets appartenant aux collectivités territoriales ou à des propriétaires privés (particuliers, associations…). 
+
+Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
 
 Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement. 
 
-Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir. Il est possible d’ajuster la liste des communes destinataires de la campagne.
+Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir. 
 
-Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
+Les conservateurs d'un département choisissent la liste des communes destinataires de la campagne. Vous pouvez donc exclure d'une campagne les communes qui sont des cas particuliers ou difficiles. 
 
 ## Fiabilité du recensement effectué par les communes
 
@@ -216,7 +219,11 @@ L’équipe de Collectif Objets a également accès aux échanges afin de pouvoi
 
 ## Fonctionnement du bordereau de récolement
 
-Une fois l’examen d’une commune finalisée vous retrouverez la génération du bordereau dans l’onglet dédié. Les bordereaux de récolement peuvent être édités seulement une fois que vous avez examiné les recensements et accepté le dossier. Il vous est alors possible de générer un bordereau pour chaque édifice abritant des objets protégés.
+Une fois que vous avez terminé d'examiner le dossier d’une commune et que vous l'avez transmis à la commune, vous pouvez générer un bordereau de récolement dans l’onglet dédié qui se trouve sur la page de chaque commune. 
+
+Les bordereaux de récolement sont pré-remplis avec les informations présentes dans Collectif Objets (PM de chaque objet, dénomination de l'objet, date de protection, état de conservation, commentaires de la commune et du conservateur entrés dans la plateforme et photos transmises par la commune) mais ils ne peuvent pas être modifiés. 
+
+Un bordereau peut être généré pour chaque édifice abritant des objets protégés dans une commune.
 
 ![Bordereau de récolement](/contenus/content_blobs/images/2023-07-11-capture-ecran-liste-des-communes.png)
 
@@ -247,7 +254,15 @@ Si vous détectez une différence entre la localisation réelle d’un objet et 
 
 Si le changement de localisation de l’objet n’est pas détecté en amont de la campagne, c’est la commune indiquée sur la notice Palissy de l’objet qui recevra la demande de recensement. 
 
-Po ur information, les notices Palissy indiquent généralement la commune qui abritait un objet à l’époque de sa protection, qui peut remonter à près de deux siècles. L’objet peut désormais être abrité au sein d’une autre commune.
+Pour information, les notices Palissy indiquent généralement la commune qui abritait un objet à l’époque de sa protection, qui peut remonter à près de deux siècles. L’objet peut désormais être abrité au sein d’une autre commune.
+
+## Si vous ne recevez pas les e-mails envoyés par la plateforme Collectif Objets
+
+Le compte de chaque conservateur dans Collectif Objets est lié à une adresse e-mail qui sert d'identifiant pour se connecter à Collectif Objets. Cette adresse sert aussi à prévenir le conservateur lorsqu'une commune lui écrit dans la messagerie intégrée à Collectif Objets, ainsi qu'à créer / réinitialiser son mot de passe pour se connecter à la plateforme. 
+
+D﻿ans de rares cas, certains systèmes informatiques (de type "pare-feu" ou "anti-spam") bloquent la transmission des e-mails provenant de la plateforme Collectif Objets. Par exemple, le système de pare-feu utilisé par le service informatique d'une région peut considérer que les e-mails envoyés par la plateforme sont des "spams" et ainsi empêcher les adresses e-mails des employés de la région de recevoir les e-mails provenant de Collectif Objets. 
+
+S﻿i vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : collectifobjets@beta.gouv.fr ) ne soient plus considérés comme indésirables.
 
 # Autres
 
