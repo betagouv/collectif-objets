@@ -52,8 +52,7 @@ class Recensement < ApplicationRecord
 
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
   # À faire évoluer : retirer edifice_nom au profit d'un belongs_to: autre_edifice
-  validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? && edifice_id.nil? }
-  validates :edifice_id, presence: true, if: -> { completed? && autre_edifice? && edifice_nom.nil? }
+  validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? }
   validates :recensable, inclusion: { in: [true, false] }, if: -> { completed? }
   validates :recensable, inclusion: { in: [false] }, if: -> { completed? && absent? }
   validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { completed? && recensable? }
