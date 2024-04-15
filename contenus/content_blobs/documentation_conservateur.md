@@ -260,9 +260,9 @@ Pour information, les notices Palissy indiquent généralement la commune qui ab
 
 Le compte de chaque conservateur dans Collectif Objets est lié à une adresse e-mail qui sert d'identifiant pour se connecter à Collectif Objets. Cette adresse sert aussi à prévenir le conservateur lorsqu'une commune lui écrit dans la messagerie intégrée à Collectif Objets, ainsi qu'à créer / réinitialiser son mot de passe pour se connecter à la plateforme. 
 
-D﻿ans de rares cas, certains systèmes informatiques (de type "pare-feu" ou "anti-spam") bloquent la transmission des e-mails provenant de la plateforme Collectif Objets. Par exemple, le système de pare-feu utilisé par le service informatique d'une région peut considérer que les e-mails envoyés par la plateforme sont des "spams" et ainsi empêcher les adresses e-mails des employés de la région de recevoir les e-mails provenant de Collectif Objets. 
+Dans de rares cas, certains systèmes informatiques (de type "pare-feu" ou "anti-spam") bloquent la transmission des e-mails provenant de la plateforme Collectif Objets. Par exemple, le système de pare-feu utilisé par le service informatique d'une région peut considérer que les e-mails envoyés par la plateforme sont des "spams" et ainsi empêcher les adresses e-mails des employés de la région de recevoir les e-mails provenant de Collectif Objets. 
 
-S﻿i vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : collectifobjets@beta.gouv.fr ) ne soient plus considérés comme indésirables.
+Si vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : collectifobjets@beta.gouv.fr ) ne soient plus considérés comme indésirables.
 
 # Autres
 
