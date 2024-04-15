@@ -18,7 +18,7 @@ RSpec.shared_examples "campaign email commons" do
     # it "recipient is users' email" do
     expect(mail.to).to eq(["jean@mairie.fr"])
     # it "sender is collectif objets" do
-    expect(mail.from).to eq(["collectifobjets@beta.gouv.fr"])
+    expect(mail.from).to eq([ApplicationMailer::FROM_EMAIL_ADDRESS])
   end
 
   describe "contains the campaign signature" do
