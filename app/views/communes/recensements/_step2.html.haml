@@ -5,7 +5,7 @@
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
   %fieldset.fr-fieldset
     .fr-fieldset__element
-      .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
+      .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
         = form_builder.label :autre_commune_code_insee do 
           Dans quelle commune se trouve l'objet ?
           .fr-hint-text
@@ -17,7 +17,7 @@
             = error_message
 
     .fr-fieldset__element
-      .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
+      .fr-input-group#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
         = form_builder.label :edifice_nom do 
           Dans quel édifice se trouve l'objet ?
           .fr-hint-text
