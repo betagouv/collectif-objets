@@ -5,6 +5,17 @@
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
   %fieldset.fr-fieldset{ data: { controller: "choix-edifice" }}
     .fr-fieldset__element
+      .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
+        = form_builder.label :edifice_id do 
+          Dans quelle commune se trouve l'objet ?
+          .fr-hint-text
+            .fr-mb-1w
+              Vous avez indiqué que l'objet se trouvait dans une autre commune, veuillez nous indiquer le nom de la commune dans laquelle il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
+
+        = form_builder.select :autre_commune_code_insee,
+                              options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee)
+
+    .fr-fieldset__element
       .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_id].present?)}
         = form_builder.label :edifice_id do 
           Dans quel édifice se trouve l'objet ?
