@@ -10,4 +10,9 @@ export default class extends Controller {
   check_autre_edifice() {
     this.edificeNomTarget.style.display = this.autreEdificeTarget.selected ? "block" : "none";
   }
+
+  autre_commune_selected(event) {
+    // event.currentTarget.closest("form").requestSubmit();
+  }
+
 }

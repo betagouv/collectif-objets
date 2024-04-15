@@ -13,7 +13,10 @@
               Vous avez indiqué que l'objet se trouvait dans une autre commune, veuillez nous indiquer le nom de la commune dans laquelle il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
 
         = form_builder.select :autre_commune_code_insee,
-                              options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee)
+                              options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee),
+                              {},
+                              { data: {action: "change->choix-edifice#autre_commune_selected"} }
+
 
     .fr-fieldset__element
       .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_id].present?)}
