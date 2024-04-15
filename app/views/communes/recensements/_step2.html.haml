@@ -3,18 +3,30 @@
 -# À faire évoluer : utiliser les nested_attributes pour ne plus avoir edifice_nom dans Recensement
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
+  %fieldset.fr-fieldset
+    .fr-fieldset__element
+      .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
+        = form_builder.label :autre_commune_code_insee do 
+          Dans quelle commune se trouve l'objet ?
+          .fr-hint-text
+            .fr-mb-1w
+              Veuillez nous indiquer le code INSEE de la commune dans lequel l'objet a été déplacé, vous pourrez ajouter des indications supplémentaires en commentaire à l’étape 5 si nécéssaire.
+        = form_builder.text_field :autre_commune_code_insee
+        - form_builder.object.errors[:autre_commune_code_insee].each do |error_message|
+          %p.fr-error-text
+            = error_message
 
-  .fr-fieldset__element
-    .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
-      = form_builder.label :edifice_nom do 
-        Dans quel édifice se trouve l'objet ?
-        .fr-hint-text
-          .fr-mb-1w
-            Veuillez nous indiquer le nom de l'édifice dans lequel l'objet a été déplacé, vous pourrez ajouter des indications supplémentaires en commentaire à l’étape 5 si nécéssaire.
-      = form_builder.text_field :edifice_nom
-      - form_builder.object.errors[:edifice_nom].each do |error_message|
-        %p.fr-error-text
-          = error_message
+    .fr-fieldset__element
+      .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
+        = form_builder.label :edifice_nom do 
+          Dans quel édifice se trouve l'objet ?
+          .fr-hint-text
+            .fr-mb-1w
+              Veuillez nous indiquer le nom de l'édifice dans lequel l'objet a été déplacé, vous pourrez ajouter des indications supplémentaires en commentaire à l’étape 5 si nécéssaire.
+        = form_builder.text_field :edifice_nom
+        - form_builder.object.errors[:edifice_nom].each do |error_message|
+          %p.fr-error-text
+            = error_message
 
   .co-text--right
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"
