@@ -124,6 +124,10 @@ module RecensementHelper
     nil
   end
 
+  def nom_commune_localisation_objet(recensement)
+    recensement.nom_commune_localisation_objet.presence || "avec le code INSEE #{recensement.autre_commune_code_insee}"
+  end
+
   def deleted_recensement_title(recensement)
     "Recensement supprimé de l’objet #{recensement.deleted_objet_snapshot['palissy_REF']}"
   end

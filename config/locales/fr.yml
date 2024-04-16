@@ -77,7 +77,7 @@ fr:
         absent_html: "Non, je ne sais pas où est l’objet"
       answers:
         edifice_initial_html: "<span>Oui, l’objet se trouve dans l’édifice indiqué initialement <b>%{nom_edifice}</b></span>"
-        autre_edifice_html: "<span>Oui, il a été déplacé dans l'édifice %{nom_edifice}</span>"
+        autre_edifice_html: "<span>Oui, il a été déplacé dans l'édifice %{nom_edifice} de la commune %{nom_commune_localisation_objet}</span>"
         absent_html: "Non, l’objet est introuvable"
     recensable_choices:
       true: L’objet est recensable

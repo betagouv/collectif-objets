@@ -25,7 +25,7 @@
     = edit_recensement_step_link recensement, 1, "aria-label": "Modifier la localisation de l’objet"
   %div
     = t "recensement.localisation.answers.#{recensement.localisation}_html",
-      nom_edifice: recensement_nom_edifice(recensement), nom_commune: recensement.commune.nom
+      nom_edifice: recensement_nom_edifice(recensement), nom_commune_localisation_objet: nom_commune_localisation_objet(recensement)
 
 - if !recensement.absent?
   %section.fr-mb-4w

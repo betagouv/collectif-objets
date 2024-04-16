@@ -149,6 +149,16 @@ class Recensement < ApplicationRecord
     end
   end
 
+  def nom_commune_localisation_objet
+    commune_localisation_objet = if autre_commune_code_insee.present?
+                                   Commune.find_by(code_insee: autre_commune_code_insee)
+                                 else
+                                   commune
+                                 end
+
+    commune_localisation_objet.presence
+  end
+
   def self.ransackable_scopes(_ = nil) = [:photos_presence_in]
 
   def photos_presenters
