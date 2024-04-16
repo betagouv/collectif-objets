@@ -48,10 +48,18 @@ module RecensementWizard
       "RecensementWizard::Step#{next_step_number}".constantize::TITLE
     end
 
+    def valid?
+      wizard_is_valid = super
+      unless recensement.valid?
+        errors.merge!(recensement.errors)
+        wizard_is_valid = false
+      end
+      wizard_is_valid
+    end
+
     def update(permitted_params)
       recensement.status = "draft" if @recensement.completed?
       assign_attributes parse_params(permitted_params)
-      errors.merge!(recensement.errors) unless valid?
       return false unless valid?
 
       return true if skip_save?
