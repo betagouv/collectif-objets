@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_15_152223) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_16_134220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -374,7 +374,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_15_152223) do
     t.datetime "analysed_at"
     t.bigint "conservateur_id"
     t.bigint "dossier_id"
-    t.boolean "confirmation_sur_place"
     t.bigint "pop_export_memoire_id"
     t.bigint "pop_export_palissy_id"
     t.string "status", default: "draft", null: false
