@@ -182,6 +182,8 @@ fr:
               inclusion: "La localisation est invalide"
             edifice_nom:
               blank: "Le nom de l'édifice dans lequel se trouve maintenant l’objet doit être indiqué"
+            autre_commune_code_insee:
+              blank: "Le code INSEE dans lequel se trouve maintenant l’objet doit être indiqué"
             etat_sanitaire:
               blank: "L'état doit être rempli"
               inclusion: "L'état est invalide"
