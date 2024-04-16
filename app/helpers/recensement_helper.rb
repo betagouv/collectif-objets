@@ -124,6 +124,7 @@ module RecensementHelper
     nil
   end
 
+  # TODO : À supprimer au profit du RecensementPresenter#nom_commune_localisation_objet
   def nom_commune_localisation_objet(recensement)
     recensement.nom_commune_localisation_objet.presence || "avec le code INSEE #{recensement.autre_commune_code_insee}"
   end
