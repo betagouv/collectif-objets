@@ -184,6 +184,7 @@ fr:
               blank: "Le nom de l'édifice dans lequel se trouve maintenant l’objet doit être indiqué"
             autre_commune_code_insee:
               blank: "Le code INSEE dans lequel se trouve maintenant l’objet doit être indiqué"
+              invalid: "Le code INSEE doit être composé de 5 chiffres"
             etat_sanitaire:
               blank: "L'état doit être rempli"
               inclusion: "L'état est invalide"
