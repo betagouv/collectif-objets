@@ -5,6 +5,6 @@ module RecensementWizard
     STEP_NUMBER = 6
     TITLE = "Commentaires"
 
-    def permitted_params = %i[notes]
+    def recensement_params = %i[notes]
   end
 end

@@ -12,6 +12,11 @@ module RecensementWizard
 
     delegate *Recensement.attribute_names, :objet, :commune, :persisted?, to: :recensement # rubocop:disable Lint/AmbiguousOperator
 
+    def recensement_params = raise NotImplementedError
+    def wizard_params = []
+
+    def permitted_params = recensement_params + wizard_params
+
     def initialize(recensement)
       @recensement = recensement
     end
@@ -61,8 +66,6 @@ module RecensementWizard
 
       recensement.save
     end
-
-    def permitted_params = raise NotImplementedError
 
     def after_success_path
       to_step = confirmation_modal? ? step_number : next_step_number

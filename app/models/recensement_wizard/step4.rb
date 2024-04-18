@@ -11,6 +11,10 @@ module RecensementWizard
 
     delegate :photos, :photo_attachments, to: :recensement
 
+    def recensement_params = %i[photos]
+
+    def wizard_params = %i[confirmation_no_photos]
+
     validates(
       :photos,
       content_type: %w[image/jpg image/jpeg image/png],
@@ -21,8 +25,6 @@ module RecensementWizard
       super
       self.confirmation_no_photos = "false"
     end
-
-    def permitted_params = %i[confirmation_no_photos photos]
 
     # rubocop:disable Style/GuardClause
     def assign_attributes(parsed_params)
