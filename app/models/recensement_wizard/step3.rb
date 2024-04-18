@@ -21,7 +21,8 @@ module RecensementWizard
       self.confirmation_not_recensable = recensement.recensable_was == false ? "true" : "false"
     end
 
-    def permitted_params = %i[recensable confirmation_not_recensable]
+    def recensement_params = %i[recensable]
+    def wizard_params = %i[confirmation_not_recensable]
 
     def confirmation_modal_path_params
       return if recensable != false || confirmation_not_recensable

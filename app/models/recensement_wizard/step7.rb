@@ -5,6 +5,8 @@ module RecensementWizard
     STEP_NUMBER = 7
     TITLE = "Récapitulatif"
 
+    def recensement_params = []
+
     def update(_params)
       recensement.complete!
     end

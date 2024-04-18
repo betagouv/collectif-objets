@@ -7,6 +7,9 @@ module RecensementWizard
 
     attr_accessor :confirmation_introuvable
 
+    def recensement_params = %i[localisation]
+    def wizard_params = %i[confirmation_introuvable]
+
     validates :localisation, presence: { message: "Veuillez préciser où se trouve l’objet" }
 
     validates :localisation,
@@ -20,8 +23,6 @@ module RecensementWizard
       super
       self.confirmation_introuvable = recensement.absent? ? "true" : "false"
     end
-
-    def permitted_params = %i[localisation confirmation_introuvable]
 
     def next_step_number
       if localisation == Recensement::LOCALISATION_ABSENT

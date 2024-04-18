@@ -5,6 +5,8 @@ module RecensementWizard
     STEP_NUMBER = 5
     TITLE = "Objet"
 
+    def recensement_params = %i[etat_sanitaire securisation]
+
     validates \
       :etat_sanitaire,
       presence: { message: "Veuillez préciser l’état de l’objet" }
@@ -28,7 +30,5 @@ module RecensementWizard
         message: "La sécurisation de l’objet n’est pas valide"
       },
       if: -> { securisation.present? }
-
-    def permitted_params = %i[etat_sanitaire securisation]
   end
 end
