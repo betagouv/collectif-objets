@@ -9,6 +9,8 @@ module RecensementWizard
 
     attr_accessor :confirmation_no_photos
 
+    delegate :photos, :photo_attachments, to: :recensement
+
     validates(
       :photos,
       content_type: %w[image/jpg image/jpeg image/png],

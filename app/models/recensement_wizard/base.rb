@@ -10,12 +10,7 @@ module RecensementWizard
     include ActiveModel::Model
     attr_reader :recensement
 
-    delegate \
-      :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
-      :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
-      :edifice_initial?, :autre_commune_code_insee,
-      :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
-      to: :recensement
+    delegate *Recensement.attribute_names, :objet, :commune, :persisted?, to: :recensement # rubocop:disable Lint/AmbiguousOperator
 
     def initialize(recensement)
       @recensement = recensement
@@ -110,9 +105,9 @@ module RecensementWizard
     def skipped_steps
       # return [] if step_number <= 5 # can we comment this line ?
       s = []
-      s += [2, 3, 4, 5] if absent?
-      s += [4, 5] unless recensable?
-      s += [2] if edifice_initial?
+      s += [2, 3, 4, 5] if recensement.absent?
+      s += [4, 5] unless recensement.recensable?
+      s += [2] if recensement.edifice_initial?
       s
     end
   end
