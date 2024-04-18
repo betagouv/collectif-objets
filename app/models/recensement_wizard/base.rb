@@ -81,8 +81,7 @@ module RecensementWizard
 
     def assign_attributes(attributes)
       attrs_recensement = attributes.to_h.clone.symbolize_keys
-      attrs_wizard = attrs_recensement.slice! \
-        :localisation, :recensable, :edifice_nom, :autre_commune_code_insee, :etat_sanitaire, :securisation, :notes
+      attrs_wizard = attrs_recensement.slice!(*recensement_params)
       recensement.assign_attributes(attrs_recensement)
       super(attrs_wizard)
     end
