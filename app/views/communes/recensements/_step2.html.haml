@@ -10,7 +10,7 @@
           Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?
           .fr-hint-text
             .fr-mb-1w
-              Vous pourrez ajouter des indications supplémentaires en commentaire à l’étape 5 si nécéssaire. Si vous ne savez pas où est l’objet, revenez à l’étape précédente et indiquez "non, je ne trouve pas l’objet".
+              Pas besoin de le remplir si l’objet est toujours dans votre commune.
         = form_builder.text_field :autre_commune_code_insee
         - form_builder.object.errors[:autre_commune_code_insee].each do |error_message|
           %p.fr-error-text
@@ -22,7 +22,7 @@
           Dans quel édifice se trouve l'objet ?
           .fr-hint-text
             .fr-mb-1w
-              Veuillez nous indiquer le nom de l’édifice dans lequel l’objet a été déplacé, vous pourrez ajouter des indications supplémentaires en commentaire à l’étape 5 si nécéssaire.
+              Si vous ne savez pas où est l’objet, revenez à l’étape précédente et indiquez "non, je ne trouve pas l’objet". Vous pourrez ajouter des indications supplémentaires à l'étape commentaires si nécéssaire.
         = form_builder.text_field :edifice_nom
         - form_builder.object.errors[:edifice_nom].each do |error_message|
           %p.fr-error-text
