@@ -23,6 +23,5 @@
             = render DsfrComponent::StepperComponent.new(title: @wizard.title,
               value: @wizard.step_number,
               max: RecensementWizard::STEPS.size, 
-              next_title: @wizard.next_step_title,
-              html_attributes: { class: @wizard.skipped_steps_class })
+              next_title: @wizard.next_step_title
           = render "communes/recensements/step#{@wizard.step_number}", wizard: @wizard

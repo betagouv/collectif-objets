@@ -75,12 +75,6 @@ module RecensementWizard
         commune, objet, recensement, step: to_step, **confirmation_modal_path_params.to_h
     end
 
-    def skipped_steps_class
-      return nil if skipped_steps.empty?
-
-      "co-stepper--skip-steps co-stepper--skip-steps-#{skipped_steps.join('-')}-out-of-6"
-    end
-
     def assign_attributes(attributes)
       attrs_recensement = attributes.to_h.clone.symbolize_keys
       attrs_wizard = attrs_recensement.slice! \
