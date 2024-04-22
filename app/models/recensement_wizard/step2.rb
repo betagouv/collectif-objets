@@ -26,17 +26,7 @@ module RecensementWizard
       self.autre_commune_code_insee ||= recensement.commune.code_insee
     end
 
-    def next_step_number
-      edifice_id.present? || edifice_nom.present? ? super : step_number
-    end
-
     def assign_attributes(attributes)
-      # Reset de l'édifice si une autre commune est choisie
-      # if autre_commune_selected?
-      #   attributes.delete(:edifice_id)
-      #   attributes.delete(:edifice_nom)
-      # end
-
       if attributes[:edifice_id].present? && attributes[:edifice_id] == "0"
         attributes[:autre_edifice_checked] = true
         attributes.delete(:edifice_id)
