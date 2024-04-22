@@ -18,7 +18,9 @@ RSpec.describe Recensement, type: :model do
 
     context "recensement autre edifice with edifice_nom" do
       let(:recensement) do
-        build(:recensement, localisation: Recensement::LOCALISATION_AUTRE_EDIFICE, edifice_nom: "blah")
+        build(:recensement,
+              localisation: Recensement::LOCALISATION_AUTRE_EDIFICE,
+              edifice_nom: "blah", autre_commune_code_insee: "01010")
       end
       it { should eq true }
     end
@@ -78,8 +80,8 @@ RSpec.describe Recensement, type: :model do
 
       context "autre edifice with edifice_nom set" do
         let(:recensement) do
-          build(:recensement,
-                attributes.merge(localisation: Recensement::LOCALISATION_AUTRE_EDIFICE, edifice_nom: "autre eglise"))
+          build(:recensement, attributes.merge(localisation: Recensement::LOCALISATION_AUTRE_EDIFICE,
+                                               edifice_nom: "autre eglise", autre_commune_code_insee: "01010"))
         end
         it { should eq true }
       end

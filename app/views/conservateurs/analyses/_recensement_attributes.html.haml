@@ -1,13 +1,8 @@
 .fr-mb-3w
-  .fr-pb-1w.co-text--bold Localisation de l’objet
+  .fr-pb-1w.co-text--bold L’objet a-t-il été trouvé par la commune ?
   .fr-mb-1w
     = recensement_presenter.localisation_sentence
-  - if recensement.autre_edifice?
-    .fr-pb-1w.co-text--bold
-      Nom de l’édifice dans lequel se trouve l’objet
-    .fr-mb-1w
-      %input.fr-input.co-text--black{disabled: "disabled", type: "text", value: "#{recensement.edifice_nom}"}
-  - elsif recensement.absent?
+  - if recensement.absent?
     .fr-checkbox-group.fr-mt-2w
       = check_box_tag("recensement[analyse_fiches][]",
         "depot_plainte",

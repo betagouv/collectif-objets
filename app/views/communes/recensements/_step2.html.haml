@@ -3,49 +3,65 @@
 -# À faire évoluer : utiliser les nested_attributes pour ne plus avoir edifice_nom dans Recensement
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
-  %fieldset.fr-fieldset{ data: { controller: "choix-edifice" }}
-    .fr-fieldset__element
-      .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
-        = form_builder.label :edifice_id do 
-          Dans quelle commune se trouve l'objet ?
-          .fr-hint-text
-            .fr-mb-1w
-              Vous avez indiqué que l'objet se trouvait dans une autre commune, veuillez nous indiquer le nom de la commune dans laquelle il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
+  - if wizard.recensement.localisation == Recensement.LOCALISATION_AUTRE_EDIFICE  
+    %fieldset.fr-fieldset{ data: { controller: "choix-edifice" }}
+      .fr-fieldset__element
+        .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_id].present?)}
+          = form_builder.label :edifice_id do 
+            Dans quel édifice se trouve l'objet ?
+            .fr-hint-text
+              .fr-mb-1w
+                Vous avez indiqué que l'objet se trouvait dans un autre édifice, veuillez nous indiquer l'édifice dans lequel il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
 
-        = form_builder.select :autre_commune_code_insee,
-                              options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee),
-                              {},
-                              { data: {action: "change->choix-edifice#autre_commune_selected"} }
-
-
-    .fr-fieldset__element
-      .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_id].present?)}
-        = form_builder.label :edifice_id do 
-          Dans quel édifice se trouve l'objet ?
-          .fr-hint-text
-            .fr-mb-1w
-              Vous avez indiqué que l'objet se trouvait dans un autre édifice, veuillez nous indiquer l'édifice dans lequel il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
-
-        %select.fr-select{name: "wizard[edifice_id]", id: "wizard_edifice_id", "data-action" => "change->choix-edifice#check_autre_edifice"}
-          %option{disabled: "disabled", hidden: "hidden", value: "", selected: wizard.edifice_id.nil? && !wizard.autre_edifice_checked } Sélectionner un édifice
-          - wizard.recensement.commune.edifices.each do |edifice|
-            %option{value: edifice.id, selected: edifice.id == form_builder.object.recensement.edifice_id }=edifice.nom
-          %option{"data-choix-edifice-target" => "autreEdifice", value: "0", selected: wizard.autre_edifice_checked } Autre édifice
+          %select.fr-select{name: "wizard[edifice_id]", id: "wizard_edifice_id", "data-action" => "change->choix-edifice#check_autre_edifice"}
+            %option{disabled: "disabled", hidden: "hidden", value: "", selected: wizard.edifice_id.nil? && !wizard.autre_edifice_checked } Sélectionner un édifice
+            - wizard.recensement.commune.edifices.each do |edifice|
+              %option{value: edifice.id, selected: edifice.id == form_builder.object.recensement.edifice_id }=edifice.nom
+            %option{"data-choix-edifice-target" => "autreEdifice", value: "0", selected: wizard.autre_edifice_checked } Autre édifice
         - form_builder.object.errors[:edifice_id].each do |error_message|
           %p.fr-error-text
             = error_message
 
-    .fr-fieldset__element{data: { "choix-edifice-target" => "edificeNom" }}
-      .fr-input-group.fr-mb-8w#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
-        = form_builder.label :edifice_nom do 
-          Indiquez le nom de l’édifice
-          .fr-hint-text
-            .fr-mb-1w
-              Vous nous avez indiqué que l’objet n’était pas dans un édifice de la liste. Veuillez nous indiquer le nom de cet édifice, vous pourrez ajouter des indications supplémentaires en commentaire à l’étape 5 si nécéssaire.
-        = form_builder.text_field :edifice_nom
-        - form_builder.object.errors[:edifice_nom].each do |error_message|
-          %p.fr-error-text
-            = error_message
+      .fr-fieldset__element
+        .fr-input-group#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
+          = form_builder.label :edifice_nom do 
+            Dans quel édifice se trouve l'objet ?
+            .fr-hint-text
+              .fr-mb-1w
+                Si vous ne savez pas où est l’objet, revenez à l’étape précédente et indiquez "non, je ne trouve pas l’objet". Vous pourrez ajouter des indications supplémentaires à l'étape commentaires si nécéssaire.
+          = form_builder.text_field :edifice_nom
+          - form_builder.object.errors[:edifice_nom].each do |error_message|
+            %p.fr-error-text
+              = error_message
+  - else
+    %fieldset.fr-fieldset
+      .fr-fieldset__element
+        .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
+          = form_builder.label :autre_commune_code_insee do 
+            Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?
+            .fr-hint-text
+              .fr-mb-1w
+                Vous avez indiqué que l'objet se trouvait dans une autre commune, veuillez nous indiquer le nom de la commune dans laquelle il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
+          = form_builder.text_field :autre_commune_code_insee
+          - form_builder.object.errors[:autre_commune_code_insee].each do |error_message|
+            %p.fr-error-text
+              = error_message
+      
+      .fr-fieldset__element
+        .fr-input-group#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
+          = form_builder.label :edifice_nom do 
+            Dans quel édifice se trouve l'objet ?
+            .fr-hint-text
+              .fr-mb-1w
+                Si vous ne savez pas où est l’objet, revenez à l’étape précédente et indiquez "non, je ne trouve pas l’objet". Vous pourrez ajouter des indications supplémentaires à l'étape commentaires si nécéssaire.
+          = form_builder.text_field :edifice_nom
+          - form_builder.object.errors[:edifice_nom].each do |error_message|
+            %p.fr-error-text
+              = error_message
+        -# = form_builder.select :autre_commune_code_insee,
+        -#                       options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee),
+        -#                       {},
+        -#                       { data: {action: "change->choix-edifice#autre_commune_selected"} }
 
   .co-text--right
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"

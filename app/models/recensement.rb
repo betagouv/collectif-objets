@@ -52,8 +52,8 @@ class Recensement < ApplicationRecord
 
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
   # À faire évoluer : retirer edifice_nom au profit d'un belongs_to: autre_edifice
-  validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? && edifice_id.nil? }
-  validates :edifice_id, presence: true, if: -> { completed? && autre_edifice? && edifice_nom.nil? }
+  validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? }
+  validates :autre_commune_code_insee, format: /\b\d{5}\b/, allow_blank: true
   validates :recensable, inclusion: { in: [true, false] }, if: -> { completed? }
   validates :recensable, inclusion: { in: [false] }, if: -> { completed? && absent? }
   validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { completed? && recensable? }
@@ -148,6 +148,16 @@ class Recensement < ApplicationRecord
     elsif attribute_name.include?("securisation")
       SECURISATIONS
     end
+  end
+
+  def nom_commune_localisation_objet
+    commune_localisation_objet = if autre_commune_code_insee.present?
+                                   Commune.find_by(code_insee: autre_commune_code_insee)
+                                 else
+                                   commune
+                                 end
+
+    commune_localisation_objet.presence
   end
 
   def self.ransackable_scopes(_ = nil) = [:photos_presence_in]

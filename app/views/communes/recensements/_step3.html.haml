@@ -2,7 +2,15 @@
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
 
-  = render "communes/recensements/fields/recensable", form_builder:
+  = render RecensementRadiosFieldsetComponent.new(form_builder:, field: :recensable) do |c|
+    - c.with_legend do
+      L’objet est-il recensable ?
+      .fr-hint-text
+        .fr-mb-1w
+          Si l’objet est trop difficile d’accès (par exemple au sommet d’un clocher), ou bien si l’objet est en restauration, vous ne pouvez peut-être pas le recenser.
+        .fr-mb-1w= link_to "Voir la page 7 du guide", guide_url(page: 7), target: "_blank", rel: "noopener"
+    - c.with_option value: :true, label: t("recensement.recensable_choices.true")
+    - c.with_option value: :false, label: t("recensement.recensable_choices.false")
 
   = form_builder.hidden_field :confirmation_not_recensable
 

@@ -73,11 +73,11 @@ fr:
     localisation:
       choices:
         edifice_initial_html: "<span>Oui, l’objet se trouve dans l’édifice indiqué initialement <b>%{nom_edifice}</b></span>"
-        autre_edifice_html: "<span>Oui, mais l’objet se trouve dans <b>un autre édifice</b> dans la commune %{nom_commune}</span>"
+        autre_edifice_html: "<span>Oui, mais l’objet se trouve dans <b>un autre édifice</b></span>"
         absent_html: "Non, je ne sais pas où est l’objet"
       answers:
         edifice_initial_html: "<span>Oui, l’objet se trouve dans l’édifice indiqué initialement <b>%{nom_edifice}</b></span>"
-        autre_edifice_html: "<span>Oui, il a été déplacé dans l'édifice %{nom_edifice}</span>"
+        autre_edifice_html: "<span>Oui, il a été déplacé dans l'édifice %{nom_edifice} de la commune %{nom_commune_localisation_objet}</span>"
         absent_html: "Non, l’objet est introuvable"
     recensable_choices:
       true: L’objet est recensable
@@ -182,6 +182,9 @@ fr:
               inclusion: "La localisation est invalide"
             edifice_nom:
               blank: "Le nom de l'édifice dans lequel se trouve maintenant l’objet doit être indiqué"
+            autre_commune_code_insee:
+              blank: "Le code INSEE dans lequel se trouve maintenant l’objet doit être indiqué"
+              invalid: "Le code INSEE doit être composé de 5 chiffres"
             etat_sanitaire:
               blank: "L'état doit être rempli"
               inclusion: "L'état est invalide"

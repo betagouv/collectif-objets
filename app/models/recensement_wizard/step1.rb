@@ -45,7 +45,7 @@ module RecensementWizard
 
       unless localisation == Recensement::LOCALISATION_AUTRE_EDIFICE
         recensement.edifice_nom = nil
-        recensement.edifice_id = nil
+        recensement.autre_commune_code_insee = nil
       end
 
       return unless localisation == Recensement::LOCALISATION_ABSENT && confirmation_introuvable

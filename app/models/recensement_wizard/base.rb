@@ -13,7 +13,7 @@ module RecensementWizard
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
       :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
-      :edifice_initial?, :edifice_id,
+      :edifice_initial?, :autre_commune_code_insee,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
@@ -48,10 +48,18 @@ module RecensementWizard
       "RecensementWizard::Step#{next_step_number}".constantize::TITLE
     end
 
+    def valid?
+      wizard_is_valid = super
+      unless recensement.valid?
+        errors.merge!(recensement.errors)
+        wizard_is_valid = false
+      end
+      wizard_is_valid
+    end
+
     def update(permitted_params)
       recensement.status = "draft" if @recensement.completed?
       assign_attributes parse_params(permitted_params)
-      errors.merge!(recensement.errors) unless valid?
       return false unless valid?
 
       return true if skip_save?
@@ -67,16 +75,10 @@ module RecensementWizard
         commune, objet, recensement, step: to_step, **confirmation_modal_path_params.to_h
     end
 
-    def skipped_steps_class
-      return nil if skipped_steps.empty?
-
-      "co-stepper--skip-steps co-stepper--skip-steps-#{skipped_steps.join('-')}-out-of-6"
-    end
-
     def assign_attributes(attributes)
       attrs_recensement = attributes.to_h.clone.symbolize_keys
       attrs_wizard = attrs_recensement.slice! \
-        :localisation, :recensable, :edifice_id, :edifice_nom, :etat_sanitaire, :securisation, :notes
+        :localisation, :recensable, :edifice_nom, :autre_commune_code_insee, :etat_sanitaire, :securisation, :notes
       recensement.assign_attributes(attrs_recensement)
       super(attrs_wizard)
     end
