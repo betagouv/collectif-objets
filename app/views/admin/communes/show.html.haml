@@ -32,13 +32,14 @@
         %p Aucun usager
         %p
           %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
-      %h4
-        = icon_span("account-circle")
-        = user.email
-      %div
-        = link_to "incarner cet usager",
-          admin_user_impersonate_path(user),
-          class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-warning-line"
+      - else
+        %h4
+          = icon_span("account-circle")
+          = user.email
+        %div
+          = link_to "incarner cet usager",
+            admin_user_impersonate_path(user),
+            class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-warning-line"
 
     .fr-col-md-4
       %h4 Commentaires admin
