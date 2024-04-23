@@ -1,14 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "edificeNom", "autreEdifice" ]
+  static targets = [ "edificeNomFieldset", "edificeNomInput", "autreEdifice" ]
 
-  connect() {
-    this.check_autre_edifice();
-  }
+  // connect() {
+  //   this.check_autre_edifice();
+  // }
 
   check_autre_edifice() {
-    this.edificeNomTarget.style.display = this.autreEdificeTarget.selected ? "block" : "none";
+    this.edificeNomFieldsetTarget.classList.toggle("fr-hidden");
+    if (this.autreEdificeTarget.selected)
+      this.edificeNomInputTarget.value = "";
   }
 
   autre_commune_selected(event) {

@@ -3,33 +3,33 @@
 -# À faire évoluer : utiliser les nested_attributes pour ne plus avoir edifice_nom dans Recensement
 
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
-  - if wizard.recensement.localisation == Recensement.LOCALISATION_AUTRE_EDIFICE  
+  - if wizard.recensement.localisation == Recensement::LOCALISATION_AUTRE_EDIFICE  
     %fieldset.fr-fieldset{ data: { controller: "choix-edifice" }}
       .fr-fieldset__element
-        .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_id].present?)}
-          = form_builder.label :edifice_id do 
+        .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom_existant].present?)}
+          = form_builder.label :edifice_nom_existant do 
             Dans quel édifice se trouve l'objet ?
             .fr-hint-text
               .fr-mb-1w
                 Vous avez indiqué que l'objet se trouvait dans un autre édifice, veuillez nous indiquer l'édifice dans lequel il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
 
-          %select.fr-select{name: "wizard[edifice_id]", id: "wizard_edifice_id", "data-action" => "change->choix-edifice#check_autre_edifice"}
-            %option{disabled: "disabled", hidden: "hidden", value: "", selected: wizard.edifice_id.nil? && !wizard.autre_edifice_checked } Sélectionner un édifice
+          %select.fr-select{name: "wizard[edifice_nom_existant]", id: "wizard_edifice_nom_existant", "data-action" => "change->choix-edifice#check_autre_edifice"}
+            %option{disabled: "disabled", hidden: "hidden", value: "", selected: wizard.edifice_nom_existant.nil? && !wizard.autre_edifice_checked } Sélectionner un édifice
             - wizard.recensement.commune.edifices.each do |edifice|
-              %option{value: edifice.id, selected: edifice.id == form_builder.object.recensement.edifice_id }=edifice.nom
+              %option{ selected: edifice.nom == form_builder.object.recensement.edifice_nom }=edifice.nom
             %option{"data-choix-edifice-target" => "autreEdifice", value: "0", selected: wizard.autre_edifice_checked } Autre édifice
-        - form_builder.object.errors[:edifice_id].each do |error_message|
-          %p.fr-error-text
-            = error_message
+          - form_builder.object.errors[:edifice_nom_existant].each do |error_message|
+            %p.fr-error-text
+              = error_message
 
-      .fr-fieldset__element
+      .fr-fieldset__element{class: ("fr-hidden" unless wizard.autre_edifice_checked), data: { "choix-edifice-target" => "edificeNomFieldset" }}
         .fr-input-group#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
           = form_builder.label :edifice_nom do 
             Dans quel édifice se trouve l'objet ?
             .fr-hint-text
               .fr-mb-1w
                 Si vous ne savez pas où est l’objet, revenez à l’étape précédente et indiquez "non, je ne trouve pas l’objet". Vous pourrez ajouter des indications supplémentaires à l'étape commentaires si nécéssaire.
-          = form_builder.text_field :edifice_nom
+          = form_builder.text_field :edifice_nom, data: { "choix-edifice-target" => "edificeNomInput"}
           - form_builder.object.errors[:edifice_nom].each do |error_message|
             %p.fr-error-text
               = error_message
@@ -47,6 +47,12 @@
             %p.fr-error-text
               = error_message
       
+          -# Pour une future version où l'on pourra sélectionner la commune parmi une liste
+          -# = form_builder.select :autre_commune_code_insee,
+          -#                       options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee),
+          -#                       {},
+          -#                       { data: {action: "change->choix-edifice#autre_commune_selected"} }
+
       .fr-fieldset__element
         .fr-input-group#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
           = form_builder.label :edifice_nom do 
