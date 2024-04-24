@@ -1,9 +1,21 @@
 #!/usr/bin/env bash
 
-if ! command -v foreman &> /dev/null
-then
+# Stop dangling processes, if any
+lsof -t -i:1025 | xargs -r kill # MailHog
+lsof -t -i:3000 | xargs -r kill # Puma
+lsof -t -i:3036 | xargs -r kill # Vite
+
+# Ensure required dependencies are present
+bundle check &> /dev/null || bundle install
+npm install
+
+# Try starting Overmind
+if command -v overmind &> /dev/null; then
+  # Remove dangling socks from overmind
+  rm -f ".overmind.sock"
+  bundle exec overmind start -f Procfile.dev --no-port "$@"
+else # Fallback to Foreman
   echo “Installing foreman…”
   gem install foreman
+  bundle exec foreman start -f Procfile.dev --no-port "$@"
 fi
-
-bundle exec foreman start -f Procfile.dev "$@"
