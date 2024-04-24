@@ -32,7 +32,7 @@ module CollectifObjets
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Europe/Paris"
 
     config.autoload_lib(ignore: %w[assets tasks])
 
