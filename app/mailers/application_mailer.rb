@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  FROM_EMAIL_ADDRESS = "contact@collectifobjets.beta.gouv.fr"
+  FROM_EMAIL_ADDRESS = "contact@collectif-objets.beta.gouv.fr"
   default from: email_address_with_name(FROM_EMAIL_ADDRESS, "Collectif Objets")
   layout "application_mailer"
 
