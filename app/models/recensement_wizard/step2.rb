@@ -34,7 +34,6 @@ module RecensementWizard
       super
       self.autre_edifice_checked = recensement.edifice_nom.present? &&
                                    recensement.commune.edifices.pluck(:nom).exclude?(recensement.edifice_nom)
-      self.autre_commune_code_insee ||= recensement.commune.code_insee
     end
 
     def assign_attributes(attributes)
@@ -48,12 +47,6 @@ module RecensementWizard
       end
 
       super
-
-      # if autre_edifice_checked
-      #   recensement.edifice_id = nil
-      # else
-      #   recensement.edifice_nom = nil
-      # end
     end
   end
 end
