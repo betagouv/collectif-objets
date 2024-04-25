@@ -43,6 +43,9 @@ module RecensementWizard
     def assign_attributes(attributes)
       super
 
+      # Les lignes ci-dessous sont utilisées pour remettre à zéro les données de recensement
+      # dans le cas d'un retour en arrière dans le formulaire et du choix d'une autre option
+      # Idéalement on aimerait que ce soit plus clair via une méthode "reset_recensement" dans chaque étape
       unless recensement.autre_edifice?
         recensement.edifice_nom = nil
         recensement.autre_commune_code_insee = nil
