@@ -28,12 +28,12 @@
             Dans quel édifice se trouve l'objet ?
             .fr-hint-text
               .fr-mb-1w
-                Si vous ne savez pas où est l’objet, revenez à l’étape précédente et indiquez "non, je ne trouve pas l’objet". Vous pourrez ajouter des indications supplémentaires à l'étape commentaires si nécéssaire.
+                Veuillez nous indiquer le nom de l'édifice. Si vous ne le connaissez pas, indiquez "Édifice non connu".
           = form_builder.text_field :edifice_nom, data: { "choix-edifice-target" => "edificeNomInput"}
           - form_builder.object.errors[:edifice_nom].each do |error_message|
             %p.fr-error-text
               = error_message
-  - else
+  - elsif wizard.recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
     %fieldset.fr-fieldset
       .fr-fieldset__element
         .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
@@ -41,7 +41,7 @@
             Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?
             .fr-hint-text
               .fr-mb-1w
-                Vous avez indiqué que l'objet se trouvait dans une autre commune, veuillez nous indiquer le nom de la commune dans laquelle il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
+                Vous avez indiqué que l'objet se trouvait dans une autre commune, veuillez nous indiquer son code INSEE. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
           = form_builder.text_field :autre_commune_code_insee
           - form_builder.object.errors[:autre_commune_code_insee].each do |error_message|
             %p.fr-error-text
@@ -53,21 +53,18 @@
           -#                       {},
           -#                       { data: {action: "change->choix-edifice#autre_commune_selected"} }
 
+      -# TODO (refactoring) : réutiliser le même champ que celui pour le déplacement dans la même commune
       .fr-fieldset__element
         .fr-input-group#edifice_nom{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom].present?)}
           = form_builder.label :edifice_nom do 
             Dans quel édifice se trouve l'objet ?
             .fr-hint-text
               .fr-mb-1w
-                Si vous ne savez pas où est l’objet, revenez à l’étape précédente et indiquez "non, je ne trouve pas l’objet". Vous pourrez ajouter des indications supplémentaires à l'étape commentaires si nécéssaire.
+                Veuillez nous indiquer le nom de l'édifice. Si vous ne le connaissez pas, indiquez "Édifice non connu".
           = form_builder.text_field :edifice_nom
           - form_builder.object.errors[:edifice_nom].each do |error_message|
             %p.fr-error-text
               = error_message
-        -# = form_builder.select :autre_commune_code_insee,
-        -#                       options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee),
-        -#                       {},
-        -#                       { data: {action: "change->choix-edifice#autre_commune_selected"} }
 
   .co-text--right
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"

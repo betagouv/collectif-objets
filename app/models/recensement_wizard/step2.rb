@@ -5,18 +5,28 @@ module RecensementWizard
     STEP_NUMBER = 2
     TITLE = "Précisions sur la localisation"
 
-    attr_accessor :edifice_nom_existant, :autre_edifice_checked, :autre_commune_code_insee
+    attr_accessor :edifice_nom_existant, :autre_edifice_checked
 
     validates :edifice_nom_existant,
               presence: { message: "Veuillez sélectionner un édifice. \
                 S’il n'est pas dans la liste, choisir \"Autre édificie\"." },
-              unless: -> { autre_edifice_checked }
+              unless: lambda {
+                localisation != Recensement::LOCALISATION_AUTRE_EDIFICE ||
+                  (localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE && autre_edifice_checked)
+              }
 
     validates \
       :edifice_nom,
       presence: {
         message: "Veuillez préciser le nom de l’édifice dans lequel l’objet a été déplacé"
-      }, if: -> { autre_edifice_checked }
+      }, if: lambda {
+        localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE ||
+          (localisation == Recensement::LOCALISATION_AUTRE_EDIFICE && autre_edifice_checked)
+      }
+
+    validates :autre_commune_code_insee,
+              presence: { message: "Le code INSEE dans lequel se trouve maintenant l’objet doit être indiqué" },
+              if: -> { localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
 
     def permitted_params = %i[edifice_nom_existant edifice_nom autre_edifice_checked autre_commune_code_insee]
 
