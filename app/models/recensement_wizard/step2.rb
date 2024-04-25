@@ -45,14 +45,5 @@ module RecensementWizard
       #   recensement.edifice_nom = nil
       # end
     end
-
-    # TODO : supprimer
-    def autre_edifice?
-      edifice_id.present? && edifice_id.zero?
-    end
-
-    def autre_commune_selected?
-      autre_commune_code_insee != commune.code_insee
-    end
   end
 end
