@@ -104,7 +104,7 @@ module RecensementWizard
     def skipped_steps
       # return [] if step_number <= 5 # can we comment this line ?
       s = []
-      s += [2, 3, 4, 5] if absent?
+      s += [2, 3, 4, 5] if absent? || recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
       s += [4, 5] unless recensable?
       s += [2] if edifice_initial?
       s
