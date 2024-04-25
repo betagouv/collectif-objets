@@ -33,9 +33,14 @@ class Recensement < ApplicationRecord
   end
 
   LOCALISATION_EDIFICE_INITIAL = "edifice_initial"
+  # TODO : renommer en "deplacement_autre_edifice"
   LOCALISATION_AUTRE_EDIFICE = "autre_edifice"
+  LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE = "deplacement_autre_commune"
+  LOCALISATION_DEPLACEMENT_TEMPORAIRE = "deplacement_temporaire"
   LOCALISATION_ABSENT = "absent"
-  LOCALISATIONS = [LOCALISATION_EDIFICE_INITIAL, LOCALISATION_AUTRE_EDIFICE, LOCALISATION_ABSENT].freeze
+  LOCALISATIONS = [LOCALISATION_EDIFICE_INITIAL, LOCALISATION_AUTRE_EDIFICE,
+                   LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE, LOCALISATION_DEPLACEMENT_TEMPORAIRE,
+                   LOCALISATION_ABSENT].freeze
 
   ETAT_BON = "bon"
   ETAT_MOYEN = "moyen"
@@ -52,8 +57,11 @@ class Recensement < ApplicationRecord
 
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
   # À faire évoluer : retirer edifice_nom au profit d'un belongs_to: autre_edifice
-  validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? }
+  validates :edifice_nom, presence: true, if: -> { completed? && deplacement_definitif? }
   validates :autre_commune_code_insee, format: /\b\d{5}\b/, allow_blank: true
+  validates :autre_commune_code_insee,
+            presence: true,
+            if: -> { completed? && localisation == LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
   validates :recensable, inclusion: { in: [true, false] }, if: -> { completed? }
   validates :recensable, inclusion: { in: [false] }, if: -> { completed? && absent? }
   validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { completed? && recensable? }

@@ -10,8 +10,9 @@ module Recensements
       localisation == Recensement::LOCALISATION_ABSENT
     end
 
-    def autre_edifice?
-      localisation == Recensement::LOCALISATION_AUTRE_EDIFICE
+    def deplacement_definitif?
+      localisation == Recensement::LOCALISATION_AUTRE_EDIFICE ||
+        localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
     end
 
     def edifice_initial?
@@ -19,7 +20,7 @@ module Recensements
     end
 
     def missing_photos?
-      recensable? && (edifice_initial? || autre_edifice?) && photos.empty?
+      recensable? && (edifice_initial? || deplacement_definitif?) && photos.empty?
     end
 
     def en_peril?

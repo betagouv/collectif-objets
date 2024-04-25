@@ -22,8 +22,8 @@ module Bordereau
 
     attr_reader :recensement
 
-    delegate :objet, :absent?, :autre_edifice?, :recensable?, :analyse_etat_sanitaire, :etat_sanitaire, :localisation,
-             :mauvaise_securisation?, to: :recensement
+    delegate :objet, :absent?, :deplacement_definitif?, :recensable?, :analyse_etat_sanitaire, :etat_sanitaire,
+             :localisation, :mauvaise_securisation?, to: :recensement
     delegate :palissy_REF, :palissy_DENO, :palissy_SCLE, :palissy_CATE, :palissy_DPRO, :nom, to: :objet
 
     def denomination_cell
@@ -45,7 +45,7 @@ module Bordereau
 
     def observations_proprietaire_cell
       observations = [recensement.notes]
-      observations << ["L’objet a été déplacé vers : #{recensement.edifice_nom}"] if autre_edifice?
+      observations << ["L’objet a été déplacé vers : #{recensement.edifice_nom}"] if deplacement_definitif?
       observations.compact_blank.join("\n")
     end
 

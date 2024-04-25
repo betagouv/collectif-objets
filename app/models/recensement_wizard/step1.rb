@@ -24,7 +24,8 @@ module RecensementWizard
     def permitted_params = %i[localisation confirmation_introuvable]
 
     def next_step_number
-      if localisation == Recensement::LOCALISATION_ABSENT
+      if localisation == Recensement::LOCALISATION_ABSENT ||
+         localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
         6
       elsif localisation == Recensement::LOCALISATION_EDIFICE_INITIAL
         3
@@ -43,14 +44,21 @@ module RecensementWizard
     def assign_attributes(attributes)
       super
 
-      unless localisation == Recensement::LOCALISATION_AUTRE_EDIFICE
+      # Les lignes ci-dessous sont utilisées pour remettre à zéro les données de recensement
+      # dans le cas d'un retour en arrière dans le formulaire et du choix d'une autre option
+      # Idéalement on aimerait que ce soit plus clair via une méthode "reset_recensement" dans chaque étape
+      unless recensement.deplacement_definitif?
         recensement.edifice_nom = nil
         recensement.autre_commune_code_insee = nil
       end
 
-      return unless localisation == Recensement::LOCALISATION_ABSENT && confirmation_introuvable
+      unless localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
+        recensement.autre_commune_code_insee = nil
+      end
 
-      recensement.localisation = Recensement::LOCALISATION_ABSENT
+      return unless (localisation == Recensement::LOCALISATION_ABSENT && confirmation_introuvable) ||
+                    localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+
       recensement.recensable = false
       recensement.etat_sanitaire = nil
       recensement.securisation = nil
