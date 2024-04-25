@@ -48,6 +48,10 @@ module RecensementWizard
         recensement.autre_commune_code_insee = nil
       end
 
+      unless localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
+        recensement.autre_commune_code_insee = nil
+      end
+
       return unless localisation == Recensement::LOCALISATION_ABSENT && confirmation_introuvable
 
       recensement.localisation = Recensement::LOCALISATION_ABSENT
