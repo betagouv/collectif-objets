@@ -10,6 +10,7 @@ class DepartementsController < ApplicationController
   def show
     @departement = Departement.find(params[:id])
     @communes = @departement.communes.include_objets_count.order(:nom)
+    @title = "Liste des communes #{@departement.dans_nom} (#{@departement.code})"
   end
 
   def set_departements_map_bins
