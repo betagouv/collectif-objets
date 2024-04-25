@@ -56,7 +56,7 @@ module CampaignsControllerConcern
 
   def destroy
     if @campaign.destroy
-      redirect_to after_destroy_path, status: :see_other, notice: "Le brouillon de campagne a été détruit"
+      redirect_to after_destroy_path, status: :see_other, notice: "Le brouillon de campagne a été supprimé"
     else
       @campaign.errors.add(:base, "Impossible de supprimer ce brouillon de campagne")
       render :show, status: :unprocessable_entity
