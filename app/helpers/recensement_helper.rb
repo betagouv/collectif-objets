@@ -101,7 +101,7 @@ module RecensementHelper
 
   def recensement_nom_edifice(recensement)
     return recensement.objet.palissy_EDIF if recensement.edifice_initial?
-    return recensement.edifice_nom if recensement.autre_edifice?
+    return recensement.edifice_nom if recensement.deplacement_definitif?
 
     nil
   end

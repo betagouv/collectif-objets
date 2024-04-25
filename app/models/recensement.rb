@@ -57,7 +57,7 @@ class Recensement < ApplicationRecord
 
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
   # À faire évoluer : retirer edifice_nom au profit d'un belongs_to: autre_edifice
-  validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? }
+  validates :edifice_nom, presence: true, if: -> { completed? && deplacement_definitif? }
   validates :autre_commune_code_insee, format: /\b\d{5}\b/, allow_blank: true
   validates :autre_commune_code_insee,
             presence: true,
