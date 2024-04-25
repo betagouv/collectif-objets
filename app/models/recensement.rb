@@ -36,9 +36,11 @@ class Recensement < ApplicationRecord
   # TODO : renommer en "deplacement_autre_edifice"
   LOCALISATION_AUTRE_EDIFICE = "autre_edifice"
   LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE = "deplacement_autre_commune"
+  LOCALISATION_DEPLACEMENT_TEMPORAIRE = "deplacement_temporaire"
   LOCALISATION_ABSENT = "absent"
   LOCALISATIONS = [LOCALISATION_EDIFICE_INITIAL, LOCALISATION_AUTRE_EDIFICE,
-                   LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE, LOCALISATION_ABSENT].freeze
+                   LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE, LOCALISATION_DEPLACEMENT_TEMPORAIRE,
+                   LOCALISATION_ABSENT].freeze
 
   ETAT_BON = "bon"
   ETAT_MOYEN = "moyen"
