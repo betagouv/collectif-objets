@@ -11,7 +11,8 @@ module Recensements
     end
 
     def autre_edifice?
-      localisation == Recensement::LOCALISATION_AUTRE_EDIFICE
+      localisation == Recensement::LOCALISATION_AUTRE_EDIFICE ||
+        localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
     end
 
     def edifice_initial?

@@ -43,7 +43,7 @@ module RecensementWizard
     def assign_attributes(attributes)
       super
 
-      unless localisation == Recensement::LOCALISATION_AUTRE_EDIFICE
+      unless recensement.autre_edifice?
         recensement.edifice_nom = nil
         recensement.autre_commune_code_insee = nil
       end
