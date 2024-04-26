@@ -2,15 +2,14 @@
 
 require "rails_helper"
 
-RSpec.feature "Communes - send message", type: :feature, js: true do
+RSpec.feature "Conservateurs - messages", type: :feature, js: true do
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement:) }
-  let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:) }
+  let!(:user) { create(:conservateur, departements: [departement]) }
 
   it "should let user send a message" do
-    login_as(user, scope: :user)
-    visit "/"
-    within("header") { click_on "Messagerie" }
+    login_as(user, scope: :conservateur)
+    visit "/conservateurs/communes/#{commune.id}/messages"
     expect(page).to be_axe_clean
     expect(page).to have_text(/Attention à vos données à caractère personnel/i)
     expect(page).to have_text(/Aucun message/i)
