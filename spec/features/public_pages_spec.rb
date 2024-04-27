@@ -38,7 +38,7 @@ feature "accessibility public pages", js: true do
     it { should be_axe_clean.excluding("iframe") }
   end
 
-  ArticlePresse.load_all.each do |article_presse|
+  ArticlePresse.all.each do |article_presse|
     describe "Article de Presse #{article_presse.title}" do
       before { visit article_presse_path(article_presse.id) }
       it { should be_axe_clean.excluding("iframe") }
@@ -94,7 +94,7 @@ feature "accessibility public pages", js: true do
     it { should be_axe_clean }
   end
 
-  Fiche.load_all.each do |fiche|
+  Fiche.all.each do |fiche|
     describe "Fiche conseil #{fiche.title}" do
       before { visit fiche_path(fiche.id) }
       it { should be_axe_clean }

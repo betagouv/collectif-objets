@@ -6,18 +6,18 @@ module MarkdownModelConcern
   extend ActiveSupport::Concern
 
   class_methods do
-    def load_all
-      all_ids.map { load_from_id(_1) }
+    def all
+      ids.map { find(_1) }
     end
 
-    def all_ids
+    def ids
       Rails.root.join(directory_path)
         .glob("*.md")
         .reverse
         .map { File.basename(_1, ".md") }
     end
 
-    def load_from_id(id)
+    def find(id)
       Rails.cache.fetch("#{cache_prefix}-#{id}", expires_in: 10.days) do
         path = Rails.root.join("#{directory_path}/#{id}.md")
         parsed = FrontMatterParser::Parser.parse_file path
