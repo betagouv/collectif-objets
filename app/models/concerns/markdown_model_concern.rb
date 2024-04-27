@@ -36,6 +36,8 @@ module MarkdownModelConcern
 
   attr_reader :id, :markdown_content, :frontmatter_data
 
+  def title = frontmatter_data[:titre]
+
   def doc
     @doc ||= Kramdown::Document.new(markdown_content)
   end
@@ -56,5 +58,13 @@ module MarkdownModelConcern
 
   def kramdown_elt_to_list_item_html(elt)
     "<li><a href='##{elt.attr[:id]}'>#{elt.value.options[:raw_text]}</a>#{kramdown_elt_to_list_html(elt)}</li>"
+  end
+
+  def respond_to_missing?(name, _include_private = false)
+    frontmatter_data.key? name
+  end
+
+  def method_missing(method, *_args)
+    frontmatter_data[method]
   end
 end
