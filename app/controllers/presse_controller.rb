@@ -6,8 +6,6 @@ class PresseController < ApplicationController
   end
 
   def show
-    raise ActionController::RoutingError, "Article inexistant" if ArticlePresse.ids.exclude? params[:id]
-
     @article = ArticlePresse.find(params[:id])
   end
 

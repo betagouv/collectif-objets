@@ -8,8 +8,6 @@ class FichesController < ApplicationController
   end
 
   def show
-    raise ActiveRecord::RecordNotFound if Fiche.ids.exclude? params[:id]
-
     @fiche = Fiche.find(params[:id])
     @objets = objets
   end
