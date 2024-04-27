@@ -34,14 +34,14 @@ module MarkdownModelConcern
 
   attr_reader :id, :markdown_content, :frontmatter_data
 
-  def kramdown_doc
-    @kramdown_doc ||= Kramdown::Document.new(markdown_content)
+  def doc
+    @doc ||= Kramdown::Document.new(markdown_content)
   end
 
-  delegate :to_html, to: :kramdown_doc
+  delegate :to_html, to: :doc
 
   def table_of_contents_html
-    kramdown_elt_to_list_html(kramdown_doc.to_toc)
+    kramdown_elt_to_list_html(doc.to_toc)
   end
 
   private
