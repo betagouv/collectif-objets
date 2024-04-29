@@ -122,7 +122,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   scenario "recensement of 2 objects + completion" do
-    navigate_to_first_objet
+    navigate_to_objets
 
     expect(page).to be_axe_clean
 
@@ -359,10 +359,17 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     find("label", text: "Oui, mais l’objet se trouve dans un autre édifice dans la commune Albon").click
     click_on "Passer à l’étape suivante"
 
+    # État initial de la page
     step2_validate
     expect(page).to have_select("Dans quel édifice se trouve l’objet ?",
                                 selected: "Sélectionner un édifice",
                                 with_options: [edifice.nom, autre_edifice.nom, "Autre édifice"])
+    # Cas d'erreur
+    step_forward
+    step2_validate
+    expect(page).to have_text("Veuillez sélectionner un édifice")
+
+    # Cas où on sélectionne parmi la liste d'édifices existants
     select autre_edifice.nom, from: "Dans quel édifice se trouve l’objet ?"
     expect(page).to have_no_field("Indiquez le nom de l’édifice")
     click_on "Passer à l’étape suivante"
@@ -371,8 +378,15 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step_back
     expect(page).to have_select("Dans quel édifice se trouve l’objet ?", selected: autre_edifice.nom)
 
+    # Cas où on sélectionne Autre édifice
     select "Autre édifice", from: "Dans quel édifice se trouve l’objet ?"
     expect(page).to have_field("Indiquez le nom de l’édifice")
+
+    # Cas d'erreur
+    step_forward
+    step2_validate
+    expect(page).to have_text("Veuillez préciser le nom de l’édifice dans lequel l’objet a été déplacé")
+
     fill_in "Indiquez le nom de l’édifice", with: "Notre Dame"
     step_forward
 
@@ -388,9 +402,20 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     find("label", text: "Oui, mais l’objet se trouve dans une autre commune").click
     step_forward
 
+    # État initial de la page
     step2_validate
     expect(page).to have_field("Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "")
     expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "")
+
+    # Cas d'erreur
+    step_forward
+    expect(page).to have_text("Le code INSEE dans lequel se trouve maintenant l’objet doit être indiqué")
+    expect(page).to have_text("Veuillez préciser le nom de l’édifice dans lequel l’objet a été déplacé")
+    fill_in "Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "123"
+    step_forward
+    expect(page).to have_text("Le code INSEE doit être composé de 5 chiffres")
+
+    # Cas standard
     fill_in "Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "01010"
     fill_in "Dans quel édifice se trouve l’objet ?", with: "Chapelle Sixtine"
     step_forward
