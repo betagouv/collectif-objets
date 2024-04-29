@@ -254,7 +254,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step1_validate
     step1_choose_objet_dans_edifice_initial_and_continue
     step3_validate
-    expect(page).to have_text("Étape suivante : Objet")
+    expect(page).to have_text("Étape suivante : Photos de l’objet")
     find("label", text: "L’objet n’est pas recensable").click
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
@@ -265,15 +265,15 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme que l’objet n’est pas recensable")
     click_on "Confirmer et continuer"
-    step5_validate
+    step6_validate
     click_on "Revenir à l’étape précédente"
     step3_validate
     expect(page).to have_text("Étape suivante : Commentaires")
     expect(find(".fr-radio-group", text: "L’objet n’est pas recensable").find("input", visible: false)).to be_checked
     click_on "Passer à l’étape suivante"
-    step5_validate
-    click_on "Passer à l’étape suivante"
     step6_validate
+    click_on "Passer à l’étape suivante"
+    step7_validate
     expect(page).to have_text("L’objet n’est pas recensable")
     expect(page).not_to have_text(/Photos/i)
     click_on "Valider le recensement de cet objet"
@@ -283,7 +283,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(card_bouquet).to have_text(/Recensé/i)
     card_bouquet.click
     click_on "Modifier le recensement"
-    step6_validate
+    step7_validate
     find("section", text: "L’objet n’est pas recensable").find('button[aria-label="Modifier la réponse"]').click
     step3_validate
     find("label", text: "L’objet est recensable").click
