@@ -352,7 +352,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   scenario "deplacement dans la même commune" do
-    autre_edifice = Edifice.create(nom: "autre édifice", code_insee: commune.code_insee)
+    autre_edifice = Edifice.create(nom: "Basilique Saint-Pierre", code_insee: commune.code_insee)
 
     navigate_to_first_objet
     expect(page).to have_text("Oui, mais l’objet se trouve dans un autre édifice dans la commune Albon")
