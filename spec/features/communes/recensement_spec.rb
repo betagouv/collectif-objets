@@ -22,6 +22,14 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     visit "/"
     expect(page).to have_text("Albon")
     within("header") { click_on "Voir les objets de Albon" }
+    expect(page).to have_text("Bouquet d’Autel")
+    expect(page).to have_text("Ciboire des malades")
+  end
+
+  def navigate_to_first_objet
+    navigate_to_objets
+    click_on "Bouquet d’Autel"
+    click_on "Recenser cet objet"
   end
 
   def step1_validate
@@ -100,9 +108,8 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   scenario "recensement of 2 objects + completion" do
-    navigate_to_objets
-    expect(page).to have_text("Bouquet d’Autel")
-    expect(page).to have_text("Ciboire des malades")
+    navigate_to_first_objet
+
     expect(page).to be_axe_clean
 
     # PREMIER OBJET
@@ -220,9 +227,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   scenario "recensement introuvable" do
-    navigate_to_objets
-    click_on "Bouquet d’Autel"
-    click_on "Recenser cet objet"
+    navigate_to_first_objet
 
     step1_validate
     find("label", text: "Non, je ne sais pas où est l’objet").click
@@ -247,9 +252,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   scenario "recensement non recensable" do
-    navigate_to_objets
-    click_on "Bouquet d’Autel"
-    click_on "Recenser cet objet"
+    navigate_to_first_objet
 
     step1_validate
     step1_choose_objet_dans_edifice_initial_and_continue
@@ -303,9 +306,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   scenario "recensement without photos" do
-    navigate_to_objets
-    click_on "Bouquet d’Autel"
-    click_on "Recenser cet objet"
+    navigate_to_first_objet
 
     step1_validate
     step1_choose_objet_dans_edifice_initial_and_continue
@@ -328,9 +329,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   scenario "aucun choix à l’étape 1" do
-    navigate_to_objets
-    click_on "Bouquet d’Autel"
-    click_on "Recenser cet objet"
+    navigate_to_first_objet
     step1_validate
     click_on "Passer à l’étape suivante"
     scroll_to(find("#recensement_form_step"))
