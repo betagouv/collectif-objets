@@ -13,7 +13,6 @@ gem "aws-sdk-s3", "~> 1.143", require: false
 gem "bootsnap", "~> 1.17", require: false
 gem "devise", "~> 4.9"
 gem "dsfr-view-components", "~> 0.4"
-gem "factory_bot_rails", "~> 6.2"
 gem "front_matter_parser", "~> 1.0"
 gem "good_job", "3.21.5"
 gem "haml-rails", "~> 2.1"
@@ -42,6 +41,7 @@ gem "vite_rails", "~> 3.0"
 
 group :development, :test do
   gem "debug", ">= 1.0"
+  gem "factory_bot_rails", "~> 6.2"
   gem "launchy", "~> 2.5"
   gem "rspec-rails", "~> 6.1"
   gem "rubocop", "~> 1.63", require: false
