@@ -4,11 +4,13 @@
     <ol class="fr-breadcrumb__list">
       <% local_assigns[:links].map do |label, path| %>
         <li>
-          <a class="fr-breadcrumb__link" href="<%= path %>"><%= truncate(label, length: 25) %></a>
+          <%= link_to truncate(label, length: 25), path, class: "fr-breadcrumb__link", title: label.size > 25 ? label : nil %>
         </li>
       <% end %>
       <li>
-        <a class="fr-breadcrumb__link" aria-current="page"><%= truncate(local_assigns[:current_page_label], length: 25) %></a>
+        <a class="fr-breadcrumb__link" aria-current="page" <%= "title=#{current_page_label}" if current_page_label.size > 25 %>>
+          <%= truncate(current_page_label, length: 25) %>
+        </a>
       </li>
     </ol>
   </div>
