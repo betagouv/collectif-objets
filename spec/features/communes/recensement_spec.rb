@@ -236,9 +236,9 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
     expect(page).to have_text("Je confirme ne pas trouver l’objet")
     click_on "Confirmer et continuer"
-    step5_validate
-    click_on "Passer à l’étape suivante"
     step6_validate
+    click_on "Passer à l’étape suivante"
+    step7_validate
     click_on "Valider le recensement de cet objet"
 
     find_all("a", text: "Revenir à la liste d’objets de ma commune").first.click
