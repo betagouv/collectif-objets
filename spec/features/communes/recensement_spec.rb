@@ -45,6 +45,20 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
   end
 
+  def step_forward
+    click_on "Passer à l’étape suivante"
+  end
+
+  def step_back
+    click_on "Revenir à l’étape précédente"
+  end
+
+  def step2_validate
+    expect(page).to have_text("Étape 2 sur 7")
+    expect(page).to have_text("Précisions sur la localisation")
+    expect(page).to have_text("Étape suivante : Accessibilité")
+  end
+
   def step3_validate
     expect(page).to have_text("Étape 3 sur 7")
     expect(page).to have_text("Accessibilité")
@@ -335,5 +349,36 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     scroll_to(find("#recensement_form_step"))
     step1_validate
     expect(page).to have_text("Veuillez préciser où se trouve l’objet")
+  end
+
+  scenario "deplacement dans la même commune" do
+    autre_edifice = Edifice.create(nom: "autre édifice", code_insee: commune.code_insee)
+
+    navigate_to_first_objet
+    expect(page).to have_text("Oui, mais l’objet se trouve dans un autre édifice dans la commune Albon")
+    find("label", text: "Oui, mais l’objet se trouve dans un autre édifice dans la commune Albon").click
+    click_on "Passer à l’étape suivante"
+
+    step2_validate
+    expect(page).to have_select("Dans quel édifice se trouve l’objet ?",
+                                selected: "Sélectionner un édifice",
+                                with_options: [edifice.nom, autre_edifice.nom, "Autre édifice"])
+    select autre_edifice.nom, from: "Dans quel édifice se trouve l’objet ?"
+    expect(page).to have_no_field("Indiquez le nom de l’édifice")
+    click_on "Passer à l’étape suivante"
+
+    step3_validate
+    step_back
+    expect(page).to have_select("Dans quel édifice se trouve l’objet ?", selected: autre_edifice.nom)
+
+    select "Autre édifice", from: "Dans quel édifice se trouve l’objet ?"
+    expect(page).to have_field("Indiquez le nom de l’édifice")
+    fill_in "Indiquez le nom de l’édifice", with: "Notre Dame"
+    step_forward
+
+    step3_validate
+    step_back
+    expect(page).to have_select("Dans quel édifice se trouve l’objet ?", selected: "Autre édifice")
+    expect(page).to have_field("Indiquez le nom de l’édifice", with: "Notre Dame")
   end
 end
