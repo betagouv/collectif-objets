@@ -22,5 +22,6 @@
     - if sp_prefix
       .fr-mb-1w
         = link_to "Mairie de #{@commune} sur service-public.fr", "https://lannuaire.service-public.fr/#{sp_prefix}/mairie-#{@commune.code_insee}-01", class: "fr-link fr-icon-information-line fr-link--icon-left", target: "_blank", rel: "noopener"
-    .fr-mb-1w
-      = link_to @commune.users.first.email, "mailto:#{@commune.users.first.email}", class: "fr-link fr-icon-mail-line fr-link--icon-left"
+    - if @commune.users.first&.email
+      .fr-mb-1w
+        = link_to @commune.users.first.email, "mailto:#{@commune.users.first.email}", class: "fr-link fr-icon-mail-line fr-link--icon-left"
