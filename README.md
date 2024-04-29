@@ -404,10 +404,13 @@ Avec le recul, certains choix méritent d’être revus :
 ## Dumps des bases de données
 
 ```sh
-# Dans un terminal
+# Dans un terminal à part, lancer un tunnel SSH pour avoir accès à la base de données.
+# Il faut avoir préalablement configuré une clé SSH dans Scalingo
 scalingo --app collectif-objets-staging db-tunnel SCALINGO_POSTGRESQL_URL
 
-# Dans un second terminal
+# Dans un second terminal, lancer le dump en remplaçant collectif_o_9999 et XXXXX par les données
+# de prod ou staging que vous trouverez dans la variable d'environnement SCALINGO_POSTGRESQL_URL.
+# Pour récupérer les données de recensement, utiliser plutôt le scritp pg_dump_data_full.sh
 ./scripts/pg_dump_data_anonymous.sh postgres://collectif_o_9999:XXXXX@localhost:10000/collectif_o_9999 tmp/dump.pgsql
 
 # Le dump peut alors être importé en local
