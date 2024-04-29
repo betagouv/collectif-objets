@@ -25,7 +25,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   def step1_validate
-    expect(page).to have_text("Étape 1 sur 6")
+    expect(page).to have_text("Étape 1 sur 7")
     expect(page).to have_text("Localisation")
     expect(page).to have_text("Avez-vous trouvé l’objet ?")
   end
@@ -38,27 +38,39 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   def step3_validate
-    expect(page).to have_text("Étape 3 sur 6")
-    expect(page).to have_text("Photos de l’objet")
+    expect(page).to have_text("Étape 3 sur 7")
+    expect(page).to have_text("Accessibilité")
     expect(page).to have_text("L’objet est-il recensable ?")
-    expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
   end
 
-  def step3_chose_recensable
+  def step3_chose_recensable_and_continue
     scroll_to(find("#recensement_form_step"))
     find("label", text: "L’objet est recensable").click
     expect(page).to be_axe_clean
+    click_on "Passer à l’étape suivante"
   end
 
   def step4_validate
-    expect(page).to have_text("Étape 4 sur 6")
+    expect(page).to have_text("Étape 4 sur 7")
+    expect(page).to have_text("Photos de l’objet")
+    expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
+  end
+
+  def step4_upload_photo_and_continue
+    attach_file("recensement_photos", Rails.root.join("spec/fixture_files/peinture1.jpg"))
+    expect(page).to have_selector("img[src*='peinture1.jpg']")
+    click_on "Passer à l’étape suivante"
+  end
+
+  def step5_validate
+    expect(page).to have_text("Étape 5 sur 7")
     expect(page).to have_text("Objet")
     expect(page).to have_text("Étape suivante : Commentaires")
     expect(page).to have_text("Quel est l’état actuel de l’objet ?")
     expect(page).to have_text("L’objet est-il en sécurité ?")
   end
 
-  def step4_choose_etat_et_volable_and_continue
+  def step5_choose_etat_et_volable_and_continue
     scroll_to(find("#recensement_form_step"))
     find("label", text: "L’objet est en état moyen").click
     find("label", text: "L’objet est difficile à voler").click
@@ -66,22 +78,22 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
   end
 
-  def step5_validate
-    expect(page).to have_text("Étape 5 sur 6")
+  def step6_validate
+    expect(page).to have_text("Étape 6 sur 7")
     expect(page).to have_text("Commentaires")
     expect(page).to have_text("Étape suivante : Récapitulatif")
     expect(page).to have_text("Avez-vous des commentaires ?")
   end
 
-  def step5_comment_and_continue
+  def step6_comment_and_continue
     scroll_to(find("#recensement_form_step"))
     fill_in "Avez-vous des commentaires ?", with: "Cette peinture est magnifique"
     expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
   end
 
-  def step6_validate
-    expect(page).to have_text("Étape 6 sur 6")
+  def step7_validate
+    expect(page).to have_text("Étape 7 sur 7")
     expect(page).to have_text("Récapitulatif")
     expect(page).not_to have_text("Étape suivante")
     expect(page).to be_axe_clean
@@ -107,10 +119,11 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # STEP 3
     step3_validate
-    expect(page).to have_text("Étape suivante : Objet")
-    step3_chose_recensable
+    expect(page).to have_text("Étape suivante : Photos de l’objet")
+    step3_chose_recensable_and_continue
 
-    expect(page).to have_text("Prenez des photos de l’objet dans son état actuel")
+    # STEP 4
+    step4_validate
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau1.jpg"))
     expect(page).to have_selector("img[src*='tableau1.jpg']")
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau2.jpg"))
@@ -121,16 +134,16 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
-    # Step 4
-    step4_validate
-    step4_choose_etat_et_volable_and_continue
-
     # Step 5
     step5_validate
-    step5_comment_and_continue
+    step5_choose_etat_et_volable_and_continue
 
-    # Step 6 - Recap
+    # Step 6
     step6_validate
+    step6_comment_and_continue
+
+    # Step 7 - Recap
+    step7_validate
     expect(page).to have_text("Oui, l’objet se trouve dans l’édifice indiqué initialement")
     expect(page).to have_text("L’objet est recensable")
     expect(page).to have_selector("img[src*='tableau1.jpg']")
@@ -158,20 +171,23 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Recenser cet objet"
     step1_validate
     # "comment ça marche" accordion should be closed for successive recensements
-    find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
-    click_on "Passer à l’étape suivante"
+    step1_choose_objet_dans_edifice_initial_and_continue
+
     step3_validate
-    find("label", text: "L’objet est recensable").click
-    attach_file("recensement_photos", Rails.root.join("spec/fixture_files/peinture1.jpg"))
-    expect(page).to have_selector("img[src*='peinture1.jpg']")
-    click_on "Passer à l’étape suivante"
+    step3_chose_recensable_and_continue
+
     step4_validate
+    step4_upload_photo_and_continue
+
+    step5_validate
     find("label", text: "L’objet est en bon état").click
     find("label", text: "L’objet est difficile à voler").click
     click_on "Passer à l’étape suivante"
-    step5_validate
-    click_on "Passer à l’étape suivante"
+
     step6_validate
+    step6_comment_and_continue
+
+    step7_validate
     click_on "Valider le recensement de cet objet"
 
     # Confirmation
