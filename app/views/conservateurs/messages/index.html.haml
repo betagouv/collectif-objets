@@ -5,15 +5,11 @@
   = render "shared/messages/form", url: conservateurs_commune_messages_path(@commune), message: @new_message
   = render "shared/messages/email_address_hint", email_address: @commune.support_email(role: :conservateur)
 
-  .fr-mt-16w
-    %h2 Autres moyens de contact
-    %p.co-text--italic
+  = dsfr_accordion_section(title: "Autres contacts de la commune") do
+    %p.fr-mx-16w
       :markdown
         Nous vous recommandons d’utiliser la messagerie ci-dessus en priorité pour centraliser vos échanges avec la commune.
-        Cela permet notamment de partager les échanges avec les autres conservateurs du département, ainsi qu’avec l’équipe de Collectif Objets qui peut répondre aux questions techniques.
-
-        **La commune est prévenue par email à chaque fois qu’un message est envoyé.**
-
+        Cela permet notamment de partager les échanges avec les autres conservateurs du département
     %div
     - if phone = @commune.phone_number
       .fr-mb-1w
