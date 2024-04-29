@@ -41,7 +41,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def step1_choose_objet_dans_edifice_initial_and_continue
     scroll_to(find("#recensement_form_step"))
     find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
-    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
   end
 
@@ -68,7 +67,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def step3_chose_recensable_and_continue
     scroll_to(find("#recensement_form_step"))
     find("label", text: "L’objet est recensable").click
-    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
   end
 
@@ -96,7 +94,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     scroll_to(find("#recensement_form_step"))
     find("label", text: "L’objet est en état moyen").click
     find("label", text: "L’objet est difficile à voler").click
-    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
   end
 
@@ -110,7 +107,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def step6_comment_and_continue
     scroll_to(find("#recensement_form_step"))
     fill_in "Avez-vous des commentaires ?", with: "Cette peinture est magnifique"
-    expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
   end
 
@@ -118,7 +114,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Étape 7 sur 7")
     expect(page).to have_text("Récapitulatif")
     expect(page).not_to have_text("Étape suivante")
-    expect(page).to be_axe_clean
   end
 
   scenario "recensement of 2 objects + completion" do
@@ -135,16 +130,19 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # STEP 1
     step1_validate
+    expect(page).to be_axe_clean
     expect(page).to have_text("Précisions sur la localisation")
     step1_choose_objet_dans_edifice_initial_and_continue
 
     # STEP 3
     step3_validate
+    expect(page).to be_axe_clean
     expect(page).to have_text("Étape suivante : Photos de l’objet")
     step3_chose_recensable_and_continue
 
     # STEP 4
     step4_validate
+    expect(page).to be_axe_clean
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau1.jpg"))
     expect(page).to have_selector("img[src*='tableau1.jpg']")
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau2.jpg"))
@@ -157,14 +155,17 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # Step 5
     step5_validate
+    expect(page).to be_axe_clean
     step5_choose_etat_et_volable_and_continue
 
     # Step 6
     step6_validate
+    expect(page).to be_axe_clean
     step6_comment_and_continue
 
     # Step 7 - Recap
     step7_validate
+    expect(page).to be_axe_clean
     expect(page).to have_text("Oui, l’objet se trouve dans l’édifice indiqué initialement")
     expect(page).to have_text("L’objet est recensable")
     expect(page).to have_selector("img[src*='tableau1.jpg']")
@@ -367,6 +368,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     # Cas d'erreur
     step_forward
     step2_validate
+    expect(page).to be_axe_clean
     expect(page).to have_text("Veuillez sélectionner un édifice")
 
     # Cas où on sélectionne parmi la liste d'édifices existants
@@ -404,6 +406,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # État initial de la page
     step2_validate
+    expect(page).to be_axe_clean
     expect(page).to have_field("Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "")
     expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "")
 
