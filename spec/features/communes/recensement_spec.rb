@@ -309,13 +309,19 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     step1_validate
     step1_choose_objet_dans_edifice_initial_and_continue
-    find("label", text: "L’objet est recensable").click
-    click_on "Passer à l’étape suivante"
+    step3_chose_recensable_and_continue
     step4_validate
-    step4_choose_etat_et_volable_and_continue
-    step5_validate
+
     click_on "Passer à l’étape suivante"
-    step6_validate
+    expect(page).to have_text("Êtes-vous sûr de ne pas pouvoir prendre de photos ?")
+    sleep 1 # sleep and check modal is still present to make sure it does not autoclose
+    expect(page).to have_text("Êtes-vous sûr de ne pas pouvoir prendre de photos ?")
+    click_on "Annuler" # same here
+    click_on "Passer à l’étape suivante"
+    click_on "Confirmer et continuer"
+
+    step5_choose_etat_et_volable_and_continue
+    step6_comment_and_continue
     expect(page).to have_text(/Photos manquantes/i)
     click_on "Valider le recensement de cet objet"
     expect(page).to have_text("Votre recensement a bien été enregistré")
