@@ -381,4 +381,23 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_select("Dans quel édifice se trouve l’objet ?", selected: "Autre édifice")
     expect(page).to have_field("Indiquez le nom de l’édifice", with: "Notre Dame")
   end
+
+  scenario "deplacement autre commune" do
+    navigate_to_first_objet
+    expect(page).to have_text("Oui, mais l’objet se trouve dans une autre commune")
+    find("label", text: "Oui, mais l’objet se trouve dans une autre commune").click
+    step_forward
+
+    step2_validate
+    expect(page).to have_field("Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "")
+    expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "")
+    fill_in "Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "01010"
+    fill_in "Dans quel édifice se trouve l’objet ?", with: "Chapelle Sixtine"
+    step_forward
+
+    step3_validate
+    step_back
+    expect(page).to have_field("Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "01010")
+    expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "Chapelle Sixtine")
+  end
 end
