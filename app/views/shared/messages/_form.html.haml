@@ -1,4 +1,4 @@
-.fr-mt-2w
+%div
   - if message.errors.any?
     .fr-alert.fr-alert--error.fr-mb-6w
       %p Votre message n'a pas pu être envoyé :
@@ -15,4 +15,4 @@
         = f.label :files, "Ajouter des photos ou fichiers"
         = f.file_field :files, multiple: true, direct_upload: true
       .fr-input-group
-        = f.submit "Envoyer"
+        %button.fr-btn.fr-btn--icon-right.fr-icon-send-plane-fill{type: :submit} Envoyer

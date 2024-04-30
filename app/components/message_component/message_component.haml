@@ -1,10 +1,10 @@
-.co-background--white.fr-pt-2w.fr-px-1w.fr-mb-4w.co-max-width-80{class: css_classes}
-  .co-flex.co-flex--space-between.co-flex--align-items-center
+.fr-p-2w.fr-mb-4w.co-max-width-60{class: css_classes}
+  .co-flex.co-flex--space-between.co-flex--align-items-center.fr-mb-1w
     .co-text--bold
       = icon_span(author_icon)
       = author_name
     .co-text--italic le #{l(sent_at, format: :long_with_weekday)}
-  .fr-my-2w.fr-pl-4w
+  .co-margin-last-0
     - if inbound_email?
       - if inbound_email.body_md.present?
         != Kramdown::Document.new(message.inbound_email.body_md).to_html
@@ -19,7 +19,7 @@
           Votre dossier demande des modifications.
       = simple_format message.text
   - if message.files.any?
-    .fr-my-2w.fr-pl-4w
+    %div
       .fr-mb-1w
         - if message.files.length == 1
           1 fichier
@@ -37,7 +37,7 @@
                   %div= file.filename
                   .co-text--italic= number_to_human_size file.byte_size
   - if skipped_attachments&.any?
-    .fr-my-2w.fr-pl-4w
+    %div
       %details
         %summary
           - if skipped_attachments.length == 1
@@ -48,7 +48,7 @@
           - skipped_attachments.each do |attachment|
             %li
               = link_to "#{attachment.filename} (#{number_to_human_size(attachment.size)})", attachment_path(attachment), target: "_blank", rel: "noopener"
-  .co-text--italic.fr-text--sm.fr-pb-1w
-    - if inbound_email?
+  - if inbound_email?
+    .co-text--italic.fr-text--sm
       Ce message a été envoyé par mail depuis l'adresse
       = inbound_email.from_email
