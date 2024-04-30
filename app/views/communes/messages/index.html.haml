@@ -8,6 +8,14 @@
 
       %h1 Messagerie
 
+      .fr-callout
+        .fr-callout__text
+          La messagerie permet d'échanger avec le conservateur en cas de doute.
+          %br
+          Vous avez une question concernant le fonctionnement de la plateforme&nbsp;?
+          N'hésitez pas à consulter notre documentation.
+        = link_to "Voir la documentation", content_blob_path(:documentation_commune), class: "fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
+
       = render "shared/messages/list", messages: @messages, viewed_by: current_user
 
       = render "shared/messages/form", message: @new_message, url: commune_messages_path(@commune)
