@@ -8,7 +8,7 @@
 
   = form_for message, url: , method: :post, builder: FormBuilderDsfr, html: { id: "new-message-form" } do |f|
     .fr-input-group
-      = f.label :text, "Nouveau message"
+      = f.label :text, "Votre message"
       = f.text_area :text, rows: 5, required: true, autocomplete: "off"
     .co-flex.co-flex--space-between
       .fr-input-group
