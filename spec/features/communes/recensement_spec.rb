@@ -428,4 +428,23 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_field("Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "01010")
     expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "Chapelle Sixtine")
   end
+
+  scenario "déplacement temporaire" do
+    navigate_to_first_objet
+    expect(page).to have_text("Oui, mais l’objet a été déplacé temporairement")
+    find("label", text: "Oui, mais l’objet a été déplacé temporairement").click
+    step_forward
+
+    step6_validate
+    step_forward
+
+    step7_validate
+    expect(page).to have_text("Oui, il a été déplacé temporairement")
+    find("section", text: "Oui, il a été déplacé temporairement")
+      .find('button[aria-label="Modifier la localisation de l’objet"]').click
+
+    step1_validate
+    expect(find(".fr-radio-group", text: "Oui, mais l’objet a été déplacé temporairement")
+           .find("input", visible: false)).to be_checked
+  end
 end
