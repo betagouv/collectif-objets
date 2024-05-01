@@ -7,6 +7,6 @@
     Ces informations sont trop personnelles.
 
   - if messages.empty?
-    %p.co-background--light-grey.co-text--italic.fr-mb-0#empty-message Aucun message pour le moment
+    %p.co-background--light-grey.fr-p-2w.co-text--italic.fr-mb-0#empty-message Aucun message pour le moment
   - else
     = render MessageComponent.with_collection(messages, viewed_by: )
