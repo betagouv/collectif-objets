@@ -60,7 +60,7 @@ group :development do
 end
 
 group :test do
-  gem "axe-core-capybara", "~> 4.7"
+  gem "axe-core-capybara", "~> 4.9"
   gem "axe-core-rspec", "~> 4.8"
   gem "capybara", "~> 3.39"
   gem "selenium-webdriver", "~> 4.16"
