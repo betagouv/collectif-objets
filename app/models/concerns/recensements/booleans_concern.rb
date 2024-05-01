@@ -15,6 +15,10 @@ module Recensements
         localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
     end
 
+    def deplacement_temporaire?
+      localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+    end
+
     def edifice_initial?
       localisation == Recensement::LOCALISATION_EDIFICE_INITIAL
     end

@@ -440,6 +440,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     step7_validate
     expect(page).to have_text("Oui, il a été déplacé temporairement")
+    expect(page).not_to have_text("L’objet est-il recensable ?")
     find("section", text: "Oui, il a été déplacé temporairement")
       .find('button[aria-label="Modifier la localisation de l’objet"]').click
 

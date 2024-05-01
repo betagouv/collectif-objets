@@ -27,7 +27,7 @@
     = t "recensement.localisation.answers.#{recensement.localisation}_html",
       nom_edifice: recensement_nom_edifice(recensement), nom_commune_localisation_objet: nom_commune_localisation_objet(recensement)
 
-- if !recensement.absent?
+- unless recensement.absent? || recensement.deplacement_temporaire?
   %section.fr-mb-4w
     %h3.fr-text--lg.fr-mb-1v
       L’objet est-il recensable ?
