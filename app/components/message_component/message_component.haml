@@ -1,9 +1,8 @@
 .fr-p-2w.fr-mb-4w.co-max-width-60{class: css_classes}
   .co-flex.co-flex--space-between.co-flex--align-items-center.fr-mb-1w
-    .co-text--bold
-      = icon_span(author_icon)
-      = author_name
-    .co-text--italic le #{l(sent_at, format: :long_with_weekday)}
+    = icon_span(author_icon)
+    .co-text--bold.co-flex--grow.fr-mx-1w= author_name
+    .co-text--italic #{l(sent_at, format: :long_with_weekday)}
   .co-margin-last-0
     - if inbound_email?
       - if inbound_email.body_md.present?
