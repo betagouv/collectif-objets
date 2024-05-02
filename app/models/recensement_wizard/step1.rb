@@ -41,12 +41,7 @@ module RecensementWizard
         wizard: { localisation: Recensement::LOCALISATION_ABSENT, confirmation_introuvable: "true" } }
     end
 
-    def assign_attributes(attributes)
-      super
-
-      # Les lignes ci-dessous sont utilisées pour remettre à zéro les données de recensement
-      # dans le cas d'un retour en arrière dans le formulaire et du choix d'une autre option
-      # Idéalement on aimerait que ce soit plus clair via une méthode "reset_recensement" dans chaque étape
+    def reset_recensement_data_for_next_steps
       if recensement.localisation_changed?
         recensement.edifice_nom = nil
         recensement.autre_commune_code_insee = nil

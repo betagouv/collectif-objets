@@ -73,6 +73,7 @@ module RecensementWizard
 
       return true if skip_save?
 
+      reset_recensement_data_for_next_steps
       recensement.save
     end
 
@@ -91,6 +92,11 @@ module RecensementWizard
       recensement.assign_attributes(attrs_recensement)
       super(attrs_wizard)
     end
+
+    # Cette méthode est à re définir dans les sous-classes pour remettre à zéro les données de recensement
+    # dans le cas d'un retour en arrière dans le formulaire et du choix d'une autre option
+    # Redefine this method in step subclasses to reset data when the user steps back and changes the answers
+    def reset_recensement_data_for_next_steps; end
 
     def confirmation_modal_close_path
       edit_commune_objet_recensement_path(commune, objet, recensement, step: step_number)

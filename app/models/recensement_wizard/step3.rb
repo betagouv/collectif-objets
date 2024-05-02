@@ -34,8 +34,7 @@ module RecensementWizard
       recensable == false ? 6 : super
     end
 
-    def assign_attributes(attributes)
-      super
+    def reset_recensement_data_for_next_steps
       return unless recensable == false && confirmation_not_recensable
 
       recensement.etat_sanitaire = nil
