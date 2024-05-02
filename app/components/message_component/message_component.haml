@@ -20,10 +20,7 @@
   - if message.files.any?
     %div
       .fr-mb-1w
-        - if message.files.length == 1
-          1 fichier
-        - else
-          \#{message.files.length} fichiers
+        = t("activerecord.attributes.message.files", count: message.files.length)
       .co-flex.co-flex--gap-05rem
         - message.files.each do |file|
           - if file.variable?
@@ -39,10 +36,7 @@
     %div
       %details
         %summary
-          - if skipped_attachments.length == 1
-            1 autre fichier
-          - else
-            #{skipped_attachments.length} autres fichiers
+          = t("activerecord.attributes.message.skipped_attachments", count: skipped_attachments.length)
         %ul
           - skipped_attachments.each do |attachment|
             %li

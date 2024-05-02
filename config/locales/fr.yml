@@ -291,6 +291,15 @@ fr:
         last_name: Nom de famille
         phone_number: Numéro de téléphone
         last_sign_in_at: Dernière connexion
+      message:
+        files:
+          zero: aucun fichier
+          one: 1 fichier
+          other: "%{count} fichiers"
+        skipped_attachments:
+          zero: aucun autre fichier
+          one: 1 autre fichier
+          other: "%{count} autre fichiers"
   date:
     abbr_day_names:
       - dim
