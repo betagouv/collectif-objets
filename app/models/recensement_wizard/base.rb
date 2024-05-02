@@ -42,6 +42,15 @@ module RecensementWizard
       prev
     end
 
+    def skipped_steps
+      # return [] if step_number <= 5 # can we comment this line ?
+      s = []
+      s += [2, 3, 4, 5] if absent? || recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+      s += [4, 5] unless recensable?
+      s += [2] if edifice_initial?
+      s
+    end
+
     def next_step_title
       return unless next_step_number
 
@@ -100,15 +109,5 @@ module RecensementWizard
     def confirmation_modal_path_params = nil
     def confirmation_modal? = confirmation_modal_path_params.present?
     alias skip_save? confirmation_modal?
-
-    # Utilisé pour les sauts d'étape quand on revient en arrière dans le formulaire
-    def skipped_steps
-      # return [] if step_number <= 5 # can we comment this line ?
-      s = []
-      s += [2, 3, 4, 5] if absent? || recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
-      s += [4, 5] unless recensable?
-      s += [2] if edifice_initial?
-      s
-    end
   end
 end
