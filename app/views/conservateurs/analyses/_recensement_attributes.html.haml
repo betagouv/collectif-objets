@@ -1,5 +1,8 @@
 .fr-mb-3w
-  .fr-pb-1w.co-text--bold L’objet a-t-il été trouvé par la commune ?
+  .fr-pb-1w.co-flex.co-flex--align-items-center
+    %span.co-text--bold L’objet a-t-il été trouvé par la commune ?
+    %button.fr-btn--tooltip.fr-btn{"aria-describedby" => "tooltip-localisation-incorrecte"} Information contextuelle
+    %span.fr-tooltip.fr-placement{id: "tooltip-localisation-incorrecte", role: "tooltip", "aria-hidden" =>"true"} Si la localisation n'est pas correcte, informez en la commune pour qu’elle la modifie.
   .fr-mb-1w
     = recensement_presenter.localisation_sentence
   - if recensement.absent?
