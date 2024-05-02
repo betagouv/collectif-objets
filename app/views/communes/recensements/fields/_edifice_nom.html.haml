@@ -7,7 +7,7 @@
       .fr-hint-text
         .fr-mb-1w
           Veuillez nous indiquer le nom de l’édifice. Si vous ne le connaissez pas, indiquez "Édifice non connu".
-    = form_builder.text_field :edifice_nom, data: { "choix-edifice-target" => "edificeNomInput"}
+    = form_builder.text_field :edifice_nom, placeholder: "ex: Mairie, Eglise Sainte-Marie, Hôpital...", data: { "choix-edifice-target" => "edificeNomInput"}
     - form_builder.object.errors[:edifice_nom].each do |error_message|
       %p.fr-error-text
         = error_message
