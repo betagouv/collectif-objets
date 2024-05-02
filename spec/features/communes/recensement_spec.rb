@@ -396,6 +396,16 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step_back
     expect(page).to have_select("Dans quel édifice se trouve l’objet ?", selected: "Autre édifice")
     expect(page).to have_field("Indiquez le nom de l’édifice", with: "Notre Dame")
+
+    # Retour étape sur la localisation
+    step_back
+    step1_validate
+
+    # Changement de réponse
+    find("label", text: "Oui, mais l’objet se trouve dans une autre commune").click
+    step_forward
+    step2_validate
+    expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "")
   end
 
   scenario "deplacement autre commune" do
@@ -427,44 +437,10 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step_back
     expect(page).to have_field("Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "01010")
     expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "Chapelle Sixtine")
-  end
-
-  scenario "déplacement dans même commune puis change de réponse" do
-    navigate_to_first_objet
-    find("label", text: "Oui, mais l’objet se trouve dans un autre édifice dans la commune Albon").click
-    step_forward
-
-    select "Autre édifice", from: "Dans quel édifice se trouve l’objet ?"
-    fill_in "Indiquez le nom de l’édifice", with: "Notre Dame"
-    step_forward
-    step3_validate
 
     # Retour étape sur la localisation
     step_back
-    step2_validate
-    step_back
-
-    # Changement de réponse
-    find("label", text: "Oui, mais l’objet se trouve dans une autre commune").click
-    step_forward
-    step2_validate
-    expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "")
-  end
-
-  scenario "déplacement dans autre commune puis change de réponse" do
-    navigate_to_first_objet
-    find("label", text: "Oui, mais l’objet se trouve dans une autre commune").click
-    step_forward
-
-    fill_in "Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "12345"
-    fill_in "Dans quel édifice se trouve l’objet ?", with: "Chapelle Sixtine"
-    step_forward
-    step3_validate
-
-    # Retour étape sur la localisation
-    step_back
-    step2_validate
-    step_back
+    step1_validate
 
     # Changement de réponse
     find("label", text: "Oui, mais l’objet se trouve dans un autre édifice dans la commune Albon").click
