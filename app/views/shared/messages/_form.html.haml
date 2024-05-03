@@ -10,9 +10,9 @@
     .fr-input-group
       = f.label :text, "Votre message"
       = f.text_area :text, rows: 5, required: true, autocomplete: "off"
-    .co-flex.co-flex--space-between
+    .d-sm-flex.justify-content-between
       .fr-input-group
         = f.label :files, "Ajouter des photos ou fichiers"
         = f.file_field :files, multiple: true, direct_upload: true
       .fr-input-group
-        %button.fr-btn.fr-btn--icon-right.fr-icon-send-plane-fill{type: :submit} Envoyer
+        %button.fr-btn.fr-btn--lg.fr-btn--icon-right.fr-icon-send-plane-fill.w-100.w-md-auto.fr-grid-row--center{type: :submit} Envoyer
