@@ -21,7 +21,7 @@ module CampaignsControllerConcern
     @departement = @campaign.departement
     authorize_campaign
     if @campaign.save
-      redirect_to send("#{routes_prefix}_campaign_path", @campaign),
+      redirect_to send("#{routes_prefix}_campaign_edit_recipients_path", @campaign),
                   notice: "La campagne a été créée avec succès, elle peut être configurée"
     else
       render :new, status: :unprocessable_entity
