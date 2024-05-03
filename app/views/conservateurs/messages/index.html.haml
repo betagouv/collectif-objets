@@ -1,6 +1,8 @@
 = render layout: "conservateurs/communes/tabs",
   locals: { commune: @commune, dossier: @dossier, current_tab: :messagerie } do
 
+  %h2.fr-sr-only Messagerie
+
   = render "shared/messages/list", messages: @messages, viewed_by: current_conservateur
   = render "shared/messages/form", url: conservateurs_commune_messages_path(@commune), message: @new_message
   = render "shared/messages/email_address_hint", email_address: @commune.support_email(role: :conservateur)
