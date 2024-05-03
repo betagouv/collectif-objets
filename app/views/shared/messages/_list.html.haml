@@ -1,5 +1,12 @@
-.co-max-height-40vh.co-overflow-auto.co-background--light-grey.co-border.fr-p-2w#messages-list{ tabindex: "0", data: { controller: "messages", messages: { target: "list" } } }
+.co-md-max-height-40vh.co-md-overflow-auto.co-md-overflow-auto-shadow.fr-mb-8w#messages-list{ tabindex: "0", data: { controller: "messages", messages: { target: "list" } } }
+
+  .fr-col-lg-8.fr-mt-lg-2w.fr-mb-3w.fr-mx-auto
+    Attention à vos données à caractère personnel !
+    Ne communiquez pas de données identifiantes notamment des données relatives
+    à vos opinions politiques, appartenances syndicales, convictions religieuses.
+    Ces informations sont trop personnelles.
+
   - if messages.empty?
-    %p.co-text--italic#empty-message Aucun message pour le moment
+    %p.co-background--light-grey.fr-p-2w.co-text--italic.fr-mb-0#empty-message Aucun message pour le moment
   - else
     = render MessageComponent.with_collection(messages, viewed_by: )

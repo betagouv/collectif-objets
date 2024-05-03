@@ -38,7 +38,7 @@ class MessageComponent < ViewComponent::Base
   end
 
   def css_classes
-    viewed_by_author? ? ["co-margin-left-auto"] : []
+    viewed_by_author? ? ["co-margin-left-auto", "co-background--light-grey"] : ["co-background--light-teal"]
   end
 
   def attachment_path(attachment)
