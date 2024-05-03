@@ -23,8 +23,10 @@
 
 /* OVERFLOWS */
 
-.co-overflow-auto { overflow: auto; }
 .co-overflow--hidden { overflow: hidden; }
+@media only screen and (min-width:780px) {
+  .co-md-overflow-auto { overflow: auto; }
+}
 
 /* WIDTHS & HEIGHTS */
 
@@ -38,7 +40,8 @@
 .co-max-width-150px { max-width: 150px; }
 .co--width-max-100 { max-width: 100%; }
 @media only screen and (min-width:780px) {
-  .co-max-width-60 { max-width: 60%; }
+  .co-md-max-width-60 { max-width: 60%; }
+  .co-md-max-height-40vh { max-height: 40vh; }
 }
 .co-max-width-80 { max-width: 80%; }
 
@@ -46,7 +49,6 @@
 .co-height--100vh { height: 100vh; }
 .co-height--60vh { height: 60vh; }
 .co-height-600px { height: 600px; }
-.co-max-height-40vh { max-height: 40vh; }
 .co-max-height-50vh { max-height: 50vh; }
 .co-max-height-80px { max-height: 80px; }
 
@@ -160,6 +162,32 @@ html[data-fr-scheme="dark"] .co-background--white { background-color: #000; }
 
 @media only screen and (max-width: 768px) {
   .co-flex-md-reverse-order { order: -1; }
+}
+
+/* Gradient shadows indicating overflowing content */
+@media only screen and (min-width:780px) {
+  .co-md-overflow-auto-shadow {
+    position: relative;
+  }
+  .co-md-overflow-auto-shadow::before,
+  .co-md-overflow-auto-shadow::after {
+    content: "";
+    display: block;
+    height: 2rem;
+    position: sticky;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .co-md-overflow-auto-shadow::before {
+    top: 0;
+    background: linear-gradient(180deg, white, rgba(255, 255, 255, 0) 100%);
+  }
+  .co-md-overflow-auto-shadow::after {
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), white 100%);
+  }
 }
 
 /* TEXT COLORS */

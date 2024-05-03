@@ -1,8 +1,11 @@
-.fr-p-2w.fr-mb-4w.co-max-width-60{class: css_classes}
-  .co-flex.co-flex--space-between.co-flex--align-items-center.fr-mb-1w
+.co-text--center.co-text--italic.fr-mb-1w
+  =l(sent_at, format: :long_with_weekday).upcase_first
+
+.fr-p-2w.fr-mb-4w.co-md-max-width-60{class: css_classes}
+  .co-flex.co-flex--space-between.co-flex--align-items-center.fr-mb-2w
     = icon_span(author_icon)
-    .co-text--bold.co-flex--grow.fr-mx-1w= author_name
-    .co-text--italic #{l(sent_at, format: :long_with_weekday)}
+    .co-text--bold.co-flex--grow.fr-ml-1w
+      = author_name
   .co-margin-last-0
     - if inbound_email?
       - if inbound_email.body_md.present?
@@ -18,30 +21,28 @@
           Votre dossier demande des modifications.
       = simple_format message.text
   - if message.files.any?
-    %div
-      .fr-mb-1w
-        = t("activerecord.attributes.message.files", count: message.files.length)
-      .co-flex.co-flex--gap-05rem
-        - message.files.each do |file|
-          - if file.variable?
+    .fr-mt-2w.fr-mb-1w.co-text--italic.co-margin-last-0
+      = t("activerecord.attributes.message.files", count: message.files.length)
+    .co-flex.co-flex--gap-05rem
+      - message.files.each do |file|
+        - if file.variable?
+          = link_to url_for(file), target: "_blank", rel: "noopener", class: "co-external-link--without-decoration" do
+            = image_tag url_for(file.variant(:small)), class: "co-max-height-150px co-max-width-150px"
+        - else
+          .fr-py-2w.fr-px-1w.co-border.co-text--center
             = link_to url_for(file), target: "_blank", rel: "noopener", class: "co-external-link--without-decoration" do
-              = image_tag url_for(file.variant(:small)), class: "co-max-height-150px co-max-width-150px"
-          - else
-            .fr-py-2w.fr-px-1w.co-border.co-text--center
-              = link_to url_for(file), target: "_blank", rel: "noopener", class: "co-external-link--without-decoration" do
-                .co-flex.co-flex--column.co-flex--justify-content-center.co-height--100
-                  %div= file.filename
-                  .co-text--italic= number_to_human_size file.byte_size
+              .co-flex.co-flex--column.co-flex--justify-content-center.co-height--100
+                %div= file.filename
+                .co-text--italic= number_to_human_size file.byte_size
   - if skipped_attachments&.any?
-    %div
-      %details
-        %summary
-          = t("activerecord.attributes.message.skipped_attachments", count: skipped_attachments.length)
-        %ul
-          - skipped_attachments.each do |attachment|
-            %li
-              = link_to "#{attachment.filename} (#{number_to_human_size(attachment.size)})", attachment_path(attachment), target: "_blank", rel: "noopener"
+    %details.fr-mt-2w.co-text--italic.co-margin-last-0
+      %summary
+        = t("activerecord.attributes.message.skipped_attachments", count: skipped_attachments.length)
+      %ul
+      - skipped_attachments.each do |attachment|
+        %li
+          = link_to "#{attachment.filename} (#{number_to_human_size(attachment.size)})", attachment_path(attachment), target: "_blank", rel: "noopener"
   - if inbound_email?
-    .co-text--italic.fr-text--sm
+    .co-text--italic.fr-text--sm.co-margin-last-0
       Ce message a été envoyé par mail depuis l'adresse
       = inbound_email.from_email
