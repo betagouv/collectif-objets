@@ -10,18 +10,6 @@ class Departement < ApplicationRecord
   has_many :campaigns, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
   has_many :pop_exports, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
 
-  def self.include_communes_count
-    joins(
-      %{
-        LEFT OUTER JOIN (
-          SELECT "departement_code", COUNT(*) communes_count
-          FROM communes
-          GROUP BY "departement_code"
-        ) a ON a."departement_code" = departements.code
-      }
-    ).select("departements.*, COALESCE(a.communes_count, 0) AS communes_count")
-  end
-
   def self.include_objets_count
     joins(
       %{

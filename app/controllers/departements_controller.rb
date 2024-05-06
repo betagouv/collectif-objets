@@ -2,7 +2,7 @@
 
 class DepartementsController < ApplicationController
   def index
-    @departements = Departement.all.include_objets_count.include_communes_count
+    @departements = Departement.all.include_objets_count
     @map_departements_json = @departements.map { serialize_departement(_1) }.to_json
     set_departements_map_bins
   end
