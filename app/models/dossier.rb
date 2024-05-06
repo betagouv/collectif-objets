@@ -10,9 +10,11 @@ class Dossier < ApplicationRecord
 
   include AASM
   aasm column: :status, timestamps: true, whiny_persistence: true do
+    state :initial
     state :construction, initial: true, display: I18n.t("dossier.status_badge.construction")
     state :submitted, display: I18n.t("dossier.status_badge.submitted")
     state :accepted, display: I18n.t("dossier.status_badge.accepted")
+    state :closed
 
     event :submit, after: :aasm_after_submit do
       transitions from: :construction, to: :submitted
