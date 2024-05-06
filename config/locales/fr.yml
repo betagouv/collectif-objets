@@ -92,10 +92,10 @@ fr:
       en_danger: Facile à voler
   dossier:
     status_badge:
+      empty: Non Recensé
       construction: Partiellement recensé
       submitted: Non examiné
       accepted: Examiné
-      none: Non recensé
     rapport:
       recensement:
         notes: Commentaires de la commune
