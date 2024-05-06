@@ -21,7 +21,7 @@ module CampaignsControllerConcern
     @departement = @campaign.departement
     authorize_campaign
     if @campaign.save
-      redirect_to send("#{routes_prefix}_campaign_path", @campaign),
+      redirect_to send("#{routes_prefix}_campaign_edit_recipients_path", @campaign),
                   notice: "La campagne a été créée avec succès, elle peut être configurée"
     else
       render :new, status: :unprocessable_entity
@@ -56,7 +56,7 @@ module CampaignsControllerConcern
 
   def destroy
     if @campaign.destroy
-      redirect_to after_destroy_path, status: :see_other, notice: "Le brouillon de campagne a été détruit"
+      redirect_to after_destroy_path, status: :see_other, notice: "Le brouillon de campagne a été supprimé"
     else
       @campaign.errors.add(:base, "Impossible de supprimer ce brouillon de campagne")
       render :show, status: :unprocessable_entity

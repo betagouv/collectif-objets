@@ -5,7 +5,7 @@ module Conservateurs
     before_action :set_departement, only: [:show]
 
     def index
-      @departements = policy_scope(Departement).include_communes_count.include_objets_count
+      @departements = policy_scope(Departement).include_objets_count
     end
 
     def show

@@ -57,6 +57,6 @@ class ObjetCardComponent < ViewComponent::Base
 
     PhotoPresenter.new \
       url: recensement.photos.first.variant(:medium),
-      description: "Photo de recensement de l’objet #{objet.nom}"
+      description: "Objet #{objet.nom} lors du recensement"
   end
 end
