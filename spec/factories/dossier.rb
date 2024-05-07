@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :dossier do
     association :commune
-    status { "construction" }
 
     trait :submitted do
       status { "submitted" }
