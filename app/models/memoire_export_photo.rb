@@ -2,19 +2,16 @@
 
 class MemoireExportPhoto
   COLS = %w[LBASE REF REFIMG NUMP DATPV COULEUR OBS COM DOM EDIF COPY TYPDOC IDPROD LIEUCOR
-            LEG TECHOR DATOEU SCLE AUTOEU INSEE ADRESSE LIEU].freeze
+            LEG TECHOR SCLE INSEE].freeze
 
-  attr_reader :attachment, :recensement, :palissy_objet, :annee_versement
+  attr_reader :attachment, :recensement, :annee_versement
 
-  def initialize(attachment:, recensement:, palissy_objet: {}, annee_versement: nil)
+  def initialize(attachment:, recensement:, annee_versement: nil)
     @attachment = attachment
     raise ArgumentError, "missing attachment" if @attachment.nil?
 
     @recensement = recensement
     raise ArgumentError, "missing recensement" if @recensement.nil?
-
-    @palissy_objet = palissy_objet
-    raise ArgumentError, "missing palissy_objet" if @palissy_objet.nil?
 
     @annee_versement = annee_versement || Time.zone.today.year
   end
@@ -27,13 +24,12 @@ class MemoireExportPhoto
     attachments.map { new(attachment: _1, recensement: map.fetch(_1.record_id), annee_versement:) }
   end
 
-  def self.from_recensements(recensements_arel, palissy_data:, annee_versement: nil)
+  def self.from_recensements(recensements_arel, annee_versement: nil)
     recensements_arel
       .includes(:photos_attachments, :photos_blobs)
       .map do |recensement|
-        palissy_objet = palissy_data.find { _1["REF"] == recensement.objet.palissy_REF }
         recensement.photos.where(exportable: true).map do |attachment|
-          MemoireExportPhoto.new(attachment:, recensement:, palissy_objet:, annee_versement:)
+          MemoireExportPhoto.new(attachment:, recensement:, annee_versement:)
         end
       end.flatten
   end
@@ -88,13 +84,9 @@ class MemoireExportPhoto
 
   def memoire_LIEUCOR = "Collectif Objets"
 
-  def memoire_LEG = palissy_objet["TICO"]
-  def memoire_TECHOR = palissy_objet["CATE"]&.join(";")
-  def memoire_DATOEU = palissy_objet["DATE"]&.join(";")
-  def memoire_SCLE = palissy_objet["SCLE"]&.join(";")
-  def memoire_AUTOEU = palissy_objet["AUTR"]&.join(";")
-  def memoire_INSEE = palissy_objet["INSEE"]
-  def memoire_ADRESSE = palissy_objet["ADRS"]
-  def memoire_LIEU = palissy_objet["LIEU"]
+  def memoire_LEG = recensement.objet.palissy_TICO
+  def memoire_TECHOR = recensement.objet.palissy_CATE
+  def memoire_SCLE = recensement.objet.palissy_SCLE
+  def memoire_INSEE = recensement.objet.palissy_INSEE
   # rubocop:enable Naming/MethodName
 end
