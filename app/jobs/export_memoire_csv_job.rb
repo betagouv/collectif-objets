@@ -13,17 +13,6 @@ class ExportMemoireCsvJob < ApplicationJob
 
   private
 
-  def palissy_data
-    @palissy_data ||= Synchronizer::ApiClientJson.objets(
-      params: {
-        REF__in: recensements_memoire.map(&:objet).map(&:palissy_REF).join(","),
-        _col: %w[REF TICO CATE DATE SCLE AUTR INSEE ADRS LIEU],
-        _json: %w[CATE DATE SCLE AUTR]
-      },
-      logger: Rails.logger, limit: 1000
-    ).to_a
-  end
-
   def io
     StringIO.new(
       CSV.generate(force_quotes: true) do |csv|
@@ -36,7 +25,7 @@ class ExportMemoireCsvJob < ApplicationJob
   end
 
   def recensement_photos
-    @recensement_photos ||= MemoireExportPhoto.from_recensements(recensements_memoire, palissy_data:)
+    @recensement_photos ||= MemoireExportPhoto.from_recensements(recensements_memoire)
   end
 
   def recensements_memoire
