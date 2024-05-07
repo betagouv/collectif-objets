@@ -59,22 +59,22 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   if ENV["HOST"] =~ /staging/
     config.action_mailer.smtp_settings = {
-      :user_name => Rails.application.credentials.mailtrap.user_name,
-      :password => Rails.application.credentials.mailtrap.password,
-      :address => 'sandbox.smtp.mailtrap.io',
-      :host => 'sandbox.smtp.mailtrap.io',
-      :port => '2525',
-      :authentication => :login
+      authentication: :login,
+      address: "sandbox.smtp.mailtrap.io",
+      user_name: Rails.application.credentials.mailtrap.user_name,
+      password: Rails.application.credentials.mailtrap.password,
+      port: 2525,
+      host: "sandbox.smtp.mailtrap.io"
     }
   else
     config.action_mailer.smtp_settings = {
-      :address => "smtp-relay.sendinblue.com",
-      :port => 587,
-      :user_name => Rails.application.credentials.sendinblue.smtp.username,
-      :password => Rails.application.credentials.sendinblue.smtp.password,
-      :authentication => 'login',
-      :enable_starttls_auto => true,
-      :return_response => true
+      authentication: :login,
+      address: "smtp-relay.sendinblue.com",
+      user_name: Rails.application.credentials.sendinblue.smtp.username,
+      password: Rails.application.credentials.sendinblue.smtp.password,
+      port: 587,
+      enable_starttls_auto: true,
+      return_response: true
     }
   end
 
