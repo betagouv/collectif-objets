@@ -10,7 +10,7 @@ class Dossier < ApplicationRecord
 
   include AASM
   aasm column: :status, timestamps: true, whiny_persistence: true do
-    state :empty, initial: true, display: I18n.t("dossier.status_badge.vide")
+    state :empty, initial: true, display: I18n.t("dossier.status_badge.empty")
     state :construction, display: I18n.t("dossier.status_badge.construction")
     state :submitted, display: I18n.t("dossier.status_badge.submitted")
     state :accepted, display: I18n.t("dossier.status_badge.accepted")
