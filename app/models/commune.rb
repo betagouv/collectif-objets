@@ -12,7 +12,7 @@ class Commune < ApplicationRecord
     state :started, display: "Recensement démarré"
     state :completed, display: "Recensement terminé"
 
-    event :start, before: :aasm_before_start do
+    event :start do
       transitions from: :inactive, to: :started
     end
     event :complete, after: :aasm_after_complete do
@@ -180,12 +180,6 @@ class Commune < ApplicationRecord
     parts << "conservateur" if role == :conservateur
     parts << inbound_email_token
     "#{parts.join('-')}@#{Rails.configuration.x.inbound_emails_domain}"
-  end
-
-  def aasm_before_start
-    raise AASM::InvalidTransition if dossier.present?
-
-    update!(dossier: Dossier.create!(commune: self))
   end
 
   def aasm_after_complete

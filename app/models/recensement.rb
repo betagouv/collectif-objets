@@ -120,12 +120,7 @@ class Recensement < ApplicationRecord
 
   def aasm_after_complete
     commune.start! if commune.inactive?
-
-    if !commune.dossier&.persisted? || !commune.dossier&.valid?
-      raise ActiveRecord::RecordInvalid, "cannot complete recensement before dossier is created"
-    end
-
-    update(dossier: commune.dossier)
+    dossier.start! if dossier.empty?
   end
 
   def aasm_after_commit_complete

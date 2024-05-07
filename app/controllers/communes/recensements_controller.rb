@@ -11,7 +11,8 @@ module Communes
     end
 
     def create
-      @recensement = Recensement.new(objet: @objet, status: "draft")
+      commune = Commune.find(params[:commune_id])
+      @recensement = commune.dossier.recensements.build(objet: @objet, status: "draft")
       authorize(@recensement)
       if @recensement.save
         redirect_to edit_commune_objet_recensement_path(@recensement.commune, @objet, @recensement, step: 1)
