@@ -13,12 +13,16 @@ class Dossier < ApplicationRecord
     state :construction, initial: true, display: I18n.t("dossier.status_badge.construction")
     state :submitted, display: I18n.t("dossier.status_badge.submitted")
     state :accepted, display: I18n.t("dossier.status_badge.accepted")
+    state :archived, display: I18n.t("dossier.status_badge.archived")
 
     event :submit, after: :aasm_after_submit do
       transitions from: :construction, to: :submitted
     end
     event :accept, after: :aasm_after_accept do
       transitions from: :submitted, to: :accepted
+    end
+    event :archive do
+      transitions from: [:submitted, :accepted], to: :archived
     end
     event :return_to_construction, after: :aasm_after_return_to_construction do
       transitions from: :submitted, to: :construction do

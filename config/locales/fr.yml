@@ -103,6 +103,7 @@ fr:
       submitted: Non examiné
       accepted: Examiné
       none: Non recensé
+      archived: Archivé
     rapport:
       recensement:
         notes: Commentaires de la commune
