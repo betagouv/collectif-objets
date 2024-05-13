@@ -103,11 +103,11 @@
 
   %h4
     = icon_span "file-text"
-    #{@commune.past_dossiers.count} Dossier(s) de recensements
-  - if @commune.past_dossiers.empty?
+    #{@commune.archived_dossiers.count} Dossier(s) de recensements
+  - if @commune.archived_dossiers.empty?
     %p Aucun dossier de recensement démarré
 
-- @commune.past_dossiers.each do |dossier|
+- @commune.archived_dossiers.each do |dossier|
   .fr-container
     %h5 Dossier ##{dossier.id} #{dossier_status_badge(dossier, small: true)}
     %ul.fr-mb-2w

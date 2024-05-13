@@ -32,7 +32,9 @@ class Commune < ApplicationRecord
     dependent: nil # leave the objets in the database when the commune is destroyed
   )
   has_many :recensements, through: :objets, source: :recensements
-  has_many :past_dossiers, class_name: "Dossier", dependent: :restrict_with_error
+  has_many :archived_dossiers, -> { archived }, class_name: "Dossier",
+                                                dependent: :restrict_with_error,
+                                                inverse_of: :commune
   belongs_to :dossier, optional: true
   has_many :campaign_recipients, dependent: :destroy
   has_many :admin_comments, dependent: :destroy, as: :resource
