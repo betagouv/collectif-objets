@@ -46,6 +46,7 @@ module RecensementWizard
       # return [] if step_number <= 5 # can we comment this line ?
       s = []
       s += [2, 3, 4, 5] if absent? || recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+      s += [3, 4, 5] if recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
       s += [4, 5] unless recensable?
       s += [2] if edifice_initial?
       s

@@ -48,5 +48,9 @@ module RecensementWizard
 
       super
     end
+
+    def next_step_number
+      localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE ? 6 : super
+    end
   end
 end
