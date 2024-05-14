@@ -24,7 +24,7 @@ module Communes
               END) AS statut_global
             FROM communes
             LEFT OUTER JOIN dossiers
-            ON communes.dossier_id = dossiers.id
+            ON dossiers.id = communes.id
             LEFT OUTER JOIN (
               SELECT dossiers.id,
                 SUM(CASE WHEN recensements.analysed_at IS NOT NULL THEN 1 ELSE 0 END) AS recensements_analysed_count,

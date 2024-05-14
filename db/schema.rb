@@ -136,7 +136,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.string "status", default: "inactive", null: false
     t.datetime "completed_at"
     t.integer "recensement_ratio"
-    t.bigint "dossier_id"
     t.datetime "started_at"
     t.float "latitude"
     t.float "longitude"
@@ -144,7 +143,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.datetime "last_in_scope_at"
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement_code"], name: "index_communes_on_departement_code"
-    t.index ["dossier_id"], name: "index_communes_on_dossier_id"
   end
 
   create_table "conservateur_roles", force: :cascade do |t|

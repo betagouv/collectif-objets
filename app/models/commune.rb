@@ -35,7 +35,7 @@ class Commune < ApplicationRecord
   has_many :archived_dossiers, -> { archived }, class_name: "Dossier",
                                                 dependent: :restrict_with_error,
                                                 inverse_of: :commune
-  belongs_to :dossier, optional: true
+  has_one :dossier, -> { where.not(status: :archived) }, dependent: :restrict_with_error, inverse_of: :commune
   has_many :campaign_recipients, dependent: :destroy
   has_many :admin_comments, dependent: :destroy, as: :resource
   has_many :survey_votes, dependent: :nullify
@@ -187,7 +187,7 @@ class Commune < ApplicationRecord
   def aasm_before_start
     raise AASM::InvalidTransition if dossier.present?
 
-    update!(dossier: Dossier.create!(commune: self))
+    create_dossier!
   end
 
   def aasm_after_complete
