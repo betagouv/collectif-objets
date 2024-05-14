@@ -364,7 +364,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step2_validate
     expect(page).to have_select("Dans quel édifice se trouve l’objet ?",
                                 selected: "Sélectionner un édifice",
-                                with_options: [edifice.nom, autre_edifice.nom, "Autre édifice"])
+                                with_options: [autre_edifice.nom, "Autre édifice"])
     # Cas d'erreur
     step_forward
     step2_validate

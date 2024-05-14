@@ -16,7 +16,8 @@
           %select.fr-select{name: "wizard[edifice_nom_existant]", id: "wizard_edifice_nom_existant", "data-action" => "change->choix-edifice#check_autre_edifice"}
             %option{disabled: "disabled", hidden: "hidden", value: "", selected: wizard.edifice_nom_existant.nil? && !wizard.autre_edifice_checked } Sélectionner un édifice
             - wizard.recensement.commune.edifices.each do |edifice|
-              %option{ selected: edifice.nom == form_builder.object.recensement.edifice_nom }=edifice.nom
+              - unless edifice.nom == wizard.recensement.objet.edifice.nom
+                %option{ selected: edifice.nom == form_builder.object.recensement.edifice_nom }=edifice.nom
             %option{"data-choix-edifice-target" => "autreEdifice", value: "0", selected: wizard.autre_edifice_checked } Autre édifice
           - form_builder.object.errors[:edifice_nom_existant].each do |error_message|
             %p.fr-error-text
