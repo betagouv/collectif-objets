@@ -208,7 +208,7 @@ Pour y accéder :
 
 * [Sélectionnez la commune de votre choix](#comment-accder-aux-dossiers-de-recensement-des-communes-) et rendez-vous sur sa page.
 * Cliquez sur l’onglet « Messagerie ».
-* Vous pouvez alors rédiger votre message dans le champ dédié « Nouveau message » et y ajouter éventuellement une pièce-jointe.
+* Vous pouvez alors rédiger votre message dans le champ dédié « Votre message » et y ajouter éventuellement une pièce-jointe.
 * Cliquez enfin sur le bouton « Envoyer » pour transmettre votre mél.
 
   La mairie sera directement informée sur sa boîte mél - par une notification - que vous lui avez écrit. De la même manière, lorsque la commune vous répondra, vous recevrez une notification sur votre boîte mél.

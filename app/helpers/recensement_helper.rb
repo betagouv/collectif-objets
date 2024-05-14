@@ -87,7 +87,7 @@ module RecensementHelper
   end
 
   def edit_recensement_step_link(recensement, step, **)
-    button_to( \
+    button_to(
       "",
       edit_commune_objet_recensement_path(recensement.commune, recensement.objet, recensement),
       params: { step: },

@@ -14,7 +14,7 @@
   %ul.co-columns--4
     - campaign.departement.communes.order("communes.nom").each do |commune|
       - checked = campaign.commune_ids.include?(commune.id)
-      .fr-checkbox-group
+      .fr-checkbox-group.fr-mb-1w
         %input{type: "checkbox",
           name: "campaign[recipients_attributes][][commune_id]",
           id: "campaign_recipients_attributes_commune_#{commune.id}",

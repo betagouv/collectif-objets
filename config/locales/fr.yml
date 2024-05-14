@@ -292,7 +292,7 @@ fr:
           step_relance1: Première relance
           step_relance2: Seconde relance
           step_relance3: Troisième relance
-          step_fin: Mail de clotûre envoyé, n'a pas participé
+          step_fin: Mail de clôture envoyé, n'a pas participé
         opt_out_reason:
           postponed: La commune s'occupera du recensement à une date ultérieure
           other: Autre
@@ -301,6 +301,15 @@ fr:
         last_name: Nom de famille
         phone_number: Numéro de téléphone
         last_sign_in_at: Dernière connexion
+      message:
+        files:
+          zero: aucune pièce jointe
+          one: 1 pièce jointe
+          other: "%{count} pièces jointes"
+        skipped_attachments:
+          zero: aucune autre pièce jointe
+          one: 1 autre pièce jointe
+          other: "%{count} autres pièces jointes"
   date:
     abbr_day_names:
       - dim
@@ -488,7 +497,7 @@ fr:
       operation_nationale: Cette opération nationale doit permettre aux conservateurs d’antiquités et d’objets d’art d'avoir une vue globale sur l'état du parc mobilier, dans le cadre du récolement quinquennal des objets monuments historiques. 
       connectez_vous: "<b>Connectez-vous à votre espace dédié sur Collectif Objets</b> pour recenser : "
     fin_inactive:
-      title: "Mail de clotûre - commune inactive"
+      title: "Mail de clôture - commune inactive"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
       fin_aujourdhui: La campagne de recensement participatif %{dans_departement} prend fin aujourd’hui.
       vous_navez_pas_souhaite: Sauf erreur de notre part, vous n’avez pas souhaité participer à la campagne de recensement des objets monuments historiques pour laquelle nous vous avons sollicité il y a quelques semaines.
@@ -503,7 +512,7 @@ fr:
       plus_actif: Nous avons remarqué que vous n’étiez plus actif depuis quelque temps.
       reply: Sachez que si vous rencontrez des problèmes pour finaliser le recensement de vos objets protégés, vous pouvez nous contacter en répondant à cet email.
     fin_started:
-      title: "Mail de clotûre - recensement démarré"
+      title: "Mail de clôture - recensement démarré"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
       objets_restants: <b>Sauf erreur de notre part, nous n’avons enregistré qu’une partie des recensements des objets protégés présents dans votre commune.</b>
       dossier_complet: Seul un dossier complet pourra être envoyé au conservateur d’antiquités et d’objets d’art pour qu’il puisse vous faire ses retours.
@@ -529,7 +538,7 @@ fr:
       intro: La campagne de recensement des objets monuments historiques pour laquelle vous avez participé prendra fin le %{date_fin}. Nous vous remercions encore pour votre investissement dans la protection du patrimoine mobilier français.
       finalisez: <b>Pour que les conservateurs d’antiquités et d’objets d’art reçoivent votre contribution et l'examinent, n’oubliez pas de finaliser votre recensement !</b>
     fin_to_complete:
-      title: "Mail de clotûre - commune doit finaliser"
+      title: "Mail de clôture - commune doit finaliser"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
       sauf_erreur: Sauf erreur de notre part, vous n’avez pas effectué la dernière étape qui permet l’envoi du dossier de recensement.
       pas_trop_tard: "Il n’est pas trop tard : <b>pour que les conservateurs d’antiquités et d’objets d’art reçoivent votre contribution et puissent vous accompagner, il suffit de suivre ce lien :</b>"

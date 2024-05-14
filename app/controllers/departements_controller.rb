@@ -2,7 +2,7 @@
 
 class DepartementsController < ApplicationController
   def index
-    @departements = Departement.all.include_objets_count.include_communes_count
+    @departements = Departement.all.include_objets_count
     @map_departements_json = @departements.map { serialize_departement(_1) }.to_json
     set_departements_map_bins
   end
@@ -10,6 +10,7 @@ class DepartementsController < ApplicationController
   def show
     @departement = Departement.find(params[:id])
     @communes = @departement.communes.include_objets_count.order(:nom)
+    @title = "Liste des communes #{@departement.dans_nom} (#{@departement.code})"
   end
 
   def set_departements_map_bins

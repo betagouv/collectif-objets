@@ -13,7 +13,6 @@ gem "aws-sdk-s3", "~> 1.143", require: false
 gem "bootsnap", "~> 1.17", require: false
 gem "devise", "~> 4.9"
 gem "dsfr-view-components", "~> 0.4"
-gem "factory_bot_rails", "~> 6.2"
 gem "front_matter_parser", "~> 1.0"
 gem "good_job", "3.21.5"
 gem "haml-rails", "~> 2.1"
@@ -21,8 +20,8 @@ gem "icalendar", "~> 2.10"
 gem "image_processing", "~> 1.12"
 gem "kramdown", "~> 2.4"
 gem "matrix", "~> 0.4"
-gem "mjml-rails", "~> 4.9"
-gem "pagy", "~> 6.4"
+gem "mjml-rails", "~> 4.11"
+gem "pagy", "~> 6.5"
 gem "pg", "~> 1.5"
 gem "prawn", "~> 2.4"
 gem "prawn-table", "~> 0.2"
@@ -42,10 +41,11 @@ gem "vite_rails", "~> 3.0"
 
 group :development, :test do
   gem "debug", ">= 1.0"
+  gem "factory_bot_rails", "~> 6.2"
   gem "launchy", "~> 2.5"
   gem "rspec-rails", "~> 6.1"
-  gem "rubocop", "~> 1.51", require: false
-  gem "rubocop-rails", "~> 2.23", require: false
+  gem "rubocop", "~> 1.63", require: false
+  gem "rubocop-rails", "~> 2.24", require: false
 end
 
 group :development do
@@ -60,7 +60,7 @@ group :development do
 end
 
 group :test do
-  gem "axe-core-capybara", "~> 4.7"
+  gem "axe-core-capybara", "~> 4.9"
   gem "axe-core-rspec", "~> 4.8"
   gem "capybara", "~> 3.39"
   gem "selenium-webdriver", "~> 4.16"

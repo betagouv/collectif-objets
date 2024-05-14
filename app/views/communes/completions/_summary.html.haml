@@ -38,4 +38,4 @@
                 photo#{recensement.photos.count > 1 ? 's' : ""}
               .co-recensement-photos{tabindex: "0"}
                 - recensement.photos.each_with_index.map do |photo, index|
-                  %div= image_tag photo.variant(:medium), alt: "Photo de recensement #{index + 1}"
+                  %div= image_tag photo.variant(:medium), alt: "Recensement #{index + 1}"

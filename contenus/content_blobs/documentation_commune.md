@@ -188,7 +188,7 @@ C﻿elle-ci est directement disponible dès que vous vous connectez à votre esp
 
 ![](/contenus/content_blobs/images/capture-messagerie-co.png)
 
-Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le champ dédié « Nouveau message » et y ajouter éventuellement une pièce-jointe en cliquant sur le petit rectangle gris "Parcourir..."
+Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le champ dédié « Votre message » et y ajouter éventuellement une pièce-jointe en cliquant sur le petit rectangle gris "Parcourir..."
 
 ![Messagerie commune](/contenus/content_blobs/images/2023-07-26-messagerie-commune-la-desirade.png)
 
