@@ -38,7 +38,7 @@ class RecensementPresenter
     case @recensement.localisation
     when Recensement::LOCALISATION_EDIFICE_INITIAL
       text { "Oui, l’objet se trouve dans l’édifice indiqué initialement «#{objet_edifice_nom}»" }
-    when Recensement::LOCALISATION_AUTRE_EDIFICE
+    when Recensement::LOCALISATION_AUTRE_EDIFICE, Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
       text do
         "Oui, il a été déplacé dans l’édifice «#{@recensement.edifice_nom}» \
          dans la commune #{nom_commune_localisation_objet}"
