@@ -55,7 +55,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def step2_validate
     expect(page).to have_text("Étape 2 sur 7")
     expect(page).to have_text("Précisions sur la localisation")
-    expect(page).to have_text("Étape suivante : Accessibilité")
   end
 
   def step3_validate
@@ -362,6 +361,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # État initial de la page
     step2_validate
+    expect(page).to have_text("Étape suivante : Accessibilité")
     expect(page).to have_select("Dans quel édifice se trouve l’objet ?",
                                 selected: "Sélectionner un édifice",
                                 with_options: [autre_edifice.nom, "Autre édifice"])
@@ -416,6 +416,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # État initial de la page
     step2_validate
+    expect(page).to have_text("Étape suivante : Commentaires")
     expect(page).to be_axe_clean
     expect(page).to have_field("Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "")
     expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "")
@@ -433,7 +434,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     fill_in "Dans quel édifice se trouve l’objet ?", with: "Chapelle Sixtine"
     step_forward
 
-    step3_validate
+    step6_validate
     step_back
     expect(page).to have_field("Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?", with: "01010")
     expect(page).to have_field("Dans quel édifice se trouve l’objet ?", with: "Chapelle Sixtine")
