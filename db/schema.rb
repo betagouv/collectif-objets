@@ -194,7 +194,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.string "visit"
     t.datetime "replied_automatically_at"
     t.datetime "archived_at"
-    t.index ["commune_id"], name: "dossiers_unique_commune_id", unique: true
+    t.index ["commune_id"], name: "index_dossiers_on_commune_id"
     t.index ["conservateur_id"], name: "index_dossiers_on_conservateur_id"
   end
 
