@@ -27,7 +27,8 @@
     = t "recensement.localisation.answers.#{recensement.localisation}_html",
       nom_edifice: recensement_nom_edifice(recensement), nom_commune_localisation_objet: nom_commune_localisation_objet(recensement)
 
-- unless recensement.absent? || recensement.deplacement_temporaire?
+-# Il serait certainement plus cohérent d'avoir recensable == false dans le cas où l'objet rentre dans les critères suivants
+- unless recensement.absent? || recensement.deplacement_temporaire? || recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
   %section.fr-mb-4w
     %h3.fr-text--lg.fr-mb-1v
       L’objet est-il recensable ?
