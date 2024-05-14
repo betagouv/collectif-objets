@@ -11,9 +11,8 @@ module Communes
       def self.include_statut_global
         joins(%{
           LEFT OUTER JOIN (
-            SELECT communes.code_insee, (CASE
-                WHEN communes.status = 'inactive' THEN #{Commune::ORDRE_NON_RECENSÉ}
-                WHEN communes.status = 'started' THEN #{Commune::ORDRE_EN_COURS_DE_RECENSEMENT}
+            SELECT communes.code_insee, COALESCE((CASE
+                WHEN dossiers.status = 'construction' THEN #{Commune::ORDRE_EN_COURS_DE_RECENSEMENT}
                 WHEN dossiers.status = 'accepted' then #{Commune::ORDRE_EXAMINÉ}
                 WHEN dossiers.status = 'submitted' AND dossiers.replied_automatically_at IS NOT NULL
                   THEN #{Commune::ORDRE_REPONSE_AUTOMATIQUE}
@@ -21,10 +20,10 @@ module Communes
                   THEN #{Commune::ORDRE_A_EXAMINER}
                 WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0
                   THEN #{Commune::ORDRE_EN_COURS_D_EXAMEN}
-              END) AS statut_global
+                END), #{Commune::ORDRE_NON_RECENSÉ}) AS statut_global
             FROM communes
             LEFT OUTER JOIN dossiers
-            ON dossiers.id = communes.id
+            ON dossiers.commune_id = communes.id
             LEFT OUTER JOIN (
               SELECT dossiers.id,
                 SUM(CASE WHEN recensements.analysed_at IS NOT NULL THEN 1 ELSE 0 END) AS recensements_analysed_count,
