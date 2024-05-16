@@ -3,8 +3,11 @@
 %p
   %b Emplacement
   %br
-  Se situe dans l'édifice
-  %b= objet.edifice_nom
+  - if objet.edifice_nom
+    Se situe dans l'édifice
+    %b= objet.edifice_nom
+  - else
+    Inconnu
   %br
   %i= objet.emplacement
 
