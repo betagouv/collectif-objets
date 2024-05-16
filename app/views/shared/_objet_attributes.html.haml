@@ -21,12 +21,12 @@
 %p
   %b Époque
   %br
-  = objet.crafted_at || "N/A"
+  = objet.crafted_at || "Inconnue"
 
 %p
   %b Protection
   %br
-  = objet.palissy_DPRO || "N/A"
+  = objet.palissy_DPRO || "Inconnue"
 
 - if objet.déplacé?
   %p
@@ -45,7 +45,7 @@
   %b Récolement
   %br
   Dernier récolement :
-  = objet.last_recolement_at || "N/A"
+  = objet.last_recolement_at || "inconnu"
 
 %p
   %b Références
