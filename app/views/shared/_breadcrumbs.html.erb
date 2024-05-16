@@ -8,7 +8,7 @@
         </li>
       <% end %>
       <li>
-        <a class="fr-breadcrumb__link" aria-current="page" <%= "title=#{current_page_label}" if current_page_label.size > 25 %>>
+        <a class="fr-breadcrumb__link" aria-current="page" <%= "title=#{current_page_label}" if current_page_label.to_s.size > 25 %>>
           <%= truncate(current_page_label, length: 25) %>
         </a>
       </li>
