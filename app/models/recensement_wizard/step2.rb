@@ -3,67 +3,54 @@
 module RecensementWizard
   class Step2 < Base
     STEP_NUMBER = 2
-    TITLE = "Localisation"
+    TITLE = "Précisions sur la localisation"
 
-    attr_accessor :confirmation_not_recensable
+    attr_accessor :edifice_nom_existant, :autre_edifice_checked
 
-    validates \
-      :localisation,
-      presence: { message: "Veuillez préciser où se trouve l’objet" }
-
-    validates \
-      :localisation,
-      inclusion: {
-        in: [Recensement::LOCALISATION_EDIFICE_INITIAL, Recensement::LOCALISATION_AUTRE_EDIFICE],
-        message: "La localisation de l’objet n’est pas valide"
-      },
-      if: -> { localisation.present? }
+    validates :edifice_nom_existant,
+              presence: { message: "Veuillez sélectionner un édifice. \
+                S’il n'est pas dans la liste, choisir \"Autre édificie\"." },
+              unless: lambda {
+                localisation != Recensement::LOCALISATION_AUTRE_EDIFICE ||
+                  (localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE && autre_edifice_checked)
+              }
 
     validates \
       :edifice_nom,
       presence: {
         message: "Veuillez préciser le nom de l’édifice dans lequel l’objet a été déplacé"
-      },
-      if: -> { localisation == Recensement::LOCALISATION_AUTRE_EDIFICE }
-
-    validates \
-      :recensable,
-      inclusion: {
-        in: [true, false],
-        message: "Veuillez renseigner si l’objet est recensable ou non"
+      }, if: lambda {
+        localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE ||
+          (localisation == Recensement::LOCALISATION_AUTRE_EDIFICE && autre_edifice_checked)
       }
+
+    validates :autre_commune_code_insee,
+              presence: { message: "Le code INSEE dans lequel se trouve maintenant l’objet doit être indiqué" },
+              if: -> { localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
+
+    def permitted_params = %i[edifice_nom_existant edifice_nom autre_edifice_checked autre_commune_code_insee]
 
     def initialize(recensement)
       super
-      self.confirmation_not_recensable = recensement.recensable_was == false ? "true" : "false"
-    end
-
-    def permitted_params = %i[localisation edifice_nom recensable confirmation_not_recensable]
-
-    def confirmation_modal_path_params
-      return if recensable != false || confirmation_not_recensable
-
-      { modal: "confirmation-not-recensable",
-        wizard: { recensable: "false", confirmation_not_recensable: "true", localisation:, edifice_nom: } }
-    end
-
-    def confirmation_modal_close_path
-      edit_commune_objet_recensement_path commune, objet, recensement, step: 2, wizard: { localisation:, edifice_nom: }
-    end
-
-    def next_step_number
-      recensable == false ? 5 : super
+      self.autre_edifice_checked = recensement.edifice_nom.present? &&
+                                   recensement.commune.edifices.pluck(:nom).exclude?(recensement.edifice_nom)
     end
 
     def assign_attributes(attributes)
-      super
-      if recensable == false && confirmation_not_recensable
-        recensement.etat_sanitaire = nil
-        recensement.securisation = nil
-        recensement.photos = []
-      elsif recensable == true && recensement.recensable_was == false
-        recensement.status = "draft"
+      if attributes[:edifice_nom_existant].present? && attributes[:edifice_nom_existant] == "0"
+        attributes[:autre_edifice_checked] = true
       end
+
+      if attributes[:edifice_nom_existant].present? && attributes[:edifice_nom_existant] != "0"
+        attributes[:autre_edifice_checked] = false
+        attributes[:edifice_nom] = attributes[:edifice_nom_existant]
+      end
+
+      super
+    end
+
+    def next_step_number
+      localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE ? 6 : super
     end
   end
 end

@@ -8,7 +8,8 @@ class Recensement < ApplicationRecord
   belongs_to :dossier, optional: true
   belongs_to :pop_export_memoire, class_name: "PopExport", inverse_of: :recensements_memoire, optional: true
   belongs_to :pop_export_palissy, class_name: "PopExport", inverse_of: :recensements_palissy, optional: true
-
+  # À terme, avoir une association de ce genre :
+  # belongs_to :autre_edifice, class_name: "Edifice", foreign_key: "edifice_id"
   has_many_attached :photos do |attachable|
     attachable.variant :small, resize_to_limit: [300, 400], saver: { strip: true }
     attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }
@@ -32,9 +33,14 @@ class Recensement < ApplicationRecord
   end
 
   LOCALISATION_EDIFICE_INITIAL = "edifice_initial"
+  # TODO : renommer en "deplacement_autre_edifice"
   LOCALISATION_AUTRE_EDIFICE = "autre_edifice"
+  LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE = "deplacement_autre_commune"
+  LOCALISATION_DEPLACEMENT_TEMPORAIRE = "deplacement_temporaire"
   LOCALISATION_ABSENT = "absent"
-  LOCALISATIONS = [LOCALISATION_EDIFICE_INITIAL, LOCALISATION_AUTRE_EDIFICE, LOCALISATION_ABSENT].freeze
+  LOCALISATIONS = [LOCALISATION_EDIFICE_INITIAL, LOCALISATION_AUTRE_EDIFICE,
+                   LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE, LOCALISATION_DEPLACEMENT_TEMPORAIRE,
+                   LOCALISATION_ABSENT].freeze
 
   ETAT_BON = "bon"
   ETAT_MOYEN = "moyen"
@@ -49,9 +55,13 @@ class Recensement < ApplicationRecord
   validates :objet, presence: true, unless: -> { deleted? } # it is important not to use objet_id here
   validates :objet_id, uniqueness: true, if: -> { objet_id.present? }
 
-  validates :confirmation_sur_place, inclusion: { in: [true], if: -> { completed? && !absent? } }
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
-  validates :edifice_nom, presence: true, if: -> { completed? && autre_edifice? }
+  # À faire évoluer : retirer edifice_nom au profit d'un belongs_to: autre_edifice
+  validates :edifice_nom, presence: true, if: -> { completed? && deplacement_definitif? }
+  validates :autre_commune_code_insee, format: /\b\d{5}\b/, allow_blank: true
+  validates :autre_commune_code_insee,
+            presence: true,
+            if: -> { completed? && localisation == LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
   validates :recensable, inclusion: { in: [true, false] }, if: -> { completed? }
   validates :recensable, inclusion: { in: [false] }, if: -> { completed? && absent? }
   validates :etat_sanitaire, presence: true, inclusion: { in: ETATS }, if: -> { completed? && recensable? }
@@ -146,6 +156,16 @@ class Recensement < ApplicationRecord
     elsif attribute_name.include?("securisation")
       SECURISATIONS
     end
+  end
+
+  def nom_commune_localisation_objet
+    commune_localisation_objet = if autre_commune_code_insee.present?
+                                   Commune.find_by(code_insee: autre_commune_code_insee)
+                                 else
+                                   commune
+                                 end
+
+    commune_localisation_objet.presence
   end
 
   def self.ransackable_scopes(_ = nil) = [:photos_presence_in]

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module RecensementWizard
-  STEPS = [1, 2, 3, 4, 5, 6].freeze
+  STEPS = [1, 2, 3, 4, 5, 6, 7].freeze
+  PHOTOS_STEP_NUMER = 4 # not ideal but a quick fix to know where to redirect in recensement photos controller
   class InvalidStep < StandardError; end
 
   class Base
@@ -12,6 +13,7 @@ module RecensementWizard
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
       :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
+      :edifice_initial?, :autre_commune_code_insee,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
@@ -40,19 +42,39 @@ module RecensementWizard
       prev
     end
 
+    def skipped_steps
+      # return [] if step_number <= 5 # can we comment this line ?
+      s = []
+      s += [2, 3, 4, 5] if absent? || recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+      s += [3, 4, 5] if recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
+      s += [4, 5] unless recensable?
+      s += [2] if edifice_initial?
+      s
+    end
+
     def next_step_title
       return unless next_step_number
 
       "RecensementWizard::Step#{next_step_number}".constantize::TITLE
     end
 
+    def valid?
+      wizard_is_valid = super
+      unless recensement.valid?
+        errors.merge!(recensement.errors)
+        wizard_is_valid = false
+      end
+      wizard_is_valid
+    end
+
     def update(permitted_params)
+      recensement.status = "draft" if @recensement.completed?
       assign_attributes parse_params(permitted_params)
-      errors.merge!(recensement.errors) unless valid?
       return false unless valid?
 
       return true if skip_save?
 
+      reset_recensement_data_for_next_steps
       recensement.save
     end
 
@@ -64,18 +86,21 @@ module RecensementWizard
         commune, objet, recensement, step: to_step, **confirmation_modal_path_params.to_h
     end
 
-    def skipped_steps_class
-      return nil if skipped_steps.empty?
-
-      "co-stepper--skip-steps co-stepper--skip-steps-#{skipped_steps.join('-')}-out-of-6"
-    end
-
     def assign_attributes(attributes)
       attrs_recensement = attributes.to_h.clone.symbolize_keys
       attrs_wizard = attrs_recensement.slice! \
-        :localisation, :recensable, :edifice_nom, :etat_sanitaire, :securisation, :notes
+        :localisation, :recensable, :edifice_nom, :autre_commune_code_insee, :etat_sanitaire, :securisation, :notes
       recensement.assign_attributes(attrs_recensement)
       super(attrs_wizard)
+    end
+
+    # Cette méthode est à re définir dans les sous-classes pour remettre à zéro les données de recensement
+    # dans le cas d'un retour en arrière dans le formulaire et du choix d'une autre option
+    # Redefine this method in step subclasses to reset data when the user steps back and changes the answers
+    def reset_recensement_data_for_next_steps; end
+
+    def confirmation_modal_close_path
+      edit_commune_objet_recensement_path(commune, objet, recensement, step: step_number)
     end
 
     private
@@ -91,13 +116,5 @@ module RecensementWizard
     def confirmation_modal_path_params = nil
     def confirmation_modal? = confirmation_modal_path_params.present?
     alias skip_save? confirmation_modal?
-
-    def skipped_steps
-      return [] if step_number < 5
-      return [2, 3, 4] if absent?
-      return [3, 4] unless recensable?
-
-      []
-    end
   end
 end

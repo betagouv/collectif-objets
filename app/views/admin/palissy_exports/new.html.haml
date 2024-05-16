@@ -20,7 +20,7 @@
             %td #{recensement.objet.palissy_REF}
             %td #{recensement.commune}
             %td
-              - if recensement.autre_edifice?
+              - if recensement.deplacement_definitif?
                 déplacé ;
                 = recensement.edifice_nom
               - elsif recensement.absent?

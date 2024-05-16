@@ -20,9 +20,5 @@
           autoscroll_block: "start" } do
         .co-background--grey.fr-px-md-10w.fr-py-md-7w.fr-p-2w
           .fr-mb-5w
-            = render DsfrComponent::StepperComponent.new(title: @wizard.title,
-              value: @wizard.step_number,
-              max: 6,
-              next_title: @wizard.next_step_title,
-              html_attributes: { class: @wizard.skipped_steps_class })
+            = render DsfrComponent::StepperComponent.new(title: @wizard.title, value: @wizard.step_number, max: RecensementWizard::STEPS.size, next_title: @wizard.next_step_title)
           = render "communes/recensements/step#{@wizard.step_number}", wizard: @wizard

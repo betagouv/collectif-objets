@@ -70,12 +70,19 @@ fr:
       remaining_count:
         one: "Il reste 1 objet signalé en péril ou disparu à examiner à %{commune}"
         other: "Il reste %{count} objets signalés en péril ou disparus à examiner à %{commune}"
-    investigation_choices:
-      true: Je confirme que je me suis bien déplacé et que j’ai trouvé l’objet
-      false: Je ne trouve pas l’objet
-    localisation_choices:
-      edifice_initial: "L’objet se trouve dans l’édifice indiqué initialement: %{nom_edifice}"
-      autre_edifice: "L’objet se trouve dans un autre édifice: %{nom_edifice}"
+    localisation:
+      choices:
+        edifice_initial_html: "<span>Oui, l’objet se trouve dans l’édifice indiqué initialement <b>%{nom_edifice}</b></span>"
+        autre_edifice_html: "<span>Oui, mais l’objet se trouve dans <b>un autre édifice</b> dans la commune %{nom_commune}</span>"
+        autre_commune_html: "<span>Oui, mais l’objet se trouve dans <b>une autre commune</b></span>"
+        deplacement_temporaire_html: "<span>Oui, mais l’objet a été <b>déplacé temporairement</b> (pour une restauration ou exposition par exemple)</span>"
+        absent_html: "Non, je ne sais pas où est l’objet"
+      answers:
+        edifice_initial_html: "<span>Oui, l’objet se trouve dans l’édifice indiqué initialement <b>%{nom_edifice}</b></span>"
+        autre_edifice_html: "<span>Oui, il a été déplacé dans l'édifice %{nom_edifice} de la commune %{nom_commune_localisation_objet}</span>"
+        deplacement_autre_commune_html: "<span>Oui, il a été déplacé dans l'édifice %{nom_edifice} de la commune %{nom_commune_localisation_objet}</span>"
+        deplacement_temporaire_html: "Oui, il a été déplacé temporairement"
+        absent_html: "Non, l’objet est introuvable"
     recensable_choices:
       true: L’objet est recensable
       false: L’objet n’est pas recensable
@@ -178,7 +185,10 @@ fr:
               blank: "La localisation doit être indiquée"
               inclusion: "La localisation est invalide"
             edifice_nom:
-              blank: "Le nom de l'édifice dans lequel se trouve maintenant L’objet doit être indiqué"
+              blank: "Le nom de l'édifice dans lequel se trouve maintenant l’objet doit être indiqué"
+            autre_commune_code_insee:
+              blank: "Le code INSEE dans lequel se trouve maintenant l’objet doit être indiqué"
+              invalid: "Le code INSEE doit être composé de 5 chiffres"
             etat_sanitaire:
               blank: "L'état doit être rempli"
               inclusion: "L'état est invalide"

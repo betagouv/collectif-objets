@@ -375,7 +375,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_124218) do
     t.datetime "analysed_at"
     t.bigint "conservateur_id"
     t.bigint "dossier_id"
-    t.boolean "confirmation_sur_place"
     t.bigint "pop_export_memoire_id"
     t.bigint "pop_export_palissy_id"
     t.string "status", default: "draft", null: false
@@ -384,6 +383,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_124218) do
     t.string "deleted_reason"
     t.string "deleted_message"
     t.jsonb "deleted_objet_snapshot"
+    t.string "autre_commune_code_insee"
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["deleted_at"], name: "index_recensements_on_deleted_at"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"

@@ -1,34 +1,51 @@
 -# locals: (wizard:)
 
+-# À faire évoluer : utiliser les nested_attributes pour ne plus avoir edifice_nom dans Recensement
+
 = render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
+  - if wizard.recensement.localisation == Recensement::LOCALISATION_AUTRE_EDIFICE  
+    %fieldset.fr-fieldset{ data: { controller: "choix-edifice" }}
+      .fr-fieldset__element
+        .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom_existant].present?)}
+          = form_builder.label :edifice_nom_existant do 
+            Dans quel édifice se trouve l’objet ?
+            .fr-hint-text
+              .fr-mb-1w
+                Vous avez indiqué que l’objet se trouvait dans un autre édifice, veuillez nous indiquer l'édifice dans lequel il a été déplacé. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
 
-  = render "communes/recensements/fields/localisation", form_builder:
+          %select.fr-select{name: "wizard[edifice_nom_existant]", id: "wizard_edifice_nom_existant", "data-action" => "change->choix-edifice#check_autre_edifice"}
+            %option{disabled: "disabled", hidden: "hidden", value: "", selected: wizard.edifice_nom_existant.nil? && !wizard.autre_edifice_checked } Sélectionner un édifice
+            - wizard.recensement.commune.edifices.each do |edifice|
+              - unless edifice.nom == wizard.recensement.objet.edifice.nom
+                %option{ selected: edifice.nom == form_builder.object.recensement.edifice_nom }=edifice.nom
+            %option{"data-choix-edifice-target" => "autreEdifice", value: "0", selected: wizard.autre_edifice_checked } Autre édifice
+          - form_builder.object.errors[:edifice_nom_existant].each do |error_message|
+            %p.fr-error-text
+              = error_message
 
-  = render "communes/recensements/fields/recensable", form_builder:
+      = render "communes/recensements/fields/edifice_nom", form_builder:, extra_class: wizard.autre_edifice_checked ? "" : "fr-hidden", label: "Indiquez le nom de l’édifice"
 
-  = form_builder.hidden_field :confirmation_not_recensable
+  - elsif wizard.recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
+    %fieldset.fr-fieldset
+      .fr-fieldset__element
+        .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
+          = form_builder.label :autre_commune_code_insee do 
+            Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?
+            .fr-hint-text
+              .fr-mb-1w
+                Vous avez indiqué que l'objet se trouvait dans une autre commune, veuillez nous indiquer son code INSEE. Si vous ne savez pas où est l'objet, revenez à l'étape précédente et indiquez "non, je ne trouve pas l'objet".
+          = form_builder.text_field :autre_commune_code_insee
+          - form_builder.object.errors[:autre_commune_code_insee].each do |error_message|
+            %p.fr-error-text
+              = error_message
+      
+          -# Pour une future version où l'on pourra sélectionner la commune parmi une liste
+          -# = form_builder.select :autre_commune_code_insee,
+          -#                       options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee),
+          -#                       {},
+          -#                       { data: {action: "change->choix-edifice#autre_commune_selected"} }
 
-  - if @modal == "confirmation-not-recensable"
-    = dsfr_modal(title: "Je confirme que l’objet n’est pas recensable",
-      opened: true,
-      html_attributes: { id: "modal-confirmation-not-recensable",
-        "data-controller": "modal-auto-open",
-        "data-modal-auto-open-target": "modal"}) do |m|
-
-      - m.with_header do
-        = link_to "Fermer", wizard.confirmation_modal_close_path, class: "fr-link--close fr-link"
-
-      %p Cette option est à utiliser dans le cas où vous n’avez pas accès à l’objet, par exemple dans un clocher dangereusement accessible, ou bien un objet qui se trouve temporairement en restauration.
-      %p Vous allez être redirigé directement vers l’étape des commentaires.
-      %p
-        Vous pouvez aussi contacter vos conservateurs via la
-        = link_to "messagerie", commune_messages_path(wizard.commune)
-        pour lui demander de l’aide ou des conseils pour recenser l’objet.
-
-      - m.with_button do
-        = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
-      - m.with_button do
-        = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
+      = render "communes/recensements/fields/edifice_nom", form_builder:, label: "Dans quel édifice se trouve l’objet ?"
 
   .co-text--right
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"

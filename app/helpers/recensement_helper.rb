@@ -1,25 +1,7 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ModuleLength
 module RecensementHelper
   Option = Struct.new :value, :label, :badge_color
-
-  def localisation_options(recensement)
-    [
-      Option.new(
-        Recensement::LOCALISATION_EDIFICE_INITIAL,
-        "L'objet est bien présent dans l'édifice #{recensement.objet.edifice_nom}"
-      ),
-      Option.new(
-        Recensement::LOCALISATION_AUTRE_EDIFICE,
-        "L'objet est présent dans un autre édifice"
-      ),
-      Option.new(
-        Recensement::LOCALISATION_ABSENT,
-        "L’objet est introuvable, ou bien vous savez qu'il a disparu"
-      )
-    ]
-  end
 
   def etat_badge_color(etat)
     {
@@ -119,13 +101,17 @@ module RecensementHelper
 
   def recensement_nom_edifice(recensement)
     return recensement.objet.palissy_EDIF if recensement.edifice_initial?
-    return recensement.edifice_nom if recensement.autre_edifice?
+    return recensement.edifice_nom if recensement.deplacement_definitif?
 
     nil
+  end
+
+  # TODO : À supprimer au profit du RecensementPresenter#nom_commune_localisation_objet
+  def nom_commune_localisation_objet(recensement)
+    recensement.nom_commune_localisation_objet.presence || "avec le code INSEE #{recensement.autre_commune_code_insee}"
   end
 
   def deleted_recensement_title(recensement)
     "Recensement supprimé de l’objet #{recensement.deleted_objet_snapshot['palissy_REF']}"
   end
 end
-# rubocop:enable Metrics/ModuleLength

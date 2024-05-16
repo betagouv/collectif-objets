@@ -3,59 +3,58 @@
 module RecensementWizard
   class Step1 < Base
     STEP_NUMBER = 1
-    TITLE = "Recherche"
+    TITLE = "Localisation"
 
-    attr_accessor :investigation, :confirmation_introuvable
+    attr_accessor :confirmation_introuvable
 
-    validates :investigation,
-              inclusion: { in: %w[confirmation_sur_place introuvable],
-                           message: "Veuillez choisir une option" }
+    validates :localisation, presence: { message: "Veuillez préciser où se trouve l’objet" }
+
+    validates :localisation,
+              inclusion: {
+                in: Recensement::LOCALISATIONS,
+                message: "La localisation de l’objet n’est pas valide"
+              },
+              if: -> { localisation.present? }
 
     def initialize(recensement)
       super
       self.confirmation_introuvable = recensement.absent? ? "true" : "false"
-      if recensement.absent?
-        self.investigation = "introuvable"
-      elsif recensement.confirmation_sur_place?
-        self.investigation = "confirmation_sur_place"
-      end
     end
 
-    def permitted_params = %i[investigation confirmation_introuvable]
+    def permitted_params = %i[localisation confirmation_introuvable]
 
     def next_step_number
-      investigation == "introuvable" ? 5 : super
+      if localisation == Recensement::LOCALISATION_ABSENT ||
+         localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+        6
+      elsif localisation == Recensement::LOCALISATION_EDIFICE_INITIAL
+        3
+      else
+        super
+      end
     end
 
     def confirmation_modal_path_params
-      return if investigation != "introuvable" || confirmation_introuvable
+      return if localisation != Recensement::LOCALISATION_ABSENT || confirmation_introuvable
 
       { modal: "confirmation-introuvable",
-        wizard: { investigation: "introuvable", confirmation_introuvable: "true" } }
+        wizard: { localisation: Recensement::LOCALISATION_ABSENT, confirmation_introuvable: "true" } }
     end
 
-    def confirmation_modal_close_path
-      edit_commune_objet_recensement_path commune, objet, recensement, step: 1
-    end
-
-    def assign_attributes(attributes)
-      super
-      if investigation == "confirmation_sur_place"
-        recensement.confirmation_sur_place = true
-        if recensement.absent?
-          recensement.recensable = nil
-          recensement.localisation = nil
-          recensement.status = "draft" # force returning to draft for completed ones
-        end
-      elsif investigation == "introuvable" && confirmation_introuvable
-        recensement.confirmation_sur_place = true
-        recensement.localisation = Recensement::LOCALISATION_ABSENT
-        recensement.recensable = false
+    def reset_recensement_data_for_next_steps
+      if recensement.localisation_changed?
         recensement.edifice_nom = nil
-        recensement.etat_sanitaire = nil
-        recensement.securisation = nil
-        recensement.photos = []
+        recensement.autre_commune_code_insee = nil
       end
+
+      return unless (localisation == Recensement::LOCALISATION_ABSENT && confirmation_introuvable) ||
+                    localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+
+      recensement.recensable = false
+      recensement.etat_sanitaire = nil
+      recensement.securisation = nil
+      recensement.photos = []
+      recensement.photos_count = 0
     end
   end
 end

@@ -4,7 +4,6 @@ FactoryBot.define do
   factory :recensement do
     association :objet
     association :dossier
-    confirmation_sur_place { true }
     localisation { Recensement::LOCALISATION_EDIFICE_INITIAL }
     recensable { true }
     edifice_nom { nil }
@@ -14,7 +13,6 @@ FactoryBot.define do
     status { "completed" }
 
     trait :empty do
-      confirmation_sur_place { nil }
       localisation { nil }
       recensable { nil }
       edifice_nom { nil }

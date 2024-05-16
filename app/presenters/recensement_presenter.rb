@@ -33,12 +33,16 @@ class RecensementPresenter
     end
   end
 
-  def localisation_sentence(full: false)
+  # TODO : supprimer le paramètre ici et dans la vue _recensement_attributes
+  def localisation_sentence(*)
     case @recensement.localisation
     when Recensement::LOCALISATION_EDIFICE_INITIAL
-      text { "L'objet est bien présent dans l'édifice «#{objet_edifice_nom}»" }
-    when Recensement::LOCALISATION_AUTRE_EDIFICE
-      text { "L'objet a été déplacé dans un autre édifice #{": «#{@recensement.edifice_nom}»" if full}" }
+      text { "Oui, l’objet se trouve dans l’édifice indiqué initialement «#{objet_edifice_nom}»" }
+    when Recensement::LOCALISATION_AUTRE_EDIFICE, Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
+      text do
+        "Oui, il a été déplacé dans l’édifice «#{@recensement.edifice_nom}» \
+         dans la commune #{nom_commune_localisation_objet}"
+      end
     when Recensement::LOCALISATION_ABSENT
       badge("warning") { "L'objet est introuvable" }
     end
@@ -97,6 +101,11 @@ class RecensementPresenter
 
   def objet_edifice_nom
     @recensement.objet&.edifice_nom || (@recensement.deleted_objet_snapshot || {})["lieu_actuel_edifice_nom"]
+  end
+
+  def nom_commune_localisation_objet
+    @recensement.nom_commune_localisation_objet.presence ||
+      "avec le code INSEE #{@recensement.autre_commune_code_insee}"
   end
 end
 

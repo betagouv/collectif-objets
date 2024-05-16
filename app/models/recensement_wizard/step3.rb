@@ -3,45 +3,45 @@
 module RecensementWizard
   class Step3 < Base
     STEP_NUMBER = 3
-    TITLE = "Photos de l’objet"
+    TITLE = "Accessibilité"
 
     include ActiveStorageValidations
 
-    attr_accessor :confirmation_no_photos
+    attr_accessor :confirmation_not_recensable
 
-    validates(
-      :photos,
-      content_type: %w[image/jpg image/jpeg image/png],
-      size: { less_than: 20.megabytes }
-    )
+    validates \
+      :recensable,
+      inclusion: {
+        in: [true, false],
+        message: "Veuillez renseigner si l’objet est recensable ou non"
+      }
 
     def initialize(recensement)
       super
-      self.confirmation_no_photos = "false"
+      self.confirmation_not_recensable = recensement.recensable_was == false ? "true" : "false"
     end
 
-    def permitted_params = %i[confirmation_no_photos photos]
-
-    # rubocop:disable Style/GuardClause
-    def assign_attributes(parsed_params)
-      if parsed_params[:photos]&.any?
-        recensement.photos = recensement.photos.map(&:signed_id) + [parsed_params[:photos][0]]
-        recensement.photos_count += 1
-      end
-      if parsed_params.key?(:confirmation_no_photos)
-        self.confirmation_no_photos = parsed_params[:confirmation_no_photos]
-      end
-    end
-    # rubocop:enable Style/GuardClause
+    def permitted_params = %i[recensable confirmation_not_recensable]
 
     def confirmation_modal_path_params
-      return if photos.any? || confirmation_no_photos
+      return if recensable != false || confirmation_not_recensable
 
-      { modal: "confirmation-no-photos", wizard: { confirmation_no_photos: "true" } }
+      { modal: "confirmation-not-recensable",
+        wizard: { recensable: "false", confirmation_not_recensable: "true" } }
     end
 
-    def confirmation_modal_close_path
-      edit_commune_objet_recensement_path(commune, objet, recensement, step: 3)
+    def next_step_number
+      recensable == false ? 6 : super
+    end
+
+    def reset_recensement_data_for_next_steps
+      return unless recensable == false && confirmation_not_recensable
+
+      recensement.etat_sanitaire = nil
+      recensement.securisation = nil
+      recensement.photos = []
+      # TODO : voir s'il est plus judicieux d'utiliser un counter_cache
+      recensement.photos_count = 0
     end
   end
 end
