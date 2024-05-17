@@ -16,12 +16,11 @@
         %br
         = link_to "Retrouvez le reportage sur Canal 32", "https://www.canal32.fr/thematiques/culture/sujet/des-maires-participent-au-recensement-du-patrimoine-du-02-novembre-2022.html", target: "_blank", rel: "noopener", class: "fr-link co-text--muted fr-text--sm"
 
-  - @articles.each_slice(4) do |articles|
-    .fr-grid-row.fr-grid-row--gutters
-      - articles.each do |article|
-        .fr-col-6.fr-col-md-4.fr-col-lg-3
-          = render DsfrComponent::TileComponent.new title: article.title,
-            url: article_presse_path(article.id),
-            image_src: url_for(article.logo),
-            description: article.date,
-            heading_level: 2
+  .fr-grid-row.fr-grid-row--gutters
+    - @articles.each do |article|
+      .fr-col-12.fr-col-sm-6.fr-col-md-4.fr-col-lg-3
+        = render DsfrComponent::TileComponent.new title: article.title,
+          url: article_presse_path(article.id),
+          image_src: url_for(article.logo),
+          description: article.date,
+          heading_level: 2
