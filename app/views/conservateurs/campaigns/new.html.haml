@@ -1,6 +1,6 @@
 - content_for(:head_title) { "Nouvelle campagne #{@campaign.departement.nom}" }
 
-%main.fr-container.fr-mb-8w
+%main#contenu.fr-container.fr-mb-8w
   = render "shared/breadcrumbs", links: [["Départements", conservateurs_departements_path], [@campaign.departement.nom, conservateurs_departement_path(@campaign.departement)]], current_page_label: "Nouvelle campagne"
 
   %h1 Nouvelle Campagne #{@campaign.departement.nom}

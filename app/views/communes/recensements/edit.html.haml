@@ -1,5 +1,5 @@
 - content_for(:head_title) { "Recensement · #{truncate(@wizard.objet.nom, length: 20)}" }
-%main.fr-container.fr-pb-10w.co-container--sm-px-0
+%main#contenu.fr-container.fr-pb-10w.co-container--sm-px-0
   .fr-px-2w.fr-px-md-0
     = render "shared/breadcrumbs",
       links: [["Accueil", root_path],

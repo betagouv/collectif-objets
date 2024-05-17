@@ -1,6 +1,6 @@
 - content_for(:head_title) { "Recensement enregistré" }
 
-%main
+%main#contenu
   .fr-container
     = render "shared/breadcrumbs",
       links: [["Accueil", root_path], ["Objets de #{@commune.nom}", commune_objets_path(@commune)]],

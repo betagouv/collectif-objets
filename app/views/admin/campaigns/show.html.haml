@@ -1,6 +1,6 @@
 - content_for(:head_title) { "Campagne #{campaign_title(@campaign)}" }
 
-%main.fr-container.fr-mb-8w
+%main#contenu.fr-container.fr-mb-8w
   = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Campagnes", admin_campaigns_path]], current_page_label: campaign_title(@campaign)
 
   %h1

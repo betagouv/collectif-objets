@@ -1,6 +1,6 @@
 - content_for(:head_title) { "Mon compte" }
 
-%main.fr-container.fr-py-4w.fr-grid-row.fr-grid-row--center{"data-controller" => "devise--sessions"}
+%main#contenu.fr-container.fr-py-4w.fr-grid-row.fr-grid-row--center{"data-controller" => "devise--sessions"}
   .fr-col-md-8
     = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Mon compte")
     .co-flex.co-flex--space-between.co-flex--align-items-center

@@ -1,5 +1,5 @@
 - content_for(:head_title) { "Recensements de #{@commune.nom}" }
-%main.fr-container.fr-pt-2w.fr-pb-8w
+%main#contenu.fr-container.fr-pt-2w.fr-pb-8w
   = render "shared/breadcrumbs",  links: [["Accueil", root_path], ["Objets de #{@commune.nom}", commune_objets_path(@commune)]],  current_page_label: "Données envoyées"
   %h1.co-text--blue
     Recensements de #{@commune.nom}

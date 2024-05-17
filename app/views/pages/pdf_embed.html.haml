@@ -1,7 +1,7 @@
 - title = t("pages.pdf_embed.title.#{@pdf_name}")
 - content_for(:head_title) { title }
 
-%main.fr-container.fr-pt-2w.fr-pb-8w
+%main#contenu.fr-container.fr-pt-2w.fr-pb-8w
   = render "shared/breadcrumbs", links: [["Accueil", root_path]] + @breadcrumbs, current_page_label: title
   %h1.co-text--blue= title
   %p
