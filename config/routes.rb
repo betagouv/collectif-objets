@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     get :confidentialite
     get "comment-ca-marche", action: :aide, as: :aide
     get "guide-de-recensement", action: :guide, as: :guide
-    get :pdf, action: :pdf_download, as: :pdf_download
+    get :pdf, to: redirect("guide-de-recensement")
     get :admin
     get :plan
     get :declaration_accessibilite
