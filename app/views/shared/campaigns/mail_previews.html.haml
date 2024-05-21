@@ -1,7 +1,7 @@
 - title = "Prévisualisation des mails de lancement de la campagne #{campaign_title(@campaign)}"
 - content_for(:head_title) { title }
 
-%main.fr-container.fr-mb-8w
+%main#contenu.fr-container.fr-mb-8w
   = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Campagnes", admin_campaigns_path], [campaign_title(@campaign), admin_campaign_path(@campaign)]], current_page_label: "Prévisualisation des mails de lancement"
   %h1= title
 

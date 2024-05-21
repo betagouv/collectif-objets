@@ -1,6 +1,6 @@
 - content_for(:head_title) { @article.title }
 
-%main.fr-container.fr-pb-8w
+%main#contenu.fr-container.fr-pb-8w
   = render("shared/breadcrumbs", links: [["Accueil", root_path], ["On parle de nous", presse_path]], current_page_label: @article.title)
 
   %h1= @article.title

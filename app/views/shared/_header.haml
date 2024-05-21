@@ -1,6 +1,7 @@
 = dsfr_header(logo_text: "Ministère\nde la Culture".html_safe,
   title: "Collectif Objets",
-  tagline: "Préservez votre patrimoine mobilier") do |c|
+  tagline: "Préservez votre patrimoine mobilier",
+  html_attributes: {id: "header-navigation"}) do |c|
 
   - if current_conservateur
     - c.with_tool_link title: current_conservateur, path: edit_conservateur_registration_path, classes: ["fr-icon-settings-5-line"]
