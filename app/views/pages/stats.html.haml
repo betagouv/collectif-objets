@@ -1,9 +1,12 @@
-- content_for(:head_title) { "Statistiques" }
+- title = "Statistiques"
+- content_for(:head_title) { title }
 
 %main.fr-container.fr-pb-8w
-= render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Statistiques"
+  = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: title
 
-%iframe#metabase-iframe.co-width--100.co-height--100vh{src: "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/public/dashboard/33cf5b50-b2e8-41c4-9bcd-ed7fe5b994d0",
-  frameborder: "0",
-  allowtransparency: true
-}
+  %h1.co-text--blue= title
+
+  %iframe#metabase-iframe.co-width--100.co-height--100vh{src: "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/public/dashboard/33cf5b50-b2e8-41c4-9bcd-ed7fe5b994d0",
+    frameborder: "0",
+    allowtransparency: true
+  }
