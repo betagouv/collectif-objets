@@ -5,8 +5,8 @@
 
   %h1= @article.title
 
-  .co-flex.co-flex--align-items-center.co-flex--gap-1rem
-    = image_tag @article.logo, alt: "Logo #{@article.source}", class: "co-max-width-150px co-max-height-80px"
+  .co-flex.co-flex-md-column.co-flex--gap-1rem
+    = image_tag @article.logo, alt: "Logo #{@article.source}", class: "fr-responsive-img co-max-width-150px co-max-height-80px"
     %span.co-text--italic= @article.date
     = @article.source
 
@@ -16,7 +16,6 @@
   - if @article.video == "reportage_canal32"
     .fr-my-2w.co-max-width-40rem
       = render "shared/video_embed", title: "Reportage Canal 32", video_id: "114c5786-72a6-4c25-9638-cf4d87861963"
-
 
   .fr-mt-4w
     = link_to "Lire l'article complet", @article.url, class: "co-link", target: "_blank", rel: "noopener"
