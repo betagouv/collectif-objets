@@ -2,7 +2,6 @@
 
 module RecensementWizard
   class Step7 < Base
-    STEP_NUMBER = 7
     TITLE = "Récapitulatif"
 
     def update(_params)

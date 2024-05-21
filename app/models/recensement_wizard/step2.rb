@@ -2,7 +2,6 @@
 
 module RecensementWizard
   class Step2 < Base
-    STEP_NUMBER = 2
     TITLE = "Précisions sur la localisation"
 
     attr_accessor :edifice_nom_existant, :autre_edifice_checked

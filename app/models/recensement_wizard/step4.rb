@@ -2,7 +2,6 @@
 
 module RecensementWizard
   class Step4 < Base
-    STEP_NUMBER = 4
     TITLE = "Photos de l’objet"
 
     include ActiveStorageValidations

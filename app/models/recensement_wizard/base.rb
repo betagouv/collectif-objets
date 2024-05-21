@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RecensementWizard
-  STEPS = [1, 2, 3, 4, 5, 6, 7].freeze
+  STEPS = (1..7).to_a.freeze
   PHOTOS_STEP_NUMER = 4 # not ideal but a quick fix to know where to redirect in recensement photos controller
   class InvalidStep < StandardError; end
 
@@ -17,6 +17,11 @@ module RecensementWizard
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       to: :recensement
 
+    delegate :title, :step_number, to: :class
+
+    def self.title = self::TITLE
+    def self.step_number = name.demodulize[-1].to_i
+
     def initialize(recensement)
       @recensement = recensement
     end
@@ -27,8 +32,7 @@ module RecensementWizard
       "RecensementWizard::Step#{step}".constantize.new(recensement)
     end
 
-    def title = self.class::TITLE
-    def step_number = self.class::STEP_NUMBER
+    def step_number = self.class.name.demodulize[-1].to_i
 
     def next_step_number
       step_number + 1 if step_number < STEPS.last
