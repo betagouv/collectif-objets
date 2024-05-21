@@ -3,30 +3,33 @@
 %p
   %b Emplacement
   %br
-  Se situe dans l'édifice
-  %b= objet.edifice_nom
+  - if objet.edifice_nom
+    Se situe dans l'édifice
+    %b= objet.edifice_nom
+  - else
+    Inconnu
   %br
   %i= objet.emplacement
 
 %p
   %b Dénomination
   %br
-  = objet.palissy_DENO
+  = objet.palissy_DENO || "Inconnue"
 
 %p
   %b Catégorie
   %br
-  = objet.categorie
+  = objet.categorie || "Inconnue"
 
 %p
   %b Époque
   %br
-  = objet.crafted_at || "N/A"
+  = objet.crafted_at || "Inconnue"
 
 %p
   %b Protection
   %br
-  = objet.palissy_DPRO || "N/A"
+  = objet.palissy_DPRO || "Inconnue"
 
 - if objet.déplacé?
   %p
@@ -45,7 +48,7 @@
   %b Récolement
   %br
   Dernier récolement :
-  = objet.last_recolement_at || "N/A"
+  = objet.last_recolement_at || "inconnu"
 
 %p
   %b Références
