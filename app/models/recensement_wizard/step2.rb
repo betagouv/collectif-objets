@@ -9,7 +9,7 @@ module RecensementWizard
 
     validates :edifice_nom_existant,
               presence: { message: "Veuillez sélectionner un édifice. \
-                S’il n'est pas dans la liste, choisir \"Autre édificie\"." },
+                S’il n'est pas dans la liste, choisir \"Autre édifice\"." },
               unless: lambda {
                 localisation != Recensement::LOCALISATION_AUTRE_EDIFICE ||
                   (localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE && autre_edifice_checked)
