@@ -15,6 +15,7 @@ module RecensementWizard
       :securisation, :notes, :photos, :photo_attachments, :recensable?, :absent?,
       :edifice_initial?, :autre_commune_code_insee,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
+      :localisation=, :recensable=, :edifice_nom=, :autre_commune_code_insee=, :etat_sanitaire=, :securisation=, :notes=,
       to: :recensement
 
     delegate :title, :step_number, to: :class
@@ -88,14 +89,6 @@ module RecensementWizard
       to_step = confirmation_modal? ? step_number : next_step_number
       edit_commune_objet_recensement_path \
         commune, objet, recensement, step: to_step, **confirmation_modal_path_params.to_h
-    end
-
-    def assign_attributes(attributes)
-      attrs_recensement = attributes.to_h.clone.symbolize_keys
-      attrs_wizard = attrs_recensement.slice! \
-        :localisation, :recensable, :edifice_nom, :autre_commune_code_insee, :etat_sanitaire, :securisation, :notes
-      recensement.assign_attributes(attrs_recensement)
-      super(attrs_wizard)
     end
 
     # Cette méthode est à re définir dans les sous-classes pour remettre à zéro les données de recensement
