@@ -46,7 +46,10 @@ RSpec.describe Communes::RecensementsController, type: :request do
     let(:recensement) { create(:recensement, objet:, status: :draft) }
     let(:path) { commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id, step:) }
     let(:method) { :patch }
-    let(:next_step) { edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id, step: next_step_number) }
+    let(:next_step) do
+      edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id,
+                                          step: next_step_number)
+    end
 
     context "Étape 1" do
       let(:step) { 1 }
@@ -111,7 +114,7 @@ RSpec.describe Communes::RecensementsController, type: :request do
         end
       end
       context "si l'objet se trouve dans un édifice non listé" do
-        let(:params) { { wizard: { edifice_nom_existant: "0", edifice_nom: "Édifice non listé"} } }
+        let(:params) { { wizard: { edifice_nom_existant: "0", edifice_nom: "Édifice non listé" } } }
         let(:next_step_number) { 3 }
         it "enregistre et redirige vers l'étape 3" do
           perform_request
@@ -169,7 +172,9 @@ RSpec.describe Communes::RecensementsController, type: :request do
     context "Étape 5" do
       let(:step) { 5 }
       context "si l'objet est en bon état et en sécurité" do
-        let(:params) { { wizard: { etat_sanitaire: Recensement::ETAT_BON, securisation: Recensement::SECURISATION_CORRECTE } } }
+        let(:params) do
+          { wizard: { etat_sanitaire: Recensement::ETAT_BON, securisation: Recensement::SECURISATION_CORRECTE } }
+        end
         let(:next_step_number) { 6 }
         it "enregistre et redirige vers l'étape 6" do
           perform_request

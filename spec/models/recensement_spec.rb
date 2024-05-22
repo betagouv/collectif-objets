@@ -171,10 +171,14 @@ RSpec.describe Recensement, type: :model do
       let(:etat_sanitaire) { Recensement::ETAT_BON }
       let(:securisation) { Recensement::SECURISATION_CORRECTE }
       let(:localisation) { Recensement::LOCALISATION_EDIFICE_INITIAL }
-      let(:recensement) { create(:recensement, status: :draft, recensable:, localisation:, etat_sanitaire:, securisation:) }
+      let(:recensement) do
+        create(:recensement, status: :draft, recensable:, localisation:, etat_sanitaire:, securisation:)
+      end
 
       context "false" do
-        let(:recensement) { create(:recensement, status: :draft, localisation:, recensable:, etat_sanitaire: nil, securisation: nil) }
+        let(:recensement) do
+          create(:recensement, status: :draft, localisation:, recensable:, etat_sanitaire: nil, securisation: nil)
+        end
         let(:recensable) { false }
         it "reste false" do
           do_complete!
@@ -211,7 +215,7 @@ RSpec.describe Recensement, type: :model do
             let(:etat_sanitaire) { nil }
             let(:securisation) { nil }
             it "devient false" do
-              recensement.autre_commune_code_insee = 12345
+              recensement.autre_commune_code_insee = 12_345
               recensement.edifice_nom = "autre édifice"
               do_complete!
               expect(recensement.reload.recensable).to eq false
