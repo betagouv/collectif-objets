@@ -167,7 +167,7 @@ RSpec.describe Recensement, type: :model do
   describe "#complete!" do
     subject(:do_complete!) { recensement.complete! }
 
-    describe "#complete! pour une commune inactive" do
+    context "pour une commune inactive" do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:objet) { create(:objet, commune:) }
       let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
@@ -183,7 +183,7 @@ RSpec.describe Recensement, type: :model do
       end
     end
 
-    describe "#complete! pour une commune started" do
+    context "pour une commune started" do
       let!(:commune) { create(:commune, status: "started") }
       let!(:dossier) { create(:dossier, status: "construction", commune:) }
       before { commune.update!(dossier:) }
@@ -203,7 +203,7 @@ RSpec.describe Recensement, type: :model do
       end
     end
 
-    describe "#complete! pour une commune inactive mais une erreur se produit" do
+    context "pour une commune inactive mais une erreur se produit" do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:objet) { create(:objet, commune:) }
       let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
