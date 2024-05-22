@@ -167,6 +167,78 @@ RSpec.describe Recensement, type: :model do
   describe "#complete!" do
     subject(:do_complete!) { recensement.complete! }
 
+    context "quand recensable est" do
+      let(:etat_sanitaire) { Recensement::ETAT_BON }
+      let(:securisation) { Recensement::SECURISATION_CORRECTE }
+      let(:localisation) { Recensement::LOCALISATION_EDIFICE_INITIAL }
+      let(:recensement) { create(:recensement, status: :draft, recensable:, localisation:, etat_sanitaire:, securisation:) }
+
+      context "false" do
+        let(:recensement) { create(:recensement, status: :draft, localisation:, recensable:, etat_sanitaire: nil, securisation: nil) }
+        let(:recensable) { false }
+        it "reste false" do
+          do_complete!
+          expect(recensement.reload.recensable).to eq recensable
+        end
+      end
+      context "true" do
+        let(:recensable) { true }
+        it "reste true" do
+          do_complete!
+          expect(recensement.reload.recensable).to eq recensable
+        end
+      end
+      context "vide" do
+        let(:recensable) { nil }
+        context "et localisation est" do
+          context "LOCALISATION_EDIFICE_INITIAL" do
+            let(:localisation) { Recensement::LOCALISATION_EDIFICE_INITIAL }
+            it "devient true" do
+              do_complete!
+              expect(recensement.reload.recensable).to eq true
+            end
+          end
+          context "LOCALISATION_AUTRE_EDIFICE" do
+            let(:localisation) { Recensement::LOCALISATION_AUTRE_EDIFICE }
+            it "devient true" do
+              recensement.edifice_nom = "autre édifice"
+              do_complete!
+              expect(recensement.reload.recensable).to eq true
+            end
+          end
+          context "LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE" do
+            let(:localisation) { Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
+            let(:etat_sanitaire) { nil }
+            let(:securisation) { nil }
+            it "devient false" do
+              recensement.autre_commune_code_insee = 12345
+              recensement.edifice_nom = "autre édifice"
+              do_complete!
+              expect(recensement.reload.recensable).to eq false
+            end
+          end
+          context "LOCALISATION_DEPLACEMENT_TEMPORAIRE" do
+            let(:localisation) { Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE }
+            let(:etat_sanitaire) { nil }
+            let(:securisation) { nil }
+            it "devient false" do
+              do_complete!
+              expect(recensement.reload.recensable).to eq false
+            end
+          end
+          context "LOCALISATION_ABSENT" do
+            let(:localisation) { Recensement::LOCALISATION_ABSENT }
+            let(:etat_sanitaire) { nil }
+            let(:securisation) { nil }
+            it "devient false" do
+              do_complete!
+              expect(recensement.reload.recensable).to eq false
+            end
+          end
+        end
+      end
+    end
+
     context "pour une commune inactive" do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:objet) { create(:objet, commune:) }
