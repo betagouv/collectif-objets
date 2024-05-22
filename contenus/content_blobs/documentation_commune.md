@@ -60,9 +60,9 @@ Précaution à prendre : même si les demandes de recensement sont adressées au
 
 ## 6 - Consulter la liste complète des objets protégés de ma commune
 
-La liste des objets protégés au titre des Monuments Historiques est publique et accessible [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture. 
+La liste des objets protégés au titre des Monuments Historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture. 
 
-Les données affichées dans Collectif Objets proviennent de la Plateforme Ouverte du Patrimoine (POP) et en particulier des bases de données Palissy pour les informations et Mémoire pour les photographies associées.
+Les données affichées dans Collectif Objets proviennent de POP et en particulier des bases de données Palissy pour les informations et Mémoire pour les photographies associées.
 
 Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement à une personne tierce. Pour effectuer ce recensement, la mairie recevra un code de connexion sur son adresse email lui permettant de se connecter et de réaliser les recensements. 
 
