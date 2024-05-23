@@ -101,38 +101,34 @@
       .fr-grid-row.fr-grid-row-gutters
         .fr-col-12.fr-pb-4w.co-text--center
           %h2.co-text--blue Ils témoignent
-        .fr-col-md-6.fr-p-4w
-          .co-testimonial-wrapper
+        .fr-col-md-6
+          %blockquote.co-testimonial
             = vite_image_tag "images/illustrations/head-circle-man-blue.svg", class: "co-testimonial-avatar", alt: ""
-            %p
-              ‟ Je n'avais pas connaissance de la valeur ou de ce que pouvaient représenter mes objets au niveau du patrimoine ”
-          .co-text--center
-            Maire d'une commune de 545 habitants
-            %span.co-text--muted Haute-Marne
-        .fr-col-md-6.fr-p-4w
-          .co-testimonial-wrapper
+            %p ‟ Je n'avais pas connaissance de la valeur ou de ce que pouvaient représenter mes objets au niveau du patrimoine ”
+            %footer
+              Maire d'une commune de 545 habitants
+              %span.co-text--muted Haute-Marne
+        .fr-col-md-6
+          %blockquote.co-testimonial
             = vite_image_tag "images/illustrations/head-circle-woman-red.svg", class: "co-testimonial-avatar", alt: ""
-            %p
-              ‟ Le recensement s'est bien passé, le guide fourni était super. Je ne connaissais pas tout cela ! ”
-          .co-text--center
-            Conseillère Municipale d'une commune de 729 habitants
-            %span.co-text--muted Haute-Marne
-        .fr-col-md-6.fr-p-4w
-          .co-testimonial-wrapper
+            %p ‟ Le recensement s'est bien passé, le guide fourni était super. Je ne connaissais pas tout cela ! ”
+            %footer
+              Conseillère Municipale d'une commune de 729 habitants
+              %span.co-text--muted Haute-Marne
+        .fr-col-md-6
+          %blockquote.co-testimonial
             = vite_image_tag "images/illustrations/head-circle-man-glasses.svg", class: "co-testimonial-avatar", alt: ""
-            %p
-              ‟ Ça prend 5 minutes, rien de compliqué, c'est simple. C'est la patrimoine de la France, il est chez nous, c'est notre devoir. ”
-          .co-text--center
-            Maire d'une commune de 518 habitants
-            %span.co-text--muted Haute-Marne
-        .fr-col-md-6.fr-p-4w
-          .co-testimonial-wrapper
+            %p ‟ Ça prend 5 minutes, rien de compliqué, c'est simple. C'est le patrimoine de la France, il est chez nous, c'est notre devoir. ”
+            %footer
+              Maire d'une commune de 518 habitants
+              %span.co-text--muted Haute-Marne
+        .fr-col-md-6
+          %blockquote.co-testimonial
             = vite_image_tag "images/illustrations/head-circle-man-beard.svg", class: "co-testimonial-avatar", alt: ""
-            %p
-              ‟ La démarche permet de mieux connaître l'histoire de sa commune et d'échanger avec les habitants, et les anciens, sur ce qui fait notre commune ”
-          .co-text--center
-            Maire d'une commune de 789 habitants
-            %span.co-text--muted Haute-Marne
+            %p ‟ La démarche permet de mieux connaître l'histoire de sa commune et d'échanger avec les habitants, et les anciens, sur ce qui fait notre commune. ”
+            %footer
+              Maire d'une commune de 789 habitants
+              %span.co-text--muted Haute-Marne
       %p.co-text--center.fr-mt-8w
         = link_to "Voir toutes nos apparitions dans la presse", presse_path, class: "fr-link"
 
