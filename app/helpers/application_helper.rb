@@ -4,7 +4,7 @@ module ApplicationHelper
   include Pagy::Frontend
 
   def head_title
-    [content_for(:head_title), "Collectif Objets"].join(" · ")
+    [content_for(:head_title), "Collectif Objets"].compact_blank.join(" · ")
   end
 
   def badge(color = "", **html_opts)
