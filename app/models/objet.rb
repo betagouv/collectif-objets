@@ -100,7 +100,7 @@ class Objet < ApplicationRecord
   end
 
   def to_s = palissy_TICO
-  def nom = super || [palissy_DENO || categorie || palissy_REF, crafted_at].compact_blank.join(", ").upcase_first
+  def nom = (super || [palissy_DENO || categorie || palissy_REF, crafted_at].compact_blank.join(", ")).upcase_first
   def déplacé? = palissy_WEB.present? && palissy_DEPL.present?
   def code_insee_a_changé? = palissy_WEB.present? && palissy_DEPL.blank?
 
