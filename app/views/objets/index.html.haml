@@ -25,14 +25,14 @@
   - if @filters[:commune].blank?
     - if @pagy.pages > 1
       .fr-mt-4w= render 'shared/pagy_nav', pagy: @pagy
-    = render layout: "objets/cards_grid_layout", locals: { count: @objets.count } do
+    = render layout: "shared/grid_layout" do
       - @objets.each do |objet|
         .fr-col-md-4
           = render ObjetCardComponent.new(objet)
     - if @pagy.pages > 1
       = render 'shared/pagy_nav', pagy: @pagy, label: "Pagination bas de page"
 
-  - else  
+  - else
     = render "edifices/list", edifices: @objets_list.edifices
     - @objets_list.edifices.each do |edifice|
       .fr-my-4w

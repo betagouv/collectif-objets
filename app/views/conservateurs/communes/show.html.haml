@@ -29,7 +29,7 @@
   = render "edifices/list", edifices: @edifices
   - @edifices.each_with_index do |edifice, index|
     = render "edifices/title", edifice:
-    = render layout: "objets/cards_grid_layout", locals: { count: edifice.objets.length } do
+    = render layout: "shared/grid_layout" do
       - reordered = @dossier ? edifice.objets.order_by_recensement_priorite : edifice.objets
       - reordered.each do |objet|
         .fr-col-md-4

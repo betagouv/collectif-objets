@@ -7,8 +7,8 @@
       - if @objets.any?
         %p Vous pouvez modifier ces informations autant que vous le souhaitez avant l’envoi à la commune.
       - else
-        %p 
-          L’ensemble des objets en péril ou disparus ont été examinés. Vous pouvez envoyer votre examen à la commune. 
+        %p
+          L’ensemble des objets en péril ou disparus ont été examinés. Vous pouvez envoyer votre examen à la commune.
           = link_to_button "Envoyer l'examen à la commune", new_conservateurs_dossier_accept_path(@dossier), class: "fr-btn", data: { turbo_action: "advance" }
         %p ou
       %p
@@ -21,7 +21,7 @@
       .fr-col-md-10
         %h3.co-text--center
           = t("recensement.analyse.remaining_count", count: @objets.count, commune: @commune.nom)
-        = render layout: "objets/cards_grid_layout", locals: { count: @objets.count } do
+        = render layout: "shared/grid_layout" do
           - @objets.each do |objet|
             .fr-col-md-4
               = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.current_recensement, can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?, commune: @commune

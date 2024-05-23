@@ -1,4 +1,4 @@
-= render layout: "objets/cards_grid_layout", locals: { count: objets.count } do
+= render layout: "shared/grid_layout" do
   - objets.each do |objet|
     .fr-col-md-4
       = render ObjetCardComponent.new(objet)
