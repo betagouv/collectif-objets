@@ -19,10 +19,6 @@
       Liste des #{@pagy.count} objets protégés en France
 
   - if @filters[:commune].blank?
-    %p.co-text--center
-      = link_to "Filtrer les objets d'une commune en particulier", departements_path
-
-  - if @filters[:commune].blank?
     - if @pagy.pages > 1
       .fr-mt-4w= render 'shared/pagy_nav', pagy: @pagy
     = render layout: "shared/grid_layout" do

@@ -51,21 +51,6 @@
                   = accessible_icon_span
               %li …
           %li
-            = link_to "Liste des communes par département", departements_path
-            = accessible_icon_span
-            %ul
-              - Departement.order(:code).first(2).each do |departement|
-                %li
-                  = link_to "Liste des communes du #{departement}", departement_path(departement)
-                  = accessible_icon_span
-                  %ul
-                    - departement.communes.order(:code_insee).first(2).each do |commune|
-                      %li
-                        = link_to "Liste des objets de #{commune}", objets_path(commune_code_insee: commune.code_insee)
-                        = accessible_icon_span
-                    %li …
-              %li …
-          %li
             = link_to "Connexion Communes", new_user_session_code_path
             = accessible_icon_span
           %li

@@ -24,25 +24,6 @@ feature "accessibility public pages", js: true do
     it { should be_axe_clean }
   end
 
-  describe "departements#index - Liste des communes de toute la france" do
-    before do
-      departements = create_list(:departement, 2)
-      departements.each { create_list(:commune, 2, departement: _1) }
-    end
-    before { visit departements_path }
-    it { should be_axe_clean }
-  end
-
-  describe "departements#show - Liste des communes d'un département" do
-    let!(:departement) { create(:departement) }
-    let!(:communes) { create_list(:commune, 2, departement:) }
-    let!(:objets) do
-      communes.map { create_list(:objet, 3, commune: _1) }.flatten
-    end
-    before { visit departement_path(departement) }
-    it { should be_axe_clean }
-  end
-
   describe "objets#index(commune_code_insee) - Liste des objets d'une commune" do
     let!(:commune) { create(:commune) }
     let!(:objets) { create_list(:objet, 3, commune:) }
