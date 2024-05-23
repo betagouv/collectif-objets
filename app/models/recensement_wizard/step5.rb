@@ -2,7 +2,6 @@
 
 module RecensementWizard
   class Step5 < Base
-    STEP_NUMBER = 5
     TITLE = "Objet"
 
     validates \

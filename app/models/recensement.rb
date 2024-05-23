@@ -24,7 +24,8 @@ class Recensement < ApplicationRecord
     state :completed, display: "Complet et validé"
     state :deleted, display: "Archivé"
 
-    event :complete, after: :aasm_after_complete, after_commit: :aasm_after_commit_complete do
+    event :complete, before: :ensure_recensable, after: :aasm_after_complete,
+                     after_commit: :aasm_after_commit_complete do
       transitions from: :draft, to: :completed
     end
     event :soft_delete, before_transaction: :aasm_before_soft_delete_transaction do
@@ -191,5 +192,15 @@ class Recensement < ApplicationRecord
       deleted_reason: reason,
       deleted_message: message.presence,
       deleted_objet_snapshot: objet_snapshot || objet.snapshot_attributes
+  end
+
+  def ensure_recensable
+    return unless recensable.nil?
+
+    self.recensable = !localisation.in?([
+                                          Recensement::LOCALISATION_ABSENT,
+                                          Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE,
+                                          Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
+                                        ])
   end
 end

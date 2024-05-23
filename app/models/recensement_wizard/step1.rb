@@ -2,7 +2,6 @@
 
 module RecensementWizard
   class Step1 < Base
-    STEP_NUMBER = 1
     TITLE = "Localisation"
 
     attr_accessor :confirmation_introuvable

@@ -2,7 +2,6 @@
 
 module RecensementWizard
   class Step3 < Base
-    STEP_NUMBER = 3
     TITLE = "Accessibilité"
 
     include ActiveStorageValidations
