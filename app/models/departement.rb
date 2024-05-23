@@ -10,6 +10,8 @@ class Departement < ApplicationRecord
   has_many :campaigns, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
   has_many :pop_exports, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
 
+  scope :sorted, -> { order(:code) }
+
   def self.include_objets_count
     joins(
       %{

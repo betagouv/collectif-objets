@@ -22,7 +22,7 @@
                     new_user_session_code_path,
                     data: { user_session_form_target: "changeButton" }
             = f.select(:departement,
-              options_for_select(Departement.order(:code).map { [_1, _1.code] }, @departement&.code),
+              options_for_select(Departement.sorted.map { [_1, _1.code] }, @departement&.code),
               {include_blank: "Sélectionnez un département"},
               required: true,
               autocomplete: "off",
