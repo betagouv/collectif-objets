@@ -19,9 +19,4 @@ class ObjetsController < ApplicationController
     @objet = Objet.find(params[:id])
     redirect_to root_path, alert: "Cet objet n'est lié à aucune commune" unless @objet.commune
   end
-
-  def show_by_ref_pop
-    @objet = Objet.find_by(palissy_REF: params[:palissy_REF])
-    render :show
-  end
 end
