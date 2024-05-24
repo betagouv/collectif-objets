@@ -6,7 +6,7 @@
       %p.fr-card__desc
         = commune.nom
         %br/
-        = edifice_nom
+        = edifice_nom&.upcase_first
 
       .fr-card__start
         - if start_badges
