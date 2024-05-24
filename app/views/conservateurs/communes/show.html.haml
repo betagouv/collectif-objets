@@ -33,7 +33,7 @@
       - reordered = @dossier ? edifice.objets.order_by_recensement_priorite : edifice.objets
       - reordered.each do |objet|
         .fr-col-md-4
-          = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.current_recensement, can_analyse: objet.current_recensement&.completed? && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?, commune: @commune
+          = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.recensement, can_analyse: objet.recensement&.completed? && conservateurs_policy(Analyse.new(recensement: objet.recensement)).edit?, commune: @commune
 
   - deleted_recensements = @dossier&.recensements&.only_deleted
   - if deleted_recensements&.any?

@@ -15,7 +15,7 @@ class ObjetCardComponent < ViewComponent::Base
     @commune = kwargs[:commune] || @objet.commune # pass to avoid n+1 queries
     @main_photo_origin = kwargs[:main_photo_origin] || :memoire
     @link_html_attributes_custom = kwargs[:link_html_attributes] || {}
-    @recensement = kwargs[:recensement] || @objet.current_recensement
+    @recensement = kwargs[:recensement] || @objet.recensement
     @size = kwargs[:size] || :md
     super
   end

@@ -7,6 +7,7 @@ class Objet < ApplicationRecord
   belongs_to :commune, foreign_key: :lieu_actuel_code_insee, primary_key: :code_insee, optional: true,
                        inverse_of: :objets
   belongs_to :edifice, optional: true
+  has_one :recensement
   has_many :recensements, dependent: :restrict_with_exception
 
   accepts_nested_attributes_for :edifice
@@ -73,10 +74,8 @@ class Objet < ApplicationRecord
     truncate("#{palissy_REF} #{nom}", length: 40)
   end
 
-  def current_recensement = recensements.first
-
-  def recensement? = current_recensement.present?
-  def recensement_completed? = current_recensement&.completed?
+  def recensement? = recensement.present?
+  def recensement_completed? = recensement&.completed?
 
   def self.select_best_objet_in_list(objets_arr)
     current_arr = objets_arr

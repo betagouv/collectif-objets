@@ -4,7 +4,7 @@ module Communes
   class RecensementPolicy < BasePolicy
     def new?
       user_commune? &&
-        objet.current_recensement.nil? &&
+        (objet.recensement.nil? || objet.recensement.new_record?) &&
         commune_can_edit?
     end
 

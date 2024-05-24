@@ -10,7 +10,7 @@
         %th Photos
     %tbody
       - objets.each do |objet|
-        - recensement = objet.current_recensement
+        - recensement = objet.recensement
         - presenter = RecensementPresenter.new(recensement)
         - palissy_photo_presenter = recensement.objet.palissy_photos_presenters.first
         %tr

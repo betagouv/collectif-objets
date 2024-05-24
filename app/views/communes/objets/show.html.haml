@@ -7,19 +7,19 @@
     %h1.fr-mb-0= @objet.nom
     = objet_recensement_badge(@objet)
 
-  - if @commune.dossier&.accepted? && @objet.current_recensement&.analyse_notes.present?
+  - if @commune.dossier&.accepted? && @objet.recensement&.analyse_notes.present?
     .fr-mb-8w.co-break-inside-avoid
       .co-text--bold Commentaires du conservateur
-      .co-blockquote= @objet.current_recensement.analyse_notes
+      .co-blockquote= @objet.recensement.analyse_notes
 
   .fr-grid-row.fr-pb-4w.fr-grid-row--gutters
     .fr-col-md-6
-      - if @objet.current_recensement&.draft?
+      - if @objet.recensement&.draft?
         .fr-mb-4w
-          = link_to "Compléter le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.current_recensement, step: 1), class: "fr-btn"
-      - elsif @objet.recensement? && communes_policy(@objet.current_recensement).edit?
+          = link_to "Compléter le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.recensement, step: 1), class: "fr-btn"
+      - elsif @objet.recensement? && communes_policy(@objet.recensement).edit?
         .fr-mb-4w
-          = link_to "Modifier le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.current_recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
+          = link_to "Modifier le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
       - elsif communes_policy(Recensement.new(objet: @objet)).new?
         .fr-mb-4w
           = button_to "Recenser cet objet", commune_objet_recensements_path(@objet.commune, @objet), class: "fr-btn", method: :post
