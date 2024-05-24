@@ -23,6 +23,9 @@ AllCops:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+Style/SymbolArray:
+  Enabled: false
+
 Layout/MultilineMethodCallIndentation:
   Enabled: false
 
