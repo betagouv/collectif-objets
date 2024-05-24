@@ -9,6 +9,6 @@
 
   = render "edifices/list", edifices: @commune.edifices
 
-  = render @commune.edifices
+  = render @commune.edifices.preloaded
 
   = render "communes/objets/pourquoi_n_objets_callout", objets_list: @commune.objets

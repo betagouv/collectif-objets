@@ -17,6 +17,10 @@ class Edifice < ApplicationRecord
     .group("edifices.id")
   }
 
+  scope :preloaded, -> do
+    with_objets.includes(objets: [:commune, :recensement, { recensement: [:photos_attachments, :photos_blobs] }]).ordered_by_nom
+  end
+
   def self.ordered_by_nom
     order(Arel.sql("LOWER(UNACCENT(edifices.nom))"))
   end
