@@ -16,7 +16,7 @@ module Communes
       if @recensement.save
         redirect_to edit_commune_objet_recensement_path(@recensement.commune, @objet, @recensement, step: 1)
       else
-        redirect_to commune_objet_path(objet.commune, objet),
+        redirect_to commune_objet_path(@recensement.commune, @objet),
                     alert: "Une erreur est survenue : #{@recensement.errors.full_messages.join}"
       end
     end
