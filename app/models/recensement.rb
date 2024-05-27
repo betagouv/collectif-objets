@@ -24,7 +24,7 @@ class Recensement < ApplicationRecord
     state :completed, display: "Complet et validé"
     state :deleted, display: "Archivé"
 
-    event :complete, before: :ensure_correct_data, after: :aasm_after_complete,
+    event :complete, before: :ensure_completable, after: :aasm_after_complete,
                      after_commit: :aasm_after_commit_complete do
       transitions from: :draft, to: :completed
     end
@@ -194,7 +194,7 @@ class Recensement < ApplicationRecord
       deleted_objet_snapshot: objet_snapshot || objet.snapshot_attributes
   end
 
-  def ensure_correct_data
+  def ensure_completable
     return unless recensable.nil?
 
     self.recensable = !localisation.in?([
