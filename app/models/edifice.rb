@@ -18,10 +18,11 @@ class Edifice < ApplicationRecord
   }
   scope :ordered_by_nom, -> { order(Arel.sql("LOWER(UNACCENT(edifices.nom))")) }
 
-  scope :preloaded, -> do
-    with_objets.includes(objets: [:commune, :recensement, { recensement: [:photos_attachments, :photos_blobs] }]).ordered_by_nom
-  end
-
+  scope :preloaded, lambda {
+    with_objets.ordered_by_nom.includes(
+      objets: [:commune, :recensement, { recensement: [:photos_attachments, :photos_blobs] }]
+    )
+  }
 
   # rubocop:disable Naming/MethodParameterName, Naming/VariableName
   def self.find_or_create_and_synchronize!(merimee_REF:, code_insee:)
