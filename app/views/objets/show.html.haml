@@ -1,6 +1,6 @@
 - content_for(:head_title) { truncate(@objet.nom, length: 20) }
 %main#contenu.fr-container.fr-pt-2w
-  = render "shared/breadcrumbs", links: [["Accueil", root_path],["Objets de #{@objet.commune.nom}",objets_path(commune_code_insee: @objet.commune.code_insee)]], current_page_label: @objet.nom
+  = render "shared/breadcrumbs", links: [["Accueil", root_path],["Objets de #{@objet.commune.nom}", @objet.commune]], current_page_label: @objet.nom
   %h1= @objet.nom
 
   .fr-grid-row.fr-pb-4w.fr-grid-row--gutters

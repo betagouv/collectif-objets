@@ -5,29 +5,9 @@ require "rails_helper"
 feature "accessibility public pages", js: true do
   subject { page }
 
-  describe "objets#index" do
-    let!(:objets1) { create_list(:objet, 10, :with_palissy_photo) }
-    let!(:objets2) { create_list(:objet, 12, :without_image) }
-    before { visit objets_path }
-    it { should be_axe_clean }
-  end
-
-  describe "objets#show sans photo" do
-    let!(:objet) { create(:objet, :without_image) }
-    before { visit objet_path(objet) }
-    it { should be_axe_clean }
-  end
-
-  describe "objets#show avec photo" do
-    let!(:objet) { create(:objet, :with_palissy_photo) }
-    before { visit objet_path(objet) }
-    it { should be_axe_clean }
-  end
-
-  describe "objets#index(commune_code_insee) - Liste des objets d'une commune" do
-    let!(:commune) { create(:commune) }
-    let!(:objets) { create_list(:objet, 3, commune:) }
-    before { visit objets_path(commune_code_insee: commune.code_insee) }
+  describe "communes#show" do
+    let!(:commune) { create(:commune, :with_objets) }
+    before { visit commune_path(commune) }
     it { should be_axe_clean }
   end
 

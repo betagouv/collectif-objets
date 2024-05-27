@@ -60,7 +60,8 @@ Rails.application.routes.draw do
   get "/presse/:id", to: "presse#show", as: :article_presse
   resources :survey_votes, only: %w[new create]
 
-  resources :objets, only: %i[index show]
+  resources :communes, only: :show
+  resources :objets, only: :show
   resources :contenus, only: %i[show], controller: "content_blobs", as: "content_blobs"
 
   ## --------
