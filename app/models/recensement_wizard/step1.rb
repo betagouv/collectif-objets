@@ -47,7 +47,8 @@ module RecensementWizard
       end
 
       return unless (localisation == Recensement::LOCALISATION_ABSENT && confirmation_introuvable) ||
-                    localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+                    localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE ||
+                    localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
 
       recensement.recensable = false
       recensement.etat_sanitaire = nil
