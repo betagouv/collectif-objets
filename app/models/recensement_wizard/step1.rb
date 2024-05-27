@@ -41,19 +41,10 @@ module RecensementWizard
     end
 
     def reset_recensement_data_for_next_steps
-      if recensement.localisation_changed?
-        recensement.edifice_nom = nil
-        recensement.autre_commune_code_insee = nil
-      end
+      return unless recensement.localisation_changed?
 
-      return unless (localisation == Recensement::LOCALISATION_ABSENT && confirmation_introuvable) ||
-                    localisation == Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
-
-      recensement.recensable = false
-      recensement.etat_sanitaire = nil
-      recensement.securisation = nil
-      recensement.photos = []
-      recensement.photos_count = 0
+      recensement.edifice_nom = nil
+      recensement.autre_commune_code_insee = nil
     end
   end
 end
