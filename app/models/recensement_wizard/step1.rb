@@ -41,10 +41,10 @@ module RecensementWizard
     end
 
     def reset_recensement_data_for_next_steps
-      if recensement.localisation_changed?
-        recensement.edifice_nom = nil
-        recensement.autre_commune_code_insee = nil
-      end
+      return unless recensement.localisation_changed?
+
+      recensement.edifice_nom = nil
+      recensement.autre_commune_code_insee = nil
     end
   end
 end
