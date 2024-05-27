@@ -32,15 +32,5 @@ module RecensementWizard
     def next_step_number
       recensable == false ? 6 : super
     end
-
-    def reset_recensement_data_for_next_steps
-      return unless recensable == false && confirmation_not_recensable
-
-      recensement.etat_sanitaire = nil
-      recensement.securisation = nil
-      recensement.photos = []
-      # TODO : voir s'il est plus judicieux d'utiliser un counter_cache
-      recensement.photos_count = 0
-    end
   end
 end
