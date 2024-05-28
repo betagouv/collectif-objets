@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   resources :survey_votes, only: %w[new create]
 
   resources :communes, only: :show
-  resources :objets, only: :show
+  resources :objets, only: [:index, :show]
   resources :contenus, only: %i[show], controller: "content_blobs", as: "content_blobs"
 
   ## --------
