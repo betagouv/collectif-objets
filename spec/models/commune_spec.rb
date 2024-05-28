@@ -273,7 +273,7 @@ RSpec.describe Commune, type: :model do
         it "should not work and the error should be explicit" do
           subject
           expect(commune.errors.full_messages).to eq(
-            ["Impossible de supprimer Commune parce qu’il y a 1 ou plusieurs dossiers associés"]
+            ["Impossible de supprimer Commune parce qu’il y a un dossier associé"]
           )
         end
       end
