@@ -41,7 +41,6 @@ module RecensementPhoto
     has_one :objet, through: :recensement
     has_one :commune, through: :objet
     has_one :departement, through: :commune
-    delegate :memoire_sequence_name, to: :departement
     after_save :set_memoire_number, if: :recensement?
   end
 
@@ -57,7 +56,7 @@ module RecensementPhoto
     return if memoire_number.present? || !recensement?
 
     ActiveRecord::Base.connection.execute \
-      "UPDATE active_storage_attachments SET memoire_number = nextval('#{memoire_sequence_name}') WHERE id = #{id};"
+      "UPDATE active_storage_attachments SET memoire_number = nextval('#{recensement.departement.memoire_sequence_name}') WHERE id = #{id};"
     reload
   end
 
