@@ -5,48 +5,9 @@ require "rails_helper"
 feature "accessibility public pages", js: true do
   subject { page }
 
-  describe "objets#index" do
-    let!(:objets1) { create_list(:objet, 10, :with_palissy_photo) }
-    let!(:objets2) { create_list(:objet, 12, :without_image) }
-    before { visit objets_path }
-    it { should be_axe_clean }
-  end
-
-  describe "objets#show sans photo" do
-    let!(:objet) { create(:objet, :without_image) }
-    before { visit objet_path(objet) }
-    it { should be_axe_clean }
-  end
-
-  describe "objets#show avec photo" do
-    let!(:objet) { create(:objet, :with_palissy_photo) }
-    before { visit objet_path(objet) }
-    it { should be_axe_clean }
-  end
-
-  describe "departements#index - Liste des communes de toute la france" do
-    before do
-      departements = create_list(:departement, 2)
-      departements.each { create_list(:commune, 2, departement: _1) }
-    end
-    before { visit departements_path }
-    it { should be_axe_clean }
-  end
-
-  describe "departements#show - Liste des communes d'un département" do
-    let!(:departement) { create(:departement) }
-    let!(:communes) { create_list(:commune, 2, departement:) }
-    let!(:objets) do
-      communes.map { create_list(:objet, 3, commune: _1) }.flatten
-    end
-    before { visit departement_path(departement) }
-    it { should be_axe_clean }
-  end
-
-  describe "objets#index(commune_code_insee) - Liste des objets d'une commune" do
-    let!(:commune) { create(:commune) }
-    let!(:objets) { create_list(:objet, 3, commune:) }
-    before { visit objets_path(commune_code_insee: commune.code_insee) }
+  describe "communes#show" do
+    let!(:commune) { create(:commune, :with_objets) }
+    before { visit commune_path(commune) }
     it { should be_axe_clean }
   end
 

@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     render(turbo_stream: [turbo_stream.update(*, **)])
   end
 
+  rescue_from ActiveRecord::RecordNotFound, with: :page_not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   protected
@@ -77,6 +78,10 @@ class ApplicationController < ActionController::Base
     message += " : #{exception.message}" if Rails.env.development?
     flash[:alert] = message
     redirect_back(fallback_location: root_path)
+  end
+
+  def page_not_found
+    render "errors/not_found", status: :not_found
   end
 
   helper_method :active_nav_links

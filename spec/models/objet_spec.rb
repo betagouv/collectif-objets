@@ -107,17 +107,17 @@ RSpec.describe Objet, type: :model do
     let(:message) { "notice Palissy est un sous-dossier" }
     subject { objet.destroy_and_soft_delete_recensement!(reason:, message:) }
 
-    context "aucun recensement" do
+    context "quand il n'y a aucun recensement" do
       it "détruit l'objet" do
         subject
         expect { objet.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
-    context "un recensement completed existe" do
+    context "quand un recensement completed existe" do
       let(:recensement) { create(:recensement) }
       let(:objet) { recensement.objet }
-      it "détruit l'objet et soft delete le recensement" do
+      it "l'objet est détruit et le recensement est soft-deleted" do
         subject
         expect { objet.reload }.to raise_error(ActiveRecord::RecordNotFound)
         expect(recensement.reload.deleted?).to eq true
@@ -126,11 +126,11 @@ RSpec.describe Objet, type: :model do
         expect(recensement.reload.deleted_message).to eq "notice Palissy est un sous-dossier"
       end
 
-      context "le destroy! échoue" do
+      context "mais que objet.destroy! échoue" do
         before do
           allow(objet).to receive(:destroy!).and_raise(ActiveRecord::RecordNotDestroyed)
         end
-        it "should rollback and not soft delete recensement" do
+        it "ne supprime ni l'objet ni le recensement" do
           expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed)
           expect(recensement.reload.deleted?).to eq false
         end

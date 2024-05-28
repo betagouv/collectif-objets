@@ -2,7 +2,7 @@
 
 %main#contenu.fr-pt-2w.fr-pb-8w
   .fr-container
-    = render("shared/breadcrumbs", links: [["Accueil", root_path], ["Objets de #{@commune}", objets_path(commune_code_insee: @commune.code_insee)]], current_page_label: "Pourquoi n'avez vous pas pu participer à Collectif Objets ?")
+    = render("shared/breadcrumbs", links: [["Accueil", root_path], ["Objets de #{@commune}", @commune]], current_page_label: "Pourquoi n'avez vous pas pu participer à Collectif Objets ?")
 
     %h1 Pourquoi n'avez vous pas pu participer à Collectif Objets ?
 

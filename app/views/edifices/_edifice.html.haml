@@ -1,0 +1,9 @@
+%h2.fr-mt-4w{id: edifice.slug}
+  = edifice_nom(edifice.nom)
+  ·
+  = t("objets.count", count: edifice.objets.length)
+
+.fr-grid-row.fr-pb-4w.fr-grid-row--gutters
+  - edifice.objets.each do |objet|
+    .fr-col-sm-6.fr-col-md-4.fr-col-lg-3
+      = render ObjetCardComponent.new(objet)

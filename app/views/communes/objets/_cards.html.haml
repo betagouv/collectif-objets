@@ -1,4 +1,4 @@
 = render layout: "shared/grid_layout" do
   - objets.each do |objet|
     .fr-col-md-3
-      = render Communes::ObjetCardComponent.new(objet, commune:, recensement: objet.current_recensement)
+      = render Communes::ObjetCardComponent.new(objet, commune:, recensement: objet.recensement)

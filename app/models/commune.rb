@@ -31,7 +31,7 @@ class Commune < ApplicationRecord
     inverse_of: :commune,
     dependent: nil # leave the objets in the database when the commune is destroyed
   )
-  has_many :recensements, through: :objets
+  has_many :recensements, through: :objets, source: :recensements
   has_many :past_dossiers, class_name: "Dossier", dependent: :restrict_with_error
   belongs_to :dossier, optional: true
   has_many :campaign_recipients, dependent: :destroy

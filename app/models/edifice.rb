@@ -16,10 +16,13 @@ class Edifice < ApplicationRecord
     .merge(Objet.classés.or(Objet.inscrits))
     .group("edifices.id")
   }
+  scope :ordered_by_nom, -> { order(Arel.sql("LOWER(UNACCENT(edifices.nom))")) }
 
-  def self.ordered_by_nom
-    order(Arel.sql("LOWER(UNACCENT(edifices.nom))"))
-  end
+  scope :preloaded, lambda {
+    with_objets.ordered_by_nom.includes(
+      objets: [:commune, :recensements, { recensements: [:photos_attachments, :photos_blobs] }]
+    )
+  }
 
   # rubocop:disable Naming/MethodParameterName, Naming/VariableName
   def self.find_or_create_and_synchronize!(merimee_REF:, code_insee:)

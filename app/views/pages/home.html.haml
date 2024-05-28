@@ -46,10 +46,10 @@
           Les conservateurs de votre département vous adresseront un
           = succeed "," do
             %b examen sur la conservation et la sécurisation de vos objets
-  .co-background--light-grey.fr-py-12w
-    .fr-container.fr-grid-row.fr-grid-row--center.fr-my-8w
-      .fr-col-md-6
-        = link_to "Je découvre les objets monuments historiques de ma commune", objets_path, class: "fr-btn"
+
+    .fr-container.fr-grid-row.fr-grid-row--center
+      .fr-col-md-6.fr-pt-4w.co-text--center
+        = link_to "Voir les objets monuments historiques de ma commune", new_user_session_code_path, class: "fr-btn fr-btn--secondary"
 
   / SECTION ETAPES
   .co-home-section-steps
@@ -61,7 +61,7 @@
           %b Je me rends sur place
           pour recenser mes objets protégés et les prendre en photo
         %p
-          = link_to "Voir les objets de ma commune", objets_path, class: "fr-icon-arrow-right-line fr-link--icon-right"
+          = link_to "Voir les objets de ma commune", new_user_session_code_path, class: "fr-icon-arrow-right-line fr-link--icon-right"
     .fr-container.fr-grid-row.fr-grid-row-gutters.fr-grid-row--middle.fr-grid-row--center.fr-my-12w
       .fr-col-md-5
         %p.fr-text--lg

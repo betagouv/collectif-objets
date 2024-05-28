@@ -15,7 +15,7 @@ class ObjetCardComponent < ViewComponent::Base
     @commune = kwargs[:commune] || @objet.commune # pass to avoid n+1 queries
     @main_photo_origin = kwargs[:main_photo_origin] || :memoire
     @link_html_attributes_custom = kwargs[:link_html_attributes] || {}
-    @recensement = kwargs[:recensement] || @objet.current_recensement
+    @recensement = kwargs[:recensement] || @objet.recensement
     @size = kwargs[:size] || :md
     super
   end
@@ -35,9 +35,7 @@ class ObjetCardComponent < ViewComponent::Base
   end
 
   def main_photo
-    return @main_photo if @main_photo.present?
-
-    {
+    @main_photo ||= {
       memoire: main_photo_palissy,
       recensement: main_photo_recensement,
       recensement_or_memoire: main_photo_recensement || main_photo_palissy
@@ -53,10 +51,10 @@ class ObjetCardComponent < ViewComponent::Base
   def main_photo_palissy = palissy_photos_presenters&.first
 
   def main_photo_recensement
-    return unless recensement&.photos&.any?
+    return unless (photo = recensement&.photos&.first)
 
     PhotoPresenter.new \
-      url: recensement.photos.first.variant(:medium),
+      url: photo.variant(:medium),
       description: "Objet #{objet.nom} lors du recensement"
   end
 end

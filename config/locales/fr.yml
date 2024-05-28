@@ -716,6 +716,12 @@ fr:
       header:
         one: 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreur'
         other: 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+    not_found:
+      title: Page non trouvée (erreur 404)
+      content: La page que vous cherchez est introuvable. Excusez-nous pour la gêne occasionnée.
+      help: |-
+        Si vous avez tapé lʼadresse web dans le navigateur, vérifiez quʼelle est correcte. La page nʼest peut-être plus
+        disponible.<br /> Dans ce cas, pour continuer votre visite, vous pouvez consulter notre page dʼaccueil.
 
   support:
     array:

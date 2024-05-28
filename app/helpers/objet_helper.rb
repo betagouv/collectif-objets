@@ -20,7 +20,7 @@ module ObjetHelper
   end
 
   def objet_recensement_badge_color_and_text(objet)
-    recensement = objet.current_recensement
+    recensement = objet.recensement
     dossier = recensement&.dossier
     return nil if dossier&.accepted?
 

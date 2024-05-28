@@ -73,10 +73,9 @@ class Objet < ApplicationRecord
     truncate("#{palissy_REF} #{nom}", length: 40)
   end
 
-  def current_recensement = recensements.first
-
-  def recensement? = current_recensement.present?
-  def recensement_completed? = current_recensement&.completed?
+  def recensement = recensements.first
+  def recensement? = recensement.present?
+  def recensement_completed? = recensement&.completed?
 
   def self.select_best_objet_in_list(objets_arr)
     current_arr = objets_arr

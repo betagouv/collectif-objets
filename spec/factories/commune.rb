@@ -13,6 +13,10 @@ FactoryBot.define do
       users { [association(:user)] }
     end
 
+    trait :with_objets do
+      objets { [association(:objet), association(:objet)] }
+    end
+
     trait :completed do
       status { "completed" }
       association :dossier, :submitted

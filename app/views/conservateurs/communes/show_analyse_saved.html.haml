@@ -24,4 +24,4 @@
         = render layout: "shared/grid_layout" do
           - @objets.each do |objet|
             .fr-col-md-4
-              = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.current_recensement, can_analyse: objet.current_recensement && conservateurs_policy(Analyse.new(recensement: objet.current_recensement)).edit?, commune: @commune
+              = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.recensement, can_analyse: objet.recensement && conservateurs_policy(Analyse.new(recensement: objet.recensement)).edit?, commune: @commune

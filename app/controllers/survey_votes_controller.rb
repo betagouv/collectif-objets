@@ -14,7 +14,7 @@ class SurveyVotesController < ApplicationController
     @survey_vote = SurveyVote.new(survey_vote_params)
     @commune = @survey_vote.commune
     if @survey_vote.save
-      redirect_to objets_path(commune_code_insee: @commune.code_insee), notice: "Merci pour votre réponse !"
+      redirect_to @commune, notice: "Merci pour votre réponse !"
     else
       @commune = @survey_vote.commune
       render :new, status: :unprocessable_entity
@@ -30,16 +30,13 @@ class SurveyVotesController < ApplicationController
   def validate_survey_exists
     return true if params[:survey] == "campaign_inactive"
 
-    redirect_to objets_path(commune_code_insee: @commune.code_insee), alert: "ce sondage n'existe pas"
+    redirect_to @commune, alert: "ce sondage n'existe pas"
   end
 
   def validate_commune_has_not_voted
     return true if @commune.survey_votes.where(survey: "campaign_inactive").empty?
 
-    redirect_to(
-      objets_path(commune_code_insee: @commune.code_insee),
-      alert: "votre commune #{@commune} a déjà répondu à ce sondage"
-    )
+    redirect_to(@commune, alert: "votre commune #{@commune} a déjà répondu à ce sondage")
   end
 
   def survey_vote_params
