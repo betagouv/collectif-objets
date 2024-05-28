@@ -25,8 +25,8 @@
         %label.fr-label{for: "campaign_recipients_attributes_commune_#{commune.id}"}
           %span= commune.nom
           &nbsp;
-          - if commune.active?
-            %span.co-text--sm (déjà active)
+          - if commune.started?
+            %span.co-text--sm (recensement en cours)
           - if commune.users.empty?
             %span.co-text--sm (pas d'email)
           - if commune.objets.empty?

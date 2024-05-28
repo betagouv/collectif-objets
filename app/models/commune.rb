@@ -165,7 +165,7 @@ class Commune < ApplicationRecord
   end
 
   def can_be_campaign_recipient?
-    inactive? && users.any? && objets.any?
+    !started? && users.any? && objets.any?
   end
 
   def shall_receive_email_objets_verts?(date)
