@@ -5,11 +5,13 @@
 .co-text--bold #{campaign.communes.count} communes destinataires
 
 = form_for campaign, builder: FormBuilderDsfr, url: send("#{routes_prefix}_campaign_update_recipients_path", campaign), data: { controller: "multichecker" } do |f|
-  .fr-mb-4w
-    %button.fr-btn.fr-btn--secondary{"data-action" => "multichecker#checkAll"}
-      Tout sélectionner
-    %button.fr-btn.fr-btn--tertiary{"data-action" => "multichecker#uncheckAll"}
-      Tout désélectionner
+  %ul.fr-btns-group.fr-btns-group--inline-md.fr-mb-4w
+    %li
+      %button.fr-btn.fr-btn--secondary{"data-action" => "multichecker#checkAll"}
+        Tout sélectionner
+    %li
+      %button.fr-btn.fr-btn--tertiary{"data-action" => "multichecker#uncheckAll"}
+        Tout désélectionner
 
   %ul.co-columns--4
     - campaign.departement.communes.order("communes.nom").each do |commune|
