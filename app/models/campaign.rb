@@ -116,8 +116,8 @@ class Campaign < ApplicationRecord
 
   # these next methods are used in the admin to force step up or start a campaign
 
-  def can_force_start? = !prod? && draft_or_planned? && communes.any? && safe_emails?
-  def can_force_step_up? = !prod? && ongoing? && next_step.present? && communes.any? && safe_emails?
+  def can_force_start? = !prod? && draft_or_planned? && communes.any?
+  def can_force_step_up? = !prod? && ongoing? && next_step.present? && communes.any?
 
   def to_s
     "Campagne #{departement} du #{date_lancement} au #{date_fin}"
@@ -126,5 +126,4 @@ class Campaign < ApplicationRecord
   private
 
   def prod? = Rails.configuration.x.environment_specific_name == "production"
-  def safe_emails? = communes.map(&:users).flatten.all?(&:safe_email?)
 end
