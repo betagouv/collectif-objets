@@ -16,9 +16,9 @@
 
         - if campaign.communes.any?(&:active?)
           .fr-mt-2w
-            ⚠️ Attention : certaines communes destinataires ont déjà commencé à recenser, il faut les retirer des destinataires avant de pouvoir planifier la campagne.
+            ⚠️ Attention : certaines communes destinataires ont déjà commencé à recenser, elles ne recevront pas les emails de campagne.
 
-      = f.submit "Planifier la campagne", disabled: campaign.communes.any?(&:active?)
+      = f.submit "Planifier la campagne"
 
 - elsif campaign.planned? && campaign.date_lancement > Time.zone.today
   = form_for campaign, builder: FormBuilderDsfr, url: send("#{r}_campaign_update_status_path", campaign) do |f|
