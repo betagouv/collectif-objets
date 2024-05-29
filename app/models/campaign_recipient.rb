@@ -17,7 +17,7 @@ class CampaignRecipient < ApplicationRecord
   # TODO: validate cannot be CRUD for non-draft campaign
   # TODO: validate commune belongs to campaign departement
 
-  validate :validate_inactive
+  validate :can_be_included
   validate :validate_email
 
   before_create :set_unsubscribe_token
@@ -61,10 +61,10 @@ class CampaignRecipient < ApplicationRecord
 
   private
 
-  def validate_inactive
+  def can_be_included
     return if persisted? || (campaign.ongoing? || campaign.finished?)
 
-    errors.add(:commune_id, "Impossible d'intégrer une commune déjà active") unless commune.inactive?
+    errors.add(:commune_id, "Impossible d'intégrer une commune en cours de recensement") if commune.started?
   end
 
   def validate_email
