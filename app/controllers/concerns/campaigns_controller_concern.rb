@@ -41,8 +41,8 @@ module CampaignsControllerConcern
     redirect_to send("#{routes_prefix}_campaign_path", @campaign),
                 notice: "Les destinataires de la campagne ont été modifiés"
   rescue ActiveRecord::RecordInvalid => e
-    redirect_to \
-      send("#{routes_prefix}_campaign_edit_recipients_path", @campaign),
+    render :edit_recipients,
+      status: :unprocessable_entity,
       alert: "#{e.record.commune.nom} : #{e.record.errors.first.message}"
   end
 
