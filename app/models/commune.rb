@@ -67,6 +67,14 @@ class Commune < ApplicationRecord
   accepts_nested_attributes_for :users, allow_destroy: true
   validates_associated :users
 
+  def inactive?
+    dossier.nil?
+  end
+
+  def started?
+    active? && dossier.construction?
+  end
+
   # Le "statut global" est une sorte de fusion des champs status de la commune, du dossier et de l'examen,
   # et permet l'affichage d'un statut unique dans les vues et un filtre facile via Ransack.
   #

@@ -303,4 +303,33 @@ RSpec.describe Commune, type: :model do
       end
     end
   end
+
+  describe "#can_be_campaign_recipient?" do
+    subject { commune.can_be_campaign_recipient? }
+
+    context "n'a jamais recensé" do
+      let(:commune) { build(:commune_recensable) }
+      it { should be_truthy }
+    end
+
+    context "en cours de recensement" do
+      let(:commune) { build(:commune_en_cours_de_recensement) }
+      it { should be_falsey }
+    end
+
+    context "a envoyé son dossier" do
+      let(:commune) { build(:commune_a_examiner) }
+      it { should be_truthy }
+    end
+
+    context "en cours d'examen" do
+      let(:commune) { build(:commune_en_cours_dexamen) }
+      it { should be_truthy }
+    end
+
+    context "examinée" do
+      let(:commune) { build(:commune_examinée) }
+      it { should be_truthy }
+    end
+  end
 end
