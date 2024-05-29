@@ -116,7 +116,6 @@ class Campaign < ApplicationRecord
 
   # these next methods are used in the admin to force step up or start a campaign
 
-  def can_update_all_recipients_emails? = !prod? && draft_or_planned? && communes.any?
   def can_force_start? = !prod? && draft_or_planned? && communes.any? && safe_emails?
   def can_force_step_up? = !prod? && ongoing? && next_step.present? && communes.any? && safe_emails?
 
