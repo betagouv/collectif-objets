@@ -21,7 +21,7 @@ class Campaign < ApplicationRecord
     state :ongoing, display: "En cours"
     state :finished, display: "Terminée"
 
-    event(:plan) { transitions from: :draft, to: :planned, guard: :only_inactive_communes? }
+    event(:plan) { transitions from: :draft, to: :planned }
     event(:return_to_draft) { transitions from: :planned, to: :draft }
     event(:start) { transitions from: :planned, to: :ongoing }
     event(:finish) { transitions from: :ongoing, to: :finished }
@@ -107,7 +107,6 @@ class Campaign < ApplicationRecord
 
   def dates_are_present? = DATE_FIELDS.map { send(_1) }.all?(&:present?)
   def draft_or_planned? = draft? || planned?
-  def only_inactive_communes? = communes.where.not(status: "inactive").empty?
   def stats = super&.with_indifferent_access
 
   def self.ransackable_attributes(_ = nil)
