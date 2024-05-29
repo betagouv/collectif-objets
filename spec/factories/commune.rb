@@ -23,6 +23,7 @@ FactoryBot.define do
     end
 
     trait :en_cours_de_recensement do
+      status { "started" }
       association :dossier
     end
 
