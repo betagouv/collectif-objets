@@ -32,10 +32,12 @@ FactoryBot.define do
     end
 
     trait :en_cours_d_examen do
+      status { "completed" }
       association :dossier, factory: :dossier_en_cours_dexamen
     end
 
     trait :examinée do
+      status { "completed" }
       association :dossier, factory: :dossier_examiné
     end
 
