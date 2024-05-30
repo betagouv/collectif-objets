@@ -12,6 +12,8 @@
     %li
       %button.fr-btn.fr-btn--tertiary{"data-action" => "multichecker#uncheckAll"}
         Tout désélectionner
+    %li.fr-ml-auto
+      %button.fr-btn.fr-btn--primary{type: :submit} Enregistrer la sélection
 
   %ul.co-columns--4
     - campaign.departement.communes.order("communes.nom").each do |commune|
