@@ -49,6 +49,8 @@ class Commune < ApplicationRecord
   }
   scope :completed, -> { where(status: STATE_COMPLETED) }
 
+  scope :sort_by_nom, -> { order("communes.nom ASC") }
+
   # these 2 scopes are a hack for ransack sorting on dossier_status from conservateurs/departements#show
   # from my understanding it should work out of the box with `dossier_status` but it doesn't ¯\_(ツ)_/¯
   # cf https://github.com/activerecord-hackery/ransack/blob/main/lib/ransack/adapters/active_record/context.rb#L211
