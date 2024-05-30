@@ -16,7 +16,7 @@
       %button.fr-btn.fr-btn--primary{type: :submit} Enregistrer la sélection
 
   %ul.co-columns--4
-    - campaign.departement.communes.order("communes.nom").each do |commune|
+    - campaign.available_communes.each do |commune|
       - checked = campaign.commune_ids.include?(commune.id)
       .fr-checkbox-group.fr-mb-1w
         %input{type: "checkbox",

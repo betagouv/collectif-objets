@@ -105,6 +105,10 @@ class Campaign < ApplicationRecord
     STEPS[0..index]
   end
 
+  def available_communes
+    @available_communes ||= departement.communes.distinct.with_objets.include_users_count.includes(:dossier)
+  end
+
   def dates_are_present? = DATE_FIELDS.map { send(_1) }.all?(&:present?)
   def draft_or_planned? = draft? || planned?
   def stats = super&.with_indifferent_access
