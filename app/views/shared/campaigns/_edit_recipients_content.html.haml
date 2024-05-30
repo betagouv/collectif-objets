@@ -2,7 +2,7 @@
   %p.fr-callout__text
     = t("campaigns.edit_recipients_tooltip")
 
-%p= "Liste des #{campaign.available_communes.load.size} communes abritant des objets <abbr title='Monuments Historiques'>MH</abbr> #{campaign.departement.dans_nom}.".html_safe
+%p.fr-mb-4w= "Liste des #{campaign.available_communes.load.size} communes abritant des objets <abbr title='Monuments Historiques'>MH</abbr> #{campaign.departement.dans_nom}.".html_safe
 
 = form_for campaign, builder: FormBuilderDsfr, url: send("#{routes_prefix}_campaign_update_recipients_path", campaign), data: { controller: "multichecker" } do |f|
   %ul.fr-btns-group.fr-btns-group--icon-left.fr-btns-group--inline-md.fr-mb-4w
@@ -18,7 +18,7 @@
   %fieldset.fr-fieldset
     %legend.fr-sr-only
       Communes
-    .co-columns-auto.co-columns-sm-2.co-columns-md-3.co-columns-lg-4
+    .co-columns-auto.co-columns-sm-2.co-columns-md-3.co-columns-lg-4.fr-mx-1w
       - campaign.available_communes.each do |commune|
         - checked = campaign.commune_ids.include?(commune.id)
         - input_id = "campaign_recipients_attributes_commune_#{commune.id}"
