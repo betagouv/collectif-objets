@@ -13,11 +13,6 @@
     .fr-callout
       %p.fr-callout__text
         Cette campagne est en brouillon. Pour qu'elle soit active et démarre effectivement le #{l(campaign.date_lancement, format: :long_with_weekday)}, il faut la marquer comme planifiée. Vous pourrez repasser la campagne en brouillon si nécessaire.
-
-        - if campaign.communes.any?(&:active?)
-          .fr-mt-2w
-            ⚠️ Attention : certaines communes destinataires ont déjà commencé à recenser, elles ne recevront pas les emails de campagne.
-
       = f.submit "Planifier la campagne"
 
 - elsif campaign.planned? && campaign.date_lancement > Time.zone.today
