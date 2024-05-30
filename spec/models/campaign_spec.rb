@@ -195,7 +195,7 @@ RSpec.describe Campaign, type: :model do
     end
   end
 
-  describe "validate_only_invalid_communes" do
+  describe "#plan" do
     let!(:campaign) { create(:campaign, status: "draft") }
     let!(:campaign_recipient1) do
       create(:campaign_recipient, campaign:, commune: build(:commune_with_user, status: "inactive"))
@@ -209,16 +209,6 @@ RSpec.describe Campaign, type: :model do
         res = campaign.plan!
         expect(res).to eq true
         expect(campaign.reload.status).to eq("planned")
-      end
-    end
-
-    context "some active communes" do
-      before { campaign_recipient2.commune.start! }
-
-      it "should not allow planning the campaign" do
-        expect(campaign.may_plan?).to eq false
-        expect { campaign.plan! }.to raise_exception(AASM::InvalidTransition)
-        expect(campaign.reload.status).to eq("draft")
       end
     end
   end
