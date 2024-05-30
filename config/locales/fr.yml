@@ -567,7 +567,7 @@ fr:
       option2: si vous connaissez une personne liée à leur propriétaire qui pourrait les recenser, nous vous invitons à lui transférer ce courriel.
       question: Pour toute question complémentaire, vous avez la possibilité de répondre à ce courriel.
   campaigns:
-    edit_recipients_tooltip: Les communes peuvent être éditées uniquement pour les campagnes en brouillon. Une fois planifiées ou démarrées, les communes ne peuvent plus être modifiées.
+    edit_recipients_tooltip: Attention ! Dorénavant, toutes les communes sont sélectionnées par défaut, y compris celles dont le dossier n'a pas encore été examiné.
     mail_names:
       lancement: Mail de lancement
       relance1: Première relance
