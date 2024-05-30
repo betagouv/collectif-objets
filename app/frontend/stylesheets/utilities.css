@@ -63,6 +63,33 @@
 .co-margin-last-0 p:last-child { margin-bottom: 0 }
 
 /* COLUMNS */
+/* Prevent column breaks inside elements */
+.co-break-avoid-column {
+  break-inside: avoid-column;
+}
+.co-columns-auto {
+  width: 100%;
+  columns: 1 auto;
+  column-fill: balance;
+}
+.co-columns-2 { column-count: 2; }
+.co-columns-3 { column-count: 3; }
+.co-columns-4 { column-count: 4; }
+@media only screen and (min-width:576px) {
+  .co-columns-sm-2 { column-count: 2; }
+  .co-columns-sm-3 { column-count: 3; }
+  .co-columns-sm-4 { column-count: 4; }
+}
+@media only screen and (min-width:768px) {
+  .co-columns-md-2 { column-count: 2; }
+  .co-columns-md-3 { column-count: 3; }
+  .co-columns-md-4 { column-count: 4; }
+}
+@media only screen and (min-width:992px) {
+  .co-columns-lg-2 { column-count: 2; }
+  .co-columns-lg-3 { column-count: 3; }
+  .co-columns-lg-4 { column-count: 4; }
+}
 
 @media only screen and (min-width:780px) {
   .co-columns--3 { columns: 3; }

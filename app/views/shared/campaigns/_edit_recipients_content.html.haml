@@ -15,27 +15,32 @@
     %li.fr-ml-auto
       %button.fr-btn.fr-btn--primary.fr-btn--icon-left.fr-icon-checkbox-circle-fill{type: :submit} Enregistrer la sélection
 
-  %ul.co-columns--4
-    - campaign.available_communes.each do |commune|
-      - checked = campaign.commune_ids.include?(commune.id)
-      .fr-checkbox-group.fr-mb-1w
-        %input{type: "checkbox",
-          name: "campaign[recipients_attributes][][commune_id]",
-          id: "campaign_recipients_attributes_commune_#{commune.id}",
-          value: "#{commune.id}",
-          checked: checked,
-          "data-multichecker-target": "checkbox",
-          disabled: !checked && !commune.can_be_campaign_recipient? }
-        %label.fr-label{for: "campaign_recipients_attributes_commune_#{commune.id}"}
-          %span= commune.nom
-          &nbsp;
-          - if commune.started?
-            %span.co-text--sm (recensement en cours)
-          - if commune.users.empty?
-            %span.co-text--sm (pas d'email)
-          - if commune.objets.empty?
-            %span.co-text--sm (pas d'objets)
-          %span.fr-ml-1w.fr-badge.fr-badge--sm= commune.code_insee
+  %fieldset.fr-fieldset
+    %legend.fr-sr-only
+      Communes
+    .co-columns-auto.co-columns-sm-2.co-columns-md-3.co-columns-lg-4
+      - campaign.available_communes.each do |commune|
+        - checked = campaign.commune_ids.include?(commune.id)
+        - input_id = "campaign_recipients_attributes_commune_#{commune.id}"
+        .fr-checkbox-group.fr-checkbox-group--sm.fr-mb-1w.co-break-avoid-column
+          %input{type: :checkbox,
+            name: "campaign[recipients_attributes][][commune_id]",
+            id: input_id,
+            value: commune.id,
+            checked: checked,
+            "data-multichecker-target": :checkbox,
+            disabled: commune.users_count.zero? || commune.dossier&.construction? }
+          %label.fr-label{for: input_id}
+            %span.fr-mr-auto= commune.nom
+            - if commune.users_count.zero?
+              = badge(:warning) { "Pas d'email" }
+            - elsif commune.dossier
+              - if commune.dossier.construction?
+                = badge { commune.dossier.aasm.human_state }
+              - elsif commune.dossier.accepted?
+                = badge(:success) { commune.dossier.aasm.human_state }
+              - else
+                = badge(:info) { commune.dossier.aasm.human_state }
 
   .fr-mt-4w.co-text--center
     %button.fr-btn.fr-btn--primary.fr-btn--icon-left.fr-icon-checkbox-circle-fill{type: :submit} Enregistrer la sélection
