@@ -35,6 +35,8 @@ class Campaign < ApplicationRecord
   validate :validate_weekdays, if: :dates_are_present?
   validate :validate_no_overlapping_campaigns, if: -> { dates_are_present? && planned? }
 
+  before_create :add_default_recipients
+
   def step_for_date(date)
     return nil if date < date_lancement
 
@@ -128,6 +130,16 @@ class Campaign < ApplicationRecord
 
   def to_s
     "Campagne #{departement} du #{date_lancement} au #{date_fin}"
+  end
+
+  def communes_valides
+    departement.communes.distinct.unscope(:order).joins(:users, :objets).left_joins(:dossier)
+      .where.not(dossiers: { status: :construction })
+      .or(Commune.distinct.where(dossiers: { id: nil }))
+  end
+
+  def add_default_recipients
+    communes_valides.ids.each { |commune_id| recipients.find_or_initialize_by(commune_id:) }
   end
 
   private
