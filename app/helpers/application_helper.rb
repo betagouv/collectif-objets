@@ -10,7 +10,7 @@ module ApplicationHelper
   def badge(color = "", **html_opts)
     html_opts[:class] ||= ""
     html_opts[:class] += " fr-badge fr-badge--sm"
-    html_opts[:class] += " fr-badge--#{color}" unless color.blank?
+    html_opts[:class] += " fr-badge--#{color}" if color.present?
     content_tag("p", yield, **html_opts)
   end
 

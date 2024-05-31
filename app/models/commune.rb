@@ -43,7 +43,9 @@ class Commune < ApplicationRecord
 
   scope :with_user, -> { where.associated(:users) }
   scope :with_objets, -> { where.associated(:objets) }
-  scope :include_users_count, -> { select("communes.*, COUNT(users.id) as users_count").left_outer_joins(:users).group("communes.id") }
+  scope :include_users_count, lambda {
+    select("communes.*, COUNT(users.id) as users_count").left_outer_joins(:users).group("communes.id")
+  }
 
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)

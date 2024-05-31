@@ -42,8 +42,8 @@ module CampaignsControllerConcern
                 notice: "Les destinataires de la campagne ont été modifiés"
   rescue ActiveRecord::RecordInvalid => e
     render :edit_recipients,
-      status: :unprocessable_entity,
-      alert: "#{e.record.commune.nom} : #{e.record.errors.first.message}"
+           status: :unprocessable_entity,
+           alert: "#{e.record.commune.nom} : #{e.record.errors.first.message}"
   end
 
   def update_status
