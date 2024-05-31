@@ -14,7 +14,6 @@ FactoryBot.define do
     palissy_PROT { "classé au titre objet" }
 
     association :commune
-    association :edifice
 
     trait :without_image do
       # do nothing
