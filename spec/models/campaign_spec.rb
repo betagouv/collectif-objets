@@ -230,11 +230,19 @@ RSpec.describe Campaign, type: :model do
     it "should archive dossiers when necessary" do
       campaign.start
 
+      # Expectations on old dossier
       expect(commune_non_recensée.dossier).to be_nil
       expect(commune_en_cours_de_recensement.dossier.status).to eq("construction")
-      expect(commune_a_examiner.dossier).to be_nil
-      expect(commune_en_cours_dexamen.dossier).to be_nil
-      expect(commune_examinée.dossier).to be_nil
+      expect(commune_a_examiner.dossier.status).to eq("archived")
+      expect(commune_en_cours_dexamen.dossier.status).to eq("archived")
+      expect(commune_examinée.dossier.status).to eq("archived")
+
+      # Expectations on new dossier
+      expect(commune_non_recensée.reload.dossier).to be_nil
+      expect(commune_en_cours_de_recensement.reload.dossier.status).to eq("construction")
+      expect(commune_a_examiner.reload.dossier).to be_nil
+      expect(commune_en_cours_dexamen.reload.dossier).to be_nil
+      expect(commune_examinée.reload.dossier).to be_nil
     end
   end
 end
