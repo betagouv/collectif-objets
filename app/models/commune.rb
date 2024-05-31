@@ -178,7 +178,7 @@ class Commune < ApplicationRecord
   end
 
   def archive_dossier
-    dossier&.archive unless dossier&.construction?
+    dossier&.archive! unless dossier&.construction?
   end
 
   def support_email(role:)

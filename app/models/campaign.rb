@@ -23,7 +23,7 @@ class Campaign < ApplicationRecord
 
     event(:plan) { transitions from: :draft, to: :planned }
     event(:return_to_draft) { transitions from: :planned, to: :draft }
-    event(:start) { transitions from: :planned, to: :ongoing, before: :archive_dossiers }
+    event(:start, before: :archive_dossiers) { transitions from: :planned, to: :ongoing }
     event(:finish) { transitions from: :ongoing, to: :finished }
   end
 
