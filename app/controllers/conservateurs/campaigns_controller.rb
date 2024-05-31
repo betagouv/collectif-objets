@@ -5,6 +5,7 @@ module Conservateurs
     include CampaignsControllerConcern
 
     # rubocop:disable Rails/LexicallyScopedActionFilter
+    # Certaines actions sont définies dans le concern partagés par admins et conservateurs
     before_action :authorize_campaign, except: %i[new create]
     after_action :enqueue_admin_mail, only: %i[update_status]
     # rubocop:enable Rails/LexicallyScopedActionFilter
