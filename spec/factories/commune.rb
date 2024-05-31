@@ -10,11 +10,11 @@ FactoryBot.define do
     inbound_email_token { "12345678901234567890" }
 
     trait :with_user do
-      users { [association(:user)] }
+      users { [association(:user, commune: instance)] }
     end
 
     trait :with_objets do
-      objets { [association(:objet), association(:objet)] }
+      objets { [association(:objet, commune: instance), association(:objet, commune: instance)] }
     end
 
     trait :recensable do
@@ -24,22 +24,22 @@ FactoryBot.define do
 
     trait :en_cours_de_recensement do
       status { "started" }
-      association :dossier
+      dossier { association(:dossier, commune: instance) }
     end
 
     trait :completed do
       status { "completed" }
-      association :dossier, :submitted
+      dossier { association(:dossier, :submitted, commune: instance) }
     end
 
     trait :en_cours_d_examen do
       status { "completed" }
-      association :dossier, factory: :dossier_en_cours_dexamen
+      dossier { association(:dossier_en_cours_dexamen, commune: instance) }
     end
 
     trait :examinée do
       status { "completed" }
-      association :dossier, factory: :dossier_examiné
+      dossier { association(:dossier_examiné, :submitted, commune: instance) }
     end
 
     factory :commune_with_user, traits: [:with_user]
