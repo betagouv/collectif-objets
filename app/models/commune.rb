@@ -177,6 +177,10 @@ class Commune < ApplicationRecord
       !date.on_weekend?
   end
 
+  def archive_dossier
+    dossier&.archive unless dossier&.construction?
+  end
+
   def support_email(role:)
     parts = ["mairie", code_insee]
     parts << "conservateur" if role == :conservateur

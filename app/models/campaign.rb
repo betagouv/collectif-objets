@@ -23,7 +23,7 @@ class Campaign < ApplicationRecord
 
     event(:plan) { transitions from: :draft, to: :planned }
     event(:return_to_draft) { transitions from: :planned, to: :draft }
-    event(:start) { transitions from: :planned, to: :ongoing }
+    event(:start) { transitions from: :planned, to: :ongoing, before: :archive_dossiers }
     event(:finish) { transitions from: :ongoing, to: :finished }
   end
 
@@ -111,6 +111,10 @@ class Campaign < ApplicationRecord
 
   def self.ransackable_attributes(_ = nil)
     %w[departement_code status recipients_count date_lancement]
+  end
+
+  def archive_dossiers
+    communes.map(&:archive_dossier)
   end
 
   # these next methods are used in the admin to force step up or start a campaign
