@@ -212,4 +212,29 @@ RSpec.describe Campaign, type: :model do
       end
     end
   end
+
+  describe "#start" do
+    let(:campaign) { create(:campaign_planned) }
+    let(:commune_non_recensée) { create(:commune_non_recensée) }
+    let(:commune_en_cours_de_recensement) { create(:commune_non_recensée) }
+    let(:commune_a_examiner) { create(:commune_a_examiner) }
+    let(:commune_en_cours_dexamen) { create(:commune_en_cours_dexamen) }
+    let(:commune_examinée) { create(:commune_examinée) }
+
+    before do
+      campaign.communes << [commune_non_recensée, commune_en_cours_de_recensement,
+                            commune_a_examiner, commune_en_cours_dexamen, commune_examinée]
+      commune_en_cours_de_recensement.start
+    end
+
+    it "should archive dossiers when necessary" do
+      campaign.start
+
+      expect(commune_non_recensée.dossier).to be_nil
+      expect(commune_en_cours_de_recensement.dossier.status).to eq("construction")
+      expect(commune_a_examiner.dossier).to be_nil
+      expect(commune_en_cours_dexamen.dossier).to be_nil
+      expect(commune_examinée.dossier).to be_nil
+    end
+  end
 end

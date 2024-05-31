@@ -23,6 +23,7 @@ FactoryBot.define do
 
     trait :examiné do
       accepted
+      conservateur
     end
 
     factory :dossier_en_cours_dexamen, traits: [:submitted, :with_recensement_examiné]

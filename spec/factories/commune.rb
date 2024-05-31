@@ -43,7 +43,7 @@ FactoryBot.define do
     end
 
     factory :commune_with_user, traits: [:with_user]
-    factory :commune_recensable, traits: [:recensable]
+    factory :commune_recensable, traits: [:recensable], aliases: [:commune_non_recensée]
     factory :commune_completed, traits: %i[recensable completed], aliases: [:commune_a_examiner]
     factory :commune_en_cours_de_recensement, traits: [:recensable, :en_cours_de_recensement]
     factory :commune_en_cours_dexamen, traits: [:recensable, :en_cours_d_examen]
