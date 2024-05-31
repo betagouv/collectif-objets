@@ -20,6 +20,9 @@ AllCops:
 
   SuggestExtensions: false
 
+Style/Lambda:
+  Enabled: false
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
