@@ -73,7 +73,7 @@ class Objet < ApplicationRecord
     truncate("#{palissy_REF} #{nom}", length: 40)
   end
 
-  def recensement = recensements.first
+  def recensement = Recensement.find_by(objet: self, dossier: commune.dossier)
   def recensement? = recensement.present?
   def recensement_completed? = recensement&.completed?
 
