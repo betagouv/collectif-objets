@@ -5,14 +5,12 @@ titre: Sécuriser vos objets
 
 **Pour sécuriser des œuvres protégées au titre des monuments historiques, vous devez impérativement faire appel à la Conservation départementale des Antiquités et Objets d’Art (CAOA) qui établira avec vous un programme de travaux. Car si certaines règles ne sont pas respectées, des dégradations importantes pourraient arriver. Des subventions peuvent être octroyées dans certains cas pour ces travaux.**
 
-
-
 ## 1 - Pourquoi sécuriser mes objets ?
 
-Parmi l’ensemble desbiens culturels patrimoniaux, le patrimoine mobilier des églises est sans doute le plus fragile. Au-delà de son intérêt artistique, ce patrimoine est aussi le témoin de la vie et de l’histoire de communautés. Ayant parfois perdu son usage premier, il est souvent menacé.
+Parmi l’ensemble des biens culturels patrimoniaux, le patrimoine mobilier des églises est sans doute le plus fragile. Au-delà de son intérêt artistique, ce patrimoine est aussi le témoin de la vie et de l’histoire de communautés. Ayant parfois perdu son usage premier, il est souvent menacé.
 
-Les objets protégés au titre des monuments historiques sont des trésors patrimoniaux et des trésors nationaux en ce qui concerne les objets classés (article L. 111-1 du code du patrimoine).\
-\
+Les objets protégés au titre des monuments historiques sont des trésors patrimoniaux et des trésors nationaux en ce qui concerne les objets classés (article L. 111-1 du code du patrimoine).
+
 Il est du ressort de chacun - et en particulier des communes propriétaires de ces objets - de s’assurer de leur préservation et de leur transmission aux générations futures.
 
 Chaque année, des objets monuments historiques disparaissent du fait de vols ou d’actes malveillants. Afin de lutter contre ces vols, il importe de sécuriser les bâtiments qui abritent les objets monuments historiques et de s’assurer que ces objets sont exposés de manière à garantir leur sécurité.
@@ -64,7 +62,7 @@ En plus de la sécurisation de l’édifice, il faut vous assurer de la qualité
 
 ***Pour sécuriser des œuvres protégées au titre des monuments historiques, vous devez impérativement faire appel à la Conservation départementale des Antiquités et Objets d’Art (CAOA)* qui établira avec vous un programme de travaux. Car si certaines règles ne sont pas respectées, des dégradations importantes pourraient arriver. Des subventions peuvent être octroyées dans certains cas pour ces travaux.**
 
-[A﻿nnuaire des CAOA par département](https://www.culture.gouv.fr/content/download/323686/file/Liste%20CAOA%20FEVRIER%202023.odt?inLanguage=fre-FR)
+[A﻿nnuaire des CAOA par département](https://caoa.fr/wp-content/telechargement/2024-04-25-annuaire-CAOA-CDAOA.pdf)
 
 Après échange avec un conservateur de votre département, l’intervention d’un restaurateur qualifié permettra d’identifier et d’installer le meilleur système de fixation pour éviter de porter atteinte à l’œuvre. Par exemple :
 
@@ -88,7 +86,7 @@ Toutefois, si l’objet ne peut pas être mis en sécurité *in situ* via la sé
 
 Dès l’instant où les conditions de sécurité et de bonne conservation de l’objet sont rétablies dans son site d’origine, son retour en ce lieu est très souhaitable.
 
-## 5 - Les 4 étapes qui doivent accompagner ces mises à l’abri : 
+## 5 - Les 4 étapes qui doivent accompagner ces mises à l’abri :
 
 * Obtenir l’accord de l’affectataire (généralement l’association diocésaine ou son représentant)
 * Prévenir le Conservateur des Antiquités et Objets d’Art (CAOA) de ce changement de localisation
@@ -110,7 +108,5 @@ Des dispositions sont aussi à prendre au niveau municipal et avec les voisins d
 * Le ou les détenteur(s) des clés (maire, voisin, résidents du presbytère…) doivent être clairement identifiés par les personnes qui risquent de repérer le sinistre en premier, généralement les plus proches voisins.
 * Les clés doivent être accessibles à tout instant en cas d’urgence (jour, nuit, période de vacances…). A l’arrivée des sapeurs-pompiers, elles seront ainsi immédiatement à leur disposition.
 * En outre, une ou plusieurs personnes de la commune doivent pouvoir signaler aux pompiers où se trouvent les objets particulièrement fragiles ou précieux.
-
-
 
 **Source** : Geneviève Rager, *La conservation des objets mobiliers dans les églises, Outil d’auto-évaluation*, Ministère de la culture et de la communication,direction de l’architecture et du patrimoine, 2004
