@@ -1,6 +1,6 @@
 - if @show_new_selection_message
   .fr-alert.fr-alert--info.fr-mb-4w
-    %pfr-alert__title= t("campaigns.edit_recipients_tooltip")
+    %p.fr-alert__title= t("campaigns.edit_recipients_tooltip")
 
 %p.fr-mb-4w= "Liste des #{campaign.available_communes.load.size} communes abritant des objets <abbr title='Monuments Historiques'>MH</abbr> #{campaign.departement.dans_nom}.".html_safe
 
