@@ -109,6 +109,10 @@ fr:
         analyse_notes: Commentaires du conservateur
         analyse_fiches: Conseils du conservateur
   pages:
+    login:
+      already_connected:
+        as_conservateur: "Vous êtes déjà connecté en tant que conservateur. Cette page de connexion est réservée aux communes."
+        as_admin: "Vous êtes déjà connecté en tant qu'administrateur. Cette page de connexion est réservée aux communes."
     pdf_embed:
       title:
         guide: "Guide de Recensement"

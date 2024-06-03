@@ -3,6 +3,10 @@
 %main#contenu.fr-container.fr-pt-2w.fr-pb-4w{"data-controller": "devise--sessions"}
   = render "shared/breadcrumbs", links: [ ["Accueil", root_path]], current_page_label: "Connexion à Collectif Objets"
 
+  - if conservateur_signed_in? || admin_user_signed_in?
+    .fr-alert.fr-alert--info.fr-mb-4w
+      %p.fr-alert__title= t("pages.login.already_connected.as_#{conservateur_signed_in? ? :conservateur : :administrateur}" )
+
   = turbo_frame_tag "user-session-form" do
     .fr-grid-row
       .fr-col-md-5
