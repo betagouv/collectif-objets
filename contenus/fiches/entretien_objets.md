@@ -7,9 +7,12 @@ Préserver notre patrimoine, c’est aussi en prendre soin. Pensez à demander l
 
 Vous trouverez dans cette fiche quelques conseils pour prendre soin de vos objets sans les mettre en danger. 
 
-**De manière générale, il s’agit essentiellement de :**\
-**\-﻿ s’assurer qu’un ménage régulier et prudent ait lieu dans l’édifice abritant les objets protégés**\
-**\- dépoussiérer les objets avec délicatesse, s’ils ne sont pas fragiles ni peints**\
+**De manière générale, il s’agit essentiellement de :**
+
+**\-﻿ s’assurer qu’un ménage régulier et prudent ait lieu dans l’édifice abritant les objets protégés**
+
+**\- dépoussiérer les objets avec délicatesse, s’ils ne sont pas fragiles ni peints**
+
 **\- veiller à aérer régulièrement la pièce pour lutter contre l’humidité.** 
 
 Attention : de manière générale, demandez l’accord d’un conservateur des antiquités et objets d’art (CAOA) avant de nettoyer ou déplacer vos objets.
@@ -46,7 +49,7 @@ Un pinceau ou un chiffon doux suffisent au dépoussiérage. Toute autre techniqu
 
 ***Attention*** : il est rare que le dépoussiérage d’un objet constitue une urgence absolue. En revanche, une intervention malencontreuse peut le détruire en quelques secondes.
 
-**Si l’objet est endommagé - tâches, traces de moisissures, attaques d’insectes, déchirures, trous, cassures : il faut prévenir les conservateurs** pour qu’ils vous accompagnent dans un projet de restauration.\
+**Si l’objet est endommagé - tâches, traces de moisissures, attaques d’insectes, déchirures, trous, cassures : il faut prévenir les conservateurs** pour qu’ils vous accompagnent dans un projet de restauration.
 
 Il ne faut jamais restaurer soi-même un objet (recollage, remise en peinture etc), au risque de l’endommager gravement ! [voir la fiche sur les étapes préalables à la restauration](/fiches/restauration).
 
@@ -84,8 +87,6 @@ Il ne faut jamais restaurer soi-même un objet (recollage, remise en peinture et
 * Ne pas les coller contre les murs pour empêcher que l’humidité ne se propage.
 * Évitez de les cirer.
 
-
-
 ### L﻿es vitraux
 
 * Ne pas nettoyer les vitraux avec du produit à vitres.
@@ -93,8 +94,6 @@ Il ne faut jamais restaurer soi-même un objet (recollage, remise en peinture et
 ### L﻿es peinture murales
 
 * Ne pas brosser les peintures murales ni les dépoussiérer à la tête de loup : le simple contact peut gravement les altérer.
-
-
 
 ### **Les orgues**
 
@@ -109,8 +108,6 @@ Il ne faut jamais restaurer soi-même un objet (recollage, remise en peinture et
 * Les objets anciens sont sensibles aux changements de température et d’humidité. Il ne faut pas chauffer excessivement l’édifice les abritant afin de limiter les écarts de température importants et les variations d’humidité. Préférez une température de 18° à une température de 22°, surtout en hiver, car les variations de température seraient trop importantes.
 * Éloignez les objets des sources de pénétration d’eau.
 
-
-
 D’une façon générale, si un objet d’intérêt patrimonial vous préoccupe en raison de :
 
 * un aspect esthétique insatisfaisant ;
@@ -122,7 +119,5 @@ D’une façon générale, si un objet d’intérêt patrimonial vous préoccupe
 * ou toute autre raison qui vous paraît motiver une prise de décision...
 
 mettez-vous en relation avec le CAOA de votre département ou avec le conservateur des monuments historiques avant d’intervenir. Il s’agit d’une obligation légale. 
-
-
 
 **Source** : Geneviève Rager, *La conservation des objets mobiliers dans les églises, Outil d’auto-évaluation*, Ministère de la culture et de la communication, Direction de l’architecture et du patrimoine, 2004
