@@ -21,6 +21,10 @@ class Commune < ApplicationRecord
     event :return_to_started, after: :aasm_after_return_to_started do
       transitions from: :completed, to: :started
     end
+
+    event :return_to_inactive do
+      transitions from: :completed, to: :inactive
+    end
   end
 
   has_many :users, dependent: :destroy
@@ -187,6 +191,7 @@ class Commune < ApplicationRecord
 
   def archive_dossier
     dossier&.archive! unless dossier&.construction?
+    return_to_inactive
   end
 
   def support_email(role:)
