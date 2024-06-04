@@ -35,7 +35,8 @@ RSpec.describe Communes::RecensementsController, type: :request do
     context "quand l'objet a déjà un recensement" do
       # Si un recensement existe, l'autorisation est refusée. Rediriger vers le recensement en cours plutôt ?
       it "redirige vers la page d'accueil" do
-        create(:recensement, objet:)
+        commune.start
+        create(:recensement, objet:, dossier: commune.dossier)
         expect { perform_request }.to change(Recensement, :count).by(0)
         expect(response).to redirect_to root_path
       end
