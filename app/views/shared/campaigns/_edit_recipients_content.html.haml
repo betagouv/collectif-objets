@@ -20,16 +20,17 @@
       Communes
     .co-columns-auto.co-columns-sm-2.co-columns-md-3.co-columns-lg-4.fr-mx-1w
       - campaign.available_communes.each do |commune|
-        - checked = campaign.commune_ids.include?(commune.id)
+        - disabled = commune.users_count.zero? || commune.dossier&.construction?
+        - checked = !disabled && (campaign.commune_ids.include?(commune.id) || campaign.commune_ids.size.zero?)
         - input_id = "campaign_recipients_attributes_commune_#{commune.id}"
         .fr-checkbox-group.fr-checkbox-group--sm.fr-mb-1w.co-break-avoid-column
           %input{type: :checkbox,
             name: "campaign[recipients_attributes][][commune_id]",
             id: input_id,
             value: commune.id,
-            checked: checked,
+            checked:,
             "data-multichecker-target": :checkbox,
-            disabled: commune.users_count.zero? || commune.dossier&.construction? }
+            disabled: }
           %label.fr-label{for: input_id}
             %span.fr-mr-auto= commune.nom
             - if commune.users_count.zero?
