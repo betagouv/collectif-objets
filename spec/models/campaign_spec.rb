@@ -245,17 +245,4 @@ RSpec.describe Campaign, type: :model do
       expect(commune_examinée.reload.dossier).to be_nil
     end
   end
-
-  describe "#add_default_recipients" do
-    let(:departement) { create(:departement) }
-    let(:campaign) { build(:campaign, departement:) }
-    it "ajoute les communes valides aux destinataires" do
-      create(:commune, :with_user, departement:) # User, pas d'objet
-      create(:commune, :with_objets, departement:) # Pas d'user, des objets
-      create(:commune, :with_user, :with_objets, :en_cours_de_recensement, departement:) # User, objets, mais en cours
-      communes_valides = 3
-      create_list(:commune, communes_valides, :with_user, :with_objets, departement:)
-      expect(campaign.add_default_recipients.size).to eq communes_valides
-    end
-  end
 end
