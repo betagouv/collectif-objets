@@ -160,7 +160,7 @@ class Commune < ApplicationRecord
   end
 
   def all_objets_recensed?
-    objets.all?(&:recensement_completed?)
+    dossier.objets.all?(&:recensement_completed?)
   end
 
   def to_s
