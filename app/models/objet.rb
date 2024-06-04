@@ -75,7 +75,10 @@ class Objet < ApplicationRecord
 
   def recensement = Recensement.find_by(objet: self, dossier: commune.dossier)
   def recensement? = recensement.present?
-  def recensement_completed? = recensement&.completed?
+
+  def recensement_completed?
+    !recensement.nil? && recensement.completed?
+  end
 
   def self.select_best_objet_in_list(objets_arr)
     current_arr = objets_arr

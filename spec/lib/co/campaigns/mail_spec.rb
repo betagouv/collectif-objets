@@ -26,16 +26,19 @@ RSpec.describe Co::Campaigns::Mail do
     context "relance1 started with all recensements" do
       let(:step) { "relance1" }
       let!(:commune) { create(:commune_en_cours_de_recensement) }
-      let!(:recensement1) { create(:recensement, objet: create(:objet, commune:), dossier: commune.dossier) }
-      let!(:recensement2) { create(:recensement, objet: create(:objet, commune:), dossier: commune.dossier) }
+      before do
+        commune.objets.each do |objet|
+          create(:recensement, objet:, dossier: commune.dossier)
+        end
+      end
       it { should eq "relance1_to_complete_email" }
     end
 
     context "relance1 started with some recensements" do
       let(:step) { "relance1" }
-      let!(:commune) { create(:commune, status: "started") }
-      let!(:recensement1) { create(:recensement, objet: create(:objet, commune:)) }
-      let!(:objet2) { create(:objet, commune:) }
+      let!(:commune) { create(:commune_en_cours_de_recensement) }
+      let!(:recensement1) { create(:recensement, objet: commune.objets.first, dossier: commune.dossier) }
+      let!(:objet) { create(:objet, commune:) }
       it { should eq "relance1_started_email" }
     end
   end
