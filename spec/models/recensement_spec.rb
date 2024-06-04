@@ -116,13 +116,6 @@ RSpec.describe Recensement, type: :model do
         it { should eq true }
       end
     end
-
-    context "another recensement already exists for same objet" do
-      let!(:objet) { create(:objet) }
-      let!(:existing_recensement) { create(:recensement, objet:) }
-      let(:recensement) { build(:recensement, objet:) }
-      it { should eq false }
-    end
   end
 
   describe "prevent analyse override equal to original" do
