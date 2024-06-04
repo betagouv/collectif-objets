@@ -36,7 +36,7 @@ class Dossier < ApplicationRecord
 
   validates :conservateur, presence: true, if: :accepted?
   validates :visit, inclusion: { in: %w[souhaitable prioritaire] }, allow_nil: true
-  validates :commune_id, uniqueness: true, unless: -> { archived? }
+  validates :commune_id, uniqueness: { conditions: -> { where.not(status: "archived") } }
 
   delegate :departement, to: :commune
 
