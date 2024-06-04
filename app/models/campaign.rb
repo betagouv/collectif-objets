@@ -7,7 +7,7 @@ class Campaign < ApplicationRecord
   DATE_FIELDS = STEPS.map { "date_#{_1}" }.freeze
 
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :campaigns
-  has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy, counter_cache: :recipients_count
+  has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy
   has_many :communes, through: :recipients
   has_many :objets, through: :communes
   has_many :emails, class_name: "CampaignEmail", through: :recipients
@@ -58,6 +58,17 @@ class Campaign < ApplicationRecord
     STEPS[STEPS.find_index(step) + 1]
   end
 
+  # Crée des destinataires sans N+1
+  def commune_ids=(ids = [])
+    recipients.where.not(commune_id: ids).destroy_all
+    recipients_data = ids.intersection(selectable_communes.ids).collect do |commune_id|
+      { commune_id:, unsubscribe_token: CampaignRecipient.random_token }
+    end
+    recipients.insert_all(recipients_data)
+    self.recipients_count = recipients_data.size
+    recipients
+  end
+
   def validate_successive_dates
     DATE_FIELDS.each_cons(2) do |field1, field2|
       date1, date2 = [field1, field2].map { send(_1) }
@@ -106,7 +117,15 @@ class Campaign < ApplicationRecord
   end
 
   def available_communes
+    # Le nombre d'utilisateurs sert à exclure les communes sans mail de contact
+    # Le dossier sert à exclure les communes en cours de recensement
     @available_communes ||= departement.communes.distinct.with_objets.include_users_count.includes(:dossier)
+  end
+
+  def selectable_communes
+    departement.communes.distinct.unscope(:order).joins(:users, :objets).left_joins(:dossier)
+      .where.not(dossiers: { status: :construction })
+      .or(Commune.distinct.where(dossiers: { id: nil }))
   end
 
   def dates_are_present? = DATE_FIELDS.map { send(_1) }.all?(&:present?)
