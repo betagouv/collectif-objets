@@ -37,9 +37,10 @@ module Conservateurs
 
       # N'afficher que pour les conservateurs ayant créés des campagnes
       # avant, et pas après le changement
+      departement = @campaign.departement
       @show_new_selection_message =
-        @departement.campaigns.where("created_at < ?", date).exists? &&
-        @departement.campaigns.where.not("created_at > ?", date).exists?
+        departement.campaigns.where("created_at < ?", date).exists? &&
+        departement.campaigns.where.not("created_at > ?", date).exists?
     end
   end
 end
