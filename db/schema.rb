@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_03_162920) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -386,7 +386,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["deleted_at"], name: "index_recensements_on_deleted_at"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
-    t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true
+    t.index ["objet_id", "dossier_id"], name: "index_recensements_on_objet_id_and_dossier_id", unique: true
   end
 
   create_table "session_codes", force: :cascade do |t|
