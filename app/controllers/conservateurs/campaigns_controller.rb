@@ -13,7 +13,8 @@ module Conservateurs
 
     def new
       @departement = Departement.find(params[:departement_id])
-      @campaign = Campaign.new(departement: @departement)
+      @previous = @departement.campaigns.select(:sender_name, :nom_drac, :signature).last&.attributes || {}
+      @campaign = Campaign.new(@previous.merge(departement: @departement))
       authorize(@campaign)
     end
 
