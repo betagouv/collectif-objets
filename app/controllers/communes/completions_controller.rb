@@ -30,7 +30,7 @@ module Communes
     end
 
     def set_objets
-      @objets = @commune.objets.joins(:recensements)
+      @objets = @dossier.objets
         .includes(:commune, recensements: %i[photos_attachments photos_blobs])
     end
 
