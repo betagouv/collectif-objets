@@ -252,22 +252,24 @@ RSpec.describe Campaign, type: :model do
     let(:commune_ids) { create_list(:commune, 3, :with_user, :with_objets, departement:).collect(&:id) }
     it "supprime les communes non sélectionnées" do
       create_list(:recipient, 3, campaign:)
-      expect { campaign.commune_ids=([]) }.to change(CampaignRecipient, :count).by(-3)
+      expect { campaign.commune_ids = ([]) }.to change(CampaignRecipient, :count).by(-3)
     end
     it "ajoute les communes valides aux destinataires" do
       ids = commune_ids.dup
       ids << create(:commune, :with_user, departement:).id # User, pas d'objet
       ids << create(:commune, :with_objets, departement:).id # Pas d'user, des objets
-      ids << create(:commune, :with_user, :with_objets, :en_cours_de_recensement, departement:).id # User, objets, mais en cours
+      # User, objets, mais en cours
+      ids << create(:commune, :with_user, :with_objets, :en_cours_de_recensement, departement:).id
 
-      expect { campaign.commune_ids=(ids) }.to change(CampaignRecipient, :count).by(commune_ids.size)
+      expect { campaign.commune_ids = (ids) }.to change(CampaignRecipient, :count).by(commune_ids.size)
       expect(campaign.commune_ids).to eq commune_ids
     end
     it "met à jour le nombre de destinataires" do
-      expect { campaign.commune_ids=(commune_ids) }.to change(campaign, :recipients_count).by(commune_ids.size)
+      expect { campaign.commune_ids = (commune_ids) }.to change(campaign, :recipients_count).by(commune_ids.size)
     end
     it "déclenche le minimum de requêtes possible" do
-      expect { campaign.commune_ids=(commune_ids) }.not_to exceed_query_limit(1).with(/INSERT INTO "campaign_recipients"/)
+      expect { campaign.commune_ids = (commune_ids) }.not_to exceed_query_limit(1)
+        .with(/INSERT INTO "campaign_recipients"/)
     end
   end
 end
