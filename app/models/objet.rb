@@ -19,8 +19,10 @@ class Objet < ApplicationRecord
         }
 
   scope :without_completed_recensements, lambda {
-    joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.status = 'completed'")
-      .where(recensements: { id: nil })
+    joins(commune: :dossier)
+    .joins("LEFT JOIN recensements ON recensements.objet_id = objets.id \
+            AND recensements.status = 'completed' AND recensements.dossier_id = dossiers.id")
+    .where(recensements: { id: nil })
   }
 
   scope :a_examiner, lambda {
@@ -73,7 +75,7 @@ class Objet < ApplicationRecord
     truncate("#{palissy_REF} #{nom}", length: 40)
   end
 
-  def recensement = Recensement.find_by(objet: self, dossier: commune.dossier)
+  def recensement = recensements.find_by(dossier: commune.dossier)
   def recensement? = recensement.present?
 
   def recensement_completed?
