@@ -39,12 +39,11 @@
       %h3 Dates
       .fr-mb-2w{"data-controller" => "date-jump"}
         - Campaign::DATE_FIELDS.each_with_index do |date_field, index|
-          .fr-input-group{"data-controller" => "date-display"}
+          .fr-input-group
             .fr-grid-row
               .fr-col-sm-10
                 = f.label date_field do
                   = t("activerecord.attributes.campaign.#{date_field}")
-                  %span.fr-hint-text{"data-date-display-target" => "hint"}
               - if index > 0
                 .fr-col-sm-2.co-text--right
                   %button.fr-btn.fr-btn--tertiary.fr-btn--sm.fr-mb-1w{"data-action" => "date-jump#set", "data-date-jump-target" => "button"}
@@ -52,9 +51,7 @@
             = f.date_field(                                     |
                 date_field,                                     |
                 class: "fr-input",                              |
-                "data-action": "change->date-display#onChange", |
                 "data-date-jump-target": "input",               |
-                "data-date-display-target": "input"             |
               )                                                 |
   .fr-input-group.co-text--right.fr-mt-4w
     = f.submit campaign.persisted? ? "Sauvegarder" : "Créer la campagne"
