@@ -12,7 +12,7 @@ gem "after_commit_everywhere", "~> 1.3"
 gem "aws-sdk-s3", "~> 1.143", require: false
 gem "bootsnap", "~> 1.17", require: false
 gem "devise", "~> 4.9"
-gem "dsfr-view-components", "~> 0.4"
+gem "dsfr-view-components", "~> 0.5"
 gem "front_matter_parser", "~> 1.0"
 gem "good_job", "3.21.5"
 gem "haml-rails", "~> 2.1"
