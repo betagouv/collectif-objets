@@ -17,12 +17,16 @@ class ObjetCardComponent < ViewComponent::Base
     @link_html_attributes_custom = kwargs[:link_html_attributes] || {}
     @recensement = kwargs[:recensement] || @objet.recensement
     @size = kwargs[:size] || :md
+    @btn_text = kwargs[:btn_text]
+    @btn_path = kwargs[:btn_path]
+    @btn_class = kwargs[:btn_class]
     super
   end
 
   private
 
-  attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin, :size
+  attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin, :size,
+              :btn_text, :btn_class, :btn_path
 
   delegate :nom, :edifice_nom, :palissy_photos_presenters, to: :objet
 

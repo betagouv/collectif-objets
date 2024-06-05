@@ -299,7 +299,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     card_bouquet = find(".fr-card", text: "Bouquet d’Autel")
     expect(card_bouquet).to have_text(/Recensé/i)
     card_bouquet.click
-    click_on "Modifier le recensement"
     step7_validate
     find("section", text: "L’objet n’est pas recensable").find('button[aria-label="Modifier la réponse"]').click
     step3_validate
@@ -310,7 +309,6 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
     expect(card_bouquet).to have_text(/Recensement à compléter/i)
     card_bouquet.click
-    click_on "Compléter le recensement"
     step1_validate
     click_on "Passer à l’étape suivante"
     step3_validate
