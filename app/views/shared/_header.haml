@@ -33,7 +33,7 @@
     - c.with_direct_link_simple title: "Comment ça marche ?", path: aide_path, active: active_nav_link?("Comment ça marche ?")
 
     - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos") do |dropdown|
-      - dropdown.with_link title: "Documentation", path: content_blob_path(:documentation_commune), active: active_nav_link?("Documentation")
+      - dropdown.with_link title: "Aide en ligne", path: content_blob_path(:aide_en_ligne), active: active_nav_link?("Aide en ligne")
       - dropdown.with_link title: "On parle de nous", path: presse_path
       - dropdown.with_link title: "Statistiques", path: stats_path
 

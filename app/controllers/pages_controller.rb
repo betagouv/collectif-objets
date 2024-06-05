@@ -51,7 +51,7 @@ class PagesController < ApplicationController
   end
 
   def aide
-    @active_nav_links = ["Aide", "Comment ça marche ?"]
+    @active_nav_links = ["Aide", "Aide en ligne"]
   end
 
   def stats
