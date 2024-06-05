@@ -256,7 +256,7 @@ fr:
         analyse_fiches: Fiches à associer
         analyse_notes: Commentaires pour la mairie
       dossier:
-        notes_commune: Commentaires de la commune à destination des conservateurs
+        notes_commune: Commentaires de la commune
         notes_conservateur: Commentaires des conservateurs à destination de la commune
         interface_communes:
           notes_commune: Vos commentaires à destination des conservateurs
