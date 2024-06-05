@@ -29,6 +29,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Warden::Test::Helpers
+  config.before(:suite) { require Rails.root.join("scripts/create_postgres_sequences_memoire_photos_numbers.rb") }
 
   config.after(type: :feature) do |example_group|
     next unless example_group.exception
