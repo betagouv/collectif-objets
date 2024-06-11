@@ -9,7 +9,7 @@ module Conservateurs
     end
 
     def show
-      @dossier = @commune.archived_dossiers.find_by(params[:id])
+      @dossier = @commune.dossier
       authorize(@dossier)
     end
 
