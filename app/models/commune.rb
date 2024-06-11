@@ -115,6 +115,7 @@ class Commune < ApplicationRecord
     STATUT_GLOBAUX[statut_global]
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity Épargnons l'âme sensible de Rubocop
   def statut_global
     # Dans le cas où on appelle include_statut_global, le champ existe déjà
     if has_attribute?(:statut_global)
@@ -136,6 +137,7 @@ class Commune < ApplicationRecord
       end
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   validate do |commune|
     next if commune.nom.blank? || commune.nom == commune.nom.strip
