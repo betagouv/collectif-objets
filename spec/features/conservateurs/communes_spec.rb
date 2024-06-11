@@ -19,6 +19,7 @@ RSpec.feature "Conservateurs - commune", type: :feature, js: true do
   end
 
   it "affiche le dossier de la commune" do
+    create(:dossier, commune:)
     visit "/conservateurs/communes/#{commune.id}/dossier"
     expect(page).to be_axe_clean
     expect(page).to have_text(/L'examen est généré lors de l’acceptation du dossier/i)
