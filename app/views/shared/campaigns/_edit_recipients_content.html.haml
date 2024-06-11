@@ -35,13 +35,8 @@
             %span.fr-mr-auto= commune.nom
             - if commune.users_count.zero?
               = badge(:warning) { "Pas d'email" }
-            - elsif commune.dossier
-              - if commune.dossier.construction?
-                = badge { commune.dossier.aasm.human_state }
-              - elsif commune.dossier.accepted?
-                = badge(:success) { commune.dossier.aasm.human_state }
-              - else
-                = badge(:info) { commune.dossier.aasm.human_state }
+            - else
+              = commune_statut_global_badge(commune)
 
   .fr-mt-4w.co-text--center
     %button.fr-btn.fr-btn--primary.fr-btn--icon-left.fr-icon-checkbox-circle-fill{type: :submit} Enregistrer la sélection

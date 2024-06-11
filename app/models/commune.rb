@@ -123,9 +123,9 @@ class Commune < ApplicationRecord
       ORDRE_NON_RECENSÉ
     elsif started?
       ORDRE_EN_COURS_DE_RECENSEMENT
-    elsif dossier.accepted?
+    elsif dossier&.accepted?
       ORDRE_EXAMINÉ
-    elsif dossier.replied_automatically?
+    elsif dossier&.replied_automatically?
       ORDRE_REPONSE_AUTOMATIQUE
     else # dossier.submitted?
       recensements_analysed_count = recensements.where.not(analysed_at: nil).count

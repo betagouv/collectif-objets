@@ -119,7 +119,8 @@ class Campaign < ApplicationRecord
   def available_communes
     # Le nombre d'utilisateurs sert à exclure les communes sans mail de contact
     # Le dossier sert à exclure les communes en cours de recensement
-    @available_communes ||= departement.communes.distinct.with_objets.include_users_count.includes(:dossier)
+    @available_communes ||= departement.communes.distinct.with_objets
+      .include_users_count.includes(:dossier).include_statut_global.group(:statut_global)
   end
 
   def selectable_communes
