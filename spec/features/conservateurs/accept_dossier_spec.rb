@@ -75,6 +75,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     # galerie - pivoter
     blob_id_before_rotate = find(".co-galerie .content .photo img")[:src].match(%r{blobs/proxy/(.*)/tableau2.jpg})[1]
     find("button", text: /Pivoter/).click
+    sleep(1)
     blob_id_after_rotate = find(".co-galerie .content .photo img")[:src].match(%r{blobs/proxy/(.*)/tableau2.jpg})[1]
     expect(blob_id_before_rotate).not_to eq(blob_id_after_rotate)
     expect(current_img[:filename]).to eq "tableau2.jpg"
