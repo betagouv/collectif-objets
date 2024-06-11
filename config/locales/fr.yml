@@ -98,6 +98,7 @@ fr:
       en_securite: Difficile à voler
       en_danger: Facile à voler
   dossier:
+    title: Recensement validé le %{date}
     status_badge:
       construction: Recensement en cours
       submitted: Non examiné

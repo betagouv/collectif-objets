@@ -52,6 +52,10 @@ class Dossier < ApplicationRecord
       .map(&:id)
   end
 
+  def title
+    I18n.t("dossier.title", date: I18n.l(accepted_at.to_date, format: :long))
+  end
+
   def full?
     recensements.count == commune.objets.count
   end

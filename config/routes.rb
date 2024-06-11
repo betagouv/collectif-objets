@@ -101,7 +101,8 @@ Rails.application.routes.draw do
       resources :messages, only: %i[index new create] do
         resources :email_attachments, only: [:show]
       end
-      resource :dossier, only: %i[show]
+      resource :dossier, only: :show
+      get :historique, as: :historique, to: "dossiers#historique"
       resources :bordereaux, only: %i[new create]
       resource :deleted_recensements, only: [:show]
     end

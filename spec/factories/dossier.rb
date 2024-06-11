@@ -26,6 +26,13 @@ FactoryBot.define do
       conservateur
     end
 
+    trait :archived do
+      accepted
+      conservateur
+      archived_at { 1.day.ago }
+      status { :archived }
+    end
+
     factory :dossier_en_cours_dexamen, traits: [:submitted, :with_recensement_examiné]
     factory :dossier_examiné, traits: [:examiné]
   end

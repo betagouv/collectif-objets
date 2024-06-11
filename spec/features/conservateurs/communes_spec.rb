@@ -23,4 +23,11 @@ RSpec.feature "Conservateurs - commune", type: :feature, js: true do
     expect(page).to be_axe_clean
     expect(page).to have_text(/L'examen est généré lors de l’acceptation du dossier/i)
   end
+
+  it "affiche les anciens dossiers de la commune" do
+    create(:dossier, :archived, commune:)
+    visit "/conservateurs/communes/#{commune.id}/historique"
+    expect(page).to be_axe_clean
+    expect(page).to have_text(/Historique de la commune/i)
+  end
 end
