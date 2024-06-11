@@ -14,6 +14,8 @@ class CampaignRecipient < ApplicationRecord
   validates :opt_out_reason, inclusion: { in: OPT_OUT_REASONS }, if: :opt_out?
   validates :opt_out_reason, inclusion: { in: [nil, ""] }, unless: :opt_out?
 
+  validate :commune_state, :commune_users, on: :create
+
   before_create :set_unsubscribe_token
 
   delegate :random_token, to: :class
@@ -57,5 +59,17 @@ class CampaignRecipient < ApplicationRecord
 
   def set_unsubscribe_token
     self.unsubscribe_token ||= random_token
+  end
+
+  private
+
+  def commune_state
+    return if campaign.ongoing? || campaign.finished?
+
+    errors.add(:commune_id, "Impossible d'intégrer une commune en cours de recensement") if commune.started?
+  end
+
+  def commune_users
+    errors.add(:commune_id, "La commune n'a pas d'email associé") unless commune.users.any?
   end
 end
