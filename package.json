@@ -1,7 +1,7 @@
 {
   "name": "collectif-objets",
   "version": "0.0.1",
-  "description": "![CI](https://github.com/adipasquale/collectif-objets/actions/workflows/ci.yml/badge.svg)",
+  "description": "![CI](https://github.com/betagouv/collectif-objets/actions/workflows/ci.yml/badge.svg)",
   "main": "index.js",
   "directories": {
     "lib": "lib"
