@@ -66,7 +66,11 @@ feature "accessibility public pages", js: true do
   end
 
   describe "Guide du recensement" do
-    before { visit guide_path }
+    before do
+      url = Regexp.new(Regexp.escape(PagesController::STATIC_FILES_HOST))
+      stub_request(:any, url).to_return(status: 200, body: "", headers: {})
+      visit guide_path
+    end
     it { should be_axe_clean }
   end
 
