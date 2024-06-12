@@ -71,6 +71,7 @@
   width: 100%;
   columns: 1 auto;
   column-fill: balance;
+  column-gap: 2rem;
 }
 .co-columns-2 { column-count: 2; }
 .co-columns-3 { column-count: 3; }

@@ -18,7 +18,7 @@
   %fieldset.fr-fieldset
     %legend.fr-sr-only
       Communes
-    .co-columns-auto.co-columns-sm-2.co-columns-md-3.co-columns-lg-4.fr-mx-1w
+    .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-1w
       - campaign.available_communes.each do |commune|
         - disabled = commune.users_count.zero? || commune.dossier&.construction?
         - checked = !disabled && (campaign.commune_ids.include?(commune.id) || campaign.commune_ids.size.zero?)
