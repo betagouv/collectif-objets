@@ -22,7 +22,7 @@ class Commune < ApplicationRecord
       transitions from: :completed, to: :started
     end
 
-    event :return_to_inactive do
+    event :return_to_inactive, after: :refresh_recensement_ratio do
       transitions from: :completed, to: :inactive
     end
   end
@@ -215,6 +215,10 @@ class Commune < ApplicationRecord
 
   def aasm_after_return_to_started
     dossier.return_to_construction! unless dossier.construction?
+  end
+
+  def refresh_recensement_ratio
+    RefreshCommuneRecensementRatioJob.perform_later(id)
   end
 
   # -------
