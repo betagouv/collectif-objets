@@ -32,7 +32,7 @@
             "data-multichecker-target": :checkbox,
             disabled: }
           %label.fr-label{for: input_id}
-            %span.fr-mr-auto= commune.nom
+            %span.fr-mr-auto{title: (commune.nom.length > 25 ? commune.nom : nil)}= truncate(commune.nom, length: 25)
             - if commune.users_count.zero?
               = badge(:warning) { "Pas d'email" }
             - else
