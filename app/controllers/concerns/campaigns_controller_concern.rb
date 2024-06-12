@@ -72,7 +72,7 @@ module CampaignsControllerConcern
   private
 
   def params_recipient_commune_ids
-    params.fetch(:campaign, {}).fetch(:recipients_attributes, []).pluck(:commune_id)
+    params.fetch(:campaign, {}).fetch(:recipients_attributes, []).pluck(:commune_id).map(&:to_i)
   end
 
   def set_campaign

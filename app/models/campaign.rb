@@ -61,7 +61,7 @@ class Campaign < ApplicationRecord
   # Crée des destinataires sans N+1
   def commune_ids=(ids = [])
     recipients.where.not(commune_id: ids).destroy_all
-    recipients_data = ids.map(&:to_i).intersection(selectable_communes.ids).collect do |commune_id|
+    recipients_data = ids.intersection(selectable_communes.ids).collect do |commune_id|
       { commune_id:, unsubscribe_token: CampaignRecipient.random_token }
     end
     recipients.insert_all(recipients_data)
