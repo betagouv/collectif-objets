@@ -20,9 +20,9 @@ RSpec.describe "Active Storage safe purge monkey patches" do
     end
   end
 
-  context "blob uses local service" do
+  context "when using local service" do
     let(:blob) { local_blob }
-    it "should delete the blob" do
+    it "the blob is deleted" do
       expect(blob.service).to receive(:delete)
       expect(blob.service).to receive(:delete_prefixed)
       res = blob.delete
@@ -30,9 +30,9 @@ RSpec.describe "Active Storage safe purge monkey patches" do
     end
   end
 
-  context "blob uses prod service" do
+  context "when using production service" do
     let(:blob) { local_blob.tap { _1.update!(service_name: "scaleway_production") } }
-    it "should not delete the blob" do
+    it "the blob is not deleted" do
       expect(blob.service).not_to receive(:delete)
       expect(blob.service).not_to receive(:delete_prefixed)
       res = blob.delete
