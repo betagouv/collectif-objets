@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe "Active Storage safe purge monkey patches" do
-  let(:mock_service) { double("active_storage_service") }
   let(:local_blob) do
     ActiveStorage::Blob.create_and_upload!(
       io: Rails.root.join("spec/fixture_files/peinture1.jpg").open("rb"),
