@@ -193,7 +193,7 @@ class Commune < ApplicationRecord
 
   def archive_dossier
     dossier&.archive! unless dossier&.construction?
-    return_to_inactive if completed?
+    return_to_inactive! if completed?
   end
 
   def support_email(role:)
