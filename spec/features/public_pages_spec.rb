@@ -5,6 +5,11 @@ require "rails_helper"
 feature "accessibility public pages", js: true do
   subject { page }
 
+  describe "page d'accueil" do
+    before { visit root_path }
+    it { should be_axe_clean.excluding("iframe") }
+  end
+
   describe "communes#show" do
     let!(:commune) { create(:commune, :with_objets) }
     before { visit commune_path(commune) }
