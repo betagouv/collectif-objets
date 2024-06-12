@@ -119,7 +119,7 @@ Rails.application.routes.draw do
       patch :update_recipients
       patch :update_status
       get :mail_previews
-      resources :recipients, controller: "campaign_recipients", only: %i[show update] do
+      resources :recipients, controller: "campaign_recipients", only: :update do
         get :mail_preview
       end
     end
@@ -157,7 +157,7 @@ Rails.application.routes.draw do
         post :force_start
         post :force_step_up
       end
-      resources :recipients, controller: "campaign_recipients", only: %i[show update] do
+      resources :recipients, controller: "campaign_recipients", only: :update do
         get :mail_preview
       end
       resources :emails, controller: "campaign_emails", only: [] do

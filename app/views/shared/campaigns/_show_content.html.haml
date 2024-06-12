@@ -70,14 +70,9 @@
       %ul.co-columns--4
         - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
           %li
-            = link_to recipient.commune.nom, send("#{r}_campaign_recipient_path", campaign, recipient)
+            = recipient.commune.nom
             = campaign_recipient_status_badge(recipient)
             = campaign_recipient_opt_out_badge(recipient)
-            - if recipient.commune.active? && campaign.draft?
-              %span.fr-icon--sm.fr-icon-warning-line.fr-text--sm.co-text--red{"aria-hidden" => "true"}
-                active
-
-            %span.fr-text--sm.co-text--muted= recipient.commune.code_insee
       - if excluded_communes.any?
         .fr-mt-4w
           %b
