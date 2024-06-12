@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe "Active Storage safe purge monkey patches" do
-  let(:mock_service) { double("active_storage_service") }
   let(:local_blob) do
     ActiveStorage::Blob.create_and_upload!(
       io: Rails.root.join("spec/fixture_files/peinture1.jpg").open("rb"),
@@ -21,9 +20,9 @@ RSpec.describe "Active Storage safe purge monkey patches" do
     end
   end
 
-  context "blob uses local service" do
+  context "when using local service" do
     let(:blob) { local_blob }
-    it "should delete the blob" do
+    it "the blob is deleted" do
       expect(blob.service).to receive(:delete)
       expect(blob.service).to receive(:delete_prefixed)
       res = blob.delete
@@ -31,9 +30,10 @@ RSpec.describe "Active Storage safe purge monkey patches" do
     end
   end
 
-  context "blob uses prod service" do
+  context "when using production service" do
     let(:blob) { local_blob.tap { _1.update!(service_name: "scaleway_production") } }
-    it "should not delete the blob" do
+    before { stub_request(:any, /.*/).to_return(status: 200, body: "", headers: {}) }
+    it "the blob is not deleted" do
       expect(blob.service).not_to receive(:delete)
       expect(blob.service).not_to receive(:delete_prefixed)
       res = blob.delete
