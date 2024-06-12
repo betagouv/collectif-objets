@@ -67,14 +67,16 @@
   %p
     = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
       %h2 #{campaign.communes.count} communes destinataires :
-      %ul.co-columns--4
+      %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-1w
         - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
           %li
-            = recipient.commune.nom
-            = campaign_recipient_status_badge(recipient)
-            = campaign_recipient_opt_out_badge(recipient)
+            .co-flex.co-flex--space-between
+              = recipient.commune.nom
+              = commune_statut_global_badge(recipient.commune)
+              = campaign_recipient_status_badge(recipient)
+              = campaign_recipient_opt_out_badge(recipient)
       - if excluded_communes.any?
-        .fr-mt-4w
+        .fr-mt-4w.co-flex.co-flex--space-between
           %b
             = excluded_communes.count
             communes non inclues :
