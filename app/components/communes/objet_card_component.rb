@@ -12,8 +12,27 @@ module Communes
     end
 
     def call
-      render ::ObjetCardComponent.new(objet, commune:, header_badges:,
+      render ::ObjetCardComponent.new(objet, commune:, header_badges:, btn_text:, btn_class:, btn_path:,
                                              path:, main_photo_origin: :recensement_or_memoire)
+    end
+
+    def btn_text
+      if recensement&.status == "draft" # Si la commune a commencé à recenser l'objet
+        "Compléter le recensement"
+      elsif recensement # La commune a déjà recensé l'objet
+        "Modifier le recensement"
+      elsif dossier&.construction? # Si la commune peut recenser l'objet mais ne l'a pas fait
+        "Recenser cet objet"
+      end
+    end
+
+    def btn_class
+      "fr-btn fr-btn--sm fr-btn--icon-right fr-icon-arrow-right-line fr-enlarge-link " \
+        "fr-btn--#{recensement ? 'secondary' : 'primary'}"
+    end
+
+    def btn_path
+      edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id) if recensement
     end
 
     private

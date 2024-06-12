@@ -4,7 +4,7 @@
 %main.fr-container.fr-pb-8w
   = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: title
 
-  %h1.co-text--blue= title
+  %h1= title
 
   %iframe#metabase-iframe.co-width--100.co-height--100vh{src: "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/public/dashboard/33cf5b50-b2e8-41c4-9bcd-ed7fe5b994d0",
     frameborder: "0",

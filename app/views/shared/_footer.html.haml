@@ -27,6 +27,9 @@
         %li.fr-footer__bottom-item.co-white-space-nowrap
           = link_to presse_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-chat-2-line" do
             On parle de nous
+        %li.fr-footer__bottom-item.co-white-space-nowrap
+          = link_to content_blob_path(:aide_en_ligne), class: "fr-footer__bottom-link fr-link--icon-left fr-icon-question-line" do
+            Aide en ligne
         - if current_admin_user.nil?
           %li.fr-footer__bottom-item.co-white-space-nowrap
             = link_to admin_path, class: "fr-footer__bottom-link fr-link--icon-left fr-icon-lock-line" do

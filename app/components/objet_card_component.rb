@@ -17,21 +17,25 @@ class ObjetCardComponent < ViewComponent::Base
     @link_html_attributes_custom = kwargs[:link_html_attributes] || {}
     @recensement = kwargs[:recensement] || @objet.recensement
     @size = kwargs[:size] || :md
+    @btn_text = kwargs[:btn_text]
+    @btn_path = kwargs[:btn_path]
+    @btn_class = kwargs[:btn_class]
     super
   end
 
   private
 
-  attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin, :size
+  attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin, :size,
+              :btn_text, :btn_class, :btn_path
 
-  delegate :nom, :palissy_DENO, :edifice_nom, :palissy_photos_presenters, to: :objet
+  delegate :nom, :edifice_nom, :palissy_photos_presenters, to: :objet
 
   def path
     @path ||= objet_path(@objet)
   end
 
   def truncated_nom
-    truncate(nom || palissy_DENO, length: 30)
+    truncate(nom, length: 45)
   end
 
   def main_photo
@@ -43,7 +47,7 @@ class ObjetCardComponent < ViewComponent::Base
   end
 
   def link_html_attributes
-    { class: "fr-card__link" }
+    { class: "fr-card__link", title: nom.length > 45 ? nom : nil }.compact
       .deep_merge_html_attributes(@link_html_attributes_custom)
       .deep_tidy_html_attributes
   end
@@ -55,6 +59,6 @@ class ObjetCardComponent < ViewComponent::Base
 
     PhotoPresenter.new \
       url: photo.variant(:medium),
-      description: "Objet #{objet.nom} lors du recensement"
+      description: "Objet #{nom} lors du recensement"
   end
 end

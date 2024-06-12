@@ -7,5 +7,5 @@ class ContentBlobsController < ApplicationController
     @content_blob = ContentBlob.load_from_id(params[:id])
   end
 
-  def active_nav_links = %w[Documentation]
+  def active_nav_links = ["Aide en ligne"]
 end

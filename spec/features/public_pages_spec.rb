@@ -107,7 +107,7 @@ feature "accessibility public pages", js: true do
   end
 
   describe "Documentation commune" do
-    before { visit content_blob_path(:documentation_commune) }
+    before { visit content_blob_path(:aide_en_ligne) }
     it { should be_axe_clean.excluding("iframe") }
   end
 

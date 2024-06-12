@@ -3,7 +3,7 @@
 
 %main#contenu.fr-container.fr-pt-2w.fr-pb-8w
   = render "shared/breadcrumbs", links: [["Accueil", root_path]] + @breadcrumbs, current_page_label: title
-  %h1.co-text--blue= title
+  %h1= title
   %p
     = link_to "Télécharger", pdf_download_url(pdf: @pdf_name), class: "fr-link fr-link--icon-right fr-icon-file-download-line", download: "#{@pdf_name}.pdf"
   %embed.co-pdf-embed.co-height--60vh{src: "#{pdf_download_url(pdf: @pdf_name)}", title: title, type: "application/pdf", width: "100%" }
