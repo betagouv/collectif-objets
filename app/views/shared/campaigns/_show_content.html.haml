@@ -12,7 +12,7 @@
     = f.hidden_field :status_event, value: "plan"
     .fr-callout
       %p.fr-callout__text
-        Cette campagne est en brouillon. Pour qu’elle démarre effectivement le #{l(campaign.date_lancement, format: :long_with_weekday)}, cliquez sur "Planifer la campagne". Vous pourrez repasser la campagne en brouillon si nécessaire, jusqu’à la date de lancement de campagne.
+        Cette campagne est en brouillon. Pour qu’elle démarre effectivement le #{l(campaign.date_lancement, format: :long_with_weekday)}, cliquez sur "Planifier la campagne". Vous pourrez repasser la campagne en brouillon si nécessaire, jusqu’à la date de lancement de campagne.
       = f.submit "Planifier la campagne"
 
 - elsif campaign.planned? && campaign.date_lancement > Time.zone.today
