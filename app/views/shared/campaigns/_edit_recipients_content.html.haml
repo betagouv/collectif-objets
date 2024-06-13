@@ -19,7 +19,7 @@
     %legend.fr-sr-only
       Communes
     = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
-      .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-1w
+      .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.fr-px-1w
         - campaign.available_communes.each do |commune|
           - disabled = commune.users_count.zero? || commune.dossier&.construction?
           - checked = !disabled && (campaign.commune_ids.include?(commune.id) || campaign.commune_ids.size.zero?)
