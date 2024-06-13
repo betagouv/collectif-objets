@@ -32,7 +32,7 @@ class Departement < ApplicationRecord
   end
 
   def current_campaign
-    campaigns.where("date_lancement <= ? AND date_fin >= ?", Time.zone.now.to_date, Time.zone.now.to_date).first
+    campaigns.where("date_lancement <= :today AND date_fin >= :today", today: Date.today).first
   end
 
   def to_s = [code, nom].join(" - ")
