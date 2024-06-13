@@ -136,7 +136,7 @@ RSpec.describe Commune, type: :model do
 
         it "returns false si la commune est en cours d'examen" do
           objet = create(:objet, commune:)
-          create(:recensement, :examiné, objet:)
+          create(:recensement, :examiné, objet:, dossier:)
           is_expected.to be_falsey
         end
 
