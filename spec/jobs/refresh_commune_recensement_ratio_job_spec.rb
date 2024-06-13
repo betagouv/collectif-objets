@@ -15,25 +15,25 @@ RSpec.describe RefreshCommuneRecensementRatioJob, type: :job do
       it { should be_nil }
     end
 
-    context "single commune with objets and no recensements" do
+    context "single commune with objets" do
+      let!(:commune) { create(:commune_en_cours_de_recensement) }
       let!(:objet1) { create(:objet, commune:) }
       let!(:objet2) { create(:objet, commune:) }
-      it { should eq 0 }
-    end
 
-    context "single commune with objets and half recensements" do
-      let!(:objet1) { create(:objet, commune:) }
-      let!(:objet2) { create(:objet, commune:) }
-      let!(:recensement1) { create(:recensement, objet: objet1) }
-      it { should eq 50 }
-    end
+      context "with no recensement" do
+        it { should eq 0 }
+      end
 
-    context "single commune with objets and half recensements" do
-      let!(:objet1) { create(:objet, commune:) }
-      let!(:objet2) { create(:objet, commune:) }
-      let!(:recensement1) { create(:recensement, objet: objet1) }
-      let!(:recensement2) { create(:recensement, objet: objet2) }
-      it { should eq 100 }
+      context "with half recensements" do
+        let!(:recensement1) { create(:recensement, objet: objet1, dossier: commune.dossier) }
+        it { should eq 50 }
+      end
+
+      context "with all recensements" do
+        let!(:recensement1) { create(:recensement, objet: objet1, dossier: commune.dossier) }
+        let!(:recensement2) { create(:recensement, objet: objet2, dossier: commune.dossier) }
+        it { should eq 100 }
+      end
     end
   end
 end
