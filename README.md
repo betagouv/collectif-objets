@@ -814,7 +814,7 @@ On retrouve ces termes encore dans le code, il faudrait idéalement les renommer
 La configuration des domaines en `.beta.gouv.fr` est gérée par l'équipe transverse de beta.gouv.fr,
 idem pour les domaines en `.incubateur.net`
 
-L'adresse `collectifobjets@beta.gouv.fr` est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost
+L'adresse `contact@collectif-objets.beta.gouv.fr` est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost
 de beta cf https://doc.incubateur.net/communaute/travailler-a-beta-gouv/jutilise-les-outils-de-la-communaute/outils/liste-de-diffusion-et-adresses-de-contact#la-commande-mattermost-emails
 
 L'adresse `support@collectif-objets.beta.gouv.fr` est gérée en délégation de service par l'incubateur du ministère de
