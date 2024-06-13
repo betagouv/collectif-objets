@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 puts ActionMailer::Base.mail(
-  from: ApplicationMailer::FROM_EMAIL_ADDRESS,
+  from: CONTACT_EMAIL,
   to: "wazaa@lol.fr",
   subject: "Envoi #{Time.zone.now.to_i} d'un dossier Collectif Objets",
   content_type: "text/html",

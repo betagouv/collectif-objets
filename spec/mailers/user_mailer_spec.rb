@@ -17,7 +17,7 @@ RSpec.describe UserMailer, type: :mailer do
     it "behaves as expected" do
       expect(mail.subject).to include "Code de connexion"
       expect(mail.to).to eq(["jean@user.fr"])
-      expect(mail.from).to eq([ApplicationMailer::FROM_EMAIL_ADDRESS])
+      expect(mail.from).to eq([CONTACT_EMAIL])
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe UserMailer, type: :mailer do
     it "behaves as expected" do
       expect(mail.subject).to include "Marseille, merci dʼavoir contribué à Collectif Objets"
       expect(mail.to).to eq(["jean@user.fr"])
-      expect(mail.from).to eq([ApplicationMailer::FROM_EMAIL_ADDRESS])
+      expect(mail.from).to eq([CONTACT_EMAIL])
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe UserMailer, type: :mailer do
     it "behaves as expected" do
       expect(mail.subject).to include "Examen du recensement des objets protégés de Marseille"
       expect(mail.to).to eq(["jean@user.fr"])
-      expect(mail.from).to eq([ApplicationMailer::FROM_EMAIL_ADDRESS])
+      expect(mail.from).to eq([CONTACT_EMAIL])
     end
   end
 
@@ -73,7 +73,7 @@ RSpec.describe UserMailer, type: :mailer do
     it "behaves as expected" do
       expect(mail.subject).to include "Vos recensements d'objets ont été transmis aux conservateurs"
       expect(mail.to).to eq(["jean@user.fr"])
-      expect(mail.from).to eq([ApplicationMailer::FROM_EMAIL_ADDRESS])
+      expect(mail.from).to eq([CONTACT_EMAIL])
     end
   end
 
@@ -92,7 +92,7 @@ RSpec.describe UserMailer, type: :mailer do
     it "behaves as expected" do
       expect(mail.subject).to include "Nadia Riza vous a envoyé un message sur Collectif Objets"
       expect(mail.to).to eq(["jean@user.fr"])
-      expect(mail.from).to eq([ApplicationMailer::FROM_EMAIL_ADDRESS])
+      expect(mail.from).to eq([CONTACT_EMAIL])
     end
   end
 end
