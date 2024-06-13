@@ -4,7 +4,7 @@
 %main#contenu.fr-container.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Objets de #{@commune.nom}"
 
-  %h1.co-text--blue.co-text--center
+  %h1.co-text--center
     Les #{@commune.objets.count} objets protégés de #{@commune.nom}
 
   = render "edifices/list", edifices: @commune.edifices

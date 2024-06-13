@@ -31,6 +31,12 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.before(:suite) { require Rails.root.join("scripts/create_postgres_sequences_memoire_photos_numbers.rb") }
 
+  require "webmock/rspec"
+  WebMock.disable_net_connect!(allow_localhost: true)
+  config.before(type: :feature) do
+    stub_request(:any, /tube.numerique.gouv.fr/).to_return(status: 200, body: "", headers: {})
+  end
+
   config.after(type: :feature) do |example_group|
     next unless example_group.exception
 
@@ -56,7 +62,7 @@ Capybara.register_driver :chrome do |app|
 end
 
 
-Capybara.javascript_driver = Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
+Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
 Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
 
 Capybara.default_max_wait_time = 10

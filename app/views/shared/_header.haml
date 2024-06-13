@@ -32,8 +32,8 @@
     - c.with_direct_link_simple title: "Examen du conservateur", path: commune_dossier_path(current_user.commune), active: active_nav_link?("Examen du conservateur")
     - c.with_direct_link_simple title: "Comment ça marche ?", path: aide_path, active: active_nav_link?("Comment ça marche ?")
 
-    - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos") do |dropdown|
-      - dropdown.with_link title: "Documentation", path: content_blob_path(:documentation_commune), active: active_nav_link?("Documentation")
+    - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos") || active_nav_link?("Aide en ligne") || active_nav_link?("On parle de nous") || active_nav_link?("Statistiques") do |dropdown|
+      - dropdown.with_link title: "Aide en ligne", path: content_blob_path(:aide_en_ligne), active: active_nav_link?("Aide en ligne")
       - dropdown.with_link title: "On parle de nous", path: presse_path
       - dropdown.with_link title: "Statistiques", path: stats_path
 

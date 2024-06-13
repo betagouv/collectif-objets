@@ -147,6 +147,9 @@ GEM
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
+    crack (1.0.0)
+      bigdecimal
+      rexml
     crass (1.0.6)
     date (3.3.4)
     debug (1.9.2)
@@ -204,6 +207,7 @@ GEM
       activesupport (>= 5.1)
       haml (>= 4.0.6)
       railties (>= 5.1)
+    hashdiff (1.1.0)
     html-attributes-utils (1.0.0)
       activesupport (>= 6.1.4.4)
     html2haml (2.3.0)
@@ -472,6 +476,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webmock (3.23.0)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     webrick (1.8.1)
     websocket (1.2.10)
     websocket-driver (0.7.6)
@@ -540,6 +548,7 @@ DEPENDENCIES
   view_component (~> 2.83)
   vite_rails (~> 3.0)
   web-console (~> 4.2)
+  webmock (~> 3.23)
 
 RUBY VERSION
    ruby 3.3.0p0

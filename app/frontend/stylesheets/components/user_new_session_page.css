@@ -28,6 +28,15 @@
   position: relative;
 }
 
+/* Le titre ne doit pas avoir une couleur de lien */
+.co-overlapping-cards .fr-card__link {
+  color: var(--text-default-grey) !important;
+}
+/* Supprime la flèche inutile */
+.co-overlapping-cards .fr-card__link::after {
+  display: none;
+}
+
 /* the cards are absolute-positioned on the centered item */
 
 .co-overlapping-cards .fr-card {

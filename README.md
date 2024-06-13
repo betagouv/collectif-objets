@@ -336,14 +336,14 @@ Ce choix a été fait pour aller plus vite, sans avoir à créer de nouveau cham
 
 Cependant, ces calculs à la volée peuvent être lents, comparé à un simple champ en base. Ils le seront de plus en plus, sachant qu'ils dépendent du nombre de recensements, qui va continuer d'augmenter avec le temps.
 
-| situation | commune        | recensement(s)                          | dossier         | statut global |
-|-----------|----------------|-----------------------------------------|-----------------|-----------------|
-| 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_ | Non recensé |
-| 2         | `started`      | au moins un `completed`                 | `construction`  | En cours de recensement |
-| 3         | `completed`    | tous `completed`                        | `submitted`     | À examiner |
-| 4         | `completed` | tous `completed`                        | `submitted`  et `replied_automatically_at` présent   | Réponse automatique |
-| 5 | `completed` | au moins un `completed` et examiné | `submitted`     | En cours d'examen |
-| 6         | `completed`    | tous `completed` et tous examinés       | `accepted`      | Examiné |
+| situation | commune        | recensement(s)                          | dossier                                            | statut global |
+|-----------|----------------|-----------------------------------------|----------------------------------------------------|-----------------|
+| 1         | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_                                    | Non recensé |
+| 2         | `started`      | au moins un `completed`                 | `construction`                                     | En cours de recensement |
+| 3         | `completed`    | tous `completed`                        | `submitted`                                        | À examiner |
+| 4         | `completed`    | tous `completed`                        | `submitted`  et `replied_automatically_at` présent | Réponse automatique |
+| 5         | `completed`    | au moins un `completed` et examiné      | `submitted`                                        | En cours d'examen |
+| 6         | `completed`    | tous `completed` et tous examinés       | `accepted`                                         | Examiné |
 
 - Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements"
 - Le passage à l'étape 6 se fait par une action manuelle des conservateurs "Accepter le dossier"
@@ -370,7 +370,7 @@ Les objectifs principaux de ce code sont :
 
 Les commentaires dans le code sont à limiter au minimum, on préfère refactorer le code pour qu’il soit plus clair.
 
-Les controlleurs sont légers.
+Les contrôleurs sont légers.
 Les modèles contiennent la logique métier. Il y a des modèles ActiveRecord et d’autres PORO.
 On utilise les concerns pour isoler des comportements de modèles. cf [doctrine 37signals](https://dev.37signals.com/vanilla-rails-is-plenty).
 Cela peut évidemment évoluer.
@@ -378,7 +378,7 @@ Cela peut évidemment évoluer.
 La couverture des tests est modérée.
 Il y a des tests E2E pour les chemins les plus importants, principalement pour les cas de succès.
 Il y a des tests unitaires pour les modèles quand cela semble nécessaire ou que ça aide l’écriture du code.
-Il n’y a pas de tests de controlleurs, on favorisera les tests E2E ou pas de tests.
+Il n’y a pas de tests de contrôleurs, on favorisera les tests E2E ou pas de tests.
 Il n’y a pas de tests pour les fonctionnalités natives de Rails ni ActiveRecord.
 Les appels ActiveRecord ne sont pas mockés, ils font partie de ce qui est couvert par les tests.
 
@@ -466,7 +466,7 @@ Voici une liste à suivre pour préparer une astreinte sereine :
 - [ ] se présenter aux membres de l'équipe, déclarer les dates et horaires d'astreinte et les moyens de contact
 - [ ] demander un compte admin en prod et en staging
 - [ ] faire tourner le projet en local, [cf README/installation](https://github.com/betagouv/collectif-objets/#readme)
-- [ ] récupérer la variable d'env RAILS_MASTER_KEY depuis l'app de prod scalingo (ou un membre de l'équipe) et la définir dans `config/master.key`
+- [ ] récupérer la variable d'env RAILS_MASTER_KEY depuis l'app de prod Scalingo (ou un membre de l'équipe) et la définir dans `config/master.key`
 - [ ] faire un tour des principales fonctionnalités de l'appli en tant que commune et conservateur
 
 Optionnel :
@@ -612,7 +612,7 @@ Les métadonnées des photos venant de Mémoire sont stockées dans le champ `ob
 ]
 ```
 
-Les métadonnées des photos mises en ligne par les communes ou les conservateurs lors du recensement sont des stockées dans `ActiveStorage::Attachment` et `ActiveStorage::Blob`, liés à l'objet `Recensement`. Les fichiers sont sur un bucket S3.
+Les métadonnées des photos mises en ligne par les communes ou les conservateurs lors du recensement sont stockées dans `ActiveStorage::Attachment` et `ActiveStorage::Blob`, liés à l'objet `Recensement`. Les fichiers sont sur un bucket S3.
 
 ## Frontend : Vite, View Components, Stimulus
 
@@ -620,7 +620,7 @@ Les fichiers `.rb` des composants View Components sont dans `/app/components`.
 Pour chaque composant, tous les fichiers liés (JS, CSS, preview) sont dans un dossier du même nom dans
 `/app/components`.
 
-Par exemple un composant GalerieComponent pourra être composé les fichiers suivants:
+Par exemple un composant GalerieComponent pourra être composé des fichiers suivants :
 
 - `/app/components/galerie_component.rb`
 - `/app/components/galerie_component/galerie_component.css`
@@ -735,8 +735,8 @@ Cette configuration est décrite sur [ce pad](https://pad.incubateur.net/zdhV1dI
 Ils sont désactivés en temps normal puisque ce fichier est très rarement modifié.
 
 Si l’erreur `Git Gateway Error: Please ask your site administrator to reissue the Git Gateway token` apparaît, il faut
-- renouveller le token du user GitHub robot@collectifobjets.org depuis [sur cette page GitHub](https://github.com/settings/tokens) (Settings > Developer settings > Personal Access Tokens (classic)) avec le droit `repo` uniquement
-- copiez le sur [la configuration Netlify Identity](https://app.netlify.com/sites/collectif-objets-cms/settings/identity) dans Git Gateway
+- renouveler le token du user GitHub robot@collectifobjets.org depuis [sur cette page GitHub](https://github.com/settings/tokens) (Settings > Developer settings > Personal Access Tokens (classic)) avec le droit `repo` uniquement
+- le copier sur [la configuration Netlify Identity](https://app.netlify.com/sites/collectif-objets-cms/settings/identity) dans Git Gateway
 
 ## Rajouter une vidéo sur le site
 
@@ -802,7 +802,7 @@ Une fois installé vous pouvez utiliser :
 
 ## Vocabulaire
 
-Un objet dit *prioritaire* est un objet en péril ou disparu. Le cas contraire, on parle d'*objet vert*.
+Un objet dit *prioritaire* est un objet en péril ou disparu. Dans les autres cas, on parle d'*objet vert*.
 
 **Historique**
 
@@ -887,7 +887,7 @@ Lorsque de nouvelles apparaissent il convient de s’assurer qu’elles provienn
 
 - vérifier que le `source_file` de l’évènement n’indique pas quelque chose de suspect comme une extension navigateur
 - vérifier que la ressource qui n’a pas pu être chargée est une ressource utilisée dans CO. Par exemple on n’utilise jamais de google fonts, donc une URL en fonts.google bloquée n’est pas un problème de notre code. C’est probablement une extension navigateur aussi
-- depuis l’issue, cliquer sur Open in Discover en haut à gauche permet de chercher des points communs entre les occurences du problème, par exemple des URLs similaires ou bien une famille de navigateurs impactés.
+- depuis l’issue, cliquer sur Open in Discover en haut à gauche permet de chercher des points communs entre les occurrences du problème, par exemple des URLs similaires ou bien une famille de navigateurs impactés.
 
 Sentry est déjà configuré pour ignorer les problèmes dont le source_file est `moz_extension` ou `sandbox eval code`, cf [config Sentry](https://sentry.incubateur.net/settings/betagouv/projects/collectif-objets/security-headers/csp/).
 

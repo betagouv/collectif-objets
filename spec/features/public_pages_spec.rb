@@ -5,6 +5,11 @@ require "rails_helper"
 feature "accessibility public pages", js: true do
   subject { page }
 
+  describe "page d'accueil" do
+    before { visit root_path }
+    it { should be_axe_clean.excluding("iframe") }
+  end
+
   describe "communes#show" do
     let!(:commune) { create(:commune, :with_objets) }
     before { visit commune_path(commune) }
@@ -61,7 +66,11 @@ feature "accessibility public pages", js: true do
   end
 
   describe "Guide du recensement" do
-    before { visit guide_path }
+    before do
+      url = Regexp.new(Regexp.escape(PagesController::STATIC_FILES_HOST))
+      stub_request(:any, url).to_return(status: 200, body: "", headers: {})
+      visit guide_path
+    end
     it { should be_axe_clean }
   end
 
@@ -98,7 +107,7 @@ feature "accessibility public pages", js: true do
   end
 
   describe "Documentation commune" do
-    before { visit content_blob_path(:documentation_commune) }
+    before { visit content_blob_path(:aide_en_ligne) }
     it { should be_axe_clean.excluding("iframe") }
   end
 

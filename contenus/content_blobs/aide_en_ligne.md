@@ -1,5 +1,5 @@
 ---
-titre: Documentation Commune
+titre: Aide en ligne
 ---
 # I - Qu’est-ce que Collectif Objets ?
 
@@ -7,16 +7,16 @@ titre: Documentation Commune
 
 Collectif Objets est un **service public numérique** du ministère de la Culture qui facilite le dialogue entre les acteurs de la chaîne patrimoniale et favorise la préservation du patrimoine mobilier protégé.
 
-Il permet aux conservateurs en charge du patrimoine d'organiser des campagnes de recensement auprès des communes abritant des objets protégés au titre des monuments historiques. 
+Il permet aux conservateurs en charge du patrimoine d'organiser des campagnes de recensement auprès des communes abritant des objets protégés au titre des monuments historiques.
 
-Les mairies sont invitées à aller examiner *in situ* les objets protégés de leur territoire puis à les recenser en ligne dans le site Collectif Objets. Pour cela, elles répondent à un questionnaire en ligne et transmettent des photos des objets attestant de leur état. Ces informations sont ensuite transmises aux conservateurs (conservateurs des antiquités et objets d’art et conservateurs des monuments historiques) pour expertise. 
+Les mairies sont invitées à aller examiner *in situ* les objets protégés de leur territoire puis à les recenser en ligne dans le site Collectif Objets. Pour cela, elles répondent à un questionnaire en ligne et transmettent des photos des objets attestant de leur état. Ces informations sont ensuite transmises aux conservateurs (conservateurs des antiquités et objets d’art et conservateurs des monuments historiques) pour expertise.
 
 Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 
-* d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ; 
+* d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ;
 * de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
 
-Les communes sont accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable. 
+Les communes sont accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable.
 
 ## 2- Qu’est-ce qu'un “objet protégé au titre des monuments historiques” ?
 
@@ -34,11 +34,11 @@ Il existe deux niveaux de protection au titre des Monuments historiques : l’in
 
 ## 3 - Pourquoi recenser les objets protégés ?
 
-La France compte plus de 285 000 objets protégés au titre des Monuments historiques. 
+La France compte plus de 285 000 objets protégés au titre des Monuments historiques.
 
 Le recensement par les communes permet une certaine surveillance des objets mobiliers en s’assurant qu’ils ne sont pas dégradés ou volés et participe à leur préservation. Il constitue une étape préalable utile à la préparation du récolement quinquennal tel qu’il est défini par le code du Patrimoine (article L. 622-8). 
 
-Il est impossible pour les conservateurs de visiter régulièrement tous ces objets, qui sont répartis dans les trois quarts des communes françaises. Afin d’éviter vols et dégradations, il est important de les inspecter régulièrement. 
+Il est impossible pour les conservateurs de visiter régulièrement tous ces objets, qui sont répartis dans les trois quarts des communes françaises. Afin d’éviter vols et dégradations, il est important de les inspecter régulièrement.
 
 Les conservateurs assurent cette mission au quotidien mais l’information n’est pas toujours enregistrée dans les bases de données. D'où l’émergence du service public Collectif Objets et son invitation au dialogue et au partage de données.
 
@@ -48,7 +48,7 @@ Recenser un ensemble d'objets est une opération rapide et simple qui permet la 
 
 Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire dans la gestion quotidienne.
 
-En faisant d'un objet une pièce à part entière du patrimoine national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
+En faisant d'un objet une pièce à part entière du patrimoine national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien.
 
 ## 5 - Engagements des communes
 
@@ -60,11 +60,11 @@ Précaution à prendre : même si les demandes de recensement sont adressées au
 
 ## 6 - Consulter la liste complète des objets protégés de ma commune
 
-La liste des objets protégés au titre des Monuments Historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture. 
+La liste des objets protégés au titre des Monuments Historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture.
 
 Les données affichées dans Collectif Objets proviennent de POP et en particulier des bases de données Palissy pour les informations et Mémoire pour les photographies associées.
 
-Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement à une personne tierce. Pour effectuer ce recensement, la mairie recevra un code de connexion sur son adresse email lui permettant de se connecter et de réaliser les recensements. 
+Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement à une personne tierce. Pour effectuer ce recensement, la mairie recevra un code de connexion sur son adresse email lui permettant de se connecter et de réaliser les recensements.
 
 ## 7 - Destination des données récoltées sur Collectif Objets
 
@@ -86,19 +86,19 @@ La protection au titre des monuments historiques n’a pas vocation à s’appli
 
 ## 1 - Se connecter à la plateforme grâce à un code de connexion
 
-P﻿our effectuer un recensement via Collectif Objets, vous devez d'abord vous connecter à votre espace dédié dans le site, grâce à un code de connexion à 6 chiffres que vous recevrez par email.  
+P﻿our effectuer un recensement via Collectif Objets, vous devez d'abord vous connecter à votre espace dédié dans le site, grâce à un code de connexion à 6 chiffres que vous recevrez par email.
 
 La vidéo ci-dessous vous présente les deux méthodes possibles pour vous connecter.
 
 <iframe title="Connexion d'une commune à Collectif Objets" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/f0958173-b19a-48da-aa5a-84ac7a5158aa" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
-P﻿our obtenir un code de connexion, vous pouvez : 
+P﻿our obtenir un code de connexion, vous pouvez :
 
 1. Partir de l'email que vous avez reçu et qui vous invite à recenser.
 
-Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code. 
+Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code.
 
-2. Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions : 
+2. Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions :
 
 * Rendez-vous sur cette page internet : <https://collectif-objets.beta.gouv.fr/users/session_codes/new> 
 * Cliquez sur « Sélectionnez un département » et choisissez votre département dans la liste proposée. Puis sélectionnez le nom de votre commune dans la liste en dessous. 
@@ -109,18 +109,18 @@ Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez
   \
   Comment effectuer un recensement ?
 
-Vous pouvez recenser en 4 étapes : 
+Vous pouvez recenser en 4 étapes :
 
-* Commencez par vous connecter à votre commune. 
+* Commencez par vous connecter à votre commune.
 * Ensuite, vous y retrouverez la liste de(s) objet(s) monument(s) historique(s) à recenser dans votre commune.
 * Vous pouvez cliquer sur un objet. Le bouton “Recenser cet objet” pour répondre au questionnaire de recensement se trouve sur cette page de détail de l’objet.
 * Une fois l’ensemble des recensements effectué vous pourrez transmettre votre dossier aux conservateurs qui pourront ainsi revenir vers vous avec un examen.
 
 ## 2 - Si vous n’avez pas reçu d’email(s) vous invitant à recenser vos objets protégés
 
-S﻿i vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a deux explications plausibles : 
+S﻿i vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a deux explications plausibles :
 
-\-﻿ il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département. 
+\-﻿ il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
 
 \-﻿ s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contactée. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou adresses email de contact) qui sont renseignées dans le site web de l'Etat "Annuaire du service public" : [https://lannuaire.service-public.fr/ ](https://lannuaire.service-public.fr/)
 
@@ -128,15 +128,15 @@ S﻿i votre commune n'a pas indiqué d'adresse email de contact dans ce site, ou
 
 ## 3 - Effectuer le recensement en ligne de ses objets protégés monuments historiques
 
-Depuis votre espace dans le site, vous pourrez voir la liste des objets protégés de votre commune. 
+Depuis votre espace dans le site, vous pourrez voir la liste des objets protégés de votre commune.
 
 En cliquant sur chacun des objets, vous obtiendrez des informations à son sujet : dernier emplacement connu, catégorie d’objet, dernier récolement, son numéro de référence au sein de la base de données nationale du patrimoine… Ces informations pourront vous aider à retrouver et identifier l’objet au sein de votre commune.
 
-Ensuite, les étapes sont les suivantes : 
+Ensuite, les étapes sont les suivantes :
 
 * Se rendre sur les lieux où se trouvent les objets pour les examiner et les prendre en photo
 * V﻿ous connecter à l'espace dédié à votre commune dans le site Collectif Objets (vous trouverez les explications plus haut)
-* Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet. Pour cela, cliquez sur l'un de vos objets puis cliquez sur le bouton “Recenser cet objet” pour répondre au questionnaire de recensement. 
+* Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet. Pour cela, cliquez sur l'un de vos objets puis cliquez sur le bouton “Recenser cet objet” pour répondre au questionnaire de recensement.
 * Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
 
 ### **V﻿oici une vidéo qui explique comment effectuer le recensement de ses objets dans le site Collectif Objets :**
@@ -149,7 +149,7 @@ Si aucun élu n'est disponible pour effectuer ce recensement, il peut être effe
 
 Si le ou la maire, ou la personne responsable du patrimoine de la commune, vous a fait confiance et vous a chargé de vous occuper de ce recensement, vous êtes légitime pour le faire. L’enjeu principal est de bien suivre les consignes indiquées pour le recensement, de prendre en photo de façon nette les objets protégés, et de remplir attentivement le formulaire de recensement pour chaque objet protégé.
 
-Si vous avez la possibilité d’être deux personnes pour effectuer le recensement des objets, nous vous recommandons de former un tandem avec un observateur et un rédacteur : 
+Si vous avez la possibilité d’être deux personnes pour effectuer le recensement des objets, nous vous recommandons de former un tandem avec un observateur et un rédacteur :
 
 * L'observateur est idéalement quelqu'un qui connait déjà l'édifice. Il ausculte minutieusement les objets (en manipulant le minimum et avec des gants si cela est nécessaire) et fournit ses observations au rédacteur ;
 * Le rédacteur se consacre au remplissage des questionnaires et la prise de photo pendant l'examen des œuvres, afin de restituer fidèlement les observations.
@@ -183,7 +183,7 @@ Elle permet aux conservateurs et aux communes d’échanger directement depuis l
 
 C﻿omment accéder à la messagerie ? \
 \
-C﻿elle-ci est directement disponible dès que vous vous connectez à votre espace sur Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les méls que vous recevez de Collectif Objets). Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web. 
+C﻿elle-ci est directement disponible dès que vous vous connectez à votre espace sur Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les méls que vous recevez de Collectif Objets). Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web.
 
 ![](/contenus/content_blobs/images/capture-messagerie-co.png)
 
@@ -199,16 +199,16 @@ L’équipe de Collectif Objets a également accès aux échanges afin de pouvoi
 
 ## 2 - Si l'objet à recenser est manquant
 
-Il arrive que la localisation indiquée pour un objet sur Collectif Objets contienne une erreur ou une information datée. 
+Il arrive que la localisation indiquée pour un objet sur Collectif Objets contienne une erreur ou une information datée.
 
 La plupart du temps, l'objet a été déplacé sans que vous en soyez informé.
 
 Afin de savoir si l’objet a été déplacé ou s’il a disparu depuis longtemps, il convient d’interroger certaines personnes : les habitués du lieu d’emplacement indiqué dans la fiche, un représentant de la paroisse ou le curé s’il s’agit d’un édifice religieux, les personnes en charge de l’accès ou de l’entretien de l’édifice supposé abriter l’objet…
 
-Après ces recherches, si l’objet n'est toujours pas retrouvé : 
+Après ces recherches, si l’objet n'est toujours pas retrouvé :
 
 * indiquez-le comme “introuvable” via la plateforme Collectif Objets ;
-* après échanges avec les conservateurs, il vous faudra peut-être déposer une plainte auprès de la gendarmerie en spécifiant la disparition d'un objet protégé au titre des monuments historiques. Il n'y a aucune prescription pour ce type de vol. Les trésors nationaux ne peuvent pas quitter le domaine public, ils sont imprescriptibles. 
+* après échanges avec les conservateurs, il vous faudra peut-être déposer une plainte auprès de la gendarmerie en spécifiant la disparition d'un objet protégé au titre des monuments historiques. Il n'y a aucune prescription pour ce type de vol. Les trésors nationaux ne peuvent pas quitter le domaine public, ils sont imprescriptibles.
 
 Dans tous les cas, vous avez la possibilité de discuter de cela avec vos conservateurs depuis la messagerie de la plateforme.
 
@@ -220,7 +220,7 @@ Quelques ressources supplémentaires à ce sujet :
 
 ## 3 - Évaluer l’état d’un objet
 
-Évaluer l’état des objets permet de donner une idée globale de leur état de conservation aux conservateurs. Ils pourront, si nécessaire, corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus logique. 
+Évaluer l’état des objets permet de donner une idée globale de leur état de conservation aux conservateurs. Ils pourront, si nécessaire, corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus logique.
 
 Si des doutes subsistent, vous pouvez interroger le conservateur ou la conservatrice de votre département via la messagerie interne au site Collectif Objets.
 
@@ -237,7 +237,7 @@ Si vous avez un doute sur quel objet est le bon, vous pouvez prendre des photos 
 * Pensez bien à vérifier que vos photos sont nettes ;
 * S'il vous est impossible de faire autrement, le flash peut être utilisé s'il améliore la visibilité. Attention à ne pas surexposer votre photo
 
-Exemples d’un ensemble de photos à prendre pour une statue : 
+Exemples d’un ensemble de photos à prendre pour une statue :
 
 * une vue de face
 * de profil
@@ -247,7 +247,7 @@ Exemples d’un ensemble de photos à prendre pour une statue :
 
 ## 6 - Savoir si les données sur les objets ont bien été transmises
 
-Les informations que vous rentrez sur la plateforme ne peuvent être transmises aux conservateurs qu'une fois que vous avez complété les questionnaires pour tous les objets protégés de votre commune. 
+Les informations que vous rentrez sur la plateforme ne peuvent être transmises aux conservateurs qu'une fois que vous avez complété les questionnaires pour tous les objets protégés de votre commune.
 
 Lorsque vous avez terminé le recensement pour votre commune - c’est à dire : rempli les questionnaires pour la totalité des objets protégés abrités par votre commune - il vous est proposé de “Finaliser le recensement”.
 
@@ -265,7 +265,7 @@ Ils pourront vous recontacter par la suite à travers la messagerie (qui est cou
 
 S﻿i vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas fini d'examiner votre dossier de recensement.
 
-Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela : 
+Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela :
 
 <iframe title="Modifier son recensement - Collectif Objets" width="100%" height="400" src="https://tube.numerique.gouv.fr/videos/embed/f4f8f996-8219-4d6f-b531-b25f7356e014" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 

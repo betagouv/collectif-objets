@@ -65,4 +65,5 @@ group :test do
   gem "capybara", "~> 3.39"
   gem "rspec-sqlimit"
   gem "selenium-webdriver", "~> 4.16"
+  gem "webmock", "~> 3.23"
 end

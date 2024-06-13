@@ -1,7 +1,7 @@
 - content_for(:head_title) { "Objets protégés de #{@commune.nom}" }
 %main#contenu.fr-container.fr-pb-4w
   = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Objets de #{@commune.nom}"
-  %h1.co-text--blue= @commune.nom
+  %h1= @commune.nom
   - if @commune.inactive?
     %h2.co-text--blue
       = t(".n_objets_a_recenser", count: @objets_list.count)
