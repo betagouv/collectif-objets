@@ -67,7 +67,7 @@
   %p
     = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
       %h2 #{campaign.communes.count} communes destinataires :
-      %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-1w
+      %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
         - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
           - url_commune = current_conservateur ? conservateurs_commune_path(recipient.commune) : admin_commune_path(recipient.commune)
           %li.co-position-relative.fr-enlarge-link
@@ -79,7 +79,7 @@
       - if excluded_communes.any?
         %p
           %strong #{excluded_communes.count} communes non inclues :
-        %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-1w
+        %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
           - excluded_communes.each do |commune|
             - url_commune = current_conservateur ? conservateurs_commune_path(commune) : admin_commune_path(commune)
             %li.co-position-relative.fr-enlarge-link
