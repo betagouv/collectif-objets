@@ -19,7 +19,7 @@ RSpec.describe ConservateurMailer, type: :mailer do
     it "behaves as expected" do
       expect(mail.subject).to include "Marseille vous a envoyé un message"
       expect(mail.to).to eq(["nadia.riza@drac.gouv.fr"])
-      expect(mail.from).to eq([ApplicationMailer::FROM_EMAIL_ADDRESS])
+      expect(mail.from).to eq([CONTACT_EMAIL])
     end
   end
 end

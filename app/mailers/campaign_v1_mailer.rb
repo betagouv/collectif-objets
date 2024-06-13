@@ -5,7 +5,7 @@ class CampaignV1Mailer < ApplicationMailer
   before_action :set_campaign_commune_and_user
   default \
     to: -> { @user.email },
-    from: -> { email_address_with_name(FROM_EMAIL_ADDRESS, @campaign.sender_name) },
+    from: -> { email_address_with_name(CONTACT_EMAIL, @campaign.sender_name) },
     reply_to: -> { @commune.support_email(role: :user) }
 
   MAIL_NAMES = (

@@ -25,7 +25,7 @@ RSpec.describe Co::SendInBlueClient do
                 "event": "delivered",
                 "tag": "",
                 "ip": "212.146.222.15",
-                "from": "collectifobjets@beta.gouv.fr"
+                "from": "contact@collectif-objets.beta.gouv.fr"
               },
               {
                 "email": "adrien@dipasquale.fr",
@@ -35,7 +35,7 @@ RSpec.describe Co::SendInBlueClient do
                 "event": "requests",
                 "tag": "",
                 "ip": "212.146.222.15",
-                "from": "collectifobjets@beta.gouv.fr"
+                "from": "contact@collectif-objets.beta.gouv.fr"
               }
             ]
           }
@@ -73,7 +73,7 @@ RSpec.describe Co::SendInBlueClient do
                 "reason": "Unable to find MX of domain lol.fr",
                 "tag": "",
                 "ip": "212.146.222.15",
-                "from": "collectifobjets@beta.gouv.fr"
+                "from": "contact@collectif-objets.beta.gouv.fr"
               },
               {
                 "email": "wazaa@lol.fr",
@@ -83,7 +83,7 @@ RSpec.describe Co::SendInBlueClient do
                 "event": "requests",
                 "tag": "",
                 "ip": "212.146.222.15",
-                "from": "collectifobjets@beta.gouv.fr"
+                "from": "contact@collectif-objets.beta.gouv.fr"
               }
             ]
           }
