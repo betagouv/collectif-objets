@@ -34,12 +34,12 @@ module CommuneHelper
     ]
   end
 
-  def commune_statut_global_badge(commune, small: false)
+  def commune_statut_global_badge(commune, **options)
     colors = ["", "", "success", "blue-ecume", "blue-ecume", "success"]
     content_tag(
       "p",
       commune.statut_global_texte,
-      class: "fr-badge fr-badge--#{colors[commune.statut_global]} #{small ? 'fr-badge--sm' : ''}"
+      class: class_names(options[:class], "fr-badge", "fr-badge--#{colors[commune.statut_global]}", { "fr-badge--sm": options[:small] })
     )
   end
 end
