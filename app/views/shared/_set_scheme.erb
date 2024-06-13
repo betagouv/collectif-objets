@@ -1,0 +1,11 @@
+<%#
+  Reduce screen flickering when user color mode is not the default
+  https://getbootstrap.com/docs/5.3/customize/color-modes/#javascript
+%>
+<script nonce="<%= content_security_policy_nonce %>">
+  let theme = localStorage.getItem("scheme");
+  if (!["light", "dark"].includes(theme)) {
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  document.documentElement.setAttribute("data-fr-theme", theme);
+</script>
