@@ -76,15 +76,14 @@
               = campaign_recipient_status_badge(recipient)
               = campaign_recipient_opt_out_badge(recipient)
       - if excluded_communes.any?
-        .fr-mt-4w.co-flex.co-flex--space-between
-          %b
-            = excluded_communes.count
-            communes non inclues :
-          %ul.co-columns--4
-            - excluded_communes.each do |commune|
-              %li
+        %p
+          %strong #{excluded_communes.count} communes non inclues :
+        %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-1w
+          - excluded_communes.each do |commune|
+            %li
+              .co-flex.co-flex--space-between
                 = commune.nom
-                %span.fr-text--sm.co-text--muted= commune.code_insee
+                = commune_statut_global_badge(commune)
 - else
   %p Les communes destinataires n'ont pas encore été définies
 
