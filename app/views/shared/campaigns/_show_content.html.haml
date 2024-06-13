@@ -69,9 +69,10 @@
       %h2 #{campaign.communes.count} communes destinataires :
       %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-1w
         - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
-          %li
+          - url_commune = current_conservateur ? conservateurs_commune_path(recipient.commune) : admin_commune_path(recipient.commune)
+          %li.co-position-relative.fr-enlarge-link
             .co-flex.co-flex--space-between
-              = recipient.commune.nom
+              = link_to recipient.commune.nom, url_commune, class: "fr-mr-auto"
               = commune_statut_global_badge(recipient.commune)
               = campaign_recipient_status_badge(recipient)
               = campaign_recipient_opt_out_badge(recipient)
@@ -80,9 +81,10 @@
           %strong #{excluded_communes.count} communes non inclues :
         %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-1w
           - excluded_communes.each do |commune|
-            %li
+            - url_commune = current_conservateur ? conservateurs_commune_path(commune) : admin_commune_path(commune)
+            %li.co-position-relative.fr-enlarge-link
               .co-flex.co-flex--space-between
-                = commune.nom
+                = link_to commune.nom, url_commune
                 = commune_statut_global_badge(commune)
 - else
   %p Les communes destinataires n'ont pas encore été définies
