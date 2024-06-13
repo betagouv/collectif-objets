@@ -9,4 +9,4 @@ We try never to lag behind a major update for more than 3 months.
 
 ## Reporting a Vulnerability
 
-If you think you have found a vulnerability or would like to question us on security, feel free to reach out to us at `collectifobjets@beta.gouv.fr`
+If you think you have found a vulnerability or would like to question us on security, feel free to reach out to us at `contact@collectif-objets.beta.gouv.fr`
