@@ -5,7 +5,7 @@
         = f.label :count, "Nombre de mails max (peut être lent)"
         = f.text_field :count, value: @count, type: :number, autocomplete: "off"
       .fr-input-group
-        = f.submit "Prévisualiser les mails"
+        = f.submit "Prévisualiser les mails", name: nil
 
 - campaign.recipients.includes(:commune).first(@count).each_slice(2) do |recipients|
   .fr-grid-row.fr-mb-2w.fr-grid-row--gutters
