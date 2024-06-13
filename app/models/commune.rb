@@ -221,6 +221,10 @@ class Commune < ApplicationRecord
     RefreshCommuneRecensementRatioJob.perform_later(id)
   end
 
+  def completed_at
+    dossier&.submitted_at
+  end
+
   # -------
   # RANSACK
   # -------
