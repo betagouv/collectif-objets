@@ -646,9 +646,11 @@ fr:
     commune_avec_objets_verts:
       remerciements: Nous vous remercions d'avoir pris part à la campagne de recensement des objets monuments historiques avec Collectif Objets %{dans_departement}.
       preservation_patrimoine: En participant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine.
-      engagement: Le partage des connaissances entre l'ensemble des acteurs de la chaîne patrimoniale permet d'assurer un meilleur suivi des objets protégés et d'identifier les situations problématiques nécessitant une prise en charge urgente. Nous vous remercions vivement pour votre engagement.
+      engagement: Le partage des connaissances entre communes et conservateurs permet d'assurer un meilleur suivi des objets protégés et d'identifier les situations problématiques nécessitant une prise en charge. Nous vous remercions vivement pour votre engagement.
       que_des_objets_verts: Vous avez indiqué que les objets protégés de votre commune sont dans un état qui n'appelle pas une prise en charge urgente.
-      contacter_caoa: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur d’antiquités et d’objets d’art. Vous  pouvez directement le contacter via
+      toutefois: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur des antiquités et d’objets d’art de votre département.
+      contacter_caoa: Vous pouvez le contacter directement en vous rendant sur l'onglet "Messagerie" depuis votre compte Collectif Objets.
+      cta: Accéder à la messagerie
     dossier_auto_submitted:
       intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs d’antiquités et d’objets d’art ne l'avaient pas encore reçu.
       auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’examiner et revenir vers vous avec un examen, en temps voulu.
