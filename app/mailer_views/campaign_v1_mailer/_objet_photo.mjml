@@ -5,8 +5,6 @@
     <mj-text align="center">
       <%= objet.palissy_TICO %>
       <br />
-      Objet présent à <%= commune.nom %>
-      <br />
       <b><%= objet.edifice_nom_formatted %></b>
       <%= objet.emplacement %>
       <% if photo_presenter&.credit.present? %>
