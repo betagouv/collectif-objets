@@ -451,7 +451,6 @@ fr:
       to_complete: Commune doit finaliser
     layout:
       portage: Cette initiative est portée par le ministère de la Culture et la Direction interministérielle du numérique dans le cadre du programme beta.gouv.
-      contact: Pour toute question, répondez à cet email. Nous pourrons vous recontacter par téléphone dans les meilleurs délais.
       desinscription: Suivez ce lien pour ne plus recevoir d'emails de Collectif Objets
     lancement:
       title: Mail de lancement

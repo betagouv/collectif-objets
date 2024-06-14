@@ -25,9 +25,6 @@
         <mj-text color="#666">
           <%= t("campaign_v1_mailer.layout.portage") %>
         </mj-text>
-        <mj-text color="#666">
-          <%= t("campaign_v1_mailer.layout.contact") %>
-        </mj-text>
       </mj-column>
     </mj-section>
   </mj-body>
