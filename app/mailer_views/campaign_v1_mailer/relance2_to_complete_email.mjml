@@ -2,10 +2,14 @@
   <mj-column>
     <mj-text><%= ct("relance2_to_complete.merci") %></mj-text>
     <mj-text><%= ct("relance2_to_complete.toutefois") %></mj-text>
-    <mj-text><%= ct("shared.cliquez") %></mj-text>
+    <mj-text><%= ct("relance2_to_complete.cliquez") %></mj-text>
   </mj-column>
 </mj-section>
 
 <%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>
 
-<%= render partial: "custom_campaign_infos_section" %>
+<mj-section>
+  <mj-column>
+    <mj-text><%= ct("fin_shared.contact") %></mj-text>
+  </mj-column>
+</mj-section>

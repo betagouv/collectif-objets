@@ -528,7 +528,8 @@ fr:
       title: "Mail de deuxième relance - commune doit finaliser"
       subject: Il reste une dernière étape pour envoyer le dossier de recensement de %{nom_commune}
       merci: Nous vous remercions d’avoir pris le temps de participer à la campagne de recensement et de vous investir dans la protection de notre patrimoine mobilier.
-      toutefois: Toutefois, <b>il semblerait que vous n’ayez pas encore effectué la dernière étape qui consiste à envoyer le dossier aux conservateurs d’antiquités et d’objets d’art pour qu’ils puissent l’étudier.</b>
+      toutefois: Toutefois, il semblerait que vous n’ayez pas encore finalisé votre recensement, ce qui est nécessaire pour nous transmettre votre dossier.
+      cliquez: "Il n’est pas trop tard. Pour finaliser votre contribution, il vous suffit de cliquer ici :"
     relance3_to_complete:
       title: "Mail de troisième relance - commune doit finaliser"
       subject: N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}
