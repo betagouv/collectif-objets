@@ -618,6 +618,7 @@ fr:
         mdp_ne_changera_pas_avant: Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur ce lien et renseigné un nouveau mot de passe.
 
   application_mailer_layout:
+    project_name: Collectif Objets
     tagline: Préservez votre patrimoine mobilier
     politesse: Bien cordialement,
   conservateur_mailer:

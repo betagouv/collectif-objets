@@ -11,7 +11,7 @@
   </mj-column>
   <mj-column width="60%" vertical-align="middle">
     <mj-text>
-      <%= local_assigns.fetch(:signature, "Collectif Objets").html_safe %>
+      <%= local_assigns.fetch(:signature, t("application_mailer_layout.project_name")).html_safe %>
     </mj-text>
   </mj-column>
 </mj-section>
