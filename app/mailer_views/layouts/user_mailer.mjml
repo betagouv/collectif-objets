@@ -25,7 +25,7 @@
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-image width="100px" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
+        <mj-image width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
       </mj-column>
       <mj-column>
         <mj-text>
