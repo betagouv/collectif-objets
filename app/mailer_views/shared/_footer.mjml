@@ -6,10 +6,10 @@
   </mj-column>
 </mj-section>
 <mj-section>
-  <mj-column>
-    <mj-image width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
+  <mj-column width="40%" vertical-align="middle">
+    <mj-image align="left" width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png"></mj-image>
   </mj-column>
-  <mj-column>
+  <mj-column width="60%" vertical-align="middle">
     <mj-text>
       <%= local_assigns.fetch(:signature, "Collectif Objets").html_safe %>
     </mj-text>
