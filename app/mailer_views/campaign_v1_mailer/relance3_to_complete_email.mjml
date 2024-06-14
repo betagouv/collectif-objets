@@ -1,11 +1,16 @@
 <mj-section>
   <mj-column>
     <mj-text><%= ct("relance3_to_complete.intro") %></mj-text>
+    <mj-text><%= ct("relance3_to_complete.sauf_erreur") %></mj-text>
     <mj-text><%= ct("relance3_to_complete.finalisez") %></mj-text>
-    <mj-text><%= ct("shared.cliquez") %></mj-text>
   </mj-column>
 </mj-section>
 
 <%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>
 
-<%= render partial: "custom_campaign_infos_section" %>
+<mj-section>
+  <mj-column>
+    <mj-text><%= ct("fin_shared.contact") %></mj-text>
+    <%= render partial: "custom_campaign_infos" %>
+  </mj-column>
+</mj-section>

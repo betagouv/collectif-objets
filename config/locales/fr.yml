@@ -532,7 +532,8 @@ fr:
       title: "Mail de troisième relance - commune doit finaliser"
       subject: N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}
       intro: La campagne de recensement des objets monuments historiques pour laquelle vous avez participé prendra fin le %{date_fin}. Nous vous remercions encore pour votre investissement dans la protection du patrimoine mobilier français.
-      finalisez: <b>Pour que les conservateurs d’antiquités et d’objets d’art reçoivent votre contribution et l'examinent, n’oubliez pas de finaliser votre recensement !</b>
+      sauf_erreur: Sauf erreur de notre part, vous n’avez pas effectué la dernière étape qui permet l’envoi du dossier de recensement.
+      finalisez: "Il n’est pas trop tard. Pour transmettre votre dossier, il vous suffit de cliquer sur le bouton ci-dessous puis de cliquer sur “Envoyer les recensements” :"
     fin_to_complete:
       title: "Mail de clôture - commune doit finaliser"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
