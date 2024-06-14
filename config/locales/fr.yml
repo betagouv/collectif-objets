@@ -538,7 +538,7 @@ fr:
       title: "Mail de clôture - commune doit finaliser"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
       sauf_erreur: Sauf erreur de notre part, vous n’avez pas effectué la dernière étape qui permet l’envoi du dossier de recensement.
-      pas_trop_tard: "Il n’est pas trop tard : <b>pour que les conservateurs d’antiquités et d’objets d’art reçoivent votre contribution et puissent vous accompagner, il suffit de suivre ce lien :</b>"
+      pas_trop_tard: "Il n’est pas trop tard : <b>pour transmettre votre contribution, il suffit de suivre ce lien puis de cliquer sur “Envoyer les recensements”</b> :"
     fin_shared:
       fin_aujourdhui: <b>La campagne de recensement participatif des objets monuments historiques %{dans_departement} prend fin aujourd’hui.</b>
       merci: Nous vous remercions pour votre engagement en faveur du patrimoine mobilier protégé.

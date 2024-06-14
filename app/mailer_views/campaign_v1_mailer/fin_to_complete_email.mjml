@@ -7,3 +7,9 @@
   </mj-column>
 </mj-section>
 <%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>
+
+<mj-section>
+  <mj-column>
+    <mj-text><%= ct("fin_shared.contact") %></mj-text>
+  </mj-column>
+</mj-section>
