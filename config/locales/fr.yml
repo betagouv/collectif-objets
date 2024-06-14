@@ -502,7 +502,6 @@ fr:
       fin_aujourdhui: La campagne de recensement participatif %{dans_departement} prend fin aujourd’hui.
       vous_navez_pas_souhaite: Sauf erreur de notre part, vous n’avez pas participé à la campagne de recensement des objets monuments historiques pour laquelle nous vous avons sollicité il y a quelques semaines.
       prochaine_campagne: Votre commune pourra être recontactée ultérieurement pour une prochaine campagne.
-      contact: Pour contacter les conservateurs de votre département, vous pouvez écrire un message dans l’onglet “Messagerie” depuis votre compte Collectif Objets.
     relance2_started:
       title: "Mail de seconde relance - recensement démarré"
       subject: Rencontrez-vous des difficultés dans le recensement de vos objets protégés à %{nom_commune} ?
@@ -543,6 +542,7 @@ fr:
     fin_shared:
       fin_aujourdhui: <b>La campagne de recensement participatif des objets monuments historiques %{dans_departement} prend fin aujourd’hui.</b>
       merci: Nous vous remercions pour votre engagement en faveur du patrimoine mobilier protégé.
+      contact: Pour contacter les conservateurs de votre département, vous pouvez écrire un message dans l’onglet “Messagerie” depuis votre compte Collectif Objets.
     shared:
       madame_monsieur_le_maire: "Madame la Maire, Monsieur le Maire,"
       role_elu: Pour lutter contre les vols et les dégradations des objets protégés de votre commune, <b>votre rôle d'élu local est essentiel</b>.
