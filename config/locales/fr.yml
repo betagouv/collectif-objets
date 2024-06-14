@@ -666,14 +666,14 @@ fr:
       cta: Connexion
       valid_until: "Ce code est valide jusqu'à %{date}."
     message_received:
-      bonjour: Bonjour %{nom_commune},
-      from_conservateur: "%{author}, conservateur de votre département, vous a envoyé un message sur Collectif Objets le %{date} :"
+      bonjour: Bonjour,
+      from_conservateur: "Le conservateur de votre département, %{author}, vous a envoyé un message sur Collectif Objets le %{date} :"
       from_admin_user: "%{author} de l'équipe support de Collectif Objets vous a envoyé un message le %{date} :"
       attachments:
         one: Ce message contient 1 pièce jointe visible depuis Collectif Objets.
         other: Ce message contient %{count} pièces jointes visibles depuis Collectif Objets.
-      cta: Répondre sur Collectif Objets
-      reply_by_email: Vous pouvez aussi répondre à cet email directement. Le message apparaîtra dans la messagerie de Collectif Objets et l'usager sera notifié par email.
+      cta: Accéder à mon compte
+      reply: "Pour lui répondre, veuillez vous rendre sur l’onglet “Messagerie” depuis votre compte Collectif Objets :"
     layout:
       unsubscribe: Je ne souhaite plus recevoir ces emails
 
