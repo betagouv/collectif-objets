@@ -1,35 +1,35 @@
 <mj-section>
   <mj-column>
     <mj-text>
-      <%= I18n.t("user_mailer.shared.bonjour") %>
+      <%= t("user_mailer.shared.bonjour") %>
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.participation") %>
+      <%= t("user_mailer.commune_completed.participation") %>
     </mj-text>
 
     <mj-text font-weight="800">
-      <%= I18n.t("user_mailer.commune_completed.merci") %>
+      <%= t("user_mailer.commune_completed.merci") %>
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.visibilite") %>
+      <%= t("user_mailer.commune_completed.visibilite") %>
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.a_venir") %>
+      <%= t("user_mailer.commune_completed.a_venir") %>
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.documentation") %> <%= link_to "en cliquant ici", content_blob_url(:aide_en_ligne) %>.
+      <%= t("user_mailer.commune_completed.documentation") %> <%= link_to "en cliquant ici", content_blob_url(:aide_en_ligne) %>.
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.shared.contact") %> <%= link_to "la messagerie de Collectif Objets", commune_messages_url(@commune) %>.
+      <%= t("user_mailer.shared.contact") %> <%= link_to "la messagerie de Collectif Objets", commune_messages_url(@commune) %>.
     </mj-text>
 
     <mj-button href="<%= @cta_url %>" background-color="rgb(0,0,145)">
-      <%= I18n.t("user_mailer.commune_completed.cta") %>
+      <%= t("user_mailer.commune_completed.cta") %>
     </mj-button>
   </mj-column>
 </mj-section>
