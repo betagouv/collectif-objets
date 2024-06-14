@@ -505,8 +505,9 @@ fr:
       title: "Mail de seconde relance - recensement démarré"
       subject: Rencontrez-vous des difficultés dans le recensement de vos objets protégés à %{nom_commune} ?
       bien_recu: Nous avons bien reçu vos premiers retours concernant les objets protégés de %{nom_commune}. Nous vous remercions de vous investir dans la protection de notre patrimoine mobilier.
-      plus_actif: Nous avons remarqué que vous n’étiez plus actif depuis quelque temps.
-      reply: Sachez que si vous rencontrez des problèmes pour finaliser le recensement de vos objets protégés, vous pouvez nous contacter en répondant à cet email.
+      plus_actif: Sauf erreur de notre part, nous n’avons enregistré qu’une partie des recensements des objets protégés présents dans votre commune.
+      dossier_complet: Seul un dossier complet pourra être pris en compte. Sachez qu’il n’est pas trop tard pour compléter votre recensement. La campagne se termine le %{date_fin}.
+      contactez_nous: Si vous rencontrez des problèmes pour finaliser le recensement de vos objets protégés, vous pouvez nous contacter en vous rendant sur l’onglet “Messagerie” depuis votre compte Collectif Objets.
     fin_started:
       title: "Mail de clôture - recensement démarré"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"

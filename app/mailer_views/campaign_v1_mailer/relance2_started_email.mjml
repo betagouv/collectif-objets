@@ -1,13 +1,16 @@
 <mj-section>
   <mj-column>
     <mj-text><%= ct("relance2_started.bien_recu") %></mj-text>
-    <mj-text>
-      <%= ct("relance2_started.plus_actif") %>
-      <b><%= ct("relance2_started.reply") %></b>
-    </mj-text>
+    <mj-text><%= ct("relance2_started.plus_actif") %></mj-text>
+    <mj-text><b><%= ct("relance2_started.dossier_complet") %></b></mj-text>
+    <mj-text><%= ct("relance2_started.contactez_nous") %></mj-text>
   </mj-column>
 </mj-section>
 
 <%= render partial: "cta", locals: { variant: "started", user: @user, commune: @commune } %>
 
-<%= render partial: "custom_campaign_infos_section" %>
+<mj-section>
+  <mj-column>
+    <mj-text><%= t("application_mailer_layout.politesse") %></mj-text>
+  </mj-column>
+</mj-section>
