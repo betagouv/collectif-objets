@@ -545,7 +545,7 @@ fr:
       fin_aujourdhui: <b>La campagne de recensement participatif des objets monuments historiques %{dans_departement} prend fin aujourd’hui.</b>
       merci: Nous vous remercions pour votre engagement en faveur du patrimoine mobilier protégé.
     shared:
-      madame_monsieur_le_maire: "Madame, Monsieur le Maire,"
+      madame_monsieur_le_maire: "Madame la Maire, Monsieur le Maire,"
       role_elu: Pour lutter contre les vols et les dégradations des objets protégés de votre commune, <b>votre rôle d'élu local est essentiel</b>.
       cta_inactive:
         one: Commencer le recensement de l’objet protégé à %{nom_commune}
@@ -556,7 +556,7 @@ fr:
         one: "%{nom_commune} abrite un objet monument historique."
         other: "%{nom_commune} abrite %{count} objets monuments historiques."
       cliquez: "Il vous suffit de cliquer ici :"
-      politesse: "Bien cordialement,"
+      politesse: Je vous prie d’agréer, madame la maire, monsieur le maire, l’expression de ma considération distinguée.
     concordataires:
       intro: Nous sommes dans un département concordataire et la propriété de certains objets religieux peut être incorrectement renseignée dans les bases de données du ministère de la Culture. L'objectif premier de ce travail de recensement n'est pas d'établir définitivement la propriété de ces objets mais bien de s'assurer de leur présence et de leur état.
       intro2: Pour sa bonne organisation, nous vous invitons à vous rapprocher des affectataires (par exemple les établissements publics du culte que sont les fabriques, conseils presbytéraux, consistoires protestants ou le consistoire israélite départemental).
