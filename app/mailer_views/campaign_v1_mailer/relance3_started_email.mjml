@@ -4,10 +4,14 @@
     <mj-text><%= ct("relance3_started.date_fin") %></mj-text>
     <mj-text><%= ct("relance3_started.finalisez") %></mj-text>
     <mj-text><%= ct("relance3_started.photos") %></mj-text>
-    <mj-text><%= ct("relance3_started.besoin_daide") %></mj-text>
   </mj-column>
 </mj-section>
 
 <%= render partial: "cta", locals: { variant: "started", user: @user, commune: @commune } %>
 
-<%= render partial: "custom_campaign_infos_section" %>
+<mj-section>
+  <mj-column>
+    <mj-text><%= ct("fin_shared.contact") %></mj-text>
+    <mj-text><%= ct("fin_shared.date_fin") %></mj-text>
+  </mj-column>
+</mj-section>

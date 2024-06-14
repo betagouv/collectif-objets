@@ -520,9 +520,8 @@ fr:
       subject: "N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}"
       merci: Nous vous remercions de contribuer à cette campagne de recensement participatif %{dans_departement}.
       date_fin: <b>Pour rappel, la campagne prendra fin le %{date_fin}.</b>
-      finalisez: Nous vous invitons donc à finaliser le recensement de l’ensemble de vos objets protégés avant cette échéance, afin que les conservateurs d’antiquités et d’objets d’art puissent prendre connaissance de vos réponses et vous accompagner au mieux.
-      photos: <b>Il est important d’y joindre des photos récentes pour permettre aux conservateurs d’évaluer l’état des objets recensés.</b>
-      besoin_daide: Si vous avez besoin d’aide pour terminer le recensement, notre équipe se tient à votre disposition, il vous suffit de répondre à cet email.
+      finalisez: Nous vous invitons donc à finaliser le recensement de l’ensemble de vos objets protégés avant cette échéance, afin que nous puissions prendre connaissance de vos réponses.
+      photos: <b>Il est important d’y joindre des photos récentes des objets pour que nous puissions en évaluer l'état.</b>
     relance2_to_complete:
       title: "Mail de deuxième relance - commune doit finaliser"
       subject: Il reste une dernière étape pour envoyer le dossier de recensement de %{nom_commune}
