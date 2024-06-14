@@ -6,10 +6,10 @@
   </mj-column>
 </mj-section>
 <mj-section>
-  <mj-column width="40%" vertical-align="middle">
+  <mj-column width="40%" vertical-align="top">
     <mj-image align="left" width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png"></mj-image>
   </mj-column>
-  <mj-column width="60%" vertical-align="middle">
+  <mj-column width="60%" vertical-align="top">
     <mj-text>
       <%= local_assigns.fetch(:signature, t("application_mailer_layout.project_name")).html_safe %>
     </mj-text>
