@@ -652,10 +652,9 @@ fr:
       contacter_caoa: Vous pouvez le contacter directement en vous rendant sur l'onglet "Messagerie" depuis votre compte Collectif Objets.
       cta: Accéder à la messagerie
     dossier_auto_submitted:
-      intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture depuis, les conservateurs d’antiquités et d’objets d’art ne l'avaient pas encore reçu.
-      auto_submitted: Nous avons transmis automatiquement le dossier de votre commune aux conservateurs de votre département. Ils vont désormais pouvoir l’examiner et revenir vers vous avec un examen, en temps voulu.
+      intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture, les conservateurs d’antiquités et d’objets d’art de votre département ne l'avaient pas encore reçu.
+      auto_submitted: Nous l'avons transmis automatiquement afin qu'ils puissent l’examiner.
       cta: Voir les données envoyées
-      contact: Nous restons à votre disposition pour toute question ou demande de clarification.
     dossier_accepted:
       submitted: Vous avez envoyé un dossier de recensement des objets protégés de %{commune_nom} et nous vous en remercions.
       commentaire: "Voici le commentaire final laissé par votre conservateur suite à l’examen de votre dossier :"
