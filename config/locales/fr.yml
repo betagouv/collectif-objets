@@ -455,16 +455,18 @@ fr:
     lancement:
       title: Mail de lancement
       subject: "Lancement du recensement des objets monuments historiques à %{nom_commune}"
-      invitation: "La DRAC %{nom_drac} vous invite à participer à une campagne de recensement lancée sur %{nombre_communes} communes %{dans_departement} du %{date_lancement} au %{date_fin}, afin de vous accompagner dans la protection et la valorisation de votre patrimoine mobilier."
+      invitation: "Je vous invite à participer à une campagne de recensement lancée sur %{nombre_communes} communes %{dans_departement} du %{date_lancement} au %{date_fin}, afin de vous accompagner dans la protection et la valorisation de votre patrimoine mobilier."
       abrite_n_objets:
         one: "%{nom_commune} abrite un objet protégé au titre des monuments historiques :"
         other: "%{nom_commune} abrite %{count} objets protégés au titre des monuments historiques, comme celui-ci :"
-      simple: Le recensement est court et simple. Il se fait en ligne sur le site dédié Collectif Objets. Il consiste à vérifier la présence de l’objet, le photographier et répondre à un rapide questionnaire visant à évaluer son état. Il se différencie donc des précédents inventaires.
-      conseils: "À la lecture de vos réponses, les conservateurs d’antiquités et d’objets d’art pourront vous conseiller sur :"
-      conseil1: "l'entretien de vos objets et leur restauration éventuelle,"
-      conseil2: "leur sécurisation et leur valorisation,"
-      conseil3: "les possibilités de financement auprès des différents acteurs du patrimoine."
-      decouvrez: "<b>Découvrez les objets monuments historiques de votre territoire et commencez votre recensement</b> :"
+      simple: "Le recensement est court et simple. Il se fait en ligne sur le site dédié : “Collectif Objets”. Il consiste à :"
+      conseil1: vérifier la présence de l’objet dans votre commune
+      conseil2: le photographier
+      conseil3: répondre à un rapide questionnaire visant à évaluer son état.
+      different: Il se différencie donc des précédents inventaires.
+      conseils: À la lecture de vos réponses, les conservateurs d’antiquités et d’objets d’art pourront vous conseiller sur l'entretien de vos objets et leur restauration éventuelle, leur sécurisation et leur valorisation, ou encore les possibilités de financement auprès des différents acteurs du patrimoine.
+      coordonnees: Pour être mieux à même de répondre à vos questions, je vous prie de bien vouloir nous indiquer le nom et les coordonnées de la personne en charge de ce recensement au sein de l’équipe communale. <b>Vous pourrez indiquer ces informations dans le champ « commentaire »</b>.
+      decouvrez: "<b>Découvrez les objets monuments historiques de votre territoire et commencez votre recensement&nbsp;:</b>"
     relance1_inactive:
       title: "Mail de première relance - commune inactive"
       subject: "%{nom_commune}, le recensement des objets monuments historiques %{dans_departement} est en cours"

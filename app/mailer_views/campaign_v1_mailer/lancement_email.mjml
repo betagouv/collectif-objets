@@ -9,16 +9,17 @@
 
 <mj-section>
   <mj-column>
-    <mj-text><%= ct("lancement.simple") %></mj-text>
-    <%= render partial: "custom_campaign_infos" %>
-    <mj-text><%= ct("lancement.conseils") %></mj-text>
     <mj-text>
+      <%= ct("lancement.simple") %>
       <ul>
         <li><%= ct("lancement.conseil1") %></li>
         <li><%= ct("lancement.conseil2") %></li>
         <li><%= ct("lancement.conseil3") %></li>
       </ul>
+      <%= ct("lancement.different") %>
     </mj-text>
+    <mj-text><%= ct("lancement.conseils") %></mj-text>
+    <mj-text><%= ct("lancement.coordonnees") %></mj-text>
     <mj-text><%= ct("lancement.decouvrez") %></mj-text>
   </mj-column>
 </mj-section>
