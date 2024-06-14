@@ -9,3 +9,9 @@
     </mj-text>
   </mj-column>
 </mj-section>
+
+<mj-section>
+  <mj-column>
+    <mj-divider border-color="rgb(0,0,145)"></mj-divider>
+  </mj-column>
+</mj-section>
