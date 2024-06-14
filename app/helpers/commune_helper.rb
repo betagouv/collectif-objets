@@ -39,7 +39,8 @@ module CommuneHelper
     content_tag(
       "p",
       commune.statut_global_texte,
-      class: class_names(options[:class], "fr-badge", "fr-badge--#{colors[commune.statut_global]}", { "fr-badge--sm": options[:small] })
+      class: class_names(options[:class], "fr-badge", "fr-badge--#{colors[commune.statut_global]}",
+                         { "fr-badge--sm": options[:small] })
     )
   end
 end
