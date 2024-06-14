@@ -1,5 +1,6 @@
 <mj-head>
   <mj-attributes>
     <mj-all font-family="Arial" />
+    <mj-title><%= mailer.message.subject %></mj-title>
   </mj-attributes>
 </mj-head>
