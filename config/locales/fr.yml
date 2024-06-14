@@ -482,9 +482,9 @@ fr:
     relance2_inactive:
       title: "Mail de seconde relance - commune inactive"
       subject: "%{nom_commune}, le recensement des objets monuments historiques %{dans_departement} est en cours"
-      intro: "La campagne de recensement des objets monuments historiques %{dans_departement} se termine dans %{fin_dans_n_semaines} semaines."
+      intro: "La campagne de recensement des objets monuments historiques %{dans_departement} se termine dans %{fin_dans_n_jours} jours."
       simple: Le recensement est simple et ne vous prendra que quelques minutes par objet.
-      conseils: En plus de (re)découvrir le patrimoine de votre commune, vous pourrez bénéficier de conseils et de l’expertise des conservateurs d’antiquités et d’objets d’art pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
+      conseils: En plus de (re)découvrir le patrimoine de votre commune, vous pourrez bénéficier de conseils et de l’expertise de l'équipe départemenatale en charge de la conservation des antiquités et objets d'art pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire.
     relance3_inactive:
       title: "Mail de dernière relance - commune inactive"
       subject: "Plus que %{fin_dans_n_jours} jours pour recenser les objets monuments historiques de %{nom_commune}"

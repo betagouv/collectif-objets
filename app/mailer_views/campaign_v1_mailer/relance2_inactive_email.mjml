@@ -12,4 +12,10 @@
 
 <%= render partial: "cta", locals: { variant: "inactive", user: @user, commune: @commune } %>
 
-<%= render partial: "custom_campaign_infos_section" %>
+<mj-section>
+  <mj-column>
+    <mj-text><%= ct("fin_shared.contact") %></mj-text>
+    <%= render partial: "custom_campaign_infos" %>
+    <mj-text><%= ct("fin_shared.date_fin") %></mj-text>
+  </mj-column>
+</mj-section>
