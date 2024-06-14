@@ -30,6 +30,6 @@
 
     <mj-button href="<%= @cta_url %>" background-color="rgb(0,0,145)">
       <%= I18n.t("user_mailer.commune_completed.cta") %>
-      </mj-button>
+    </mj-button>
   </mj-column>
 </mj-section>
