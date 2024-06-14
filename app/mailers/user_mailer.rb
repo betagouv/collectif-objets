@@ -2,7 +2,6 @@
 
 class UserMailer < ApplicationMailer
   helper :messages
-  layout "user_mailer"
   default to: -> { @user.email }
 
   def session_code_email

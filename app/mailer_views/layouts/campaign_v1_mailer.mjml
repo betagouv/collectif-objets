@@ -1,12 +1,8 @@
 <mjml>
-  <mj-head>
-    <mj-attributes>
-      <mj-all font-family="Arial" />
-    </mj-attributes>
-  </mj-head>
+  <%= render "shared/head" %>
 
   <mj-body>
-    <%= render "layouts/mail_header" %>
+    <%= render "shared/header" %>
 
     <mj-section>
       <mj-column>
@@ -18,24 +14,9 @@
 
     <%= yield %>
 
-    <mj-section>
-      <mj-column>
-        <mj-text>
-          <%= t("campaign_v1_mailer.shared.politesse") %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
-
-    <mj-section>
-      <mj-column>
-        <mj-image width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
-      </mj-column>
-      <mj-column>
-        <mj-text>
-          <%= @campaign.signature.gsub("\n", "<br/>").html_safe %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
+    <% signature = @campaign.signature.gsub("\n", "<br/>") %>
+    <% unsubscribe = link_to t("campaign_v1_mailer.layout.desinscription"), new_user_unsubscribe_url(token: @campaign_recipient.unsubscribe_token) %>
+    <%= render "shared/footer", signature:, unsubscribe: %>
 
     <mj-section>
       <mj-column>
@@ -44,16 +25,6 @@
         </mj-text>
         <mj-text color="#666">
           <%= t("campaign_v1_mailer.layout.contact") %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
-
-    <mj-section>
-      <mj-column>
-        <mj-text color="#666">
-          <a href="<%= new_user_unsubscribe_url(token: @campaign_recipient.unsubscribe_token) %>">
-            <%= t("campaign_v1_mailer.layout.desinscription") %>
-          </a>
         </mj-text>
       </mj-column>
     </mj-section>

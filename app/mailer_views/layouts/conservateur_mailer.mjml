@@ -1,38 +1,12 @@
 <mjml>
-  <mj-head>
-    <mj-attributes>
-      <mj-all font-family="Arial" />
-    </mj-attributes>
-  </mj-head>
+  <%= render "shared/head" %>
 
   <mj-body>
-    <%= render "layouts/mail_header" %>
+    <%= render "shared/header" %>
 
     <%= yield %>
 
-    <mj-section>
-      <mj-column>
-        <mj-text>
-          <%= I18n.t("application_mailer_layout.politesse") %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-image width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
-      </mj-column>
-      <mj-column>
-        <mj-text>
-          <b>Collectif Objets</b>
-        </mj-text>
-      </mj-column>
-    </mj-section>
-    <mj-section>
-      <mj-column>
-        <mj-text>
-          <%= link_to I18n.t("conservateur_mailer.layout.unsubscribe"), edit_conservateur_registration_url %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
+    <% unsubscribe = link_to I18n.t("conservateur_mailer.layout.unsubscribe"), edit_conservateur_registration_url %>
+    <%= render "shared/footer", unsubscribe: %>
   </mj-body>
 </mjml>

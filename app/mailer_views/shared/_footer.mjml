@@ -1,0 +1,26 @@
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("application_mailer_layout.politesse") %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column>
+    <mj-image width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png" align="left"></mj-image>
+  </mj-column>
+  <mj-column>
+    <mj-text>
+      <%= local_assigns.fetch(:signature, "Collectif Objets").html_safe %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<% if local_assigns.key?(:unsubscribe) %>
+  <mj-section>
+    <mj-column>
+      <mj-text>
+        <%= unsubscribe %>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+<% end %>
