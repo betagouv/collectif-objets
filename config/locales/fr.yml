@@ -500,11 +500,9 @@ fr:
       title: "Mail de clôture - commune inactive"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
       fin_aujourdhui: La campagne de recensement participatif %{dans_departement} prend fin aujourd’hui.
-      vous_navez_pas_souhaite: Sauf erreur de notre part, vous n’avez pas souhaité participer à la campagne de recensement des objets monuments historiques pour laquelle nous vous avons sollicité il y a quelques semaines.
-      raison: "Dans une démarche d’amélioration, nous vous serions reconnaissants de nous indiquer pourquoi. Il vous suffit de cliquer sur un de ces liens :"
-      vous_pouvez_finaliser: Par ailleurs, <b>si vous aviez commencé les démarches de recensement, sachez que votre compte sur Collectif Objets vous est toujours accessible pour le finaliser et le transmettre aux conservateurs d’antiquités et d’objets d’art</b>. Votre travail n’est pas perdu !
-      annee_prochaine: "Si vous n’avez pas pu participer cette année, ne vous inquiétez pas : votre commune sera recontactée ultérieurement pour une prochaine campagne."
-      a_votre_disposition: Nous restons à votre disposition pour toute information complémentaire.
+      vous_navez_pas_souhaite: Sauf erreur de notre part, vous n’avez pas participé à la campagne de recensement des objets monuments historiques pour laquelle nous vous avons sollicité il y a quelques semaines.
+      prochaine_campagne: Votre commune pourra être recontactée ultérieurement pour une prochaine campagne.
+      contact: Pour contacter les conservateurs de votre département, vous pouvez écrire un message dans l’onglet “Messagerie” depuis votre compte Collectif Objets.
     relance2_started:
       title: "Mail de seconde relance - recensement démarré"
       subject: Rencontrez-vous des difficultés dans le recensement de vos objets protégés à %{nom_commune} ?
