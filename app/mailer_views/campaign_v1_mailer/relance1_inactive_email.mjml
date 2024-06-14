@@ -2,10 +2,8 @@
   <mj-column>
     <mj-text><%= ct("relance1_inactive.abrite_n_objets") %></mj-text>
     <mj-text><%= ct("relance1_inactive.accompagnement") %></mj-text>
-    <mj-text>
-      <%= ct("shared.role_elu") %>
-      <%= ct("relance1_inactive.simple") %>
-    </mj-text>
+    <mj-text><%= ct("shared.role_elu") %></mj-text>
+    <mj-text><%= ct("relance1_inactive.simple") %></mj-text>
     <mj-text><%= ct("relance1_inactive.conseils") %></mj-text>
     <mj-text><%= ct("relance1_inactive.decouvrez") %></mj-text>
   </mj-column>
@@ -15,6 +13,7 @@
 
 <mj-section>
   <mj-column>
+    <mj-text><%= ct("fin_shared.contact") %></mj-text>
     <%= render partial: "custom_campaign_infos" %>
     <mj-text><%= ct("relance1_inactive.date_fin") %></mj-text>
   </mj-column>

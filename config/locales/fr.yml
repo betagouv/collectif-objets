@@ -475,7 +475,7 @@ fr:
         other: "%{nom_commune} abrite %{count} objets monuments historiques."
       accompagnement: Pour vous accompagner dans la préservation et la mise en valeur de votre patrimoine, la DRAC %{nom_drac} vous invite à recenser vos objets protégés sur le site dédié Collectif Objets.
       simple: Ce recensement est simple et ne vous prendra que quelques minutes par objet.
-      conseils: Suite à celui-ci, vous pourrez bénéficier de conseils et de l’expertise des conservateurs d’antiquités et d’objets d’art pour les opérations de restauration, de sécurisation ou de valorisation des objets sur votre territoire ainsi qu’obtenir des pistes de financements.
+      conseils: Suite à votre recensement, nous pourrons vous conseiller si nécessaire sur l'entretien de vos objets, leur sécurisation, les démarches à suivre pour entamer une restauration… Ce recensement permet d'assurer un meilleur suivi des objets protégés et d'identifier les situations problématiques nécessitant une prise en charge.
       decouvrez:
         one: "<b>Découvrez l'objet monument historique à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
         other: "Découvrez les objets monuments historiques à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
