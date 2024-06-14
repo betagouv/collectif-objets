@@ -15,6 +15,6 @@
   <mj-column>
     <mj-text><%= ct("fin_shared.contact") %></mj-text>
     <%= render partial: "custom_campaign_infos" %>
-    <mj-text><%= ct("relance1_inactive.date_fin") %></mj-text>
+    <mj-text><%= ct("fin_shared.date_fin") %></mj-text>
   </mj-column>
 </mj-section>

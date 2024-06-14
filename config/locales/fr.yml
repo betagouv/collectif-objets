@@ -479,7 +479,6 @@ fr:
       decouvrez:
         one: "<b>Découvrez l'objet monument historique à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
         other: "Découvrez les objets monuments historiques à %{nom_commune} ainsi que toutes les informations à propos du recensement sur le site dédié Collectif Objets</b> :"
-      date_fin: Cette campagne de recensement est ouverte jusqu’au %{date_fin}.
     relance2_inactive:
       title: "Mail de seconde relance - commune inactive"
       subject: "%{nom_commune}, le recensement des objets monuments historiques %{dans_departement} est en cours"
@@ -540,6 +539,7 @@ fr:
       sauf_erreur: Sauf erreur de notre part, vous n’avez pas effectué la dernière étape qui permet l’envoi du dossier de recensement.
       pas_trop_tard: "Il n’est pas trop tard : <b>pour transmettre votre contribution, il suffit de suivre ce lien puis de cliquer sur “Envoyer les recensements”</b> :"
     fin_shared:
+      date_fin: Cette campagne de recensement est ouverte jusqu’au %{date_fin}.
       fin_aujourdhui: <b>La campagne de recensement participatif des objets monuments historiques %{dans_departement} prend fin aujourd’hui.</b>
       merci: Nous vous remercions pour votre engagement en faveur du patrimoine mobilier protégé.
       contact: Pour contacter les conservateurs de votre département, vous pouvez écrire un message dans l’onglet “Messagerie” depuis votre compte Collectif Objets.
