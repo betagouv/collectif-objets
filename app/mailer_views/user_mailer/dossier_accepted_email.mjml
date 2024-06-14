@@ -12,7 +12,7 @@
 
 <mj-section padding-left="20px">
   <mj-column border-left="2px solid rgb(0,0,145)">
-    <mj-text font-style="italic"><%= line_breaks_to_br(@dossier.notes_conservateur) %></mj-text>
+    <mj-text font-style="italic"><%= simple_format(@dossier.notes_conservateur) %></mj-text>
   </mj-column>
 </mj-section>
 
