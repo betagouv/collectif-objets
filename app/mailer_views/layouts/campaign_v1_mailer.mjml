@@ -2,7 +2,8 @@
   <%= render "shared/head" %>
 
   <mj-body>
-    <%= render "shared/header" %>
+    <% header_name = "Direction Régionale des Affaires Culturelles #{@campaign.nom_drac}" %>
+    <%= render "shared/header", header_name: %>
 
     <mj-section>
       <mj-column>
