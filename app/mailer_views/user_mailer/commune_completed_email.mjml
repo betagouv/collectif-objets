@@ -21,7 +21,7 @@
     </mj-text>
 
     <mj-text>
-      <%= I18n.t("user_mailer.commune_completed.documentation") %> <%= link_to "notre documentation", content_blob_url(:aide_en_ligne) %>.
+      <%= I18n.t("user_mailer.commune_completed.documentation") %> <%= link_to "en cliquant ici", content_blob_url(:aide_en_ligne) %>.
     </mj-text>
 
     <mj-text>
