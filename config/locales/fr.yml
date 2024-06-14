@@ -512,10 +512,10 @@ fr:
       title: "Mail de clôture - recensement démarré"
       subject: "Dernier jour pour recenser les objets monuments historiques de %{nom_commune}"
       objets_restants: <b>Sauf erreur de notre part, nous n’avons enregistré qu’une partie des recensements des objets protégés présents dans votre commune.</b>
-      dossier_complet: Seul un dossier complet pourra être envoyé au conservateur d’antiquités et d’objets d’art pour qu’il puisse vous faire ses retours.
-      pas_trop_tard: <b>Sachez qu’il n’est pas trop tard pour compléter votre contribution.</b>
-      toujours_accessible: Votre compte reste ouvert si vous souhaitez rajouter les photos ou les recensements d’objets manquants.
-      finalisez: Une fois ces compléments faits, n’oubliez pas de cliquer sur le bouton “finaliser mon recensement”.
+      dossier_complet: Seul un dossier de recensement complet pourra être pris en compte.
+      pas_trop_tard: <b>Sachez qu’il n’est pas trop tard pour finaliser votre recensement.</b>
+      toujours_accessible: Celui-ci reste accessible une année si vous souhaitez rajouter les photos ou les recensements manquants.
+      finalisez: Une fois ces compléments faits, n’oubliez pas de cliquer sur le bouton “Finaliser mon recensement”, puis de valider vos informations en cliquant sur “Je valide le recensement des objets de ma commune”
     relance3_started:
       title: "Mail de troisième relance - recensement démarré"
       subject: "N’oubliez pas de finaliser le recensement des objets protégés de %{nom_commune}"
