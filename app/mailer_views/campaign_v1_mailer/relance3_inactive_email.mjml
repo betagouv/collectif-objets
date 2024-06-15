@@ -9,13 +9,7 @@
     <mj-text><%= ct("relance3_inactive.collaboratif") %></mj-text>
     <mj-text><%= ct("relance3_inactive.meme_si_bon_etat") %></mj-text>
     <mj-text><%= ct("relance3_inactive.connectez_vous") %></mj-text>
-  </mj-column>
-</mj-section>
-
-<%= render partial: "cta", locals: { variant: "inactive", user: @user, commune: @commune } %>
-
-<mj-section>
-  <mj-column>
+    <%= render partial: "cta", locals: { variant: "inactive", user: @user, commune: @commune } %>
     <mj-text><%= ct("fin_shared.contact") %></mj-text>
     <%= render partial: "custom_campaign_infos" %>
   </mj-column>
