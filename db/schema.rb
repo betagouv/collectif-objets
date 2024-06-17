@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_03_162920) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_17_092808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -135,7 +135,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_03_162920) do
     t.datetime "updated_at", null: false
     t.string "status", default: "inactive", null: false
     t.datetime "completed_at"
-    t.integer "recensement_ratio"
     t.datetime "started_at"
     t.float "latitude"
     t.float "longitude"
