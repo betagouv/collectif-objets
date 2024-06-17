@@ -77,9 +77,6 @@ class Recensement < ApplicationRecord
   validates :deleted_at, presence: true, if: -> { deleted? }
   validates :deleted_reason, inclusion: { in: %w[objet-devenu-hors-scope changement-de-commune] }, if: -> { deleted? }
 
-  after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune.present? }
-
   scope :present_and_recensable, lambda {
     where(
       recensable: true,

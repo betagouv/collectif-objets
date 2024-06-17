@@ -46,9 +46,6 @@ class Objet < ApplicationRecord
   scope :code_insee_a_changé, -> { where.not(palissy_WEB: nil).where.not(palissy_DEPL: nil) }
   scope :déplacés, -> { where.not(palissy_WEB: nil).where(palissy_DEPL: nil) }
 
-  after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
-
   delegate :departement, to: :commune
 
   # old column names still used in code for reads
