@@ -34,7 +34,7 @@
           Mauvais email / Je n'y ai pas accès
       #faq-mauvais-email.fr-collapse
         - url = @commune ? "https://www.service-public.fr/particuliers/recherche?keyword=mairie+#{@commune.nom}+#{@commune.departement.nom}" : url_annuaire
-        = "Les comptes des mairies ont été créés en utilisant les données publiées sur #{link_to "service-public.fr", url_annuaire, target: :_blank, rel: :noopener}."
+        Les comptes des mairies ont été créés en utilisant les données publiées sur l'annuaire du service public.
         %br
         Si cet email est erroné ou que vous n'y avez pas accès, retrouvez la mairie de votre commune sur
         = link_to "l’annuaire du service public", url_annuaire, target: :_blank, rel: :noopener
