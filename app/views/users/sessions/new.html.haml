@@ -17,6 +17,7 @@
             value: params[:code],
             required: true,
             autocomplete: "off",
+            autofocus: true,
             class: ("fr-input--error" if @error),
             **(@error ? { aria: { describedby: "error-message" } }  : {})
           - if @error
