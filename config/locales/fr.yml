@@ -663,7 +663,7 @@ fr:
       cta: Découvrir l'examen de mon recensement
       merci: Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
     session_code:
-      lien: "Voici votre code de connexion à Collectif Objets :"
+      lien: "Voici votre lien de connexion à Collectif Objets :"
       cta: Connexion
       valid_until: "Ce code est valide jusqu'à %{date}."
     message_received:
