@@ -1,33 +1,33 @@
 <% if @campaign.custom_message.present? %>
-<mj-text>
-  <%= @campaign.custom_message %>
-</mj-text>
+  <mj-text>
+    <%= @campaign.custom_message %>
+  </mj-text>
 <% end %>
 <% if @departement.concordataire? %>
-<mj-text>
-  <%= ct(".concordataires.intro") %>
-</mj-text>
+  <mj-text>
+    <%= ct(".concordataires.intro") %>
+  </mj-text>
 
-<mj-text>
-  <%= ct(".concordataires.intro2") %>
-</mj-text>
+  <mj-text>
+    <%= ct(".concordataires.intro2") %>
+  </mj-text>
 
-<mj-text>
-  <%= ct(".concordataires.pas_proprietaire") %>
-</mj-text>
+  <mj-text>
+    <%= ct(".concordataires.pas_proprietaire") %>
+  </mj-text>
 
-<mj-text>
-  <ul>
-    <li>
-      <%= ct(".concordataires.option1") %>
-    </li>
-    <li>
-      <%= ct(".concordataires.option2") %>
-    </li>
-  </ul>
-</mj-text>
+  <mj-text>
+    <ul>
+      <li>
+        <%= ct(".concordataires.option1") %>
+      </li>
+      <li>
+        <%= ct(".concordataires.option2") %>
+      </li>
+    </ul>
+  </mj-text>
 
-<mj-text>
-  <%= ct(".concordataires.question") %>
-</mj-text>
+  <mj-text>
+    <%= ct(".concordataires.question") %>
+  </mj-text>
 <% end %>
