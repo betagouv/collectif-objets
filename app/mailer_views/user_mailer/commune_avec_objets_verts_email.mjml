@@ -1,34 +1,30 @@
-<mj-section>
-  <mj-column>
-    <mj-text>
-      <%= t("user_mailer.shared.bonjour") %>
-    </mj-text>
+<mj-text>
+  <%= t("user_mailer.shared.bonjour") %>
+</mj-text>
 
-    <mj-text>
-      <%= t("user_mailer.commune_avec_objets_verts.remerciements", dans_departement: @commune.departement.dans_nom) %>
-    </mj-text>
+<mj-text>
+  <%= t("user_mailer.commune_avec_objets_verts.remerciements", dans_departement: @commune.departement.dans_nom) %>
+</mj-text>
 
-    <mj-text>
-      <%= t("user_mailer.commune_avec_objets_verts.preservation_patrimoine") %>
-    </mj-text>
+<mj-text>
+  <%= t("user_mailer.commune_avec_objets_verts.preservation_patrimoine") %>
+</mj-text>
 
-    <mj-text>
-      <%= t("user_mailer.commune_avec_objets_verts.engagement") %>
-    </mj-text>
+<mj-text>
+  <%= t("user_mailer.commune_avec_objets_verts.engagement") %>
+</mj-text>
 
-    <mj-text>
-      <%= t("user_mailer.commune_avec_objets_verts.que_des_objets_verts") %>
-    </mj-text>
+<mj-text>
+  <%= t("user_mailer.commune_avec_objets_verts.que_des_objets_verts") %>
+</mj-text>
 
-    <mj-text>
-      <%= t("user_mailer.commune_avec_objets_verts.toutefois") %>
-    </mj-text>
-    <mj-text>
-      <%= t("user_mailer.commune_avec_objets_verts.contacter_caoa") %>
-    </mj-text>
+<mj-text>
+  <%= t("user_mailer.commune_avec_objets_verts.toutefois") %>
+</mj-text>
+<mj-text>
+  <%= t("user_mailer.commune_avec_objets_verts.contacter_caoa") %>
+</mj-text>
 
-    <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= commune_messages_url(@commune) %>">
-      <%= t("user_mailer.commune_avec_objets_verts.cta") %>
-    </mj-button>
-  </mj-column>
-</mj-section>
+<mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= commune_messages_url(@commune) %>">
+  <%= t("user_mailer.commune_avec_objets_verts.cta") %>
+</mj-button>

@@ -1,15 +1,11 @@
-<mj-section>
-  <mj-column>
-    <mj-text><%= ct("relance2_inactive.intro") %></mj-text>
-    <mj-text>
-      <%= ct("shared.commune_abrite_objets") %>
-      <%= ct("shared.role_elu") %>
-    </mj-text>
-    <mj-text><%= ct("relance2_inactive.simple") %></mj-text>
-    <mj-text><%= ct("relance2_inactive.conseils") %></mj-text>
-    <%= render partial: "cta", locals: { variant: "inactive", user: @user, commune: @commune } %>
-    <mj-text><%= ct("fin_shared.contact") %></mj-text>
-    <%= render partial: "custom_campaign_infos" %>
-    <mj-text><%= ct("fin_shared.date_fin") %></mj-text>
-  </mj-column>
-</mj-section>
+<mj-text><%= ct("relance2_inactive.intro") %></mj-text>
+<mj-text>
+  <%= ct("shared.commune_abrite_objets") %>
+  <%= ct("shared.role_elu") %>
+</mj-text>
+<mj-text><%= ct("relance2_inactive.simple") %></mj-text>
+<mj-text><%= ct("relance2_inactive.conseils") %></mj-text>
+<%= render partial: "cta", locals: { variant: "inactive", user: @user, commune: @commune } %>
+<mj-text><%= ct("fin_shared.contact") %></mj-text>
+<%= render partial: "custom_campaign_infos" %>
+<mj-text><%= ct("fin_shared.date_fin") %></mj-text>

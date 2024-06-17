@@ -1,9 +1,5 @@
-<mj-section>
-  <mj-column>
-    <mj-text><%= ct("relance2_to_complete.merci") %></mj-text>
-    <mj-text><%= ct("relance2_to_complete.toutefois") %></mj-text>
-    <mj-text><%= ct("relance2_to_complete.cliquez") %></mj-text>
-    <%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>
-    <mj-text><%= ct("fin_shared.contact") %></mj-text>
-  </mj-column>
-</mj-section>
+<mj-text><%= ct("relance2_to_complete.merci") %></mj-text>
+<mj-text><%= ct("relance2_to_complete.toutefois") %></mj-text>
+<mj-text><%= ct("relance2_to_complete.cliquez") %></mj-text>
+<%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>
+<mj-text><%= ct("fin_shared.contact") %></mj-text>

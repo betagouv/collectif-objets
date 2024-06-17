@@ -1,13 +1,9 @@
-<mj-section>
-  <mj-column>
-    <mj-text>
-      <%= t("user_mailer.session_code.lien") %>
-    </mj-text>
-    <mj-text font-size="20px" letter-spacing="1em" align="center" padding="20px 0">
-      <%= @session_code.code %>
-    </mj-text>
-    <mj-text>
-      <%= t("user_mailer.session_code.valid_until", date: l(@session_code.valid_until, format: :long)) %>
-    </mj-text>
-  </mj-column>
-</mj-section>
+<mj-text>
+  <%= t("user_mailer.session_code.lien") %>
+</mj-text>
+<mj-text font-size="20px" letter-spacing="1em" align="center" padding="20px 0">
+  <%= @session_code.code %>
+</mj-text>
+<mj-text>
+  <%= t("user_mailer.session_code.valid_until", date: l(@session_code.valid_until, format: :long)) %>
+</mj-text>
