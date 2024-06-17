@@ -8,9 +8,12 @@
     <mj-image align="left" width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png"></mj-image>
   </mj-column>
   <mj-column width="60%" vertical-align="top">
-    <mj-text>
-      <%= local_assigns.fetch(:signature, t("application_mailer_layout.signature")).html_safe %>
-    </mj-text>
+    <% if local_assigns.key?(:signature) %>
+      <mj-text><%= signature.html_safe %></mj-text>
+    <% else %>
+      <mj-text><b><%= t("application_mailer_layout.signature") %></b></mj-text>
+      <mj-text><%= t("application_mailer_layout.tagline") %></mj-text>
+    <% end %>
   </mj-column>
 </mj-section>
 <% if local_assigns.key?(:extra) %>
