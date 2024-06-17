@@ -25,7 +25,7 @@
               = @error
         .fr-input-group.fr-btns-group
           = f.submit "Connexion"
-          = link_to "Redemander un code de connexion …",
+          = link_to "Demander un nouveau code de connexion",
             new_user_session_code_path(code_insee: @commune.code_insee),
             type: "button",
             class: "fr-btn fr-btn--tertiary",
