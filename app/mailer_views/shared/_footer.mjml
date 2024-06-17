@@ -15,6 +15,15 @@
     </mj-text>
   </mj-column>
 </mj-section>
+<% if local_assigns.key?(:extra) %>
+  <mj-section>
+    <mj-column>
+      <mj-text color="#666">
+        <%= extra %>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+<% end %>
 <% if local_assigns.key?(:unsubscribe) %>
   <mj-section>
     <mj-column>

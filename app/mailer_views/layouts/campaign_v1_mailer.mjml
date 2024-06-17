@@ -18,14 +18,7 @@
     <% politesse = t("campaign_v1_mailer.shared.politesse") %>
     <% signature = @campaign.signature.gsub("\n", "<br/>") %>
     <% unsubscribe = link_to t("campaign_v1_mailer.layout.desinscription"), new_user_unsubscribe_url(token: @campaign_recipient.unsubscribe_token) %>
-    <%= render "shared/footer", politesse:, signature:, unsubscribe: %>
-
-    <mj-section>
-      <mj-column>
-        <mj-text color="#666">
-          <%= t("campaign_v1_mailer.layout.portage") %>
-        </mj-text>
-      </mj-column>
-    </mj-section>
+    <% extra = t("campaign_v1_mailer.layout.portage") %>
+    <%= render "shared/footer", politesse:, signature:, unsubscribe:, extra: %>
   </mj-body>
 </mjml>
