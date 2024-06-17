@@ -26,6 +26,7 @@
               {include_blank: "Sélectionnez un département"},
               required: true,
               autocomplete: "off",
+              autofocus: @departement.nil?,
               disabled: @departement.present?,
               data: { action: "user-session-form#submitCommuneForm",
                 user_session_form_target: "departementSelect" })
@@ -44,6 +45,7 @@
               {include_blank: true},
               required: true,
               autocomplete: "off",
+              autofocus: @departement.present?,
               disabled: @departement.blank?,
               data: { action: "user-session-form#submitCommuneForm" })
 
