@@ -619,7 +619,8 @@ fr:
   application_mailer_layout:
     project_name: Collectif Objets
     tagline: Préservez votre patrimoine mobilier
-    politesse: Bien cordialement,
+    politesse: Cordialement,
+    signature: L'équipe de Collectif Objets
   conservateur_mailer:
     message_received:
       bonjour: Bonjour %{nom},
