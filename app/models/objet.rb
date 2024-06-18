@@ -12,8 +12,11 @@ class Objet < ApplicationRecord
   accepts_nested_attributes_for :edifice
 
   scope :order_by_recensement_priorite,
-        lambda {
-          left_outer_joins(:recensements)
+        lambda { |dossier_id|
+          joins(%( LEFT OUTER JOIN recensements
+                     ON recensements.objet_id = objets.id AND recensements.deleted_at IS NULL
+                       AND recensements.dossier_id = #{dossier_id}
+          ).squish)
           .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
           .order("recensements.analysed_at DESC")
         }

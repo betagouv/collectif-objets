@@ -28,7 +28,7 @@ module Conservateurs
         .objets
         .includes(:edifice, recensements: %i[photos_attachments photos_blobs])
         .a_examiner
-        .order_by_recensement_priorite
+        .order_by_recensement_priorite(@dossier.id)
       render "show_analyse_saved"
     end
 
