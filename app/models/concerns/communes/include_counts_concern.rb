@@ -26,15 +26,17 @@ module Communes
         joins(
           %{
             LEFT OUTER JOIN (
-              #{Recensement.select(%{objets.lieu_actuel_code_insee,
+              SELECT
+                communes.id,
                 SUM(CASE WHEN #{Recensement::RECENSEMENT_ABSENT_SQL} THEN 1 ELSE 0 END) AS disparus_count,
                 SUM(CASE WHEN #{Recensement::RECENSEMENT_EN_PERIL_SQL} THEN 1 ELSE 0 END) AS en_peril_count
-                 })
-                .left_outer_joins(:objet)
-                .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
-                .group(:lieu_actuel_code_insee).to_sql}
+              FROM communes
+              LEFT OUTER JOIN dossiers ON dossiers.commune_id = communes.id AND dossiers.status != 'archived'
+              LEFT OUTER JOIN recensements ON recensements.deleted_at IS NULL AND recensements.dossier_id = dossiers.id
+              WHERE #{Recensement::RECENSEMENT_PRIORITAIRE_SQL}
+              GROUP BY communes.id
             ) AS recensements_prioritaires
-            ON recensements_prioritaires.lieu_actuel_code_insee = communes.code_insee
+            ON recensements_prioritaires.id = communes.id
           }.squish
         ).select(%(
           COALESCE(recensements_prioritaires.disparus_count, 0) AS disparus_count,
