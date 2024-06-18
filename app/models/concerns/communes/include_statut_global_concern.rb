@@ -22,19 +22,18 @@ module Communes
                   THEN #{Commune::ORDRE_EN_COURS_D_EXAMEN}
                 END), #{Commune::ORDRE_NON_RECENSÉ}) AS statut_global
             FROM communes
-            LEFT OUTER JOIN dossiers
-            ON dossiers.commune_id = communes.id
+            LEFT OUTER JOIN dossiers ON dossiers.commune_id = communes.id AND dossiers.status != 'archived'
             LEFT OUTER JOIN (
-              SELECT dossiers.id,
+              SELECT communes.id,
                 SUM(CASE WHEN recensements.analysed_at IS NOT NULL THEN 1 ELSE 0 END) AS recensements_analysed_count,
                 SUM(CASE WHEN #{Recensement::RECENSEMENT_PRIORITAIRE_SQL} THEN 1 ELSE 0 END)
                   AS recensements_prioritaires_count
-              FROM dossiers
-              LEFT OUTER JOIN recensements
-              ON dossiers.id = recensements.dossier_id
-              GROUP BY dossiers.id
-            ) AS nb_recensements_par_dossiers
-            ON dossiers.id = nb_recensements_par_dossiers.id
+              FROM communes
+              LEFT OUTER JOIN dossiers ON dossiers.commune_id = communes.id AND dossiers.status != 'archived'
+              LEFT OUTER JOIN recensements ON recensements.deleted_at IS NULL AND recensements.dossier_id = dossiers.id
+              GROUP BY communes.id
+            ) AS nb_recensements_par_communes
+            ON communes.id = nb_recensements_par_communes.id
           ) AS communes_statut_global
           ON communes.code_insee = communes_statut_global.code_insee
         }.squish)
