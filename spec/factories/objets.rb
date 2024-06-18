@@ -20,7 +20,7 @@ FactoryBot.define do
     end
 
     trait :with_recensement do
-      recensements { [association(:recensement)] }
+      recensements { [association(:recensement, dossier_id: commune.dossier&.id)] }
     end
 
     trait :with_recensement_with_photos_mocked do
@@ -71,11 +71,11 @@ FactoryBot.define do
     end
 
     factory :objet_en_peril do
-      recensements { [association(:recensement, :en_peril)] }
+      recensements { [association(:recensement, :en_peril, dossier_id: commune.dossier&.id)] }
     end
 
     trait :disparu do
-      recensements { [association(:recensement, :disparu)] }
+      recensements { [association(:recensement, :disparu, dossier_id: commune.dossier&.id)] }
     end
   end
 end
