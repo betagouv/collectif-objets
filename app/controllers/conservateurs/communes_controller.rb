@@ -24,7 +24,7 @@ module Conservateurs
     protected
 
     def show_analyse_saved
-      @objets = @dossier
+      @objets = @commune
         .objets
         .includes(:edifice, recensements: %i[photos_attachments photos_blobs])
         .a_examiner
