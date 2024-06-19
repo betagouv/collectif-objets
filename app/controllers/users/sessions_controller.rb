@@ -45,8 +45,11 @@ module Users
       @email = params[:email]
       return redirect_to new_user_session_code_path if @email.blank?
 
-      @user = User.find_by(email: params[:email])
-      return redirect_to new_user_session_code_path if @user.blank?
+      @user = User.find_by(email: @email)
+      if @user.blank?
+        return redirect_to new_user_session_code_path,
+                           alert: "Aucune commune associée à l'email #{@email}"
+      end
 
       @commune = @user.commune
     end
