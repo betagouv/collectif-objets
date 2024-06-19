@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :commune
 
-  has_one :session_code, -> { valid }, dependent: :destroy
+  has_one :session_code, -> { valid.order(created_at: :desc) }, dependent: :destroy, inverse_of: :user
 
   attr_accessor :impersonating
 
