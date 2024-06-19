@@ -17,7 +17,7 @@ class SessionAuthentication
   end
 
   def authenticate(&sign_in_block)
-    sleep(rand(0.5..1)) if Rails.env.production? # To prevent timing attacks
+    prevent_timing_attacks
     return false unless valid?
 
     return false unless sign_in_block.call(user)
@@ -33,6 +33,10 @@ class SessionAuthentication
   def error_message = errors.map(&:message).to_sentence
 
   private
+
+  def prevent_timing_attacks
+    sleep(rand(0.5..1)) if Rails.env.production?
+  end
 
   attr_reader :email, :code
 
