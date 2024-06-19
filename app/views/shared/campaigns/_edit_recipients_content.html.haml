@@ -22,7 +22,7 @@
       .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.fr-px-1w
         - campaign.available_communes.each do |commune|
           - disabled = commune.users_count.zero? || commune.dossier&.construction?
-          - checked = !disabled && (campaign.commune_ids.include?(commune.id) || campaign.commune_ids.size.zero?)
+          - checked = !disabled && (communes_ids.empty? || communes_ids.include?(commune.id))
           - input_id = "campaign_commune_#{commune.id}"
           .fr-checkbox-group.fr-checkbox-group--sm.fr-mb-1w.co-break-avoid-column
             %input{type: :checkbox,
