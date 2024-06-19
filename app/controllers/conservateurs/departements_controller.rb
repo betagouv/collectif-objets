@@ -10,18 +10,15 @@ module Conservateurs
 
     def show
       @stats = Co::DepartementStats.new(@departement.code)
+      set_communes
       if params[:vue] == "carte"
-        set_communes
+        @communes.select(%w[code_insee nom status objets_count en_peril_count latitude longitude]).to_a
         set_departement_json
         render "show_map"
       else
         set_status_global_filter
-        @ransack = policy_scope(Commune)
+        @ransack = @communes
           .select("nom")
-          .where(departement: @departement)
-          .include_objets_count
-          .include_statut_global
-          .includes(:dossier)
           .ransack(params[:q])
 
         # Remonte par défaut les communes avec le plus d'objets en péril
@@ -47,14 +44,11 @@ module Conservateurs
     end
 
     def set_communes
-      fields = %w[code_insee nom status objets_count en_peril_count latitude longitude]
       @communes = policy_scope(Commune)
         .where(departement_code: @departement.code)
         .includes(:dossier)
         .include_objets_count
         .include_statut_global
-        .select(fields)
-        .to_a
     end
 
     def set_status_global_filter
