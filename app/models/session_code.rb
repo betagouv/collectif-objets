@@ -18,6 +18,10 @@ class SessionCode < ApplicationRecord
     rand((10.pow(LENGTH - 1))...(10.pow(LENGTH))).to_s
   end
 
+  def self.valid_format?(code)
+    /^\d{#{LENGTH}}$/.match? code.to_s.strip
+  end
+
   def expired?
     created_at < Time.zone.now - EXPIRE_AFTER
   end

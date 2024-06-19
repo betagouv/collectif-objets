@@ -39,16 +39,16 @@ class SessionAuthentication
   delegate :session_code, to: :user, allow_nil: true
 
   def cleaned_code
-    @cleaned_code ||= code.gsub(/\s+/, "")
+    @cleaned_code ||= code.gsub(/\D+/, "")
   end
 
   def validate_code_format
-    return if errors.any? || cleaned_code.match(SessionCode::FORMAT_REGEX)
+    return if errors.any? || SessionCode.valid_format?(cleaned_code)
 
     errors.add(
       :code,
       :invalid_format,
-      message: "Le code de connexion est composé de 6 chiffres exactement. " \
+      message: "Le code de connexion est composé de #{SessionCode::LENGTH} chiffres exactement. " \
                "Vérifiez que vous n’avez pas copié deux fois le même chiffre."
     )
   end
