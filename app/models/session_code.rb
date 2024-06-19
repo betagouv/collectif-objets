@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SessionCode < ApplicationRecord
+  LENGTH = 6
   EXPIRE_AFTER = 1.day.freeze
 
   belongs_to :user
@@ -14,8 +15,7 @@ class SessionCode < ApplicationRecord
   delegate :random_code, to: :class
 
   def self.random_code
-    length = 6
-    rand(10.pow(length - 1)...10.pow(length)).to_s
+    rand((10.pow(LENGTH - 1))...(10.pow(LENGTH))).to_s
   end
 
   def expired?
