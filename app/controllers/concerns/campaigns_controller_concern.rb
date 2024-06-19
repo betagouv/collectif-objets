@@ -13,6 +13,7 @@ module CampaignsControllerConcern
   end
 
   def show; end
+
   def edit_recipients
     @communes_ids = @campaign.commune_ids
   end

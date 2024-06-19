@@ -58,6 +58,10 @@ class Campaign < ApplicationRecord
     STEPS[STEPS.find_index(step) + 1]
   end
 
+  def communes_en_cours
+    communes.distinct.joins(:dossier).where(dossiers: { status: :submitted })
+  end
+
   # Crée des destinataires sans N+1
   def commune_ids=(ids = [])
     recipients.where.not(commune_id: ids).destroy_all

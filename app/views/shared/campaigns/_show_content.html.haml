@@ -86,6 +86,12 @@
               .co-flex.co-flex--space-between
                 = link_to commune.nom, url_commune
                 = commune_statut_global_badge(commune)
+  - if (count = campaign.communes_en_cours.load.count).positive?
+    = dsfr_alert(type: :warning, title: "Communes en cours d'examen", classes: "fr-mb-2w") do
+      %p
+        Au lancement de la campagne, les dossiers suivants seront archivés :
+        = "#{campaign.communes_en_cours.collect { |commune| link_to(commune.nom, conservateurs_commune_dossier_path(commune)) }.to_sentence.html_safe}."
+
 - else
   %p Les communes destinataires n'ont pas encore été définies
 
