@@ -22,7 +22,7 @@ class SessionAuthentication
 
     return false unless sign_in_block.call(user)
 
-    last_session_code.mark_used!
+    session_code.mark_used!
     true
   end
 
@@ -36,7 +36,7 @@ class SessionAuthentication
 
   attr_reader :email, :code
 
-  delegate :last_session_code, to: :user, allow_nil: true
+  delegate :session_code, to: :user, allow_nil: true
 
   def cleaned_code
     @cleaned_code ||= code.gsub(/\s+/, "")
@@ -56,7 +56,7 @@ class SessionAuthentication
   def validate_codes_match
     return if errors.any?
 
-    return if last_session_code.present? && last_session_code.code == cleaned_code
+    return if session_code.present? && session_code.code == cleaned_code
 
     errors.add(
       :code,
@@ -69,7 +69,7 @@ class SessionAuthentication
   def validate_code_not_used
     return if errors.any?
 
-    return unless last_session_code.used?
+    return unless session_code.used?
 
     errors.add :code, :used, message: "Code de connexion déjà utilisé"
   end
@@ -77,7 +77,7 @@ class SessionAuthentication
   def validate_code_not_expired
     return if errors.any?
 
-    return unless last_session_code.expired?
+    return unless session_code.expired?
 
     errors.add :code, :expired, message: "Le code de connexion n'est plus valide, " \
                                          "veuillez en redemander un en cliquant sur le bouton ci-dessous"
