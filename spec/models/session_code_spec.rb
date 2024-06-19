@@ -17,8 +17,8 @@ describe SessionCode, type: :service do
       let(:created_at) { 3.minutes.ago }
       it { should eq false }
     end
-    context "sent 3 hours ago" do
-      let(:created_at) { 3.hours.ago }
+    context "sent 3 days ago" do
+      let(:created_at) { 3.days.ago }
       it { should eq true }
     end
   end
