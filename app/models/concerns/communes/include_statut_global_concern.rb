@@ -25,9 +25,7 @@ module Communes
             LEFT OUTER JOIN dossiers ON dossiers.commune_id = communes.id AND dossiers.status != 'archived'
             LEFT OUTER JOIN (
               SELECT communes.id,
-                SUM(CASE WHEN recensements.analysed_at IS NOT NULL THEN 1 ELSE 0 END) AS recensements_analysed_count,
-                SUM(CASE WHEN #{Recensement::RECENSEMENT_PRIORITAIRE_SQL} THEN 1 ELSE 0 END)
-                  AS recensements_prioritaires_count
+                SUM(CASE WHEN recensements.analysed_at IS NOT NULL THEN 1 ELSE 0 END) AS recensements_analysed_count
               FROM communes
               LEFT OUTER JOIN dossiers ON dossiers.commune_id = communes.id AND dossiers.status != 'archived'
               LEFT OUTER JOIN recensements ON recensements.deleted_at IS NULL AND recensements.dossier_id = dossiers.id
