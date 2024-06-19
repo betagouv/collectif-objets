@@ -5,7 +5,7 @@ class SessionCode < ApplicationRecord
 
   belongs_to :user
 
-  def self.generate_random_code
+  def self.random_code
     length = 6
     rand(10.pow(length - 1)...10.pow(length)).to_s
   end
