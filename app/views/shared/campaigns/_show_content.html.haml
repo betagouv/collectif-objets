@@ -89,7 +89,7 @@
 - else
   %p Les communes destinataires n'ont pas encore été définies
 
-= button_to campaign.communes.any? ? "Modifier les communes destinataires" : "Définir les communes destinataires", send("#{r}_campaign_edit_recipients_path", campaign), method: :get, class: "fr-btn fr-btn--secondary", disabled: !campaign.draft?
+= link_to campaign.communes.any? ? "Modifier les communes destinataires" : "Définir les communes destinataires", send("#{r}_campaign_edit_recipients_path", campaign), class: "fr-btn fr-btn--secondary", disabled: !campaign.draft?
 
 - if campaign.draft? || campaign.planned?
 
