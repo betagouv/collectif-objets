@@ -12,8 +12,8 @@ class SessionAuthentication
   validate :validate_code_format, :validate_codes_match, :validate_code_not_expired, :validate_code_not_used
 
   def initialize(email, code)
-    @email = email
-    @code = code
+    @email = email.to_s.strip
+    @code = code.gsub(/\D+/, "")
   end
 
   def authenticate(&sign_in_block)
@@ -42,12 +42,8 @@ class SessionAuthentication
 
   delegate :session_code, to: :user, allow_nil: true
 
-  def cleaned_code
-    @cleaned_code ||= code.gsub(/\D+/, "")
-  end
-
   def validate_code_format
-    return if errors.any? || SessionCode.valid_format?(cleaned_code)
+    return if errors.any? || SessionCode.valid_format?(code)
 
     errors.add(
       :code,
@@ -60,7 +56,7 @@ class SessionAuthentication
   def validate_codes_match
     return if errors.any?
 
-    return if session_code.present? && session_code.code == cleaned_code
+    return if session_code.present? && session_code.code == code
 
     errors.add(
       :code,
