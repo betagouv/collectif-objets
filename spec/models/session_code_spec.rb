@@ -10,6 +10,18 @@ describe SessionCode, type: :service do
     end
   end
 
+  describe ".valid_format?" do
+    subject { SessionCode.valid_format?(code) }
+    context "when code is valid" do
+      let(:code) { SessionCode.random_code }
+      it { should eq true }
+    end
+    context "when code is invalid" do
+      let(:code) { "abcd" }
+      it { should eq false }
+    end
+  end
+
   describe "#expired?" do
     let(:session_code) { build(:session_code, created_at:) }
     subject { session_code.expired? }
