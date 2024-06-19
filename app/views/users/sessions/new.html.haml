@@ -6,7 +6,7 @@
     .fr-col-md-5
       %h1.fr-h2 Connexion à Collectif Objets
       %h2.fr-h3 Rentrez le code de connexion pour #{@commune.nom}
-      - if @user.last_session_code.present?
+      - if @user.session_code.present?
         .fr-mb-2w
           Le code de connexion a été envoyé à #{@user.email}
       = form_with(url: user_session_path, builder: FormBuilderDsfr, data: { turbo_frame: "_top" }) do |f|
