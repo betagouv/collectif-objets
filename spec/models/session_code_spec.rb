@@ -3,9 +3,9 @@
 require "rails_helper"
 
 describe SessionCode, type: :service do
-  describe "#generate_session_code" do
+  describe ".random_code" do
     it "should generate a 6-digit code" do
-      code = SessionCode.generate_random_code
+      code = SessionCode.random_code
       expect(code).to match(/^\d{6}$/)
     end
   end
