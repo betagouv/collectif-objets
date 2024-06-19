@@ -5,6 +5,10 @@ class SessionCode < ApplicationRecord
 
   belongs_to :user
 
+  before_create :generate_code
+
+  delegate :random_code, to: :class
+
   def self.random_code
     length = 6
     rand(10.pow(length - 1)...10.pow(length)).to_s
@@ -19,4 +23,8 @@ class SessionCode < ApplicationRecord
   def used? = used_at.present?
 
   def mark_used! = update!(used_at: Time.zone.now)
+
+  private
+
+  def generate_code = self.code = random_code
 end
