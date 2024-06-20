@@ -1,25 +1,27 @@
-- content_for(:head_title) { "Admin" }
+- content_for(:head_title) { "Administration" }
 
 %main#contenu.fr-mt-4w.fr-mb-8w
-  .fr-container.fr-grid-row
-    .fr-col-md-8
-      %h1
-        %span.fr-icon-lock-line(aria-hidden="true")
-        Admin
-      %h2 Ressources
-      %ul
-        %li= link_to "Communes", admin_communes_path
-        %li= link_to "Conservateurs", admin_conservateurs_path
-        %li= link_to "Campagnes", admin_campaigns_path
-        %li
-          = link_to "Fiches et articles de presse (dans le CMS)", "https://collectif-objets-cms.netlify.app/",
-            target: "_blank", rel: "noopener"
+  .fr-container
+    %h1
+      %span.fr-icon-lock-line(aria-hidden="true")
+      Administration
+    .fr-grid-row.fr-grid-row--gutters
+      .fr-col-md-6
+        %h2 Ressources
+        %ul
+          %li= link_to "Communes", admin_communes_path
+          %li= link_to "Conservateurs", admin_conservateurs_path
+          %li= link_to "Campagnes", admin_campaigns_path
+          %li
+            = link_to "Fiches et articles de presse (dans le CMS)", "https://collectif-objets-cms.netlify.app/",
+              target: "_blank", rel: "noopener"
 
-      %h2.fr-mt-4w Outils & Debug
-      %ul
-        - if Rails.configuration.x.environment_specific_name == "production"
-          %li= link_to "Prévisualisation des emails (sur staging)", "https://staging.collectif-objets.incubateur.net/mail_previews", target: "_blank", rel: "noopener"
-        - else
-          %li= link_to "Prévisualisation des emails", mail_previews_path
-        %li= link_to "Suivi des tâches asynchrones (GoodJob)", "/good_job"
-        %li= link_to "Exports pour POP", admin_exports_path
+      .fr-col-md-6
+        %h2 Outils & Debug
+        %ul
+          - if Rails.configuration.x.environment_specific_name == "production"
+            %li= link_to "Prévisualisation des emails (sur staging)", "https://staging.collectif-objets.incubateur.net/mail_previews", target: "_blank", rel: "noopener"
+          - else
+            %li= link_to "Prévisualisation des emails", mail_previews_path
+          %li= link_to "Suivi des tâches asynchrones (GoodJob)", "/good_job"
+          %li= link_to "Exports pour POP", admin_exports_path

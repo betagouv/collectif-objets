@@ -41,7 +41,7 @@ Plus de 90% des informations transmises par les communes sont validées sans cor
 
 ## Si vous souhaitez déployer une campagne dans votre département
 
-C’est simple : contactez-nous à l’adresse [collectifobjets@beta.gouv.fr](mailto:collectifobjets@beta.gouv.fr) pour prendre rendez-vous avec notre équipe de déploiement.
+C’est simple : contactez-nous à l’adresse [contact@collectif-objets.beta.gouv.fr](mailto:contact@collectif-objets.beta.gouv.fr) pour prendre rendez-vous avec notre équipe de déploiement.
 
 Collectif Objets est un service destiné aux conservateurs des Monuments Historiques et conservateurs des Antiquités et Objets d’Art.
 
@@ -250,7 +250,7 @@ Si des informations semblent prescrites ou erronnées sur Collectif Objets, nous
 
 **Si un objet est attribué à une commune autre que celle qui l’abrite :**
 
-Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mél à : [collectifobjets@beta.gouv.fr](mailto:collectifobjets@beta.gouv.fr) .
+Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mél à : [contact@collectif-objets.beta.gouv.fr](mailto:contact@collectif-objets.beta.gouv.fr) .
 
 Si le changement de localisation de l’objet n’est pas détecté en amont de la campagne, c’est la commune indiquée sur la notice Palissy de l’objet qui recevra la demande de recensement. 
 
@@ -260,9 +260,9 @@ Pour information, les notices Palissy indiquent généralement la commune qui ab
 
 Le compte de chaque conservateur dans Collectif Objets est lié à une adresse e-mail qui sert d'identifiant pour se connecter à Collectif Objets. Cette adresse sert aussi à prévenir le conservateur lorsqu'une commune lui écrit dans la messagerie intégrée à Collectif Objets, ainsi qu'à créer / réinitialiser son mot de passe pour se connecter à la plateforme. 
 
-D﻿ans de rares cas, certains systèmes informatiques (de type "pare-feu" ou "anti-spam") bloquent la transmission des e-mails provenant de la plateforme Collectif Objets. Par exemple, le système de pare-feu utilisé par le service informatique d'une région peut considérer que les e-mails envoyés par la plateforme sont des "spams" et ainsi empêcher les adresses e-mails des employés de la région de recevoir les e-mails provenant de Collectif Objets. 
+Dans de rares cas, certains systèmes informatiques (de type "pare-feu" ou "anti-spam") bloquent la transmission des e-mails provenant de la plateforme Collectif Objets. Par exemple, le système de pare-feu utilisé par le service informatique d'une région peut considérer que les e-mails envoyés par la plateforme sont des "spams" et ainsi empêcher les adresses e-mails des employés de la région de recevoir les e-mails provenant de Collectif Objets. 
 
-S﻿i vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : collectifobjets@beta.gouv.fr ) ne soient plus considérés comme indésirables.
+Si vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : contact@collectif-objets.beta.gouv.fr) ne soient plus considérés comme indésirables.
 
 # Autres
 

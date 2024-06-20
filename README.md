@@ -229,9 +229,9 @@ flowchart TB
 
 - production : [collectif-objets.beta.gouv.fr](https://collectif-objets.beta.gouv.fr/)
 - staging : [staging.collectifobjets.org](https://staging.collectifobjets.org/) - aussi appelé recette ou
-  bac à sable - Il n'y a pas de données sensibles sur cette base de données et elle peut être réinitialisée à tout moment.
+  bac à sable - Il n'y a pas de données sensibles sur cette base de données et elle peut être réinitialisée à tout moment. Les emails envoyés par Collectif Objets sont consultables sur [Mailtrap](https://mailtrap.io/).
 - local : [localhost:3000](http://localhost:3000) - héberge le site et [localhost:8025](http://localhost:8025) héberge
-  MailHog pour voir les emails simulés
+  MailHog pour voir les emails envoyés par Collectif Objets
 
 Outils & services externes
 
@@ -243,6 +243,7 @@ Outils & services externes
 - [Webmail Gandi](https://webmail.gandi.net) - pour les mails en collectifobjets.org
 - [Netlify CMS](https://collectif-objets-cms.netlify.app) - pour les fiches et les articles de presse
 - [datasette sur fly.io](https://collectif-objets-datasette.fly.dev/)
+- [Mailtrap](https://mailtrap.io/) - Pour consulter les emails envoyés depuis les environnements de staging et review apps
 
 # Diagramme d'entités de la base de données
 
@@ -817,7 +818,7 @@ On retrouve ces termes encore dans le code, il faudrait idéalement les renommer
 La configuration des domaines en `.beta.gouv.fr` est gérée par l'équipe transverse de beta.gouv.fr,
 idem pour les domaines en `.incubateur.net`
 
-L'adresse `collectifobjets@beta.gouv.fr` est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost
+L'adresse `contact@collectif-objets.beta.gouv.fr` est une liste de diffusion beta.gouv.fr, elle se gère depuis le mattermost
 de beta cf https://doc.incubateur.net/communaute/travailler-a-beta-gouv/jutilise-les-outils-de-la-communaute/outils/liste-de-diffusion-et-adresses-de-contact#la-commande-mattermost-emails
 
 L'adresse `support@collectif-objets.beta.gouv.fr` est gérée en délégation de service par l'incubateur du ministère de

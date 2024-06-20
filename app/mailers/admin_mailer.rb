@@ -10,7 +10,7 @@ class AdminMailer < ApplicationMailer
     @conservateur = conservateur
     @campaign = campaign
     @subject = "#{title_prefix} - Campagne planifiée par un conservateur dans le #{campaign.departement}"
-    mail to: "collectifobjets@beta.gouv.fr", subject: @subject
+    mail to: CONTACT_EMAIL, subject: @subject
   end
 
   private

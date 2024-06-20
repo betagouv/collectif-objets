@@ -150,6 +150,6 @@
           - **Sybille de La Raudière** Chargée de déploiement
 
         %p
-          = link_to "collectifobjets@beta.gouv.fr", "mailto:collectifobjets@beta.gouv.fr", class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-mail-line fr-mt-2w"
+          = link_to CONTACT_EMAIL, "mailto:#{CONTACT_EMAIL}", class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-mail-line fr-mt-2w"
       .fr-col-md-6.fr-px-6w
         = render 'shared/picture_tag', filename_without_extension: "equipe",  img_class: "co--width-max-100", alt: "Équipe de Collectif Objets"

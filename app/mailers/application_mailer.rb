@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: email_address_with_name("collectifobjets@beta.gouv.fr", "Collectif Objets")
+  default from: email_address_with_name(CONTACT_EMAIL, "Collectif Objets")
   layout "application_mailer"
 
   # rubocop:disable Rails/OutputSafety

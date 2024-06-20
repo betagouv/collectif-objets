@@ -1,0 +1,1 @@
+CONTACT_EMAIL="contact@collectif-objets.beta.gouv.fr"
