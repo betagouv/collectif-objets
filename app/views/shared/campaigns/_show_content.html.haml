@@ -89,7 +89,9 @@
   - if (count = campaign.communes_en_cours.load.count).positive?
     = dsfr_alert(type: :warning, title: "Communes en cours d'examen", classes: "fr-mb-2w") do
       %p
-        Au lancement de la campagne, les dossiers suivants seront archivés :
+        Attention, vous vous apprêtez à recontacter une ou plusieurs communes qui sont en cours d’examen. Nous vous invitons à finaliser l’examen avant de relancer une campagne.
+        %br
+        Communes en cours d'examen&nbsp;:
         = "#{campaign.communes_en_cours.collect { |commune| link_to(commune.nom, conservateurs_commune_dossier_path(commune)) }.to_sentence.html_safe}."
 
 - else
