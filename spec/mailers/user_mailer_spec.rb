@@ -11,7 +11,7 @@ RSpec.describe UserMailer, type: :mailer do
 
     include_examples(
       "both parts contain",
-      "Voici votre code de connexion à Collectif Objets"
+      "Voici votre lien de connexion à Collectif Objets"
     )
 
     it "behaves as expected" do

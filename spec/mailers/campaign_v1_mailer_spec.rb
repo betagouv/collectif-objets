@@ -119,7 +119,7 @@ RSpec.describe CampaignV1Mailer, type: :mailer do
     "a campaign email",
     :relance3_inactive_email,
     "Plus que 60 jours pour recenser les objets monuments historiques de Joinville",
-    "Nous vous invitons à prendre part à ce recensement même si vous estimez que vos objets protégés sont en bon état"
+    "Ainsi, nous vous invitons à prendre part à ce recensement même si vous estimez que les vos objets protégés de votre commune sont en bon état" # rubocop:disable Layout/LineLength
   )
 
   it_behaves_like(
@@ -133,7 +133,7 @@ RSpec.describe CampaignV1Mailer, type: :mailer do
     "a campaign email",
     :relance3_to_complete_email,
     "N’oubliez pas de finaliser le recensement des objets protégés de Joinville",
-    "n’oubliez pas de finaliser votre recensement"
+    "Pour transmettre votre dossier, il vous suffit de cliquer"
   )
 
   # FIN
@@ -142,14 +142,14 @@ RSpec.describe CampaignV1Mailer, type: :mailer do
     "a campaign email",
     :fin_inactive_email,
     "Dernier jour pour recenser les objets monuments historiques de Joinville",
-    "Sauf erreur de notre part, vous n’avez pas souhaité participer à la campagne"
+    "Sauf erreur de notre part, vous n’avez pas participé à la campagne"
   )
 
   it_behaves_like(
     "a campaign email",
     :fin_started_email,
     "Dernier jour pour recenser les objets monuments historiques de Joinville",
-    "Seul un dossier complet pourra être envoyé au conservateur d’antiquités et d’objets d’art pour qu’il puisse vous faire ses retours" # rubocop:disable Layout/LineLength
+    "Seul un dossier de recensement complet pourra être pris en compte"
   )
 
   it_behaves_like(
