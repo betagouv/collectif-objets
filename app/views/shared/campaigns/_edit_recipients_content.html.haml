@@ -35,9 +35,9 @@
             %label.fr-label{for: input_id}
               %span{title: (commune.nom.length > 25 ? commune.nom : nil)}= truncate(commune.nom, length: 25)
               - if commune.users_count.zero?
-                = badge(:warning, class: "fr-ml-auto") { "Pas d'email" }
+                = badge(:warning, class: "fr-ml-auto", small: true) { "Pas d'email" }
               - else
-                = commune_statut_global_badge(commune, class: "fr-ml-auto")
+                = commune_statut_global_badge(commune, class: "fr-ml-auto", small: true)
 
   .fr-mt-4w.co-text--center
     %button.fr-btn.fr-btn--primary.fr-btn--icon-left.fr-icon-checkbox-circle-fill{type: :submit} Enregistrer la sélection
