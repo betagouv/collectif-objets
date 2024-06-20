@@ -48,7 +48,12 @@ class Commune < ApplicationRecord
   scope :with_user, -> { where.associated(:users) }
   scope :with_objets, -> { where.associated(:objets) }
   scope :include_users_count, lambda {
-    select("communes.*, COUNT(users.id) as users_count").left_outer_joins(:users).group("communes.id")
+    joins(%(LEFT OUTER JOIN (
+              SELECT commune_id, COUNT(users.id) AS users_count
+              FROM users
+              GROUP BY commune_id
+            ) AS nb_users_par_commune ON nb_users_par_commune.commune_id = communes.id).squish)
+    .select("communes.*, COALESCE(users_count, 0) AS users_count")
   }
 
   scope :has_recensements_with_missing_photos, lambda {
