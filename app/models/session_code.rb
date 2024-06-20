@@ -5,6 +5,7 @@ class SessionCode < ApplicationRecord
   EXPIRE_AFTER = 1.day.freeze
 
   belongs_to :user
+  has_one :commune, through: :user
 
   scope :used, -> { where.not(used_at: nil) }
   scope :unused, -> { where(used_at: nil) }
