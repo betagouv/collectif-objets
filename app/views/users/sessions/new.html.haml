@@ -27,9 +27,7 @@
           = f.submit "Connexion"
           = link_to "Demander un nouveau code de connexion",
             new_user_session_code_path(code_insee: @commune.code_insee),
-            type: "button",
-            class: "fr-btn fr-btn--tertiary",
-            data: { turbo_action: "advance" }
+            class: "fr-btn fr-btn--tertiary"
 
       .fr-mt-10w
         = render "users/sessions/faq"
