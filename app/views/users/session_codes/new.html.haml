@@ -65,7 +65,8 @@
                 = f.submit "Recevoir un code de connexion"
                 = link_to "Saisir mon code de connexion",
                   new_user_session_path(email: @commune_user.email),
-                  class: "fr-btn fr-btn--tertiary"
+                  class: "fr-btn fr-btn--tertiary",
+                  data: { turbo_frame: "_top" }
 
         .fr-mt-6w
           = render "users/sessions/faq"
