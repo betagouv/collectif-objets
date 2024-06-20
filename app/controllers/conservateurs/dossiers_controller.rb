@@ -10,7 +10,7 @@ module Conservateurs
 
     def show
       @dossier = @commune.dossier
-      authorize(@dossier)
+      authorize(@dossier) if @dossier
     end
 
     protected
