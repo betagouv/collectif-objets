@@ -67,7 +67,7 @@
   %p
     = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
       %h2 #{campaign.communes.count} communes destinataires :
-      %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
+      %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.fr-px-1w
         - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
           - url_commune = current_conservateur ? conservateurs_commune_path(recipient.commune) : admin_commune_path(recipient.commune)
           %li.co-position-relative.fr-enlarge-link
