@@ -31,37 +31,36 @@
 - if (campaign.ongoing? || campaign.finished?) && campaign.stats.present?
   = render "shared/campaigns/stats", stats: campaign.stats
 
-.fr-mb-8w
-  .fr-grid-row
-    .fr-col-md-6
-      %h2 Configuration
-      %div
-        %b Nom de l'émetteur des mails :
-        %span= campaign.sender_name.presence || "N/A"
-      %div
-        %b
-          Nom de la DRAC en charge :
-        %span= campaign.nom_drac.presence || "N/A"
-      %div
-        %b Signature des mails :
-        - if campaign.signature.present?
-          .co-white-space-pre-line.co-blockquote= campaign.signature
-        - else
-          %span N/A
-      .fr-mt-2w
-        = button_to "Modifier la configuration", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary", method: :get, disabled: !campaign.draft?
-    .fr-col-md-6
-      %h2 Dates
-      %table
-        %tbody
-          - Campaign::DATE_FIELDS.each do |date_field|
-            %tr
-              %th.co-text--right.fr-pr-2w= t("activerecord.attributes.campaign.#{date_field}")
-              %td= l(campaign.send(date_field), format: :long_with_weekday)
-        %tfoot
+.fr-grid-row.fr-grid-row--gutters.fr-mb-8w
+  .fr-col-md-6
+    %h2 Configuration
+    %div
+      %b Nom de l'émetteur des mails :
+      %span= campaign.sender_name.presence || "N/A"
+    %div
+      %b
+        Nom de la DRAC en charge :
+      %span= campaign.nom_drac.presence || "N/A"
+    %div
+      %b Signature des mails :
+      - if campaign.signature.present?
+        .co-white-space-pre-line.co-blockquote= campaign.signature
+      - else
+        %span N/A
+    .fr-mt-2w
+      = button_to "Modifier la configuration", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary", method: :get, disabled: !campaign.draft?
+
+  .fr-col-md-6
+    %h2 Dates
+    %table
+      %tbody
+        - Campaign::DATE_FIELDS.each do |date_field|
           %tr
-            %td.co-text--center.fr-pt-2w{:colspan => "2"}
-              = button_to "Modifier les dates", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary", method: :get, disabled: !campaign.draft?
+            %th.co-text--right.fr-pr-2w= t("activerecord.attributes.campaign.#{date_field}")
+            %td= l(campaign.send(date_field), format: :long_with_weekday)
+        %tr
+          %td.co-text--center.fr-pt-2w{:colspan => "2"}
+            = button_to "Modifier les dates", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary", method: :get, disabled: !campaign.draft?
 
 %h2 Communes destinataires
 - if campaign.communes.any?
