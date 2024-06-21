@@ -271,6 +271,10 @@ fr:
           started: Recensement démarré
           completed: Recensement terminé
         departement_code: Département
+        count:
+          zero: aucune commune
+          one: une commune
+          other: "%{count} communes"
       campaign:
         departement_code: Département
         date_lancement: Date de lancement

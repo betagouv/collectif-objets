@@ -63,29 +63,34 @@
             %td.co-text--center.fr-pt-2w{:colspan => "2"}
               = button_to "Modifier les dates", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary", method: :get, disabled: !campaign.draft?
 
+%h2 Communes destinataires
 - if campaign.communes.any?
   %p
-    = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
-      %h2 #{campaign.communes.count} communes destinataires :
-      %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.fr-px-1w
-        - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
-          - url_commune = current_conservateur ? conservateurs_commune_path(recipient.commune) : admin_commune_path(recipient.commune)
+    La campagne sera envoyée à
+    %b= Commune.human_attribute_name(:count, count: campaign.recipients.count)
+    parmi les
+    %b= Commune.human_attribute_name(:count, count: campaign.departement.communes_count)
+    du département.
+  = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
+    %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
+      - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
+        - url_commune = current_conservateur ? conservateurs_commune_path(recipient.commune) : admin_commune_path(recipient.commune)
+        %li.co-position-relative.fr-enlarge-link
+          .co-flex.co-flex--space-between
+            = link_to recipient.commune.nom, url_commune, class: "fr-mr-auto"
+            = commune_statut_global_badge(recipient.commune, small: true)
+            = campaign_recipient_status_badge(recipient)
+            = campaign_recipient_opt_out_badge(recipient)
+    - if excluded_communes.any?
+      %p
+        %strong #{excluded_communes.count} communes non inclues :
+      %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
+        - excluded_communes.each do |commune|
+          - url_commune = current_conservateur ? conservateurs_commune_path(commune) : admin_commune_path(commune)
           %li.co-position-relative.fr-enlarge-link
             .co-flex.co-flex--space-between
-              = link_to recipient.commune.nom, url_commune, class: "fr-mr-auto"
-              = commune_statut_global_badge(recipient.commune, small: true)
-              = campaign_recipient_status_badge(recipient)
-              = campaign_recipient_opt_out_badge(recipient)
-      - if excluded_communes.any?
-        %p
-          %strong #{excluded_communes.count} communes non inclues :
-        %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
-          - excluded_communes.each do |commune|
-            - url_commune = current_conservateur ? conservateurs_commune_path(commune) : admin_commune_path(commune)
-            %li.co-position-relative.fr-enlarge-link
-              .co-flex.co-flex--space-between
-                = link_to commune.nom, url_commune
-                = commune_statut_global_badge(commune)
+              = link_to commune.nom, url_commune
+              = commune_statut_global_badge(commune)
   - if (count = campaign.communes_en_cours.load.count).positive?
     = dsfr_alert(type: :warning, title: "Communes en cours d'examen", classes: "fr-mb-2w") do
       %p
@@ -95,7 +100,10 @@
         = "#{campaign.communes_en_cours.collect { |commune| link_to(commune.nom, conservateurs_commune_dossier_path(commune)) }.to_sentence.html_safe}."
 
 - else
-  %p Les communes destinataires n'ont pas encore été définies
+  %p
+    Aucune commune parmi les
+    %b= Commune.human_attribute_name(:count, count: campaign.departement.communes_count)
+    du département n'a été sélectionnée.
 
 = link_to campaign.communes.any? ? "Modifier les communes destinataires" : "Définir les communes destinataires", send("#{r}_campaign_edit_recipients_path", campaign), class: "fr-btn fr-btn--secondary", disabled: !campaign.draft?
 
