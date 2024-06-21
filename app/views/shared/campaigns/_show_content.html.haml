@@ -32,7 +32,7 @@
   = render "shared/campaigns/stats", stats: campaign.stats
 
 .fr-grid-row.fr-grid-row--gutters.fr-mb-8w
-  .fr-col-md-6
+  .fr-col-lg-6
     %h2 Configuration
     %div
       %b Nom de l'émetteur des mails :
@@ -50,7 +50,7 @@
     .fr-mt-2w
       = button_to "Modifier la configuration", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary", method: :get, disabled: !campaign.draft?
 
-  .fr-col-md-6
+  .fr-col-lg-6
     %h2 Dates
     %table
       %tbody
