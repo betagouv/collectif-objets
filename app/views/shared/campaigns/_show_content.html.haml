@@ -68,7 +68,7 @@
               %li
                 = button_to "Modifier les dates", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-calendar-2-line", method: :get, disabled: !campaign.draft?
               %li
-                = button_to "Supprimer la campagne", send("#{r}_campaign_path", campaign), method: :delete, class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-delete-line fr-my-1w fr-mt-md-0", disabled: !campaign.draft?, data: { turbo_confirm: "Êtes-vous sûr.e  de vouloir supprimer ce brouillon ? C'est irréversible." }
+                = button_to "Supprimer la campagne", send("#{r}_campaign_path", campaign), method: :delete, class: "fr-btn fr-btn--tertiary fr-btn--icon-left fr-icon-delete-line fr-my-1w fr-mt-md-0", disabled: !campaign.draft?, data: { turbo_confirm: "Êtes-vous sûr.e  de vouloir supprimer ce brouillon ? C'est irréversible." }
 
 %h2 Communes destinataires
 - if campaign.communes.any?
