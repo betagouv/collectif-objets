@@ -18,6 +18,7 @@
   %fieldset.fr-fieldset
     %legend.fr-sr-only
       Communes
+    %input{type: :hidden, name: "campaign[commune_ids][]", value: "" }
     = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
       .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.fr-px-1w
         - campaign.available_communes.each do |commune|
