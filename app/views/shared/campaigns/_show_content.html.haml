@@ -47,8 +47,11 @@
         .co-white-space-pre-line.co-blockquote= campaign.signature
       - else
         %span N/A
-    .fr-mt-2w
-      = button_to "Modifier la configuration", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary", method: :get, disabled: !campaign.draft?
+    %ul.fr-btns-group.fr-btns-group--icon-left.fr-btns-group--inline-md.fr-mt-2w
+      %li
+        = button_to "Modifier la configuration", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-pencil-line", method: :get, disabled: !campaign.draft?
+      %li
+        = button_to "Prévisualiser les messages", send("#{r}_campaign_mail_previews_path", campaign), method: :get, class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-eye-line fr-my-1w fr-mt-md-0", disabled: campaign.communes.empty? || !campaign.draft_or_planned?
 
   .fr-col-lg-6
     %h2 Dates
@@ -56,11 +59,16 @@
       %tbody
         - Campaign::DATE_FIELDS.each do |date_field|
           %tr
-            %th.co-text--right.fr-pr-2w= t("activerecord.attributes.campaign.#{date_field}")
+            %th.text-start.text-lg-end.w-50.w-md-25.w-lg-auto.fr-pr-2w
+              = t("activerecord.attributes.campaign.#{date_field}")
             %td= l(campaign.send(date_field), format: :long_with_weekday)
         %tr
-          %td.co-text--center.fr-pt-2w{:colspan => "2"}
-            = button_to "Modifier les dates", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary", method: :get, disabled: !campaign.draft?
+          %td{colspan: 2}
+            %ul.fr-btns-group.fr-btns-group--icon-left.fr-btns-group--inline-md.fr-mt-2w
+              %li
+                = button_to "Modifier les dates", send("edit_#{r}_campaign_path", campaign), class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-calendar-2-line", method: :get, disabled: !campaign.draft?
+              %li
+                = button_to "Supprimer la campagne", send("#{r}_campaign_path", campaign), method: :delete, class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-delete-line fr-my-1w fr-mt-md-0", disabled: !campaign.draft?, data: { turbo_confirm: "Êtes-vous sûr.e  de vouloir supprimer ce brouillon ? C'est irréversible." }
 
 %h2 Communes destinataires
 - if campaign.communes.any?
@@ -104,13 +112,4 @@
     %b= Commune.human_attribute_name(:count, count: campaign.departement.communes_count)
     du département n'a été sélectionnée.
 
-= link_to campaign.communes.any? ? "Modifier les communes destinataires" : "Définir les communes destinataires", send("#{r}_campaign_edit_recipients_path", campaign), class: "fr-btn fr-btn--secondary", disabled: !campaign.draft?
-
-- if campaign.draft? || campaign.planned?
-
-  %h2.fr-mt-4w Actions
-
-  = form_with url: send("#{r}_campaign_path", campaign), method: :delete, data: { turbo_confirm: "Êtes-vous sûr.e  de vouloir supprimer ce brouillon ? C'est irréversible." } do |f|
-    = f.submit "Supprimer ce brouillon de campagne…", class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-destroy-line fr-my-1w", disabled: !campaign.draft?
-
-  = button_to "Génerer un aperçu des mails qui vont être envoyés", send("#{r}_campaign_mail_previews_path",campaign), method: :get, class: "fr-btn fr-btn--secondary fr-my-1w", disabled: campaign.communes.empty? || !campaign.draft_or_planned?
+= button_to campaign.communes.any? ? "Modifier les communes destinataires" : "Définir les communes destinataires", send("#{r}_campaign_edit_recipients_path", campaign), method: :get, class: "fr-btn fr-btn--secondary", disabled: !campaign.draft_or_planned?
