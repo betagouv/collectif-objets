@@ -661,7 +661,7 @@ fr:
     session_code:
       lien: "Voici votre code de connexion à Collectif Objets :"
       cta: Connexion
-      one_hour: Ce code est valide une heure.
+      valid_until: "Ce code est valide jusqu'à %{date}."
     message_received:
       bonjour: Bonjour %{nom_commune},
       from_conservateur: "%{author}, conservateur de votre département, vous a envoyé un message sur Collectif Objets le %{date} :"

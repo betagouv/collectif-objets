@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :commune
 
-  has_many :session_codes, dependent: :destroy
+  has_one :session_code, -> { valid.order(created_at: :desc) }, dependent: :destroy, inverse_of: :user
 
   attr_accessor :impersonating
 
@@ -17,6 +17,4 @@ class User < ApplicationRecord
 
   def safe_email? = SAFE_DOMAINS.include?(email.split("@").last)
   def to_s = email.split("@")[0]
-
-  def last_session_code = session_codes.order(created_at: :desc).first
 end

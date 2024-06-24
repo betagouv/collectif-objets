@@ -7,7 +7,7 @@
       <%= @session_code.code %>
     </mj-text>
     <mj-text>
-      <%= I18n.t("user_mailer.session_code.one_hour") %>
+      <%= I18n.t("user_mailer.session_code.valid_until", date: l(@session_code.valid_until, format: :long)) %>
     </mj-text>
   </mj-column>
 </mj-section>

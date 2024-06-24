@@ -26,6 +26,7 @@
               {include_blank: "Sélectionnez un département"},
               required: true,
               autocomplete: "off",
+              autofocus: @departement.nil?,
               disabled: @departement.present?,
               data: { action: "user-session-form#submitCommuneForm",
                 user_session_form_target: "departementSelect" })
@@ -44,6 +45,7 @@
               {include_blank: true},
               required: true,
               autocomplete: "off",
+              autofocus: @departement.present?,
               disabled: @departement.blank?,
               data: { action: "user-session-form#submitCommuneForm" })
 
@@ -57,10 +59,14 @@
             = form_with(url: user_session_codes_path, builder: FormBuilderDsfr, data: { turbo_frame: "_top" }) do |f|
               = f.hidden_field :email, value: @commune_user.email
               = dsfr_alert type: :info, size: :sm do
-                L’email auquel sera envoyé le code de connexion est
+                Le code de connexion sera envoyé par email à
                 %b= @commune_user.email
               .fr-btns-group.fr-mt-4w
                 = f.submit "Recevoir un code de connexion"
+                = link_to "Saisir mon code de connexion",
+                  new_user_session_path(email: @commune_user.email),
+                  class: "fr-btn fr-btn--tertiary",
+                  data: { turbo_frame: "_top" }
 
         .fr-mt-6w
           = render "users/sessions/faq"
