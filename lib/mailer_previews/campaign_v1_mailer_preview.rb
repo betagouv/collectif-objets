@@ -19,6 +19,6 @@ class CampaignV1MailerPreview < ApplicationMailerPreview
   end
 
   def campaign
-    @campaign ||= Campaign.first
+    @campaign ||= Campaign.joins(:communes).first
   end
 end
