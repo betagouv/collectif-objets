@@ -6,7 +6,7 @@ class PhotoPresenter
   attr_accessor :lightbox_path_params, :lightbox_path
 
   def initialize(url:, description: nil, credit: nil, thumb_url: nil, download_url: nil, id: nil)
-    @url = rewrite_photo_url(url)
+    @url = url
     @thumb_url = thumb_url || url
     @description = description
     @download_url = download_url || url
@@ -28,15 +28,11 @@ class PhotoPresenter
 
   def self.from_palissy_photo(palissy_photo, index)
     new(
-      url: palissy_photo["url"],
+      url: palissy_photo["url"].sub(MEMOIRE_PHOTOS_AWS_BASE_URL, MEMOIRE_PHOTOS_BASE_URL),
       description: palissy_photo["name"],
       credit: palissy_photo["credit"],
       id: index
     )
-  end
-
-  def rewrite_photo_url(url)
-    url.sub(MEMOIRE_PHOTOS_AWS_BASE_URL, MEMOIRE_PHOTOS_BASE_URL)
   end
 
   def alt = [description, credit].map(&:presence).compact.join(" - ")
