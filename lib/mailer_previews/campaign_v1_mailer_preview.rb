@@ -8,7 +8,7 @@ class CampaignV1MailerPreview < ApplicationMailerPreview
     end
   end
 
-  protected
+  private
 
   def user
     @user ||= commune.users.first
