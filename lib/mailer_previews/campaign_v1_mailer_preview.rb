@@ -10,8 +10,6 @@ class CampaignV1MailerPreview < ApplicationMailerPreview
 
   private
 
-  attr_reader :user, :commune, :campaign
-
   def user
     @user ||= commune.users.first
   end

@@ -10,14 +10,10 @@ class UserMailerPreview < ApplicationMailerPreview
   end
 
   def commune_completed_email
-    user = User.order(Arel.sql("RANDOM()")).first
-    commune = Commune.order(Arel.sql("RANDOM()")).first
     UserMailer.with(user:, commune:).commune_completed_email
   end
 
   def commune_avec_objets_verts_email
-    user = User.order(Arel.sql("RANDOM()")).first
-    commune = Commune.order(Arel.sql("RANDOM()")).first
     UserMailer.with(user:, commune:).commune_avec_objets_verts_email
   end
 
@@ -28,15 +24,17 @@ class UserMailerPreview < ApplicationMailerPreview
   end
 
   def dossier_auto_submitted
-    user = User.order(Arel.sql("RANDOM()")).first
-    commune = Commune.order(Arel.sql("RANDOM()")).first
     UserMailer.with(user:, commune:).dossier_auto_submitted_email
   end
 
   def message_received
-    user = User.first
-    message = Message.first
-
+    message = Message.from_conservateur.first
+    user = message.commune.users.first
     UserMailer.with(message:, user:).message_received_email
   end
+
+  private
+
+  def user = @user ||= User.order(Arel.sql("RANDOM()")).first
+  def commune = user.commune
 end
