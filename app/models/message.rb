@@ -11,6 +11,7 @@ class Message < ApplicationRecord
     attachable.variant :small, resize_to_limit: [300, 400], saver: { strip: true }
   end
 
+  scope :from_commune, -> { where(author_type: "User") }
   scope :from_conservateur, -> { where(author_type: "Conservateur") }
 
   after_create_commit :enqueue_mattermost_notification, unless: :rejection?

@@ -665,7 +665,7 @@ fr:
     session_code:
       lien: "Voici votre lien de connexion à Collectif Objets :"
       cta: Connexion
-      valid_until: "Ce code est valide jusqu'à %{date}."
+      valid_until: "Ce code est valide jusqu'à <b>%{date}</b>."
       nouveau_code: Passé ce délai, vous pouvez
     message_received:
       bonjour: Bonjour,
