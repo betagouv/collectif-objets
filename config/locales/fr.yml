@@ -666,6 +666,7 @@ fr:
       lien: "Voici votre lien de connexion à Collectif Objets :"
       cta: Connexion
       valid_until: "Ce code est valide jusqu'à %{date}."
+      nouveau_code: Passé ce délai, vous pouvez
     message_received:
       bonjour: Bonjour,
       from_conservateur: "Le conservateur de votre département, %{author}, vous a envoyé un message sur Collectif Objets le %{date} :"
