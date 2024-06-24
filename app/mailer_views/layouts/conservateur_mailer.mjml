@@ -1,0 +1,12 @@
+<mjml>
+  <%= render "shared/head" %>
+
+  <mj-body>
+    <%= render "shared/header" %>
+
+    <%= yield %>
+
+    <% unsubscribe = link_to I18n.t("conservateur_mailer.layout.unsubscribe"), edit_conservateur_registration_url %>
+    <%= render "shared/footer", unsubscribe: %>
+  </mj-body>
+</mjml>

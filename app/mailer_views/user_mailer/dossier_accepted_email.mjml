@@ -1,0 +1,31 @@
+    <mj-text>
+      <%= t("user_mailer.shared.bonjour") %>
+    </mj-text>
+
+    <mj-text>
+      <%= t("user_mailer.dossier_accepted.submitted", commune_nom: @commune.nom) %>
+    </mj-text>
+    <mj-text>
+      <%= t("user_mailer.dossier_accepted.commentaire") %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<mj-section padding-left="20px">
+  <mj-column border-left="2px solid rgb(0,0,145)">
+    <mj-text font-style="italic"><%= simple_format(@dossier.notes_conservateur) %></mj-text>
+  </mj-column>
+</mj-section>
+
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("user_mailer.dossier_accepted.rapport") %>
+    </mj-text>
+    <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= @cta_url %>">
+      <%= t("user_mailer.dossier_accepted.cta") %>
+    </mj-button>
+    <mj-text>
+      <%= t("user_mailer.dossier_accepted.merci") %>
+    </mj-text>
+    <mj-text><%= t("user_mailer.shared.contact") %></mj-text>

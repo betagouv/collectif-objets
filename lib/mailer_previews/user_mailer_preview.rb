@@ -22,24 +22,8 @@ class UserMailerPreview < ApplicationMailerPreview
   end
 
   def dossier_accepted_email(dossier = nil, conservateur = nil)
-    dossier = dossier&.clone || Dossier.new(
-      commune: Commune.new(
-        nom: "Martigues",
-        users: [
-          User.new(
-            email: "jean-lou@mairie-martigues.gov.fr"
-          )
-        ]
-      ).tap(&:readonly!),
-      status: "accepted",
-      accepted_at: Time.zone.now - 2.days.ago,
-      notes_conservateur: "Merci pour ce recensement complet",
-      conservateur: Conservateur.new(
-        first_name: "Léa",
-        last_name: "Dupond",
-        email: "lea-dupond@drac-de-la-france.gouv.fr"
-      ).tap(&:readonly!)
-    ).tap(&:readonly!)
+    dossier = dossier&.clone || Dossier.find_by(status: "accepted")
+    conservateur ||= dossier.conservateur
     UserMailer.with(dossier:, conservateur:).dossier_accepted_email
   end
 
@@ -50,14 +34,8 @@ class UserMailerPreview < ApplicationMailerPreview
   end
 
   def message_received
-    user = build(:user, email: "jean.frank@mairie.fr")
-    conservateur = build(:conservateur)
-    message = build(
-      :message,
-      author: conservateur,
-      origin: "web",
-      text: "Bonjour, merci mais il manque des photos du calice de la chapelle"
-    )
+    user = User.first
+    message = Message.first
 
     UserMailer.with(message:, user:).message_received_email
   end

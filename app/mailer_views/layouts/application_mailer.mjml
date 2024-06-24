@@ -1,0 +1,11 @@
+<mjml>
+  <%= render "shared/head" %>
+
+  <mj-body>
+    <%= render "shared/header" %>
+
+    <%= yield %>
+
+    <%= render "shared/footer" %>
+  </mj-body>
+</mjml>

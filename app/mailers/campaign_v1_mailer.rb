@@ -26,11 +26,6 @@ class CampaignV1Mailer < ApplicationMailer
   end
   helper_method :ct
 
-  def tt(key, **)
-    I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**)).gsub("<b>", "").gsub("</b>", "")
-  end
-  helper_method :tt
-
   private
 
   def set_campaign_commune_and_user

@@ -1,0 +1,5 @@
+<mj-text><%= ct("relance2_started.bien_recu") %></mj-text>
+<mj-text><%= ct("relance2_started.plus_actif") %></mj-text>
+<mj-text><b><%= ct("relance2_started.dossier_complet") %></b></mj-text>
+<mj-text><%= ct("relance2_started.contactez_nous") %></mj-text>
+<%= render partial: "cta", locals: { variant: "started", user: @user, commune: @commune } %>

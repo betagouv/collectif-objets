@@ -1,0 +1,6 @@
+<mj-text><%= ct("fin_shared.fin_aujourdhui") %></mj-text>
+<mj-text><%= ct("fin_shared.merci") %></mj-text>
+<mj-text><%= ct("fin_to_complete.sauf_erreur") %></mj-text>
+<mj-text><%= ct("fin_to_complete.pas_trop_tard") %></mj-text>
+<%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>
+<mj-text><%= ct("fin_shared.contact") %></mj-text>
