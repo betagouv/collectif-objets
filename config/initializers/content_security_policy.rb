@@ -13,6 +13,7 @@ Rails.application.configure do
     policy.default_src :self, :https
     policy.script_src :self, "https://stats.beta.gouv.fr/"
     policy.base_uri :self
+    policy.form_action :self
     policy.img_src \
       :self,
       :data,
