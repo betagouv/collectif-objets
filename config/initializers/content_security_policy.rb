@@ -30,7 +30,7 @@ Rails.application.configure do
       *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
 
     policy.object_src :self # for the PDFs served by the rails server
-    policy.font_src :self, :https, :data
+    policy.font_src :self
     policy.child_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
     policy.worker_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
 
