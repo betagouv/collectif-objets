@@ -11,7 +11,7 @@ Rails.application.configure do
     end
 
     policy.default_src :self, :https
-    policy.script_src  :self, :https
+    policy.script_src  :self, "https://stats.beta.gouv.fr/"
     policy.img_src \
       :self,
       :data,
