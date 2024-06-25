@@ -34,7 +34,7 @@ Rails.application.configure do
     policy.child_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
     policy.worker_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
 
-    policy.style_src :self, :https, *(Rails.env.development? ? [:unsafe_inline] : [])
+    policy.style_src :self, :https
 
     policy.frame_src :self, # for the PDFs served by the rails server through <embed> cf https://stackoverflow.com/a/69147536
       "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/",
@@ -46,6 +46,5 @@ Rails.application.configure do
   config.content_security_policy_nonce_generator = ->(request) { SecureRandom.base64(16) }
 
   nonce_directives = %w(script-src)
-  nonce_directives += %w(style-src) unless Rails.env.development?
   config.content_security_policy_nonce_directives = nonce_directives
 end

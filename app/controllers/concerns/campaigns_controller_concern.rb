@@ -10,6 +10,9 @@ module CampaignsControllerConcern
       only: %i[show mail_previews edit edit_recipients update_recipients update_status update destroy]
     before_action :set_excluded_communes, only: %i[show update_status]
     before_action :redirect_planned_campaign, only: %i[edit_recipients]
+
+    # Temporarily allow inline styles when previewing emails
+    content_security_policy { |policy| policy.style_src :self, :https, :unsafe_inline }
   end
 
   def show; end
