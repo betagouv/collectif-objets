@@ -9,7 +9,8 @@ module Communes
     included do
       # Permet de récupérer le "statut global" sur toutes les communes
       def self.include_statut_global
-        joins(%{
+        includes(:dossier)
+        .joins(%{
           LEFT OUTER JOIN (
             SELECT communes.code_insee, COALESCE((CASE
                 WHEN dossiers.status = 'construction' THEN #{Commune::ORDRE_EN_COURS_DE_RECENSEMENT}

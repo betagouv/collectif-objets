@@ -46,7 +46,6 @@ module Conservateurs
     def set_communes
       @communes = policy_scope(Commune)
         .where(departement_code: @departement.code)
-        .includes(:dossier)
         .include_statut_global
     end
 
