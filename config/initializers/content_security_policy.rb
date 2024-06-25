@@ -27,7 +27,7 @@ Rails.application.configure do
       "https://stats.beta.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
       *s3_uris2,
-      *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
+      *(Rails.env.development? ? [:ws, :http].map { |protocol| "#{protocol}://#{ViteRuby.config.host_with_port}" } : [])
 
     policy.object_src :self # for the PDFs served by the rails server
     policy.font_src :self
