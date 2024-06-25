@@ -148,17 +148,6 @@ RSpec.describe Commune, type: :model do
     end
   end
 
-  describe ".include_objets_count" do
-    let!(:commune) { create(:commune) }
-    before do
-      create_list(:objet, 2, commune:)
-    end
-
-    it "fournit un compteur avec 2 objets" do
-      expect(Commune.include_objets_count.first.objets_count).to eq 2
-    end
-  end
-
   describe "recensements prioritaires count" do
     let!(:commune) { create(:commune, :en_cours_de_recensement) }
     before do

@@ -3,7 +3,6 @@
 class Commune < ApplicationRecord
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :communes, counter_cache: true
 
-  include Communes::IncludeCountsConcern
   include Communes::IncludeStatutGlobalConcern
 
   include AASM
