@@ -36,6 +36,7 @@ Rails.application.configure do
 
     policy.style_src :self, :https
 
+    policy.frame_ancestors :none
     policy.frame_src :self, # for the PDFs served by the rails server through <embed> cf https://stackoverflow.com/a/69147536
       "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/",
       "https://tube.numerique.gouv.fr/",
