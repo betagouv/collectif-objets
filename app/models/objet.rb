@@ -5,7 +5,7 @@ class Objet < ApplicationRecord
 
   scope :with_images, -> { where("cardinality(palissy_photos) >= 1") }
   belongs_to :commune, foreign_key: :lieu_actuel_code_insee, primary_key: :code_insee, optional: true,
-                       inverse_of: :objets
+                       inverse_of: :objets, counter_cache: true
   belongs_to :edifice, optional: true
   has_many :recensements, dependent: :restrict_with_exception
 
