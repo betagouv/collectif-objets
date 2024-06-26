@@ -86,8 +86,6 @@
           .co-flex.co-flex--space-between
             = link_to recipient.commune.nom, url_commune, class: "fr-mr-auto"
             = commune_statut_global_badge(recipient.commune, small: true)
-            = campaign_recipient_status_badge(recipient)
-            = campaign_recipient_opt_out_badge(recipient)
     - if excluded_communes.any?
       %p
         %strong #{excluded_communes.count} communes non inclues :
