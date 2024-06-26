@@ -1,0 +1,6 @@
+<mj-text><%= ct("relance3_to_complete.intro") %></mj-text>
+<mj-text><%= ct("relance3_to_complete.sauf_erreur") %></mj-text>
+<mj-text><%= ct("relance3_to_complete.finalisez") %></mj-text>
+<%= render partial: "cta_complete", locals: { user: @user, commune: @commune } %>
+<mj-text><%= ct("fin_shared.contact") %></mj-text>
+<%= render partial: "custom_campaign_infos" %>

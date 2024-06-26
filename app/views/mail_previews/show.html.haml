@@ -1,0 +1,14 @@
+- title = "Prévisualisation de #{@mailer.preview_name.titleize} : #{@email}"
+- content_for(:head_title) { "Admin | #{title}" }
+
+%main#contenu.fr-container.fr-my-4w
+  %h1= title
+  .fr-grid-row
+    .fr-col-md-4
+      = render "mailers", mailers: @mailers
+    .fr-col-md-8
+      = turbo_frame_tag "mail_preview" do
+        %h2
+          = @mailer.preview_name.titleize
+          = t("#{@mailer.preview_name}.#{@email}.title", default: @email)
+        = render Conservateurs::MailIframeComponent.new(mail: @mail, fit: true)
