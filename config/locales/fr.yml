@@ -547,6 +547,7 @@ fr:
     shared:
       madame_monsieur_le_maire: "Madame la maire, monsieur le maire,"
       role_elu: Pour lutter contre les vols et les dégradations des objets protégés de votre commune, <b>votre rôle d'élu local est essentiel</b>.
+      cta_connect: Accéder à mon compte
       cta_inactive:
         one: Commencer le recensement de l’objet protégé à %{nom_commune}
         other: Commencer le recensement des %{count} objets protégés à %{nom_commune}

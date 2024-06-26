@@ -1,4 +1,5 @@
 <mj-text><%= ct("fin_shared.fin_aujourdhui") %></mj-text>
 <mj-text><%= ct("fin_inactive.vous_navez_pas_souhaite") %></mj-text>
 <mj-text><%= ct("fin_inactive.prochaine_campagne") %></mj-text>
+<%= render partial: "cta", locals: { user: @user, variant: :connect } %>
 <mj-text><%= ct("fin_shared.contact") %></mj-text>
