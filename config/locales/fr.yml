@@ -545,7 +545,7 @@ fr:
       merci: Nous vous remercions pour votre engagement en faveur du patrimoine mobilier protégé.
       contact: Pour contacter les conservateurs de votre département, vous pouvez écrire un message dans l’onglet “Messagerie” depuis votre compte Collectif Objets.
     shared:
-      madame_monsieur_le_maire: "Madame la Maire, Monsieur le Maire,"
+      madame_monsieur_le_maire: "Madame la maire, monsieur le maire,"
       role_elu: Pour lutter contre les vols et les dégradations des objets protégés de votre commune, <b>votre rôle d'élu local est essentiel</b>.
       cta_inactive:
         one: Commencer le recensement de l’objet protégé à %{nom_commune}
