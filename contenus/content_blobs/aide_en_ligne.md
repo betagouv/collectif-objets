@@ -86,7 +86,7 @@ La protection au titre des monuments historiques n’a pas vocation à s’appli
 
 ## 1 - Se connecter à la plateforme grâce à un code de connexion
 
-P﻿our effectuer un recensement via Collectif Objets, vous devez d'abord vous connecter à votre espace dédié dans le site, grâce à un code de connexion à 6 chiffres que vous recevrez par email.
+P﻿our effectuer un recensement via Collectif Objets, vous devez d'abord vous connecter à votre espace dédié dans le site, grâce à un code de connexion à 6 chiffres que vous recevrez par email. Ce code est valable pour une durée de 24 heures. 
 
 La vidéo ci-dessous vous présente les deux méthodes possibles pour vous connecter.
 
@@ -96,7 +96,7 @@ P﻿our obtenir un code de connexion, vous pouvez :
 
 1. Partir de l'email que vous avez reçu et qui vous invite à recenser.
 
-Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code.
+Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code ou suivre le lien disponible dans l'email.
 
 2. Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions :
 
@@ -105,16 +105,7 @@ Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez
 * Cliquez sur « Recevoir un code de connexion » 
 * Consultez la boite mail de votre commune. Vous recevrez un courriel contenant un code de connexion à 6 chiffres. Il faut le taper dans la page internet où vous venez de demander le code de connexion. 
 * Vous serez alors connecté à l'espace de votre commune dans la plateforme *Collectif Objets.* Lisez les rapides instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
-* Vous verrez alors s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier. \
-  \
-  Comment effectuer un recensement ?
-
-Vous pouvez recenser en 4 étapes :
-
-* Commencez par vous connecter à votre commune.
-* Ensuite, vous y retrouverez la liste de(s) objet(s) monument(s) historique(s) à recenser dans votre commune.
-* Vous pouvez cliquer sur un objet. Le bouton “Recenser cet objet” pour répondre au questionnaire de recensement se trouve sur cette page de détail de l’objet.
-* Une fois l’ensemble des recensements effectué vous pourrez transmettre votre dossier aux conservateurs qui pourront ainsi revenir vers vous avec un examen.
+* Vous verrez alors s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier. 
 
 ## 2 - Si vous n’avez pas reçu d’email(s) vous invitant à recenser vos objets protégés
 
