@@ -16,13 +16,13 @@
     .fr-col-md-6
       - if @objet.recensement&.draft?
         .fr-mb-4w
-          = link_to "Compléter le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.recensement, step: 1), class: "fr-btn"
+          = link_to "Compléter", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.recensement, step: 1), class: "fr-btn"
       - elsif @objet.recensement? && communes_policy(@objet.recensement).edit?
         .fr-mb-4w
-          = link_to "Modifier le recensement", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
+          = link_to "Modifier", edit_commune_objet_recensement_path(@objet.commune, @objet, @objet.recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
       - elsif communes_policy(Recensement.new(objet: @objet)).new?
         .fr-mb-4w
-          = button_to "Recenser cet objet", commune_objet_recensements_path(@objet.commune, @objet), class: "fr-btn", method: :post
+          = button_to "Recenser", commune_objet_recensements_path(@objet.commune, @objet), class: "fr-btn", method: :post
 
       = render "shared/objet_attributes", objet: @objet
 

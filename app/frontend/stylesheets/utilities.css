@@ -69,7 +69,7 @@
 }
 .co-columns-auto {
   width: 100%;
-  columns: 1 auto;
+  columns: 1;
   column-fill: balance;
   column-gap: 2rem;
 }

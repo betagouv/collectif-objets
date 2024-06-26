@@ -18,11 +18,11 @@ module Communes
 
     def btn_text
       if recensement&.status == "draft" # Si la commune a commencé à recenser l'objet
-        "Compléter le recensement"
+        "Compléter"
       elsif recensement # La commune a déjà recensé l'objet
-        "Modifier le recensement"
+        "Modifier"
       elsif dossier&.construction? # Si la commune peut recenser l'objet mais ne l'a pas fait
-        "Recenser cet objet"
+        "Recenser"
       end
     end
 

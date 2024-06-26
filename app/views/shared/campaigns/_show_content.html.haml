@@ -82,7 +82,7 @@
     %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
       - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
         - url_commune = current_conservateur ? conservateurs_commune_path(recipient.commune) : admin_commune_path(recipient.commune)
-        %li.co-position-relative.fr-enlarge-link
+        %li.co-position-relative.fr-enlarge-link.co-break-avoid-column
           .co-flex.co-flex--space-between
             = link_to recipient.commune.nom, url_commune, class: "fr-mr-auto"
             = commune_statut_global_badge(recipient.commune, small: true)
@@ -92,7 +92,7 @@
       %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
         - excluded_communes.each do |commune|
           - url_commune = current_conservateur ? conservateurs_commune_path(commune) : admin_commune_path(commune)
-          %li.co-position-relative.fr-enlarge-link
+          %li.co-position-relative.fr-enlarge-link.co-break-avoid-column
             .co-flex.co-flex--space-between
               = link_to commune.nom, url_commune
               = commune_statut_global_badge(commune)
