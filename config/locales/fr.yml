@@ -118,7 +118,7 @@ fr:
     aide:
       intro:
         title: Le recensement
-        content1: Mener un recensement, c’est aller vérifier la présence d’un objet au sein de son édifice et constater son état en répondant à un questionnaire simplifié. C’est une opération rapide à mener (5 à 10 min par objet) et qui ne demande aucune expertise ou formation particulière. Les données collectées permettent aux conservateurs d’antiquités et d’objets d’art en charge de votre territoire de mieux connaître votre patrimoine, de vous aider à le valoriser et d’intervenir à temps pour le protéger.
+        content1: Mener un recensement, c’est aller vérifier la présence d’un objet au sein de son édifice et constater son état en répondant à un questionnaire simplifié. C’est une opération rapide à mener (5 à 10 min par objet) et qui ne demande aucune expertise ou formation particulière. Les données collectées permettent aux conservateurs des antiquités et objets d’art en charge de votre territoire de mieux connaître votre patrimoine, de vous aider à le valoriser et d’intervenir à temps pour le protéger.
         content2: Vous êtes élu·e ou agent municipal ? Vous êtes en charge du patrimoine de votre commune ? Sur Collectif Objets vous pouvez retrouver la liste des objets protégés Monuments Historiques abrités par votre commune à la page “les objets de ma commune” afin de les recenser.
       etape1:
         title: Étape 1 - Je me rends sur place
@@ -132,16 +132,16 @@ fr:
           question1: L’objet est-il présent ?
           question2: Dans quel état est-il ?
           question3: Est-il facile à voler ?
-        photo: Il est aussi important de joindre une photo de l’état actuel de l’objet afin de permettre au conservateur d’antiquités et d’objets d’art en charge de votre dossier de valider votre recensement.
+        photo: Il est aussi important de joindre une photo de l’état actuel de l’objet afin de permettre au conservateur des antiquités et objets d’art en charge de votre dossier de valider votre recensement.
         hors_ligne: Vous n’avez pas accès à internet dans l’édifice ? Nous avons préparé une version imprimable de la liste de vos objets et des questionnaires à emporter lors de vos déplacements que vous n’aurez plus qu’à saisir en ligne à votre retour.
       etape3:
         title: Étape 3 - Je reçois des recommandations d’un conservateur
-        conseils: Une fois le recensement terminé, le conservateur d’antiquités et d’objets d’art en charge de votre territoire reviendra vers vous pour valider votre recensement et - si besoin - vous guider vers des opérations d’entretien, de sauvegarde ou de sécurisation de vos objets.
+        conseils: Une fois le recensement terminé, le conservateur des antiquités et objets d’art en charge de votre territoire reviendra vers vous pour valider votre recensement et - si besoin - vous guider vers des opérations d’entretien, de sauvegarde ou de sécurisation de vos objets.
         fiches: Des fiches explicatives et/ou des commentaires du conservateur pourront vous être délivrés pour faciliter ces opérations.
       faq:
         retours:
           title: Que se passe-t-il après lʼenvoi de mes réponses ?
-          content: Vos réponses seront traitées par les conservatrices et conservateurs d’antiquités et d’objets d’art (CAOA). Un examen vous sera adressé. Il facilitera lʼétablissement du récolement réglementaire. Pour les objets affectés aux cultes, celui-ci doit être signé par le propriétaire, lʼaffectataire et la/le CAOA.
+          content: Vos réponses seront traitées par les conservatrices et conservateurs des antiquités et objets d’art (CAOA). Un examen vous sera adressé. Il facilitera lʼétablissement du récolement réglementaire. Pour les objets affectés aux cultes, celui-ci doit être signé par le propriétaire, lʼaffectataire et la/le CAOA.
         restauration:
           title: Comment lancer un projet de restauration ?
           veuillez_consulter: "Veuillez consulter ces pages dédiées sur le site du Ministère de la Culture :"
@@ -159,7 +159,7 @@ fr:
           page_proteger: Protéger des objets mobiliers au titre des monuments historiques
         sur_place:
           title: Pourquoi dois-je me rendre sur place ?
-          content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre conservateur d’antiquités et d’objets d’art (CAOA) puisse réaliser un premier niveau d’examen et vous guider dans la préservation de ces objets.
+          content: Un déplacement sur place vous permettra d’évaluer de manière précise l’état dans lequel se trouve votre objet et de le prendre en photo. Ces éléments sont nécessaires pour que votre conservateur des antiquités et objets d’art (CAOA) puisse réaliser un premier niveau d’examen et vous guider dans la préservation de ces objets.
         entretien:
           title: Comment entretenir mes objets ?
           content: Au delà de l'entretien courant qui consiste à nettoyer l'espace autour des objets, il convient de ne pas toucher aux objets protégés. Seul un professionnel habilité assurera une prise en charge optimale.
@@ -464,7 +464,7 @@ fr:
       conseil2: le photographier
       conseil3: répondre à un rapide questionnaire visant à évaluer son état.
       different: Il se différencie donc des précédents inventaires.
-      conseils: À la lecture de vos réponses, les conservateurs d’antiquités et d’objets d’art pourront vous conseiller sur l'entretien de vos objets et leur restauration éventuelle, leur sécurisation et leur valorisation, ou encore les possibilités de financement auprès des différents acteurs du patrimoine.
+      conseils: À la lecture de vos réponses, les conservateurs des antiquités et objets d’art pourront vous conseiller sur l'entretien de vos objets et leur restauration éventuelle, leur sécurisation et leur valorisation, ou encore les possibilités de financement auprès des différents acteurs du patrimoine.
       coordonnees: Pour être mieux à même de répondre à vos questions, je vous prie de bien vouloir nous indiquer le nom et les coordonnées de la personne en charge de ce recensement au sein de l’équipe communale. <b>Vous pourrez indiquer ces informations dans le champ « commentaire »</b>.
       decouvrez: "<b>Découvrez les objets monuments historiques de votre territoire et commencez votre recensement&nbsp;:</b>"
     relance1_inactive:
@@ -649,11 +649,11 @@ fr:
       preservation_patrimoine: En participant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine.
       engagement: Le partage des connaissances entre communes et conservateurs permet d'assurer un meilleur suivi des objets protégés et d'identifier les situations problématiques nécessitant une prise en charge. Nous vous remercions vivement pour votre engagement.
       que_des_objets_verts: Vous avez indiqué que les objets protégés de votre commune sont dans un état qui n'appelle pas une prise en charge urgente.
-      toutefois: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur des antiquités et d’objets d’art de votre département.
+      toutefois: Toutefois, si la situation de l'un de ces objets protégés venait à changer dans les prochains mois, n'hésitez pas à en avertir le conservateur des antiquités et objets d’art de votre département.
       contacter_caoa: Vous pouvez le contacter directement en vous rendant sur l'onglet "Messagerie" depuis votre compte Collectif Objets.
       cta: Accéder à la messagerie
     dossier_auto_submitted:
-      intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture, les conservateurs d’antiquités et d’objets d’art de votre département ne l'avaient pas encore reçu.
+      intro: Vous avez réalisé le recensement des objets protégés de votre commune il y a plusieurs semaines et nous vous en remercions. Votre dossier était en attente de clôture, les conservateurs des antiquités et objets d’art de votre département ne l'avaient pas encore reçu.
       auto_submitted: Nous l'avons transmis automatiquement afin qu'ils puissent l’examiner.
       cta: Voir les données envoyées
     dossier_accepted:
