@@ -119,7 +119,7 @@ RSpec.describe CampaignV1Mailer, type: :mailer do
     "a campaign email",
     :relance3_inactive_email,
     "Plus que 60 jours pour recenser les objets monuments historiques de Joinville",
-    "Ainsi, nous vous invitons à prendre part à ce recensement même si vous estimez que les vos objets protégés de votre commune sont en bon état" # rubocop:disable Layout/LineLength
+    "Ainsi, nous vous invitons à prendre part à ce recensement même si vous estimez que les objets protégés de votre commune sont en bon état" # rubocop:disable Layout/LineLength
   )
 
   it_behaves_like(
