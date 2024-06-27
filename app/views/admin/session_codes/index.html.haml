@@ -33,21 +33,4 @@
               %td.text-end= @total
               %td.text-end 100 %
     .fr-col-md-8
-      %h2 Derniers codes générés
-      .fr-table
-        %table
-          %thead
-            %tr
-              %th Commune
-              %th Email
-              %th Code
-              %th Utilisé&nbsp;?
-              %th Valide jusqu'au
-          %tbody
-            - SessionCode.last(10).each do |session_code|
-              %tr
-                %th= link_to session_code.commune.nom, admin_commune_path(session_code.commune)
-                %td= session_code.user.email
-                %td.text-center= session_code.code
-                %td.text-center= session_code.used? ? "Oui" : "Non"
-                %td.text-end= l session_code.valid_until, format: :long
+      = render "session_codes", session_codes: @session_codes, offset: @offset, limit: @limit, total: @total
