@@ -2,7 +2,9 @@
 
 module Admin
   class SessionCodesController < BaseController
-    def index; end
+    def index
+      @total = SessionCode.count
+    end
 
     private
 
