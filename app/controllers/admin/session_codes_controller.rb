@@ -6,6 +6,6 @@ module Admin
 
     private
 
-    def active_nav_links = %w[Admin]
+    def active_nav_links = ["Administration"]
   end
 end
