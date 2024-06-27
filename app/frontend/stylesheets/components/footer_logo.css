@@ -1,6 +1,19 @@
+.fr-footer__body {
+  align-items: stretch;
+}
 .co-footer-logo {
   /* overrides DSFR default that wraps logos for sm viewports */
   flex-basis: auto;
+  align-self: center !important;
+  margin-right: 1rem !important;
+}
+@media (max-width: 576px) {
+  .fr-footer__body {
+    margin-bottom: -1rem;
+  }
+  .co-footer-logo {
+    padding-bottom: 1rem !important;
+  }
 }
 
 .co-footer-logo img {
