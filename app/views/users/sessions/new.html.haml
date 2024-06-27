@@ -18,6 +18,8 @@
             required: true,
             autocomplete: "off",
             autofocus: true,
+            inputmode: :numeric,
+            autocomplete: "one-time-code",
             class: ("fr-input--error" if @error),
             **(@error ? { aria: { describedby: "error-message" } }  : {})
           - if @error
