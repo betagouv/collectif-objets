@@ -10,7 +10,7 @@ Rails.application.configure do
       policy.report_uri "https://sentry.incubateur.net/api/40/security/?sentry_key=5f6f9cf638ac413b82d1d9c8a9ba2025"
     end
 
-    policy.default_src :self, :https
+    policy.default_src :none
     policy.script_src :self, "https://stats.beta.gouv.fr/"
     policy.base_uri :self
     policy.form_action :self
