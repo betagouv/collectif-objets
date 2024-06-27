@@ -34,30 +34,6 @@ module Admin
       redirect_to admin_campaign_path(@campaign), notice: "La campagne est en train de passer à l'étape #{next_step}…"
     end
 
-    def update_all_recipients_emails
-      set_campaign
-      raise unless @campaign.can_update_all_recipients_emails?
-
-      template = params[:email_template]
-      if !URI::MailTo::EMAIL_REGEXP.match(template) || template.exclude?("CODE_INSEE")
-        return redirect_to admin_campaign_path(@campaign), alert: "Le template d’email n'est pas valide"
-      end
-
-      emails = []
-      @campaign.communes.each do |commune|
-        users = commune.users
-        users.each_with_index do |user, index|
-          plus_alias = user.commune.code_insee
-          plus_alias += "-user-#{index}" if users.count > 1
-          email = template.gsub("CODE_INSEE", plus_alias)
-          emails << email
-          user.update! email:
-        end
-      end
-      redirect_to admin_campaign_path(@campaign),
-                  notice: "Les emails ont été mis à jour : #{emails.first(3).to_sentence}"
-    end
-
     private
 
     def enqueue_campaign_jobs

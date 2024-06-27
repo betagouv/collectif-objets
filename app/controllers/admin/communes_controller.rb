@@ -6,7 +6,7 @@ module Admin
       @ransack = Commune.include_statut_global.ransack(params[:q])
       @query_present = params[:q].present?
       @pagy, @communes = pagy(
-        @ransack.result.include_objets_count, items: 20
+        @ransack.result, items: 20
       )
     end
 

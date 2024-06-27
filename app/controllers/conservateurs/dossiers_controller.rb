@@ -2,22 +2,24 @@
 
 module Conservateurs
   class DossiersController < BaseController
-    before_action :set_commune, :set_dossier
+    before_action :set_commune
 
-    def show; end
+    def historique
+      @dossiers = policy_scope(Dossier).where(commune: @commune, status: :archived).order(archived_at: :desc)
+    end
 
-    protected
-
-    def set_dossier
+    def show
       @dossier = @commune.dossier
       authorize(@dossier) if @dossier
     end
+
+    protected
 
     def set_commune
       @commune = Commune.find(params[:commune_id])
       authorize(@commune)
     end
 
-    def active_nav_links = ["Mes départements", @dossier.departement.to_s]
+    def active_nav_links = ["Mes départements", @commune.departement.to_s]
   end
 end

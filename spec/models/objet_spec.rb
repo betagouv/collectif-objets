@@ -91,14 +91,15 @@ RSpec.describe Objet, type: :model do
   end
 
   it ".order_by_recensement_priorite" do
-    _objet_non_recensé = create(:objet)
+    dossier = create(:dossier)
+    _objet_non_recensé = create(:objet, commune: dossier.commune)
     objet_recensé_vert = create(:objet)
-    create(:recensement, objet: objet_recensé_vert)
+    create(:recensement, objet: objet_recensé_vert, dossier:)
     objet_recensé_prioritaire = create(:objet)
-    create(:recensement, :en_peril, objet: objet_recensé_prioritaire)
+    create(:recensement, :en_peril, objet: objet_recensé_prioritaire, dossier:)
 
-    expect(Objet.order_by_recensement_priorite.count).to eq 3
-    expect(Objet.order_by_recensement_priorite.first).to eq(objet_recensé_prioritaire)
+    expect(Objet.order_by_recensement_priorite(dossier.id).count).to eq 3
+    expect(Objet.order_by_recensement_priorite(dossier.id).first).to eq(objet_recensé_prioritaire)
   end
 
   describe "#destroy_and_soft_delete_recensement!" do

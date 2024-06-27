@@ -98,11 +98,13 @@ fr:
       en_securite: Difficile à voler
       en_danger: Facile à voler
   dossier:
+    title: Recensement validé le %{date}
     status_badge:
-      construction: Partiellement recensé
+      construction: Recensement en cours
       submitted: Non examiné
       accepted: Examiné
       none: Non recensé
+      archived: Archivé
     rapport:
       recensement:
         notes: Commentaires de la commune
@@ -269,6 +271,10 @@ fr:
           started: Recensement démarré
           completed: Recensement terminé
         departement_code: Département
+        count:
+          zero: aucune commune
+          one: une commune
+          other: "%{count} communes"
       campaign:
         departement_code: Département
         date_lancement: Date de lancement
@@ -566,7 +572,7 @@ fr:
       option2: si vous connaissez une personne liée à leur propriétaire qui pourrait les recenser, nous vous invitons à lui transférer ce courriel.
       question: Pour toute question complémentaire, vous avez la possibilité de répondre à ce courriel.
   campaigns:
-    edit_recipients_tooltip: Les communes peuvent être éditées uniquement pour les campagnes en brouillon. Une fois planifiées ou démarrées, les communes ne peuvent plus être modifiées.
+    edit_recipients_tooltip: Attention ! Dorénavant, toutes les communes sont sélectionnées par défaut, y compris celles dont le dossier n'a pas encore été examiné.
     mail_names:
       lancement: Mail de lancement
       relance1: Première relance
@@ -716,7 +722,8 @@ fr:
         one: ne fait pas la bonne longueur (doit comporter un seul caractère)
         other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
       restrict_dependent_destroy:
-        has_many: "Impossible de supprimer %{model} parce qu’il y a 1 ou plusieurs %{record}"
+        has_many: "Impossible de supprimer %{model} parce qu’il y a 1 ou plusieurs %{record} associés"
+        has_one: "Impossible de supprimer %{model} parce qu’il y a un %{record} associé"
     template:
       body: 'Veuillez vérifier les champs suivants : '
       header:

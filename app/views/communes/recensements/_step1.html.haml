@@ -20,9 +20,7 @@
   - if @modal == "confirmation-introuvable"
     = dsfr_modal(title: "Je confirme ne pas trouver l’objet",
       opened: true,
-      html_attributes: { id: "modal-confirmation-introuvable",
-        "data-controller": "modal-auto-open",
-        "data-modal-auto-open-target": "modal"}) do |m|
+      html_attributes: { "data-controller": "modal-auto-open" }) do |m|
       - m.with_header do
         = link_to "Fermer", wizard.confirmation_modal_close_path, class: "fr-link--close fr-link"
       %p

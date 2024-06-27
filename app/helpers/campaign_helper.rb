@@ -16,7 +16,7 @@ module CampaignHelper
       "finished" => :success
     }[campaign.status]
     text = I18n.t("activerecord.attributes.campaign.statuses.#{campaign.status}")
-    "<p class=\"fr-badge fr-badge--sm fr-badge--#{color}\">#{text}</p>".html_safe
+    "<span class=\"fr-badge fr-badge--sm fr-badge--#{color}\">#{text}</span>".html_safe
   end
 
   def campaign_recipient_status_badge(recipient)

@@ -4,6 +4,10 @@ module Conservateurs
   class CommunePolicy < BasePolicy
     alias commune record
 
+    def historique?
+      show?
+    end
+
     def show?
       conservateur.departements.include?(commune.departement)
     end

@@ -85,5 +85,7 @@ FactoryBot.define do
       analysed_at { 1.minute.ago }
       conservateur
     end
+
+    factory :recensement_examiné, traits: [:examiné]
   end
 end

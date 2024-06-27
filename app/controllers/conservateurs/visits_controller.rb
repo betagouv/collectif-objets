@@ -3,11 +3,10 @@
 module Conservateurs
   class VisitsController < BaseController
     def index
-      @dossiers = policy_scope(Dossier).where(conservateur: current_conservateur).to_visit
+      @dossiers = policy_scope(Dossier).current.where(conservateur: current_conservateur).to_visit
         .joins(:commune)
         .includes(:commune)
-        .select("dossiers.*, communes.nom AS nom_commune")
-        .include_objets_count
+        .select("dossiers.*")
         .joins(%{
           LEFT JOIN (
             SELECT recensements.dossier_id, COUNT(*) AS nombre_objets_prioritaires
@@ -17,7 +16,7 @@ module Conservateurs
           ) AS nombre_objets_prioritaires_par_dossier
           ON nombre_objets_prioritaires_par_dossier.dossier_id = dossiers.id
         }).select("COALESCE(nombre_objets_prioritaires, 0) AS nombre_objets_prioritaires")
-        .order(:visit, :nom_commune)
+        .order(:visit, "communes.nom")
     end
 
     private

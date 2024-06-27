@@ -20,6 +20,9 @@ AllCops:
 
   SuggestExtensions: false
 
+Style/Lambda:
+  Enabled: false
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
@@ -36,6 +39,10 @@ Rails/SkipsModelValidations:
   Enabled: false
 
 Rails/I18nLocaleTexts:
+  Enabled: false
+
+# Disable because where and exists? don't accept the same arguments
+Rails/WhereExists:
   Enabled: false
 
 Style/ClassAndModuleChildren:

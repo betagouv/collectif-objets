@@ -25,7 +25,6 @@
                 %th Nom
                 %th Objets
                 %th Statut
-                %th Recensement
                 %th Envoi dossier
             %tbody
               - @communes.each do |commune|
@@ -35,11 +34,6 @@
                   %td= link_to commune.nom, admin_commune_path(commune)
                   %td= commune.objets_count
                   %td= commune_statut_global_badge(commune, small: true)
-                  %td
-                    - if commune.recensement_ratio.present?
-                      #{commune.recensement_ratio}%
-                    - if commune.recensements.any? && commune.recensements.missing_photos.any?
-                      .fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
                   %td= l(commune.completed_at.to_date) if commune.completed_at.present?
         - if @pagy.pages > 1
           = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}

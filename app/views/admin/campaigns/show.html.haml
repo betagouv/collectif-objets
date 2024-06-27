@@ -11,18 +11,6 @@
 
   %h2.fr-mt-4w ⚙️ Admin
 
-  - if @campaign.can_update_all_recipients_emails?
-    .fr-callout.fr-callout--brown-caramel.fr-fi-warning-line
-      %h3.fr-callout__title Modifier tous les emails
-      %p.fr-callout__text
-        Ceci est une action exceptionnelle pour tester le fonctionnement des campagnes. Vous pouvez modifier tous les emails des destinataires d’un coup.
-        %br
-        Utilisez un modèle d’adresse mail de la forme antoine.clairefond+CODE_INSEE@gmail.com , le CODE_INSEE sera remplacé par le code INSEE de la commune destinataire.
-      = form_tag admin_campaign_update_all_recipients_emails_path(@campaign), method: :post do
-        .fr-input-group
-          = text_field_tag :email_template, nil, class: "fr-input", placeholder: "antoine.clairefond+CODE_INSEE@gmail.com"
-          = submit_tag "Modifier tous les emails", class: "fr-btn fr-btn--icon-left fr-icon-warning-line"
-
   - if @campaign.can_force_start?
     .fr-callout.fr-callout--brown-caramel.fr-fi-warning-line
       %h3.fr-callout__title Lancer la campagne tout de suite [DEBUG]

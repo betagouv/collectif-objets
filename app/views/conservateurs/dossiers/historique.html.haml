@@ -1,0 +1,38 @@
+= render layout: "conservateurs/communes/tabs",
+  locals: { commune: @commune, dossiers: @dossiers, current_tab: :historique, hide_for_print: true } do
+
+  %h2.fr-sr-only Historique de la commune
+
+  = render DsfrComponent::AccordionComponent.new do |accordion|
+    - @dossiers.each do |dossier|
+      - rapport = RapportPresenter.new(dossier)
+      - accordion.section title: dossier.title, expanded: @dossiers.size == 1 do
+        - if rapport.notes_conservateur.present?
+          .co-background--light-teal.fr-p-4w
+            %h4.fr-text--md.fr-mb-0 Commentaire global du conservateur
+            = rapport.notes_conservateur
+
+        - rapport.each_fiche_item do |fiche:, recensements:, index:|
+          .fr-mb-4w
+            %h4 #{fiche.title}
+            .fr-mb-2w
+              = link_to "Voir la fiche #{fiche.title}",
+                fiche_path(fiche.id),
+                target: :_blank,
+                data: { turbo_frame: "_top" },
+                class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+
+            .fr-mb-4w.fr-grid-row.fr-grid-row--gutters
+              - recensements.each do |recensement|
+                - { objet: recensement.objet, commune: recensement.commune } => { objet:, commune: }
+                .fr-col-md-3
+                  = render ::ObjetCardComponent.new objet,
+                    commune: commune,
+                    path: current_user ? commune_objet_path(commune, objet) : objet_path(objet),
+                    main_photo_origin: :recensement,
+                    link_html_attributes: { data: { turbo_frame: "_top" } }
+
+        %h4.fr-mt-8w Vue détaillée objet par objet
+        - rapport.each_recensement_item do |**recensement_item|
+          = render "shared/rapport/recensement", **recensement_item
+

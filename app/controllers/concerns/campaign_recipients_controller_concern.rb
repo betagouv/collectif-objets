@@ -8,8 +8,6 @@ module CampaignRecipientsControllerConcern
     before_action :validate_mail_preview_params, only: [:mail_preview]
   end
 
-  def show; end
-
   def update
     if @recipient.update(recipient_params)
       redirect_to send("#{routes_prefix}_campaign_recipient_path", @recipient.campaign, @recipient),
