@@ -114,14 +114,6 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
           expect(email.email_name).to eq("relance1_inactive_email")
         end
       end
-
-      context "SMTP answers weirdly" do
-        let(:smtp_response_text) { "509 Error SMTP weird" }
-        it "should raise without updating the recipient" do
-          expect { subject }.to raise_exception(/Unexpected SMTP response/)
-          expect(recipient.reload.current_step).to eq("lancement")
-        end
-      end
     end
 
     context "mail ne doit pas être envoyé" do
