@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   PDFS = { "guide" => "Guidederecensement" }.freeze
   STATIC_FILES_HOST = "fichiers.collectif-objets.beta.gouv.fr"
 
+  content_security_policy(only: [:pdf_embed, :pdf_download]) { |p| p.frame_ancestors :self }
+
   def home
     @stats = Rails.cache.fetch("homepage_stats", expires_in: 24.hours) do
       { recensements: Recensement.count, communes: Commune.completed.count }
