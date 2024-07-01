@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :init_banners
   before_action :set_locale
   before_action :set_sentry_context
+  before_action :set_permissions_policy_header
 
   def render_turbo_stream_update(*, **)
     render(turbo_stream: [turbo_stream.update(*, **)])
@@ -109,5 +110,21 @@ class ApplicationController < ActionController::Base
     elsif current_admin_user
       redirect_to root_path, alert: "Vous êtes déjà connecté en tant qu’admin"
     end
+  end
+
+  # The Permissions policy header now replaces the Features policy
+  # But Rails 7 doesn't automatically use the new header
+  # See https://github.com/rails/rails/pull/41994
+  def set_permissions_policy_header
+    permission_directives = Rails.application.config.permissions_policy.directives
+    response.headers["Permissions-Policy"] = permission_directives.map do |directive, sources|
+      if sources.include? "'none'"
+        "#{directive}=()"
+      elsif sources.include? "'self'"
+        "#{directive}=(#{sources.join(' ')})"
+      elsif sources.include? "'all'"
+        "#{directive}=(*)"
+      end
+    end.compact.join(", ")
   end
 end
