@@ -21,14 +21,13 @@ module Communes
         "Compléter"
       elsif recensement # La commune a déjà recensé l'objet
         "Modifier"
-      elsif dossier&.construction? # Si la commune peut recenser l'objet mais ne l'a pas fait
+      else
         "Recenser"
       end
     end
 
     def btn_class
-      "fr-btn fr-btn--sm fr-btn--icon-right fr-icon-arrow-right-line fr-enlarge-link " \
-        "fr-btn--#{recensement ? 'secondary' : 'primary'}"
+      "fr-btn fr-btn--sm fr-btn--icon-right fr-icon-arrow-right-line fr-enlarge-link fr-btn--secondary"
     end
 
     def btn_path
