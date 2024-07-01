@@ -61,6 +61,8 @@ export default class extends Controller {
       (error, blob) => {
         if (error) {
           this.inputTarget.disabled = false
+          this.toggleDependentLinks(true)
+          this.progressTextTarget.innerHTML = "Échec d'envoi du fichier"
           console.log("ERROR on direct upload !", error)
         } else {
           const hiddenField = document.createElement('input')
