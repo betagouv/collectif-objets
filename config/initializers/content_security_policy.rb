@@ -19,6 +19,7 @@ Rails.application.configure do
       *s3_uris1,
       *s3_uris2,
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/",
+      "https://pop-perf-assets.s3.gra.io.cloud.ovh.net/",
       "https://collectif-objets.beta.gouv.fr/", # for mail previews
       "https://stats.beta.gouv.fr"
 
