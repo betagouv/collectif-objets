@@ -28,7 +28,7 @@ class PhotoPresenter
 
   def self.from_palissy_photo(palissy_photo, index)
     new(
-      url: palissy_photo["url"],
+      url: palissy_photo["url"].sub(MEMOIRE_PHOTOS_AWS_BASE_URL, MEMOIRE_PHOTOS_BASE_URL),
       description: palissy_photo["name"],
       credit: palissy_photo["credit"],
       id: index

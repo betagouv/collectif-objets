@@ -3,8 +3,6 @@
 module Synchronizer
   module Photos
     class SynchronizeAllJob < ApplicationJob
-      MEMOIRE_PHOTOS_BASE_URL = "https://s3.eu-west-3.amazonaws.com/pop-phototeque"
-
       def perform(params = {})
         @limit = params.with_indifferent_access[:limit]
         @dry_run = params.with_indifferent_access[:dry_run]
