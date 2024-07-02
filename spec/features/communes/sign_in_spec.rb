@@ -9,7 +9,7 @@ RSpec.feature "Communes sign-in", type: :feature, js: true do
 
   include ActiveJob::TestHelper
 
-  scenario "sign in with session code" do
+  scenario "with session code" do
     visit "/"
     click_on "Connexion commune"
     expect(page).to have_text("Connexion")
@@ -29,11 +29,16 @@ RSpec.feature "Communes sign-in", type: :feature, js: true do
 
     fill_in "code", with: session_code
     click_on "Connexion"
-
     expect(page).to have_text("Vous êtes maintenant connecté")
+
+    visit new_user_session_code_path
+    expect(page).to have_text("Vous êtes déjà connecté")
+
+    click_on "Déconnexion"
+    expect(page).to have_text("Connexion commune")
   end
 
-  context "user has deprecated magic token" do
+  context "with magic token (deprecated)" do
     let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:, magic_token_deprecated: "blah123") }
     it "should redirect to connection page with commune preselected" do
       visit "/magic-authentication?magic-token=blah123"

@@ -14,6 +14,12 @@ RSpec.feature "Sign in with password", type: :feature, js: true do
     fill_in "Mot de passe", with: "super-long-mot-de-passe-du-futur"
     find_button("Se connecter").click
     expect(page).to have_text("Connecté(e)")
+
+    visit new_conservateur_session_path
+    expect(page).to have_text("Vous êtes déjà connecté")
+
+    click_on "Déconnexion"
+    expect(page).to have_text("Connexion conservateur")
   end
 
   scenario "sign in with wrong password" do

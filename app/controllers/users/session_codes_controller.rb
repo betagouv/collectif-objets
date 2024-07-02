@@ -9,6 +9,7 @@ module Users
       if params[:code_insee].present?
         @commune = Commune.find_by(code_insee: params[:code_insee])
         @commune_user = @commune&.users&.first
+        @no_user = !@commune_user
         @departement = @commune.departement
       elsif params[:departement].present?
         @departement = Departement.find(params[:departement])

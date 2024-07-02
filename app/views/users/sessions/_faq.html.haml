@@ -1,4 +1,3 @@
-- url_annuaire = "https://lannuaire.service-public.fr/navigation/mairie"
 %ul.fr-accordions-group
   %li
     %section.fr-accordion
@@ -7,7 +6,7 @@
           Je n'ai pas reçu de code de connexion, pourquoi ?
       #faq-pas-recu.fr-collapse
         Le code de connexion a été envoyé à l’email de votre commune indiqué sur
-        = "#{link_to "l’annuaire du service public", url_annuaire, target: :_blank, rel: :noopener}."
+        = "#{link_to "l’annuaire du service public", annuaire_service_public_url, target: :_blank, rel: :noopener}."
         %br
         Le code d’activation peut se trouver dans vos “Spams” / “Courrier indésirable”.
   %li
@@ -19,7 +18,7 @@
         Seules les communes ayant au moins un objet protégé et propriété de la commune sont accessibles dans Collectif Objets.
         %br
         Il faut aussi que la commune ait un email correctement déclaré sur
-        = link_to "l’annuaire du service public", url_annuaire, target: :_blank, rel: :noopener
+        = link_to "l’annuaire du service public", annuaire_service_public_url, target: :_blank, rel: :noopener
   %li
     %section.fr-accordion
       %h2.fr-accordion__title
@@ -33,9 +32,8 @@
         %button.fr-accordion__btn{"aria-controls": "faq-mauvais-email", "aria-expanded": "false"}
           Mauvais email / Je n'y ai pas accès
       #faq-mauvais-email.fr-collapse
-        - url = @commune ? "https://www.service-public.fr/particuliers/recherche?keyword=mairie+#{@commune.nom}+#{@commune.departement.nom}" : url_annuaire
         Les comptes des mairies ont été créés en utilisant les données publiées sur l'annuaire du service public.
         %br
         Si cet email est erroné ou que vous n'y avez pas accès, retrouvez la mairie de votre commune sur
-        = link_to "l’annuaire du service public", url, target: :_blank, rel: :noopener
+        = link_to "l’annuaire du service public", annuaire_service_public_url(@commune), target: :_blank, rel: :noopener
         puis cliquez sur "Mettre cette page à jour".

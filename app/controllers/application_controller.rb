@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   impersonates :user
   impersonates :conservateur
 
+  devise_group :person, contains: [:user, :conservateur, :admin]
+
   before_action :init_banners
   before_action :set_locale
   before_action :set_sentry_context
@@ -102,12 +104,6 @@ class ApplicationController < ActionController::Base
 
   # this overrides the default devise method
   def require_no_authentication
-    if current_user
-      redirect_to root_path, alert: "Vous êtes déjà connecté en tant qu’usager"
-    elsif current_conservateur
-      redirect_to root_path, alert: "Vous êtes déjà connecté en tant que conservateur"
-    elsif current_admin_user
-      redirect_to root_path, alert: "Vous êtes déjà connecté en tant qu’admin"
-    end
+    redirect_to after_sign_in_path_for(current_person), notice: "Vous êtes déjà connecté•e" if person_signed_in?
   end
 end

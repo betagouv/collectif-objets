@@ -35,6 +35,14 @@ Rails.application.routes.draw do
     get "conservateurs/edit" => "devise/registrations#edit", :as => "edit_conservateur_registration"
   end
 
+  direct :annuaire_service_public do |commune|
+    if commune.is_a? Commune
+      "https://www.service-public.fr/particuliers/recherche?keyword=mairie+#{commune.nom}+#{commune.departement.nom}"
+    else
+      "https://lannuaire.service-public.fr/navigation/mairie"
+    end
+  end
+
   ## ------
   ## PUBLIC
   ## ------
