@@ -29,13 +29,24 @@
               disabled: @departement.present?)
 
           - if @departement
-            .fr-input-group
+            .fr-input-group{ class: @no_user ? "fr-input-group--error" : nil }
               = f.label :code_insee, "Commune"
               = f.select(:code_insee,
-                @departement ? options_for_select(@departement.communes.where.associated(:users).order(:nom).pluck(:nom, :code_insee), @commune&.code_insee) : [],
+                @departement ? options_for_select(@departement.communes.order(:nom).pluck(:nom, :code_insee), @commune&.code_insee) : [],
                 {include_blank: true},
                 required: true,
-                autofocus: true)
+                autofocus: true,
+                class: @no_user ? "fr-input fr-input--error" : "fr-input",
+                **(@no_user ? { aria: { describedby: :error } }  : {}))
+              - if @no_user
+                #error.fr-mt-2w
+                  = dsfr_alert(type: :error, size: :sm) do
+                    Cette commune content des objets protégés Monuments Historique, mais n'a pas d'adresse email publique.
+                    %br
+                    Veuillez mettre les informations à jour sur
+                    = succeed '.' do # Ajoute le point après le lien, sans espace
+                      = link_to "l'annuaire du service public", "https://www.service-public.fr/particuliers/recherche?keyword=mairie+#{@commune.nom}+#{@commune.departement.nom}"
+
             .fr-input-group
               = f.submit "Choisir la commune", name: nil, class: @commune ? "fr-btn--secondary w-100" : ""
 
