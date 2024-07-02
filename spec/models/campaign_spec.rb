@@ -153,7 +153,7 @@ RSpec.describe Campaign, type: :model do
     end
 
     context "begins on a sunday" do
-      let(:date_lancement) { Date.current.next_week(:saturday) }
+      let(:date_lancement) { Date.current.next_week(:sunday) }
       it { should eq false }
     end
 
