@@ -45,7 +45,7 @@
                     %br
                     Veuillez mettre les informations à jour sur
                     = succeed '.' do # Ajoute le point après le lien, sans espace
-                      = link_to "l'annuaire du service public", "https://www.service-public.fr/particuliers/recherche?keyword=mairie+#{@commune.nom}+#{@commune.departement.nom}"
+                      = link_to "l'annuaire du service public", annuaire_service_public_url(@commune)
 
             .fr-input-group
               = f.submit "Choisir la commune", name: nil, class: @commune ? "fr-btn--secondary w-100" : ""
