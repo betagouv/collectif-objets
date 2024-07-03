@@ -98,6 +98,8 @@ RSpec.describe Objet, type: :model do
     create(:recensement, :en_peril, objet: objet_recensé_prioritaire, dossier:)
     objet_examiné = create(:objet, commune: dossier.commune)
     create(:recensement_examiné, objet: objet_examiné, dossier:)
+    dossier_archivé = create(:dossier, :archived)
+    create(:recensement_examiné, objet: objet_examiné, dossier: dossier_archivé)
 
     objets_ordered_by_priorite = Objet.order_by_recensement_priorite
     expect(objets_ordered_by_priorite.count).to eq 3

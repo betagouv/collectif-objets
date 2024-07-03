@@ -11,14 +11,13 @@ class Objet < ApplicationRecord
 
   accepts_nested_attributes_for :edifice
 
-  scope :order_by_recensement_priorite,
-        lambda {
-          left_outer_joins(commune: :dossier)
-          .left_outer_joins(:recensements)
-          .where("recensements.dossier_id = dossiers.id")
-          .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
-          .order("recensements.analysed_at DESC")
-        }
+  scope :order_by_recensement_priorite, lambda {
+    left_outer_joins(commune: :dossier)
+    .left_outer_joins(:recensements)
+    .where("recensements.dossier_id = dossiers.id")
+    .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
+    .order("recensements.analysed_at DESC")
+  }
 
   scope :without_completed_recensements, lambda {
     joins(commune: :dossier)
