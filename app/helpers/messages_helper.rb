@@ -16,16 +16,6 @@ module MessagesHelper
   end
   # rubocop:enable Rails/OutputSafety
 
-  def message_content_text(message)
-    if message.web?
-      message.text
-    elsif message.inbound_email.body_text.present?
-      message.inbound_email.body_text
-    else
-      "Le contenu du message n'a pas pu être chargé"
-    end
-  end
-
   def md_to_html(md_content)
     return nil if md_content.blank?
 

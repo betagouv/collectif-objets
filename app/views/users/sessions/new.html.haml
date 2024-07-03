@@ -6,7 +6,7 @@
     .fr-col-md-5
       %h1.fr-h2 Connexion à Collectif Objets
       %h2.fr-h3 Rentrez le code de connexion pour #{@commune.nom}
-      - if @user.last_session_code.present?
+      - if @user.session_code.present?
         .fr-mb-2w
           Le code de connexion a été envoyé à #{@user.email}
       = form_with(url: user_session_path, builder: FormBuilderDsfr, data: { turbo_frame: "_top" }) do |f|
@@ -17,6 +17,9 @@
             value: params[:code],
             required: true,
             autocomplete: "off",
+            autofocus: true,
+            inputmode: :numeric,
+            autocomplete: "one-time-code",
             class: ("fr-input--error" if @error),
             **(@error ? { aria: { describedby: "error-message" } }  : {})
           - if @error
@@ -24,11 +27,9 @@
               = @error
         .fr-input-group.fr-btns-group
           = f.submit "Connexion"
-          = link_to "Redemander un code de connexion …",
+          = link_to "Demander un nouveau code de connexion",
             new_user_session_code_path(code_insee: @commune.code_insee),
-            type: "button",
-            class: "fr-btn fr-btn--tertiary",
-            data: { turbo_action: "advance" }
+            class: "fr-btn fr-btn--tertiary"
 
       .fr-mt-10w
         = render "users/sessions/faq"

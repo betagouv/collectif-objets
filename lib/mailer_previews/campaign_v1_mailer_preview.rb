@@ -8,24 +8,17 @@ class CampaignV1MailerPreview < ApplicationMailerPreview
     end
   end
 
-  protected
+  private
 
   def user
-    @user ||= build :user, email: "mairie@thoiry.fr", login_token: "fakecode"
+    @user ||= commune.users.first
   end
 
   def commune
-    @commune ||= begin
-      commune ||= build :commune, nom: "Thoiry", code_insee: "23300", departement_code: "23", status: @commune_status
-      commune.instance_variable_set :@objet, build(:objet, :with_palissy_photo)
-      def commune.highlighted_objet = @objet
-      def commune.objets = Struct.new(:a, :b, :c).new(1, 2, 3)
-      # `commune.objets.size` will be 3
-      commune
-    end
+    @commune ||= campaign.communes.first
   end
 
   def campaign
-    @campaign ||= build :campaign, communes: build_list(:commune, 10)
+    @campaign ||= Campaign.joins(:communes).first
   end
 end

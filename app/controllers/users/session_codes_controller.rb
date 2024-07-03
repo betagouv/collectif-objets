@@ -23,10 +23,9 @@ module Users
           alert: "Erreur : l’email de la commune est incorrect"
       end
 
-      session_code = SessionCode.create!(user:, code: SessionCode.generate_random_code)
-      # bang method because there is no reason for this to fail and we want to know if it does
+      session_code = user.session_code || user.create_session_code!
       UserMailer.with(session_code:).session_code_email.deliver_later
-      redirect_to new_user_session_path(email: params[:email])
+      redirect_to new_user_session_path(email: user.email)
     end
 
     protected

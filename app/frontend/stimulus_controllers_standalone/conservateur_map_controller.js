@@ -10,6 +10,7 @@ export default class extends Controller {
   connect() {
     const { layers: defaultLayers, ...defaultStyle } = OpenmaptilesStyle
     const departement = JSON.parse(this.wrapperTarget.dataset.departementJson)
+    // Plus d'infos sur l'utilisation des tuiles ici : https://guides.data.gouv.fr/reutiliser-des-donnees/utiliser-les-api-geographiques/utiliser-les-tuiles-vectorielles
     this.map = new maplibregl.Map({
       container: this.containerTarget,
       bounds: departement.boundingBox,

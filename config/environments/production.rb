@@ -57,26 +57,15 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: ENV["HOST"] }
   config.action_mailer.delivery_method = :smtp
-  if ENV["HOST"] =~ /staging/
-    config.action_mailer.smtp_settings = {
-      authentication: :login,
-      address: "sandbox.smtp.mailtrap.io",
-      user_name: Rails.application.credentials.mailtrap.user_name,
-      password: Rails.application.credentials.mailtrap.password,
-      port: 2525,
-      host: "sandbox.smtp.mailtrap.io"
-    }
-  else
-    config.action_mailer.smtp_settings = {
-      authentication: :login,
-      address: "smtp-relay.sendinblue.com",
-      user_name: Rails.application.credentials.sendinblue.smtp.username,
-      password: Rails.application.credentials.sendinblue.smtp.password,
-      port: 587,
-      enable_starttls_auto: true,
-      return_response: true
-    }
-  end
+  config.action_mailer.smtp_settings = {
+    authentication: :login,
+    address: ENV["SMTP_ADDRESS"],
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
+    port: ENV["SMTP_PORT"],
+    enable_starttls_auto: true,
+    return_response: true
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

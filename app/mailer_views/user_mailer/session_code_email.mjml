@@ -1,0 +1,13 @@
+<mj-text>
+  <%= t("user_mailer.session_code.lien") %>
+</mj-text>
+<mj-button href="<%= new_user_session_url(email: @user.email, code: @session_code.code) %>" background-color="rgb(0,0,145)" font-size="20px" letter-spacing="1em" padding="20px 0">
+  <%= @session_code.code %>
+</mj-button>
+<mj-text>
+  <%= t("user_mailer.session_code.valid_until", date: l(@session_code.valid_until, format: :long)).html_safe %>
+</mj-text>
+<mj-text>
+  <%= t("user_mailer.session_code.nouveau_code") %>
+  <b><%= link_to "demander un nouveau code de connexion", @login_url %></b>.
+</mj-text>

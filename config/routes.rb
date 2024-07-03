@@ -148,6 +148,7 @@ Rails.application.routes.draw do
         post :toggle_impersonate_mode
       end
     end
+    get "/session_codes(/:offset)", to: "session_codes#index", as: :session_codes
     resources :campaigns do
       get :edit_recipients
       patch :update_recipients
@@ -195,7 +196,11 @@ Rails.application.routes.draw do
   get "health/js_error", to: "health#js_error"
   get "health/slow_image", to: "health#slow_image" if Rails.env.development?
 
-  resources :mail_previews, only: [:index] if Rails.configuration.x.environment_specific_name != "production"
+  if Rails.configuration.x.environment_specific_name != "production"
+    resources :mail_previews, only: [:index] do
+      get "/:mailer/:email", on: :collection, action: :show, as: :preview
+    end
+  end
 end
 
 # rubocop:enable Metrics/BlockLength

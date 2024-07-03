@@ -1,0 +1,50 @@
+    <mj-text>
+      <%= t("conservateur_mailer.message_received.bonjour", nom: @conservateur.to_s) %>
+    </mj-text>
+    <mj-text>
+      <%= t("conservateur_mailer.message_received.intro", nom_commune: @commune.nom, date: l(@message.created_at, format: :long_with_weekday)) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<mj-section padding-left="20px">
+  <mj-column border-left="2px solid rgb(0,0,145)">
+    <mj-text font-style="italic">
+      <mj-raw>
+        <%= message_content_html @message %>
+      </mj-raw>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<%- if @message.files_and_skipped_attachments_count.positive? %>
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("conservateur_mailer.message_received.attachments", count: @message.files_and_skipped_attachments_count) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<%- end %>
+
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("conservateur_mailer.message_received.pour_repondre") %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<mj-section>
+  <mj-column>
+    <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= conservateurs_commune_url(@message.commune) %>">
+      <%= t("conservateur_mailer.message_received.cta") %>
+    </mj-button>
+  </mj-column>
+</mj-section>
+
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("conservateur_mailer.message_received.reply_by_email") %>
+    </mj-text>

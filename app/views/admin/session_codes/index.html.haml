@@ -1,0 +1,36 @@
+- title = "Codes de connexion"
+- content_for(:head_title) { title }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: title
+  %h1= title
+
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-md-4
+      %h2 Statistiques
+      .fr-table
+        %table
+          %thead
+            %tr
+              %th
+              %th Nombre
+              %th Pourcentage
+          %tbody
+            %tr
+              %th Codes valides
+              %td.text-end= total_valid = SessionCode.valid.count
+              %td.text-end= "#{(total_valid / @total.to_f * 100).to_i}&nbsp;%".html_safe
+            %tr
+              %th Codes utilisés
+              %td.text-end= total_used = SessionCode.used.count
+              %td.text-end= "#{(total_used / @total.to_f * 100).to_i}&nbsp;%".html_safe
+            %tr
+              %th Codes expirés
+              %td.text-end= total_expired = SessionCode.expired.count
+              %td.text-end= "#{(total_expired / @total.to_f * 100).to_i}&nbsp;%".html_safe
+            %tr
+              %th Total des codes
+              %td.text-end= @total
+              %td.text-end 100 %
+    .fr-col-md-8
+      = render "session_codes", session_codes: @session_codes, offset: @offset, limit: @limit, total: @total

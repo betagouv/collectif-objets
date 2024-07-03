@@ -8,7 +8,7 @@ RSpec.describe SessionAuthentication do
   let!(:session_code) { instance_double(SessionCode, code: "123456", expired?: expired, used?: used) }
   let(:expired) { false }
   let(:used) { false }
-  before { allow(user).to receive(:last_session_code).and_return(session_code) }
+  before { allow(user).to receive(:session_code).and_return(session_code) }
 
   subject { session_authentication.authenticate }
 

@@ -14,8 +14,9 @@ RSpec.feature "Communes sign-in", type: :feature, js: true do
     click_on "Connexion commune"
     expect(page).to have_text("Connexion")
     select "26 - Drôme", from: "departement"
+    click_on "Choisir le département"
     select "Albon", from: "code_insee"
-    # click_on "Choisir la commune ou le département"
+    click_on "Choisir la commune"
 
     expect(page).to have_text("mairie-albon@test.fr")
     click_on "Recevoir un code de connexion"

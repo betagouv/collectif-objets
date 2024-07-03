@@ -32,6 +32,9 @@ GEM
       net-pop
       net-smtp
       rails-dom-testing (~> 2.2)
+    actionmailer-html2text (0.2.0)
+      actionmailer
+      html2text (~> 0.2.0)
     actionpack (7.1.2)
       actionview (= 7.1.2)
       activesupport (= 7.1.2)
@@ -215,6 +218,8 @@ GEM
       haml (>= 4.0)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    html2text (0.2.1)
+      nokogiri (~> 1.6)
     htmlbeautifier (1.4.2)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
@@ -501,6 +506,7 @@ PLATFORMS
 DEPENDENCIES
   aasm (~> 5.5)
   aasm-diagram (~> 0.1)
+  actionmailer-html2text (~> 0.2.0)
   active_model_validates_intersection_of (~> 3.0)
   active_storage_validations (~> 1.1)
   after_commit_everywhere (~> 1.3)
