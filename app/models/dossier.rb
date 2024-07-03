@@ -51,8 +51,11 @@ class Dossier < ApplicationRecord
       .map(&:id)
   end
 
+  def construction_at = created_at
+
   def title
-    I18n.t("dossier.title", date: I18n.l(accepted_at.to_date, format: :long))
+    date = I18n.l(send("#{status}_at").to_date, format: :long)
+    I18n.t("dossier.title_#{status}", date:)
   end
 
   def full?

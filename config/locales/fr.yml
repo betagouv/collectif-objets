@@ -98,7 +98,10 @@ fr:
       en_securite: Difficile à voler
       en_danger: Facile à voler
   dossier:
-    title: Recensement validé le %{date}
+    title_construction: Recensement créé le %{date}
+    title_submitted: Recensement envoyé le %{date}
+    title_accepted: Recensement validé le %{date}
+    title_archived: Recensement archivé le %{date}
     status_badge:
       construction: Recensement en cours
       submitted: Non examiné
