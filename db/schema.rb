@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_150141) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_03_081527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -196,6 +196,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_150141) do
     t.datetime "archived_at"
     t.index ["commune_id"], name: "index_dossiers_on_commune_id"
     t.index ["conservateur_id"], name: "index_dossiers_on_conservateur_id"
+    t.index ["status"], name: "index_dossiers_on_status", using: :hash
   end
 
   create_table "edifices", force: :cascade do |t|
