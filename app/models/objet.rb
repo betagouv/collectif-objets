@@ -21,8 +21,8 @@ class Objet < ApplicationRecord
 
   scope :without_completed_recensements, lambda {
     joins(commune: :dossier)
-    .joins("LEFT JOIN recensements ON recensements.objet_id = objets.id \
-            AND recensements.status = 'completed' AND recensements.dossier_id = dossiers.id")
+    .joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.dossier_id = dossiers.id \
+            AND recensements.deleted_at IS NULL AND recensements.status = 'completed'")
     .where(recensements: { id: nil })
   }
 

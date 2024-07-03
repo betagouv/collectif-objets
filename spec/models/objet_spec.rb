@@ -108,6 +108,18 @@ RSpec.describe Objet, type: :model do
     expect(objets_ordered_by_priorite[2]).to eq(objet_examiné)
   end
 
+  it ".without_completed_recensements" do
+    dossier = create(:dossier)
+    create(:objet, commune: dossier.commune)
+    objet_recensé_brouillon = create(:objet, commune: dossier.commune)
+    create(:recensement, status: :draft, objet: objet_recensé_brouillon, dossier:)
+    create(:recensement, :supprimé, dossier:)
+    objet_recensé = create(:objet, commune: dossier.commune)
+    create(:recensement, objet: objet_recensé, dossier:)
+
+    expect(Objet.without_completed_recensements.count).to eq 2
+  end
+
   describe "#destroy_and_soft_delete_recensement!" do
     let!(:objet) { create(:objet) }
     let(:reason) { "objet-devenu-hors-scope" }
