@@ -31,7 +31,7 @@ module Communes
 
     def set_objets
       @objets = @dossier.objets
-        .includes(:commune, recensements: %i[photos_attachments photos_blobs])
+        .includes(:commune, recensement: %i[photos_attachments photos_blobs])
     end
 
     def set_missing_photos
