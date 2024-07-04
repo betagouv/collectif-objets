@@ -96,7 +96,7 @@
             = commune_statut_global_badge(recipient.commune, small: true)
     - if excluded_communes.load.any?
       %p
-        %strong #{excluded_communes.size} communes non inclues :
+        %strong #{excluded_communes.size} communes exclues de la campagne &nbsp;:
       %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
         - excluded_communes.each do |commune|
           - url_commune = current_conservateur ? conservateurs_commune_path(commune) : admin_commune_path(commune)
