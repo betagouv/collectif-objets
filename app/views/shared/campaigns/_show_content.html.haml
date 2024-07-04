@@ -94,7 +94,8 @@
           .co-flex.co-flex--space-between
             = link_to recipient.commune.nom, url_commune, class: "fr-mr-auto"
             = commune_statut_global_badge(recipient.commune, small: true)
-    - if excluded_communes.load.any?
+  - if excluded_communes.load.any?
+    = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes exclues…") do
       %p
         %strong #{excluded_communes.size} communes exclues de la campagne &nbsp;:
       %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
