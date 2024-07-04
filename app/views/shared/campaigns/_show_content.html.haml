@@ -103,7 +103,10 @@
           %li.co-position-relative.fr-enlarge-link.co-break-avoid-column
             .co-flex.co-flex--space-between
               = link_to commune.nom, url_commune
-              = commune_statut_global_badge(commune)
+              - if commune.users_count.zero?
+                = badge(:warning, class: "fr-ml-auto", small: true) { "Pas d'email" }
+              - else
+                = commune_statut_global_badge(commune, class: "fr-ml-auto", small: true)
 
 - else
   %p
