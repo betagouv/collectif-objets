@@ -32,7 +32,7 @@ module Synchronizer
         end
 
         def existing_recensement
-          @existing_recensement ||= persisted_objet.recensements.first
+          @existing_recensement ||= persisted_objet.recensement
         end
 
         def log_message
