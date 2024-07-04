@@ -27,7 +27,7 @@
 
 
   = render "edifices/list", edifices: @edifices
-  - @edifices.each_with_index do |edifice, index|
+  - @edifices.each do |edifice|
     = render "edifices/title", edifice:
     = render layout: "shared/grid_layout" do
       - reordered = @dossier ? edifice.objets.order_by_recensement_priorite : edifice.objets
