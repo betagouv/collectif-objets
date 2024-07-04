@@ -127,6 +127,12 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to be_axe_clean
     click_on "Recenser"
 
+    # Retour à la liste d'objets, le recensement doit apparaître "À compléter"
+    click_on "Objets de Albon"
+    card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
+    expect(card_bouquet).to have_text(/Recensement à compléter/i)
+    card_bouquet.click
+
     # STEP 1
     step1_validate
     expect(page).to be_axe_clean
