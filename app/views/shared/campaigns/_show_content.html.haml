@@ -94,9 +94,9 @@
           .co-flex.co-flex--space-between
             = link_to recipient.commune.nom, url_commune, class: "fr-mr-auto"
             = commune_statut_global_badge(recipient.commune, small: true)
-    - if excluded_communes.any?
+    - if excluded_communes.load.any?
       %p
-        %strong #{excluded_communes.count} communes non inclues :
+        %strong #{excluded_communes.size} communes non inclues :
       %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
         - excluded_communes.each do |commune|
           - url_commune = current_conservateur ? conservateurs_commune_path(commune) : admin_commune_path(commune)
