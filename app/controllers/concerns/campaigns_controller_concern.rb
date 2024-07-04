@@ -88,7 +88,7 @@ module CampaignsControllerConcern
   end
 
   def set_excluded_communes
-    @excluded_communes = (@campaign.departement.communes - @campaign.communes).sort_by(&:nom)
+    @excluded_communes = @campaign.excluded_communes
   end
 
   def campaign_params
