@@ -17,7 +17,9 @@ module Communes
     end
 
     def btn_text
-      if recensement&.status == "draft" # Si la commune a commencé à recenser l'objet
+      if readonly? # La commune a déjà recensé l'objet
+        "Afficher"
+      elsif recensement&.status == "draft" # Si la commune a commencé à recenser l'objet
         "Compléter"
       elsif recensement # La commune a déjà recensé l'objet
         "Modifier"
@@ -31,7 +33,9 @@ module Communes
     end
 
     def btn_path
-      edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id) if recensement
+      return if readonly? || recensement.nil?
+
+      edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id)
     end
 
     private
@@ -42,6 +46,10 @@ module Communes
 
     def path
       commune_objet_path(commune, objet)
+    end
+
+    def readonly?
+      objet.commune && commune&.status == "completed"
     end
 
     def header_badges
