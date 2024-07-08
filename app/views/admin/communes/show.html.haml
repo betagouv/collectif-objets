@@ -3,11 +3,7 @@
 .fr-container.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
 
-  .co-flex{"data-controller": "copy-to-clipboard"}
-    %h2{"data-copy-to-clipboard-target": "content"}= @commune
-    %div.fr-ml-2w.fr-mt-1w
-      %button{type: :button, "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-todo-line"}
-        copier
+  %h2= @commune
 
   .fr-grid-row
     .fr-col-md-8
