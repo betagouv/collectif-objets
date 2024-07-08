@@ -92,13 +92,14 @@ RSpec.describe Objet, type: :model do
 
   it ".order_by_recensement_priorite" do
     dossier = create(:dossier)
-    objet_recensé_vert = create(:objet, commune: dossier.commune)
+    commune = dossier.commune
+    objet_recensé_vert = create(:objet, commune:)
     create(:recensement, objet: objet_recensé_vert, dossier:)
-    objet_recensé_prioritaire = create(:objet, commune: dossier.commune)
+    objet_recensé_prioritaire = create(:objet, commune:)
     create(:recensement, :en_peril, objet: objet_recensé_prioritaire, dossier:)
-    objet_examiné = create(:objet, commune: dossier.commune)
+    objet_examiné = create(:objet, commune:)
     create(:recensement_examiné, objet: objet_examiné, dossier:)
-    dossier_archivé = create(:dossier, :archived)
+    dossier_archivé = create(:dossier, :archived, commune:)
     create(:recensement_examiné, objet: objet_examiné, dossier: dossier_archivé)
 
     objets_ordered_by_priorite = Objet.order_by_recensement_priorite
