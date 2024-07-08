@@ -26,7 +26,7 @@ module Conservateurs
     def restrict_access
       return true if current_conservateur.present?
 
-      redirect_to root_path, alert: "Vous n'êtes pas connecté en tant que conservateur"
+      redirect_to new_conservateur_session_path, alert: "Vous n'êtes pas connecté en tant que conservateur"
     end
 
     def policy_scope(scope)
