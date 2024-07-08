@@ -4,10 +4,10 @@ module Communes
   class ObjetCardComponent < ViewComponent::Base
     include ObjetHelper
 
-    def initialize(objet, commune:, recensement: nil)
+    def initialize(objet, commune: nil, recensement: nil)
       @objet = objet
       @recensement = recensement
-      @commune = commune
+      @commune = commune || objet.commune
       super
     end
 
