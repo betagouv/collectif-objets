@@ -2,7 +2,7 @@
 
 module ObjetHelper
   def edifice_nom(nom)
-    return nom.capitalize if nom.present?
+    return nom.upcase_first if nom.present?
 
     content_tag(:i, "Édifice non renseigné")
   end
