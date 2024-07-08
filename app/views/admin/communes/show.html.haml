@@ -80,7 +80,7 @@
                 %div.co-flex.co-flex--align-items-center.co-flex--gap-1rem
                   %div
                     %h3.h5 Édifice #{edifice_nom(edifice.nom)}
-                  %div #{edifice.objets.count} objets
+                  %div= t("objets.count", count: edifice.objets.length)
             - edifice.objets.each do |objet|
               %tr
                 %td= link_to_palissy(objet) { objet.palissy_REF }
