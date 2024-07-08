@@ -46,10 +46,10 @@ plugin :tmp_restart
 
 # when using good_job in async mode locally, we need to shutdown the good_job process manually
 # cf https://github.com/bensheldon/good_job/tree/main#execute-jobs-async--in-process
-if ENV.fetch("WEB_CONCURRENCY", 0).to_i.positive?
-  before_fork { GoodJob.shutdown }
-  on_worker_boot { GoodJob.restart }
-  on_worker_shutdown { GoodJob.shutdown }
-  MAIN_PID = Process.pid
-  at_exit { GoodJob.shutdown if Process.pid == MAIN_PID }
-end
+# if ENV.fetch("WEB_CONCURRENCY", 0).to_i.positive?
+#   before_fork { GoodJob.shutdown }
+#   on_worker_boot { GoodJob.restart }
+#   on_worker_shutdown { GoodJob.shutdown }
+#   MAIN_PID = Process.pid
+#   at_exit { GoodJob.shutdown if Process.pid == MAIN_PID }
+# end
