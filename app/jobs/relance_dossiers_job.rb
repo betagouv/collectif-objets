@@ -19,7 +19,7 @@ class RelanceDossiersJob < ApplicationJob
     end
 
     def dossiers_a_archiver
-      dossiers_created_in (MOIS_ARCHIVE.months.ago..)
+      dossiers_created_in (..MOIS_ARCHIVE.months.ago.end_of_month)
     end
   end
 
