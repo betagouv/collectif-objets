@@ -15,10 +15,10 @@ class Recensement < ApplicationRecord
     attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }
   end
 
-  delegate :commune, to: :dossier
-  delegate :departement, to: :dossier
 
   before_validation :set_dossier
+  delegate :commune, to: :objet, allow_nil: true
+  delegate :departement, to: :objet, allow_nil: true
 
   include AASM
   aasm column: :status, whiny_persistence: true, timestamps: true do
