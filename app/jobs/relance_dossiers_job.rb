@@ -6,23 +6,20 @@ class RelanceDossiersJob < ApplicationJob
   MOIS_ARCHIVE = 12
 
   class << self
-    def dossiers
-      Dossier.construction
+    def dossiers_created_in(created_at)
+      Dossier.construction.where(created_at:).ids
     end
 
     def dossiers_a_relancer
-      created_at = MOIS_RELANCE.months.ago.all_month
-      dossiers.where(created_at:).ids
+      dossiers_created_in MOIS_RELANCE.months.ago.all_month
     end
 
     def dossiers_pour_derniere_relance
-      created_at = MOIS_DERNIERE_RELANCE.months.ago.all_month
-      dossiers.where(created_at:).ids
+      dossiers_created_in MOIS_DERNIERE_RELANCE.months.ago.all_month
     end
 
     def dossiers_a_archiver
-      created_at = (MOIS_ARCHIVE.months.ago..)
-      dossiers.where(created_at:).ids
+      dossiers_created_in (MOIS_ARCHIVE.months.ago..)
     end
   end
 
