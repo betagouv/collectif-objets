@@ -26,7 +26,7 @@ class Recensement < ApplicationRecord
     state :completed, display: "Complet et validé"
     state :deleted, display: "Archivé"
 
-    event :complete, before: :ensure_completable do
+    event :complete, before: :ensure_completable, after_commit: :notify_on_mattermost do
       transitions from: :draft, to: :completed
     end
     event :soft_delete, before_transaction: :aasm_before_soft_delete_transaction do
@@ -127,7 +127,7 @@ class Recensement < ApplicationRecord
   end
   ## fin du code qui semble mort
 
-  def aasm_after_commit_complete
+  def notify_on_mattermost
     SendMattermostNotificationJob.perform_later("recensement_created", { "recensement_id" => id })
   end
 
