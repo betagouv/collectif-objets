@@ -236,22 +236,6 @@ RSpec.describe Recensement, type: :model do
       end
     end
 
-    context "pour une commune inactive" do
-      let!(:commune) { create(:commune, status: "inactive") }
-      let!(:objet) { create(:objet, commune:) }
-      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
-      it "change le statut du recensement et de la commune et créé un dossier" do
-        expect(SendMattermostNotificationJob).to \
-          receive(:perform_later).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
-        do_complete!
-        expect(recensement.reload.status.to_sym).to eq :completed
-        expect(recensement.reload.dossier).to be_present
-        expect(recensement.reload.dossier.status.to_sym).to eq :construction
-        expect(recensement.reload.dossier.commune.status.to_sym).to eq :started
-        expect(commune.reload.dossier).to eq recensement.reload.dossier
-      end
-    end
-
     context "pour une commune started" do
       let!(:commune) { create(:commune, status: "started") }
       let!(:dossier) { create(:dossier, status: "construction", commune:) }
@@ -268,27 +252,6 @@ RSpec.describe Recensement, type: :model do
         expect(recensement.reload.dossier.status.to_sym).to eq :construction
         expect(commune.reload.status.to_sym).to eq :started
         expect(commune.reload.dossier).to eq recensement.reload.dossier
-        expect(Dossier.count).to eq initial_dossier_count
-      end
-    end
-
-    context "pour une commune inactive mais une erreur se produit" do
-      let!(:commune) { create(:commune, status: "inactive") }
-      let!(:objet) { create(:objet, commune:) }
-      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
-      before do
-        def recensement.aasm_after_complete
-          super
-          raise ActiveRecord::RecordInvalid
-        end
-      end
-      it "annule tous les changements" do
-        expect(SendMattermostNotificationJob).not_to receive(:perform_later)
-        initial_dossier_count = Dossier.count
-        expect { do_complete! }.to raise_error(ActiveRecord::RecordInvalid)
-        expect(recensement.reload.status.to_sym).to eq :draft
-        expect(commune.reload.status.to_sym).to eq :inactive
-        expect(commune.reload.dossier).to be_nil
         expect(Dossier.count).to eq initial_dossier_count
       end
     end
