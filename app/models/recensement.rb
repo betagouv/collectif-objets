@@ -15,8 +15,6 @@ class Recensement < ApplicationRecord
     attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }
   end
 
-
-  before_validation :set_dossier
   delegate :commune, to: :objet, allow_nil: true
   delegate :departement, to: :objet, allow_nil: true
 
@@ -173,11 +171,6 @@ class Recensement < ApplicationRecord
   end
 
   private
-
-  def set_dossier
-    commune.start! if commune.inactive?
-    self.dossier = commune.dossier
-  end
 
   def aasm_before_soft_delete_transaction(reason:, message: nil, objet_snapshot: nil)
     assign_attributes \
