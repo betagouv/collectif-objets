@@ -20,7 +20,7 @@ class Dossier < ApplicationRecord
       transitions from: :submitted, to: :accepted
     end
     event :archive do
-      transitions from: [:submitted, :accepted], to: :archived
+      transitions from: [:construction, :submitted, :accepted], to: :archived
     end
     event :return_to_construction, after: :aasm_after_return_to_construction do
       transitions from: :submitted, to: :construction do

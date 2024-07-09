@@ -10,7 +10,8 @@ RSpec.describe RelanceDossiersJob, type: :job do
     it "relance les dossiers" do
       dossiers = {}
       { a_relancer: RelanceDossiersJob::MOIS_RELANCE,
-        derniere_relance: RelanceDossiersJob::MOIS_DERNIERE_RELANCE }.each do |kind, i|
+        derniere_relance: RelanceDossiersJob::MOIS_DERNIERE_RELANCE,
+        a_archiver: RelanceDossiersJob::MOIS_ARCHIVE }.each do |kind, i|
         dossiers[kind] ||= []
         [:beginning_of_month, :end_of_month].each do |time_of_month|
           commune = create(:commune, :with_user, departement:)
@@ -22,6 +23,7 @@ RSpec.describe RelanceDossiersJob, type: :job do
       # Vérifie que les dossiers des mois concernés sont sélectionnés
       expect(RelanceDossiersJob.dossiers_a_relancer).to eq dossiers[:a_relancer]
       expect(RelanceDossiersJob.dossiers_pour_derniere_relance).to eq dossiers[:derniere_relance]
+      expect(RelanceDossiersJob.dossiers_a_archiver).to eq dossiers[:a_archiver]
 
       # Vérifie que les dossiers sont envoyés aux bons mailers
       dossiers[:a_relancer].each do |dossier_id|
@@ -29,6 +31,9 @@ RSpec.describe RelanceDossiersJob, type: :job do
       end
       dossiers[:derniere_relance].each do |dossier_id|
         expect(DerniereRelanceDossierIncompletJob).to receive(:perform_later).with(dossier_id)
+      end
+      dossiers[:a_archiver].each do |dossier_id|
+        expect(ArchiveDossierIncompletJob).to receive(:perform_later).with(dossier_id)
       end
 
       RelanceDossiersJob.new.perform
