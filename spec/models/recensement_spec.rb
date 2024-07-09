@@ -237,11 +237,9 @@ RSpec.describe Recensement, type: :model do
     end
 
     context "pour une commune started" do
-      let!(:commune) { create(:commune, status: "started") }
-      let!(:dossier) { create(:dossier, status: "construction", commune:) }
-      before { commune.update!(dossier:) }
+      let!(:commune) { create(:commune, :en_cours_de_recensement) }
       let!(:objet) { create(:objet, commune:) }
-      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
+      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: commune.dossier) }
       it "change le statut du recensement et réutilise le dossier existant" do
         expect(SendMattermostNotificationJob).to \
           receive(:perform_later).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
