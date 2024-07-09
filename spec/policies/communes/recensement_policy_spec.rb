@@ -22,6 +22,14 @@ describe Communes::RecensementPolicy do
       it { should_not permit(user, recensement) }
     end
 
+    context "objet n'a pas de recensement + commune started" do
+      let(:commune) { build(:commune, :en_cours_de_recensement) }
+      let(:objet) { build(:objet, commune:) }
+      let(:recensement) { build(:recensement, objet:, dossier: commune.dossier) }
+      let(:user) { build(:user, commune:) }
+      it { should permit(user, recensement) }
+    end
+
     context "objet n'a pas de recensement + commune completed" do
       # this is a rare case where an object is created after the commune is completed
       let(:commune) { build(:commune, status: :completed) }
