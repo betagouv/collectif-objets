@@ -20,7 +20,7 @@ class Commune < ApplicationRecord
     event :return_to_started, after: :aasm_after_return_to_started do
       transitions from: :completed, to: :started
     end
-    event :return_to_inactive, after: :aasm_after_return_to_inactive do
+    event :return_to_inactive do
       transitions from: :completed, to: :inactive
     end
   end
@@ -217,8 +217,7 @@ class Commune < ApplicationRecord
   end
 
   def aasm_after_return_to_started
-    dossier.archive!
-    create_dossier!
+    dossier.return_to_construction! unless dossier.construction?
   end
 
   def completed_at
