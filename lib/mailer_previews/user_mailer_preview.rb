@@ -27,6 +27,14 @@ class UserMailerPreview < ApplicationMailerPreview
     UserMailer.with(user:, commune:).dossier_auto_submitted_email
   end
 
+  def relance_dossier_incomplet
+    UserMailer.with(user:, commune:).relance_dossier_incomplet
+  end
+
+  def derniere_relance_dossier_incomplet
+    UserMailer.with(user:, commune:).derniere_relance_dossier_incomplet
+  end
+
   def message_received
     message = Message.from_conservateur.first
     user = message.commune.users.first
