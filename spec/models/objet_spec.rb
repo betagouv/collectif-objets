@@ -91,7 +91,7 @@ RSpec.describe Objet, type: :model do
   end
 
   it ".order_by_recensement_priorite" do
-    commune = create(:commune_en_cours_de_recensement)
+    commune = create(:commune, :en_cours_de_recensement)
     dossier = commune.dossier
     objet_recensé_vert = create(:objet, commune:)
     create(:recensement, objet: objet_recensé_vert, dossier:)
