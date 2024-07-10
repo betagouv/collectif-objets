@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_10_131820) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_10_153849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -179,6 +179,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_131820) do
     t.boolean "concordataire"
     t.string "bounding_box", default: [], null: false, array: true
     t.integer "communes_count", default: 0, null: false
+    t.string "region"
   end
 
   create_table "dossiers", force: :cascade do |t|
