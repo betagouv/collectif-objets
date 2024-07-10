@@ -217,10 +217,20 @@ RSpec.describe Communes::RecensementsController, type: :request do
 
     context "Étape 7" do
       let(:step) { 7 }
-      it "clôture le recensement" do
-        perform_request
-        expect(recensement.reload.completed?).to eq true
-        expect(response).to redirect_to commune_objets_path(commune, objet_id: objet.id, recensement_saved: true)
+      context "si le recensement est valide" do
+        it "clôture le recensement" do
+          perform_request
+          expect(recensement.reload.completed?).to eq true
+          expect(response).to redirect_to commune_objets_path(commune, objet_id: objet.id, recensement_saved: true)
+        end
+      end
+      context "si le recensement est déjà completed" do
+        it "redirige sans erreur" do
+          recensement.complete!
+          perform_request
+          expect(recensement.reload.completed?).to eq true
+          expect(response).to redirect_to commune_objets_path(commune, objet_id: objet.id, recensement_saved: true)
+        end
       end
     end
   end
