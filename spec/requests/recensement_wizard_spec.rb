@@ -232,6 +232,15 @@ RSpec.describe Communes::RecensementsController, type: :request do
           expect(response).to redirect_to commune_objets_path(commune, objet_id: objet.id, recensement_saved: true)
         end
       end
+      context "si le recensement est invalide" do
+        it "affiche un message d'erreur" do
+          # Met le recensement dans un état invalide sans passer par les validations
+          recensement.update_columns(status: :completed, autre_commune_code_insee: nil,
+                                     localisation: Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE)
+          perform_request
+          expect(response).to have_http_status :unprocessable_entity
+        end
+      end
     end
   end
 

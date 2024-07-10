@@ -5,8 +5,12 @@ module RecensementWizard
     TITLE = "Récapitulatif"
 
     def update(_params)
+      return false unless recensement.valid?
+
       recensement.complete! unless recensement.completed?
     end
+
+    def next_step_number = 1
 
     def after_success_path
       commune_objets_path(commune, recensement_saved: true, objet_id: objet.id)
