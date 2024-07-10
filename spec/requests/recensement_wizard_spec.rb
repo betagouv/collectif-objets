@@ -186,7 +186,7 @@ RSpec.describe Communes::RecensementsController, type: :request do
       context "si l'état et la sécurisation de l'objet ne sont pas indiqués" do
         let(:params) { { wizard: { etat_sanitaire: "", securisation: "" } } }
         let(:next_step_number) { 5 }
-        it "enregistre et redirige vers l'étape 5" do
+        it "affiche un message d'erreur" do
           perform_request
           expect(response).to have_http_status :unprocessable_entity
         end
