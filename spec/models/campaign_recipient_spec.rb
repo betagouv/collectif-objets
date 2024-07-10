@@ -92,7 +92,7 @@ RSpec.describe CampaignRecipient, type: :model do
 
     context "seconde relance pour une commune ayant recensé il y a plus de 5 jours" do
       let(:step) { "relance2" }
-      let!(:commune) { create(:commune_with_user, status: "started") }
+      let!(:commune) { create(:commune, :with_user, :en_cours_de_recensement) }
       let!(:campaign) { create(:campaign) }
       let!(:objet) { create(:objet, commune:) }
       let!(:recensement) do

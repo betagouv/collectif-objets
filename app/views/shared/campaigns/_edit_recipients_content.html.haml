@@ -19,26 +19,27 @@
     %legend.fr-sr-only
       Communes
     %input{type: :hidden, name: "campaign[commune_ids][]", value: "" }
-    = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
-      .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.fr-px-1w
-        - campaign.available_communes.each do |commune|
-          - disabled = commune.users_count.zero? || commune.dossier&.construction?
-          - checked = !disabled && (communes_ids.empty? || communes_ids.include?(commune.id))
-          - input_id = "campaign_commune_#{commune.id}"
-          .fr-checkbox-group.fr-checkbox-group--sm.fr-mb-1w.co-break-avoid-column
-            %input{type: :checkbox,
-              name: "campaign[commune_ids][]",
-              id: input_id,
-              value: commune.id,
-              checked:,
-              "data-multichecker-target": :checkbox,
-              disabled: }
-            %label.fr-label{for: input_id}
-              %span{title: (commune.nom.length > 25 ? commune.nom : nil)}= truncate(commune.nom, length: 25)
-              - if commune.users_count.zero?
-                = badge(:warning, class: "fr-ml-auto", small: true) { "Pas d'email" }
-              - else
-                = commune_statut_global_badge(commune, class: "fr-ml-auto", small: true)
+    .fr-fieldset__element
+      = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
+        .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.w-100
+          - campaign.available_communes.each do |commune|
+            - disabled = commune.users_count.zero? || commune.dossier&.construction?
+            - checked = !disabled && (communes_ids.empty? || communes_ids.include?(commune.id))
+            - input_id = "campaign_commune_#{commune.id}"
+            .fr-checkbox-group.fr-checkbox-group--sm.fr-mb-1w.co-break-avoid-column
+              %input{type: :checkbox,
+                name: "campaign[commune_ids][]",
+                id: input_id,
+                value: commune.id,
+                checked:,
+                "data-multichecker-target": :checkbox,
+                disabled: }
+              %label.fr-label{for: input_id}
+                %span{title: (commune.nom.length > 25 ? commune.nom : nil)}= truncate(commune.nom, length: 25)
+                - if commune.users_count.zero?
+                  = badge(:warning, class: "fr-ml-auto", small: true) { "Pas d'email" }
+                - else
+                  = commune_statut_global_badge(commune, class: "fr-ml-auto", small: true)
 
   .fr-mt-4w.co-text--center
     %button.fr-btn.fr-btn--primary.fr-btn--icon-left.fr-icon-checkbox-circle-fill{type: :submit} Enregistrer la sélection

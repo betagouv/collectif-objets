@@ -11,7 +11,7 @@ class Objet < ApplicationRecord
 
   has_one :recensement, -> {
     left_outer_joins(objet: { commune: :dossier })
-    .where("recensements.dossier_id = dossiers.id OR recensements.status = 'draft'")
+    .where("recensements.dossier_id = dossiers.id")
   }, dependent: :nullify, inverse_of: :objet
 
   accepts_nested_attributes_for :edifice
@@ -19,7 +19,7 @@ class Objet < ApplicationRecord
   scope :order_by_recensement_priorite, lambda {
     left_outer_joins(commune: :dossier)
     .joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.deleted_at IS NULL \
-              AND (recensements.dossier_id = dossiers.id OR recensements.status = 'draft')")
+              AND recensements.dossier_id = dossiers.id")
     .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
     .order("recensements.analysed_at DESC")
   }

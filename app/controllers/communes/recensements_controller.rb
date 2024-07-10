@@ -13,7 +13,10 @@ module Communes
     end
 
     def create
-      @recensement = Recensement.new(objet: @objet, status: "draft")
+      commune = Commune.find(params[:commune_id])
+      commune.start! if commune.inactive?
+
+      @recensement = Recensement.new(objet: @objet, dossier: commune.dossier)
       authorize(@recensement)
       if @recensement.save
         redirect_to edit_commune_objet_recensement_path(@recensement.commune, @objet, @recensement, step: 1)

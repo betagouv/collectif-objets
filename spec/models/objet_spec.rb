@@ -91,14 +91,15 @@ RSpec.describe Objet, type: :model do
   end
 
   it ".order_by_recensement_priorite" do
-    dossier = create(:dossier)
-    objet_recensé_vert = create(:objet, commune: dossier.commune)
+    commune = create(:commune_en_cours_de_recensement)
+    dossier = commune.dossier
+    objet_recensé_vert = create(:objet, commune:)
     create(:recensement, objet: objet_recensé_vert, dossier:)
-    objet_recensé_prioritaire = create(:objet, commune: dossier.commune)
+    objet_recensé_prioritaire = create(:objet, commune:)
     create(:recensement, :en_peril, objet: objet_recensé_prioritaire, dossier:)
-    objet_examiné = create(:objet, commune: dossier.commune)
+    objet_examiné = create(:objet, commune:)
     create(:recensement_examiné, objet: objet_examiné, dossier:)
-    dossier_archivé = create(:dossier, :archived)
+    dossier_archivé = create(:dossier, :archived, commune:)
     create(:recensement_examiné, objet: objet_examiné, dossier: dossier_archivé)
 
     objets_ordered_by_priorite = Objet.order_by_recensement_priorite
@@ -109,12 +110,12 @@ RSpec.describe Objet, type: :model do
   end
 
   it ".without_completed_recensements" do
-    dossier = create(:dossier)
-    create(:objet, commune: dossier.commune)
-    objet_recensé_brouillon = create(:objet, commune: dossier.commune)
+    commune = create(:commune, :en_cours_de_recensement)
+    dossier = commune.dossier
+    create(:objet, commune:)
+    objet_recensé_brouillon = create(:objet, commune:)
     create(:recensement, status: :draft, objet: objet_recensé_brouillon, dossier:)
-    create(:recensement, :supprimé, dossier:)
-    objet_recensé = create(:objet, commune: dossier.commune)
+    objet_recensé = create(:objet, commune:)
     create(:recensement, objet: objet_recensé, dossier:)
 
     expect(Objet.without_completed_recensements.count).to eq 2

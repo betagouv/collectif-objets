@@ -78,6 +78,14 @@
     parmi les
     %b= Commune.human_attribute_name(:count, count: campaign.departement.communes_count)
     du département.
+
+  - if (campaign.draft? || campaign.planned?) && campaign.communes_en_cours.load.any?
+    = dsfr_alert(type: :warning, title: "Communes en cours d'examen", classes: "fr-mb-2w") do
+      %p
+        Attention, vous vous apprêtez à recontacter une ou plusieurs communes dont l’examen n'est pas terminé. Nous vous invitons à finaliser l’examen avant de relancer une campagne.
+        %br
+        Communes à terminer d’examiner&nbsp;:
+        = "#{campaign.communes_en_cours.collect { |commune| link_to(commune.nom, conservateurs_commune_dossier_path(commune)) }.to_sentence.html_safe}."
   = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes…") do
     %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
       - campaign.recipients.includes(:commune).order("communes.nom").each do |recipient|
@@ -86,23 +94,20 @@
           .co-flex.co-flex--space-between
             = link_to recipient.commune.nom, url_commune, class: "fr-mr-auto"
             = commune_statut_global_badge(recipient.commune, small: true)
-    - if excluded_communes.any?
+  - if excluded_communes.load.any?
+    = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher toutes les communes exclues…") do
       %p
-        %strong #{excluded_communes.count} communes non inclues :
+        %strong #{excluded_communes.size} communes exclues de la campagne &nbsp;:
       %ul.co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0
         - excluded_communes.each do |commune|
           - url_commune = current_conservateur ? conservateurs_commune_path(commune) : admin_commune_path(commune)
           %li.co-position-relative.fr-enlarge-link.co-break-avoid-column
             .co-flex.co-flex--space-between
               = link_to commune.nom, url_commune
-              = commune_statut_global_badge(commune)
-  - if campaign.planned? && (count = campaign.communes_en_cours.load.count).positive?
-    = dsfr_alert(type: :warning, title: "Communes en cours d'examen", classes: "fr-mb-2w") do
-      %p
-        Attention, vous vous apprêtez à recontacter une ou plusieurs communes qui sont en cours d’examen. Nous vous invitons à finaliser l’examen avant de relancer une campagne.
-        %br
-        Communes en cours d'examen&nbsp;:
-        = "#{campaign.communes_en_cours.collect { |commune| link_to(commune.nom, conservateurs_commune_dossier_path(commune)) }.to_sentence.html_safe}."
+              - if commune.users_count.zero?
+                = badge(:warning, class: "fr-ml-auto", small: true) { "Pas d'email" }
+              - else
+                = commune_statut_global_badge(commune, class: "fr-ml-auto", small: true)
 
 - else
   %p

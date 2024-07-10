@@ -44,7 +44,8 @@ RSpec.describe Communes::RecensementsController, type: :request do
   end
 
   context "PATCH communes/1/objets/1/recensements/1&step=" do
-    let(:recensement) { create(:recensement, objet:, status: :draft) }
+    before { commune.start! }
+    let(:recensement) { create(:recensement, objet:, status: :draft, dossier: commune.dossier) }
     let(:path) { commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id, step:) }
     let(:method) { :patch }
     let(:next_step) do
@@ -227,7 +228,8 @@ RSpec.describe Communes::RecensementsController, type: :request do
   end
 
   context "DELETE communes/1/objets/1/recensements/1" do
-    let(:recensement) { create(:recensement, objet:, status: :completed) }
+    before { commune.start! }
+    let(:recensement) { create(:recensement, objet:, status: :completed, dossier: commune.dossier) }
     let(:method) { :delete }
     let(:path) { commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id) }
 

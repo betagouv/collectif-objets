@@ -58,6 +58,10 @@ class Campaign < ApplicationRecord
     STEPS[STEPS.find_index(step) + 1]
   end
 
+  def excluded_communes
+    departement.communes.excluding(communes).include_users_count.sort_by_nom
+  end
+
   def communes_en_cours
     communes.distinct.joins(:dossier).where(dossiers: { status: :submitted })
   end
