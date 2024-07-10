@@ -5,7 +5,7 @@ class Recensement < ApplicationRecord
   include Recensements::BooleansConcern
 
   belongs_to :objet, optional: true
-  belongs_to :dossier, optional: true
+  belongs_to :dossier
   belongs_to :pop_export_memoire, class_name: "PopExport", inverse_of: :recensements_memoire, optional: true
   belongs_to :pop_export_palissy, class_name: "PopExport", inverse_of: :recensements_palissy, optional: true
   # À terme, avoir une association de ce genre :
@@ -24,8 +24,7 @@ class Recensement < ApplicationRecord
     state :completed, display: "Complet et validé"
     state :deleted, display: "Archivé"
 
-    event :complete, before: :ensure_completable, after: :aasm_after_complete,
-                     after_commit: :aasm_after_commit_complete do
+    event :complete, before: :ensure_completable, after_commit: :notify_on_mattermost do
       transitions from: :draft, to: :completed
     end
     event :soft_delete, before_transaction: :aasm_before_soft_delete_transaction do
@@ -126,17 +125,7 @@ class Recensement < ApplicationRecord
   end
   ## fin du code qui semble mort
 
-  def aasm_after_complete
-    commune.start! if commune.inactive?
-
-    if !commune.dossier&.persisted? || !commune.dossier&.valid?
-      raise ActiveRecord::RecordInvalid, "cannot complete recensement before dossier is created"
-    end
-
-    update(dossier: commune.dossier)
-  end
-
-  def aasm_after_commit_complete
+  def notify_on_mattermost
     SendMattermostNotificationJob.perform_later("recensement_created", { "recensement_id" => id })
   end
 

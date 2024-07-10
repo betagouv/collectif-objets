@@ -74,7 +74,7 @@ class Objet < ApplicationRecord
   end
 
   def recensement
-    Recensement.where(objet: self).and(Recensement.where(dossier: commune.dossier).or(Recensement.draft)).first
+    Recensement.find_by(objet: self, dossier: commune.dossier)
   end
 
   def recensement? = recensement.present?

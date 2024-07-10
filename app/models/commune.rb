@@ -20,7 +20,6 @@ class Commune < ApplicationRecord
     event :return_to_started, after: :aasm_after_return_to_started do
       transitions from: :completed, to: :started
     end
-
     event :return_to_inactive do
       transitions from: :completed, to: :inactive
     end
@@ -208,7 +207,7 @@ class Commune < ApplicationRecord
   end
 
   def aasm_before_start
-    raise AASM::InvalidTransition if dossier.present?
+    raise AASM::InvalidTransition, "Commune cannot start if it has a dossier" if dossier.present?
 
     create_dossier!
   end

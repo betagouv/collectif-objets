@@ -39,7 +39,7 @@ FactoryBot.define do
 
     trait :examinée do
       status { "completed" }
-      dossier { association(:dossier_examiné, :submitted, commune: instance) }
+      dossier { association(:dossier_examiné, commune: instance) }
     end
 
     factory :commune_with_user, traits: [:with_user]
