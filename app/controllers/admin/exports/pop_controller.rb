@@ -11,6 +11,12 @@ module Admin
           .where(recensements: Recensement.absent_or_recensable)
           .includes(recensements: %i[photos_attachments objet])
       end
+
+      private
+
+      def active_nav_links
+        ["Administration"]
+      end
     end
   end
 end

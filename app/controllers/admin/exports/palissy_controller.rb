@@ -24,6 +24,10 @@ module Admin
           .where.not(localisation: "edifice_initial")
           .order('communes.nom, objets."palissy_REF"')
       end
+
+      def active_nav_links
+        ["Administration"]
+      end
     end
   end
 end

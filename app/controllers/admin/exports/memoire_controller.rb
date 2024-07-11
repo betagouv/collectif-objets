@@ -62,6 +62,10 @@ module Admin
           .where(communes: { departement_code: @departement })
           .where(recensements: { status: "completed", pop_export_memoire_id: nil })
       end
+
+      def active_nav_links
+        ["Administration"]
+      end
     end
   end
 end
