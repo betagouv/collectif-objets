@@ -1,0 +1,36 @@
+- page_title = "Export MPP des objets manquants"
+- content_for(:head_title) { page_title }
+
+%main#contenu.fr-container.fr-mb-8w
+  = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: page_title
+
+  %h1= page_title
+
+  .fr-table
+    %table.co-header-title-vertical-align
+      %thead
+        %tr
+          %th PM
+          %th Département d'origine
+          %th Code INSEE d'origine
+          %th Commentaire de la commune
+          %th Commentaire conservateur
+          %th Notes
+          %th Date de validation par le conservateur
+          %th Manquant
+          %th Vol
+      %tbody
+        - @objets.each do |objet|
+          %tr.co-vertical-align-top
+            %td= objet.palissy_REF
+            %td= objet.departement
+            %td= objet.lieu_actuel_code_insee
+            %td= objet.recensement.dossier.notes_commune
+            %td= objet.recensement.dossier.notes_conservateur
+            %td= objet.recensement.notes
+            %td.co-white-space-nowrap= l(objet.recensement.analysed_at, format: :long).upcase_first
+            %td Manquant
+            %td Œuvre déclarée manquante au moment du recensement Collectif Objets en #{objet.recensement.analysed_at.year}
+
+  - if @pagy.pages > 1
+    = render partial: "shared/pagy_nav", locals: { pagy: @pagy }

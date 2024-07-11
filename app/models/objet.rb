@@ -40,6 +40,10 @@ class Objet < ApplicationRecord
                        .where(recensements: { analysed_at: nil })
                        .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
                      }
+  scope :examinés, lambda {
+                     joins(:recensements)
+                     .where.not(recensements: { analysed_at: nil })
+                   }
 
   MIS_DE_COTE_SQL = %("palissy_PROT" LIKE 'déclassé au titre objet'
                       OR "palissy_PROT" LIKE 'désinscrit'
@@ -54,7 +58,8 @@ class Objet < ApplicationRecord
                    }
   scope :protégés, -> { classés.or(inscrits) }
   scope :code_insee_a_changé, -> { where.not(palissy_WEB: nil).where.not(palissy_DEPL: nil) }
-  scope :déplacés, -> { where.not(palissy_WEB: nil).where(palissy_DEPL: nil) }
+  scope :déplacés, -> { joins(:recensement).merge(Recensement.déplacés) }
+  scope :manquants, -> { joins(:recensement).merge(Recensement.absent) }
 
   # old column names still used in code for reads
   alias_attribute :nom, :palissy_TICO

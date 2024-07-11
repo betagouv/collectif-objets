@@ -1,0 +1,44 @@
+- page_title = "Export MPP des objets déplacés"
+- content_for(:head_title) { page_title }
+
+%main#contenu.fr-container.fr-mb-8w
+  = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: page_title
+
+  %h1= page_title
+
+  .fr-table
+    %table.co-header-title-vertical-align
+      %thead
+        %tr
+          %th PM
+          %th Département d'origine
+          %th Code INSEE d'origine
+          %th Nom de la commune d'origine
+          %th Édifice d'origine
+          %th Département de déplacement
+          %th WEB (nouveau code INSEE)
+          %th MOSA (nouvel édifice)
+          %th Date de validation du dossier par le conservateur
+          %th Région de déplacement
+          %th Commune de déplacement
+          %th DEPL
+      %tbody
+        - @objets.each do |objet|
+          %tr.co-vertical-align-top
+            %td= objet.palissy_REF
+            %td= objet.departement.nom
+            %td= objet.palissy_INSEE
+            %td= objet.commune.nom
+            %td= objet.edifice.nom&.upcase_first
+            %td= objet.nouveau_departement.nom
+            %td= objet.lieu_actuel_code_insee
+            %td= objet.nouvel_edifice&.upcase_first
+            %td.co-white-space-nowrap= l(objet.recensement.analysed_at, format: :long).upcase_first
+            %td= objet.nouveau_departement&.region || objet.departement.region
+            %td= objet.nouvelle_commune.nom
+            %td
+              Lieu de déplacement :
+              = [objet.nouveau_departement.region, objet.nouveau_departement.code, objet.nouvelle_commune.nom, "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"].join(" ; ")
+
+  - if @pagy.pages > 1
+    = render partial: "shared/pagy_nav", locals: { pagy: @pagy }

@@ -176,6 +176,10 @@ Rails.application.routes.draw do
     resources :admin_comments, only: %i[create destroy], controller: "comments"
     namespace :exports do
       get :pop, controller: :pop, action: :index
+      controller :mpp do
+        get :deplaces
+        get :manquants
+      end
       resources :palissy, only: %i[new create show destroy]
       resources :memoire, only: %i[new create show destroy], param: :departement_code
     end
