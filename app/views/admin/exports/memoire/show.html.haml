@@ -10,7 +10,7 @@
     %p exporté le #{l(@pop_export.created_at, format: :long_with_weekday)}
 
     .co-flex.co-flex--gap-1rem
-      %div Fichiers :
+      %h2 Fichiers :
       %div
         - if @pop_export.csv.attached?
           %div
@@ -26,7 +26,7 @@
         %div ZIP des photos en cours de génération…
 
     .co-flex.co-flex--space-between.fr-mt-8w
-      %h4 #{@pagy.count} Photos exportées
+      %h2.h4 #{@pagy.count} Photos exportées
 
   = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
   = render "photos_table", photos_recensement: @photos
