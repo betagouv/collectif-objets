@@ -6,29 +6,29 @@
 
     %h2.h4 #{@recensements.count} objets déplacés ou disparus
 
-  .fr-table
-    %table
-      %thead
-        %tr
-          %th PM
-          %th Commune
-          %th DEPL
-          %th commentaires
-      %tbody
-        - @recensements.each do |recensement|
+    .fr-table
+      %table
+        %thead
           %tr
-            %td #{recensement.objet.palissy_REF}
-            %td #{recensement.commune}
-            %td
-              - if recensement.deplacement_definitif?
-                déplacé ;
-                = recensement.edifice_nom
-              - elsif recensement.absent?
-                disparu
-            %td.co-max-width-40rem
-              - if recensement.notes.present?
-                %div Commentaire de la commune:
-                .fr-pl-1w.co-text--italic= recensement.notes
-              - if recensement.analyse_notes.present?
-                %div Commentaire du conservateur:
-                .fr-pl-1w.co-text--italic= recensement.analyse_notes
+            %th PM
+            %th Commune
+            %th DEPL
+            %th commentaires
+        %tbody
+          - @recensements.each do |recensement|
+            %tr
+              %td #{recensement.objet.palissy_REF}
+              %td #{recensement.commune}
+              %td
+                - if recensement.deplacement_definitif?
+                  déplacé ;
+                  = recensement.edifice_nom
+                - elsif recensement.absent?
+                  disparu
+              %td.co-max-width-40rem
+                - if recensement.notes.present?
+                  %div Commentaire de la commune:
+                  .fr-pl-1w.co-text--italic= recensement.notes
+                - if recensement.analyse_notes.present?
+                  %div Commentaire du conservateur:
+                  .fr-pl-1w.co-text--italic= recensement.analyse_notes

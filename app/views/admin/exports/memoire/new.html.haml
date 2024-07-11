@@ -12,6 +12,6 @@
           %a.fr-btn.fr-btn{href: admin_exports_memoire_path(departement_code: @departement.code), "data-turbo-method": "POST", "data-turbo-confirm": "Attention, les recensements seront marqués comme exportés !"}
             Générer l'export
 
-  = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
-  = render "photos_table", photos_recensement: @photos
-  = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    = render "photos_table", photos_recensement: @photos
+    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}

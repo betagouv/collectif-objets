@@ -28,6 +28,6 @@
     .co-flex.co-flex--space-between.fr-mt-8w
       %h2.h4 #{@pagy.count} Photos exportées
 
-  = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
-  = render "photos_table", photos_recensement: @photos
-  = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    = render "photos_table", photos_recensement: @photos
+    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
