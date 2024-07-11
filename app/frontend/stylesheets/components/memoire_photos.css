@@ -1,0 +1,15 @@
+.fr-table#photos thead tr:not(:first-child) th {
+  font-size: 0.6rem;
+  line-height: 1rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.fr-table#photos img {
+  max-width: 150px;
+}
+.fr-table#photos a[target="_blank"] {
+  background: none;
+}
+.fr-table#photos a[target="_blank"]::after {
+  display: none;
+}
