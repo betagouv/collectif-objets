@@ -25,9 +25,9 @@ class RecensementPresenter
   def localisation
     case @recensement.localisation
     when Recensement::LOCALISATION_EDIFICE_INITIAL
-      text { objet_edifice_nom }
+      text { objet_edifice_nom&.upcase_first }
     when Recensement::LOCALISATION_AUTRE_EDIFICE
-      text { @recensement.edifice_nom }
+      text { @recensement.edifice_nom&.upcase_first }
     when Recensement::LOCALISATION_ABSENT
       badge("warning") { "Introuvable" }
     end
