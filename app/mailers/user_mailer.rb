@@ -46,7 +46,7 @@ class UserMailer < ApplicationMailer
   def relance_dossier_incomplet
     @user = params[:user]
     @commune = params[:commune]
-    @cta_url = commune_completion_url(@commune)
+    @cta_url = commune_objets_url(@commune)
     set_login_url
     mail subject: "Plus que 3 mois pour pour finaliser votre recensement"
   end
@@ -54,7 +54,7 @@ class UserMailer < ApplicationMailer
   def derniere_relance_dossier_incomplet
     @user = params[:user]
     @commune = params[:commune]
-    @cta_url = commune_completion_url(@commune)
+    @cta_url = commune_objets_url(@commune)
     set_login_url
     mail subject: "Plus qu'un mois pour pour finaliser votre recensement"
   end
