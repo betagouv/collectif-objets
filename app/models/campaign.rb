@@ -73,7 +73,7 @@ class Campaign < ApplicationRecord
       { commune_id:, unsubscribe_token: CampaignRecipient.random_token }
     end
     recipients.insert_all(recipients_data)
-    self.recipients_count = recipients_data.size
+    update(recipients_count: recipients_data.size)
     recipients
   end
 
