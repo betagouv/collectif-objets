@@ -40,6 +40,8 @@
 .co-max-width-150px { max-width: 150px; }
 .co--width-max-100 { max-width: 100%; }
 @media only screen and (min-width:780px) {
+  .co-width-md-40 { width: 40%; }
+  .co-width-md-50 { width: 50%; }
   .co-md-max-width-60 { max-width: 60%; }
   .co-md-max-height-40vh { max-height: 40vh; }
 }
