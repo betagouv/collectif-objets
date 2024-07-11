@@ -3,11 +3,7 @@
 .fr-container.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
 
-  .co-flex{"data-controller": "copy-to-clipboard"}
-    %h2{"data-copy-to-clipboard-target": "content"}= @commune
-    %div.fr-ml-2w.fr-mt-1w
-      %button{type: :button, "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-todo-line"}
-        copier
+  %h1= @commune
 
   .fr-grid-row
     .fr-col-md-8
@@ -27,7 +23,7 @@
         %p
           %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
       - else
-        %h4
+        %h2.h4
           = icon_span("account-circle")
           = user.email
         %div
@@ -36,7 +32,7 @@
             class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-warning-line"
 
     .fr-col-md-4
-      %h4 Commentaires admin
+      %h2.h4 Commentaires admin
       .fr-mb-2w
         = form_for [:admin, @commune.admin_comments.build], builder: FormBuilderDsfr, as: :comment do |f|
           = f.hidden_field :resource_type
@@ -55,14 +51,14 @@
               %span.fr-text--sm= link_to "Supprimer", admin_admin_comment_path(comment), "data-turbo-method": "delete"
               = blockquote comment.body
 
-  %h4.fr-mt-4w
+  %h2.h4.fr-mt-4w
     = icon_span("mail")
     Messagerie
 
   = render "shared/messages/list", viewed_by: current_admin_user, messages: @messages
   = render "shared/messages/form", message: Message.new, url: admin_messages_path(commune_id: @commune.id)
 
-  %h4.fr-mt-4w
+  %h2.h4.fr-mt-4w
     = icon_span("passport")
     #{@commune.objets.count} objet(s) dans #{@commune.edifices.count} édifice(s)
 
@@ -83,8 +79,8 @@
               %th(colspan="6")
                 %div.co-flex.co-flex--align-items-center.co-flex--gap-1rem
                   %div
-                    %h5 Édifice #{edifice_nom(edifice.nom)}
-                  %div #{edifice.objets.count} objets
+                    %h3.h5 Édifice #{edifice_nom(edifice.nom)}
+                  %div= t("objets.count", count: edifice.objets.length)
             - edifice.objets.each do |objet|
               %tr
                 %td= link_to_palissy(objet) { objet.palissy_REF }
@@ -95,7 +91,7 @@
                 %td= objet.palissy_CATE
                 %td= objet.palissy_SCLE
 
-  %h4
+  %h2.h4
     = icon_span "file-text"
     #{@commune.archived_dossiers.count} Dossier(s) de recensements
   - if @commune.archived_dossiers.empty?

@@ -15,6 +15,10 @@ Rails.application.configure do
       cron: "30 10 * * *",
       class: "Campaigns::CronJob"
     },
+    dossiers: {
+      cron: "0 8 1 * *", # the first day of every month at 8am
+      class: "RelanceDossiersJob"
+    },
     refresh_all_campaign_stats: {
       cron: "0 * * * *",
       class: "Campaigns::RefreshAllCampaignStatsJob"
