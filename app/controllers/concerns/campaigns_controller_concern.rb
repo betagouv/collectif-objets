@@ -71,11 +71,13 @@ module CampaignsControllerConcern
     end
   end
 
+  # rubocop:disable Naming/MemoizedInstanceVariableName
   def mail_previews
-    @count = params.fetch(:count, "10").to_i
-    raise "invalid count" if @count.nil? || @count.negative?
-    raise "cannot generate more than 100 mails" if @count > 100
+    commune_id = params[:commune_id]
+    @recipient = @campaign.recipients.find_by(commune_id:) if commune_id
+    @recipient ||= @campaign.recipients.first
   end
+  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   private
 
