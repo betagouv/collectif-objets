@@ -1,35 +1,39 @@
 = turbo_frame_tag :session_codes do
   %h2 Derniers codes générés
-  .fr-table.w-100
-    %table
-      %thead
-        %tr
-          %th Commune
-          %th Email
-          %th Code
-          %th Utilisé&nbsp;?
-          %th Valide jusqu'au
-      %tbody
-        - session_codes.each do |session_code|
-          %tr
-            %th= link_to session_code.commune.nom, admin_commune_path(session_code.commune), data: { turbo_frame: "_top" }
-            %td= session_code.user.email
-            %td.text-center= session_code.code
-            %td.text-center= session_code.used? ? "Oui" : "Non"
-            %td.text-end= l session_code.valid_until, format: :long
 
-  .co-pagination-wrapper
-    %nav.fr-pagination{role: :navigation, "aria-label": "Pagination"}
-      %ul.fr-pagination__list
-        %li
-          - if offset.positive?
-            = link_to "Codes plus récents", url_for(offset: offset - 1), role: :link, class: "fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label", "data-turbo-action": :restore
-          - else
-            %a.fr-pagination__link.fr-pagination__link--prev.fr-pagination__link--lg-label Codes plus récents
+  - if session_codes.size.zero?
+    %p Aucun code à afficher
+  - else
+    .fr-table.w-100
+      %table
+        %thead
+          %tr
+            %th Commune
+            %th Email
+            %th Code
+            %th Utilisé&nbsp;?
+            %th Valide jusqu'au
+        %tbody
+          - session_codes.each do |session_code|
+            %tr
+              %th= link_to session_code.commune.nom, admin_commune_path(session_code.commune), data: { turbo_frame: "_top" }
+              %td= session_code.user.email
+              %td.text-center= session_code.code
+              %td.text-center= session_code.used? ? "Oui" : "Non"
+              %td.text-end= l session_code.valid_until, format: :long
+
+    .co-pagination-wrapper
+      %nav.fr-pagination{role: :navigation, "aria-label": "Pagination"}
+        %ul.fr-pagination__list
           %li
-            %a{class: "fr-pagination__link", "aria-current": :page, title: "Page #{offset}"}= offset
-        %li
-          - if limit * (offset + 1) < total
-            = link_to "Codes plus anciens", url_for(offset: offset + 1), role: :link, class: "fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label", "data-turbo-action": :advance
-          - else
-            %a.fr-pagination__link.fr-pagination__link--next.fr-pagination__link--lg-label Codes plus anciens
+            - if offset.positive?
+              = link_to "Codes plus récents", url_for(offset: offset - 1), role: :link, class: "fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label", "data-turbo-action": :restore
+            - else
+              %a.fr-pagination__link.fr-pagination__link--prev.fr-pagination__link--lg-label Codes plus récents
+            %li
+              %a{class: "fr-pagination__link", "aria-current": :page, title: "Page #{offset}"}= offset
+          %li
+            - if limit * (offset + 1) < total
+              = link_to "Codes plus anciens", url_for(offset: offset + 1), role: :link, class: "fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label", "data-turbo-action": :advance
+            - else
+              %a.fr-pagination__link.fr-pagination__link--next.fr-pagination__link--lg-label Codes plus anciens
