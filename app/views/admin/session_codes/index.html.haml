@@ -19,15 +19,15 @@
             %tr
               %th Codes valides
               %td.text-end= total_valid = SessionCode.valid.count
-              %td.text-end= "#{(total_valid / @total.to_f * 100).to_i}&nbsp;%".html_safe
+              %td.text-end= "#{@total.zero? ? 0 : (total_valid / @total.to_f * 100).to_i}&nbsp;%".html_safe
             %tr
               %th Codes utilisés
               %td.text-end= total_used = SessionCode.used.count
-              %td.text-end= "#{(total_used / @total.to_f * 100).to_i}&nbsp;%".html_safe
+              %td.text-end= "#{@total.zero? ? 0 : (total_used / @total.to_f * 100).to_i}&nbsp;%".html_safe
             %tr
               %th Codes expirés
               %td.text-end= total_expired = SessionCode.expired.count
-              %td.text-end= "#{(total_expired / @total.to_f * 100).to_i}&nbsp;%".html_safe
+              %td.text-end= "#{@total.zero? ? 0 : (total_expired / @total.to_f * 100).to_i}&nbsp;%".html_safe
             %tr
               %th Total des codes
               %td.text-end= @total
