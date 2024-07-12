@@ -12,7 +12,7 @@
       %tbody
         - session_codes.each do |session_code|
           %tr
-            %th= link_to session_code.commune.nom, admin_commune_path(session_code.commune)
+            %th= link_to session_code.commune.nom, admin_commune_path(session_code.commune), data: { turbo_frame: "_top" }
             %td= session_code.user.email
             %td.text-center= session_code.code
             %td.text-center= session_code.used? ? "Oui" : "Non"
