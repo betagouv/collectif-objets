@@ -7,7 +7,7 @@ module Campaigns
       return unless @campaign.ongoing?
 
       recipients_to_step_up.each do |recipient|
-        Campaigns::StepUpRecipientJob.perform_later(recipient.id, current_step)
+        Campaigns::StepUpRecipientJob.perform_later(recipient.id, @campaign.current_step)
       end
     end
 
@@ -15,11 +15,9 @@ module Campaigns
 
     attr_reader :campaign
 
-    delegate :current_step, :previous_step, to: :campaign
-
     def recipients_to_step_up
       @campaign.recipients.joins(:commune)
-        .where(current_step: previous_step)
+        .where(current_step: @campaign.previous_step)
         .where(opt_out: [nil, false])
         .where.not(communes: { status: "completed" })
     end

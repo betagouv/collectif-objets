@@ -109,7 +109,8 @@ Rails.application.routes.draw do
       resources :messages, only: %i[index new create] do
         resources :email_attachments, only: [:show]
       end
-      resource :dossier, only: %i[show]
+      resource :dossier, only: :show
+      get :historique, as: :historique, to: "dossiers#historique"
       resources :bordereaux, only: %i[new create]
       resource :deleted_recensements, only: [:show]
     end
@@ -126,7 +127,7 @@ Rails.application.routes.draw do
       patch :update_recipients
       patch :update_status
       get :mail_previews
-      resources :recipients, controller: "campaign_recipients", only: %i[show update] do
+      resources :recipients, controller: "campaign_recipients", only: :update do
         get :mail_preview
       end
     end
@@ -164,9 +165,8 @@ Rails.application.routes.draw do
       if Rails.configuration.x.environment_specific_name != "production"
         post :force_start
         post :force_step_up
-        post :update_all_recipients_emails
       end
-      resources :recipients, controller: "campaign_recipients", only: %i[show update] do
+      resources :recipients, controller: "campaign_recipients", only: :update do
         get :mail_preview
       end
       resources :emails, controller: "campaign_emails", only: [] do

@@ -85,5 +85,14 @@ FactoryBot.define do
       analysed_at { 1.minute.ago }
       conservateur
     end
+
+    trait :supprimé do
+      deleted_at { Time.zone.now }
+      status { "deleted" }
+      deleted_reason { "objet-devenu-hors-scope" }
+      objet { nil }
+    end
+
+    factory :recensement_examiné, traits: [:examiné]
   end
 end

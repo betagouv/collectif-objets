@@ -4,10 +4,10 @@ module Communes
   class ObjetCardComponent < ViewComponent::Base
     include ObjetHelper
 
-    def initialize(objet, commune:, recensement: nil)
+    def initialize(objet, commune: nil, recensement: nil)
       @objet = objet
       @recensement = recensement
-      @commune = commune
+      @commune = commune || objet.commune
       super
     end
 
@@ -17,22 +17,25 @@ module Communes
     end
 
     def btn_text
-      if recensement&.status == "draft" # Si la commune a commencé à recenser l'objet
-        "Compléter le recensement"
+      if readonly? # La commune a déjà recensé l'objet
+        "Afficher"
+      elsif recensement&.status == "draft" # Si la commune a commencé à recenser l'objet
+        "Compléter"
       elsif recensement # La commune a déjà recensé l'objet
-        "Modifier le recensement"
-      elsif dossier&.construction? # Si la commune peut recenser l'objet mais ne l'a pas fait
-        "Recenser cet objet"
+        "Modifier"
+      else
+        "Recenser"
       end
     end
 
     def btn_class
-      "fr-btn fr-btn--sm fr-btn--icon-right fr-icon-arrow-right-line fr-enlarge-link " \
-        "fr-btn--#{recensement ? 'secondary' : 'primary'}"
+      "fr-btn fr-btn--sm fr-btn--icon-right fr-icon-arrow-right-line fr-enlarge-link fr-btn--secondary"
     end
 
     def btn_path
-      edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id) if recensement
+      return if readonly? || recensement.nil?
+
+      edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id)
     end
 
     private
@@ -43,6 +46,10 @@ module Communes
 
     def path
       commune_objet_path(commune, objet)
+    end
+
+    def readonly?
+      objet.commune && commune&.status == "completed"
     end
 
     def header_badges

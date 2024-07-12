@@ -5,22 +5,30 @@ class Objet < ApplicationRecord
 
   scope :with_images, -> { where("cardinality(palissy_photos) >= 1") }
   belongs_to :commune, foreign_key: :lieu_actuel_code_insee, primary_key: :code_insee, optional: true,
-                       inverse_of: :objets
+                       inverse_of: :objets, counter_cache: true
   belongs_to :edifice, optional: true
   has_many :recensements, dependent: :restrict_with_exception
 
+  has_one :recensement, -> {
+    left_outer_joins(objet: { commune: :dossier })
+    .where("recensements.dossier_id = dossiers.id")
+  }, dependent: :nullify, inverse_of: :objet
+
   accepts_nested_attributes_for :edifice
 
-  scope :order_by_recensement_priorite,
-        lambda {
-          left_outer_joins(:recensements)
-          .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
-          .order("recensements.analysed_at DESC")
-        }
+  scope :order_by_recensement_priorite, lambda {
+    left_outer_joins(commune: :dossier)
+    .joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.deleted_at IS NULL \
+              AND recensements.dossier_id = dossiers.id")
+    .order(Arel.sql(Recensement::SQL_ORDER_PRIORITE))
+    .order("recensements.analysed_at DESC")
+  }
 
   scope :without_completed_recensements, lambda {
-    joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.status = 'completed'")
-      .where(recensements: { id: nil })
+    joins(commune: :dossier)
+    .joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.dossier_id = dossiers.id \
+            AND recensements.deleted_at IS NULL AND recensements.status = 'completed'")
+    .where(recensements: { id: nil })
   }
 
   scope :a_examiner, lambda {
@@ -43,9 +51,6 @@ class Objet < ApplicationRecord
   scope :protégés, -> { classés.or(inscrits) }
   scope :code_insee_a_changé, -> { where.not(palissy_WEB: nil).where.not(palissy_DEPL: nil) }
   scope :déplacés, -> { where.not(palissy_WEB: nil).where(palissy_DEPL: nil) }
-
-  after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune }
 
   delegate :departement, to: :commune
 
@@ -73,9 +78,11 @@ class Objet < ApplicationRecord
     truncate("#{palissy_REF} #{nom}", length: 40)
   end
 
-  def recensement = recensements.first
   def recensement? = recensement.present?
-  def recensement_completed? = recensement&.completed?
+
+  def recensement_completed?
+    !recensement.nil? && recensement.completed?
+  end
 
   def self.select_best_objet_in_list(objets_arr)
     current_arr = objets_arr

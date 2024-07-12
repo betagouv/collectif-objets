@@ -136,7 +136,7 @@ RSpec.describe Commune, type: :model do
 
         it "returns false si la commune est en cours d'examen" do
           objet = create(:objet, commune:)
-          create(:recensement, :examiné, objet:)
+          create(:recensement, :examiné, objet:, dossier:)
           is_expected.to be_falsey
         end
 
@@ -148,19 +148,8 @@ RSpec.describe Commune, type: :model do
     end
   end
 
-  describe ".include_objets_count" do
-    let!(:commune) { create(:commune) }
-    before do
-      create_list(:objet, 2, commune:)
-    end
-
-    it "fournit un compteur avec 2 objets" do
-      expect(Commune.include_objets_count.first.objets_count).to eq 2
-    end
-  end
-
-  describe ".include_recensements_prioritaires_count" do
-    let!(:commune) { create(:commune) }
+  describe "recensements prioritaires count" do
+    let!(:commune) { create(:commune, :en_cours_de_recensement) }
     before do
       create(:objet, :with_recensement, commune:)
       create(:objet_en_peril, commune:)
@@ -168,11 +157,11 @@ RSpec.describe Commune, type: :model do
     end
 
     it "fournit un compteur d'objets disparus" do
-      expect(Commune.include_recensements_prioritaires_count.first.disparus_count).to eq 2
+      expect(Commune.include_statut_global.first.disparus_count).to eq 2
     end
 
     it "fournit un compteur d'objets en péril" do
-      expect(Commune.include_recensements_prioritaires_count.first.en_peril_count).to eq 1
+      expect(Commune.include_statut_global.first.en_peril_count).to eq 1
     end
   end
 
@@ -273,7 +262,7 @@ RSpec.describe Commune, type: :model do
         it "should not work and the error should be explicit" do
           subject
           expect(commune.errors.full_messages).to eq(
-            ["Impossible de supprimer Commune parce qu’il y a 1 ou plusieurs past dossiers"]
+            ["Impossible de supprimer Commune parce qu’il y a un dossier associé"]
           )
         end
       end
@@ -301,6 +290,35 @@ RSpec.describe Commune, type: :model do
           expect(commune.errors.first).to have_attributes(attribute: :"users.email", type: :taken)
         end
       end
+    end
+  end
+
+  describe "#can_be_campaign_recipient?" do
+    subject { commune.can_be_campaign_recipient? }
+
+    context "n'a jamais recensé" do
+      let(:commune) { build(:commune_recensable) }
+      it { should be_truthy }
+    end
+
+    context "en cours de recensement" do
+      let(:commune) { build(:commune_en_cours_de_recensement) }
+      it { should be_falsey }
+    end
+
+    context "a envoyé son dossier" do
+      let(:commune) { build(:commune_a_examiner) }
+      it { should be_truthy }
+    end
+
+    context "en cours d'examen" do
+      let(:commune) { build(:commune_en_cours_dexamen) }
+      it { should be_truthy }
+    end
+
+    context "examinée" do
+      let(:commune) { build(:commune_examinée) }
+      it { should be_truthy }
     end
   end
 end

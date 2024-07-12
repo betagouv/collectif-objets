@@ -2,6 +2,6 @@
 
 class AutoSubmitDossiersJob < ApplicationJob
   def perform
-    Dossier.auto_submittable.each { AutoSubmitDossierJob.perform_later(_1.id) }
+    Dossier.auto_submittable.pluck(:id).each { AutoSubmitDossierJob.perform_later(_1) }
   end
 end

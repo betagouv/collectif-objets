@@ -21,8 +21,8 @@ fr:
           other: Envoyer les recensements
       objets_manquants:
         pourquoi_n_objets:
-          one: Pourquoi cette liste ne contient qu'un objet ?
-          other: Pourquoi cette liste ne contient que %{count} objets ?
+          one: Pourquoi cette liste ne contient-elle qu'un seul objet ?
+          other: Pourquoi cette liste ne contient-elle que %{count} objets ?
         seulement_objets_proteges_html: Ce recensement concerne <b>uniquement les objets monuments historiques</b>. Ces trésors nationaux sont concernés par une réglementation particulière.
         en_savoir_plus: En savoir plus…
       submitted_callout:
@@ -98,11 +98,16 @@ fr:
       en_securite: Difficile à voler
       en_danger: Facile à voler
   dossier:
+    title_construction: Recensement créé le %{date}
+    title_submitted: Recensement envoyé le %{date}
+    title_accepted: Recensement validé le %{date}
+    title_archived: Recensement archivé le %{date}
     status_badge:
-      construction: Partiellement recensé
+      construction: Recensement en cours
       submitted: Non examiné
       accepted: Examiné
       none: Non recensé
+      archived: Archivé
     rapport:
       recensement:
         notes: Commentaires de la commune
@@ -273,6 +278,10 @@ fr:
           started: Recensement démarré
           completed: Recensement terminé
         departement_code: Département
+        count:
+          zero: aucune commune
+          one: une commune
+          other: "%{count} communes"
       campaign:
         departement_code: Département
         date_lancement: Date de lancement
@@ -570,7 +579,7 @@ fr:
       option2: si vous connaissez une personne liée à leur propriétaire qui pourrait les recenser, nous vous invitons à lui transférer ce courriel.
       question: Pour toute question complémentaire, vous avez la possibilité de répondre à ce courriel.
   campaigns:
-    edit_recipients_tooltip: Les communes peuvent être éditées uniquement pour les campagnes en brouillon. Une fois planifiées ou démarrées, les communes ne peuvent plus être modifiées.
+    edit_recipients_tooltip: Attention ! Dorénavant, toutes les communes sont sélectionnées par défaut, y compris celles dont le dossier n'a pas encore été examiné.
     mail_names:
       lancement: Mail de lancement
       relance1: Première relance
@@ -667,6 +676,16 @@ fr:
       rapport: Vous trouverez sur Collectif Objets l'examen de votre recensement par un conservateur, contenant les informations que vous nous avez envoyées, ainsi que des retours spécifiques sur vos objets lorsque nécessaire.
       cta: Découvrir l'examen de mon recensement
       merci: Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
+    relance_dossier_incomplet:
+      sauf_erreur: Sauf erreur de notre part, certains objets de votre commune n’ont pas été recensés.
+      veuillez_finir: Le stockage sur notre plateforme des données liées aux objets recensés expirera dans 3 mois. Passé ce délai, les données seront supprimées et ne pourront pas être transmises.
+      pas_trop_tard: "Il n’est pas trop tard : <b>pour finir votre recensement et permettre son envoi, il suffit de suivre ce lien puis de compléter le recensement</b> :"
+      cta: Finir de recenser les objets
+    derniere_relance_dossier_incomplet:
+      message_precedent: Nous espérons que vous avez-pu prendre connaissance de notre précédent message concernant le stockage de vos données de recensement.
+      le_stockage_expire: Le stockage sur notre plateforme des données liées aux objets recensés expirera dans 30 jours. Passé ce délai, les données seront supprimées et ne pourront pas être transmises.
+      pas_trop_tard: Il n’est pas trop tard : <b>pour finir votre recensement et permettre son envoi, il suffit de suivre ce lien puis de compléter le recensement</b>.
+      cta: Finir de recenser les objets
     session_code:
       lien: "Voici votre lien de connexion à Collectif Objets :"
       cta: Connexion
@@ -720,7 +739,8 @@ fr:
         one: ne fait pas la bonne longueur (doit comporter un seul caractère)
         other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
       restrict_dependent_destroy:
-        has_many: "Impossible de supprimer %{model} parce qu’il y a 1 ou plusieurs %{record}"
+        has_many: "Impossible de supprimer %{model} parce qu’il y a 1 ou plusieurs %{record} associés"
+        has_one: "Impossible de supprimer %{model} parce qu’il y a un %{record} associé"
     template:
       body: 'Veuillez vérifier les champs suivants : '
       header:

@@ -5,4 +5,4 @@
   = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Campagnes", admin_campaigns_path], [campaign_title(@campaign), admin_campaign_path(@campaign)]], current_page_label: "Prévisualisation des mails de lancement"
   %h1= title
 
-  = render "shared/campaigns/mail_previews_content", campaign: @campaign, routes_prefix: :admin
+  = render "shared/campaigns/mail_previews_content", campaign: @campaign, recipient: @recipient, routes_prefix: :admin

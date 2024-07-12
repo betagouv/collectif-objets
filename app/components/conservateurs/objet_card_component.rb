@@ -2,11 +2,11 @@
 
 module Conservateurs
   class ObjetCardComponent < ViewComponent::Base
-    def initialize(objet, commune:, recensement: nil, can_analyse: false)
+    def initialize(objet, commune: nil, recensement: nil, can_analyse: false)
       @objet = objet
       @recensement = recensement
       @can_analyse = can_analyse
-      @commune = commune
+      @commune = commune || objet.commune
       super
     end
 

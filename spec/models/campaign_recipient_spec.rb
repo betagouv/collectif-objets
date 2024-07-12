@@ -79,10 +79,12 @@ RSpec.describe CampaignRecipient, type: :model do
 
     context "seconde relance pour une commune ayant recensé juste avant" do
       let(:step) { "relance2" }
-      let!(:commune) { create(:commune_with_user, status: "started") }
+      let!(:commune) { create(:commune_en_cours_de_recensement) }
       let!(:campaign) { create(:campaign) }
       let!(:objet) { create(:objet, commune:) }
-      let!(:recensement) { create(:recensement, objet:, updated_at: campaign.date_relance2 - 1.day) }
+      let!(:recensement) do
+        create(:recensement, objet:, dossier: commune.dossier, updated_at: campaign.date_relance2 - 1.day)
+      end
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
 
       it { should eq true }
@@ -90,10 +92,12 @@ RSpec.describe CampaignRecipient, type: :model do
 
     context "seconde relance pour une commune ayant recensé il y a plus de 5 jours" do
       let(:step) { "relance2" }
-      let!(:commune) { create(:commune_with_user, status: "started") }
+      let!(:commune) { create(:commune, :with_user, :en_cours_de_recensement) }
       let!(:campaign) { create(:campaign) }
       let!(:objet) { create(:objet, commune:) }
-      let!(:recensement) { create(:recensement, objet:, updated_at: campaign.date_relance2 - 10.days) }
+      let!(:recensement) do
+        create(:recensement, objet:, dossier: commune.dossier, updated_at: campaign.date_relance2 - 10.days)
+      end
       let!(:recipient) { create(:campaign_recipient, campaign:, commune:, current_step: "relance1") }
 
       it { should eq false }

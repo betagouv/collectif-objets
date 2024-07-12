@@ -1,0 +1,23 @@
+<mj-text>
+  <%= t("user_mailer.shared.bonjour") %>
+</mj-text>
+
+<mj-text>
+  <%= t("user_mailer.derniere_relance_dossier_incomplet.message_precedent") %>
+</mj-text>
+
+<mj-text>
+  <%= t("user_mailer.derniere_relance_dossier_incomplet.le_stockage_expire") %>
+</mj-text>
+
+<mj-text>
+  <%= t("user_mailer.derniere_relance_dossier_incomplet.pas_trop_tard").html_safe %>
+</mj-text>
+
+<mj-button href="<%= @cta_url %>" background-color="rgb(0,0,145)">
+  <%= t("user_mailer.derniere_relance_dossier_incomplet.cta") %>
+</mj-button>
+
+<mj-text>
+  <%= t("user_mailer.shared.contact") %>
+</mj-text>

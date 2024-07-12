@@ -29,7 +29,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def navigate_to_first_objet
     navigate_to_objets
     click_on "Bouquet d’Autel"
-    click_on "Recenser cet objet"
+    click_on "Recenser"
   end
 
   def step1_validate
@@ -125,7 +125,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("PAS ENCORE RECENSÉ")
     expect(page).to have_text("st Jean")
     expect(page).to be_axe_clean
-    click_on "Recenser cet objet"
+    click_on "Recenser"
+
+    # Retour à la liste d'objets, le recensement doit apparaître "À compléter"
+    click_on "Objets de Albon"
+    card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
+    expect(card_bouquet).to have_text(/Recensement à compléter/i)
+    card_bouquet.click
 
     # STEP 1
     step1_validate
@@ -189,7 +195,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # SECOND OBJET
     expect(page).to have_text(/Pas encore recensé/i)
-    click_on "Recenser cet objet"
+    click_on "Recenser"
     step1_validate
     # "comment ça marche" accordion should be closed for successive recensements
     step1_choose_objet_dans_edifice_initial_and_continue

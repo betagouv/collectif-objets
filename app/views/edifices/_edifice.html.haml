@@ -6,4 +6,7 @@
 .fr-grid-row.fr-pb-4w.fr-grid-row--gutters
   - edifice.objets.each do |objet|
     .fr-col-sm-6.fr-col-md-4.fr-col-lg-3
-      = render ObjetCardComponent.new(objet)
+      - if current_user&.commune == edifice.commune
+        = render Communes::ObjetCardComponent.new(objet)
+      - else
+        = render ObjetCardComponent.new(objet)

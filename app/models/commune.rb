@@ -3,7 +3,6 @@
 class Commune < ApplicationRecord
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :communes, counter_cache: true
 
-  include Communes::IncludeCountsConcern
   include Communes::IncludeStatutGlobalConcern
 
   include AASM
@@ -21,6 +20,9 @@ class Commune < ApplicationRecord
     event :return_to_started, after: :aasm_after_return_to_started do
       transitions from: :completed, to: :started
     end
+    event :return_to_inactive do
+      transitions from: :completed, to: :inactive
+    end
   end
 
   has_many :users, dependent: :destroy
@@ -31,13 +33,26 @@ class Commune < ApplicationRecord
     inverse_of: :commune,
     dependent: nil # leave the objets in the database when the commune is destroyed
   )
-  has_many :recensements, through: :objets, source: :recensements
-  has_many :past_dossiers, class_name: "Dossier", dependent: :restrict_with_error
-  belongs_to :dossier, optional: true
+  has_many :archived_dossiers, -> { archived }, class_name: "Dossier",
+                                                dependent: :restrict_with_error,
+                                                inverse_of: :commune
+  has_one :dossier, -> { where.not(status: :archived) }, dependent: :restrict_with_error, inverse_of: :commune
+  has_many :recensements, through: :dossier, source: :recensements
   has_many :campaign_recipients, dependent: :destroy
   has_many :admin_comments, dependent: :destroy, as: :resource
   has_many :survey_votes, dependent: :nullify
   has_many :messages, dependent: :destroy
+
+  scope :with_user, -> { where.associated(:users) }
+  scope :with_objets, -> { where.associated(:objets) }
+  scope :include_users_count, lambda {
+    joins(%(LEFT OUTER JOIN (
+              SELECT commune_id, COUNT(users.id) AS users_count
+              FROM users
+              GROUP BY commune_id
+            ) AS nb_users_par_commune ON nb_users_par_commune.commune_id = communes.id).squish)
+    .select("communes.*, COALESCE(users_count, 0) AS users_count")
+  }
 
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)
@@ -46,6 +61,8 @@ class Commune < ApplicationRecord
     presence ? all : has_recensements_with_missing_photos
   }
   scope :completed, -> { where(status: STATE_COMPLETED) }
+
+  scope :sort_by_nom, -> { order("communes.nom ASC") }
 
   # these 2 scopes are a hack for ransack sorting on dossier_status from conservateurs/departements#show
   # from my understanding it should work out of the box with `dossier_status` but it doesn't ¯\_(ツ)_/¯
@@ -101,6 +118,7 @@ class Commune < ApplicationRecord
     STATUT_GLOBAUX[statut_global]
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity Épargnons l'âme sensible de Rubocop
   def statut_global
     # Dans le cas où on appelle include_statut_global, le champ existe déjà
     if has_attribute?(:statut_global)
@@ -109,9 +127,9 @@ class Commune < ApplicationRecord
       ORDRE_NON_RECENSÉ
     elsif started?
       ORDRE_EN_COURS_DE_RECENSEMENT
-    elsif dossier.accepted?
+    elsif dossier&.accepted?
       ORDRE_EXAMINÉ
-    elsif dossier.replied_automatically?
+    elsif dossier&.replied_automatically?
       ORDRE_REPONSE_AUTOMATIQUE
     else # dossier.submitted?
       recensements_analysed_count = recensements.where.not(analysed_at: nil).count
@@ -122,6 +140,7 @@ class Commune < ApplicationRecord
       end
     end
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   validate do |commune|
     next if commune.nom.blank? || commune.nom == commune.nom.strip
@@ -163,7 +182,7 @@ class Commune < ApplicationRecord
   end
 
   def can_be_campaign_recipient?
-    inactive? && users.any? && objets.any?
+    !started? && users.any? && objets.any?
   end
 
   def shall_receive_email_objets_verts?(date)
@@ -175,6 +194,11 @@ class Commune < ApplicationRecord
       !date.on_weekend?
   end
 
+  def archive_dossier
+    dossier&.archive! unless dossier&.construction?
+    return_to_inactive! if completed?
+  end
+
   def support_email(role:)
     parts = ["mairie", code_insee]
     parts << "conservateur" if role == :conservateur
@@ -183,9 +207,9 @@ class Commune < ApplicationRecord
   end
 
   def aasm_before_start
-    raise AASM::InvalidTransition if dossier.present?
+    raise AASM::InvalidTransition, "Commune cannot start if it has a dossier" if dossier.present?
 
-    update!(dossier: Dossier.create!(commune: self))
+    create_dossier!
   end
 
   def aasm_after_complete
@@ -194,6 +218,10 @@ class Commune < ApplicationRecord
 
   def aasm_after_return_to_started
     dossier.return_to_construction! unless dossier.construction?
+  end
+
+  def completed_at
+    dossier&.submitted_at
   end
 
   # -------

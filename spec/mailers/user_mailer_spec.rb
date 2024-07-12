@@ -77,6 +77,40 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
+  describe "relance_dossier_incomplet" do
+    let(:commune) { create(:commune, nom: "Marseille") }
+    let(:user) { create(:user, email: "jean@user.fr", commune:) }
+    let(:mail) { UserMailer.with(user:, commune:).relance_dossier_incomplet }
+
+    include_examples(
+      "both parts contain",
+      "expirera dans 3 mois"
+    )
+
+    it "behaves as expected" do
+      expect(mail.subject).to include "Plus que 3 mois pour pour finaliser votre recensement"
+      expect(mail.to).to eq([user.email])
+      expect(mail.from).to eq([CONTACT_EMAIL])
+    end
+  end
+
+  describe "derniere_relance_dossier_incomplet" do
+    let(:commune) { create(:commune, nom: "Marseille") }
+    let(:user) { create(:user, email: "jean@user.fr", commune:) }
+    let(:mail) { UserMailer.with(user:, commune:).derniere_relance_dossier_incomplet }
+
+    include_examples(
+      "both parts contain",
+      "expirera dans 30 jours"
+    )
+
+    it "behaves as expected" do
+      expect(mail.subject).to include "Plus qu'un mois pour pour finaliser votre recensement"
+      expect(mail.to).to eq([user.email])
+      expect(mail.from).to eq([CONTACT_EMAIL])
+    end
+  end
+
   describe "message_received_email" do
     let!(:commune) { create(:commune, id: 10, nom: "Marseille") }
     let(:user) { build(:user, email: "jean@user.fr", commune:) }

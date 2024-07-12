@@ -58,7 +58,7 @@ RSpec.describe Synchronizer::Communes::Revision do
       create(
         :commune, :with_user,
         code_insee: "01001", nom: "Ambérieu-sur-mer", phone_number: "01 01 01 01 01",
-        departement_code: "01"
+        departement:
       )
     end
 
