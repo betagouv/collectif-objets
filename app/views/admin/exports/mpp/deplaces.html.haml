@@ -6,39 +6,19 @@
 
   %h1= page_title
 
+  = link_to "Télécharger les fichiers déplacés en CSV", url_for(format: :csv), class: "fr-btn fr-btn--primary fr-btn--icon-left fr-icon-download-line co-no-target-blank", target: "_blank", rel: "noopener"
+
   .fr-table
     %table.co-header-title-vertical-align
       %thead
         %tr
-          %th PM
-          %th Département d'origine
-          %th Code INSEE d'origine
-          %th Nom de la commune d'origine
-          %th Édifice d'origine
-          %th Département de déplacement
-          %th WEB (nouveau code INSEE)
-          %th MOSA (nouvel édifice)
-          %th Date de validation du dossier par le conservateur
-          %th Région de déplacement
-          %th Commune de déplacement
-          %th DEPL
+          - @headers.each do |header|
+            %th= header
       %tbody
-        - @objets.each do |objet|
+        - @objets.each do |objet_values|
           %tr.co-vertical-align-top
-            %td= objet.palissy_REF
-            %td= objet.departement.nom
-            %td= objet.palissy_INSEE
-            %td= objet.commune.nom
-            %td= objet.edifice.nom&.upcase_first
-            %td= objet.nouveau_departement.nom
-            %td= objet.lieu_actuel_code_insee
-            %td= objet.nouvel_edifice&.upcase_first
-            %td.co-white-space-nowrap= l(objet.recensement.analysed_at, format: :long).upcase_first
-            %td= objet.nouveau_departement&.region || objet.departement.region
-            %td= objet.nouvelle_commune.nom
-            %td
-              Lieu de déplacement :
-              = [objet.nouveau_departement.region, objet.nouveau_departement.code, objet.nouvelle_commune.nom, "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"].join(" ; ")
+            - objet_values.each do |value|
+              %td= value
 
   - if @pagy.pages > 1
     = render partial: "shared/pagy_nav", locals: { pagy: @pagy }

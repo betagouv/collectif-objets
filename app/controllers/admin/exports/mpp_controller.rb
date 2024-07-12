@@ -3,19 +3,28 @@
 module Admin
   module Exports
     class MppController < BaseController
-      def deplaces
-        @objets = Objet.déplacés.examinés
-                                .includes(:departement, :commune, :edifice, :recensements)
-                                .includes(:nouveau_departement, :nouvelle_commune, :nouvel_edifice)
-        @pagy, @objets = pagy(@objets)
-      end
+      before_action :use_module, only: [:deplaces, :manquants]
 
-      def manquants
-        @objets = Objet.manquants.examinés.includes(:departement, :commune, :recensements, recensements: :dossier)
-        @pagy, @objets = pagy(@objets)
-      end
+      def deplaces; end
+      def manquants; end
 
       private
+
+      def use_module
+        respond_to do |format|
+          mod = "::Exports::Mpp::#{action_name.camelize}".constantize
+          format.html do
+            @headers = mod.headers
+            @objets = mod.objets
+            @pagy, @objets = pagy(@objets)
+            @objets = @objets.collect { |objet| mod.values(objet) }
+          end
+          format.csv do
+            filename = "Collectif Objets - Objets #{action_name}.csv"
+            send_data mod.to_csv, filename:, type: "text/csv", disposition: :attachment
+          end
+        end
+      end
 
       def active_nav_links
         ["Administration"]

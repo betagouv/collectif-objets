@@ -319,3 +319,8 @@ tr.co-vertical-align-top td {
 .co-table-white tr {
   border-bottom: 1px solid var(--background-contrast-grey);
 }
+
+/* Boutons */
+.co-no-target-blank::after {
+  display: none !important;
+}
