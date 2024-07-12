@@ -262,7 +262,7 @@ RSpec.describe Campaign, type: :model do
       ids << create(:commune, :with_user, :with_objets, :en_cours_de_recensement, departement:).id
 
       expect { campaign.commune_ids = (ids) }.to change(CampaignRecipient, :count).by(commune_ids.size)
-      expect(campaign.commune_ids).to eq commune_ids
+      expect(campaign.commune_ids.sort).to eq commune_ids.sort
     end
     it "met à jour le nombre de destinataires" do
       expect { campaign.commune_ids = (commune_ids) }.to change(campaign, :recipients_count).by(commune_ids.size)
