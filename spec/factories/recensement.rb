@@ -77,6 +77,11 @@ FactoryBot.define do
       securisation { nil }
     end
 
+    trait :deplace do
+      localisation { Recensement::LOCALISATION_AUTRE_EDIFICE }
+      edifice_nom { "Autre édifice" }
+    end
+
     trait :en_peril do
       etat_sanitaire { Recensement::ETAT_PERIL }
     end
