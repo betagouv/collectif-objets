@@ -48,14 +48,14 @@ module Exports
           objet.departement.nom,
           objet.palissy_INSEE,
           objet.commune.nom,
-          objet.edifice.nom&.upcase_first,
-          objet.nouveau_departement.nom,
+          objet.edifice&.nom&.upcase_first,
+          objet.nouveau_departement&.nom,
           objet.lieu_actuel_code_insee,
           objet.nouvel_edifice&.upcase_first,
           I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
           objet.nouveau_departement&.region || objet.departement.region,
-          objet.nouvelle_commune.nom,
-          "Lieu de déplacement : #{[objet.nouveau_departement.region, objet.nouveau_departement.code, objet.nouvelle_commune.nom, "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"].join(" ; ")}",
+          objet.nouvelle_commune&.nom,
+          "Lieu de déplacement : #{[objet.nouveau_departement&.region || objet.departement&.region, objet.nouveau_departement&.code || objet.departement.code, objet.nouvelle_commune&.nom || objet.commune&.nom, "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"].join(" ; ")}",
         ]
       end
 
@@ -68,7 +68,8 @@ module Exports
       extend self
 
       def objets
-        Objet.manquants.examinés.includes(:departement, :commune, :recensements, recensements: :dossier)
+        Objet.manquants.examinés
+          .includes(:departement, :commune, :recensements, recensements: :dossier)
       end
 
       def headers
@@ -88,7 +89,7 @@ module Exports
       def values(objet)
         [
           objet.palissy_REF,
-          objet.departement,
+          objet.departement.nom,
           objet.lieu_actuel_code_insee,
           objet.recensement.dossier.notes_commune,
           objet.recensement.dossier.notes_conservateur,
