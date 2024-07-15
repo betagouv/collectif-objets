@@ -20,7 +20,7 @@ module Admin
             @objets = @objets.collect { |objet| mod.values(objet) }
           end
           format.csv do
-            filename = "Collectif Objets - Objets #{action_name}.csv"
+            filename = "Collectif Objets - Objets #{action_name} #{Time.zone.now.strftime("%Y-%m-%d")}.csv"
             send_data mod.to_csv, filename:, type: "text/csv", disposition: :attachment
           end
         end
