@@ -10,6 +10,6 @@
   z-index: 10;
 }
 
-html[data-fr-scheme="dark"] .co-fade-overflow:before {
-  background: linear-gradient(transparent 60%, #181818);
+html[data-fr-theme="dark"] .co-fade-overflow:before {
+  background: linear-gradient(transparent 30%, #181818);
 }
