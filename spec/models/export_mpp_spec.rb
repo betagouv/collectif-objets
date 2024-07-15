@@ -18,6 +18,12 @@ RSpec.describe Exports::Mpp, type: :model do
     describe "#values(objet)" do
       it "liste les valeurs d'un objet" do
         objet = create(:objet, :deplace_et_examine, commune:)
+        lieu_de_deplacement = [
+          objet.nouveau_departement&.region || objet.departement&.region,
+          objet.nouveau_departement&.code || objet.departement.code,
+          objet.nouvelle_commune&.nom || objet.commune&.nom,
+          "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"
+        ].join(" ; ")
         expectation = [
           objet.palissy_REF,
           objet.departement.nom,
@@ -30,8 +36,7 @@ RSpec.describe Exports::Mpp, type: :model do
           I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
           objet.nouveau_departement&.region || objet.departement.region,
           objet.nouvelle_commune&.nom,
-          "Lieu de déplacement : #{[objet.nouveau_departement&.region || objet.departement&.region,
-                                    objet.nouveau_departement&.code || objet.departement.code, objet.nouvelle_commune&.nom || objet.commune&.nom, "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"].join(' ; ')}"
+          "Lieu de déplacement : #{lieu_de_deplacement}"
         ]
         expect(exporter.values(objet)).to eq expectation
       end
