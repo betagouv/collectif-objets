@@ -9,9 +9,11 @@ class Objet < ApplicationRecord
   belongs_to :edifice, optional: true
   has_one :departement, through: :commune
   has_one :nouveau_departement, class_name: "Departement", primary_key: :lieu_actuel_departement_code,
-                                foreign_key: :code
-  has_one :nouvelle_commune, class_name: "Commune", primary_key: :lieu_actuel_code_insee, foreign_key: :code_insee
-  has_one :nouvel_edifice, class_name: "Edifice", primary_key: :lieu_actuel_edifice_ref, foreign_key: :merimee_REF
+                                foreign_key: :code, dependent: :nullify, inverse_of: :objets
+  has_one :nouvelle_commune, class_name: "Commune", primary_key: :lieu_actuel_code_insee, foreign_key: :code_insee,
+                             dependent: :nullify, inverse_of: :objets
+  has_one :nouvel_edifice, class_name: "Edifice", primary_key: :lieu_actuel_edifice_ref, foreign_key: :merimee_REF,
+                           dependent: :nullify, inverse_of: :objets
   has_many :recensements, dependent: :restrict_with_exception
 
   has_one :recensement, -> {
