@@ -84,11 +84,11 @@
     %h2#stats.co-text--blue Elles ont participé
     .fr-container.fr-grid-row.fr-grid-row--center.fr-grid-row-gutters
       .fr-col-md-6.fr-px-8w.fr-pb-4w
-        .fr-display--xl.co-text--blue= @stats[:communes]
+        .fr-display--xl.co-text--blue= number_with_delimiter @stats[:communes], delimiter: "&nbsp;".html_safe
         .co-text--blue
           communes engagées dans le recensement
       .fr-col-md-6.fr-px-8w
-        .fr-display--xl.co-text--blue= @stats[:recensements]
+        .fr-display--xl.co-text--blue= number_with_delimiter @stats[:recensements], delimiter: "&nbsp;".html_safe
         .co-text--blue
           objets monuments historiques déjà recensés
           depuis le début de l'opération
