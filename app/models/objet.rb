@@ -8,7 +8,8 @@ class Objet < ApplicationRecord
                        inverse_of: :objets, counter_cache: true
   belongs_to :edifice, optional: true
   has_one :departement, through: :commune
-  has_one :nouveau_departement, class_name: "Departement", primary_key: :lieu_actuel_departement_code, foreign_key: :code
+  has_one :nouveau_departement, class_name: "Departement", primary_key: :lieu_actuel_departement_code,
+                                foreign_key: :code
   has_one :nouvelle_commune, class_name: "Commune", primary_key: :lieu_actuel_code_insee, foreign_key: :code_insee
   has_one :nouvel_edifice, class_name: "Edifice", primary_key: :lieu_actuel_edifice_ref, foreign_key: :merimee_REF
   has_many :recensements, dependent: :restrict_with_exception
@@ -118,7 +119,7 @@ class Objet < ApplicationRecord
   def code_insee_a_changé? = palissy_WEB.present? && palissy_DEPL.blank?
 
   def nouvel_edifice
-    (super&.nom || lieu_actuel_edifice_nom) unless déplacé?
+    super&.nom || lieu_actuel_edifice_nom unless déplacé?
   end
 
   def destroy_and_soft_delete_recensement!(**kwargs)

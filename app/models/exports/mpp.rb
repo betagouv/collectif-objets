@@ -2,12 +2,12 @@
 
 module Exports
   module Mpp
-    extend self
+    module_function
 
     def to_csv(module_name)
       require "csv"
 
-      CSV.generate(col_sep: ';') do |csv|
+      CSV.generate(col_sep: ";") do |csv|
         csv << module_name.headers
 
         module_name.objets.find_each do |objet|
@@ -17,7 +17,7 @@ module Exports
     end
 
     module Deplaces
-      extend self
+      module_function
 
       def objets
         Objet.déplacés.examinés
@@ -38,7 +38,7 @@ module Exports
           "Date de validation du dossier par le conservateur",
           "Région de déplacement",
           "Commune de déplacement",
-          "DEPL",
+          "DEPL"
         ]
       end
 
@@ -55,7 +55,8 @@ module Exports
           I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
           objet.nouveau_departement&.region || objet.departement.region,
           objet.nouvelle_commune&.nom,
-          "Lieu de déplacement : #{[objet.nouveau_departement&.region || objet.departement&.region, objet.nouveau_departement&.code || objet.departement.code, objet.nouvelle_commune&.nom || objet.commune&.nom, "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"].join(" ; ")}",
+          "Lieu de déplacement : #{[objet.nouveau_departement&.region || objet.departement&.region,
+                                    objet.nouveau_departement&.code || objet.departement.code, objet.nouvelle_commune&.nom || objet.commune&.nom, "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"].join(' ; ')}"
         ]
       end
 
@@ -65,7 +66,7 @@ module Exports
     end
 
     module Manquants
-      extend self
+      module_function
 
       def objets
         Objet.manquants.examinés
@@ -82,7 +83,7 @@ module Exports
           "Notes",
           "Date de validation par le conservateur",
           "Manquant",
-          "Vol",
+          "Vol"
         ]
       end
 
@@ -96,7 +97,7 @@ module Exports
           objet.recensement.notes,
           I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
           "Manquant",
-          "Œuvre déclarée manquante au moment du recensement Collectif Objets en #{objet.recensement.analysed_at.year}",
+          "Œuvre déclarée manquante au moment du recensement Collectif Objets en #{objet.recensement.analysed_at.year}"
         ]
       end
 
