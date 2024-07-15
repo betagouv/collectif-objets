@@ -6,7 +6,9 @@
 
   %h1= page_title
 
-  = link_to "Télécharger les fichiers déplacés en CSV", url_for(format: :csv), class: "fr-btn fr-btn--primary fr-btn--icon-left fr-icon-download-line co-no-target-blank", target: "_blank", rel: "noopener"
+  .co-flex.co-flex--space-between.co-flex--gap-1rem
+    = link_to "Télécharger les fichiers déplacés en CSV", url_for(format: :csv), class: "fr-btn fr-btn--primary fr-btn--icon-left fr-icon-download-line co-no-target-blank", target: "_blank", rel: "noopener"
+    = link_to "Voir les objets manquants", admin_exports_manquants_path, class: "fr-icon-arrow-right-line fr-link--icon-right"
 
   .fr-table
     %table.co-header-title-vertical-align
