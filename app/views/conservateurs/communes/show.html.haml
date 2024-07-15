@@ -19,11 +19,16 @@
         Examinez l’ensemble des objets en péril ou disparus pour envoyer des informations complémentaires à la commune.
         = link_to_button "Envoyer l'examen à la commune", "#", class: "fr-btn", disabled: true, data: { turbo_action: "advance" }
 
-  .fr-mb-4w
-    - if @dossier&.notes_commune.present?
-      %p
-        = t("activerecord.attributes.dossier.notes_commune")
-      = blockquote(@dossier.notes_commune)
+  - if @dossier&.notes_commune.present? || @dossier&.recenseur.present?
+    .fr-grid-row.fr-grid-row--gutters
+      - if @dossier&.notes_commune.present?
+        .fr-col-md-6.fr-mb-4w
+          = t("activerecord.attributes.dossier.notes_commune")
+          = blockquote(@dossier.notes_commune)
+      - if @dossier&.recenseur.present?
+        .fr-col-md-6.fr-mb-4w
+          = t("activerecord.attributes.dossier.recenseur")
+          = blockquote(@dossier.recenseur)
 
 
   = render "edifices/list", edifices: @edifices

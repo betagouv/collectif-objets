@@ -7,8 +7,15 @@
     .fr-col-md-6
       %p Merci d'avoir participé et validé le recensement des objets de votre commune ! Un conservateur a été prévenu et reviendra vers vous.
   = render "communes/completions/summary", objets: @objets
-  - if @dossier.notes_commune.present?
-    %p= t("activerecord.attributes.dossier.interface_communes.notes_commune")
-    = blockquote(@dossier.notes_commune)
-  - else
-    %p.co-text--italic Aucun commentaire à destination des conservateurs
+
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-md-6.fr-mb-4w
+      - if @dossier.notes_commune.present?
+        = t("activerecord.attributes.dossier.notes_commune")
+        = blockquote(@dossier.notes_commune)
+      - else
+        %p.co-text--italic Aucun commentaire à destination des conservateurs
+    - if @dossier.recenseur.present?
+      .fr-col-md-6.fr-mb-4w
+        = t("activerecord.attributes.dossier.recenseur")
+        = blockquote(@dossier.recenseur)
