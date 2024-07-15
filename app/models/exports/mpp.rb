@@ -21,7 +21,7 @@ module Exports
 
       def objets
         Objet.déplacés.examinés
-          .includes(:departement, :commune, :edifice, :recensements)
+          .includes(:departement, :commune, :edifice, :recensement)
           .includes(:nouveau_departement, :nouvelle_commune, :nouvel_edifice)
       end
 
@@ -77,7 +77,7 @@ module Exports
 
       def objets
         Objet.manquants.examinés
-          .includes(:departement, :commune, :recensements, recensements: :dossier)
+          .includes(:departement, :commune, :recensement, recensement: :dossier)
       end
 
       def headers
