@@ -2,6 +2,7 @@
 %main#contenu.fr-container.fr-pb-8w
   = render"shared/breadcrumbs",
     links: [["Accueil", root_path], ["Objets de #{@commune.nom}", commune_objets_path(@commune)]], current_page_label: "Finalisation"
+
   - if @commune.errors.any?
     .fr-grid-row
       .fr-col-md-6
@@ -11,12 +12,12 @@
           %ul
             - @commune.errors.attribute_names.each do |attribute|
               %li= @commune.errors.messages_for(attribute).first
-  .fr-grid-row
-    .fr-col-md-6
-      %h1
-        Finalisation du recensement de #{@commune.nom}
-      %p
-        Veuillez vérifier la complétion et l'exactitude de vos recensements avant de les transmettre aux conservateurs de votre département.
+
+  %h1 Finalisation du recensement de #{@commune.nom}
+
+  .co-readable
+    %p
+      Veuillez vérifier la complétion et l'exactitude de vos recensements avant de les transmettre aux conservateurs de votre département.
 
   = render "communes/completions/summary", objets: @objets
 
