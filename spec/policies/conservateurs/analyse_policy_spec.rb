@@ -10,7 +10,7 @@ describe Conservateurs::AnalysePolicy do
       let(:commune) { build(:commune, status: :completed) }
       let(:objet) { build(:objet, commune:) }
       let(:dossier) { build(:dossier, commune:, status: :submitted) }
-      let(:recensement) { build(:recensement, objet:, dossier:) }
+      let(:recensement) { create(:recensement, objet:, dossier:) }
       let(:analyse) { Analyse.new(recensement:) }
       let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3) + [analyse.departement]) }
       it { should permit(conservateur, analyse) }
@@ -20,7 +20,7 @@ describe Conservateurs::AnalysePolicy do
       let(:commune) { build(:commune, status: :started) }
       let(:objet) { build(:objet, commune:) }
       let(:dossier) { build(:dossier, commune:, status: :submitted) }
-      let(:recensement) { build(:recensement, objet:, dossier:) }
+      let(:recensement) { create(:recensement, objet:, dossier:) }
       let(:analyse) { Analyse.new(recensement:) }
       let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3) + [analyse.departement]) }
       it { should_not permit(conservateur, analyse) }

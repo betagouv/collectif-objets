@@ -1,7 +1,9 @@
 %main#contenu
   .fr-container.fr-mb-8w
     = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Exports par département"
+
     %h1 Exports par département
+
     .fr-table
       %table
         %thead
@@ -29,11 +31,11 @@
                 %div + #{departement.recensements.to_a.reject(&:pop_export_memoire_id).sum { _1.photos.reject(&:exportable?).length }} photos non exportables
               %td.co-white-space-nowrap
                 - departement.pop_exports.palissy.each do |pop_export|
-                  .fr-mb-2w= link_to pop_export, admin_palissy_export_path(pop_export), class: "fr-link"
-                %div= link_to "nouvel export Palissy …", new_admin_palissy_export_path(departement_code: departement.code), class: "fr-link"
+                  .fr-mb-2w= link_to pop_export, admin_exports_palissy_path(pop_export), class: "fr-link"
+                %div= link_to "nouvel export Palissy …", new_admin_exports_palissy_path(departement_code: departement.code), class: "fr-link"
                 - departement.pop_exports.memoire.each do |pop_export|
-                  .fr-mb-2w= link_to pop_export, admin_memoire_export_path(pop_export), class: "fr-link"
-                %div= link_to "nouvel export Mémoire…", new_admin_memoire_export_path(departement_code: departement.code), class: "fr-link"
+                  .fr-mb-2w= link_to pop_export, admin_exports_memoire_path(pop_export), class: "fr-link"
+                %div= link_to "nouvel export Mémoire…", new_admin_exports_memoire_path(departement_code: departement.code), class: "fr-link"
         %tfooter
           %tr
             %th Totaux

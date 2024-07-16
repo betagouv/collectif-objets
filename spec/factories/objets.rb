@@ -77,5 +77,17 @@ FactoryBot.define do
     trait :disparu do
       recensements { [association(:recensement, :disparu, dossier_id: commune.dossier&.id)] }
     end
+
+    trait :deplace do
+      recensements { [association(:recensement, :deplace, dossier_id: commune.dossier&.id)] }
+    end
+
+    trait :deplace_et_examine do
+      recensements { [association(:recensement, :deplace, :examiné, dossier_id: commune.dossier&.id)] }
+    end
+
+    trait :disparu_et_examine do
+      recensements { [association(:recensement, :disparu, :examiné, dossier_id: commune.dossier&.id)] }
+    end
   end
 end

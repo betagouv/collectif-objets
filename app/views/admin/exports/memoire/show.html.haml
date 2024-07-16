@@ -1,16 +1,16 @@
 %main#contenu
   .fr-container.fr-mb-8w
-    = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Exports par département", admin_exports_path]], current_page_label: "Export Mémoire ##{@pop_export.id} pour #{@pop_export.departement}"
+    = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Exports par département", admin_exports_pop_path]], current_page_label: "Export Mémoire ##{@pop_export.id} pour #{@pop_export.departement}"
 
     .co-flex.co-flex--space-between
       %h1 Export Mémoire ##{@pop_export.id}
       %div
-        = link_to "Supprimer", admin_memoire_export_path(@pop_export), "data-turbo-method": "DELETE", class: "fr-btn fr-btn--icon-left fr-icon-delete-line"
+        = link_to "Supprimer", admin_exports_memoire_path(@pop_export), "data-turbo-method": "DELETE", class: "fr-btn fr-btn--icon-left fr-icon-delete-line"
     %p #{@pop_export.departement}
     %p exporté le #{l(@pop_export.created_at, format: :long_with_weekday)}
 
     .co-flex.co-flex--gap-1rem
-      %div Fichiers :
+      %h2 Fichiers :
       %div
         - if @pop_export.csv.attached?
           %div
@@ -26,8 +26,8 @@
         %div ZIP des photos en cours de génération…
 
     .co-flex.co-flex--space-between.fr-mt-8w
-      %h4 #{@pagy.count} Photos exportées
+      %h2.h4 #{@pagy.count} Photos exportées
 
-  = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
-  = render "photos_table", photos_recensement: @photos
-  = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    = render "photos_table", photos_recensement: @photos
+    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}

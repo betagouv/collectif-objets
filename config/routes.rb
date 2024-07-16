@@ -174,9 +174,15 @@ Rails.application.routes.draw do
       end
     end
     resources :admin_comments, only: %i[create destroy], controller: "comments"
-    resources :exports, only: [:index]
-    resources :palissy_exports, only: %i[new create show destroy]
-    resources :memoire_exports, only: %i[new create show destroy]
+    namespace :exports do
+      get :pop, controller: :pop, action: :index
+      controller :mpp do
+        get :deplaces
+        get :manquants
+      end
+      resources :palissy, only: %i[new create show destroy]
+      resources :memoire, only: %i[new create show destroy], param: :departement_code
+    end
     resources :attachments, only: [:destroy] do
       post :rotate
       put :exportable

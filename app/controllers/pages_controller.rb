@@ -11,8 +11,8 @@ class PagesController < ApplicationController
   end
 
   def admin
-    @active_nav_links = ["Admininistration"]
-    redirect_to new_admin_user_session_path, alert: "Connectez-vous en tant qu'admin" if current_admin_user.nil?
+    @active_nav_links = ["Administration"]
+    redirect_to new_admin_user_session_path, alert: "Connectez-vous en tant qu'admin" unless admin_user_signed_in?
   end
 
   def guide

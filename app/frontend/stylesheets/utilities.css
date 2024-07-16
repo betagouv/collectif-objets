@@ -292,6 +292,11 @@ html[data-fr-scheme="dark"] .co-text--blue {
 .co-header-title-vertical-align thead tr th {
   vertical-align: text-top;
 }
+.co-vertical-align-top,
+tr.co-vertical-align-top th,
+tr.co-vertical-align-top td {
+  vertical-align: text-top;
+}
 
 /* Table en blanc*/
 .co-table-white table {
@@ -313,4 +318,9 @@ html[data-fr-scheme="dark"] .co-text--blue {
 
 .co-table-white tr {
   border-bottom: 1px solid var(--background-contrast-grey);
+}
+
+/* Boutons */
+.co-no-target-blank::after {
+  display: none !important;
 }
