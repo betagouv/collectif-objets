@@ -1,0 +1,20 @@
+%nav.fr-sidemenu.fr-sidemenu--sticky-full-height{ role: :navigation, aria: { labelledby: "fr-sidemenu-title" } }
+  .fr-sidemenu__inner
+    %button.fr-sidemenu__btn{ aria: { controls: "fr-sidemenu-wrapper", expanded: false } }
+      Dans cette rubrique
+    .fr-collapse#fr-sidemenu-wrapper
+      .fr-sidemenu__title#fr-sidemenu-title
+        Table des matières
+      %ul.fr-sidemenu__list
+        - items.each_with_index do |item, i|
+          %li.fr-sidemenu__item
+            - if item.children.any?
+              %button.fr-sidemenu__btn{ aria: { expanded: false, controls: "fr-sidemenu-item-#{i}" } }
+                = item.title
+              .fr-collapse{ id: "fr-sidemenu-item-#{i}" }
+                %ul.fr-sidemenu__list
+                  - item.children.each do |child|
+                    %li.fr-sidemenu__item
+                      = link_to child.title, "##{child.id}", class: "fr-sidemenu__link", "data-turbo": false
+            - else
+              = link_to item.title, "##{item.id}", class: "fr-sidemenu__link", "data-turbo": false

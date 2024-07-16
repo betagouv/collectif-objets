@@ -52,20 +52,19 @@ module MarkdownModelConcern
 
   delegate :to_html, to: :doc
 
-  def table_of_contents_html
-    kramdown_elt_to_list_html(doc.to_toc)
+  def toc
+    doc.to_toc.children.collect { |element| kramdown_elt_to_toc_item(element) }
   end
 
   private
 
-  def kramdown_elt_to_list_html(elt)
-    return nil if elt.children.empty?
-
-    "<ul>\n#{elt.children.map { kramdown_elt_to_list_item_html(_1) }.join("\n")}\n</ul>\n"
-  end
-
-  def kramdown_elt_to_list_item_html(elt)
-    "<li><a href='##{elt.attr[:id]}'>#{elt.value.options[:raw_text]}</a>#{kramdown_elt_to_list_html(elt)}</li>"
+  def kramdown_elt_to_toc_item(element)
+    Struct.new("TocItem", :title, :id, :children) unless defined? Struct::TocItem
+    Struct::TocItem.new(
+      element.value.options[:raw_text],
+      element.attr[:id],
+      element.children.map { |child| kramdown_elt_to_toc_item(child) } || []
+    )
   end
 
   def respond_to_missing?(name, _include_private = false)
