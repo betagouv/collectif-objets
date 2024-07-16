@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
   def home
     @stats = Rails.cache.fetch("homepage_stats", expires_in: 24.hours) do
-      { recensements: Objet.where.associated(:recensements).count, communes: Commune.completed.count }
+      { recensements: Objet.where.associated(:recensements).uniq.count, communes: Commune.completed.count }
     end
   end
 
