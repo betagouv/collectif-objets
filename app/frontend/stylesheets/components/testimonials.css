@@ -22,7 +22,7 @@
   }
 }
 
-html[data-fr-scheme="dark"] .co-testimonial p {
+html[data-fr-theme="dark"] .co-testimonial p {
   background-color: rgb(78, 20, 251);
 }
 

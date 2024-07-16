@@ -147,19 +147,19 @@ img.co-object-fit-contain,
 /* BACKGROUNDS */
 
 .co-background--light-grey { background-color: #F9F8F6; }
-html[data-fr-scheme="dark"] .co-background--light-grey { background-color: #171326; }
+html[data-fr-theme="dark"] .co-background--light-grey { background-color: #171326; }
 
 .co-background--teal { background-color: rgb(185, 185, 251); }
-html[data-fr-scheme="dark"] .co-background--teal { background-color: rgb(19, 19, 109); }
+html[data-fr-theme="dark"] .co-background--teal { background-color: rgb(19, 19, 109); }
 
 .co-background--grey { background-color: #f6f6f6; }
-html[data-fr-scheme="dark"] .co-background--grey { background-color: #280404; }
+html[data-fr-theme="dark"] .co-background--grey { background-color: #280404; }
 
 .co-background--light-teal { background-color: #F5F5FE; }
-html[data-fr-scheme="dark"] .co-background--light-teal { background-color: #10106a; }
+html[data-fr-theme="dark"] .co-background--light-teal { background-color: #10106a; }
 
 .co-background--white { background-color: #fff; }
-html[data-fr-scheme="dark"] .co-background--white { background-color: #000; }
+html[data-fr-theme="dark"] .co-background--white { background-color: #000; }
 
 .co-background-color-inherit { background-color: inherit; }
 
@@ -214,6 +214,12 @@ html[data-fr-scheme="dark"] .co-background--white { background-color: #000; }
     bottom: 0;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0), white 100%);
   }
+  html[data-fr-theme="dark"] .co-md-overflow-auto-shadow::before {
+    background: linear-gradient(180deg, #181818, rgba(255, 255, 255, 0) 100%);
+  }
+  html[data-fr-theme="dark"] .co-md-overflow-auto-shadow::after {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), #181818 100%);
+  }
 }
 
 /* TEXT COLORS */
@@ -227,7 +233,7 @@ html[data-fr-scheme="dark"] .co-background--white { background-color: #000; }
 .co-text--red { color: rgb(145, 0, 0) !important; }
 .co-text--muted { color: rgb(103, 103, 103); }
 
-html[data-fr-scheme="dark"] .co-text--blue {
+html[data-fr-theme="dark"] .co-text--blue {
   color: rgb(137, 137, 203) !important;
 }
 
