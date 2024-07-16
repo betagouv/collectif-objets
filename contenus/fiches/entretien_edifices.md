@@ -1,6 +1,7 @@
 ---
 titre: Entretien de l’édifice et lutte contre les infestations
 ---
+
 ## Introduction
 
 Les objets classés monuments historiques sont considérés comme des trésors nationaux. Ils sont désignés ainsi par l'article L. 111-1 du Code du patrimoine. Il est important que tout le monde, notamment les communes qui abritent ces objets, prenne part à leur préservation pour les générations futures.
@@ -19,9 +20,9 @@ L'humidité est un facteur majeur qui peut endommager rapidement les œuvres d'a
 
 Surveillez les fuites d’eau, les phénomènes de condensation liés aux changements de température et les infiltrations d’eau. Pour suivre le niveau d'humidité, l'utilisation d'un hygromètre, un appareil qui mesure l'humidité de l'air, est recommandée.
 
-Si vous remarquez un taux d'humidité anormalement élevé, il est important d'éloigner les œuvres de la source de cette humidité. 
+Si vous remarquez un taux d'humidité anormalement élevé, il est important d'éloigner les œuvres de la source de cette humidité.
 
-De plus, il est important de ne pas utiliser de grandes quantités d'eau pour le nettoyage dans les zones où sont conservées les œuvres, car cela pourrait augmenter l'humidité de l'air et causer des dommages. 
+De plus, il est important de ne pas utiliser de grandes quantités d'eau pour le nettoyage dans les zones où sont conservées les œuvres, car cela pourrait augmenter l'humidité de l'air et causer des dommages.
 
 ### Luminosité
 
@@ -31,9 +32,9 @@ Il est crucial de faire attention à l'emplacement de vos œuvres. Évitez de le
 
 ### Les polluants (poussière et micro-particules)
 
-Les poussière et micro-particules ne doivent pas entrer au contact de l’objet. Passez le balai et dépoussiérez régulièrement votre édifice. 
+Les poussière et micro-particules ne doivent pas entrer au contact de l’objet. Passez le balai et dépoussiérez régulièrement votre édifice.
 
-Attention toutefois, il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial. Voir section "Que faire". 
+Attention toutefois, il ne faut pas intervenir par vous-même sur les objets monuments historiques ou d’intérêt patrimonial. Voir section "Que faire".
 
 ## Prévenir les infestations de nuisibles
 
@@ -68,19 +69,19 @@ Les insectes xylophages les plus fréquents sont la petite vrillette, la grande 
 
 *Sciure au pied du meuble, illustrant la présence de vrillette.*
 
-### Insectes qui aiment les tissus :
+### Insectes qui aiment les tissus
 
-Les mites, les blattes et les poissons d’argents peuvent infester des supports textiles très divers. Dont les toiles des tableaux.  
+Les mites, les blattes et les poissons d’argents peuvent infester des supports textiles très divers, dont les toiles des tableaux.
 
 ![Trou de mite sur un tissu](/contenus/fiches/images/mite-trou-tissu.jpg)
 
-*Trou de mite sur un tissu.* 
+*Trou de mite sur un tissu.*
 
 ## Les moisissures
 
 Les moisissures sont des champignons microscopiques. Généralement de couleur verdâtre ou blanchâtre lorsqu’ils se sont développés. Ils ressemblent à de la poussière lorsqu’ils manquent d’eau.
 
-Ils sont visibles à la surface des objets et sont redoutables pour leur conservation. Il ne faut pas intervenir soi même, sauf pour les brosser doucement et à sec, loin d'autres surfaces qui pourraient être contaminées.
+Ils sont visibles à la surface des objets et sont redoutables pour leur conservation. Il ne faut pas intervenir soi-même, sauf pour les brosser doucement et à sec, loin d'autres surfaces qui pourraient être contaminées.
 
 **Astuces pour éviter la moisissure :** 
 
@@ -93,11 +94,11 @@ En cas de doute sur le niveau d’humidité dans l’air à différents moments 
 
 ## Les animaux
 
-Des animaux peuvent se cacher dans les bâtiments sans qu'on le sache. Comme les rongeurs et pigeons.
+Des animaux tels que rongeurs et pigeons peuvent se cacher dans les bâtiments sans qu'on le sache.
 
 * Vérifiez souvent l'intérieur pour voir s'il y a des infestations.
 * Faites attention avec les poisons pour rongeurs. L'animal peut mourir derrière un meuble, causant des moisissures.
-* Les fientes de pigeon sont acides et peuvent abîmer les œuvres d'art. Elles sont aussi dures à nettoyer et sont dangereuses si on les respire.
+* Les fientes de pigeon sont acides et peuvent abîmer les œuvres d'art. Elles sont également difficiles à nettoyer et dangereuses si on les respire.
 
 ## Que faire ?
 
@@ -115,8 +116,8 @@ Pour améliorer l’état sanitaire des bâtiments où se trouvent les objets, v
 
 **Insectes :** les noms fournis par ce site sont en latin, mais l’appellation en français figure au sein de chaque fiche :
 
-* Bois d'ouvrage | CICRP · voir sur http://insectes-nuisibles.cicrp.fr/fr/bois-douvrage
-* Fibres textiles | CICRP ·  voir sur http://insectes-nuisibles.cicrp.fr/fr/fibres-textiles
+* [Bois d'ouvrage (CICRP)](http://insectes-nuisibles.cicrp.fr/fr/bois-douvrage)
+* [Fibres textiles (CICRP)](http://insectes-nuisibles.cicrp.fr/fr/fibres-textiles)
 
 **Moisissures** :
 

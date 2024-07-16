@@ -1,7 +1,8 @@
 ---
 titre: Sécuriser vos objets
 ---
-## **L'essentiel :**
+
+## L'essentiel
 
 **Pour sécuriser des œuvres protégées au titre des monuments historiques, vous devez impérativement faire appel à la Conservation départementale des Antiquités et Objets d’Art (CAOA) qui établira avec vous un programme de travaux. Car si certaines règles ne sont pas respectées, des dégradations importantes pourraient arriver. Des subventions peuvent être octroyées dans certains cas pour ces travaux.**
 
@@ -11,7 +12,7 @@ Parmi l’ensemble des biens culturels patrimoniaux, le patrimoine mobilier des 
 
 Les objets protégés au titre des monuments historiques sont des trésors patrimoniaux et des trésors nationaux en ce qui concerne les objets classés (article L. 111-1 du code du patrimoine).
 
-Il est du ressort de chacun - et en particulier des communes propriétaires de ces objets - de s’assurer de leur préservation et de leur transmission aux générations futures.
+Il est du ressort de chacun —et en particulier des communes propriétaires de ces objets— de s’assurer de leur préservation et de leur transmission aux générations futures.
 
 Chaque année, des objets monuments historiques disparaissent du fait de vols ou d’actes malveillants. Afin de lutter contre ces vols, il importe de sécuriser les bâtiments qui abritent les objets monuments historiques et de s’assurer que ces objets sont exposés de manière à garantir leur sécurité.
 
@@ -27,7 +28,7 @@ Il est important de s’assurer que les objets eux-mêmes sont exposés de mani�
 
 En dehors des heures d’ouverture au public, il faut s’assurer que le bâtiment est bien sécurisé.
 
-### **5 conseils pour sécuriser un lieu ouvert au public :**
+### 5 conseils pour sécuriser un lieu ouvert au public
 
 * Si possible, motivez des personnes de bonne volonté pour surveiller l’édifice lorsqu’il est ouvert au public, quitte à restreindre les horaires d’ouverture.
 * Lorsque l’édifice n'est pas surveillé, limitez les horaires d’ouverture. Nous vous déconseillons de l'ouvrir trop tôt le matin, après la tombée de la nuit, ou encore à l’heure du déjeuner. Des plages horaires courtes sont préférables à une fermeture pour cause de vols ou dégradations.
@@ -35,7 +36,7 @@ En dehors des heures d’ouverture au public, il faut s’assurer que le bâtime
 * Un édifice bien entretenu donne l’impression d’être « habité ». Cela diminue le risque de vol.
 * La sensibilisation du public est importante. Elle peut se faire par l’intermédiaire de feuillets qui décrivent l’édifice et ce qu’il contient, en insistant sur la valeur patrimoniale des objets, et non sur leur valeur vénale. Cela peut dissuader d’éventuels larcins.
 
-### 5 conseils pour assurer la sécurité **d’un bâtiment non surveillé :**
+### 5 conseils pour assurer la sécurité d’un bâtiment non surveillé
 
 * **Les clés de l’église doivent être en nombre limité et localisables à tout moment.\
   Il est important de tenir à jour une liste des personnes disposant des clés** (exemple : avoir une liste en mairie avec les coordonnées à jour des dépositaires et la mention des emprunts occasionnels, même de courte durée).
@@ -50,7 +51,7 @@ Les serrures anciennes, bien entretenues ou restaurées par un serrurier qualifi
 
 Ce dispositif peut être complété par des moyens modernes, à condition d’être installés par des professionnels qualifiés (systèmes d’alarmes, clés de sécurité non reproductibles par exemple)
 
-### **Sensibilisation du voisinage au risque de vol**
+### Sensibilisation du voisinage au risque de vol
 
 Si la localisation de l’édifice est isolée, il est important de sensibiliser le proche voisinage au risque d’intrusion dans l’église.
 
@@ -60,9 +61,9 @@ Afin de protéger les biens dans l’édifice comme les voisins eux-mêmes, des 
 
 En plus de la sécurisation de l’édifice, il faut vous assurer de la qualité des accrochages et fixations des œuvres présentées au public. C'est particulièrement vrai pour les objets de petits formats, quel que soit leur lieu d’exposition.
 
-***Pour sécuriser des œuvres protégées au titre des monuments historiques, vous devez impérativement faire appel à la Conservation départementale des Antiquités et Objets d’Art (CAOA)* qui établira avec vous un programme de travaux. Car si certaines règles ne sont pas respectées, des dégradations importantes pourraient arriver. Des subventions peuvent être octroyées dans certains cas pour ces travaux.**
+**Pour sécuriser des œuvres protégées au titre des monuments historiques, vous devez impérativement faire appel à la Conservation départementale des Antiquités et Objets d’Art (CAOA) qui établira avec vous un programme de travaux. Car si certaines règles ne sont pas respectées, des dégradations importantes pourraient arriver. Des subventions peuvent être octroyées dans certains cas pour ces travaux.**
 
-[A﻿nnuaire des CAOA par département](https://caoa.fr/wp-content/telechargement/2024-04-25-annuaire-CAOA-CDAOA.pdf)
+[Annuaire des CAOA par département](https://caoa.fr/wp-content/telechargement/2024-04-25-annuaire-CAOA-CDAOA.pdf)
 
 Après échange avec un conservateur de votre département, l’intervention d’un restaurateur qualifié permettra d’identifier et d’installer le meilleur système de fixation pour éviter de porter atteinte à l’œuvre. Par exemple :
 
@@ -72,7 +73,7 @@ Après échange avec un conservateur de votre département, l’intervention d�
 
 ### Astuce
 
-Dans les églises, la sacristie est un lieu tout à fait approprié pour entreposer les objets qui ne peuvent pas être fixés - a condition que celle-ci ferme à clé.
+Dans les églises, la sacristie est un lieu tout à fait approprié pour entreposer les objets qui ne peuvent pas être fixés —à condition que celle-ci ferme à clé.
 Avec l’accord du clergé affectataire, vous pouvez y déplacer les objets qui vous sembleraient les plus vulnérables.
 Ces regroupements d’objets constituent dans certains cas des “trésors d’église”, sécurisant les objets de plusieurs communes.
 
@@ -82,18 +83,18 @@ Le maintien de l’objet dans son lieu d’origine est à privilégier, afin de 
 Toutefois, si l’objet ne peut pas être mis en sécurité *in situ* via la sécurisation du bâtiment ou via un système de fixation approprié, deux options s’offrent à vous :
 
 * créer des **réserves particulières** (en mairie ou dans un bâtiment qui répond aux règles de sécurisation énoncées précédemment)
-* **déposer à la cathédrale** les objets qui ne pourront pas être sécurisés dans la commune. Une convention de dépôt sera alors établie entre le propriétaire de l’œuvre et l’État (DRAC - Conservation Régionale des Monuments historiques) en liaison avec le conservateur des antiquités et objets d'art (CAOA) du département. 
+* **déposer à la cathédrale** les objets qui ne pourront pas être sécurisés dans la commune. Une convention de dépôt sera alors établie entre le propriétaire de l’œuvre et l’État (DRAC - Conservation Régionale des Monuments historiques) en liaison avec le conservateur des antiquités et objets d'art (CAOA) du département.
 
 Dès l’instant où les conditions de sécurité et de bonne conservation de l’objet sont rétablies dans son site d’origine, son retour en ce lieu est très souhaitable.
 
-## 5 - Les 4 étapes qui doivent accompagner ces mises à l’abri :
+## 5 - Les 4 étapes qui doivent accompagner ces mises à l’abri
 
 * Obtenir l’accord de l’affectataire (généralement l’association diocésaine ou son représentant)
 * Prévenir le Conservateur des Antiquités et Objets d’Art (CAOA) de ce changement de localisation
 * Signaler ces dépôts lors de chaque recensement effectué par l’équipe CAOA du département
 * Mettre à jour vos éventuels inventaires communaux
 
-## 6﻿ - **Enjeux de sécurité liés aux incendies**
+## 6 - Enjeux de sécurité liés aux incendies
 
 Pour mitiger les risques liés aux incendies, vous devriez dès aujourd’hui :
 
@@ -106,7 +107,7 @@ Pour mitiger les risques liés aux incendies, vous devriez dès aujourd’hui :
 Des dispositions sont aussi à prendre au niveau municipal et avec les voisins de l’église, en anticipation d’un éventuel incendie :
 
 * Le ou les détenteur(s) des clés (maire, voisin, résidents du presbytère…) doivent être clairement identifiés par les personnes qui risquent de repérer le sinistre en premier, généralement les plus proches voisins.
-* Les clés doivent être accessibles à tout instant en cas d’urgence (jour, nuit, période de vacances…). A l’arrivée des sapeurs-pompiers, elles seront ainsi immédiatement à leur disposition.
+* Les clés doivent être accessibles à tout instant en cas d’urgence (jour, nuit, période de vacances…). À l’arrivée des sapeurs-pompiers, elles seront ainsi immédiatement à leur disposition.
 * En outre, une ou plusieurs personnes de la commune doivent pouvoir signaler aux pompiers où se trouvent les objets particulièrement fragiles ou précieux.
 
-**Source** : Geneviève Rager, *La conservation des objets mobiliers dans les églises, Outil d’auto-évaluation*, Ministère de la culture et de la communication,direction de l’architecture et du patrimoine, 2004
+**Source** : Geneviève Rager, *La conservation des objets mobiliers dans les églises, Outil d’auto-évaluation*, Ministère de la culture et de la communication, direction de l’architecture et du patrimoine, 2004
