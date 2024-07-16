@@ -10,6 +10,14 @@ module MarkdownModelConcern
       ids.map { find(_1) }
     end
 
+    def directory_path
+      "contenus/#{name.pluralize.underscore}"
+    end
+
+    def cache_prefix
+      name.dasherize
+    end
+
     def ids
       Rails.root.join(directory_path)
         .glob("*.md")
