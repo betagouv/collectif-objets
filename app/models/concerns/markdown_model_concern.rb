@@ -34,6 +34,10 @@ module MarkdownModelConcern
         new(id, parsed.content, parsed.front_matter.symbolize_keys)
       end
     end
+
+    def find_each(&block)
+      all.each(&block)
+    end
   end
 
   def initialize(id, markdown_content, frontmatter_data)
