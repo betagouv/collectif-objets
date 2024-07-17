@@ -36,6 +36,10 @@ class Departement < ApplicationRecord
   has_many :conservateurs, through: :conservateur_roles
   has_many :campaigns, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
   has_many :pop_exports, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
+  has_many :pop_exports_memoire, -> { memoire }, class_name: "PopExport", dependent: :nullify,
+                                                 foreign_key: :departement_code, inverse_of: :departement
+  has_many :pop_exports_palissy, -> { palissy }, class_name: "PopExport", dependent: :nullify,
+                                                 foreign_key: :departement_code, inverse_of: :departement
 
   scope :sorted, -> { order(:code) }
 
