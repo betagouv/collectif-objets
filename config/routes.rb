@@ -180,7 +180,6 @@ Rails.application.routes.draw do
         get :deplaces
         get :manquants
       end
-      resources :palissy, only: %i[new create show destroy]
       resources :memoire, only: %i[new create show destroy], param: :departement_code
     end
     resources :attachments, only: [:destroy] do
