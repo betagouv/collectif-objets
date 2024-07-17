@@ -35,7 +35,7 @@
                 %div= link_to "nouvel export Palissy …", new_admin_exports_palissy_path(departement_code: departement.code), class: "fr-link"
                 - departement.pop_exports.memoire.each do |pop_export|
                   .fr-mb-2w= link_to pop_export, admin_exports_memoire_path(pop_export), class: "fr-link"
-                %div= link_to "nouvel export Mémoire…", new_admin_exports_memoire_path(departement_code: departement.code), class: "fr-link"
+                = link_to "Nouvel export Mémoire…", new_admin_exports_memoire_path(departement_code: departement.code), class: "fr-link", title: "Export Mémoire #{departement}"
         %tfooter
           %tr
             %th Totaux
