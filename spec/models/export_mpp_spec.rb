@@ -44,7 +44,8 @@ RSpec.describe Exports::Mpp, type: :model do
           objet.nouvel_edifice&.upcase_first,
           objet.nouveau_departement&.region || objet.departement.region,
           I18n.l(objet.recensement.dossier.accepted_at, format: :long).upcase_first,
-          "Lieu de déplacement : #{lieu_de_deplacement}"
+          "Lieu de déplacement : #{lieu_de_deplacement}",
+          Exports::Mpp.dossier_url(objet.recensement.dossier)
         ]
         expect(exporter.values(objet)).to eq expectation
       end
@@ -83,7 +84,8 @@ RSpec.describe Exports::Mpp, type: :model do
           I18n.l(objet.recensement.dossier.accepted_at, format: :long).upcase_first,
           "Manquant",
           "Œuvre déclarée manquante au moment du recensement Collectif Objets en #{
-            objet.recensement.dossier.accepted_at.year}"
+            objet.recensement.dossier.accepted_at.year}",
+          Exports::Mpp.dossier_url(objet.recensement.dossier)
         ]
         expect(exporter.values(objet)).to eq expectation
       end

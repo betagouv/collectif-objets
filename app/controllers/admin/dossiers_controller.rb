@@ -2,6 +2,11 @@
 
 module Admin
   class DossiersController < BaseController
+    def show
+      @dossier = Dossier.find(params[:id])
+      @commune = @dossier.commune # Requis par shared/dossier_rapport
+    end
+
     def update
       @dossier = Dossier.find(params[:id])
       raise if params[:status] != "construction"

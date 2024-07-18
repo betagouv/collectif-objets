@@ -16,6 +16,10 @@ module Exports
       end
     end
 
+    def dossier_url(dossier)
+      Rails.application.routes.url_helpers.admin_dossier_url(dossier)
+    end
+
     module Deplaces
       module_function
 
@@ -38,7 +42,8 @@ module Exports
           "MOSA (nouvel édifice)",
           "Région de déplacement",
           "Date de validation du dossier par le conservateur",
-          "DEPL"
+          "DEPL",
+          "Rapport"
         ]
       end
 
@@ -62,7 +67,8 @@ module Exports
           objet.nouvel_edifice&.upcase_first,
           objet.nouveau_departement&.region || objet.departement.region,
           I18n.l(objet.recensement.dossier.accepted_at, format: :long).upcase_first,
-          "Lieu de déplacement : #{lieu_de_deplacement}"
+          "Lieu de déplacement : #{lieu_de_deplacement}",
+          Mpp.dossier_url(objet.recensement.dossier)
         ]
       end
       # rubocop:enable Metrics/CyclomaticComplexity
@@ -91,7 +97,8 @@ module Exports
           "Commentaire du conservateur sur l'objet",
           "Date de validation par le conservateur",
           "Manquant",
-          "Vol"
+          "Vol",
+          "Rapport"
         ]
       end
 
@@ -107,7 +114,8 @@ module Exports
           I18n.l(objet.recensement.dossier.accepted_at, format: :long).upcase_first,
           "Manquant",
           "Œuvre déclarée manquante au moment du recensement Collectif Objets en #{
-            objet.recensement.dossier.accepted_at.year}"
+            objet.recensement.dossier.accepted_at.year}",
+          Mpp.dossier_url(objet.recensement.dossier)
         ]
       end
 
