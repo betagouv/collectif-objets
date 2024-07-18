@@ -341,4 +341,60 @@ RSpec.describe Recensement, type: :model do
       end
     end
   end
+
+  describe "#nouvelle_commune" do
+    let(:commune) { create(:commune) }
+    let(:localisation) { Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
+    let(:recensement) { build(:recensement, localisation:, autre_commune_code_insee:) }
+
+    context "when autre_commune_code_insee is set" do
+      let(:autre_commune_code_insee) { commune.code_insee }
+      it "returns the new commune" do
+        expect(recensement.nouvelle_commune).to eq commune
+      end
+    end
+    context "when autre_commune_code_insee is nil" do
+      let(:autre_commune_code_insee) { nil }
+      it "returns nil" do
+        expect(recensement.nouvelle_commune).to eq nil
+      end
+    end
+  end
+
+  describe "#nouvel_edifice" do
+    let(:recensement) { build(:recensement, localisation:, edifice_nom:) }
+    let(:localisation) { Recensement::LOCALISATION_AUTRE_EDIFICE }
+
+    context "when edifice_nom is set" do
+      let(:edifice_nom) { "Nouvel édifice" }
+      it "returns the name of the new edifice" do
+        expect(recensement.nouvel_edifice).to eq edifice_nom
+      end
+    end
+    context "when edifice_nom is nil" do
+      let(:edifice_nom) { nil }
+      it "returns nil" do
+        expect(recensement.nouvel_edifice).to eq nil
+      end
+    end
+  end
+
+  describe "#nouveau_departement" do
+    let(:commune) { create(:commune) }
+    let(:localisation) { Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
+    let(:recensement) { build(:recensement, localisation:, autre_commune_code_insee:) }
+
+    context "when autre_commune_code_insee is set" do
+      let(:autre_commune_code_insee) { commune.code_insee }
+      it "returns the new departement" do
+        expect(recensement.nouveau_departement).to eq commune.departement
+      end
+    end
+    context "when autre_commune_code_insee is nil" do
+      let(:autre_commune_code_insee) { nil }
+      it "returns nil" do
+        expect(recensement.nouveau_departement).to eq nil
+      end
+    end
+  end
 end

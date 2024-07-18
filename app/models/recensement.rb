@@ -14,9 +14,12 @@ class Recensement < ApplicationRecord
     attachable.variant :small, resize_to_limit: [300, 400], saver: { strip: true }
     attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }
   end
+  has_one :nouvelle_commune, class_name: "Commune", dependent: nil, inverse_of: false,
+                             foreign_key: :code_insee, primary_key: :autre_commune_code_insee
 
   delegate :commune, to: :objet, allow_nil: true
   delegate :departement, to: :objet, allow_nil: true
+  delegate :departement, to: :nouvelle_commune, allow_nil: true, prefix: :nouveau
 
   include AASM
   aasm column: :status, whiny_persistence: true, timestamps: true do
@@ -151,13 +154,11 @@ class Recensement < ApplicationRecord
   end
 
   def nom_commune_localisation_objet
-    commune_localisation_objet = if autre_commune_code_insee.present?
-                                   Commune.find_by(code_insee: autre_commune_code_insee)
-                                 else
-                                   commune
-                                 end
+    nouvelle_commune || commune
+  end
 
-    commune_localisation_objet.presence
+  def nouvel_edifice
+    edifice_nom if déplacé?
   end
 
   def self.ransackable_scopes(_ = nil) = [:photos_presence_in]

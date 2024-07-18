@@ -22,7 +22,7 @@ module Exports
       def objets
         Objet.déplacés.examinés
           .includes(:departement, :commune, :edifice, :recensement)
-          .includes(:nouveau_departement, :nouvelle_commune, :nouvel_edifice)
+          .includes(recensement: :nouvelle_commune)
       end
 
       def headers
@@ -56,7 +56,7 @@ module Exports
           objet.palissy_INSEE,
           objet.commune.nom,
           objet.edifice&.nom&.upcase_first,
-          objet.nouveau_departement&.nom,
+          objet.nouveau_departement&.nom || objet.departement.nom,
           objet.lieu_actuel_code_insee,
           objet.nouvel_edifice&.upcase_first,
           I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
