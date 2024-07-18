@@ -20,7 +20,7 @@ module Exports
       module_function
 
       def objets
-        Objet.déplacés.examinés
+        Objet.déplacés.examinés.order("recensements.created_at DESC")
           .includes(:departement, :commune, :edifice, :recensement)
           .includes(recensement: :nouvelle_commune)
       end
@@ -76,7 +76,7 @@ module Exports
       module_function
 
       def objets
-        Objet.manquants.examinés
+        Objet.manquants.examinés.order("recensements.created_at DESC")
           .includes(:departement, :commune, :recensement, recensement: :dossier)
       end
 

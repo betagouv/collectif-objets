@@ -12,7 +12,7 @@ RSpec.describe Exports::Mpp, type: :model do
         create(:objet, commune:)
         create(:objet, :disparu, commune:)
         objets = create_list(:objet, 3, :deplace_et_examine, commune:)
-        expect(exporter.objets.order(:created_at)).to eq objets
+        expect(exporter.objets).to eq objets.sort_by { |objet| objet.recensement.created_at }.reverse
       end
     end
     describe "#values(objet)" do
@@ -50,7 +50,7 @@ RSpec.describe Exports::Mpp, type: :model do
         create(:objet, commune:)
         create(:objet, :deplace, commune:)
         objets = create_list(:objet, 3, :disparu_et_examine, commune:)
-        expect(exporter.objets.order(:created_at)).to eq objets
+        expect(exporter.objets).to eq objets.sort_by { |objet| objet.recensement.created_at }.reverse
       end
     end
     describe "#values(objet)" do
