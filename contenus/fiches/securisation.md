@@ -6,7 +6,7 @@ titre: Sécuriser vos objets
 
 **Pour sécuriser des œuvres protégées au titre des monuments historiques, vous devez impérativement faire appel à la Conservation départementale des Antiquités et Objets d’Art (CAOA) qui établira avec vous un programme de travaux. Car si certaines règles ne sont pas respectées, des dégradations importantes pourraient arriver. Des subventions peuvent être octroyées dans certains cas pour ces travaux.**
 
-## 1 - Pourquoi sécuriser mes objets ?
+## Pourquoi sécuriser mes objets ?
 
 Parmi l’ensemble des biens culturels patrimoniaux, le patrimoine mobilier des églises est sans doute le plus fragile. Au-delà de son intérêt artistique, ce patrimoine est aussi le témoin de la vie et de l’histoire de communautés. Ayant parfois perdu son usage premier, il est souvent menacé.
 
@@ -18,7 +18,7 @@ Chaque année, des objets monuments historiques disparaissent du fait de vols ou
 
 Le présent document est là pour vous guider dans vos démarches.
 
-## 2 - Comment sécuriser efficacement un bâtiment ?
+## Comment sécuriser efficacement un bâtiment ?
 
 Les objets monuments historiques sont principalement exposés dans des bâtiments accueillant du public. Les objets exposés dans des églises sont particulièrement vulnérables car celles-ci sont généralement ouvertes, sans moyens de surveillance permanents.
 
@@ -57,7 +57,7 @@ Si la localisation de l’édifice est isolée, il est important de sensibiliser
 
 Afin de protéger les biens dans l’édifice comme les voisins eux-mêmes, des consignes précises doivent être données aux voisins volontaires : contacter immédiatement la gendarmerie et la mairie en cas de tentative d’intrusion dans l’édifice, ne pas se confronter directement aux intrus, etc…
 
-## 3 - Comment sécuriser les systèmes de présentation des objets ?
+## Comment sécuriser les systèmes de présentation des objets ?
 
 En plus de la sécurisation de l’édifice, il faut vous assurer de la qualité des accrochages et fixations des œuvres présentées au public. C'est particulièrement vrai pour les objets de petits formats, quel que soit leur lieu d’exposition.
 
@@ -77,7 +77,7 @@ Dans les églises, la sacristie est un lieu tout à fait approprié pour entrepo
 Avec l’accord du clergé affectataire, vous pouvez y déplacer les objets qui vous sembleraient les plus vulnérables.
 Ces regroupements d’objets constituent dans certains cas des “trésors d’église”, sécurisant les objets de plusieurs communes.
 
-## 4 - Autres moyens de sécurisation
+## Autres moyens de sécurisation
 
 Le maintien de l’objet dans son lieu d’origine est à privilégier, afin de préserver la cohérence de son histoire et sa connaissance par les citoyens locaux.
 Toutefois, si l’objet ne peut pas être mis en sécurité *in situ* via la sécurisation du bâtiment ou via un système de fixation approprié, deux options s’offrent à vous :
@@ -87,14 +87,14 @@ Toutefois, si l’objet ne peut pas être mis en sécurité *in situ* via la sé
 
 Dès l’instant où les conditions de sécurité et de bonne conservation de l’objet sont rétablies dans son site d’origine, son retour en ce lieu est très souhaitable.
 
-## 5 - Les 4 étapes qui doivent accompagner ces mises à l’abri
+## Les 4 étapes qui doivent accompagner ces mises à l’abri
 
 * Obtenir l’accord de l’affectataire (généralement l’association diocésaine ou son représentant)
 * Prévenir le Conservateur des Antiquités et Objets d’Art (CAOA) de ce changement de localisation
 * Signaler ces dépôts lors de chaque recensement effectué par l’équipe CAOA du département
 * Mettre à jour vos éventuels inventaires communaux
 
-## 6 - Enjeux de sécurité liés aux incendies
+## Enjeux de sécurité liés aux incendies
 
 Pour mitiger les risques liés aux incendies, vous devriez dès aujourd’hui :
 

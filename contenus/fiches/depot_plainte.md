@@ -8,7 +8,7 @@ Les objets monuments historiques sont des trésors nationaux (article L. 111-1 d
 
 Ils appartiennent toujours au domaine public, même s'ils sont perdus ou volés, quelle que soit la date de leur disparition. Tous les moyens doivent être mis en œuvre pour les y faire revenir.
 
-Ils sont imprescriptibles et inaliénables. \
+Ils sont imprescriptibles et inaliénables.
 **Il n’y a pas de prescription pour déclarer ce type de disparition.**
 
 Sans plainte, il n’est pas possible de signaler cet objet dans le cadre de la lutte contre le trafic d’œuvres d’art.

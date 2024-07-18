@@ -8,7 +8,7 @@ La présente fiche vise à vous informer sur la procédure pour lancer une resta
 
 ## Grandes étapes conduisant à la restauration d’un objet
 
-### I. Temps d’échange et de construction d’une opération de restauration
+### Temps d’échange et de construction d’une opération de restauration
 
 1. **Construction d’un projet adapté avec les conservateurs**
   Le conservateur revient vers vous pour construire un projet adapté au cas spécifique de l’oeuvre à restaurer. Les étapes sont variées et passent le plus souvent par un constat d’état, un cahier des charges ou bien encore par une recherche sur l’histoire exacte de l’œuvre. L’ensemble de ces éléments de réflexion préalables permet de décider des opérations à engager (étude préalable, simple opération d’entretien, restauration fondamentale). Le détail de ces opérations permet de demander des devis comparables entre-eux.
@@ -17,7 +17,7 @@ La présente fiche vise à vous informer sur la procédure pour lancer une resta
 3. **Sélection du devis le plus adapté avec vos conservateurs**
 4. **Les conservateurs peuvent vous accompagner dans le montage d’un plan de financement.**
 
-### II. Le temps de l’instruction administrative
+### Le temps de l’instruction administrative
 
 🚨 Cette étape ne peut débuter qu’après des échanges préalables avec vos conservateurs.
 
