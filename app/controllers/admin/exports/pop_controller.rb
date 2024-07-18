@@ -6,7 +6,7 @@ module Admin
       def index
         @departements = Departement
           .order(:code)
-          .includes(:dossiers)
+          .includes(:dossiers, :pop_exports_memoire)
           .where.not(dossiers: { accepted_at: nil })
           .where(recensements: Recensement.absent_or_recensable)
           .includes(recensements: %i[photos_attachments objet])

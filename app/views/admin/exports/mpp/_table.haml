@@ -1,0 +1,18 @@
+.fr-table
+  %table.co-header-title-vertical-align
+    %thead
+      %tr
+        - headers.each do |header|
+          %th= header
+    %tbody
+      - objets.each do |objet_values|
+        %tr.co-vertical-align-top
+          - objet_values.each do |value|
+            %td
+              - if value&.starts_with?("http")
+                =link_to value, value, target: :_blank
+              - else
+                = value
+
+- if @pagy.pages > 1
+  = render partial: "shared/pagy_nav", locals: { pagy: }

@@ -8,12 +8,6 @@ class Objet < ApplicationRecord
                        inverse_of: :objets, counter_cache: true
   belongs_to :edifice, optional: true
   has_one :departement, through: :commune
-  has_one :nouveau_departement, class_name: "Departement", primary_key: :lieu_actuel_departement_code,
-                                foreign_key: :code, dependent: nil, inverse_of: :objets
-  has_one :nouvelle_commune, class_name: "Commune", primary_key: :lieu_actuel_code_insee, foreign_key: :code_insee,
-                             dependent: nil, inverse_of: :objets
-  has_one :nouvel_edifice, class_name: "Edifice", primary_key: :lieu_actuel_edifice_ref, foreign_key: :merimee_REF,
-                           dependent: nil, inverse_of: :objets
   has_many :recensements, dependent: :restrict_with_exception
 
   has_one :recensement, -> {
@@ -43,10 +37,7 @@ class Objet < ApplicationRecord
                        .where(recensements: { analysed_at: nil })
                        .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
                      }
-  scope :examinés, lambda {
-                     joins(:recensements)
-                     .where.not(recensements: { analysed_at: nil })
-                   }
+  scope :examinés, -> { joins(recensement: :dossier).merge(Dossier.accepted) }
 
   MIS_DE_COTE_SQL = %("palissy_PROT" LIKE 'déclassé au titre objet'
                       OR "palissy_PROT" LIKE 'désinscrit'
@@ -75,6 +66,8 @@ class Objet < ApplicationRecord
   alias_attribute :nom_dossier, :palissy_DOSS
   alias_attribute :edifice_nom, :palissy_EDIF
   alias_attribute :emplacement, :palissy_EMPL
+
+  delegate :nouvel_edifice, :nouvelle_commune, :nouveau_departement, to: :recensement, allow_nil: true
 
   def edifice_nom_formatted
     if edifice_nom == "église" && commune.present?
@@ -119,10 +112,6 @@ class Objet < ApplicationRecord
   def nom = (super || [palissy_DENO || categorie || palissy_REF, crafted_at].compact_blank.join(", ")).upcase_first
   def déplacé? = palissy_WEB.present? && palissy_DEPL.present?
   def code_insee_a_changé? = palissy_WEB.present? && palissy_DEPL.blank?
-
-  def nouvel_edifice
-    super&.nom || lieu_actuel_edifice_nom unless déplacé?
-  end
 
   def destroy_and_soft_delete_recensement!(**kwargs)
     transaction do

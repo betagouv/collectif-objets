@@ -10,6 +10,14 @@ module Recensements
       localisation == Recensement::LOCALISATION_ABSENT
     end
 
+    def déplacé?
+      [
+        Recensement::LOCALISATION_AUTRE_EDIFICE,
+        Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE,
+        Recensement::LOCALISATION_DEPLACEMENT_TEMPORAIRE
+      ].include? localisation
+    end
+
     def deplacement_definitif?
       localisation == Recensement::LOCALISATION_AUTRE_EDIFICE ||
         localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE

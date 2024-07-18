@@ -149,7 +149,7 @@ Rails.application.routes.draw do
         post :toggle_impersonate_mode
       end
     end
-    resources :dossiers, only: [:update]
+    resources :dossiers, only: [:show, :update]
     resources :users, only: %i[] do
       get :impersonate
       collection do
@@ -180,7 +180,6 @@ Rails.application.routes.draw do
         get :deplaces
         get :manquants
       end
-      resources :palissy, only: %i[new create show destroy]
       resources :memoire, only: %i[new create show destroy], param: :departement_code
     end
     resources :attachments, only: [:destroy] do

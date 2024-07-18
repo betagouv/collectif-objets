@@ -1,0 +1,7 @@
+- page_title = "Dossier de #{@commune}"
+- content_for(:head_title) { page_title }
+
+%main#contenu.fr-container.fr-mb-8w
+  = render "shared/breadcrumbs", links: [["Admin", admin_path], [@commune.nom, admin_commune_path(@commune)]], current_page_label: page_title
+
+  = render "shared/dossier_rapport", rapport: RapportPresenter.new(@dossier)
