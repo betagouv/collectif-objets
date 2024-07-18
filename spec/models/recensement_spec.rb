@@ -6,17 +6,17 @@ RSpec.describe Recensement, type: :model do
   describe "validations" do
     subject { recensement.valid? }
 
-    context "basic recensement from factory" do
+    context "from factory" do
       let(:recensement) { build(:recensement) }
       it { should eq true }
     end
 
-    context "recensement without etat_sanitaire" do
+    context "without etat_sanitaire" do
       let(:recensement) { build(:recensement, etat_sanitaire: nil) }
       it { should eq false }
     end
 
-    context "recensement autre edifice with edifice_nom" do
+    context "autre edifice with edifice_nom" do
       let(:recensement) do
         build(:recensement,
               localisation: Recensement::LOCALISATION_AUTRE_EDIFICE,
@@ -25,12 +25,12 @@ RSpec.describe Recensement, type: :model do
       it { should eq true }
     end
 
-    context "recensement autre edifice without edifice_nom" do
+    context "autre edifice without edifice_nom" do
       let(:recensement) { build(:recensement, localisation: Recensement::LOCALISATION_AUTRE_EDIFICE, edifice_nom: nil) }
       it { should eq false }
     end
 
-    context "recensement introuvable" do
+    context "introuvable" do
       let(:attributes) do
         { localisation: Recensement::LOCALISATION_ABSENT, recensable: false, etat_sanitaire: nil, securisation: nil }
       end
@@ -70,7 +70,7 @@ RSpec.describe Recensement, type: :model do
       end
     end
 
-    context "recensement non recensable" do
+    context "non recensable" do
       let(:attributes) { { recensable: false, etat_sanitaire: nil, securisation: nil } }
 
       context "other fields empty" do
