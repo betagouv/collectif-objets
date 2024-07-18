@@ -32,10 +32,10 @@ RSpec.describe Exports::Mpp, type: :model do
           objet.edifice&.nom&.upcase_first,
           objet.nouveau_departement&.nom,
           objet.nouvelle_commune&.code_insee,
-          objet.nouvel_edifice&.upcase_first,
-          I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
-          objet.nouveau_departement&.region || objet.departement.region,
           objet.nouvelle_commune&.nom,
+          objet.nouvel_edifice&.upcase_first,
+          objet.nouveau_departement&.region || objet.departement.region,
+          I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
           "Lieu de déplacement : #{lieu_de_deplacement}"
         ]
         expect(exporter.values(objet)).to eq expectation

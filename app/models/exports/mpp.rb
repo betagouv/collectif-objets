@@ -34,10 +34,10 @@ module Exports
           "Édifice d'origine",
           "Département de déplacement",
           "WEB (nouveau code INSEE)",
-          "MOSA (nouvel édifice)",
-          "Date de validation du dossier par le conservateur",
-          "Région de déplacement",
           "Commune de déplacement",
+          "MOSA (nouvel édifice)",
+          "Région de déplacement",
+          "Date de validation du dossier par le conservateur",
           "DEPL"
         ]
       end
@@ -58,10 +58,10 @@ module Exports
           objet.edifice&.nom&.upcase_first,
           objet.nouveau_departement&.nom,
           objet.nouvelle_commune&.code_insee,
-          objet.nouvel_edifice&.upcase_first,
-          I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
-          objet.nouveau_departement&.region || objet.departement.region,
           objet.nouvelle_commune&.nom,
+          objet.nouvel_edifice&.upcase_first,
+          objet.nouveau_departement&.region || objet.departement.region,
+          I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
           "Lieu de déplacement : #{lieu_de_deplacement}"
         ]
       end
