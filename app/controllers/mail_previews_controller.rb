@@ -5,7 +5,7 @@ class MailPreviewsController < ApplicationController
 
   # Temporarily allow inline styles when previewing emails
   content_security_policy(only: :show) do |policy|
-    policy.style_src :self, :https, :unsafe_inline
+    policy.style_src :self, :unsafe_inline
   end
 
   def index; end
