@@ -4,7 +4,7 @@ class FichesController < ApplicationController
   helper_method :titre_objets_concernes
 
   def index
-    @fiches = Fiche.all
+    @fiches = Fiche.all.sort_by(&:id)
   end
 
   def show
