@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
   def home
     @stats = Rails.cache.fetch("homepage_stats", expires_in: 24.hours) do
-      { recensements: Recensement.count, communes: Commune.completed.count }
+      { recensements: Recensement.select(:objet_id).distinct.count, communes: Commune.completed.count }
     end
   end
 
