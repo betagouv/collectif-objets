@@ -7,7 +7,7 @@ titre: Sécuriser vos objets
 
 ## 1 - Pourquoi sécuriser mes objets ?
 
-Parmi l’ensemble des biens culturels patrimoniaux, le patrimoine mobilier des églises est sans doute le plus fragile. Au-delà de son intérêt artistique, ce patrimoine est aussi le témoin de la vie et de l’histoire de communautés. Ayant parfois perdu son usage premier, il est souvent menacé.
+Parmi l’ensemble des biens culturels patrimoniaux, le patrimoine mobilier des églises est sans doute le plus fragile. Au-delà de son intérêt artistique, ce patrimoine est aussi le témoin de la vie et de l’histoire de communautés. Ayant parfois perdu son usage premier, il est souvent menacé. 
 
 Les objets protégés au titre des monuments historiques sont des trésors patrimoniaux et des trésors nationaux en ce qui concerne les objets classés (article L. 111-1 du code du patrimoine).
 
