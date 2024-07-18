@@ -22,7 +22,7 @@ module Exports
       def objets
         Objet.déplacés.examinés.order("recensements.created_at DESC")
           .includes(:departement, :commune, :edifice, :recensement)
-          .includes(recensement: :nouvelle_commune)
+          .includes(recensement: [:dossier, :nouvelle_commune])
       end
 
       def headers
@@ -48,7 +48,7 @@ module Exports
           objet.nouveau_departement&.region || objet.departement&.region,
           objet.nouveau_departement&.code || objet.departement.code,
           objet.nouvelle_commune&.nom || objet.commune&.nom,
-          "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.analysed_at.year})"
+          "#{objet.nouvel_edifice} (Collectif Objets #{objet.recensement.dossier.accepted_at.year})"
         ].join(" ; ")
         [
           objet.palissy_REF,
@@ -61,7 +61,7 @@ module Exports
           objet.nouvelle_commune&.nom,
           objet.nouvel_edifice&.upcase_first,
           objet.nouveau_departement&.region || objet.departement.region,
-          I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
+          I18n.l(objet.recensement.dossier.accepted_at, format: :long).upcase_first,
           "Lieu de déplacement : #{lieu_de_deplacement}"
         ]
       end
@@ -104,9 +104,10 @@ module Exports
           objet.recensement.dossier.notes_conservateur,
           objet.recensement.notes,
           objet.recensement.analyse_notes,
-          I18n.l(objet.recensement.analysed_at, format: :long).upcase_first,
+          I18n.l(objet.recensement.dossier.accepted_at, format: :long).upcase_first,
           "Manquant",
-          "Œuvre déclarée manquante au moment du recensement Collectif Objets en #{objet.recensement.analysed_at.year}"
+          "Œuvre déclarée manquante au moment du recensement Collectif Objets en #{
+            objet.recensement.dossier.accepted_at.year}"
         ]
       end
 
