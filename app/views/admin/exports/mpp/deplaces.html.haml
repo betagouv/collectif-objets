@@ -10,17 +10,4 @@
     = link_to "Télécharger les fichiers déplacés en CSV", url_for(format: :csv), class: "fr-btn fr-btn--primary fr-btn--icon-left fr-icon-download-line co-no-target-blank", target: "_blank", rel: "noopener"
     = link_to "Voir les objets manquants", admin_exports_manquants_path, class: "fr-icon-arrow-right-line fr-link--icon-right"
 
-  .fr-table
-    %table.co-header-title-vertical-align
-      %thead
-        %tr
-          - @headers.each do |header|
-            %th= header
-      %tbody
-        - @objets.each do |objet_values|
-          %tr.co-vertical-align-top
-            - objet_values.each do |value|
-              %td= value
-
-  - if @pagy.pages > 1
-    = render partial: "shared/pagy_nav", locals: { pagy: @pagy }
+  = render "table", headers: @headers, objets: @objets, pagy: @pagy
