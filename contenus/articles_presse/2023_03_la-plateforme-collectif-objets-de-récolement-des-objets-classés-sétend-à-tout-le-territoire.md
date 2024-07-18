@@ -11,4 +11,4 @@ resume: Testée avec succès par les petites communes du Grand Est en 2022, la
 ---
 Testée avec succès par les petites communes du Grand Est en 2022, la plateforme du ministère de la Culture Collectif-Objets étend en 2023 son périmètre d'action à l'ensemble du territoire. Elle donne la possibilité aux communes de recenser les objets historiques classés et aide les conservateurs à décider des mesures de préservation.
 
-E﻿ntretien avec le journaliste Olivier Devillers
+Entretien avec le journaliste Olivier Devillers

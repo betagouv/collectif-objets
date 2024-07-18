@@ -7,7 +7,7 @@ titre: Documentation Conservateur
 
 Collectif Objets est un **service public numérique** du ministère de la Culture. Il favorise la préservation du patrimoine mobilier protégé en facilitant le dialogue entre les acteurs de la chaîne patrimoniale. Il prend la forme d'un site web (ou plateforme numérique) où conservateurs et municipalités peuvent échanger.
 
-Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques.
+**Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques.**
 
 Les mairies sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer.
 
@@ -25,7 +25,7 @@ Collectif Objets s’adresse aux communes abritant des objets protégés au titr
 
 Ce dispositif concerne les objets appartenant aux collectivités territoriales ou à des propriétaires privés (particuliers, associations…).
 
-Les objets qui sont propriétés de l’Etat ne sont pas concernés par Collectif Objets.
+Les objets qui sont propriétés de l’État ne sont pas concernés par Collectif Objets.
 
 Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement.
 
@@ -41,7 +41,7 @@ Plus de 90% des informations transmises par les communes sont validées sans cor
 
 ### Si vous souhaitez déployer une campagne dans votre département
 
-C’est simple : contactez-nous à l’adresse [contact@collectif-objets.beta.gouv.fr](mailto:contact@collectif-objets.beta.gouv.fr) pour prendre rendez-vous avec notre équipe de déploiement.
+C’est simple : contactez-nous à l’adresse [#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL}){:target="_blank" rel="noopener"} pour prendre rendez-vous avec notre équipe de déploiement.
 
 Collectif Objets est un service destiné aux conservateurs des Monuments Historiques et conservateurs des Antiquités et Objets d’Art.
 
@@ -82,11 +82,10 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
 * **Cliquez sur le lien « Créer une nouvelle campagne » et configurez la campagne :**
-
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates.
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées.
 * **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder » pour enregistrer la liste mise à jour.
-* **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mél, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire.
+* **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mail, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire.
 
 Voici également un tutoriel vidéo :
 
@@ -104,7 +103,7 @@ Pour accéder aux dossiers de recensement des communes :
   Les dossiers de recensement transmis par les communes sont présentés soit dans un tableau (« [Vue Tableau](#comment-fonctionne-la-vue-tableau-dun-dpartement-) »), soit sous forme de carte (« Vue Carte »).
 * **Cliquez sur le nom de la commune qui vous intéresse pour accéder à son dossier de recensement.**
 
-  P﻿our information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel.
+  Pour information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel.
 
 ![Liste des communes](/contenus/content_blobs/images/conservateurs_liste_communes.png)
 
@@ -114,14 +113,14 @@ Pour accéder aux dossiers de recensement des communes :
 
 Suivez les étapes ou visionnez la vidéo ci-dessous :
 
-* **Cliquez sur** **l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
+* **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
 
   * **Examinez les informations transmises par la commune :** à partir des photos récentes transmises par la commune, qui sont zoomables pour en examiner les détails, vous pouvez valider ou corriger les informations renseignées.
 
     Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée.
 
     **Si la commune s’est trompée d’objet, reportez-vous à cette section. De la même manière, si la commune n’a pas transmis de photos, reportez-vous à cette section.**
-  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée : *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)* ; *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)* ; *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)* ; *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen.
+  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée : *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)*, *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)*, *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)*, *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen.
 
     Un champ libre « commentaires pour la mairie » est à votre disposition si vous souhaitez préciser certains points à la commune.
   * **Enregistrez votre travail :** cliquez sur le bouton « Sauvegarder ».
@@ -167,7 +166,7 @@ Après avoir examiné les informations transmises par la commune pour chaque obj
 * **Cliquez sur le bouton « Envoyer l'examen ».**
 
   ![Examen terminé](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
-* **Décidez de si vous souhaiter prévoir une visite sur le terrain** en cochant la case appropriée : « *pas de visite prévue* » ; « *visite souhaitable* » et « *visite prioritaire* ». Cette option n'est pas diffusée aux communes, elle est uniquement pour votre usage personnel et votre suivi.
+* **Décidez de si vous souhaiter prévoir une visite sur le terrain** en cochant la case appropriée : « *pas de visite prévue* », « *visite souhaitable* » et « *visite prioritaire* ». Cette option n'est pas diffusée aux communes, elle est uniquement pour votre usage personnel et votre suivi.
 
   Un champ libre « commentaire global » est à votre disposition si vous souhaitez préciser certains points à la commune.
 * **Cliquez sur le bouton « Finaliser et envoyer l'examen à la commune »** pour lui transmettre votre examen.
@@ -204,7 +203,7 @@ Pour y accéder :
 * Vous pouvez alors rédiger votre message dans le champ dédié « Votre message » et y ajouter éventuellement une pièce-jointe.
 * Cliquez enfin sur le bouton « Envoyer » pour transmettre votre mél.
 
-  La mairie sera directement informée sur sa boîte mél - par une notification - que vous lui avez écrit. De la même manière, lorsque la commune vous répondra, vous recevrez une notification sur votre boîte mél.
+La mairie sera directement informée sur sa boîte mél - par une notification - que vous lui avez écrit. De la même manière, lorsque la commune vous répondra, vous recevrez une notification sur votre boîte mél.
 
 L’équipe de Collectif Objets a également accès aux échanges afin de pouvoir assister les communes lorsqu’elles rencontrent des problèmes avec le fonctionnement de Collectif Objets.
 
@@ -243,7 +242,7 @@ Si des informations semblent prescrites ou erronnées sur Collectif Objets, nous
 
 **Si un objet est attribué à une commune autre que celle qui l’abrite :**
 
-Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mél à : [contact@collectif-objets.beta.gouv.fr](mailto:contact@collectif-objets.beta.gouv.fr) .
+Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mél à : [#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL}).
 
 Si le changement de localisation de l’objet n’est pas détecté en amont de la campagne, c’est la commune indiquée sur la notice Palissy de l’objet qui recevra la demande de recensement.
 
@@ -255,7 +254,7 @@ Le compte de chaque conservateur dans Collectif Objets est lié à une adresse e
 
 Dans de rares cas, certains systèmes informatiques (de type "pare-feu" ou "anti-spam") bloquent la transmission des e-mails provenant de la plateforme Collectif Objets. Par exemple, le système de pare-feu utilisé par le service informatique d'une région peut considérer que les e-mails envoyés par la plateforme sont des "spams" et ainsi empêcher les adresses e-mails des employés de la région de recevoir les e-mails provenant de Collectif Objets.
 
-Si vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : contact@collectif-objets.beta.gouv.fr) ne soient plus considérés comme indésirables.
+Si vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : [#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL})) ne soient plus considérés comme indésirables.
 
 ## Autres
 
@@ -277,10 +276,7 @@ Les objets prioritaires sont les objets qui semblent mériter une attention part
 
 En France, le titre de “restaurateur” n’étant pas protégé, un artiste ou un artisan sans formation particulière peut se dire restaurateur. Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. Ces professionnels sont titulaires d’un diplôme reconnu au grade master de conservation-restauration des biens culturels (niveau bac +5/niveau 7 du cadre unifié européen) :  
 
-\- diplôme de l’Institut National du Patrimoine – département des restaurateurs (Paris-Aubervilliers)
-
-\- master de conservation-restauration des biens culturels (université de Paris I-Panthéon-Sorbonne)
-
-\- diplôme national supérieur d'expression plastique de l'école d'art et de design TALM de  Tours, mention conservation-restauration des oeuvres sculptées valant grade de Master
-
-\- diplôme national supérieur d'expression plastique de l’école supérieure d'art d’Avignon mention en conservation-restauration des biens culturels valant grade de Master
+- diplôme de l’Institut National du Patrimoine – département des restaurateurs (Paris-Aubervilliers)
+- master de conservation-restauration des biens culturels (université de Paris I-Panthéon-Sorbonne)
+- diplôme national supérieur d'expression plastique de l'école d'art et de design TALM de  Tours, mention conservation-restauration des oeuvres sculptées valant grade de Master
+- diplôme national supérieur d'expression plastique de l’école supérieure d'art d’Avignon mention en conservation-restauration des biens culturels valant grade de Master.
