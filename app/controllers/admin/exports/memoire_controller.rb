@@ -6,6 +6,15 @@ module Admin
       before_action :set_pop_export, only: %i[show destroy]
       before_action :set_departement, only: %i[new create]
 
+      def index
+        @departements = Departement
+          .order(:code)
+          .includes(:dossiers, :pop_exports_memoire)
+          .where.not(dossiers: { accepted_at: nil })
+          .where(recensements: Recensement.absent_or_recensable)
+          .includes(recensements: %i[photos_attachments objet])
+      end
+
       def show
         @pagy, attachments = pagy(@pop_export.recensement_photos_attachments, items: 50)
         @photos = MemoireExportPhoto.from_attachments(attachments, annee_versement: @pop_export.created_at.year)
@@ -32,7 +41,7 @@ module Admin
 
       def destroy
         @pop_export.destroy!
-        redirect_to admin_exports_pop_path, notice: "L'export a été supprimé", status: :see_other
+        redirect_to admin_exports_memoire_index_path, notice: "L'export a été supprimé", status: :see_other
       end
 
       private

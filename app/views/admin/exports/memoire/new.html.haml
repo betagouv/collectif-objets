@@ -1,6 +1,6 @@
 %main#contenu
   .fr-container.fr-mb-8w
-    = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Exports par département", admin_exports_pop_path]], current_page_label: "Export Mémoire pour #{@departement}"
+    = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Exports par département", admin_exports_memoire_index_path]], current_page_label: "Export Mémoire pour #{@departement}"
 
     %h1 Export Mémoire pour #{@departement}
 
@@ -9,7 +9,7 @@
 
       - if @exportable_count.positive?
         %div
-          %a.fr-btn.fr-btn{href: admin_exports_memoire_path(departement_code: @departement.code), "data-turbo-method": "POST", "data-turbo-confirm": "Attention, les recensements seront marqués comme exportés !"}
+          %a.fr-btn.fr-btn{href: admin_exports_memoire_index_path(departement_code: @departement.code), "data-turbo-method": "POST", "data-turbo-confirm": "Attention, les recensements seront marqués comme exportés !"}
             Générer l'export
 
     = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
