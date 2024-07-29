@@ -24,7 +24,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install libvips
-        run: sudo apt-get install -y libvips42 --no-install-recommends --fix-missing
+        run: sudo apt-get install -y libvips --no-install-recommends --fix-missing
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
