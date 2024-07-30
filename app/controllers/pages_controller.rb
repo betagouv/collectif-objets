@@ -4,7 +4,13 @@ class PagesController < ApplicationController
   PDFS = { "guide" => "Guidederecensement" }.freeze
   STATIC_FILES_HOST = "fichiers.collectif-objets.beta.gouv.fr"
 
-  before_action :render_markdown, only: [:conditions, :confidentialite, :mentions_legales]
+  before_action :render_markdown, only: [
+    :conditions,
+    :confidentialite,
+    :mentions_legales,
+    :declaration_accessibilite,
+    :schema_pluriannuel_accessibilite
+  ]
 
   def home
     @stats = Rails.cache.fetch("homepage_stats", expires_in: 24.hours) do
@@ -67,6 +73,8 @@ class PagesController < ApplicationController
   def conditions; end
   def confidentialite; end
   def mentions_legales; end
+  def declaration_accessibilite; end
+  def schema_pluriannuel_accessibilite; end
 
   attr_reader :active_nav_links
 
