@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   PDFS = { "guide" => "Guidederecensement" }.freeze
   STATIC_FILES_HOST = "fichiers.collectif-objets.beta.gouv.fr"
 
+  before_action :render_markdown, only: [:conditions, :confidentialite, :mentions_legales]
+
   def home
     @stats = Rails.cache.fetch("homepage_stats", expires_in: 24.hours) do
       { recensements: Recensement.select(:objet_id).distinct.count, communes: Commune.completed.count }
@@ -62,5 +64,16 @@ class PagesController < ApplicationController
     @active_nav_links = ["Je suis conservateur"]
   end
 
+  def conditions; end
+  def confidentialite; end
+  def mentions_legales; end
+
   attr_reader :active_nav_links
+
+  private
+
+  def render_markdown
+    @content_blob = ContentBlob.find(action_name)
+    render "content_blobs/show"
+  end
 end
