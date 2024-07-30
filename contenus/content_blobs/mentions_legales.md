@@ -28,13 +28,15 @@ OVH\\
 
 La conformité aux normes d’accessibilité numérique est un [objectif ultérieur](/declaration_accessibilite) mais nous tâchons de rendre cette plateforme accessible à toutes et à tous.
 
-Pour en savoir plus, vous pouvez consulter la [politique d’accessibilité numérique de l’État](https://accessibilite.numerique.gouv.fr/).
+Pour en savoir plus, vous pouvez consulter la [politique d’accessibilité numérique de l’État](https://accessibilite.numerique.gouv.fr/){:target="_blank" rel="noopener"}..
 
 ### Signaler un dysfonctionnement
 
 Si vous rencontrez un défaut d’accessibilité vous empêchant d’accéder à un contenu ou une fonctionnalité du site, merci de nous en faire part : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
 
 Si vous n’obtenez pas de réponse rapide de notre part, vous êtes en droit de faire parvenir vos doléances ou une demande de saisine au Défenseur des droits.
+
+L'État a mis en place une [politique d’accessibilité numérique](http://references.modernisation.gouv.fr/accessibilite-numerique){:target="_blank" rel="noopener"}.
 
 ## Sécurité
 

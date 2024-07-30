@@ -45,6 +45,8 @@ Pour les exercer, vous pouvez contacter l’adresse suivante : [CONTACT_EMAIL](m
 
 Ou par voie postale :
 
+En raison de lʼobligation de sécurité et de confidentialité dans le traitement des données à caractère personnel qui incombe au responsable de traitement, votre demande ne sera traitée que si vous apportez la preuve de votre identité. Pour vous aider dans votre démarche, consulter la fiche CNIL [Exercer son droit d'accès](https://www.cnil.fr/fr/modele/courrier/exercer-son-droit-dacces){:target="_blank" rel="noopener"}.
+
 Ministère de la Culture
 
 À l’attention du délégué à la protection des données (DPD)
@@ -54,7 +56,7 @@ Ministère de la Culture
 
 Puisque ce sont des droits personnels, nous ne traiterons votre demande que si nous sommes en mesure de vous identifier. Dans le cas où nous ne parvenons pas à vous identifier, nous pouvons être amenés à vous demander une preuve de votre identité.
 
-Pour vous aider dans votre démarche, la CNIL a élaboré un [modèle de courrier](https://www.cnil.fr/fr/modele/courrier/exercer-son-droit-dacces).
+Pour vous aider dans votre démarche, la CNIL a élaboré un [modèle de courrier](https://www.cnil.fr/fr/modele/courrier/exercer-son-droit-dacces){:target="_blank" rel="noopener"}..
 
 Le responsable de traitement s’engage à vous répondre dans un délai raisonnable qui ne saurait dépasser 1 mois à compter de la réception de votre demande.
 
@@ -106,5 +108,5 @@ Collectif Objets utilise Matomo, configuré en mode exempté et ne nécessitant 
 
 Pour en savoir plus, vous pouvez consulter les fiches suivantes proposées par la CNIL :
 
-- [Cookies & traceurs : que dit la loi ?](https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies/que-dit-la-loi)
-- [Cookies : les outils pour les maîtriser](https://www.cnil.fr/fr/cookies-et-autres-traceurs/comment-se-proteger/maitriser-votre-navigateur)
+- [Cookies & traceurs : que dit la loi ?](https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies/que-dit-la-loi){:target="_blank" rel="noopener"}
+- [Cookies : les outils pour les maîtriser](https://www.cnil.fr/fr/cookies-et-autres-traceurs/comment-se-proteger/maitriser-votre-navigateur){:target="_blank" rel="noopener"}
