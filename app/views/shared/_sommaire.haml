@@ -1,0 +1,11 @@
+%nav.fr-summary{ role: "navigation", "aria-labelledby": "fr-summary-title" }
+  %h2.fr-summary__title Table des matières
+  %ol
+    - items.each do |item|
+      %li
+        = link_to item.title, "##{item.id}", class: "fr-summary__link", "data-turbo": false
+        - if item.children.any?
+          %ol
+            - item.children.each do |child|
+              %li
+                = link_to child.title, "##{child.id}", class: "fr-summary__link", "data-turbo": false

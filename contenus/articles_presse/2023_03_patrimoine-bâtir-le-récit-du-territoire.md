@@ -9,6 +9,6 @@ resume: "Intervention de Romuald Goudeseune, conservateur des monuments
   Patrimoine : bâtir le récit du territoire\" à l'ocassion du 104ème Congrès de
   l'AMF."
 ---
-Protéger, restaurer et valoriser, telles sont les trois missions endossées par les élus et leurs agents, sujet d'un forum au 104e Congrès des maires, le 24 novembre. 
+Protéger, restaurer et valoriser, telles sont les trois missions endossées par les élus et leurs agents, sujet d'un forum au 104e Congrès des maires, le 24 novembre.
 
 Le ministère de la Culture a lancé, fin 2021, l’opération Collectif Objets, qui s’adresse directement aux élus locaux.  Les élus et leurs services sont incités à recenser en ligne leurs objets protégés, via une interface numérique dédiée. En s’appuyant sur ces informations, les conservateurs peuvent alors établir un diagnostic et accompagner les communes dans leurs démarches de restauration et valorisation.

@@ -28,7 +28,7 @@ class RapportPresenter
   attr_reader :dossier
 
   def fiches
-    @fiches ||= fiche_ids.map { Fiche.load_from_id(_1) }
+    @fiches ||= fiche_ids.map { Fiche.find(_1) }
   end
 
   private

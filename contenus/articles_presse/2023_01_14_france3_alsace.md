@@ -8,4 +8,4 @@ url: https://france3-regions.francetvinfo.fr/grand-est/bas-rhin/patrimoine-une-p
 
 C'est un outil numérique dédié à la sauvegarde du patrimoine. La plateforme "collectif objets" a été lancée en 2021 dans le Grand-Est pour tester le recensement participatif par les communes de leurs biens mobiliers, tous les objets classés ou inscrits aux monuments historiques.
 
-Reportage à Rosheim et Onhenheim avec la journaliste Florence Grandon pour France 3. 
+Reportage à Rosheim et Onhenheim avec la journaliste Florence Grandon pour France 3.

@@ -7,6 +7,6 @@ url: https://www.culture.gouv.fr/Regions/DRAC-Nouvelle-Aquitaine/Actualites/La-D
 ---
 « Collectif objets », une campagne participative et un site web pour accompagner les communes dans la préservation de leur patrimoine mobilier.
 
-Afin de soutenir les communes landaises dans la préservation de leur patrimoine mobilier protégé, la Direction régionale des Affaires culturelles de Nouvelle-Aquitaine déploie le dispositif Collectif Objets : un service numérique facilitant leurs échanges avec les conservateurs du département. 
+Afin de soutenir les communes landaises dans la préservation de leur patrimoine mobilier protégé, la Direction régionale des Affaires culturelles de Nouvelle-Aquitaine déploie le dispositif Collectif Objets : un service numérique facilitant leurs échanges avec les conservateurs du département.
 
 Pour la première fois en région Nouvelle-Aquitaine, les communes du département des Landes sont invitées à recenser les objets protégés au titre des monuments historiques conservés sur leur territoire.

@@ -1,3 +1,5 @@
+- content_for(:head_title) { "Aide en ligne : #{@content_blob.title}" }
+
 %main#contenu.fr-container.fr-pb-16w.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: @content_blob.title
 
@@ -5,8 +7,6 @@
 
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-md-4
-      %nav{"aria-label": "Table des matières"}
-        != @content_blob.table_of_contents_html
-
+      = render "shared/sommaire", items: @content_blob.toc
     .fr-col-md-8.co-markdown-content
       != @content_blob.to_html

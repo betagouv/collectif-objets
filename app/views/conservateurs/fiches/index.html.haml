@@ -23,4 +23,4 @@
               %td
                 .co-flex.co-flex--wrap.co-flex--gap-05rem
                   - commune.recensements.pluck(:analyse_fiches).flatten.uniq.each do |fiche_id| 
-                    = dsfr_tag(title: Fiche.load_from_id(fiche_id).title, classes: ["co-blue-tag"]) 
+                    = dsfr_tag(title: Fiche.find(fiche_id).title, classes: ["co-blue-tag"]) 

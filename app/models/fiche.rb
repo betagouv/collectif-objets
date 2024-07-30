@@ -2,9 +2,4 @@
 
 class Fiche
   include MarkdownModelConcern
-
-  def self.directory_path = "contenus/fiches"
-  def self.cache_prefix = "fiches"
-
-  def title = frontmatter_data[:titre]
 end
