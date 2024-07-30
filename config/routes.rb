@@ -175,12 +175,11 @@ Rails.application.routes.draw do
     end
     resources :admin_comments, only: %i[create destroy], controller: "comments"
     namespace :exports do
-      get :pop, controller: :pop, action: :index
+      resources :memoire, except: :edit
       controller :mpp do
         get :deplaces
         get :manquants
       end
-      resources :memoire, only: %i[new create show destroy], param: :departement_code
     end
     resources :attachments, only: [:destroy] do
       post :rotate
