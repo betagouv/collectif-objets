@@ -92,6 +92,7 @@ class Dossier < ApplicationRecord
 
   def aasm_after_submit(updates = {}, **_kwargs)
     update(notes_commune: updates[:notes_commune]) if updates.key?(:notes_commune)
+    update(recenseur: updates[:recenseur]) if updates.key?(:recenseur)
     commune.complete! unless commune.completed?
   end
 

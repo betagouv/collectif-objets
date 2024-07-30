@@ -267,6 +267,8 @@ fr:
       dossier:
         notes_commune: Commentaires de la commune
         notes_conservateur: Commentaires des conservateurs à destination de la commune
+        recenseur: Coordonnées de la personne ayant effectué le recensement
+        recenseur_hint_html: Indiquez ici uniquement le nom et les coordonnées de la personne en charge du recensement afin de faciliter le suivi des objets protégés. Ces données sont couvertes par notre <a href="%{confidentialite_path}" target="_blank" rel="noopener">politique de confidentialité</a>.
         interface_communes:
           notes_commune: Vos commentaires à destination des conservateurs
         interface_conservateurs:

@@ -2,6 +2,7 @@
 %main#contenu.fr-container.fr-pb-8w
   = render"shared/breadcrumbs",
     links: [["Accueil", root_path], ["Objets de #{@commune.nom}", commune_objets_path(@commune)]], current_page_label: "Finalisation"
+
   - if @commune.errors.any?
     .fr-grid-row
       .fr-col-md-6
@@ -11,24 +12,31 @@
           %ul
             - @commune.errors.attribute_names.each do |attribute|
               %li= @commune.errors.messages_for(attribute).first
-  .fr-grid-row
-    .fr-col-md-6
-      %h1
-        Finalisation du recensement de #{@commune.nom}
-      %p
-        Veuillez vérifier la complétion et l'exactitude de vos recensements avant de les transmettre aux conservateurs de votre département.
+
+  %h1 Finalisation du recensement de #{@commune.nom}
+
+  .co-readable
+    %p
+      Veuillez vérifier la complétion et l'exactitude de vos recensements avant de les transmettre aux conservateurs de votre département.
 
   = render "communes/completions/summary", objets: @objets
-  .fr-grid-row
-    .fr-col-md-6
-      = form_for @dossier_completion,
-        as: :dossier_completion,
-        url: commune_completion_path(@commune),
-        method: "POST",
-        builder: FormBuilderDsfr,
-        data: (@missing_photos ? { turbo_confirm: "Un recensement d'objet sans photo vous sera probablement renvoyé par les conservateurs. Êtes-vous sûr de vouloir valider votre recensement en l'état ?" } : {}) do |f|
+
+  = form_for @dossier_completion,
+    as: :dossier_completion,
+    url: commune_completion_path(@commune),
+    method: "POST",
+    builder: FormBuilderDsfr,
+    data: (@missing_photos ? { turbo_confirm: "Un recensement d'objet sans photo vous sera probablement renvoyé par les conservateurs. Êtes-vous sûr de vouloir valider votre recensement en l'état ?" } : {}) do |f|
+    .fr-grid-row.fr-grid-row--gutters
+      .fr-col-md-6.fr-mb-2w
         .fr-input-group
           = f.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune")
           = f.text_area :notes_commune
-        .actions
-          = f.submit "Je valide le recensement des objets de ma commune"
+      .fr-col-md-6.fr-mb-2w
+        .fr-input-group
+          = f.label :recenseur do
+            = t("activerecord.attributes.dossier.recenseur")
+            %span.fr-hint-text= t("activerecord.attributes.dossier.recenseur_hint_html", confidentialite_path:)
+          = f.text_area :recenseur
+    .actions
+      = f.submit "Je valide le recensement des objets de ma commune"

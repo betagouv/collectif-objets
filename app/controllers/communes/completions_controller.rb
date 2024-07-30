@@ -39,7 +39,7 @@ module Communes
     end
 
     def dossier_completion_params
-      params.require(:dossier_completion).permit(:notes_commune).to_h.symbolize_keys
+      params.require(:dossier_completion).permit(:notes_commune, :recenseur).to_h.symbolize_keys
         .merge(user: current_user)
     end
 

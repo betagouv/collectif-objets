@@ -1,14 +1,22 @@
 - content_for(:head_title) { "Recensements de #{@commune.nom}" }
 %main#contenu.fr-container.fr-pt-2w.fr-pb-8w
   = render "shared/breadcrumbs",  links: [["Accueil", root_path], ["Objets de #{@commune.nom}", commune_objets_path(@commune)]],  current_page_label: "Données envoyées"
-  %h1
-    Recensements de #{@commune.nom}
-  .fr-grid-row
-    .fr-col-md-6
-      %p Merci d'avoir participé et validé le recensement des objets de votre commune ! Un conservateur a été prévenu et reviendra vers vous.
+
+  %h1 Recensements de #{@commune.nom}
+
+  .co-readable
+    %p Merci d'avoir participé et validé le recensement des objets de votre commune ! Un conservateur a été prévenu et reviendra vers vous.
+
   = render "communes/completions/summary", objets: @objets
-  - if @dossier.notes_commune.present?
-    %p= t("activerecord.attributes.dossier.interface_communes.notes_commune")
-    = blockquote(@dossier.notes_commune)
-  - else
-    %p.co-text--italic Aucun commentaire à destination des conservateurs
+
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-md-6.fr-mb-4w
+      - if @dossier.notes_commune.present?
+        = t("activerecord.attributes.dossier.notes_commune")
+        = blockquote(@dossier.notes_commune)
+      - else
+        %p.co-text--italic Aucun commentaire à destination des conservateurs
+    - if @dossier.recenseur.present?
+      .fr-col-md-6.fr-mb-4w
+        = t("activerecord.attributes.dossier.recenseur")
+        = blockquote(@dossier.recenseur)
