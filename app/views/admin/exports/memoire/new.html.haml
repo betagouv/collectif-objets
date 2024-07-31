@@ -1,3 +1,5 @@
+- content_for(:head_title) { "Nouvel export Mémoire pour #{@departement}" }
+
 %main#contenu
   .fr-container.fr-mb-8w
     = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Exports par département", admin_exports_memoire_index_path]], current_page_label: "Export Mémoire pour #{@departement}"

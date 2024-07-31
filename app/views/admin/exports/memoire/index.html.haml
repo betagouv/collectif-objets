@@ -1,3 +1,5 @@
+- content_for(:head_title) { "Exports mémoire par départements" }
+
 %main#contenu
   .fr-container.fr-mb-8w
     = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Exports par département"
