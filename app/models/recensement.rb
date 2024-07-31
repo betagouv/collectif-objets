@@ -104,7 +104,6 @@ class Recensement < ApplicationRecord
   }
   scope :in_commune, ->(commune) { joins(:objet).where(objets: { commune: }) }
   scope :not_analysed, -> { where(analysed_at: nil) }
-  scope :absent_or_recensable, -> { where(recensable: true).or(absent) }
   scope :completed, -> { where(status: "completed") }
 
   # from https://medium.com/@cathmgarcia/soft-deletion-in-ruby-on-rails-a1d65d0172ab

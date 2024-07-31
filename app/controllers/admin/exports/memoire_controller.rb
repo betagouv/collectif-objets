@@ -11,7 +11,7 @@ module Admin
           .order(:code)
           .includes(:dossiers, :pop_exports_memoire)
           .where.not(dossiers: { accepted_at: nil })
-          .where(recensements: Recensement.absent_or_recensable)
+          .where(recensements: Recensement.recensable)
           .includes(recensements: %i[photos_attachments objet])
       end
 
