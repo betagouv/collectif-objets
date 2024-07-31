@@ -158,7 +158,17 @@
 
         %h2.fr-mt-4w#administration 4. Administration
         %p Ces pages sont visibles uniquement pour les administrateurs connectés
-        %p Plan des pages en construction …
 
         %ul
-          %li= link_to "Accueil de l'administration", admin_path
+          %li= link_to "Administration", admin_path
+          %li= link_to "Liste des communes", admin_communes_path
+          %li= link_to "Liste des conservateurs", admin_conservateurs_path
+          %li= link_to "Liste des campagnes", admin_campaigns_path
+          %li= link_to "Prévisualisation des emails", mail_previews_path
+          %li  Suivi des tâches asynchrones
+          %li= link_to "Codes de connexion", admin_session_codes_path
+          %li= link_to "Export des photos pour Mémoire", admin_exports_memoire_index_path
+          %li= link_to "Export des objets déplacés pour Palissy", admin_exports_deplaces_path
+          %li= link_to "Export des objets manquants pour Palissy", admin_exports_manquants_path
+
+
