@@ -12,7 +12,6 @@
           %tr
             %th Département
             %th Dossiers examinés
-            %th Recensements examinés
             %th dont disparus ou introuvables
             %th Photos
             %th Exports
@@ -21,7 +20,6 @@
             %tr
               %td= departement
               %td= departement.dossiers.length
-              %td= departement.recensements.length
               %td= departement.recensements.to_a.reject(&:pop_export_palissy_id).reject(&:edifice_initial?).length
               %td
                 - photos_count = departement.recensements.to_a.reject(&:pop_export_memoire_id).sum { _1.photos.select(&:exportable?).length }
