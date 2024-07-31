@@ -1,18 +1,18 @@
 - content_for(:head_title) { "Admin - Campagnes" }
 
-.fr-container.fr-grid-row.fr-pt-2w.fr-pb-4w
+%main#contenu.fr-container.fr-grid-row.fr-pt-2w.fr-pb-4w
   .fr-col-md-10
     = render("shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Campagnes")
 
     .co-flex.co-flex--space-between
-      %h2
+      %h1
         = icon_span("question-answer")
         Admin - Campagnes
       %div= link_to "Créer une nouvelle campagne", new_admin_campaign_path, class: "fr-btn"
 
     = search_form_for @ransack, url: admin_campaigns_path, builder: FormBuilderDsfr do |f|
       .co-flex.co-flex--align-items-center.co-flex--justify-content-center.fr-mt-2w
-        %div Filtres
+        %h2.fr-mb-1w Filtres
         .fr-ml-2w
           = f.select :status_eq, [["tous les statuts", nil]] + campaigns_statuses_options, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
 

@@ -3,6 +3,7 @@
 
 %main#contenu.fr-container.fr-pt-2w.fr-pb-4w
   = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Campagnes", admin_campaigns_path], [campaign_title(@campaign), admin_campaign_path(@campaign)]], current_page_label: "Communes"
+
   %h1= title
 
   = render "shared/campaigns/edit_recipients_content", campaign: @campaign, routes_prefix: :admin, communes_ids: @communes_ids
