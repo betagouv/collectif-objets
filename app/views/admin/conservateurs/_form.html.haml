@@ -2,14 +2,16 @@
   .fr-alert.fr-alert--error.fr-mb-4w
     %p
       Erreur(s)
+    %ul
       - conservateur.errors.full_messages.each do |message|
         %li= message
 
 = form_for [:admin, conservateur], builder: FormBuilderDsfr, data: { turbo: false } do |f|
   .fr-input-group
-    = f.label :email, "Email (*)"
-    - if conservateur.persisted?
-      %i Si c'est un conservateur différent, il faut créer un nouveau compte conservateur !
+    = f.label :email do
+      Email (*)
+      - if conservateur.persisted?
+        %span.fr-hint-text Si c'est un conservateur différent, il faut créer un nouveau compte conservateur !
     = f.text_field :email, required: true
   .fr-input-group
     = f.label :first_name
