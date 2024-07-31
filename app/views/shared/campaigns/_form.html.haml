@@ -9,7 +9,7 @@
 = form_for [routes_prefix, campaign], builder: FormBuilderDsfr do |f|
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-md-6
-      %h3 Configuration
+      %h2 Configuration
       .fr-input-group
         = f.label :departement_code
         = f.select :departement_code, Departement.order(:code).all.map { [_1.to_s, _1.code ] }, {}, disabled: campaign.persisted? || local_assigns[:departement_disabled]
@@ -36,7 +36,7 @@
             La signature sera utilisée dans le bas du mail. Elle peut faire entre 1 et 8 lignes.
         = f.text_area :signature, placeholder: "Jeanne Dupont\n\nConservatrice en charge des monuments historiques\nDRAC Rhône-Alpes, Châlons-sur-Saone, 10 rue de la république", rows: 4
     .fr-col-md-6
-      %h3 Dates
+      %h2 Dates
       .fr-mb-2w{"data-controller" => "date-lancement"}
         - Campaign::DATE_FIELDS.each_with_index do |date_field, index|
           .fr-input-group

@@ -14,9 +14,11 @@
       .co-flex.co-flex--align-items-center.co-flex--justify-content-center.fr-mt-2w
         %h2.fr-mb-1w Filtres
         .fr-ml-2w
+          = f.label :status_eq, "Statuts", class: "fr-sr-only"
           = f.select :status_eq, [["tous les statuts", nil]] + campaigns_statuses_options, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
 
         .fr-ml-2w
+          = f.label :departement_code_eq, "Département", class: "fr-sr-only"
           = f.select :departement_code_eq, [["tous les départements", nil]] + departements_options, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
 
         - if @query_present
@@ -27,7 +29,7 @@
       %table
         %thead
           %tr
-            %th
+            %th Campagne
             %th= sort_link @ransack, :departement_code, "Département"
             %th= sort_link @ransack, :status, "Statut"
             %th= sort_link @ransack, :recipients_count, "Nombre de communes"
