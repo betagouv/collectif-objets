@@ -22,9 +22,27 @@
   .fr-input-group
     = f.label :phone_number
     = f.text_field :phone_number
-  .fr-input-group
-    = f.label :departements, "Départements"
-    .co-columns--4
-      = f.collection_check_boxes(:departement_ids, Departement.all.order(:code), :code, :to_s) do |ff|
-        %div= ff.label { ff.check_box + ff.text }
+  %fieldset.fr-fieldset
+    %legend
+      Départements
+    %input{type: :hidden, name: "conservateur[departement_ids][]", value: "" }
+    .fr-fieldset__element{ data: { controller: "multichecker" } }
+      %ul.fr-btns-group.fr-btns-group--icon-left.fr-btns-group--inline-md.fr-my-2w
+        %li
+          %button.fr-btn.fr-btn--secondary.fr-btn--icon-left.fr-icon-check-line{"data-action" => "multichecker#checkAll"}
+            Tout sélectionner
+        %li
+          %button.fr-btn.fr-btn--tertiary.fr-btn--icon-left.fr-icon-close-line{"data-action" => "multichecker#uncheckAll"}
+            Tout désélectionner
+      .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.w-100
+        - Departement.all.order(:code).each do |departement|
+          - input_id = "conservateur_departement_ids_#{departement.id}"
+          .fr-checkbox-group.fr-checkbox-group--sm.fr-mb-1w.co-break-avoid-column
+            %input{type: :checkbox,
+              name: "conservateur[departement_ids][]",
+              id: input_id,
+              value: departement.id,
+              checked: conservateur.departement_ids.include?(departement.id),
+              "data-multichecker-target": :checkbox}
+            %label.fr-label{for: input_id}= departement
   = f.submit "Enregistrer"
