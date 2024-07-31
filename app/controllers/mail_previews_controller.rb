@@ -20,6 +20,8 @@ class MailPreviewsController < ApplicationController
     @mail = @mailer.call(@email)
   end
 
+  private
+
   def set_mailers
     @mailers = ActionMailer::Preview.all.reject { |mailer| mailer.emails.empty? }
   end
