@@ -10,6 +10,7 @@ class Campaign < ApplicationRecord
   has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy
   has_many :communes, through: :recipients
   has_many :objets, through: :communes
+  has_many :dossiers, dependent: nil # Pour le calcul des statistiques
   has_many :emails, class_name: "CampaignEmail", through: :recipients
 
   accepts_nested_attributes_for :recipients, allow_destroy: true
@@ -26,6 +27,8 @@ class Campaign < ApplicationRecord
     event(:start, before: :archive_dossiers) { transitions from: :planned, to: :ongoing }
     event(:finish) { transitions from: :ongoing, to: :finished }
   end
+
+  scope :active, -> { where(status: [:ongoing, :finished], date_lancement: Date.current.., date_fin: ..Date.current) }
 
   validates :date_lancement, :date_relance1, :date_relance2, :date_relance3, :date_fin, presence: true
   validates :sender_name, :signature, :nom_drac, presence: true, unless: :draft?
