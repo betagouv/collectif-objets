@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Rails/OutputSafety
 module CampaignHelper
   def campaign_status_badge(campaign)
     color = {
@@ -10,7 +9,7 @@ module CampaignHelper
       "finished" => :success
     }[campaign.status]
     text = I18n.t("activerecord.attributes.campaign.statuses.#{campaign.status}")
-    "<span class=\"fr-badge fr-badge--sm fr-badge--#{color}\">#{text}</span>".html_safe
+    tag.span text, class: "fr-badge fr-badge--sm fr-badge--#{color}"
   end
 
   def campaigns_statuses_options
@@ -39,4 +38,3 @@ module CampaignHelper
     ]
   end
 end
-# rubocop:enable Rails/OutputSafety
