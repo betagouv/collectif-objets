@@ -6,15 +6,15 @@
       .fr-card
         .fr-card__body
           .fr-card__content
-            %h3.fr-card__title.fr-text-title--blue-france #{stats.communes_completed_percentage}%
-            %p.fr-card__desc de communes recenseuses, soit #{stats.communes_completed_count} communes sur #{stats.communes_count}
+            %h3.fr-card__title.fr-text-title--blue-france Communes recenseuses : #{stats.communes_completed_percentage}%
+            %p.fr-card__desc Soit #{stats.communes_completed_count} communes sur #{stats.communes_count}.
 
     .fr-col-md-3.fr-col-12
       .fr-card
         .fr-card__body
           .fr-card__content
-            %h3.fr-card__title.fr-text-title--blue-france #{stats.objets_recenses_percentage}%
-            %p.fr-card__desc d'objets recensés, soit #{stats.objets_recenses_count} objets sur #{stats.objets_count}
+            %h3.fr-card__title.fr-text-title--blue-france Objets recensés : #{stats.objets_recenses_percentage}%
+            %p.fr-card__desc Soit #{stats.objets_recenses_count} objets sur #{stats.objets_count}.
 
     .fr-col-md-6
       .fr-card
@@ -25,23 +25,22 @@
               %canvas.co-height-150px{data: { controller: "stacked-line-chart",
                 datasets: departement_etat_objets_line_chart_data(stats).to_json,
                 "unit-suffix": "objet(s)",
-                "x-title": "nombre d’objets"} }
+                "x-title": "Nombre d’objets"} }
 -# version mobile
 .fr-mb-4w.fr-accordion.fr-background-alt--blue-france.hide.co-display--sm
   %h2.fr-accordion__title
     %button.fr-accordion__btn{"aria-expanded" => "false", "aria-controls" => "accordion-stats"} Voir les statistiques du département
-  .fr-collapse{id: "accordion-stats"}
-    .fr-grid-row.fr-grid-row--gutters.fr-mb-2w.fr-background-alt--blue-france
-      .fr-col-md-3.fr-col-12
-        .fr-card
-          .fr-card__body
-            .fr-card__content
-              %h3.fr-card__title.fr-text-title--blue-france #{stats.communes_completed_percentage}%
-              %p.fr-card__desc de communes recenseuses, soit #{stats.communes_completed_count} communes sur #{stats.communes_count}
+  .fr-collapse.fr-px-2w.fr-pb-0#accordion-stats
+    %p
+      %strong= "#{stats.communes_completed_percentage}%"
+      de communes recenseuses, soit
+      %strong= stats.communes_completed_count
+      communes sur
+      %strong= "#{stats.communes_count}."
 
-      .fr-col-md-3.fr-col-12
-        .fr-card
-          .fr-card__body
-            .fr-card__content
-              %h3.fr-card__title.fr-text-title--blue-france #{stats.objets_recenses_percentage}%
-              %p.fr-card__desc d'objets recensés, soit #{stats.objets_recenses_count} objets sur #{stats.objets_count}
+    %p
+      %strong= "#{stats.objets_recenses_percentage}%"
+      des objets sont recensés, soit
+      %strong= stats.objets_recenses_count
+      objets sur
+      %strong= "#{stats.objets_count}."
