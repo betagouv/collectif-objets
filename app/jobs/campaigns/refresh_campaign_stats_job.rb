@@ -4,7 +4,7 @@ module Campaigns
   class RefreshCampaignStatsJob < ApplicationJob
     def perform(campaign_id)
       @campaign = Campaign.find(campaign_id)
-      @campaign.update_columns(stats: CampaignStats.new(@campaign).stats)
+      @campaign.refresh_stats
     end
   end
 end

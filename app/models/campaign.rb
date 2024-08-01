@@ -158,6 +158,10 @@ class Campaign < ApplicationRecord
     "Campagne #{departement} du #{date_lancement} au #{date_fin}"
   end
 
+  def refresh_stats
+    update_columns(stats: CampaignStats.new(self).stats)
+  end
+
   private
 
   def prod? = Rails.configuration.x.environment_specific_name == "production"
