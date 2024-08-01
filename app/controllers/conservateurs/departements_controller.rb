@@ -9,7 +9,7 @@ module Conservateurs
     end
 
     def show
-      @stats = Co::DepartementStats.new(@departement.code)
+      @stats = Co::DepartementStats.new(@departement)
       set_communes
       if params[:vue] == "carte"
         @communes.select(%w[code_insee nom status objets_count en_peril_count latitude longitude]).to_a

@@ -6,13 +6,16 @@ module Co
       @departement = departement
     end
 
+    attr_reader :departement
+
+    delegate :code, :communes_count, to: :departement
+
     def objets_count
-      @objets_count ||= Objet.where(lieu_actuel_departement_code: @departement).count
+      @objets_count ||= Objet.in_departement(code).count
     end
 
     def objets_recenses_count
-      @objets_recenses_count ||=
-        Objet.where(lieu_actuel_departement_code: @departement).where.associated(:recensements).count
+      @objets_recenses_count ||= Recensement.in_departement(code).count
     end
 
     def objets_recenses_percentage
@@ -21,12 +24,8 @@ module Co
       @objets_recenses_percentage ||= (objets_recenses_count.to_f / objets_count * 100).round
     end
 
-    def communes_count
-      @communes_count ||= Commune.where(departement: @departement).count
-    end
-
     def communes_completed_count
-      @communes_completed_count ||= Commune.where(departement: @departement).completed.count
+      @communes_completed_count ||= departement.communes.completed.count
     end
 
     def communes_completed_percentage
@@ -36,8 +35,7 @@ module Co
     end
 
     def etats_sanitaires_value_counts
-      @etats_sanitaires_value_counts ||=
-        Recensement.in_departement(@departement).etats_sanitaires_value_counts
+      @etats_sanitaires_value_counts ||= departement.recensements.etats_sanitaires_value_counts
     end
   end
 end
