@@ -5,7 +5,7 @@
       .fr-col-md-6
         - if stats[:statuses].present?
           %p
-            Statut des #{@campaign.communes.count} communes
+            Statut des #{@campaign.recipients_count} communes
           %canvas{data: { controller: "stacked-line-chart",
             datasets: campaign_communes_statuses_line_chart_datasets(stats[:statuses]).to_json,
             "unit-suffix": "commune(s)",
