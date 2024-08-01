@@ -1,3 +1,5 @@
+- content_for(:head_title) { "Export Mémoire ##{@pop_export.id}" }
+
 %main#contenu
   .fr-container.fr-mb-8w
     = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Exports par département", admin_exports_memoire_index_path]], current_page_label: "Export Mémoire ##{@pop_export.id} pour #{@pop_export.departement}"
@@ -28,6 +30,6 @@
     .co-flex.co-flex--space-between.fr-mt-8w
       %h2.h4 #{@pagy.count} Photos exportées
 
-    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy} if @pagy.pages > 1
     = render "photos_table", photos_recensement: @photos
-    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
+    = render partial: 'shared/pagy_nav', locals: {pagy: @pagy} if @pagy.pages > 1

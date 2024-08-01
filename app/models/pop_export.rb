@@ -20,8 +20,8 @@ class PopExport < ApplicationRecord
   has_many :photos_attachments, -> { where(exportable: true) }, through: :recensements_memoire
   has_one_attached :zip
   has_one_attached :csv
-  scope :palissy, -> { where(base: "palissy") }
-  scope :memoire, -> { where(base: "memoire") }
+  scope :palissy, -> { where(base: :palissy) }
+  scope :memoire, -> { where(base: :memoire) }
 
   def recensement_photos_attachments
     ActiveStorage::Attachment
