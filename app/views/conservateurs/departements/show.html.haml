@@ -1,4 +1,4 @@
-- content_for(:head_title) { t(".head_title", departement: @departement) }
+- content_for(:head_title) { "#{@departement.nom} - Vue tableau" }
 
 %main#contenu.fr-container.fr-mb-8w
   = render "shared/breadcrumbs", links: [["Départements", conservateurs_departements_path]], current_page_label: @departement.nom

@@ -1,4 +1,4 @@
-- content_for(:head_title) { t(".head_title", departement: @departement) }
+- content_for(:head_title) { "#{@departement.nom} - Vue carte" }
 
 = vite_javascript_tag "conservateur_map"
 
