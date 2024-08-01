@@ -111,6 +111,8 @@ class Recensement < ApplicationRecord
   scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
   scope :with_deleted, -> { unscope(where: :deleted_at) }
 
+  scope :not_exported_yet, -> { where(pop_export_memoire_id: nil) }
+
   # L'objet est prioritaire s'il a disparu ou s'il est en péril,
   # jugé par la commune ou le conservateur
   RECENSEMENT_ABSENT_SQL = %("recensements"."localisation" = '#{LOCALISATION_ABSENT}').freeze

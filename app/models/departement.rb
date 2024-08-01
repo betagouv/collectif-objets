@@ -32,6 +32,7 @@ class Departement < ApplicationRecord
   has_many :objets, through: :communes
   has_many :dossiers, through: :communes, source: :dossiers
   has_many :recensements, through: :dossiers
+  has_many :photos_attachments, through: :recensements
   has_many :conservateur_roles, dependent: :destroy, foreign_key: :departement_code, inverse_of: :departement
   has_many :conservateurs, through: :conservateur_roles
   has_many :campaigns, dependent: :nullify, foreign_key: :departement_code, inverse_of: :departement
