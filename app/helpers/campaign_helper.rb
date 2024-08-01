@@ -21,20 +21,24 @@ module CampaignHelper
   end
 
   def campaign_communes_statuses_line_chart_datasets(statuses_stats)
+    started = statuses_stats.fetch("construction", 0)
+    submitted = statuses_stats.fetch("submitted", 0)
+    accepted = statuses_stats.fetch("accepted", 0)
+    inactive = statuses_stats.fetch("total", 0) - (started + submitted + accepted)
     [
-      { label: "Inactive", backgroundColor: "rgba(254, 238, 113, 1)", data: [statuses_stats.fetch("inactive", 0)] },
-      { label: "Recensement démarré", backgroundColor: "rgba(94, 100, 255, 1)",
-        data: [statuses_stats.fetch("started", 0)] },
-      { label: "Recensement terminé", backgroundColor: "rgba(30, 100, 30, 1)",
-        data: [statuses_stats.fetch("completed", 0)] }
+      { label: "Inactive", data: [inactive], backgroundColor: "rgb(254, 247, 218)" },
+      { label: "En cours de recensement", data: [started], backgroundColor: "rgb(252, 198, 58)" },
+      { label: "Recensement terminé", data: [submitted], backgroundColor: "rgb(192, 140, 101)" },
+      { label: "Recensement examiné", data: [accepted], backgroundColor: "rgb(149, 226, 87)" }
     ]
   end
 
   def campaign_objets_statuses_line_chart_datasets(objets_stats)
+    recensés = objets_stats.fetch("recensed", 0)
+    non_recensés = objets_stats.fetch("not_recensed", 0)
     [
-      { label: "Pas encore recensé", backgroundColor: "rgba(254, 238, 113, 1)",
-        data: [objets_stats.fetch("not_recensed", 0)] },
-      { label: "Recensé", backgroundColor: "rgba(94, 100, 255, 1)", data: [objets_stats.fetch("recensed", 0)] }
+      { label: "Pas encore recensé", data: [non_recensés], backgroundColor: "rgb(254, 247, 218)" },
+      { label: "Recensé", data: [recensés], backgroundColor: "rgb(149, 226, 87)" }
     ]
   end
 end

@@ -11,6 +11,7 @@ class Campaign < ApplicationRecord
   has_many :communes, through: :recipients
   has_many :objets, through: :communes
   has_many :dossiers, dependent: nil # Pour le calcul des statistiques
+  has_many :recensements, through: :dossiers
   has_many :emails, class_name: "CampaignEmail", through: :recipients
 
   accepts_nested_attributes_for :recipients, allow_destroy: true
