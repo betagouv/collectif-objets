@@ -33,9 +33,13 @@ class Commune < ApplicationRecord
     inverse_of: :commune,
     dependent: nil # leave the objets in the database when the commune is destroyed
   )
+
+  has_many :dossiers, dependent: :restrict_with_error
   has_many :archived_dossiers, -> { archived }, class_name: "Dossier",
                                                 dependent: :restrict_with_error,
                                                 inverse_of: :commune
+
+  # Pourrait être renommé en dossier_en_cours
   has_one :dossier, -> { where.not(status: :archived) }, dependent: :restrict_with_error, inverse_of: :commune
   has_many :recensements, through: :dossier, source: :recensements
   has_many :campaign_recipients, dependent: :destroy
