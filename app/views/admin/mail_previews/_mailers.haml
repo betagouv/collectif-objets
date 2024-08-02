@@ -1,0 +1,7 @@
+- mailers.each do |mailer|
+  .fr-mb-4w
+    %h2= mailer.preview_name.titleize
+    %ul
+      - mailer.emails.each do |email|
+        %li
+          = link_to t("#{mailer.preview_name}.#{email}.title", default: email), preview_admin_mail_previews_path(mailer: mailer.preview_name, email:), "data-turbo-frame": "mail_preview", "data-turbo-action": "advance"

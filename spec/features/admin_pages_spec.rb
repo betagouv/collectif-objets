@@ -70,7 +70,7 @@ feature "Admin", js: true do
   end
 
   describe "prévisualisation des mails" do
-    let(:path) { mail_previews_path }
+    let(:path) { admin_mail_previews_path }
     it_behaves_like "an accessible page"
   end
 
