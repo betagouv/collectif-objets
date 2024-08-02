@@ -8,13 +8,12 @@
   = render "stats", stats: @stats
   #tabs-container
     .fr-tabs
-      %ul.fr-tabs__list{"aria-label" => "Tableau ou Carte", role: "tablist"}
+      %ul.fr-tabs__list{ role: :tablist, "aria-label": "Tableau ou Carte" }
         %li{role: "presentation"}
-          %button#tab-tableau.fr-tabs__tab{"aria-controls" => "tabpanel-tableau", "aria-selected" => "true", role: "tab", tabindex: "0"}
+          %button#tab-tableau.fr-tabs__tab{ role: :tab, aria: { selected: true, controls: :"tabpanel-tableau" } }
             Vue Tableau
         %li{role: "presentation"}
-          %a#tab-carte.fr-tabs__tab{href: "#{conservateurs_departement_path(@departement, vue: "carte", anchor: "tabs-container")}", role: "tab", tabindex: "1"}
-            Vue Carte
-      #tabpanel-tableau.fr-tabs__panel.fr-tabs__panel--selected{"aria-labelledby" => "tab-tableau", role: "tabpanel", tabindex: "0"}
+          = link_to "Vue carte", conservateurs_departement_path(@departement, vue: :carte, anchor: "tabs-container"), class: "fr-tabs__tab", role: :tab
+      #tabpanel-tableau.fr-tabs__panel.fr-tabs__panel--selected{ role: :tabpanel, aria: { labelledby: "tab-tableau" }, tabindex: "0" }
         = turbo_frame_tag "communes-search" do
           = render "communes_search", ransack: @ransack, departement: @departement, communes: @communes, pagy: @pagy, query_present: @query_present

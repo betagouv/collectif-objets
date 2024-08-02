@@ -6,8 +6,8 @@
       .fr-col-12.fr-col-sm-4
         = f.label :nom_unaccented_cont, "Nom de commune", class: "fr-mb-1w"
         .co-flex
-          = f.text_field :nom_unaccented_cont, data: { controller: "input-autosubmit", action: "change->input-autosubmit#submit" }
-          %button.fr-btn.fr-btn--tertiary.fr-icon-search-line
+          = f.text_field :nom_unaccented_cont
+          %button.fr-btn.fr-btn--tertiary.fr-icon-search-line{ aria: { label: "Chercher" } }
       .fr-col-12.fr-col-sm-4
         = f.label :statut_global_eq, "Statut de l'examen"
         = f.select :statut_global_eq, communes_statuses_options_for_select, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
