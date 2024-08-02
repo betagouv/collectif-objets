@@ -16,6 +16,7 @@ FactoryBot.define do
     end
 
     trait :accepted do
+      conservateur
       status { "accepted" }
       accepted_at { 2.days.ago }
       notes_conservateur { "Quels beaux tableaux" }

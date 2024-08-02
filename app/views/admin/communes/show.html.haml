@@ -1,6 +1,6 @@
 - content_for(:head_title) { "#{@commune.nom} - Admin" }
 
-.fr-container.fr-pt-2w
+%main#contenu.fr-container.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
 
   %h1= @commune
@@ -45,6 +45,7 @@
           = f.hidden_field :resource_type
           = f.hidden_field :resource_id
           .fr-input-group
+            = f.label :body, "Commentaire", class: "fr-sr-only"
             = f.text_area :body
           = f.submit "Créer un nouveau commentaire"
       - if @commune.admin_comments.count.zero?

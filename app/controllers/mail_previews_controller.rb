@@ -2,6 +2,7 @@
 
 class MailPreviewsController < ApplicationController
   before_action :set_mailers
+  before_action :restrict_access
 
   # Temporarily allow inline styles when previewing emails
   content_security_policy(only: :show) do |policy|
@@ -18,6 +19,14 @@ class MailPreviewsController < ApplicationController
             "L'email '#{@email}' n'est pas disponible dans le mailer '#{@mailer&.name || params[:mailer]}'"
     end
     @mail = @mailer.call(@email)
+  end
+
+  private
+
+  def restrict_access
+    return true if admin_user_signed_in?
+
+    redirect_to root_path, alert: "Vous n'êtes pas connecté en tant qu'admin"
   end
 
   def set_mailers
