@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :campaign do
-    status { "ongoing" }
+    status { :ongoing }
     association :departement
     sequence(:date_lancement) do |offset|
       initial_date = Date.new(2030, 1, 7) # monday
@@ -20,8 +20,12 @@ FactoryBot.define do
         "DRAC Rhône-Alpes, Châlons-sur-Saone, 10 rue de la république"
     end
 
+    trait :draft do
+      status { :draft }
+    end
+
     trait :planned do
-      status { "planned" }
+      status { :planned }
     end
 
     trait :with_communes do

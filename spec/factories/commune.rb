@@ -28,6 +28,7 @@ FactoryBot.define do
     end
 
     trait :completed do
+      with_user
       status { "completed" }
       dossier { association(:dossier, :submitted, commune: instance) }
     end
