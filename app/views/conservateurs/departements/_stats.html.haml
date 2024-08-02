@@ -44,3 +44,8 @@
       %strong= stats.objets_recenses_count
       objets sur
       %strong= "#{stats.objets_count}."
+
+    %p.fr-mb-0 État sanitaire des #{stats.objets_count} objets recensés :
+    %ul
+      - departement_etat_objets_line_chart_data(stats).each do |stat|
+        %li #{stat[:label]} : #{stat[:data].first}
