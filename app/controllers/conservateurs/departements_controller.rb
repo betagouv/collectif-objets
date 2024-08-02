@@ -17,9 +17,7 @@ module Conservateurs
         render "show_map"
       else
         set_status_global_filter
-        @ransack = @communes
-          .select("nom")
-          .ransack(params[:q])
+        @ransack = @communes.select("nom").ransack(params[:q])
 
         # Remonte par défaut les communes avec le plus d'objets en péril
         @ransack.sorts = "en_peril_count DESC" if @ransack.sorts.empty?
