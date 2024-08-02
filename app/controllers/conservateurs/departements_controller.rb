@@ -22,7 +22,8 @@ module Conservateurs
           .ransack(params[:q])
 
         # Remonte par défaut les communes avec le plus d'objets en péril
-        @ransack.sorts = "en_peril_count desc" if @ransack.sorts.empty?
+        @ransack.sorts = "en_peril_count DESC" if @ransack.sorts.empty?
+        @ransack.sorts = "nom ASC" unless @ransack.sorts.collect(&:attr).include? "unaccent(nom)"
 
         @pagy, @communes = pagy @ransack.result, items: 15
         @query_present = params[:q].present?
