@@ -15,5 +15,4 @@
         %li{role: "presentation"}
           = link_to "Vue carte", conservateurs_departement_path(@departement, vue: :carte, anchor: "tabs-container"), class: "fr-tabs__tab", role: :tab
       #tabpanel-tableau.fr-tabs__panel.fr-tabs__panel--selected{ role: :tabpanel, aria: { labelledby: "tab-tableau" }, tabindex: "0" }
-        = turbo_frame_tag "communes-search" do
-          = render "communes_search", ransack: @ransack, departement: @departement, communes: @communes, pagy: @pagy, query_present: @query_present
+        = render "communes_search", ransack: @ransack, departement: @departement, communes: @communes, pagy: @pagy, query_present: @query_present
