@@ -93,7 +93,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(current_img[:filename]).to eq "tableau2.jpg"
     find("button", text: /Fermer/).click
 
-    etat_sanitaire_group = find("div", text: /État de l’objet/, class: "co-text--bold")
+    etat_sanitaire_group = find("h4", text: /État de l’objet/)
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(etat_sanitaire_group) do
       click_on "Modifier"
@@ -107,7 +107,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
 
     # examen second recensement
     click_on "Ciboire des malades"
-    securisation_group = find("div", text: /Sécurisation de l’objet/, class: "co-text--bold")
+    securisation_group = find("h4", text: /Sécurisation de l’objet/)
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
     within(securisation_group) do
       click_on "Modifier"

@@ -23,22 +23,23 @@ FactoryBot.define do
     end
 
     trait :en_cours_de_recensement do
-      status { "started" }
+      status { :started }
       dossier { association(:dossier, commune: instance) }
     end
 
     trait :completed do
-      status { "completed" }
+      with_user
+      status { :completed }
       dossier { association(:dossier, :submitted, commune: instance) }
     end
 
     trait :en_cours_d_examen do
-      status { "completed" }
+      status { :completed }
       dossier { association(:dossier_en_cours_dexamen, commune: instance) }
     end
 
     trait :examinée do
-      status { "completed" }
+      status { :completed }
       dossier { association(:dossier_examiné, commune: instance) }
     end
 

@@ -13,7 +13,7 @@
         .fr-card.fr-card--horizontal.fr-card--horizontal-tier
           .fr-card__body
             .fr-card__content
-              %h4.fr-card__title
+              %h3.fr-card__title
                 = @objet.palissy_REF
               %p.fr-card__desc
                 %b Édifice
@@ -44,12 +44,11 @@
 
   #recensement
     .co-background--light-teal.fr-my-2w.fr-px-4w.fr-py-2w
-      %h3 Recensement
+      %h3.fr-h4 Recensement
       .fr-grid-row.fr-grid-row--gutters.fr-pb-6w.fr-mt-3w
         .fr-col-md-8
           = render "recensement_attributes", recensement_presenter: @recensement_presenter, recensement: @recensement, f:
-          .fr-pb-1w
-            %b= t("activerecord.attributes.recensement.notes")
+          %h4.fr-h6.fr-mb-0.fr-pb-1w.co-text--bold= t("activerecord.attributes.recensement.notes")
           %div
             - if @recensement.notes.present?
               = blockquote(@recensement.notes, class: "fr-my-2w")

@@ -154,7 +154,56 @@
 
         %h2.fr-mt-4w#conservateurs 3. Interface conservateurs
         %p Ces pages sont visibles uniquement pour les conservateurs connectés
-        %p Plan des pages en construction …
+
+        %ul
+          %li
+            = link_to "Mon compte conservateur", edit_conservateur_registration_path
+            = accessible_icon_span
+          %li
+            = link_to "Mes départements", conservateurs_departements_path
+            = accessible_icon_span
+          %li
+            = link_to "Déplacements prévus", conservateurs_visits_path
+            = accessible_icon_span
+          %li
+            = link_to "Fiches attribuées", conservateurs_fiches_path
+            = accessible_icon_span
+          %li
+            Campagnes de recensement :
+            %ul
+              %li
+                Nouvelle campagne de recensement
+                = accessible_icon_span
+              %li
+                Campagne de recensement
+                = accessible_icon_span
+              %li
+                Modifier la campagne de recensement
+                = accessible_icon_span
+              %li
+                Sélectionner les destinataires de la campagne
+                = accessible_icon_span
+              %li
+                Prévisualiser les messages de la campagne
+                = accessible_icon_span
+          %li
+            Communes :
+            %ul
+              %li
+                Recensement
+                = accessible_icon_span
+              %li
+                Messagerie
+                = accessible_icon_span
+              %li
+                Examen
+                = accessible_icon_span
+              %li
+                Bordereaux de récolement
+                = accessible_icon_span
+              %li
+                Historique
+                = accessible_icon_span
 
         %h2.fr-mt-4w#administration 4. Administration
         %p Ces pages sont visibles uniquement pour les administrateurs connectés
