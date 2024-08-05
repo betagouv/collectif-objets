@@ -95,6 +95,7 @@ fr:
     title_submitted: Recensement envoyé le %{date}
     title_accepted: Recensement validé le %{date}
     title_archived: Recensement archivé le %{date}
+    auto_submitted: "Commentaire automatique : ce dossier a été transféré automatiquement 1 mois après le dernier recensement."
     status_badge:
       construction: Recensement en cours
       submitted: Non examiné
