@@ -5,7 +5,7 @@ module Admin
     skip_before_action :disconnect_impersonating_conservateur, only: [:toggle_impersonate_mode]
 
     def index
-      @ransack = Conservateur.order(:last_name).ransack(params[:q])
+      @ransack = Conservateur.order(:last_name).includes(:departements).ransack(params[:q])
       @query_present = params[:q].present?
       @pagy, @conservateurs = pagy(@ransack.result, items: 20)
     end
