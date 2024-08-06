@@ -30,4 +30,54 @@ describe Departement, type: :model do
       it { is_expected.to eq nil }
     end
   end
+
+  describe "#activity" do
+    let(:departement) { create(:departement) }
+    let(:commune) { create(:commune, :with_user, departement:) }
+    let(:commune2) { create(:commune, :with_user, departement:) }
+    let(:commune_autre_departement) { create(:commune, :with_user) }
+    let(:date_range) { Time.zone.now.all_week }
+    subject(:activity) { departement.activity(date_range) }
+
+    context "quand des communes ont écrit des messages" do
+      it "indique le nombre de messages par nom de commune" do
+        # Message trop ancien
+        create(:message, commune:, author: commune.users.first, created_at: date_range.first - 1.day)
+        # Message d'une commune hors département
+        create(:message, commune: commune_autre_departement, author: commune_autre_departement.users.first,
+                         created_at: date_range.first + 1.day)
+        # Messages attendus
+        create(:message, commune:, author: commune.users.first, created_at: date_range.first + 1.hour)
+        create(:message, commune: commune2, author: commune2.users.first, created_at: date_range.last - 1.hour)
+        expect(activity.key?(:commune_messages_count)).to eq true
+        expect(activity[:commune_messages_count]).to eq({ commune => 1, commune2 => 1 })
+      end
+    end
+
+    context "quand des communes ont transmis des dossiers" do
+      let!(:dossier) { create(:dossier, :submitted, commune:, submitted_at: date_range.first + 1.day) }
+      it "liste les communes" do
+        create(:dossier, :submitted, commune: commune2, submitted_at: date_range.first - 1.day)
+        create(:dossier, :submitted, commune: commune_autre_departement, submitted_at: date_range.first + 1.day)
+        expect(activity.key?(:commune_dossiers_transmis)).to eq true
+        expect(activity[:commune_dossiers_transmis]).to eq [commune]
+      end
+      context "avec des objets disparus" do
+        it "indique le nombre d'objets disparus par commune" do
+          create(:recensement, dossier:, objet: create(:objet, commune: dossier.commune))
+          create(:recensement, :disparu, dossier:, objet: create(:objet, commune: dossier.commune))
+          expect(activity.key?(:commune_objets_absents)).to eq true
+          expect(activity[:commune_objets_absents]).to eq({ commune => 1 })
+        end
+      end
+      context "avec des objets en péril" do
+        it "indique le nombre d'objets en péril par commune" do
+          create(:recensement, dossier:, objet: create(:objet, commune: dossier.commune))
+          create(:recensement, :en_peril, dossier:, objet: create(:objet, commune: dossier.commune))
+          expect(activity.key?(:commune_objets_en_peril)).to eq true
+          expect(activity[:commune_objets_en_peril]).to eq({ commune => 1 })
+        end
+      end
+    end
+  end
 end
