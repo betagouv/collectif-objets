@@ -17,12 +17,11 @@ module Conservateurs
         render "show_map"
       else
         set_status_global_filter
-        @ransack = @communes
-          .select("nom")
-          .ransack(params[:q])
+        @ransack = @communes.select("nom").ransack(params[:q])
 
         # Remonte par défaut les communes avec le plus d'objets en péril
-        @ransack.sorts = "en_peril_count desc" if @ransack.sorts.empty?
+        @ransack.sorts = "en_peril_count DESC" if @ransack.sorts.empty?
+        @ransack.sorts = "nom ASC" unless @ransack.sorts.collect(&:attr).include? "unaccent(nom)"
 
         @pagy, @communes = pagy @ransack.result, items: 15
         @query_present = params[:q].present?
@@ -44,9 +43,7 @@ module Conservateurs
     end
 
     def set_communes
-      @communes = policy_scope(Commune)
-        .where(departement_code: @departement.code)
-        .include_statut_global
+      @communes = @departement.communes.include_statut_global
     end
 
     def set_status_global_filter
