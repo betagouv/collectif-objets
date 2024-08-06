@@ -20,7 +20,7 @@ Rails.application.configure do
       class: "RelanceDossiersJob"
     },
     refresh_all_campaign_stats: {
-      cron: "0 * * * *",
+      cron: "0 8 * * mon-fri",
       class: "Campaigns::RefreshAllCampaignStatsJob"
     },
     auto_submit_dossiers: {
