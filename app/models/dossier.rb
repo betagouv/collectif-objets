@@ -112,6 +112,6 @@ class Dossier < ApplicationRecord
   private
 
   def set_campaign
-    self.campaign_id ||= commune.campaigns.ongoing.ids.first if commune
+    self.campaign_id ||= commune.campaigns.ongoing.ids.first
   end
 end
