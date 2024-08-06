@@ -62,6 +62,7 @@ class Commune < ApplicationRecord
     presence ? all : has_recensements_with_missing_photos
   }
   scope :completed, -> { where(status: STATE_COMPLETED) }
+  scope :in_departement, ->(code) { where(departement_code: code) if code }
 
   scope :sort_by_nom, -> { order("communes.nom ASC") }
 

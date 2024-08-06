@@ -55,6 +55,15 @@ class Departement < ApplicationRecord
     ).select("departements.*, COALESCE(b.objets_count, 0) AS objets_count")
   end
 
+  def self.parse_from_code_insee(code_insee)
+    if code_insee&.length != 5
+      Rails.logger.warn "le code INSEE '#{code_insee}' ne fait pas 5 caractères"
+      return nil
+    end
+
+    code_insee.starts_with?("97") ? code_insee[0..2] : code_insee[0..1]
+  end
+
   def current_campaign
     campaigns.where.not(status: :draft).find_by("date_lancement <= :today AND date_fin >= :today",
                                                 today: Time.zone.today)
@@ -65,12 +74,13 @@ class Departement < ApplicationRecord
   def memoire_sequence_name = "memoire_photos_number_#{code}"
   def self.ransackable_attributes(_ = nil) = %w[code]
 
-  def self.parse_from_code_insee(code_insee)
-    if code_insee&.length != 5
-      Rails.logger.warn "le code INSEE '#{code_insee}' ne fait pas 5 caractères"
-      return nil
-    end
+  def activity(date_range = Time.zone.now.all_week)
+    @activity ||= {}
+    return @activity[date_range] if @activity.key? date_range
 
-    code_insee.starts_with?("97") ? code_insee[0..2] : code_insee[0..1]
+    data = {
+      new_messages: Message.received_in(date_range).from_commune.in_departement(code)
+    }
+    @activity[date_range] = data
   end
 end

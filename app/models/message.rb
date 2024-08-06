@@ -13,6 +13,8 @@ class Message < ApplicationRecord
 
   scope :from_commune, -> { where(author_type: "User") }
   scope :from_conservateur, -> { where(author_type: "Conservateur") }
+  scope :in_departement, ->(code) { joins(:commune).merge(Commune.in_departement(code)) }
+  scope :received_in, ->(date_range) { where(created_at: date_range) if date_range }
 
   after_create_commit :enqueue_mattermost_notification, unless: :rejection?
 
