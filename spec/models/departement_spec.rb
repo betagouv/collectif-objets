@@ -30,4 +30,33 @@ describe Departement, type: :model do
       it { is_expected.to eq nil }
     end
   end
+
+  describe "#activity" do
+    let(:departement) { create(:departement) }
+    let(:commune) { create(:commune, :with_user, departement:) }
+    let(:commune2) { create(:commune, :with_user, departement:) }
+    let(:commune_autre_departement) { create(:commune, :with_user) }
+    let(:date_range) { Time.zone.now.all_week }
+    subject(:activity) { departement.activity(date_range) }
+
+    context "quand des communes ont écrit des messages" do
+      it "liste les messages" do
+        # Message trop ancien
+        create(:message, commune:, author: commune.users.first, created_at: date_range.first - 1.day,
+                         text: "Trop ancien")
+        # Message d'une commune hors département
+        create(:message, commune: commune_autre_departement, author: commune_autre_departement.users.first,
+                         created_at: date_range.first + 1.day, text: "Hors département")
+        # Messages attendus
+        expected_messages = [
+          create(:message, commune:, author: commune.users.first,  created_at: date_range.first + 1.hour,
+                           text: "Reçu en début de période"),
+          create(:message, commune:, author: commune2.users.first, created_at: date_range.last - 1.hour,
+                           text: "Reçu en fin de période")
+        ]
+        expect(activity.key?(:new_messages)).to eq true
+        expect(activity[:new_messages]).to eq expected_messages
+      end
+    end
+  end
 end

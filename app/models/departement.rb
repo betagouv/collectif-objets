@@ -73,4 +73,14 @@ class Departement < ApplicationRecord
   alias display_name to_s
   def memoire_sequence_name = "memoire_photos_number_#{code}"
   def self.ransackable_attributes(_ = nil) = %w[code]
+
+  def activity(date_range = Time.zone.now.all_week)
+    @activity ||= {}
+    return @activity[date_range] if @activity.key? date_range
+
+    data = {
+      new_messages: Message.received_in(date_range).from_commune.in_departement(code)
+    }
+    @activity[date_range] = data
+  end
 end
