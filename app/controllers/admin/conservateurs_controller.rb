@@ -40,11 +40,7 @@ module Admin
     def impersonate
       @conservateur = Conservateur.find(params[:conservateur_id])
       impersonate_conservateur(@conservateur)
-      if @conservateur.departements.count == 1
-        redirect_to conservateurs_departement_path @conservateur.departements.first
-      else
-        redirect_to conservateurs_departements_path
-      end
+      redirect_to after_sign_in_path_for_conservateur(@conservateur)
     end
 
     def toggle_impersonate_mode
