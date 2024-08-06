@@ -24,7 +24,7 @@ module Exports
       module_function
 
       def objets
-        Objet.déplacés.examinés.order("recensements.created_at DESC")
+        Objet.déplacés.examinés.order("dossiers.accepted_at DESC, recensements.created_at DESC")
           .includes(:departement, :commune, :edifice, :recensement)
           .includes(recensement: [:dossier, :nouvelle_commune])
       end
@@ -82,7 +82,7 @@ module Exports
       module_function
 
       def objets
-        Objet.manquants.examinés.order("recensements.created_at DESC")
+        Objet.manquants.examinés.order("dossiers.accepted_at DESC, recensements.created_at DESC")
           .includes(:departement, :commune, :recensement, recensement: :dossier)
       end
 
