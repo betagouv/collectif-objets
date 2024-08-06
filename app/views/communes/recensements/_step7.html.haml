@@ -22,7 +22,7 @@
 %section.fr-mb-4w
   %h3.fr-text--lg.fr-mb-1v
     Avez-vous trouvé l’objet ?
-    = edit_recensement_step_link recensement, 1, "aria-label": "Modifier la localisation de l’objet"
+    = edit_recensement_step_link recensement, 1, title: "Modifier la localisation de l’objet"
   %div
     = t "recensement.localisation.answers.#{recensement.localisation}_html",
       nom_edifice: recensement_nom_edifice(recensement), nom_commune_localisation_objet: nom_commune_localisation_objet(recensement)
@@ -32,14 +32,14 @@
   %section.fr-mb-4w
     %h3.fr-text--lg.fr-mb-1v
       L’objet est-il recensable ?
-      = edit_recensement_step_link recensement, 3, "aria-label": "Modifier la réponse"
+      = edit_recensement_step_link recensement, 3, title: "Modifier la réponse"
     %div= t "recensement.recensable_choices.#{recensement.recensable.to_s}"
 
 - if recensement.recensable?
   %section.fr-mb-4w
     %h3.fr-text--lg.fr-mb-1v
       Photos
-      = edit_recensement_step_link recensement, 4, "aria-label": "Modifier les photos"
+      = edit_recensement_step_link recensement, 4, title: "Modifier les photos"
     - if recensement.photos.any?
       .co-flex.co-flex--gap-1rem.co-flex--wrap
         - recensement.photos.each do |photo|
@@ -52,7 +52,7 @@
     %h3.fr-text--lg.fr-mb-1v
       Quel est l’état de l’objet ?
       - unless recensement.analyse_etat_sanitaire.present?
-        = edit_recensement_step_link recensement, 5, "aria-label": "Modifier l’état de l’objet"
+        = edit_recensement_step_link recensement, 5, title: "Modifier l’état de l’objet"
     %div
       - if recensement.analyse_etat_sanitaire.present?
         %div.co-text--strikethrough.co-semi-transparent.fr-mr-1w
@@ -66,7 +66,7 @@
     %h3.fr-text--lg.fr-mb-1v
       L’objet est-il en sécurité ?
       - unless recensement.analyse_securisation.present?
-        = edit_recensement_step_link recensement, 5, "aria-label": "Modifier la réponse"
+        = edit_recensement_step_link recensement, 5, title: "Modifier la réponse"
     - if recensement.analyse_securisation.present?
       %div.co-text--strikethrough.co-semi-transparent.fr-mr-1w
         = t "recensement.securisation_choices.#{recensement.securisation}"
@@ -78,7 +78,7 @@
 %section.fr-mb-4w
   %h3.fr-text--lg.fr-mb-1v
     Vos commentaires
-    = edit_recensement_step_link recensement, 6, "aria-label": "Modifier les commentaires"
+    = edit_recensement_step_link recensement, 6, title: "Modifier les commentaires"
   - if recensement.notes.present?
     .co-blockquote= recensement.notes
   - else

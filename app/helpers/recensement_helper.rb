@@ -88,10 +88,10 @@ module RecensementHelper
 
   def edit_recensement_step_link(recensement, step, **)
     button_to(
-      "",
+      "Modifier",
       edit_commune_objet_recensement_path(recensement.commune, recensement.objet, recensement),
       params: { step: },
-      class: "fr-btn fr-btn--sm fr-icon-edit-line fr-btn--tertiary fr-btn--tertiary-no-outline",
+      class: "fr-btn fr-btn--sm fr-btn--icon-left fr-icon-edit-line fr-btn--tertiary fr-btn--tertiary-no-outline",
       data: { turbo_action: "advance" },
       form_class: "co-display--inline co-edit-button",
       method: :get,
