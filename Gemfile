@@ -12,6 +12,7 @@ gem "active_storage_validations", "~> 1.1"
 gem "after_commit_everywhere", "~> 1.3"
 gem "aws-sdk-s3", "~> 1.143", require: false
 gem "bootsnap", "~> 1.17", require: false
+gem "csv", "~> 3.3"
 gem "devise", "~> 4.9"
 gem "dsfr-view-components", "~> 0.4"
 gem "front_matter_parser", "~> 1.0"
