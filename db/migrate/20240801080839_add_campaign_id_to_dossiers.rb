@@ -2,7 +2,7 @@ class AddCampaignIdToDossiers < ActiveRecord::Migration[7.1]
   def change
     add_reference :dossiers, :campaign, foreign_key: true
     backfill unless reverting?
-    RefreshAllCampaignStatsJob.set(wait: 5.minutes).perform_later unless reverting?
+    Campaigns::RefreshAllCampaignStatsJob.set(wait: 5.minutes).perform_later unless reverting?
   end
 
   private
