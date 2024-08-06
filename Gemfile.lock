@@ -154,6 +154,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
+    csv (3.3.0)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -515,6 +516,7 @@ DEPENDENCIES
   axe-core-rspec (~> 4.8)
   bootsnap (~> 1.17)
   capybara (~> 3.39)
+  csv (~> 3.3)
   debug (>= 1.0)
   devise (~> 4.9)
   dsfr-view-components (~> 0.4)
