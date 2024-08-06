@@ -17,6 +17,8 @@ class Objet < ApplicationRecord
 
   accepts_nested_attributes_for :edifice
 
+  scope :in_departement, ->(code) { where(lieu_actuel_departement_code: code) if code }
+
   scope :order_by_recensement_priorite, lambda {
     left_outer_joins(commune: :dossier)
     .joins("LEFT JOIN recensements ON recensements.objet_id = objets.id AND recensements.deleted_at IS NULL \
