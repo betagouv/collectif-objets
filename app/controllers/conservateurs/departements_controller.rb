@@ -2,7 +2,7 @@
 
 module Conservateurs
   class DepartementsController < BaseController
-    before_action :set_departement, only: [:show]
+    before_action :set_departement, only: [:show, :carte]
 
     def index
       @departements = policy_scope(Departement).include_objets_count.order(:code)
@@ -10,21 +10,24 @@ module Conservateurs
 
     def show
       set_communes
-      if params[:vue] == "carte"
-        @communes.select(%w[code_insee nom status objets_count en_peril_count latitude longitude]).to_a
-        set_departement_json
-        render "show_map"
-      else
-        set_status_global_filter
-        @ransack = @communes.select("nom").ransack(params[:q])
+      set_status_global_filter
+      @ransack = @communes.select("nom").ransack(params[:q])
 
-        # Remonte par défaut les communes avec le plus d'objets en péril
-        @ransack.sorts = "en_peril_count DESC" if @ransack.sorts.empty?
-        @ransack.sorts = "nom ASC" unless @ransack.sorts.collect(&:attr).include? "unaccent(nom)"
+      # Remonte par défaut les communes avec le plus d'objets en péril
+      @ransack.sorts = "en_peril_count DESC" if @ransack.sorts.empty?
+      @ransack.sorts = "nom ASC" unless @ransack.sorts.collect(&:attr).include? "unaccent(nom)"
 
-        @pagy, @communes = pagy @ransack.result, items: 15
-        @query_present = params[:q].present?
-      end
+      @pagy, @communes = pagy @ransack.result, items: 15
+      @query_present = params[:q].present?
+    end
+
+    def carte
+      set_communes
+      @communes.select(%w[code_insee nom status objets_count en_peril_count latitude longitude]).to_a
+      @departement_json = {
+        code: @departement.code,
+        boundingBox: @departement.bounding_box
+      }.to_json
     end
 
     protected
@@ -32,13 +35,6 @@ module Conservateurs
     def set_departement
       @departement = Departement.find(params[:id])
       authorize(@departement)
-    end
-
-    def set_departement_json
-      @departement_json = {
-        code: @departement.code,
-        boundingBox: @departement.bounding_box
-      }.to_json
     end
 
     def set_communes

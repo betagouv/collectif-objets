@@ -14,6 +14,6 @@
           %button#tab-tableau.fr-tabs__tab{ role: :tab, aria: { selected: true, controls: :"tabpanel-tableau" } }
             Vue Tableau
         %li{role: "presentation"}
-          = link_to "Vue carte", conservateurs_departement_path(@departement, vue: :carte, anchor: "tabs-container"), class: "fr-tabs__tab", role: :tab
+          = link_to "Vue carte", carte_conservateurs_departement_path(@departement, anchor: "tabs-container"), class: "fr-tabs__tab", role: :tab
       #tabpanel-tableau.fr-tabs__panel.fr-tabs__panel--selected{ role: :tabpanel, aria: { labelledby: "tab-tableau" }, tabindex: "0" }
         = render "communes_search", ransack: @ransack, departement: @departement, communes: @communes, pagy: @pagy, query_present: @query_present
