@@ -55,6 +55,6 @@ module Conservateurs
       end
     end
 
-    def active_nav_links = ["Mes départements"] + (@departement ? [@departement.to_s] : [])
+    def active_nav_links = ["Mes départements", @departement&.to_s].compact
   end
 end
