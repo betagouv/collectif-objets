@@ -10,12 +10,14 @@
   = render "stats", stats: @departement.stats
   #tabs-container
     .fr-tabs
-      %ul.fr-tabs__list{ role: :tablist, "aria-label": "Tableau ou Carte" }
+      %ul.fr-tabs__list{ role: :tablist, "aria-label": "Onglets" }
         %li{role: "presentation"}
           = link_to "Vue tableau", conservateurs_departement_path(@departement, anchor: "tabs-container"), class: "fr-tabs__tab", role: :tab
         %li{role: "presentation"}
           %button#tab-current.fr-tabs__tab{ role: :tab, aria: { selected: true, controls: :tabpanel } }
             Vue carte
+        %li{role: "presentation"}
+          = link_to "Activité", activite_conservateurs_departement_path(@departement, anchor: "tabs-container"), class: "fr-tabs__tab", role: :tab
 
       #tabpanel.fr-tabs__panel.fr-tabs__panel--selected{ role: :tabpanel, tabindex: "0", aria: { labelledby: "tab-current" } }
         = render "map", communes: @communes, departement: @departement, departement_json: @departement_json

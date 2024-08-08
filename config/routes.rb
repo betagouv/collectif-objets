@@ -101,6 +101,7 @@ Rails.application.routes.draw do
   namespace :conservateurs do
     resources :departements, only: %i[index show] do
       get :carte, on: :member
+      get :activite, on: :member
       resources :campaigns, only: %i[new]
     end
     resources :communes, only: [:show] do

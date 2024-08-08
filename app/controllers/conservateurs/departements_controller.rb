@@ -2,7 +2,7 @@
 
 module Conservateurs
   class DepartementsController < BaseController
-    before_action :set_departement, only: [:show, :carte]
+    before_action :set_departement, only: [:show, :carte, :activite]
 
     def index
       @departements = policy_scope(Departement).include_objets_count.order(:code)
@@ -28,6 +28,10 @@ module Conservateurs
         code: @departement.code,
         boundingBox: @departement.bounding_box
       }.to_json
+    end
+
+    def activite
+      @activity = @departement.activity
     end
 
     protected

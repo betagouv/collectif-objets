@@ -9,11 +9,14 @@
 
   #tabs-container
     .fr-tabs
-      %ul.fr-tabs__list{ role: :tablist, "aria-label": "Tableau ou Carte" }
+      %ul.fr-tabs__list{ role: :tablist, "aria-label": "Onglets" }
         %li{role: "presentation"}
           %button#tab-current.fr-tabs__tab{ role: :tab, aria: { selected: true, controls: :tabpanel } }
             Vue Tableau
         %li{role: "presentation"}
           = link_to "Vue carte", carte_conservateurs_departement_path(@departement, anchor: "tabs-container"), class: "fr-tabs__tab", role: :tab
+        %li{role: "presentation"}
+          = link_to "Activité", activite_conservateurs_departement_path(@departement, anchor: "tabs-container"), class: "fr-tabs__tab", role: :tab
+
       #tabpanel.fr-tabs__panel.fr-tabs__panel--selected{ role: :tabpanel, aria: { labelledby: "tab-current" }, tabindex: "0" }
         = render "communes_search", ransack: @ransack, departement: @departement, communes: @communes, pagy: @pagy, query_present: @query_present

@@ -8,6 +8,7 @@ module Conservateurs
       conservateur.departements.include?(departement)
     end
     alias carte? show?
+    alias activite? show?
 
     class Scope < Scope
       def resolve
