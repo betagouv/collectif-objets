@@ -74,6 +74,8 @@ class Departement < ApplicationRecord
   def memoire_sequence_name = "memoire_photos_number_#{code}"
   def self.ransackable_attributes(_ = nil) = %w[code]
 
+  def stats = Co::DepartementStats.new(self)
+
   def activity(date_range = Time.zone.now.all_week)
     {
       commune_messages_count: commune_messages_count(date_range),

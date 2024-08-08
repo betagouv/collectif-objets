@@ -7,7 +7,8 @@
   %h1= @departement.nom
 
   = render "campaigns", departement: @departement
-  = render "stats", stats: @stats
+  = render "stats", stats: @departement.stats
+
   #tabs-container
     .fr-tabs
       %ul.fr-tabs__list{ role: :tablist, "aria-label": "Tableau ou Carte" }
