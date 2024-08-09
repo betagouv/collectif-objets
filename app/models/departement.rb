@@ -84,7 +84,7 @@ class Departement < ApplicationRecord
   end
 
   def commune_messages_count(date_range)
-    communes.sort_by_nom.left_joins(:messages).merge(Message.from_commune.received_in(date_range)).tally
+    communes.sort_by_nom.joins(:messages).merge(Message.from_commune.received_in(date_range)).tally
   end
 
   def commune_dossiers_transmis(date_range)

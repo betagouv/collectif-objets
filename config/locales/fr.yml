@@ -258,6 +258,10 @@ fr:
         analyse_fiches: Fiches à associer
         analyse_notes: Commentaires pour la mairie
       dossier:
+        count:
+          zero: aucun dossier
+          one: un dossier
+          other: "%{count} dossiers"
         notes_commune: Commentaires de la commune
         notes_conservateur: Commentaires des conservateurs à destination de la commune
         recenseur: Coordonnées de la personne ayant effectué le recensement
@@ -655,6 +659,12 @@ fr:
       pour_repondre: Pour répondre à ce message, rendez-vous sur la messagerie dans Collectif Objets accessible depuis la page de la commune.
       cta: Répondre à ce message
       reply_by_email: Vous pouvez aussi répondre à cet email directement. Le message apparaîtra dans la messagerie de Collectif Objets et l'usager sera notifié par email.
+    activite:
+      bonjour: Bonjour %{nom},
+      intro: "Voici l'activité des communes du %{date_start} au %{date_end} %{dans_departement}."
+      messages: "Vous avez reçu %{messages} de %{communes}."
+      dossiers: "Vous avez %{dossiers} à examiner."
+      cta: Ne plus recevoir ce type de messages
     layout:
       unsubscribe: Je ne souhaite plus recevoir ces emails
   user_mailer:
