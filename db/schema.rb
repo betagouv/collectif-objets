@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_01_080839) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_173758) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -167,6 +167,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_01_080839) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.boolean "messages_mail_notifications", default: true
+    t.boolean "send_recap", default: false, null: false
     t.index ["email"], name: "index_conservateurs_on_email", unique: true
   end
 
