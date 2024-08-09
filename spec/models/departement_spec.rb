@@ -55,27 +55,23 @@ describe Departement, type: :model do
     end
 
     context "quand des communes ont transmis des dossiers" do
-      let!(:dossier) { create(:dossier, :submitted, commune:, submitted_at: date_range.first + 1.day) }
+      let!(:dossier) { create(:dossier, :submitted, :with_recensement, commune:, submitted_at: date_range.first + 1.day) }
       it "liste les communes" do
-        create(:dossier, :submitted, commune: commune2, submitted_at: date_range.first - 1.day)
-        create(:dossier, :submitted, commune: commune_autre_departement, submitted_at: date_range.first + 1.day)
+        create(:dossier, :submitted, :with_recensement, commune: commune2, submitted_at: date_range.first - 1.day)
+        create(:dossier, :submitted, :with_recensement, commune: commune_autre_departement, submitted_at: date_range.first + 1.day)
         expect(activity.key?(:commune_dossiers_transmis)).to eq true
         expect(activity[:commune_dossiers_transmis]).to eq [commune]
       end
       context "avec des objets disparus" do
         it "indique le nombre d'objets disparus par commune" do
-          create(:recensement, dossier:, objet: create(:objet, commune: dossier.commune))
           create(:recensement, :disparu, dossier:, objet: create(:objet, commune: dossier.commune))
-          expect(activity.key?(:commune_objets_absents)).to eq true
-          expect(activity[:commune_objets_absents]).to eq({ commune => 1 })
+          expect(activity[:commune_dossiers_transmis].first.disparus_count).to eq 1
         end
       end
       context "avec des objets en péril" do
         it "indique le nombre d'objets en péril par commune" do
-          create(:recensement, dossier:, objet: create(:objet, commune: dossier.commune))
           create(:recensement, :en_peril, dossier:, objet: create(:objet, commune: dossier.commune))
-          expect(activity.key?(:commune_objets_en_peril)).to eq true
-          expect(activity[:commune_objets_en_peril]).to eq({ commune => 1 })
+          expect(activity[:commune_dossiers_transmis].first.en_peril_count).to eq 1
         end
       end
     end

@@ -34,9 +34,9 @@ module Conservateurs
     end
 
     def activite
-      start_date = params.key?(:du) ? Date.strptime(params[:du], "%Y-%m-%d") : nil
-      end_date = params.key?(:au) ? Date.strptime(params[:au], "%Y-%m-%d") : nil
-      @date_range = (start_date && end_date) ? start_date..end_date : Date.current.all_week
+      start_date = parse_date(params[:du])
+      end_date = parse_date(params[:au])
+      @date_range = start_date && end_date ? start_date..end_date : Date.current.all_week
       @activity = @departement.activity(@date_range)
       render "tabs"
     end
@@ -71,5 +71,13 @@ module Conservateurs
     end
 
     def active_nav_links = ["Mes départements", @departement&.to_s].compact
+
+    def parse_date(str)
+      return if str.nil? || str.blank?
+
+      Date.strptime(str, "%Y-%m-%d")
+    rescue Date::Error
+      nil
+    end
   end
 end

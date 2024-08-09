@@ -310,6 +310,10 @@ fr:
         phone_number: Numéro de téléphone
         last_sign_in_at: Dernière connexion
       message:
+        count:
+          zero: aucun message
+          one: un message
+          other: "%{count} messages"
         files:
           zero: aucune pièce jointe
           one: 1 pièce jointe
@@ -318,6 +322,13 @@ fr:
           zero: aucune autre pièce jointe
           one: 1 autre pièce jointe
           other: "%{count} autres pièces jointes"
+      objet:
+        en_peril_count:
+          one: 1 objet en péril
+          other: "%{count} objets en péril"
+        disparus_count:
+          one: 1 objet absent
+          other: "%{count} objets absents"
   date:
     abbr_day_names:
       - dim
@@ -434,9 +445,6 @@ fr:
       zero: aucun objet
       one: 1 objet
       other: "%{count} objets"
-    en_peril_count:
-      one: 1 objet en péril
-      other: "%{count} objets en péril"
     recensed_count:
       one: 1 objet recensé
       other: "%{count} objets recensés"

@@ -42,4 +42,15 @@ module CommuneHelper
                          { "fr-badge--sm": options[:small] })
     )
   end
+
+  def commune_name_with_objets_rouges_count(commune)
+    data = [commune.nom]
+    if commune.en_peril_count.positive?
+      data << Objet.human_attribute_name(:en_peril_count, count: commune.en_peril_count)
+    end
+    if commune.disparus_count.positive?
+      data << Objet.human_attribute_name(:disparus_count, count: commune.disparus_count)
+    end
+    data.join(", ")
+  end
 end

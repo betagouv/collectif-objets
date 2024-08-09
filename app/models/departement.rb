@@ -79,9 +79,7 @@ class Departement < ApplicationRecord
   def activity(date_range = Time.zone.now.all_week)
     {
       commune_messages_count: commune_messages_count(date_range),
-      commune_dossiers_transmis: commune_dossiers_transmis(date_range),
-      commune_objets_absents: commune_objets_absents(date_range),
-      commune_objets_en_peril: commune_objets_en_peril(date_range)
+      commune_dossiers_transmis: commune_dossiers_transmis(date_range)
     }
   end
 
@@ -90,14 +88,7 @@ class Departement < ApplicationRecord
   end
 
   def commune_dossiers_transmis(date_range)
-    communes.sort_by_nom.joins(:dossier).where(dossiers: { submitted_at: date_range })
-  end
-
-  def commune_objets_absents(date_range)
-    commune_dossiers_transmis(date_range).joins(:recensements).merge(Recensement.absent).tally
-  end
-
-  def commune_objets_en_peril(date_range)
-    commune_dossiers_transmis(date_range).joins(:recensements).merge(Recensement.en_peril).tally
+    communes.sort_by_nom.include_en_peril_and_disparus_count
+            .joins(:dossier).where(dossiers: { submitted_at: date_range })
   end
 end

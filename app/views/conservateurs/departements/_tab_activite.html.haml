@@ -1,65 +1,53 @@
 - commune_messages_count = @activity[:commune_messages_count]
 - commune_dossiers_transmis = @activity[:commune_dossiers_transmis]
-- commune_objets_absents = @activity[:commune_objets_absents]
-- commune_objets_en_peril = @activity[:commune_objets_en_peril]
 
-.fr-mb-4w.fr-background-alt--blue-france.fr-p-2w
-  %h2.fr-text--lg Activité des communes
+= turbo_frame_tag "activite" do
+  = form_with url: url_for, method: :GET, builder: FormBuilderDsfr, data: { turbo_action: :replace } do |f|
+    .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-end.fr-mb-2w
+      .fr-col-md-4
+        .fr-input-group
+          = f.label :du, "Date de début"
+          = f.date_field :du, value: @date_range.first, class: "fr-input"
+      .fr-col-md-4
+        .fr-input-group
+          = f.label :au, "Date de fin"
+          = f.date_field :au, value: @date_range.last, class: "fr-input"
+      .fr-col-md-4
+        = f.button "Voir l'activité dans cette période", name: nil, class: "fr-btn fr-btn--secondary"
+
   .fr-grid-row.fr-grid-row--gutters
-    .fr-col-md
+    .fr-col
       .fr-card
         .fr-card__body
           .fr-card__content
-            %h3.fr-card__title.fr-text-title--blue-france
-              Nouveaux messages :
-              = badge :info, class: "fr-badge--no-icon" do commune_messages_count.values.sum end
-          .fr-card__footer
-            %ul.fr-links-group
-              - commune_messages_count.each do |commune, count|
-                %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
-                  - title = "#{commune.nom} : #{Message.human_attribute_name(:count, count:)}"
-                  = link_to commune.nom, conservateurs_commune_messages_path(commune), class: "fr-link", title:
-                  = badge :info, class: "fr-badge--no-icon co-flex--align-self-center" do count end
+            %h2.fr-card__title.fr-text-title--blue-france
+              Nouveaux messages : #{commune_messages_count.size}
+            .fr-card__desc
+              - if commune_messages_count.size.positive?
+                %ul.fr-links-group.fr-pl-0.fr-mb-0
+                  - commune_messages_count.each do |commune, count|
+                    %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
+                      - title = "#{commune.nom} : #{Message.human_attribute_name(:count, count:)}"
+                      = link_to commune.nom, conservateurs_commune_messages_path(commune), class: "fr-link", title:
+                      = badge :info, class: "fr-badge--no-icon" do count end
+              - else
+                %p.fr-text--italic Aucun message des communes dans cette période.
 
-    .fr-col-md
+    .fr-col
       .fr-card
         .fr-card__body
           .fr-card__content
-            %h3.fr-card__title.fr-text-title--blue-france
-              Dossiers transmis :
-              = badge :info, class: "fr-badge--no-icon" do commune_dossiers_transmis.size end
-          .fr-card__footer
-            %ul.fr-links-group
-              - commune_dossiers_transmis.each do |commune|
-                %li
-                  = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link fr-icon-arrow-right-line fr-link--icon-right"
-
-    .fr-col-md
-      .fr-card
-        .fr-card__body
-          .fr-card__content
-            %h3.fr-card__title.fr-text-title--blue-france
-              Objets disparus :
-              = badge :info, class: "fr-badge--no-icon" do commune_objets_absents.values.sum end
-          .fr-card__footer
-            %ul.fr-links-group
-              - commune_objets_absents.each do |commune, count|
-                %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
-                  - title = "#{commune.nom} : #{Objet.human_attribute_name(:count, count:)} disparu(s)"
-                  = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link", title:
-                  = badge :info, class: "fr-badge--no-icon" do count end
-
-    .fr-col-md
-      .fr-card
-        .fr-card__body
-          .fr-card__content
-            %h3.fr-card__title.fr-text-title--blue-france
-              Objets en péril :
-              = badge :info, class: "fr-badge--no-icon" do commune_objets_en_peril.values.sum end
-          .fr-card__footer
-            %ul.fr-links-group
-              - commune_objets_en_peril.each do |commune, count|
-                %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
-                  - title = "#{commune.nom} : #{Objet.human_attribute_name(:count, count:)} en péril"
-                  = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link", title:
-                  = badge :info, class: "fr-badge--no-icon" do count end
+            %h2.fr-card__title.fr-text-title--blue-france
+              Dossiers transmis : #{commune_dossiers_transmis.load.size}
+            .fr-card__desc
+              - if commune_dossiers_transmis.size.positive?
+                %ul.fr-links-group.fr-pl-0.fr-mb-0
+                  - commune_dossiers_transmis.each do |commune|
+                    %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
+                      = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link", title: commune_name_with_objets_rouges_count(commune)
+                      - if commune.en_peril_count.positive?
+                        = badge :warning do Objet.human_attribute_name(:en_peril_count, count: commune.en_peril_count) end
+                      - if commune.disparus_count.positive?
+                        = badge :warning do Objet.human_attribute_name(:disparus_count, count: commune.disparus_count) end
+              - else
+                %p.fr-text--italic Aucun dossier transmis dans cette période.
