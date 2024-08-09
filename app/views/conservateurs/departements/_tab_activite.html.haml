@@ -1,0 +1,65 @@
+- commune_messages_count = @activity[:commune_messages_count]
+- commune_dossiers_transmis = @activity[:commune_dossiers_transmis]
+- commune_objets_absents = @activity[:commune_objets_absents]
+- commune_objets_en_peril = @activity[:commune_objets_en_peril]
+
+.fr-mb-4w.fr-background-alt--blue-france.fr-p-2w
+  %h2.fr-text--lg Activité des communes
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-md
+      .fr-card
+        .fr-card__body
+          .fr-card__content
+            %h3.fr-card__title.fr-text-title--blue-france
+              Nouveaux messages :
+              = badge :info, class: "fr-badge--no-icon" do commune_messages_count.values.sum end
+          .fr-card__footer
+            %ul.fr-links-group
+              - commune_messages_count.each do |commune, count|
+                %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
+                  - title = "#{commune.nom} : #{Message.human_attribute_name(:count, count:)}"
+                  = link_to commune.nom, conservateurs_commune_messages_path(commune), class: "fr-link", title:
+                  = badge :info, class: "fr-badge--no-icon co-flex--align-self-center" do count end
+
+    .fr-col-md
+      .fr-card
+        .fr-card__body
+          .fr-card__content
+            %h3.fr-card__title.fr-text-title--blue-france
+              Dossiers transmis :
+              = badge :info, class: "fr-badge--no-icon" do commune_dossiers_transmis.size end
+          .fr-card__footer
+            %ul.fr-links-group
+              - commune_dossiers_transmis.each do |commune|
+                %li
+                  = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link fr-icon-arrow-right-line fr-link--icon-right"
+
+    .fr-col-md
+      .fr-card
+        .fr-card__body
+          .fr-card__content
+            %h3.fr-card__title.fr-text-title--blue-france
+              Objets disparus :
+              = badge :info, class: "fr-badge--no-icon" do commune_objets_absents.values.sum end
+          .fr-card__footer
+            %ul.fr-links-group
+              - commune_objets_absents.each do |commune, count|
+                %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
+                  - title = "#{commune.nom} : #{Objet.human_attribute_name(:count, count:)} disparu(s)"
+                  = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link", title:
+                  = badge :info, class: "fr-badge--no-icon" do count end
+
+    .fr-col-md
+      .fr-card
+        .fr-card__body
+          .fr-card__content
+            %h3.fr-card__title.fr-text-title--blue-france
+              Objets en péril :
+              = badge :info, class: "fr-badge--no-icon" do commune_objets_en_peril.values.sum end
+          .fr-card__footer
+            %ul.fr-links-group
+              - commune_objets_en_peril.each do |commune, count|
+                %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
+                  - title = "#{commune.nom} : #{Objet.human_attribute_name(:count, count:)} en péril"
+                  = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link", title:
+                  = badge :info, class: "fr-badge--no-icon" do count end

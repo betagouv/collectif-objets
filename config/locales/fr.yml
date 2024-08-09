@@ -46,13 +46,6 @@ fr:
         head_title: Carte du %{departement}
       title:
         campaign: Campagne de recensement du %{date_lancement} au %{date_fin}
-      map_sidebar_commune_template:
-        en_peril_count:
-          one: 1 objet en péril
-          other: "%{count} objets en péril"
-        recensed_count:
-          one: 1 objet recensé
-          other: "%{count} objets recensés"
     recensements:
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
@@ -441,6 +434,13 @@ fr:
       zero: aucun objet
       one: 1 objet
       other: "%{count} objets"
+    en_peril_count:
+      one: 1 objet en péril
+      other: "%{count} objets en péril"
+    recensed_count:
+      one: 1 objet recensé
+      other: "%{count} objets recensés"
+
     photos_count:
       zero: Aucune photo connue pour cet objet
       one: 1 photo connue pour cet objet

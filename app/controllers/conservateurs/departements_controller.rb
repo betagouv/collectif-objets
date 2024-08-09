@@ -3,6 +3,8 @@
 module Conservateurs
   class DepartementsController < BaseController
     before_action :set_departement, only: [:show, :carte, :activite]
+    before_action :set_status_global_filter, only: [:show]
+    before_action :set_tabs, only: [:show, :carte, :activite]
 
     def index
       @departements = policy_scope(Departement).include_objets_count.order(:code)
@@ -10,7 +12,6 @@ module Conservateurs
 
     def show
       set_communes
-      set_status_global_filter
       @ransack = @communes.select("nom").ransack(params[:q])
 
       # Remonte par défaut les communes avec le plus d'objets en péril
@@ -19,6 +20,7 @@ module Conservateurs
 
       @pagy, @communes = pagy @ransack.result, items: 15
       @query_present = params[:q].present?
+      render "tabs"
     end
 
     def carte
@@ -28,10 +30,15 @@ module Conservateurs
         code: @departement.code,
         boundingBox: @departement.bounding_box
       }.to_json
+      render "tabs"
     end
 
     def activite
-      @activity = @departement.activity
+      start_date = params.key?(:du) ? Date.strptime(params[:du], "%Y-%m-%d") : nil
+      end_date = params.key?(:au) ? Date.strptime(params[:au], "%Y-%m-%d") : nil
+      @date_range = (start_date && end_date) ? start_date..end_date : Date.current.all_week
+      @activity = @departement.activity(@date_range)
+      render "tabs"
     end
 
     protected
@@ -43,6 +50,15 @@ module Conservateurs
 
     def set_communes
       @communes = @departement.communes.include_statut_global
+    end
+
+    def set_tabs
+      anchor = :tabpanel
+      @tabs = [
+        [:show, "Vue tableau", conservateurs_departement_path(@departement, anchor:)],
+        [:carte, "Vue carte", carte_conservateurs_departement_path(@departement, anchor:)],
+        [:activite, "Activité", activite_conservateurs_departement_path(@departement, anchor:)]
+      ]
     end
 
     def set_status_global_filter
