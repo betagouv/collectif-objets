@@ -31,6 +31,39 @@ describe Departement, type: :model do
     end
   end
 
+  describe ".with_activity_in(date_range)" do
+    let(:departement) { create(:departement) }
+    let(:departement2) { create(:departement) }
+    let(:commune) { create(:commune, :with_user, departement:) }
+    let(:commune2) { create(:commune, :with_user, departement: departement2) }
+    let(:date_range) { Time.zone.now.all_week }
+    let!(:conservateur) { create(:conservateur, departements: [departement], send_recap: true) }
+    let!(:conservateur2) { create(:conservateur, departements: [departement2], send_recap: true) }
+    subject(:departements_with_activity) { Departement.with_activity_in(date_range) }
+
+    context "quand une commune a écrit un message" do
+      it "liste le département de cette commune" do
+        # Message d'une commune du premier département inclus dans la date_range
+        create(:message, :from_commune, commune:, created_at: Time.zone.now)
+        # Message trop ancien
+        create(:message, :from_commune, commune: commune2, created_at: 2.weeks.ago)
+        expect(departements_with_activity).to eq({ departement.code => [conservateur.id] })
+        expect { departements_with_activity }.not_to exceed_query_limit(1).with(/SELECT/)
+      end
+    end
+
+    context "quand une commune a transmis un dossier" do
+      it "liste le département de cette commune" do
+        # Dossier valide
+        create(:dossier, :submitted, :with_recensement, commune:, submitted_at: date_range.first + 1.day)
+        # Message trop ancien
+        create(:dossier, :submitted, :with_recensement, commune: commune2, submitted_at: date_range.first - 1.day)
+        expect(departements_with_activity).to eq({ departement.code => [conservateur.id] })
+        expect { departements_with_activity }.not_to exceed_query_limit(1).with(/SELECT/)
+      end
+    end
+  end
+
   describe "#commune_messages_count(date_range)" do
     let(:departement) { create(:departement) }
     let(:commune) { create(:commune, :with_user, departement:) }
