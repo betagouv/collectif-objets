@@ -19,6 +19,10 @@ Rails.application.configure do
       cron: "0 8 1 * *", # À 8h tous les 1er du mois
       class: "RelanceDossiersJob"
     },
+    departements: {
+      cron: "30 8 * * mon", # À 8h30 tous les lundis
+      class: "DepartementActiviteJob"
+    },
     refresh_all_campaign_stats: {
       cron: "0 8 * * mon-fri", # À 8h tous les jours de semaine
       class: "Campaigns::RefreshAllCampaignStatsJob"
