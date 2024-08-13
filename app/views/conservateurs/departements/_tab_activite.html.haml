@@ -1,7 +1,7 @@
 - commune_messages_count = @departement.commune_messages_count(@date_range)
 - commune_dossiers_transmis = @departement.commune_dossiers_transmis(@date_range)
 
-= turbo_frame_tag "activite" do
+= turbo_frame_tag :activite do
   = form_with url: url_for, method: :GET, builder: FormBuilderDsfr, data: { turbo_action: :replace } do |f|
     .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-end.fr-mb-2w
       .fr-col-md-4
@@ -28,7 +28,7 @@
                   - commune_messages_count.each do |commune, count|
                     %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
                       - title = "#{commune.nom} : #{Message.human_attribute_name(:count, count:)}"
-                      = link_to commune.nom, conservateurs_commune_messages_path(commune), class: "fr-link", title:
+                      = link_to commune.nom, conservateurs_commune_messages_path(commune), class: "fr-link", title:, "data-turbo-frame": :_top
                       = badge :info, class: "fr-badge--no-icon" do count end
               - else
                 %p.co-text--italic Aucun message des communes entre #{l @date_start.to_date, format: :long_with_weekday} et #{l @date_end.to_date, format: :long_with_weekday}.
@@ -44,7 +44,7 @@
                 %ul.fr-links-group.fr-pl-0.fr-mb-0
                   - commune_dossiers_transmis.each do |commune|
                     %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
-                      = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link", title: commune_name_with_objets_rouges_count(commune)
+                      = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link", title: commune_name_with_objets_rouges_count(commune), "data-turbo-frame": :_top
                       - if commune.en_peril_count.positive?
                         = badge :warning do Objet.human_attribute_name(:en_peril_count, count: commune.en_peril_count) end
                       - if commune.disparus_count.positive?
