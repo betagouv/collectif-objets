@@ -7,11 +7,11 @@
       .fr-col-md-4
         .fr-input-group
           = f.label :du, "Date de début"
-          = f.date_field :du, value: @date_range.first, class: "fr-input"
+          = f.date_field :du, value: @date_start, class: "fr-input"
       .fr-col-md-4
         .fr-input-group
           = f.label :au, "Date de fin"
-          = f.date_field :au, value: @date_range.last, class: "fr-input"
+          = f.date_field :au, value: @date_end, class: "fr-input"
       .fr-col-md-4
         = f.button "Voir l'activité dans cette période", name: nil, class: "fr-btn fr-btn--secondary"
 
@@ -31,7 +31,7 @@
                       = link_to commune.nom, conservateurs_commune_messages_path(commune), class: "fr-link", title:
                       = badge :info, class: "fr-badge--no-icon" do count end
               - else
-                %p.fr-text--italic Aucun message des communes dans cette période.
+                %p.co-text--italic Aucun message des communes entre #{l @date_start.to_date, format: :long_with_weekday} et #{l @date_end.to_date, format: :long_with_weekday}.
 
     .fr-col
       .fr-card
@@ -50,4 +50,4 @@
                       - if commune.disparus_count.positive?
                         = badge :warning do Objet.human_attribute_name(:disparus_count, count: commune.disparus_count) end
               - else
-                %p.fr-text--italic Aucun dossier transmis dans cette période.
+                %p.co-text--italic Aucun dossier transmis du #{l @date_start.to_date, format: :long_with_weekday} au #{l @date_end.to_date, format: :long_with_weekday}.
