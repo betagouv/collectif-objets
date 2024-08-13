@@ -31,13 +31,13 @@ describe Departement, type: :model do
     end
   end
 
-  describe "#activity" do
+  describe "#commune_messages_count(date_range)" do
     let(:departement) { create(:departement) }
     let(:commune) { create(:commune, :with_user, departement:) }
     let(:commune2) { create(:commune, :with_user, departement:) }
     let(:commune_autre_departement) { create(:commune, :with_user) }
     let(:date_range) { Time.zone.now.all_week }
-    subject(:activity) { departement.activity(date_range) }
+    subject(:commune_messages_count) { departement.commune_messages_count(date_range) }
 
     context "quand des communes ont écrit des messages" do
       it "indique le nombre de messages par nom de commune" do
@@ -49,29 +49,37 @@ describe Departement, type: :model do
         # Messages attendus
         create(:message, commune:, author: commune.users.first, created_at: date_range.first + 1.hour)
         create(:message, commune: commune2, author: commune2.users.first, created_at: date_range.last - 1.hour)
-        expect(activity.key?(:commune_messages_count)).to eq true
-        expect(activity[:commune_messages_count]).to eq({ commune => 1, commune2 => 1 })
+        expect(commune_messages_count).to eq({ commune => 1, commune2 => 1 })
       end
     end
+  end
+
+  describe "#commune_dossiers_transmis(date_range)" do
+    let(:departement) { create(:departement) }
+    let(:commune) { create(:commune, :with_user, departement:) }
+    let(:commune2) { create(:commune, :with_user, departement:) }
+    let(:commune3) { create(:commune, :with_user) }
+    let(:date_range) { Time.zone.now.all_week }
+    let(:dossier) { create(:dossier, :submitted, :with_recensement, commune:, submitted_at: date_range.first + 1.day) }
+    subject(:commune_dossiers_transmis) { departement.commune_dossiers_transmis(date_range) }
 
     context "quand des communes ont transmis des dossiers" do
-      let!(:dossier) { create(:dossier, :submitted, :with_recensement, commune:, submitted_at: date_range.first + 1.day) }
       it "liste les communes" do
+        create(:dossier, :submitted, :with_recensement, commune:, submitted_at: date_range.first + 1.day)
         create(:dossier, :submitted, :with_recensement, commune: commune2, submitted_at: date_range.first - 1.day)
-        create(:dossier, :submitted, :with_recensement, commune: commune_autre_departement, submitted_at: date_range.first + 1.day)
-        expect(activity.key?(:commune_dossiers_transmis)).to eq true
-        expect(activity[:commune_dossiers_transmis]).to eq [commune]
+        create(:dossier, :submitted, :with_recensement, commune: commune3, submitted_at: date_range.first + 1.day)
+        expect(commune_dossiers_transmis).to eq [commune]
       end
       context "avec des objets disparus" do
         it "indique le nombre d'objets disparus par commune" do
           create(:recensement, :disparu, dossier:, objet: create(:objet, commune: dossier.commune))
-          expect(activity[:commune_dossiers_transmis].first.disparus_count).to eq 1
+          expect(commune_dossiers_transmis.first.disparus_count).to eq 1
         end
       end
       context "avec des objets en péril" do
         it "indique le nombre d'objets en péril par commune" do
           create(:recensement, :en_peril, dossier:, objet: create(:objet, commune: dossier.commune))
-          expect(activity[:commune_dossiers_transmis].first.en_peril_count).to eq 1
+          expect(commune_dossiers_transmis.first.en_peril_count).to eq 1
         end
       end
     end

@@ -76,13 +76,6 @@ class Departement < ApplicationRecord
 
   def stats = Co::DepartementStats.new(self)
 
-  def activity(date_range = Time.zone.now.all_week)
-    {
-      commune_messages_count: commune_messages_count(date_range),
-      commune_dossiers_transmis: commune_dossiers_transmis(date_range)
-    }
-  end
-
   def commune_messages_count(date_range)
     communes.sort_by_nom.joins(:messages).merge(Message.from_commune.received_in(date_range)).tally
   end

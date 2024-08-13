@@ -1,5 +1,5 @@
-- commune_messages_count = @activity[:commune_messages_count]
-- commune_dossiers_transmis = @activity[:commune_dossiers_transmis]
+- commune_messages_count = @departement.commune_messages_count(@date_range)
+- commune_dossiers_transmis = @departement.commune_dossiers_transmis(@date_range)
 
 = turbo_frame_tag "activite" do
   = form_with url: url_for, method: :GET, builder: FormBuilderDsfr, data: { turbo_action: :replace } do |f|

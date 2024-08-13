@@ -37,7 +37,6 @@ module Conservateurs
       start_date = parse_date(params[:du])
       end_date = parse_date(params[:au])
       @date_range = start_date && end_date ? start_date..end_date : Date.current.all_week
-      @activity = @departement.activity(@date_range)
       render "tabs"
     end
 
