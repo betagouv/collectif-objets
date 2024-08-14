@@ -65,11 +65,9 @@ module Conservateurs
     end
 
     def set_date_range
-      @date_start = parse_date(params[:du])
-      @date_end = parse_date(params[:au])
-      @date_range = @date_start && @date_end ? @date_start..@date_end : Date.current.all_week
-      @date_start ||= @date_range.first
-      @date_end   ||= @date_range.last
+      @date_start = parse_date(params[:du]) || 1.week.ago.at_beginning_of_week
+      @date_end = parse_date(params[:au]) || Time.zone.today
+      @date_range = @date_start..@date_end
     end
 
     def set_tabs
