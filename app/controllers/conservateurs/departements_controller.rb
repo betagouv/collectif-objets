@@ -2,13 +2,23 @@
 
 module Conservateurs
   class DepartementsController < BaseController
+    before_action :set_departements, only: [:index, :activite_des_departements]
     before_action :set_departement, only: [:show, :carte, :activite]
+    before_action :set_date_range, only: [:activite, :activite_des_departements]
     before_action :set_communes, only: [:show, :carte]
     before_action :set_status_global_filter, only: [:show]
     before_action :set_tabs, only: [:show, :carte, :activite]
 
-    def index
-      @departements = policy_scope(Departement).include_objets_count.order(:code)
+    skip_after_action :verify_authorized, only: :activite_des_departements
+
+    def index; end
+
+    def activite_des_departements
+      if @departements.length == 1
+        redirect_to activite_conservateurs_departement_path(@departements.first)
+      else
+        render "activite"
+      end
     end
 
     def show
@@ -36,15 +46,14 @@ module Conservateurs
     end
 
     def activite
-      @date_start = parse_date(params[:du])
-      @date_end = parse_date(params[:au])
-      @date_range = @date_start && @date_end ? @date_start..@date_end : Date.current.all_week
-      @date_start ||= @date_range.first
-      @date_end   ||= @date_range.last
       render "tabs"
     end
 
     protected
+
+    def set_departements
+      @departements = policy_scope(Departement).include_objets_count.order(:code)
+    end
 
     def set_departement
       @departement = Departement.find(params[:id])
@@ -53,6 +62,14 @@ module Conservateurs
 
     def set_communes
       @communes = @departement.communes.include_statut_global
+    end
+
+    def set_date_range
+      @date_start = parse_date(params[:du])
+      @date_end = parse_date(params[:au])
+      @date_range = @date_start && @date_end ? @date_start..@date_end : Date.current.all_week
+      @date_start ||= @date_range.first
+      @date_end   ||= @date_range.last
     end
 
     def set_tabs

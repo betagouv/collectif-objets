@@ -1,0 +1,12 @@
+= form_with url: url_for, method: :GET, builder: FormBuilderDsfr, data: { turbo_action: :replace } do |f|
+  .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-end.fr-mb-2w
+    .fr-col-md-4
+      .fr-input-group
+        = f.label :du, "Date de début"
+        = f.date_field :du, value: @date_start, class: "fr-input"
+    .fr-col-md-4
+      .fr-input-group
+        = f.label :au, "Date de fin"
+        = f.date_field :au, value: @date_end, class: "fr-input"
+    .fr-col-md-4
+      = f.button "Voir l'activité dans cette période", name: nil, class: "fr-btn fr-btn--secondary"
