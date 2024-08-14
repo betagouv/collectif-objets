@@ -24,9 +24,14 @@
       %h2 Préférences de communication
       = form_for current_conservateur, url: conservateurs_conservateur_path, builder: FormBuilderDsfr do |f|
         .fr-checkbox-group.fr-mb-4w
-          = f.check_box :messages_mail_notifications, autocomplete: "off"
+          = f.check_box :messages_mail_notifications, autocomplete: :off
           = f.label :messages_mail_notifications do
             = icon_span(:mail)
-            %span Notifications mails pour les messages reçus
+            %span Recevoir un email à chaque message reçu sur la plateforme.
+        .fr-checkbox-group.fr-mb-4w
+          = f.check_box :send_recap, autocomplete: :off
+          = f.label :send_recap do
+            = icon_span(:mail)
+            %span Recevoir chaque semaine un récapitulatif de l'activité des communes.
         .fr-input-group
           = f.submit "Sauvegarder"

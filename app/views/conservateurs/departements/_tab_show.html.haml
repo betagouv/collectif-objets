@@ -1,7 +1,5 @@
--# locals: (ransack:, departement:, communes:, pagy:, query_present: false)
-
 = turbo_frame_tag "communes-search" do
-  = search_form_for ransack, url: conservateurs_departement_path(departement), method: "GET", builder: FormBuilderDsfr, data: { turbo_action: "replace" } do |f|
+  = search_form_for @ransack, url: url_for, method: :GET, builder: FormBuilderDsfr, data: { turbo_action: :replace } do |f|
     .fr-grid-row.fr-grid-row--gutters.co-flex--align-items-end
       .fr-col-12.fr-col-sm-4
         = f.label :nom_unaccented_cont, "Nom de commune", class: "fr-mb-1w"
@@ -11,12 +9,12 @@
       .fr-col-12.fr-col-sm-4
         = f.label :statut_global_eq, "Statut de l'examen"
         = f.select :statut_global_eq, communes_statuses_options_for_select, {}, data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
-
-      - if query_present
+      - if @query_present
         .fr-col-12.fr-col-sm-4
           -# Le q: {statut_global_eq: ""} permet d'écraser le statut conservé en session
-          = link_to "réinitialiser les filtres", conservateurs_departement_path(departement, q: {statut_global_eq: ""}), class: "fr-link"
-    - if pagy.count.zero?
+          = link_to "Réinitialiser les filtres", url_for(q: {statut_global_eq: ""}), class: "fr-btn fr-btn--tertiary"
+
+    - if @pagy.count.zero?
       %p.co-text--italic.fr-py-8w
         Aucune commune trouvée
     - else
@@ -24,14 +22,14 @@
         %table.co-header-title-vertical-align
           %thead
             %tr
-              %th= sort_link ransack, :nom, "Commune", data: { turbo_action: "replace" }
-              %th.co-hide--sm= sort_link ransack, :objets_count, "Nombre d'objets", default_order: :desc, data: { turbo_action: "replace" }
-              %th.co-hide--sm= sort_link ransack, :en_peril_count, "Objets en péril", default_order: :desc, data: { turbo_action: "replace" }
-              %th.co-hide--sm= sort_link ransack, :disparus_count, "Objets disparus", default_order: :desc, data: { turbo_action: "replace" }
-              %th= sort_link ransack, :statut_global, "Examen", data: { turbo_action: "replace" }
-              %th.co-hide--sm= sort_link ransack, :dossier_submitted_at, "Date du recensement", data: { turbo_action: "replace" }
+              %th= sort_link @ransack, :nom, "Commune", data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link @ransack, :objets_count, "Nombre d'objets", default_order: :desc, data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link @ransack, :en_peril_count, "Objets en péril", default_order: :desc, data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link @ransack, :disparus_count, "Objets disparus", default_order: :desc, data: { turbo_action: "replace" }
+              %th= sort_link @ransack, :statut_global, "Examen", data: { turbo_action: "replace" }
+              %th.co-hide--sm= sort_link @ransack, :dossier_submitted_at, "Date du recensement", data: { turbo_action: "replace" }
           %tbody
-            - communes.each do |commune|
+            - @communes.each do |commune|
               %tr
                 %td
                   = link_to commune.nom, conservateurs_commune_path(commune), "data-turbo-frame": "_top"
@@ -41,6 +39,6 @@
                 %td= commune_statut_global_badge(commune, small: true)
                 %td.co-hide--sm= commune.dossier&.submitted_at&.strftime("%d/%m/%y")
 
-    - if pagy.pages > 1
+    - if @pagy.pages > 1
       .fr-mt-8w.co-pagination-wrapper
-        != render partial: 'shared/pagy_nav', locals: {pagy:}
+        = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}

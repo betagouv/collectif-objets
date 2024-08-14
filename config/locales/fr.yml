@@ -46,13 +46,6 @@ fr:
         head_title: Carte du %{departement}
       title:
         campaign: Campagne de recensement du %{date_lancement} au %{date_fin}
-      map_sidebar_commune_template:
-        en_peril_count:
-          one: 1 objet en péril
-          other: "%{count} objets en péril"
-        recensed_count:
-          one: 1 objet recensé
-          other: "%{count} objets recensés"
     recensements:
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
@@ -265,6 +258,10 @@ fr:
         analyse_fiches: Fiches à associer
         analyse_notes: Commentaires pour la mairie
       dossier:
+        count:
+          zero: aucun dossier
+          one: un dossier
+          other: "%{count} dossiers"
         notes_commune: Commentaires de la commune
         notes_conservateur: Commentaires des conservateurs à destination de la commune
         recenseur: Coordonnées de la personne ayant effectué le recensement
@@ -317,6 +314,10 @@ fr:
         phone_number: Numéro de téléphone
         last_sign_in_at: Dernière connexion
       message:
+        count:
+          zero: aucun message
+          one: un message
+          other: "%{count} messages"
         files:
           zero: aucune pièce jointe
           one: 1 pièce jointe
@@ -325,6 +326,19 @@ fr:
           zero: aucune autre pièce jointe
           one: 1 autre pièce jointe
           other: "%{count} autres pièces jointes"
+      objet:
+        recensed_count:
+          zero: aucun objet recensé
+          one: 1 objet recensé
+          other: "%{count} objets recensés"
+        en_peril_count:
+          zero: aucun objet en péril
+          one: 1 objet en péril
+          other: "%{count} objets en péril"
+        disparus_count:
+          zero: aucun objet disparu
+          one: 1 objet disparu
+          other: "%{count} objets disparus"
   date:
     abbr_day_names:
       - dim
@@ -441,6 +455,10 @@ fr:
       zero: aucun objet
       one: 1 objet
       other: "%{count} objets"
+    recensed_count:
+      one: 1 objet recensé
+      other: "%{count} objets recensés"
+
     photos_count:
       zero: Aucune photo connue pour cet objet
       one: 1 photo connue pour cet objet
@@ -647,6 +665,12 @@ fr:
       pour_repondre: Pour répondre à ce message, rendez-vous sur la messagerie dans Collectif Objets accessible depuis la page de la commune.
       cta: Répondre à ce message
       reply_by_email: Vous pouvez aussi répondre à cet email directement. Le message apparaîtra dans la messagerie de Collectif Objets et l'usager sera notifié par email.
+    activite:
+      bonjour: Bonjour %{nom},
+      intro: "Voici l'activité des communes du %{date_start} au %{date_end} %{dans_departement}."
+      messages: "Vous avez reçu %{messages} de %{communes}."
+      dossiers: "Vous avez %{dossiers} à examiner."
+      cta: Ne plus recevoir ce type de messages
     layout:
       unsubscribe: Je ne souhaite plus recevoir ces emails
   user_mailer:

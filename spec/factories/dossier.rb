@@ -5,6 +5,10 @@ FactoryBot.define do
     association :commune
     status { :construction }
 
+    trait :with_recensement do
+      recensements { [association(:recensement, dossier: instance, objet: association(:objet, commune:))] }
+    end
+
     trait :with_recensement_examiné do
       recensements { [association(:recensement_examiné)] }
     end

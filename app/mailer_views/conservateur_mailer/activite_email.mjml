@@ -1,0 +1,48 @@
+    <mj-text>
+      <%= t("conservateur_mailer.activite.bonjour", nom: @conservateur.to_s) %>
+    </mj-text>
+    <mj-text>
+      <%= t("conservateur_mailer.activite.intro", dans_departement: @departement.dans_nom, date_start: @human_date_start, date_end: @human_date_end) %>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+<%- if @communes_with_messages.length.positive? %>
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("conservateur_mailer.activite.messages", messages: Message.human_attribute_name(:count, count: @communes_with_messages.values.sum), communes: Commune.human_attribute_name(:count, count: @communes_with_messages.length)) %>
+      <ul>
+      <% @communes_with_messages.each do |commune, count| %>
+        <li>
+          <%= link_to "#{commune.nom} : #{Message.human_attribute_name(:count, count:)}", conservateurs_commune_url(commune) %>
+        </li>
+      <% end %>
+      </ul>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<%- end %>
+
+<%- if @communes_with_dossiers.length.positive? %>
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= t("conservateur_mailer.activite.dossiers", dossiers: Dossier.human_attribute_name(:count, count: @communes_with_dossiers.length)) %>
+      <ul>
+      <% @communes_with_dossiers.each do |commune| %>
+        <li>
+          <%= link_to commune_name_with_objets_rouges_count(commune), conservateurs_commune_dossier_url(commune) %>
+        </li>
+      <% end %>
+      </ul>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<%- end %>
+
+<mj-section>
+  <mj-column>
+    <mj-button background-color="rgb(0,0,145)" color="#fff" align="center" href="<%= edit_conservateur_registration_url %>">
+      <%= t("conservateur_mailer.activite.cta") %>
+    </mj-button>

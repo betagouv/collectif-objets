@@ -43,6 +43,7 @@ class Dossier < ApplicationRecord
   scope :auto_submittable, -> { where(id: auto_submittable_ids) }
   scope :to_visit, -> { where.not(visit: nil) }
   scope :current, -> { where.not(status: "archived") }
+  scope :submitted_in, ->(date_range) { where(submitted_at: date_range) if date_range }
 
   before_create :set_campaign
 

@@ -22,4 +22,25 @@ RSpec.describe ConservateurMailer, type: :mailer do
       expect(mail.from).to eq([CONTACT_EMAIL])
     end
   end
+
+  describe "activite_email" do
+    let(:departement) { create(:departement) }
+    let(:conservateur) { create(:conservateur, departements: [departement]) }
+    let(:commune) { create(:commune, departement:) }
+    let(:dossier) { create(:dossier, :submitted, commune:) }
+    let(:date_start) { dossier.submitted_at.at_beginning_of_week }
+    let(:date_end) { date_start.at_end_of_week }
+    let(:mail) { ConservateurMailer.with(conservateur:, departement:, date_start:, date_end:).activite_email }
+
+    include_examples(
+      "both parts contain",
+      "activité des communes"
+    )
+
+    it "behaves as expected" do
+      expect(mail.subject).to include "Récapitlatif d'activité"
+      expect(mail.to).to eq([conservateur.email])
+      expect(mail.from).to eq([CONTACT_EMAIL])
+    end
+  end
 end
