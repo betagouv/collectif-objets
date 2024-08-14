@@ -25,8 +25,8 @@
         .fr-mb-6w
           - if commune.en_peril_count
             .co-text--bold
-              = t("objets.en_peril_count", count: commune.en_peril_count)
-            %div sur #{t("objets.recensed_count", count: commune.objets_count)}
+              = Objet.human_attribute_name(:en_peril_count, count: commune.en_peril_count)
+            %div sur #{Objet.human_attribute_name(:recensed_count, count: commune.objets_count)}.
           - else
             = t(".recensed_count", count: commune.objets_count)
         %div

@@ -327,10 +327,16 @@ fr:
           one: 1 autre pièce jointe
           other: "%{count} autres pièces jointes"
       objet:
+        recensed_count:
+          zero: aucun objet recensé
+          one: 1 objet recensé
+          other: "%{count} objets recensés"
         en_peril_count:
+          zero: aucun objet en péril
           one: 1 objet en péril
           other: "%{count} objets en péril"
         disparus_count:
+          zero: aucun objet disparu
           one: 1 objet disparu
           other: "%{count} objets disparus"
   date:
