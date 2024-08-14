@@ -21,7 +21,7 @@
         .fr-card__body
           .fr-card__content
             %h2.fr-card__title.fr-text-title--blue-france
-              Nouveaux messages : #{commune_messages_count.size}
+              Nouveaux messages : #{commune_messages_count.values.sum}
             .fr-card__desc
               - if commune_messages_count.size.positive?
                 %ul.fr-links-group.fr-pl-0.fr-mb-0
