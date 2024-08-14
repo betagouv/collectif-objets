@@ -784,3 +784,7 @@ fr:
       last_word_connector: " et "
       two_words_connector: " et "
       words_connector: ", "
+  number:
+    format:
+      delimiter: " "
+      separator: ","
