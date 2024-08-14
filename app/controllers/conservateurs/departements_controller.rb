@@ -37,6 +37,8 @@ module Conservateurs
       @date_start = parse_date(params[:du])
       @date_end = parse_date(params[:au])
       @date_range = @date_start && @date_end ? @date_start..@date_end : Date.current.all_week
+      @date_start ||= @date_range.first
+      @date_end   ||= @date_range.last
       render "tabs"
     end
 
