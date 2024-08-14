@@ -44,7 +44,7 @@
                 %ul.fr-links-group.fr-pl-0.fr-mb-0
                   - commune_dossiers_transmis.each do |commune|
                     %li.co-flex.co-flex--space-between.co-flex--align-items-center.co-position-relative.fr-enlarge-link.fr-px-1w.fr-mx-n1w.fr-pt-1w.fr-mt-n1w
-                      = link_to commune.nom, conservateurs_commune_dossier_path(commune), class: "fr-link", title: commune_name_with_objets_rouges_count(commune), "data-turbo-frame": :_top
+                      = link_to commune.nom, conservateurs_commune_path(commune), class: "fr-link", title: commune_name_with_objets_rouges_count(commune), "data-turbo-frame": :_top
                       - if commune.en_peril_count.positive?
                         = badge :warning do Objet.human_attribute_name(:en_peril_count, count: commune.en_peril_count) end
                       - if commune.disparus_count.positive?
