@@ -331,8 +331,8 @@ fr:
           one: 1 objet en péril
           other: "%{count} objets en péril"
         disparus_count:
-          one: 1 objet absent
-          other: "%{count} objets absents"
+          one: 1 objet disparu
+          other: "%{count} objets disparus"
   date:
     abbr_day_names:
       - dim
