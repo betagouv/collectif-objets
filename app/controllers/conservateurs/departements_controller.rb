@@ -3,6 +3,7 @@
 module Conservateurs
   class DepartementsController < BaseController
     before_action :set_departement, only: [:show, :carte, :activite]
+    before_action :set_communes, only: [:show, :carte]
     before_action :set_status_global_filter, only: [:show]
     before_action :set_tabs, only: [:show, :carte, :activite]
 
@@ -11,7 +12,6 @@ module Conservateurs
     end
 
     def show
-      set_communes
       @ransack = @communes.select("nom").ransack(params[:q])
 
       # Remonte par défaut les communes avec le plus d'objets en péril
@@ -27,7 +27,6 @@ module Conservateurs
     end
 
     def carte
-      set_communes
       @communes.select(%w[code_insee nom status objets_count en_peril_count latitude longitude]).to_a
       @departement_json = {
         code: @departement.code,
