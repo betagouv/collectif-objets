@@ -62,6 +62,18 @@ describe Departement, type: :model do
         expect { departements_with_activity }.not_to exceed_query_limit(1).with(/SELECT/)
       end
     end
+
+    context "quand des communes ont envoyé un message et transmis un dossier" do
+      it "liste les départements des deux communes" do
+        # Message d'une commune du premier département inclus dans la date_range
+        create(:message, :from_commune, commune:, created_at: Time.zone.now)
+        # Dossier valide
+        create(:dossier, :submitted, :with_recensement, commune: commune2, submitted_at: date_range.first + 1.day)
+        expect(departements_with_activity).to eq({ departement.code => [conservateur.id],
+                                                   departement2.code => [conservateur2.id] })
+        expect { departements_with_activity }.not_to exceed_query_limit(1).with(/SELECT/)
+      end
+    end
   end
 
   describe "#commune_messages_count(date_range)" do
