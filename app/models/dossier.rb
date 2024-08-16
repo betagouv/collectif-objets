@@ -74,10 +74,6 @@ class Dossier < ApplicationRecord
     recensements.where.not(analysed_at: nil).empty?
   end
 
-  def can_return_to_construction?
-    submitted? && not_analysed?
-  end
-
   def analyse_overrides?
     recensements.any?(&:analyse_overrides?)
   end
