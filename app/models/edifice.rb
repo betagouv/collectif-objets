@@ -20,7 +20,7 @@ class Edifice < ApplicationRecord
 
   scope :preloaded, lambda {
     with_objets.ordered_by_nom.includes(
-      objets: [:commune, :recensements, { recensements: [:photos_attachments, :photos_blobs] }]
+      objets: [:commune, { recensement: [:photos_attachments, :photos_blobs] }]
     )
   }
 

@@ -1,9 +1,9 @@
-- content_for(:head_title) { "Admin - Conservateurs" }
+- content_for(:head_title) { "Admin - Modifier #{@conservateur}" }
 
-.fr-container.fr-pt-2w.fr-pb-4w
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
   = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Conservateurs", admin_conservateurs_path]], current_page_label: "Modifier #{@conservateur}"
 
-  %h2 Admin - Modifier #{@conservateur}
+  %h1 Admin - Modifier #{@conservateur}
 
   .fr-grid-row
     .fr-col-md-8

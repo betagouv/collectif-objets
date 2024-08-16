@@ -6,17 +6,17 @@ RSpec.describe Recensement, type: :model do
   describe "validations" do
     subject { recensement.valid? }
 
-    context "basic recensement from factory" do
+    context "from factory" do
       let(:recensement) { build(:recensement) }
       it { should eq true }
     end
 
-    context "recensement without etat_sanitaire" do
+    context "without etat_sanitaire" do
       let(:recensement) { build(:recensement, etat_sanitaire: nil) }
       it { should eq false }
     end
 
-    context "recensement autre edifice with edifice_nom" do
+    context "autre edifice with edifice_nom" do
       let(:recensement) do
         build(:recensement,
               localisation: Recensement::LOCALISATION_AUTRE_EDIFICE,
@@ -25,12 +25,12 @@ RSpec.describe Recensement, type: :model do
       it { should eq true }
     end
 
-    context "recensement autre edifice without edifice_nom" do
+    context "autre edifice without edifice_nom" do
       let(:recensement) { build(:recensement, localisation: Recensement::LOCALISATION_AUTRE_EDIFICE, edifice_nom: nil) }
       it { should eq false }
     end
 
-    context "recensement introuvable" do
+    context "introuvable" do
       let(:attributes) do
         { localisation: Recensement::LOCALISATION_ABSENT, recensable: false, etat_sanitaire: nil, securisation: nil }
       end
@@ -70,7 +70,7 @@ RSpec.describe Recensement, type: :model do
       end
     end
 
-    context "recensement non recensable" do
+    context "non recensable" do
       let(:attributes) { { recensable: false, etat_sanitaire: nil, securisation: nil } }
 
       context "other fields empty" do
@@ -115,13 +115,6 @@ RSpec.describe Recensement, type: :model do
         before { recensement.assign_attributes(attributes.merge(photos: [])) }
         it { should eq true }
       end
-    end
-
-    context "another recensement already exists for same objet" do
-      let!(:objet) { create(:objet) }
-      let!(:existing_recensement) { create(:recensement, objet:) }
-      let(:recensement) { build(:recensement, objet:) }
-      it { should eq false }
     end
   end
 
@@ -243,28 +236,10 @@ RSpec.describe Recensement, type: :model do
       end
     end
 
-    context "pour une commune inactive" do
-      let!(:commune) { create(:commune, status: "inactive") }
-      let!(:objet) { create(:objet, commune:) }
-      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
-      it "change le statut du recensement et de la commune et créé un dossier" do
-        expect(SendMattermostNotificationJob).to \
-          receive(:perform_later).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
-        do_complete!
-        expect(recensement.reload.status.to_sym).to eq :completed
-        expect(recensement.reload.dossier).to be_present
-        expect(recensement.reload.dossier.status.to_sym).to eq :construction
-        expect(recensement.reload.dossier.commune.status.to_sym).to eq :started
-        expect(commune.reload.dossier).to eq recensement.reload.dossier
-      end
-    end
-
     context "pour une commune started" do
-      let!(:commune) { create(:commune, status: "started") }
-      let!(:dossier) { create(:dossier, status: "construction", commune:) }
-      before { commune.update!(dossier:) }
+      let!(:commune) { create(:commune, :en_cours_de_recensement) }
       let!(:objet) { create(:objet, commune:) }
-      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
+      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: commune.dossier) }
       it "change le statut du recensement et réutilise le dossier existant" do
         expect(SendMattermostNotificationJob).to \
           receive(:perform_later).with("recensement_created", { "recensement_id" => an_instance_of(Integer) })
@@ -275,27 +250,6 @@ RSpec.describe Recensement, type: :model do
         expect(recensement.reload.dossier.status.to_sym).to eq :construction
         expect(commune.reload.status.to_sym).to eq :started
         expect(commune.reload.dossier).to eq recensement.reload.dossier
-        expect(Dossier.count).to eq initial_dossier_count
-      end
-    end
-
-    context "pour une commune inactive mais une erreur se produit" do
-      let!(:commune) { create(:commune, status: "inactive") }
-      let!(:objet) { create(:objet, commune:) }
-      let(:recensement) { create(:recensement, objet:, status: "draft", dossier: nil) }
-      before do
-        def recensement.aasm_after_complete
-          super
-          raise ActiveRecord::RecordInvalid
-        end
-      end
-      it "annule tous les changements" do
-        expect(SendMattermostNotificationJob).not_to receive(:perform_later)
-        initial_dossier_count = Dossier.count
-        expect { do_complete! }.to raise_error(ActiveRecord::RecordInvalid)
-        expect(recensement.reload.status.to_sym).to eq :draft
-        expect(commune.reload.status.to_sym).to eq :inactive
-        expect(commune.reload.dossier).to be_nil
         expect(Dossier.count).to eq initial_dossier_count
       end
     end
@@ -384,6 +338,62 @@ RSpec.describe Recensement, type: :model do
         expect(recensement.reload.deleted_at).to be_nil
         subject
         expect { recensement.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+
+  describe "#nouvelle_commune" do
+    let(:commune) { create(:commune) }
+    let(:localisation) { Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
+    let(:recensement) { build(:recensement, localisation:, autre_commune_code_insee:) }
+
+    context "when autre_commune_code_insee is set" do
+      let(:autre_commune_code_insee) { commune.code_insee }
+      it "returns the new commune" do
+        expect(recensement.nouvelle_commune).to eq commune
+      end
+    end
+    context "when autre_commune_code_insee is nil" do
+      let(:autre_commune_code_insee) { nil }
+      it "returns nil" do
+        expect(recensement.nouvelle_commune).to eq nil
+      end
+    end
+  end
+
+  describe "#nouvel_edifice" do
+    let(:recensement) { build(:recensement, localisation:, edifice_nom:) }
+    let(:localisation) { Recensement::LOCALISATION_AUTRE_EDIFICE }
+
+    context "when edifice_nom is set" do
+      let(:edifice_nom) { "Nouvel édifice" }
+      it "returns the name of the new edifice" do
+        expect(recensement.nouvel_edifice).to eq edifice_nom
+      end
+    end
+    context "when edifice_nom is nil" do
+      let(:edifice_nom) { nil }
+      it "returns nil" do
+        expect(recensement.nouvel_edifice).to eq nil
+      end
+    end
+  end
+
+  describe "#nouveau_departement" do
+    let(:commune) { create(:commune) }
+    let(:localisation) { Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
+    let(:recensement) { build(:recensement, localisation:, autre_commune_code_insee:) }
+
+    context "when autre_commune_code_insee is set" do
+      let(:autre_commune_code_insee) { commune.code_insee }
+      it "returns the new departement" do
+        expect(recensement.nouveau_departement).to eq commune.departement
+      end
+    end
+    context "when autre_commune_code_insee is nil" do
+      let(:autre_commune_code_insee) { nil }
+      it "returns nil" do
+        expect(recensement.nouveau_departement).to eq nil
       end
     end
   end

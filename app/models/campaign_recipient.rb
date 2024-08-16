@@ -4,7 +4,7 @@ class CampaignRecipient < ApplicationRecord
   STATUSES = %w[completed started step_lancement step_relance1 step_relance2 step_relance3 step_fin].freeze
   OPT_OUT_REASONS = %w[postponed other].freeze
 
-  belongs_to :campaign, counter_cache: :recipients_count
+  belongs_to :campaign
   belongs_to :commune
   has_one :departement, through: :commune
   has_many :emails, class_name: "CampaignEmail", dependent: :destroy, inverse_of: :recipient
@@ -14,13 +14,15 @@ class CampaignRecipient < ApplicationRecord
   validates :opt_out_reason, inclusion: { in: OPT_OUT_REASONS }, if: :opt_out?
   validates :opt_out_reason, inclusion: { in: [nil, ""] }, unless: :opt_out?
 
-  # TODO: validate cannot be CRUD for non-draft campaign
-  # TODO: validate commune belongs to campaign departement
-
-  validate :validate_inactive
-  validate :validate_email
+  validate :commune_state, :commune_users, on: :create
 
   before_create :set_unsubscribe_token
+
+  delegate :random_token, to: :class
+
+  def self.random_token
+    SecureRandom.hex(30)
+  end
 
   def status
     if campaign.draft? || campaign.planned?
@@ -56,20 +58,18 @@ class CampaignRecipient < ApplicationRecord
   end
 
   def set_unsubscribe_token
-    self.unsubscribe_token ||= SecureRandom.hex(30)
+    self.unsubscribe_token ||= random_token
   end
 
   private
 
-  def validate_inactive
-    return if persisted? || (campaign.ongoing? || campaign.finished?)
+  def commune_state
+    return if campaign.ongoing? || campaign.finished?
 
-    errors.add(:commune_id, "Impossible d'intégrer une commune déjà active") unless commune.inactive?
+    errors.add(:commune_id, "Impossible d'intégrer une commune en cours de recensement") if commune.started?
   end
 
-  def validate_email
-    return if persisted?
-
+  def commune_users
     errors.add(:commune_id, "La commune n'a pas d'email associé") unless commune.users.any?
   end
 end

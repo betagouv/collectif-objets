@@ -17,9 +17,8 @@ class CampaignStats
 
   def objets_stats
     total = campaign.objets.count
-    recensed = campaign.objets.where.associated(:recensements).count
-    recensed_with_photo = campaign
-      .objets.where.associated(:recensements).where.not(recensements: { photos_count: 0 }).count
+    recensed = campaign.recensements.count
+    recensed_with_photo = campaign.recensements.with_photos.count
     {
       total:,
       recensed:,
@@ -30,7 +29,7 @@ class CampaignStats
   end
 
   def statuses_stats
-    campaign.communes.group(:status).count
+    { total: campaign.recipients_count }.merge campaign.dossiers.group(:status).count
   end
 
   def mails_stats

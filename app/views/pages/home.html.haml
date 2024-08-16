@@ -84,11 +84,11 @@
     %h2#stats.co-text--blue Elles ont participé
     .fr-container.fr-grid-row.fr-grid-row--center.fr-grid-row-gutters
       .fr-col-md-6.fr-px-8w.fr-pb-4w
-        .fr-display--xl.co-text--blue= @stats[:communes]
+        .fr-display--xl.co-text--blue= number_with_delimiter @stats[:communes], delimiter: "&nbsp;".html_safe
         .co-text--blue
           communes engagées dans le recensement
       .fr-col-md-6.fr-px-8w
-        .fr-display--xl.co-text--blue= @stats[:recensements]
+        .fr-display--xl.co-text--blue= number_with_delimiter @stats[:recensements], delimiter: "&nbsp;".html_safe
         .co-text--blue
           objets monuments historiques déjà recensés
           depuis le début de l'opération
@@ -131,25 +131,3 @@
               %span.co-text--muted Haute-Marne
       %p.co-text--center.fr-mt-8w
         = link_to "Voir toutes nos apparitions dans la presse", presse_path, class: "fr-link"
-
-  / SECTION AIDE
-  #help.co-background--light-grey.fr-py-12w
-    .fr-container.fr-grid-row
-      .fr-col-md-6.fr-pr-4w.fr-pb-4w
-        %h2.co-text--blue
-          L'équipe de Collectif Objets
-        %p
-          Nous sommes là pour vous répondre et vous accompagner dans cette démarche
-        :markdown
-          - **Enora Bulting** Designer
-          - **Antoine Clairefond** Chargé de déploiement
-          - **Brice Durand** Développeur
-          - **Gaëlle Pichon-Meunier** Intrapreneuse
-          - **Fantine Monot** Chargée de déploiement
-          - **Raphaëlle Neyton** Coach
-          - **Sybille de La Raudière** Chargée de déploiement
-
-        %p
-          = link_to CONTACT_EMAIL, "mailto:#{CONTACT_EMAIL}", class: "fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-mail-line fr-mt-2w"
-      .fr-col-md-6.fr-px-6w
-        = render 'shared/picture_tag', filename_without_extension: "equipe",  img_class: "co--width-max-100", alt: "Équipe de Collectif Objets"

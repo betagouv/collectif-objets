@@ -61,7 +61,7 @@ module Recensements
     end
 
     def analyse_fiches_objects
-      analyse_fiches.map { Fiche.load_from_id(_1) }
+      analyse_fiches.map { Fiche.find(_1) }
     end
   end
 end

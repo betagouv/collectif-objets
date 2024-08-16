@@ -43,6 +43,22 @@ class UserMailer < ApplicationMailer
     mail subject: "Vos recensements d'objets ont été transmis aux conservateurs"
   end
 
+  def relance_dossier_incomplet
+    @user = params[:user]
+    @commune = params[:commune]
+    @cta_url = commune_objets_url(@commune)
+    set_login_url
+    mail subject: "Plus que 3 mois pour pour finaliser votre recensement"
+  end
+
+  def derniere_relance_dossier_incomplet
+    @user = params[:user]
+    @commune = params[:commune]
+    @cta_url = commune_objets_url(@commune)
+    set_login_url
+    mail subject: "Plus qu'un mois pour pour finaliser votre recensement"
+  end
+
   def message_received_email
     @message, @user = params.values_at(:message, :user)
     @author = @message.author

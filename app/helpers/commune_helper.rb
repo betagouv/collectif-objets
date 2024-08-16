@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-# rubocop:disable Rails/OutputSafety
 module CommuneHelper
   def commune_status_badge(commune)
     color = { inactive: "", started: :info, completed: :success }
       .with_indifferent_access[commune.status]
     text = I18n.t("activerecord.attributes.commune.statuses.#{commune.status}")
-    "<p class=\"fr-badge fr-badge--sm fr-badge--#{color}\">#{text}</p>".html_safe
+    content_tag("p", text, class: "fr-badge fr-badge--sm fr-badge--#{color}")
   end
 
   def commune_messagerie_title(commune)
@@ -34,13 +33,24 @@ module CommuneHelper
     ]
   end
 
-  def commune_statut_global_badge(commune, small: false)
+  def commune_statut_global_badge(commune, **options)
     colors = ["", "", "success", "blue-ecume", "blue-ecume", "success"]
     content_tag(
       "p",
       commune.statut_global_texte,
-      class: "fr-badge fr-badge--#{colors[commune.statut_global]} #{small ? 'fr-badge--sm' : ''}"
+      class: class_names(options[:class], "fr-badge", "fr-badge--#{colors[commune.statut_global]}",
+                         { "fr-badge--sm": options[:small] })
     )
   end
+
+  def commune_name_with_objets_rouges_count(commune)
+    data = [commune.nom]
+    if commune.en_peril_count.positive?
+      data << Objet.human_attribute_name(:en_peril_count, count: commune.en_peril_count)
+    end
+    if commune.disparus_count.positive?
+      data << Objet.human_attribute_name(:disparus_count, count: commune.disparus_count)
+    end
+    data.join(", ")
+  end
 end
-# rubocop:enable Rails/OutputSafety

@@ -2,13 +2,11 @@
 
 class PresseController < ApplicationController
   def index
-    @articles = ArticlePresse.load_all
+    @articles = ArticlePresse.all
   end
 
   def show
-    raise ActionController::RoutingError, "Article inexistant" if ArticlePresse.all_ids.exclude? params[:id]
-
-    @article = ArticlePresse.load_from_id(params[:id])
+    @article = ArticlePresse.find(params[:id])
   end
 
   private

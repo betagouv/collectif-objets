@@ -14,14 +14,13 @@ FactoryBot.define do
     palissy_PROT { "classé au titre objet" }
 
     association :commune
-    association :edifice
 
     trait :without_image do
       # do nothing
     end
 
     trait :with_recensement do
-      recensements { [association(:recensement)] }
+      recensements { [association(:recensement, dossier_id: commune.dossier&.id)] }
     end
 
     trait :with_recensement_with_photos_mocked do
@@ -72,11 +71,23 @@ FactoryBot.define do
     end
 
     factory :objet_en_peril do
-      recensements { [association(:recensement, :en_peril)] }
+      recensements { [association(:recensement, :en_peril, dossier_id: commune.dossier&.id)] }
     end
 
     trait :disparu do
-      recensements { [association(:recensement, :disparu)] }
+      recensements { [association(:recensement, :disparu, dossier_id: commune.dossier&.id)] }
+    end
+
+    trait :deplace do
+      recensements { [association(:recensement, :deplace, dossier_id: commune.dossier&.id)] }
+    end
+
+    trait :deplace_et_examine do
+      recensements { [association(:recensement, :deplace, :examiné, dossier_id: commune.dossier&.id)] }
+    end
+
+    trait :disparu_et_examine do
+      recensements { [association(:recensement, :disparu, :examiné, dossier_id: commune.dossier&.id)] }
     end
   end
 end

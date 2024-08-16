@@ -1,3 +1,5 @@
+- content_for(:head_title) { "Fiches conseil" }
+
 %main#contenu.fr-container.fr-pb-16w.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Fiches conseils"
   %h1 Fiches conseils des conservateurs

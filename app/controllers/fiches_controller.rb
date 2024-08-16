@@ -4,13 +4,11 @@ class FichesController < ApplicationController
   helper_method :titre_objets_concernes
 
   def index
-    @fiches = Fiche.load_all
+    @fiches = Fiche.all.sort_by(&:id)
   end
 
   def show
-    raise ActiveRecord::RecordNotFound if Fiche.all_ids.exclude? params[:id]
-
-    @fiche = Fiche.load_from_id(params[:id])
+    @fiche = Fiche.find(params[:id])
     @objets = objets
   end
 

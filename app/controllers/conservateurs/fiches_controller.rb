@@ -6,7 +6,6 @@ module Conservateurs
       @communes = policy_scope(Commune)
         .joins(:recensements).where("cardinality(recensements.analyse_fiches) > 0")
         .includes(:recensements)
-        .include_objets_count
         .group(:id, "objets_count", "recensements.id")
         .order(:nom)
     end

@@ -5,7 +5,7 @@ class Recensement < ApplicationRecord
   include Recensements::BooleansConcern
 
   belongs_to :objet, optional: true
-  belongs_to :dossier, optional: true
+  belongs_to :dossier
   belongs_to :pop_export_memoire, class_name: "PopExport", inverse_of: :recensements_memoire, optional: true
   belongs_to :pop_export_palissy, class_name: "PopExport", inverse_of: :recensements_palissy, optional: true
   # À terme, avoir une association de ce genre :
@@ -14,9 +14,12 @@ class Recensement < ApplicationRecord
     attachable.variant :small, resize_to_limit: [300, 400], saver: { strip: true }
     attachable.variant :medium, resize_to_limit: [800, 800], saver: { strip: true }
   end
+  has_one :nouvelle_commune, class_name: "Commune", dependent: nil, inverse_of: false,
+                             foreign_key: :code_insee, primary_key: :autre_commune_code_insee
 
   delegate :commune, to: :objet, allow_nil: true
   delegate :departement, to: :objet, allow_nil: true
+  delegate :departement, to: :nouvelle_commune, allow_nil: true, prefix: :nouveau
 
   include AASM
   aasm column: :status, whiny_persistence: true, timestamps: true do
@@ -24,8 +27,7 @@ class Recensement < ApplicationRecord
     state :completed, display: "Complet et validé"
     state :deleted, display: "Archivé"
 
-    event :complete, before: :ensure_completable, after: :aasm_after_complete,
-                     after_commit: :aasm_after_commit_complete do
+    event :complete, before: :ensure_completable, after_commit: :notify_on_mattermost do
       transitions from: :draft, to: :completed
     end
     event :soft_delete, before_transaction: :aasm_before_soft_delete_transaction do
@@ -54,7 +56,7 @@ class Recensement < ApplicationRecord
   SECURISATIONS = [SECURISATION_CORRECTE, SECURISATION_MAUVAISE].freeze
 
   validates :objet, presence: true, unless: -> { deleted? } # it is important not to use objet_id here
-  validates :objet_id, uniqueness: true, if: -> { objet_id.present? }
+  validates :objet_id, uniqueness: { scope: :dossier_id }
 
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
   # À faire évoluer : retirer edifice_nom au profit d'un belongs_to: autre_edifice
@@ -77,20 +79,21 @@ class Recensement < ApplicationRecord
   validates :deleted_at, presence: true, if: -> { deleted? }
   validates :deleted_reason, inclusion: { in: %w[objet-devenu-hors-scope changement-de-commune] }, if: -> { deleted? }
 
-  after_create { RefreshCommuneRecensementRatioJob.perform_later(commune.id) }
-  after_destroy { RefreshCommuneRecensementRatioJob.perform_later(commune.id) if commune.present? }
-
   scope :present_and_recensable, lambda {
     where(
       recensable: true,
       localisation: [LOCALISATION_EDIFICE_INITIAL, LOCALISATION_AUTRE_EDIFICE]
     )
   }
-  scope :missing_photos, lambda {
-    present_and_recensable.where.missing(:photos_attachments)
-  }
+  scope :with_photos, -> { present_and_recensable.where.associated(:photos_attachments) }
+  scope :missing_photos, -> { present_and_recensable.where.missing(:photos_attachments) }
   scope :photos_presence_in, ->(presence) { presence ? all : missing_photos }
   scope :absent, -> { where(localisation: LOCALISATION_ABSENT) }
+  scope :déplacés, -> {
+                     where(localisation: [LOCALISATION_AUTRE_EDIFICE,
+                                          LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE,
+                                          LOCALISATION_DEPLACEMENT_TEMPORAIRE])
+                   }
   scope :en_peril, -> { where(RECENSEMENT_EN_PERIL_SQL) }
   scope :prioritaires, -> { where(RECENSEMENT_PRIORITAIRE_SQL) }
   scope :recensable, -> { where(recensable: true) }
@@ -129,17 +132,7 @@ class Recensement < ApplicationRecord
   end
   ## fin du code qui semble mort
 
-  def aasm_after_complete
-    commune.start! if commune.inactive?
-
-    if !commune.dossier&.persisted? || !commune.dossier&.valid?
-      raise ActiveRecord::RecordInvalid, "cannot complete recensement before dossier is created"
-    end
-
-    update(dossier: commune.dossier)
-  end
-
-  def aasm_after_commit_complete
+  def notify_on_mattermost
     SendMattermostNotificationJob.perform_later("recensement_created", { "recensement_id" => id })
   end
 
@@ -160,13 +153,11 @@ class Recensement < ApplicationRecord
   end
 
   def nom_commune_localisation_objet
-    commune_localisation_objet = if autre_commune_code_insee.present?
-                                   Commune.find_by(code_insee: autre_commune_code_insee)
-                                 else
-                                   commune
-                                 end
+    nouvelle_commune || commune
+  end
 
-    commune_localisation_objet.presence
+  def nouvel_edifice
+    edifice_nom if déplacé?
   end
 
   def self.ransackable_scopes(_ = nil) = [:photos_presence_in]

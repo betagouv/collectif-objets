@@ -25,13 +25,9 @@ module Communes
       authorize(@dossier_completion)
     end
 
-    def redirect_with_alert(alert)
-      redirect_to commune_objets_path(@commune), alert:
-    end
-
     def set_objets
-      @objets = @commune.objets.joins(:recensements)
-        .includes(:commune, recensements: %i[photos_attachments photos_blobs])
+      @objets = @dossier.objets
+        .includes(:commune, recensement: %i[photos_attachments photos_blobs])
     end
 
     def set_missing_photos
@@ -39,7 +35,7 @@ module Communes
     end
 
     def dossier_completion_params
-      params.require(:dossier_completion).permit(:notes_commune).to_h.symbolize_keys
+      params.require(:dossier_completion).permit(:notes_commune, :recenseur).to_h.symbolize_keys
         .merge(user: current_user)
     end
 

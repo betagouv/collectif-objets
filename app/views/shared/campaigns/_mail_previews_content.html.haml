@@ -1,16 +1,9 @@
-.fr-grid-row.fr-mb-8w
-  .fr-col-md-6
-    = form_with url: send("#{routes_prefix}_campaign_mail_previews_path", campaign), method: :get, builder: FormBuilderDsfr do |f|
-      .fr-input-group
-        = f.label :count, "Nombre de mails max (peut être lent)"
-        = f.text_field :count, value: @count, type: :number, autocomplete: "off"
-      .fr-input-group
-        = f.submit "Prévisualiser les mails", name: nil
+= form_with url: send("#{routes_prefix}_campaign_mail_previews_path", campaign), method: :get, class: "fr-mr-md-2w", builder: FormBuilderDsfr do |f|
+  .fr-input-group
+    = f.label :commune_id, "Commune à prévisualiser"
+    = f.collection_select :commune_id, campaign.communes, :id, :nom, { selected: recipient.commune_id }, class: "fr-select", data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }
+  .fr-input-group
+    = f.submit "Prévisualiser le mail", name: nil, class: "fr-hidden"
 
-- campaign.recipients.includes(:commune).first(@count).each_slice(2) do |recipients|
-  .fr-grid-row.fr-mb-2w.fr-grid-row--gutters
-    - recipients.each do |recipient|
-      .fr-col-md-6
-        %b= recipient.commune
-        - mail = CampaignV1Mailer.with(user: recipient.commune.users.first, commune: recipient.commune, campaign: recipient.campaign).lancement_email
-        = render Conservateurs::MailIframeComponent.new mail:, display_headers: false, fit: true
+- mail = CampaignV1Mailer.with(user: recipient.commune.users.first, commune: recipient.commune, campaign:).lancement_email
+= render Conservateurs::MailIframeComponent.new mail:, display_headers: false, fit: true

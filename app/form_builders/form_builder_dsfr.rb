@@ -24,20 +24,20 @@ class FormBuilderDsfr < ActionView::Helpers::FormBuilder
   def text_area(method, options = {})
     options[:class] ||= ""
     options[:class] += " fr-input"
-    super(method, options)
+    super
   end
 
   def select(method, choices, options = {}, html_options = {})
     html_options = html_options.with_indifferent_access
     html_options[:class] ||= ""
     html_options[:class] += " fr-select"
-    super(method, choices, options, html_options)
+    super
   end
 
   def submit(value, options = {})
     options = options.with_indifferent_access
     options[:class] ||= ""
     options[:class] += " fr-btn"
-    super(value, options)
+    super
   end
 end

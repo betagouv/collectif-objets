@@ -1,3 +1,4 @@
 web: bundle exec rails server -p 3000
+worker: GOOD_JOB_MAX_THREADS=1 bundle exec good_job start
 mailhog: mailhog
 vite: bin/vite dev

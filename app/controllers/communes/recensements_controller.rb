@@ -6,12 +6,17 @@ module Communes
     before_action :set_recensement, only: %i[edit update destroy]
     before_action :set_wizard, only: %i[edit update]
 
+    content_security_policy(only: :edit) { |policy| policy.style_src :self, :unsafe_inline }
+
     def edit
       @modal = params[:modal]
     end
 
     def create
-      @recensement = Recensement.new(objet: @objet, status: "draft")
+      commune = Commune.find(params[:commune_id])
+      commune.start! if commune.inactive?
+
+      @recensement = Recensement.new(objet: @objet, dossier: commune.dossier)
       authorize(@recensement)
       if @recensement.save
         redirect_to edit_commune_objet_recensement_path(@recensement.commune, @objet, @recensement, step: 1)

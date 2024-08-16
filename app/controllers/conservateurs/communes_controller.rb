@@ -8,10 +8,7 @@ module Conservateurs
     def show
       return show_analyse_saved if params[:analyse_saved].present?
 
-      @edifices = Edifice.where(code_insee: @commune.code_insee)
-        .with_objets
-        .ordered_by_nom
-        .includes(objets: { recensements: { photos_attachments: :blob } })
+      @edifices = Edifice.where(code_insee: @commune.code_insee).preloaded
     end
 
     def autocomplete
@@ -24,9 +21,9 @@ module Conservateurs
     protected
 
     def show_analyse_saved
-      @objets = @dossier
+      @objets = @commune
         .objets
-        .includes(:edifice, recensements: %i[photos_attachments photos_blobs])
+        .includes(:edifice, recensement: %i[photos_attachments photos_blobs])
         .a_examiner
         .order_by_recensement_priorite
       render "show_analyse_saved"

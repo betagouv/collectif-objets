@@ -310,9 +310,9 @@ RSpec.describe Synchronizer::Objets::Revision::Base do
     end
 
     context "changement de commune + objet déjà recensé" do
-      let!(:commune_before_update) { create(:commune, code_insee: "01004", status: :started) }
-      let!(:recensement) { create(:recensement, objet: persisted_objet) }
-      let!(:commune_after_update) { create(:commune, code_insee: "01999", status: :inactive) }
+      let!(:commune_before_update) { create(:commune_en_cours_de_recensement, code_insee: "01004") }
+      let!(:recensement) { create(:recensement, objet: persisted_objet, dossier: commune_before_update.dossier) }
+      let!(:commune_after_update) { create(:commune_en_cours_de_recensement, code_insee: "01999") }
       before do
         objet_attributes.merge!(
           palissy_INSEE: "01999",

@@ -49,7 +49,7 @@ module Synchronizer
         end
 
         def existing_recensement
-          @existing_recensement ||= persisted_objet.recensements.first
+          @existing_recensement ||= persisted_objet.recensement
         end
 
         def commune_after_update = @eager_loaded_records.commune

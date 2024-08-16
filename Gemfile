@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.0"
+ruby "3.3.4"
 
 gem "aasm", "~> 5.5"
 gem "actionmailer-html2text", "~> 0.2.0"
@@ -12,6 +12,7 @@ gem "active_storage_validations", "~> 1.1"
 gem "after_commit_everywhere", "~> 1.3"
 gem "aws-sdk-s3", "~> 1.143", require: false
 gem "bootsnap", "~> 1.17", require: false
+gem "csv", "~> 3.3"
 gem "devise", "~> 4.9"
 gem "dsfr-view-components", "~> 0.4"
 gem "front_matter_parser", "~> 1.0"
@@ -64,6 +65,7 @@ group :test do
   gem "axe-core-capybara", "~> 4.9"
   gem "axe-core-rspec", "~> 4.8"
   gem "capybara", "~> 3.39"
+  gem "rspec-sqlimit", "~> 0.0.6"
   gem "selenium-webdriver", "~> 4.21"
   gem "webmock", "~> 3.23"
 end

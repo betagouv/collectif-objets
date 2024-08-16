@@ -7,9 +7,11 @@ class Campaign < ApplicationRecord
   DATE_FIELDS = STEPS.map { "date_#{_1}" }.freeze
 
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :campaigns
-  has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy, counter_cache: :recipients_count
+  has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy
   has_many :communes, through: :recipients
   has_many :objets, through: :communes
+  has_many :dossiers, dependent: :nullify # Pour le calcul des statistiques
+  has_many :recensements, through: :dossiers
   has_many :emails, class_name: "CampaignEmail", through: :recipients
 
   accepts_nested_attributes_for :recipients, allow_destroy: true
@@ -21,9 +23,9 @@ class Campaign < ApplicationRecord
     state :ongoing, display: "En cours"
     state :finished, display: "Terminée"
 
-    event(:plan) { transitions from: :draft, to: :planned, guard: :only_inactive_communes? }
+    event(:plan) { transitions from: :draft, to: :planned }
     event(:return_to_draft) { transitions from: :planned, to: :draft }
-    event(:start) { transitions from: :planned, to: :ongoing }
+    event(:start, before: :archive_dossiers) { transitions from: :planned, to: :ongoing }
     event(:finish) { transitions from: :ongoing, to: :finished }
   end
 
@@ -56,6 +58,25 @@ class Campaign < ApplicationRecord
     return nil if step == "fin"
 
     STEPS[STEPS.find_index(step) + 1]
+  end
+
+  def excluded_communes
+    departement.communes.excluding(communes).include_users_count.sort_by_nom
+  end
+
+  def communes_en_cours
+    communes.distinct.joins(:dossier).where(dossiers: { status: :submitted })
+  end
+
+  # Crée des destinataires sans N+1
+  def commune_ids=(ids = [])
+    recipients.where.not(commune_id: ids).destroy_all
+    recipients_data = ids.intersection(selectable_communes.ids).collect do |commune_id|
+      { commune_id:, unsubscribe_token: CampaignRecipient.random_token }
+    end
+    recipients.insert_all(recipients_data)
+    update(recipients_count: recipients_data.size)
+    recipients
   end
 
   def validate_successive_dates
@@ -105,27 +126,45 @@ class Campaign < ApplicationRecord
     STEPS[0..index]
   end
 
+  def available_communes
+    # Le nombre d'utilisateurs sert à exclure les communes sans mail de contact
+    # Le dossier sert à exclure les communes en cours de recensement
+    @available_communes ||= departement.communes.distinct.with_objets
+      .include_users_count.include_statut_global
+  end
+
+  def selectable_communes
+    departement.communes.distinct.unscope(:order).joins(:users, :objets).left_joins(:dossier)
+      .where.not(dossiers: { status: :construction })
+      .or(Commune.distinct.where(dossiers: { id: nil }))
+  end
+
   def dates_are_present? = DATE_FIELDS.map { send(_1) }.all?(&:present?)
   def draft_or_planned? = draft? || planned?
-  def only_inactive_communes? = communes.where.not(status: "inactive").empty?
   def stats = super&.with_indifferent_access
 
   def self.ransackable_attributes(_ = nil)
     %w[departement_code status recipients_count date_lancement]
   end
 
+  def archive_dossiers
+    communes.map(&:archive_dossier)
+  end
+
   # these next methods are used in the admin to force step up or start a campaign
 
-  def can_update_all_recipients_emails? = !prod? && draft_or_planned? && communes.any?
-  def can_force_start? = !prod? && draft_or_planned? && communes.any? && safe_emails?
-  def can_force_step_up? = !prod? && ongoing? && next_step.present? && communes.any? && safe_emails?
+  def can_force_start? = !prod? && draft_or_planned? && communes.any?
+  def can_force_step_up? = !prod? && ongoing? && next_step.present? && communes.any?
 
   def to_s
     "Campagne #{departement} du #{date_lancement} au #{date_fin}"
   end
 
+  def refresh_stats
+    update_columns(stats: CampaignStats.new(self).stats)
+  end
+
   private
 
   def prod? = Rails.configuration.x.environment_specific_name == "production"
-  def safe_emails? = communes.map(&:users).flatten.all?(&:safe_email?)
 end

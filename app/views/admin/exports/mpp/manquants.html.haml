@@ -1,0 +1,13 @@
+- page_title = "Export des objets manquants pour Palissy"
+- content_for(:head_title) { page_title }
+
+%main#contenu.fr-container.fr-mb-8w
+  = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: page_title
+
+  %h1= page_title
+
+  .co-flex.co-flex--space-between.co-flex--gap-1rem
+    = link_to "Télécharger les fichiers manquants en CSV", url_for(format: :csv), class: "fr-btn fr-btn--primary fr-btn--icon-left fr-icon-download-line co-no-target-blank", target: "_blank", rel: "noopener"
+    = link_to "Voir les objets déplacés", admin_exports_deplaces_path, class: "fr-icon-arrow-right-line fr-link--icon-right"
+
+  = render "table", headers: @headers, objets: @objets, pagy: @pagy

@@ -8,47 +8,29 @@
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-md-4
       %h2 Statistiques
-      - total = SessionCode.count.to_f
       .fr-table
         %table
           %thead
             %tr
-              %th
+              %td
               %th Nombre
               %th Pourcentage
           %tbody
             %tr
               %th Codes valides
               %td.text-end= total_valid = SessionCode.valid.count
-              %td.text-end= "#{(total_valid / total * 100).to_i}&nbsp;%".html_safe
+              %td.text-end= "#{@total.zero? ? 0 : (total_valid / @total.to_f * 100).to_i}&nbsp;%".html_safe
             %tr
               %th Codes utilisés
               %td.text-end= total_used = SessionCode.used.count
-              %td.text-end= "#{(total_used / total * 100).to_i}&nbsp;%".html_safe
+              %td.text-end= "#{@total.zero? ? 0 : (total_used / @total.to_f * 100).to_i}&nbsp;%".html_safe
             %tr
               %th Codes expirés
               %td.text-end= total_expired = SessionCode.expired.count
-              %td.text-end= "#{(total_expired / total * 100).to_i}&nbsp;%".html_safe
+              %td.text-end= "#{@total.zero? ? 0 : (total_expired / @total.to_f * 100).to_i}&nbsp;%".html_safe
             %tr
               %th Total des codes
-              %td.text-end= total.to_i
+              %td.text-end= @total
               %td.text-end 100 %
     .fr-col-md-8
-      %h2 Derniers codes générés
-      .fr-table
-        %table
-          %thead
-            %tr
-              %th Commune
-              %th Email
-              %th Code
-              %th Utilisé&nbsp;?
-              %th Valide jusqu'au
-          %tbody
-            - SessionCode.last(10).each do |session_code|
-              %tr
-                %th= link_to session_code.commune.nom, admin_commune_path(session_code.commune)
-                %td= session_code.user.email
-                %td.text-center= session_code.code
-                %td.text-center= session_code.used? ? "Oui" : "Non"
-                %td.text-end= l session_code.valid_until, format: :long
+      = render "session_codes", session_codes: @session_codes, offset: @offset, limit: @limit, total: @total

@@ -35,7 +35,8 @@ RSpec.describe Communes::RecensementsController, type: :request do
     context "quand l'objet a déjà un recensement" do
       # Si un recensement existe, l'autorisation est refusée. Rediriger vers le recensement en cours plutôt ?
       it "redirige vers la page d'accueil" do
-        create(:recensement, objet:)
+        commune.start
+        create(:recensement, objet:, dossier: commune.dossier)
         expect { perform_request }.to change(Recensement, :count).by(0)
         expect(response).to redirect_to root_path
       end
@@ -43,7 +44,8 @@ RSpec.describe Communes::RecensementsController, type: :request do
   end
 
   context "PATCH communes/1/objets/1/recensements/1&step=" do
-    let(:recensement) { create(:recensement, objet:, status: :draft) }
+    before { commune.start! }
+    let(:recensement) { create(:recensement, objet:, status: :draft, dossier: commune.dossier) }
     let(:path) { commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id, step:) }
     let(:method) { :patch }
     let(:next_step) do
@@ -186,7 +188,7 @@ RSpec.describe Communes::RecensementsController, type: :request do
       context "si l'état et la sécurisation de l'objet ne sont pas indiqués" do
         let(:params) { { wizard: { etat_sanitaire: "", securisation: "" } } }
         let(:next_step_number) { 5 }
-        it "enregistre et redirige vers l'étape 5" do
+        it "affiche un message d'erreur" do
           perform_request
           expect(response).to have_http_status :unprocessable_entity
         end
@@ -217,16 +219,36 @@ RSpec.describe Communes::RecensementsController, type: :request do
 
     context "Étape 7" do
       let(:step) { 7 }
-      it "clôture le recensement" do
-        perform_request
-        expect(recensement.reload.completed?).to eq true
-        expect(response).to redirect_to commune_objets_path(commune, objet_id: objet.id, recensement_saved: true)
+      context "si le recensement est valide" do
+        it "clôture le recensement" do
+          perform_request
+          expect(recensement.reload.completed?).to eq true
+          expect(response).to redirect_to commune_objets_path(commune, objet_id: objet.id, recensement_saved: true)
+        end
+      end
+      context "si le recensement est déjà completed" do
+        it "redirige sans erreur" do
+          recensement.complete!
+          perform_request
+          expect(recensement.reload.completed?).to eq true
+          expect(response).to redirect_to commune_objets_path(commune, objet_id: objet.id, recensement_saved: true)
+        end
+      end
+      context "si le recensement est invalide" do
+        it "affiche un message d'erreur" do
+          # Met le recensement dans un état invalide sans passer par les validations
+          recensement.update_columns(status: :completed, autre_commune_code_insee: nil,
+                                     localisation: Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE)
+          perform_request
+          expect(response).to have_http_status :unprocessable_entity
+        end
       end
     end
   end
 
   context "DELETE communes/1/objets/1/recensements/1" do
-    let(:recensement) { create(:recensement, objet:, status: :completed) }
+    before { commune.start! }
+    let(:recensement) { create(:recensement, objet:, status: :completed, dossier: commune.dossier) }
     let(:method) { :delete }
     let(:path) { commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id) }
 

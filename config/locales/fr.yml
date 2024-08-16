@@ -21,8 +21,8 @@ fr:
           other: Envoyer les recensements
       objets_manquants:
         pourquoi_n_objets:
-          one: Pourquoi cette liste ne contient qu'un objet ?
-          other: Pourquoi cette liste ne contient que %{count} objets ?
+          one: Pourquoi cette liste ne contient-elle qu'un seul objet ?
+          other: Pourquoi cette liste ne contient-elle que %{count} objets ?
         seulement_objets_proteges_html: Ce recensement concerne <b>uniquement les objets monuments historiques</b>. Ces trésors nationaux sont concernés par une réglementation particulière.
         en_savoir_plus: En savoir plus…
       submitted_callout:
@@ -46,13 +46,6 @@ fr:
         head_title: Carte du %{departement}
       title:
         campaign: Campagne de recensement du %{date_lancement} au %{date_fin}
-      map_sidebar_commune_template:
-        en_peril_count:
-          one: 1 objet en péril
-          other: "%{count} objets en péril"
-        recensed_count:
-          one: 1 objet recensé
-          other: "%{count} objets recensés"
     recensements:
       analyse_fiches:
         hint: Partagez des fiches PDF aux communes pour les aider à entretenir les objets
@@ -98,17 +91,26 @@ fr:
       en_securite: Difficile à voler
       en_danger: Facile à voler
   dossier:
+    title_construction: Recensement créé le %{date}
+    title_submitted: Recensement envoyé le %{date}
+    title_accepted: Recensement validé le %{date}
+    title_archived: Recensement archivé le %{date}
     status_badge:
-      construction: Partiellement recensé
+      construction: Recensement en cours
       submitted: Non examiné
       accepted: Examiné
       none: Non recensé
+      archived: Archivé
     rapport:
       recensement:
         notes: Commentaires de la commune
         analyse_notes: Commentaires du conservateur
         analyse_fiches: Conseils du conservateur
   pages:
+    login:
+      already_connected:
+        as_conservateur: "Vous êtes déjà connecté en tant que conservateur. Cette page de connexion est réservée aux communes."
+        as_administrateur: "Vous êtes déjà connecté en tant qu'administrateur. Cette page de connexion est réservée aux communes."
     pdf_embed:
       title:
         guide: "Guide de Recensement"
@@ -256,8 +258,14 @@ fr:
         analyse_fiches: Fiches à associer
         analyse_notes: Commentaires pour la mairie
       dossier:
+        count:
+          zero: aucun dossier
+          one: un dossier
+          other: "%{count} dossiers"
         notes_commune: Commentaires de la commune
         notes_conservateur: Commentaires des conservateurs à destination de la commune
+        recenseur: Coordonnées de la personne ayant effectué le recensement
+        recenseur_hint_html: Indiquez ici uniquement le nom et les coordonnées de la personne en charge du recensement afin de faciliter le suivi des objets protégés. Ces données sont couvertes par notre <a href="%{confidentialite_path}" target="_blank" rel="noopener">politique de confidentialité</a>.
         interface_communes:
           notes_commune: Vos commentaires à destination des conservateurs
         interface_conservateurs:
@@ -269,6 +277,10 @@ fr:
           started: Recensement démarré
           completed: Recensement terminé
         departement_code: Département
+        count:
+          zero: aucune commune
+          one: une commune
+          other: "%{count} communes"
       campaign:
         departement_code: Département
         date_lancement: Date de lancement
@@ -302,6 +314,10 @@ fr:
         phone_number: Numéro de téléphone
         last_sign_in_at: Dernière connexion
       message:
+        count:
+          zero: aucun message
+          one: un message
+          other: "%{count} messages"
         files:
           zero: aucune pièce jointe
           one: 1 pièce jointe
@@ -310,6 +326,19 @@ fr:
           zero: aucune autre pièce jointe
           one: 1 autre pièce jointe
           other: "%{count} autres pièces jointes"
+      objet:
+        recensed_count:
+          zero: aucun objet recensé
+          one: 1 objet recensé
+          other: "%{count} objets recensés"
+        en_peril_count:
+          zero: aucun objet en péril
+          one: 1 objet en péril
+          other: "%{count} objets en péril"
+        disparus_count:
+          zero: aucun objet disparu
+          one: 1 objet disparu
+          other: "%{count} objets disparus"
   date:
     abbr_day_names:
       - dim
@@ -426,6 +455,10 @@ fr:
       zero: aucun objet
       one: 1 objet
       other: "%{count} objets"
+    recensed_count:
+      one: 1 objet recensé
+      other: "%{count} objets recensés"
+
     photos_count:
       zero: Aucune photo connue pour cet objet
       one: 1 photo connue pour cet objet
@@ -566,7 +599,7 @@ fr:
       option2: si vous connaissez une personne liée à leur propriétaire qui pourrait les recenser, nous vous invitons à lui transférer ce courriel.
       question: Pour toute question complémentaire, vous avez la possibilité de répondre à ce courriel.
   campaigns:
-    edit_recipients_tooltip: Les communes peuvent être éditées uniquement pour les campagnes en brouillon. Une fois planifiées ou démarrées, les communes ne peuvent plus être modifiées.
+    edit_recipients_tooltip: Attention ! Dorénavant, toutes les communes sont sélectionnées par défaut, y compris celles dont le dossier n'a pas encore été examiné.
     mail_names:
       lancement: Mail de lancement
       relance1: Première relance
@@ -632,6 +665,12 @@ fr:
       pour_repondre: Pour répondre à ce message, rendez-vous sur la messagerie dans Collectif Objets accessible depuis la page de la commune.
       cta: Répondre à ce message
       reply_by_email: Vous pouvez aussi répondre à cet email directement. Le message apparaîtra dans la messagerie de Collectif Objets et l'usager sera notifié par email.
+    activite:
+      bonjour: Bonjour %{nom},
+      intro: "Voici l'activité des communes du %{date_start} au %{date_end} %{dans_departement}."
+      messages: "Vous avez reçu %{messages} de %{communes}."
+      dossiers: "Vous avez %{dossiers} à examiner."
+      cta: Ne plus recevoir ce type de messages
     layout:
       unsubscribe: Je ne souhaite plus recevoir ces emails
   user_mailer:
@@ -663,6 +702,16 @@ fr:
       rapport: Vous trouverez sur Collectif Objets l'examen de votre recensement par un conservateur, contenant les informations que vous nous avez envoyées, ainsi que des retours spécifiques sur vos objets lorsque nécessaire.
       cta: Découvrir l'examen de mon recensement
       merci: Merci encore pour votre engagement pour nous aider à préserver le patrimoine mobilier.
+    relance_dossier_incomplet:
+      sauf_erreur: Sauf erreur de notre part, certains objets de votre commune n’ont pas été recensés.
+      veuillez_finir: Le stockage sur notre plateforme des données liées aux objets recensés expirera dans 3 mois. Passé ce délai, les données seront supprimées et ne pourront pas être transmises.
+      pas_trop_tard: "Il n’est pas trop tard : <b>pour finir votre recensement et permettre son envoi, il suffit de suivre ce lien puis de compléter le recensement</b> :"
+      cta: Finir de recenser les objets
+    derniere_relance_dossier_incomplet:
+      message_precedent: Nous espérons que vous avez-pu prendre connaissance de notre précédent message concernant le stockage de vos données de recensement.
+      le_stockage_expire: Le stockage sur notre plateforme des données liées aux objets recensés expirera dans 30 jours. Passé ce délai, les données seront supprimées et ne pourront pas être transmises.
+      pas_trop_tard: Il n’est pas trop tard : <b>pour finir votre recensement et permettre son envoi, il suffit de suivre ce lien puis de compléter le recensement</b>.
+      cta: Finir de recenser les objets
     session_code:
       lien: "Voici votre lien de connexion à Collectif Objets :"
       cta: Connexion
@@ -716,7 +765,8 @@ fr:
         one: ne fait pas la bonne longueur (doit comporter un seul caractère)
         other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
       restrict_dependent_destroy:
-        has_many: "Impossible de supprimer %{model} parce qu’il y a 1 ou plusieurs %{record}"
+        has_many: "Impossible de supprimer %{model} parce qu’il y a 1 ou plusieurs %{record} associés"
+        has_one: "Impossible de supprimer %{model} parce qu’il y a un %{record} associé"
     template:
       body: 'Veuillez vérifier les champs suivants : '
       header:

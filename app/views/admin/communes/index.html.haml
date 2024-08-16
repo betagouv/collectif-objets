@@ -1,9 +1,9 @@
 - content_for(:head_title) { "Admin - Communes" }
 
-.fr-container.fr-pt-2w.fr-pb-4w
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
   = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Communes"
 
-  %h2 Admin - Communes
+  %h1 Admin - Communes
 
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-10
@@ -25,7 +25,6 @@
                 %th Nom
                 %th Objets
                 %th Statut
-                %th Recensement
                 %th Envoi dossier
             %tbody
               - @communes.each do |commune|
@@ -35,17 +34,12 @@
                   %td= link_to commune.nom, admin_commune_path(commune)
                   %td= commune.objets_count
                   %td= commune_statut_global_badge(commune, small: true)
-                  %td
-                    - if commune.recensement_ratio.present?
-                      #{commune.recensement_ratio}%
-                    - if commune.recensements.any? && commune.recensements.missing_photos.any?
-                      .fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
                   %td= l(commune.completed_at.to_date) if commune.completed_at.present?
         - if @pagy.pages > 1
           = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
 
     .fr-col-2
-      %h5 Filtres
+      %h2.h5 Filtres
       - if @query_present
         .fr-mb-2w= link_to "réinitialiser les filtres", admin_communes_path
       = search_form_for @ransack, url: admin_communes_path, builder: FormBuilderDsfr do |f|

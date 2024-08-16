@@ -189,7 +189,7 @@ Côté Javascript les principaux packages utilisés sont :
 - `@gouvfr/dsfr` : Design Système de l'État Français
 - `@rails/activestorage` : Gestion des uploads de photos
 - `@hotwired/stimulus` : Simplifie le lien entre HTML et JS
-- `maplibre-gl` : permet d'afficher une carte des objets en France
+- `maplibre-gl` : permet d'afficher une carte des communes du département d'un conservateur
 - `Chart.js` : diagrammes
 
 # Infrastructure, environnements, écosystème et services externes

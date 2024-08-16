@@ -1,11 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modal"]
-
   connect() {
-    if (!this.hasModalTarget) return
-
     this.retryCount = 0;
     this.openModal()
   }
@@ -13,7 +9,7 @@ export default class extends Controller {
   openModal() {
     if (!window.dsfr) return this.enqueueRetry()
 
-    const dsfrElt = window.dsfr(this.modalTarget)
+    const dsfrElt = window.dsfr(this.element)
     if (!dsfrElt) return this.enqueueRetry()
 
     dsfrElt.modal.disclose()

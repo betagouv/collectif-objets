@@ -153,7 +153,7 @@ RSpec.describe Campaign, type: :model do
     end
 
     context "begins on a sunday" do
-      let(:date_lancement) { Date.current.next_week(:saturday) }
+      let(:date_lancement) { Date.current.next_week(:sunday) }
       it { should eq false }
     end
 
@@ -195,7 +195,7 @@ RSpec.describe Campaign, type: :model do
     end
   end
 
-  describe "validate_only_invalid_communes" do
+  describe "#plan" do
     let!(:campaign) { create(:campaign, status: "draft") }
     let!(:campaign_recipient1) do
       create(:campaign_recipient, campaign:, commune: build(:commune_with_user, status: "inactive"))
@@ -211,15 +211,65 @@ RSpec.describe Campaign, type: :model do
         expect(campaign.reload.status).to eq("planned")
       end
     end
+  end
 
-    context "some active communes" do
-      before { campaign_recipient2.commune.start! }
+  describe "#start" do
+    let(:campaign) { create(:campaign_planned) }
+    let(:commune_non_recensée) { create(:commune_non_recensée) }
+    let(:commune_en_cours_de_recensement) { create(:commune_non_recensée) }
+    let(:commune_a_examiner) { create(:commune_a_examiner) }
+    let(:commune_en_cours_dexamen) { create(:commune_en_cours_dexamen) }
+    let(:commune_examinée) { create(:commune_examinée) }
 
-      it "should not allow planning the campaign" do
-        expect(campaign.may_plan?).to eq false
-        expect { campaign.plan! }.to raise_exception(AASM::InvalidTransition)
-        expect(campaign.reload.status).to eq("draft")
-      end
+    before do
+      campaign.communes << [commune_non_recensée, commune_en_cours_de_recensement,
+                            commune_a_examiner, commune_en_cours_dexamen, commune_examinée]
+      commune_en_cours_de_recensement.start
+    end
+
+    it "should archive dossiers when necessary" do
+      campaign.start
+
+      # Expectations on old dossier
+      expect(commune_non_recensée.dossier).to be_nil
+      expect(commune_en_cours_de_recensement.dossier.status).to eq("construction")
+      expect(commune_a_examiner.dossier.status).to eq("archived")
+      expect(commune_en_cours_dexamen.dossier.status).to eq("archived")
+      expect(commune_examinée.dossier.status).to eq("archived")
+
+      # Expectations on new dossier
+      expect(commune_non_recensée.reload.dossier).to be_nil
+      expect(commune_en_cours_de_recensement.reload.dossier.status).to eq("construction")
+      expect(commune_a_examiner.reload.dossier).to be_nil
+      expect(commune_en_cours_dexamen.reload.dossier).to be_nil
+      expect(commune_examinée.reload.dossier).to be_nil
+    end
+  end
+
+  describe "#commune_ids=" do
+    let(:departement) { create(:departement) }
+    let(:campaign) { create(:campaign, departement:) }
+    let(:commune_ids) { create_list(:commune, 3, :with_user, :with_objets, departement:).collect(&:id) }
+    it "supprime les communes non sélectionnées" do
+      create_list(:recipient, 3, campaign:)
+      expect { campaign.commune_ids = ([]) }.to change(CampaignRecipient, :count).by(-3)
+    end
+    it "ajoute les communes valides aux destinataires" do
+      ids = commune_ids.dup
+      ids << create(:commune, :with_user, departement:).id # User, pas d'objet
+      ids << create(:commune, :with_objets, departement:).id # Pas d'user, des objets
+      # User, objets, mais en cours
+      ids << create(:commune, :with_user, :with_objets, :en_cours_de_recensement, departement:).id
+
+      expect { campaign.commune_ids = (ids) }.to change(CampaignRecipient, :count).by(commune_ids.size)
+      expect(campaign.commune_ids.sort).to eq commune_ids.sort
+    end
+    it "met à jour le nombre de destinataires" do
+      expect { campaign.commune_ids = (commune_ids) }.to change(campaign, :recipients_count).by(commune_ids.size)
+    end
+    it "déclenche le minimum de requêtes possible" do
+      expect { campaign.commune_ids = (commune_ids) }.not_to exceed_query_limit(1)
+        .with(/INSERT INTO "campaign_recipients"/)
     end
   end
 end

@@ -3,56 +3,55 @@
 %main#contenu.fr-container.fr-pt-2w.fr-pb-4w{"data-controller": "devise--sessions"}
   = render "shared/breadcrumbs", links: [ ["Accueil", root_path]], current_page_label: "Connexion à Collectif Objets"
 
+  - if conservateur_signed_in? || admin_user_signed_in?
+    .fr-alert.fr-alert--info.fr-mb-4w
+      %p.fr-alert__title= t("pages.login.already_connected.as_#{conservateur_signed_in? ? :conservateur : :administrateur}" )
+
   = turbo_frame_tag "user-session-form" do
     .fr-grid-row
-      .fr-col-md-5{data: { controller: "user-session-form" }}
+      .fr-col-md-5
         %h1.fr-h2 Connexion à Collectif Objets
+
         %h2.fr-h3 Recevoir un code de connexion
         = form_with(url: new_user_session_code_path,
           method: :get,
           builder: FormBuilderDsfr,
-          autocomplete: "off",
-          data: {user_session_form_target: "communeForm", turbo_action: "advance"}) do |f|
+          data: {turbo_action: "advance"}) do |f|
           .fr-input-group
             .co-flex.fr-mb-1w
               = f.label :departement, "Département"
-              - if @departement
-                .fr-ml-1w
-                  = link_to "modifier",
-                    new_user_session_code_path,
-                    data: { user_session_form_target: "changeButton" }
+              = link_to "modifier", new_user_session_code_path, class: "fr-ml-1w" if @departement
             = f.select(:departement,
               options_for_select(Departement.sorted.map { [_1, _1.code] }, @departement&.code),
               {include_blank: "Sélectionnez un département"},
               required: true,
-              autocomplete: "off",
               autofocus: @departement.nil?,
-              disabled: @departement.present?,
-              data: { action: "user-session-form#submitCommuneForm",
-                user_session_form_target: "departementSelect" })
+              disabled: @departement.present?)
 
-          .fr-input-group{class: ("hide" if @departement.nil?),
-            data: { user_session_form_target: "communeGroup" }}
-            .co-flex.fr-mb-1w
+          - if @departement
+            .fr-input-group{ class: @no_user ? "fr-input-group--error" : nil }
               = f.label :code_insee, "Commune"
-              - if @commune
-                .fr-ml-1w
-                  = link_to "modifier",
-                    new_user_session_code_path(departement: @departement.code),
-                    data: { user_session_form_target: "changeButton" }
-            = f.select(:code_insee,
-              @departement ? options_for_select(@departement.communes.where.associated(:users).order(:nom).map { [_1.nom, _1.code_insee] }, @commune&.code_insee) : [],
-              {include_blank: true},
-              required: true,
-              autocomplete: "off",
-              autofocus: @departement.present?,
-              disabled: @departement.blank?,
-              data: { action: "user-session-form#submitCommuneForm" })
+              = f.select(:code_insee,
+                @departement ? options_for_select(@departement.communes.order(:nom).pluck(:nom, :code_insee), @commune&.code_insee) : [],
+                {include_blank: true},
+                required: true,
+                autofocus: true,
+                class: @no_user ? "fr-input fr-input--error" : "fr-input",
+                **(@no_user ? { aria: { describedby: :error } }  : {}))
+              - if @no_user
+                #error.fr-mt-2w
+                  = dsfr_alert(type: :error, size: :sm) do
+                    Cette commune content des objets protégés Monuments Historique, mais n'a pas d'adresse email publique.
+                    %br
+                    Veuillez mettre les informations à jour sur
+                    = succeed '.' do # Ajoute le point après le lien, sans espace
+                      = link_to "l'annuaire du service public", annuaire_service_public_url(@commune)
 
-          - if !@commune
             .fr-input-group
-              = f.submit @departement.present? ? "Choisir la commune" : "Choisir le département",
-                data: { user_session_form_target: "submitCommuneFormButton" }
+              = f.submit "Choisir la commune", name: nil, class: @commune ? "fr-btn--secondary w-100" : ""
+
+          - else
+            = f.submit "Choisir le département", name: nil, class: "w-100"
 
         - if @commune && @commune_user
           .fr-mt-4w
@@ -62,7 +61,7 @@
                 Le code de connexion sera envoyé par email à
                 %b= @commune_user.email
               .fr-btns-group.fr-mt-4w
-                = f.submit "Recevoir un code de connexion"
+                = f.submit "Recevoir un code de connexion", name: nil
                 = link_to "Saisir mon code de connexion",
                   new_user_session_path(email: @commune_user.email),
                   class: "fr-btn fr-btn--tertiary",

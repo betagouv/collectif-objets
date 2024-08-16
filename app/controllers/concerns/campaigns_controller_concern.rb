@@ -16,7 +16,11 @@ module CampaignsControllerConcern
   end
 
   def show; end
-  def edit_recipients; end
+
+  def edit_recipients
+    @communes_ids = @campaign.commune_ids
+  end
+
   def edit; end
 
   def create
@@ -44,9 +48,10 @@ module CampaignsControllerConcern
     redirect_to send("#{routes_prefix}_campaign_path", @campaign),
                 notice: "Les destinataires de la campagne ont été modifiés"
   rescue ActiveRecord::RecordInvalid => e
-    redirect_to \
-      send("#{routes_prefix}_campaign_edit_recipients_path", @campaign),
-      alert: "#{e.record.commune.nom} : #{e.record.errors.first.message}"
+    @communes_ids = params_recipient_commune_ids
+    render :edit_recipients,
+           status: :unprocessable_entity,
+           alert: "#{e.record.commune.nom} : #{e.record.errors.first.message}"
   end
 
   def update_status
@@ -66,16 +71,18 @@ module CampaignsControllerConcern
     end
   end
 
+  # rubocop:disable Naming/MemoizedInstanceVariableName
   def mail_previews
-    @count = params.fetch(:count, "10").to_i
-    raise "invalid count" if @count.nil? || @count.negative?
-    raise "cannot generate more than 100 mails" if @count > 100
+    commune_id = params[:commune_id]
+    @recipient = @campaign.recipients.find_by(commune_id:) if commune_id
+    @recipient ||= @campaign.recipients.first
   end
+  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   private
 
   def params_recipient_commune_ids
-    params.fetch(:campaign, {}).fetch(:recipients_attributes, []).pluck(:commune_id)
+    params.dig(:campaign, :commune_ids).map(&:to_i)
   end
 
   def set_campaign
@@ -83,7 +90,7 @@ module CampaignsControllerConcern
   end
 
   def set_excluded_communes
-    @excluded_communes = (@campaign.departement.communes - @campaign.communes).sort_by(&:nom)
+    @excluded_communes = @campaign.excluded_communes
   end
 
   def campaign_params

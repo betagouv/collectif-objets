@@ -1,24 +1,14 @@
 - content_for(:head_title) { "#{@commune.nom} - Admin" }
 
-.fr-container.fr-pt-2w
+%main#contenu.fr-container.fr-pt-2w
   = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Communes", admin_communes_path]], current_page_label: @commune.nom
 
-  .co-flex{"data-controller": "copy-to-clipboard"}
-    %h2{"data-copy-to-clipboard-target": "content"}= @commune
-    %div.fr-ml-2w.fr-mt-1w
-      %button{type: :button, "data-copy-to-clipboard-target": "button", "data-action": "copy-to-clipboard#copy", class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-todo-line"}
-        copier
+  %h1= @commune
 
   .fr-grid-row
     .fr-col-md-8
       %p
         = commune_statut_global_badge(@commune)
-
-      - if @commune.started? && @commune.recensement_ratio.present?
-        %p
-          Objets recensés à #{@commune.recensement_ratio}%
-          - if @commune.recensements.any? && @commune.recensements.missing_photos.any?
-            %span.fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
 
       - if @commune.started_at.present?
         %p
@@ -33,21 +23,29 @@
         %p
           %i Cela signifie généralement qu'il n'y a pas d'email valide sur service-public.fr
       - else
-        %h4
+        %h2.h4
           = icon_span("account-circle")
           = user.email
-        %div
-          = link_to "incarner cet usager",
-            admin_user_impersonate_path(user),
-            class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-warning-line"
+
+      - if user || @commune.departement.conservateurs.load.any?
+        .co-flex.co-flex--wrap.co-flex--gap-05rem
+          - if user
+            = link_to "Incarner la commune",
+              admin_user_impersonate_path(user),
+              class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-warning-line co-width-md-40"
+          - @commune.departement.conservateurs.each do |conservateur|
+            = link_to "Incarner #{conservateur.full_name}",
+              admin_conservateur_impersonate_path(conservateur),
+              class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-user-star-line co-width-md-40"
 
     .fr-col-md-4
-      %h4 Commentaires admin
+      %h2.h4 Commentaires admin
       .fr-mb-2w
         = form_for [:admin, @commune.admin_comments.build], builder: FormBuilderDsfr, as: :comment do |f|
           = f.hidden_field :resource_type
           = f.hidden_field :resource_id
           .fr-input-group
+            = f.label :body, "Commentaire", class: "fr-sr-only"
             = f.text_area :body
           = f.submit "Créer un nouveau commentaire"
       - if @commune.admin_comments.count.zero?
@@ -61,14 +59,14 @@
               %span.fr-text--sm= link_to "Supprimer", admin_admin_comment_path(comment), "data-turbo-method": "delete"
               = blockquote comment.body
 
-  %h4.fr-mt-4w
+  %h2.h4.fr-mt-4w
     = icon_span("mail")
     Messagerie
 
   = render "shared/messages/list", viewed_by: current_admin_user, messages: @messages
   = render "shared/messages/form", message: Message.new, url: admin_messages_path(commune_id: @commune.id)
 
-  %h4.fr-mt-4w
+  %h2.h4.fr-mt-4w
     = icon_span("passport")
     #{@commune.objets.count} objet(s) dans #{@commune.edifices.count} édifice(s)
 
@@ -89,8 +87,8 @@
               %th(colspan="6")
                 %div.co-flex.co-flex--align-items-center.co-flex--gap-1rem
                   %div
-                    %h5 Édifice #{edifice_nom(edifice.nom)}
-                  %div #{edifice.objets.count} objets
+                    %h3.h5 Édifice #{edifice_nom(edifice.nom)}
+                  %div= t("objets.count", count: edifice.objets.length)
             - edifice.objets.each do |objet|
               %tr
                 %td= link_to_palissy(objet) { objet.palissy_REF }
@@ -101,67 +99,67 @@
                 %td= objet.palissy_CATE
                 %td= objet.palissy_SCLE
 
-  %h4
+  %h2.h4
     = icon_span "file-text"
-    #{@commune.past_dossiers.count} Dossier(s) de recensements
-  - if @commune.past_dossiers.empty?
+    #{@commune.archived_dossiers.count} Dossier(s) de recensements
+  - if @commune.archived_dossiers.empty?
     %p Aucun dossier de recensement démarré
 
-- @commune.past_dossiers.each do |dossier|
-  .fr-container
-    %h5 Dossier ##{dossier.id} #{dossier_status_badge(dossier, small: true)}
-    %ul.fr-mb-2w
-      %li démarré le #{l(dossier.created_at, format: :long_with_weekday)}
-      - if dossier.submitted_at.present?
-        %li envoyé le #{l(dossier.submitted_at, format: :long_with_weekday)}
-      - if dossier.accepted_at.present?
-        %li accepté le #{l(dossier.accepted_at, format: :long_with_weekday)}
-    %p #{dossier.recensements.count} recensements
+  - @commune.archived_dossiers.each do |dossier|
+    .fr-container
+      %h5 Dossier ##{dossier.id} #{dossier_status_badge(dossier, small: true)}
+      %ul.fr-mb-2w
+        %li démarré le #{l(dossier.created_at, format: :long_with_weekday)}
+        - if dossier.submitted_at.present?
+          %li envoyé le #{l(dossier.submitted_at, format: :long_with_weekday)}
+        - if dossier.accepted_at.present?
+          %li accepté le #{l(dossier.accepted_at, format: :long_with_weekday)}
+      %p #{dossier.recensements.count} recensements
 
-    - if dossier.can_return_to_construction?
-      = link_to admin_dossier_path(dossier, status: "construction"), class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-arrow-go-back-line", data: {"turbo-method": "PUT"} do
-        Repasser la commune en recensement et le dossier en construction
-  = render UnfoldComponent.new(max_height_px: 800, button_text: "Voir tous les recensements") do
-    .fr-table
-      %table
-        %thead
-          %tr
-            %th Objet
-            %th Localisation
-            %th Recensable
-            %th État
-            %th Sécurisation
-            %th Photos
-            %th Notes
-        %tbody
-          - dossier.recensements.each do |recensement|
-            - recensement_presenter = RecensementPresenter.new(recensement)
+      - if dossier.can_return_to_construction?
+        = link_to admin_dossier_path(dossier, status: "construction"), class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-arrow-go-back-line", data: {"turbo-method": "PUT"} do
+          Repasser la commune en recensement et le dossier en construction
+    = render UnfoldComponent.new(max_height_px: 800, button_text: "Voir tous les recensements") do
+      .fr-table
+        %table
+          %thead
             %tr
-              %td
-                = link_to_palissy(recensement.objet) { recensement.objet.palissy_REF }
-                = recensement.objet.palissy_TICO
-              %td= recensement_presenter.localisation
-              %td= recensement_presenter.recensable
-              - if recensement.recensable?
+              %th Objet
+              %th Localisation
+              %th Recensable
+              %th État
+              %th Sécurisation
+              %th Photos
+              %th Notes
+          %tbody
+            - dossier.recensements.each do |recensement|
+              - recensement_presenter = RecensementPresenter.new(recensement)
+              %tr
                 %td
-                  = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :etat_sanitaire, recensement:, recensement_presenter:)
-                %td
-                  = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :securisation, recensement:, recensement_presenter:)
-              - else
-                %td
-                %td
-              %td
-                - if recensement.missing_photos?
-                  .fr-badge.fr-badge--warning.fr-badge--sm
-                    Photos manquantes
+                  = link_to_palissy(recensement.objet) { recensement.objet.palissy_REF }
+                  = recensement.objet.palissy_TICO
+                %td= recensement_presenter.localisation
+                %td= recensement_presenter.recensable
+                - if recensement.recensable?
+                  %td
+                    = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :etat_sanitaire, recensement:, recensement_presenter:)
+                  %td
+                    = render Conservateurs::AnalyseOverrideComponent.new(original_attribute_name: :securisation, recensement:, recensement_presenter:)
                 - else
-                  .co-galerie-miniatures--minimal
-                    = render galerie_recensement(recensement)
+                  %td
+                  %td
+                %td
+                  - if recensement.missing_photos?
+                    .fr-badge.fr-badge--warning.fr-badge--sm
+                      Photos manquantes
+                  - else
+                    .co-galerie-miniatures--minimal
+                      = render galerie_recensement(recensement)
 
-              %td
-                - if recensement.notes.present?
-                  %div Commentaire de la commune
-                  %blockquote= recensement.notes
-                - if recensement.analyse_notes.present?
-                  %div Commentaire du conservateur
-                  %blockquote= recensement.analyse_notes
+                %td
+                  - if recensement.notes.present?
+                    %div Commentaire de la commune
+                    %blockquote= recensement.notes
+                  - if recensement.analyse_notes.present?
+                    %div Commentaire du conservateur
+                    %blockquote= recensement.analyse_notes

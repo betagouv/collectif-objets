@@ -35,6 +35,14 @@ Rails.application.routes.draw do
     get "conservateurs/edit" => "devise/registrations#edit", :as => "edit_conservateur_registration"
   end
 
+  direct :annuaire_service_public do |commune|
+    if commune.is_a? Commune
+      "https://www.service-public.fr/particuliers/recherche?keyword=mairie+#{commune.nom}+#{commune.departement.nom}"
+    else
+      "https://lannuaire.service-public.fr/navigation/mairie"
+    end
+  end
+
   ## ------
   ## PUBLIC
   ## ------
@@ -47,7 +55,7 @@ Rails.application.routes.draw do
     get :confidentialite
     get "comment-ca-marche", action: :aide, as: :aide
     get "guide-de-recensement", action: :guide, as: :guide
-    get :pdf, action: :pdf_download, as: :pdf_download
+    get :pdf, to: redirect("guide-de-recensement")
     get :admin
     get :plan
     get :declaration_accessibilite
@@ -92,6 +100,8 @@ Rails.application.routes.draw do
 
   namespace :conservateurs do
     resources :departements, only: %i[index show] do
+      get :carte, on: :member
+      get :activite, on: :member
       resources :campaigns, only: %i[new]
     end
     resources :communes, only: [:show] do
@@ -101,7 +111,8 @@ Rails.application.routes.draw do
       resources :messages, only: %i[index new create] do
         resources :email_attachments, only: [:show]
       end
-      resource :dossier, only: %i[show]
+      resource :dossier, only: :show
+      get :historique, as: :historique, to: "dossiers#historique"
       resources :bordereaux, only: %i[new create]
       resource :deleted_recensements, only: [:show]
     end
@@ -118,7 +129,7 @@ Rails.application.routes.draw do
       patch :update_recipients
       patch :update_status
       get :mail_previews
-      resources :recipients, controller: "campaign_recipients", only: %i[show update] do
+      resources :recipients, controller: "campaign_recipients", only: :update do
         get :mail_preview
       end
     end
@@ -140,14 +151,14 @@ Rails.application.routes.draw do
         post :toggle_impersonate_mode
       end
     end
-    resources :dossiers, only: [:update]
+    resources :dossiers, only: [:show, :update]
     resources :users, only: %i[] do
       get :impersonate
       collection do
         post :toggle_impersonate_mode
       end
     end
-    get :session_codes, to: "session_codes#index", as: :session_codes
+    get "/session_codes(/:offset)", to: "session_codes#index", as: :session_codes
     resources :campaigns do
       get :edit_recipients
       patch :update_recipients
@@ -156,9 +167,8 @@ Rails.application.routes.draw do
       if Rails.configuration.x.environment_specific_name != "production"
         post :force_start
         post :force_step_up
-        post :update_all_recipients_emails
       end
-      resources :recipients, controller: "campaign_recipients", only: %i[show update] do
+      resources :recipients, controller: "campaign_recipients", only: :update do
         get :mail_preview
       end
       resources :emails, controller: "campaign_emails", only: [] do
@@ -166,15 +176,22 @@ Rails.application.routes.draw do
       end
     end
     resources :admin_comments, only: %i[create destroy], controller: "comments"
-    resources :exports, only: [:index]
-    resources :palissy_exports, only: %i[new create show destroy]
-    resources :memoire_exports, only: %i[new create show destroy]
+    namespace :exports do
+      resources :memoire, except: :edit
+      controller :mpp do
+        get :deplaces
+        get :manquants
+      end
+    end
     resources :attachments, only: [:destroy] do
       post :rotate
       put :exportable
     end
     resources :messages, only: [:create] do
       resources :email_attachments, only: [:show]
+    end
+    resources :mail_previews, only: [:index] do
+      get "/:mailer/:email", on: :collection, action: :show, as: :preview
     end
   end
 
@@ -195,12 +212,6 @@ Rails.application.routes.draw do
   get "health/raise_on_purpose", to: "health#raise_on_purpose"
   get "health/js_error", to: "health#js_error"
   get "health/slow_image", to: "health#slow_image" if Rails.env.development?
-
-  if Rails.configuration.x.environment_specific_name != "production"
-    resources :mail_previews, only: [:index] do
-      get "/:mailer/:email", on: :collection, action: :show, as: :preview
-    end
-  end
 end
 
 # rubocop:enable Metrics/BlockLength

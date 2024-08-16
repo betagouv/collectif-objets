@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_173758) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -135,16 +135,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.datetime "updated_at", null: false
     t.string "status", default: "inactive", null: false
     t.datetime "completed_at"
-    t.integer "recensement_ratio"
-    t.bigint "dossier_id"
     t.datetime "started_at"
     t.float "latitude"
     t.float "longitude"
     t.string "inbound_email_token", null: false
     t.datetime "last_in_scope_at"
+    t.integer "objets_count", default: 0, null: false
     t.index ["code_insee"], name: "communess_unique_code_insee", unique: true
     t.index ["departement_code"], name: "index_communes_on_departement_code"
-    t.index ["dossier_id"], name: "index_communes_on_dossier_id"
   end
 
   create_table "conservateur_roles", force: :cascade do |t|
@@ -169,6 +167,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.boolean "messages_mail_notifications", default: true
+    t.boolean "send_recap", default: false, null: false
     t.index ["email"], name: "index_conservateurs_on_email", unique: true
   end
 
@@ -181,6 +180,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.boolean "concordataire"
     t.string "bounding_box", default: [], null: false, array: true
     t.integer "communes_count", default: 0, null: false
+    t.string "region"
   end
 
   create_table "dossiers", force: :cascade do |t|
@@ -195,8 +195,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.datetime "updated_at", null: false
     t.string "visit"
     t.datetime "replied_automatically_at"
-    t.index ["commune_id"], name: "dossiers_unique_commune_id", unique: true
+    t.datetime "archived_at"
+    t.text "recenseur"
+    t.bigint "campaign_id"
+    t.index ["campaign_id"], name: "index_dossiers_on_campaign_id"
+    t.index ["commune_id"], name: "index_dossiers_on_commune_id"
     t.index ["conservateur_id"], name: "index_dossiers_on_conservateur_id"
+    t.index ["status"], name: "index_dossiers_on_status", using: :hash
   end
 
   create_table "edifices", force: :cascade do |t|
@@ -387,7 +392,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
     t.index ["conservateur_id"], name: "index_recensements_on_conservateur_id"
     t.index ["deleted_at"], name: "index_recensements_on_deleted_at"
     t.index ["dossier_id"], name: "index_recensements_on_dossier_id"
-    t.index ["objet_id"], name: "index_recensements_on_objet_id", unique: true
+    t.index ["objet_id", "dossier_id"], name: "index_recensements_on_objet_id_and_dossier_id", unique: true
   end
 
   create_table "session_codes", force: :cascade do |t|
@@ -431,6 +436,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_123719) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "dossiers", "campaigns"
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"

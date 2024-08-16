@@ -19,6 +19,8 @@ module RecensementWizard
       :etat_sanitaire=, :securisation=, :notes=,
       to: :recensement
 
+    delegate :step_number, to: :class
+
     delegate :title, :step_number, to: :class
 
     def self.title = self::TITLE
@@ -33,8 +35,6 @@ module RecensementWizard
 
       "RecensementWizard::Step#{step}".constantize.new(recensement)
     end
-
-    def step_number = self.class.name.demodulize[-1].to_i
 
     def next_step_number
       step_number + 1 if step_number < STEPS.last

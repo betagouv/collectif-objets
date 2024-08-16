@@ -1,10 +1,10 @@
 - content_for(:head_title) { "Admin - Conservateurs" }
 
-.fr-container.fr-pt-2w.fr-pb-4w
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
   = render "shared/breadcrumbs", links: [["Admin", admin_path]], current_page_label: "Conservateurs"
 
   .co-flex.co-flex--space-between
-    %h2
+    %h1
       = icon_span("question-answer")
       Admin - Conservateurs
     %div
@@ -53,7 +53,7 @@
           = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
 
     .fr-col-2
-      %h5 Filtres
+      %h2.h5 Filtres
       - if @query_present
         .fr-mb-2w= link_to "réinitialiser les filtres", admin_conservateurs_path
       = search_form_for @ransack, url: admin_conservateurs_path, builder: FormBuilderDsfr do |f|

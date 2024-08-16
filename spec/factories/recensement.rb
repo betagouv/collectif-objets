@@ -77,6 +77,11 @@ FactoryBot.define do
       securisation { nil }
     end
 
+    trait :deplace do
+      localisation { Recensement::LOCALISATION_AUTRE_EDIFICE }
+      edifice_nom { "Autre édifice" }
+    end
+
     trait :en_peril do
       etat_sanitaire { Recensement::ETAT_PERIL }
     end
@@ -85,5 +90,15 @@ FactoryBot.define do
       analysed_at { 1.minute.ago }
       conservateur
     end
+
+    trait :supprimé do
+      deleted_at { Time.zone.now }
+      status { "deleted" }
+      deleted_reason { "objet-devenu-hors-scope" }
+      objet { nil }
+      deleted_objet_snapshot { attributes_for(:objet) }
+    end
+
+    factory :recensement_examiné, traits: [:examiné]
   end
 end

@@ -29,7 +29,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def navigate_to_first_objet
     navigate_to_objets
     click_on "Bouquet d’Autel"
-    click_on "Recenser cet objet"
+    click_on "Recenser"
   end
 
   def step1_validate
@@ -125,7 +125,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("PAS ENCORE RECENSÉ")
     expect(page).to have_text("st Jean")
     expect(page).to be_axe_clean
-    click_on "Recenser cet objet"
+    click_on "Recenser"
+
+    # Retour à la liste d'objets, le recensement doit apparaître "À compléter"
+    click_on "Objets de Albon"
+    card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
+    expect(card_bouquet).to have_text(/Recensement à compléter/i)
+    card_bouquet.click
 
     # STEP 1
     step1_validate
@@ -189,7 +195,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     # SECOND OBJET
     expect(page).to have_text(/Pas encore recensé/i)
-    click_on "Recenser cet objet"
+    click_on "Recenser"
     step1_validate
     # "comment ça marche" accordion should be closed for successive recensements
     step1_choose_objet_dans_edifice_initial_and_continue
@@ -300,7 +306,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(card_bouquet).to have_text(/Recensé/i)
     card_bouquet.click
     step7_validate
-    find("section", text: "L’objet n’est pas recensable").find('button[aria-label="Modifier la réponse"]').click
+    find("section", text: "L’objet n’est pas recensable").find('button[title="Modifier la réponse"]').click
     step3_validate
     find("label", text: "L’objet est recensable").click
     click_on "Passer à l’étape suivante"
@@ -462,7 +468,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Oui, il a été déplacé temporairement")
     expect(page).not_to have_text("L’objet est-il recensable ?")
     find("section", text: "Oui, il a été déplacé temporairement")
-      .find('button[aria-label="Modifier la localisation de l’objet"]').click
+      .find('button[title="Modifier la localisation de l’objet"]').click
 
     step1_validate
     expect(find(".fr-radio-group", text: "Oui, mais l’objet a été déplacé temporairement")

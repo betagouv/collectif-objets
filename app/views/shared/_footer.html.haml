@@ -2,17 +2,17 @@
   .fr-container
     .fr-footer__body
       .fr-footer__brand.fr-enlarge-link.co-footer-logo
-        = link_to root_path, title: "Retour à l’accueil" do
-          %p.fr-logo{title: "Ministère de la Culture"}
+        = link_to "https://www.culture.gouv.fr/" do
+          %p.fr-logo
             Ministère
             %br
             de la Culture
       .fr-footer__brand.fr-enlarge-link.co-footer-logo
-        = link_to "https://beta.gouv.fr/communaute/#/incubators/culture", title: "Incubateur Atelier Numérique" do
-          = vite_image_tag "images/logo-atelier-numerique.svg", alt: "Logo Atelier Numérique"
+        = link_to "https://www.culture.gouv.fr/Thematiques/monuments-sites/monuments-historiques-sites-patrimoniaux/les-monuments-historiques", title: "Monuments Historiques" do
+          = vite_image_tag "images/logo-monuments-historiques.png", alt: "Monuments Historiques"
       .fr-footer__brand.fr-enlarge-link.co-footer-logo
-        = link_to "https://beta.gouv.fr", title: "beta.gouv.fr" do
-          = render "shared/picture_tag", filename_without_extension: "logo-beta-gouv", img_class: "co--width-max-100", alt: "logo beta.gouv.fr"
+        = link_to "https://www.modernisation.gouv.fr/transformer-laction-publique/fonds-pour-la-transformation-de-laction-publique", title: "FTAP : Fonds pour la Transformation de l'Action Publique — Ministère de la transformation et de la fonction publique" do
+          = vite_image_tag "images/logo-FTAP.png", class: "co--width-max-100", alt: "Fonds pour la Transformation de l'Action Publique"
     .fr-footer__bottom
       %ul.fr-footer__bottom-list
         %li.fr-footer__bottom-item.co-white-space-nowrap
@@ -55,6 +55,8 @@
           Accessibilité : non conforme
           \·
           %span.co-white-space-nowrap= link_to "Déclaration d’accessibilité", declaration_accessibilite_path
+
+- # Modale pour choisir entre mode clair/sombre/système
 %dialog#fr-theme-modal.fr-modal{"aria-labelledby": "fr-theme-modal-title", role: "dialog"}
   .fr-container.fr-container--fluid.fr-container-md
     .fr-grid-row.fr-grid-row--center

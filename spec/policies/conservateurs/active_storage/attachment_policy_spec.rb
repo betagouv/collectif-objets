@@ -10,8 +10,8 @@ describe Conservateurs::ActiveStorage::AttachmentPolicy do
       let(:commune) { build(:commune, status: :completed) }
       let(:objet) { build(:objet, commune:) }
       let(:dossier) { build(:dossier, commune:, status: :submitted) }
-      let(:recensement) { build(:recensement, :with_photo, objet:, dossier:) }
-      let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3) + [recensement.departement]) }
+      let(:recensement) { create(:recensement, :with_photo, objet:, dossier:) }
+      let(:conservateur) { build(:conservateur, departements: [recensement.departement]) }
       it { should permit(conservateur, recensement.photos[0]) }
     end
 
@@ -19,7 +19,7 @@ describe Conservateurs::ActiveStorage::AttachmentPolicy do
       let(:commune) { build(:commune, status: :started) }
       let(:objet) { build(:objet, commune:) }
       let(:dossier) { build(:dossier, commune:, status: :construction) }
-      let(:recensement) { build(:recensement, :with_photo, objet:, dossier:) }
+      let(:recensement) { create(:recensement, :with_photo, objet:, dossier:) }
       let(:conservateur) { build(:conservateur, departements: build_list(:departement, 3) + [recensement.departement]) }
       it { should_not permit(conservateur, recensement.photos[0]) }
     end
