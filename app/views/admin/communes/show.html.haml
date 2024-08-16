@@ -116,9 +116,6 @@
           %li accepté le #{l(dossier.accepted_at, format: :long_with_weekday)}
       %p #{dossier.recensements.count} recensements
 
-      - if dossier.can_return_to_construction?
-        = link_to admin_dossier_path(dossier, status: "construction"), class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-arrow-go-back-line", data: {"turbo-method": "PUT"} do
-          Repasser la commune en recensement et le dossier en construction
     = render UnfoldComponent.new(max_height_px: 800, button_text: "Voir tous les recensements") do
       .fr-table
         %table

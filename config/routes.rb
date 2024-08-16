@@ -151,7 +151,7 @@ Rails.application.routes.draw do
         post :toggle_impersonate_mode
       end
     end
-    resources :dossiers, only: [:show, :update]
+    resources :dossiers, only: [:show]
     resources :users, only: %i[] do
       get :impersonate
       collection do
