@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_one :session_code, -> { valid.order(created_at: :desc) }, dependent: :destroy, inverse_of: :user
 
+  # this association is mostly here to indicate that when a user is destroyed its session codes are destroyed too
+  has_many :session_codes, dependent: :destroy
+
   attr_accessor :impersonating
 
   validates :email, presence: true, uniqueness: true
