@@ -30,7 +30,10 @@ RSpec.describe ConservateurMailer, type: :mailer do
     let(:dossier) { create(:dossier, :submitted, commune:) }
     let(:date_start) { dossier.submitted_at.at_beginning_of_week }
     let(:date_end) { date_start.at_end_of_week }
-    let(:mail) { ConservateurMailer.with(conservateur:, departement:, date_start:, date_end:).activite_email }
+    let(:mail) do
+      ConservateurMailer.with(conservateur_id: conservateur.id, departement_code: departement.code,
+                              date_start:, date_end:).activite_email
+    end
 
     include_examples(
       "both parts contain",

@@ -15,7 +15,8 @@ class ConservateurMailer < ApplicationMailer
   end
 
   def activite_email
-    @conservateur, @departement = params.values_at(:conservateur, :departement)
+    @conservateur = Conservateur.find(params[:conservateur_id])
+    @departement = Departement.find(params[:departement_code])
     date_start, date_end = params.values_at(:date_start, :date_end)
     date_range = date_start..date_end
     @human_date_start = l date_start.to_date, format: :long_with_weekday

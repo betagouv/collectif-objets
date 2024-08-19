@@ -12,9 +12,9 @@ class DepartementActiviteJob < ApplicationJob
   delegate :date_start, :date_end, :date_range, to: :class
 
   def perform
-    Departement.with_activity_in(date_range).each do |departement, conservateurs|
-      conservateurs.each do |conservateur|
-        ConservateurMailer.with(conservateur:, departement:, date_start:, date_end:)
+    Departement.with_activity_in(date_range).each do |departement_code, conservateur_ids|
+      conservateur_ids.each do |conservateur_id|
+        ConservateurMailer.with(conservateur_id:, departement_code:, date_start:, date_end:)
           .activite_email.deliver_later
       end
     end
