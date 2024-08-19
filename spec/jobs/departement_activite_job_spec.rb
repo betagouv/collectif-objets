@@ -29,13 +29,15 @@ RSpec.describe DepartementActiviteJob, type: :job do
       before do
         allow(Departement).to receive(:with_activity_in)
           .with(date_start..date_end)
-          .and_return({ departement => [conservateur] })
+          .and_return({ departement.code => [conservateur.id] })
       end
       it "envoie un mail à chaque conservateur" do
         expect do
           described_class.perform_now
-        end.to have_enqueued_mail(ConservateurMailer, :activite_email).once
-          .with(params: { conservateur:, departement:, date_start:, date_end: }, args: [])
+        end.to have_enqueued_mail(ConservateurMailer, :activite_email).once.with(
+          params: { conservateur_id: conservateur.id, departement_code: departement.code,
+                    date_start:, date_end: }, args: []
+        )
       end
     end
   end
