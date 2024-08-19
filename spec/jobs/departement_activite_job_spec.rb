@@ -24,19 +24,18 @@ RSpec.describe DepartementActiviteJob, type: :job do
     context "quand un département a de l'activité" do
       let(:date_start) { described_class.date_start }
       let(:date_end) { described_class.date_end }
-      let(:conservateur) { instance_double("Conservateur", id: 1).id }
-      let(:departement) { instance_double("Departement", code: "01").code }
+      let(:conservateur_id) { instance_double("Conservateur", id: 1).id }
+      let(:departement_code) { instance_double("Departement", code: "01").code }
       before do
         allow(Departement).to receive(:with_activity_in)
           .with(date_start..date_end)
-          .and_return({ departement.code => [conservateur.id] })
+          .and_return({ departement_code => [conservateur_id] })
       end
       it "envoie un mail à chaque conservateur" do
         expect do
           described_class.perform_now
         end.to have_enqueued_mail(ConservateurMailer, :activite_email).once.with(
-          params: { conservateur_id: conservateur.id, departement_code: departement.code,
-                    date_start:, date_end: }, args: []
+          params: { conservateur_id:, departement_code:, date_start:, date_end: }, args: []
         )
       end
     end
