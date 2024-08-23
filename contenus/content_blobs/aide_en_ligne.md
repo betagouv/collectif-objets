@@ -1,9 +1,9 @@
 ---
 titre: Aide en ligne
 ---
-## Qu’est-ce que Collectif Objets ?
+## À propos de Collectif Objets 
 
-### Présentation
+### Démarche de Collectif Objets
 
 Collectif Objets est un **service public numérique** du ministère de la Culture qui facilite le dialogue entre les acteurs de la chaîne patrimoniale et favorise la préservation du patrimoine mobilier protégé.
 
@@ -18,7 +18,7 @@ Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 
 Les communes sont accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable.
 
-### Qu’est-ce qu'un “objet protégé au titre des monuments historiques” ?
+### Les objets protégés au titre des monuments historiques
 
 À l’instar des immeubles, un objet peut être inscrit ou classé "monument historique" du fait de son intérêt historique, artistique, scientifique ou technique. Cette protection est encadrée par le Code du patrimoine.
 
@@ -32,7 +32,7 @@ Il existe deux niveaux de protection au titre des Monuments historiques : l’in
 
 [En savoir plus sur la protection au titre des Monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
 
-### Pourquoi recenser les objets protégés ?
+### Objectifs du recensement
 
 La France compte plus de 285 000 objets protégés au titre des Monuments historiques.
 
@@ -46,9 +46,7 @@ Recenser un ensemble d'objets est une opération rapide et simple qui permet la 
 
 ### Obligations des propriétaires d'objets protégés
 
-Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire dans la gestion quotidienne.
-
-En faisant d'un objet une pièce à part entière du patrimoine national, il invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien.
+Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la gestion quotidienne de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
 
 ### Engagements des communes
 
@@ -109,9 +107,8 @@ Pour obtenir un code de connexion, vous pouvez :
 
 Si vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a deux explications plausibles :
 
-- il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
-
-- s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contactée. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou adresses email de contact) qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).
+* il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
+* s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contactée. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou adresses email de contact) qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).
 
 Si votre commune n'a pas indiqué d'adresse email de contact dans ce site, ou si l'adresse email indiquée dans le site est obsolète, nous vous invitons à effectuer une demande de mise à jour de vos coordonnées directement depuis le site de l'annuaire du service public. Pour cela, il vous faut rechercher la page de votre commune dans ce site, puis descendre en bas de la page et cliquer sur "Demander une mise à jour de cette page" et ensuite suivre les instructions.
 
