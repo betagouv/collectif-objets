@@ -212,7 +212,7 @@ Quelques ressources supplémentaires à ce sujet :
 * [Sécurité et sureté des Monuments Historiques](https://www.culture.gouv.fr/Sites-thematiques/Securite-Surete/Securite-et-surete-des-biens/Securite-et-surete-des-monuments-historiques)
 * [Sécurité des biens culturels : de la prévention du vol à la restitution de l'objet volé](https://www.culture.gouv.fr/Sites-thematiques/Conservation-restauration/Plans-de-sauvegarde-Securite-Surete/Surete/Securite-des-biens-culturels-de-la-prevention-du-vol-a-la-restitution-de-l-objet-vole)
 
-### Je ne sais pas évaluer l’état d’un objet 
+### Je ne sais pas évaluer l’état d’un objet
 
 Évaluer l’état des objets permet de donner une idée globale de leur état de conservation aux conservateurs. Ils pourront, si nécessaire, corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus logique.
 
@@ -238,7 +238,7 @@ Une fois vos informations transmises aux conservateurs, vous n’avez plus rien 
 
 Ils pourront vous recontacter par la suite à travers la messagerie (vous en serez informé par un email) afin de vous demander des modifications, ou plus de détails, ou vous recommander des actions ou bien pour une prise de rendez-vous pour une visite. 
 
-### Modifier le recensement / envoyer de nouvelles photos pour les objets recensés
+### Je souhaite modifier mon recensement ou ajouter de nouvelles photos
 
 Si vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas fini d'examiner votre dossier de recensement.
 
