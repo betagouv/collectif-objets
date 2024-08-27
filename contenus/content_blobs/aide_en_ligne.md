@@ -97,7 +97,8 @@ La vidéo ci-dessous vous présente les deux méthodes possibles pour vous conne
 
 Pour obtenir un code de connexion, vous pouvez :
 
-1. Partir de l'email que vous avez reçu et qui vous invite à recenser.
+1. Partir de l'email que vous avez reçu et qui vous invite à recenser. \
+   \
    Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code ou suivre le lien disponible dans l'email.
 2. Si vous ne trouvez plus l'email vous invitant au recensement, suivez ces instructions :
 
@@ -108,16 +109,7 @@ Pour obtenir un code de connexion, vous pouvez :
    * Vous serez alors connecté à l'espace de votre commune dans la plateforme *Collectif Objets*. Lisez les rapides instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
    * Vous verrez alors s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier. 
 
-### Si vous n’avez pas reçu d’email vous invitant à recenser vos objets protégés
-
-Si vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a deux explications plausibles :
-
-* il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
-* s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contactée. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou adresses email de contact) qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).
-
-Si votre commune n'a pas indiqué d'adresse email de contact dans ce site, ou si l'adresse email indiquée dans le site est obsolète, nous vous invitons à effectuer une demande de mise à jour de vos coordonnées directement depuis le site de l'annuaire du service public. Pour cela, il vous faut rechercher la page de votre commune dans ce site, puis descendre en bas de la page et cliquer sur "Demander une mise à jour de cette page" et ensuite suivre les instructions.
-
-### Effectuer le recensement en ligne de ses objets protégés monuments historiques
+### Déroulé du recensement 
 
 Depuis votre espace dans le site, vous pourrez voir la liste des objets protégés de votre commune.
 
@@ -165,6 +157,16 @@ Seuls les objets protégés au titre des monuments historiques (classés ou insc
 [Protéger des objets mobiliers au titre des monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques)
 
 ## Problématiques rencontrées lors du recensement
+
+### Je n’ai pas été contacté par Collectif Objets
+
+Si vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a trois explications potentielles :
+
+* v﻿otre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques
+* il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
+* s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contacté. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou "adresses email de contact") qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).
+
+Si votre commune n'a pas indiqué d'adresse email de contact dans ce site, ou si l'adresse email indiquée dans le site est obsolète, nous vous invitons à effectuer une demande de mise à jour de vos coordonnées directement depuis le site de l'annuaire du service public. Pour cela, il vous faut rechercher la page de votre commune dans ce site, puis descendre en bas de la page et cliquer sur "Demander une mise à jour de cette page" et ensuite suivre les instructions.
 
 ### Une messagerie est à votre disposition sur le site Collectif Objets si vous rencontrez un problème
 
