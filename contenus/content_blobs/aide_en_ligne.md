@@ -266,9 +266,7 @@ Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le cha
 
 Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message.
 
-Lorsque les conservateurs vous répondront, vous recevrez une notification sur votre boîte mél.
-
-L’équipe de Collectif Objets a également accès aux échanges afin de pouvoir assister les communes lorsqu’elles rencontrent des problèmes avec le fonctionnement de Collectif Objets.
+Lorsque les conservateurs vous répondront, vous recevrez une notification sur votre boîte mail.
 
 ## Après le recensement
 
