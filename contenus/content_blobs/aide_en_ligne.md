@@ -109,7 +109,7 @@ Pour obtenir un code de connexion, vous pouvez :
    * Vous serez alors connecté à l'espace de votre commune dans la plateforme *Collectif Objets*. Lisez les rapides instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
    * Vous verrez alors s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier. 
 
-### Déroulé du recensement 
+### Déroulé du recensement
 
 Depuis votre espace dans le site, vous pourrez voir la liste des objets protégés de votre commune.
 
@@ -126,7 +126,30 @@ Ensuite, les étapes sont les suivantes :
 
 <iframe title="Vidéo recensement commune Collectif Objets" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/e14ce7fc-ffb8-491c-ade0-9b7a19b43690" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
 
-### Légitimé et personnes impliquées pour le recensement
+### L’ajout des photos pour le recensement
+
+À moins que cela ne vous soit impossible, nous vous demandons systématiquement d’ajouter des photos lors du recensement de vos objets protégés. Ces photos constituent une source d’information précieuse pour les conservateurs et leur permettent de mieux évaluer l’état de l’objet et l’opportunité d’entamer un travail de restauration ou de sécurisation de l’objet, par exemple.
+
+* Pensez bien à vérifier que vos photos sont nettes ;
+* S'il vous est impossible de faire autrement, le flash peut être utilisé s'il améliore la visibilité. Attention à ne pas surexposer votre photo
+
+Exemples d’un ensemble de photos à prendre pour une statue :
+
+* une vue de face
+* de profil
+* un ou des zoom(s) sur un détail qui vous questionne
+
+![Exemple de photos de recensement](/contenus/content_blobs/images/exemple_photos.png)
+
+### Licence utilisée pour les photos déposées
+
+Les photos déposées sur la plateforme Collectif Objets sont placées sous la [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-licence/). Cette licence développée par l’État français est ouverte, libre et gratuite, et apporte la sécurité juridique nécessaire aux producteurs et aux réutilisateurs des données publiques. Elles pourront donc être réutilisées. Mais les photos ne pourront pas être dénaturées et la source (la Mairie) sera citée en cas de réutilisation.
+
+Cette licence ouverte est automatiquement appliquée lorsque c'est un agent public qui prend la photo.
+
+Si c'est une personne externe à la mairie qui prend les photos, il faut recueillir une cession de droits.
+
+### Qui peut recenser
 
 Si aucun élu n'est disponible pour effectuer ce recensement, il peut être effectué par une personne de confiance : par exemple la personne qui gère les accès à l’édifice abritant les objets protégés ou encore une association.
 
@@ -143,20 +166,20 @@ Si des doutes subsistent sur ce que vous devez faire, vous pouvez poser des ques
 
 Il faudra compter le temps de trajet pour vous rendre dans chaque édifice, ensuite cela dépend du nombre d’objets à recenser au sein de votre commune et du nombre d’édifices dans lesquels ils se situent. Vous pouvez compter moins de 5 minutes par objet, une fois que vous avez l’objet devant vous.
 
-### Matériel à prévoir pour le recensement
+### Matériel à prévoir 
 
 * De quoi prendre des photos : un smartphone suffit si la qualité des images prises est satisfaisante, les photos doivent être nettes.
 * Un appareil avec une connexion à internet pour remplir les questionnaires en ligne : un smartphone suffit
 * Éventuellement des gants en coton (ou en latex ou en vinyle) pour manipuler l'orfèvrerie ou protéger vos mains, et des vêtements qui ne craignent pas la poussière
 * Éventuellement un escabeau pour vous rapprocher des objets si cela est nécessaire (attention de ne pas vous mettre en danger et de ne pas effectuer le recensement seul dans ce cas)
 
-### Nombre d’objets affichés sur Collectif Objets
+### Les objets à recenser 
 
-Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet mobilier concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
+Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
 
 [Protéger des objets mobiliers au titre des monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques)
 
-## Problématiques rencontrées lors du recensement
+## Difficultés les plus courantes
 
 ### Je n’ai pas été contacté par Collectif Objets
 
@@ -168,29 +191,7 @@ Si vous n'avez pas reçu d'email vous invitant à recenser les objets protégés
 
 Si votre commune n'a pas indiqué d'adresse email de contact dans ce site, ou si l'adresse email indiquée dans le site est obsolète, nous vous invitons à effectuer une demande de mise à jour de vos coordonnées directement depuis le site de l'annuaire du service public. Pour cela, il vous faut rechercher la page de votre commune dans ce site, puis descendre en bas de la page et cliquer sur "Demander une mise à jour de cette page" et ensuite suivre les instructions.
 
-### Une messagerie est à votre disposition sur le site Collectif Objets si vous rencontrez un problème
-
-Une messagerie instantanée est intégrée dans le site Collectif Objets.
-
-Elle permet aux conservateurs et aux communes d’échanger directement depuis le site afin de centraliser l’ensemble des informations liées aux objets. Lorsque vous écrivez dans la messagerie, les conservateurs de votre département en sont avertis par mail.
-
-Comment accéder à la messagerie ? \
-\
-Celle-ci est directement disponible dès que vous vous connectez à votre espace sur Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les méls que vous recevez de Collectif Objets). Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web.
-
-![Capture écran de la messagerie](/contenus/content_blobs/images/capture-messagerie-co.png)
-
-Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le champ dédié « Votre message » et y ajouter éventuellement une pièce-jointe en cliquant sur le petit rectangle gris "Parcourir..."
-
-![Messagerie commune](/contenus/content_blobs/images/2023-07-26-messagerie-commune-la-desirade.png)
-
-Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message.
-
-Lorsque les conservateurs vous répondront, vous recevrez une notification sur votre boîte mél.
-
-L’équipe de Collectif Objets a également accès aux échanges afin de pouvoir assister les communes lorsqu’elles rencontrent des problèmes avec le fonctionnement de Collectif Objets.
-
-### Si l'objet à recenser est manquant
+### Je ne trouve pas un objet 
 
 Il arrive que la localisation indiquée pour un objet sur Collectif Objets contienne une erreur ou une information datée.
 
@@ -223,21 +224,6 @@ Il arrive que plusieurs objets similaires soient abrités dans un même édifice
 
 Si vous avez un doute sur quel objet est le bon, vous pouvez prendre des photos des différents objets et écrire aux conservateurs de votre département via la messagerie disponible sur la plateforme Collectif Objets. Ils pourront vous conseiller pour l’identification des objets protégés.
 
-### L’ajout des photos pour le recensement
-
-À moins que cela ne vous soit impossible, nous vous demandons systématiquement d’ajouter des photos lors du recensement de vos objets protégés. Ces photos constituent une source d’information précieuse pour les conservateurs et leur permettent de mieux évaluer l’état de l’objet et l’opportunité d’entamer un travail de restauration ou de sécurisation de l’objet, par exemple.
-
-* Pensez bien à vérifier que vos photos sont nettes ;
-* S'il vous est impossible de faire autrement, le flash peut être utilisé s'il améliore la visibilité. Attention à ne pas surexposer votre photo
-
-Exemples d’un ensemble de photos à prendre pour une statue :
-
-* une vue de face
-* de profil
-* un ou des zoom(s) sur un détail qui vous questionne
-
-![Exemple de photos de recensement](/contenus/content_blobs/images/exemple_photos.png)
-
 ### Savoir si les données sur les objets ont bien été transmises
 
 Les informations que vous rentrez sur la plateforme ne peuvent être transmises aux conservateurs qu'une fois que vous avez complété les questionnaires pour tous les objets protégés de votre commune.
@@ -264,6 +250,30 @@ Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela
 
 Si un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'examen de votre dossier. C'est donc cette procédure que vous devrez suivre.
 
+### Utiliser la messagerie en cas de problème
+
+Une messagerie instantanée est intégrée dans le site Collectif Objets.
+
+Elle permet aux conservateurs et aux communes d’échanger directement depuis le site afin de centraliser l’ensemble des informations liées aux objets. Lorsque vous écrivez dans la messagerie, les conservateurs de votre département en sont avertis par mail.
+
+Comment accéder à la messagerie ? \
+\
+Celle-ci est directement disponible dès que vous vous connectez à votre espace sur Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les méls que vous recevez de Collectif Objets). Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web.
+
+![Capture écran de la messagerie](/contenus/content_blobs/images/capture-messagerie-co.png)
+
+Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le champ dédié « Votre message » et y ajouter éventuellement une pièce-jointe en cliquant sur le petit rectangle gris "Parcourir..."
+
+![Messagerie commune](/contenus/content_blobs/images/2023-07-26-messagerie-commune-la-desirade.png)
+
+Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message.
+
+Lorsque les conservateurs vous répondront, vous recevrez une notification sur votre boîte mél.
+
+L’équipe de Collectif Objets a également accès aux échanges afin de pouvoir assister les communes lorsqu’elles rencontrent des problèmes avec le fonctionnement de Collectif Objets.
+
+
+
 ## Après le recensement
 
 ### Après l’envoi de vos réponses
@@ -283,14 +293,6 @@ Nota Bene : Ce recensement se distingue du “récolement” officiel des conser
 Suite à la transmission de votre dossier, les conservateurs vont comparer les états des objets dans les différentes communes de votre département et vont établir un ordre de priorité pour leurs actions et leurs visites. Si l'état de votre objet est parmi les plus préoccupants, ils pourront envisager de vous accompagner dans un travail de sécurisation ou de restauration de votre objet. Ils pourraient décider de venir voir les objets dont l’état est préoccupant in situ.
 
 Les conservateurs peuvent également vous contacter via la messagerie de Collectif Objets afin de vous donner des conseils ou des indications pour l’entretien et la préservation de vos objets.
-
-### Licence utilisée pour les photos déposées
-
-Les photos déposées sur la plateforme Collectif Objets sont placées sous la [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-licence/). Cette licence développée par l’État français est ouverte, libre et gratuite, et apporte la sécurité juridique nécessaire aux producteurs et aux réutilisateurs des données publiques. Elles pourront donc être réutilisées. Mais les photos ne pourront pas être dénaturées et la source (la Mairie) sera citée en cas de réutilisation.
-
-Cette licence ouverte est automatiquement appliquée lorsque c'est un agent public qui prend la photo.
-
-Si c'est une personne externe à la mairie qui prend les photos, il faut recueillir une cession de droits.
 
 ### Sécuriser un objet
 
