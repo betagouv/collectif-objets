@@ -61,7 +61,7 @@ Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, 
 
 Seuls les propriétaires des objets peuvent décider ou non d’une restauration de leur propriété. Les conservateurs sont là pour guider les propriétaires et les accompagner dans la conservation de leurs objets.
 
-### Consulter la liste complète des objets protégés de ma commune
+### Accéder à la liste des objets protégés de ma commune
 
 La liste des objets protégés au titre des Monuments Historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture.
 
@@ -69,13 +69,13 @@ Les données affichées dans Collectif Objets proviennent de POP et en particuli
 
 Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement à une personne tierce. Pour effectuer ce recensement, la mairie recevra un code de connexion sur son adresse email lui permettant de se connecter et de réaliser les recensements.
 
-### Destination des données récoltées sur Collectif Objets
+### Destinataires des données récoltées
 
 Les données transférées par les communes sont à destination des conservateurs des antiquités et objets d’art et conservateurs des monuments historiques du département dont fait partie la commune.
 
 L’accès aux données est également possible par l’équipe de Collectif Objets, il est contrôlé et exclusivement réservé dans un but d’amélioration du service.
 
-### Ajouter un objet à la liste des objets protégés
+### Protéger un nouvel objet
 
 Collectif Objets ne permet pas d’ajouter un objet à la liste des objets protégés au titre des monuments historiques.
 
@@ -85,9 +85,9 @@ La mesure d’inscription est décidée au niveau régional par décision du pr�
 
 La protection au titre des monuments historiques n’a pas vocation à s’appliquer aux objets mobiliers les plus récents, créés il y a moins de 50 ans. La protection au titre des monuments historiques est, en principe, irréversible et nécessite un recul historique suffisant. En savoir plus sur [la protection des objets au titre de monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques#:~:text=Il%20existe%20deux%20niveaux%20de,science%20ou%20de%20la%20technique).
 
-## Le recensement sur Collectif Objets
+## Effectuer le recensement
 
-### Se connecter à la plateforme grâce à un code de connexion
+### Se connecter à la plateforme
 
 Pour effectuer un recensement via Collectif Objets, vous devez d'abord vous connecter à votre espace dédié dans le site, grâce à un code de connexion à 6 chiffres que vous recevrez par email. Ce code est valable pour une durée de 24 heures.
 
