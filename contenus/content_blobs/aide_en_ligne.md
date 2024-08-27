@@ -48,19 +48,20 @@ Recenser un ensemble d'objets est une opération rapide et simple qui permet la 
 
 Suite à la loi de 1905 concernant la séparation des Églises et de l'État, la commune est généralement propriétaire des objets de l’église communale qui y ont été inventoriés à l'époque. 
 
-Ces objets sont affectés aux cultes, ce qui signifie que vous ne pouvez pas en disposer pour d’autres usages, sauf après accord de l’affectataire : le curé ou son représentant dans le cas des associations diocésaines. Certains objets sont classés "monuments historiques" et intéressent directement ce recensement. En savoir plus sur le [régime de séparation des Églises et de l'État](https://www.vie-publique.fr/eclairage/20205-le-regime-de-separationprincipe-des-relations-etat-et-les-cultes). 
+Ces objets sont affectés au culte, ce qui signifie que vous ne pouvez pas en disposer pour d’autres usages, sauf après accord de l’affectataire : le curé ou son représentant dans le cas des associations diocésaines. Certains objets sont classés ou inscrits comme "monuments historiques" et intéressent directement ce recensement. \
+En savoir plus sur le [régime de séparation des Églises et de l'État](https://www.vie-publique.fr/eclairage/20205-le-regime-de-separationprincipe-des-relations-etat-et-les-cultes). 
 
 Attention : même si les demandes de recensement sont adressées aux communes qui abritent les objets, elles n’en sont pas toujours propriétaires. En tant que détentrices des objets, elles sont tout de même tenues de présenter ces objets lors d'un contrôle de l'État.
 
-Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la **gestion quotidienne** de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite cependant à y accorder la plus grande attention. 
+Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la **gestion quotidienne** de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite à y accorder la plus grande attention. 
 
-L﻿es propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. 
+L﻿es propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
 
-Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée en amont à l’État par le propriétaire ou le détenteur. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
+Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée avant ces travaux à l’État (c'est-à-dire auprès de la DRAC de votre région) par le propriétaire ou le détenteur. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
 
-Seuls les propriétaires des objets peuvent décider ou non d’une restauration de leurs propriétés. Les conservateurs sont là pour guider les propriétaires et les accompagner dans la conservation de leurs objets.
+Seuls les propriétaires des objets peuvent décider ou non d’une restauration de leur propriété. Les conservateurs sont là pour guider les propriétaires et les accompagner dans la conservation de leurs objets.
 
-### Consulter la liste complète des objets protégés de ma commune
+### Accéder à la liste des objets protégés de ma commune
 
 La liste des objets protégés au titre des Monuments Historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture.
 
@@ -68,13 +69,13 @@ Les données affichées dans Collectif Objets proviennent de POP et en particuli
 
 Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement à une personne tierce. Pour effectuer ce recensement, la mairie recevra un code de connexion sur son adresse email lui permettant de se connecter et de réaliser les recensements.
 
-### Destination des données récoltées sur Collectif Objets
+### Destinataires des données récoltées
 
 Les données transférées par les communes sont à destination des conservateurs des antiquités et objets d’art et conservateurs des monuments historiques du département dont fait partie la commune.
 
 L’accès aux données est également possible par l’équipe de Collectif Objets, il est contrôlé et exclusivement réservé dans un but d’amélioration du service.
 
-### Ajouter un objet à la liste des objets protégés
+### Protéger un nouvel objet
 
 Collectif Objets ne permet pas d’ajouter un objet à la liste des objets protégés au titre des monuments historiques.
 
@@ -84,9 +85,9 @@ La mesure d’inscription est décidée au niveau régional par décision du pr�
 
 La protection au titre des monuments historiques n’a pas vocation à s’appliquer aux objets mobiliers les plus récents, créés il y a moins de 50 ans. La protection au titre des monuments historiques est, en principe, irréversible et nécessite un recul historique suffisant. En savoir plus sur [la protection des objets au titre de monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques#:~:text=Il%20existe%20deux%20niveaux%20de,science%20ou%20de%20la%20technique).
 
-## Le recensement sur Collectif Objets
+## Effectuer le recensement
 
-### Se connecter à la plateforme grâce à un code de connexion
+### Se connecter à la plateforme
 
 Pour effectuer un recensement via Collectif Objets, vous devez d'abord vous connecter à votre espace dédié dans le site, grâce à un code de connexion à 6 chiffres que vous recevrez par email. Ce code est valable pour une durée de 24 heures.
 
