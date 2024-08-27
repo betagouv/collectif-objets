@@ -1,7 +1,7 @@
 ---
 titre: Aide en ligne
 ---
-## À propos de Collectif Objets 
+## À propos de Collectif Objets
 
 ### Démarche de Collectif Objets
 
@@ -46,15 +46,19 @@ Recenser un ensemble d'objets est une opération rapide et simple qui permet la 
 
 ### Obligations des propriétaires d'objets protégés
 
-Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la gestion quotidienne de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite cependant à y accorder la plus grande attention. Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée à l’État. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
+Suite à la loi de 1905 concernant la séparation des Églises et de l'État, la commune est généralement propriétaire des objets de l’église communale qui y ont été inventoriés à l'époque. 
 
-### Engagements des communes
+Ces objets sont affectés aux cultes, ce qui signifie que vous ne pouvez pas en disposer pour d’autres usages, sauf après accord de l’affectataire : le curé ou son représentant dans le cas des associations diocésaines. Certains objets sont classés "monuments historiques" et intéressent directement ce recensement. En savoir plus sur le [régime de séparation des Églises et de l'État](https://www.vie-publique.fr/eclairage/20205-le-regime-de-separationprincipe-des-relations-etat-et-les-cultes). 
+
+Attention : même si les demandes de recensement sont adressées aux communes qui abritent les objets, elles n’en sont pas toujours propriétaires. En tant que détentrices des objets, elles sont tout de même tenues de présenter ces objets lors d'un contrôle de l'État.
+
+Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la **gestion quotidienne** de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite cependant à y accorder la plus grande attention. 
+
+L﻿es propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. 
+
+Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée en amont à l’État par le propriétaire ou le détenteur. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
 
 Seuls les propriétaires des objets peuvent décider ou non d’une restauration de leurs propriétés. Les conservateurs sont là pour guider les propriétaires et les accompagner dans la conservation de leurs objets.
-
-Suite à la loi de 1905, la commune est généralement propriétaire des objets de l’église communale qui y ont été inventoriés. Ils sont affectés aux cultes, ce qui signifie que vous ne pouvez pas en disposer pour d’autres usages, sauf après accord de l’affectataire : le curé ou son représentant dans le cas des associations diocésaines. Certains d'entre eux sont monuments historiques et intéressent directement ce recensement. En savoir plus sur le [régime de séparation des Églises et de l'État](https://www.vie-publique.fr/eclairage/20205-le-regime-de-separationprincipe-des-relations-etat-et-les-cultes).
-
-Précaution à prendre : même si les demandes de recensement sont adressées aux communes qui abritent les objets, elles n’en sont pas toujours propriétaires.
 
 ### Consulter la liste complète des objets protégés de ma commune
 
