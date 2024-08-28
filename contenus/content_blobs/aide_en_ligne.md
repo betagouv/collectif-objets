@@ -282,7 +282,7 @@ Vous avez alors complété avec succès votre recensement et nous vous en remerc
 
 Nota Bene : Ce recensement se distingue du “récolement” officiel des conservateurs, qui nécessite des signatures des propriétaires, conservateurs et éventuels affectataires.
 
-### Signalement d’un état préoccupant pour un objet
+### Objets signalés en état préoccupant 
 
 Suite à la transmission de votre dossier, les conservateurs vont comparer les états des objets dans les différentes communes de votre département et vont établir un ordre de priorité pour leurs actions et leurs visites. Si l'état de votre objet est parmi les plus préoccupants, ils pourront envisager de vous accompagner dans un travail de sécurisation ou de restauration de votre objet. Ils pourraient décider de venir voir les objets dont l’état est préoccupant in situ.
 
