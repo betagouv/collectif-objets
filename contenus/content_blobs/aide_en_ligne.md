@@ -255,11 +255,11 @@ Si un conservateur remarque que vous avez commis une erreur, il est probable qu'
 
 Une messagerie instantanée est intégrée dans le site Collectif Objets.
 
-Elle permet aux conservateurs et aux communes d’échanger directement depuis le site afin de centraliser l’ensemble des informations liées aux objets. Lorsque vous écrivez dans la messagerie, les conservateurs de votre département en sont avertis par mail.
+Elle permet aux conservateurs et aux communes d’échanger directement depuis le site. Cela permet de centraliser l’ensemble des informations liées aux objets. Lorsque vous écrivez dans la messagerie, les conservateurs de votre département en sont avertis par mail. Et inversement, vous serez prévenu par email lorsqu'un conservateur vous écrit dans la messagerie. 
 
-Comment accéder à la messagerie ? \
-\
-Celle-ci est directement disponible dès que vous vous connectez à votre espace sur Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les méls que vous recevez de Collectif Objets). Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web.
+Pour accéder à la messagerie, vous devez vous connectez à votre espace dans Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les mails que vous recevez de la part de Collectif Objets). 
+
+Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web. 
 
 ![Capture écran de la messagerie](/contenus/content_blobs/images/capture-messagerie-co.png)
 
@@ -268,8 +268,6 @@ Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le cha
 ![Messagerie commune](/contenus/content_blobs/images/2023-07-26-messagerie-commune-la-desirade.png)
 
 Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message.
-
-Lorsque les conservateurs vous répondront, vous recevrez une notification sur votre boîte mail.
 
 ## Après le recensement
 
