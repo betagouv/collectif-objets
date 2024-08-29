@@ -291,7 +291,9 @@ Les conservateurs peuvent également vous contacter via la messagerie de Collect
 
 ### Sécuriser un objet
 
-Veuillez consulter notre fiche à ce sujet disponible sur le site Collectif Objets, elle vous guidera grâce aux conseils des conservateurs : [lire la fiche sur la sécurisation](/fiches/securisation).
+Veuillez consulter notre fiche à ce sujet, qui regroupe des conseils des conservateurs : [lire la fiche sur la sécurisation](/fiches/securisation). 
+
+N﻿ous vous recommandons également de vous renseigner directement auprès des conservateurs des antiquités et objets d'art de votre département. 
 
 Pour aller plus loin sur la [sécurisation des objets protégés](https://www.culture.gouv.fr/Thematiques/Securite-Surete) et les [procédures en cas de vol](https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol).
 
@@ -299,15 +301,15 @@ Pour aller plus loin sur la [sécurisation des objets protégés](https://www.cu
 
 Au-delà de l'entretien courant qui consiste à nettoyer l'espace autour des objets, il convient de ne pas toucher aux objets protégés. Seul un professionnel habilité assurera une prise en charge optimale.
 
-Vous pouvez également consulter cette [fiche liée à l’entretien des objets](/fiches/entretien_objets) écrite par des conservateurs.
+Vous pouvez consulter cette [fiche liée à l’entretien des objets](/fiches/entretien_objets) écrite par des conservateurs.
 
 Pour plus d'informations, veuillez consulter le site du Ministère de la Culture : [intervenir sur un objet mobilier classé ou inscrit](https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit).
 
 ### Lancer un projet de restauration pour un objet
 
-Nous vous invitons dans un premier temps à effectuer le recensement qui vous est demandé puis à prendre contact avec vos conservateurs à travers la messagerie prévue à cet effet. Ces derniers pourront vous accompagner dans vos projets de restaurations.
+Nous vous invitons dans un premier temps à effectuer le recensement qui vous est demandé puis à prendre contact avec vos conservateurs à travers la messagerie prévue à cet effet. Ces derniers pourront vous accompagner dans vos projets de restauration.
 
-Pour aller plus loin vous pouvez consulter cette page dédiée, du site du ministère de la Culture : [intervenir sur un objet mobilier classé ou inscrit](https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit).
+Pour aller plus loin, vous pouvez consulter cette page dédiée, du site du ministère de la Culture : [intervenir sur un objet mobilier classé ou inscrit](https://www.culture.gouv.fr/Sites-thematiques/Monuments-Sites/Interventions-demarches/Intervenir-sur-un-objet-mobilier-classe-ou-inscrit).
 
 ### Trouver des aides pour financer des travaux sur un objet protégé
 
@@ -315,4 +317,4 @@ Si l'un de vos objets protégés mérite de bénéficier de travaux (restauratio
 
 Pour plus de renseignements, veuillez consulter les [aides possibles](https://aides-territoires.beta.gouv.fr/portails/patrimoinemobilier/).
 
-**Attention** : avant d'entamer une demande d'aide pour travaux, nous vous invitons à en discuter avec le Conservateur des antiquités et objets d'art de votre département qui saura vous conseiller. Son appui sera nécessaire pour effectuer la demande d'aide auprès de la DRAC.
+**Attention** : avant d'entamer une demande d'aide pour travaux, **discutez-en avec le Conservateur des antiquités et objets d'art de votre département** qui saura vous conseiller. Son appui sera nécessaire pour effectuer la demande d'aide auprès de la DRAC.
