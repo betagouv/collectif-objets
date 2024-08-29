@@ -180,7 +180,11 @@ I﻿l faut ajouter à ce temps le temps de trajet pour vous rendre dans chaque �
 
 Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
 
-[Protéger des objets mobiliers au titre des monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques)
+L﻿es informations concernant les objets visibles sur Collectif Objets sont issues de la "Plateforme Ouverte du Patrimoine" du ministère de la Culture, et plus précisément de sa base de données "Palissy". 
+
+Une petite partie des objets protégés ayant une fiche dans la base Palissy nʼest volontairement pas importée dans Collectif Objets. Il sʼagit des objets propriétés de lʼÉtat, des objets volés, partiellement volés ou disparus, et de certains objets appartenant à un ensemble plus large ("sous-dossiers" dans Palissy).
+
+P﻿our en savoir plus sur les objets protégés au titre des monuments historiques : [Protéger des objets mobiliers au titre des monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques)
 
 ## Difficultés les plus courantes
 
