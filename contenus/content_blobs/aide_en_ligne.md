@@ -109,11 +109,7 @@ Pour obtenir un code de connexion, vous pouvez :
    * Une fois le code saisi dans la page de connexion, vous serez connecté à l'espace de votre commune dans la plateforme. Lisez les instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran. 
    * Vous verrez s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier pour commencer son recensement, après être allé voir cet objet sur son lieu de conservation.
 
-
-
 S﻿i vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](https://collectif-objets.beta.gouv.fr/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
-
-
 
 ### Déroulé du recensement
 
@@ -170,7 +166,8 @@ Si des doutes subsistent sur ce que vous devez faire, vous pouvez poser des ques
 
 ### Durée d’un recensement
 
-Il faudra compter le temps de trajet pour vous rendre dans chaque édifice, ensuite cela dépend du nombre d’objets à recenser au sein de votre commune et du nombre d’édifices dans lesquels ils se situent. Vous pouvez compter moins de 5 minutes par objet, une fois que vous avez l’objet devant vous.
+Cela dépend du nombre d’objets à recenser au sein de votre commune et du nombre d’édifices dans lesquels ils se situent. Vous pouvez compter moins de 5 minutes par objet, une fois que vous avez l’objet devant vous.\
+I﻿l faut ajouter à ce temps le temps de trajet pour vous rendre dans chaque édifice et en revenir.
 
 ### Matériel à prévoir
 
