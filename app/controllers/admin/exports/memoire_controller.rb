@@ -10,6 +10,7 @@ module Admin
         @departements = Departement
           .select("code", "nom", "count(photos_attachments.id) AS photos_count")
           .order(:code)
+          .includes(:pop_exports_memoire)
           .joins(:photos_attachments)
           .where.not(dossiers: { accepted_at: nil })
           .where(recensements: Recensement.recensable.not_exported_yet)
