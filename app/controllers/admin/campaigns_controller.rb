@@ -5,7 +5,7 @@ module Admin
     include CampaignsControllerConcern
 
     def index
-      @ransack = Campaign.ransack(params[:q])
+      @ransack = Campaign.includes(:departement).ransack(params[:q])
       @query_present = params[:q].present?
       @pagy, @campaigns = pagy(@ransack.result, items: 20)
     end

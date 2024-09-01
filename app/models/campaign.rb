@@ -10,6 +10,8 @@ class Campaign < ApplicationRecord
   has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy
   has_many :communes, through: :recipients
   has_many :objets, through: :communes
+  has_many :dossiers, dependent: :nullify # Pour le calcul des statistiques
+  has_many :recensements, through: :dossiers
   has_many :emails, class_name: "CampaignEmail", through: :recipients
 
   accepts_nested_attributes_for :recipients, allow_destroy: true
@@ -156,6 +158,10 @@ class Campaign < ApplicationRecord
 
   def to_s
     "Campagne #{departement} du #{date_lancement} au #{date_fin}"
+  end
+
+  def refresh_stats
+    update_columns(stats: CampaignStats.new(self).stats)
   end
 
   private

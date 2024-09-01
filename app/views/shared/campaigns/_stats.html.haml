@@ -1,11 +1,11 @@
 .fr-mb-4w
-  %h4 Statistiques
+  %h2 Statistiques
   .fr-grid-row.fr-grid-row--gutters
     - if stats[:statuses].present? || stats[:objets].present?
       .fr-col-md-6
         - if stats[:statuses].present?
           %p
-            Statut des #{@campaign.communes.count} communes
+            Statut des #{@campaign.recipients_count} communes
           %canvas{data: { controller: "stacked-line-chart",
             datasets: campaign_communes_statuses_line_chart_datasets(stats[:statuses]).to_json,
             "unit-suffix": "commune(s)",

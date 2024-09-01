@@ -96,6 +96,7 @@ FactoryBot.define do
       status { "deleted" }
       deleted_reason { "objet-devenu-hors-scope" }
       objet { nil }
+      deleted_objet_snapshot { attributes_for(:objet) }
     end
 
     factory :recensement_examiné, traits: [:examiné]

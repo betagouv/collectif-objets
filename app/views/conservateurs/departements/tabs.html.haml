@@ -1,0 +1,20 @@
+- content_for(:head_title) { "#{@departement.nom} - Vue tableau" }
+
+%main#contenu.fr-container.fr-mb-8w
+  = render "shared/breadcrumbs", links: [["Départements", conservateurs_departements_path]], current_page_label: @departement.nom
+  %h1= @departement.nom
+
+  = render "campaigns", departement: @departement
+  = render "stats", stats: @departement.stats
+
+  #tabs-container
+    .fr-tabs
+      %ul.fr-tabs__list{ role: :tablist, "aria-label": "Onglets" }
+        - @tabs.each do |action, title, path|
+          %li{role: "presentation"}
+            - if current_page? action:
+              %button#tab-current.fr-tabs__tab{ role: :tab, aria: { selected: true, controls: :tabpanel } }= title
+            - else
+              = link_to title, path, class: "fr-tabs__tab", role: :tab
+      #tabpanel.fr-tabs__panel.fr-tabs__panel--selected{ role: :tabpanel, aria: { labelledby: "tab-current" }, tabindex: "0" }
+        = render "tab_#{action_name}"

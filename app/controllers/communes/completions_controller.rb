@@ -25,10 +25,6 @@ module Communes
       authorize(@dossier_completion)
     end
 
-    def redirect_with_alert(alert)
-      redirect_to commune_objets_path(@commune), alert:
-    end
-
     def set_objets
       @objets = @dossier.objets
         .includes(:commune, recensement: %i[photos_attachments photos_blobs])

@@ -4,4 +4,5 @@
   = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Campagnes", admin_campaigns_path], [campaign_title(@campaign), admin_campaign_path(@campaign)]], current_page_label: "Éditer la configuration"
 
   %h1 Éditer la campagne #{campaign_title(@campaign)}
+
   = render "shared/campaigns/form", campaign: @campaign, routes_prefix: :admin

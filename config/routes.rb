@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     get :confidentialite
     get "comment-ca-marche", action: :aide, as: :aide
     get "guide-de-recensement", action: :guide, as: :guide
-    get :pdf, action: :pdf_download, as: :pdf_download
+    get :pdf, to: redirect("guide-de-recensement")
     get :admin
     get :plan
     get :declaration_accessibilite
@@ -100,6 +100,8 @@ Rails.application.routes.draw do
 
   namespace :conservateurs do
     resources :departements, only: %i[index show] do
+      get :carte, on: :member
+      get :activite, on: :member
       resources :campaigns, only: %i[new]
     end
     resources :communes, only: [:show] do
@@ -149,7 +151,7 @@ Rails.application.routes.draw do
         post :toggle_impersonate_mode
       end
     end
-    resources :dossiers, only: [:show, :update]
+    resources :dossiers, only: [:show]
     resources :users, only: %i[] do
       get :impersonate
       collection do
@@ -188,6 +190,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:create] do
       resources :email_attachments, only: [:show]
     end
+    resources :mail_previews, only: [:index] do
+      get "/:mailer/:email", on: :collection, action: :show, as: :preview
+    end
   end
 
   # -----
@@ -207,12 +212,6 @@ Rails.application.routes.draw do
   get "health/raise_on_purpose", to: "health#raise_on_purpose"
   get "health/js_error", to: "health#js_error"
   get "health/slow_image", to: "health#slow_image" if Rails.env.development?
-
-  if Rails.configuration.x.environment_specific_name != "production"
-    resources :mail_previews, only: [:index] do
-      get "/:mailer/:email", on: :collection, action: :show, as: :preview
-    end
-  end
 end
 
 # rubocop:enable Metrics/BlockLength

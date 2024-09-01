@@ -21,13 +21,13 @@
           %p
             = link_to "Voir le guide de recensement", guide_path, class: "fr-btn"
         .fr-col-md-7.fr-px-12w
-          = render "shared/picture_tag", filename_without_extension: "sur-place", img_class: "co--width-max-100", alt: "exemples d'objets monuments historiques"
+          = render "shared/picture_tag", filename_without_extension: "sur-place", img_class: "co--width-max-100", alt: "Personne prenant une photo d'un tableau avec son téléphone"
 
   %section
     .fr-container
       .fr-grid-row.fr-py-12w.fr-grid-row--middle
         .fr-col-md-7.fr-px-12w
-          = render"shared/picture_tag", filename_without_extension: "formulaire", img_class: "co--width-max-100", alt: "Guide de recensement"
+          = render"shared/picture_tag", filename_without_extension: "formulaire", img_class: "co--width-max-100", alt: "Formulaire de recensement"
         .fr-col-md-5
           %h2.co-text--blue= t(".etape2.title")
           %p= t(".etape2.questions.title")
@@ -45,7 +45,7 @@
           %p= t(".etape3.conseils")
           %p= t(".etape3.fiches")
         .fr-col-md-7.fr-px-12w
-          = vite_image_tag "images/illustrations/etape3.svg", class: "co-width--100", alt: "etape 3"
+          = vite_image_tag "images/illustrations/etape3_sans_chiffre.svg", class: "co-width--100", alt: ""
 
   %section.fr-py-8w
     #faq.fr-container

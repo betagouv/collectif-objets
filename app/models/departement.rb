@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Departement < ApplicationRecord
+  include Departement::Activity
+
   CODES = %w[
     01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27 28 29 2A 2B 30 31 32 33 34
     35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69
@@ -56,6 +58,15 @@ class Departement < ApplicationRecord
     ).select("departements.*, COALESCE(b.objets_count, 0) AS objets_count")
   end
 
+  def self.parse_from_code_insee(code_insee)
+    if code_insee&.length != 5
+      Rails.logger.warn "le code INSEE '#{code_insee}' ne fait pas 5 caractères"
+      return nil
+    end
+
+    code_insee.starts_with?("97") ? code_insee[0..2] : code_insee[0..1]
+  end
+
   def current_campaign
     campaigns.where.not(status: :draft).find_by("date_lancement <= :today AND date_fin >= :today",
                                                 today: Time.zone.today)
@@ -66,12 +77,5 @@ class Departement < ApplicationRecord
   def memoire_sequence_name = "memoire_photos_number_#{code}"
   def self.ransackable_attributes(_ = nil) = %w[code]
 
-  def self.parse_from_code_insee(code_insee)
-    if code_insee&.length != 5
-      Rails.logger.warn "le code INSEE '#{code_insee}' ne fait pas 5 caractères"
-      return nil
-    end
-
-    code_insee.starts_with?("97") ? code_insee[0..2] : code_insee[0..1]
-  end
+  def stats = Co::DepartementStats.new(self)
 end

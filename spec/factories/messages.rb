@@ -8,5 +8,9 @@ FactoryBot.define do
     text { "Comment s'appelle l'objet en question ?\nJe ne le trouve pas" }
     automated_mail_name { nil }
     created_at { 1.day.ago }
+
+    trait :from_commune do
+      author { commune.users.first }
+    end
   end
 end

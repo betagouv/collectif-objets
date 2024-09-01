@@ -85,9 +85,8 @@ class Recensement < ApplicationRecord
       localisation: [LOCALISATION_EDIFICE_INITIAL, LOCALISATION_AUTRE_EDIFICE]
     )
   }
-  scope :missing_photos, lambda {
-    present_and_recensable.where.missing(:photos_attachments)
-  }
+  scope :with_photos, -> { present_and_recensable.where.associated(:photos_attachments) }
+  scope :missing_photos, -> { present_and_recensable.where.missing(:photos_attachments) }
   scope :photos_presence_in, ->(presence) { presence ? all : missing_photos }
   scope :absent, -> { where(localisation: LOCALISATION_ABSENT) }
   scope :déplacés, -> {

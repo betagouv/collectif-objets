@@ -42,10 +42,6 @@ module Conservateurs
       @objets = @commune.objets.includes(:commune, recensements: %i[photos_attachments photos_blobs])
     end
 
-    def redirect_with_alert(alert)
-      redirect_to conservateurs_commune_path(@commune), alert:
-    end
-
     def dossier_params
       params
         .require(:dossier)

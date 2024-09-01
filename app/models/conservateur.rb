@@ -7,6 +7,7 @@ class Conservateur < ApplicationRecord
 
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, password_length: 8..128
 
+  scope :send_recap, -> { where(send_recap: true) }
   scope :with_departement, ->(d) { where("departement_codes @> ARRAY[?]::varchar[]", d) }
 
   attr_accessor :impersonating

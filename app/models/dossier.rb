@@ -2,6 +2,7 @@
 
 class Dossier < ApplicationRecord
   belongs_to :commune
+  belongs_to :campaign, optional: true
   has_many :recensements, dependent: :nullify
   has_many :objets, through: :recensements
   belongs_to :conservateur, optional: true
@@ -42,6 +43,9 @@ class Dossier < ApplicationRecord
   scope :auto_submittable, -> { where(id: auto_submittable_ids) }
   scope :to_visit, -> { where.not(visit: nil) }
   scope :current, -> { where.not(status: "archived") }
+  scope :submitted_in, ->(date_range) { where(submitted_at: date_range) if date_range }
+
+  before_create :set_campaign
 
   def self.auto_submittable_ids
     construction.includes(:recensements, commune: [:objets])
@@ -68,10 +72,6 @@ class Dossier < ApplicationRecord
 
   def not_analysed?
     recensements.where.not(analysed_at: nil).empty?
-  end
-
-  def can_return_to_construction?
-    submitted? && not_analysed?
   end
 
   def analyse_overrides?
@@ -105,4 +105,10 @@ class Dossier < ApplicationRecord
   end
 
   def self.ransackable_attributes(_ = nil) = %w[status submitted_at]
+
+  private
+
+  def set_campaign
+    self.campaign_id ||= commune.campaigns.ongoing.ids.first
+  end
 end

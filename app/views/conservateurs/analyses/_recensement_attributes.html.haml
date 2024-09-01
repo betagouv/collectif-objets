@@ -1,5 +1,5 @@
 .fr-mb-3w
-  .fr-pb-1w.co-flex.co-flex--align-items-center
+  %h4.fr-h6.fr-mb-0.fr-pb-1w.co-flex.co-flex--align-items-center
     %span.co-text--bold L’objet a-t-il été trouvé par la commune ?
     %button.fr-btn--tooltip.fr-btn{"aria-describedby" => "tooltip-localisation-incorrecte"} Information contextuelle
     %span.fr-tooltip.fr-placement{id: "tooltip-localisation-incorrecte", role: "tooltip", "aria-hidden" =>"true"} Si la localisation n'est pas correcte, informez en la commune pour qu’elle la modifie.
@@ -20,7 +20,7 @@
 
 - if recensement.recensable?
   .fr-my-4w.attribute-group
-    .fr-pb-1w.co-text--bold
+    %h4.fr-h6.fr-mb-0.fr-pb-1w
       État de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "etat_sanitaire")
     .fr-checkbox-group.fr-mt-2w
@@ -55,7 +55,7 @@
       = link_to "Voir le contenu de ces fiches conseils", fiches_path, target: "_blank", rel: "noopener"
 
   .fr-my-4w.attribute-group
-    .fr-pb-1w.co-text--bold
+    %h4.fr-h6.fr-mb-0.fr-pb-1w
       Sécurisation de l’objet
     = render analyse_attribute_component(recensement:, form_builder: f, recensement_presenter:, attribute_name: "securisation")
     .fr-checkbox-group.fr-mt-2w

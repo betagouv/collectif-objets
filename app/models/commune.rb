@@ -43,6 +43,7 @@ class Commune < ApplicationRecord
   has_one :dossier, -> { where.not(status: :archived) }, dependent: :restrict_with_error, inverse_of: :commune
   has_many :recensements, through: :dossier, source: :recensements
   has_many :campaign_recipients, dependent: :destroy
+  has_many :campaigns, through: :campaign_recipients
   has_many :admin_comments, dependent: :destroy, as: :resource
   has_many :survey_votes, dependent: :nullify
   has_many :messages, dependent: :destroy
@@ -57,6 +58,13 @@ class Commune < ApplicationRecord
             ) AS nb_users_par_commune ON nb_users_par_commune.commune_id = communes.id).squish)
     .select("communes.*, COALESCE(users_count, 0) AS users_count")
   }
+  scope :include_en_peril_and_disparus_count, -> do
+    joins(:recensements)
+    .select("communes.*,
+      COUNT(DISTINCT CASE WHEN #{Recensement::RECENSEMENT_EN_PERIL_SQL} THEN 1 END) AS en_peril_count,
+      COUNT(DISTINCT CASE WHEN #{Recensement::RECENSEMENT_ABSENT_SQL} THEN 1 END) AS disparus_count")
+    .group("communes.id")
+  end
 
   scope :has_recensements_with_missing_photos, lambda {
     joins(:recensements).merge(Recensement.missing_photos).group(:id)
@@ -65,6 +73,7 @@ class Commune < ApplicationRecord
     presence ? all : has_recensements_with_missing_photos
   }
   scope :completed, -> { where(status: STATE_COMPLETED) }
+  scope :in_departement, ->(code) { where(departement_code: code) if code }
 
   scope :sort_by_nom, -> { order("communes.nom ASC") }
 

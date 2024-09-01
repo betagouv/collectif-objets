@@ -9,4 +9,4 @@
     .fr-col-md-4
       = render "shared/sommaire", items: @content_blob.toc
     .fr-col-md-8.co-markdown-content
-      != @content_blob.to_html
+      != @content_blob.to_html.gsub("CONTACT_EMAIL", CONTACT_EMAIL)
