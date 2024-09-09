@@ -349,9 +349,9 @@ Ci-dessous les étapes dans un tableau :
 
 
 ## Note sur le statut global de la commune
-Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées.
+Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées en la colonne "Examen". Elles correspondaient respectivement au `status` de la commune et au `status` du dossier.
 
-Cette colonne unique est appelée "statut global" dans le code et correspond au badge affiché dans dans la colonne "Examen" du tableau des communes côté conservateur. Il est calculé en fonction du statut de la commune, de son dossier et de ses recensements. Afin de faciliter le filtre et tri via Ransack, il est également remonté via une requête SQL dans le concern "include_statut_global".
+Cette information unique est appelée "statut global" dans le code. Il est calculé à la volée en fonction du statut de la commune, de son dossier et de ses recensements.
 
 Ce choix a été fait pour aller plus vite, sans avoir à créer de nouveau champ ni modifier l'existant. Cette dernière option nécessite beaucoup de changements dans le code, notamment à tous les endroits qui dépendent du "status" actuel de la commune.
 
