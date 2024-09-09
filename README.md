@@ -335,6 +335,7 @@ La version complète du diagramme d'entités de la base de données est visible 
     NB : le mot analysed vient de l'ancien terme "Analysé" désormais remplacé par "Examiné". De plus, on pourrait avoir un statut `analysed` ou `examined` sur le recensement, pour que ce soit cohérent avec les statuts `draft` et `completed`.
 
 6. Commune "Examinée" : après avoir examiné tous les objets de la commune, le conservateur clique sur "Accepter le dossier" et le dossier passe en `accepted`.
+7. Si une nouvelle campagne de recensement démarre et que la commune est concernée, son dossier est archivé (status `archived`) et la commune repasse en `inactive`.
 
 Ci-dessous les étapes dans un tableau :
 
@@ -346,6 +347,7 @@ Ci-dessous les étapes dans un tableau :
 | 4         | `completed`    | tous `completed`                        | `submitted`  et `replied_automatically_at` présent | Réponse automatique |
 | 5         | `completed`    | au moins un `completed` et examiné      | `submitted`                                        | En cours d'examen |
 | 6         | `completed`    | tous `completed` et tous examinés       | `accepted`                                         | Examiné |
+| 7         | `inactive`    | _aucun recensement_   | ancien dossier `archived`                                         | Non recensé |
 
 
 ## Note sur le statut global de la commune
