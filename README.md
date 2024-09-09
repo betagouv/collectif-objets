@@ -323,19 +323,20 @@ La version complète du diagramme d'entités de la base de données est visible 
 |--------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|
 | ![](doc/commune_state_machine_diagram.png) | ![](doc/recensement_state_machine_diagram.png) | ![](doc/dossier_state_machine_diagram.png) | ![](doc/campaign_state_machine_diagram.png) |
 
-- Un `Dossier` est d'abord en construction, puis est soumis aux conservateurs et enfin accepté ou rejeté.
-- L'état d'une `Commune` est lié à l'état de son `Dossier`.
-  La commune passe en recensement démarré lorsque le dossier est en construction, puis en recensement complété lorsque
-  le dossier est soumis.
+`bundle exec rake diagrams:generate[nom_du_model]` permet de mettre à jour ces diagrammes
 
-**Note sur le statut global de la commune**
-Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées.
+## Déroulé
+1. Commune "Non recensé" : si la commune n'a jamais recensé, son status est `inactive` et elle n'a aucun dossier associé.
+2. Commune "En cours de recensement" : lorsque la commune recense son premier objet MH, on crée un `Dossier` en construction. Le `Recensement` de cet objet MH est lié au `dossier` qui vient d'être créé.
+3. Commune "À examiner" : quand la commune a recensé tous ses objets puis cliqué sur "Envoyer le recensement", cela passe la commune en `completed` et le dossier en `submitted`.
+4. Commune "Réponse automatique" : si la commune n'a que des objets "verts" (pas dans une situation préoccupante), on lui envoie une email en précisant que le conservateur ne va pas forcément regarder son dossier en priorité. Son dossier passe en `replied_automatically_at`.
+5. Commune "En cours d'examen" : lorsque le conservateur finit d'examiner le recensement d'un objet, la colonne `analysed_at` est remplie. L'état du dossier ne change pas.
+   
+    NB : le mot analysed vient de l'ancien terme "Analysé" désormais remplacé par "Examiné". De plus, on pourrait avoir un statut `analysed` ou `examined` sur le recensement, pour que ce soit cohérent avec les statuts `draft` et `completed`.
 
-Cette colonne unique est appelée "statut global" dans le code. Il est calculé en fonction du statut de la commune, de son dossier et de ses recensements. Afin de faciliter le filtre et tri via Ransack, il est également remonté via une requête SQL dans le concern "include_statut_global".
+6. Commune "Examinée" : après avoir examiné tous les objets de la commune, le conservateur clique sur "Accepter le dossier" et le dossier passe en `accepted`.
 
-Ce choix a été fait pour aller plus vite, sans avoir à créer de nouveau champ ni modifier l'existant. Cette dernière option nécessite beaucoup de changements dans le code, notamment à tous les endroits qui dépendent du "status" actuel de la commune.
-
-Cependant, ces calculs à la volée peuvent être lents, comparé à un simple champ en base. Ils le seront de plus en plus, sachant qu'ils dépendent du nombre de recensements, qui va continuer d'augmenter avec le temps.
+Ci-dessous les étapes dans un tableau :
 
 | situation | commune        | recensement(s)                          | dossier                                            | statut global |
 |-----------|----------------|-----------------------------------------|----------------------------------------------------|-----------------|
@@ -346,12 +347,17 @@ Cependant, ces calculs à la volée peuvent être lents, comparé à un simple c
 | 5         | `completed`    | au moins un `completed` et examiné      | `submitted`                                        | En cours d'examen |
 | 6         | `completed`    | tous `completed` et tous examinés       | `accepted`                                         | Examiné |
 
-- Le passage de 2 à 3 se fait par une action manuelle de la commune "Envoyer mes recensements"
-- Le passage à l'étape 6 se fait par une action manuelle des conservateurs "Accepter le dossier"
 
-`bundle exec rake diagrams:generate` permet de mettre à jour ces diagrammes
+## Note sur le statut global de la commune
+Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées.
 
-Schéma du cycle de vie d'un dossier :
+Cette colonne unique est appelée "statut global" dans le code et correspond au badge affiché dans dans la colonne "Examen" du tableau des communes côté conservateur. Il est calculé en fonction du statut de la commune, de son dossier et de ses recensements. Afin de faciliter le filtre et tri via Ransack, il est également remonté via une requête SQL dans le concern "include_statut_global".
+
+Ce choix a été fait pour aller plus vite, sans avoir à créer de nouveau champ ni modifier l'existant. Cette dernière option nécessite beaucoup de changements dans le code, notamment à tous les endroits qui dépendent du "status" actuel de la commune.
+
+Cependant, ces calculs à la volée peuvent être lents, comparé à un simple champ en base. Ils le seront de plus en plus, sachant qu'ils dépendent du nombre de recensements, qui va continuer d'augmenter avec le temps.
+
+## Schéma du cycle de vie d'un dossier
 
 ![cycle de vie dossier drawio](doc/cycle-vie-dossier.drawio.svg)
 
