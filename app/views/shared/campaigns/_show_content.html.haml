@@ -73,7 +73,7 @@
 %h2 Communes destinataires
 - if campaign.communes.any?
   %p
-    La campagne sera envoyée à
+    La campagne concerne
     %b= Commune.human_attribute_name(:count, count: campaign.recipients.count)
     parmi les
     %b= Commune.human_attribute_name(:count, count: campaign.departement.communes_count)
