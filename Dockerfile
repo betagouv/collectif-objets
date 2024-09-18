@@ -7,11 +7,11 @@ RUN apt-get update -qq && apt-get install --no-install-recommends -y build-essen
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock .
+COPY Gemfile Gemfile.lock /app/
 RUN bundle install
 
 WORKDIR /app
-COPY package.json package-lock.json .
+COPY package.json package-lock.json /app/
 RUN npm i
 
 COPY . .
