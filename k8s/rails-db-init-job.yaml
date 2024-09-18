@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rails-init-db
+  labels:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: rails-initdb-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: rails-pg-restore
+        image: collectif-objets-ror
+        args: ["rails", "db:setup"]
+        env:
+          - name: DATABASE_HOST
+            value: db
+          - name: DATABASE_PASSWORD
+            value: objets
+          - name: DATABASE_USERNAME
+            value: postgres
+          - name: MAILHOG_HOST
+            value: mailhog
+      restartPolicy: Never

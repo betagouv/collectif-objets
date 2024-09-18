@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collectif-objets
+      app.kubernetes.io/instance: collectif-objets-dev1
+      app.kubernetes.io/component: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collectif-objets
+        app.kubernetes.io/instance: collectif-objets-dev1
+        app.kubernetes.io/component: web
+    spec:
+      containers:
+      - name: web
+        image: collectif-objets-ror
+        args: ["bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+        env:
+          - name: DATABASE_HOST
+            value: db
+          - name: DATABASE_PASSWORD
+            value: objets
+          - name: DATABASE_USERNAME
+            value: postgres
+          - name: MAILHOG_HOST
+            value: mailhog
+        ports:
+          - containerPort: 3000
+            protocol: TCP
+        volumeMounts:
+        - mountPath: /database_init_rails
+          name: kind-shared-initdb
+      volumes:
+      - name: kind-shared-initdb
+        hostPath: 
+          path: /kind_shared/database_init_rails
+          type: Directory 
+      restartPolicy: Always
