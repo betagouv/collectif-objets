@@ -3,7 +3,12 @@ FROM ruby:3.3-slim
 
 EXPOSE 3000
 
-RUN apt-get update -qq && apt-get install --no-install-recommends -y build-essential libpq-dev postgresql-client curl libvips42 nodejs npm
+RUN apt-get update -qq \
+    && apt-get install \
+    -y --no-install-recommends \
+    build-essential libpq-dev postgresql-client \
+    curl libvips42 \
+    nodejs npm
 
 WORKDIR /app
 
