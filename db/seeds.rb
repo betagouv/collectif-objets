@@ -13,6 +13,9 @@ run("curl https://s3.fr-par.scw.cloud/collectif-objets-public/seeds.pgsql > #{pa
 db = Rails.configuration.database_configuration[Rails.env]
 db_url = db["url"] || "postgresql://#{db["username"]}:#{db["password"]}@#{db["host"]}:#{db["port"]}/#{db["database"]}"
 
+puts "creating postgres sequences not handled by db init (memoire photos)"
+run("rails runner scripts/create_postgres_sequences_memoire_photos_numbers.rb")
+
 puts "restoring data to postgres db..."
 run("pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=#{db_url} #{path}
 ")
