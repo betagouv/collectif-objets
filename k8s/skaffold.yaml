@@ -1,0 +1,21 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: collectif-objets-dev-config
+build:
+  artifacts:
+    - image: collectif-objets-ror
+      context: ..
+      docker:
+        dockerfile: Dockerfile
+  local:
+    useDockerCLI: true
+    useBuildkit: true
+manifests:
+  rawYaml:
+    - db-deployment.yaml
+    - db-service.yaml
+    - web-deployment.yaml
+    - web-service.yaml
+    - worker-deployment.yaml
+    - rails-db-init-job.yaml
