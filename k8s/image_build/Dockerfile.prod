@@ -3,6 +3,8 @@
 # Ruby gem install stage needs build-essential, postgres libs and libvips for images
 FROM ruby:3.3-slim AS ruby-builder
 
+ARG UID="11112"
+
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
@@ -12,20 +14,22 @@ RUN apt-get update -qq \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /collectif-objets
-RUN useradd -s /bin/bash -u 11112 -d /collectif-objets co && chown 11112:11112 /collectif-objets
-USER 11112    
+RUN useradd -s /bin/bash -u "${UID}" -d /collectif-objets co && chown "${UID}":"${UID}" /collectif-objets
+USER "${UID}"    
 
 WORKDIR /collectif-objets
-COPY --chown=11112:11112 Gemfile Gemfile.lock /collectif-objets/
+COPY --chown="${UID}":"${UID}" Gemfile Gemfile.lock /collectif-objets/
 RUN bundle install
 
-COPY --chown=11112:11112 package.json package-lock.json /collectif-objets/
+COPY --chown="${UID}":"${UID}" package.json package-lock.json /collectif-objets/
 RUN npm install
 
 CMD ["bash"]
 
 # Final production image stage
 FROM ruby:3.3-slim AS production
+
+ARG UID="11112"
 
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
@@ -36,16 +40,16 @@ RUN apt-get update -qq \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /collectif-objets
-RUN useradd -s /bin/bash -u 11112 -d /collectif-objets co && chown 11112:11112 /collectif-objets
-USER 11112
+RUN useradd -s /bin/bash -u "${UID}" -d /collectif-objets co && chown "${UID}":"${UID}" /collectif-objets
+USER "${UID}"
 
-COPY --chown=11112:11112 Gemfile Gemfile.lock /collectif-objets/
-COPY --chown=11112:11112 --from=ruby-builder /usr/local/bundle /usr/local/bundle
-COPY --chown=11112:11112 --from=ruby-builder /collectif-objets/.bundle /collectif-objets/.bundle
-COPY --chown=11112:11112 --from=ruby-builder /collectif-objets/node_modules /collectif-objets/node_modules
+COPY --chown="${UID}":"${UID}" Gemfile Gemfile.lock /collectif-objets/
+COPY --chown="${UID}":"${UID}" --from=ruby-builder /usr/local/bundle /usr/local/bundle
+COPY --chown="${UID}":"${UID}" --from=ruby-builder /collectif-objets/.bundle /collectif-objets/.bundle
+COPY --chown="${UID}":"${UID}" --from=ruby-builder /collectif-objets/node_modules /collectif-objets/node_modules
 
-COPY --chown=11112:11112 --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown=11112:11112 --parents=true config.ru spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true config.ru spec storage tmp vendor prawn_assets /collectif-objets/
 
 EXPOSE 3000
 

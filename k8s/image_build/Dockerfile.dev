@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1.7-labs
 FROM ruby:3.3-slim
 
+ARG UID="11112"
+
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
@@ -11,16 +13,16 @@ RUN apt-get update -qq \
 
 # create app directory and create custom user with uid > 10000 to run the app in it
 WORKDIR /collectif-objets
-RUN useradd -s /bin/bash -u 11112 -d /collectif-objets co && chown 11112:11112 /collectif-objets
-USER 11112
+RUN useradd -s /bin/bash -u "${UID}" -d /collectif-objets co && chown "${UID}":"${UID}" /collectif-objets
+USER "${UID}"
 
 # install ruby and npm libraries
-COPY --chown=11112:11112 Gemfile Gemfile.lock package.json package-lock.json /collectif-objets/
+COPY --chown="${UID}":"${UID}" Gemfile Gemfile.lock package.json package-lock.json /collectif-objets/
 RUN bundle install && npm install
 
 # copy only necessary application files
-COPY --chown=11112:11112 --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown=11112:11112 --parents=true config.ru spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true config.ru spec storage tmp vendor prawn_assets /collectif-objets/
 
 EXPOSE 3000
 
