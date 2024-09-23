@@ -1,28 +1,27 @@
-# syntax=docker/dockerfile:1
-
+# syntax=docker/dockerfile:1.7-labs
 FROM ruby:3.3-slim
 
-EXPOSE 3000
-
+# https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
+ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
-    && apt-get install \
-    -y --no-install-recommends \
+    && apt-get install -y --no-install-recommends \
     build-essential libpq-dev postgresql-client \
-    curl libvips42 \
-    nodejs npm
+    curl libvips42 nodejs npm ncdu \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+# create app directory and create custom user with uid > 10000 to run the app in it
+WORKDIR /collectif-objets
+RUN useradd -s /bin/bash -u 11112 -d /collectif-objets co && chown 11112:11112 /collectif-objets
+USER 11112
 
-COPY Gemfile Gemfile.lock /app/
-RUN bundle install
+# install ruby and npm libraries
+COPY --chown=11112:11112 Gemfile Gemfile.lock package.json package-lock.json /collectif-objets/
+RUN bundle install && npm install
 
-WORKDIR /app
-COPY package.json package-lock.json /app/
-RUN npm i
+# copy only necessary application files
+COPY --chown=11112:11112 --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
+COPY --chown=11112:11112 --parents=true config.ru spec storage tmp vendor prawn_assets /collectif-objets/
 
-COPY app bin cms config contenus db lib prawn_assets public scripts spec storage tmp vendor /app/
-COPY .rubocop.yml .ignore .rspec .ruby-version .sentryclirc .tool-versions Aptfile Brewfile.netlify /app/
-COPY config.ru Gemfile Gemfile.lock Makefile package.json package-lock.json /app/
-COPY Procfile Procfile.dev Rakefile vite.config.ts
+EXPOSE 3000
 
 CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]

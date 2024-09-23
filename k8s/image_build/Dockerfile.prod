@@ -1,28 +1,53 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1.7-labs
 
-FROM ruby:3.3-slim
+# Ruby gem install stage needs build-essential, postgres libs and libvips for images
+FROM ruby:3.3-slim AS ruby-builder
+
+# https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
+ENV DEBIAN_FRONTEND=noninteractive 
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+    build-essential libpq-dev postgresql-client \
+    libvips42 nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /collectif-objets
+RUN useradd -s /bin/bash -u 11112 -d /collectif-objets co && chown 11112:11112 /collectif-objets
+USER 11112    
+
+WORKDIR /collectif-objets
+COPY --chown=11112:11112 Gemfile Gemfile.lock /collectif-objets/
+RUN bundle install
+
+COPY --chown=11112:11112 package.json package-lock.json /collectif-objets/
+RUN npm install
+
+CMD ["bash"]
+
+# Final production image stage
+FROM ruby:3.3-slim AS production
+
+ENV DEBIAN_FRONTEND=noninteractive 
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+    libpq-dev \
+    nodejs \
+    libvips42 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /collectif-objets
+RUN useradd -s /bin/bash -u 11112 -d /collectif-objets co && chown 11112:11112 /collectif-objets
+USER 11112
+
+COPY --chown=11112:11112 Gemfile Gemfile.lock /collectif-objets/
+COPY --chown=11112:11112 --from=ruby-builder /usr/local/bundle /usr/local/bundle
+COPY --chown=11112:11112 --from=ruby-builder /collectif-objets/.bundle /collectif-objets/.bundle
+COPY --chown=11112:11112 --from=ruby-builder /collectif-objets/node_modules /collectif-objets/node_modules
+
+COPY --chown=11112:11112 --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
+COPY --chown=11112:11112 --parents=true config.ru spec storage tmp vendor prawn_assets /collectif-objets/
 
 EXPOSE 3000
 
-RUN apt-get update -qq \
-    && apt-get install \
-    -y --no-install-recommends \
-    build-essential libpq-dev postgresql-client \
-    curl libvips42 \
-    nodejs npm
-
-WORKDIR /app
-
-COPY Gemfile Gemfile.lock /app/
-RUN bundle install
-
-WORKDIR /app
-COPY package.json package-lock.json /app/
-RUN npm i
-
-COPY app bin cms config contenus db lib prawn_assets public scripts spec storage tmp vendor /app/
-COPY .rubocop.yml .ignore .rspec .ruby-version .sentryclirc .tool-versions Aptfile Brewfile.netlify /app/
-COPY config.ru Gemfile Gemfile.lock Makefile package.json package-lock.json /app/
-COPY Procfile Procfile.dev Rakefile vite.config.ts
-
 CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+
