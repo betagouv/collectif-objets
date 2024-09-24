@@ -41,7 +41,7 @@ RSpec.describe ConservateurMailer, type: :mailer do
     )
 
     it "behaves as expected" do
-      expect(mail.subject).to include "Récapitlatif d'activité"
+      expect(mail.subject).to include "Récapitulatif d'activité"
       expect(mail.to).to eq([conservateur.email])
       expect(mail.from).to eq([CONTACT_EMAIL])
     end
