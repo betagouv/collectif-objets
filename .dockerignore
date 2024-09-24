@@ -5,3 +5,9 @@ Dockerfile
 docker-compose.yml
 tmp/**
 log/**
+
+# fix docker build error involving those git links by ignoring them
+/public/dsfr/dsfr.min.css
+/public/dsfr/fonts
+/public/dsfr/icons
+/public/dsfr/utility/utility.min.css
