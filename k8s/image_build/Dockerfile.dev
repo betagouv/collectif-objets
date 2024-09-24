@@ -22,7 +22,7 @@ RUN bundle install && npm install
 
 # copy only necessary application files
 COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown="${UID}":"${UID}" --parents=true config.ru spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
 
 EXPOSE 3000
 
