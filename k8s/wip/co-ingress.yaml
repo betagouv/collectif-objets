@@ -10,8 +10,8 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: collectif-objets.local
-    http:
+  #- host: collectif-objets.local
+  - http:
       paths:
       - path: /
         pathType: Prefix
