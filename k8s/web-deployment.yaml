@@ -22,26 +22,26 @@ spec:
     spec:
       containers:
       - name: web
-        image: collectif-objets-ror
+        image: collectif-objets-prod-distroless
         args: ["bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
         env:
-          - name: DATABASE_HOST
-            value: db
-          - name: DATABASE_PASSWORD
-            value: objets
-          - name: DATABASE_USERNAME
-            value: postgres
-          - name: MAILHOG_HOST
-            value: mailhog
+        - name: DATABASE_HOST
+          value: db
+        - name: DATABASE_PASSWORD
+          value: objets
+        - name: DATABASE_USERNAME
+          value: postgres
+        - name: MAILHOG_HOST
+          value: mailhog
         ports:
-          - containerPort: 3000
-            protocol: TCP
+        - containerPort: 3000
+          protocol: TCP
         volumeMounts:
         - mountPath: /database_init_rails
           name: kind-shared-initdb
       volumes:
       - name: kind-shared-initdb
-        hostPath: 
+        hostPath:
           path: /kind_shared/database_init_rails
-          type: Directory 
+          type: Directory
       restartPolicy: Always

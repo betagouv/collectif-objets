@@ -11,15 +11,15 @@ spec:
     spec:
       containers:
       - name: rails-pg-restore
-        image: collectif-objets-ror
+        image: collectif-objets-dev
         args: ["rails", "db:setup"]
         env:
-          - name: DATABASE_HOST
-            value: db
-          - name: DATABASE_PASSWORD
-            value: objets
-          - name: DATABASE_USERNAME
-            value: postgres
-          - name: MAILHOG_HOST
-            value: mailhog
+        - name: DATABASE_HOST
+          value: db
+        - name: DATABASE_PASSWORD
+          value: objets
+        - name: DATABASE_USERNAME
+          value: postgres
+        - name: MAILHOG_HOST
+          value: mailhog
       restartPolicy: Never

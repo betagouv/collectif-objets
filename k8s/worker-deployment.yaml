@@ -21,16 +21,16 @@ spec:
         app.kubernetes.io/component: worker
     spec:
       containers:
-        - args: ["bundle", "exec", "good_job", "start"]
-          env:
-            - name: DATABASE_HOST
-              value: db
-            - name: DATABASE_PASSWORD
-              value: objets
-            - name: DATABASE_USERNAME
-              value: postgres
-            - name: MAILHOG_HOST
-              value: mailhog
-          image: collectif-objets-ror
-          name: worker
+      - args: ["bundle", "exec", "good_job", "start"]
+        env:
+        - name: DATABASE_HOST
+          value: db
+        - name: DATABASE_PASSWORD
+          value: objets
+        - name: DATABASE_USERNAME
+          value: postgres
+        - name: MAILHOG_HOST
+          value: mailhog
+        image: collectif-objets-prod-distroless
+        name: worker
       restartPolicy: Always
