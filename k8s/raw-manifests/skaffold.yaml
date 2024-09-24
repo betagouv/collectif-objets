@@ -5,11 +5,11 @@ metadata:
 build:
   artifacts:
   - image: collectif-objets-prod-distroless
-    context: ..
+    context: ../..
     docker:
       dockerfile: k8s/image_build/Dockerfile.prod.distroless
   - image: collectif-objets-dev
-    context: ..
+    context: ../..
     docker:
       dockerfile: k8s/image_build/Dockerfile.dev
   local:
