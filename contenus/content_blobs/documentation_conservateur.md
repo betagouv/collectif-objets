@@ -115,13 +115,18 @@ Pour accéder aux dossiers de recensement des communes :
 Suivez les étapes ou visionnez la vidéo ci-dessous :
 
 * **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet. \
-  Le premier encadré blanc, en haut de page, affiche des informations issues de la base Palissy de la Plateforme Ouverte du Patrimoine (POP). Les informations transmises par la commune se trouvent en dessous, dans la partie bleutée sous l'intitulé "Recensement". Les photos transmises par la commune (si elle en a transmis) se trouvent sur la droite de cette section.
+  Le premier encadré blanc, en haut de page, affiche des informations issues de la base Palissy de la Plateforme Ouverte du Patrimoine (POP). Les informations transmises par la commune se trouvent en dessous, dans la partie bleutée sous l'intitulé "Recensement". Les photos transmises par la commune (si elle en a bien transmis) se trouvent sur la droite de cette section. 
 
-  * **Examinez les informations transmises par la commune :** à partir des photos transmises par la commune, qui sont cliquables et zoomables pour en examiner les détails, vous pouvez valider ou corriger les informations renseignées.
+  * **Examinez les informations transmises par la commune :** à partir des photos transmises par la commune, qui sont cliquables et zoomables pour en examiner les détails, vous pouvez valider (en les laissant comme telles) ou corriger les informations renseignées. 
 
-    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée.
+    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification.\
+    \
+    N﻿'oubliez pas de sauvegarder vos modifications en cliquant sur le bouton « Sauvegarder » en bas de page.
 
-    **Si la commune s’est trompée d’objet, reportez-vous à cette section. De la même manière, si la commune n’a pas transmis de photos, reportez-vous à cette section.**
+    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises. Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).**\
+    **Reportez-vous à la section correspondante ci-dessous pour en savoir plus.**\
+    \
+    **De la même manière, si la commune n’a pas transmis de photos, reportez-vous à la section correspondante ci-dessous.** 
   * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée : *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)*, *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)*, *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)*, *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)* et *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*. Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen.
 
     Un champ libre « commentaires pour la mairie » est à votre disposition si vous souhaitez préciser certains points à la commune.
@@ -129,7 +134,7 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 
     ![Examen d’un recensement](/contenus/content_blobs/images/conservateurs_analyse.png)
 * **Répétez ce processus pour chaque objet abrité par la commune.**
-* **Envoyez l'examen final du recensement à la commune :** après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : lien.
+* **Envoyez l'examen final du recensement à la commune :** après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen. Pour cela, référez-vous à la section : " Envoyer mon examen à la commune " ci-dessous.
 
 ### Vidéo explicative : l'examen d'un dossier de recensement dans Collectif Objets
 
@@ -146,23 +151,28 @@ Déroulé et timing de la vidéo :
 * **08:59** Générer un bordereau de récolement
 * **09:25** Retrouver la liste des déplacements envisagés
 
-### Si la commune n’a pas recensé le bon objet
+### Si la commune n’a pas recensé le bon objet ou si les photos transmises sont problématiques 
 
-Si la commune vous a transmis des informations erronées ou insuffisantes, envoyez-lui un message afin qu'elle puisse faire les corrections nécessaires.
+Si la commune vous a transmis des informations erronées ou insuffisantes, envoyez-lui un message (via la messagerie intégrée au site) afin qu'elle puisse faire les corrections nécessaires. 
 
-En effet, il ne faut pas « finaliser » les dossiers des communes où des éléments sont insatisfaisants car cela reviendrait à valider des informations erronées, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)
+En effet, il ne faut pas « finaliser » les dossiers des communes où des éléments sont insatisfaisants **car cela reviendrait à valider des informations erronées**, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)
 
-Vous pouvez faire part à la commune de remarques pour l’aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-).
+**I﻿l faut notamment être très vigilant avec les photographies transmises.** Si les photos ne correspondent pas au bon objet, ou s'il s'agit de photos d'archives, ou de photos issues de la base Palissy de POP (vous pouvez le vérifier en comparant les photos de la commune avec les photos qui s'affichent en haut de page) il est nécessaire de **supprimer ces photographies.** \
+P﻿our cela, cliquez sur la photo transmises par la commune, cela ouvrira une "galerie photo" où vous pouvez faire défiler les photos transmises. Pour chaque photo erronnée ou insatisfaisante, cliquez sur "Supprimer" en haut de page et validez cette action.
+
+Vous pouvez faire part à la commune de remarques pour l’aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-) intégrée au site. 
+
+A﻿ttention : une fois que vous aurez validé l'examen de la commune (c'est-à-dire que vous lui aurez transmis votre retour), celle-ci ne pourra plus modifier son recensement. Ainsi, si vous souhaitez qu'elle apporte des corrections ou des nouvelles images, échangez via la messagerie et attendez ces modifications avant de finaliser votre retour. 
 
 ### Si la commune n’a pas pris de photos
 
-Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre examen.
+Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre examen. Les photos doivent être récentes et nouvelles. 
 
 ### Envoyer mon examen à la commune
 
 Après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen.
 
-**Lorsque vous envoyez votre examen final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l’État.**
+**Lorsque vous envoyez votre examen final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l’État, y compris les photographies transmises par la commune.**
 
 * [Rendez-vous sur la page de la commune concernée.](#comment-accder-aux-dossiers-de-recensement-des-communes-) Pour accéder à l'examen, **vous devez avoir examiné chaque objet recensé.**
 * **Cliquez sur le bouton « Envoyer l'examen ».**
