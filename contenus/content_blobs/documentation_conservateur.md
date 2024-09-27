@@ -41,7 +41,7 @@ Plus de 90% des informations transmises par les communes sont validées sans cor
 
 ### Si vous souhaitez déployer une campagne dans votre département
 
-C’est simple : contactez-nous à l’adresse [#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL}){:target="_blank" rel="noopener"} pour prendre rendez-vous avec notre équipe de déploiement.
+C’est simple : contactez-nous à l’adresse [\#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL}){:target="_blank" rel="noopener"} pour prendre rendez-vous avec notre équipe de déploiement.
 
 Collectif Objets est un service destiné aux conservateurs des Monuments Historiques et conservateurs des Antiquités et Objets d’Art.
 
@@ -82,6 +82,7 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
 * **Cliquez sur le lien « Créer une nouvelle campagne » et configurez la campagne :**
+
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates.
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées.
 * **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder » pour enregistrer la liste mise à jour.
@@ -113,9 +114,10 @@ Pour accéder aux dossiers de recensement des communes :
 
 Suivez les étapes ou visionnez la vidéo ci-dessous :
 
-* **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
+* **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet. \
+  Le premier encadré blanc, en haut de page, affiche des informations issues de la base Palissy de la Plateforme Ouverte du Patrimoine (POP). Les informations transmises par la commune se trouvent en dessous, dans la partie bleutée sous l'intitulé "Recensement". Les photos transmises par la commune (si elle en a transmis) se trouvent sur la droite de cette section.
 
-  * **Examinez les informations transmises par la commune :** à partir des photos récentes transmises par la commune, qui sont zoomables pour en examiner les détails, vous pouvez valider ou corriger les informations renseignées.
+  * **Examinez les informations transmises par la commune :** à partir des photos transmises par la commune, qui sont cliquables et zoomables pour en examiner les détails, vous pouvez valider ou corriger les informations renseignées.
 
     Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée.
 
@@ -135,14 +137,14 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 
 Déroulé et timing de la vidéo :
 
-- **00:51** Tableau de suivi des communes et statuts des dossiers des communes
-- **02:38** Examen d'un dossier d'une commune
-- **04:50** Examen et traitement des photos provenant des communes
-- **06:08** Corriger le recensement d'une commune
-- **06:34** Transmission des fiches informatives
-- **08:22** Classer une commune comme un déplacement souhaitable ou prioritaire
-- **08:59** Générer un bordereau de récolement
-- **09:25** Retrouver la liste des déplacements envisagés
+* **00:51** Tableau de suivi des communes et statuts des dossiers des communes
+* **02:38** Examen d'un dossier d'une commune
+* **04:50** Examen et traitement des photos provenant des communes
+* **06:08** Corriger le recensement d'une commune
+* **06:34** Transmission des fiches informatives
+* **08:22** Classer une commune comme un déplacement souhaitable ou prioritaire
+* **08:59** Générer un bordereau de récolement
+* **09:25** Retrouver la liste des déplacements envisagés
 
 ### Si la commune n’a pas recensé le bon objet
 
@@ -242,7 +244,7 @@ Si des informations semblent prescrites ou erronnées sur Collectif Objets, nous
 
 **Si un objet est attribué à une commune autre que celle qui l’abrite :**
 
-Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mél à : [#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL}).
+Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mél à : [\#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL}).
 
 Si le changement de localisation de l’objet n’est pas détecté en amont de la campagne, c’est la commune indiquée sur la notice Palissy de l’objet qui recevra la demande de recensement.
 
@@ -254,7 +256,7 @@ Le compte de chaque conservateur dans Collectif Objets est lié à une adresse e
 
 Dans de rares cas, certains systèmes informatiques (de type "pare-feu" ou "anti-spam") bloquent la transmission des e-mails provenant de la plateforme Collectif Objets. Par exemple, le système de pare-feu utilisé par le service informatique d'une région peut considérer que les e-mails envoyés par la plateforme sont des "spams" et ainsi empêcher les adresses e-mails des employés de la région de recevoir les e-mails provenant de Collectif Objets.
 
-Si vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : [#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL})) ne soient plus considérés comme indésirables.
+Si vous êtes dans cette situation, prenez contact avec les gérants du système informatique en question et demandez-leur de faire en sorte que les emails envoyés par la plateforme Collectif Objets (via l'adresse : [\#{CONTACT_EMAIL}](mailto:#{CONTACT_EMAIL})) ne soient plus considérés comme indésirables.
 
 ## Autres
 
@@ -276,7 +278,7 @@ Les objets prioritaires sont les objets qui semblent mériter une attention part
 
 En France, le titre de “restaurateur” n’étant pas protégé, un artiste ou un artisan sans formation particulière peut se dire restaurateur. Le ministère de la Culture reconnaît seulement quatre diplômes précis comme étant les formations nécessaires et adéquates pour intervenir sur des objets protégés au titre des monuments historiques. Ces professionnels sont titulaires d’un diplôme reconnu au grade master de conservation-restauration des biens culturels (niveau bac +5/niveau 7 du cadre unifié européen) :  
 
-- diplôme de l’Institut National du Patrimoine – département des restaurateurs (Paris-Aubervilliers)
-- master de conservation-restauration des biens culturels (université de Paris I-Panthéon-Sorbonne)
-- diplôme national supérieur d'expression plastique de l'école d'art et de design TALM de  Tours, mention conservation-restauration des oeuvres sculptées valant grade de Master
-- diplôme national supérieur d'expression plastique de l’école supérieure d'art d’Avignon mention en conservation-restauration des biens culturels valant grade de Master.
+* diplôme de l’Institut National du Patrimoine – département des restaurateurs (Paris-Aubervilliers)
+* master de conservation-restauration des biens culturels (université de Paris I-Panthéon-Sorbonne)
+* diplôme national supérieur d'expression plastique de l'école d'art et de design TALM de  Tours, mention conservation-restauration des oeuvres sculptées valant grade de Master
+* diplôme national supérieur d'expression plastique de l’école supérieure d'art d’Avignon mention en conservation-restauration des biens culturels valant grade de Master.
