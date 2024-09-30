@@ -12,6 +12,6 @@
           = link_to(departement, conservateurs_departement_path(departement))
           %br/
           %span.fr-text--sm
-            = "#{departement.objets_count} objets protégés dans #{departement.communes_count} communes"
+            = "#{number_with_delimiter departement.objets_count} objets protégés dans #{departement.communes_count} communes"
   .fr-my-4w
     = link_to t("conservateurs.departements.index.contact"), "mailto:support@collectif-objets.beta.gouv.fr"
