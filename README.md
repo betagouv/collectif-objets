@@ -328,38 +328,40 @@ Le recensement des objets d'une commune se fait en plusieurs étapes que l'on pe
 
 
 ## Déroulé
-1. Commune "Non recensé" : si la commune n'a jamais recensé, son status est `inactive` et elle n'a aucun dossier associé.
-2. Commune "En cours de recensement" : lorsque la commune recense son premier objet MH, sont statut passen en `started` et on lui crée un `Dossier` en `construction`. Le `Recensement` de cet objet MH est lié au `dossier` qui vient d'être créé.
-3. Commune "À examiner" : quand la commune a recensé tous ses objets puis cliqué sur "Envoyer le recensement", cela passe la commune en `completed` et le dossier en `submitted`.
-4. Commune "Réponse automatique" : si la commune n'a que des objets "verts" (pas dans une situation préoccupante), on lui envoie une email en précisant que le conservateur ne va pas forcément regarder son dossier en priorité. Son dossier passe en `replied_automatically_at`.
-5. Commune "En cours d'examen" : lorsque le conservateur finit d'examiner le recensement d'un objet, la colonne `analysed_at` est remplie. L'état du dossier ne change pas.
-   
-    NB : le mot analysed vient de l'ancien terme "Analysé" et devrait être remplacé par "Examiné". De plus, on pourrait avoir un statut `analysed` ou `examined` sur le recensement, pour que ce soit cohérent avec les statuts `draft` et `completed`.
 
-6. Commune "Examinée" : après avoir examiné tous les objets de la commune, le conservateur clique sur "Accepter le dossier" et le dossier passe en `accepted`.
-7. Commune "Non recensé" : Si une nouvelle campagne de recensement démarre et que la commune est concernée, son dossier est archivé (status `archived`) et la commune repasse en `inactive`.
+1. La commune n'a pas encore recensé d'objets.
+2. Suite à une email de campagne ou à une démarche spontanée, la commune recense son premier objet MH. On crée alors le dossier de recensement.
+3. La commune a recensé tous ses objets puis cliqué sur "Envoyer le recensement"
+4. Si la commune n'a que des objets "verts" (pas dans une situation préoccupante) et que le conservateur n'a pas démarré l'examen, on lui envoie une email en fin de campagne, en précisant que le conservateur ne va pas forcément regarder son dossier en priorité.
+5. Le conservateur examine le recensement d'un premier objet.
+6. Après avoir examiné tous les objets de la commune, le conservateur clique sur "Accepter le dossier".
+7. Si une nouvelle campagne de recensement démarre et que la commune est concernée, la commune repasse en étape 1. On parle de re-recensement. Cette étape peut arriver à tout moment, idéalement après que le conservateur ait examiné le dossier.
 
-Ci-dessous les étapes dans un tableau :
+Ci-dessous les étapes avec le détail des différents statuts en base de données
 
-| Étape | commune        | recensement(s)                          | dossier                                            |
-|-----------|----------------|-----------------------------------------|----------------------------------------------------|
-| 1 - Non recensé  | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_  |
-| 2 - En cours de recensement        | `started`      | au moins un `completed`  | `construction` |
-| 3 - À examiner         | `completed`    | tous `completed`  | `submitted`|
-| 4 - Réponse automatique   | `completed`    | tous `completed` | `submitted`  et `replied_automatically_at` présent |
-| 5 - En cours d'examen  | `completed`    | au moins un `completed` et examiné | `submitted` |
-| 6 - Examiné  | `completed`    | tous `completed` et tous examinés  | `accepted` |
-| 7 - Non recensé  | `inactive`    | _aucun recensement_   | ancien dossier `archived`  |
+| Étape | statut global | commune        | recensement(s)                          | dossier                                            |
+|-----|-------------|----------------|-----------------------------------------|----------------------------------------------------|
+| 1 | Non recensé  | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_  |
+| 2 | En cours de recensement        | `started`      | au moins un `completed`  | `construction` |
+| 3 | À examiner         | `completed`    | tous `completed`  | `submitted`|
+| 4 | Réponse automatique   | `completed`    | tous `completed` | `submitted`  et `replied_automatically_at` présent |
+| 5 | En cours d'examen  | `completed`    | au moins un `completed` et examiné | `submitted` |
+| 6 | Examiné  | `completed`    | tous `completed` et tous examinés  | `accepted` |
+| 7 | Non recensé  | `inactive`    | _aucun recensement_   | ancien dossier `archived`  |
 
 
-## Note sur le statut global de la commune
-Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées en la colonne "Examen". Elles correspondaient respectivement au `status` de la commune et au `status` du dossier.
+## Dette technique sur les statuts et le vocabulaire
+
+Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées. Elles correspondaient respectivement au `status` de la commune et au `status` du dossier.
 
 Cette information unique est appelée "statut global" dans le code. Il est calculé à la volée en fonction du statut de la commune, de son dossier et de ses recensements.
 
 Ce choix a été fait pour aller plus vite, sans avoir à créer de nouveau champ ni modifier l'existant. Cette dernière option nécessite beaucoup de changements dans le code, notamment à tous les endroits qui dépendent du "status" actuel de la commune.
 
 Cependant, ces calculs à la volée peuvent être lents, comparé à un simple champ en base. Ils le seront de plus en plus, sachant qu'ils dépendent du nombre de recensements, qui va continuer d'augmenter avec le temps.
+
+
+Aussi, le mot analysed vient de l'ancien terme "Analysé" et devrait être remplacé par "Examiné". De plus, on pourrait avoir un statut `analysed` ou `examined` sur le recensement, pour que ce soit cohérent avec les statuts `draft` et `completed`.
 
 ## Machines à états finis (*state machines*)
 
