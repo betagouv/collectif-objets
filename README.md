@@ -337,6 +337,18 @@ Le recensement des objets d'une commune se fait en plusieurs étapes que l'on pe
 6. Après avoir examiné tous les objets de la commune, le conservateur clique sur "Accepter le dossier".
 7. Si une nouvelle campagne de recensement démarre et que la commune est concernée, la commune repasse en étape 1. On parle de re-recensement. Cette étape peut arriver à tout moment, idéalement après que le conservateur ait examiné le dossier.
 
+## Machines à états finis (*state machines*)
+
+Dans le code, chaque étape modifie l'état de la `Commune`, du `Dossier` ou du `Recensement`.
+Il existe aussi la notion de `statut global` sur la commune, qui est affiché en tant que badge pour le conservateur ou dans l'admin. Il est déduit en fonction du statut de la commune, de son dossier et de ses recensements.
+
+
+| Communes                                   | Recensements                                   | Dossiers                                   | Campaigns                                   |
+|--------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|
+| ![](doc/commune_state_machine_diagram.png) | ![](doc/recensement_state_machine_diagram.png) | ![](doc/dossier_state_machine_diagram.png) | ![](doc/campaign_state_machine_diagram.png) |
+
+`bundle exec rake diagrams:generate[nom_du_model]` permet de mettre à jour ces diagrammes
+
 Ci-dessous les étapes avec le détail des différents statuts en base de données
 
 | Étape | statut global | commune        | recensement(s)                          | dossier                                            |
@@ -352,24 +364,14 @@ Ci-dessous les étapes avec le détail des différents statuts en base de donné
 
 ## Dette technique sur les statuts et le vocabulaire
 
-Suite à une amélioration sur le tableau des communes (dans vue d'un département côté conservateur et dans l'admin) les colonnes "État du recensement" et "Examen" ont été fusionnées. Elles correspondaient respectivement au `status` de la commune et au `status` du dossier.
+Le statut global est récupéré à la volée dans une requête SQL plutôt qu'avec un champ dédié. Ce choix a été fait pour déployer les fonctionnalités plus vite, en évitant au maximum de changer l'existant. 
 
-Cette information unique est appelée "statut global" dans le code. Il est calculé à la volée en fonction du statut de la commune, de son dossier et de ses recensements.
-
-Ce choix a été fait pour aller plus vite, sans avoir à créer de nouveau champ ni modifier l'existant. Cette dernière option nécessite beaucoup de changements dans le code, notamment à tous les endroits qui dépendent du "status" actuel de la commune.
-
-Cependant, ces calculs à la volée peuvent être lents, comparé à un simple champ en base. Ils le seront de plus en plus, sachant qu'ils dépendent du nombre de recensements, qui va continuer d'augmenter avec le temps.
+Cependant, il serait judicieux de réduire le nombre de statuts, qui sont d'ailleurs souvent redondants. Nous avions imaginé de supprimer le `status` de la `Commune` et remplacer le `status` du `Dossier` par le `statut_global`. Cela simplifierait grandement le code et améliorerait les performances. En effet, le calcul du `statut_global` peut être lent comparé à lecture d'un champ en base.
 
 
 Aussi, le mot analysed vient de l'ancien terme "Analysé" et devrait être remplacé par "Examiné". De plus, on pourrait avoir un statut `analysed` ou `examined` sur le recensement, pour que ce soit cohérent avec les statuts `draft` et `completed`.
 
-## Machines à états finis (*state machines*)
 
-| Communes                                   | Recensements                                   | Dossiers                                   | Campaigns                                   |
-|--------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|
-| ![](doc/commune_state_machine_diagram.png) | ![](doc/recensement_state_machine_diagram.png) | ![](doc/dossier_state_machine_diagram.png) | ![](doc/campaign_state_machine_diagram.png) |
-
-`bundle exec rake diagrams:generate[nom_du_model]` permet de mettre à jour ces diagrammes
 
 # Code
 
