@@ -9,7 +9,8 @@
     %span
       = link_to "Télécharger (PDF de #{number_to_human_size edifice.bordereau.byte_size})",
         rails_blob_path(edifice.bordereau, disposition: "attachment"),
-        class: "fr-btn fr-btn--sm fr-btn--icon-left fr-icon-download-line"
+        class: "fr-btn fr-btn--sm fr-btn--icon-left fr-icon-download-line",
+        title: "Bordereau de récolement · #{edifice.nom.upcase_first} (PDF de #{number_to_human_size edifice.bordereau.byte_size})"
     %span
       = button_to "Regénérer",
         conservateurs_commune_bordereaux_path(commune, edifice:),
