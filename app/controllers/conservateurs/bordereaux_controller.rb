@@ -9,7 +9,7 @@ module Conservateurs
     end
 
     def create
-      @edifice = Edifice.find(params[:edifice_id])
+      @edifice = Edifice.find(params[:edifice])
       raise unless @edifice.commune == @dossier.commune
 
       @edifice.bordereau&.purge
