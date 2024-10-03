@@ -2,7 +2,7 @@
 
 .co-flex.co-flex--align-items-center.co-flex--gap-1rem.fr-mb-2w{id: "bordereau-#{edifice.id}"}
   %span
-    = "#{edifice.nom} · #{texte_nombre_objets_protégés(edifice)}"
+    = "#{edifice.nom.upcase_first} · #{texte_nombre_objets_protégés(edifice)}"
 
   - if edifice.bordereau.present?
     %span
