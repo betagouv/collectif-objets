@@ -14,9 +14,8 @@
         %span.fr-icon-warning-line(aria-hidden="true")
         Il n’y a aucun objet classé ou inscrit dans cette commune.
 
-    - else 
-      - @edifices.each do |edifice|
-        = render "conservateurs/bordereaux/edifice", edifice:
+    - else
+      = render partial: "conservateurs/bordereaux/edifice", collection: @edifices
   - else
     .co-readable
       %p
