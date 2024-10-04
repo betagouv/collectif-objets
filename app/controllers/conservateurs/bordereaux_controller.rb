@@ -6,7 +6,7 @@ module Conservateurs
     skip_after_action :verify_policy_scoped, only: :index
 
     def index
-      @edifices = @commune.edifices.with_objets_classés_ou_inscrits.ordered_by_nom
+      @edifices = @commune.edifices.with_objets_classés_ou_inscrits.ordered_by_nom.includes(bordereau_attachment: :blob)
     end
 
     def create
