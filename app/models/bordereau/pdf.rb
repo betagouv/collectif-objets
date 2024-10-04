@@ -113,7 +113,9 @@ module Bordereau
 
     def add_footnotes
       grid([7, 0], [7, 4]).bounding_box do
-        move_down 20
+        move_down 30
+        stroke_horizontal_rule
+        move_down 10
         text <<~TEXT, size: 8
           1    Pour les biens affectés au culte au sens de la loi du 9 décembre 1905 concernant la séparation des Églises et de l’État.
         TEXT
