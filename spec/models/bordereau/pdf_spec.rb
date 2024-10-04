@@ -53,7 +53,7 @@ RSpec.describe "Bordereau::Pdf" do
     # TODO: add mocked photos
 
     it "does not raise" do
-      expect { Bordereau::Pdf.new(dossier, edifice).build_prawn_doc }.not_to raise_error
+      expect { Bordereau::Pdf.new(dossier, edifice) }.not_to raise_error
     end
   end
 end

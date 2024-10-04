@@ -10,12 +10,23 @@ module Bordereau
     def initialize(dossier, edifice)
       @dossier = dossier
       @edifice = edifice
+      build_prawn_doc
     end
 
     # Utilisé comme référence par Prawn::View
     def document
       @document ||= Prawn::Document.new page_layout: :landscape, page_size: "A4"
     end
+
+    def to_io
+      StringIO.new(document.render)
+    end
+
+    def filename
+      "bordereau-#{dossier.commune.to_s.parameterize}-#{edifice.nom.parameterize}.pdf"
+    end
+
+    private
 
     def build_prawn_doc
       setup_fonts
@@ -106,8 +117,6 @@ module Bordereau
 
       document
     end
-
-    private
 
     # TODO: À refacto dans un modèle (Recensement ou Objet)
     def recensements_des_objets_de_l_edifice_typés(niveau_de_protection)
