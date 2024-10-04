@@ -120,6 +120,9 @@ module Bordereau
         ajout_table_objets_recensés(recensements_objets_inscrits)
       end
 
+      # Les pages générées après `number_pages` ne sont pas numérotées
+      number_pages "<page>/<total>", at: [bounds.right - 150, 0], align: :right
+
       document
     end
 
