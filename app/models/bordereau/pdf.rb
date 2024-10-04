@@ -38,16 +38,21 @@ module Bordereau
         move_down 20
         image Rails.root.join("prawn_assets/logo-monument-historique.png"), width: 100
       end
-
       # Partie en haut et centrée avec les titres
       grid([0, 1], [1, 3]).bounding_box do
-        text "Direction régionale des affaires culturelles", align: :center, style: :bold
+        text "Direction régionale des affaires culturelles", align: :center, style: :bold, size: 10
+        move_down 2
+        text "Conservation des antiquités et objets d’art".upcase, align: :center, style: :bold, size: 10
+        stroke_horizontal_rule
         move_down 10
-        text "Conservation des antiquités et objets d’art", align: :center, style: :bold
+        text "Bordereau de récolement des objets mobilier".upcase, align: :center, style: :bold, size: 14
         move_down 10
         text "Département : #{dossier.departement}", align: :center
         move_down 5
         text "Commune de : #{dossier.commune.nom}", align: :center
+        move_down 5
+        text "Édifice : #{edifice.nom.upcase_first}", align: :center
+        # TODO: Ajouter l'adresse récupérée lors de l'import depuis Palissy
       end
 
       recensements_objets_classés = recensements_des_objets_de_l_edifice_typés("classés")
