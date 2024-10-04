@@ -93,7 +93,7 @@ module Bordereau
             "<b>L’affectataire¹,</b>
             <i>(nom et prénom en toutes lettres)</i>",
             "<b>Le Conservateur des Antiquités et Objets d’Art,</b>
-            <i>(nom et prénom en toutes lettres)</i>",
+            <i>(nom et prénom en toutes lettres)</i>"
           ]
         ],
         column_widths: [256, 240, 272],
@@ -168,8 +168,8 @@ module Bordereau
         "<b>Photographie</b>"
       ]]
       table(headers + recensements, column_widths: [75, 110, 75, 75, 350, 75],
-                    cell_style: { size: 8, border_color: "CCCCCC", inline_format: true },
-                    header: true)
+                                    cell_style: { size: 8, border_color: "CCCCCC", inline_format: true },
+                                    header: true)
     end
 
     def setup_fonts

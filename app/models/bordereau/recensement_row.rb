@@ -44,8 +44,8 @@ module Bordereau
 
     def observations
       [
-        "<b>Propriétaire :</b>  " + observations_proprietaire_cell.presence || "Néant",
-        "<b>Conservateur :</b>  " + recensement.analyse_notes.presence || "Néant",
+        "<b>Propriétaire :</b>  #{observations_proprietaire_cell.presence || 'Néant'}",
+        "<b>Conservateur :</b>  #{recensement.analyse_notes.presence || 'Néant'}"
       ].join("\n")
     end
 
