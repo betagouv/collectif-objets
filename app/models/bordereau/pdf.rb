@@ -120,6 +120,35 @@ module Bordereau
         ajout_table_objets_recensés(recensements_objets_inscrits)
       end
 
+      # Mentions légales (remplissent une page entière en taille 10)
+      start_new_page
+      text <<~TEXT, inline_format: true, size: 10
+        <b>Références législatives et réglementaires dans le code du patrimoine</b>
+
+        <b>Article L.622-8</b>
+        Il est procédé, par l'autorité administrative, au moins tous les cinq ans, au récolement des objets mobiliers classés au titre des monuments historiques.
+        En outre, les propriétaires ou détenteurs de ces objets sont tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative.
+
+        <b>Article R.622-9</b>
+        La liste générale des objets mobiliers et des ensembles historiques mobiliers classés, établie et publiée par le ministère chargé de la culture, comprend :
+        1° La dénomination ou la désignation et les principales caractéristiques de ces objets et ensembles historiques mobiliers ;
+        2° L'indication de l'immeuble et de la commune où ils sont conservés, et, le cas échéant, de la servitude de maintien dans les lieux attachés à l'objet mobilier ou à l'ensemble historique mobilier concerné. Toutefois, si l'objet mobilier ou l'ensemble historique mobilier appartient à un propriétaire privé, celui-ci peut demander que seule l'indication du département soit mentionnée ;
+        3° La qualité de personne publique ou privée de leur propriétaire et, s'il y a lieu, l'affectataire domanial ;
+        4° La date de la décision de classement.
+
+        <b>Article R.622-24</b>
+        La présentation des objets mobiliers classés, faite à la demande des services de l’État chargés des monuments historiques en application du deuxième alinéa de l'article L.622-8, s'effectue sur leur lieu habituel de conservation. Toutefois, les propriétaires, affectataires, détenteurs ou dépositaires de ces objets peuvent demander que cette présentation s'effectue dans un autre lieu.
+        Le contrôle sur place des biens protégés s'effectue en présence du propriétaire, de l'affectataire ou de leur représentant. En cas d'absence, il s'effectue avec leur accord.
+
+        <b>Article R.622-25</b>
+        Le conservateur des antiquités et des objets d'art procède au moins tous les cinq ans au récolement des objets mobiliers classés.
+        Le préfet du département accrédite les agents auxquels les propriétaires ou détenteurs de ces objets sont tenus, en application du second alinéa de l'article L.622-8, de les présenter.
+
+        <b>Article R.622-38</b>
+        Le préfet de région dresse une liste des objets mobiliers inscrits de la région qui contient les mêmes renseignements que ceux énumérés à l'article R.622-9.
+        Un exemplaire de cette liste, tenue à jour, est déposé au ministère chargé de la culture, à la direction régionale des affaires culturelles et auprès du conservateur des antiquités et des objets d'art.
+      TEXT
+
       # Les pages générées après `number_pages` ne sont pas numérotées
       number_pages "<page>/<total>", at: [bounds.right - 150, 0], align: :right
 
