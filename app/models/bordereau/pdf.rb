@@ -32,35 +32,11 @@ module Bordereau
       setup_fonts
       define_grid(columns: 5, rows: 8, gutter: 0)
 
-      # Partie en haut à gauche avec les logos
-      grid([0, 0], [1, 0]).bounding_box do
-        image Rails.root.join("prawn_assets/logo-ministere-culture.png"), width: 100
-        move_down 20
-        image Rails.root.join("prawn_assets/logo-monument-historique.png"), width: 100
-      end
-      # Partie en haut et centrée avec les titres
-      grid([0, 1], [1, 3]).bounding_box do
-        text "Direction régionale des affaires culturelles", align: :center, style: :bold, size: 10
-        move_down 2
-        text "Conservation des antiquités et objets d’art".upcase, align: :center, style: :bold, size: 10
-        stroke_horizontal_rule
-        move_down 10
-        text "Bordereau de récolement des objets mobilier".upcase, align: :center, style: :bold, size: 14
-        move_down 10
-        text "Département : #{dossier.departement}", align: :center
-        move_down 5
-        text "Commune de : #{dossier.commune.nom}", align: :center
-        move_down 5
-        text "Édifice : #{edifice.nom.upcase_first}", align: :center
-        # TODO: Ajouter l'adresse récupérée lors de l'import depuis Palissy
-      end
+      add_logos
+      add_header
 
       recensements_objets_classés = recensements_des_objets_de_l_edifice_typés("classés")
       if recensements_objets_classés.present?
-        # Liste des objets classés
-        text "Récolement des objets classés de l'édifice #{edifice.nom}", align: :center, style: :bold
-        move_down 10
-
         ajout_table_objets_recensés(recensements_objets_classés)
 
         # Page de signature
@@ -120,8 +96,42 @@ module Bordereau
         ajout_table_objets_recensés(recensements_objets_inscrits)
       end
 
-      # Mentions légales (remplissent une page entière en taille 10)
-      start_new_page
+      add_legalese
+
+      # Les pages générées après `number_pages` ne sont pas numérotées
+      number_pages "<page>/<total>", at: [bounds.right - 150, 0], align: :right
+
+      document
+    end
+
+    def add_logos
+      grid([0, 0], [1, 0]).bounding_box do
+        image Rails.root.join("prawn_assets/logo-ministere-culture.png"), width: 100
+        move_down 20
+        image Rails.root.join("prawn_assets/logo-monument-historique.png"), width: 100
+      end
+    end
+
+    def add_header
+      grid([0, 1], [1, 3]).bounding_box do
+        text "Direction régionale des affaires culturelles", align: :center, style: :bold, size: 10
+        move_down 2
+        text "Conservation des antiquités et objets d’art".upcase, align: :center, style: :bold, size: 10
+        stroke_horizontal_rule
+        move_down 10
+        text "Bordereau de récolement des objets mobilier".upcase, align: :center, style: :bold, size: 14
+        move_down 10
+        text "Département : #{dossier.departement}", align: :center
+        move_down 5
+        text "Commune de : #{dossier.commune.nom}", align: :center
+        move_down 5
+        text "Édifice : #{edifice.nom.upcase_first}", align: :center
+        # TODO: Ajouter l'adresse récupérée lors de l'import depuis Palissy
+      end
+    end
+
+    def add_legalese
+      start_new_page # On remplit une page entière en taille 10
       text <<~TEXT, inline_format: true, size: 10
         <b>Références législatives et réglementaires dans le code du patrimoine</b>
 
@@ -148,11 +158,6 @@ module Bordereau
         Le préfet de région dresse une liste des objets mobiliers inscrits de la région qui contient les mêmes renseignements que ceux énumérés à l'article R.622-9.
         Un exemplaire de cette liste, tenue à jour, est déposé au ministère chargé de la culture, à la direction régionale des affaires culturelles et auprès du conservateur des antiquités et des objets d'art.
       TEXT
-
-      # Les pages générées après `number_pages` ne sont pas numérotées
-      number_pages "<page>/<total>", at: [bounds.right - 150, 0], align: :right
-
-      document
     end
 
     # TODO: À refacto dans un modèle (Recensement ou Objet)
