@@ -149,23 +149,22 @@ module Bordereau
       TEXT
     end
 
-    # TODO: À refacto dans un modèle (Recensement ou Objet)
     def recensements
       @dossier.recensements.joins(:objet).where(objets: { edifice_id: edifice.id })
         .order('objets."palissy_EMPL", objets."palissy_TICO"')
+        .map { RecensementRow.new(_1).to_a }
     end
 
     def add_objects_table
-      lignes = recencements.map { RecensementRow.new(_1).to_a }
-      lignes.prepend([
-                       "<b>Référence Palissy</b>",
-                       "<b>Dénomination</b>",
-                       "<b>Date de protection</b>",
-                       "<b>Etat de conservation</b>",
-                       "<b>Observations</b>",
-                       "<b>Photographie</b>"
-                     ])
-      table(lignes, column_widths: [75, 110, 75, 75, 350, 75],
+      headers = [[
+        "<b>Référence Palissy</b>",
+        "<b>Dénomination</b>",
+        "<b>Date de protection</b>",
+        "<b>Etat de conservation</b>",
+        "<b>Observations</b>",
+        "<b>Photographie</b>"
+      ]]
+      table(headers + recensements, column_widths: [75, 110, 75, 75, 350, 75],
                     cell_style: { size: 8, border_color: "CCCCCC", inline_format: true },
                     header: true)
     end
