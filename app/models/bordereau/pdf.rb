@@ -80,7 +80,7 @@ module Bordereau
       text "Participants au récolement :", style: :bold
       move_down 20
       text <<~TEXT, inline_format: true
-        Les soussignés (<i>nom, prénom en toutes lettres, fonction et signature</i>) certifient que les objets mobiliers ou immeubles par destination portés au present etat figurent dans l’édifice «#{edifice.nom}», #{commune}, lors du récolement en date du #{ellipsis}
+        Les soussignés certifient que les objets mobiliers ou immeubles par destination portés au present etat figurent dans l’édifice «#{edifice.nom}», #{commune}, lors du récolement en date du #{ellipsis}
       TEXT
       move_down 40
       text "Fait à #{ellipsis}, le #{ellipsis}", align: :right
@@ -88,13 +88,16 @@ module Bordereau
       table \
         [
           [
-            "<i>Le propriétaire ou son représentant,</i>",
-            "<i>L’affectataire¹,</i>",
-            "<i>Le Conservateur des Antiquités et Objets d’Art,</i>"
+            "<b>Le propriétaire ou son représentant,</b>
+            <i>(nom et prénom en toutes lettres)</i>",
+            "<b>L’affectataire¹,</b>
+            <i>(nom et prénom en toutes lettres)</i>",
+            "<b>Le Conservateur des Antiquités et Objets d’Art,</b>
+            <i>(nom et prénom en toutes lettres)</i>",
           ]
         ],
-        column_widths: [256, 256, 256],
-        cell_style: { border_color: "FFFFFF", style: :italic, inline_format: true, size: 11 }
+        column_widths: [256, 240, 272],
+        cell_style: { border_color: "FFFFFF", inline_format: true, size: 11 }
 
       # Partie avec les signataires et destinataires
       grid([6, 0], [6, 4]).bounding_box do
