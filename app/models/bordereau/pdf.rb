@@ -99,7 +99,6 @@ module Bordereau
         column_widths: [256, 240, 272],
         cell_style: { border_color: "FFFFFF", inline_format: true, size: 11 }
 
-      # Partie avec les signataires et destinataires
       grid([6, 0], [6, 4]).bounding_box do
         text "Diffusion du bordereau :", style: :bold, size: 10
         text <<~TEXT, size: 8
