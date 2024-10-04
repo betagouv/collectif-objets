@@ -35,25 +35,10 @@ module Bordereau
       add_logos
       add_header
 
-      recensements_objets_classés = recensements_des_objets_de_l_edifice_typés("classés")
-      if recensements_objets_classés.present?
-        ajout_table_objets_recensés(recensements_objets_classés)
-        add_signatures
-        add_footnotes
-      end
+      add_objects_table
 
-      # Page de la liste des objets inscrits
-      recensements_objets_inscrits = recensements_des_objets_de_l_edifice_typés("inscrits")
-      if recensements_objets_inscrits.present?
-        start_new_page if recensements_objets_classés.present?
-
-        text "Liste des objets inscrits de l'édifice #{edifice.nom}", align: :center, style: :bold, size: 12
-        text "Toutes les informations liées à ces objets figurent dans Collectif Objets " \
-             "et dans l'examen transmis par vos CMH et CAOA",
-             align: :center, size: 10
-        move_down(10)
-        ajout_table_objets_recensés(recensements_objets_inscrits)
-      end
+      add_signatures
+      add_footnotes
 
       add_legalese
 
@@ -165,16 +150,12 @@ module Bordereau
     end
 
     # TODO: À refacto dans un modèle (Recensement ou Objet)
-    def recensements_des_objets_de_l_edifice_typés(niveau_de_protection)
-      @dossier
-        .recensements
-        .joins(:objet)
-        .where(objets: { edifice_id: edifice.id })
-        .merge(niveau_de_protection == "classés" ? Objet.classés : Objet.inscrits)
-        .order('objets."palissy_REF"')
+    def recensements
+      @dossier.recensements.joins(:objet).where(objets: { edifice_id: edifice.id })
+        .order('objets."palissy_EMPL", objets."palissy_TICO"')
     end
 
-    def ajout_table_objets_recensés(recencements)
+    def add_objects_table
       lignes = recencements.map { RecensementRow.new(_1).to_a }
       lignes.prepend([
                        "<b>Référence Palissy</b>",
