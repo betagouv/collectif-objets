@@ -165,7 +165,7 @@ module Bordereau
                        "<b>Observations</b>",
                        "<b>Photographie</b>"
                      ])
-      table(lignes, column_widths: [75, 122, 122, 122, 244, 75],
+      table(lignes, column_widths: [75, 110, 75, 75, 350, 75],
                     cell_style: { size: 8, border_color: "CCCCCC", inline_format: true },
                     header: true)
     end
