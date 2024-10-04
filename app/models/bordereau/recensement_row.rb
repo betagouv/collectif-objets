@@ -12,8 +12,7 @@ module Bordereau
         nom,
         palissy_DPRO, # date de protection
         etat_sanitaire_cell,
-        recensement.analyse_notes,
-        observations_proprietaire_cell,
+        observations,
         photo_cell
       ]
     end
@@ -41,6 +40,15 @@ module Bordereau
       else
         etat_sanitaire
       end
+    end
+
+    def observations
+      [
+        "<b>Propriétaire :</b>",
+        observations_proprietaire_cell.presence || "Néant",
+        "<b>Conservateur :</b>",
+        recensement.analyse_notes.presence || "Néant",
+      ].join("\n")
     end
 
     def observations_proprietaire_cell

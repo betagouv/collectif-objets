@@ -177,11 +177,10 @@ module Bordereau
                        "<b>Dénomination</b>",
                        "<b>Date de protection</b>",
                        "<b>Etat de conservation</b>",
-                       "<b>Observations du conservateur</b>",
-                       "<b>Observations sur le terrain</b>",
+                       "<b>Observations</b>",
                        "<b>Photographie</b>"
                      ])
-      table(lignes, column_widths: [75, 122, 122, 122, 122, 122, 75],
+      table(lignes, column_widths: [75, 122, 122, 122, 244, 75],
                     cell_style: { size: 8, border_color: "CCCCCC", inline_format: true },
                     header: true)
     end
