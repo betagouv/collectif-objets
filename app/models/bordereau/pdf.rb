@@ -154,6 +154,7 @@ module Bordereau
     end
 
     def add_objects_table
+      move_down 20
       headers = [[
         "<b>Référence Palissy</b>",
         "<b>Dénomination</b>",
