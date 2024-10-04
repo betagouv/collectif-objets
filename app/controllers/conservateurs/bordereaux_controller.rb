@@ -3,8 +3,9 @@
 module Conservateurs
   class BordereauxController < BaseController
     before_action :set_commune, :set_dossier
+    skip_after_action :verify_policy_scoped, only: :index
 
-    def new
+    def index
       @edifices = @commune.edifices.with_objets_classés_ou_inscrits.ordered_by_nom
     end
 
@@ -19,7 +20,7 @@ module Conservateurs
 
       respond_to do |format|
         format.html do
-          redirect_to new_conservateurs_commune_bordereau_path(@commune),
+          redirect_to conservateurs_commune_bordereaux_path(@commune),
                       notice: "Le bordereau est en cours de génération …"
         end
         format.turbo_stream

@@ -112,7 +112,7 @@ feature "Conservateurs", js: true do
 
   describe "communes/1/bordereaux/new" do
     let(:dossier) { create(:dossier, :accepted, commune:, conservateur:) }
-    let(:path) { new_conservateurs_commune_bordereau_path(dossier.commune) }
+    let(:path) { conservateurs_commune_bordereaux_path(dossier.commune) }
     it_behaves_like "an accessible page"
   end
 
