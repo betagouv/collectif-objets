@@ -31,7 +31,7 @@
             - else
               %a.fr-pagination__link.fr-pagination__link--prev.fr-pagination__link--lg-label Codes plus récents
             %li
-              %a{class: "fr-pagination__link", "aria-current": :page, title: "Page #{offset}"}= offset
+              %a{class: "fr-pagination__link", "aria-current": :page, title: "Page #{offset + 1}"}= offset + 1
           %li
             - if limit * (offset + 1) < total
               = link_to "Codes plus anciens", url_for(offset: offset + 1), role: :link, class: "fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label", "data-turbo-action": :advance
