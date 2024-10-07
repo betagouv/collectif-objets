@@ -26,7 +26,7 @@ class UserMailer < ApplicationMailer
   def dossier_accepted_email
     @dossier = params[:dossier]
     @commune = @dossier.commune
-    @user = @commune.users.first
+    @user = @commune.user
     @conservateur = @dossier.conservateur || params[:conservateur]
     @cta_url = commune_dossier_url(@commune)
     mail \
