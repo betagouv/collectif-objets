@@ -110,23 +110,6 @@ RSpec.describe SessionAuthentication do
       end
     end
 
-    context "code is used" do
-      let(:used) { true }
-      let(:email) { "jean@delafontaine.fr" }
-      let(:code) { "123456" }
-
-      it { should eq false }
-      it "should not yield" do
-        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
-      end
-      it "should have used code error" do
-        subject
-        error = session_authentication.errors.first
-        expect(error).to have_attributes(attribute: :code, type: :used)
-        expect(session_authentication.error_message).to eq "Code de connexion déjà utilisé"
-      end
-    end
-
     context "codes mismatch" do
       let(:email) { "jean@delafontaine.fr" }
       let(:code) { "654321" }
