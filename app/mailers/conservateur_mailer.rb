@@ -25,6 +25,6 @@ class ConservateurMailer < ApplicationMailer
     @communes_with_dossiers = @departement.commune_dossiers_transmis(date_range)
     mail \
       to: email_address_with_name(@conservateur.email, @conservateur.full_name),
-      subject: "Récapitlatif d'activité du #{@human_date_start} au #{@human_date_end} #{@departement.dans_nom}"
+      subject: "Récapitulatif d'activité du #{@human_date_start} au #{@human_date_end} #{@departement.dans_nom}"
   end
 end

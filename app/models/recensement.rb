@@ -56,7 +56,7 @@ class Recensement < ApplicationRecord
   SECURISATIONS = [SECURISATION_CORRECTE, SECURISATION_MAUVAISE].freeze
 
   validates :objet, presence: true, unless: -> { deleted? } # it is important not to use objet_id here
-  validates :objet_id, uniqueness: { scope: :dossier_id }
+  validates :objet_id, uniqueness: { scope: :dossier_id }, unless: -> { deleted? }
 
   validates :localisation, presence: true, inclusion: { in: LOCALISATIONS }, if: -> { completed? }
   # À faire évoluer : retirer edifice_nom au profit d'un belongs_to: autre_edifice

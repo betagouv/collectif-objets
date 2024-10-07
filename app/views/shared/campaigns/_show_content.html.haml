@@ -73,7 +73,7 @@
 %h2 Communes destinataires
 - if campaign.communes.any?
   %p
-    La campagne sera envoyée à
+    La campagne concerne
     %b= Commune.human_attribute_name(:count, count: campaign.recipients.count)
     parmi les
     %b= Commune.human_attribute_name(:count, count: campaign.departement.communes_count)
@@ -82,7 +82,7 @@
   - if (campaign.draft? || campaign.planned?) && campaign.communes_en_cours.load.any?
     = dsfr_alert(type: :warning, title: "Communes en cours d'examen", classes: "fr-mb-2w") do
       %p
-        Attention, vous vous apprêtez à recontacter une ou plusieurs communes dont l’examen n'est pas terminé. Nous vous invitons à finaliser l’examen avant de relancer une campagne.
+        Attention, vous vous apprêtez à recontacter une ou plusieurs communes dont l’examen n'est pas terminé. Nous vous invitons à finaliser l'examen avant de relancer une campagne, sans quoi les dossiers non examinés seront perdus.
         %br
         Communes à terminer d’examiner&nbsp;:
         = "#{campaign.communes_en_cours.collect { |commune| link_to(commune.nom, conservateurs_commune_dossier_path(commune)) }.to_sentence.html_safe}."

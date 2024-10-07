@@ -9,13 +9,13 @@ module Admin
         unless %w[90 -90].include?(params[:degrees])
 
       @attachment.rotate!(degrees: params[:degrees].to_i)
-      render partial: "admin/exports/memoires/photo", locals: { photo: @attachment }
+      render partial: "admin/exports/memoire/photo", locals: { photo: @attachment }
     end
 
     def exportable
       @attachment.update!(exportable: params[:exportable] == "true")
 
-      render partial: "admin/exports/memoires/photo", locals: { photo: @attachment }
+      render partial: "admin/exports/memoire/photo", locals: { photo: @attachment }
     end
 
     def destroy

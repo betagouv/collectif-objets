@@ -578,7 +578,7 @@ fr:
       merci: Nous vous remercions pour votre engagement en faveur du patrimoine mobilier protégé.
       contact: Pour contacter les conservateurs de votre département, vous pouvez écrire un message dans l’onglet “Messagerie” depuis votre compte Collectif Objets.
     shared:
-      madame_monsieur_le_maire: "Madame la maire, monsieur le maire,"
+      madame_monsieur_le_maire: "Madame la Maire, Monsieur le Maire,"
       role_elu: Pour lutter contre les vols et les dégradations des objets protégés de votre commune, <b>votre rôle d'élu local est essentiel</b>.
       cta_connect: Accéder à mon compte
       cta_inactive:
@@ -590,7 +590,7 @@ fr:
         one: "%{nom_commune} abrite un objet monument historique."
         other: "%{nom_commune} abrite %{count} objets monuments historiques."
       cliquez: "Il vous suffit de cliquer ici :"
-      politesse: Je vous prie d’agréer, madame la maire, monsieur le maire, l’expression de ma considération distinguée.
+      politesse: Je vous prie d’agréer, Madame la Maire, Monsieur le Maire, l’expression de ma considération distinguée.
     concordataires:
       intro: Nous sommes dans un département concordataire et la propriété de certains objets religieux peut être incorrectement renseignée dans les bases de données du ministère de la Culture. L'objectif premier de ce travail de recensement n'est pas d'établir définitivement la propriété de ces objets mais bien de s'assurer de leur présence et de leur état.
       intro2: Pour sa bonne organisation, nous vous invitons à vous rapprocher des affectataires (par exemple les établissements publics du culte que sont les fabriques, conseils presbytéraux, consistoires protestants ou le consistoire israélite départemental).
