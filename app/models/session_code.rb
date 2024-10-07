@@ -9,7 +9,7 @@ class SessionCode < ApplicationRecord
 
   scope :used, -> { where.not(used_at: nil) }
   scope :unused, -> { where(used_at: nil) }
-  scope :valid, -> { unused.where(created_at: EXPIRE_AFTER.ago..) }
+  scope :valid, -> { where(created_at: EXPIRE_AFTER.ago..) }
   scope :expired, -> { where(created_at: ..EXPIRE_AFTER.ago) }
   scope :outdated, -> { where(created_at: ..1.month.ago) }
 

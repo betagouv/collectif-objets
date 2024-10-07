@@ -9,7 +9,7 @@ class SessionAuthentication
   validates :email, presence: true
   validates :code, presence: true
   validates :user, presence: { message: "Aucun utilisateur trouvé pour cet email" }
-  validate :validate_code_format, :validate_codes_match, :validate_code_not_expired, :validate_code_not_used
+  validate :validate_code_format, :validate_codes_match, :validate_code_not_expired
 
   def initialize(email, code)
     @email = email.to_s.strip
@@ -64,14 +64,6 @@ class SessionAuthentication
       message: "Code de connexion incorrect. " \
                "Vérifiez que vous avez bien recopié le code et qu’il provient bien du dernier mail envoyé."
     )
-  end
-
-  def validate_code_not_used
-    return if errors.any?
-
-    return unless session_code.used?
-
-    errors.add :code, :used, message: "Code de connexion déjà utilisé"
   end
 
   def validate_code_not_expired
