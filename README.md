@@ -557,10 +557,8 @@ style scraper_run fill:#888833
 Les données sur les communes et les emails des mairies proviennent
 de [l’API de service-public.fr](https://api-lannuaire.service-public.fr/explore/dataset/api-lannuaire-administration/api/)
 
-Les données des objets monuments historiques sont celles des bases nationales Palissy, Mérimée et Mémoire.
-Elles sont en grande partie publiées sur [data.culture.gouv.fr](https://data.culture.gouv.fr) et une petite partie est encore scrappée depuis [POP](https://www.pop.culture.gouv.fr/).
-
-Voir plus de détails sur les processus de synchronisation des données dans [doc/synchronisation.md](doc/synchronisation.md)
+Les données des objets monuments historiques sont récupérées depuis les bases nationales Palissy (objets), Mérimée (édifices) et Mémoire (photos).
+Plus d'info sur le processus de synchronisation des données dans [doc/synchronisation.md](doc/synchronisation.md)
 
 
 La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :
