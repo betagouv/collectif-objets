@@ -15,6 +15,13 @@ module Admin
       @messages = Message.where(commune: @commune).order(created_at: :asc)
     end
 
+    def session_code
+      @commune = Commune.find(params[:id])
+      user = @commune.users.first
+      @session_code = user.session_code || user.create_session_code
+      redirect_to [:admin, @commune]
+    end
+
     private
 
     def active_nav_links = %w[Communes]
