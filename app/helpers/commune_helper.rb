@@ -34,7 +34,7 @@ module CommuneHelper
   end
 
   def commune_statut_global_badge(commune, **options)
-    colors = ["", "", "success", "blue-ecume", "blue-ecume", "success"]
+    colors = ["", "", "green-emeraude", "blue-ecume", "blue-ecume", "success"]
     content_tag(
       "p",
       commune.statut_global_texte,
