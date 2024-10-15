@@ -144,7 +144,9 @@ Rails.application.routes.draw do
   ## -----
 
   namespace :admin do
-    resources :communes, only: %i[index show]
+    resources :communes, only: %i[index show] do
+      post :session_code, on: :member
+    end
     resources :conservateurs, except: [:destroy] do
       get :impersonate
       collection do

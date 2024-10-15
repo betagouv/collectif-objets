@@ -30,6 +30,17 @@
       - if user || @commune.departement.conservateurs.load.any?
         .co-flex.co-flex--wrap.co-flex--gap-05rem
           - if user
+            - if session_code = user.session_code
+              = link_to "Code de connexion #{session_code.code}",
+                new_user_session_path(email: user.email, code: session_code.code),
+                id: dom_id(@commune, :session_code),
+                class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-user-star-line co-width-md-40",
+                title: "Code #{session_code.code}, valable jusqu'à #{l session_code.valid_until, format: :long}"
+            - else
+              = button_to "Générer un code de connexion",
+                session_code_admin_commune_path,
+                id: dom_id(@commune, :session_code),
+                form_class: "co-width-md-40", class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line w-100"
             = link_to "Incarner la commune",
               admin_user_impersonate_path(user),
               class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-warning-line co-width-md-40"

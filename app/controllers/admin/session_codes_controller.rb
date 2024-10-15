@@ -5,6 +5,7 @@ module Admin
     def index
       @total = SessionCode.count
       @pagy, @session_codes = pagy SessionCode.includes(:commune).order(created_at: :desc), limit: 10
+      @search = Commune.ransack(params[:nom])
     end
 
     private
