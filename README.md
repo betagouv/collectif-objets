@@ -356,7 +356,7 @@ Ci-dessous les étapes avec le détail des différents statuts en base de donné
 | 1 | Non recensé  | `inactive`     | _aucun recensement_ <br>ou tous `draft` | _aucun dossier_  |
 | 2 | En cours de recensement        | `started`      | au moins un `completed`  | `construction` |
 | 3 | À examiner         | `completed`    | tous `completed`  | `submitted`|
-| 4 | Réponse automatique   | `completed`    | tous `completed` | `submitted`  et `replied_automatically_at` présent |
+| 4 | Examen optionnel   | `completed`    | tous `completed` | `submitted`  et `replied_automatically_at` présent |
 | 5 | En cours d'examen  | `completed`    | au moins un `completed` et examiné | `submitted` |
 | 6 | Examiné  | `completed`    | tous `completed` et tous examinés  | `accepted` |
 | 7 | Non recensé  | `inactive`    | _aucun recensement_   | ancien dossier `archived`  |
