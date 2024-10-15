@@ -9,7 +9,7 @@ module Bordereau
     def to_a
       [
         palissy_REF,
-        nom,
+        denomination_cell,
         palissy_DPRO, # date de protection
         etat_sanitaire_cell,
         observations,
@@ -26,8 +26,8 @@ module Bordereau
     delegate :palissy_REF, :palissy_DENO, :palissy_SCLE, :palissy_CATE, :palissy_DPRO, :nom, to: :objet
 
     def denomination_cell
-      materiaux = palissy_CATE ? palissy_CATE.split(";").compact_blank.join(", ") : ""
-      [palissy_DENO, palissy_SCLE, materiaux].compact_blank.join("\n")
+      materiaux = palissy_CATE ? palissy_CATE.split(";").compact_blank.join(", ").upcase_first : ""
+      [nom, palissy_SCLE, materiaux].compact_blank.join("\n")
     end
 
     def etat_sanitaire_cell

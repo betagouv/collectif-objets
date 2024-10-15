@@ -161,7 +161,7 @@ module Bordereau
       move_down 20
       headers = [[
         "<b>Référence Palissy</b>",
-        "<b>Dénomination</b>",
+        "<b>Objet</b>",
         "<b>Date de protection</b>",
         "<b>Etat de conservation</b>",
         "<b>Observations</b>",
