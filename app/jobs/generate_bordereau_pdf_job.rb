@@ -10,10 +10,10 @@ class GenerateBordereauPdfJob < ApplicationJob
     # raise unless edifice.objets.classés.count.positive?
     raise unless dossier.accepted?
 
-    prawn_doc = Bordereau::Pdf.new(dossier, edifice).build_prawn_doc
+    pdf = Bordereau::Pdf.new(dossier, edifice)
     edifice.bordereau.attach \
-      io: StringIO.new(prawn_doc.render),
-      filename: "bordereau-#{dossier.commune.to_s.parameterize}-#{edifice.nom.parameterize}.pdf",
-      content_type: "application/pdf"
+      io: pdf.to_io,
+      filename: pdf.filename,
+      content_type: Mime[:pdf]
   end
 end

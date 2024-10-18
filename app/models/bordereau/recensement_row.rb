@@ -9,11 +9,10 @@ module Bordereau
     def to_a
       [
         palissy_REF,
-        nom,
+        denomination_cell,
         palissy_DPRO, # date de protection
         etat_sanitaire_cell,
-        recensement.analyse_notes,
-        observations_proprietaire_cell,
+        observations,
         photo_cell
       ]
     end
@@ -27,8 +26,8 @@ module Bordereau
     delegate :palissy_REF, :palissy_DENO, :palissy_SCLE, :palissy_CATE, :palissy_DPRO, :nom, to: :objet
 
     def denomination_cell
-      materiaux = palissy_CATE ? palissy_CATE.split(";").compact_blank.join(", ") : ""
-      [palissy_DENO, palissy_SCLE, materiaux].compact_blank.join("\n")
+      materiaux = palissy_CATE ? palissy_CATE.split(";").compact_blank.join(", ").upcase_first : ""
+      [nom, palissy_SCLE, materiaux].compact_blank.join("\n")
     end
 
     def etat_sanitaire_cell
@@ -41,6 +40,13 @@ module Bordereau
       else
         etat_sanitaire
       end
+    end
+
+    def observations
+      [
+        "<b>Propriétaire :</b>  #{observations_proprietaire_cell.presence || 'Néant'}",
+        "<b>Conservateur :</b>  #{recensement.analyse_notes.presence || 'Néant'}"
+      ].join("\n")
     end
 
     def observations_proprietaire_cell

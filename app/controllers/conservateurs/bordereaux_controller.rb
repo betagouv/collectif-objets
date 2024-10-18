@@ -3,13 +3,14 @@
 module Conservateurs
   class BordereauxController < BaseController
     before_action :set_commune, :set_dossier
+    skip_after_action :verify_policy_scoped, only: :index
 
-    def new
-      @edifices = @commune.edifices.with_objets_classés_ou_inscrits.ordered_by_nom
+    def index
+      @edifices = @commune.edifices.with_objets_classés_ou_inscrits.ordered_by_nom.includes(bordereau_attachment: :blob)
     end
 
     def create
-      @edifice = Edifice.find(params[:edifice_id])
+      @edifice = Edifice.find(params[:edifice])
       raise unless @edifice.commune == @dossier.commune
 
       @edifice.bordereau&.purge
@@ -19,7 +20,7 @@ module Conservateurs
 
       respond_to do |format|
         format.html do
-          redirect_to new_conservateurs_commune_bordereau_path(@commune),
+          redirect_to conservateurs_commune_bordereaux_path(@commune),
                       notice: "Le bordereau est en cours de génération …"
         end
         format.turbo_stream
