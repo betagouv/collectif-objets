@@ -30,7 +30,7 @@ module Communes
       if @wizard.update(params_wizard)
         redirect_to @wizard.after_success_path
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 
@@ -40,7 +40,7 @@ module Communes
           commune_objet_path(@recensement.commune, @recensement.objet),
           success: "Recensement supprimé"
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

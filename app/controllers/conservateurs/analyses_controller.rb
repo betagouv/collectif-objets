@@ -10,7 +10,7 @@ module Conservateurs
       if @recensement.update(analyse_recensement_params)
         redirect_to conservateurs_commune_path(@objet.commune, analyse_saved: true)
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

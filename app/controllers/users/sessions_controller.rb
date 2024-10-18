@@ -13,7 +13,7 @@ module Users
       success = @session_authentication.authenticate { sign_in(_1) }
       unless success
         @error = @session_authentication.error_message
-        return render(:new, status: :unprocessable_entity)
+        return render(:new, status: :unprocessable_content)
       end
 
       redirect_to after_sign_in_path_for(@session_authentication.user), notice: "Vous êtes maintenant connecté(e)"

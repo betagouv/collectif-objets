@@ -13,7 +13,7 @@ module CampaignRecipientsControllerConcern
       redirect_to send("#{routes_prefix}_campaign_recipient_path", @recipient.campaign, @recipient),
                   notice: "Destinataire mis à jour"
     else
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 

@@ -14,7 +14,7 @@ module Communes
       if @dossier_completion.create!(**dossier_completion_params)
         redirect_to commune_objets_path(@commune), notice: "Le recensement de votre commune est terminé !"
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       end
     end
 

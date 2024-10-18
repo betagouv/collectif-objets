@@ -24,7 +24,7 @@ module Admin
       if @conservateur.save
         redirect_to edit_admin_conservateur_path(@conservateur), notice: "Conservateur créé !"
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       end
     end
 
@@ -33,7 +33,7 @@ module Admin
       if @conservateur.update(conservateur_params)
         redirect_to edit_admin_conservateur_path(@conservateur), notice: "Conservateur modifié !"
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

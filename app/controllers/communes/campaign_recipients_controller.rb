@@ -8,7 +8,7 @@ module Communes
       if @recipient.update(recipient_params)
         redirect_to edit_user_registration_path, notice: "Vos préférences de communication ont été mises à jour"
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

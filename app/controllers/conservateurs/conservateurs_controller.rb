@@ -7,7 +7,7 @@ module Conservateurs
       if current_conservateur.update(conservateur_params)
         redirect_to edit_conservateur_registration_path, notice: success_notice
       else
-        render "users/registrations/edit", status: :unprocessable_entity
+        render "users/registrations/edit", status: :unprocessable_content
       end
     end
 

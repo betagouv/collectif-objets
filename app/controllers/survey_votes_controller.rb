@@ -17,7 +17,7 @@ class SurveyVotesController < ApplicationController
       redirect_to @commune, notice: "Merci pour votre réponse !"
     else
       @commune = @survey_vote.commune
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
