@@ -35,6 +35,6 @@ module MessagesControllerConcern
   def render_index_after_create_error
     set_messages
     @new_message = @message
-    render :index, status: :unprocessable_entity
+    render :index, status: :unprocessable_content
   end
 end

@@ -190,7 +190,7 @@ RSpec.describe Communes::RecensementsController, type: :request do
         let(:next_step_number) { 5 }
         it "affiche un message d'erreur" do
           perform_request
-          expect(response).to have_http_status :unprocessable_entity
+          expect(response).to have_http_status :unprocessable_content
         end
       end
     end
@@ -240,7 +240,7 @@ RSpec.describe Communes::RecensementsController, type: :request do
           recensement.update_columns(status: :completed, autre_commune_code_insee: nil,
                                      localisation: Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE)
           perform_request
-          expect(response).to have_http_status :unprocessable_entity
+          expect(response).to have_http_status :unprocessable_content
         end
       end
     end

@@ -7,7 +7,7 @@ module Admin
       if comment.save
         redirect_to [:admin, comment.resource], notice: "commentaire créé !"
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
       end
     end
 

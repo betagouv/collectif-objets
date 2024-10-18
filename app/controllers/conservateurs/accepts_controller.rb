@@ -11,7 +11,7 @@ module Conservateurs
         UserMailer.with(dossier: @dossier).dossier_accepted_email.deliver_now
         redirect_to conservateurs_commune_path(@commune), notice: "L'examen a été envoyé à la commune"
       else
-        render "conservateurs/accepts/new", status: :unprocessable_entity
+        render "conservateurs/accepts/new", status: :unprocessable_content
       end
     end
 
