@@ -105,8 +105,8 @@ class Commune < ApplicationRecord
   ORDRE_NON_RECENSÉ = 0
   STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de recensement"
   ORDRE_EN_COURS_DE_RECENSEMENT = 1
-  STATUT_GLOBAL_REPONSE_AUTOMATIQUE = "Réponse automatique"
-  ORDRE_REPONSE_AUTOMATIQUE = 2
+  STATUT_GLOBAL_EXAMEN_OPTIONNEL = "Examen optionnel"
+  ORDRE_EXAMEN_OPTIONNEL = 2
   STATUT_GLOBAL_A_EXAMINER = "À examiner"
   ORDRE_A_EXAMINER = 3
   STATUT_GLOBAL_EN_COURS_D_EXAMEN = "En cours d'examen"
@@ -117,7 +117,7 @@ class Commune < ApplicationRecord
   STATUT_GLOBAUX = [
     STATUT_GLOBAL_NON_RECENSÉ,
     STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT,
-    STATUT_GLOBAL_REPONSE_AUTOMATIQUE,
+    STATUT_GLOBAL_EXAMEN_OPTIONNEL,
     STATUT_GLOBAL_A_EXAMINER,
     STATUT_GLOBAL_EN_COURS_D_EXAMEN,
     STATUT_GLOBAL_EXAMINÉ
@@ -139,7 +139,7 @@ class Commune < ApplicationRecord
     elsif dossier&.accepted?
       ORDRE_EXAMINÉ
     elsif dossier&.replied_automatically?
-      ORDRE_REPONSE_AUTOMATIQUE
+      ORDRE_EXAMEN_OPTIONNEL
     else # dossier.submitted?
       recensements_analysed_count = recensements.where.not(analysed_at: nil).count
       if recensements_analysed_count.zero?

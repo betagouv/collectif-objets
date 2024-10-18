@@ -65,7 +65,7 @@ module Conservateurs
       elsif recensement&.prioritaire?
         badge_struct.new "blue-ecume", "À examiner"
       else
-        badge_struct.new "success", "Examen optionnel"
+        badge_struct.new "green-emeraude", "Examen optionnel"
       end
     end
 

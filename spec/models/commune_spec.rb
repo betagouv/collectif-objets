@@ -193,8 +193,8 @@ RSpec.describe Commune, type: :model do
           before { commune.dossier.update(replied_automatically_at: Time.zone.now) }
 
           it "a un statut global sur le recensement et l'examen à Réponse automatique" do
-            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
-            expect(Commune.first.statut_global).to eq Commune::ORDRE_REPONSE_AUTOMATIQUE
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMEN_OPTIONNEL
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMEN_OPTIONNEL
           end
 
           it "passe en Examiné si le conservateur décide de faire l'examen tout de même" do
