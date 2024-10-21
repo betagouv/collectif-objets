@@ -23,4 +23,4 @@
                 - departement.pop_exports_memoire.each do |pop_export|
                   .fr-mb-2w= link_to pop_export, admin_exports_memoire_path(pop_export), class: "fr-link"
               %td
-                = link_to "Nouvel export Mémoire…", new_admin_exports_memoire_path(departement_code: departement.code), class: "fr-link", title: "Export Mémoire #{departement}"
+                = link_to "Nouvel export Mémoire…", new_admin_exports_memoire_path(departement_code: departement.code), class: "fr-link", title: "Nouvel export Mémoire #{departement}"
