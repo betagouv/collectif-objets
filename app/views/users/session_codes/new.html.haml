@@ -59,7 +59,9 @@
               = f.hidden_field :email, value: @commune_user.email
               = dsfr_alert type: :info, size: :sm do
                 Le code de connexion sera envoyé par email à
-                %b= @commune_user.email
+                %strong #{@commune_user.email}.
+                %br
+                Pensez à vérifier dans le dossier spams / courriers indésirables de la boite mail concernée si vous ne recevez pas le code.
               .fr-btns-group.fr-mt-4w
                 = f.submit "Recevoir un code de connexion", name: nil
                 = link_to "Saisir mon code de connexion",
