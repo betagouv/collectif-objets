@@ -2,7 +2,7 @@
   .title
     = title
 
-  - if count > 0
+  - if count.positive?
     .first
       = link_to photos[0].lightbox_path, class: "photo cursor--zoom-in" do
         = vite_or_raw_image_tag photos[0].thumb_url, alt: photos[0].alt, class: "fr-responsive-img"
