@@ -18,7 +18,7 @@
           - @departements.each do |departement|
             %tr
               %td= departement
-              %td= departement.recensements.to_a.reject(&:pop_export_memoire_id).sum { _1.photos.select(&:exportable?).length }
+              %td= departement.photos_count
               %td 
                 - departement.pop_exports_memoire.each do |pop_export|
                   .fr-mb-2w= link_to pop_export, admin_exports_memoire_path(pop_export), class: "fr-link"
