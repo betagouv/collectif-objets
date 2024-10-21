@@ -18,8 +18,8 @@
           - @departements.each do |departement|
             %tr
               %td= departement
-              %td= departement.photos_count
-              %td 
+              %td.text-end= departement.photos_count
+              %td
                 - departement.pop_exports_memoire.each do |pop_export|
                   .fr-mb-2w= link_to pop_export, admin_exports_memoire_path(pop_export), class: "fr-link"
               %td
