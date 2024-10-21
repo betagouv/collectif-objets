@@ -192,9 +192,9 @@ RSpec.describe Commune, type: :model do
         context "lorsque la commune a reçu une réponse automatique" do
           before { commune.dossier.update(replied_automatically_at: Time.zone.now) }
 
-          it "a un statut global sur le recensement et l'examen à Réponse automatique" do
-            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMEN_OPTIONNEL
-            expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMEN_OPTIONNEL
+          it "a un statut global sur le recensement et l'examen à À examiner" do
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
           end
 
           it "passe en Examiné si le conservateur décide de faire l'examen tout de même" do
@@ -211,9 +211,9 @@ RSpec.describe Commune, type: :model do
                    etat_sanitaire: Recensement::ETAT_PERIL, dossier: commune.dossier, objet:, conservateur:)
           end
 
-          it "a un statut global sur le recensement et l'examen à À examiner" do
-            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
-            expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+          it "a un statut global sur le recensement et l'examen à Examen prioritaire" do
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMEN_PRIORITAIRE
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMEN_PRIORITAIRE
           end
 
           it "a un statut global sur le recensement et l'examen à En cours d'examen" do

@@ -105,10 +105,10 @@ class Commune < ApplicationRecord
   ORDRE_NON_RECENSÉ = 0
   STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT = "En cours de recensement"
   ORDRE_EN_COURS_DE_RECENSEMENT = 1
-  STATUT_GLOBAL_EXAMEN_OPTIONNEL = "Examen optionnel"
-  ORDRE_EXAMEN_OPTIONNEL = 2
   STATUT_GLOBAL_A_EXAMINER = "À examiner"
-  ORDRE_A_EXAMINER = 3
+  ORDRE_A_EXAMINER = 2
+  STATUT_GLOBAL_EXAMEN_PRIORITAIRE = "À examiner en priorité"
+  ORDRE_EXAMEN_PRIORITAIRE = 3
   STATUT_GLOBAL_EN_COURS_D_EXAMEN = "En cours d'examen"
   ORDRE_EN_COURS_D_EXAMEN = 4
   STATUT_GLOBAL_EXAMINÉ = "Examiné"
@@ -117,8 +117,8 @@ class Commune < ApplicationRecord
   STATUT_GLOBAUX = [
     STATUT_GLOBAL_NON_RECENSÉ,
     STATUT_GLOBAL_EN_COURS_DE_RECENSEMENT,
-    STATUT_GLOBAL_EXAMEN_OPTIONNEL,
     STATUT_GLOBAL_A_EXAMINER,
+    STATUT_GLOBAL_EXAMEN_PRIORITAIRE,
     STATUT_GLOBAL_EN_COURS_D_EXAMEN,
     STATUT_GLOBAL_EXAMINÉ
   ].freeze
@@ -139,11 +139,11 @@ class Commune < ApplicationRecord
     elsif dossier&.accepted?
       ORDRE_EXAMINÉ
     elsif dossier&.replied_automatically?
-      ORDRE_EXAMEN_OPTIONNEL
+      ORDRE_A_EXAMINER
     else # dossier.submitted?
       recensements_analysed_count = recensements.where.not(analysed_at: nil).count
       if recensements_analysed_count.zero?
-        ORDRE_A_EXAMINER
+        ORDRE_EXAMEN_PRIORITAIRE
       else # recensements_analysed_count > 0
         ORDRE_EN_COURS_D_EXAMEN
       end
@@ -196,7 +196,7 @@ class Commune < ApplicationRecord
 
   def shall_receive_email_objets_verts?(date)
     users.any? &&
-      statut_global == Commune::ORDRE_A_EXAMINER &&
+      statut_global == Commune::ORDRE_EXAMEN_PRIORITAIRE &&
       !dossier.a_des_objets_prioritaires? &&
       dossier.replied_automatically_at.nil? &&
       dossier.submitted_at < date - 1.week &&
