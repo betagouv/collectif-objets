@@ -110,18 +110,18 @@ RSpec.describe Commune, type: :model do
         commune.update(status: "completed")
       end
 
-      context "dossier soumis il y a moins d'une semaine" do
+      context "mais le dossier a été soumis il y a moins d'une semaine" do
         let(:date) { Date.new(2023, 11, 10) }
         before { dossier.update(submitted_at: Date.new(2023, 11, 9)) }
         it { is_expected.to be_falsey }
       end
 
-      context "on est le weekend" do
+      context "mais on est le weekend" do
         let(:date) { Date.new(2023, 11, 13) }
         it { is_expected.to be_falsey }
       end
 
-      context "le recensement est terminé il y a plus d'une semaine et la date d'envoi est hors weekend" do
+      context "il y a plus d'une semaine et la date d'envoi est hors weekend" do
         let(:date) { Date.new(2023, 11, 13) }
         before { dossier.update(submitted_at: Date.new(2023, 11, 3)) }
 
