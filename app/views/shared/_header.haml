@@ -38,7 +38,7 @@
       - dropdown.with_link title: "Statistiques", path: stats_path
 
   - elsif current_admin_user
-    - c.with_tool_link title: "#{current_admin_user} (Admin)", path: "#", classes: ["fr-icon-admin-line"]
+    - c.with_tool_link title: "#{current_admin_user} (Admin)", path: admin_path, classes: ["fr-icon-admin-line"]
     - c.with_tool_link title: "Déconnexion", path: destroy_admin_user_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": "DELETE" }
     - c.with_direct_link_simple title: "Administration", path: admin_path, active: active_nav_link?("Administration")
     - c.with_direct_link_simple title: "Communes", path: admin_communes_path, active: active_nav_link?("Communes")
