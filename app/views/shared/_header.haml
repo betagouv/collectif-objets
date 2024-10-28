@@ -5,6 +5,7 @@
 
   - if current_conservateur
     - c.with_tool_link title: current_conservateur, path: edit_conservateur_registration_path, classes: ["fr-icon-settings-5-line"]
+    - c.with_tool_link title: "Activité des communes", path: activite_conservateurs_departements_path, classes: ["fr-icon-notification-3-line"]
     - c.with_tool_link title: "Déconnexion", path: destroy_conservateur_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": "DELETE" }
 
     - if current_conservateur.departements.count > 2
