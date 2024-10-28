@@ -30,7 +30,7 @@ RUN npm install
 COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
 COPY --chown="${UID}":"${UID}" --parents=true config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
 
-RUN bundle exec vite build
+# RUN bundle exec vite build
 
 CMD ["bash"]
 
