@@ -8,11 +8,14 @@ module Admin
 
       def index
         @departements = Departement
+          .select("code", "nom", "count(photos_attachments.id) AS photos_count")
           .order(:code)
-          .includes(:dossiers, :pop_exports_memoire)
+          .includes(:pop_exports_memoire)
+          .joins(:photos_attachments)
           .where.not(dossiers: { accepted_at: nil })
-          .where(recensements: Recensement.absent_or_recensable)
-          .includes(recensements: %i[photos_attachments objet])
+          .where(recensements: Recensement.recensable.not_exported_yet)
+          .where(photos_attachments: { exportable: true })
+          .group(:code, :nom)
       end
 
       def show
