@@ -19,8 +19,10 @@ run("rails runner scripts/create_postgres_sequences_memoire_photos_numbers.rb")
 puts "restoring data to postgres db..."
 run("pg_restore --data-only --no-owner --no-privileges --no-comments --dbname=#{db_url} #{path}
 ")
-puts "done"
+puts "db restoration done"
 
 Conservateur.create!(email: "conservateur@collectif.local", password: "123456789", departements: Departement.where(code: %w[06 09 12 19 26 51 52 86])) unless Conservateur.where(email: "conservateur@collectif.local").any?
+puts "Dev convervateur account created => conservateur@collectif.local mdp 123456789"
 
 AdminUser.create!(email: "admin@collectif.local", password: "123456", first_name: "Test", last_name: "Admin")
+puts "Dev admin account created => admin@collectif.local mdp 123456"
