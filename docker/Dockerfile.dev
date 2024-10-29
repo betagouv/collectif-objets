@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1.7-labs
 FROM ruby:3.3-slim
 
-ARG UID="11112"
+# use same UID as distroless nonroot for simplicity
+ARG UID="65532"
 
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
@@ -22,7 +23,13 @@ RUN bundle install && npm install
 
 # copy only necessary application files
 COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown="${UID}":"${UID}" --parents=true config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true vite.config.ts config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
+
+# copy design system from node libs to public dir (can't be handled by symbolic links in k8s)
+RUN cp -R node_modules/@gouvfr/dsfr/dist/fonts public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/icons public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/dsfr/utility 
 
 EXPOSE 3000
 

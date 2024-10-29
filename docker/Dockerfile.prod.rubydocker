@@ -3,7 +3,8 @@
 # Ruby gem install stage needs build-essential, postgres libs and libvips for images
 FROM ruby:3.3-slim AS ruby-builder
 
-ARG UID="11112"
+# use same UID as distroless nonroot for simplicity
+ARG UID="65532"
 
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
@@ -29,7 +30,8 @@ CMD ["bash"]
 # Final production image stage
 FROM ruby:3.3-slim AS production
 
-ARG UID="11112"
+# use same UID as distroless nonroot for simplicity
+ARG UID="65532"
 
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \

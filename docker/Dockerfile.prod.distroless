@@ -6,7 +6,8 @@
 
 FROM ruby:3.3-slim AS ruby-builder
 
-ARG UID="11112"
+# use same UID as distroless nonroot for simplicity
+ARG UID="65532"
 
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
@@ -28,9 +29,13 @@ COPY --chown="${UID}":"${UID}" package.json package-lock.json /collectif-objets/
 RUN npm install
 
 COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown="${UID}":"${UID}" --parents=true config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true vite.config.ts config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
 
-# RUN bundle exec vite build
+# copy design system from node libs to public dir (can't be handled by symbolic links in k8s)
+RUN cp -R node_modules/@gouvfr/dsfr/dist/fonts public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/icons public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/dsfr/utility 
 
 CMD ["bash"]
 
@@ -114,10 +119,11 @@ WORKDIR /collectif-objets
 COPY --chown=nonroot:nonroot Gemfile Gemfile.lock /collectif-objets/
 COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/.bundle /collectif-objets/.bundle
 COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/node_modules /collectif-objets/node_modules
+COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/public /collectif-objets/public
 
 # Copying application files from dev context
-COPY --chown=nonroot --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown=nonroot --parents=true config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown=nonroot --parents=true app bin cms config contenus db lib scripts /collectif-objets/
+COPY --chown=nonroot --parents=true vite.config.ts config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
 
 EXPOSE 3000
 
