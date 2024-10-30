@@ -6,6 +6,9 @@ docker-compose.yml
 tmp/**
 log/**
 
+public/vite-dev
+public/vite-test
+
 # fix docker build error involving those git links by ignoring them
 /public/dsfr/dsfr.min.css
 /public/dsfr/fonts

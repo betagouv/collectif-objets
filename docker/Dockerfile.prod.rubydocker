@@ -6,6 +6,9 @@ FROM ruby:3.3-slim AS ruby-builder
 # use same UID as distroless nonroot for simplicity
 ARG UID="65532"
 
+# Important to set this before bundle install
+ENV RAILS_ENV=production
+
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
@@ -51,9 +54,12 @@ COPY --chown="${UID}":"${UID}" --from=ruby-builder /collectif-objets/.bundle /co
 COPY --chown="${UID}":"${UID}" --from=ruby-builder /collectif-objets/node_modules /collectif-objets/node_modules
 
 COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown="${UID}":"${UID}" --parents=true config.ru spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true config.ru spec storage vendor prawn_assets /collectif-objets/
 
 EXPOSE 3000
+
+# Generates /public/vite folder when env is production
+RUN bundle exec rails assets:precompile
 
 CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
 

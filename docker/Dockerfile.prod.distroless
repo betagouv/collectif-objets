@@ -9,6 +9,9 @@ FROM ruby:3.3-slim AS ruby-builder
 # use same UID as distroless nonroot for simplicity
 ARG UID="65532"
 
+# Important to set this before bundle install
+ENV RAILS_ENV=production
+
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
@@ -29,13 +32,16 @@ COPY --chown="${UID}":"${UID}" package.json package-lock.json /collectif-objets/
 RUN npm install
 
 COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown="${UID}":"${UID}" --parents=true vite.config.ts config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true vite.config.ts config.ru Rakefile spec storage vendor prawn_assets /collectif-objets/
 
 # copy design system from node libs to public dir (can't be handled by symbolic links in k8s)
 RUN cp -R node_modules/@gouvfr/dsfr/dist/fonts public/dsfr/ \
     && cp -R node_modules/@gouvfr/dsfr/dist/icons public/dsfr/ \
     && cp -R node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/dsfr/ \
     && cp -R node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/dsfr/utility 
+
+# Generates /public/vite folder when env is production
+RUN bundle exec rails assets:precompile
 
 CMD ["bash"]
 
@@ -115,7 +121,7 @@ ENV PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
 USER nonroot
 WORKDIR /collectif-objets
 
-# Copying application libraries from builder
+# Copying application libraries and files from builder
 COPY --chown=nonroot:nonroot Gemfile Gemfile.lock /collectif-objets/
 COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/.bundle /collectif-objets/.bundle
 COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/node_modules /collectif-objets/node_modules
@@ -123,7 +129,7 @@ COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/public /colle
 
 # Copying application files from dev context
 COPY --chown=nonroot --parents=true app bin cms config contenus db lib scripts /collectif-objets/
-COPY --chown=nonroot --parents=true vite.config.ts config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown=nonroot --parents=true vite.config.ts config.ru Rakefile spec storage vendor prawn_assets /collectif-objets/
 
 EXPOSE 3000
 

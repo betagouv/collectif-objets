@@ -4,6 +4,9 @@ FROM ruby:3.3-slim
 # use same UID as distroless nonroot for simplicity
 ARG UID="65532"
 
+# Important to set this before bundle install
+ENV RAILS_ENV=production
+
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
@@ -23,7 +26,7 @@ RUN bundle install && npm install
 
 # copy only necessary application files
 COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
-COPY --chown="${UID}":"${UID}" --parents=true vite.config.ts config.ru Rakefile spec storage tmp vendor prawn_assets /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true vite.config.ts config.ru Rakefile spec storage vendor prawn_assets /collectif-objets/
 
 # copy design system from node libs to public dir (can't be handled by symbolic links in k8s)
 RUN cp -R node_modules/@gouvfr/dsfr/dist/fonts public/dsfr/ \
@@ -32,5 +35,8 @@ RUN cp -R node_modules/@gouvfr/dsfr/dist/fonts public/dsfr/ \
     && cp -R node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/dsfr/utility 
 
 EXPOSE 3000
+
+# Generates /public/vite folder when env is production
+RUN bundle exec rails assets:precompile
 
 CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
