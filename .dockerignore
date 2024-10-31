@@ -6,6 +6,8 @@ docker-compose.yml
 tmp/**
 log/**
 
+master.key
+
 public/vite-dev
 public/vite-test
 
