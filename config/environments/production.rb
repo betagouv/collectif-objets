@@ -103,22 +103,30 @@ Rails.application.configure do
     config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
   end
 
+  puts "environment: production"
+  puts "specific environment: #{config.x.environment_specific_name}"
+
   if config.x.environment_specific_name == "production"
     config.active_storage.service = :scaleway
-    config.s3_endpoint = ""
+    # config.s3_endpoint = ""
 
   elsif config.x.environment_specific_name == "mc_stg"
     config.action_mailer.show_previews = true
     # we need to keep scaleway_staging name for db consistency (see storage.yml)
     # even if this points to ovh bucket TODO: replace in DB ?
     config.active_storage.service = :scaleway_staging
-    config.s3_endpoint = ""
+    
+    config.action_mailer.smtp_settings = {
+      address: ENV.fetch("MAILHOG_HOST", '127.0.0.1'),
+      port: 1025
+    }
+    config.action_mailer.raise_delivery_errors = false
+    config.action_mailer.perform_caching = false
 
   else # staging scalingo+scaleway
     config.action_mailer.show_previews = true
     config.active_storage.service = :scaleway_staging
-    config.s3_endpoint = ""
-
+  
   end
 
 end

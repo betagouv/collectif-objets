@@ -4,7 +4,7 @@
     .fr-container--fluid.co-flex.co-flex--space-between.co-flex--align-items-center.co-flex--wrap.co-flex--gap-05rem.fr-mb-1w
       .co-flex--grow
         - if banners.include?(:environment)
-          %div{class: "fr-alert fr-alert--sm fr-alert--#{Rails.configuration.x.environment_specific_name == "staging" ? "warning" : "error"} fr-icon-alarm-warning-line co-white-space-nowrap"}
+          %div{class: "fr-alert fr-alert--sm fr-alert--#{ ["staging","mc_stg"].include?(Rails.configuration.x.environment_specific_name)  ? "warning" : "error"} fr-icon-alarm-warning-line co-white-space-nowrap"}
             .co-environment-banner.co-flex.co-flex--space-between
               Env #{Rails.configuration.x.environment_specific_name}
               - if Rails.env.development?

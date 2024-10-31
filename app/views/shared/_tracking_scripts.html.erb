@@ -1,5 +1,5 @@
 <input id="current-user-email" type="hidden" value="<%= current_user&.email %>">
 
-<% if Rails.env.production? && !ENV["HOST"]&.match(/staging/) %>
+<% if Rails.env.production? && Rails.configuration.x.environment_specific_name == "production" %>
   <%= vite_javascript_tag "matomo_tracking" %>
 <% end %>
