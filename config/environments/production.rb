@@ -92,15 +92,33 @@ Rails.application.configure do
 
   config.force_ssl = true
   config.ssl_options = { hsts: { preload: true } }
-  config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
   config.x.inbound_emails_domain = "reponse.collectifobjets.org"
+  config.sandbox_by_default = true # for the console
 
-  if config.x.environment_specific_name == "staging"
-    config.action_mailer.show_previews = true
-    config.active_storage.service = :scaleway_staging
+  
+  # Configure different variants of production environment (staging, production, mc_stg, mc_prod)
+  if ENV["RAILS_SPECIFIC_ENV"].present?
+    config.x.environment_specific_name =  ENV["RAILS_SPECIFIC_ENV"]
   else
-    config.active_storage.service = :scaleway
+    config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
   end
 
-  config.sandbox_by_default = true # for the console
+  if config.x.environment_specific_name == "production"
+    config.active_storage.service = :scaleway
+    config.s3_endpoint = ""
+
+  elsif config.x.environment_specific_name == "mc_stg"
+    config.action_mailer.show_previews = true
+    # we need to keep scaleway_staging name for db consistency (see storage.yml)
+    # even if this points to ovh bucket TODO: replace in DB ?
+    config.active_storage.service = :scaleway_staging
+    config.s3_endpoint = ""
+
+  else # staging scalingo+scaleway
+    config.action_mailer.show_previews = true
+    config.active_storage.service = :scaleway_staging
+    config.s3_endpoint = ""
+
+  end
+
 end
