@@ -100,7 +100,16 @@ COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libpq.a /usr/lib/x86_64-linux
 COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/pkgconfig/libpq.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libpq.pc
 COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libpq* /usr/lib/x86_64-linux-gnu/
 
-# Copy libvips42 package files
+# Copy libvips42 package files for image conversion
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42    /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libvips.so.42    /usr/lib/x86_64-linux-gnu/libvips.so.42
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-heif.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-heif.so
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-jxl.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-jxl.so
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-magick.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-magick.so
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-openslide.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-openslide.so
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-poppler.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-poppler.so
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42.16.1    /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42.16.1
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libvips.so.42.16.1    /usr/lib/x86_64-linux-gnu/libvips.so.42.16.1
 
 # Define env for ruby and app to work
 # ENV RUBY_DOWNLOAD_SHA256=51aec7ea89b46125a2c9adc6f36766b65023d47952b916b1aed300ddcc042359
