@@ -40,6 +40,21 @@ feature "Admin", js: true do
     it_behaves_like "an accessible page"
   end
 
+  describe "admin_users" do
+    let(:path) { admin_admin_users_path }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "admin_users/new" do
+    let(:path) { new_admin_admin_user_path }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "admin_users/1" do
+    let(:path) { admin_admin_user_path(admin) }
+    it_behaves_like "an accessible page"
+  end
+
   describe "campaigns" do
     let(:path) { admin_campaigns_path }
     it_behaves_like "an accessible page"

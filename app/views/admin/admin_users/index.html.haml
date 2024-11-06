@@ -1,0 +1,27 @@
+- content_for(:head_title) { "Administration - Administrateurs" }
+
+%main#contenu.fr-container.fr-grid-row.fr-pt-2w.fr-pb-4w
+  .fr-col-md-10
+    = render("shared/breadcrumbs", links: [["Administration", admin_path]], current_page_label: "Administrateurs")
+
+    .co-flex.co-flex--space-between
+      %h1
+        Administrateurs
+      %div= link_to "Ajouter un nouvel administrateur", new_admin_admin_user_path, class: "fr-btn"
+
+    .fr-table
+      %table
+        %thead
+          %tr
+            %th Nom complet
+            %th Email
+            %th Date d'ajout
+
+        %tbody
+          - @admin_users.each do |admin_user|
+            %tr
+              %td.co-min-width-200px= link_to admin_user, [:admin, admin_user]
+              %td.co-min-width-200px= admin_user.email
+              %td.co-min-width-200px
+                = l admin_user.created_at, format: :long
+                = "(il y a #{time_ago_in_words admin_user.created_at})"
