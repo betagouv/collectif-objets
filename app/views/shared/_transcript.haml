@@ -1,0 +1,42 @@
+-# locals: (title:)
+- id = "transcript_#{title.object_id}"
+- transcript = capture_haml { yield }
+- return if transcript.blank?
+
+.fr-transcription
+  %button.fr-transcription__btn{
+      "aria-expanded": "false",
+      "aria-controls": "collapse-#{id}"
+    }
+    Transcription
+  .fr-collapse{ id: "collapse-#{id}" }
+    .fr-transcription__footer
+      .fr-transcription__actions-group
+        %button.fr-btn.fr-btn--fullscreen{
+          "aria-controls": "modal-#{id}",
+          "aria-label": "Agrandir la transcription",
+          "data-fr-opened": "false",
+          "data-fr-js-modal-button": "true"
+        }
+          Agrandir
+    %dialog.fr-modal{
+      role: :dialog,
+      id: "modal-#{id}",
+      "aria-labelledby": "modal-#{id}-title"
+    }
+      .fr-container.fr-container--fluid.fr-container-md
+        .fr-grid-row.fr-grid-row--center
+          .fr-col-12.fr-col-md-10.fr-col-lg-8
+            .fr-modal__body
+              .fr-modal__header
+                %button.fr-btn.fr-btn--close{
+                  title: "Fermer",
+                  "aria-controls": "modal-#{id}"
+                }
+                  Fermer
+              .fr-modal__content
+                %h1.fr-modal__title{
+                  id:"modal-#{id}-title"
+                }
+                  = title
+                = transcript
