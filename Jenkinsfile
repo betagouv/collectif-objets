@@ -1,5 +1,12 @@
 pipeline {
-    agent any
+
+    environment {
+        RAILS_ENV = 'test'
+        DATABASE_URL = 'postgres://rails:password@localhost:5432/rails_test'
+        DISABLE_BOOTSNAP = '1'
+    }
+
+    agent { label "dev" }
 
     services {
         postgres {
@@ -15,11 +22,7 @@ pipeline {
         }
     }
 
-    environment {
-        RAILS_ENV = 'test'
-        DATABASE_URL = 'postgres://rails:password@localhost:5432/rails_test'
-        DISABLE_BOOTSNAP = '1'
-    }
+
 
     stages {
         stage('Checkout') {
