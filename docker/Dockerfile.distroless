@@ -12,6 +12,14 @@ ARG UID="65532"
 # Important to set this before bundle install
 ENV RAILS_ENV=production
 
+# Other launch parameters to OVERLOAD at runtime
+ENV RAILS_SPECIFIC_ENV=production
+# ENV DATABASE_URL=postgresql://...
+# ENV RAILS_MASTER_KEY=
+# ENV SENTRY_AUTH_TOKEN=auth_token
+# ENV SMTP_PASSWORD=smtp_password
+# ENV SMTP_USERNAME=smtp_username
+
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
@@ -86,6 +94,18 @@ COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libbrotlidec* /usr/lib/x86_64
 COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libbrotlicommon* /usr/lib/x86_64-linux-gnu/
 COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libnghttp2* /usr/lib/x86_64-linux-gnu/
 COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libffi* /usr/lib/x86_64-linux-gnu/
+
+# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/gio/modules /usr/lib/x86_64-linux-gnu/gio/modules
+# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/glib-2.0/gio-launch-desktop  /usr/lib/x86_64-linux-gnu/glib-2.0/gio-launch-desktop
+# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/glib-2.0/gio-querymodules  /usr/lib/x86_64-linux-gnu/glib-2.0/gio-querymodules
+# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/glib-2.0/glib-compile-schemas  /usr/lib/x86_64-linux-gnu/glib-2.0/glib-compile-schemas
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgio-2.0.so*  /usr/lib/x86_64-linux-gnu/
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libglib-2.0.so*  /usr/lib/x86_64-linux-gnu/
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so*  /usr/lib/x86_64-linux-gnu/
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgobject-2.0.so*  /usr/lib/x86_64-linux-gnu/
+COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgthread-2.0.so*  /usr/lib/x86_64-linux-gnu/
+COPY --from=ruby-builder /usr/share/lintian/overrides/libglib2.0-0  /usr/share/lintian/overrides/libglib2.0-0
+
 COPY --from=ruby-builder /usr/local/lib/ /usr/local/lib
 COPY --from=ruby-builder /usr/local/bin/ /usr/local/bin
 # we need env because MJML binary call #!/usr/bin/env node

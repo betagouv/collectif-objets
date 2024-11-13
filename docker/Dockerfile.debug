@@ -7,6 +7,14 @@ ARG UID="65532"
 # Important to set this before bundle install
 ENV RAILS_ENV=production
 
+# Other launch parameters to OVERLOAD at runtime
+ENV RAILS_SPECIFIC_ENV=production
+# ENV DATABASE_URL=postgresql://...
+# ENV RAILS_MASTER_KEY=
+# ENV SENTRY_AUTH_TOKEN=auth_token
+# ENV SMTP_PASSWORD=smtp_password
+# ENV SMTP_USERNAME=smtp_username
+
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -qq \
