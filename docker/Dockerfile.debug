@@ -13,6 +13,7 @@ RUN apt-get update -qq \
     && apt-get install -y --no-install-recommends \
     build-essential libpq-dev postgresql-client \
     curl libvips42 nodejs npm ncdu \
+    python3-pip neovim \
     && rm -rf /var/lib/apt/lists/*
 
 # create app directory and create custom user with uid > 10000 to run the app in it
