@@ -40,6 +40,11 @@ gem "typhoeus", "~> 1.4"
 gem "tzinfo-data", "~> 1.0", platforms: %i[mingw mswin x64_mingw jruby]
 gem "view_component", "~> 2.83"
 gem "vite_rails", "~> 3.0"
+gem 'yabeda', '~> 0.13.1' 
+gem 'yabeda-prometheus', '~> 0.9.1'
+gem 'yabeda-rails', '~> 0.9.0'
+gem 'yabeda-puma-plugin', '~> 0.7.1'
+gem 'kubernetes-health', '~> 3.14'
 
 group :development, :test do
   gem "debug", ">= 1.0"
