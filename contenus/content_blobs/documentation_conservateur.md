@@ -90,7 +90,119 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 
 Voici également un tutoriel vidéo :
 
-<iframe title="Lancement campagne" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/761cc7e8-80df-4489-be5b-c3f5feb253a0?stop=2m20s" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+<figure role="group" class="fr-content-media">
+  <iframe
+    title="Lancer une campagne de recensement"
+    class="fr-responsive-vid"
+    width="560"
+    src="https://tube.numerique.gouv.fr/videos/embed/761cc7e8-80df-4489-be5b-c3f5feb253a0?stop=2m20s"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+  <figcaption class="fr-content-media__caption">
+    Tutoriel : lancer une campagne de recensement
+  </figcaption>
+  <div class="fr-transcription" id="transcription-761cc7e8">
+    <button
+      class="fr-transcription__btn"
+      aria-expanded="false"
+      aria-controls="fr-transcription-collapse-transcription-761cc7e8"
+      data-fr-js-collapse-button="true"
+    >
+      Transcription
+    </button>
+    <div
+      class="fr-collapse"
+      id="fr-transcription-collapse-transcription-761cc7e8"
+      data-fr-js-collapse="true"
+    >
+      <div class="fr-transcription__footer">
+        <div class="fr-transcription__actions-group">
+          <button
+            class="fr-btn--fullscreen fr-btn"
+            aria-controls="fr-transcription-modal-transcription-761cc7e8"
+            aria-label="Agrandir la transcription"
+            data-fr-opened="false"
+            data-fr-js-modal-button="true"
+          >
+            Agrandir
+          </button>
+        </div>
+      </div>
+      <div
+        id="fr-transcription-modal-transcription-761cc7e8"
+        class="fr-modal"
+        aria-labelledby="fr-transcription-modal-transcription-761cc7e8-title"
+        data-fr-js-modal="true"
+      >
+        <div class="fr-container fr-container--fluid fr-container-md">
+          <div class="fr-grid-row fr-grid-row--center">
+            <div class="fr-col-12 fr-col-md-10 fr-col-lg-8">
+              <div class="fr-modal__body" data-fr-js-modal-body="true">
+                <div class="fr-modal__header">
+                  <button
+                    class="fr-btn--close fr-btn"
+                    aria-controls="fr-transcription-modal-transcription-761cc7e8"
+                    title="Fermer"
+                    data-fr-js-modal-button="true"
+                  >
+                    Fermer
+                  </button>
+                </div>
+                <div class="fr-modal__content">
+                  <h1
+                    id="fr-transcription-modal-transcription-761cc7e8-title"
+                    class="fr-modal__title"
+                  >
+                    Tutoriel : lancer une campagne de recensement
+                  </h1>
+                  <p>Bonjour à tous.</p>
+                  <p>Voici une rapide vidéo de présentation du lancement d'une campagne de recensement des objets protégés d'un département via le service public Collectif Objets.<br>
+                  Une fois connecté à la plateforme, le conservateur qui veut lancer sa campagne de recensement des objets doit se connecter à son compte.<br>
+                  Il sélectionne ensuite son département.<br>
+                  Par exemple, imaginons que je suis un conservateur des Côtes d'Armor.</p>
+                  <p>Ici, il y a des informations affichées sur l'état des recensements des objets dans son département.<br>
+                  Mais puisqu'il n'y a pas encore eu de campagne, les informations sont encore nulles.</p>
+                  <p>Pour lancer une campagne, il va ici rentrer des informations qui apparaîtront dans les emails qui seront envoyés aux communes de son département.</p>
+                  Les emails sont prérédigés, et complétés via ces informations.</p>
+                  <p>Il choisit sa date de lancement, les dates pour les relances par mail des communes qui n'ont pas encore répondu et la date de clôture.</p>
+                  C'est la première étape pour préparer la campagne.</p>
+                  <p>Il doit ensuite choisir les communes qu'il souhaite avoir comme communes destinataires de la campagne dans son département.<br>
+                  Toutes les communes qui abritent des objets protégés sont recensées ici.<br>
+                  Il peut choisir de sélectionner toutes les communes s'il veut toutes les contacter.<br>
+                  Il peut en enlever certaines s'il ne veut pas les inclure dans la campagne.</p>
+                  <p>Il sauvegarde ensuite la liste des destinataires.<br>
+                  Et si les informations lui conviennent, les informations qui seront dans le mail envoyées aux communes, les dates pour la campagne de recensement ainsi que la liste des communes destinataires, il peut planifier sa campagne.<br>
+                  Et ainsi, comme il lui est indiqué, la campagne est prête, elle démarrera le jour qu'il a choisi.</p>
+                  <p>Il peut encore la modifier s'il le souhaite ou laisser comme ça et laisser la campagne démarrer.<br>
+                  Voilà pour la préparation d'une campagne de recensement des objets protégés avec Collectif Objets.</p>
+                  <p>Nous allons maintenant voir comment se déroule le recensement des objets protégés du côté des communes.</p>
+                  <p>Lorsqu'une campagne de recensement est lancée dans un département, les communes concernées par cette campagne vont recevoir un email qui les avertit du lancement de la campagne, qui leur explique en quoi cela consiste.<br>
+                  Elles voient une photo si elles sont disponibles d'un des objets protégés qui est abrité sur leur territoire.<br>
+                  Et elles ont un lien qui leur permet de se connecter directement à leur espace sur la plateforme Collectif Objets.</p>
+                  <p>Sur leur espace, elles voient s'afficher les objets protégés qui sont abrités sur leur territoire.<br>
+                  Ici, pour cette commune, il n'y en a qu'un.</p>
+                  <p>En cliquant sur l'objet, elle a une petite fiche informative et ensuite, elle peut recenser cet objet.</p>
+                  <p>On lui explique la démarche, elle doit se rendre sur place et remplir un formulaire avant d'être en contact avec un conservateur ou une conservatrice de son département.</p>
+                  <ul>
+                    <li>1. Elle répond au formulaire.</li>
+                    <li>2. Elle indique où se trouve l'objet, s'il est bien accessible pour un recensement.</li>
+                    <li>3. Elle est invitée à transmettre des photos des objets.</li>
+                    <li>4. À indiquer l'état et à Valider.</li>
+                    <li>5. Après ce récapitulatif, et une fois qu'elle a recensé tous les objets de son département, elle peut finaliser le recensement et donc transmettre son dossier au conservateur ou à la conservatrice de son département.</li>
+                    <li>6. Elle peut laisser un commentaire pour le conservateur ou la conservatrice.</li>
+                    <li>7. Et ensuite, c'est terminé.</li>
+                  </ul>
+                  <p>Elle peut retrouver les données transmises pour son information et elles seront toujours accessibles sur son espace sur le site Collectif Objets.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
 
 ### Accéder aux dossiers de recensement des communes
 
@@ -138,18 +250,160 @@ Suivez les étapes ou visionnez la vidéo ci-dessous :
 
 ### Vidéo explicative : l'examen d'un dossier de recensement dans Collectif Objets
 
-<iframe title="Examen d'un dossier d'une commune dans Collectif Objets - février 2024" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/eeb840be-5a28-4914-8a63-070b09db3c96?warningTitle=0" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
-
-Déroulé et timing de la vidéo :
-
-* **00:51** Tableau de suivi des communes et statuts des dossiers des communes
-* **02:38** Examen d'un dossier d'une commune
-* **04:50** Examen et traitement des photos provenant des communes
-* **06:08** Corriger le recensement d'une commune
-* **06:34** Transmission des fiches informatives
-* **08:22** Classer une commune comme un déplacement souhaitable ou prioritaire
-* **08:59** Générer un bordereau de récolement
-* **09:25** Retrouver la liste des déplacements envisagés
+<figure role="group" class="fr-content-media">
+  <iframe
+    title="Examiner un dossier"
+    class="fr-responsive-vid"
+    width="560"
+    src="https://tube.numerique.gouv.fr/videos/embed/eeb840be-5a28-4914-8a63-070b09db3c96?warningTitle=0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+  <figcaption class="fr-content-media__caption">
+    Tutoriel : examiner un dossier de recensement
+  </figcaption>
+  <div class="fr-transcription" id="transcription-eeb840be">
+    <button
+      class="fr-transcription__btn"
+      aria-expanded="false"
+      aria-controls="fr-transcription-collapse-transcription-eeb840be"
+      data-fr-js-collapse-button="true"
+    >
+      Transcription
+    </button>
+    <div
+      class="fr-collapse"
+      id="fr-transcription-collapse-transcription-eeb840be"
+      data-fr-js-collapse="true"
+    >
+      <div class="fr-transcription__footer">
+        <div class="fr-transcription__actions-group">
+          <button
+            class="fr-btn--fullscreen fr-btn"
+            aria-controls="fr-transcription-modal-transcription-eeb840be"
+            aria-label="Agrandir la transcription"
+            data-fr-opened="false"
+            data-fr-js-modal-button="true"
+          >
+            Agrandir
+          </button>
+        </div>
+      </div>
+      <div
+        id="fr-transcription-modal-transcription-eeb840be"
+        class="fr-modal"
+        aria-labelledby="fr-transcription-modal-transcription-eeb840be-title"
+        data-fr-js-modal="true"
+      >
+        <div class="fr-container fr-container--fluid fr-container-md">
+          <div class="fr-grid-row fr-grid-row--center">
+            <div class="fr-col-12 fr-col-md-10 fr-col-lg-8">
+              <div class="fr-modal__body" data-fr-js-modal-body="true">
+                <div class="fr-modal__header">
+                  <button
+                    class="fr-btn--close fr-btn"
+                    aria-controls="fr-transcription-modal-transcription-eeb840be"
+                    title="Fermer"
+                    data-fr-js-modal-button="true"
+                  >
+                    Fermer
+                  </button>
+                </div>
+                <div class="fr-modal__content">
+                  <h1
+                    id="fr-transcription-modal-transcription-eeb840be-title"
+                    class="fr-modal__title"
+                  >
+                    Tutoriel : examiner un dossier de recensement
+                  </h1>
+                  <p>Bonjour et bienvenue dans cette petite vidéo explicative de l'examen d'un dossier de recensement d'une commune dans Collectif Objets lorsque l'on est conservateur.
+                    <br />Tout d'abord, il faut bien sûr se connecter à la plateforme avec son adresse mail et ses identifiants.</p>
+                  <p>Ensuite, on choisit le département que l'on gère, aujourd'hui, je vais incarner un conservateur de la Charente.</p>
+                  <p><strong>Tableau de suivi des communes</strong></p>
+                  <p>Lorsqu'on clique sur son département, on arrive sur la page de tableau de bord des conservateurs qui permet de voir l'avancée d'une campagne de recensement, l'avancée des recensements des communes dans un département.<br />Ici, seulement deux communes ont effectué leur recensement dans cette campagne en Charente.<br />Et en dessous, s'affiche un tableau pour consulter l'avancée des communes dans le recensement.
+                    <br />Vous pouvez visualiser toutes les communes du département ou ici, filtrer en fonction des différentes catégories de l'avancée des communes.</p>
+                  <p><strong>Statuts des dossiers</strong></p>
+                  <ul>
+                    <li>En cliquant sur "Non recensé", vous verrez apparaître toutes les communes qui n'ont pas encore effectué de recensement dans le collectif objet.</li>
+                    <li>En sélectionnant "En cours de recensement", vous verrez apparaître les communes qui ont commencé le recensement, mais qui ne l'ont pas terminé.</li>
+                    <li>Dans la catégorie "À examiner", peut-être la plus importante, vous verrez apparaître les communes qui ont recensé et dont les dossiers de recensement contiennent au moins un objet considéré comme prioritaire, c'est-à-dire signalé comme étant en péril ou comme disparu par la commune qui a recensé.</li>
+                    <li>Dans la catégorie "Réponse automatique" apparaîtront les communes qui ont terminé leur recensement et qui n'ont signalé aucun objet en péril ou disparu.
+                      <br />Ces dossiers, qui sont considérés comme non prioritaires se retrouveront ici peu après la fin de campagne.
+                      <br />Vous pouvez bien sûr les consulter, les examiner, nous vous encourageons à le faire, mais ces communes auront déjà reçu un email pour leur dire que leur dossier a bien été reçu, mais qu'il ne semble, à priori, pas être prioritaire.</li>
+                    <li>En cours d'examen, vous retrouverez ici les communes que vous avez commencées en tant que conservateur à consulter, c'est-à-dire que vous avez commencé à traiter le dossier de recensement, mais vous ne l'avez pas encore terminé.</li>
+                    <li>Et, dans la catégorie "Examiné", vous verrez apparaître les communes pour lesquelles vous avez déjà terminé votre examen et vous avez fait un retour à la commune.</li>
+                  </ul>
+                  <p><strong>Examen d'un dossier</strong></p>
+                  <p>Ici, je vais aller examiner le dossier de la commune qui a des objets prioritaires, en l'occurrence un objet prioritaire.
+                    <br />En cliquant sur le nom de la commune, apparaît son dossier de recensement avec ici le commentaire principal général que la commune a laissé au conservateur de son département.<br />Ensuite, vous voyez apparaître les objets.</p>
+                  <p>Les objets pour lesquels vous voyez écrit "À examiner" sont les objets prioritaires, soit signalés comme en péril, soit disparus.
+                    <br />Ceux pour lesquels vous voyez "Examen optionnel" ne semblent pas être des prioritaires selon les données de la commune, mais il est quand même important de les regarder puisque elle peut contenir des erreurs ou des commentaires et des questions des communes qui vous sont adressées.</p>
+                  <ul>
+                    <li>Ici s'affichent, lorsqu'elles sont disponibles, les photos d'archives de l'objet en question dans les bases de la Médiathèque du Patrimoine et de la Photographie. Vous pouvez accéder directement à la fiche Palissy de l'objet.</li>
+                    <li>Ici, vous voyez la localisation de l'objet selon la commune.</li>
+                    <li>Ici, la commune a confirmé que l'objet est bien localisé là où il est censé être d'après les informations issues de la notice Palissy.</li>
+                    <li>Ici, la commune a donné l'état de l'objet selon elle, que vous pouvez modifier si nécessaire.</li>
+                    <li>Est-ce que l'objet est en sécurité se trouve ici.</li>
+                  </ul>
+                  <p>En fonction des réponses, vous pouvez transmettre des fiches informatives à la commune.
+                    <br />Et ici, vous voyez le commentaire de la commune sur cet objet.
+                    <br />Sur la droite, apparaît la galerie des photographies transmises par la commune.
+                    <br />Vous pouvez cliquer pour voir la photo en plus grand, la télécharger, la pivoter, la supprimer ou en ajouter d'autres, mais je reviendrai très bientôt sur cette partie-là.
+                    <br />Vous pouvez ici, si vous constatez que tout va bien, remercier la commune et rapidement clore l'analyse, l'examen, pour cet objet en cliquant sur "Sauvegarder".
+                    <br />Et là, la plateforme retient bien que vous avez traité cet objet.</p>
+                  <p>Il reste un objet à examiner dans le dossier de cette commune et c'est un objet prioritaire.
+                    <br />En cliquant dessus, vous voyez encore une fois ici les informations issues de Palissy pour comparer avec les photos de la commune.</p>
+                  <p><strong>Examen et traitement des photographies provenant des communes</strong></p>
+                  <p>La galerie photo, c'est un sujet important puisque nous souhaitons par la suite reverser les photos des recensements des communes à la Médiathèque du Patrimoine et de la Photographie lorsque les photos ont été consultées, examinées par les conservateurs.
+                    <br />Pour voir la photo de la commune, vous pouvez donc cliquer dessus.
+                    <br />Vous pouvez, si elle est dans le mauvais sens, la faire pivoter, ce qui la conservera par la suite dans le bon sens.
+                    <br />Vous pouvez la télécharger directement dans votre ordinateur.</p>
+                  <p>Si la commune a transmis la photo d'un mauvais objet, nous vous invitons à supprimer cette image afin qu'elle ne soit pas transmise par la suite à la MPP comme étant une photographie de l'objet auquel le dossier est lié.
+                    <br />Si vous avez de votre côté une autre photo de cet objet que vous souhaitez ajouter au dossier, notamment pour qu'elle puisse aller dans les bases nationales par la suite, vous pouvez directement verser une photo depuis votre ordinateur.</p>
+                  <p>Ici, je vais verser une photo de test qui n'a rien à voir, mais vous pouvez enrichir la galerie.
+                    <br />On voit maintenant que le dossier de cet objet contient deux photographies.</p>
+                  <p><strong>Corriger le recensement d'une commune</strong></p>
+                  <p>Si vous estimez que la commune n'a pas eu une estimation très juste de l'état de l'objet, vous pouvez et nous vous invitons à modifier l'état de l'objet indiqué par la commune.
+                    <br />Ici, vous pouvez choisir les options.
+                    <br />Disons que cet objet est seulement peut-être en état moyen et stationnaire.
+                    <br />Vous pouvez cliquer ici et ensuite, valider votre choix avec "Choisir" et là, vous rectifiez l'état transmis par la commune.</p>
+                  <p><strong>Transmission des fiches informatives</strong></p>
+                  <p>Vous pouvez transmettre des fiches informatives sur différents sujets à la commune relativement à chaque objet.
+                    <br />Par exemple, si vous pensez qu'il faut mieux entretenir l'édifice, vous pouvez cliquer ici et elle recevra pour cet objet l'indication qu'il faudrait lire cette fiche sur les mesures d'entretien des édifices.</p>
+                  <p>Même chose pour la sécurisation des objets si cela vous semble nécessaire.</p>
+                  <p><strong>Transmission des fiches informatives</strong></p>
+                  <p>Vous voyez ici apparaître le commentaire de la commune et vous pouvez rédiger un commentaire pour répondre à la commune sur cet objet.
+                    <br />Par exemple, "Cet objet ne mérite pas encore de restauration. Je vous invite à entretenir l'édifice comme indiqué dans la fiche".</p>
+                  <p>Et si vous êtes satisfait de votre retour, vous avez ajouté vos photos éventuellement, vous pouvez sauvegarder ici.
+                    <br />Et voilà, la plateforme vous indique que votre examen a bien été sauvegardé et que tous les objets ainsi que les prioritaires ont été traités.</p>
+                  <p>En revenant à la liste des recensements de la commune, vous pouvez avoir une vision globale.
+                    <br />Les deux objets ont bien été examinés.<br />Vous pouvez maintenant transmettre votre examen à la commune.</p>
+                  <p>Vous avez un dernier récapitulatif où vous voyez les fiches que vous avez éventuellement transmises pour chaque objet, les éventuelles corrections que vous avez apportées et vous pouvez ajouter un commentaire global à destination de la commune qu'elle verra dans le mail qu'elle recevra.
+                    <br />"Merci beaucoup pour votre recensement, pas d'urgence à mon avis".</p>
+                  <p><strong>Classer une commune comme un déplacement souhaitable ou prioritaire</strong></p>
+                  <p>Si vous le souhaitez, vous pouvez indiquer si cette commune vous paraît une visite souhaitable ou peut-être même une visite prioritaire pour les prochains temps.
+                    <br />Cette information ne sera pas transmise à la commune, elle sera juste sauvegardée dans votre espace personnel de conservateur dans Collectif Objets.</p>
+                  <p>En cliquant ici, vous envoyez définitivement l'examen, votre retour à la commune.
+                    <br />Elle va être notifiée par mail et pourra venir le consulter.</p>
+                    <br />L'examen apparaît là, vous pouvez aussi vous-même le retrouver, et l'imprimer si vous le souhaitez.</p>
+                  <p><strong>Générer un bordereau de récolement</strong></p>
+                  <p>Après, avoir examiné le dossier d'une commune, vous pouvez également générer ici un PDF, un bordereau de récolement sous format PDF pré rempli à partir des données qui sont dans Collectif Objets.
+                    <br />Une fois que le PDF a été généré, vous pouvez le télécharger directement sur votre ordinateur en cliquant ici.
+                    <br />Ici, dans "Mes Actions", vous pourrez retrouver la liste de toutes les communes pour lesquelles vous avez indiqué qu'un déplacement était prioritaire ou souhaitable.
+                    <br />Ici, la commune que nous venons de traiter.</p>
+                  <p>Voici pour les principales fonctionnalités pour l'analyse d'un dossier de recensement pour un conservateur.</p>
+                  <p><strong>Retrouver la liste des déplacements envisagés</strong></p>
+                  <p>Si vous revenez au tableau de bord de votre département, désormais, cette commune que vous avez traitée sera dans la catégorie "Examiné".
+                    <br />On voit la nouvelle commune apparaître ici parmi les dossiers traités.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
 
 ### Si la commune n’a pas recensé le bon objet ou si les photos transmises sont problématiques 
 
