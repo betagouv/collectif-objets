@@ -77,7 +77,7 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   #config.log_formatter = ::Logger::Formatter.new
 
-  config.log_formatter = JsonLogger.new
+  config.log_formatter = SimpleJSONLogFormatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
@@ -109,7 +109,7 @@ Rails.application.configure do
   puts "specific environment: #{config.x.environment_specific_name}"
 
   if config.x.environment_specific_name == "production"
-    config.active_storage.service = :scaleway_staging
+    config.active_storage.service = :scaleway
     # config.s3_endpoint = ""
 
   elsif config.x.environment_specific_name == "mc_stg"
@@ -124,9 +124,6 @@ Rails.application.configure do
     }
     config.action_mailer.raise_delivery_errors = false
     config.action_mailer.perform_caching = false
-    config.log_level = :debug
-    config.force_ssl = false
-    config.assume_ssl = false
 
   else # staging scalingo+scaleway
     config.action_mailer.show_previews = true
