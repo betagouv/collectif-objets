@@ -46,18 +46,18 @@ Recenser un ensemble d'objets est une opération rapide et simple qui permet la 
 
 ### Obligations des propriétaires d'objets protégés
 
-Suite à la loi de 1905 concernant la séparation des Églises et de l'État, la commune est généralement propriétaire des objets de l’église communale qui y ont été inventoriés à l'époque. 
+Suite à la loi de 1905 concernant la séparation des Églises et de l'État, la commune est généralement propriétaire des objets de l’église communale qui y ont été inventoriés à l'époque.
 
 Ces objets sont affectés au culte, ce qui signifie que vous ne pouvez pas en disposer pour d’autres usages, sauf après accord de l’affectataire : le curé ou son représentant dans le cas des associations diocésaines. Certains objets sont classés ou inscrits comme "monuments historiques" et intéressent directement ce recensement. \
-En savoir plus sur le [régime de séparation des Églises et de l'État](https://www.vie-publique.fr/eclairage/20205-le-regime-de-separationprincipe-des-relations-etat-et-les-cultes). 
+En savoir plus sur le [régime de séparation des Églises et de l'État](https://www.vie-publique.fr/eclairage/20205-le-regime-de-separationprincipe-des-relations-etat-et-les-cultes).
 
 Attention : même si les demandes de recensement sont adressées aux communes qui abritent les objets, elles n’en sont pas toujours propriétaires. En tant que détentrices des objets, elles sont tout de même tenues de présenter ces objets lors d'un contrôle de l'État.
 
-Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la **gestion quotidienne** de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite à y accorder la plus grande attention. 
+Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la **gestion quotidienne** de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite à y accorder la plus grande attention.
 
-L﻿es propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
+Les propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
 
-Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée avant ces travaux à l’État (c'est-à-dire auprès de la DRAC de votre région) par le propriétaire ou le détenteur. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
+Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée avant ces travaux à l’État (c'est-à-dire auprès de la DRAC de votre région) par le propriétaire ou le détenteur. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien.
 
 Seuls les propriétaires des objets peuvent décider ou non d’une restauration de leur propriété. Les conservateurs sont là pour guider les propriétaires et les accompagner dans la conservation de leurs objets.
 
@@ -93,7 +93,106 @@ Pour effectuer un recensement via Collectif Objets, vous devez d'abord vous conn
 
 La vidéo ci-dessous vous présente les deux méthodes possibles pour vous connecter.
 
-<iframe title="Connexion d'une commune à Collectif Objets" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/f0958173-b19a-48da-aa5a-84ac7a5158aa" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+<figure role="group" class="fr-content-media">
+  <iframe
+    title="Lancer une campagne de recensement"
+    class="fr-responsive-vid"
+    width="560"
+    src="https://tube.numerique.gouv.fr/videos/embed/f0958173-b19a-48da-aa5a-84ac7a5158aa"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+  <figcaption class="fr-content-media__caption">
+    Tutoriel : connexion à Collectif Objets
+  </figcaption>
+  <div class="fr-transcription" id="transcription-f0958173">
+    <button
+      class="fr-transcription__btn"
+      aria-expanded="false"
+      aria-controls="fr-transcription-collapse-transcription-f0958173"
+      data-fr-js-collapse-button="true"
+    >
+      Transcription
+    </button>
+    <div
+      class="fr-collapse"
+      id="fr-transcription-collapse-transcription-f0958173"
+      data-fr-js-collapse="true"
+    >
+      <div class="fr-transcription__footer">
+        <div class="fr-transcription__actions-group">
+          <button
+            class="fr-btn--fullscreen fr-btn"
+            aria-controls="fr-transcription-modal-transcription-f0958173"
+            aria-label="Agrandir la transcription"
+            data-fr-opened="false"
+            data-fr-js-modal-button="true"
+          >
+            Agrandir
+          </button>
+        </div>
+      </div>
+      <div
+        id="fr-transcription-modal-transcription-f0958173"
+        class="fr-modal"
+        aria-labelledby="fr-transcription-modal-transcription-f0958173-title"
+        data-fr-js-modal="true"
+      >
+        <div class="fr-container fr-container--fluid fr-container-md">
+          <div class="fr-grid-row fr-grid-row--center">
+            <div class="fr-col-12 fr-col-md-10 fr-col-lg-8">
+              <div class="fr-modal__body" data-fr-js-modal-body="true">
+                <div class="fr-modal__header">
+                  <button
+                    class="fr-btn--close fr-btn"
+                    aria-controls="fr-transcription-modal-transcription-f0958173"
+                    title="Fermer"
+                    data-fr-js-modal-button="true"
+                  >
+                    Fermer
+                  </button>
+                </div>
+                <div class="fr-modal__content">
+                  <h1
+                    id="fr-transcription-modal-transcription-f0958173-title"
+                    class="fr-modal__title"
+                  >
+                    Tutoriel : connexion à Collectif Objets
+                  </h1>
+                  <p>Bonjour à tous.</p>
+                  <p>Dans cette petite vidéo, nous allons voir comment se connecter à Collectif Objets pour recenser lorsque l'on est une commune.</p>
+                  <p>La première méthode, c'est de partir de l'email de début de campagne de recensement que vous recevez par email sur l'adresse de votre commune telle qu'indiquée dans l'Annuaire du Service Public.</p>
+                  <p>Lorsque vous recevez un email de Collectif Objets pour vous annoncer le début d'une campagne de recensement et vous inviter à recenser, dans cet email, vous avez accès ici en bas à un bouton cliquable pour vous retrouver sur le site de Collectif Objets.</p>
+                  <p>Il faut demander un code de connexion que vous allez recevoir par email.</p>
+                  <p>Ici, j'avais incarné la commune d'Aix, en Corrèze.</p>
+                  <p>La plateforme a reconnu, à partir de l'email que j'ai utilisé, de quelle commune il s'agissait.</p>
+                  <p>Et elle me prévient bien de l'adresse email à laquelle le code de connexion va être envoyé.</p>
+                  <p>Si je clique sur "Recevoir un code de connexion", normalement, dans les prochaines minutes, dans ma boite mail, je vais retrouver un email de la part de la plateforme Collectif Objets, qui me permet de rentrer ce code pour se connecter.</p>
+                  <p>Voilà, je vois que j'ai bien reçu l'email Collectif Objets.</p>
+                  <p>Vous pouvez copier-coller ce code à six chiffres.</p>
+                  <p>Attention, c'est bien six caractères seulement.</p>
+                  <p>Vous pouvez le taper ou le copier-coller, mais il ne faut pas rajouter d'espace.</p>
+                  <p>Vous pouvez l'indiquer ici dans l'espace prévu.</p>
+                  <p>Et en cliquant sur "Connexion", vous êtes désormais connecté à l'espace de votre commune dans la plateforme et vous pouvez  cliquer sur "Recenser les objets" pour voir les objets de votre commune qu'il faut recenser dans Collectif Objets.</p>
+                  <p>Ensuite, vous pouvez cliquer sur l'un des objets et sur Recenser cet objet pour commencer le recensement, arriver sur le questionnaire de recensement.</p>
+                  <p>Attention, il faut bien penser à transmettre des photographies à jour, actuelles, que vous aurez prises des objets protégés de votre commune.</p>
+                  <p>Le deuxième moyen pour se connecter à la plateforme, dans le cas où vous n'auriez pas reçu, ou si vous ne retrouvez plus l'email de lancement de campagne, c'est en vous connectant au site Collectif Objets. Vous pouvez cliquer sur "Connexion commune" en haut, et là, indiquez quelle est votre commune.</p>
+                  <p>Si on reprend le même exemple avec une commune de Corrèze, la commune d'Aix, je peux la retrouver ici dans les listes.</p>
+                  <p>Je choisis mon département, le nom de ma commune.</p>
+                  <p>La plateforme m'indique quelle est l'adresse e-mail contact qu'elle a trouvé en ligne sur l'Annuaire du Service Public.</p>
+                  <p>Je peux à nouveau cliquer sur recevoir un code de connexion.</p>
+                  <p>Et dans ma boîte mail, je recevrai un nouveau code de connexion pour cela.</p>
+                  <p>Voilà, un nouvel email est arrivé avec un nouveau code de connexion pour s'identifier dans la plateforme.</p>
+                  <p>Je viens taper le code ici et je peux me connecter à l'espace de ma commune pour recenser.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
 
 Pour obtenir un code de connexion, vous pouvez :
 
@@ -106,10 +205,10 @@ Pour obtenir un code de connexion, vous pouvez :
    * Cliquez sur « Sélectionnez un département » et choisissez votre département dans la liste. Puis sélectionnez le nom de votre commune dans la liste en dessous. 
    * Cliquez sur « Recevoir un code de connexion » 
    * Consultez la boite mail de votre commune. Vous recevrez un courriel contenant un code de connexion à 6 chiffres. Cliquez sur le code dans le mail, ou copiez-le pour le saisir dans la page de connexion.
-   * Une fois le code saisi dans la page de connexion, vous serez connecté à l'espace de votre commune dans la plateforme. Lisez les instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran. 
+   * Une fois le code saisi dans la page de connexion, vous serez connecté à l'espace de votre commune dans la plateforme. Lisez les instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
    * Vous verrez s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier pour commencer son recensement, après être allé voir cet objet sur son lieu de conservation.
 
-S﻿i vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](https://collectif-objets.beta.gouv.fr/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
+Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](https://collectif-objets.beta.gouv.fr/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
 
 ### Déroulé du recensement
 
@@ -126,7 +225,118 @@ Ensuite, les étapes sont les suivantes :
 
 ### Vidéo expliquant comment effectuer le recensement
 
-<iframe title="Vidéo recensement commune Collectif Objets" width="560" height="315" src="https://tube.numerique.gouv.fr/videos/embed/e14ce7fc-ffb8-491c-ade0-9b7a19b43690" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+<figure role="group" class="fr-content-media">
+  <iframe
+    title="Lancer une campagne de recensement"
+    class="fr-responsive-vid"
+    width="560"
+    src="https://tube.numerique.gouv.fr/videos/embed/e14ce7fc-ffb8-491c-ade0-9b7a19b43690"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+  <figcaption class="fr-content-media__caption">
+    Tutoriel : comment effectuer le recensement
+  </figcaption>
+  <div class="fr-transcription" id="transcription-e14ce7fc">
+    <button
+      class="fr-transcription__btn"
+      aria-expanded="false"
+      aria-controls="fr-transcription-collapse-transcription-e14ce7fc"
+      data-fr-js-collapse-button="true"
+    >
+      Transcription
+    </button>
+    <div
+      class="fr-collapse"
+      id="fr-transcription-collapse-transcription-e14ce7fc"
+      data-fr-js-collapse="true"
+    >
+      <div class="fr-transcription__footer">
+        <div class="fr-transcription__actions-group">
+          <button
+            class="fr-btn--fullscreen fr-btn"
+            aria-controls="fr-transcription-modal-transcription-e14ce7fc"
+            aria-label="Agrandir la transcription"
+            data-fr-opened="false"
+            data-fr-js-modal-button="true"
+          >
+            Agrandir
+          </button>
+        </div>
+      </div>
+      <div
+        id="fr-transcription-modal-transcription-e14ce7fc"
+        class="fr-modal"
+        aria-labelledby="fr-transcription-modal-transcription-e14ce7fc-title"
+        data-fr-js-modal="true"
+      >
+        <div class="fr-container fr-container--fluid fr-container-md">
+          <div class="fr-grid-row fr-grid-row--center">
+            <div class="fr-col-12 fr-col-md-10 fr-col-lg-8">
+              <div class="fr-modal__body" data-fr-js-modal-body="true">
+                <div class="fr-modal__header">
+                  <button
+                    class="fr-btn--close fr-btn"
+                    aria-controls="fr-transcription-modal-transcription-e14ce7fc"
+                    title="Fermer"
+                    data-fr-js-modal-button="true"
+                  >
+                    Fermer
+                  </button>
+                </div>
+                <div class="fr-modal__content">
+                  <h1
+                    id="fr-transcription-modal-transcription-e14ce7fc-title"
+                    class="fr-modal__title"
+                  >
+                    Tutoriel : comment effectuer le recensement
+                  </h1>
+                  <p>Je vais vous montrer aujourd'hui comment se déroule le recensement des objets protégés d'une commune dans Collectif Objets.</p>
+                  <p>Je vais donc incarner une commune des Côtes d'Armor.</p>
+                  <p>Comme vous le savez sûrement, il faut désormais obtenir, demander dans Collectif Objets, un code de connexion pour pouvoir s'identifier bien comme étant une commune dans Collectif Objets.</p>
+                  <p>J'ai donc reçu par email un code de connexion à six chiffres qu'on peut copier-coller et insérer dans la page d'où nous avons fait la demande de code de connexion.</p>
+                  <p>Une fois arrivé ici, on est donc bien connecté.</p>
+                  <p>J'incarne la commune de Gomenet.</p>
+                  <p>Vous voyez ici les instructions importantes pour effectuer le recensement dans Collectif Objets : il faut d'abord être allé voir sur place les objets protégés, les prendre en photo et noter leur état de conservation afin de pouvoir venir rentrer cette information et les photos dans le site internet Collectif Objets et éventuellement échanger avec les conservateurs du département.</p>
+                  <p>Ici, la commune possède deux objets protégés, deux calices.</p>
+                  <p>En cliquant sur l'image de l'objet, on trouve des premières informations complémentaires sur l'objet en question et en cliquant sur "Recenser cet objet", on accède au questionnaire de recensement.</p>
+                  <p>Les photos que vous pouvez déjà voir ici sont celles issues des bases nationales de données sur le patrimoine, mais il est important que vous mettiez également des photos récentes dans Collectif Objets.</p>
+                  <p>Vous devez d'abord confirmer si vous avez bien trouvé l'objet, s'il a été déplacé dans un autre édifice de la commune ou si vous ne savez pas où est l'objet.</p>
+                  <p>Admettons ici que l'objet est bien dans le bon édifice.</p>
+                  <p>On vous invite ensuite à transmettre des photos de l'objet, à moins que l'objet ne soit pas recensable.</p>
+                  <p>Un objet non recensable, c'est par exemple un objet qui est trop difficile d'accès, comme une cloche très en hauteur dans un clocher, ou peut-être un objet qui se trouve dans un endroit fermé auquel vous n'avez pas accès.</p>
+                  <p>Vous pouvez, en cliquant ici, directement choisir des images depuis votre ordinateur à transmettre au conservateur, les photos récentes de l'objet.</p>
+                  <p>Là, j'utilise des images de test aléatoires.</p>
+                  <p>Dans la mesure du possible, transmettez plusieurs photos de l'objet sous plusieurs angles afin que le conservateur puisse se faire une bonne idée de l'état de l'objet.</p>
+                  <p>Ensuite, on vous demande de répondre à des questions rapides sur l'état de l'objet, est-ce qu'il est plutôt en bon état ou dans le cas le plus grave, s'il tombe vraiment en ruine, est-ce qu'il est en péril ?</p>
+                  <p>Disons ici que l'objet est en bon état et qu'il est difficile à voler, parce qu'il se trouverait par exemple dans un meuble fermé à clé, avec la clé détenue par quelqu'un de l'église.</p>
+                  <p>Enfin, vous pouvez laisser un commentaire à votre conservateur au sujet de l'objet, des informations sur son état, sur peut-être des travaux qui ont été faits sur l'objet dernièrement ou éventuellement aussi poser des questions à votre conservateur ou demander des conseils ou un rendez-vous à propos de cet objet.</p>
+                  <p>Vous avez une petite étape de récapitulatif où vous pouvez modifier des informations si jamais vous avez changé d'idée à propos d'une des questions.</p>
+                  <p>Vous pouvez cliquer sur le petit crayon bleu pour modifier une information et sinon, vous pouvez valider des informations pour cet objet.</p>
+                  <p>Comme vous le voyez, il reste encore dans le même édifice des objets à recenser un autre calice.</p>
+                  <p>Je clique dessus, je vais passer plus rapidement.</p>
+                  <p>On pourrait dire cette fois que l'objet se trouve dans un autre édifice, il a été déplacé.</p>
+                  <p>Par exemple, la mairie.</p>
+                  <p>Je transmets une autre image.</p>
+                  <p>Par exemple, disons que cet objet est en très mauvais état et qu'il est accessible au public sans surveillance.</p>
+                  <p>Je pourrais indiquer au conservateur que l'objet est facile à voler.</p>
+                  <p>Encore un commentaire.</p>
+                  <p>Peut-être une question cette fois.</p>
+                  <p>Je valide le recensement.</p>
+                  <p>Voilà, on voit que tous les objets ont bien été recensés.</p>
+                  <p>Si on revient à la liste des objets, on voit bien qu'ils sont tous les deux recensés, il n'y a plus qu'à envoyer le recensement au Conservateur.</p>
+                  <p>Vous avez une dernière étape récapitulative et vous pouvez ajouter un commentaire global sur votre dossier, par exemple.</p>
+                  <p>Une fois que vous avez cliqué sur la finalisation, votre dossier est bien transmis au Conservateur qui pourra le consulter et éventuellement, si besoin, vous faire des retours.</p>
+                  <p>Si vous avez des questions pour votre Conservateur, que vous souhaitez échanger avec lui, vous avez accès ici à une messagerie sur laquelle vous pouvez cliquer et rentrer un message ici, transmettre également des fichiers si besoin pour joindre votre Conservateur et lui poser des questions questions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
 
 ### Ajouter des photos pour le recensement
 
@@ -167,7 +377,7 @@ Si des doutes subsistent sur ce que vous devez faire, vous pouvez poser des ques
 ### Durée d’un recensement
 
 Cela dépend du nombre d’objets à recenser au sein de votre commune et du nombre d’édifices dans lesquels ils se situent. Vous pouvez compter moins de 5 minutes par objet, une fois que vous avez l’objet devant vous.\
-I﻿l faut ajouter à ce temps le temps de trajet pour vous rendre dans chaque édifice et en revenir.
+Il faut ajouter à ce temps le temps de trajet pour vous rendre dans chaque édifice et en revenir.
 
 ### Matériel à prévoir
 
@@ -180,11 +390,11 @@ I﻿l faut ajouter à ce temps le temps de trajet pour vous rendre dans chaque �
 
 Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
 
-L﻿es informations concernant les objets visibles sur Collectif Objets sont issues de la "Plateforme Ouverte du Patrimoine" du ministère de la Culture, et plus précisément de sa base de données "Palissy". 
+Les informations concernant les objets visibles sur Collectif Objets sont issues de la "Plateforme Ouverte du Patrimoine" du ministère de la Culture, et plus précisément de sa base de données "Palissy".
 
 Une petite partie des objets protégés ayant une fiche dans la base Palissy nʼest volontairement pas importée dans Collectif Objets. Il sʼagit des objets propriétés de lʼÉtat, des objets volés, partiellement volés ou disparus, et de certains objets appartenant à un ensemble plus large ("sous-dossiers" dans Palissy).
 
-P﻿our en savoir plus sur les objets protégés au titre des monuments historiques : [Protéger des objets mobiliers au titre des monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques)
+Pour en savoir plus sur les objets protégés au titre des monuments historiques : [Protéger des objets mobiliers au titre des monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques)
 
 ## Difficultés les plus courantes
 
@@ -192,7 +402,7 @@ P﻿our en savoir plus sur les objets protégés au titre des monuments historiq
 
 Si vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a trois explications potentielles :
 
-* v﻿otre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques
+* votre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques
 * il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
 * s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contacté. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou "adresses email de contact") qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).
 
@@ -237,21 +447,110 @@ Les informations que vous rentrez sur la plateforme ne peuvent être transmises 
 
 Lorsque vous avez rempli les questionnaires pour la totalité des objets protégés abrités par votre commune, il vous est proposé de “Finaliser le recensement”.
 
-En cliquant sur ce bouton et en suivant les instructions, votre dossier de recensement (qui comprend les informations et photos que vous avez indiquées pour chaque objet protégé) sera envoyé aux conservateurs de votre département. 
+En cliquant sur ce bouton et en suivant les instructions, votre dossier de recensement (qui comprend les informations et photos que vous avez indiquées pour chaque objet protégé) sera envoyé aux conservateurs de votre département.
 
 Les conservateurs pourront alors effectuer l’examen de votre dossier, et éventuellement vous demander plus d’informations ou des corrections avant de le valider.
 
-Une fois vos informations transmises aux conservateurs, vous n’avez plus rien à faire en ce qui concerne le recensement des objets. C'est désormais aux conservateurs de procéder à l’examen de votre dossier.  
+Une fois vos informations transmises aux conservateurs, vous n’avez plus rien à faire en ce qui concerne le recensement des objets. C'est désormais aux conservateurs de procéder à l’examen de votre dossier.
 
-Ils pourront vous recontacter par la suite à travers la messagerie (vous en serez informé par un email) afin de vous demander des modifications, ou plus de détails, ou vous recommander des actions ou bien pour une prise de rendez-vous pour une visite. 
+Ils pourront vous recontacter par la suite à travers la messagerie (vous en serez informé par un email) afin de vous demander des modifications, ou plus de détails, ou vous recommander des actions ou bien pour une prise de rendez-vous pour une visite.
 
 ### Je souhaite modifier mon recensement ou ajouter de nouvelles photos
 
 Si vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas fini d'examiner votre dossier de recensement.
 
-Voici une vidéo explicative pour vous indiquer la démarche à suivre pour cela :
+Voici une vidéo explicative pour vous indiquer la démarche à suivre :
 
-<iframe title="Modifier son recensement - Collectif Objets" width="100%" height="400" src="https://tube.numerique.gouv.fr/videos/embed/f4f8f996-8219-4d6f-b531-b25f7356e014" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+<figure role="group" class="fr-content-media">
+  <iframe
+    title="Lancer une campagne de recensement"
+    class="fr-responsive-vid"
+    width="560"
+    src="https://tube.numerique.gouv.fr/videos/embed/f4f8f996-8219-4d6f-b531-b25f7356e014"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+  <figcaption class="fr-content-media__caption">
+    Tutoriel : comment modifier un recensement
+  </figcaption>
+  <div class="fr-transcription" id="transcription-f4f8f996">
+    <button
+      class="fr-transcription__btn"
+      aria-expanded="false"
+      aria-controls="fr-transcription-collapse-transcription-f4f8f996"
+      data-fr-js-collapse-button="true"
+    >
+      Transcription
+    </button>
+    <div
+      class="fr-collapse"
+      id="fr-transcription-collapse-transcription-f4f8f996"
+      data-fr-js-collapse="true"
+    >
+      <div class="fr-transcription__footer">
+        <div class="fr-transcription__actions-group">
+          <button
+            class="fr-btn--fullscreen fr-btn"
+            aria-controls="fr-transcription-modal-transcription-f4f8f996"
+            aria-label="Agrandir la transcription"
+            data-fr-opened="false"
+            data-fr-js-modal-button="true"
+          >
+            Agrandir
+          </button>
+        </div>
+      </div>
+      <div
+        id="fr-transcription-modal-transcription-f4f8f996"
+        class="fr-modal"
+        aria-labelledby="fr-transcription-modal-transcription-f4f8f996-title"
+        data-fr-js-modal="true"
+      >
+        <div class="fr-container fr-container--fluid fr-container-md">
+          <div class="fr-grid-row fr-grid-row--center">
+            <div class="fr-col-12 fr-col-md-10 fr-col-lg-8">
+              <div class="fr-modal__body" data-fr-js-modal-body="true">
+                <div class="fr-modal__header">
+                  <button
+                    class="fr-btn--close fr-btn"
+                    aria-controls="fr-transcription-modal-transcription-f4f8f996"
+                    title="Fermer"
+                    data-fr-js-modal-button="true"
+                  >
+                    Fermer
+                  </button>
+                </div>
+                <div class="fr-modal__content">
+                  <h1
+                    id="fr-transcription-modal-transcription-f4f8f996-title"
+                    class="fr-modal__title"
+                  >
+                    Tutoriel : comment modifier un recensement
+                  </h1>
+                  <p>Bonjour à tous.</p>
+                  <p>Voici une petite démonstration de la procédure pour modifier son recensement lorsque l'on est une commune utilisatrice de Collectif Objets, et notamment, afin de modifier des photos qui auraient été transmises et qui seraient erronées, que l'on souhaiterait changer.</p>
+                  <p>Il faut d'abord vous reconnecter à votre compte sur Collectif Objets.</p>
+                  <p>Pour ça, vous pouvez vous connecter à partir des emails que vous avez reçus, qui vous invitaient à participer à la campagne de recensement ou qui vous remerciez d'avoir terminé votre recensement, par exemple.</p>
+                  <p>Dans ces emails, vous avez toujours accès à un lien pour vous connecter à votre espace sur Collectif Objets.</p>
+                  <p>Ici, j'incarne la commune de Lantosque et je vois les objets que j'ai déjà recensés.</p>
+                  <p>Je peux, en cliquant dessus, choisir de modifier le recensement.</p>
+                  <p>Ici, le petit crayon à côté de chaque étape du questionnaire permet de modifier l'étape en question.</p>
+                  <p>Ici, sur l'espace pour insérer des photos, je peux donc supprimer l'image que j'avais transmise et en cliquant sur "Parcourir", envoyer une nouvelle image.</p>
+                  <p>Celle-ci, par exemple.</p>
+                  <p>Maintenant, je peux revérifier toutes les étapes, je valide si toutes les autres étapes me conviennent, je peux ajouter un commentaire pour dire que j'ai modifié la photo.</p>
+                  <p>Pour corriger, par exemple, et valider le recensement de cet objet.</p>
+                  <p>Maintenant, la nouvelle photo apparaît et le dossier est toujours accessible pour les conservateurs, mais avec une nouvelle photo.</p>
+                  <p>Je vous rappelle qu'on peut également mettre plusieurs photos à la fois pour un même objet.</p>
+                  <p>C'est même vivement recommandé, afin que les conservateurs et conservatrices puissent examiner l'objet sous différents angles ou étudier des détails.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</figure>
 
 Si un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'examen de votre dossier. C'est donc cette procédure que vous devrez suivre.
 
@@ -259,11 +558,11 @@ Si un conservateur remarque que vous avez commis une erreur, il est probable qu'
 
 Une messagerie instantanée est intégrée dans le site Collectif Objets.
 
-Elle permet aux conservateurs et aux communes d’échanger directement depuis le site. Cela permet de centraliser l’ensemble des informations liées aux objets. Lorsque vous écrivez dans la messagerie, les conservateurs de votre département en sont avertis par mail. Et inversement, vous serez prévenu par email lorsqu'un conservateur vous écrit dans la messagerie. 
+Elle permet aux conservateurs et aux communes d’échanger directement depuis le site. Cela permet de centraliser l’ensemble des informations liées aux objets. Lorsque vous écrivez dans la messagerie, les conservateurs de votre département en sont avertis par mail. Et inversement, vous serez prévenu par email lorsqu'un conservateur vous écrit dans la messagerie.
 
-Pour accéder à la messagerie, vous devez vous connectez à votre espace dans Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les mails que vous recevez de la part de Collectif Objets). 
+Pour accéder à la messagerie, vous devez vous connectez à votre espace dans Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les mails que vous recevez de la part de Collectif Objets).
 
-Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web. 
+Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web.
 
 ![Capture écran de la messagerie](/contenus/content_blobs/images/capture-messagerie-co.png)
 
@@ -295,9 +594,9 @@ Les conservateurs peuvent également vous contacter via la messagerie de Collect
 
 ### Sécuriser un objet
 
-Veuillez consulter notre fiche à ce sujet, qui regroupe des conseils des conservateurs : [lire la fiche sur la sécurisation](/fiches/securisation). 
+Veuillez consulter notre fiche à ce sujet, qui regroupe des conseils des conservateurs : [lire la fiche sur la sécurisation](/fiches/securisation).
 
-N﻿ous vous recommandons également de vous renseigner directement auprès des conservateurs des antiquités et objets d'art de votre département. 
+Nous vous recommandons également de vous renseigner directement auprès des conservateurs des antiquités et objets d'art de votre département.
 
 Pour aller plus loin sur la [sécurisation des objets protégés](https://www.culture.gouv.fr/Thematiques/Securite-Surete) et les [procédures en cas de vol](https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol).
 
