@@ -4,6 +4,18 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.default_url_options = { host: ENV["HOST"]&.sub(/https:\/\//, ""), protocol: "https" }
 
+class JsonLogFormatter < ActiveSupport::Logger::SimpleFormatter
+  def call(severity, time, _progname, message)
+    # %Q{ { 'time': "#{time.iso8601}", "level": "#{severity}", "message": "#{message}"} \n }
+    log_entry = {
+      time: time.iso8601,
+      level: severity,
+      message: message
+    }
+    JSON.generate(log_entry) + "\n"
+  end
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -75,7 +87,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = JsonLogFormatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
@@ -83,8 +95,10 @@ Rails.application.configure do
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new($stdout)
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    # logger.formatter = config.log_formatter
+    logger.formatter = JsonLogFormatter.new
+    config.logger = logger
+    # config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Do not dump schema after migrations.
