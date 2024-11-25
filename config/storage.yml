@@ -12,14 +12,17 @@ scaleway_defaults: &scaleway_defaults
   region: fr-par
 
 mc_ovh_defaults: &mc_ovh_defaults
-  endpoint: https://s3.gra.io.cloud.ovh.net/
+  endpoint: https://s3.gra.io.cloud.ovh.net
   service: S3
   region: gra
+  # force_path_style: true # Critical for OVH S3 compatibility LOL
 
 mc_ovh_staging: &mc_ovh_staging
   !!merge <<: *mc_ovh_defaults
-  access_key_id: <%= Rails.application.credentials.dig(:mc_ovh_s3, :user_dev_colle, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:mc_ovh_s3, :user_dev_colle, :secret_access_key) %>
+  access_key_id: <%= ENV["BUCKET_USER_ACCESS_KEY_ID"] %>
+  #access_key_id: <%= Rails.application.credentials.dig(:mc_ovh_s3, :user_dev_colle, :access_key_id) %>
+  secret_access_key: <%= ENV["BUCKET_USER_SECRET_ACCESS_KEY"] %>
+  #secret_access_key: <%= Rails.application.credentials.dig(:mc_ovh_s3, :user_dev_colle, :secret_access_key) %>
   bucket: collectif-objets-staging2
 
 scaleway_development:
