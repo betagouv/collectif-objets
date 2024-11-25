@@ -14,6 +14,8 @@ ENV RAILS_SPECIFIC_ENV=production
 # ENV SENTRY_AUTH_TOKEN=auth_token
 # ENV SMTP_PASSWORD=smtp_password
 # ENV SMTP_USERNAME=smtp_username
+# ENV BUCKET_USER_ACCESS_KEY_ID=access_key_id
+# ENV BUCKET_USER_SECRET_ACCESS_KEY=secret_access_key
 
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
