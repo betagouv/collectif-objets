@@ -1,0 +1,65 @@
+# syntax=docker/dockerfile:1.7-labs
+
+# Ruby gem install stage needs build-essential, postgres libs and libvips for images
+FROM ruby:3.3-slim AS ruby-builder
+
+# use same UID as distroless nonroot for simplicity
+ARG UID="65532"
+
+# Important to set this before bundle install
+ENV RAILS_ENV=production
+
+# https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
+ENV DEBIAN_FRONTEND=noninteractive 
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+    build-essential libpq-dev postgresql-client \
+    libvips42 nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /collectif-objets
+RUN useradd -s /bin/bash -u "${UID}" -d /collectif-objets co && chown "${UID}":"${UID}" /collectif-objets
+USER "${UID}"    
+
+WORKDIR /collectif-objets
+COPY --chown="${UID}":"${UID}" Gemfile Gemfile.lock /collectif-objets/
+RUN bundle install
+
+COPY --chown="${UID}":"${UID}" package.json package-lock.json /collectif-objets/
+RUN npm install
+
+CMD ["bash"]
+
+# Final production image stage
+FROM ruby:3.3-slim AS production
+
+# use same UID as distroless nonroot for simplicity
+ARG UID="65532"
+
+ENV DEBIAN_FRONTEND=noninteractive 
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+    libpq-dev \
+    nodejs \
+    libvips42 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /collectif-objets
+RUN useradd -s /bin/bash -u "${UID}" -d /collectif-objets co && chown "${UID}":"${UID}" /collectif-objets
+USER "${UID}"
+
+COPY --chown="${UID}":"${UID}" Gemfile Gemfile.lock /collectif-objets/
+COPY --chown="${UID}":"${UID}" --from=ruby-builder /usr/local/bundle /usr/local/bundle
+COPY --chown="${UID}":"${UID}" --from=ruby-builder /collectif-objets/.bundle /collectif-objets/.bundle
+COPY --chown="${UID}":"${UID}" --from=ruby-builder /collectif-objets/node_modules /collectif-objets/node_modules
+
+COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true config.ru spec storage vendor prawn_assets /collectif-objets/
+
+EXPOSE 3000
+
+# Generates /public/vite folder when env is production
+RUN bundle exec rails assets:precompile
+
+CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+

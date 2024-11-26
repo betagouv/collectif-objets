@@ -53,3 +53,12 @@ plugin :tmp_restart
 #   MAIN_PID = Process.pid
 #   at_exit { GoodJob.shutdown if Process.pid == MAIN_PID }
 # end
+
+# For monitoring PUMA
+activate_control_app
+# plugin :yabeda
+plugin :yabeda_prometheus
+
+# For native kubernetes probes / lifecycle management
+plugin 'kubernetes'
+kubernetes_url 'tcp://0.0.0.0:9393'

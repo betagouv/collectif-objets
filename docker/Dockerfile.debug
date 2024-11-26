@@ -1,0 +1,53 @@
+# syntax=docker/dockerfile:1.7-labs
+FROM ruby:3.3-slim
+
+# use same UID as distroless nonroot for simplicity
+ARG UID="65532"
+
+# Important to set this before bundle install
+ENV RAILS_ENV=production
+
+# Other launch parameters to OVERLOAD at runtime
+ENV RAILS_SPECIFIC_ENV=production
+# ENV DATABASE_URL=postgresql://...
+# ENV RAILS_MASTER_KEY=
+# ENV SENTRY_AUTH_TOKEN=auth_token
+# ENV SMTP_PASSWORD=smtp_password
+# ENV SMTP_USERNAME=smtp_username
+# ENV BUCKET_USER_ACCESS_KEY_ID=access_key_id
+# ENV BUCKET_USER_SECRET_ACCESS_KEY=secret_access_key
+
+# https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
+ENV DEBIAN_FRONTEND=noninteractive 
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+    build-essential libpq-dev postgresql-client \
+    curl libvips42 nodejs npm ncdu \
+    python3-pip neovim \
+    && rm -rf /var/lib/apt/lists/*
+
+# create app directory and create custom user with uid > 10000 to run the app in it
+WORKDIR /collectif-objets
+RUN useradd -s /bin/bash -u "${UID}" -d /collectif-objets co && chown "${UID}":"${UID}" /collectif-objets
+USER "${UID}"
+
+# install ruby and npm libraries
+COPY --chown="${UID}":"${UID}" Gemfile Gemfile.lock package.json package-lock.json /collectif-objets/
+RUN bundle install && npm install
+
+# copy only necessary application files
+COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true vite.config.ts config.ru Rakefile spec storage vendor prawn_assets /collectif-objets/
+
+# copy design system from node libs to public dir (can't be handled by symbolic links in k8s)
+RUN cp -R node_modules/@gouvfr/dsfr/dist/fonts public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/icons public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/dsfr/utility 
+
+EXPOSE 3000
+
+# Generates /public/vite folder when env is production
+RUN bundle exec rails assets:precompile
+
+CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]

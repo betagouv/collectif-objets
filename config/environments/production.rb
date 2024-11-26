@@ -4,6 +4,18 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.default_url_options = { host: ENV["HOST"]&.sub(/https:\/\//, ""), protocol: "https" }
 
+class JsonLogFormatter < ActiveSupport::Logger::SimpleFormatter
+  def call(severity, time, _progname, message)
+    # %Q{ { 'time': "#{time.iso8601}", "level": "#{severity}", "message": "#{message}"} \n }
+    log_entry = {
+      time: time.iso8601,
+      level: severity,
+      message: message
+    }
+    JSON.generate(log_entry) + "\n"
+  end
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -75,7 +87,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = JsonLogFormatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
@@ -83,8 +95,10 @@ Rails.application.configure do
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new($stdout)
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    # logger.formatter = config.log_formatter
+    logger.formatter = JsonLogFormatter.new
+    config.logger = logger
+    # config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Do not dump schema after migrations.
@@ -92,15 +106,41 @@ Rails.application.configure do
 
   config.force_ssl = true
   config.ssl_options = { hsts: { preload: true } }
-  config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
   config.x.inbound_emails_domain = "reponse.collectifobjets.org"
+  config.sandbox_by_default = true # for the console
 
-  if config.x.environment_specific_name == "staging"
-    config.action_mailer.show_previews = true
-    config.active_storage.service = :scaleway_staging
+  
+  # Configure different variants of production environment (staging, production, mc_stg, mc_prod)
+  if ENV["RAILS_SPECIFIC_ENV"].present?
+    config.x.environment_specific_name =  ENV["RAILS_SPECIFIC_ENV"]
   else
-    config.active_storage.service = :scaleway
+    config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
   end
 
-  config.sandbox_by_default = true # for the console
+  puts "environment: production"
+  puts "specific environment: #{config.x.environment_specific_name}"
+
+  if config.x.environment_specific_name == "production"
+    config.active_storage.service = :scaleway
+    # config.s3_endpoint = ""
+
+  elsif config.x.environment_specific_name == "mc_stg"
+    config.action_mailer.show_previews = true
+    # we need to keep scaleway_staging name for db consistency (see storage.yml)
+    # even if this points to ovh bucket TODO: replace in DB ?
+    config.active_storage.service = :scaleway_staging
+    
+    config.action_mailer.smtp_settings = {
+      address: ENV.fetch("MAILHOG_HOST", '127.0.0.1'),
+      port: 1025
+    }
+    config.action_mailer.raise_delivery_errors = false
+    config.action_mailer.perform_caching = false
+
+  else # staging scalingo+scaleway
+    config.action_mailer.show_previews = true
+    config.active_storage.service = :scaleway_staging
+  
+  end
+
 end
