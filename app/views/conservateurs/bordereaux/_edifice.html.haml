@@ -4,7 +4,7 @@
 
 .d-md-flex.align-content-center.co-flex--gap-1rem.fr-mb-2w{id: "bordereau-#{edifice.id}"}
   %span
-    = "#{nom} · #{texte_nombre_objets_protégés(edifice)}"
+    = "#{nom} · #{Objet.human_attribute_name(:proteges_count, count: edifice.objets.protégés.count)}"
 
   - if edifice.bordereau.attached?
     = link_to "Télécharger (PDF de #{number_to_human_size edifice.bordereau.byte_size})",
