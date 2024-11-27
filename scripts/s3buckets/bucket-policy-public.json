@@ -1,0 +1,19 @@
+{
+    "Version": "2022-09-21",
+    "Id": "collectifobjets",
+    "Statement": [
+      {
+        "Sid": "Allow public access on all files",
+        "Effect": "Allow",
+        "Principal": {
+          "SCW": "project_id:xxxx-xxxx-xxxx"
+        },
+        "Action": [
+          "s3:GetObject"
+        ],
+        "Resource": [
+          "collectif-objets-public"
+        ]
+      }
+    ]
+  }

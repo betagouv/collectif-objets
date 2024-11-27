@@ -24,7 +24,9 @@ Rails.application.configure do
     elsif Rails.configuration.x.environment_specific_name == "mc_stg"
       s3_uris = [
         "https://collectif-objets-staging2.s3.gra.io.cloud.ovh.net/",
+        "https://collectif-objets-staging.s3.gra.io.cloud.ovh.net/",
         "https://s3.gra.io.cloud.ovh.net/collectif-objets-staging2/",
+        "https://s3.gra.io.cloud.ovh.net/collectif-objets-staging/",
         "https://collectif-objets-public.s3.gra.io.cloud.ovh.net/",
         "https://s3.gra.io.cloud.ovh.net/collectif-objets-public/"
       ]
