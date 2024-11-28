@@ -1,6 +1,6 @@
 - if banners.any?
   .co-background-color-inherit.co-position-sticky.co-top-0.co-z-index-600.co-print-hide.fr-text--sm{role: "alert",
-    data: { controller: "visibility-toggle", "visibility-toggle-target": "section" }}
+    data: { controller: "visibility-toggle" }}
     .fr-container--fluid.co-flex.co-flex--space-between.co-flex--align-items-center.co-flex--wrap.co-flex--gap-05rem.fr-mb-1w
       .co-flex--grow
         - if banners.include?(:environment)
