@@ -13,6 +13,9 @@ module Conservateurs
 
     def new
       @departement = Departement.find(params[:departement_id])
+      @campaign = Campaign.new(departement: @departement)
+      authorize(@campaign)
+
       defaults = @departement.campaigns.select(:sender_name, :nom_drac, :signature).last&.attributes
       defaults ||= {
         sender_name: current_conservateur.full_name,
@@ -24,8 +27,7 @@ module Conservateurs
           "DRAC #{@departement.region}"
         ].join("\n")
       }
-      @campaign = Campaign.new(defaults.merge(departement: @departement))
-      authorize(@campaign)
+      @campaign.assign_attributes(defaults)
     end
 
     private
