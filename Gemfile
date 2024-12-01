@@ -55,7 +55,7 @@ group :development do
   gem "foreman", "~> 0.87"
   gem "html2haml", "~> 2.3"
   gem "htmlbeautifier", "~> 1.4"
-  gem "pry", "~> 0.14"
+  gem "pry", "~> 0.15"
   gem "rails-erd", "~> 1.7", require: false
   gem "solargraph", "~> 0.50"
   gem "web-console", "~> 4.2"
