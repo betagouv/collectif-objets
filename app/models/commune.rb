@@ -203,7 +203,7 @@ class Commune < ApplicationRecord
       statut_global == Commune::ORDRE_EXAMEN_PRIORITAIRE &&
       !dossier.a_des_objets_prioritaires? &&
       dossier.replied_automatically_at.nil? &&
-      dossier.submitted_at < date - 1.week &&
+      dossier.submitted_at.to_date < date - 1.day &&
       !date.on_weekend?
   end
 
