@@ -82,7 +82,9 @@
   - if (campaign.draft? || campaign.planned?) && campaign.communes_en_cours.load.any?
     = dsfr_alert(type: :warning, title: "Communes en cours d'examen", classes: "fr-mb-2w") do
       %p
-        Attention, vous vous apprêtez à recontacter une ou plusieurs communes dont l’examen n'est pas terminé. Nous vous invitons à finaliser l'examen avant de relancer une campagne, sans quoi les dossiers non examinés seront perdus.
+        Attention, vous vous apprêtez à recontacter une ou plusieurs communes dont l’examen n'est pas terminé.
+        %br
+        Nous vous invitons à finaliser l'examen avant de relancer une campagne, sans quoi les dossiers non examinés seront perdus.
         %br
         Communes à terminer d’examiner&nbsp;:
         = "#{campaign.communes_en_cours.collect { |commune| link_to(commune.nom, conservateurs_commune_dossier_path(commune)) }.to_sentence.html_safe}."
