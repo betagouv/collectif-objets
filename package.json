@@ -27,14 +27,14 @@
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.1",
     "maplibre-gl": "^3.6.2",
-    "mjml": "^4.14.1",
+    "mjml": "^4.7.1",
     "nanobar": "^0.4.2",
     "stimulus-vite-helpers": "^3.0.1",
     "throttle-debounce": "^5.0.0"
   },
   "devDependencies": {
-    "vite": "^4.5.5",
-    "vite-plugin-ruby": "^3.2.2",
+    "vite": "^5.4.11",
+    "vite-plugin-ruby": "^5.1.1",
     "vite-plugin-stimulus-hmr": "^3.0.0"
   }
 }
