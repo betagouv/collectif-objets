@@ -12,6 +12,10 @@ export default class extends Controller {
     this.toggleDependentLinks(true)
   }
 
+  disconnect() {
+    this.nanobar = null
+  }
+
   triggerUpload() {
     const files = Array.from(this.inputTarget.files)
     if (files.length !== 1) return
