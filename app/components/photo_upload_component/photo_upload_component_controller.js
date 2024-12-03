@@ -4,10 +4,10 @@ import Nanobar from "nanobar"
 import "./photo_upload_component.css"
 
 export default class extends Controller {
-  static targets = ["wrapper", "input", "submit",  "nanobar", "progressText"]
+  static targets = ["input", "submit", "nanobar", "progressText"]
+  static values = { url: String }
 
   connect() {
-    this.formTarget = this.inputTarget.closest("form")
     this.submitTarget.remove()
     this.toggleDependentLinks(true)
   }
@@ -45,7 +45,7 @@ export default class extends Controller {
 
   uploadFile(file) {
     this.inputTarget.disabled = true // so it does re-upload on form submit
-    new DirectUpload(file, this.wrapperTarget.dataset.directUploadUrl, this).create(
+    new DirectUpload(file, this.urlValue, this).create(
       (error, blob) => {
         if (error) {
           this.inputTarget.disabled = false
@@ -60,7 +60,7 @@ export default class extends Controller {
           this.inputTarget.after(hiddenField)
           this.inputTarget.removeAttribute("data-uploading")
           this.progressTextTarget.innerHTML = "photo en cours d’ajout …"
-          this.formTarget.requestSubmit()
+          this.element.requestSubmit()
         }
       }
     )
