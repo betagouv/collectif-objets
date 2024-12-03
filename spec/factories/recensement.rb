@@ -42,17 +42,6 @@ FactoryBot.define do
       end
     end
 
-    trait :with_photo do
-      after(:build) do |recensement|
-        recensement.photos.attach(
-          io: Rails.root.join("spec/fixture_files/tableau1.jpg").open,
-          filename: "tableau1.jpg",
-          content_type: "image/jpeg",
-          service_name: "test"
-        )
-      end
-    end
-
     trait :with_photos do
       transient do
         photos_count { 2 }
@@ -68,6 +57,13 @@ FactoryBot.define do
           )
         end
       end
+    end
+
+    trait :with_photo do
+      transient do
+        photos_count { 1 }
+      end
+      with_photos
     end
 
     trait :disparu do
