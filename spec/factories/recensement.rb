@@ -45,15 +45,17 @@ FactoryBot.define do
     trait :with_photos do
       transient do
         photos_count { 2 }
+        photo_files { Array.new(photos_count) { |i| "tableau#{i + 1}.jpg" } }
       end
 
       after(:build) do |recensement, evaluator|
         evaluator.photos_count.times do |i|
+          file = evaluator.photo_files[i]
+
           recensement.photos.attach(
-            io: Rails.root.join("spec/fixture_files/tableau#{i + 1}.jpg").open,
-            filename: "tableau#{i + 1}.jpg",
-            content_type: "image/jpeg",
-            service_name: "test"
+            io: Rails.root.join("spec/fixture_files/#{file}").open,
+            filename: file,
+            service_name: :test
           )
         end
       end
