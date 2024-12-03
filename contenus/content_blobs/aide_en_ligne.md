@@ -55,7 +55,7 @@ Attention : même si les demandes de recensement sont adressées aux communes qu
 
 Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la **gestion quotidienne** de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite à y accorder la plus grande attention. 
 
-L﻿es propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
+Les propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
 
 Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée avant ces travaux à l’État (c'est-à-dire auprès de la DRAC de votre région) par le propriétaire ou le détenteur. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien. 
 
@@ -109,7 +109,7 @@ Pour obtenir un code de connexion, vous pouvez :
    * Une fois le code saisi dans la page de connexion, vous serez connecté à l'espace de votre commune dans la plateforme. Lisez les instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran. 
    * Vous verrez s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier pour commencer son recensement, après être allé voir cet objet sur son lieu de conservation.
 
-S﻿i vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](https://collectif-objets.beta.gouv.fr/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
+Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](https://collectif-objets.beta.gouv.fr/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
 
 ### Déroulé du recensement
 
@@ -167,7 +167,7 @@ Si des doutes subsistent sur ce que vous devez faire, vous pouvez poser des ques
 ### Durée d’un recensement
 
 Cela dépend du nombre d’objets à recenser au sein de votre commune et du nombre d’édifices dans lesquels ils se situent. Vous pouvez compter moins de 5 minutes par objet, une fois que vous avez l’objet devant vous.\
-I﻿l faut ajouter à ce temps le temps de trajet pour vous rendre dans chaque édifice et en revenir.
+Il faut ajouter à ce temps le temps de trajet pour vous rendre dans chaque édifice et en revenir.
 
 ### Matériel à prévoir
 
@@ -180,11 +180,11 @@ I﻿l faut ajouter à ce temps le temps de trajet pour vous rendre dans chaque �
 
 Seuls les objets protégés au titre des monuments historiques (classés ou inscrits) figurent dans Collectif Objets. La protection est justifiée par l’intérêt de l’objet concerné au point de vue de l’histoire, de l’art, de la science ou de la technique.
 
-L﻿es informations concernant les objets visibles sur Collectif Objets sont issues de la "Plateforme Ouverte du Patrimoine" du ministère de la Culture, et plus précisément de sa base de données "Palissy". 
+Les informations concernant les objets visibles sur Collectif Objets sont issues de la "Plateforme Ouverte du Patrimoine" du ministère de la Culture, et plus précisément de sa base de données "Palissy". 
 
 Une petite partie des objets protégés ayant une fiche dans la base Palissy nʼest volontairement pas importée dans Collectif Objets. Il sʼagit des objets propriétés de lʼÉtat, des objets volés, partiellement volés ou disparus, et de certains objets appartenant à un ensemble plus large ("sous-dossiers" dans Palissy).
 
-P﻿our en savoir plus sur les objets protégés au titre des monuments historiques : [Protéger des objets mobiliers au titre des monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques)
+Pour en savoir plus sur les objets protégés au titre des monuments historiques : [Protéger des objets mobiliers au titre des monuments historiques](https://www.culture.gouv.fr/Thematiques/Monuments-Sites/Interventions-demarches/Proteger-un-objet-un-immeuble-un-espace/Proteger-des-objets-mobiliers-au-titre-des-monuments-historiques)
 
 ## Difficultés les plus courantes
 
@@ -192,7 +192,7 @@ P﻿our en savoir plus sur les objets protégés au titre des monuments historiq
 
 Si vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a trois explications potentielles :
 
-* v﻿otre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques
+* votre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques
 * il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
 * s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contacté. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou "adresses email de contact") qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).
 
@@ -297,7 +297,7 @@ Les conservateurs peuvent également vous contacter via la messagerie de Collect
 
 Veuillez consulter notre fiche à ce sujet, qui regroupe des conseils des conservateurs : [lire la fiche sur la sécurisation](/fiches/securisation). 
 
-N﻿ous vous recommandons également de vous renseigner directement auprès des conservateurs des antiquités et objets d'art de votre département. 
+Nous vous recommandons également de vous renseigner directement auprès des conservateurs des antiquités et objets d'art de votre département. 
 
 Pour aller plus loin sur la [sécurisation des objets protégés](https://www.culture.gouv.fr/Thematiques/Securite-Surete) et les [procédures en cas de vol](https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol).
 
