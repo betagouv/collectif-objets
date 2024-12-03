@@ -50,10 +50,4 @@ class Edifice < ApplicationRecord
   end
 
   def nom = super || "édifice non renseigné"
-
-  def generate_bordereau!(dossier)
-    pdf = Bordereau::Pdf.new(dossier, self)
-    bordereau.purge if bordereau.attached?
-    bordereau.attach io: pdf.to_io, filename: pdf.filename, content_type: Mime[:pdf]
-  end
 end
