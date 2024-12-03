@@ -22,7 +22,6 @@ export default class extends Controller {
     this.uploadFile(files[0])
     document.querySelector(".fr-input-group--error")?.classList.remove("fr-input-group--error")
     document.querySelectorAll(".fr-error-text,.fr-alert.fr-alert--error").forEach(e => e.remove())
-
   }
 
   directUploadWillStoreFileWithXHR(xhr) {
@@ -37,7 +36,6 @@ export default class extends Controller {
   }
 
   uploadRequestDidProgress(event) {
-    // console.log("in uploadRequestDidProgress")
     const progress = event.loaded / event.total * 100
     if (!progress) return
 
