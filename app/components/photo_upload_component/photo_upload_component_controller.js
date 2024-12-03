@@ -21,7 +21,7 @@ export default class extends Controller {
     if (files.length !== 1) return
 
     this.nanobar = new Nanobar({ target: this.nanobarTarget })
-    this.progressTextTarget.innerHTML = `chargement démarré …`
+    this.progressTextTarget.innerHTML = `Chargement démarré …`
     this.toggleDependentLinks(false)
     this.uploadFile(files[0])
     document.querySelector(".fr-input-group--error")?.classList.remove("fr-input-group--error")
@@ -30,7 +30,7 @@ export default class extends Controller {
 
   directUploadWillStoreFileWithXHR(xhr) {
     xhr.upload.addEventListener("progress", event => this.uploadRequestDidProgress(event))
-    this.progressTextTarget.innerHTML = `chargement en cours …`
+    this.progressTextTarget.innerHTML = `Chargement en cours …`
   }
 
   toggleDependentLinks(enabled) {
@@ -43,7 +43,7 @@ export default class extends Controller {
     const progress = event.loaded / event.total * 100
     if (!progress) return
 
-    this.progressTextTarget.innerHTML = `chargée à ${Math.round(progress)}%`
+    this.progressTextTarget.innerHTML = `Chargée à ${Math.round(progress)}%`
     this.nanobar.go(progress)
   }
 
@@ -57,13 +57,13 @@ export default class extends Controller {
           this.progressTextTarget.innerHTML = "Échec d'envoi du fichier"
           console.log("ERROR on direct upload !", error)
         } else {
-          const hiddenField = document.createElement('input')
+          const hiddenField = document.createElement("input")
           hiddenField.setAttribute("type", "hidden")
           hiddenField.setAttribute("value", blob.signed_id)
           hiddenField.name = this.inputTarget.name
           this.inputTarget.after(hiddenField)
           this.inputTarget.removeAttribute("data-uploading")
-          this.progressTextTarget.innerHTML = "photo en cours d’ajout …"
+          this.progressTextTarget.innerHTML = "Photo en cours d’ajout …"
           this.element.requestSubmit()
         }
       }
