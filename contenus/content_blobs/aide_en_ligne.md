@@ -16,7 +16,7 @@ Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 * d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ;
 * de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
 
-Les communes sont accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable.
+Les communes peuvent échanger avec les conservateurs via une messagerie et être accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable. 
 
 ### Les objets protégés au titre des monuments historiques
 
@@ -24,11 +24,11 @@ Les communes sont accompagnées, lorsque cela est nécessaire, pour préserver l
 
 Ce statut juridique confère à l’objet une protection d’ordre public afin d’assurer sa préservation et transmission aux générations futures.
 
-Il appartient ainsi au propriétaire de veiller à l’entretien d’un objet protégé au titre des monuments historiques. De la même manière, toute intervention sur l’objet doit être réalisée de concert avec les services de l’État (déplacement, restauration, travaux…).
+Il appartient ainsi au propriétaire de veiller à l’entretien d’un objet protégé au titre des monuments historiques. De la même manière, toute intervention sur l’objet (déplacement, restauration, travaux…) doit être réalisée avec l'accord des services de l’État. 
 
 Le recensement participatif proposé sur la plateforme Collectif Objets s’inscrit dans cette démarche de préservation des œuvres, en facilitant la relation entre les propriétaires d’objets monuments historiques et les services experts de l’État (les conservateurs des antiquités et objets d’art et les conservateurs des monuments historiques).
 
-Il existe deux niveaux de protection au titre des Monuments historiques : l’inscription et le classement. L’inscription constitue le premier niveau de protection, et le classement le niveau le plus élevé.
+Il existe deux niveaux de protection au titre des Monuments historiques : l’inscription et le classement. L’inscription constitue le premier niveau de protection et le classement est le niveau le plus élevé.
 
 [En savoir plus sur la protection au titre des Monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
 
@@ -36,11 +36,11 @@ Il existe deux niveaux de protection au titre des Monuments historiques : l’in
 
 La France compte plus de 285 000 objets protégés au titre des Monuments historiques.
 
-Le recensement par les communes permet une certaine surveillance des objets mobiliers en s’assurant qu’ils ne sont pas dégradés ou volés et participe à leur préservation. Il constitue une étape préalable utile à la préparation du récolement quinquennal tel qu’il est défini par le code du Patrimoine (article L. 622-8). 
+Le recensement par les communes permet une certaine surveillance des objets mobiliers en s’assurant qu’ils ne sont pas dégradés ou volés et participe ainsi à leur préservation. Il constitue une étape préalable utile à la préparation du récolement quinquennal tel qu’il est défini par le code du Patrimoine (article L. 622-8). 
 
-Il est impossible pour les conservateurs de visiter régulièrement tous ces objets, qui sont répartis dans les trois quarts des communes françaises. Afin d’éviter vols et dégradations, il est important de les inspecter régulièrement.
+Il est impossible pour les conservateurs de visiter régulièrement tous ces objets qui sont répartis dans les trois quarts des communes françaises. Mais afin d’éviter vols et dégradations, il est important de les inspecter régulièrement.
 
-Les conservateurs assurent cette mission au quotidien mais l’information n’est pas toujours enregistrée dans les bases de données. D'où l’émergence du service public Collectif Objets et son invitation au dialogue et au partage de données.
+Les conservateurs assurent cette mission au quotidien mais l’information n’est pas toujours enregistrée dans des bases de données. D'où l’émergence du service public Collectif Objets qui invite au dialogue et au partage de données.
 
 Recenser un ensemble d'objets est une opération rapide et simple qui permet la préservation de ces derniers et donc de notre patrimoine commun.
 
@@ -55,7 +55,7 @@ Attention : même si les demandes de recensement sont adressées aux communes qu
 
 Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la **gestion quotidienne** de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite à y accorder la plus grande attention.
 
-Les propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
+Les propriétaires et les détenteurs d'objets protégés sont "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
 
 Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée avant ces travaux à l’État (c'est-à-dire auprès de la DRAC de votre région) par le propriétaire ou le détenteur. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien.
 
@@ -63,17 +63,17 @@ Seuls les propriétaires des objets peuvent décider ou non d’une restauration
 
 ### Accéder à la liste des objets protégés de ma commune
 
-La liste des objets protégés au titre des Monuments Historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture.
+La liste des objets protégés au titre des Monuments historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture.
 
-Les données affichées dans Collectif Objets proviennent de POP et en particulier des bases de données Palissy pour les informations et Mémoire pour les photographies associées.
+Les données affichées dans Collectif Objets proviennent de POP et en particulier des bases de données *Palissy* pour les informations et *Mémoire* pour les photographies associées.
 
 Collectif Objets contacte les mairies des communes pour effectuer le recensement. La mairie peut déléguer le recensement à une personne tierce. Pour effectuer ce recensement, la mairie recevra un code de connexion sur son adresse email lui permettant de se connecter et de réaliser les recensements.
 
 ### Destinataires des données récoltées
 
-Les données transférées par les communes sont à destination des conservateurs des antiquités et objets d’art et conservateurs des monuments historiques du département dont fait partie la commune.
+Les données transmises par les communes sont à destination des conservateurs des antiquités et objets d’art (CAOA) et conservateurs des monuments historiques (CMH) du département dont fait partie la commune.
 
-L’accès aux données est également possible par l’équipe de Collectif Objets, il est contrôlé et exclusivement réservé dans un but d’amélioration du service.
+L’accès aux données est également possible par l’équipe en charge de Collectif Objets. Il est contrôlé et exclusivement réservé dans un but d’amélioration du service. 
 
 ### Protéger un nouvel objet
 
@@ -198,13 +198,13 @@ Pour obtenir un code de connexion, vous pouvez :
 
 1. Partir de l'email que vous avez reçu et qui vous invite à recenser. \
    \
-   Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code ou suivre le lien disponible dans l'email.
+   Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code ou bien suivre le lien disponible dans l'email.
 2. Si vous ne trouvez plus l'email vous invitant au recensement :
 
    * Rendez-vous sur la [page de demande de code](https://collectif-objets.beta.gouv.fr/users/session_codes/new)
    * Cliquez sur « Sélectionnez un département » et choisissez votre département dans la liste. Puis sélectionnez le nom de votre commune dans la liste en dessous. 
    * Cliquez sur « Recevoir un code de connexion » 
-   * Consultez la boite mail de votre commune. Vous recevrez un courriel contenant un code de connexion à 6 chiffres. Cliquez sur le code dans le mail, ou copiez-le pour le saisir dans la page de connexion.
+   * Consultez la boite mail de votre commune. Vous recevrez un courriel contenant un code de connexion à 6 chiffres. Attention : cet email peut atterrir dans les "spams" ou "courriers indésirables" de votre boite mail. Cliquez sur le code dans le mail, ou copiez-le pour le saisir dans la page de connexion. 
    * Une fois le code saisi dans la page de connexion, vous serez connecté à l'espace de votre commune dans la plateforme. Lisez les instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
    * Vous verrez s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier pour commencer son recensement, après être allé voir cet objet sur son lieu de conservation.
 
