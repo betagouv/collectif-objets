@@ -79,11 +79,11 @@ RSpec.describe Campaigns::CronJob, type: :job do
     end
 
     it "envoie un email aux communes avec uniquement des objets verts \
-        ayant fini leur recensement il y a plus d'une semaine et ayant démarré après le 05/10/2023" do
-      commune_sans_objets_prioritaires.dossier.update(submitted_at: Date.new(2023, 11, 1))
+        ayant fini leur recensement il y a plus d'un jour et ayant démarré après le 05/10/2023" do
+      commune_sans_objets_prioritaires.dossier.update(submitted_at: Date.new(2023, 11, 14))
       commune_sans_objets_prioritaires2.dossier.update(submitted_at: Date.new(2023, 9, 15))
 
-      Campaigns::CronJob.new.perform(Date.new(2023, 11, 13))
+      Campaigns::CronJob.new.perform(Date.new(2023, 11, 16))
       perform_enqueued_jobs
 
       expect(ActionMailer::Base.deliveries.count).to eq(1)

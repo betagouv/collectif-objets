@@ -110,20 +110,20 @@ RSpec.describe Commune, type: :model do
         commune.update(status: "completed")
       end
 
-      context "mais le dossier a été soumis il y a moins d'une semaine" do
-        let(:date) { Date.new(2023, 11, 10) }
-        before { dossier.update(submitted_at: Date.new(2023, 11, 9)) }
+      context "mais le dossier a été soumis il y a moins d'un jour" do
+        let(:date) { Date.new(2023, 11, 14) }
+        before { dossier.update(submitted_at: Date.new(2023, 11, 13)) }
         it { is_expected.to be_falsey }
       end
 
       context "mais on est le weekend" do
-        let(:date) { Date.new(2023, 11, 13) }
+        let(:date) { Date.new(2023, 11, 12) }
         it { is_expected.to be_falsey }
       end
 
-      context "il y a plus d'une semaine et la date d'envoi est hors weekend" do
-        let(:date) { Date.new(2023, 11, 13) }
-        before { dossier.update(submitted_at: Date.new(2023, 11, 3)) }
+      context "il y a plus d'un jour et la date d'envoi est hors weekend" do
+        let(:date) { Date.new(2023, 11, 15) }
+        before { dossier.update(submitted_at: Date.new(2023, 11, 13)) }
 
         it "returns false si la commune a des objets prioritaires" do
           create(:recensement, :en_peril, dossier:)
