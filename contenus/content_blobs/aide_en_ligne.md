@@ -40,7 +40,7 @@ Le recensement par les communes permet une certaine surveillance des objets mobi
 
 Il est impossible pour les conservateurs de visiter régulièrement tous ces objets qui sont répartis dans les trois quarts des communes françaises. Mais afin d’éviter vols et dégradations, il est important de les inspecter régulièrement.
 
-Les conservateurs assurent cette mission au quotidien mais l’information n’est pas toujours enregistrée dans les bases de données. D'où l’émergence du service public Collectif Objets et son invitation au dialogue et au partage de données.
+Les conservateurs assurent cette mission au quotidien mais l’information n’est pas toujours enregistrée dans des bases de données. D'où l’émergence du service public Collectif Objets qui invite au dialogue et au partage de données.
 
 Recenser un ensemble d'objets est une opération rapide et simple qui permet la préservation de ces derniers et donc de notre patrimoine commun.
 
