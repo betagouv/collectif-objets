@@ -28,7 +28,7 @@ Il appartient ainsi au propriétaire de veiller à l’entretien d’un objet pr
 
 Le recensement participatif proposé sur la plateforme Collectif Objets s’inscrit dans cette démarche de préservation des œuvres, en facilitant la relation entre les propriétaires d’objets monuments historiques et les services experts de l’État (les conservateurs des antiquités et objets d’art et les conservateurs des monuments historiques).
 
-Il existe deux niveaux de protection au titre des Monuments historiques : l’inscription et le classement. L’inscription constitue le premier niveau de protection, et le classement le niveau le plus élevé.
+Il existe deux niveaux de protection au titre des Monuments historiques : l’inscription et le classement. L’inscription constitue le premier niveau de protection et le classement est le niveau le plus élevé.
 
 [En savoir plus sur la protection au titre des Monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
 
