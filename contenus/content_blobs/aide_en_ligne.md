@@ -36,9 +36,9 @@ Il existe deux niveaux de protection au titre des Monuments historiques : l’in
 
 La France compte plus de 285 000 objets protégés au titre des Monuments historiques.
 
-Le recensement par les communes permet une certaine surveillance des objets mobiliers en s’assurant qu’ils ne sont pas dégradés ou volés et participe à leur préservation. Il constitue une étape préalable utile à la préparation du récolement quinquennal tel qu’il est défini par le code du Patrimoine (article L. 622-8). 
+Le recensement par les communes permet une certaine surveillance des objets mobiliers en s’assurant qu’ils ne sont pas dégradés ou volés et participe ainsi à leur préservation. Il constitue une étape préalable utile à la préparation du récolement quinquennal tel qu’il est défini par le code du Patrimoine (article L. 622-8). 
 
-Il est impossible pour les conservateurs de visiter régulièrement tous ces objets, qui sont répartis dans les trois quarts des communes françaises. Afin d’éviter vols et dégradations, il est important de les inspecter régulièrement.
+Il est impossible pour les conservateurs de visiter régulièrement tous ces objets qui sont répartis dans les trois quarts des communes françaises. Mais afin d’éviter vols et dégradations, il est important de les inspecter régulièrement.
 
 Les conservateurs assurent cette mission au quotidien mais l’information n’est pas toujours enregistrée dans les bases de données. D'où l’émergence du service public Collectif Objets et son invitation au dialogue et au partage de données.
 
