@@ -212,16 +212,16 @@ Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section 
 
 ### Déroulé du recensement
 
-Depuis votre espace dans le site, vous pourrez voir la liste des objets protégés de votre commune.
+Une fois connecté à l'espace dédié à votre commune dans le site, vous pourrez voir la liste des objets protégés de votre commune. 
 
-En cliquant sur chacun des objets, vous obtiendrez des informations à son sujet : dernier emplacement connu, catégorie d’objet, dernier récolement, son numéro de référence au sein de la base de données nationale du patrimoine… Ces informations pourront vous aider à retrouver et identifier l’objet au sein de votre commune.
+En cliquant sur chacun des objets, vous trouverez des informations à son sujet : dernier emplacement connu, catégorie d’objet, dernier récolement, son numéro de référence au sein de la base de données nationale du patrimoine… Ces informations pourront vous aider à retrouver et identifier l’objet au sein de votre commune. 
 
 Ensuite, les étapes sont les suivantes :
 
 * Se rendre sur les lieux où se trouvent les objets pour les examiner et les prendre en photo
-* Vous connecter à l'espace dédié à votre commune dans le site Collectif Objets (vous trouverez les explications plus haut)
-* Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuel de chaque objet. Pour cela, cliquez sur l'un de vos objets puis cliquez sur le bouton “Recenser” pour répondre au questionnaire de recensement.
-* Une fois que le formulaire de chaque objet protégé de la commune est complété, vous pourrez valider le dossier de recensement de votre commune. Il sera alors transmis à un conservateur ou une conservatrice qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.
+* Vous connecter à l'espace dédié à votre commune dans le site Collectif Objets (vous trouverez les explications pour cela plus haut sur cette page)
+* Remplir un formulaire en ligne pour chaque objet, indiquant l’emplacement et l’état actuels de chaque objet. Pour accéder au formulaire, cliquez sur l'un de vos objets puis cliquez sur le bouton “Recenser”. 
+* Une fois que le formulaire de chaque objet protégé de la commune a été complété, vous pourrez valider et finaliser le dossier de recensement de votre commune. Il sera alors transmis à un conservateur qui l’examinera et, si nécessaire, vous fournira des conseils pour entretenir ou préserver vos objets.  
 
 ### Vidéo expliquant comment effectuer le recensement
 
