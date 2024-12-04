@@ -24,7 +24,7 @@ Les communes peuvent échanger avec les conservateurs via une messagerie et êtr
 
 Ce statut juridique confère à l’objet une protection d’ordre public afin d’assurer sa préservation et transmission aux générations futures.
 
-Il appartient ainsi au propriétaire de veiller à l’entretien d’un objet protégé au titre des monuments historiques. De la même manière, toute intervention sur l’objet doit être réalisée de concert avec les services de l’État (déplacement, restauration, travaux…).
+Il appartient ainsi au propriétaire de veiller à l’entretien d’un objet protégé au titre des monuments historiques. De la même manière, toute intervention sur l’objet (déplacement, restauration, travaux…) doit être réalisée avec l'accord des services de l’État. 
 
 Le recensement participatif proposé sur la plateforme Collectif Objets s’inscrit dans cette démarche de préservation des œuvres, en facilitant la relation entre les propriétaires d’objets monuments historiques et les services experts de l’État (les conservateurs des antiquités et objets d’art et les conservateurs des monuments historiques).
 
