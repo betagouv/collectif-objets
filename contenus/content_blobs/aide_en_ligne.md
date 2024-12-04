@@ -63,7 +63,7 @@ Seuls les propriétaires des objets peuvent décider ou non d’une restauration
 
 ### Accéder à la liste des objets protégés de ma commune
 
-La liste des objets protégés au titre des Monuments Historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture.
+La liste des objets protégés au titre des Monuments historiques est publique et accessible depuis la [Plateforme Ouverte du Patrimoine](https://www.pop.culture.gouv.fr/) (POP) du ministère de la Culture.
 
 Les données affichées dans Collectif Objets proviennent de POP et en particulier des bases de données Palissy pour les informations et Mémoire pour les photographies associées.
 
