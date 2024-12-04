@@ -55,7 +55,7 @@ Attention : même si les demandes de recensement sont adressées aux communes qu
 
 Le Code du patrimoine ne crée pas d'obligation particulière pour le propriétaire d'un objet protégé dans la **gestion quotidienne** de cet objet. Mais en faisant d'un objet une pièce à part entière du patrimoine national, la loi invite à y accorder la plus grande attention.
 
-Les propriétaires et les détenteurs d'un objet protégé sont en revanche "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
+Les propriétaires et les détenteurs d'objets protégés sont "tenus, lorsqu'ils en sont requis, de les présenter aux agents accrédités par l'autorité administrative" afin qu'un contrôle de l'état de l'objet, appelé "récolement", soit effectué. (Code du patrimoine, article L622-8)
 
 Lorsque des travaux impliquant ou affectant un objet protégé sont envisagés, une autorisation doit être demandée avant ces travaux à l’État (c'est-à-dire auprès de la DRAC de votre région) par le propriétaire ou le détenteur. Le propriétaire peut également demander une subvention pour la restauration d'un tel bien.
 
