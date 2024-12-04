@@ -16,7 +16,7 @@ Par la collecte de ces données, Collectif Objets permet aux conservateurs :
 * d'avoir une vision globale et actuelle du parc mobilier protégé de leur département ;
 * de réagir rapidement en cas de situation préoccupante (disparition ou dégradation d'objet protégé).
 
-Les communes sont accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable.
+Les communes peuvent échanger avec les conservateurs via une messagerie et être accompagnées, lorsque cela est nécessaire, pour préserver leur patrimoine remarquable. 
 
 ### Les objets protégés au titre des monuments historiques
 
