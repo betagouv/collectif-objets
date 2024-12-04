@@ -71,9 +71,9 @@ Collectif Objets contacte les mairies des communes pour effectuer le recensement
 
 ### Destinataires des données récoltées
 
-Les données transférées par les communes sont à destination des conservateurs des antiquités et objets d’art et conservateurs des monuments historiques du département dont fait partie la commune.
+Les données transmises par les communes sont à destination des conservateurs des antiquités et objets d’art (CAOA) et conservateurs des monuments historiques (CMH) du département dont fait partie la commune.
 
-L’accès aux données est également possible par l’équipe de Collectif Objets, il est contrôlé et exclusivement réservé dans un but d’amélioration du service.
+L’accès aux données est également possible par l’équipe en charge de Collectif Objets. Il est contrôlé et exclusivement réservé dans un but d’amélioration du service. 
 
 ### Protéger un nouvel objet
 
