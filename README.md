@@ -79,7 +79,7 @@ historiques et aux conservateurs d'examiner ces recensements.
 
 - Lancer le serveur
 
-  `make dev`
+  `bin/dev`
 
 - Installer le CLI de Scalingo :
 
@@ -362,20 +362,37 @@ Ci-dessous les étapes avec le détail des différents statuts en base de donné
 | 7 | Non recensé  | `inactive`    | _aucun recensement_   | ancien dossier `archived`  |
 
 
-## Dette technique sur les statuts et le vocabulaire
+## Dette technique
 
-Le statut global est récupéré à la volée dans une requête SQL plutôt qu'avec un champ dédié. Ce choix a été fait pour déployer les fonctionnalités plus vite, en évitant au maximum de changer l'existant. 
+### Statut global
 
+Le statut global est récupéré à la volée dans une requête SQL plutôt qu'avec un champ dédié. Ce choix a été fait pour déployer les fonctionnalités plus vite, en évitant au maximum de changer l'existant.
 Cependant, il serait judicieux de réduire le nombre de statuts, qui sont d'ailleurs souvent redondants. Nous avions imaginé de supprimer le `status` de la `Commune` et remplacer le `status` du `Dossier` par le `statut_global`. Cela simplifierait grandement le code et améliorerait les performances. En effet, le calcul du `statut_global` peut être lent comparé à lecture d'un champ en base.
-
-
 Aussi, le mot analysed vient de l'ancien terme "Analysé" et devrait être remplacé par "Examiné". De plus, on pourrait avoir un statut `analysed` ou `examined` sur le recensement, pour que ce soit cohérent avec les statuts `draft` et `completed`.
 
+### Import
 
+Les données importées sont combinées depuis différentes sources, en utilisant des outils externes.
+Dès qu'un jeu de données permettra de récupérer les URLs des photos en même temps que les données des objets, il sera possible de simplifier l'import/synchronisation.
 
-# Code
+Il serait également intéressant d'ajouter une colonne `protection` aux objets, associé à un enum, pour pouvoir facilement lister les objets protégés/classé/inscrits.
+Actuellement, récupérer cette information alourdit énormément les requêtes (le champ `palissy_DPRO` est comparé avec 5 strings, en positif, en négatif, et en sous-chaîne).
+Ce statut permettrait d'utiliser un index pour améliorer les performances lors de l'utilisation du logiciel.
 
-## Style du code, principes suivis et choix faits
+Enfin, la suppression des objets lors de la synchronisation faisait sens initialement, mais certains sont perdus ou mal repérés, puis retrouvés.
+Dans ce cas, une deuxième entrée dans la table objet est créée, et les données se trouvent donc en partie dans la table `recensements`, et dans la table `objets`.
+Il est possible de se baser sur l'identifiant PM pour faire le lien entre objets supprimés/retrouvés.
+
+### Communes et utilisateurs
+
+Il était prévu que plusieurs utilisateurs puissent se connecter sur le compte d'une commune.
+Cependant, aujourd'hui seul le premier utilisateur reçoit les mails, et est autorisé à se connecter.
+Chaque page affichant une commune récupère donc des informations de la table utilisateur.
+Il serait pertinent de rapatrier les données de connexion de l'utilisateur (email, code de connexion) dans la table commune, pour éviter des N+1 et des jointures inutiles.
+
+## Code
+
+### Style du code, principes suivis et choix faits
 
 _Tout ce qui est décrit ci-dessous est évidemment discutable et peut évoluer librement._
 
