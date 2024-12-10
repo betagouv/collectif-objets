@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_12_171535) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_07_085916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -191,7 +191,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_12_171535) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.boolean "messages_mail_notifications", default: true
-    t.boolean "send_recap", default: false, null: false
+    t.boolean "send_recap", default: true, null: false
     t.index ["email"], name: "index_conservateurs_on_email", unique: true
   end
 
@@ -440,13 +440,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_12_171535) do
   end
 
   create_table "session_codes", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "record_id", null: false
     t.string "code"
     t.datetime "used_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "created_at"], name: "index_session_codes_on_user_id_and_created_at"
-    t.index ["user_id"], name: "index_session_codes_on_user_id"
+    t.string "record_type", null: false
+    t.index ["record_id", "record_type"], name: "index_session_codes_on_record_id_and_record_type"
   end
 
   create_table "survey_votes", force: :cascade do |t|
@@ -489,6 +489,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_12_171535) do
   add_foreign_key "recensements", "objets"
   add_foreign_key "recenseur_accesses", "communes"
   add_foreign_key "recenseur_accesses", "recenseurs"
-  add_foreign_key "session_codes", "users"
   add_foreign_key "users", "communes"
 end

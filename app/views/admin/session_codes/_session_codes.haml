@@ -8,7 +8,7 @@
       %table
         %thead
           %tr
-            %th Commune
+            %th Utilisateur
             %th Email
             %th Code
             %th Utilisé&nbsp;?
@@ -16,8 +16,12 @@
         %tbody
           - session_codes.each do |session_code|
             %tr
-              %th= link_to session_code.commune.nom, admin_commune_path(session_code.commune), data: { turbo_frame: "_top" }
-              %td= session_code.user.email
+              %th
+                - if session_code.user?
+                  = link_to session_code.record.commune.nom, [:admin, session_code.record.commune], data: { turbo_frame: "_top" }
+                - else
+                  = link_to session_code.record.nom, [:admin, session_code.record], data: { turbo_frame: "_top" }
+              %td= session_code.email
               %td.text-center= session_code.code
               %td.text-center= session_code.used? ? "Oui" : "Non"
               %td.text-end= l session_code.valid_until, format: :long

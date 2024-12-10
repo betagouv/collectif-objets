@@ -4,8 +4,7 @@ class SessionCode < ApplicationRecord
   LENGTH = 6
   EXPIRE_AFTER = 1.day.freeze
 
-  belongs_to :user
-  has_one :commune, through: :user
+  belongs_to :record, polymorphic: true
 
   scope :used, -> { where.not(used_at: nil) }
   scope :unused, -> { where(used_at: nil) }
@@ -16,6 +15,7 @@ class SessionCode < ApplicationRecord
   before_create :generate_code
 
   delegate :random_code, to: :class
+  delegate :email, to: :record
 
   def self.random_code
     rand((10.pow(LENGTH - 1))...(10.pow(LENGTH))).to_s
