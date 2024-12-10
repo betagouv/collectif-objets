@@ -3,7 +3,7 @@
 class UserMailerPreview < ApplicationMailerPreview
   def session_code_email
     session_code = SessionCode.new(
-      user: User.new(email: "mairie@thoiry.fr").tap(&:readonly!),
+      record: User.new(email: "mairie@thoiry.fr").tap(&:readonly!),
       code: "234045"
     )
     UserMailer.with(session_code:).session_code_email

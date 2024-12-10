@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :session_code do
-    user
+    record { association :user }
     sequence(:code) { |n| (234_533 + n).to_s }
     created_at { 2.minutes.ago }
   end
