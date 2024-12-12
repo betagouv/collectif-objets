@@ -5,9 +5,11 @@ FROM ruby:3.3-slim AS ruby-builder
 
 # use same UID as distroless nonroot for simplicity
 ARG UID="65532"
+ARG RAILS_MASTER_KEY
 
 # Important to set this before bundle install
 ENV RAILS_ENV=production
+ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
 
 # https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
 ENV DEBIAN_FRONTEND=noninteractive 
