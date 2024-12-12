@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.5"
+ruby "3.3"
 
 gem "aasm", "~> 5.5"
 gem "actionmailer-html2text", "~> 0.2.0"
