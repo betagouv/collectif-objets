@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_10_173621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -418,6 +418,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
     t.index ["objet_id", "dossier_id"], name: "index_recensements_on_objet_id_and_dossier_id", unique: true
   end
 
+  create_table "recenseur_accesses", force: :cascade do |t|
+    t.bigint "recenseur_id", null: false
+    t.bigint "commune_id"
+    t.bigint "edifice_id"
+    t.boolean "granted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true, where: "(commune_id IS NOT NULL)"
+    t.index ["recenseur_id", "edifice_id"], name: "index_recenseur_accesses_on_recenseur_id_and_edifice_id", unique: true, where: "(edifice_id IS NOT NULL)"
+    t.index ["recenseur_id"], name: "index_recenseur_accesses_on_recenseur_id"
+  end
+
+  create_table "recenseurs", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "status", default: "pending", null: false
+    t.string "nom"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_recenseurs_on_email", unique: true
+  end
+
   create_table "session_codes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "code"
@@ -467,5 +489,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
   add_foreign_key "session_codes", "users"
+  add_foreign_key "recenseur_accesses", "recenseurs"
   add_foreign_key "users", "communes"
 end

@@ -158,6 +158,7 @@ Rails.application.routes.draw do
         post :toggle_impersonate_mode
       end
     end
+    resources :recenseurs
     get "/session_codes(/:offset)", to: "session_codes#index", as: :session_codes
     resources :campaigns do
       get :edit_recipients
