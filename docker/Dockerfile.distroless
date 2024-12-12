@@ -7,13 +7,15 @@
 FROM ruby:3.3-slim AS ruby-builder
 
 # use same UID as distroless nonroot for simplicity
-ARG UID="65532"
+ARG UID="655326"
+ARG RAILS_MASTER_KEY
 
 # Important to set this before bundle install
 ENV RAILS_ENV=production
 
 # Other launch parameters to OVERLOAD at runtime
 ENV RAILS_SPECIFIC_ENV=production
+ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
 # ENV DATABASE_URL=postgresql://...
 # ENV RAILS_MASTER_KEY=
 # ENV SENTRY_AUTH_TOKEN=auth_token
