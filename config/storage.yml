@@ -51,7 +51,7 @@ scaleway_production: &scaleway_production
 
 # scaleway name needs to be preserved for prod because attachments were saved in prod db with this service name
 scaleway:
-  !!merge <<: *mc_ovh_prod:
+  !!merge <<: *mc_ovh_prod
   # !!merge <<: *scaleway_production
 
 # same problem for migration to OVH since we use refs to scaleway_staging in staging database
