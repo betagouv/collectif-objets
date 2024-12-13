@@ -67,46 +67,6 @@ FROM gcr.io/distroless/nodejs18-debian12 AS production
 # Remove entrypoint instead
 ENTRYPOINT []
 
-# Copy ruby files and some other libs necessary for gems to function
-# COPY --from=ruby-builder /lib/x86_64-linux-gnu/libz.so.* /lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libyaml* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgmp* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libcrypt* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgcc_s* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgssapi_krb* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libkrb* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libldap* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libk5crypto* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libcom_err* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/liblber* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libsasl2* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgnutls* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libkeyutils* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libp11-kit* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libidn2* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libunistring* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libtasn1* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libnettle* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libhogweed* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libcurl* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/librtmp* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libssh2* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libpsl* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libzstd* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libbrotlidec* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libbrotlicommon* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libnghttp2* /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libffi* /usr/lib/x86_64-linux-gnu/
-
-# Image conversion depends on glib2.0
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgio-2.0.so*  /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libglib-2.0.so*  /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so*  /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgobject-2.0.so*  /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libgthread-2.0.so*  /usr/lib/x86_64-linux-gnu/
-# glib2.0 depends on libpcre2-8
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libpcre2-8.so*  /usr/lib/x86_64-linux-gnu/
-
 COPY --from=ruby-builder /usr/local/lib/ /usr/local/lib
 COPY --from=ruby-builder /usr/local/bin/ /usr/local/bin
 # we need env because MJML binary call #!/usr/bin/env node
@@ -117,60 +77,9 @@ COPY --from=ruby-builder /usr/local/bundle/extensions /usr/local/bundle/extensio
 # Copy postgres libpq-dev package files for use by pg gem
 COPY --from=ruby-builder /usr/bin/pg_config /usr/bin/pg_config
 COPY --from=ruby-builder /usr/include/postgresql /usr/include/postgresql
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libpq.a /usr/lib/x86_64-linux-gnu/libpq.a
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/pkgconfig/libpq.pc /usr/lib/x86_64-linux-gnu/pkgconfig/libpq.pc
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libpq* /usr/lib/x86_64-linux-gnu/
 
-# Copy libvips42 package files for image conversion
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42    /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libvips.so.42    /usr/lib/x86_64-linux-gnu/libvips.so.42
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-heif.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-jxl.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-magick.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-openslide.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/vips-modules-8.14/vips-poppler.so    /usr/lib/x86_64-linux-gnu/vips-modules-8.14/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42.16.1    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder /usr/lib/x86_64-linux-gnu/libvips.so.42.16.1    /usr/lib/x86_64-linux-gnu/
-# Libvips42 depends on a thousand things
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libexpatw.so*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libexpat.so*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libgsf-1.so*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libfftw3.so*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libcfitsio.so*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libcairo*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libcgif*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libexif*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libfontconfig*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libheif*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libimagequant*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libjpeg*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libjxl*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/liblcms*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libmagickcore*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libmatio*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libOpenEXR*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libopenjp*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libopenslide*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/liborc*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libpango*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libpangocairo*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libpangoft*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libpng*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libpoppler-glib*    /usr/lib/x86_64-linux-gnu/*
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/librsvg*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libtiff*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libwebp*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libwebpdemux*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libwebpmux*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libmount*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libselinux*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libxml*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libbz2*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/libharfbuzz*    /usr/lib/x86_64-linux-gnu/
-# COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/fribidi*    /usr/lib/x86_64-linux-gnu/
-
+# Copy all system libs (a bit heavier less optimized image but a lot easier to maintain)
 COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/*    /usr/lib/x86_64-linux-gnu/
-
 
 # Define env for ruby and app to work
 # ENV RUBY_DOWNLOAD_SHA256=51aec7ea89b46125a2c9adc6f36766b65023d47952b916b1aed300ddcc042359
