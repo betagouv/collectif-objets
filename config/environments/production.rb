@@ -124,6 +124,9 @@ Rails.application.configure do
     config.active_storage.service = :scaleway
     # config.s3_endpoint = ""
 
+  elsif config.x.environment_specific_name == "mc_prd"
+    config.active_storage.service = :scaleway
+
   elsif config.x.environment_specific_name == "mc_stg"
     config.action_mailer.show_previews = true
     # we need to keep scaleway_staging name for db consistency (see storage.yml)

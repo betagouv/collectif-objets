@@ -25,6 +25,12 @@ mc_ovh_staging: &mc_ovh_staging
   #secret_access_key: <%= Rails.application.credentials.dig(:mc_ovh_s3, :user_dev_colle, :secret_access_key) %>
   bucket: <%= ENV["BUCKET_NAME"] %>
 
+mc_ovh_prod: &mc_ovh_prod
+  !!merge <<: *mc_ovh_defaults
+  access_key_id: <%= ENV["BUCKET_USER_ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["BUCKET_USER_SECRET_ACCESS_KEY"] %>
+  bucket: <%= ENV["BUCKET_NAME"] %>
+
 scaleway_development:
   !!merge <<: *scaleway_defaults
   access_key_id: <%= Rails.application.credentials.dig(:scaleway, :project_co, :access_key_id) %>
@@ -45,7 +51,8 @@ scaleway_production: &scaleway_production
 
 # scaleway name needs to be preserved for prod because attachments were saved in prod db with this service name
 scaleway:
-  !!merge <<: *scaleway_production
+  !!merge <<: *mc_ovh_prod:
+  # !!merge <<: *scaleway_production
 
 # same problem for migration to OVH since we use refs to scaleway_staging in staging database
 scaleway_staging:
