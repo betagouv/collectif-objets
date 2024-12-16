@@ -340,10 +340,12 @@ Ensuite, les étapes sont les suivantes :
 
 ### Ajouter des photos pour le recensement
 
-À moins que cela ne vous soit impossible, nous vous demandons systématiquement d’ajouter des photos lors du recensement de vos objets protégés. Ces photos constituent une source d’information précieuse pour les conservateurs et leur permettent de mieux évaluer l’état de l’objet et l’opportunité d’entamer un travail de restauration ou de sécurisation de l’objet, par exemple.
+À moins que cela ne vous soit impossible, nous vous demandons systématiquement d’ajouter des photos lors du recensement en ligne de vos objets protégés. Les fichiers photos doivent être en format jpeg ou png. 
 
-* Pensez bien à vérifier que vos photos sont nettes ;
-* S'il vous est impossible de faire autrement, le flash peut être utilisé s'il améliore la visibilité. Attention à ne pas surexposer votre photo
+Ces photos constituent une source d’information précieuse pour les conservateurs et leur permettent d'évaluer l’état de l’objet et l’opportunité d’entamer un travail de restauration ou de sécurisation, par exemple. 
+
+* Pensez à vérifier que vos photos sont nettes ;
+* S'il vous est impossible de faire autrement, le flash peut être utilisé s'il améliore la visibilité. Attention à ne pas surexposer votre photo.
 
 Exemples d’un ensemble de photos à prendre pour une statue :
 
@@ -355,7 +357,7 @@ Exemples d’un ensemble de photos à prendre pour une statue :
 
 ### Licence utilisée pour les photos déposées
 
-Les photos déposées sur la plateforme Collectif Objets sont placées sous la [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-licence/). Cette licence développée par l’État français est ouverte, libre et gratuite, et apporte la sécurité juridique nécessaire aux producteurs et aux réutilisateurs des données publiques. Elles pourront donc être réutilisées. Mais les photos ne pourront pas être dénaturées et la source (la Mairie) sera citée en cas de réutilisation.
+Les photos déposées sur la plateforme Collectif Objets sont placées sous la [Licence Ouverte Etalab](https://www.etalab.gouv.fr/licence-ouverte-open-licence/). Cette licence développée par l’État français est ouverte, libre et gratuite, et apporte la sécurité juridique nécessaire aux producteurs et aux réutilisateurs des données publiques. Elles pourront donc être réutilisées. Mais les photos ne pourront pas être dénaturées et la source (la Mairie) doit être citée en cas de réutilisation.
 
 Cette licence ouverte est automatiquement appliquée lorsque c'est un agent public qui prend la photo.
 
@@ -363,7 +365,7 @@ Si c'est une personne externe à la mairie qui prend les photos, il faut recueil
 
 ### Qui peut recenser
 
-Si aucun élu n'est disponible pour effectuer ce recensement, il peut être effectué par une personne de confiance : par exemple la personne qui gère les accès à l’édifice abritant les objets protégés ou encore une association.
+Si aucun élu n'est disponible pour effectuer ce recensement, il peut être effectué par une personne de confiance, par exemple : la personne qui gère les accès à l’édifice abritant les objets protégés ou encore une association.
 
 Si le ou la maire, ou la personne responsable du patrimoine de la commune, vous a fait confiance et vous a chargé de vous occuper de ce recensement, vous êtes légitime pour le faire. L’enjeu principal est de bien suivre les consignes indiquées pour le recensement, de prendre en photo de façon nette les objets protégés, et de remplir attentivement le formulaire de recensement pour chaque objet protégé.
 
