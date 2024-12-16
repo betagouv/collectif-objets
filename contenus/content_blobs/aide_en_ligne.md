@@ -406,11 +406,13 @@ Pour en savoir plus sur les objets protégés au titre des monuments historiques
 
 Si vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a trois explications potentielles :
 
-* votre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques
-* il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
-* s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contacté. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou "adresses email de contact") qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).
+* votre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques ;
+* il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne. Une campagne de recensement peut concerner uniquement une partie d'un département. Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département ; 
+* s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contacté. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou "adresses email de contact") qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).\
+  A﻿ttention : certaines messageries électroniques (boites mail) sont équipées de systèmes "anti-spam" ou "anti-robots" qui bloquent la réception d'emails envoyés automatiquement par des logiciels, comme c'est le cas avec Collectif Objets. 
 
-Si votre commune n'a pas indiqué d'adresse email de contact dans ce site, ou si l'adresse email indiquée dans le site est obsolète, nous vous invitons à effectuer une demande de mise à jour de vos coordonnées directement depuis le site de l'annuaire du service public. Pour cela, il vous faut rechercher la page de votre commune dans ce site, puis descendre en bas de la page et cliquer sur "Demander une mise à jour de cette page" et ensuite suivre les instructions.
+Si votre commune n'a pas d'adresse email de contact indiquée dans ce site, ou si l'adresse email indiquée est obsolète, nous vous invitons à demander une mise à jour de vos coordonnées directement depuis le site de l'annuaire du service public : [https://lannuaire.service-public.fr/ ](https://lannuaire.service-public.fr/)\
+Pour cela, il vous faut rechercher la page de votre commune dans ce site, puis descendre en bas de la page et cliquer sur "Demander une mise à jour de cette page" et ensuite suivre les instructions.
 
 ### Je ne trouve pas un objet
 
