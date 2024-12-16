@@ -200,14 +200,14 @@ La vidéo ci-dessous vous présente les deux méthodes possibles pour vous conne
    Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code ou bien suivre le lien disponible dans l'email.
 2. Si vous ne trouvez plus l'email vous invitant au recensement :
 
-   * Rendez-vous sur la [page de demande de code](https://collectif-objets.beta.gouv.fr/users/session_codes/new)
+   * Rendez-vous sur la [page de demande de code](/users/session_codes/new)
    * Cliquez sur « Sélectionnez un département » et choisissez votre département dans la liste. Puis sélectionnez le nom de votre commune dans la liste en dessous. 
    * Cliquez sur « Recevoir un code de connexion » 
    * Consultez la boite mail de votre commune. Vous recevrez un courriel contenant un code de connexion à 6 chiffres. Attention : cet email peut atterrir dans les "spams" ou "courriers indésirables" de votre boite mail. Cliquez sur le code dans le mail, ou copiez-le pour le saisir dans la page de connexion.
    * Une fois le code saisi dans la page de connexion, vous serez connecté à l'espace de votre commune dans la plateforme. Lisez les instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
    * Vous verrez s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier pour commencer son recensement, après être allé voir cet objet sur son lieu de conservation.
 
-Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](https://collectif-objets.beta.gouv.fr/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
+Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
 
 ### Déroulé du recensement
 
