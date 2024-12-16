@@ -446,7 +446,7 @@ Vous pouvez également partager vos doutes dans l'espace "commentaire" en fin du
 
 Il arrive que plusieurs objets similaires soient abrités dans un même édifice et qu’un seul soit protégé au titre des monuments historiques.
 
-Si vous avez un doute sur quel objet est le bon, vous pouvez prendre des photos des différents objets et écrire aux conservateurs de votre département via la messagerie disponible dans la plateforme Collectif Objets. Il est possible de joindre des photographies à vos messages dans la messagerie. \
+Si vous avez un doute sur quel objet est le bon, vous pouvez prendre des photos des différents objets et écrire aux conservateurs de votre département via la messagerie disponible dans la plateforme Collectif Objets. Il est possible d'y joindre des photographies à vos messages.\
 Les conservateurs pourront vous conseiller pour l’identification des objets protégés.
 
 ### Je ne sais pas si mon recensement a été transmis
@@ -457,17 +457,17 @@ Lorsque vous avez rempli les questionnaires pour la totalité des objets protég
 
 En cliquant sur ce bouton et en suivant les instructions, votre dossier de recensement (qui comprend les informations et photos que vous avez indiquées pour chaque objet protégé) sera envoyé aux conservateurs de votre département.
 
-Les conservateurs pourront alors effectuer l’examen de votre dossier, et éventuellement vous demander plus d’informations ou des corrections avant de le valider.
+Les conservateurs pourront alors effectuer examiner votre dossier, et éventuellement vous demander plus d’informations ou des corrections avant de le valider.
 
-Une fois vos informations transmises aux conservateurs, vous n’avez plus rien à faire en ce qui concerne le recensement des objets. C'est désormais aux conservateurs de procéder à l’examen de votre dossier.
+Une fois vos informations transmises aux conservateurs, vous n’avez plus rien à faire en ce qui concerne le recensement des objets. C'est aux conservateurs de procéder à l’examen de votre dossier.
 
-Ils pourront vous recontacter par la suite à travers la messagerie (vous en serez informé par un email) afin de vous demander des modifications, ou plus de détails, ou vous recommander des actions ou bien pour une prise de rendez-vous pour une visite.
+Ils pourront vous recontacter par la suite à travers la messagerie (vous en serez informé par un email) afin de vous demander des modifications, plus de détails, ou vous recommander des actions ou bien pour une prise de rendez-vous pour une visite.
 
 ### Je souhaite modifier mon recensement ou ajouter de nouvelles photos
 
 Si vous souhaitez effectuer des changements dans les recensements de vos objets (par exemple : changer les photos transmises en cas de confusion entre deux objets), cela reste possible tant que les conservateurs de vos départements n'ont pas fini d'examiner votre dossier de recensement.
 
-Voici une vidéo explicative pour vous indiquer la démarche à suivre :
+Voici une vidéo explicative pour vous indiquer la marche à suivre :
 
 <figure role="group" class="fr-content-media">
   <iframe
@@ -560,7 +560,8 @@ Voici une vidéo explicative pour vous indiquer la démarche à suivre :
   </div>
 </figure>
 
-Si un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'examen de votre dossier. C'est donc cette procédure que vous devrez suivre.
+Si un conservateur remarque que vous avez commis une erreur, il est probable qu'il vous invitera à modifier votre recensement avant de finaliser l'examen de votre dossier. \
+C'est donc cette procédure que vous devrez suivre.
 
 ### Utiliser la messagerie en cas de problème
 
@@ -568,9 +569,7 @@ Une messagerie instantanée est intégrée dans le site Collectif Objets.
 
 Elle permet aux conservateurs et aux communes d’échanger directement depuis le site. Cela permet de centraliser l’ensemble des informations liées aux objets. Lorsque vous écrivez dans la messagerie, les conservateurs de votre département en sont avertis par mail. Et inversement, vous serez prévenu par email lorsqu'un conservateur vous écrit dans la messagerie.
 
-Pour accéder à la messagerie, vous devez vous connectez à votre espace dans Collectif Objets (par exemple en cliquant sur les liens qui se trouvent dans les mails que vous recevez de la part de Collectif Objets).
-
-Une fois connecté, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web.
+Pour accéder à la messagerie, vous devez vous connecter à votre espace dans Collectif Objets. Ensuite, il vous suffit de cliquer sur l'onglet "Messagerie" situé en haut de la page web.
 
 ![Capture écran de la messagerie](/contenus/content_blobs/images/capture-messagerie-co.png)
 
@@ -578,7 +577,7 @@ Une fois sur la page "Messagerie" vous pouvez rédiger votre message dans le cha
 
 ![Messagerie commune](/contenus/content_blobs/images/2023-07-26-messagerie-commune-la-desirade.png)
 
-Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message.
+Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message aux conservateurs de votre département.
 
 ## Après le recensement
 
@@ -586,17 +585,17 @@ Cliquez enfin sur le bouton « Envoyer » pour transmettre votre message.
 
 Vos réponses seront traitées par les conservateurs de votre département : les Conservateurs des antiquités et objets d’arts (CAOA) ou les Conservateurs des Monuments historiques (CMH).
 
-Lorsque les conservateurs auront examiné votre dossier de recensement, un compte-rendu vous sera adressé par email. L’objet de cet email contiendra les mots : Examen du recensement des objets protégés”.
+Lorsque les conservateurs auront examiné votre dossier de recensement, un compte-rendu sera disponible dans le site Collectif Objets, et vous serez prévenu de cela par email. L’objet de cet email contiendra les mots : "Examen du recensement des objets protégés”. 
 
-Cet email contiendra un lien qui vous permettra d’accéder aux retours des conservateurs au sujet de votre dossier de recensement. Si votre dossier semble exact et n’appelle pas des mesures exceptionnelles, il n’y aura peut-être pas de message ou de remarque des conservateurs.
+Cet email contiendra un lien qui vous permettra d’accéder aux retours des conservateurs. Si votre dossier semble exact et n’appelle pas de mesures exceptionnelles, il n’y aura peut-être pas de message ou de remarque des conservateurs.
 
-Vous avez alors complété avec succès votre recensement et nous vous en remercions.
+Vous aurez alors complété avec succès votre recensement et nous vous en remercions.
 
 Nota Bene : Ce recensement se distingue du “récolement” officiel des conservateurs, qui nécessite des signatures des propriétaires, conservateurs et éventuels affectataires.
 
 ### Objets signalés en état préoccupant
 
-Suite à la transmission de votre dossier, les conservateurs vont comparer les états des objets dans les différentes communes de votre département et vont établir un ordre de priorité pour leurs actions et leurs visites. Si l'état de votre objet est parmi les plus préoccupants, ils pourront envisager de vous accompagner dans un travail de sécurisation ou de restauration de votre objet. Ils pourraient décider de venir voir les objets dont l’état est préoccupant in situ.
+Suite à la transmission de votre dossier, les conservateurs vont comparer les états des objets dans les différentes communes de votre département et vont établir un ordre de priorité pour leurs actions et leurs visites. Si l'état de votre objet est parmi les plus préoccupants, ils pourront envisager de vous accompagner dans un travail de sécurisation ou de restauration de votre objet. Ils pourraient décider de venir voir sur place les objets dont l’état est préoccupant. 
 
 Les conservateurs peuvent également vous contacter via la messagerie de Collectif Objets afin de vous donner des conseils ou des indications pour l’entretien et la préservation de vos objets.
 
@@ -604,7 +603,7 @@ Les conservateurs peuvent également vous contacter via la messagerie de Collect
 
 Veuillez consulter notre fiche à ce sujet, qui regroupe des conseils des conservateurs : [lire la fiche sur la sécurisation](/fiches/securisation).
 
-Nous vous recommandons également de vous renseigner directement auprès des conservateurs des antiquités et objets d'art de votre département.
+Renseignez-vous directement auprès des conservateurs des antiquités et objets d'art de votre département avant de prendre une mesure de déplacement ou de sécurisation concernant un objet protégé au titre des monuments historiques. 
 
 Pour aller plus loin sur la [sécurisation des objets protégés](https://www.culture.gouv.fr/Thematiques/Securite-Surete) et les [procédures en cas de vol](https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol).
 
@@ -624,7 +623,7 @@ Pour aller plus loin, vous pouvez consulter cette page dédiée, du site du mini
 
 ### Trouver des aides pour financer des travaux sur un objet protégé
 
-Si l'un de vos objets protégés mérite de bénéficier de travaux (restauration, réparation, sécurisation...) il vous est possible de demander une aide de l'Etat auprès de votre DRAC (Direction régionale des affaires culturelles). De plus, la majorité des régions et départements proposent des aides complémentaires qui peuvent s'ajouter à l'aide du ministère de la Culture.
+Si l'un de vos objets protégés mérite de bénéficier de travaux (restauration, réparation, sécurisation...) il vous est possible de demander une aide de l'Etat auprès de votre DRAC (Direction régionale des affaires culturelles). De plus, la majorité des régions et départements propose des aides complémentaires qui peuvent s'ajouter à l'aide du ministère de la Culture.
 
 Pour plus de renseignements, veuillez consulter les [aides possibles](https://aides-territoires.beta.gouv.fr/portails/patrimoinemobilier/).
 
