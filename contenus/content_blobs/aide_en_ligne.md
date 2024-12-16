@@ -424,7 +424,7 @@ Afin de savoir si l’objet a été déplacé ou s’il a disparu depuis longtem
 
 Après ces recherches, si l’objet n'est toujours pas retrouvé :
 
-* indiquez-le comme “introuvable” via la plateforme Collectif Objets ;
+* indiquez-le comme “introuvable” via la plateforme Collectif Objets, à l'étape 1 du questionnaire de recensement concernant cet objet ;
 * après échanges avec les conservateurs, il vous faudra peut-être déposer une plainte auprès de la gendarmerie en spécifiant la disparition d'un objet protégé au titre des monuments historiques. Il n'y a aucune prescription pour ce type de vol. Les trésors nationaux ne peuvent pas quitter le domaine public, ils sont imprescriptibles.
 
 Dans tous les cas, vous avez la possibilité de discuter de cela avec vos conservateurs depuis la messagerie de la plateforme.
@@ -437,15 +437,17 @@ Quelques ressources supplémentaires à ce sujet :
 
 ### Je ne sais pas évaluer l’état d’un objet
 
-Évaluer l’état des objets permet de donner une idée globale de leur état de conservation aux conservateurs. Ils pourront, si nécessaire, corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus logique.
+Évaluer l’état des objets permet de donner une idée globale de leur état de conservation aux conservateurs. Ils pourront, si nécessaire, corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus approprié.
 
-Si des doutes subsistent, vous pouvez interroger le conservateur ou la conservatrice de votre département via la messagerie interne au site Collectif Objets.
+Si des doutes subsistent, vous pouvez interroger le conservateur ou la conservatrice de votre département via la messagerie interne au site Collectif Objets. \
+Vous pouvez également partager vos doutes dans l'espace "commentaire" en fin du questionnaire de recensement de l'objet concerné.
 
 ### Je ne sais pas si je recense le bon objet
 
 Il arrive que plusieurs objets similaires soient abrités dans un même édifice et qu’un seul soit protégé au titre des monuments historiques.
 
-Si vous avez un doute sur quel objet est le bon, vous pouvez prendre des photos des différents objets et écrire aux conservateurs de votre département via la messagerie disponible sur la plateforme Collectif Objets. Ils pourront vous conseiller pour l’identification des objets protégés.
+Si vous avez un doute sur quel objet est le bon, vous pouvez prendre des photos des différents objets et écrire aux conservateurs de votre département via la messagerie disponible dans la plateforme Collectif Objets. Il est possible de joindre des photographies à vos messages dans la messagerie. \
+Les conservateurs pourront vous conseiller pour l’identification des objets protégés.
 
 ### Je ne sais pas si mon recensement a été transmis
 
