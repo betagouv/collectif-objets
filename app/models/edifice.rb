@@ -48,4 +48,6 @@ class Edifice < ApplicationRecord
   def to_s
     "Édifice #{nom} #{merimee_REF ? "(#{merimee_REF})" : '(sans référence Mérimée)'} - commune #{code_insee}"
   end
+
+  def nom = super || "édifice non renseigné"
 end

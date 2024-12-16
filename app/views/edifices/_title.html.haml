@@ -1,4 +1,4 @@
 %h2.fr-mt-4w{id: edifice.slug}
-  = edifice_nom(edifice.nom)
+  = edifice.nom.upcase_first
   ·
   = t("objets.count", count: edifice.objets.length)

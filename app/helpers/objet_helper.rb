@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 module ObjetHelper
-  def edifice_nom(nom)
-    return nom.upcase_first if nom.present?
-
-    content_tag(:i, "Édifice non renseigné")
-  end
-
   def palissy_url(objet)
     palissy_url_ref objet.palissy_REF
   end
