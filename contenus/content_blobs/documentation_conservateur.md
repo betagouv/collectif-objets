@@ -29,7 +29,7 @@ Les objets qui sont propriétés de l’État ne sont pas concernés par Collect
 
 Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement.
 
-Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir en écrivant un email à cette adresse : contact@collectif-objets.beta.gouv.fr 
+Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir en écrivant un email à cette adresse : CONTACT_EMAIL
 
 Les conservateurs d'un département choisissent la liste des communes destinataires de la campagne. Vous pouvez donc exclure d'une campagne les communes qui sont des cas particuliers ou difficiles.
 
@@ -43,38 +43,37 @@ Plus de 90% des informations transmises par les communes sont validées sans cor
 
 Collectif Objets est un service destiné aux conservateurs des Monuments Historiques et conservateurs des Antiquités et Objets d’Art.
 
-S﻿i vous souhaitez être conseillé ou accompagné avant de lancer votre première campagne de recensement en ligne, vous pouvez écrire un email à cette adresse : contact@collectif-objets.beta.gouv.fr \
-\
-V﻿ous serez soit accompagné par une personne du ministère en maîtrise de l'outil, soit redirigé vers un ou une conservateur référent(e) qui vous conseillera pour cette première campagne.
+Si vous souhaitez être conseillé ou accompagné avant de lancer votre première campagne de recensement en ligne, vous pouvez écrire un email à cette adresse : CONTACT_EMAIL
+Vous serez soit accompagné par une personne du ministère en maîtrise de l'outil, soit redirigé vers un ou une conservateur référent(e) qui vous conseillera pour cette première campagne.
 
-S﻿oyez rassuré : l'outil est très simple d'utilisation.
+Soyez rassuré : l'outil est très simple d'utilisation.
 
 ### Les étapes d’une campagne de recensement
 
-* **Les conservateurs planifient et lancent la campagne de recensement directement depuis le site web.** Ils invitent les communes par mail à se connecter sur Collectif Objets pour découvrir les objets MH qu’elles abritent. 
+* **Les conservateurs planifient et lancent la campagne de recensement directement depuis le site web.** Ils invitent les communes par mail à se connecter sur Collectif Objets pour découvrir les objets MH qu’elles abritent.
 * **Les communes recensent en ligne les objets MH.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur "dossier de recensement" via la plateforme Collectif Objets.
 * **Les conservateurs examinent les informations et photos transmises directement depuis le site web.** Pour chaque objet, ils peuvent valider ou modifier les informations et, de leur côté, engager des actions sur le terrain si nécessaire. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune  via une messagerie intégrée au site web.
-* **Les données validées par les conservateurs** sont mises à disposition de la Médiathèque du Patrimoine et de la Photographie (MPP) pour être **éventuellement reversées dans le système d’information patrimonial.** \
-  \
-  Les informations ou données concernées sont : les photographies transmises par les communes et les emplacements des objets (déplacements / disparitions). \
-  \
-  I﻿mportant : la MPP ne met à jour les données concernant un objet qu'après avoir obtenu une confirmation d'un(e) CMH ou d'un(e) CAOA / CDAOA. 
+* **Les données validées par les conservateurs** sont mises à disposition de la Médiathèque du Patrimoine et de la Photographie (MPP) pour être **éventuellement reversées dans le système d’information patrimonial.**
+
+  Les informations ou données concernées sont : les photographies transmises par les communes et les emplacements des objets (déplacements / disparitions).
+
+  Important : la MPP ne met à jour les données concernant un objet qu'après avoir obtenu une confirmation d'un(e) CMH ou d'un(e) CAOA / CDAOA.
 
 ### Les communes concernées par la campagne
 
-Toutes les communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) peuvent être intégrées à la liste des communes concernées par une campagne de recensement. \
-\
-L﻿es conservateurs sont libres de choisir les communes à exclure. Par exemple, si un inventaire a déjà été fait là-bas récemment ; ou si l'équipe de la CAOA souhaite procéder par secteurs géographiques au sein du département. 
+Toutes les communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) peuvent être intégrées à la liste des communes concernées par une campagne de recensement.
+
+Les conservateurs sont libres de choisir les communes à exclure. Par exemple, si un inventaire a déjà été fait là-bas récemment ; ou si l'équipe de la CAOA souhaite procéder par secteurs géographiques au sein du département.
 
 ### Suite à la première campagne départementale
 
-N﻿ous encourageons dans un premier temps les conservateurs à examiner les "dossiers de recensement" transmis par les communes ayant participé à la campagne et à transmettre leurs examens aux communes, via la plateforme Collectif Objets.
+Nous encourageons dans un premier temps les conservateurs à examiner les "dossiers de recensement" transmis par les communes ayant participé à la campagne et à transmettre leurs examens aux communes, via la plateforme Collectif Objets.
 
-U﻿ne nouvelle campagne peut être relancée dès la fin d'une campagne de recensement. \
-\
-Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu précédemment. Mais il est aussi possible d'intégrer à la nouvelle campagne des communes ayant répondu précédemment. \
-\
-D﻿eux campagnes de recensement ne peuvent pas être concomitantes au sein d'un même département. 
+Une nouvelle campagne peut être relancée dès la fin d'une campagne de recensement.
+
+Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu précédemment. Mais il est aussi possible d'intégrer à la nouvelle campagne des communes ayant répondu précédemment.
+
+Deux campagnes de recensement ne peuvent pas être concomitantes au sein d'un même département.
 
 L’objectif est qu’en 5 ans l’ensemble des communes d’un département abritant des objets MH ait recensé ses objets.
 
@@ -86,28 +85,28 @@ L’objectif est qu’en 5 ans l’ensemble des communes d’un département abr
 
 Les comptes « conservateurs » sont déjà créés sur Collectif Objet à partir de l’annuaire des conservateurs. Pour se connecter à la plateforme pour la première fois, vous devez :
 
-* Vous rendre sur le site [Collectif Objets](https://collectif-objets.beta.gouv.fr/).
-* Cliquer sur « [connexion conservateur](https://collectif-objets.beta.gouv.fr/conservateurs/sign_in) » en haut à droite.
+* Vous rendre sur le site [Collectif Objets](/).
+* Cliquer sur « [connexion conservateur](/conservateurs/sign_in) » en haut à droite.
 * Cliquer sur « Première connexion / Je n’ai pas de mot de passe ».
-* Cliquer sur « [Réinitialiser mon mot de passe](https://collectif-objets.beta.gouv.fr/conservateurs/password/new) » et renseigner votre adresse mél professionnelle.
-* Vous recevrez un mél avec un lien de connexion vous invitant à définir votre mot de passe.
+* Cliquer sur « [Réinitialiser mon mot de passe](/conservateurs/password/new) » et renseigner votre adresse email professionnelle.
+* Vous recevrez un email avec un lien de connexion vous invitant à définir votre mot de passe.
 
-S﻿i vous êtes devenu conservateur récemment ou que vous rencontrez un problème, contactez l'adresse mail suivante pour expliquer votre problème : contact@collectif-objets.beta.gouv.fr
+Si vous êtes devenu conservateur récemment ou que vous rencontrez un problème, contactez l'adresse mail suivante pour expliquer votre problème : CONTACT_EMAIL
 
 ### Comment créer une campagne de recensement ?
 
-Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de mails personnalisés envoyées aux communes abritant des objets protégés. Pour lancer votre campagne de recensement, suivez les étapes ou visionnez la vidéo visible plus bas : 
+Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de mails personnalisés envoyées aux communes abritant des objets protégés. Pour lancer votre campagne de recensement, suivez les étapes ou visionnez la vidéo visible plus bas :
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
-* **Cliquez sur le lien « Créer une nouvelle campagne »** en haut de page et configurez la campagne : 
+* **Cliquez sur le lien « Créer une nouvelle campagne »** en haut de page et configurez la campagne :
 
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates.
-  * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les futurs mails à destination des communes sont mis à jour avec les informations précédemment complétées. 
-* **Définissez la liste des communes destinataires.** N'oubliez pas de cliquer sur le bouton « Enregistrer la sélection » pour enregistrer la liste mise à jour. 
-* **Lorsque vous êtes satisfait des informations relatives à votre campagne de recensement (liste des communes concernées, dates, signature de mail...), cliquez sur le bouton « Planifier la campagne ».**\
-  \
-  Votre campagne est planifiée : les communes destinataires recevront un email, à la date définie par vous, les invitant à recenser les objets protégés de leur territoire.\
-  S﻿i vous avez besoin de modifier des informations avant le début de la campagne, vous pouvez toujours cliquer sur le bouton "Repasser en brouillon" afin de ce faire. \
+  * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les futurs mails à destination des communes sont mis à jour avec les informations précédemment complétées.
+* **Définissez la liste des communes destinataires.** N'oubliez pas de cliquer sur le bouton « Enregistrer la sélection » pour enregistrer la liste mise à jour.
+* **Lorsque vous êtes satisfait des informations relatives à votre campagne de recensement (liste des communes concernées, dates, signature de mail...), cliquez sur le bouton « Planifier la campagne ».**
+
+  Votre campagne est planifiée : les communes destinataires recevront un email, à la date définie par vous, les invitant à recenser les objets protégés de leur territoire.
+  Si vous avez besoin de modifier des informations avant le début de la campagne, vous pouvez toujours cliquer sur le bouton "Repasser en brouillon" afin de ce faire.
   N'oubliez pas ensuite de repasser la campagne en "planifiée", et ce au plus tard la veille du début de la campagne !
 
 Voici également un tutoriel vidéo :
@@ -233,11 +232,11 @@ Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la
 Pour accéder aux dossiers de recensement des communes :
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-) sur Collectif Objets.** Vous arrivez sur la page « Mes départements ».
-* **Sélectionnez le département qui vous intéresse.** Vous accédez alors à la page qui constitue le "tableau de bord des conservateurs". \
-  \
+* **Sélectionnez le département qui vous intéresse.** Vous accédez alors à la page qui constitue le "tableau de bord des conservateurs".
+
   En haut de page, vous voyez les statistiques de votre département (y compris les informations relatives à la ou les campagne(s) de recensement qui ont eu lieu ou sont en cours).
 
-  Les dossiers de recensement transmis par les communes sont présentés plus bas et accessibles soit via un tableau (« [Vue Tableau](#comment-fonctionne-la-vue-tableau-dun-dpartement-) »), soit sous forme de carte (« Vue Carte »). 
+  Les dossiers de recensement transmis par les communes sont présentés plus bas et accessibles soit via un tableau (« [Vue Tableau](#comment-fonctionne-la-vue-tableau-dun-dpartement-) »), soit sous forme de carte (« Vue Carte »).
 * **Cliquez sur le nom de la commune qui vous intéresse pour accéder à son dossier de recensement.**
 
   Pour information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel.
@@ -248,37 +247,33 @@ Pour accéder aux dossiers de recensement des communes :
 
 ### Examiner le dossier de recensement d'une commune
 
-Les dossiers de recensement transmis par les communes sont répartis en deux catégories : \
-\
--﻿ "À examiner en priorité" : ces dossiers contiennent un ou plusieurs objet(s) qui a été signalé soit comme "en péril" soit comme "disparu" (c'est-à-dire : non trouvé) par la commune.\
-\
--﻿ "À examiner" : les dossiers de recensement dont aucun objet n'a été signalé comme "disparu" ou "en péril".\
-\
-N﻿ota Bene : dans la foulée de la transmission d'un dossier de recensement par une commune, tous les dossiers sont d'abord catégorisés comme "À examiner en priorité". Le tri entre les dossiers réellement prioritaires et les dossiers moins urgents dans la plateforme s'opère 24 heures après la transmission du dossier par la commune. 
+Les dossiers de recensement transmis par les communes sont répartis en deux catégories :
 
-L﻿orsque vous cliquez sur le nom d'une commune qui vous a transmis son dossier, vous  êtes immédiatement conduit vers son dossier de recensement. \
-\
-Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-dessous : 
+- "À examiner en priorité" : ces dossiers contiennent un ou plusieurs objet(s) qui a été signalé soit comme "en péril" soit comme "disparu" (c'est-à-dire : non trouvé) par la commune.
+- "À examiner" : les dossiers de recensement dont aucun objet n'a été signalé comme "disparu" ou "en péril".
+  Nota Bene : dans la foulée de la transmission d'un dossier de recensement par une commune, tous les dossiers sont d'abord catégorisés comme "À examiner en priorité". Le tri entre les dossiers réellement prioritaires et les dossiers moins urgents dans la plateforme s'opère 24 heures après la transmission du dossier par la commune.
+  Lorsque vous cliquez sur le nom d'une commune qui vous a transmis son dossier, vous  êtes immédiatement conduit vers son dossier de recensement.
+  Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-dessous :
 
-* **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet. \
+* **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
   Le premier encadré blanc, en haut de page, affiche des informations issues de la base Palissy de la Plateforme Ouverte du Patrimoine (POP). Les informations transmises par la commune se trouvent en dessous, dans la partie bleutée sous l'intitulé "Recensement". Les photos transmises par la commune (si elle en a bien transmis) se trouvent sur la droite de cette section.
 
   * **Examinez les informations transmises par la commune :** à partir des photos transmises par la commune, qui sont cliquables et zoomables pour en examiner les détails, vous pouvez valider (en les laissant comme telles) ou corriger les informations renseignées.
 
-    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification.\
+    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification.
+
     N'oubliez pas de sauvegarder vos modifications en cliquant sur le bouton « Sauvegarder » en bas de page.
 
-    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises. Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).**\
-    **Reportez-vous à la section correspondante ci-dessous pour en savoir plus.**\
+    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises. Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).**
+    **Reportez-vous à la section correspondante ci-dessous pour en savoir plus.**
     **De la même manière, si la commune n’a pas transmis de photos, reportez-vous à la section correspondante ci-dessous.**
   * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.**
     Cochez l’action appropriée parmi la liste proposée :
-
-    * *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)*,
-    * *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)*,
-    * *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)*,
-    * *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)*, et
-    * *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*.
+    - *[informer la commune sur les mesures d’entretien préventives](/fiches/entretien_objets)*,
+    - *[informer la commune sur les étapes préalables à la restauration](/fiches/restauration)*,
+    - *[informer la commune sur les mesures d’entretien des édifices](/fiches/entretien_edifices)*,
+    - *[informer la commune sur les mesures de sécurisation des objets](/fiches/securisation)*, et
+    - *[informer la commune sur le dépôt de plainte](/fiches/depot_plainte)*.
 
     Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen.
 
@@ -453,7 +448,7 @@ Si la commune vous a transmis des informations erronées ou insuffisantes, envoy
 
 En effet, il ne faut pas « finaliser » les dossiers des communes où des éléments sont insatisfaisants **car cela reviendrait à valider des informations erronées**, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)
 
-**Il faut notamment être très vigilant avec les photographies transmises.** Si les photos ne correspondent pas au bon objet, ou s'il s'agit de photos d'archives, ou de photos issues de la base Palissy de POP (vous pouvez le vérifier en comparant les photos de la commune avec les photos qui s'affichent en haut de page) il est nécessaire de **supprimer ces photographies.** \
+**Il faut notamment être très vigilant avec les photographies transmises.** Si les photos ne correspondent pas au bon objet, ou s'il s'agit de photos d'archives, ou de photos issues de la base Palissy de POP (vous pouvez le vérifier en comparant les photos de la commune avec les photos qui s'affichent en haut de page) il est nécessaire de **supprimer ces photographies.**
 Pour cela, cliquez sur la photo transmises par la commune, cela ouvrira une "galerie photo" où vous pouvez faire défiler les photos transmises. Pour chaque photo erronée ou insatisfaisante, cliquez sur "Supprimer" en haut de page et validez cette action.
 
 Vous pouvez faire part à la commune de remarques pour l’aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-) intégrée au site.
@@ -586,5 +581,5 @@ En France, le titre de “restaurateur” n’étant pas protégé, un artiste o
 
 * diplôme de l’Institut National du Patrimoine – département des restaurateurs (Paris-Aubervilliers)
 * master de conservation-restauration des biens culturels (université de Paris I-Panthéon-Sorbonne)
-* diplôme national supérieur d'expression plastique de l'école d'art et de design TALM de  Tours, mention conservation-restauration des oeuvres sculptées valant grade de Master
+* diplôme national supérieur d'expression plastique de l'école d'art et de design TALM de Tours, mention conservation-restauration des oeuvres sculptées valant grade de Master
 * diplôme national supérieur d'expression plastique de l’école supérieure d'art d’Avignon mention en conservation-restauration des biens culturels valant grade de Master.
