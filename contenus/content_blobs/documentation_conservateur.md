@@ -41,9 +41,13 @@ Plus de 90% des informations transmises par les communes sont validées sans cor
 
 ### Si vous souhaitez déployer une campagne dans votre département
 
-C’est simple : contactez-nous à l’adresse [CONTACT_EMAIL](mailto:CONTACT_EMAIL){:target="_blank" rel="noopener"} pour prendre rendez-vous avec notre équipe de déploiement.
-
 Collectif Objets est un service destiné aux conservateurs des Monuments Historiques et conservateurs des Antiquités et Objets d’Art.
+
+S﻿i vous souhaitez être conseillé ou accompagné avant de lancer votre première campagne de recensement en ligne, vous pouvez écrire un email à cette adresse : contact@collectif-objets.beta.gouv.fr \
+\
+V﻿ous serez soit accompagné par une personne du ministère en maîtrise de l'outil, soit redirigé vers un ou une conservateur référent(e) qui vous conseillera pour cette première campagne.
+
+S﻿oyez rassuré : l'outil est très simple d'utilisation.
 
 ### Les étapes d’une campagne de recensement
 
