@@ -2,7 +2,7 @@
 
 class UserMailer < ApplicationMailer
   helper :messages
-  default to: -> { @user.email }
+  default to: -> { email_address_with_name(@user.email, (@commune || @user.commune)&.nom) }
 
   def session_code_email
     @session_code = params[:session_code]
