@@ -7,7 +7,8 @@ class UserMailer < ApplicationMailer
   def session_code_email
     @session_code = params[:session_code]
     @user = @session_code.user
-    set_login_url
+    @commune = @user.commune
+    @login_url = new_user_session_code_url(code_insee: @commune&.code_insee)
     mail subject: "Collectif Objets - Code de connexion - envoyé à #{I18n.l(Time.zone.now, format: :time_first)} " \
   end
 
@@ -39,7 +40,6 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @commune = params[:commune]
     @cta_url = commune_completion_url(@commune)
-    set_login_url
     mail subject: "Vos recensements d'objets ont été transmis aux conservateurs"
   end
 
@@ -47,7 +47,6 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @commune = params[:commune]
     @cta_url = commune_objets_url(@commune)
-    set_login_url
     mail subject: "Plus que 3 mois pour pour finaliser votre recensement"
   end
 
@@ -55,7 +54,6 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @commune = params[:commune]
     @cta_url = commune_objets_url(@commune)
-    set_login_url
     mail subject: "Plus qu'un mois pour pour finaliser votre recensement"
   end
 
@@ -70,8 +68,4 @@ class UserMailer < ApplicationMailer
   end
 
   protected
-
-  def set_login_url
-    @login_url = new_user_session_code_url
-  end
 end
