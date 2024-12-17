@@ -51,10 +51,14 @@ S﻿oyez rassuré : l'outil est très simple d'utilisation.
 
 ### Les étapes d’une campagne de recensement
 
-* **Les conservateurs lancent la campagne de recensement.** Ils invitent les communes par mél à aller sur Collectif Objets pour découvrir les objets MH qu’elles abritent.
-* **Les communes recensent en ligne les objets MH.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur dossier de recensement.
-* **Les conservateurs examinent les informations et photos transmises.** Pour chaque objet, ils peuvent alors valider les informations et engager des actions sur le terrain le cas échéant. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune.
-* **Les données validées par les conservateurs sont reversées dans le système d’information patrimonial.**
+* **Les conservateurs planifient et lancent la campagne de recensement directement depuis le site web.** Ils invitent les communes par mail à se connecter sur Collectif Objets pour découvrir les objets MH qu’elles abritent. 
+* **Les communes recensent en ligne les objets MH.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur "dossier de recensement" via la plateforme Collectif Objets.
+* **Les conservateurs examinent les informations et photos transmises directement depuis le site web.** Pour chaque objet, ils peuvent valider ou modifier les informations et, de leur côté, engager des actions sur le terrain si nécessaire. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune  via une messagerie intégrée au site web.
+* **Les données validées par les conservateurs** sont mises à disposition de la Médiathèque du Patrimoine et de la Photographie (MPP) pour être **éventuellement reversées dans le système d’information patrimonial.** \
+  \
+  Les informations ou données concernées sont : les photographies transmises par les communes et les emplacements des objets (déplacements / disparitions). \
+  \
+  I﻿mportant : la MPP ne met à jour les données concernant un objet qu'après avoir obtenu une confirmation d'un(e) CMH ou d'un(e) CAOA / CDAOA. 
 
 ### Les communes concernées par la campagne
 
