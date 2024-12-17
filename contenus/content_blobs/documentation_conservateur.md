@@ -550,7 +550,7 @@ Vous pouvez choisir de désactiver les notifications automatiques reçues sur vo
 * Rendez-vous sur votre profil Collectif Objets en cliquant sur votre nom (en haut à droite de l'écran).
 * Cochez la case « Désactiver les notifications automatiques » et enregistrer votre choix;
 
-## Retrouver votre liste des communes à visiter
+### Retrouver votre liste des communes à visiter
 
 Vous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après examen de leur recensement, en cliquant sur l'onglet « Mes actions » puis sur « Déplacements prévus ».
 
@@ -558,7 +558,7 @@ Cette page affiche les communes que vous avez indiqué vouloir visiter lors de l
 
 ![Capture écran de la page Mes actions](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-18.06.08.png)
 
-### Si des informations à propos d'un objet sont incorrectes 
+### Si des informations à propos d'un objet sont incorrectes
 
 Les informations sur les objets monuments historiques sur Collectif Objets sont issues des bases de données du patrimoine Palissy et Mémoire (pour les photos).
 
