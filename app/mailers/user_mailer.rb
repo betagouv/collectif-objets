@@ -9,7 +9,7 @@ class UserMailer < ApplicationMailer
     @user = @session_code.user
     @commune = @user.commune
     @login_url = new_user_session_code_url(code_insee: @commune&.code_insee)
-    mail subject: "Collectif Objets - Code de connexion - envoyé à #{I18n.l(Time.zone.now, format: :time_first)} " \
+    mail subject: "Code de connexion Collectif Objets - envoyé à #{I18n.l(Time.zone.now, format: :time_first)} "
   end
 
   def commune_completed_email
