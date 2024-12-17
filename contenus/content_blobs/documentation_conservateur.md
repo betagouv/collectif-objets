@@ -539,26 +539,26 @@ A﻿près quelques secondes, le bordereau de récolement que vous avez complét�
 
 ![Bordereau de récolement](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-17.38.55.png)
 
-##### C﻿omplétion des commentaires : 
+##### C﻿omplétion des commentaires :
 
 ![](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-17.50.58.png)
 
 ### Désactiver les notifications de Collectif Objets
 
-Vous pouvez choisir de désactiver les notifications automatiques reçues sur votre boîte mél lorsque les communes vous écrivent. Pour cela :
+Vous pouvez choisir de désactiver les notifications automatiques reçues sur votre boîte mail lorsque les communes vous écrivent. Pour cela :
 
 * Rendez-vous sur votre profil Collectif Objets en cliquant sur votre nom (en haut à droite de l'écran).
 * Cochez la case « Désactiver les notifications automatiques » et enregistrer votre choix;
 
 ## Retrouver votre liste des communes à visiter
 
-Vous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après examen de leur recensement, en cliquant sur l'onglet « Mes actions ».
+Vous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après examen de leur recensement, en cliquant sur l'onglet « Mes actions » puis sur « Déplacements prévus ».
 
 Cette page affiche les communes que vous avez indiqué vouloir visiter lors de la finalisation de l'examen d’un dossier, et le degré de priorité que vous avez attribué à chaque visite prévue.
 
-![Capture écran de la page Mes actions](/contenus/content_blobs/images/capture-ecran-mes_actions.png)
+![Capture écran de la page Mes actions](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-18.06.08.png)
 
-### Si des informations sur un objet sont incorrectes
+### Si des informations à propos d'un objet sont incorrectes 
 
 Les informations sur les objets monuments historiques sur Collectif Objets sont issues des bases de données du patrimoine Palissy et Mémoire (pour les photos).
 
