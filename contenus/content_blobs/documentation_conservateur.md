@@ -248,6 +248,14 @@ Pour accéder aux dossiers de recensement des communes :
 
 ### Examiner le dossier de recensement d'une commune
 
+Les dossiers de recensement transmis par les communes sont répartis en deux catégories : \
+\
+-﻿ "À examiner en priorité" : ces dossiers contiennent un ou plusieurs objet(s) qui a été signalé soit comme "en péril" soit comme "disparu" (c'est-à-dire : non trouvé) par la commune.\
+\
+-﻿ "À examiner" : les dossiers de recensement dont aucun objet n'a été signalé comme "disparu" ou "en péril".\
+\
+N﻿ota Bene : dans la foulée de la transmission d'un dossier de recensement par une commune, tous les dossiers sont d'abord catégorisés comme "À examiner en priorité". Le tri entre les dossiers réellement prioritaires et les dossiers moins urgents dans la plateforme s'opère 24 heures après la transmission du dossier par la commune. \
+\
 Suivez les étapes ou visionnez la vidéo ci-dessous :
 
 * **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet. \
