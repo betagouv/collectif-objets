@@ -62,13 +62,21 @@ S﻿oyez rassuré : l'outil est très simple d'utilisation.
 
 ### Les communes concernées par la campagne
 
-Par défaut, l’ensemble des communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) sont à intégrer à la campagne de recensement.
-
-Mais, on peut choisir de ne pas inclure certaines communes si, par exemple, un inventaire a déjà été fait là-bas récemment.
+Toutes les communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) peuvent être intégrées à la liste des communes concernées par une campagne de recensement. \
+\
+L﻿es conservateurs sont libres de choisir les communes à exclure. Par exemple, si un inventaire a déjà été fait là-bas récemment ; ou si l'équipe de la CAOA souhaite procéder par secteurs géographiques au sein du département. 
 
 ### Suite à la première campagne départementale
 
-Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu. L’objectif est qu’en 5 ans l’ensemble des communes d’un département abritant des objets MH aient recensé leurs objets.
+N﻿ous encourageons dans un premier temps les conservateurs à examiner les "dossiers de recensement" transmis par les communes ayant participé à la campagne et à transmettre leurs examens aux communes, via la plateforme Collectif Objets.
+
+U﻿ne nouvelle campagne peut être relancée dès la fin d'une campagne de recensement. \
+\
+Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu précédemment. Mais il est aussi possible d'intégrer à la nouvelle campagne des communes ayant répondu précédemment. \
+\
+D﻿eux campagnes de recensement ne peuvent pas être concomitantes au sein d'un même département. 
+
+L’objectif est qu’en 5 ans l’ensemble des communes d’un département abritant des objets MH ait recensé ses objets.
 
 ## Se servir de Collectif Objets
 
