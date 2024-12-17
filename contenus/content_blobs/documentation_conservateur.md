@@ -242,9 +242,9 @@ Pour accéder aux dossiers de recensement des communes :
 
   Pour information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel.
 
-![Liste des communes](/contenus/content_blobs/images/conservateurs_liste_communes.png)
+![Liste des communes](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-13.05.47.png)
 
-![Carte du département](/contenus/content_blobs/images/conservateurs_carte_departement.png)
+![Carte du département](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-13.06.41.png)
 
 ### Examiner le dossier de recensement d'une commune
 
