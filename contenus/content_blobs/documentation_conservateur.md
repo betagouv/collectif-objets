@@ -582,17 +582,19 @@ Si vous êtes dans cette situation, prenez contact avec les gérants du système
 
 ## Autres
 
-### C﻿omment aider une commune qui a des problèmes pour se connecter au site web ? 
+### C﻿omment aider une commune qui a des problèmes pour se connecter au site web ?
 
-U﻿ne petite portion des communes rencontre des problèmes pour se connecter au site car elles ne reçoivent pas l'email contenant leur code de connexion qui leur permet de s'authentifier. 
+U﻿ne petite portion des communes rencontre des difficultés pour se connecter au site car elles ne reçoivent pas l'email contenant leur code de connexion permettant de s'authentifier. 
 
 L﻿a première chose à faire est de vérifier que l'email contenant le code de connexion n'est pas arrivé dans la section "spams" ou "courriers indésirables" de la boite mail de cette commune (les communes oublient parfois de vérifier). 
 
-S﻿i le problème est que la commune n'a pas accès à l'adresse email de contact indiquée dans le site Collectif Objets, il faut alors demander une mise à jour des coordonnées de la commune directement depuis le site de l’annuaire du service public : [https://lannuaire.service-public.fr/ ](https://lannuaire.service-public.fr/) 
+S﻿i le problème est que la commune n'a pas accès à l'adresse email de contact indiquée dans le site Collectif Objets, il faut demander une mise à jour des coordonnées de la commune directement depuis le site de l’annuaire du service public : [https://lannuaire.service-public.fr/ ](https://lannuaire.service-public.fr/) 
 
 Pour cela, il faut que la commune recherche sa page dans ce site, puis descende en bas de la page et clique sur “Demander une mise à jour de cette page” et suive les instructions. 
 
+E﻿nfin, si la commune a bien accès à la boite mail connue dans le site Collectif Objets et qu'elle ne reçoit rien, il doit s'agir d'un problème avec un logiciel "anti-spam" ou d'un blocage provenant du serveur mail de la mairie. A ce moment-là, prévenez l'équipe en charge de la plateforme afin qu'elle envoie directement à la commune un lien de connexion. 
 
+P﻿our ce faire, écrivez à l'adresse : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
 
 ### C﻿omment permettre à une personne privée ou une association de recenser certains objets d'une commune ?
 
