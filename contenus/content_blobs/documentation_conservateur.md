@@ -99,11 +99,11 @@ S﻿i vous êtes devenu conservateur récemment ou que vous rencontrez un probl�
 Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de mails personnalisés envoyées aux communes abritant des objets protégés. Pour lancer votre campagne de recensement, suivez les étapes ou visionnez la vidéo visible plus bas : 
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
-* **Cliquez sur le lien « Créer une nouvelle campagne » et configurez la campagne :**
+* **Cliquez sur le lien « Créer une nouvelle campagne »** en haut de page et configurez la campagne : 
 
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates.
-  * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les méls mis à jour avec les informations précédemment complétées.
-* **Définissez la liste des communes destinataires** : en cliquant sur le bouton « Définir les communes destinataires ». N'oubliez pas de cliquer sur le bouton « Sauvegarder » pour enregistrer la liste mise à jour.
+  * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les futurs mails à destination des communes sont mis à jour avec les informations précédemment complétées. 
+* **Définissez la liste des communes destinataires.** N'oubliez pas de cliquer sur le bouton « Enregistrer la sélection » pour enregistrer la liste mise à jour. 
 * **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mail, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire.
 
 Voici également un tutoriel vidéo :
