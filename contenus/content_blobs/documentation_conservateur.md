@@ -104,7 +104,11 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates.
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les futurs mails à destination des communes sont mis à jour avec les informations précédemment complétées. 
 * **Définissez la liste des communes destinataires.** N'oubliez pas de cliquer sur le bouton « Enregistrer la sélection » pour enregistrer la liste mise à jour. 
-* **Cliquez sur le bouton « Planifier la campagne »**. Votre campagne est planifiée : les communes destinataires recevront un mail, à la date définie par vous, les invitant à recenser les objets protégés abrités sur leur territoire.
+* **Lorsque vous êtes satisfait des informations relatives à votre campagne de recensement (liste des communes concernées, dates, signature de mail...), cliquez sur le bouton « Planifier la campagne ».**\
+  \
+  Votre campagne est planifiée : les communes destinataires recevront un email, à la date définie par vous, les invitant à recenser les objets protégés de leur territoire.\
+  S﻿i vous avez besoin de modifier des informations avant le début de la campagne, vous pouvez toujours cliquer sur le bouton "Repasser en brouillon" afin de ce faire. \
+  N'oubliez pas ensuite de repasser la campagne en "planifiée", et ce au plus tard la veille du début de la campagne !
 
 Voici également un tutoriel vidéo :
 
