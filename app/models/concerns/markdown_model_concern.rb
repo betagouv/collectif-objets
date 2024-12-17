@@ -24,10 +24,11 @@ module MarkdownModelConcern
     end
 
     def find(id)
-      Rails.cache.fetch("#{cache_prefix}-#{id}", expires_in: 10.days) do
-        path = Rails.root.join("#{directory_path}/#{id}.md")
-        raise ActiveRecord::RecordNotFound, path unless path.exist?
+      path = Rails.root.join("#{directory_path}/#{id}.md")
+      raise ActiveRecord::RecordNotFound, path unless path.exist?
 
+      cache_key = File.mtime(path).utc.to_i
+      Rails.cache.fetch(cache_key) do
         parsed = FrontMatterParser::Parser.parse_file path
         new(id, parsed.content, parsed.front_matter.symbolize_keys)
       end
