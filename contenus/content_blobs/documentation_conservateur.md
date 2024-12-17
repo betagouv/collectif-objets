@@ -9,7 +9,7 @@ Collectif Objets est un **service public numérique** du ministère de la Cultur
 
 **Collectif Objets permet aux conservateurs d'organiser des campagnes de recensement des objets protégés au titre des monuments historiques.**
 
-Les mairies sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des monuments historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer.
+Les mairies sont invitées à recenser ces objets s'ils se trouvent sur leur territoire. Les communes effectuent le recensement en ligne après être allées voir les objets *in situ*. Elles remplissent un formulaire en ligne et envoient des photos pour montrer l'état des objets. Les conservateurs des antiquités et objets d'art (CAOA) et les conservateurs des Monuments Historiques (CMH) de chaque département reçoivent ensuite ces informations pour les évaluer.
 
 Grâce à Collectif Objets, les conservateurs peuvent avoir une vue d'ensemble à jour des objets protégés au titre des monuments historiques de leur département. Ce service aide également les communes à prendre soin de leur patrimoine mobilier remarquable.
 
@@ -29,7 +29,7 @@ Les objets qui sont propriétés de l’État ne sont pas concernés par Collect
 
 Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement.
 
-Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir.
+Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir en écrivant un email à cette adresse : contact@collectif-objets.beta.gouv.fr 
 
 Les conservateurs d'un département choisissent la liste des communes destinataires de la campagne. Vous pouvez donc exclure d'une campagne les communes qui sont des cas particuliers ou difficiles.
 
@@ -226,24 +226,25 @@ Pour accéder aux dossiers de recensement des communes :
 
 Suivez les étapes ou visionnez la vidéo ci-dessous :
 
-* **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet. \\
+* **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet. \
   Le premier encadré blanc, en haut de page, affiche des informations issues de la base Palissy de la Plateforme Ouverte du Patrimoine (POP). Les informations transmises par la commune se trouvent en dessous, dans la partie bleutée sous l'intitulé "Recensement". Les photos transmises par la commune (si elle en a bien transmis) se trouvent sur la droite de cette section.
 
   * **Examinez les informations transmises par la commune :** à partir des photos transmises par la commune, qui sont cliquables et zoomables pour en examiner les détails, vous pouvez valider (en les laissant comme telles) ou corriger les informations renseignées.
 
-    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification.\\
+    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification.\
     N'oubliez pas de sauvegarder vos modifications en cliquant sur le bouton « Sauvegarder » en bas de page.
 
-    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises. Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).**\\
-    **Reportez-vous à la section correspondante ci-dessous pour en savoir plus.**\\
+    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises. Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).**\
+    **Reportez-vous à la section correspondante ci-dessous pour en savoir plus.**\
     **De la même manière, si la commune n’a pas transmis de photos, reportez-vous à la section correspondante ci-dessous.**
   * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.**
     Cochez l’action appropriée parmi la liste proposée :
-    - *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)*,
-    - *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)*,
-    - *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)*,
-    - *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)*, et
-    - *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*.
+
+    * *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)*,
+    * *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)*,
+    * *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)*,
+    * *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)*, et
+    * *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*.
 
     Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen.
 
