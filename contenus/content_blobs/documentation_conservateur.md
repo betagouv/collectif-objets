@@ -532,9 +532,10 @@ Les bordereaux de récolement sont pré-remplis avec certaines informations pré
 
 M﻿ais vous pouvez modifier et compléter certaines informations avant de générer les bordereaux sous forme de PDF : les commentaires des différentes parties prenantes au récolement. 
 
-Quatre types de commentaires peuvent être indiqués : le commentaire de la commune, celui du conservateur, celui de l'affectataire et celui du propriétaire, dans le cas où ce dernier n'est pas la commune elle-même. 
+Quatre types de commentaires peuvent être indiqués : le commentaire de la commune, celui du conservateur, celui de l'affectataire et celui du propriétaire, dans le cas où ce dernier n'est pas la commune elle-même. Par défaut, les commentaires laissés par la commune et par vous-même sont pré-remplis, mais vous pouvez les effacer ou les modifier. 
 
-U﻿ne fois que vous avez rédigé les commentaires à faire apparaître sur le bordereau de récolement, vous pouvez cliquer sur le bouton bleu "Télécharger le bordereau". 
+U﻿ne fois que vous avez rédigé les commentaires à faire apparaître sur le bordereau de récolement, cliquez d'abord sur "enregistrer et générer le bordereau" en dessous des commentaires pour le dernier objet abrité dans l'édifice en question. Puis, remontez et cliquez sur le bouton bleu "Télécharger le bordereau" situé sous le nom de l'édifice en question.\
+A﻿près quelques secondes, le bordereau de récolement que vous avez complété sera téléchargé sur votre ordinateur. 
 
 ![Bordereau de récolement](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-17.38.55.png)
 
