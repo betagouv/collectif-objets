@@ -488,18 +488,18 @@ Après avoir examiné les informations transmises par la commune pour chaque obj
 
 ### Fonctionnement de la « Vue Tableau » d’un département
 
-* Vous pouvez directement taper le nom de la commune qui vous intéresse dans la barre de recherche « Nom de commune », puis cliquez sur la loupe.
+* Vous pouvez directement taper le nom de la commune qui vous intéresse dans la barre de recherche « Nom de commune », puis cliquer sur la loupe.
 * Vous pouvez modifier l’ordre d’apparition des communes de votre département par :
 
   * Ordre alphabétique : en cliquant sur la flèche de la colonne « Commune ».
   * Nombre d’objets MH abrités par commune : en cliquant sur la flèche de la colonne « Objets ».
   * Nombre d’objets MH indiqués comme prioritaires par la commune : en cliquant sur la flèche de la colonne « Objets prioritaires ».
-  * L’état de traitement du dossier de recensement : en cliquant sur la flèche de la colonne « Examen ». Lorsque le dossier de recensement d’une commune vous est transmis pour expertise, il porte le statut « à examiner ». Lorsque vous avez examiné un dossier de recensement et l’avez transmis à la commune recenseuse, son statut est indiqué comme « examen envoyé à la commune ».
+  * L’état de traitement du dossier de recensement : en cliquant sur la flèche de la colonne « Examen ». Lorsque le dossier de recensement d’une commune vous est transmis pour expertise, il porte le statut « à examiner » ou "à examiner en priorité". Lorsque vous avez examiné un dossier de recensement et l’avez transmis à la commune recenseuse, son statut est indiqué comme « examen envoyé à la commune ». 
 * Par défaut, seules les communes vous ayant envoyé leur dossier de recensement vous sont présentées (« recensement terminé »). Toutefois, vous pouvez également afficher l’ensemble des communes contactées en cliquant sur la flèche du filtre « Etat du recensement ».
 
-  * « Recensement démarré » : les communes qui ont démarré leur recensement mais ne l’ont pas terminé.
-  * « Toutes les communes » : l’ensemble des communes de votre département qui abritent des objets MH.
-  * « Communes inactives » : celles qui n’ont pas démarré leur recensement.
+  * « en cours de recensement » : les communes qui ont démarré leur recensement mais ne l’ont pas terminé. 
+  * « Tout sélectionner » : l’ensemble des communes de votre département qui abritent des objets MH.
+  * « Non recensé » : celles qui n’ont pas démarré leur recensement.
 
 ![Vue liste des communes triable](/contenus/content_blobs/images/conservateurs_vue_communes_triable.png)
 
@@ -507,16 +507,16 @@ Après avoir examiné les informations transmises par la commune pour chaque obj
 
 Une messagerie instantanée est intégrée dans le site Collectif Objets.
 
-Elle permet aux conservateurs et communes d’échanger par mél directement depuis notre interface afin de centraliser l’ensemble des informations liées aux objets.
+Elle permet aux conservateurs et communes d’échanger par mail directement depuis notre interface afin de centraliser l’ensemble des informations liées aux objets.
 
 Pour y accéder :
 
 * [Sélectionnez la commune de votre choix](#comment-accder-aux-dossiers-de-recensement-des-communes-) et rendez-vous sur sa page.
 * Cliquez sur l’onglet « Messagerie ».
 * Vous pouvez alors rédiger votre message dans le champ dédié « Votre message » et y ajouter éventuellement une pièce-jointe.
-* Cliquez enfin sur le bouton « Envoyer » pour transmettre votre mél.
+* Cliquez enfin sur le bouton « Envoyer » pour transmettre votre mail.
 
-La mairie sera directement informée sur sa boîte mél - par une notification - que vous lui avez écrit. De la même manière, lorsque la commune vous répondra, vous recevrez une notification sur votre boîte mél.
+La mairie sera directement informée sur sa boîte mail - par une notification - que vous lui avez écrit. De la même manière, lorsque la commune vous répondra, vous recevrez une notification sur votre boîte mail.
 
 L’équipe de Collectif Objets a également accès aux échanges afin de pouvoir assister les communes lorsqu’elles rencontrent des problèmes avec le fonctionnement de Collectif Objets.
 
