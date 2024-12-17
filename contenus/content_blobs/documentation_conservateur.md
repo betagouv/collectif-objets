@@ -267,11 +267,11 @@ Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-desso
 
   * **Examinez les informations transmises par la commune :** à partir des photos transmises par la commune, qui sont cliquables et zoomables pour en examiner les détails, vous pouvez valider (en les laissant comme telles) ou corriger les informations renseignées.
 
-    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification.\
+    Pour corriger une information - soit l'état de l'objet soit sa sécurisation - il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification. \
     N'oubliez pas de sauvegarder vos modifications en cliquant sur le bouton « Sauvegarder » en bas de page.
 
-    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises. Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).**\
-    **Reportez-vous à la section correspondante ci-dessous pour en savoir plus.**\
+    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises.** Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).\
+    Reportez-vous à la section correspondante ci-dessous pour en savoir plus.\
     **De la même manière, si la commune n’a pas transmis de photos, reportez-vous à la section correspondante ci-dessous.**
   * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.**
     Cochez l’action appropriée parmi la liste proposée :
@@ -282,7 +282,7 @@ Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-desso
     * *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)*, et
     * *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*.
 
-    Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen.
+    Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen. Si vous souhaitez consulter ces fiches, vous pouvez y accéder en descendant en tout bas de page web et en cliquant sur "Fiches" sous le logo du ministère de la Culture. 
 
     Un champ libre « commentaires pour la mairie » est à votre disposition si vous souhaitez préciser certains points à la commune.
   * **Enregistrez votre travail :** cliquez sur le bouton « Sauvegarder ».
