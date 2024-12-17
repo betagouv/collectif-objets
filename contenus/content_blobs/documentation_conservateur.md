@@ -92,6 +92,8 @@ Les comptes « conservateurs » sont déjà créés sur Collectif Objet à parti
 * Cliquer sur « [Réinitialiser mon mot de passe](https://collectif-objets.beta.gouv.fr/conservateurs/password/new) » et renseigner votre adresse mél professionnelle.
 * Vous recevrez un mél avec un lien de connexion vous invitant à définir votre mot de passe.
 
+S﻿i vous êtes devenu conservateur récemment ou que vous rencontrez un problème, contactez l'adresse mail suivante pour expliquer votre problème : contact@collectif-objets.beta.gouv.fr
+
 ### Comment créer une campagne de recensement ?
 
 Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. Pour lancer votre campagne de recensement, suivez les étapes ou visionnez la vidéo ci-dessous :
