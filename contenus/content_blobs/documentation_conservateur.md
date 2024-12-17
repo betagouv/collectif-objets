@@ -94,7 +94,7 @@ Les comptes « conservateurs » sont déjà créés sur Collectif Objet à parti
 
 S﻿i vous êtes devenu conservateur récemment ou que vous rencontrez un problème, contactez l'adresse mail suivante pour expliquer votre problème : contact@collectif-objets.beta.gouv.fr
 
-### Comment créer une campagne de recensement ?
+### Créer une campagne de recensement
 
 Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de mails personnalisés envoyées aux communes abritant des objets protégés. Pour lancer votre campagne de recensement, suivez les étapes ou visionnez la vidéo visible plus bas : 
 
@@ -564,7 +564,7 @@ Les informations sur les objets monuments historiques sur Collectif Objets sont 
 
 Si des informations semblent prescrites ou erronées sur Collectif Objets, nous vous invitons à les signaler directement à la Médiathèque du Patrimoine et de la Photographie (MPP) afin que les données soient corrigées à la source. Pour contacter la MPP : [mediatheque.patrimoine@culture.gouv.fr](mailto:mediatheque.patrimoine@culture.gouv.fr) .
 
-**Si un objet est attribué à une commune autre que celle qui l’abrite :**
+### **Si un objet est attribué à une commune autre que celle qui l’abrite :**
 
 Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mail à : [CONTACT_EMAIL](mailto:CONTACT_EMAIL).
 
