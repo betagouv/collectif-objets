@@ -30,7 +30,7 @@ Le recensement participatif proposé sur la plateforme Collectif Objets s’insc
 
 Il existe deux niveaux de protection au titre des Monuments historiques : l’inscription et le classement. L’inscription constitue le premier niveau de protection et le classement est le niveau le plus élevé.
 
-[En savoir plus sur la protection au titre des Monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
+En savoir plus sur la [protection au titre des Monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
 
 ### Objectifs du recensement
 
@@ -207,7 +207,7 @@ La vidéo ci-dessous vous présente les deux méthodes possibles pour vous conne
    * Une fois le code saisi dans la page de connexion, vous serez connecté à l'espace de votre commune dans la plateforme. Lisez les instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
    * Vous verrez s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier pour commencer son recensement, après être allé voir cet objet sur son lieu de conservation.
 
-Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
+Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](/contenus/aide_en_ligne#je-nai-pas-t-contact-par-collectif-objets)
 
 ### Déroulé du recensement
 
