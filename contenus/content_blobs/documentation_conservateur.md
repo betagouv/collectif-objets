@@ -92,7 +92,6 @@ Les comptes « conservateurs » sont déjà créés sur Collectif Objet à parti
 * Cliquer sur « [Réinitialiser mon mot de passe](/conservateurs/password/new) » et renseigner votre adresse email professionnelle.
 * Vous recevrez un email avec un lien de connexion vous invitant à définir votre mot de passe.
 
-
 Si vous êtes devenu conservateur récemment ou que vous rencontrez un problème, contactez l'adresse mail suivante pour expliquer votre problème : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
 
 ### Créer une campagne de recensement
@@ -106,7 +105,6 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les futurs mails à destination des communes sont mis à jour avec les informations précédemment complétées.
 * **Définissez la liste des communes destinataires.** N'oubliez pas de cliquer sur le bouton « Enregistrer la sélection » pour enregistrer la liste mise à jour.
 * **Lorsque vous êtes satisfait des informations relatives à votre campagne de recensement (liste des communes concernées, dates, signature de mail...), cliquez sur le bouton « Planifier la campagne ».**
-
   Votre campagne est planifiée : les communes destinataires recevront un email, à la date définie par vous, les invitant à recenser les objets protégés de leur territoire.
   Si vous avez besoin de modifier des informations avant le début de la campagne, vous pouvez toujours cliquer sur le bouton "Repasser en brouillon" afin de ce faire.
   N'oubliez pas ensuite de repasser la campagne en "planifiée", et ce au plus tard la veille du début de la campagne !
@@ -233,7 +231,7 @@ Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la
 
 Pour accéder aux dossiers de recensement des communes :
 
-* **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-) sur Collectif Objets.** Vous arrivez sur la page « Mes départements ».
+* **[Connectez-vous à votre compte conservateur](#crer-mon-compte-conservateur-sur-collectif-objets-) sur Collectif Objets.** Vous arrivez sur la page « Mes départements ».
 * **Sélectionnez le département qui vous intéresse.** Vous accédez alors à la page qui constitue le "tableau de bord des conservateurs".
 
   En haut de page, vous voyez les statistiques de votre département (y compris les informations relatives à la ou les campagne(s) de recensement qui ont eu lieu ou sont en cours).
@@ -243,9 +241,9 @@ Pour accéder aux dossiers de recensement des communes :
 
   Pour information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel.
 
-![Liste des communes](/contenus/content_blobs/images/communes_vue_liste.png)
+![Liste des communes](/contenus/content_blobs/images/conservateurs_vue_tableau.png)
 
-![Carte du département](/contenus/content_blobs/images/communes_vue_carte.png)
+![Carte du département](/contenus/content_blobs/images/conservateurs_vue_carte.png)
 
 ### Examiner le dossier de recensement d'une commune
 
@@ -261,6 +259,7 @@ Lorsque vous cliquez sur le nom d'une commune qui vous a transmis son dossier, v
 Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-dessous :
 
 * **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet.
+
   Le premier encadré blanc, en haut de page, affiche des informations issues de la base Palissy de la Plateforme Ouverte du Patrimoine (POP). Les informations transmises par la commune se trouvent en dessous, dans la partie bleutée sous l'intitulé "Recensement". Les photos transmises par la commune (si elle en a bien transmis) se trouvent sur la droite de cette section.
 
   * **Examinez les informations transmises par la commune :** à partir des photos transmises par la commune, qui sont cliquables et zoomables pour en examiner les détails, vous pouvez valider (en les laissant comme telles) ou corriger les informations renseignées.
@@ -484,7 +483,7 @@ Après avoir examiné les informations transmises par la commune pour chaque obj
 * **Cliquez sur le bouton « Envoyer l'examen ».**
 
   ![Examen terminé](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
-* **Indiquez si vous souhaiter prévoir une visite sur le terrain** en cochant la case appropriée : « *pas de visite prévue* », « *visite souhaitable* » ou « *visite prioritaire* ». Cette information n'est pas diffusée aux communes, elle est uniquement pour votre usage personnel et votre suivi.
+* **Décidez de si vous souhaiter prévoir une visite sur le terrain** en cochant la case appropriée : « *pas de visite prévue* », « *visite souhaitable* » ou « *visite prioritaire* ». Cette option n'est pas diffusée aux communes, elle est uniquement pour votre usage personnel et votre suivi.
 
   Un champ libre « commentaire global » est à votre disposition si vous souhaitez préciser certains points à la commune. Le commentaire global apparaîtra dans l'email qui sera envoyé à la commune pour la prévenir de votre retour sur son dossier.
 * **Cliquez sur le bouton « Finaliser et envoyer l'examen à la commune »** pour lui transmettre votre examen.
@@ -533,6 +532,10 @@ Une fois que vous avez terminé d'examiner le dossier d’une commune et que vou
 
 Un bordereau peut être généré pour chaque édifice abritant des objets protégés dans une commune.
 
+![Bordereau de récolement](/contenus/content_blobs/images/bordereaux_de_recolement_onglet.png)
+
+### Complétion des commentaires :
+
 Les bordereaux de récolement sont pré-remplis avec certaines informations présentes dans Collectif Objets : PM de chaque objet, dénomination de l'objet, date de protection, état de conservation d'après le recensement et votre examen.
 
 Mais vous pouvez modifier et compléter certaines informations avant de générer les bordereaux sous forme de PDF : les commentaires des différentes parties prenantes au récolement.
@@ -542,9 +545,6 @@ Quatre types de commentaires peuvent être indiqués : le commentaire de la comm
 Une fois que vous avez rédigé les commentaires à faire apparaître sur le bordereau de récolement, cliquez d'abord sur "enregistrer et générer le bordereau" en dessous des commentaires pour le dernier objet abrité dans l'édifice en question. Puis, remontez et cliquez sur le bouton bleu "Télécharger le bordereau" situé sous le nom de l'édifice en question.
 Après quelques secondes, le bordereau de récolement que vous avez complété sera téléchargé sur votre ordinateur.
 
-![Bordereau de récolement](/contenus/content_blobs/images/bordereaux_de_recolement_onglet.png)
-
-#### Complétion des commentaires :
 
 ![Télécharger le bordereau de récolement](/contenus/content_blobs/images/bordereaux_de_recolement_telecharger_pdf.png)
 
@@ -611,7 +611,7 @@ Mais ce code va être envoyé par email à l'adresse de contact de la commune co
 
 Par la suite, normalement, la personne privée n’aura pas à redemander de code de connexion à chaque fois. Il suffit qu’elle utilise le même ordinateur et le même navigateur web pour se rendre sur le site Collectif Objets. 
 
-Mais attention, pour revenir sur le site, il suffit d'aller directement sur la page d'accueil du site (et non pas sur la page de demande de code de connexion) : [page d'accueil](/)
+Mais attention, pour revenir sur le site, il suffit d'aller directement sur la page d'accueil du site (et non pas sur la page de demande de code de connexion) : [page d'accueil](/).
 
 ### Crédits photographiques
 
