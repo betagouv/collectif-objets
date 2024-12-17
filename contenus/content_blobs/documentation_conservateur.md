@@ -62,9 +62,9 @@ S﻿oyez rassuré : l'outil est très simple d'utilisation.
 
 ### Les communes concernées par la campagne
 
-Par défaut, l’ensemble des communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) sont à intégrer à la campagne de recensement.
-
-Mais, on peut choisir de ne pas inclure certaines communes si, par exemple, un inventaire a déjà été fait là-bas récemment.
+Toutes les communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) peuvent être intégrées à la liste des communes concernées par une campagne de recensement. \
+\
+L﻿es conservateurs sont libres de choisir les communes à exclure. Par exemple, si un inventaire a déjà été fait là-bas récemment ; ou si l'équipe de la CAOA souhaite procéder par secteurs géographiques au sein du département. 
 
 ### Suite à la première campagne départementale
 
