@@ -539,7 +539,7 @@ A﻿près quelques secondes, le bordereau de récolement que vous avez complét�
 
 ![Bordereau de récolement](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-17.38.55.png)
 
-##### C﻿omplétion des commentaires : 
+##### C﻿omplétion des commentaires :
 
 ![](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-17.50.58.png)
 
@@ -548,25 +548,25 @@ A﻿près quelques secondes, le bordereau de récolement que vous avez complét�
 Vous pouvez choisir de désactiver les notifications automatiques reçues sur votre boîte mél lorsque les communes vous écrivent. Pour cela :
 
 * Rendez-vous sur votre profil Collectif Objets en cliquant sur votre nom (en haut à droite de l'écran).
-* Cochez la case « Désactiver les notifications automatiques » et enregistrer votre choix;
+* Cochez la case « Désactiver les notifications automatiques » et enregistrez votre choix.
 
-## Retrouver votre liste des communes à visiter
+### Retrouver votre liste des communes à visiter
 
-Vous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après examen de leur recensement, en cliquant sur l'onglet « Mes actions ».
+Vous pouvez retrouver la liste des communes où vous avez considéré qu'une visite était nécessaire après examen de leur recensement, en cliquant sur l'onglet « Mes actions » puis sur « Déplacements prévus ».
 
 Cette page affiche les communes que vous avez indiqué vouloir visiter lors de la finalisation de l'examen d’un dossier, et le degré de priorité que vous avez attribué à chaque visite prévue.
 
-![Capture écran de la page Mes actions](/contenus/content_blobs/images/capture-ecran-mes_actions.png)
+![Capture écran de la page Mes actions](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-18.06.08.png)
 
-### Si des informations sur un objet sont incorrectes
+### Si des informations à propos d'un objet sont incorrectes
 
 Les informations sur les objets monuments historiques sur Collectif Objets sont issues des bases de données du patrimoine Palissy et Mémoire (pour les photos).
 
-Si des informations semblent prescrites ou erronnées sur Collectif Objets, nous vous invitons à les signaler directement à la Médiathèque du Patrimoine et de la Photographie (MPP) afin que les données soient corrigées à la source. Pour contacter la MPP : [mediatheque.patrimoine@culture.gouv.fr](mailto:mediatheque.patrimoine@culture.gouv.fr) .
+Si des informations semblent prescrites ou erronées sur Collectif Objets, nous vous invitons à les signaler directement à la Médiathèque du Patrimoine et de la Photographie (MPP) afin que les données soient corrigées à la source. Pour contacter la MPP : [mediatheque.patrimoine@culture.gouv.fr](mailto:mediatheque.patrimoine@culture.gouv.fr) .
 
 **Si un objet est attribué à une commune autre que celle qui l’abrite :**
 
-Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mél à : [CONTACT_EMAIL](mailto:CONTACT_EMAIL).
+Si vous détectez une différence entre la localisation réelle d’un objet et la commune indiquée sur sa notice Palissy en amont d’une campagne, vous pouvez nous l’indiquer par mail à : [CONTACT_EMAIL](mailto:CONTACT_EMAIL).
 
 Si le changement de localisation de l’objet n’est pas détecté en amont de la campagne, c’est la commune indiquée sur la notice Palissy de l’objet qui recevra la demande de recensement.
 
