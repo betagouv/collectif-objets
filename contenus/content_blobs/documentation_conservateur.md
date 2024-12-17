@@ -43,8 +43,8 @@ Plus de 90% des informations transmises par les communes sont validées sans cor
 
 Collectif Objets est un service destiné aux conservateurs des Monuments Historiques et conservateurs des Antiquités et Objets d’Art.
 
-S﻿i vous souhaitez être conseillé ou accompagné avant de lancer votre première campagne de recensement en ligne, vous pouvez écrire un email à cette adresse : contact@collectif-objets.beta.gouv.fr \
-\
+S﻿i vous souhaitez être conseillé ou accompagné avant de lancer votre première campagne de recensement en ligne, vous pouvez écrire un email à cette adresse : contact@collectif-objets.beta.gouv.fr 
+
 V﻿ous serez soit accompagné par une personne du ministère en maîtrise de l'outil, soit redirigé vers un ou une conservateur référent(e) qui vous conseillera pour cette première campagne.
 
 S﻿oyez rassuré : l'outil est très simple d'utilisation.
@@ -54,26 +54,26 @@ S﻿oyez rassuré : l'outil est très simple d'utilisation.
 * **Les conservateurs planifient et lancent la campagne de recensement directement depuis le site web.** Ils invitent les communes par mail à se connecter sur Collectif Objets pour découvrir les objets MH qu’elles abritent. 
 * **Les communes recensent en ligne les objets MH.** Elles doivent se déplacer pour constater l’état actuel des objets et en prendre des photos. Elles répondent ensuite à notre questionnaire en ligne. Une fois l’ensemble des objets recensés, elles transmettent aux conservateurs leur "dossier de recensement" via la plateforme Collectif Objets.
 * **Les conservateurs examinent les informations et photos transmises directement depuis le site web.** Pour chaque objet, ils peuvent valider ou modifier les informations et, de leur côté, engager des actions sur le terrain si nécessaire. Si des informations sont erronées ou manquantes, ils peuvent les corriger directement ou contacter la commune  via une messagerie intégrée au site web.
-* **Les données validées par les conservateurs** sont mises à disposition de la Médiathèque du Patrimoine et de la Photographie (MPP) pour être **éventuellement reversées dans le système d’information patrimonial.** \
-  \
-  Les informations ou données concernées sont : les photographies transmises par les communes et les emplacements des objets (déplacements / disparitions). \
-  \
-  I﻿mportant : la MPP ne met à jour les données concernant un objet qu'après avoir obtenu une confirmation d'un(e) CMH ou d'un(e) CAOA / CDAOA. 
+* **Les données validées par les conservateurs** sont mises à disposition de la Médiathèque du Patrimoine et de la Photographie (MPP) pour être **éventuellement reversées dans le système d’information patrimonial.** 
+
+Les informations ou données concernées sont : les photographies transmises par les communes et les emplacements des objets (déplacements / disparitions). 
+
+I﻿mportant : la MPP ne met à jour les données concernant un objet qu'après avoir obtenu une confirmation d'un(e) CMH ou d'un(e) CAOA / CDAOA. 
 
 ### Les communes concernées par la campagne
 
-Toutes les communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) peuvent être intégrées à la liste des communes concernées par une campagne de recensement. \
-\
+Toutes les communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) peuvent être intégrées à la liste des communes concernées par une campagne de recensement. 
+
 L﻿es conservateurs sont libres de choisir les communes à exclure. Par exemple, si un inventaire a déjà été fait là-bas récemment ; ou si l'équipe de la CAOA souhaite procéder par secteurs géographiques au sein du département. 
 
 ### Suite à la première campagne départementale
 
 N﻿ous encourageons dans un premier temps les conservateurs à examiner les "dossiers de recensement" transmis par les communes ayant participé à la campagne et à transmettre leurs examens aux communes, via la plateforme Collectif Objets.
 
-U﻿ne nouvelle campagne peut être relancée dès la fin d'une campagne de recensement. \
-\
-Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu précédemment. Mais il est aussi possible d'intégrer à la nouvelle campagne des communes ayant répondu précédemment. \
-\
+U﻿ne nouvelle campagne peut être relancée dès la fin d'une campagne de recensement. 
+
+Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu précédemment. Mais il est aussi possible d'intégrer à la nouvelle campagne des communes ayant répondu précédemment. 
+
 D﻿eux campagnes de recensement ne peuvent pas être concomitantes au sein d'un même département. 
 
 L’objectif est qu’en 5 ans l’ensemble des communes d’un département abritant des objets MH ait recensé ses objets.
@@ -105,10 +105,11 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les futurs mails à destination des communes sont mis à jour avec les informations précédemment complétées. 
 * **Définissez la liste des communes destinataires.** N'oubliez pas de cliquer sur le bouton « Enregistrer la sélection » pour enregistrer la liste mise à jour. 
 * **Lorsque vous êtes satisfait des informations relatives à votre campagne de recensement (liste des communes concernées, dates, signature de mail...), cliquez sur le bouton « Planifier la campagne ».**\
-  \
-  Votre campagne est planifiée : les communes destinataires recevront un email, à la date définie par vous, les invitant à recenser les objets protégés de leur territoire.\
-  S﻿i vous avez besoin de modifier des informations avant le début de la campagne, vous pouvez toujours cliquer sur le bouton "Repasser en brouillon" afin de ce faire. \
-  N'oubliez pas ensuite de repasser la campagne en "planifiée", et ce au plus tard la veille du début de la campagne !
+  Votre campagne est planifiée : les communes destinataires recevront un email, à la date définie par vous, les invitant à recenser les objets protégés de leur territoire.
+
+S﻿i vous avez besoin de modifier des informations avant le début de la campagne, vous pouvez toujours cliquer sur le bouton "Repasser en brouillon" afin de ce faire. 
+
+N'oubliez pas ensuite de repasser la campagne en "planifiée", et ce au plus tard la veille du début de la campagne !
 
 Voici également un tutoriel vidéo :
 
@@ -233,11 +234,12 @@ Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la
 Pour accéder aux dossiers de recensement des communes :
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-) sur Collectif Objets.** Vous arrivez sur la page « Mes départements ».
-* **Sélectionnez le département qui vous intéresse.** Vous accédez alors à la page qui constitue le "tableau de bord des conservateurs". \
-  \
-  En haut de page, vous voyez les statistiques de votre département (y compris les informations relatives à la ou les campagne(s) de recensement qui ont eu lieu ou sont en cours).
+* **Sélectionnez le département qui vous intéresse.** Vous accédez alors à la page qui constitue le "tableau de bord des conservateurs". 
 
-  Les dossiers de recensement transmis par les communes sont présentés plus bas et accessibles soit via un tableau (« [Vue Tableau](#comment-fonctionne-la-vue-tableau-dun-dpartement-) »), soit sous forme de carte (« Vue Carte »). 
+En haut de page, vous voyez les statistiques de votre département (y compris les informations relatives à la ou les campagne(s) de recensement qui ont eu lieu ou sont en cours).
+
+Les dossiers de recensement transmis par les communes sont présentés plus bas et accessibles soit via un tableau (« [Vue Tableau](#comment-fonctionne-la-vue-tableau-dun-dpartement-) »), soit sous forme de carte (« Vue Carte »). 
+
 * **Cliquez sur le nom de la commune qui vous intéresse pour accéder à son dossier de recensement.**
 
   Pour information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel.
@@ -248,16 +250,16 @@ Pour accéder aux dossiers de recensement des communes :
 
 ### Examiner le dossier de recensement d'une commune
 
-Les dossiers de recensement transmis par les communes sont répartis en deux catégories : \
-\
--﻿ "À examiner en priorité" : ces dossiers contiennent un ou plusieurs objet(s) qui a été signalé soit comme "en péril" soit comme "disparu" (c'est-à-dire : non trouvé) par la commune.\
-\
--﻿ "À examiner" : les dossiers de recensement dont aucun objet n'a été signalé comme "disparu" ou "en péril".\
-\
+Les dossiers de recensement transmis par les communes sont répartis en deux catégories : 
+
+\-﻿ "À examiner en priorité" : ces dossiers contiennent un ou plusieurs objet(s) qui a été signalé soit comme "en péril" soit comme "disparu" (c'est-à-dire : non trouvé) par la commune.
+
+\-﻿ "À examiner" : les dossiers de recensement dont aucun objet n'a été signalé comme "disparu" ou "en péril".
+
 N﻿ota Bene : dans la foulée de la transmission d'un dossier de recensement par une commune, tous les dossiers sont d'abord catégorisés comme "À examiner en priorité". Le tri entre les dossiers réellement prioritaires et les dossiers moins urgents dans la plateforme s'opère 24 heures après la transmission du dossier par la commune. 
 
-L﻿orsque vous cliquez sur le nom d'une commune qui vous a transmis son dossier, vous  êtes immédiatement conduit vers son dossier de recensement. \
-\
+L﻿orsque vous cliquez sur le nom d'une commune qui vous a transmis son dossier, vous  êtes immédiatement conduit vers son dossier de recensement. 
+
 Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-dessous : 
 
 * **Cliquez sur l’objet qui vous intéresse :** vous accédez au questionnaire de recensement complété par la commune pour cet objet. \
