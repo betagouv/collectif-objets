@@ -233,9 +233,11 @@ Après avoir recensé l’ensemble des objets MH abrités sur son territoire, la
 Pour accéder aux dossiers de recensement des communes :
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-) sur Collectif Objets.** Vous arrivez sur la page « Mes départements ».
-* **Sélectionnez le département qui vous intéresse.** Vous accédez alors au tableau de bord de la campagne de recensement communal dans ce département.
+* **Sélectionnez le département qui vous intéresse.** Vous accédez alors à la page qui constitue le "tableau de bord des conservateurs". \
+  \
+  En haut de page, vous voyez les statistiques de votre département (y compris les informations relatives à la ou les campagne(s) de recensement qui ont eu lieu ou sont en cours).
 
-  Les dossiers de recensement transmis par les communes sont présentés soit dans un tableau (« [Vue Tableau](#comment-fonctionne-la-vue-tableau-dun-dpartement-) »), soit sous forme de carte (« Vue Carte »).
+  Les dossiers de recensement transmis par les communes sont présentés plus bas et accessibles soit via un tableau (« [Vue Tableau](#comment-fonctionne-la-vue-tableau-dun-dpartement-) »), soit sous forme de carte (« Vue Carte »). 
 * **Cliquez sur le nom de la commune qui vous intéresse pour accéder à son dossier de recensement.**
 
   Pour information : les conservateurs rattachés à un même département ont une vue partagée sur ce tableau de bord, en temps réel.
