@@ -451,7 +451,7 @@ Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-desso
 
 ### Si la commune n’a pas recensé le bon objet ou si les photos transmises sont problématiques
 
-Si la commune vous a transmis des informations erronées ou insuffisantes, envoyez-lui un message (via la messagerie intégrée au site) afin qu'elle puisse faire les corrections nécessaires.
+Si la commune vous a transmis des informations erronées ou insuffisantes, envoyez-lui un message (via la messagerie intégrée au site) afin qu'elle puisse accomplir les corrections nécessaires.
 
 En effet, il ne faut pas « finaliser » les dossiers des communes où des éléments sont insatisfaisants **car cela reviendrait à valider des informations erronées**, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)
 
