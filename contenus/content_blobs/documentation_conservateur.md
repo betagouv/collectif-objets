@@ -530,11 +530,17 @@ Un bordereau peut être généré pour chaque édifice abritant des objets prot�
 
 Les bordereaux de récolement sont pré-remplis avec certaines informations présentes dans Collectif Objets : PM de chaque objet, dénomination de l'objet, date de protection, état de conservation d'après le recensement et votre examen. 
 
-M﻿ais vous pouvez modifier et compléter certaines informations avant de générer les bordereaux sous forme de PDF : les commentaires des différentes parties prenantes au récolement. Quatre types de commentaires peuvent être indiqués : le commentaire de la commune, celui du conservateur, celui de l'affectataire et celui du propriétaire, dans le cas où ce dernier n'est pas la commune elle-même. 
+M﻿ais vous pouvez modifier et compléter certaines informations avant de générer les bordereaux sous forme de PDF : les commentaires des différentes parties prenantes au récolement. 
 
+Quatre types de commentaires peuvent être indiqués : le commentaire de la commune, celui du conservateur, celui de l'affectataire et celui du propriétaire, dans le cas où ce dernier n'est pas la commune elle-même. 
 
+U﻿ne fois que vous avez rédigé les commentaires à faire apparaître sur le bordereau de récolement, vous pouvez cliquer sur le bouton bleu "Télécharger le bordereau". 
 
 ![Bordereau de récolement](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-17.38.55.png)
+
+##### C﻿omplétion des commentaires : 
+
+![](/contenus/content_blobs/images/capture-d’écran-2024-12-17-à-17.50.58.png)
 
 ### Désactiver les notifications de Collectif Objets
 
