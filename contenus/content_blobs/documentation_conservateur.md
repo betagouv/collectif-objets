@@ -455,30 +455,33 @@ Si la commune vous a transmis des informations erronées ou insuffisantes, envoy
 
 En effet, il ne faut pas « finaliser » les dossiers des communes où des éléments sont insatisfaisants **car cela reviendrait à valider des informations erronées**, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)
 
-**Il faut notamment être très vigilant avec les photographies transmises.** Si les photos ne correspondent pas au bon objet, ou s'il s'agit de photos d'archives, ou de photos issues de la base Palissy de POP (vous pouvez le vérifier en comparant les photos de la commune avec les photos qui s'affichent en haut de page) il est nécessaire de **supprimer ces photographies.** \
-Pour cela, cliquez sur la photo transmises par la commune, cela ouvrira une "galerie photo" où vous pouvez faire défiler les photos transmises. Pour chaque photo erronée ou insatisfaisante, cliquez sur "Supprimer" en haut de page et validez cette action.
+**Il faut notamment être très vigilant avec les photographies transmises.** Si les photos ne correspondent pas au bon objet, ou s'il s'agit de photos d'archives, ou de photos issues de la base Palissy de POP (vous pouvez le vérifier en comparant les photos de la commune avec les photos qui s'affichent en haut de page) il est nécessaire de **supprimer ces photographies.** 
+
+Pour cela, cliquez sur la photo transmises par la commune, cela ouvrira une "galerie photo" où vous pouvez faire défiler les photos transmises. **Pour chaque photo erronée ou insatisfaisante, cliquez sur "Supprimer"** en haut de page et validez cette action.
 
 Vous pouvez faire part à la commune de remarques pour l’aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-) intégrée au site.
 
-Attention : une fois que vous aurez validé l'examen de la commune (c'est-à-dire que vous lui aurez transmis votre retour), celle-ci ne pourra plus modifier son recensement. Ainsi, si vous souhaitez qu'elle apporte des corrections ou des nouvelles images, échangez via la messagerie et attendez ces modifications avant de finaliser votre retour.
+Attention : une fois que vous aurez validé l'examen de la commune (c'est-à-dire que vous lui aurez transmis votre retour), celle-ci ne pourra plus modifier son recensement. Ainsi, si vous souhaitez qu'elle apporte des corrections ou des nouvelles images, échangez via la messagerie et attendez ces modifications avant de finaliser votre examen.
 
 ### Si la commune n’a pas pris de photos
 
-Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre examen. Les photos doivent être récentes et nouvelles.
+Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre examen. 
+
+Les photos doivent être récentes et nouvelles.
 
 ### Envoyer mon examen à la commune
 
 Après avoir examiné les informations transmises par la commune pour chaque objet, vous pourrez lui envoyer votre examen.
 
-**Lorsque vous envoyez votre examen final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise. Elles seront reversées par la suite dans le système d'information patrimonial de l’État, y compris les photographies transmises par la commune.**
+**Lorsque vous envoyez votre examen final à la commune, les informations qui y sont contenues sont considérées comme validées par votre expertise.** Elles seront reversées par la suite dans le système d'information patrimonial de l’État, notamment les photographies transmises par la commune.Concernant les déplacements et disparitions d'objets, la MPP demande généralement une confirmation aux C(D)AOA ou aux CMH par écrit.
 
 * [Rendez-vous sur la page de la commune concernée.](#comment-accder-aux-dossiers-de-recensement-des-communes-) Pour accéder à l'examen, **vous devez avoir examiné chaque objet recensé.**
 * **Cliquez sur le bouton « Envoyer l'examen ».**
 
   ![Examen terminé](/contenus/content_blobs/images/conservateurs_analyse_terminee.png)
-* **Décidez de si vous souhaiter prévoir une visite sur le terrain** en cochant la case appropriée : « *pas de visite prévue* », « *visite souhaitable* » et « *visite prioritaire* ». Cette option n'est pas diffusée aux communes, elle est uniquement pour votre usage personnel et votre suivi.
+* **Indiquez si vous souhaiter prévoir une visite sur le terrain** en cochant la case appropriée : « *pas de visite prévue* », « *visite souhaitable* » ou « *visite prioritaire* ». Cette information n'est pas diffusée aux communes, elle est uniquement pour votre usage personnel et votre suivi. 
 
-  Un champ libre « commentaire global » est à votre disposition si vous souhaitez préciser certains points à la commune.
+  Un champ libre « commentaire global » est à votre disposition si vous souhaitez préciser certains points à la commune. Le commentaire global apparaîtra dans l'email qui sera envoyé à la commune pour la prévenir de votre retour sur son dossier.
 * **Cliquez sur le bouton « Finaliser et envoyer l'examen à la commune »** pour lui transmettre votre examen.
 
   ![Envoyer l'examen du recensement](/contenus/content_blobs/images/conservateurs_envoyer_rapport.png)
