@@ -96,7 +96,7 @@ S﻿i vous êtes devenu conservateur récemment ou que vous rencontrez un probl�
 
 ### Comment créer une campagne de recensement ?
 
-Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de méls personnalisés auprès des communes abritant des objets protégés. Pour lancer votre campagne de recensement, suivez les étapes ou visionnez la vidéo ci-dessous :
+Les campagnes de recensement menées par Collectif Objets prennent la forme de campagnes automatisées de mails personnalisés envoyées aux communes abritant des objets protégés. Pour lancer votre campagne de recensement, suivez les étapes ou visionnez la vidéo visible plus bas : 
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
 * **Cliquez sur le lien « Créer une nouvelle campagne » et configurez la campagne :**
