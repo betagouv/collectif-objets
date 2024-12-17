@@ -68,7 +68,15 @@ L﻿es conservateurs sont libres de choisir les communes à exclure. Par exemple
 
 ### Suite à la première campagne départementale
 
-Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu. L’objectif est qu’en 5 ans l’ensemble des communes d’un département abritant des objets MH aient recensé leurs objets.
+N﻿ous encourageons dans un premier temps les conservateurs à examiner les "dossiers de recensement" transmis par les communes ayant participé à la campagne et à transmettre leurs examens aux communes, via la plateforme Collectif Objets.
+
+U﻿ne nouvelle campagne peut être relancée dès la fin d'une campagne de recensement. \
+\
+Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu précédemment. Mais il est aussi possible d'intégrer à la nouvelle campagne des communes ayant répondu précédemment. \
+\
+D﻿eux campagnes de recensement ne peuvent pas être concomitantes au sein d'un même département. 
+
+L’objectif est qu’en 5 ans l’ensemble des communes d’un département abritant des objets MH ait recensé ses objets.
 
 ## Se servir de Collectif Objets
 
