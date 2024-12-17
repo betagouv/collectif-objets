@@ -582,7 +582,19 @@ Si vous êtes dans cette situation, prenez contact avec les gérants du système
 
 ## Autres
 
-### C﻿omment permettre à une personne privée ou une association de recenser certains objets d'une commune ? 
+### C﻿omment aider une commune qui a des problèmes pour se connecter au site web ? 
+
+U﻿ne petite portion des communes rencontre des problèmes pour se connecter au site car elles ne reçoivent pas l'email contenant leur code de connexion qui leur permet de s'authentifier. 
+
+L﻿a première chose à faire est de vérifier que l'email contenant le code de connexion n'est pas arrivé dans la section "spams" ou "courriers indésirables" de la boite mail de cette commune (les communes oublient parfois de vérifier). 
+
+S﻿i le problème est que la commune n'a pas accès à l'adresse email de contact indiquée dans le site Collectif Objets, il faut alors demander une mise à jour des coordonnées de la commune directement depuis le site de l’annuaire du service public : [https://lannuaire.service-public.fr/ ](https://lannuaire.service-public.fr/) 
+
+Pour cela, il faut que la commune recherche sa page dans ce site, puis descende en bas de la page et clique sur “Demander une mise à jour de cette page” et suive les instructions. 
+
+
+
+### C﻿omment permettre à une personne privée ou une association de recenser certains objets d'une commune ?
 
 A﻿fin qu'une personne privée (un propriétaire privé par exemple, ou une association de protection du patrimoine) puisse effectuer le recensement de certains objets d'une commune, elle va devoir se "faire passer" pour la commune dans la plateforme, en collaboration avec la mairie de la dite commune.
 
@@ -593,10 +605,6 @@ M﻿ais ce code va être envoyé par email à l'adresse de contact de la commune
 P﻿ar la suite, normalement, la personne privée n’aura pas à redemander de code de connexion à chaque fois. Il suffit qu’elle utilise le même ordinateur et le même navigateur web pour se rendre sur le site Collectif Objets. 
 
 Mais attention, pour revenir sur le site, il suffit d'aller directement sur la page d'accueil du site (et non pas sur la page de demande de code de connexion) : <https://collectif-objets.beta.gouv.fr/> 
-
-
-
-
 
 ### Crédits photographiques
 
