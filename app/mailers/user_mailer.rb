@@ -2,6 +2,9 @@
 
 class UserMailer < ApplicationMailer
   helper :messages
+
+  before_action :set_commune_and_user, except: [:session_code_email, :dossier_accepted_email, :message_received_email]
+
   default to: -> { email_address_with_name(@user.email, (@commune || @user.commune)&.nom) },
           from: -> { email_address_with_name(@commune.support_email(role: :user), "Messagerie Collectif Objets") }
 
@@ -15,13 +18,11 @@ class UserMailer < ApplicationMailer
   end
 
   def commune_completed_email
-    @user, @commune = params.values_at(:user, :commune)
     @cta_url = commune_completion_url(@commune)
     mail subject: "#{@commune.nom}, merci dʼavoir contribué à Collectif Objets"
   end
 
   def commune_avec_objets_verts_email
-    @user, @commune = params.values_at(:user, :commune)
     mail subject: "Suite à votre participation à la campagne de recensement " \
                   "des objets monuments historique #{@commune.departement.dans_nom}"
   end
@@ -38,22 +39,16 @@ class UserMailer < ApplicationMailer
   end
 
   def dossier_auto_submitted_email
-    @user = params[:user]
-    @commune = params[:commune]
     @cta_url = commune_completion_url(@commune)
     mail subject: "Vos recensements d'objets ont été transmis aux conservateurs"
   end
 
   def relance_dossier_incomplet
-    @user = params[:user]
-    @commune = params[:commune]
     @cta_url = commune_objets_url(@commune)
     mail subject: "Plus que 3 mois pour pour finaliser votre recensement"
   end
 
   def derniere_relance_dossier_incomplet
-    @user = params[:user]
-    @commune = params[:commune]
     @cta_url = commune_objets_url(@commune)
     mail subject: "Plus qu'un mois pour pour finaliser votre recensement"
   end
@@ -68,4 +63,9 @@ class UserMailer < ApplicationMailer
   end
 
   protected
+
+  def set_commune_and_user
+    @user = params[:user]
+    @commune = params[:commune]
+  end
 end
