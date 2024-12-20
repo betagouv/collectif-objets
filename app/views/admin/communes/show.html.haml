@@ -98,7 +98,7 @@
               %th(colspan="6")
                 %div.co-flex.co-flex--align-items-center.co-flex--gap-1rem
                   %div
-                    %h3.h5 Édifice #{edifice_nom(edifice.nom)}
+                    %h3.h5 Édifice #{edifice.nom.upcase_first}
                   %div= t("objets.count", count: edifice.objets.length)
             - edifice.objets.each do |objet|
               %tr

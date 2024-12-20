@@ -55,7 +55,7 @@ class ObjetCardComponent < ViewComponent::Base
   def main_photo_palissy = palissy_photos_presenters&.first
 
   def main_photo_recensement
-    return unless (photo = recensement&.photos&.first)
+    return unless (photo = recensement&.photos&.first)&.variable?
 
     PhotoPresenter.new \
       url: photo.variant(:medium),

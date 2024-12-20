@@ -100,6 +100,7 @@ Rails.application.routes.draw do
 
   namespace :conservateurs do
     resources :departements, only: %i[index show] do
+      get :activite, on: :collection, action: :activite_des_departements
       get :carte, on: :member
       get :activite, on: :member
       resources :campaigns, only: %i[new]
@@ -195,6 +196,7 @@ Rails.application.routes.draw do
     resources :mail_previews, only: [:index] do
       get "/:mailer/:email", on: :collection, action: :show, as: :preview
     end
+    resources :admin_users
   end
 
   # -----

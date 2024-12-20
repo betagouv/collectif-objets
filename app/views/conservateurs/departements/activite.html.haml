@@ -1,0 +1,12 @@
+- title = "Activité de vos départements"
+- content_for(:head_title) { title }
+
+%main#contenu.fr-container.fr-py-4w.co-min-height-50vh
+  %h1= title
+
+  = render "selecteur_de_periode"
+
+  - @departements.each do |departement|
+    %h2= departement.nom
+
+    = render "activite", commune_messages_count: departement.commune_messages_count(@date_range), commune_dossiers_transmis: departement.commune_dossiers_transmis(@date_range)

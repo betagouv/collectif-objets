@@ -110,20 +110,20 @@ RSpec.describe Commune, type: :model do
         commune.update(status: "completed")
       end
 
-      context "dossier soumis il y a moins d'une semaine" do
-        let(:date) { Date.new(2023, 11, 10) }
-        before { dossier.update(submitted_at: Date.new(2023, 11, 9)) }
+      context "mais le dossier a été soumis il y a moins d'un jour" do
+        let(:date) { Date.new(2023, 11, 14) }
+        before { dossier.update(submitted_at: Date.new(2023, 11, 13)) }
         it { is_expected.to be_falsey }
       end
 
-      context "on est le weekend" do
-        let(:date) { Date.new(2023, 11, 13) }
+      context "mais on est le weekend" do
+        let(:date) { Date.new(2023, 11, 12) }
         it { is_expected.to be_falsey }
       end
 
-      context "le recensement est terminé il y a plus d'une semaine et la date d'envoi est hors weekend" do
-        let(:date) { Date.new(2023, 11, 13) }
-        before { dossier.update(submitted_at: Date.new(2023, 11, 3)) }
+      context "il y a plus d'un jour et la date d'envoi est hors weekend" do
+        let(:date) { Date.new(2023, 11, 15) }
+        before { dossier.update(submitted_at: Date.new(2023, 11, 13)) }
 
         it "returns false si la commune a des objets prioritaires" do
           create(:recensement, :en_peril, dossier:)
@@ -192,9 +192,9 @@ RSpec.describe Commune, type: :model do
         context "lorsque la commune a reçu une réponse automatique" do
           before { commune.dossier.update(replied_automatically_at: Time.zone.now) }
 
-          it "a un statut global sur le recensement et l'examen à Réponse automatique" do
-            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMEN_OPTIONNEL
-            expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMEN_OPTIONNEL
+          it "a un statut global sur le recensement et l'examen à À examiner" do
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
           end
 
           it "passe en Examiné si le conservateur décide de faire l'examen tout de même" do
@@ -211,9 +211,9 @@ RSpec.describe Commune, type: :model do
                    etat_sanitaire: Recensement::ETAT_PERIL, dossier: commune.dossier, objet:, conservateur:)
           end
 
-          it "a un statut global sur le recensement et l'examen à À examiner" do
-            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
-            expect(Commune.first.statut_global).to eq Commune::ORDRE_A_EXAMINER
+          it "a un statut global sur le recensement et l'examen à Examen prioritaire" do
+            expect(Commune.include_statut_global.first.statut_global).to eq Commune::ORDRE_EXAMEN_PRIORITAIRE
+            expect(Commune.first.statut_global).to eq Commune::ORDRE_EXAMEN_PRIORITAIRE
           end
 
           it "a un statut global sur le recensement et l'examen à En cours d'examen" do
@@ -262,7 +262,7 @@ RSpec.describe Commune, type: :model do
         it "should not work and the error should be explicit" do
           subject
           expect(commune.errors.full_messages).to eq(
-            ["Impossible de supprimer Commune parce qu’il y a un dossier associé"]
+            ["Impossible de supprimer Commune parce qu’il y a 1 ou plusieurs dossiers associés"]
           )
         end
       end

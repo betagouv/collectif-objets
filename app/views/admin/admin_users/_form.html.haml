@@ -1,0 +1,29 @@
+- if admin_user.errors.any?
+  .fr-alert.fr-alert--error.fr-mb-4w
+    %p
+      Erreur(s)
+    %ul
+      - admin_user.errors.full_messages.each do |message|
+        %li= message
+
+= form_for [:admin, admin_user], builder: FormBuilderDsfr do |f|
+  .fr-input-group
+    = f.label :first_name do
+      Prénom (*)
+    = f.text_field :first_name, required: true
+  .fr-input-group
+    = f.label :last_name do
+      Nom de famille (*)
+    = f.text_field :last_name
+  .fr-input-group
+    = f.label :email do
+      Email (*)
+    = f.text_field :email, required: true
+  - if admin_user.new_record?
+    .fr-input-group{ "data-controller": "password-visibility" }
+      = f.label :password, class: "co-flex co-flex--space-between" do
+        Mot de passe (*)
+        %button.fr-btn.fr-btn--tertiary.fr-btn--icon-left.fr-fi-eye-line{ type: :button, data: { action: "password-visibility#toggle", "password-visibility-target": :button } }
+          Afficher
+      = f.password_field :password, "data-password-visibility-target": :input
+  = f.submit "Enregistrer"

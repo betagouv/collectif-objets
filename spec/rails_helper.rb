@@ -35,6 +35,8 @@ RSpec.configure do |config|
   WebMock.disable_net_connect!(allow_localhost: true)
   config.before(type: :feature) do
     stub_request(:any, /tube.numerique.gouv.fr/).to_return(status: 200, body: "", headers: {})
+    # Silence upstream deprecation warning. See https://github.com/teamcapybara/capybara/issues/2779
+    Selenium::WebDriver.logger.ignore(:clear_local_storage, :clear_session_storage)
   end
 
   config.after(type: :feature) do |example_group|

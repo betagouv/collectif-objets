@@ -1,7 +1,3 @@
-- if @show_new_selection_message
-  .fr-alert.fr-alert--info.fr-alert--sm.fr-mb-4w
-    %p.fr-alert__description= t("campaigns.edit_recipients_tooltip")
-
 %p.fr-mb-4w= "Liste des #{campaign.available_communes.load.size} communes abritant des objets <abbr title='Monuments Historiques'>MH</abbr> #{campaign.departement.dans_nom}.".html_safe
 
 = form_for campaign, builder: FormBuilderDsfr, url: send("#{routes_prefix}_campaign_update_recipients_path", campaign), data: { controller: "multichecker" } do |f|
@@ -24,7 +20,7 @@
         .co-columns-auto.co-columns-sm-2.co-columns-lg-3.fr-mx-0.w-100
           - campaign.available_communes.each do |commune|
             - disabled = commune.users_count.zero? || commune.dossier&.construction?
-            - checked = !disabled && (communes_ids.empty? || communes_ids.include?(commune.id))
+            - checked = !disabled && (communes_ids.include?(commune.id) || (communes_ids.empty? && !commune.dossier&.submitted?))
             - input_id = "campaign_commune_#{commune.id}"
             .fr-checkbox-group.fr-checkbox-group--sm.fr-mb-1w.co-break-avoid-column
               %input{type: :checkbox,

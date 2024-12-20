@@ -1,0 +1,24 @@
+- content_for(:head_title) { "Administration - Admins - #{@admin_user}" }
+
+%main#contenu.fr-container.fr-mb-8w
+  = render "shared/breadcrumbs", links: [["Administration", admin_path], ["Admins", admin_admin_users_path]], current_page_label: @admin_user.to_s
+
+  %h1= @admin_user
+
+  %p
+    %strong Date d'ajout :
+    = l @admin_user.created_at, format: :long
+    = "(il y a #{time_ago_in_words @admin_user.created_at})"
+  %p
+    %strong Prénom :
+    = @admin_user.first_name
+  %p
+    %strong Nom de famille :
+    = @admin_user.last_name
+  %p
+    %strong Email :
+    = mail_to @admin_user.email, @admin_user.email, class: "fr-btn fr-btn--sm fr-btn--secondary"
+
+  .fr-btns-group.fr-btns-group--inline-md.fr-btns-group--icon-left
+    = link_to "Modifier", edit_admin_admin_user_path, class: "fr-btn fr-btn--secondary fr-icon-pencil-line"
+    = button_to "Supprimer", admin_admin_user_path, class: "fr-btn fr-btn--tertiary fr-icon-delete-line", method: :delete, data: { turbo_confirm: "Êtes-vous sûr ?" }

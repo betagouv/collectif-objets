@@ -4,5 +4,5 @@
   %ul.fr-mb-8w
     - edifices.each do |edifice|
       %li
-        = link_to "#{edifice_nom(edifice.nom)}".html_safe, "##{edifice.slug}", "data-turbo": false
+        = link_to edifice.nom.upcase_first, "##{edifice.slug}", "data-turbo": false
         · #{t("objets.count", count: edifice.objets.length)}

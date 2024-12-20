@@ -1,9 +1,10 @@
 -# locals: :edifice
 - commune = edifice.commune
+- nom = edifice_nom(edifice.nom)
 
 .d-md-flex.align-content-center.co-flex--gap-1rem.fr-mb-2w{id: "bordereau-#{edifice.id}"}
   %span
-    = "#{edifice.nom.upcase_first} · #{texte_nombre_objets_protégés(edifice)}"
+    = "#{nom} · #{texte_nombre_objets_protégés(edifice)}"
 
   - if edifice.bordereau.present?
     = link_to "Télécharger (PDF de #{number_to_human_size edifice.bordereau.byte_size})",

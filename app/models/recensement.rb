@@ -55,6 +55,8 @@ class Recensement < ApplicationRecord
   SECURISATION_MAUVAISE = "en_danger"
   SECURISATIONS = [SECURISATION_CORRECTE, SECURISATION_MAUVAISE].freeze
 
+  ALLOWED_PHOTO_EXTENSIONS = [".png", ".jpg", ".jpeg"].freeze
+
   validates :objet, presence: true, unless: -> { deleted? } # it is important not to use objet_id here
   validates :objet_id, uniqueness: { scope: :dossier_id }, unless: -> { deleted? }
 
@@ -73,6 +75,8 @@ class Recensement < ApplicationRecord
   validates :etat_sanitaire, inclusion: { in: [nil] }, if: -> { completed? && !recensable? }
   validates :securisation, inclusion: { in: [nil] }, if: -> { completed? && !recensable? }
   validates :photos, inclusion: { in: [] }, if: -> { completed? && !recensable? && photos.attached? }
+  validates :photos, size: { less_than: 10.megabytes }, if: -> { photos.attached? }
+  validate :photo_extensions, if: -> { photos.attached? }
 
   validates :conservateur_id, presence: true, if: -> { completed? && analysed? }
 
@@ -103,13 +107,14 @@ class Recensement < ApplicationRecord
   }
   scope :in_commune, ->(commune) { joins(:objet).where(objets: { commune: }) }
   scope :not_analysed, -> { where(analysed_at: nil) }
-  scope :absent_or_recensable, -> { where(recensable: true).or(absent) }
   scope :completed, -> { where(status: "completed") }
 
   # from https://medium.com/@cathmgarcia/soft-deletion-in-ruby-on-rails-a1d65d0172ab
   default_scope { where(deleted_at: nil) } # DANGER: default scopes are INVISIBLE and can lead to unexpected results
   scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
   scope :with_deleted, -> { unscope(where: :deleted_at) }
+
+  scope :not_exported_yet, -> { where(pop_export_memoire_id: nil) }
 
   # L'objet est prioritaire s'il a disparu ou s'il est en péril,
   # jugé par la commune ou le conservateur
@@ -202,5 +207,11 @@ class Recensement < ApplicationRecord
     self.securisation = nil
     self.photos = []
     self.photos_count = 0
+  end
+
+  def photo_extensions
+    return if photos.all? { |photo| ALLOWED_PHOTO_EXTENSIONS.include? File.extname(photo.filename.to_s).downcase }
+
+    errors.add(:photos, :invalid)
   end
 end

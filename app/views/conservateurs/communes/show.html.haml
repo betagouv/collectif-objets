@@ -9,11 +9,11 @@
 
   - elsif @dossier&.can_generate_rapport?
     = render "conservateurs/dossiers/accept_cta", dossier: @dossier
-  - elsif @commune.statut_global == Commune::ORDRE_EXAMEN_OPTIONNEL
+  - elsif @commune.statut_global == Commune::ORDRE_A_EXAMINER
     .fr-mb-4w
       = dsfr_alert type: :success, size: :sm do
-        Il n'y a pas d'objet à revoir, la commune a déjà reçu un email automatique, vous pouvez tout de même modifier ou commenter les recensements pour envoyer votre examen à la commune.
-  - elsif @commune.statut_global == Commune::ORDRE_A_EXAMINER || @commune.statut_global == Commune::ORDRE_EN_COURS_D_EXAMEN
+        La commune n'a pas indiqué de péril ou d'objets disparus, elle a donc reçu un mail automatique. Vous pouvez néanmoins consulter ou modifier les informations remontées par la commune et clore ce dossier.
+  - elsif @commune.statut_global == Commune::ORDRE_EXAMEN_PRIORITAIRE || @commune.statut_global == Commune::ORDRE_EN_COURS_D_EXAMEN
     .fr-mb-4w
       = dsfr_alert type: :info, size: :sm do
         Examinez l’ensemble des objets en péril ou disparus pour envoyer des informations complémentaires à la commune.

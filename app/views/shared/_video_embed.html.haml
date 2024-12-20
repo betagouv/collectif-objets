@@ -1,9 +1,18 @@
--# locals: (title:, video_id:, height: 315)
+-# locals: (title:, video_id:, height: 315, ratio_4_3: false, source: nil, source_text: nil)
 
-%iframe{title: "#{title} - Collectif Objets",
-  width: "100%",
-  height: height,
-  src: "https://tube.numerique.gouv.fr/videos/embed/#{video_id}",
-  frameborder: "0",
-  allowfullscreen: "",
-  sandbox: "allow-same-origin allow-scripts allow-popups"}
+%figure.fr-content-media{ role: :group }
+  %iframe.fr-responsive-vid{
+    class: ratio_4_3 ? "fr-ratio-4x3" : nil,
+    title: "#{title} - Collectif Objets",
+    width: "100%",
+    height: height,
+    src: "https://tube.numerique.gouv.fr/videos/embed/#{video_id}",
+    allowfullscreen: "",
+    allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+    sandbox: "allow-same-origin allow-scripts allow-popups"
+  }
+  %figcaption.fr-content-media__caption
+    = title
+    = link_to source_text, source, class: "fr-link", rel: :noopener, target: :_blank if source
+  = render("shared/transcript", title:) do
+    = yield

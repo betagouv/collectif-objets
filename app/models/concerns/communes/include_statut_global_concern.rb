@@ -16,9 +16,9 @@ module Communes
                 WHEN dossiers.status = 'construction' THEN #{Commune::ORDRE_EN_COURS_DE_RECENSEMENT}
                 WHEN dossiers.status = 'accepted' then #{Commune::ORDRE_EXAMINÉ}
                 WHEN dossiers.status = 'submitted' AND dossiers.replied_automatically_at IS NOT NULL
-                  THEN #{Commune::ORDRE_EXAMEN_OPTIONNEL}
-                WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0
                   THEN #{Commune::ORDRE_A_EXAMINER}
+                WHEN dossiers.status = 'submitted' AND recensements_analysed_count = 0
+                  THEN #{Commune::ORDRE_EXAMEN_PRIORITAIRE}
                 WHEN dossiers.status = 'submitted' AND recensements_analysed_count > 0
                   THEN #{Commune::ORDRE_EN_COURS_D_EXAMEN}
                 END), #{Commune::ORDRE_NON_RECENSÉ}) AS statut_global,

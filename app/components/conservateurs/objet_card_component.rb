@@ -63,9 +63,9 @@ module Conservateurs
       if recensement&.analysed?
         badge_struct.new "success", "Examiné"
       elsif recensement&.prioritaire?
-        badge_struct.new "blue-ecume", "À examiner"
+        badge_struct.new "warning", "À examiner en priorité"
       else
-        badge_struct.new "green-emeraude", "Examen optionnel"
+        badge_struct.new "blue-ecume", "À examiner"
       end
     end
 

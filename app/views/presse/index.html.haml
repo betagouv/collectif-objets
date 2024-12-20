@@ -10,11 +10,7 @@
       .fr-pl-2w.co-text--italic.co-border--left
         “Quelques clics suffisent. […] La facilité de mise en oeuvre a suscité une adhésion plus importante que prévue !”
       .fr-my-2w
-        = render "shared/video_embed", title: "Reportage Canal 32", video_id: "114c5786-72a6-4c25-9638-cf4d87861963"
-      .co-text--muted.fr-text--sm
-        Canal 32, 02.11.2022
-        %br
-        = link_to "Retrouvez le reportage sur Canal 32", "https://www.canal32.fr/thematiques/culture/sujet/des-maires-participent-au-recensement-du-patrimoine-du-02-novembre-2022.html", target: "_blank", rel: "noopener", class: "fr-link co-text--muted fr-text--sm"
+        = render "shared/video_canal32"
 
   .fr-grid-row.fr-grid-row--gutters
     - @articles.each do |article|

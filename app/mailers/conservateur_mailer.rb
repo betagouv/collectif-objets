@@ -8,10 +8,9 @@ class ConservateurMailer < ApplicationMailer
   def message_received_email
     @message, @conservateur = params.values_at(:message, :conservateur)
     @commune = @message.commune
-    mail \
-      to: @conservateur.email,
-      reply_to: email_address_with_name(@commune.support_email(role: :conservateur), "Collectif Objets Messagerie"),
-      subject: "#{@commune.nom} vous a envoyé un message"
+    mail subject: "#{@commune.nom} vous a envoyé un message",
+         to: email_address_with_name(@conservateur.email, @conservateur.full_name),
+         from: email_address_with_name(@commune.support_email(role: :conservateur), "#{@commune} via Collectif Objets")
   end
 
   def activite_email
