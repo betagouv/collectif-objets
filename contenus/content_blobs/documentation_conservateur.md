@@ -45,9 +45,9 @@ Collectif Objets est un service destiné aux conservateurs des Monuments Histori
 
 Si vous souhaitez être conseillé ou accompagné avant de lancer votre première campagne de recensement en ligne, vous pouvez écrire un email à cette adresse : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
 
-V﻿ous serez soit accompagné par une personne du ministère en maîtrise de l'outil, soit redirigé vers un ou une conservateur référent(e) qui vous conseillera pour cette première campagne.
+Vous serez soit accompagné par une personne du ministère en maîtrise de l'outil, soit redirigé vers un ou une conservateur référent(e) qui vous conseillera pour cette première campagne.
 
-S﻿oyez rassuré : l'outil est très simple d'utilisation.
+Soyez rassuré : l'outil est très simple d'utilisation.
 
 ### Les étapes d’une campagne de recensement
 
@@ -58,23 +58,23 @@ S﻿oyez rassuré : l'outil est très simple d'utilisation.
 
 Les informations ou données concernées sont : les photographies transmises par les communes et les emplacements des objets (déplacements / disparitions).
 
-I﻿mportant : la MPP ne met à jour les données concernant un objet qu'après avoir obtenu une confirmation d'un(e) CMH ou d'un(e) CAOA / CDAOA.
+Important : la MPP ne met à jour les données concernant un objet qu'après avoir obtenu une confirmation d'un(e) CMH ou d'un(e) CAOA / CDAOA.
 
 ### Les communes concernées par la campagne
 
 Toutes les communes d’un département abritant des objets MH (à l'exception des objets MH propriétés de l’État) peuvent être intégrées à la liste des communes concernées par une campagne de recensement.
 
-L﻿es conservateurs sont libres de choisir les communes à exclure. Par exemple, si un inventaire a déjà été fait là-bas récemment ; ou si l'équipe de la CAOA souhaite procéder par secteurs géographiques au sein du département.
+Les conservateurs sont libres de choisir les communes à exclure. Par exemple, si un inventaire a déjà été fait là-bas récemment ; ou si l'équipe de la CAOA souhaite procéder par secteurs géographiques au sein du département.
 
 ### Suite à la première campagne départementale
 
-N﻿ous encourageons dans un premier temps les conservateurs à examiner les "dossiers de recensement" transmis par les communes ayant participé à la campagne et à transmettre leurs examens aux communes, via la plateforme Collectif Objets.
+Nous encourageons dans un premier temps les conservateurs à examiner les "dossiers de recensement" transmis par les communes ayant participé à la campagne et à transmettre leurs examens aux communes, via la plateforme Collectif Objets.
 
-U﻿ne nouvelle campagne peut être relancée dès la fin d'une campagne de recensement.
+Une nouvelle campagne peut être relancée dès la fin d'une campagne de recensement.
 
 Les conservateurs peuvent lancer une nouvelle campagne de recensement auprès des communes n’ayant pas répondu précédemment. Mais il est aussi possible d'intégrer à la nouvelle campagne des communes ayant répondu précédemment.
 
-D﻿eux campagnes de recensement ne peuvent pas être concomitantes au sein d'un même département.
+Deux campagnes de recensement ne peuvent pas être concomitantes au sein d'un même département.
 
 L’objectif est qu’en 5 ans l’ensemble des communes d’un département abritant des objets MH ait recensé ses objets.
 
@@ -107,7 +107,7 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 * **Lorsque vous êtes satisfait des informations relatives à votre campagne de recensement (liste des communes concernées, dates, signature de mail...), cliquez sur le bouton « Planifier la campagne ».**\
   Votre campagne est planifiée : les communes destinataires recevront un email, à la date définie par vous, les invitant à recenser les objets protégés de leur territoire.
 
-S﻿i vous avez besoin de modifier des informations avant le début de la campagne, vous pouvez toujours cliquer sur le bouton "Repasser en brouillon" afin de ce faire.
+Si vous avez besoin de modifier des informations avant le début de la campagne, vous pouvez toujours cliquer sur le bouton "Repasser en brouillon" afin de ce faire.
 
 N'oubliez pas ensuite de repasser la campagne en "planifiée", et ce au plus tard la veille du début de la campagne !
 
@@ -252,13 +252,13 @@ Les dossiers de recensement transmis par les communes sont présentés plus bas 
 
 Les dossiers de recensement transmis par les communes sont répartis en deux catégories :
 
-\-﻿ "À examiner en priorité" : ces dossiers contiennent un ou plusieurs objet(s) qui a été signalé soit comme "en péril" soit comme "disparu" (c'est-à-dire : non trouvé) par la commune.
+- "À examiner en priorité" : ces dossiers contiennent un ou plusieurs objet(s) qui a été signalé soit comme "en péril" soit comme "disparu" (c'est-à-dire : non trouvé) par la commune.
 
-\-﻿ "À examiner" : les dossiers de recensement dont aucun objet n'a été signalé comme "disparu" ou "en péril".
+- "À examiner" : les dossiers de recensement dont aucun objet n'a été signalé comme "disparu" ou "en péril".
 
-N﻿ota Bene : dans la foulée de la transmission d'un dossier de recensement par une commune, tous les dossiers sont d'abord catégorisés comme "À examiner en priorité". Le tri entre les dossiers réellement prioritaires et les dossiers moins urgents dans la plateforme s'opère 24 heures après la transmission du dossier par la commune.
+Nota Bene : dans la foulée de la transmission d'un dossier de recensement par une commune, tous les dossiers sont d'abord catégorisés comme "À examiner en priorité". Le tri entre les dossiers réellement prioritaires et les dossiers moins urgents dans la plateforme s'opère 24 heures après la transmission du dossier par la commune.
 
-L﻿orsque vous cliquez sur le nom d'une commune qui vous a transmis son dossier, vous  êtes immédiatement conduit vers son dossier de recensement.
+Lorsque vous cliquez sur le nom d'une commune qui vous a transmis son dossier, vous  êtes immédiatement conduit vers son dossier de recensement.
 
 Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-dessous :
 
@@ -530,16 +530,16 @@ Un bordereau peut être généré pour chaque édifice abritant des objets prot�
 
 Les bordereaux de récolement sont pré-remplis avec certaines informations présentes dans Collectif Objets : PM de chaque objet, dénomination de l'objet, date de protection, état de conservation d'après le recensement et votre examen.
 
-M﻿ais vous pouvez modifier et compléter certaines informations avant de générer les bordereaux sous forme de PDF : les commentaires des différentes parties prenantes au récolement.
+Mais vous pouvez modifier et compléter certaines informations avant de générer les bordereaux sous forme de PDF : les commentaires des différentes parties prenantes au récolement.
 
 Quatre types de commentaires peuvent être indiqués : le commentaire de la commune, celui du conservateur, celui de l'affectataire et celui du propriétaire, dans le cas où ce dernier n'est pas la commune elle-même. Par défaut, les commentaires laissés par la commune et par vous-même sont pré-remplis, mais vous pouvez les effacer ou les modifier.
 
-U﻿ne fois que vous avez rédigé les commentaires à faire apparaître sur le bordereau de récolement, cliquez d'abord sur "enregistrer et générer le bordereau" en dessous des commentaires pour le dernier objet abrité dans l'édifice en question. Puis, remontez et cliquez sur le bouton bleu "Télécharger le bordereau" situé sous le nom de l'édifice en question.\
-A﻿près quelques secondes, le bordereau de récolement que vous avez complété sera téléchargé sur votre ordinateur.
+Une fois que vous avez rédigé les commentaires à faire apparaître sur le bordereau de récolement, cliquez d'abord sur "enregistrer et générer le bordereau" en dessous des commentaires pour le dernier objet abrité dans l'édifice en question. Puis, remontez et cliquez sur le bouton bleu "Télécharger le bordereau" situé sous le nom de l'édifice en question.\
+Après quelques secondes, le bordereau de récolement que vous avez complété sera téléchargé sur votre ordinateur.
 
 ![Bordereau de récolement](/contenus/content_blobs/images/bordereaux_de_recolement_onglet.png)
 
-#### C﻿omplétion des commentaires :
+#### Complétion des commentaires :
 
 ![](/contenus/content_blobs/images/bordereaux_de_recolement_telecharger_pdf.png)
 
@@ -582,31 +582,31 @@ Si vous êtes dans cette situation, prenez contact avec les gérants du système
 
 ## Autres
 
-### C﻿omment aider une commune qui a des problèmes pour se connecter au site web ?
+### Comment aider une commune qui a des problèmes pour se connecter au site web ?
 
-U﻿ne petite portion des communes rencontre des difficultés pour se connecter au site car elles ne reçoivent pas l'email contenant leur code de connexion permettant de s'authentifier.
+Une petite portion des communes rencontre des difficultés pour se connecter au site car elles ne reçoivent pas l'email contenant leur code de connexion permettant de s'authentifier.
 
-L﻿a première chose à faire est de vérifier que l'email contenant le code de connexion n'est pas arrivé dans la section "spams" ou "courriers indésirables" de la boite mail de cette commune (les communes oublient parfois de vérifier).
+La première chose à faire est de vérifier que l'email contenant le code de connexion n'est pas arrivé dans la section "spams" ou "courriers indésirables" de la boite mail de cette commune (les communes oublient parfois de vérifier).
 
-S﻿i le problème est que la commune n'a pas accès à l'adresse email de contact indiquée dans le site Collectif Objets, il faut demander une mise à jour des coordonnées de la commune directement depuis le site de l’annuaire du service public : [https://lannuaire.service-public.fr/ ](https://lannuaire.service-public.fr/)
+Si le problème est que la commune n'a pas accès à l'adresse email de contact indiquée dans le site Collectif Objets, il faut demander une mise à jour des coordonnées de la commune directement depuis le site de l’annuaire du service public : [https://lannuaire.service-public.fr/ ](https://lannuaire.service-public.fr/)
 
 Pour cela, il faut que la commune recherche sa page dans ce site, puis descende en bas de la page et clique sur “Demander une mise à jour de cette page” et suive les instructions.
 
-E﻿nfin, si la commune a bien accès à la boite mail connue dans le site Collectif Objets et qu'elle ne reçoit rien, il doit s'agir d'un problème avec un logiciel "anti-spam" ou d'un blocage provenant du serveur mail de la mairie. A ce moment-là, prévenez l'équipe en charge de la plateforme afin qu'elle envoie directement à la commune un lien de connexion.
+Enfin, si la commune a bien accès à la boite mail connue dans le site Collectif Objets et qu'elle ne reçoit rien, il doit s'agir d'un problème avec un logiciel "anti-spam" ou d'un blocage provenant du serveur mail de la mairie. A ce moment-là, prévenez l'équipe en charge de la plateforme afin qu'elle envoie directement à la commune un lien de connexion.
 
-P﻿our ce faire, écrivez à l'adresse : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
+Pour ce faire, écrivez à l'adresse : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
 
-### C﻿omment permettre à une personne privée ou une association de recenser certains objets d'une commune ?
+### Comment permettre à une personne privée ou une association de recenser certains objets d'une commune ?
 
-A﻿fin qu'une personne privée (un propriétaire privé par exemple, ou une association de protection du patrimoine) puisse effectuer le recensement de certains objets d'une commune, elle va devoir se "faire passer" pour la commune dans la plateforme, en collaboration avec la mairie de la dite commune.
+Afin qu'une personne privée (un propriétaire privé par exemple, ou une association de protection du patrimoine) puisse effectuer le recensement de certains objets d'une commune, elle va devoir se "faire passer" pour la commune dans la plateforme, en collaboration avec la mairie de la dite commune.
 
-Pour sa première connexion sur le site Collectif Objets, elle va devoir demander à recevoir un code de connexion comme si elle était la commune, en se rendant sur la page de connexion des communes : [/users/session_codes/new](/users/session_codes/new)
+Pour sa première connexion sur le site Collectif Objets, elle va devoir demander à recevoir un code de connexion comme si elle était la commune, en se rendant sur la page de connexion des communes : [Connexion commune](/users/session_codes/new)
 
-M﻿ais ce code va être envoyé par email à l'adresse de contact de la commune connue par le site Collectif Objets. Il faut alors que la mairie transmette le code de connexion à la personne qui souhaite recenser. Attention : ces codes ne sont valables que 24 heures par mesure de sécurité.
+Mais ce code va être envoyé par email à l'adresse de contact de la commune connue par le site Collectif Objets. Il faut alors que la mairie transmette le code de connexion à la personne qui souhaite recenser. Attention : ces codes ne sont valables que 24 heures par mesure de sécurité.
 
-P﻿ar la suite, normalement, la personne privée n’aura pas à redemander de code de connexion à chaque fois. Il suffit qu’elle utilise le même ordinateur et le même navigateur web pour se rendre sur le site Collectif Objets. 
+Par la suite, normalement, la personne privée n’aura pas à redemander de code de connexion à chaque fois. Il suffit qu’elle utilise le même ordinateur et le même navigateur web pour se rendre sur le site Collectif Objets. 
 
-Mais attention, pour revenir sur le site, il suffit d'aller directement sur la page d'accueil du site (et non pas sur la page de demande de code de connexion) : <https://collectif-objets.beta.gouv.fr/> 
+Mais attention, pour revenir sur le site, il suffit d'aller directement sur la page d'accueil du site (et non pas sur la page de demande de code de connexion) : [page d'accueil](/)
 
 ### Crédits photographiques
 
