@@ -17,8 +17,7 @@ Collectif Objets est non conforme avec le RGAA. Le site n’a encore pas été a
 ## Contenus non accessibles
 
 - le HTML des iframes de vidéos peertube n’est pas accessible
-- les vidéos ne présentent pas de transcriptions textuelles
-- la page /stats avec un iframe de metabase n’est pas accessible
+- la page [Statistiques](/stats) contient une iframe qui n’est pas accessible
 - l’inclusion du guide de recensement en PDF n’est pas accessible
 
 ## Amélioration et contact
