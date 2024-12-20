@@ -59,7 +59,7 @@ module ApplicationHelper
     icon_span("checkbox", contour:, title:)
   end
 
-  def active_nav_link?(link)
-    active_nav_links&.include?(link)
+  def active_nav_link?(*links)
+    active_nav_links&.intersect?(links)
   end
 end
