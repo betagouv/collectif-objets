@@ -539,7 +539,7 @@ A﻿près quelques secondes, le bordereau de récolement que vous avez complét�
 
 ![Bordereau de récolement](/contenus/content_blobs/images/bordereaux_de_recolement_onglet.png)
 
-##### C﻿omplétion des commentaires :
+#### C﻿omplétion des commentaires :
 
 ![](/contenus/content_blobs/images/bordereaux_de_recolement_telecharger_pdf.png)
 
