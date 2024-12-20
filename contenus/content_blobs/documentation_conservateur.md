@@ -29,7 +29,7 @@ Les objets qui sont propriétés de l’État ne sont pas concernés par Collect
 
 Dans la majorité des cas, les communes entretiennent des relations avec les propriétaires privés et sont en mesure de leur transmettre l’information concernant la campagne de recensement.
 
-Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir en écrivant un email à cette adresse : contact@collectif-objets.beta.gouv.fr
+Si vous êtes confrontés à un cas particulier, n’hésitez pas à nous le faire savoir en écrivant un email à cette adresse : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
 
 Les conservateurs d'un département choisissent la liste des communes destinataires de la campagne. Vous pouvez donc exclure d'une campagne les communes qui sont des cas particuliers ou difficiles.
 
@@ -43,7 +43,7 @@ Plus de 90% des informations transmises par les communes sont validées sans cor
 
 Collectif Objets est un service destiné aux conservateurs des Monuments Historiques et conservateurs des Antiquités et Objets d’Art.
 
-S﻿i vous souhaitez être conseillé ou accompagné avant de lancer votre première campagne de recensement en ligne, vous pouvez écrire un email à cette adresse : contact@collectif-objets.beta.gouv.fr
+Si vous souhaitez être conseillé ou accompagné avant de lancer votre première campagne de recensement en ligne, vous pouvez écrire un email à cette adresse : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
 
 V﻿ous serez soit accompagné par une personne du ministère en maîtrise de l'outil, soit redirigé vers un ou une conservateur référent(e) qui vous conseillera pour cette première campagne.
 
@@ -92,7 +92,7 @@ Les comptes « conservateurs » sont déjà créés sur Collectif Objet à parti
 * Cliquer sur « [Réinitialiser mon mot de passe](https://collectif-objets.beta.gouv.fr/conservateurs/password/new) » et renseigner votre adresse mél professionnelle.
 * Vous recevrez un mél avec un lien de connexion vous invitant à définir votre mot de passe.
 
-S﻿i vous êtes devenu conservateur récemment ou que vous rencontrez un problème, contactez l'adresse mail suivante pour expliquer votre problème : contact@collectif-objets.beta.gouv.fr
+Si vous êtes devenu conservateur récemment ou que vous rencontrez un problème, contactez l'adresse mail suivante pour expliquer votre problème : [CONTACT_EMAIL](mailto:CONTACT_EMAIL)
 
 ### Créer une campagne de recensement
 
