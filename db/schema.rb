@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_10_173621) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_12_171535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -420,13 +420,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_10_173621) do
 
   create_table "recenseur_accesses", force: :cascade do |t|
     t.bigint "recenseur_id", null: false
-    t.bigint "commune_id"
-    t.bigint "edifice_id"
+    t.bigint "commune_id", null: false
     t.boolean "granted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true, where: "(commune_id IS NOT NULL)"
-    t.index ["recenseur_id", "edifice_id"], name: "index_recenseur_accesses_on_recenseur_id_and_edifice_id", unique: true, where: "(edifice_id IS NOT NULL)"
+    t.index ["commune_id"], name: "index_recenseur_accesses_on_commune_id"
+    t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true
     t.index ["recenseur_id"], name: "index_recenseur_accesses_on_recenseur_id"
   end
 
@@ -488,7 +487,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_10_173621) do
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
-  add_foreign_key "session_codes", "users"
+  add_foreign_key "recenseur_accesses", "communes"
   add_foreign_key "recenseur_accesses", "recenseurs"
+  add_foreign_key "session_codes", "users"
   add_foreign_key "users", "communes"
 end
