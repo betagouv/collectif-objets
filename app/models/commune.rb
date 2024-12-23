@@ -47,6 +47,8 @@ class Commune < ApplicationRecord
   has_many :admin_comments, dependent: :destroy, as: :resource
   has_many :survey_votes, dependent: :nullify
   has_many :messages, dependent: :destroy
+  has_many :recenseur_accesses, dependent: :delete_all
+  has_many :recenseurs, through: :recenseur_accesses
 
   scope :with_user, -> { where.associated(:users) }
   scope :with_objets, -> { where.associated(:objets) }
