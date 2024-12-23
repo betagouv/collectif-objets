@@ -22,3 +22,12 @@
     = @recenseur.human_status
 
   = simple_format "<b>Notes :</b> #{@recenseur.notes}"
+
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-12.fr-col-lg-6
+      %h2 Communes
+      = render "accesses", recenseur: @recenseur
+
+    .fr-col-12.fr-col-lg-6
+      %h2 Nouvel accès
+      = render "admin/recenseur_accesses/form", recenseur: @recenseur

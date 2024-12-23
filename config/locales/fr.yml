@@ -248,6 +248,8 @@ fr:
               blank: "La raison de sortie manuelle de la campagne doit être remplie"
       messages:
         record_invalid: 'La validation a échoué : %{errors}'
+    models:
+      recenseur_access: Accès
     attributes:
       recensement:
         localisation: Où se trouve l’objet ?
@@ -272,6 +274,12 @@ fr:
         accepted: "Autorisé à recenser"
         rejected: "Accès interdit"
         optout: "Refuse d'être contacté"
+      recenseur_access:
+        commune_id: commune
+      recenseur_access/status:
+          granted: Autorisé
+          rejected: Refusé
+          pending: En attente de confirmation
       dossier:
         count:
           zero: aucun dossier

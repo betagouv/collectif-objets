@@ -20,11 +20,11 @@
           %table
             %thead
               %tr
-                %th Nom
-                %th Email
-                %th Notes
-                %th Statut
-                %th
+                %th{ scope: :col } Nom
+                %th{ scope: :col } Email
+                %th{ scope: :col } Notes
+                %th{ scope: :col } Statut
+                %th{ scope: :col }
             %tbody
               - @recenseurs.each do |recenseur|
                 %tr

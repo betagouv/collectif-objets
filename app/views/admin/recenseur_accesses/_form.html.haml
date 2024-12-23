@@ -1,0 +1,20 @@
+= turbo_frame_tag :new_access do
+  -#
+    - if access.errors.any?
+      .fr-alert.fr-alert--error.fr-mb-4w
+        %p
+          pluralize(access.errors.count, "Erreur")
+        %ul
+          - access.errors.full_messages.each do |message|
+            %li= message
+
+  = form_with url: [:admin, :recenseur], method: :get, builder: FormBuilderDsfr do |f|
+    .fr-search-bar.fr-mb-4w
+      = f.label :nom, "Rechercher une commune", class: "fr-label"
+      .fr-input-wrap.co-header-search-input-wrap
+        = f.text_field :nom, autocomplete: :off, required: true, placeholder: "Commune", class: "fr-input", value: params[:nom]
+      = f.button value: "Rechercher", class: "fr-btn"
+
+  %h3.fr-h5= pluralize(@communes.size, "résultat", plural: "Résultats")
+  %ul
+    = render partial: "admin/recenseur_accesses/commune", collection: @communes, locals: { recenseur: @recenseur }
