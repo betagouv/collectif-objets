@@ -12,7 +12,17 @@ module Admin
     end
 
     # GET /admin/recenseurs/1
-    def show; end
+    def show
+      @communes = Commune.none
+      if params[:nom]
+        @communes = Commune.includes(:departement).limit(20)
+                           .ransack(nom_unaccented_cont: params[:nom], s: "departement_code asc, nom asc").result
+      end
+      respond_to do |format|
+        format.turbo_stream { render "admin/recenseur_accesses/form", recenseur: @recenseur }
+        format.html
+      end
+    end
 
     # GET /admin/recenseurs/new
     def new

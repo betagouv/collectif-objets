@@ -6,7 +6,7 @@
       - recenseur.errors.full_messages.each do |message|
         %li= message
 
-= form_for [:admin, recenseur], builder: FormBuilderDsfr do |f|
+= form_for [:admin, recenseur], builder: FormBuilderDsfr, data: { turbo: false } do |f|
   .fr-input-group
     = f.label :email do
       Email (*)
