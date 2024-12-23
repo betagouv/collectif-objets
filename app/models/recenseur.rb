@@ -5,13 +5,18 @@ class Recenseur < ApplicationRecord
   enum :status, ["pending", "accepted", "rejected", "optout"].index_by(&:itself), default: :pending, validate: true
   # rubocop:enable Style/WordArray
 
-  normalizes :email, with: ->(email) { email.downcase.strip }
-  validates :email, presence: true, uniqueness: true, if: :email_changed?
+  has_many :accesses, class_name: "RecenseurAccess", dependent: :delete_all, inverse_of: :recenseur
+  has_many :communes, through: :accesses
 
-  before_save :set_nom
+  normalizes :email, with: ->(email) { email.downcase.strip }
+  validates  :email, presence: true, uniqueness: true, if: :email_changed?
+
+  before_create :set_nom
+
+  delegate :human_attribute_name, to: :class
 
   def notes = super || ""
-  def human_status = self.class.human_attribute_name("status.#{status}")
+  def human_status = human_attribute_name("status.#{status}")
 
   # -------
   # RANSACK
@@ -26,6 +31,6 @@ class Recenseur < ApplicationRecord
   private
 
   def set_nom
-    self.nom ||= email.to_s.split("@").first || ""
+    self.nom = email.to_s.split("@").first if nom.blank?
   end
 end
