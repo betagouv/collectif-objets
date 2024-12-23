@@ -5,6 +5,8 @@ class Edifice < ApplicationRecord
   has_many :objets, dependent: :nullify
   has_many :bordereaux, dependent: :nullify
 
+  has_many :recenseurs, through: :commune
+
   validates :code_insee, presence: true
   validates :merimee_REF, uniqueness: true, if: -> { merimee_REF.present? }
   validates :slug, uniqueness: { scope: :code_insee }, if: -> { code_insee.present? }
