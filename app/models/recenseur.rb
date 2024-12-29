@@ -21,6 +21,10 @@ class Recenseur < ApplicationRecord
   def notes = super || ""
   def human_status = human_attribute_name("status.#{status}")
 
+  def append_to_notes(text)
+    self.notes = [notes, text].compact_blank.join("\n")
+  end
+
   # -------
   # RANSACK
   # -------
