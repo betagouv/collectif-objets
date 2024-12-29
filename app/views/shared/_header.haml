@@ -33,6 +33,7 @@
     - c.with_direct_link_simple title: "Recensement", path: commune_objets_path(current_user.commune), active: active_nav_link?("Recensement")
     - c.with_direct_link_simple title: commune_messagerie_title(current_user.commune), path: commune_messages_path(current_user.commune), active: active_nav_link?("Messagerie")
     - c.with_direct_link_simple title: "Examen du conservateur", path: commune_dossier_path(current_user.commune), active: active_nav_link?("Examen du conservateur")
+    - c.with_direct_link_simple title: "Recenseurs", path: commune_recenseurs_path(current_user.commune), active: active_nav_link?("Recenseurs")
     - c.with_direct_link_simple title: "Comment ça marche ?", path: aide_path, active: active_nav_link?("Comment ça marche ?")
 
     - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos", "Aide en ligne", "On parle de nous", "Statistiques") do |dropdown|
