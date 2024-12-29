@@ -1,0 +1,6 @@
+= turbo_stream.replace :recenseurs,
+  partial: "communes/recenseurs/recenseurs",
+  locals: { recenseurs: @recenseurs }
+= turbo_stream.replace :form,
+  partial: "communes/recenseurs/form",
+  locals: { commune: @commune }

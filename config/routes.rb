@@ -89,6 +89,7 @@ Rails.application.routes.draw do
       resources :email_attachments, only: [:show]
     end
     resource :user, only: [:update]
+    resources :recenseurs, only: [:index, :create, :destroy]
   end
 
   ## -------------

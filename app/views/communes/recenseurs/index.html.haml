@@ -1,0 +1,15 @@
+- content_for(:head_title) { "Recenseurs de #{@commune.nom}" }
+
+%main#contenu.fr-container.fr-pb-4w
+  = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Recenseurs de #{@commune.nom}"
+
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-12.fr-col-lg-8
+      %h1 Recenseurs
+      = render "recenseurs", recenseurs: @recenseurs
+
+    .fr-col-12.fr-col-lg-4
+      %h2 Demander l'accès
+      = render "form", commune: @commune
+
+  = render "shared/recenseurs/presentation"
