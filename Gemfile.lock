@@ -241,8 +241,8 @@ GEM
     jaro_winkler (1.5.6)
     jmespath (1.6.2)
     json (2.7.2)
-    kramdown (2.4.0)
-      rexml
+    kramdown (2.5.1)
+      rexml (>= 3.3.9)
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     language_server-protocol (3.17.0.3)
@@ -371,7 +371,7 @@ GEM
       railties (>= 5.2)
     reverse_markdown (2.1.1)
       nokogiri
-    rexml (3.3.9)
+    rexml (3.4.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -533,7 +533,7 @@ DEPENDENCIES
   htmlbeautifier (~> 1.4)
   icalendar (~> 2.10)
   image_processing (~> 1.12)
-  kramdown (~> 2.4)
+  kramdown (~> 2.5)
   launchy (~> 2.5)
   matrix (~> 0.4)
   mjml-rails (~> 4.11)
