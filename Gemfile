@@ -34,7 +34,7 @@ gem "rails", "~> 7.1"
 gem "ransack", "~> 4.2"
 gem "rubyzip", "~> 2.3"
 gem "sentry-rails", "~> 5.15"
-gem "sentry-ruby", "~> 5.15"
+gem "sentry-ruby", "~> 5.22"
 gem "turbo-rails", "~> 1.4"
 gem "typhoeus", "~> 1.4"
 gem "tzinfo-data", "~> 1.0", platforms: %i[mingw mswin x64_mingw jruby]
