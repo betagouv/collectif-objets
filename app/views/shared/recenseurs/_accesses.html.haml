@@ -1,0 +1,10 @@
+= turbo_frame_tag :accesses do
+  - if accesses.empty?
+    - if other_accesses
+      %p Cette personne a accès à des communes d'autres départements.
+    - else
+      %p Aucun accès.
+  - else
+    %ul.fr-toggle__list
+      %li
+        = render partial: "shared/recenseur_accesses/toggle", collection: accesses, as: :access
