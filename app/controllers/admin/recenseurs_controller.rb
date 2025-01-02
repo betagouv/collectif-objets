@@ -9,46 +9,51 @@ module Admin
       @ransack = Recenseur.order(created_at: :desc).ransack(params[:q])
       @pagy, @recenseurs = pagy(@ransack.result, items: 20)
       @query = params.dig(:q, :email_or_nom_or_notes_cont)
+      render "shared/recenseurs/index"
     end
 
     # GET /admin/recenseurs/1
     def show
+      @accesses = @recenseur.accesses.sorted.includes(:commune, :departement)
       @communes = Commune.none
       if params[:nom]
         @communes = Commune.includes(:departement).limit(20)
                            .ransack(nom_unaccented_cont: params[:nom], s: "departement_code asc, nom asc").result
       end
       respond_to do |format|
-        format.turbo_stream { render "admin/recenseur_accesses/form", recenseur: @recenseur }
-        format.html
+        format.turbo_stream { render "shared/recenseur_accesses/form", recenseur: @recenseur }
+        format.html { render "shared/recenseurs/show" }
       end
     end
 
     # GET /admin/recenseurs/new
     def new
       @recenseur = Recenseur.new
+      render "shared/recenseurs/new"
     end
 
     # GET /admin/recenseurs/1/edit
-    def edit; end
+    def edit
+      render "shared/recenseurs/edit"
+    end
 
     # POST /admin/recenseurs
     def create
       @recenseur = Recenseur.new(recenseur_params)
 
       if @recenseur.save
-        redirect_to [:admin, @recenseur], notice: "Recenseur créé avec succès."
+        redirect_to [context, @recenseur], notice: "Recenseur créé avec succès."
       else
-        render :new, status: :unprocessable_entity
+        render render "shared/recenseurs/new", status: :unprocessable_entity
       end
     end
 
     # PATCH/PUT /admin/recenseurs/1
     def update
       if @recenseur.update(recenseur_params)
-        redirect_to [:admin, @recenseur], notice: "Recenseur modifié.", status: :see_other
+        redirect_to [context, @recenseur], notice: "Recenseur modifié.", status: :see_other
       else
-        render :edit, status: :unprocessable_entity
+        render render "shared/recenseurs/edit", status: :unprocessable_entity
       end
     end
 

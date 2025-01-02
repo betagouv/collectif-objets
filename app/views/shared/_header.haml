@@ -18,6 +18,8 @@
       - dropdown.with_link title: "Déplacements prévus", path: conservateurs_visits_path
       - dropdown.with_link title: "Fiches attribuées", path: conservateurs_fiches_path
 
+    - c.with_direct_link_simple title: "Recenseurs", path: conservateurs_recenseurs_path, active: active_nav_link?("Recenseurs")
+
     - c.with_direct_link_simple title: "Documentation", path: content_blob_path(:documentation_conservateur), active: active_nav_link?("Documentation")
 
     - c.with_search do
