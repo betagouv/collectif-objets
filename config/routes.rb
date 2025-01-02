@@ -131,6 +131,9 @@ Rails.application.routes.draw do
         get :mail_preview
       end
     end
+    resources :recenseurs do
+      resources :accesses, only: [:create, :update], as: :recenseur_access, controller: :recenseur_accesses
+    end
     resource :conservateur, only: [:update]
     resources :visits, only: [:index]
     resources :fiches, only: :index
