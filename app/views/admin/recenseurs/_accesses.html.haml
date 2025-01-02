@@ -1,8 +1,0 @@
-= turbo_frame_tag :accesses do
-  - accesses = recenseur.accesses.sorted.includes(:commune, :departement).load
-  - if accesses.empty?
-    %p Aucun accès
-  - else
-    %ul.fr-toggle__list
-      %li
-        = render partial: "admin/recenseur_accesses/toggle", collection: accesses, as: :access
