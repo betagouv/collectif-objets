@@ -7,6 +7,9 @@ class Recenseur < ApplicationRecord
 
   has_many :accesses, class_name: "RecenseurAccess", dependent: :delete_all, inverse_of: :recenseur
   has_many :communes, through: :accesses
+  has_many :departements, through: :communes
+
+  scope :without_access, -> { where.missing(:accesses) }
 
   normalizes :email, with: ->(email) { email.downcase.strip }
   validates  :email, presence: true, uniqueness: true, if: :email_changed?
@@ -24,8 +27,8 @@ class Recenseur < ApplicationRecord
 
   def self.ransackable_attributes(_ = nil) = %w[email nom notes status]
   def self.ransackable_associations(_ = nil) = []
-  ransacker(:nom, type: :string) { Arel.sql("unaccent(nom)") }
-  ransacker(:notes, type: :string) { Arel.sql("unaccent(notes)") }
+  ransacker(:nom, type: :string) { Arel.sql("unaccent(recenseurs.nom)") }
+  ransacker(:notes, type: :string) { Arel.sql("unaccent(recenseurs.notes)") }
   ransacker(:status) { _1.table[:status] }
 
   private
