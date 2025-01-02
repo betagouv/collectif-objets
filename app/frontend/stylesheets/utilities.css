@@ -330,3 +330,7 @@ tr.co-vertical-align-top td {
 .co-no-target-blank::after {
   display: none !important;
 }
+/* Rend les formulaires button_to "transparents" pour les styles */
+form.button_to {
+  display: contents;
+}
