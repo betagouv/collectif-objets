@@ -1,0 +1,26 @@
+- content_for(:head_title) { "Recenseurs" }
+%main#contenu.fr-container.fr-pb-4w
+  = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Recenseurs"
+
+  .co-flex.co-flex--space-between
+    %h1
+      = icon_span("account-pin-circle", fill: true)
+      Recenseurs
+    %div
+      %div= link_to "Créer un nouveau recenseur", [:new, context, :recenseur], class: "fr-btn"
+
+  .fr-grid-row.fr-grid-row--gutters
+    .fr-col-12.fr-col-lg-9
+      = render "shared/recenseurs/recenseurs", recenseurs: @recenseurs, pagy: @pagy, query: @query
+      = render "shared/recenseurs/presentation"
+
+    .fr-col-12.fr-col-lg-3
+      %h2.fr-h5 Filtres
+      = search_form_for @ransack, url: [context, :recenseurs], builder: FormBuilderDsfr do |f|
+        .fr-input-group
+          = f.label :email_or_nom_or_notes_cont, "Nom, email ou notes"
+          = f.search_field :email_or_nom_or_notes_cont
+        .fr-input-group
+          = f.label :status, "Statut"
+          = f.select :status, [["", ""]] + Recenseur.statuses.keys.map { [Recenseur.human_attribute_name("status.#{_1}"), _1] }
+        = f.submit "Filtrer", name: nil, data: { turbo_submit_with: "Filtrer…" }
