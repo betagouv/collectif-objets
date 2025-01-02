@@ -1,0 +1,7 @@
+- if errors.any?
+  .fr-alert.fr-alert--error.fr-mb-4w
+    %p
+      pluralize(errors.count, "Erreur", plural: "Erreurs")
+    %ul
+      - errors.full_messages.each do |message|
+        %li= message
