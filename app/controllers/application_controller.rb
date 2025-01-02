@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
 
   devise_group :person, contains: [:user, :conservateur, :admin]
 
+  helper_method :namespace
+  helper_method :namespaced?
+
   before_action :init_banners
   before_action :set_locale
   before_action :set_sentry_context
@@ -19,6 +22,9 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   protected
+
+  def namespaced? = self.class.name.include?("::")
+  def namespace = namespaced? ? self.class.module_parent.to_s.downcase.to_sym : nil
 
   def set_sentry_context
     if current_user
