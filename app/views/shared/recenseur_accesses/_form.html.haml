@@ -1,5 +1,5 @@
 = turbo_frame_tag :new_access do
-  = form_with url: [context, recenseur], method: :get, builder: FormBuilderDsfr do |f|
+  = form_with url: [namespace, recenseur], method: :get, builder: FormBuilderDsfr do |f|
     .fr-search-bar.fr-mb-4w
       = f.label :nom, "Rechercher une commune", class: "fr-label"
       .fr-input-wrap.co-header-search-input-wrap

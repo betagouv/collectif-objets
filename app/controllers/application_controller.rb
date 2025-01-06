@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   devise_group :person, contains: [:user, :conservateur, :admin]
 
-  helper_method :context
+  helper_method :namespace
 
   before_action :init_banners
   before_action :set_locale
@@ -22,15 +22,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def context
-    if current_conservateur
-      :conservateurs
-    elsif current_user
-      :communes
-    elsif current_admin_user
-      :admin
-    end
-  end
+  def namespaced? = self.name.include?("::")
+  def namespace = self.class.module_parent.to_s.downcase.to_sym
 
   def set_sentry_context
     if current_user
