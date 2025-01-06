@@ -1,7 +1,7 @@
 = turbo_frame_tag :form do
   = render "shared/errors", errors: recenseur.errors if recenseur.errors.any?
 
-  = form_for [context, recenseur], builder: FormBuilderDsfr, data: { turbo: false } do |f|
+  = form_for [namespace, recenseur], builder: FormBuilderDsfr, data: { turbo: false } do |f|
     .fr-input-group
       = f.label :email do
         Email (*)
