@@ -5,6 +5,7 @@ module Conservateurs
     before_action :restrict_access
 
     include Pundit::Authorization
+    include NamespacedPolicies
 
     # rubocop:disable Rails/LexicallyScopedActionFilter
     after_action :verify_authorized, except: :index
@@ -27,14 +28,6 @@ module Conservateurs
       return true if current_conservateur.present?
 
       redirect_to new_conservateur_session_path, alert: "Vous n'êtes pas connecté en tant que conservateur"
-    end
-
-    def policy_scope(scope)
-      super([:conservateurs, scope])
-    end
-
-    def authorize(record, query = nil)
-      super([:conservateurs, record], query)
     end
   end
 end
