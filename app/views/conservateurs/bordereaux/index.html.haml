@@ -1,7 +1,7 @@
 = render layout: "conservateurs/communes/tabs",
   locals: { commune: @commune, dossier: @dossier, current_tab: :bordereaux } do
 
-  - if @dossier&.accepted?
+  - if @bordereaux && @dossier&.accepted?
     = dsfr_alert(type: :info, size: :sm, classes: ["fr-mb-4w"]) do
       %p
         Vous pouvez générer des bordereaux de récolement pour les édifices de la commune contenant des objets protégés.
@@ -10,7 +10,7 @@
         %br
         En cas d’erreur pour les édifices, veuillez nous envoyer un mail à l’adresse : #{CONTACT_EMAIL}.
 
-    - if @bordereaux.empty?
+    - if @bordereaux&.empty?
       %p
         %span.fr-icon-warning-line(aria-hidden="true")
         Il n’y a aucun objet classé ou inscrit dans cette commune.

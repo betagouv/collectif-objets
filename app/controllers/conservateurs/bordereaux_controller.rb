@@ -7,7 +7,7 @@ module Conservateurs
     skip_after_action :verify_policy_scoped, only: :index
 
     def index
-      @bordereaux = Bordereau.for(@commune)
+      @bordereaux = Bordereau.for(@commune) if @dossier
     end
 
     def create
