@@ -267,22 +267,22 @@ Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-desso
 
   * **Examinez les informations transmises par la commune :** à partir des photos transmises par la commune, qui sont cliquables et zoomables pour en examiner les détails, vous pouvez valider (en les laissant comme telles) ou corriger les informations renseignées.
 
-    Pour corriger une information - soit l'état de l'objet soit sa sécurisation - il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification. \
+    Pour corriger une information, il vous suffit de cliquer sur « Modifier » et de sélectionner la réponse appropriée puis de cliquer sur « Choisir » pour valider votre modification.
+
     N'oubliez pas de sauvegarder vos modifications en cliquant sur le bouton « Sauvegarder » en bas de page.
 
-    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises.** Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).\
-    Reportez-vous à la section correspondante ci-dessous pour en savoir plus.\
+    **Si la commune s’est trompée d’objet, il est essentiel de supprimer les photos transmises. Sans cela, les photographie erronées risquent d'être reversées dans les bases nationales (base Palissy dans POP).**
+    **Reportez-vous à la section correspondante ci-dessous pour en savoir plus.**
+
     **De la même manière, si la commune n’a pas transmis de photos, reportez-vous à la section correspondante ci-dessous.**
-  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.**
-    Cochez l’action appropriée parmi la liste proposée :
+  * **Préconisez à la commune, le cas échéant, des actions pour préserver l’objet.** Cochez l’action appropriée parmi la liste proposée :
+    * [informer la commune sur les mesures d’entretien préventives](/fiches/entretien_objets),
+    * [informer la commune sur les étapes préalables à la restauration](/fiches/restauration),
+    * [informer la commune sur les mesures d’entretien des édifices](/fiches/entretien_edifices),
+    * [informer la commune sur les mesures de sécurisation des objets](/fiches/securisation), et
+    * [informer la commune sur le dépôt de plainte](/fiches/depot_plainte).
 
-    * *[informer la commune sur les mesures d’entretien préventives](https://collectif-objets.beta.gouv.fr/fiches/entretien_objets)*,
-    * *[informer la commune sur les étapes préalables à la restauration](https://collectif-objets.beta.gouv.fr/fiches/restauration)*,
-    * *[informer la commune sur les mesures d’entretien des édifices](https://collectif-objets.beta.gouv.fr/fiches/entretien_edifices)*,
-    * *[informer la commune sur les mesures de sécurisation des objets](https://collectif-objets.beta.gouv.fr/fiches/securisation)*, et
-    * *[informer la commune sur le dépôt de plainte](https://collectif-objets.beta.gouv.fr/fiches/depot_plainte)*.
-
-    Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen. Si vous souhaitez consulter ces fiches, vous pouvez y accéder en descendant en tout bas de page web et en cliquant sur "Fiches" sous le logo du ministère de la Culture.
+    Chaque action est associée à une fiche-conseil, qui sera automatiquement intégrée dans l'examen transmis à la commune après examen.
 
     Un champ libre « commentaires pour la mairie » est à votre disposition si vous souhaitez préciser certains points à la commune.
   * **Enregistrez votre travail :** cliquez sur le bouton « Sauvegarder ».
@@ -449,25 +449,31 @@ Afin de l'examiner, suivez les étapes suivantes ou visionnez la vidéo ci-desso
   </div>
 </figure>
 
+* **00:51** Tableau de suivi des communes et statuts des dossiers des communes
+* **02:38** Examen d'un dossier d'une commune
+* **04:50** Examen et traitement des photos provenant des communes
+* **06:08** Corriger le recensement d'une commune
+* **06:34** Transmission des fiches informatives
+* **08:22** Classer une commune comme un déplacement souhaitable ou prioritaire
+* **08:59** Générer un bordereau de récolement
+* **09:25** Retrouver la liste des déplacements envisagés
+
 ### Si la commune n’a pas recensé le bon objet ou si les photos transmises sont problématiques
 
-Si la commune vous a transmis des informations erronées ou insuffisantes, envoyez-lui un message (via la messagerie intégrée au site) afin qu'elle puisse accomplir les corrections nécessaires.
+Si la commune vous a transmis des informations erronées ou insuffisantes, envoyez-lui un message (via la messagerie intégrée au site) afin qu'elle puisse faire les corrections nécessaires.
 
 En effet, il ne faut pas « finaliser » les dossiers des communes où des éléments sont insatisfaisants **car cela reviendrait à valider des informations erronées**, qui pourraient [être reversées dans les bases nationales du patrimoine.](#quel-est-le-lien-entre-collectif-objets-et-les-bases-de-donnes-nationales-sur-le-patrimoine-)
 
-**Il faut notamment être très vigilant avec les photographies transmises.** Si les photos ne correspondent pas au bon objet, ou s'il s'agit de photos d'archives, ou de photos issues de la base Palissy de POP (vous pouvez le vérifier en comparant les photos de la commune avec les photos qui s'affichent en haut de page) il est nécessaire de **supprimer ces photographies.**
-
-Pour cela, cliquez sur la photo transmises par la commune, cela ouvrira une "galerie photo" où vous pouvez faire défiler les photos transmises. **Pour chaque photo erronée ou insatisfaisante, cliquez sur "Supprimer"** en haut de page et validez cette action.
+**Il faut notamment être très vigilant avec les photographies transmises.** Si les photos ne correspondent pas au bon objet, ou s'il s'agit de photos d'archives, ou de photos issues de la base Palissy de POP (vous pouvez le vérifier en comparant les photos de la commune avec les photos qui s'affichent en haut de page) il est nécessaire de **supprimer ces photographies.** \
+Pour cela, cliquez sur la photo transmises par la commune, cela ouvrira une "galerie photo" où vous pouvez faire défiler les photos transmises. Pour chaque photo erronnée ou insatisfaisante, cliquez sur "Supprimer" en haut de page et validez cette action.
 
 Vous pouvez faire part à la commune de remarques pour l’aider dans son recensement grâce à la [messagerie](#comment-fonctionne-la-messagerie-) intégrée au site.
 
-Attention : une fois que vous aurez validé l'examen de la commune (c'est-à-dire que vous lui aurez transmis votre retour), celle-ci ne pourra plus modifier son recensement. Ainsi, si vous souhaitez qu'elle apporte des corrections ou des nouvelles images, échangez via la messagerie et attendez ces modifications avant de finaliser votre examen.
+Attention : une fois que vous aurez validé l'examen de la commune (c'est-à-dire que vous lui aurez transmis votre retour), celle-ci ne pourra plus modifier son recensement. Ainsi, si vous souhaitez qu'elle apporte des corrections ou des nouvelles images, échangez via la messagerie et attendez ces modifications avant de finaliser votre retour.
 
 ### Si la commune n’a pas pris de photos
 
-Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre examen.
-
-Les photos doivent être récentes et nouvelles.
+Suivez la même procédure que si la commune s'est trompée d'objet : envoyez-lui un message pour lui indiquer qu'elle doit ajouter les photos nécessaires pour réaliser votre examen. Les photos doivent être récentes et nouvelles.
 
 ### Envoyer mon examen à la commune
 
@@ -541,7 +547,7 @@ Après quelques secondes, le bordereau de récolement que vous avez complété s
 
 #### Complétion des commentaires :
 
-![](/contenus/content_blobs/images/bordereaux_de_recolement_telecharger_pdf.png)
+![Télécharger le bordereau de récolement](/contenus/content_blobs/images/bordereaux_de_recolement_telecharger_pdf.png)
 
 ### Désactiver les notifications de Collectif Objets
 
