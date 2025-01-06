@@ -1,6 +1,7 @@
-# ---
+---
 titre: Aide en ligne
 ---
+
 ## À propos de Collectif Objets
 
 ### Démarche de Collectif Objets
