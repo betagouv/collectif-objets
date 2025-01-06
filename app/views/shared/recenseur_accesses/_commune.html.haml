@@ -5,7 +5,7 @@
       %button.fr-btn.fr-btn-sm.fr-btn--secondary.fr-btn--icon-left.fr-icon-check-line{disabled: true} Accès ajouté
     - else
       = button_to("Ajouter l'accès",
-        [context, recenseur, :recenseur_access_index],
+        [namespace, recenseur, :recenseur_access_index],
         class: "fr-btn fr-btn-sm fr-btn--secondary fr-btn--icon-left fr-icon-add-line",
         params: { commune_id: commune.id },
         title: "Ajouter l'accès à #{commune.nom} (#{commune.departement.nom})",
