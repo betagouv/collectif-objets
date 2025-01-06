@@ -7,7 +7,7 @@
       = icon_span("account-pin-circle", fill: true)
       Recenseurs
     %div
-      %div= link_to "Créer un nouveau recenseur", [:new, context, :recenseur], class: "fr-btn"
+      %div= link_to "Créer un nouveau recenseur", [:new, namespace, :recenseur], class: "fr-btn"
 
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-12.fr-col-lg-9
@@ -16,7 +16,7 @@
 
     .fr-col-12.fr-col-lg-3
       %h2.fr-h5 Filtres
-      = search_form_for @ransack, url: [context, :recenseurs], builder: FormBuilderDsfr do |f|
+      = search_form_for @ransack, url: [namespace, :recenseurs], builder: FormBuilderDsfr do |f|
         .fr-input-group
           = f.label :email_or_nom_or_notes_cont, "Nom, email ou notes"
           = f.search_field :email_or_nom_or_notes_cont

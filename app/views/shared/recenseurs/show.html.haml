@@ -2,15 +2,15 @@
 - content_for(:head_title) { title }
 
 %main#contenu.fr-container.fr-pt-2w.fr-pb-4w
-  = render "shared/breadcrumbs", links: [["Recenseurs", [context, :recenseurs]]], current_page_label: title
+  = render "shared/breadcrumbs", links: [["Recenseurs", [namespace, :recenseurs]]], current_page_label: title
 
   .co-flex.co-flex--space-between
     %h1
       = icon_span("account-pin-circle", fill: true)
       = title
     %ul.fr-btns-group.fr-btns-group--inline.fr-btns-group--icon-left
-      %li= link_to "Modifier", [:edit, context, @recenseur], class: "fr-btn fr-icon-pencil-line"
-      %li= button_to "Supprimer", [context, @recenseur], class: "fr-btn fr-icon-delete-line fr-btn--secondary", method: :delete, data: { turbo_confirm: "Êtes-vous sûr ?", turbo: false }
+      %li= link_to "Modifier", [:edit, namespace, @recenseur], class: "fr-btn fr-icon-pencil-line" unless current_conservateur && !policy(@recenseur).edit?
+      %li= button_to "Supprimer", [namespace, @recenseur], class: "fr-btn fr-icon-delete-line fr-btn--secondary", method: :delete, data: { turbo_confirm: "Êtes-vous sûr ?" } unless current_conservateur && !policy(@recenseur).destroy?
 
   %p
     %b Nom :
