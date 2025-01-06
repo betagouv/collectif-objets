@@ -15,13 +15,13 @@
         %tbody
           - recenseurs.each do |recenseur|
             %tr
-              %td= link_to highlight(recenseur.nom, query), [context, recenseur], data: { turbo: false }
+              %td= link_to highlight(recenseur.nom, query), [namespace, recenseur], data: { turbo: false }
               %td.co-word-break-all= link_to highlight(recenseur.email, query), "mailto:#{recenseur.email}", target: :_blank
               %td{title: recenseur.notes.size > 25 ? recenseur.notes : nil}= highlight(recenseur.notes.truncate(25), query)
               %td= recenseur.human_status
               %td.co-white-space-nowrap
                 .fr-mt-1w
-                  = link_to [:edit, context, recenseur], data: { turbo: false } do
+                  = link_to [:edit, namespace, recenseur], data: { turbo: false } do
                     = icon_span("pencil")
                     Modifier
     = render partial: "shared/pagy_nav", locals: { pagy: } if pagy.pages > 1

@@ -1,7 +1,7 @@
 
 - pending_text = RecenseurAccess.human_attribute_name("status.pending")
 
-= form_for [context, access.recenseur, access], builder: FormBuilderDsfr, html: { id: dom_id(access), class: "fr-toggle fr-toggle--border-bottom" } do |f|
+= form_for [namespace, access.recenseur, access], builder: FormBuilderDsfr, html: { id: dom_id(access), class: "fr-toggle fr-toggle--border-bottom" } do |f|
   = f.check_box :granted, value: access.granted?, id: dom_id(access, :input), class: "fr-toggle__input", data: { controller: "input-autosubmit", action: "input-autosubmit#submit", "fr-checked-label": "Autorisé", "fr-unchecked-label": access.pending? ? pending_text : "Refusé" }
   = f.label :granted, "#{access.commune.nom} (#{access.departement.nom})", for: dom_id(access, :input), class: "fr-toggle__label"
   - if access.pending?

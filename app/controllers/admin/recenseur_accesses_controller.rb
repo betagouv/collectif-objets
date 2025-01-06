@@ -12,7 +12,7 @@ module Admin
         @accesses = @recenseur.accesses.sorted.includes(:commune, :departement)
         respond_to do |format|
           format.turbo_stream { render "shared/recenseur_accesses/create" }
-          format.html { redirect_to [context, @recenseur], notice: "Accès ajouté." }
+          format.html { redirect_to [namespace, @recenseur], notice: "Accès ajouté." }
         end
       else
         head :unprocessable_entity
@@ -25,7 +25,7 @@ module Admin
       if @access.update(granted: access_params[:granted])
         respond_to do |format|
           format.turbo_stream { render "shared/recenseur_accesses/update" }
-          format.html { redirect_to [context, @recenseur], notice: "Accès modifié.", status: :see_other }
+          format.html { redirect_to [namespace, @recenseur], notice: "Accès modifié.", status: :see_other }
         end
       else
         head :unprocessable_entity

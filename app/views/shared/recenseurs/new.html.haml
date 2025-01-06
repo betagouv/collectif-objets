@@ -2,7 +2,7 @@
 - content_for(:head_title) { title }
 
 %main#contenu.fr-container.fr-pt-2w.fr-pb-4w
-  = render "shared/breadcrumbs", links: [["Recenseurs", [context, :recenseurs]]],  current_page_label: title
+  = render "shared/breadcrumbs", links: [["Recenseurs", [namespace, :recenseurs]]],  current_page_label: title
 
   %h1
     = icon_span("account-pin-circle", fill: true)
