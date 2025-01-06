@@ -42,7 +42,7 @@ module Admin
       @recenseur = Recenseur.new(recenseur_params)
 
       if @recenseur.save
-        redirect_to [context, @recenseur], notice: "Recenseur créé avec succès."
+        redirect_to [namespace, @recenseur], notice: "Recenseur créé avec succès."
       else
         render render "shared/recenseurs/new", status: :unprocessable_entity
       end
@@ -51,7 +51,7 @@ module Admin
     # PATCH/PUT /admin/recenseurs/1
     def update
       if @recenseur.update(recenseur_params)
-        redirect_to [context, @recenseur], notice: "Recenseur modifié.", status: :see_other
+        redirect_to [namespace, @recenseur], notice: "Recenseur modifié.", status: :see_other
       else
         render render "shared/recenseurs/edit", status: :unprocessable_entity
       end
