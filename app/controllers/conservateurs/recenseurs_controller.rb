@@ -51,7 +51,7 @@ module Conservateurs
 
       if @recenseur.save
         @accesses = @recenseur.accesses.sorted.includes(:commune, :departement).where(commune: policy_scope(Commune))
-        redirect_to [context, @recenseur], notice: "Recenseur créé avec succès."
+        redirect_to [namespace, @recenseur], notice: "Recenseur créé avec succès."
       else
         render "shared/recenseurs/new", status: :unprocessable_entity
       end
@@ -60,7 +60,7 @@ module Conservateurs
     # PATCH/PUT /conservateurs/recenseurs/1
     def update
       if @recenseur.update(recenseur_params)
-        redirect_to [context, @recenseur], notice: "Recenseur modifié.", status: :see_other
+        redirect_to [namespace, @recenseur], notice: "Recenseur modifié.", status: :see_other
       else
         render "shared/recenseurs/show", status: :unprocessable_entity
       end
@@ -70,7 +70,7 @@ module Conservateurs
     def destroy
       @recenseur.accesses.where(commune: policy_scope(Commune)).delete_all
       @recenseur.destroy if @recenseur.accesses.empty?
-      redirect_to [context, :recenseurs], notice: "Recenseur supprimé.", status: :see_other
+      redirect_to [namespace, :recenseurs], notice: "Recenseur supprimé.", status: :see_other
     end
 
     private
