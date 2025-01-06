@@ -12,7 +12,7 @@
 
 
   .fr-grid-row.fr-grid-row--gutters
-    .fr-col-10
+    .fr-col-12.fr-col-lg-10
       - if @pagy.count.zero?
         Vos filtres n'ont donné aucun résultat
         %div= link_to "réinitialiser les filtres", admin_communes_path
@@ -52,8 +52,8 @@
         - if @pagy.pages > 1
           = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
 
-    .fr-col-2
-      %h2.h5 Filtres
+    .fr-col-12.fr-col-lg-2
+      %h2.fr-h5 Filtres
       - if @query_present
         .fr-mb-2w= link_to "réinitialiser les filtres", admin_conservateurs_path
       = search_form_for @ransack, url: admin_conservateurs_path, builder: FormBuilderDsfr do |f|
