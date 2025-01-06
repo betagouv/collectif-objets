@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   devise_group :person, contains: [:user, :conservateur, :admin]
 
   helper_method :namespace
+  helper_method :namespaced?
 
   before_action :init_banners
   before_action :set_locale
@@ -22,8 +23,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def namespaced? = self.name.include?("::")
-  def namespace = self.class.module_parent.to_s.downcase.to_sym
+  def namespaced? = self.class.name.include?("::")
+  def namespace = namespaced? ? self.class.module_parent.to_s.downcase.to_sym : nil
 
   def set_sentry_context
     if current_user
