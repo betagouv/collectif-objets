@@ -1,6 +1,7 @@
 ---
 titre: Aide en ligne
 ---
+
 ## À propos de Collectif Objets
 
 ### Démarche de Collectif Objets
@@ -30,7 +31,7 @@ Le recensement participatif proposé sur la plateforme Collectif Objets s’insc
 
 Il existe deux niveaux de protection au titre des Monuments historiques : l’inscription et le classement. L’inscription constitue le premier niveau de protection et le classement est le niveau le plus élevé.
 
-[En savoir plus sur la protection au titre des Monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
+En savoir plus sur la [protection au titre des Monuments historiques](https://www.culture.gouv.fr/Aides-demarches/Protections-labels-et-appellations/Protection-au-titre-des-Monuments-historiques) (source : Ministère de la Culture).
 
 ### Objectifs du recensement
 
@@ -71,7 +72,7 @@ Collectif Objets contacte les mairies des communes pour effectuer le recensement
 
 ### Destinataires des données récoltées
 
-Les données transmises par les communes sont à destination des conservateurs des antiquités et objets d’art (CAOA) et conservateurs des monuments historiques (CMH) du département dont fait partie la commune.
+Les données transmises par les communes sont à destination des Conservateurs des Antiquités et Objets d’Art (CAOA) et Conservateurs des Monuments Historiques (CMH) du département dont fait partie la commune.
 
 L’accès aux données est également possible par l’équipe en charge de Collectif Objets. Il est contrôlé et exclusivement réservé dans un but d’amélioration du service.
 
@@ -197,17 +198,19 @@ La vidéo ci-dessous vous présente les deux méthodes possibles pour vous conne
 <!-- Pour obtenir un code de connexion, vous pouvez : -->
 
 1. Partir de l'email que vous avez reçu et qui vous invite à recenser.
+
    Dans cet email, cliquez sur l'encart bleu "commencer le recensement". Vous serez alors guidé directement vers une page du site Collectif Objets qui vous permet de faire une demande de code de connexion, que vous recevrez par email. Vous devrez entrer ce code dans la page web d'où vous venez de demander l'envoi d'un code ou bien suivre le lien disponible dans l'email.
+
 2. Si vous ne trouvez plus l'email vous invitant au recensement :
 
-   * Rendez-vous sur la [page de demande de code](https://collectif-objets.beta.gouv.fr/users/session_codes/new)
+   * Rendez-vous sur la [page de demande de code](/users/session_codes/new)
    * Cliquez sur « Sélectionnez un département » et choisissez votre département dans la liste. Puis sélectionnez le nom de votre commune dans la liste en dessous. 
    * Cliquez sur « Recevoir un code de connexion » 
    * Consultez la boite mail de votre commune. Vous recevrez un courriel contenant un code de connexion à 6 chiffres. Attention : cet email peut atterrir dans les "spams" ou "courriers indésirables" de votre boite mail. Cliquez sur le code dans le mail, ou copiez-le pour le saisir dans la page de connexion.
    * Une fois le code saisi dans la page de connexion, vous serez connecté à l'espace de votre commune dans la plateforme. Lisez les instructions qui s’affichent puis cliquez sur le bouton bleu « Recenser les objets » en bas à droite de l’écran.
    * Vous verrez s’afficher les objets protégés de votre commune. Cliquez sur le nom de l’objet que vous souhaitez recenser en premier pour commencer son recensement, après être allé voir cet objet sur son lieu de conservation.
 
-Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](https://collectif-objets.beta.gouv.fr/contenus/aide_en_ligne#je-ne-trouve-pas-un-objet:~:text=par%20Collectif%20Objets-,Si,-vous%20n%E2%80%99avez%20pas)
+Si vous ne recevez pas d'e-mail vous invitant à recenser, consultez la section [Je n'ai pas été contacté par Collectif Objets.](/contenus/aide_en_ligne#je-nai-pas-t-contact-par-collectif-objets)
 
 ### Déroulé du recensement
 
@@ -406,11 +409,14 @@ Pour en savoir plus sur les objets protégés au titre des monuments historiques
 
 Si vous n'avez pas reçu d'email vous invitant à recenser les objets protégés de votre commune, il y a trois explications potentielles :
 
-* votre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques
-* il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne (une campagne de recensement peut concerner uniquement une partie d'un département). Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département.
+* votre commune n'est pas propriétaire ou détentrice d'un objet protégé au titre des monuments historiques ;
+* il n'y a actuellement pas de campagne de recensement des objets protégés dans votre département qui vous concerne. Une campagne de recensement peut concerner uniquement une partie d'un département. Vous pouvez vous renseigner à ce sujet auprès des conservateurs des antiquités et objets d'art de votre département ;
 * s'il y a bien une campagne en cours qui vous concerne, le problème doit provenir de l'adresse email à laquelle vous avez été contacté. En effet, la plateforme Collectif Objets envoie ses emails aux adresses génériques des communes (ou "adresses email de contact") qui sont renseignées dans le site web de l'État [Annuaire du service public](https://lannuaire.service-public.fr/).
 
-Si votre commune n'a pas d'adresse email de contact indiquée dans ce site, ou si l'adresse email indiquée est obsolète, nous vous invitons à demander une mise à jour de vos coordonnées directement depuis l'[Annuaire du service public](https://lannuaire.service-public.fr/).
+  Attention : certaines messageries électroniques (boites mail) sont équipées de systèmes "anti-spam" ou "anti-robots" qui bloquent la réception d'emails envoyés automatiquement par des logiciels, comme c'est le cas avec Collectif Objets.
+
+Si votre commune n'a pas d'adresse email de contact indiquée dans ce site, ou si l'adresse email indiquée est obsolète, nous vous invitons à demander une mise à jour de vos coordonnées directement depuis l'[Annuaire du service public](https://lannuaire.service-public.fr/)
+
 Pour cela, il vous faut rechercher la page de votre commune dans ce site, puis descendre en bas de la page et cliquer sur "Demander une mise à jour de cette page" et ensuite suivre les instructions.
 
 ### Je ne trouve pas un objet
@@ -439,6 +445,7 @@ Quelques ressources supplémentaires à ce sujet :
 Évaluer l’état des objets permet de donner une idée globale de leur état de conservation aux conservateurs. Ils pourront, si nécessaire, corriger votre évaluation sur l’état sanitaire des objets. Nous vous demandons d’indiquer ce qui vous semble le plus approprié.
 
 Si des doutes subsistent, vous pouvez interroger le conservateur ou la conservatrice de votre département via la messagerie interne au site Collectif Objets.
+
 Vous pouvez également partager vos doutes dans l'espace "commentaire" en fin du questionnaire de recensement de l'objet concerné.
 
 ### Je ne sais pas si je recense le bon objet
@@ -602,7 +609,7 @@ Les conservateurs peuvent également vous contacter via la messagerie de Collect
 
 Veuillez consulter notre fiche à ce sujet, qui regroupe des conseils des conservateurs : [lire la fiche sur la sécurisation](/fiches/securisation).
 
-Nous vous recommandons également de vous renseigner directement auprès des conservateurs des antiquités et objets d'art de votre département.
+Renseignez-vous directement auprès des conservateurs des antiquités et objets d'art de votre département avant de prendre une mesure de déplacement ou de sécurisation concernant un objet protégé au titre des monuments historiques.
 
 Pour aller plus loin sur la [sécurisation des objets protégés](https://www.culture.gouv.fr/Thematiques/Securite-Surete) et les [procédures en cas de vol](https://www.culture.gouv.fr/Thematiques/Securite-Surete/Securite-et-surete-des-biens/Procedures-en-cas-de-vol).
 
