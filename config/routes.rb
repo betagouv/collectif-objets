@@ -160,17 +160,13 @@ Rails.application.routes.draw do
       post :session_code, on: :member
     end
     resources :conservateurs, except: [:destroy] do
-      get :impersonate
-      collection do
-        post :toggle_impersonate_mode
-      end
+      get :impersonate, on: :member
+      post :toggle_impersonate_mode, on: :collection
     end
     resources :dossiers, only: [:show]
     resources :users, only: %i[] do
-      get :impersonate
-      collection do
-        post :toggle_impersonate_mode
-      end
+      get :impersonate, on: :member
+      post :toggle_impersonate_mode, on: :collection
     end
     resources :recenseurs do
       resources :accesses, only: [:create, :update], as: :recenseur_access, controller: :recenseur_accesses

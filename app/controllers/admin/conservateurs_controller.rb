@@ -2,6 +2,7 @@
 
 module Admin
   class ConservateursController < BaseController
+    before_action :set_conservateur, only: [:edit, :update, :impersonate]
     skip_before_action :disconnect_impersonating_conservateur, only: [:toggle_impersonate_mode]
 
     def index
@@ -14,9 +15,7 @@ module Admin
       @conservateur = Conservateur.new
     end
 
-    def edit
-      @conservateur = Conservateur.find(params[:id])
-    end
+    def edit; end
 
     def create
       @conservateur = Conservateur.new(conservateur_params)
@@ -29,7 +28,6 @@ module Admin
     end
 
     def update
-      @conservateur = Conservateur.find(params[:id])
       if @conservateur.update(conservateur_params)
         redirect_to edit_admin_conservateur_path(@conservateur), notice: "Conservateur modifié !"
       else
@@ -38,7 +36,6 @@ module Admin
     end
 
     def impersonate
-      @conservateur = Conservateur.find(params[:conservateur_id])
       impersonate_conservateur(@conservateur)
       redirect_to after_sign_in_path_for_conservateur(@conservateur)
     end
@@ -56,6 +53,10 @@ module Admin
 
     def conservateur_params
       params.require(:conservateur).permit(:email, :phone_number, :first_name, :last_name, departement_ids: [])
+    end
+
+    def set_conservateur
+      @conservateur = Conservateur.find(params[:id])
     end
 
     def active_nav_links = %w[Conservateurs]
