@@ -22,6 +22,11 @@
             toggle_path: toggle_impersonate_mode_admin_users_path,
             stop_path: stop_impersonating_admin_user_path(current_user)
 
+        - if banners.include?(:recenseur_impersonate)
+          = render ImpersonateCalloutComponent.new name: "le recenseur #{current_recenseur}",
+            mode: session[:recenseur_impersonate_write].present? ? :write : :read,
+            toggle_path: toggle_impersonate_mode_admin_recenseurs_path
+
       .co-text--right
         %button{type: :button,
           data: { action: "visibility#hide" },

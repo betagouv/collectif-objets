@@ -171,6 +171,8 @@ Rails.application.routes.draw do
       post :toggle_impersonate_mode, on: :collection
     end
     resources :recenseurs do
+      get :impersonate, on: :member
+      post :toggle_impersonate_mode, on: :collection
       resources :accesses, only: [:create, :update], as: :recenseur_access, controller: :recenseur_accesses
     end
     get "/session_codes(/:offset)", to: "session_codes#index", as: :session_codes

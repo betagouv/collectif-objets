@@ -16,10 +16,13 @@ class Recenseur < ApplicationRecord
   normalizes :email, with: ->(email) { email.downcase.strip }
   validates  :email, presence: true, uniqueness: true, if: :email_changed?
 
+  attr_accessor :impersonating
+
   before_create :set_nom
 
   delegate :human_attribute_name, to: :class
 
+  def to_s = nom
   def email = super || ""
   def notes = super || ""
   def human_status = human_attribute_name("status.#{status}")
