@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   impersonates :user
+  impersonates :recenseur
   impersonates :conservateur
 
   devise_group :person, contains: [:user, :conservateur, :admin_user, :recenseur]
@@ -32,6 +33,8 @@ class ApplicationController < ActionController::Base
       set_sentry_current_user_context
     elsif current_conservateur
       set_sentry_current_conservateur_context
+    elsif current_recenseur
+      set_sentry_current_recenseur_context
     end
   end
 
@@ -52,6 +55,16 @@ class ApplicationController < ActionController::Base
       username: current_conservateur.to_s,
       ip_address: "{{auto}}",
       user_type: "conservateur"
+    )
+  end
+
+  def set_sentry_current_recenseur_context
+    Sentry.set_user(
+      id: current_recenseur.id,
+      email: current_recenseur.email,
+      username: current_recenseur.nom,
+      ip_address: "{{auto}}",
+      user_type: "recenseur"
     )
   end
 
@@ -106,13 +119,24 @@ class ApplicationController < ActionController::Base
     @banners = []
     @banners << :environment if %w[development staging].include?(Rails.configuration.x.environment_specific_name)
     @banners << :user_impersonate if impersonating_user?
-    @banners << :conservateur_impersonate if current_conservateur.present? && current_conservateur != true_conservateur
+    @banners << :recenseur_impersonate if impersonating_recenseur?
+    @banners << :conservateur_impersonate if impersonating_conservateur?
   end
 
   def impersonating_user?
     admin_user_signed_in? &&
       current_user.present? &&
       current_user != true_user
+  end
+
+  def impersonating_recenseur?
+    current_recenseur.present? &&
+      current_recenseur != true_recenseur
+  end
+
+  def impersonating_conservateur?
+    current_conservateur.present? &&
+      current_conservateur != true_conservateur
   end
 
   # this overrides the default devise method
