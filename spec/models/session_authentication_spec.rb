@@ -3,141 +3,147 @@
 require "rails_helper"
 
 RSpec.describe SessionAuthentication do
-  let(:session_authentication) { SessionAuthentication.new(email, code) }
-  let!(:user) { create(:user, email: "jean@delafontaine.fr") }
-  let!(:session_code) { instance_double(SessionCode, code: "123456", expired?: expired, used?: used) }
-  let(:expired) { false }
-  let(:used) { false }
-  before { allow(user).to receive(:session_code).and_return(session_code) }
+  let(:email) { "user@example.com" }
+  let(:code) { "123456" }
+  let(:model) { User }
+  let(:user) { instance_double(User, persisted?: true) }
+  let(:session_code) { instance_double(SessionCode, code:, expired?: false) }
 
-  subject { session_authentication.authenticate }
+  subject(:authentication) { described_class.new(email:, code:, model:) }
 
-  context "missing email" do
-    let(:email) { "" }
-    let(:code) { "123456" }
-    it { should eq false }
-    it "should not yield" do
-      expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
-    end
-    it "should have blank attribute error" do
-      subject
-      error = session_authentication.errors.first
-      expect(error).to have_attributes(attribute: :email, type: :blank)
+  before do
+    allow(model).to receive(:find_by).with(email:).and_return(user)
+    allow(user).to receive(:session_code).and_return(session_code)
+    allow(session_code).to receive(:mark_used!)
+    allow(SessionCode).to receive(:valid_format?).with(any_args).and_return(true)
+  end
+
+  describe ".authenticate_by" do
+    subject(:authenticate) { described_class.authenticate_by(email:, code:, model:) }
+
+    it "delegates to a new instance" do
+      instance = instance_double(described_class)
+      expect(described_class).to receive(:new)
+        .with(email:, code:, model:)
+        .and_return(instance)
+      expect(instance).to receive(:authenticate)
+
+      authenticate
     end
   end
 
-  context "missing code" do
-    let(:email) { "jean@delafontaine.fr" }
-    let(:code) { "" }
-    it { should eq false }
-    it "should not yield" do
-      expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
+  describe "#initialize" do
+    it "strips whitespace from email" do
+      auth = described_class.new(email: " user@example.com ", code:, model:)
+      expect(auth.send(:email)).to eq("user@example.com")
     end
-    it "should have blank attribute error" do
-      subject
-      error = session_authentication.errors.first
-      expect(error).to have_attributes(attribute: :code, type: :blank)
+
+    it "removes non-digits from code" do
+      auth = described_class.new(email:, code: "12-34-56", model:)
+      expect(auth.send(:code)).to eq("123456")
     end
   end
 
-  context "no user found" do
-    context "no matching user for email" do
-      let(:email) { "patoche@test.fr" }
-      let(:code) { "123456" }
-      it { should eq false }
-      it "should not yield" do
-        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
-      end
-      it "should have user not found error" do
-        subject
-        error = session_authentication.errors.first
-        expect(error).to have_attributes(attribute: :user, type: :blank)
-        expect(session_authentication.error_message).to eq "Aucun utilisateur trouvé pour cet email"
-      end
-    end
-  end
+  describe "#authenticate" do
+    context "when valid" do
+      let(:user) { instance_double(User, persisted?: true) }
 
-  context "user found" do
-    before do
-      allow(User).to receive(:find_by).and_return(user)
-      # allow(user).to receive(:valid_session_code?).and_return(valid_session_code)
-    end
-
-    let(:subject) { session_authentication.authenticate { true } }
-
-    context "everything works out" do
-      let(:email) { "jean@delafontaine.fr" }
-      let(:code) { "123456" }
-      it "should yield" do
-        expect { |b| session_authentication.authenticate(&b) }.to yield_control
-      end
-      it "should work" do
+      it "marks the session code as used and returns the authenticatable" do
         expect(session_code).to receive(:mark_used!)
-        subject
-        expect(session_authentication.errors).to be_empty
+        result = authentication.authenticate
+        expect(result).to eq(user)
       end
     end
 
-    context "correct code but contains spaces" do
-      let(:email) { "jean@delafontaine.fr" }
-      let(:code) { "  1 23 4 5 6  " }
-      it "should yield" do
-        expect { |b| session_authentication.authenticate(&b) }.to yield_control
-      end
-      it "should work" do
-        expect(session_code).to receive(:mark_used!)
-        res = subject
-        expect(res).to eq true
-        expect(session_authentication.errors).to be_empty
+    context "when invalid" do
+      let(:user) { instance_double(User, persisted?: false) }
+
+      it "returns an array with nil and error message" do
+        result, error = authentication.authenticate
+        expect(result).to be_nil
+        expect(error).to be_present
       end
     end
 
-    context "code is expired" do
-      let(:expired) { true }
-      let(:email) { "jean@delafontaine.fr" }
-      let(:code) { "123456" }
+    it "prevents timing attacks in production" do
+      allow(Rails.env).to receive(:production?).and_return(true)
+      expect(authentication).to receive(:sleep).with(be_between(0.5, 1))
+      authentication.authenticate
+    end
+  end
 
-      it { should eq false }
-      it "should not yield" do
-        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
-      end
-      it "should have expired code error" do
-        subject
-        error = session_authentication.errors.first
-        expect(error).to have_attributes(attribute: :code, type: :expired)
-        expect(session_authentication.error_message).to eq "Le code de connexion n'est plus valide, veuillez en " \
-                                                           "redemander un en cliquant sur le bouton ci-dessous"
+  describe "validations" do
+    describe "email presence" do
+      let(:email) { "" }
+
+      it "is invalid without an email" do
+        expect(authentication).not_to be_valid
+        expect(authentication.errors[:email]).to include("doit être rempli(e)")
       end
     end
 
-    context "codes mismatch" do
-      let(:email) { "jean@delafontaine.fr" }
-      let(:code) { "654321" }
-      it "should not yield" do
-        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
-      end
-      it { should eq false }
-      it "should have mismatch error" do
-        subject
-        error = session_authentication.errors.first
-        expect(error).to have_attributes(attribute: :code, type: :mismatch)
-        expect(session_authentication.error_message).to include "Code de connexion incorrect"
+    describe "code presence" do
+      let(:code) { "" }
+
+      it "is invalid without a code" do
+        expect(authentication).not_to be_valid
+        expect(authentication.errors[:code]).to include("doit être rempli(e)")
       end
     end
 
-    context "codes mismatch & code expired" do
-      let(:expired) { true }
-      let(:email) { "jean@delafontaine.fr" }
-      let(:code) { "654321" }
-      it "should not yield" do
-        expect { |b| session_authentication.authenticate(&b) }.not_to(yield_control)
+    describe "#validate_resource_found" do
+      context "when authenticatable is not persisted" do
+        let(:user) { instance_double(User, persisted?: false) }
+
+        it "adds an error" do
+          authentication.valid?
+          expect(authentication.errors[:email])
+            .to include("Aucun compte trouvé pour cet email")
+        end
       end
-      it { should eq false }
-      it "should have mismatch error but not expired code error" do
-        subject
-        error = session_authentication.errors.first
-        expect(error).to have_attributes(attribute: :code, type: :mismatch)
-        expect(session_authentication.error_message).to include "Code de connexion incorrect"
+
+      context "when authenticatable is persisted" do
+        let(:user) { instance_double(User, persisted?: true) }
+
+        it "does not add an error" do
+          authentication.valid?
+          expect(authentication.errors[:email])
+            .not_to include("Aucun compte trouvé pour cet email")
+        end
+      end
+    end
+
+    describe "#validate_code_format" do
+      before do
+        allow(SessionCode).to receive(:valid_format?).with(code).and_return(false)
+      end
+
+      it "validates code format" do
+        authentication.valid?
+        expect(authentication.errors[:code])
+          .to include("Le code de connexion est composé de #{SessionCode::LENGTH} chiffres exactement. " \
+                      "Vérifiez que vous n'avez pas copié deux fois le même chiffre.")
+      end
+    end
+
+    describe "#validate_codes_match" do
+      let(:session_code) { instance_double(SessionCode, code: "654321", expired?: false) }
+
+      it "adds an error when codes don't match" do
+        authentication.valid?
+        expect(authentication.errors[:code])
+          .to include("Code de connexion incorrect. " \
+                      "Vérifiez que vous avez bien recopié le code et qu'il provient bien du dernier mail envoyé.")
+      end
+    end
+
+    describe "#validate_code_not_expired" do
+      let(:session_code) { instance_double(SessionCode, code:, expired?: true) }
+
+      it "adds an error when code is expired" do
+        authentication.valid?
+        expect(authentication.errors[:code])
+          .to include("Le code de connexion n'est plus valide, veuillez en demander un nouveau.")
       end
     end
   end
