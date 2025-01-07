@@ -46,8 +46,6 @@ RSpec.describe SessionAuthentication do
 
   describe "#authenticate" do
     context "when valid" do
-      let(:user) { instance_double(User, persisted?: true) }
-
       it "marks the session code as used and returns the authenticatable" do
         expect(session_code).to receive(:mark_used!)
         result = authentication.authenticate
@@ -56,9 +54,8 @@ RSpec.describe SessionAuthentication do
     end
 
     context "when invalid" do
-      let(:user) { instance_double(User, persisted?: false) }
-
       it "returns an array with nil and error message" do
+        allow(model).to receive(:find_by).with(email:).and_return(nil)
         result, error = authentication.authenticate
         expect(result).to be_nil
         expect(error).to be_present
@@ -93,22 +90,20 @@ RSpec.describe SessionAuthentication do
 
     describe "#validate_resource_found" do
       context "when authenticatable is not persisted" do
-        let(:user) { instance_double(User, persisted?: false) }
-
         it "adds an error" do
+          allow(model).to receive(:find_by).with(email:).and_return(nil)
           authentication.valid?
           expect(authentication.errors[:email])
-            .to include("Aucun compte trouvé pour cet email")
+            .to include("Aucun compte trouvé pour cet email.")
         end
       end
 
       context "when authenticatable is persisted" do
-        let(:user) { instance_double(User, persisted?: true) }
-
         it "does not add an error" do
+          allow(model).to receive(:find_by).with(email:).and_return(build(:user, email:))
           authentication.valid?
           expect(authentication.errors[:email])
-            .not_to include("Aucun compte trouvé pour cet email")
+            .not_to include("Aucun compte trouvé pour cet email.")
         end
       end
     end
