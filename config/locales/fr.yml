@@ -707,6 +707,14 @@ fr:
       cta: Ne plus recevoir ce type de messages
     layout:
       unsubscribe: Je ne souhaite plus recevoir ces emails
+  recenseur_mailer:
+    shared:
+      bonjour: Madame, Monsieur,
+    session_code:
+      lien: "Voici votre lien de connexion à Collectif Objets :"
+      cta: Connexion
+      valid_until: "Ce code est valide jusqu'à <b>%{date}</b>."
+      nouveau_code: Passé ce délai, vous pouvez
   user_mailer:
     shared:
       bonjour: Madame, Monsieur le Maire,
