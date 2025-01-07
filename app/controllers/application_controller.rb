@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   impersonates :user
   impersonates :conservateur
 
-  devise_group :person, contains: [:user, :conservateur, :admin_user]
+  devise_group :person, contains: [:user, :conservateur, :admin_user, :recenseur]
 
   helper_method :namespace
   helper_method :namespaced?
@@ -79,6 +79,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for_adminuser(_admin_user)
     admin_path
+  end
+
+  def after_sign_in_path_for_recenseur(recenseur)
+    return [namespace, recenseur.communes.first] if recenseur.communes.size == 1
+
+    [namespace, :accesses]
   end
 
   def user_not_authorized(exception)

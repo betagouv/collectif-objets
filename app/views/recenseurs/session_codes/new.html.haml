@@ -1,0 +1,42 @@
+- content_for(:head_title) { "Connexion recenseur" }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render "shared/breadcrumbs", links: [ ["Accueil", root_path]], current_page_label: "Connexion recenseur"
+
+  - if conservateur_signed_in? || admin_user_signed_in?
+    .fr-alert.fr-alert--info.fr-mb-4w
+      %p.fr-alert__title= t("pages.login.already_connected.as_#{conservateur_signed_in? ? :conservateur : :administrateur}" )
+
+  .fr-grid-row
+    .fr-col-md-5
+      %h1.fr-h2 Connexion recenseur
+
+      %h2.fr-h3 Recevoir un code de connexion
+      = form_for(@recenseur,
+        url: recenseur_session_codes_path,
+        method: :post,
+        builder: FormBuilderDsfr) do |f|
+        .fr-input-group{class: ("fr-input-group--error" if @recenseur.errors.key?(:email))}
+          = f.label :email
+          = f.text_field :email,
+            name: :email,
+            value: params[:email],
+            required: true,
+            autocomplete: :email,
+            autofocus: @recenseur.email.empty?,
+            class: ("fr-input--error" if @recenseur.errors.key?(:email)),
+            **(@recenseur.errors.key?(:email) ? { aria: { describedby: :error_email } }  : {})
+          - if @recenseur.errors.key?(:email)
+            %p#error_email.fr-error-text.fr-text--md
+              = @recenseur.errors.full_messages_for(:email).to_sentence
+        .fr-btns-group.fr-mt-4w
+          = f.submit "Recevoir un code de connexion", name: nil
+          = link_to "Saisir mon code de connexion",
+            new_recenseur_session_path(email: @recenseur.email),
+            class: "fr-btn fr-btn--tertiary",
+            data: { turbo_frame: "_top" }
+
+      .fr-mt-6w
+        = render "recenseurs/sessions/faq"
+
+    = render "recenseurs/sessions/right_column"
