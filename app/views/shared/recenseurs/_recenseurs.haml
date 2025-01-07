@@ -20,8 +20,13 @@
               %td{title: recenseur.notes.size > 25 ? recenseur.notes : nil}= highlight(recenseur.notes.truncate(25), query)
               %td= recenseur.human_status
               %td.co-white-space-nowrap
-                .fr-mt-1w
-                  = link_to [:edit, namespace, recenseur], data: { turbo: false } do
-                    = icon_span("pencil")
-                    Modifier
+                - if current_person == current_admin_user
+                  .fr-mb-1w
+                    = link_to impersonate_admin_recenseur_path(recenseur), data: { turbo: false } do
+                      = icon_span("eye")
+                      Incarner
+                = link_to [:edit, namespace, recenseur], data: { turbo: false } do
+                  = icon_span("pencil")
+                  Modifier
+
     = render partial: "shared/pagy_nav", locals: { pagy: } if pagy.pages > 1
