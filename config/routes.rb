@@ -32,6 +32,16 @@ Rails.application.routes.draw do
     get "conservateurs/edit" => "devise/registrations#edit", :as => "edit_conservateur_registration"
   end
 
+  devise_for :recenseurs, only: %i[sessions], controllers: {
+    sessions: "recenseurs/sessions"
+  }
+  devise_scope :recenseur do
+    namespace :recenseurs, as: :recenseur do
+      resource :session, only: %i[new create destroy]
+      resources :session_codes, only: %i[new create]
+    end
+  end
+
   direct :annuaire_service_public do |commune|
     if commune.is_a? Commune
       "https://www.service-public.fr/particuliers/recherche?keyword=mairie+#{commune.nom}+#{commune.departement.nom}"
