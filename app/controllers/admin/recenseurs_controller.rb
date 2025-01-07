@@ -2,7 +2,8 @@
 
 module Admin
   class RecenseursController < BaseController
-    before_action :set_recenseur, only: [:show, :edit, :update, :destroy]
+    skip_before_action :disconnect_impersonating_recenseur, only: :toggle_impersonate_mode
+    before_action :set_recenseur, only: [:show, :edit, :update, :destroy, :impersonate]
 
     # GET /admin/recenseurs
     def index
@@ -35,6 +36,21 @@ module Admin
     # GET /admin/recenseurs/1/edit
     def edit
       render "shared/recenseurs/edit"
+    end
+
+    # GET /admin/recenseurs/1/impersonate
+    def impersonate
+      impersonate_recenseur(@recenseur)
+      redirect_to [:recenseurs, :communes]
+    end
+
+    def toggle_impersonate_mode
+      if session[:recenseur_impersonate_write].present?
+        session.delete(:recenseur_impersonate_write)
+      else
+        session[:recenseur_impersonate_write] = "1"
+      end
+      redirect_back fallback_location: recenseurs_communes_path, status: :see_other
     end
 
     # POST /admin/recenseurs
