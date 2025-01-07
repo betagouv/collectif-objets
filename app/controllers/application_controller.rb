@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   impersonates :recenseur
   impersonates :conservateur
 
-  devise_group :person, contains: [:user, :conservateur, :admin, :recenseur]
+  devise_group :person, contains: [:user, :conservateur, :admin_user, :recenseur]
 
   helper_method :namespace
   helper_method :namespaced?
