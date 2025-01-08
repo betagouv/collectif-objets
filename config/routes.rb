@@ -39,6 +39,9 @@ Rails.application.routes.draw do
     namespace :recenseurs, as: :recenseur do
       resource :session, only: %i[new create destroy]
       resources :session_codes, only: %i[new create]
+      resource  :optout, only: :destroy do
+        get "(:token)", action: :new, as: :new
+      end
     end
   end
 
