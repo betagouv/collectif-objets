@@ -1,0 +1,10 @@
+- content_for(:head_title) { @commune.nom }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render "shared/breadcrumbs", links: [["Accueil", root_path], ["Communes", recenseurs_communes_path]], current_page_label: @commune.nom
+
+  %h1= @commune.nom
+
+  = render "edifices/list", edifices: @commune.edifices
+
+  = render partial: "edifices/edifice", collection: @commune.edifices.preloaded, as: :edifice
