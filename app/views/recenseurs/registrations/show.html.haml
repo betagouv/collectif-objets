@@ -1,0 +1,18 @@
+- content_for(:head_title) { "Préférences" }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Préférences")
+
+  %h1 Mon compte
+  .fr-grid-row.fr-grid-row--gutter
+    .fr-col-12.fr-col-md-8
+      .fr-mb-6w
+        %p
+          %b Email :
+          = current_recenseur.email
+        %p
+          %b Nom :
+          = current_recenseur.nom
+        .fr-btns-group.fr-btns-group--inline-sm.fr-btns-group--icon-left
+          = link_to "Modifier mes informations", edit_recenseur_registration_path, class: "fr-btn fr-icon-pencil-line"
+          = button_to "Supprimer mon compte", recenseur_optout_path(token: current_recenseur), form: { data: { turbo_confirm: "Êtes-vous sûr(e) de vouloir supprimer votre compte ?" } }, method: :delete, class: "fr-btn fr-btn--secondary fr-icon-delete-line"

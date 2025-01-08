@@ -47,7 +47,9 @@
     - else
       - c.with_direct_link_simple title: "Communes", path: recenseurs_communes_path, active: active_nav_link?("Communes")
 
+    - c.with_tool_link title: "Préférences", path: recenseur_registration_path, classes: ["fr-icon-settings-5-line"]
     - c.with_tool_link title: "Déconnexion", path: recenseur_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": :delete }
+
     - c.with_direct_link_simple title: "Comment ça marche ?", path: aide_path, active: active_nav_link?("Comment ça marche ?")
 
     - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos", "Aide en ligne", "On parle de nous", "Statistiques") do |dropdown|
