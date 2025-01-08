@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       resource  :optout, only: :destroy do
         get "(:token)", action: :new, as: :new
       end
+      resource :registration, only: [:show, :edit, :update, :destroy]
     end
   end
 

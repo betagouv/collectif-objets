@@ -1,0 +1,21 @@
+- content_for(:head_title) { "Préférences" }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render("shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Préférences")
+
+  %h1 Modifier mes informations
+
+  .fr-grid-row.fr-grid-row--gutter
+    .fr-col-12.fr-col-md-8
+      = form_for @recenseur, url: recenseur_registration_path, builder: FormBuilderDsfr do |f|
+        .fr-input-group
+          = f.label :email do
+            Email
+            - if @recenseur.accepted?
+              .fr-hint-text Si vous modifiez votre email, vous devrez attendre que votre compte soit validé à nouveau.
+            = f.text_field :email, required: true, autocomplete: :email
+        .fr-input-group
+          = f.label :nom
+          = f.text_field :nom, autocomplete: :name
+        .fr-input-group
+          = f.submit "Enregistrer", name: nil
