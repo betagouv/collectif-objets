@@ -102,6 +102,14 @@ Rails.application.routes.draw do
     resources :recenseurs, only: [:index, :create, :destroy]
   end
 
+  ## --------
+  ## RECENSEURS
+  ## --------
+
+  namespace :recenseurs do
+    resources :communes, only: %i[index show]
+  end
+
   ## -------------
   ## CONSERVATEURS
   ## -------------
