@@ -1,0 +1,23 @@
+- content_for(:head_title) { "Désinscription" }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w{"data-controller": "devise--sessions"}
+  = render "shared/breadcrumbs", links: [ ["Accueil", root_path]], current_page_label: "Désinscription recenseur"
+
+  %h1 Désinscription recenseur
+
+  - if @recenseur
+    %p
+      Cliquez sur ce bouton pour ne plus recevoir aucun mail de la plateforme Collectif Objets.
+      %br
+      Attention, vous ne pourrez plus vous connecter sur la plateforme.
+
+    = form_with url: recenseur_optout_path, method: :delete do |f|
+      = f.hidden_field :token, value: params[:token]
+      = f.submit "Désinscription",
+        class: "fr-btn fr-icon-delete-line fr-btn--icon-left"
+  - else
+    .fr-alert.fr-alert--error.fr-mb-2w
+      L'identifiant de désinscription est invalide. Veuillez vérifier le lien que vous avez suivi.
+
+  .fr-mt-4w
+    = link_to "Annuler et revenir à l’accueil", root_path, class: "fr-btn fr-btn--secondary"

@@ -7,6 +7,8 @@ class Recenseur < ApplicationRecord
   enum :status, ["pending", "accepted", "rejected", "optout"].index_by(&:itself), default: :pending, validate: true
   # rubocop:enable Style/WordArray
 
+  generates_token_for(:optout)
+
   has_many :accesses, class_name: "RecenseurAccess", dependent: :delete_all, inverse_of: :recenseur
   has_many :communes, through: :accesses
   has_many :departements, through: :communes
@@ -26,6 +28,7 @@ class Recenseur < ApplicationRecord
   def email = super || ""
   def notes = super || ""
   def human_status = human_attribute_name("status.#{status}")
+  def optout_token = generate_token_for(:optout)
 
   def append_to_notes(text)
     self.notes = [notes, text].compact_blank.join("\n")
