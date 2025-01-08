@@ -708,6 +708,8 @@ fr:
     layout:
       unsubscribe: Je ne souhaite plus recevoir ces emails
   recenseur_mailer:
+    layout:
+      optout: Je ne souhaite plus recevoir ces emails
     shared:
       bonjour: Madame, Monsieur,
     session_code:
