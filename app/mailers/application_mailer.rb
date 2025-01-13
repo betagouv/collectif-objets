@@ -8,4 +8,10 @@ class ApplicationMailer < ActionMailer::Base
   default from: email_address_with_name(CONTACT_EMAIL, I18n.t("application_mailer_layout.project_name"))
   layout "application_mailer"
   prepend_view_path "app/mailer_views"
+
+  private
+
+  def dont_send!
+    raise AbortDeliveryError
+  end
 end
