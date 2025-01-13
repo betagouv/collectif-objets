@@ -15,8 +15,7 @@
       = form_for(@recenseur,
         url: recenseur_session_codes_path,
         method: :post,
-        builder: FormBuilderDsfr,
-        data: {turbo_action: :advance}) do |f|
+        builder: FormBuilderDsfr) do |f|
         .fr-input-group{class: ("fr-input-group--error" if @recenseur.errors.key?(:email))}
           = f.label :email
           = f.text_field :email,
