@@ -20,6 +20,6 @@ class RecenseurMailer < ApplicationMailer
   def set_recenseur = @recenseur = params.values_at(:recenseur)
 
   def skip_optouts
-    raise AbortDeliveryError if @recenseur&.optout?
+    dont_send! if @recenseur&.optout?
   end
 end
