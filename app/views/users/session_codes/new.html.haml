@@ -19,8 +19,7 @@
         %h2.fr-h3 Recevoir un code de connexion
         = form_with(url: new_user_session_code_path,
           method: :get,
-          builder: FormBuilderDsfr,
-          data: {turbo_action: "advance"}) do |f|
+          builder: FormBuilderDsfr) do |f|
           - if @departement
             = f.hidden_field :departement, value: @departement.code
           .fr-input-group
