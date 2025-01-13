@@ -29,12 +29,17 @@
           - if @recenseur.errors.key?(:email)
             %p#error_email.fr-error-text.fr-text--md
               = @recenseur.errors.full_messages_for(:email).to_sentence
-        .fr-btns-group.fr-mt-4w
-          = f.submit "Recevoir un code de connexion", name: nil
-          = link_to "Saisir mon code de connexion",
-            new_recenseur_session_path(email: @recenseur.email),
-            class: "fr-btn fr-btn--tertiary",
-            data: { turbo_frame: "_top" }
+        = f.submit "Recevoir un code de connexion", name: nil, class: "d-block w-100 text-center"
+        .fr-hr-or.fr-py-2w ou
+        = link_to "Saisir mon code de connexion",
+          new_recenseur_session_path(email: @recenseur.email),
+          class: "fr-btn fr-btn--secondary d-block w-100 text-center",
+          data: { turbo_frame: "_top" }
+
+      %hr.fr-mt-4w
+      %h2.fr-h3 Accès commune
+      = link_to "Me connecter en tant que commune", new_user_session_code_path, class: "fr-btn fr-btn--tertiary d-block w-100 text-center", data: { turbo_frame: :_top }
+
 
       .fr-mt-6w
         = render "recenseurs/sessions/faq"

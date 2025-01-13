@@ -37,3 +37,12 @@
         Si cet email est erroné ou que vous n'y avez pas accès, retrouvez la mairie de votre commune sur
         = link_to "l’annuaire du service public", annuaire_service_public_url(@commune), target: :_blank, rel: :noopener
         puis cliquez sur "Mettre cette page à jour".
+  %li
+    %section.fr-accordion
+      %h2.fr-accordion__title
+        %button.fr-accordion__btn{"aria-controls": "faq-recenseur", "aria-expanded": "false"}
+          Qu'est-ce qu'un accès recenseur ?
+      #faq-recenseur.fr-collapse
+        Les recenseurs ont accès à un ou plusieurs édifices, ou à des communes entières.
+        %br
+        En tant que commune, vous pouvez demander à créer un ou plusieurs accès recenseurs pour vous aider dans le recensement.
