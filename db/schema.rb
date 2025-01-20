@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_07_085916) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_13_134400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -424,6 +424,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_07_085916) do
     t.boolean "granted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "notified", default: false, null: false
     t.index ["commune_id"], name: "index_recenseur_accesses_on_commune_id"
     t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true
     t.index ["recenseur_id"], name: "index_recenseur_accesses_on_recenseur_id"
