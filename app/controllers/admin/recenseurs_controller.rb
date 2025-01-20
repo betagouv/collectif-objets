@@ -2,6 +2,8 @@
 
 module Admin
   class RecenseursController < BaseController
+    include NotifyRecenseurOfAccessChange
+
     skip_before_action :disconnect_impersonating_recenseur, only: :toggle_impersonate_mode
     before_action :set_recenseur, only: [:show, :edit, :update, :destroy, :impersonate]
 

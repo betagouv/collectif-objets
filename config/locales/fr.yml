@@ -711,12 +711,18 @@ fr:
     layout:
       optout: Je ne souhaite plus recevoir ces emails
     shared:
-      bonjour: Madame, Monsieur,
+      bonjour: Bonjour %{nom},
+      howto: Pour plus d'information sur le recensement sur Collectif Objets,
     session_code:
       lien: "Voici votre lien de connexion à Collectif Objets :"
       cta: Connexion
       valid_until: "Ce code est valide jusqu'à <b>%{date}</b>."
       nouveau_code: Passé ce délai, vous pouvez
+    access_granted:
+      communes: "Nous vous invitons à participer au recensement des objets classés au titre des Monuments Historiques de <b>%{communes}</b>. En contribuant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine et nous vous en remercions par avance."
+    access_revoked:
+      info: Votre accès à Collectif Objets a été supprimé. Il sera réouvert si une commune a besoin de vous à nouveau.
+      thank_you: Merci pour votre contribution au recensement.
   user_mailer:
     shared:
       bonjour: Madame, Monsieur le Maire,

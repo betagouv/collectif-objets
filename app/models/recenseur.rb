@@ -12,6 +12,10 @@ class Recenseur < ApplicationRecord
   has_many :accesses, class_name: "RecenseurAccess", dependent: :delete_all, inverse_of: :recenseur
   has_many :communes, through: :accesses
   has_many :departements, through: :communes
+  # rubocop:disable Rails/HasManyOrHasOneDependent
+  has_many :new_accesses, -> { newly_granted }, class_name: "RecenseurAccess", inverse_of: :recenseur
+  has_many :new_communes, class_name: "Commune", through: :new_accesses, source: :commune
+  # rubocop:enable Rails/HasManyOrHasOneDependent
 
   scope :without_access, -> { where.missing(:accesses) }
 
@@ -33,6 +37,8 @@ class Recenseur < ApplicationRecord
   def append_to_notes(text)
     self.notes = [notes, text].compact_blank.join("\n")
   end
+
+  def notify_access_granted? = accepted? && new_accesses.any?
 
   # -------
   # RANSACK
