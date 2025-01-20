@@ -7,6 +7,7 @@ class RecenseurAccess < ApplicationRecord
 
   scope :granted, -> { where(granted: true) }
   scope :pending, -> { where(granted: nil) }
+  scope :newly_granted, -> { where(granted: true, notified: false) }
   scope :sorted, -> { joins(:commune).order("communes.departement_code, communes.nom") }
 
   delegate :human_attribute_name, to: :class
