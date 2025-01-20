@@ -8,4 +8,13 @@ class RecenseurMailerPreview < ApplicationMailerPreview
     )
     RecenseurMailer.with(session_code:).session_code
   end
+
+  def access_granted
+    recenseur = RecenseurAccess.newly_granted.first.recenseur
+    RecenseurMailer.with(recenseur:).access_granted(preview: true)
+  end
+
+  def access_revoked
+    RecenseurMailer.with(email: "recenseur@example.com", nom: "Nom recenseur").access_revoked
+  end
 end
