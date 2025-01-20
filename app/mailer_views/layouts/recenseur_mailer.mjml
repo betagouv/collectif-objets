@@ -4,6 +4,10 @@
   <mj-body>
     <%= render "shared/header" %>
 
+    <mj-text>
+      <%= t("recenseur_mailer.shared.bonjour", nom: @recenseur.nom) %>
+    </mj-text>
+
     <%= yield %>
 
     <% unsubscribe = link_to I18n.t("recenseur_mailer.layout.optout"), new_recenseur_optout_url(token: @recenseur.optout_token) %>

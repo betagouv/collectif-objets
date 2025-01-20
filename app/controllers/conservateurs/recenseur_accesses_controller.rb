@@ -2,6 +2,8 @@
 
 module Conservateurs
   class RecenseurAccessesController < BaseController
+    include NotifyRecenseurOfAccessChange
+
     before_action :set_recenseur
 
     # POST /conservateurs/recenseurs/1/accesses
@@ -9,7 +11,8 @@ module Conservateurs
       @access = @recenseur.accesses.build(commune_id: params[:commune_id], granted: true)
       if @access.save
         @commune = @access.commune
-        @accesses = @recenseur.accesses.sorted.includes(:commune, :departement).where(commune_id: current_conservateur.commune_ids)
+        @accesses = @recenseur.accesses.sorted.includes(:commune, :departement)
+          .where(commune_id: current_conservateur.commune_ids)
         respond_to do |format|
           format.turbo_stream { render "shared/recenseur_accesses/create" }
           format.html { redirect_to [namespace, @recenseur], notice: "Accès ajouté." }

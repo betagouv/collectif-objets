@@ -2,6 +2,8 @@
 
 module Admin
   class RecenseurAccessesController < BaseController
+    include NotifyRecenseurOfAccessChange
+
     before_action :set_recenseur
 
     # POST /admin/recenseurs/1/accesses
