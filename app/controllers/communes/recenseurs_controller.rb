@@ -2,6 +2,8 @@
 
 module Communes
   class RecenseursController < BaseController
+    include NotifyRecenseurOfAccessChange
+
     skip_after_action :verify_authorized, only: [:create, :destroy]
 
     # GET /communes/1/recenseurs
@@ -35,6 +37,7 @@ module Communes
     def destroy
       @recenseur = @commune.recenseurs.find(params[:id])
       @recenseur.accesses.find_by(commune: @commune).destroy!
+      @recenseur.destroy if @recenseur.accesses.none?
       redirect_to commune_recenseurs_url, notice: "Accès supprimé.", status: :see_other
     end
 

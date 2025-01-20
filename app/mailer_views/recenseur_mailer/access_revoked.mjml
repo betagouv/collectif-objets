@@ -1,0 +1,6 @@
+<mj-text>
+  <%= t("recenseur_mailer.access_revoked.info") %>
+</mj-text>
+<mj-text>
+  <%= t("recenseur_mailer.access_revoked.thank_you") %>
+</mj-text>
