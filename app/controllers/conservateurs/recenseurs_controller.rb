@@ -2,6 +2,8 @@
 
 module Conservateurs
   class RecenseursController < BaseController
+    include NotifyRecenseurOfAccessChange
+
     before_action :set_recenseur, only: [:show, :edit, :update, :destroy]
     before_action :skip_authorization, only: :show
 
