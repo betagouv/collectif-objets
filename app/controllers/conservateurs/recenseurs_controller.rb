@@ -83,7 +83,7 @@ module Conservateurs
     end
 
     def recenseur_params
-      params.require(:recenseur).permit(:email, :nom, :notes)
+      params.require(:recenseur).permit(:email, :status, :nom, :notes)
     end
 
     def active_nav_links = ["Recenseurs"]
