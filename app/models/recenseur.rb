@@ -28,6 +28,12 @@ class Recenseur < ApplicationRecord
 
   delegate :human_attribute_name, to: :class
 
+  class << self
+    def human_statuses
+      statuses.keys.index_with { |status| human_attribute_name("status.#{status}") }
+    end
+  end
+
   def to_s = nom
   def email = super || ""
   def notes = super || ""
