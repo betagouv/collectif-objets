@@ -27,6 +27,7 @@ Rails.application.configure do
       :self,
       "https://stats.beta.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
+      "https://openmaptiles.data.gouv.fr",
       *s3_uris2,
       *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
 
