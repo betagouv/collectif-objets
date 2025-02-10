@@ -68,6 +68,10 @@ module Pretender
         request.session[readonly_session_key] = readonly ? "0" : "1"
       end
 
+      define_method :"impersonating_#{scope}_readonly?" do
+        request.session[readonly_session_key] != "1"
+      end
+
       define_method stop_impersonating_method do
         remove_instance_variable(impersonated_var) if instance_variable_defined?(impersonated_var)
         request.session.delete(session_key)
