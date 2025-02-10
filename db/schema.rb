@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_13_134400) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_10_160412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -330,7 +330,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_134400) do
 
   create_table "messages", force: :cascade do |t|
     t.string "origin"
-    t.bigint "commune_id", null: false
+    t.bigint "commune_id"
     t.string "inbound_email_id"
     t.bigint "author_id"
     t.string "author_type"
@@ -338,7 +338,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_134400) do
     t.string "automated_mail_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "recenseur_id"
     t.index ["commune_id"], name: "index_messages_on_commune_id"
+    t.index ["recenseur_id"], name: "index_messages_on_recenseur_id"
   end
 
   create_table "objets", force: :cascade do |t|
@@ -437,6 +439,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_134400) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "remember_created_at"
+    t.datetime "last_sign_in_at"
     t.index ["email"], name: "index_recenseurs_on_email", unique: true
   end
 
@@ -487,6 +491,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_134400) do
   add_foreign_key "dossiers", "campaigns"
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
+  add_foreign_key "messages", "recenseurs"
   add_foreign_key "recensements", "objets"
   add_foreign_key "recenseur_accesses", "communes"
   add_foreign_key "recenseur_accesses", "recenseurs"
