@@ -3,6 +3,8 @@
 class Recenseur < ApplicationRecord
   include SessionCodeAuthenticatable
 
+  devise :timeoutable, timeout_in: 3.months
+
   # rubocop:disable Style/WordArray -> Symbol enums are buggy up until Rails 8.1
   enum :status, ["pending", "accepted", "rejected", "optout"].index_by(&:itself), default: :pending, validate: true
   # rubocop:enable Style/WordArray
