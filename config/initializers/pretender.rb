@@ -1,5 +1,6 @@
-# slightly adapted from https://github.com/ankane/pretender to work with multiple devise models at once
+# frozen_string_literal: true
 
+# slightly adapted from https://github.com/ankane/pretender to work with multiple devise models at once
 module Pretender
   class Error < StandardError; end
 
@@ -13,6 +14,7 @@ module Pretender
       }
       true_method = :"true_#{scope}"
       session_key = :"impersonated_#{scope}_id"
+      readonly_session_key = :"#{scope}_impersonate_write"
       impersonated_var = :"@impersonated_#{scope}"
       stop_impersonating_method = :"stop_impersonating_#{scope}"
 
@@ -55,18 +57,21 @@ module Pretender
         impersonated_resource || send(true_method)
       end
 
-      define_method :"impersonate_#{scope}" do |resource|
+      define_method :"impersonate_#{scope}" do |resource, readonly: true|
         raise ArgumentError, "No resource to impersonate" unless resource
         # raise Pretender::Error, "Must be logged in to impersonate" unless send(true_method)
 
         instance_variable_set(impersonated_var, resource)
         # use to_s for Mongoid for BSON::ObjectId
         request.session[session_key] = resource.id.is_a?(Numeric) ? resource.id : resource.id.to_s
+        # Set write permission based on readonly parameter
+        request.session[readonly_session_key] = readonly ? "0" : "1"
       end
 
       define_method stop_impersonating_method do
         remove_instance_variable(impersonated_var) if instance_variable_defined?(impersonated_var)
         request.session.delete(session_key)
+        request.session.delete(readonly_session_key)
       end
     end
   end
