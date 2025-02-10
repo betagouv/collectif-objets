@@ -6,8 +6,8 @@ module Pretender
 
   module Methods
     def impersonates(scope = :user)
-      impersonated_method =:"current_#{scope}"
-      impersonate_with = proc { |id| scope.to_s.classify.constantize.find(id:) }
+      current_scope =:"current_#{scope}"
+      impersonate_with = proc { |id| scope.to_s.classify.constantize.find(id) }
       true_method = :"true_#{scope}"
       session_key = :"impersonated_#{scope}_id"
       readonly_session_key = :"#{scope}_impersonate_write"
@@ -15,23 +15,23 @@ module Pretender
       stop_impersonating_method = :"stop_impersonating_#{scope}"
 
       # define methods
-      if method_defined?(impersonated_method) || private_method_defined?(impersonated_method)
-        alias_method true_method, impersonated_method
+      if method_defined?(current_scope) || private_method_defined?(current_scope)
+        alias_method true_method, current_scope
       else
         sc = superclass
         define_method true_method do
           # TODO: handle private methods
-          unless sc.method_defined?(impersonated_method)
+          unless sc.method_defined?(current_scope)
             raise Pretender::Error,
-                  "#{impersonated_method} must be defined before the impersonates method"
+                  "#{current_scope} must be defined before the impersonates method"
           end
 
-          sc.instance_method(impersonated_method).bind(self).call
+          sc.instance_method(current_scope).bind(self).call
         end
       end
       helper_method(true_method) if respond_to?(:helper_method)
 
-      define_method impersonated_method do
+      define_method current_scope do
         impersonated_resource = instance_variable_get(impersonated_var) if instance_variable_defined?(impersonated_var)
 
         if !impersonated_resource && request.session[session_key]
