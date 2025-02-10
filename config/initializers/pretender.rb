@@ -58,8 +58,7 @@ module Pretender
         # raise Pretender::Error, "Must be logged in to impersonate" unless send(true_method)
 
         instance_variable_set(impersonated_var, resource)
-        # use to_s for Mongoid for BSON::ObjectId
-        request.session[session_key] = resource.id.is_a?(Numeric) ? resource.id : resource.id.to_s
+        request.session[session_key] = resource.id
         # Set write permission based on readonly parameter
         request.session[readonly_session_key] = readonly ? "0" : "1"
       end
