@@ -5,13 +5,9 @@ module Pretender
   class Error < StandardError; end
 
   module Methods
-    def impersonates(scope = :user, opts = {})
-      impersonated_method = opts[:method] || :"current_#{scope}"
-      impersonate_with = opts[:with] || proc { |id|
-        klass = scope.to_s.classify.constantize
-        primary_key = klass.respond_to?(:primary_key) ? klass.primary_key : :id
-        klass.find_by(primary_key => id)
-      }
+    def impersonates(scope = :user)
+      impersonated_method =:"current_#{scope}"
+      impersonate_with = proc { |id| scope.to_s.classify.constantize.find(id:) }
       true_method = :"true_#{scope}"
       session_key = :"impersonated_#{scope}_id"
       readonly_session_key = :"#{scope}_impersonate_write"
