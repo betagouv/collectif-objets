@@ -70,6 +70,10 @@
                   class: "fr-btn fr-btn--tertiary",
                   data: { turbo_frame: "_top" }
 
+        %p.fr-hr-or.fr-mt-5w ou
+        %h2.fr-h3 Accès recenseur
+        = link_to "Utiliser mon accès recenseur", new_recenseur_session_code_path, class: "fr-btn fr-btn--tertiary d-block w-100 text-center", data: { turbo_frame: :_top }
+
         .fr-mt-6w
           = render "users/sessions/faq"
 
