@@ -95,6 +95,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for_recenseur(recenseur)
+    return recenseurs_premiere_visite_path if recenseur.premiere_visite?
     return [namespace, recenseur.communes.first] if recenseur.communes.size == 1
 
     [namespace, :communes]
