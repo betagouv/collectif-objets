@@ -27,13 +27,12 @@ module RecensementWizard
               presence: { message: "Le code INSEE dans lequel se trouve maintenant l’objet doit être indiqué" },
               if: -> { localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE }
 
-    def permitted_params = %i[edifice_nom_existant edifice_nom autre_edifice_checked autre_commune_code_insee]
-
-    def initialize(recensement)
-      super
+    def setup_step
       self.autre_edifice_checked = recensement.edifice_nom.present? &&
                                    recensement.commune.edifices.pluck(:nom).exclude?(recensement.edifice_nom)
     end
+
+    def permitted_params = %i[edifice_nom_existant edifice_nom autre_edifice_checked autre_commune_code_insee]
 
     def assign_attributes(attributes)
       if attributes[:edifice_nom_existant].present? && attributes[:edifice_nom_existant] == "0"

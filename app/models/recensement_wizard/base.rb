@@ -25,15 +25,18 @@ module RecensementWizard
     def self.title = self::TITLE
     def self.step_number = name.demodulize[-1].to_i
 
-    def initialize(recensement)
-      @recensement = recensement
-    end
-
     def self.build_for(step, recensement)
       raise InvalidStep unless step.to_i.in?(STEPS)
 
       "RecensementWizard::Step#{step}".constantize.new(recensement)
     end
+
+    def initialize(recensement)
+      @recensement = recensement
+      setup_step
+    end
+
+    def setup_step; end
 
     def next_step_number
       step_number + 1 if step_number < STEPS.last
