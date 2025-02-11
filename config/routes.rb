@@ -111,6 +111,10 @@ Rails.application.routes.draw do
   ## --------
 
   namespace :recenseurs do
+    controller :pages do
+      get :premiere_visite
+      put :premiere_visite, action: :after_premiere_visite, as: :after_premiere_visite
+    end
     resources :communes, only: %i[index show]
   end
 
