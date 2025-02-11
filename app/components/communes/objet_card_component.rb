@@ -45,7 +45,7 @@ module Communes
     delegate :dossier, to: :recensement, allow_nil: true
 
     def path
-      commune_objet_path(commune, objet)
+      [commune, objet]
     end
 
     def readonly?
