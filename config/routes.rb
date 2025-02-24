@@ -115,7 +115,18 @@ Rails.application.routes.draw do
       get :premiere_visite
       put :premiere_visite, action: :after_premiere_visite, as: :after_premiere_visite
     end
-    resources :communes, only: %i[index show]
+    resources :communes, only: %i[index show] do
+      resources :objets, only: %i[index show] do
+        resources :recensements, only: %i[create edit update destroy] do
+          resources :photos, only: %i[create destroy], controller: "recensement_photos"
+        end
+      end
+      # resource :dossier, only: [:show]
+      # resources :campaign_recipients, only: [:update]
+      resources :messages, only: %i[index new create] do
+        resources :email_attachments, only: [:show]
+      end
+    end
   end
 
   ## -------------

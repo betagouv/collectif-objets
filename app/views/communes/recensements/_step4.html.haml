@@ -16,7 +16,7 @@
 
       %p
         En cas de difficultés, n’hésitez pas à contacter vos conservateurs sur la
-        = link_to "messagerie", commune_messages_path(wizard.commune)
+        = link_to "messagerie", [wizard.namespace, wizard.commune, :messages].compact
 
       - m.with_button do
         = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
