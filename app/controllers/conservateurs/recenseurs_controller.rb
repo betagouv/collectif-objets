@@ -19,15 +19,7 @@ module Conservateurs
     def show
       @accesses = @recenseur.accesses.sorted.includes(:commune, :departement).where(commune: policy_scope(Commune))
       @other_accesses = @recenseur.accesses.size > @accesses.load.size
-      @communes = Commune.none
-      if params[:nom]
-        @communes = policy_scope(Commune).includes(:departement).limit(20)
-                           .ransack(nom_unaccented_cont: params[:nom], s: "departement_code asc, nom asc").result
-      end
-      respond_to do |format|
-        format.turbo_stream { render partial: "shared/recenseur_accesses/form", recenseur: @recenseur, formats: :html }
-        format.html { render "shared/recenseurs/show" }
-      end
+      render "shared/recenseurs/show"
     end
 
     # GET /conservateurs/recenseurs/new

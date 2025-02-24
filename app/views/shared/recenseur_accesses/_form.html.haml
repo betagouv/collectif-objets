@@ -1,5 +1,5 @@
 = turbo_frame_tag :new_access do
-  = form_with url: [namespace, recenseur], method: :get, builder: FormBuilderDsfr do |f|
+  = form_with url: [:new, namespace, recenseur, :recenseur_access], method: :get, builder: FormBuilderDsfr do |f|
     .fr-search-bar.fr-mb-4w
       = f.label :nom, "Rechercher une commune", class: "fr-label"
       .fr-input-wrap.co-header-search-input-wrap
@@ -7,6 +7,10 @@
       = f.button value: "Rechercher", name: nil, type: :submit, class: "fr-btn"
 
   - if params[:nom]
-    %h3.fr-h5= pluralize(@communes.size, "résultat", plural: "Résultats")
+    %h3.fr-h5= pluralize(communes.size, "résultat", plural: "Résultats")
     %ul
-      = render partial: "shared/recenseur_accesses/commune", collection: @communes, locals: { recenseur: @recenseur }
+      = render partial: "shared/recenseur_accesses/commune", collection: communes.take(limit), locals: { recenseur: recenseur }
+
+    .co-flex.co-flex--space-between.co-flex--align-items-center.co-flex--wrap.co-flex--gap-05rem
+      = link_to_if offset.positive?, "Communes précédentes", url_for(nom: params[:nom], offset: offset - limit), class: "fr-btn fr-btn--tertiary"
+      = link_to "Communes suivantes", url_for(nom: params[:nom], offset: offset + limit), class: "fr-btn fr-btn--tertiary"
