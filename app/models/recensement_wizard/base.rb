@@ -89,10 +89,31 @@ module RecensementWizard
 
     def permitted_params = raise NotImplementedError
 
+    def commune_path
+      commune
+    end
+
+    def step_path(step: nil, edit: false)
+      step = case step
+             when :previous then previous_step_number
+             when :next then next_step_number
+             when :current, nil then step_number
+             else step
+             end
+      [edit ? :edit : nil, commune, objet, recensement, { step: }].compact
+    end
+
+    def objet_path(*args)
+      [commune, objet, *args]
+    end
+
+    def recensement_path(*args)
+      [commune, objet, recensement, *args]
+    end
+
     def after_success_path
-      to_step = confirmation_modal? ? step_number : next_step_number
-      edit_commune_objet_recensement_path \
-        commune, objet, recensement, step: to_step, **confirmation_modal_path_params.to_h
+      step = confirmation_modal? ? :current : :next
+      step_path(step:, edit: true, **confirmation_modal_path_params.to_h)
     end
 
     # Cette méthode est à re définir dans les sous-classes pour remettre à zéro les données de recensement
@@ -100,9 +121,6 @@ module RecensementWizard
     # Redefine this method in step subclasses to reset data when the user steps back and changes the answers
     def reset_recensement_data_for_next_steps; end
 
-    def confirmation_modal_close_path
-      edit_commune_objet_recensement_path(commune, objet, recensement, step: step_number)
-    end
 
     private
 
