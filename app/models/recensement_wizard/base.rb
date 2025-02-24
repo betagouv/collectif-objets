@@ -11,7 +11,7 @@ module RecensementWizard
     extend ActiveModel::Callbacks
     define_model_callbacks :initialize, only: :after
 
-    attr_reader :recensement
+    attr_reader :recensement, :recenseur
 
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
@@ -29,14 +29,15 @@ module RecensementWizard
     def self.title = self::TITLE
     def self.step_number = name.demodulize[-1].to_i
 
-    def initialize(recensement)
-      @recensement = recensement
-    end
-
-    def self.build_for(step, recensement)
+    def self.build_for(step, recensement, recenseur: false)
       raise InvalidStep unless step.to_i.in?(STEPS)
 
-      "RecensementWizard::Step#{step}".constantize.new(recensement)
+      "RecensementWizard::Step#{step}".constantize.new(recensement, recenseur:)
+    end
+
+    def initialize(recensement, recenseur: false)
+      @recensement = recensement
+      @recenseur = recenseur
     end
 
     def next_step_number
@@ -90,7 +91,7 @@ module RecensementWizard
     def permitted_params = raise NotImplementedError
 
     def commune_path
-      commune
+      [namespace, commune].compact
     end
 
     def step_path(step: nil, edit: false)
@@ -100,15 +101,15 @@ module RecensementWizard
              when :current, nil then step_number
              else step
              end
-      [edit ? :edit : nil, commune, objet, recensement, { step: }].compact
+      [edit ? :edit : nil, namespace, commune, objet, recensement, { step: }].compact
     end
 
     def objet_path(*args)
-      [commune, objet, *args]
+      [namespace, commune, objet, *args].compact
     end
 
     def recensement_path(*args)
-      [commune, objet, recensement, *args]
+      [namespace, commune, objet, recensement, *args].compact
     end
 
     def after_success_path
@@ -121,6 +122,7 @@ module RecensementWizard
     # Redefine this method in step subclasses to reset data when the user steps back and changes the answers
     def reset_recensement_data_for_next_steps; end
 
+    def namespace = recenseur ? :recenseurs : nil
 
     private
 
