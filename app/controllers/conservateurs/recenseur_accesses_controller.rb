@@ -6,6 +6,18 @@ module Conservateurs
 
     before_action :set_recenseur
 
+    # GET /conservateurs/recenseurs/1/accesses/new
+    def new
+      @communes = Commune.none
+      @offset = Integer(params[:offset] || 0)
+      @limit = 10 # Pagination basique : si on récupère plus de 20 résultats, on affiche un lien pour charger la suite
+      if params[:nom]
+        @communes = policy_scope(Commune).includes(:departement).offset(@offset).limit(@limit + 1)
+                           .ransack(nom_unaccented_cont: params[:nom], s: "departement_code asc, nom asc").result
+      end
+      render "shared/recenseur_accesses/new"
+    end
+
     # POST /conservateurs/recenseurs/1/accesses
     def create
       @access = @recenseur.accesses.build(commune_id: params[:commune_id], granted: true)

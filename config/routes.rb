@@ -159,7 +159,7 @@ Rails.application.routes.draw do
       end
     end
     resources :recenseurs do
-      resources :accesses, only: [:create, :update], as: :recenseur_access, controller: :recenseur_accesses
+      resources :accesses, only: [:new, :create, :update], as: :recenseur_access, controller: :recenseur_accesses
     end
     resource :conservateur, only: [:update]
     resources :visits, only: [:index]
@@ -187,7 +187,7 @@ Rails.application.routes.draw do
     resources :recenseurs do
       get :impersonate, on: :member
       post :toggle_impersonate_mode, on: :collection
-      resources :accesses, only: [:create, :update], as: :recenseur_access, controller: :recenseur_accesses
+      resources :accesses, only: [:new, :create, :update], as: :recenseur_access, controller: :recenseur_accesses
     end
     get "/session_codes(/:offset)", to: "session_codes#index", as: :session_codes
     resources :campaigns do
