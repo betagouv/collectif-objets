@@ -62,7 +62,7 @@ export default class extends Controller {
                 ['==', ['feature-state', 'status'], "prioritaire"],
                 '#b34001',
                 ['==', ['feature-state', 'status'], "completed"],
-                '#6b6af4',
+                '#99C221',
                 'transparent'
               ]
             }
