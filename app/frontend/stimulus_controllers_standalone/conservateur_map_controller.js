@@ -63,6 +63,10 @@ export default class extends Controller {
                 '#b34001',
                 ['==', ['feature-state', 'status'], "completed"],
                 '#99C221',
+                ['==', ['feature-state', 'status'], "started"],
+                '#6b6af4',
+                ['==', ['feature-state', 'status'], "inactive"],
+                '#dddddd',
                 'transparent'
               ]
             }
@@ -112,10 +116,13 @@ export default class extends Controller {
 
   hydrateStatuses() {
     const communes = JSON.parse(this.wrapperTarget.dataset.communesJson)
-    communes.filter(c => c.status == "completed").forEach(commune => {
-      const prioritaire = (commune.en_peril_count || 0) > 0
-      const status = prioritaire ? "prioritaire" : "completed"
-      this.setCommuneState(commune.code_insee, { selectable: true, status })
+    communes.forEach(commune => {
+      const selectable = commune.status !== "inactive"
+      let status = commune.status
+      if (status === "completed" && (commune.en_peril_count || 0) > 0) {
+        status = "prioritaire"
+      }
+      this.setCommuneState(commune.code_insee, { status, selectable })
     })
   }
 
