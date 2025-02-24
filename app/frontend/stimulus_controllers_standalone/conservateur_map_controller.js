@@ -85,6 +85,13 @@ export default class extends Controller {
     this.map.addControl(new maplibregl.NavigationControl({ showCompass: false }));
   }
 
+  disconnect() {
+    if (this.map) {
+      this.map.remove()
+      this.map = null
+    }
+  }
+
   initHover() {
     this.hoveredCodeInsee = null;
     this.map.on('mousemove', 'communes-fills', event => {
