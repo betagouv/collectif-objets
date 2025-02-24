@@ -18,15 +18,7 @@ module Admin
     # GET /admin/recenseurs/1
     def show
       @accesses = @recenseur.accesses.sorted.includes(:commune, :departement)
-      @communes = Commune.none
-      if params[:nom]
-        @communes = Commune.includes(:departement).limit(20)
-                           .ransack(nom_unaccented_cont: params[:nom], s: "departement_code asc, nom asc").result
-      end
-      respond_to do |format|
-        format.turbo_stream { render "shared/recenseur_accesses/form", recenseur: @recenseur }
-        format.html { render "shared/recenseurs/show" }
-      end
+      render "shared/recenseurs/show"
     end
 
     # GET /admin/recenseurs/new
