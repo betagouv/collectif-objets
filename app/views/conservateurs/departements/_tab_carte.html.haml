@@ -1,5 +1,7 @@
 = vite_javascript_tag "conservateur_map"
 
+%h2.fr-sr-only Carte des communes du département
+
 .co-flex.co-flex--justify-content-center
   %div
     .fr-pb-2w
@@ -29,8 +31,8 @@
     %template{"data-code-insee" => "#{commune.code_insee}", "data-conservateur-map-target" => "sidebarCommuneTemplate"}
       .co-flex.co-flex--column.co-flex--justify-content-center.co-height--100.fr-p-4w
         .fr-mb-6w
-          %h5= commune.nom
-          %div= commune_statut_global_badge(commune)
+          %h3= commune.nom
+          = commune_statut_global_badge(commune)
         .fr-mb-6w
           - if commune.en_peril_count
             .co-text--bold
