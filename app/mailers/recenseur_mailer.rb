@@ -9,6 +9,8 @@ class RecenseurMailer < ApplicationMailer
 
   def session_code
     @session_code = params[:session_code]
+    raise ActiveRecord::RecordNotFound unless @session_code.record.is_a? Recenseur
+
     @recenseur = @session_code.record
     skip_optouts
     @login_url = new_recenseur_session_code_url(email: @recenseur.email, session_code: @session_code.code)
