@@ -7,8 +7,21 @@
   margin-right: .5rem;
 }
 
-.map-legend-icon.commune-completed {
+.map-legend-icon.commune-blank {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+
+.map-legend-icon.commune-inactive {
+  background-color: #dddddd;
+}
+
+.map-legend-icon.commune-started {
   background-color: #6b6af4;
+}
+
+.map-legend-icon.commune-completed {
+  background-color: #99C221;
 }
 
 .map-legend-icon.commune-prioritaire {

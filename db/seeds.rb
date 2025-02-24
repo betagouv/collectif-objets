@@ -7,6 +7,8 @@ def run(command)
   `#{command}`
 end
 
+run "bin/rails r scripts/create_postgres_sequences_memoire_photos_numbers.rb"
+
 puts "downloading seeds file from ..."
 run("curl https://s3.fr-par.scw.cloud/collectif-objets-public/seeds.pgsql > #{path}")
 

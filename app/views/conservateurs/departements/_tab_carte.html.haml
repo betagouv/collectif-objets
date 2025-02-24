@@ -1,5 +1,7 @@
 = vite_javascript_tag "conservateur_map"
 
+%h2.fr-sr-only Carte des communes du département
+
 .co-flex.co-flex--justify-content-center
   %div
     .fr-pb-2w
@@ -8,6 +10,15 @@
     .fr-pb-2w
       .map-legend-icon.commune-prioritaire
       Commune ayant soumis un dossier de recensement avec des objets en péril
+    .fr-pb-2w
+      .map-legend-icon.commune-started
+      Commune ayant commencé à recenser
+    .fr-pb-2w
+      .map-legend-icon.commune-inactive
+      Commune n'ayant pas commencé à recenser
+    .fr-pb-2w
+      .map-legend-icon.commune-blank
+      Commune n'ayant pas d'objets à recenser
 .co-position-relative{"data-communes-json" => "#{@communes.map { _1.slice(%w[code_insee status objets_count en_peril_count]) }.to_json}",
   "data-conservateur-map-target" => "wrapper",
   "data-controller" => "conservateur-map",
@@ -16,12 +27,12 @@
   .co-position-relative
     .conservateur-map-container.co-max-width-90.co-margin-auto{"data-conservateur-map-target" => "container"}
     .tooltip{"data-conservateur-map-target" => "tooltip"}
-  - @communes.select { _1.status == "completed" }.each do |commune|
+  - @communes.each do |commune|
     %template{"data-code-insee" => "#{commune.code_insee}", "data-conservateur-map-target" => "sidebarCommuneTemplate"}
       .co-flex.co-flex--column.co-flex--justify-content-center.co-height--100.fr-p-4w
         .fr-mb-6w
-          %h5= commune.nom
-          %div= commune_statut_global_badge(commune)
+          %h3= commune.nom
+          = commune_statut_global_badge(commune)
         .fr-mb-6w
           - if commune.en_peril_count
             .co-text--bold
