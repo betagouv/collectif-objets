@@ -36,5 +36,13 @@ module Recenseurs
 
       flash.now[:notice] = "Votre accès recenseur n'est pas autorisé à recenser actuellement."
     end
+
+    def set_commune
+      @commune = policy_scope(Commune).find(params[:commune_id]) if params.key? :commune_id
+    end
+
+    def set_dossier
+      @dossier = @commune&.dossier # can be nil
+    end
   end
 end

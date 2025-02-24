@@ -47,8 +47,10 @@
 
     - if current_recenseur.communes.count == 1
       - c.with_direct_link_simple title: current_recenseur.communes.first, path: recenseurs_commune_path(current_recenseur.communes.first), active: active_nav_link?("Communes")
+      - c.with_direct_link_simple title: "Recensement", path: recenseurs_commune_objets_path(current_recenseur.communes.first), active: active_nav_link?("Recensement")
     - else
       - c.with_direct_link_simple title: "Communes", path: recenseurs_communes_path, active: active_nav_link?("Communes")
+      - c.with_direct_link_simple title: "Recensement", path: recenseurs_commune_path(@commune), active: active_nav_link?("Recensement") if @commune
 
     - c.with_direct_link_simple title: "Comment ça marche ?", path: content_blob_path(:aide_en_ligne), active: active_nav_link?("Aide en ligne")
 
