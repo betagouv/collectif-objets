@@ -35,7 +35,7 @@
         = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
 
   .co-text--right
-    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"
+    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil
     .fr-mt-2w
       = link_to "Revenir à la fiche objet",
         commune_objet_path(wizard.commune, wizard.objet),
