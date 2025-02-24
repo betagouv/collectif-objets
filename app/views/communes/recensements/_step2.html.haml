@@ -2,12 +2,12 @@
 
 -# À faire évoluer : utiliser les nested_attributes pour ne plus avoir edifice_nom dans Recensement
 
-= render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
-  - if wizard.recensement.localisation == Recensement::LOCALISATION_AUTRE_EDIFICE  
+= render "communes/recensements/wizard_form", wizard: do |form_builder|
+  - if wizard.recensement.localisation == Recensement::LOCALISATION_AUTRE_EDIFICE
     %fieldset.fr-fieldset{ data: { controller: "choix-edifice" }}
       .fr-fieldset__element
         .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:edifice_nom_existant].present?)}
-          = form_builder.label :edifice_nom_existant do 
+          = form_builder.label :edifice_nom_existant do
             Dans quel édifice se trouve l’objet ?
             .fr-hint-text
               .fr-mb-1w
@@ -29,7 +29,7 @@
     %fieldset.fr-fieldset
       .fr-fieldset__element
         .fr-input-group{class: ("fr-input-group--error" if form_builder.object.errors[:autre_commune_code_insee].present?)}
-          = form_builder.label :autre_commune_code_insee do 
+          = form_builder.label :autre_commune_code_insee do
             Quel est le code INSEE de la commune dans laquelle se trouve l’objet ?
             .fr-hint-text
               .fr-mb-1w
@@ -38,7 +38,7 @@
           - form_builder.object.errors[:autre_commune_code_insee].each do |error_message|
             %p.fr-error-text
               = error_message
-      
+
           -# Pour une future version où l'on pourra sélectionner la commune parmi une liste
           -# = form_builder.select :autre_commune_code_insee,
           -#                       options_for_select(wizard.recensement.departement.communes.map { |commune| ["#{commune.nom} - #{commune.code_insee}", commune.code_insee] }, selected: wizard.autre_commune_code_insee),
