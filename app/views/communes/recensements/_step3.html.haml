@@ -35,5 +35,5 @@
         = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
 
   .co-text--right
-    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"
+    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil
     .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:

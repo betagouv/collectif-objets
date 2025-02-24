@@ -48,5 +48,5 @@
       = render "communes/recensements/fields/edifice_nom", form_builder:, label: "Dans quel édifice se trouve l’objet ?"
 
   .co-text--right
-    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn"
+    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil
     .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:
