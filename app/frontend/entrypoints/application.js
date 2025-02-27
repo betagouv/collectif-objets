@@ -10,7 +10,7 @@ ActiveStorage.start()
 // Stimulus
 window.Stimulus = Application.start()
 
-const controllers = import.meta.globEager("../stimulus_controllers/**/*_controller.js");
+const controllers = import.meta.glob('./stimulus_controllers/**/*_controller.js', { eager: true })
 registerControllers(window.Stimulus, controllers);
 
 const identifierForComponentControllerPath = (path) => {
@@ -20,7 +20,7 @@ const identifierForComponentControllerPath = (path) => {
   return match_data[1].replace(/\//g, "--").replace(/_/g, "-")
 }
 
-const componentControllers = import.meta.globEager("../../components/**/*_controller.js");
+const componentControllers = import.meta.glob('./components/**/*_controller.js', { eager: true })
 Object.entries(componentControllers).forEach(([path, controllerModule]) => {
   const identifier = identifierForComponentControllerPath(path)
   if (!identifier || typeof controllerModule.default !== 'function') return
