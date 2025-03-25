@@ -30,7 +30,6 @@
           = t("activerecord.attributes.dossier.recenseur")
           = blockquote(@dossier.recenseur)
 
-
   = render "edifices/list", edifices: @edifices
   - @edifices.each do |edifice|
     = render "edifices/title", edifice:
@@ -51,3 +50,7 @@
           = "#{deleted_recensements.count} recensements ont été supprimés automatiquement de ce dossier"
           - cta = "Voir les #{deleted_recensements.count} recensements supprimés"
         = link_to cta, conservateurs_commune_deleted_recensements_path(@commune), class: "fr-link", data: { turbo_frame: "_top" }
+
+  - if @edifices.none? && deleted_recensements.empty?
+    = dsfr_alert type: :warning, size: :sm do
+      Aucun objet à afficher
