@@ -7,9 +7,11 @@ module Recenseurs
 
     def index
       @objets_list = objets_list
-      return unless display_only_next_objets?
-
-      render(:recensement_saved)
+      if display_only_next_objets?
+        render "communes/objets/recensement_saved"
+      else
+        render "communes/objets/index"
+      end
     end
 
     def show
