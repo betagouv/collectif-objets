@@ -37,7 +37,7 @@
                     %div
                       = conservateur.full_name
                       .co-word-break-all= link_to conservateur.email, "mailto:#{conservateur.email}", target: "_blank"
-                  %td= conservateur.departements.map { _1.to_s }.to_sentence
+                  %td= conservateur.departements.sorted.map { _1.to_s }.to_sentence
                   %td.co-white-space-nowrap= conservateur.phone_number
                   %td.co-white-space-nowrap
                     %div
