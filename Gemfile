@@ -52,7 +52,7 @@ end
 
 group :development do
   gem "aasm-diagram", "~> 0.1", require: false
-  gem "foreman", "~> 0.87"
+  gem "foreman", "~> 0.88"
   gem "html2haml", "~> 2.3"
   gem "htmlbeautifier", "~> 1.4"
   gem "pry", "~> 0.15"
