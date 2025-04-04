@@ -304,9 +304,6 @@ GEM
     pry (0.15.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    psych (5.2.3)
-      date
-      stringio
     public_suffix (5.0.5)
     puma (6.4.3)
       nio4r (~> 2.0)
@@ -365,8 +362,6 @@ GEM
       activesupport (>= 6.1.5)
       i18n
     rbs (2.8.4)
-    rdoc (6.12.0)
-      psych (>= 4.0.0)
     rdoc (6.13.1)
     regexp_parser (2.9.2)
     reline (0.6.1)
@@ -486,7 +481,7 @@ GEM
     vite_rails (3.0.19)
       railties (>= 5.1, < 9)
       vite_ruby (~> 3.0, >= 3.2.2)
-    vite_ruby (3.9.1)
+    vite_ruby (3.9.2)
       dry-cli (>= 0.7, < 2)
       logger (~> 1.6)
       mutex_m
