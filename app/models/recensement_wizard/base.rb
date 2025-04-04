@@ -16,7 +16,7 @@ module RecensementWizard
       :edifice_initial?, :autre_commune_code_insee,
       :analyse_etat_sanitaire, :analyse_securisation, :persisted?,
       :localisation=, :recensable=, :edifice_nom=, :autre_commune_code_insee=,
-      :etat_sanitaire=, :securisation=, :notes=,
+      :etat_sanitaire=, :securisation=, :notes=, :attachment_changes,
       to: :recensement
 
     delegate :step_number, to: :class
