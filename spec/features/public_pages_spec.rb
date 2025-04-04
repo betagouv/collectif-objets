@@ -5,114 +5,128 @@ require "rails_helper"
 feature "accessibility public pages", js: true do
   subject { page }
 
+  shared_examples "an accessible page" do |excludes|
+    it "should be accessible" do
+      visit path
+      expect(page).to have_current_path(path)
+      expect(page.title).not_to eq("Collectif Objets") # Le titre par défaut
+      expect(page).to be_axe_clean.excluding(*excludes)
+    end
+  end
+
   describe "page d'accueil" do
-    before { visit root_path }
-    it { should be_axe_clean.excluding("iframe") }
+    let(:path) { root_path }
+
+    it "should be accessible" do
+      visit path
+      expect(page).to have_current_path(path)
+      expect(page).to be_axe_clean.excluding(:iframe)
+    end
   end
 
   describe "communes#show" do
-    let!(:commune) { create(:commune, :with_objets) }
-    before { visit commune_path(commune) }
-    it { should be_axe_clean }
+    let(:commune) { create(:commune, :with_objets) }
+    let(:path) { commune_path(commune) }
+    it_behaves_like "an accessible page"
   end
 
   # "Statistiques", :stats_path
 
   describe "Connexion Communes" do
-    before { visit new_user_session_code_path }
-    it { should be_axe_clean }
+    let(:path) { new_user_session_code_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Connexion Conservateur" do
-    before { visit new_conservateur_session_path }
-    it { should be_axe_clean }
+    let(:path) { new_conservateur_session_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Connexion Administrateur" do
-    before { visit new_admin_user_session_path }
-    it { should be_axe_clean }
+    let(:path) { new_admin_user_session_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "On parle de nous" do
-    before { visit presse_path }
-    it { should be_axe_clean.excluding("iframe") }
+    let(:path) { presse_path }
+    it_behaves_like "an accessible page", :iframe
   end
 
   ArticlePresse.find_each do |article_presse|
     describe "Article de Presse #{article_presse.title}" do
-      before { visit article_presse_path(article_presse.id) }
-      it { should be_axe_clean.excluding("iframe") }
+      let(:path) { article_presse_path(article_presse.id) }
+      it_behaves_like "an accessible page", :iframe
     end
   end
 
   describe "Conditions générales d'utilisation" do
-    before { visit conditions_path }
-    it { should be_axe_clean }
+    let(:path) { conditions_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Mentions Légales" do
-    before { visit mentions_legales_path }
-    it { should be_axe_clean }
+    let(:path) { mentions_legales_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Confidentialité" do
-    before { visit confidentialite_path }
-    it { should be_axe_clean }
+    let(:path) { confidentialite_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Comment ça marche ?" do
-    before { visit aide_path }
-    it { should be_axe_clean }
+    let(:path) { aide_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Guide du recensement" do
+    let(:path) { guide_path }
     before do
       url = Regexp.new(Regexp.escape(PagesController::STATIC_FILES_HOST))
       stub_request(:any, url).to_return(status: 200, body: "", headers: {})
-      visit guide_path
     end
-    it { should be_axe_clean }
+    it_behaves_like "an accessible page"
   end
 
   describe "Plan du site" do
-    before { visit plan_path }
-    it { should be_axe_clean }
+    let(:path) { plan_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Schéma pluriannuel d’accessibilité" do
-    before { visit schema_pluriannuel_accessibilite_path }
-    it { should be_axe_clean }
+    let(:path) { schema_pluriannuel_accessibilite_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Déclaration d’accessibilité" do
-    before { visit declaration_accessibilite_path }
-    it { should be_axe_clean }
+    let(:path) { declaration_accessibilite_path }
+    it_behaves_like "an accessible page"
   end
 
   describe "Fiches conseil" do
-    before { visit fiches_path }
-    it { should be_axe_clean }
+    let(:path) { fiches_path }
+    it_behaves_like "an accessible page"
   end
 
   Fiche.find_each do |fiche|
     describe "Fiche conseil #{fiche.title}" do
-      before { visit fiche_path(fiche.id) }
-      it { should be_axe_clean }
+      let(:path) { fiche_path(fiche.id) }
+      it_behaves_like "an accessible page"
     end
   end
 
   describe "Documentation conservateur" do
-    before { visit content_blob_path(:documentation_conservateur) }
-    it { should be_axe_clean.excluding("iframe") }
+    let(:path) { content_blob_path(:documentation_conservateur) }
+    it_behaves_like "an accessible page", :iframe
   end
 
   describe "Documentation commune" do
-    before { visit content_blob_path(:aide_en_ligne) }
-    it { should be_axe_clean.excluding("iframe") }
+    let(:path) { content_blob_path(:aide_en_ligne) }
+    it_behaves_like "an accessible page", :iframe
   end
 
   describe "Page d’accueil conservateurs" do
-    before { visit accueil_conservateurs_path }
-    it { should be_axe_clean.excluding("iframe") }
+    let(:path) { accueil_conservateurs_path }
+    it_behaves_like "an accessible page", :iframe
   end
 end
