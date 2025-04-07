@@ -3,9 +3,13 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   impersonates :user
+  impersonates :recenseur
   impersonates :conservateur
 
-  devise_group :person, contains: [:user, :conservateur, :admin]
+  devise_group :person, contains: [:user, :conservateur, :admin_user, :recenseur]
+
+  helper_method :namespace
+  helper_method :namespaced?
 
   before_action :init_banners
   before_action :set_locale
@@ -20,11 +24,16 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def namespaced? = self.class.name.include?("::")
+  def namespace = namespaced? ? self.class.module_parent.to_s.downcase.to_sym : nil
+
   def set_sentry_context
     if current_user
       set_sentry_current_user_context
     elsif current_conservateur
       set_sentry_current_conservateur_context
+    elsif current_recenseur
+      set_sentry_current_recenseur_context
     end
   end
 
@@ -45,6 +54,16 @@ class ApplicationController < ActionController::Base
       username: current_conservateur.to_s,
       ip_address: "{{auto}}",
       user_type: "conservateur"
+    )
+  end
+
+  def set_sentry_current_recenseur_context
+    Sentry.set_user(
+      id: current_recenseur.id,
+      email: current_recenseur.email,
+      username: current_recenseur.nom,
+      ip_address: "{{auto}}",
+      user_type: "recenseur"
     )
   end
 
@@ -75,6 +94,13 @@ class ApplicationController < ActionController::Base
     admin_path
   end
 
+  def after_sign_in_path_for_recenseur(recenseur)
+    return recenseurs_premiere_visite_path if recenseur.premiere_visite?
+    return recenseurs_commune_path(recenseur.communes.first) if recenseur.communes.size == 1
+
+    recenseurs_communes_path
+  end
+
   def user_not_authorized(exception)
     message = "Vous n'avez pas le droit de faire cette action"
     message += " : #{exception.message}" if Rails.env.development?
@@ -93,13 +119,24 @@ class ApplicationController < ActionController::Base
     @banners = []
     @banners << :environment if %w[development staging].include?(Rails.configuration.x.environment_specific_name)
     @banners << :user_impersonate if impersonating_user?
-    @banners << :conservateur_impersonate if current_conservateur.present? && current_conservateur != true_conservateur
+    @banners << :recenseur_impersonate if impersonating_recenseur?
+    @banners << :conservateur_impersonate if impersonating_conservateur?
   end
 
   def impersonating_user?
     admin_user_signed_in? &&
       current_user.present? &&
       current_user != true_user
+  end
+
+  def impersonating_recenseur?
+    current_recenseur.present? &&
+      current_recenseur != true_recenseur
+  end
+
+  def impersonating_conservateur?
+    current_conservateur.present? &&
+      current_conservateur != true_conservateur
   end
 
   # this overrides the default devise method

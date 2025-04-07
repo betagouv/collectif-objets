@@ -2,8 +2,16 @@
 
 class ApplicationMailer < ActionMailer::Base
   include ActionMailer::Html2Text # Generate a text email based on the HTML
+  class AbortDeliveryError < StandardError; end
+  rescue_from AbortDeliveryError, with: -> {} # raise AbortDeliveryError.new if an email should not be sent at all
 
   default from: email_address_with_name(CONTACT_EMAIL, I18n.t("application_mailer_layout.project_name"))
   layout "application_mailer"
   prepend_view_path "app/mailer_views"
+
+  private
+
+  def dont_send!
+    raise AbortDeliveryError
+  end
 end

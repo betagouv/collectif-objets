@@ -42,11 +42,11 @@
                 id: dom_id(@commune, :session_code),
                 form_class: "co-width-md-40", class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line w-100"
             = link_to "Incarner la commune",
-              admin_user_impersonate_path(user),
+              impersonate_admin_user_path(user),
               class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-warning-line co-width-md-40"
           - @commune.departement.conservateurs.each do |conservateur|
             = link_to "Incarner #{conservateur.full_name}",
-              admin_conservateur_impersonate_path(conservateur),
+              impersonate_admin_conservateur_path(conservateur),
               class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-user-star-line co-width-md-40"
 
     .fr-col-md-4

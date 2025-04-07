@@ -40,4 +40,11 @@ class FormBuilderDsfr < ActionView::Helpers::FormBuilder
     options[:class] += " fr-btn"
     super
   end
+
+  def button(value, options = {})
+    options = options.with_indifferent_access
+    options[:class] ||= ""
+    options[:class] += " fr-btn"
+    super
+  end
 end

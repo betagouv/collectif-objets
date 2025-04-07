@@ -17,7 +17,6 @@
     - else
       %span Image corrompue
   - if delete_button
-    = button_to "Supprimer",
-      commune_objet_recensement_photo_path(recensement.commune, recensement.objet, recensement, photo),
+    = button_to "Supprimer", @wizard.recensement_path(photo:),
       class: "fr-link fr-link--icon-left fr-icon-delete-line",
       method: "delete"

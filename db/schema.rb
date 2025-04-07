@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_11_204003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -191,7 +191,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.boolean "messages_mail_notifications", default: true
-    t.boolean "send_recap", default: false, null: false
+    t.boolean "send_recap", default: true, null: false
     t.index ["email"], name: "index_conservateurs_on_email", unique: true
   end
 
@@ -330,7 +330,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
 
   create_table "messages", force: :cascade do |t|
     t.string "origin"
-    t.bigint "commune_id", null: false
+    t.bigint "commune_id"
     t.string "inbound_email_id"
     t.bigint "author_id"
     t.string "author_type"
@@ -338,7 +338,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
     t.string "automated_mail_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "recenseur_id"
     t.index ["commune_id"], name: "index_messages_on_commune_id"
+    t.index ["recenseur_id"], name: "index_messages_on_recenseur_id"
   end
 
   create_table "objets", force: :cascade do |t|
@@ -418,14 +420,39 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
     t.index ["objet_id", "dossier_id"], name: "index_recensements_on_objet_id_and_dossier_id", unique: true
   end
 
+  create_table "recenseur_accesses", force: :cascade do |t|
+    t.bigint "recenseur_id", null: false
+    t.bigint "commune_id", null: false
+    t.boolean "granted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "notified", default: false, null: false
+    t.index ["commune_id"], name: "index_recenseur_accesses_on_commune_id"
+    t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true
+    t.index ["recenseur_id"], name: "index_recenseur_accesses_on_recenseur_id"
+  end
+
+  create_table "recenseurs", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "status", default: "pending", null: false
+    t.string "nom"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "remember_created_at"
+    t.datetime "last_sign_in_at"
+    t.boolean "premiere_visite", default: true, null: false
+    t.index ["email"], name: "index_recenseurs_on_email", unique: true
+  end
+
   create_table "session_codes", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "record_id", null: false
     t.string "code"
     t.datetime "used_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "created_at"], name: "index_session_codes_on_user_id_and_created_at"
-    t.index ["user_id"], name: "index_session_codes_on_user_id"
+    t.string "record_type", null: false
+    t.index ["record_id", "record_type"], name: "index_session_codes_on_record_id_and_record_type"
   end
 
   create_table "survey_votes", force: :cascade do |t|
@@ -465,7 +492,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_154819) do
   add_foreign_key "dossiers", "campaigns"
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
+  add_foreign_key "messages", "recenseurs"
   add_foreign_key "recensements", "objets"
-  add_foreign_key "session_codes", "users"
+  add_foreign_key "recenseur_accesses", "communes"
+  add_foreign_key "recenseur_accesses", "recenseurs"
   add_foreign_key "users", "communes"
 end
