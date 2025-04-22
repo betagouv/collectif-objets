@@ -5,7 +5,7 @@ module Admin
     skip_before_action :disconnect_impersonating_user, only: [:toggle_impersonate_mode]
 
     def impersonate
-      @user = User.find(params[:user_id])
+      @user = User.find(params[:id])
       impersonate_user(@user)
       redirect_to commune_objets_path(@user.commune)
     end

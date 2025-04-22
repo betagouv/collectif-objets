@@ -1,39 +1,37 @@
-# slightly adapted from https://github.com/ankane/pretender to work with multiple devise models at once
+# frozen_string_literal: true
 
+# slightly adapted from https://github.com/ankane/pretender to work with multiple devise models at once
 module Pretender
   class Error < StandardError; end
 
   module Methods
-    def impersonates(scope = :user, opts = {})
-      impersonated_method = opts[:method] || :"current_#{scope}"
-      impersonate_with = opts[:with] || proc { |id|
-        klass = scope.to_s.classify.constantize
-        primary_key = klass.respond_to?(:primary_key) ? klass.primary_key : :id
-        klass.find_by(primary_key => id)
-      }
+    def impersonates(scope = :user)
+      current_scope =:"current_#{scope}"
+      impersonate_with = proc { |id| scope.to_s.classify.constantize.find(id) }
       true_method = :"true_#{scope}"
       session_key = :"impersonated_#{scope}_id"
+      readonly_session_key = :"#{scope}_impersonate_write"
       impersonated_var = :"@impersonated_#{scope}"
       stop_impersonating_method = :"stop_impersonating_#{scope}"
 
       # define methods
-      if method_defined?(impersonated_method) || private_method_defined?(impersonated_method)
-        alias_method true_method, impersonated_method
+      if method_defined?(current_scope) || private_method_defined?(current_scope)
+        alias_method true_method, current_scope
       else
         sc = superclass
         define_method true_method do
           # TODO: handle private methods
-          unless sc.method_defined?(impersonated_method)
+          unless sc.method_defined?(current_scope)
             raise Pretender::Error,
-                  "#{impersonated_method} must be defined before the impersonates method"
+                  "#{current_scope} must be defined before the impersonates method"
           end
 
-          sc.instance_method(impersonated_method).bind(self).call
+          sc.instance_method(current_scope).bind(self).call
         end
       end
       helper_method(true_method) if respond_to?(:helper_method)
 
-      define_method impersonated_method do
+      define_method current_scope do
         impersonated_resource = instance_variable_get(impersonated_var) if instance_variable_defined?(impersonated_var)
 
         if !impersonated_resource && request.session[session_key]
@@ -55,18 +53,24 @@ module Pretender
         impersonated_resource || send(true_method)
       end
 
-      define_method :"impersonate_#{scope}" do |resource|
+      define_method :"impersonate_#{scope}" do |resource, readonly: true|
         raise ArgumentError, "No resource to impersonate" unless resource
         # raise Pretender::Error, "Must be logged in to impersonate" unless send(true_method)
 
         instance_variable_set(impersonated_var, resource)
-        # use to_s for Mongoid for BSON::ObjectId
-        request.session[session_key] = resource.id.is_a?(Numeric) ? resource.id : resource.id.to_s
+        request.session[session_key] = resource.id
+        # Set write permission based on readonly parameter
+        request.session[readonly_session_key] = readonly ? "0" : "1"
+      end
+
+      define_method :"impersonating_#{scope}_readonly?" do
+        request.session[readonly_session_key] != "1"
       end
 
       define_method stop_impersonating_method do
         remove_instance_variable(impersonated_var) if instance_variable_defined?(impersonated_var)
         request.session.delete(session_key)
+        request.session.delete(readonly_session_key)
       end
     end
   end
