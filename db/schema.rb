@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_11_204003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -191,7 +191,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.boolean "messages_mail_notifications", default: true
-    t.boolean "send_recap", default: false, null: false
+    t.boolean "send_recap", default: true, null: false
     t.index ["email"], name: "index_conservateurs_on_email", unique: true
   end
 
@@ -253,7 +253,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
     t.datetime "enqueued_at"
     t.datetime "discarded_at"
     t.datetime "finished_at"
-    t.datetime "jobs_finished_at"
   end
 
   create_table "good_job_executions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -267,18 +266,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
     t.datetime "finished_at"
     t.text "error"
     t.integer "error_event", limit: 2
-    t.text "error_backtrace", array: true
-    t.uuid "process_id"
-    t.interval "duration"
     t.index ["active_job_id", "created_at"], name: "index_good_job_executions_on_active_job_id_and_created_at"
-    t.index ["process_id", "created_at"], name: "index_good_job_executions_on_process_id_and_created_at"
   end
 
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "state"
-    t.integer "lock_type", limit: 2
   end
 
   create_table "good_job_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -310,22 +304,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
     t.integer "executions_count"
     t.text "job_class"
     t.integer "error_event", limit: 2
-    t.text "labels", array: true
-    t.uuid "locked_by_id"
-    t.datetime "locked_at"
     t.index ["active_job_id", "created_at"], name: "index_good_jobs_on_active_job_id_and_created_at"
+    t.index ["active_job_id"], name: "index_good_jobs_on_active_job_id"
     t.index ["batch_callback_id"], name: "index_good_jobs_on_batch_callback_id", where: "(batch_callback_id IS NOT NULL)"
     t.index ["batch_id"], name: "index_good_jobs_on_batch_id", where: "(batch_id IS NOT NULL)"
-    t.index ["concurrency_key", "created_at"], name: "index_good_jobs_on_concurrency_key_and_created_at"
     t.index ["concurrency_key"], name: "index_good_jobs_on_concurrency_key_when_unfinished", where: "(finished_at IS NULL)"
     t.index ["cron_key", "created_at"], name: "index_good_jobs_on_cron_key_and_created_at_cond", where: "(cron_key IS NOT NULL)"
     t.index ["cron_key", "cron_at"], name: "index_good_jobs_on_cron_key_and_cron_at_cond", unique: true, where: "(cron_key IS NOT NULL)"
     t.index ["finished_at"], name: "index_good_jobs_jobs_on_finished_at", where: "((retried_good_job_id IS NULL) AND (finished_at IS NOT NULL))"
-    t.index ["labels"], name: "index_good_jobs_on_labels", where: "(labels IS NOT NULL)", using: :gin
-    t.index ["locked_by_id"], name: "index_good_jobs_on_locked_by_id", where: "(locked_by_id IS NOT NULL)"
-    t.index ["priority", "created_at"], name: "index_good_job_jobs_for_candidate_lookup", where: "(finished_at IS NULL)"
     t.index ["priority", "created_at"], name: "index_good_jobs_jobs_on_priority_created_at_when_unfinished", order: { priority: "DESC NULLS LAST" }, where: "(finished_at IS NULL)"
-    t.index ["priority", "scheduled_at"], name: "index_good_jobs_on_priority_scheduled_at_unfinished_unlocked", where: "((finished_at IS NULL) AND (locked_by_id IS NULL))"
     t.index ["queue_name", "scheduled_at"], name: "index_good_jobs_on_queue_name_and_scheduled_at", where: "(finished_at IS NULL)"
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
@@ -343,7 +330,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
 
   create_table "messages", force: :cascade do |t|
     t.string "origin"
-    t.bigint "commune_id", null: false
+    t.bigint "commune_id"
     t.string "inbound_email_id"
     t.bigint "author_id"
     t.string "author_type"
@@ -351,7 +338,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
     t.string "automated_mail_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "recenseur_id"
     t.index ["commune_id"], name: "index_messages_on_commune_id"
+    t.index ["recenseur_id"], name: "index_messages_on_recenseur_id"
   end
 
   create_table "objets", force: :cascade do |t|
@@ -431,14 +420,39 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
     t.index ["objet_id", "dossier_id"], name: "index_recensements_on_objet_id_and_dossier_id", unique: true
   end
 
+  create_table "recenseur_accesses", force: :cascade do |t|
+    t.bigint "recenseur_id", null: false
+    t.bigint "commune_id", null: false
+    t.boolean "granted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "notified", default: false, null: false
+    t.index ["commune_id"], name: "index_recenseur_accesses_on_commune_id"
+    t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true
+    t.index ["recenseur_id"], name: "index_recenseur_accesses_on_recenseur_id"
+  end
+
+  create_table "recenseurs", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "status", default: "pending", null: false
+    t.string "nom"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "remember_created_at"
+    t.datetime "last_sign_in_at"
+    t.boolean "premiere_visite", default: true, null: false
+    t.index ["email"], name: "index_recenseurs_on_email", unique: true
+  end
+
   create_table "session_codes", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "record_id", null: false
     t.string "code"
     t.datetime "used_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "created_at"], name: "index_session_codes_on_user_id_and_created_at"
-    t.index ["user_id"], name: "index_session_codes_on_user_id"
+    t.string "record_type", null: false
+    t.index ["record_id", "record_type"], name: "index_session_codes_on_record_id_and_record_type"
   end
 
   create_table "survey_votes", force: :cascade do |t|
@@ -478,7 +492,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
   add_foreign_key "dossiers", "campaigns"
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
+  add_foreign_key "messages", "recenseurs"
   add_foreign_key "recensements", "objets"
-  add_foreign_key "session_codes", "users"
+  add_foreign_key "recenseur_accesses", "communes"
+  add_foreign_key "recenseur_accesses", "recenseurs"
   add_foreign_key "users", "communes"
 end

@@ -1,0 +1,20 @@
+= turbo_frame_tag :form do
+  = render "shared/errors", errors: recenseur.errors if recenseur.errors.any?
+
+  = form_for [namespace, recenseur], builder: FormBuilderDsfr, data: { turbo: false } do |f|
+    .fr-input-group
+      = f.label :email do
+        Email (*)
+      = f.text_field :email, required: true
+    .fr-input-group
+      = f.label :nom
+      = f.text_field :nom
+    .fr-input-group
+      = f.label :status
+      = f.select :status, Recenseur.human_statuses.invert
+    .fr-input-group
+      = f.label :notes do
+        = Recenseur.human_attribute_name(:notes)
+        %span.fr-hint-text= Recenseur.human_attribute_name(:notes_hint)
+      = f.text_area :notes
+    = f.submit "Enregistrer", name: nil, data: { turbo_disable_with: "Enregistrement en cours…" }

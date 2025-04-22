@@ -15,10 +15,7 @@ module RecensementWizard
               },
               if: -> { localisation.present? }
 
-    def initialize(recensement)
-      super
-      self.confirmation_introuvable = recensement.absent? ? "true" : "false"
-    end
+    after_initialize -> { self.confirmation_introuvable = recensement.absent? ? "true" : "false" }
 
     def permitted_params = %i[localisation confirmation_introuvable]
 

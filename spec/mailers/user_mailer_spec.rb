@@ -9,7 +9,7 @@ RSpec.describe UserMailer, type: :mailer do
   let(:commune_support_address) { user.commune.support_email(role: :user) }
 
   describe "session_code_email" do
-    let(:session_code) { build(:session_code, user:, code: "123456") }
+    let(:session_code) { build(:session_code, record: user, code: "123456") }
     let(:mail) { UserMailer.with(session_code:).session_code_email }
 
     include_examples(

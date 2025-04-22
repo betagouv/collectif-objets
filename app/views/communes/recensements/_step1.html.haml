@@ -22,7 +22,7 @@
       opened: true,
       html_attributes: { "data-controller": "modal-auto-open" }) do |m|
       - m.with_header do
-        = link_to "Fermer", wizard.confirmation_modal_close_path, class: "fr-link--close fr-link"
+        = link_to "Fermer", wizard.step_path(step: :current), class: "fr-link--close fr-link"
       %p
         Vous allez être redirigé directement vers l’étape des commentaires.
       %p
@@ -32,12 +32,11 @@
       - m.with_button do
         = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
       - m.with_button do
-        = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
+        = link_to "Annuler", wizard.step_path(step: :current), class: "fr-btn fr-btn--secondary"
 
   .co-text--right
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil
     .fr-mt-2w
-      = link_to "Revenir à la fiche objet",
-        commune_objet_path(wizard.commune, wizard.objet),
+      = link_to "Revenir à la fiche objet", wizard.objet_path,
         class: "fr-link fr-link--icon-left fr-icon-arrow-left-line",
         data: { turbo_frame: "_top" }
