@@ -63,7 +63,7 @@ Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new app, browser: :chrome, options:
 end
 
-
+Capybara.server = :puma, { Silent: true }
 Capybara.javascript_driver = ENV.fetch("CAPYBARA_JS_DRIVER", "headless_firefox").to_sym
 Capybara.save_path = Rails.root.join("tmp/artifacts/capybara")
 
