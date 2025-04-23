@@ -14,7 +14,7 @@
             %th{ scope: :col } Actions
         %tbody
           - recenseurs.each do |recenseur|
-            %tr
+            %tr{ id: dom_id(recenseur) }
               %td= link_to highlight(recenseur.nom, query), [namespace, recenseur], data: { turbo: false }
               %td.co-word-break-all= link_to highlight(recenseur.email, query), "mailto:#{recenseur.email}", target: :_blank
               %td{title: recenseur.notes.size > 25 ? recenseur.notes : nil}= highlight(recenseur.notes.truncate(25), query)
