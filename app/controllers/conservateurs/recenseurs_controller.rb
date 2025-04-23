@@ -39,6 +39,7 @@ module Conservateurs
       @recenseur = Recenseur.find_or_initialize_by(email: recenseur_params[:email])
       authorize(@recenseur)
       @recenseur.nom = recenseur_params[:nom] if recenseur_params[:nom].present?
+      @recenseur.status = :accepted unless @recenseur.optout?
       if recenseur_params[:notes].present?
         @recenseur.append_to_notes "Notes de #{current_conservateur.full_name} : #{recenseur_params[:notes]}"
       end
