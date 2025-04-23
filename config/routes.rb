@@ -156,6 +156,7 @@ Rails.application.routes.draw do
       delete :stop_impersonating, on: :member
       post :toggle_impersonate_mode, on: :collection
     end
+    resources :recenseurs
     get "/session_codes(/:offset)", to: "session_codes#index", as: :session_codes
     resources :campaigns do
       get :edit_recipients

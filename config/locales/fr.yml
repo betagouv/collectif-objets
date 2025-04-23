@@ -258,6 +258,20 @@ fr:
         notes: Commentaires
         analyse_fiches: Fiches à associer
         analyse_notes: Commentaires pour la mairie
+      recenseur:
+        count:
+          zero: aucun recenseur
+          one: 1 recenseur
+          other: "%{count} recenseurs"
+        email: Adresse mail
+        status: Statut
+        notes: Notes
+        notes_hint: Ces notes ne sont pas visibles par les recenseurs eux-mêmes.
+      recenseur/status:
+        pending: "En attente"
+        accepted: "Autorisé à recenser"
+        rejected: "Accès interdit"
+        optout: "Refuse d'être contacté"
       dossier:
         count:
           zero: aucun dossier
