@@ -16,7 +16,7 @@ class RecenseurMailer < ApplicationMailer
   end
 
   def access_granted(preview: false)
-    throw :abort unless preview || @recenseur.notify_access_granted?
+    return false unless preview || @recenseur.notify_access_granted?
 
     @communes = @recenseur.new_communes
     # Pour simplifier l'accès, le mail inclut un code de connexion valide
@@ -37,6 +37,6 @@ class RecenseurMailer < ApplicationMailer
   def set_recenseur = @recenseur = params[:recenseur]
 
   def skip_optouts
-    throw :abort if @recenseur&.optout?
+    false if @recenseur&.optout?
   end
 end
