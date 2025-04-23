@@ -1,0 +1,25 @@
+- if recenseur.errors.any?
+  .fr-alert.fr-alert--error.fr-mb-4w
+    %p
+      pluralize(recenseur.errors.count, "Erreur")
+    %ul
+      - recenseur.errors.full_messages.each do |message|
+        %li= message
+
+= form_for [:admin, recenseur], builder: FormBuilderDsfr do |f|
+  .fr-input-group
+    = f.label :email do
+      Email (*)
+    = f.text_field :email, required: true
+  .fr-input-group
+    = f.label :nom
+    = f.text_field :nom
+  .fr-input-group
+    = f.label :status
+    = f.select :status, Recenseur.statuses.keys.map { [Recenseur.human_attribute_name("status.#{_1}"), _1] }, required: true
+  .fr-input-group
+    = f.label :notes do
+      = Recenseur.human_attribute_name(:notes)
+      %span.fr-hint-text= Recenseur.human_attribute_name(:notes_hint)
+    = f.text_area :notes
+  = f.submit "Enregistrer"

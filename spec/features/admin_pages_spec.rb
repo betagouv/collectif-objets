@@ -55,6 +55,22 @@ feature "Admin", js: true do
     it_behaves_like "an accessible page"
   end
 
+  describe "recenseurs" do
+    let(:path) { admin_recenseurs_path }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "recenseurs/new" do
+    let(:path) { new_admin_recenseur_path }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "recenseurs/1" do
+    let(:recenseur) { create(:recenseur) }
+    let(:path) { admin_recenseur_path(recenseur) }
+    it_behaves_like "an accessible page"
+  end
+
   describe "campaigns" do
     let(:path) { admin_campaigns_path }
     it_behaves_like "an accessible page"
