@@ -1,0 +1,24 @@
+- title = "Recenseur #{@recenseur.nom} • Admin"
+- content_for(:head_title) { title }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render "shared/breadcrumbs", links: [["Admin", admin_path], ["Recenseurs", admin_recenseurs_path]], current_page_label: "Recenseur #{@recenseur.nom}"
+
+  .co-flex.co-flex--space-between
+    %h1
+      = icon_span("account-pin-circle", fill: true)
+      Recenseur #{@recenseur.nom}
+    %div= link_to "Modifier", edit_admin_recenseur_path, class: "fr-btn"
+
+  %p
+    %b Nom :
+    = @recenseur.nom
+  %p
+    %b Email :
+    = link_to @recenseur.email, "mailto:#{@recenseur.email}", target: :_blank, class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-mail-line"
+
+  %p
+    %b Statut :
+    = @recenseur.human_status
+
+  = simple_format "<b>Notes :</b> #{@recenseur.notes}"
