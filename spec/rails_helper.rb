@@ -21,6 +21,12 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+module CapybaraDomId
+  def dom_id(element)
+    "#" + ActionView::RecordIdentifier.dom_id(element)
+  end
+end
+
 RSpec.configure do |config|
   config.fixture_paths = [Rails.root.join("/spec/fixtures")]
   config.use_transactional_fixtures = true
@@ -31,6 +37,7 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.before(:suite) { require Rails.root.join("scripts/create_postgres_sequences_memoire_photos_numbers.rb") }
+  config.include CapybaraDomId, type: :feature
 
   require "webmock/rspec"
   WebMock.disable_net_connect!(allow_localhost: true)
