@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_23_080000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -432,13 +432,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
   end
 
   create_table "session_codes", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "record_id", null: false
     t.string "code"
     t.datetime "used_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "created_at"], name: "index_session_codes_on_user_id_and_created_at"
-    t.index ["user_id"], name: "index_session_codes_on_user_id"
+    t.string "record_type", null: false
+    t.index ["record_id", "record_type"], name: "index_session_codes_on_record_id_and_record_type"
   end
 
   create_table "survey_votes", force: :cascade do |t|
@@ -479,6 +479,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_080823) do
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
-  add_foreign_key "session_codes", "users"
   add_foreign_key "users", "communes"
 end

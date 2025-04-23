@@ -4,7 +4,7 @@ module Admin
   class SessionCodesController < BaseController
     def index
       @total = SessionCode.count
-      @pagy, @session_codes = pagy SessionCode.includes(:commune).order(created_at: :desc), limit: 10
+      @pagy, @session_codes = pagy SessionCode.includes(:record).order(created_at: :desc), limit: 10
       @search = Commune.ransack(params[:nom])
     end
 
