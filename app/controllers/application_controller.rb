@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   impersonates :user
   impersonates :conservateur
 
-  devise_group :person, contains: [:user, :conservateur, :admin]
+  devise_group :person, contains: [:user, :conservateur, :admin_user]
 
   helper_method :namespace
   helper_method :namespaced?
