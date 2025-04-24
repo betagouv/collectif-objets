@@ -27,6 +27,10 @@ RSpec.feature "Communes sign-in", type: :feature, js: true do
     session_code = email.text_part.decoded.match(/[0-9]{6}/)
     expect(session_code).to be_present
 
+    fill_in "code", with: session_code.to_s.reverse
+    click_on "Connexion"
+    expect(page).to have_text("Code incorrect")
+
     fill_in "code", with: session_code
     click_on "Connexion"
     expect(page).to have_text("Vous êtes maintenant connecté")
