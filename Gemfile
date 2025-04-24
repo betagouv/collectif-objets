@@ -45,6 +45,7 @@ group :development, :test do
   gem "debug", ">= 1.0"
   gem "factory_bot_rails", "~> 6.2"
   gem "launchy", "~> 2.5"
+  gem "pry", "~> 0.15"
   gem "rspec-rails", "~> 6.1"
   gem "rubocop", "~> 1.63", require: false
   gem "rubocop-rails", "~> 2.24", require: false
@@ -55,7 +56,6 @@ group :development do
   gem "foreman", "~> 0.88"
   gem "html2haml", "~> 2.3"
   gem "htmlbeautifier", "~> 1.4"
-  gem "pry", "~> 0.15"
   gem "rails-erd", "~> 1.7", require: false
   gem "solargraph", "~> 0.50"
   gem "web-console", "~> 4.2"
