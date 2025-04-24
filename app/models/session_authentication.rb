@@ -58,7 +58,7 @@ class SessionAuthentication
     errors.add(
       :code,
       :invalid,
-      message: "Le code de connexion est composé de #{SessionCode::LENGTH} chiffres exactement. " \
+      message: "mal saisi. Le code de connexion est composé de #{SessionCode::LENGTH} chiffres exactement. " \
                "Vérifiez que vous n'avez pas copié deux fois le même chiffre."
     )
   end
@@ -71,7 +71,7 @@ class SessionAuthentication
     errors.add(
       :code,
       :mismatch,
-      message: "Code de connexion incorrect. " \
+      message: "incorrect. " \
                "Vérifiez que vous avez bien recopié le code et qu'il provient bien du dernier mail envoyé."
     )
   end
@@ -84,7 +84,7 @@ class SessionAuthentication
     errors.add(
       :code,
       :expired,
-      message: "Le code de connexion n'est plus valide, veuillez en demander un nouveau."
+      message: "expiré, veuillez en demander un nouveau."
     )
   end
 
