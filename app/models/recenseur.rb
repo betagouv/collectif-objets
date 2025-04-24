@@ -13,7 +13,10 @@ class Recenseur < ApplicationRecord
   generates_token_for(:optout)
 
   has_many :accesses, class_name: "RecenseurAccess", dependent: :delete_all, inverse_of: :recenseur
-  has_many :communes, through: :accesses
+  has_many :granted_accesses, -> {
+                                granted
+                              }, class_name: "RecenseurAccess", dependent: :delete_all, inverse_of: :recenseur
+  has_many :communes, through: :granted_accesses
   has_many :departements, through: :communes
   # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :new_accesses, -> { newly_granted }, class_name: "RecenseurAccess", inverse_of: :recenseur
