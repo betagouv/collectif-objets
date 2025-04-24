@@ -48,7 +48,7 @@ class SessionAuthentication
     errors.add(
       :email,
       :not_found,
-      message: "Aucun compte trouvé pour cet email"
+      message: "inconnu : aucun compte n'est associé à cet email."
     )
   end
 

@@ -73,12 +73,16 @@ RSpec.describe SessionAuthentication do
   end
 
   describe "validations" do
+    subject(:error) { authentication.errors.full_messages.first }
+
+    before(:each) { authentication.valid? }
+
     describe "email presence" do
       let(:email) { "" }
 
       it "is invalid without an email" do
         expect(authentication).not_to be_valid
-        expect(authentication.errors[:email]).to include("doit être rempli(e)")
+        expect(error).to eq("Email doit être rempli(e)")
       end
     end
 
@@ -87,7 +91,7 @@ RSpec.describe SessionAuthentication do
 
       it "is invalid without a code" do
         expect(authentication).not_to be_valid
-        expect(authentication.errors[:code]).to include("doit être rempli(e)")
+        expect(error).to eq("Code doit être rempli(e)")
       end
     end
 
@@ -97,8 +101,7 @@ RSpec.describe SessionAuthentication do
 
         it "adds an error" do
           authentication.valid?
-          expect(authentication.errors[:email])
-            .to include("Aucun compte trouvé pour cet email")
+          expect(error).to eq("Email inconnu : aucun compte n'est associé à cet email.")
         end
       end
 
@@ -107,8 +110,7 @@ RSpec.describe SessionAuthentication do
 
         it "does not add an error" do
           authentication.valid?
-          expect(authentication.errors[:email])
-            .not_to include("Aucun compte trouvé pour cet email")
+          expect(error).not_to eq("Email inconnu : aucun compte n'est associé à cet email.")
         end
       end
     end
@@ -116,13 +118,13 @@ RSpec.describe SessionAuthentication do
     describe "#validate_code_format" do
       before do
         allow(SessionCode).to receive(:valid_format?).with(code).and_return(false)
+        authentication.valid?
       end
 
       it "validates code format" do
-        authentication.valid?
-        expect(authentication.errors[:code])
-          .to include("Le code de connexion est composé de #{SessionCode::LENGTH} chiffres exactement. " \
-                      "Vérifiez que vous n'avez pas copié deux fois le même chiffre.")
+        expect(error).to eq("Code mal saisi. Le code de connexion est composé de " \
+                            "#{SessionCode::LENGTH} chiffres exactement. " \
+                            "Vérifiez que vous n'avez pas copié deux fois le même chiffre.")
       end
     end
 
@@ -130,10 +132,8 @@ RSpec.describe SessionAuthentication do
       let(:session_code) { instance_double(SessionCode, code: "654321", expired?: false) }
 
       it "adds an error when codes don't match" do
-        authentication.valid?
-        expect(authentication.errors[:code])
-          .to include("Code de connexion incorrect. " \
-                      "Vérifiez que vous avez bien recopié le code et qu'il provient bien du dernier mail envoyé.")
+        expect(error).to eq("Code incorrect. Vérifiez que vous avez bien recopié le code " \
+                            "et qu'il provient bien du dernier mail envoyé.")
       end
     end
 
@@ -141,9 +141,7 @@ RSpec.describe SessionAuthentication do
       let(:session_code) { instance_double(SessionCode, code:, expired?: true) }
 
       it "adds an error when code is expired" do
-        authentication.valid?
-        expect(authentication.errors[:code])
-          .to include("Le code de connexion n'est plus valide, veuillez en demander un nouveau.")
+        expect(error).to eq("Code expiré, veuillez en demander un nouveau.")
       end
     end
   end
