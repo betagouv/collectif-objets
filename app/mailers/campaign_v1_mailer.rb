@@ -42,7 +42,7 @@ class CampaignV1Mailer < ApplicationMailer
       dans_departement: @departement.dans_nom,
       nom_commune: @commune.nom,
       count: @commune.objets.size,
-      nombre_communes: @campaign.communes.size,
+      nombre_communes: Commune.human_attribute_name(:count, count: @campaign.communes.size),
       date_lancement: I18n.l(@campaign.date_lancement, format: :long_with_weekday),
       date_fin: I18n.l(@campaign.date_fin, format: :long_with_weekday),
       fin_dans_n_semaines: Time.zone.today.upto(@campaign.date_fin).count / 7,
