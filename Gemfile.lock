@@ -147,7 +147,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.3.5)
-    connection_pool (2.5.1)
+    connection_pool (2.5.3)
     crack (1.0.0)
       bigdecimal
       rexml
@@ -433,10 +433,10 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.22.1)
+    sentry-rails (5.23.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.22.1)
-    sentry-ruby (5.22.1)
+      sentry-ruby (~> 5.23.0)
+    sentry-ruby (5.23.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
     sexp_processor (4.16.1)
@@ -561,7 +561,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.24)
   rubyzip (~> 2.3)
   selenium-webdriver (~> 4.27)
-  sentry-rails (~> 5.15)
+  sentry-rails (~> 5.23)
   sentry-ruby (~> 5.22)
   solargraph (~> 0.50)
   turbo-rails (~> 1.4)
