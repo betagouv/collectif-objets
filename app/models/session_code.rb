@@ -31,6 +31,7 @@ class SessionCode < ApplicationRecord
 
   def valid_until = (created_at || Time.zone.now) + EXPIRE_AFTER
 
+  def user? = record_type == "User"
   def used? = used_at.present?
 
   def mark_used! = update!(used_at: Time.zone.now)
