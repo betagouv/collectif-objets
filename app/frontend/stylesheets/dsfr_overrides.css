@@ -13,3 +13,7 @@
   margin-right: 1rem;
   padding-right: 0 !important;
 }
+/* Corrige l'alignement vertical de l'icône du bouton fermer */
+.fr-link--close {
+  align-items: center;
+}
