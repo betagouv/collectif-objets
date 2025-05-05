@@ -12,6 +12,14 @@ Rails.application.configure do
 
     policy.default_src :self, :https
     policy.script_src  :self, :https
+    # Allow @vite/client to hot reload javascript changes in development
+    if Rails.env.development?
+      policy.script_src(*policy.script_src, :unsafe_eval,
+                        "http://#{ViteRuby.config.host_with_port}")
+    end
+    # You may need to enable this in production as well depending on your setup.
+    policy.script_src(*policy.script_src, :blob) if Rails.env.test?
+
     policy.img_src \
       :self,
       :data,
@@ -28,8 +36,9 @@ Rails.application.configure do
       "https://stats.beta.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
       "https://openmaptiles.data.gouv.fr",
-      *s3_uris2,
-      *(Rails.env.development? ? ["ws://#{ ViteRuby.config.host_with_port }"] : [])
+      *s3_uris2
+    # Allow @vite/client to hot reload changes in development
+    policy.connect_src(*policy.connect_src, "ws://#{ViteRuby.config.host_with_port}") if Rails.env.development?
 
     policy.object_src :self # for the PDFs served by the rails server
     policy.font_src :self, :https, :data
@@ -37,15 +46,17 @@ Rails.application.configure do
     policy.worker_src :blob # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
 
     policy.style_src :self, :https
+    # Allow @vite/client to hot reload style changes in development
+    policy.style_src(*policy.style_src, :unsafe_inline) if Rails.env.development?
 
     policy.frame_src :self, # for the PDFs served by the rails server through <embed> cf https://stackoverflow.com/a/69147536
-      "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/",
-      "https://tube.numerique.gouv.fr/"
+                     "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/",
+                     "https://tube.numerique.gouv.fr/"
   end
 
   # Generate session nonces for permitted importmap and inline scripts
-  config.content_security_policy_nonce_generator = ->(request) { SecureRandom.base64(16) }
+  config.content_security_policy_nonce_generator = ->(_) { SecureRandom.base64(16) }
 
-  nonce_directives = %w(script-src)
+  nonce_directives = %w[script-src]
   config.content_security_policy_nonce_directives = nonce_directives
 end
