@@ -157,4 +157,24 @@ RSpec.describe Objet, type: :model do
       end
     end
   end
+
+  describe "#edifice_nom_formatted" do
+    subject(:edifice_nom_formatted) { objet.edifice_nom_formatted }
+
+    let(:objet) { build(:objet, edifice_nom:, commune: build(:commune, nom: "<Ville>")) }
+
+    {
+      nil => nil,
+      "" => nil,
+      "église" => "Une église de <Ville>",
+      "HOTEL-DIEU" => "HOTEL-DIEU"
+    }.each do |nom, expected_string|
+      context "when edifice_nom is '#{nom || 'nil'}'" do
+        let(:edifice_nom) { nom }
+        it "renvoie '#{expected_string || 'nil'}'" do
+          expect(edifice_nom_formatted).to eq(expected_string)
+        end
+      end
+    end
+  end
 end

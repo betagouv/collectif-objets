@@ -24,7 +24,7 @@ class Bordereau < ApplicationRecord
 
       edifices.each do |edifice|
         bordereau = edifice.bordereaux.find { |b| b.dossier_id == dossier.id }
-        bordereau ||= edifice.bordereaux.build(dossier:, edifice_nom: edifice.nom&.upcase_first)
+        bordereau ||= edifice.bordereaux.build(dossier:, edifice_nom: edifice.nom)
         bordereau.populate_recensements
         bordereaux << bordereau
       end

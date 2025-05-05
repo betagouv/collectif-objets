@@ -24,6 +24,8 @@ class Edifice < ApplicationRecord
     )
   }
 
+  delegate :normalize_nom, to: :class
+
   # rubocop:disable Naming/MethodParameterName, Naming/VariableName
   def self.find_or_create_and_synchronize!(merimee_REF:, code_insee:)
     edifice = find_by(merimee_REF:)
@@ -45,9 +47,13 @@ class Edifice < ApplicationRecord
     s
   end
 
+  def self.normalize_nom(nom)
+    nom.strip.upcase_first if nom.present?
+  end
+
   def to_s
     "Édifice #{nom} #{merimee_REF ? "(#{merimee_REF})" : '(sans référence Mérimée)'} - commune #{code_insee}"
   end
 
-  def nom = super || "édifice non renseigné"
+  def nom = normalize_nom(super) || "édifice non renseigné"
 end

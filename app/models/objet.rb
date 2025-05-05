@@ -74,10 +74,11 @@ class Objet < ApplicationRecord
   delegate :nouvel_edifice, :nouvelle_commune, :nouveau_departement, to: :recensement, allow_nil: true
 
   def edifice_nom_formatted
-    if edifice_nom == "église" && commune.present?
+    normalized_nom = Edifice.normalize_nom(edifice_nom)
+    if normalized_nom == "Église" && commune.present?
       "Une église de #{commune.nom}"
     else
-      edifice_nom&.capitalize
+      normalized_nom
     end
   end
 

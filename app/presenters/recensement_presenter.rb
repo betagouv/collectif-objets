@@ -100,7 +100,7 @@ class RecensementPresenter
   end
 
   def objet_edifice_nom
-    @recensement.objet&.edifice_nom || (@recensement.deleted_objet_snapshot || {})["lieu_actuel_edifice_nom"]
+    @recensement.objet&.edifice_nom_formatted || (@recensement.deleted_objet_snapshot || {})["lieu_actuel_edifice_nom"]
   end
 
   def nom_commune_localisation_objet

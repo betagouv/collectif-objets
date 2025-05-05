@@ -17,4 +17,21 @@ RSpec.describe Edifice, type: :model do
       expect(Edifice.with_objets_classés_ou_inscrits.count).to eq({ edifice_avec_objets_classés_ou_inscrits.id => 3 })
     end
   end
+
+  describe ".normalize_nom" do
+    subject(:normalized) { Edifice.normalize_nom(nom) }
+
+    {
+      nil => nil,
+      "   " => nil,
+      " église" => "Église"
+    }.each do |nom, expectation|
+      context "when nom is '#{nom || 'nil'}'" do
+        let(:nom) { nom }
+        it "renvoie '#{expectation || 'nil'}'" do
+          expect(normalized).to eq(expectation)
+        end
+      end
+    end
+  end
 end

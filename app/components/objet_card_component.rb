@@ -28,7 +28,7 @@ class ObjetCardComponent < ViewComponent::Base
   attr_reader :objet, :header_badges, :start_badges, :tags, :commune, :recensement, :main_photo_origin, :size,
               :btn_text, :btn_class, :btn_path
 
-  delegate :nom, :edifice_nom, :palissy_photos_presenters, to: :objet
+  delegate :nom, :edifice_nom_formatted, :palissy_photos_presenters, to: :objet
 
   def path
     @path ||= objet_path(@objet)
