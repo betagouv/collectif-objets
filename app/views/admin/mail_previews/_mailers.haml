@@ -4,4 +4,4 @@
     %ul
       - mailer.emails.each do |email|
         %li
-          = link_to t("#{mailer.preview_name}.#{email}.title", default: email), preview_admin_mail_previews_path(mailer: mailer.preview_name, email:), "data-turbo-frame": "mail_preview", "data-turbo-action": "advance"
+          = link_to t("#{mailer.preview_name}.#{email}.title", default: email), preview_admin_mail_previews_path(mailer: mailer.preview_name, email:), data: { turbo: false }
