@@ -10,10 +10,10 @@ class ConservateurMailerPreview < ApplicationMailerPreview
 
   def activite_email
     departement = Departement.joins(:conservateurs, :dossiers).where.not(dossiers: { submitted_at: nil }).first
-    conservateur = departement.conservateurs.first
+    conservateur_id = departement.conservateur_ids.first
     date_start = departement.dossiers.submitted.first.submitted_at.at_beginning_of_week
     date_end = date_start + 6.days
 
-    ConservateurMailer.with(conservateur:, departement:, date_start:, date_end:).activite_email
+    ConservateurMailer.with(conservateur_id:, departement_code: departement.code, date_start:, date_end:).activite_email
   end
 end
