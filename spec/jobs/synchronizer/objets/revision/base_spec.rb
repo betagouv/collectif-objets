@@ -107,7 +107,7 @@ RSpec.describe Synchronizer::Objets::Revision::Base do
           expect(revision.objet.edifice).to eq edifice
           expect(edifice.merimee_REF).to eq "PA00113792"
           expect(edifice.code_insee).to eq "01004"
-          expect(edifice.nom).to eq "chapelle des Allymes"
+          expect(edifice.nom).to eq "Chapelle des Allymes"
           expect(edifice.slug).to eq "chapelle-des-allymes"
         end
       end
@@ -147,7 +147,7 @@ RSpec.describe Synchronizer::Objets::Revision::Base do
           expect(Edifice.count).to eq 2
           expect(revision.objet.edifice.merimee_REF).to be_nil
           expect(revision.objet.edifice.code_insee).to eq "01004"
-          expect(revision.objet.edifice.nom).to eq "chapelle des Allymes"
+          expect(revision.objet.edifice.nom).to eq "Chapelle des Allymes"
           expect(revision.objet.edifice.slug).to eq "chapelle-des-allymes"
         end
       end
@@ -174,7 +174,7 @@ RSpec.describe Synchronizer::Objets::Revision::Base do
           expect(revision.objet.edifice).to eq edifice
           expect(edifice.merimee_REF).to be_nil
           expect(edifice.code_insee).to eq "01004"
-          expect(edifice.nom).to eq "chapelle des Allymes"
+          expect(edifice.nom).to eq "Chapelle des Allymes"
           expect(edifice.slug).to eq "chapelle-des-allymes"
         end
       end
