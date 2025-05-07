@@ -107,7 +107,7 @@ module Co
     end
 
     def api_key
-      Rails.application.credentials.sendinblue&.api_key
+      ENV.fetch("BREVO_API_KEY", Rails.application.credentials.sendinblue&.api_key)
     end
   end
 end
