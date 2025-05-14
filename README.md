@@ -729,7 +729,28 @@ message) qui permettent d'authentifier l'auteur du message :
   `inbound_email_token` secret est `a1b2c3d4h5`.
 - `mairie-30001-conservateur-a1b2c3d4h5@reponse.collectifobjets.org` : réponse du conservateur pour la même commune
 
+Le domaine `reponse.collectifobjets.org` peut être modifié grâce à la variable d'environnement `INBOUND_EMAILS_DOMAIN`.
+
 Voir la partie sur les tunnels plus bas pour itérer en local sur ces webhooks.
+
+## Adresse de contact
+
+L'adresse de contact est affichée dans différentes pages de l'application.
+Pour éviter des redites, elle est stockée dans une constante dans le fichier `config/initializers/contact_email.rb`.
+Pour simplifier le déploiement, elle est récupérée en priorité de l'environnement, dans la clé `ENV["CONTACT_EMAIL"]`, avec une valeur de fallback.
+
+## SMTP
+
+Pour l'envoi des mails, le SMTP est configuré par les variables d'environnement suivantes :
+```
+SMTP_USERNAME
+SMTP_ADDRESS
+SMTP_USERNAME
+SMTP_PASSWORD
+SMTP_PORT
+# Et, indispensable pour pouvoir générer les URLs complètes :
+HOST
+```
 
 ## Accessibilité, Plan du site et Pages démos
 
