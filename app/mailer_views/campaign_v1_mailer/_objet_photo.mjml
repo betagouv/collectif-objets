@@ -1,6 +1,6 @@
 <% return unless objet %>
 <% photo_presenter = objet.palissy_photos_presenters&.first %>
-<mj-image width="300px" alt="" src="<%= photo_presenter&.url || "https://collectif-objets.beta.gouv.fr/image-non-renseignee.jpeg" %>" />
+<mj-image width="300px" alt="" src="<%= photo_presenter&.url || asset_url("/image-non-renseignee.jpeg") %>" />
 <mj-text align="center">
   <%= objet.palissy_TICO %>
   <br />

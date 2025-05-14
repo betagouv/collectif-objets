@@ -5,7 +5,7 @@
 </mj-section>
 <mj-section>
   <mj-column width="40%" vertical-align="top">
-    <mj-image align="left" width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png"></mj-image>
+    <mj-image align="left" width="100px" alt="Ministère de la Culture" src="<%= asset_url("/ministere-culture.png") %>"></mj-image>
   </mj-column>
   <mj-column width="60%" vertical-align="top">
     <% if local_assigns.key?(:signature) %>
