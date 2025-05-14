@@ -100,7 +100,6 @@ Les campagnes de recensement menées par Collectif Objets prennent la forme de c
 
 * **[Connectez-vous à votre compte conservateur](#comment-crer-mon-compte-conservateur-sur-collectif-objets-)** sur Collectif Objets et **sélectionnez le département** où vous souhaitez lancer la campagne.
 * **Cliquez sur le lien « Créer une nouvelle campagne »** en haut de page et configurez la campagne :
-
   * **Complétez les informations demandées** : nom de la personne en charge de la campagne, de la DRAC et choix des dates.
   * **Cliquez sur le bouton « Créer la campagne »** : votre campagne est créée et les futurs mails à destination des communes sont mis à jour avec les informations précédemment complétées.
 * **Définissez la liste des communes destinataires.** N'oubliez pas de cliquer sur le bouton « Enregistrer la sélection » pour enregistrer la liste mise à jour.
