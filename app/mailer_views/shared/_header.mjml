@@ -1,6 +1,6 @@
 <mj-section>
   <mj-column width="25%" vertical-align="middle">
-    <mj-image align="left" width="100px" alt="Ministère de la Culture" src="https://collectif-objets.beta.gouv.fr/ministere-culture.png"></mj-image>
+    <mj-image align="left" width="100px" alt="Ministère de la Culture" src="<%= asset_url("/ministere-culture.png") %>"></mj-image>
   </mj-column>
   <mj-column width="75%" vertical-align="middle">
     <mj-text font-size="20px"><%= local_assigns.fetch(:header_name, t("application_mailer_layout.project_name")) %></mj-text>
