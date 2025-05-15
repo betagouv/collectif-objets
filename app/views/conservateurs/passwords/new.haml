@@ -22,8 +22,8 @@
               Impossible de trouver un compte conservateur ou conservatrice pour l'email #{resource.email}. Êtes-vous sûr·e que c'est l'email que vous utilisez pour votre activité de conservation ?
 
             %p
-              Si vous n'arrivez pas à vous connecter, écrivez nous à
-              = link_to("support@collectif-objets.beta.gouv.fr", "mailto:support@collectif-objets.beta.gouv.fr")
+              Si vous n'arrivez pas à vous connecter, écrivez-nous à
+              = link_to(CONTACT_EMAIL, "mailto:#{CONTACT_EMAIL}")
 
           - else
             %ul

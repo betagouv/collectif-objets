@@ -33,8 +33,7 @@
                 = link_to "Réinitialiser mon mot de passe", new_conservateur_password_path
                 .fr-mt-2w
                   Si votre email n'est pas reconnu, veuillez nous contacter par mail à
-                  = link_to "mailto:support@collectif-objets.beta.gouv.fr" do
-                    support@collectif-objets.beta.gouv.fr
+                  = link_to CONTACT_EMAIL, "mailto:#{CONTACT_EMAIL}"
           %li
             %section.fr-accordion
               %h2.fr-accordion__title

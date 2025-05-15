@@ -14,4 +14,4 @@
           %span.fr-text--sm
             = "#{number_with_delimiter departement.objets_count} objets protégés dans #{departement.communes_count} communes"
   .fr-my-4w
-    = link_to t("conservateurs.departements.index.contact"), "mailto:support@collectif-objets.beta.gouv.fr"
+    = link_to t("conservateurs.departements.index.contact"), "mailto:#{CONTACT_EMAIL}"
