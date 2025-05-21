@@ -2,8 +2,6 @@
 
 require "active_support/core_ext/integer/time"
 
-Rails.application.default_url_options = { host: ENV.fetch("HOST").sub(/https:\/\//, ""), protocol: "https" }
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -56,15 +54,15 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Ensure asset_url uses the correct host.
-  config.action_mailer.asset_host = "https://#{ENV.fetch('HOST')}"
-  config.action_mailer.default_url_options = { host: ENV.fetch("HOST"), protocol: "https" }
+  config.action_mailer.asset_host = "https://#{ENV['HOST']}"
+  config.action_mailer.default_url_options = { host: ENV["HOST"].to_s.sub(/https:\/\//, ""), protocol: "https" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     authentication: :login,
-    address: ENV.fetch("SMTP_ADDRESS"),
-    user_name: ENV.fetch("SMTP_USERNAME"),
-    password: ENV.fetch("SMTP_PASSWORD"),
-    port: ENV.fetch("SMTP_PORT"),
+    address: ENV["SMTP_ADDRESS"],
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
+    port: ENV["SMTP_PORT"],
     enable_starttls_auto: true,
     return_response: true
   }
@@ -95,7 +93,7 @@ Rails.application.configure do
 
   config.force_ssl = true
   config.ssl_options = { hsts: { preload: true } }
-  config.x.environment_specific_name = ENV.fetch("HOST") =~ /staging/ ? "staging" : "production"
+  config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
   config.x.inbound_emails_domain = ENV.fetch("INBOUND_EMAILS_DOMAIN", "reponse.collectifobjets.org")
 
   if config.x.environment_specific_name == "staging"
