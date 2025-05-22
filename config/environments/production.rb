@@ -2,6 +2,9 @@
 
 require "active_support/core_ext/integer/time"
 
+host = ENV["HOST"].sub("https://", "")
+Rails.application.default_url_options = { host: }
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -54,8 +57,9 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Ensure asset_url uses the correct host.
-  config.action_mailer.asset_host = "https://#{ENV['HOST']}"
-  config.action_mailer.default_url_options = { host: ENV["HOST"].to_s.sub(/https:\/\//, ""), protocol: "https" }
+  config.action_controller.asset_host = "https://#{Rails.application.default_url_options[:host]}"
+
+  config.action_mailer.asset_host = config.action_controller.asset_host
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     authentication: :login,
@@ -66,7 +70,6 @@ Rails.application.configure do
     enable_starttls_auto: true,
     return_response: true
   }
-  config.action_controller.asset_host = config.action_mailer.asset_host
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
