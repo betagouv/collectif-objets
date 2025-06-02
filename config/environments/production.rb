@@ -2,7 +2,7 @@
 
 require "active_support/core_ext/integer/time"
 
-host = ENV["HOST"].sub("https://", "")
+host = ENV["HOST"].to_s.sub("https://", "")
 Rails.application.default_url_options = { host: }
 
 class JsonLogFormatter < ActiveSupport::Logger::SimpleFormatter
@@ -75,10 +75,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     authentication: :login,
-    address: ENV["SMTP_ADDRESS"],
-    user_name: ENV["SMTP_USERNAME"],
-    password: ENV["SMTP_PASSWORD"],
-    port: ENV["SMTP_PORT"],
+    address: ENV.fetch("SMTP_ADDRESS", nil),
+    user_name: ENV.fetch("SMTP_USERNAME", nil),
+    password: ENV.fetch("SMTP_PASSWORD", nil),
+    port: ENV.fetch("SMTP_PORT", nil),
     enable_starttls_auto: true,
     return_response: true
   }
