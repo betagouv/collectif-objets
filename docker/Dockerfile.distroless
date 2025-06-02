@@ -1,0 +1,115 @@
+# syntax=docker/dockerfile:1.7-labs
+
+###########################################
+# Ruby gem and npm packages install stage #  needs build-essential + postgres libs and libvips for images
+###########################################
+
+FROM ruby:3.4.2-slim AS ruby-builder
+
+# use same UID as distroless nonroot for simplicity
+ARG UID="655326"
+ARG RAILS_MASTER_KEY
+
+# Important to set this before bundle install
+ENV RAILS_ENV=production
+
+# Other launch parameters to OVERLOAD at runtime
+ENV RAILS_SPECIFIC_ENV=production
+ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
+# ENV DATABASE_URL=postgresql://...
+# ENV SENTRY_AUTH_TOKEN=auth_token
+# ENV SMTP_PASSWORD=smtp_password
+# ENV SMTP_USERNAME=smtp_username
+# ENV BUCKET_USER_ACCESS_KEY_ID=access_key_id
+# ENV BUCKET_USER_SECRET_ACCESS_KEY=secret_access_key
+
+# https://techoverflow.net/2021/01/13/how-to-use-apt-install-correctly-in-your-dockerfile/
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+    build-essential libpq-dev postgresql-client \
+    libvips42 nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /collectif-objets
+RUN useradd -s /bin/bash -u "${UID}" -d /collectif-objets co && chown "${UID}":"${UID}" /collectif-objets
+USER "${UID}"
+
+WORKDIR /collectif-objets
+COPY --chown="${UID}":"${UID}" Gemfile Gemfile.lock /collectif-objets/
+RUN bundle install
+
+COPY --chown="${UID}":"${UID}" package.json package-lock.json /collectif-objets/
+RUN npm install
+
+COPY --chown="${UID}":"${UID}" --parents=true app bin cms config contenus db lib scripts public /collectif-objets/
+COPY --chown="${UID}":"${UID}" --parents=true vite.config.ts config.ru Rakefile spec storage vendor prawn_assets /collectif-objets/
+
+# copy design system from node libs to public dir (can't be handled by symbolic links in k8s)
+RUN cp -R node_modules/@gouvfr/dsfr/dist/fonts public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/icons public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/dsfr/ \
+    && cp -R node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/dsfr/utility
+
+# Generates /public/vite folder when env is production
+RUN bundle exec rails assets:precompile
+
+CMD ["bash"]
+
+################################
+# Final production image stage #
+################################
+
+# Node js is required because of MJML-Rails
+FROM gcr.io/distroless/nodejs18-debian12 AS production
+
+# Default entrypoint for distroless node image is [/nodejs/bin/node] meaning that the CMD is prefixed by/launched with node
+# Remove entrypoint instead
+ENTRYPOINT []
+
+COPY --from=ruby-builder /usr/local/lib/ /usr/local/lib
+COPY --from=ruby-builder /usr/local/bin/ /usr/local/bin
+# we need env because MJML binary call #!/usr/bin/env node
+COPY --from=ruby-builder /usr/bin/env /usr/bin
+COPY --from=ruby-builder /usr/local/bundle /usr/local/bundle
+COPY --from=ruby-builder /usr/local/bundle/extensions /usr/local/bundle/extensions
+
+# Copy postgres libpq-dev package files for use by pg gem
+COPY --from=ruby-builder /usr/bin/pg_config /usr/bin/pg_config
+COPY --from=ruby-builder /usr/include/postgresql /usr/include/postgresql
+
+# Copy all system libs (a bit heavier less optimized image but a lot easier to maintain)
+COPY --from=ruby-builder  /usr/lib/x86_64-linux-gnu/*    /usr/lib/x86_64-linux-gnu/
+
+# Define env for ruby and app to work
+# ENV RUBY_DOWNLOAD_SHA256=51aec7ea89b46125a2c9adc6f36766b65023d47952b916b1aed300ddcc042359
+# ENV RUBY_VERSION=3.4.2
+ENV PWD=/collectif-objets
+ENV BUNDLE_APP_CONFIG=/usr/local/bundle
+ENV HOME=/collectif-objets
+# ENV LANG=.UTF-8
+ENV LANG=fr_FR.UTF-8
+# ENV BUNDLE_SILENCE_ROOT_WARNING=1
+ENV GEM_HOME=/usr/local/bundle
+# ENV TERM=xterm
+# ENV RUBY_DOWNLOAD_URL=https://cache.ruby-lang.org/pub/ruby/3.3/ruby-3.3.5.tar.xz
+ENV SHLVL=1
+ENV PATH=/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/nodejs/bin
+
+# nonroot user has UID 65532 - https://stackoverflow.com/questions/73568034/nobody-nonroot-user-in-distroless-images
+USER nonroot
+WORKDIR /collectif-objets
+
+# Copying application libraries and files from builder
+COPY --chown=nonroot:nonroot Gemfile Gemfile.lock /collectif-objets/
+COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/.bundle /collectif-objets/.bundle
+COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/node_modules /collectif-objets/node_modules
+COPY --chown=nonroot:nonroot --from=ruby-builder /collectif-objets/public /collectif-objets/public
+
+# Copying application files from dev context
+COPY --chown=nonroot --parents=true app bin cms config contenus db lib scripts /collectif-objets/
+COPY --chown=nonroot --parents=true vite.config.ts config.ru Rakefile spec storage vendor prawn_assets /collectif-objets/
+
+EXPOSE 3000
+
+CMD ["/usr/local/bin/ruby", "/collectif-objets/bin/rails", "server", "--binding", "0.0.0.0", "--port", "3000"]

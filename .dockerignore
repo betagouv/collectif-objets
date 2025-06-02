@@ -5,3 +5,14 @@ Dockerfile
 docker-compose.yml
 tmp/**
 log/**
+
+master.key
+
+public/vite-dev
+public/vite-test
+
+# Ignore symlinks to fix Docker build error
+/public/dsfr/dsfr.min.css
+/public/dsfr/fonts
+/public/dsfr/icons
+/public/dsfr/utility/utility.min.css
