@@ -91,7 +91,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = JsonLogFormatter.new
+  config.log_formatter = ::Logger::Formatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
@@ -105,12 +105,13 @@ Rails.application.configure do
   config.x.inbound_emails_domain = ENV.fetch("INBOUND_EMAILS_DOMAIN", "reponse.collectifobjets.org")
 
   logger = ActiveSupport::Logger.new($stdout)
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger.formatter = config.log_formatter
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  end
   if ENV["RAILS_SPECIFIC_ENV"].present?
     logger.formatter = JsonLogFormatter.new
     config.logger    = logger
-  else
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
   config.x.environment_specific_name = ENV.fetch("RAILS_SPECIFIC_ENV", ENV["HOST"] =~ /staging/ ? "staging" : "production")
