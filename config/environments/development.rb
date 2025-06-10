@@ -80,6 +80,7 @@ Rails.application.configure do
 
   config.x.environment_specific_name = "development"
   config.x.inbound_emails_domain = "reponse-loophole.collectifobjets.org"
+  config.x.inbound_allowed_ips = ["127.0.0.1"]
 
   config.hosts += %w[collectifobjets.loophole.site collectifobjets-mail-inbound.loophole.site]
   config.hosts << ENV["GITPOD_WORKSPACE_URL"].gsub("https://", "") if ENV["GITPOD_WORKSPACE_URL"].present?
