@@ -3,7 +3,7 @@
 module Api
   module V1
     class InboundEmailsController < BaseController
-      before_action :validate_ip, unless: Rails.config.x.waf_protection_active
+      before_action :validate_ip, unless: Rails.application.config.x.waf_protection_active
 
       PERMITTED_PARAMS_ROOT = %w[
         MessageId InReplyTo ReplyTo SentAtDate Subject RawHtmlBody RawTextBody ExtractedMarkdownMessage
@@ -36,7 +36,7 @@ module Api
 
       def validate_ip
         # cf https://developers.sendinblue.com/docs/how-to-use-webhooks#securing-your-webhooks
-        return if Rails.config.x.inbound_allowed_ips.any? { |mask| request.ip.start_with?(mask) }
+        return if Rails.application.config.x.inbound_allowed_ips.any? { |mask| request.ip.start_with?(mask) }
 
         render status: :forbidden, json: { error: "IP not authorized" }
       end
