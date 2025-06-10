@@ -1,0 +1,200 @@
+NAME: default
+LAST DEPLOYED: Tue Sep 24 17:54:00 2024
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+{}
+
+COMPUTED VALUES:
+{}
+
+HOOKS:
+MANIFEST:
+---
+# Source: collectif-objets/templates/db-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: db
+  name: db
+spec:
+  ports:
+    - name: "postgres"
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: db
+---
+# Source: collectif-objets/templates/web-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: web
+  name: web
+spec:
+  ports:
+    - name: "web-ror"
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: web
+---
+# Source: collectif-objets/templates/db-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: db
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collectif-objets
+      app.kubernetes.io/instance: collectif-objets-dev1
+      app.kubernetes.io/component: db
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collectif-objets
+        app.kubernetes.io/instance: collectif-objets-dev1
+        app.kubernetes.io/component: db
+    spec:
+      containers:
+      - name: posgres-dev
+        env:
+        - name: POSTGRES_PASSWORD
+          value: objets
+        image: postgres:14
+      restartPolicy: Always
+---
+# Source: collectif-objets/templates/web-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collectif-objets
+      app.kubernetes.io/instance: collectif-objets-dev1
+      app.kubernetes.io/component: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collectif-objets
+        app.kubernetes.io/instance: collectif-objets-dev1
+        app.kubernetes.io/component: web
+    spec:
+      containers:
+      - name: web
+        image: collectif-objets-prod-distroless
+        args: ["bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+        env:
+        - name: DATABASE_HOST
+          value: db
+        - name: DATABASE_PASSWORD
+          value: objets
+        - name: DATABASE_USERNAME
+          value: postgres
+        - name: MAILHOG_HOST
+          value: mailhog
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /database_init_rails
+          name: kind-shared-initdb
+      volumes:
+      - name: kind-shared-initdb
+        hostPath:
+          path: /kind_shared/database_init_rails
+          type: Directory
+      restartPolicy: Always
+---
+# Source: collectif-objets/templates/worker-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  labels:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: collectif-objets
+      app.kubernetes.io/instance: collectif-objets-dev1
+      app.kubernetes.io/component: worker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: collectif-objets
+        app.kubernetes.io/instance: collectif-objets-dev1
+        app.kubernetes.io/component: worker
+    spec:
+      containers:
+      - args: ["bundle", "exec", "good_job", "start"]
+        env:
+        - name: DATABASE_HOST
+          value: db
+        - name: DATABASE_PASSWORD
+          value: objets
+        - name: DATABASE_USERNAME
+          value: postgres
+        - name: MAILHOG_HOST
+          value: mailhog
+        image: collectif-objets-prod-distroless
+        name: worker
+      restartPolicy: Always
+---
+# Source: collectif-objets/templates/rails-db-init-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rails-init-db
+  labels:
+    app.kubernetes.io/name: collectif-objets
+    app.kubernetes.io/instance: collectif-objets-dev1
+    app.kubernetes.io/component: rails-initdb-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: rails-pg-restore
+        image: collectif-objets-dev
+        args: ["rails", "db:setup"]
+        env:
+        - name: DATABASE_HOST
+          value: db
+        - name: DATABASE_PASSWORD
+          value: objets
+        - name: DATABASE_USERNAME
+          value: postgres
+        - name: MAILHOG_HOST
+          value: mailhog
+      restartPolicy: Never
+
