@@ -3,7 +3,7 @@
 module Api
   module V1
     class InboundEmailsController < BaseController
-      before_action :validate_ip
+      before_action :validate_ip, unless: Rails.config.x.waf_protection_active
 
       PERMITTED_PARAMS_ROOT = %w[
         MessageId InReplyTo ReplyTo SentAtDate Subject RawHtmlBody RawTextBody ExtractedMarkdownMessage
