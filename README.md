@@ -881,6 +881,9 @@ L'adresse `support@collectif-objets.beta.gouv.fr` est gérée en délégation de
 
 Le domaine `collectifobjets.org`, le sous domaine de redirection des emails de réponse, et les adresses mails associées
   de l'équipe sont gérées par Adrien et son compte Gandi.
+La communication avec Brevo nécessite les variables d'environnement suivantes :
+- `SMTP_ADDRESS`, `SMTP_USERNAME`, `SMTP_PASSWORD`, et `SMTP_PORT`
+- `INBOUND_ALLOWED_IPS` : liste d'IPs ou de masques de sous-réseaux (IPv4), séparées par des virgules, autorisées à accéder au endpoint des emails reçus par l'application (/api/v1/inbound). Par défaut, utilise [les masques indiqués sur la doc Brevo](https://developers.brevo.com/docs/how-to-use-webhooks#securing-your-webhooks) (1.179.112.X et 172.246.240.X)
 
 ## Buckets S3, permissions ACLs et CORS
 
