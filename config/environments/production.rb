@@ -103,6 +103,7 @@ Rails.application.configure do
   config.force_ssl = true
   config.ssl_options = { hsts: { preload: true } }
   config.x.inbound_emails_domain = ENV.fetch("INBOUND_EMAILS_DOMAIN", "reponse.collectifobjets.org")
+  config.x.inbound_allowed_ips = ENV.fetch("INBOUND_ALLOWED_IPS", "185.107.232.|1.179.112.").split("|")
 
   logger = ActiveSupport::Logger.new($stdout)
   if ENV["RAILS_LOG_TO_STDOUT"].present?
