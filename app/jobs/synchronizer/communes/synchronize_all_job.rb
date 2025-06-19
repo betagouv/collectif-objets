@@ -15,6 +15,7 @@ module Synchronizer
         cycle_4_upsert_all
         delete_communes_without_objets
         logger.close
+        client.remove_temp_file!
       end
 
       private

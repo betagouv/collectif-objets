@@ -29,6 +29,7 @@ module Synchronizer
           csv_rows.each { block.call(_1) }
         end
         expect(api_client).to receive(:each_slice).at_least(:once).and_yield(csv_rows)
+        expect(api_client).to receive(:remove_temp_file!).once
         csv_rows.count.times do |i|
           allow(Row).to receive(:new).at_least(:once).with(csv_rows[i]).and_return(rows[i])
         end

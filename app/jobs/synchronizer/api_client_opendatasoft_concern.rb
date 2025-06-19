@@ -13,6 +13,10 @@ module Synchronizer
       # drop first line because we explicitly pass the headers
     end
 
+    def remove_temp_file!
+      @temp_file.unlink
+    end
+
     delegate :each, :each_slice, to: :lazy_iterator
 
     def count_all
