@@ -12,6 +12,7 @@ module Synchronizer
           batch.synchronize { @progressbar.increment }
         end
         logger.close
+        client.remove_temp_file!
       end
 
       private
