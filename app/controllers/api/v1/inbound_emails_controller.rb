@@ -36,7 +36,7 @@ module Api
 
       def validate_ip
         # cf https://developers.sendinblue.com/docs/how-to-use-webhooks#securing-your-webhooks
-        return if Rails.application.config.x.inbound_allowed_ips.any? { |mask| request.ip.start_with?(mask) }
+        return if Rails.application.config.x.inbound_allowed_ips.any? { |mask| request.remote_ip.start_with?(mask) }
 
         render status: :forbidden, json: { error: "IP not authorized" }
       end
