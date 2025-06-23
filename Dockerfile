@@ -1,5 +1,18 @@
 # syntax=docker/dockerfile:1
-FROM ruby:3.4.5-slim
+ARG RUBY_VERSION
+FROM ruby:${RUBY_VERSION}-slim
+COPY .ruby-version /tmp/.ruby-version
+RUN PROJECT_RUBY_VERSION=$(cat /tmp/.ruby-version | tr -d '\n\r ') && \
+    ARGUMENT_RUBY_VERSION=$(echo "$RUBY_VERSION" | tr -d '\n\r ') && \
+    if [ "$ARGUMENT_RUBY_VERSION" != "$PROJECT_RUBY_VERSION" ]; then \
+        echo "❌ Ruby version mismatch!"; \
+        echo "   Project requires: $PROJECT_RUBY_VERSION (from .ruby-version)"; \
+        echo "   Build argument:   $ARGUMENT_RUBY_VERSION (from RUBY_VERSION)"; \
+        echo "   Please update RUBY_VERSION argument: docker build --build-arg RUBY_VERSION=$PROJECT_RUBY_VERSION"; \
+        exit 1; \
+    else \
+        echo "✅ Ruby version: $ACTUAL_VERSION"; \
+    fi
 
 EXPOSE 3000
 
