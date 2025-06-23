@@ -577,6 +577,9 @@ de [l’API de service-public.fr](https://api-lannuaire.service-public.fr/explor
 Les données des objets monuments historiques sont récupérées depuis les bases nationales Palissy (objets), Mérimée (édifices) et Mémoire (photos).
 Plus d'info sur le processus de synchronisation des données dans [doc/synchronisation.md](doc/synchronisation.md)
 
+Les photos des objets sont récupérées de manière un peu détournée en scrapant les jeux de données publiés avec [POP-Scraper](https://github.com/betagouv/pop-scraper/), puis en les transformant grâce à des scripts de conversion [Datasette](https://github.com/betagouv/collectif-objets-datasette/), puis publiées sur [collectif-objets-datasette.fly.dev/](https://collectif-objets-datasette.fly.dev/).
+Plus d'info sur le processus de synchronisation des photos dans [doc/photos.md](doc/photos.md)
+
 
 La plupart des données stockées sur Collectif Objets sont publiques. Les exceptions sont :
 
