@@ -63,7 +63,7 @@ end
 
 group :test do
   gem "axe-core-capybara", "~> 4.9"
-  gem "axe-core-rspec", "~> 4.8"
+  gem "axe-core-rspec", "~> 4.10"
   gem "capybara", "~> 3.39"
   gem "rspec-sqlimit", "~> 0.0.6"
   gem "selenium-webdriver", "~> 4.33"
