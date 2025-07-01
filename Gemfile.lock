@@ -110,15 +110,17 @@ GEM
       aws-sigv4 (~> 1.8)
     aws-sigv4 (1.8.0)
       aws-eventstream (~> 1, >= 1.0.2)
-    axe-core-api (4.9.0)
+    axe-core-api (4.10.3)
       dumb_delegator
+      ostruct
       virtus
     axe-core-capybara (4.9.0)
       axe-core-api
       dumb_delegator
-    axe-core-rspec (4.8.1)
-      axe-core-api
+    axe-core-rspec (4.10.3)
+      axe-core-api (= 4.10.3)
       dumb_delegator
+      ostruct
       virtus
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -172,7 +174,7 @@ GEM
       html-attributes-utils (~> 1)
       pagy (~> 6)
       view_component (~> 2)
-    dumb_delegator (1.0.0)
+    dumb_delegator (1.1.0)
     e2mmap (0.1.0)
     erb (5.0.2)
     erubi (1.13.1)
@@ -525,7 +527,7 @@ DEPENDENCIES
   after_commit_everywhere (~> 1.5)
   aws-sdk-s3 (~> 1.143)
   axe-core-capybara (~> 4.9)
-  axe-core-rspec (~> 4.8)
+  axe-core-rspec (~> 4.10)
   bootsnap (~> 1.18)
   capybara (~> 3.39)
   csv (~> 3.3)
