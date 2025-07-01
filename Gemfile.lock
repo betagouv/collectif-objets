@@ -170,7 +170,7 @@ GEM
     diff-lcs (1.6.2)
     drb (2.2.3)
     dry-cli (1.0.0)
-    dsfr-view-components (1.5.1)
+    dsfr-view-components (1.5.3)
       html-attributes-utils (~> 1)
       pagy (~> 6)
       view_component (~> 2)
