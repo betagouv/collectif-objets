@@ -54,7 +54,7 @@ class BordereauPdf
       "<b>Référence Palissy</b>",
       "<b>Objet</b>",
       "<b>Date de protection</b>",
-      "<b>Etat de conservation</b>",
+      "<b>État de conservation</b>",
       "<b>Observations</b>",
       "<b>Photographie</b>"
     ]]
