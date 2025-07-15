@@ -5,6 +5,12 @@ Rails.application.configure do
   s3_uris1 = s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" }
   s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
 
+  # URLs de la nouvelle infra
+  s3_uris1 << "https://collectif-objets.culture.gouv.fr/"
+  s3_uris2 << "https://collectif-objets.culture.gouv.fr/"
+  s3_uris1 << "https://collectif-objets.stg.culture.gouv.fr/"
+  s3_uris2 << "https://collectif-objets.stg.culture.gouv.fr/"
+
   config.content_security_policy do |policy|
     if Rails.configuration.x.environment_specific_name == "production"
       policy.report_uri "https://sentry.incubateur.net/api/40/security/?sentry_key=5f6f9cf638ac413b82d1d9c8a9ba2025"
