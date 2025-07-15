@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
-  s3_buckets = %w[development2 staging2 production public].map { "collectif-objets-#{_1}" }
+  s3_buckets = %w[development2 staging2 staging production public].map { "collectif-objets-#{_1}" }
   s3_uris1 = s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}" }
   s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud" }
   s3_uris2 += s3_buckets.map { "https://#{_1}.s3.gra.io.cloud.ovh.net" }
