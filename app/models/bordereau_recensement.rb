@@ -57,10 +57,10 @@ class BordereauRecensement < ApplicationRecord
 
   def observations
     [
-      "<b>Commune :</b> #{notes_commune.presence || '<i>Néant</i>'}",
-      "<b>Conservateur :</b> #{notes_conservateur.presence || '<i>Néant</i>'}",
-      "<b>Propriétaire :</b> #{notes_proprietaire.presence || '<i>Néant</i>'}",
-      "<b>Affectataire :</b> #{notes_affectataire.presence || '<i>Néant</i>'}"
+      "<b>Commune :</b> #{notes_commune.presence}",
+      "<b>Conservateur :</b> #{notes_conservateur.presence}",
+      "<b>Propriétaire :</b> #{notes_proprietaire.presence}",
+      "<b>Affectataire :</b> #{notes_affectataire.presence}"
     ].join("\n")
   end
 
