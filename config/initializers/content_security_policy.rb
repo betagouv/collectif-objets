@@ -8,8 +8,8 @@ Rails.application.configure do
   # URLs de la nouvelle infra
   s3_uris1 << "https://collectif-objets.culture.gouv.fr/"
   s3_uris2 << "https://collectif-objets.culture.gouv.fr/"
-  s3_uris1 << "https://collectif-objets.stg.culture.gouv.fr/"
-  s3_uris2 << "https://collectif-objets.stg.culture.gouv.fr/"
+  s3_uris1 << "https://collectif-objets.stg.cloud.culture.fr/"
+  s3_uris2 << "https://collectif-objets.stg.cloud.culture.fr/"
 
   config.content_security_policy do |policy|
     if Rails.configuration.x.environment_specific_name == "production"
