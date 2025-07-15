@@ -2,14 +2,14 @@
 
 Rails.application.configure do
   s3_buckets = %w[development2 staging2 production public].map { "collectif-objets-#{_1}" }
-  s3_uris1 = s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" }
-  s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
+  s3_uris1 = s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}" }
+  s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud" }
 
   # URLs de la nouvelle infra
-  s3_uris1 << "https://collectif-objets.culture.gouv.fr/"
-  s3_uris2 << "https://collectif-objets.culture.gouv.fr/"
-  s3_uris1 << "https://collectif-objets.stg.cloud.culture.fr/"
-  s3_uris2 << "https://collectif-objets.stg.cloud.culture.fr/"
+  s3_uris1 << "https://collectif-objets.culture.gouv.fr"
+  s3_uris2 << "https://collectif-objets.culture.gouv.fr"
+  s3_uris1 << "https://collectif-objets.stg.cloud.culture.fr"
+  s3_uris2 << "https://collectif-objets.stg.cloud.culture.fr"
 
   config.content_security_policy do |policy|
     if Rails.configuration.x.environment_specific_name == "production"
