@@ -10,6 +10,10 @@ class BordereauRecensement < ApplicationRecord
   delegate :objet, :absent?, :recensable?, :analyse_etat_sanitaire, :mauvaise_securisation?, to: :recensement
   delegate :nom, :palissy_DPRO, :palissy_REF, :palissy_SCLE, :palissy_CATE, to: :objet
 
+  class << self
+    def etats_sanitaires = human_attribute_name(:etat_sanitaires, count: nil).invert
+  end
+
   def denomination
     [nom, époque, catégorie].compact_blank.join("\n")
   end
@@ -17,11 +21,13 @@ class BordereauRecensement < ApplicationRecord
   def époque = palissy_SCLE ? palissy_SCLE.split(";").compact_blank.join(", ") : ""
   def catégorie = palissy_CATE ? palissy_CATE.split(";").compact_blank.join(", ") : ""
 
-  def etat_sanitaire
+  def etat_sanitaire = super.presence || etat_sanitaire_recensement
+
+  def etat_sanitaire_recensement
     if absent?
-      "objet introuvable"
+      "introuvable"
     elsif !recensable?
-      "objet non recensable"
+      "non_recensable"
     elsif analyse_etat_sanitaire.present?
       analyse_etat_sanitaire
     else
