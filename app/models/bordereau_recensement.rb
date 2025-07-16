@@ -95,5 +95,7 @@ class BordereauRecensement < ApplicationRecord
            end
 
     { image: StringIO.new(data), fit: [65, 65] } if data
+  rescue ActiveStorage::FileNotFoundError
+    nil
   end
 end
