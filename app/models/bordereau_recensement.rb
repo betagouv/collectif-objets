@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "open-uri"
+
 class BordereauRecensement < ApplicationRecord
   belongs_to :bordereau, inverse_of: :bordereau_recensements
   belongs_to :recensement, inverse_of: :bordereau_recensements
@@ -84,9 +86,14 @@ class BordereauRecensement < ApplicationRecord
   end
 
   def pdf_photo
-    blob = recensement.photos.first&.variant(:small)
-    return unless blob
+    data = if (blob = recensement_photo)
+             blob.processed.download
+           elsif (url = palissy_photo)
+             raise ArgumentError, "Only https urls are allowed" unless url.start_with?("https://")
 
-    { image: StringIO.new(blob.processed.download), fit: [65, 65] }
+             URI.open(url, "rb", &:read) # rubocop:disable Security/Open
+           end
+
+    { image: StringIO.new(data), fit: [65, 65] } if data
   end
 end
