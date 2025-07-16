@@ -344,6 +344,14 @@ fr:
           zero: aucun objet protégé
           one: 1 objet protégé
           other: "%{count} objets protégés"
+      bordereau_recensement:
+        etat_sanitaires:
+          introuvable: Introuvable
+          non_recensable: Non recensable
+          bon: Bon état
+          moyen: État moyen
+          mauvais: Mauvais état
+          peril: En péril
   date:
     abbr_day_names:
       - dim

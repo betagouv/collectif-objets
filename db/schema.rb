@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_23_080000) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_15_162402) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -80,6 +80,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_23_080000) do
     t.string "notes_proprietaire"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "etat_sanitaire"
     t.index ["bordereau_id", "recensement_id"], name: "idx_on_bordereau_id_recensement_id_205ed59768", unique: true
     t.index ["bordereau_id"], name: "index_bordereau_recensements_on_bordereau_id"
     t.index ["recensement_id"], name: "index_bordereau_recensements_on_recensement_id"
@@ -431,6 +432,31 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_23_080000) do
     t.index ["objet_id", "dossier_id"], name: "index_recensements_on_objet_id_and_dossier_id", unique: true
   end
 
+  create_table "recenseur_accesses", force: :cascade do |t|
+    t.bigint "recenseur_id", null: false
+    t.bigint "commune_id", null: false
+    t.boolean "granted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "notified", default: false, null: false
+    t.index ["commune_id"], name: "index_recenseur_accesses_on_commune_id"
+    t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true
+    t.index ["recenseur_id"], name: "index_recenseur_accesses_on_recenseur_id"
+  end
+
+  create_table "recenseurs", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "status", default: "pending", null: false
+    t.string "nom"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "remember_created_at"
+    t.datetime "last_sign_in_at"
+    t.boolean "premiere_visite", default: true, null: false
+    t.index ["email"], name: "index_recenseurs_on_email", unique: true
+  end
+
   create_table "session_codes", force: :cascade do |t|
     t.bigint "record_id", null: false
     t.string "code"
@@ -479,5 +505,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_23_080000) do
   add_foreign_key "dossiers", "communes"
   add_foreign_key "messages", "communes"
   add_foreign_key "recensements", "objets"
+  add_foreign_key "recenseur_accesses", "communes"
+  add_foreign_key "recenseur_accesses", "recenseurs"
   add_foreign_key "users", "communes"
 end

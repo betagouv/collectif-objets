@@ -36,7 +36,7 @@ module Conservateurs
 
       params.require(:bordereau).permit(
         bordereau_recensements_attributes: [
-          :recensement_id, :notes_commune, :notes_conservateur, :notes_affectataire, :notes_proprietaire
+          :recensement_id, :etat_sanitaire, :notes_commune, :notes_conservateur, :notes_affectataire, :notes_proprietaire
         ]
       )
     end
