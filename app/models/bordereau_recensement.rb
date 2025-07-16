@@ -35,14 +35,16 @@ class BordereauRecensement < ApplicationRecord
     end
   end
 
+  def recensement_photo
+    recensement.photos&.first&.variant(:small)
+  end
+
+  def palissy_photo
+    objet.palissy_photos.first["url"]&.sub(MEMOIRE_PHOTOS_AWS_BASE_URL, MEMOIRE_PHOTOS_BASE_URL)
+  end
+
   def photo
-    if (variant = recensement.photos&.first&.variant(:small))
-      variant.url
-    elsif objet.palissy_photos.present?
-      objet.palissy_photos.first["url"].sub(MEMOIRE_PHOTOS_AWS_BASE_URL, MEMOIRE_PHOTOS_BASE_URL)
-    else
-      "images/illustrations/photo-manquante-pop.png"
-    end
+    recensement_photo&.url || palissy_photo
   end
 
   def notes_commune
