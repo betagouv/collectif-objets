@@ -1,5 +1,7 @@
-- if [notice, alert].map(&:presence).any?
-  .fr-container.fr-mt-4w{role: :alert}
-    .fr-alert{class: "fr-alert--#{notice ? 'info' : 'error'}" }
-      .fr-alert__content
-        = notice ? notice : alert
+- flash.each do |type, messages|
+  - Array.wrap(messages).each do |message|
+    - next if message.blank?
+    .fr-container.fr-mt-4w{role: :alert}
+      .fr-alert{class: "fr-alert--#{type == 'notice' ? 'info' : 'error'}" }
+        .fr-alert__content
+          = message
