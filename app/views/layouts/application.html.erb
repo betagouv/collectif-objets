@@ -22,6 +22,8 @@
     <%= render "shared/skiplinks" %>
     <%= render "shared/banners", banners: @banners %>
     <%= render "shared/header" %>
+    <%# Annonce temporaire de déplacement %>
+    <% flash.now[:notice] = [flash[:notice], "Un transfert technique est prévu le <strong>mercredi 23 juillet 2025</strong>. Nous nous excusons par avance pour la gêne occasionnée.".html_safe].compact %>
     <%= render "shared/flashes" %>
     <%= content_for?(:content) ? yield(:content) : yield %>
     <div class="co-print-hide">
