@@ -125,7 +125,7 @@ Rails.application.configure do
     config.action_mailer.show_previews = true
     # we need to keep scaleway_staging name for db consistency (see storage.yml)
     # even if this points to ovh bucket TODO: replace in DB ?
-    config.active_storage.service = :scaleway_staging
+    config.active_storage.service = :mc_ovh_staging
 
     config.action_mailer.smtp_settings = {
       address: ENV.fetch("MAILHOG_HOST", "127.0.0.1"),
