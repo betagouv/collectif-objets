@@ -119,7 +119,7 @@ Rails.application.configure do
 
   case config.x.environment_specific_name
   when "production", "mc_prd"
-    config.active_storage.service = :scaleway
+    config.active_storage.service = :mc_ovh_prod
     # config.s3_endpoint = ""
   when "mc_stg"
     config.action_mailer.show_previews = true
