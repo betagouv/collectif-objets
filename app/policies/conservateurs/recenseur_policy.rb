@@ -8,7 +8,11 @@ module Conservateurs
     def create? = true
 
     def show?
-      return recenseur.accesses.none? || recenseur.departements.intersect?(conservateur.departements)
+      return true if recenseur.accesses.none?
+
+      recenseur.accesses.joins(:commune)
+                        .where(communes: { departement_code: conservateur.departements.pluck(:code) })
+                        .exists?
     end
     alias edit? show?
     alias update? show?
@@ -16,10 +20,16 @@ module Conservateurs
 
     class Scope < Scope
       def resolve
-        # Recenseurs ayant accès à une commune du département ou plus
-        # ou nouvellement créé (aucun accès)
-        scope.joins(:departements).where(departements: user.departements)
-             .or(scope.where(id: scope.without_access.ids))
+        # Recenseurs sans aucuns accès (pour permettre la création en 2 écrans)
+        # OU ayant accès (peu importe son état) à une commune du département
+        with_access_to_dept = scope.joins(accesses: :commune)
+                                   .where(communes: { departement_code: conservateur.departements.pluck(:code) })
+
+        without_access = scope.without_access
+
+        scope.where(id: without_access.ids)
+             .or(scope.where(id: with_access_to_dept.ids))
+             .distinct
       end
     end
   end
