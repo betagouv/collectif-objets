@@ -2,7 +2,8 @@
   "CORSRules": [
     {
       "AllowedOrigins": [
-        "https://collectif-objets.beta.gouv.fr"
+        "https://collectif-objets.beta.gouv.fr",
+        "https://collectif-objets.culture.gouv.fr/"
       ],
       "AllowedHeaders": [
         "*"
