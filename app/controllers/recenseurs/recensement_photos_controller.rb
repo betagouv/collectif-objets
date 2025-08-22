@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Communes
+module Recenseurs
   class RecensementPhotosController < BaseController
     before_action :set_recensement_and_authorize
     before_action :set_photo, only: %i[destroy]
