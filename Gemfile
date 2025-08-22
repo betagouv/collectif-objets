@@ -44,7 +44,7 @@ gem "vite_rails", "~> 3.0"
 group :development, :test do
   gem "debug", ">= 1.0", require: !ENV.key?("CI")
   gem "factory_bot_rails", "~> 6.5"
-  gem "launchy", "~> 2.5", require: !ENV.key?("CI")
+  gem "launchy", "~> 3.1", require: !ENV.key?("CI")
   gem "pry", "~> 0.15", require: !ENV.key?("CI")
   gem "rspec-rails", "~> 8.0"
   gem "rubocop", "~> 1.63", require: false
