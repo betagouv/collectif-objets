@@ -8,7 +8,10 @@ module RecensementWizard
   class Base
     include Rails.application.routes.url_helpers
     include ActiveModel::Model
-    attr_reader :recensement
+    extend ActiveModel::Callbacks
+    define_model_callbacks :initialize, only: :after
+
+    attr_reader :recensement, :recenseur
 
     delegate \
       :objet, :commune, :localisation, :recensable, :edifice_nom, :etat_sanitaire,
@@ -26,15 +29,19 @@ module RecensementWizard
     def self.title = self::TITLE
     def self.step_number = name.demodulize[-1].to_i
 
-    def initialize(recensement)
-      @recensement = recensement
-    end
-
-    def self.build_for(step, recensement)
+    def self.build_for(step, recensement, recenseur: false)
       raise InvalidStep unless step.to_i.in?(STEPS)
 
-      "RecensementWizard::Step#{step}".constantize.new(recensement)
+      "RecensementWizard::Step#{step}".constantize.new(recensement, recenseur:)
     end
+
+    def initialize(recensement, recenseur: false)
+      @recensement = recensement
+      @recenseur = recenseur
+      setup_step
+    end
+
+    def setup_step; end
 
     def next_step_number
       step_number + 1 if step_number < STEPS.last
@@ -86,6 +93,31 @@ module RecensementWizard
 
     def permitted_params = raise NotImplementedError
 
+    def recenseur? = recenseur.present?
+    def namespace = recenseur ? :recenseurs : nil
+
+    def commune_path
+      [namespace, commune].compact
+    end
+
+    def step_path(step: nil, edit: false)
+      step = case step
+             when :previous then previous_step_number
+             when :next then next_step_number
+             when :current, nil then step_number
+             else step
+             end
+      [edit ? :edit : nil, namespace, commune, objet, recensement, { step: }].compact
+    end
+
+    def objet_path(*args)
+      [namespace, commune, objet, *args].compact
+    end
+
+    def recensement_path(*args)
+      [namespace, commune, objet, recensement, *args].compact
+    end
+
     def after_success_path
       to_step = confirmation_modal? ? step_number : next_step_number
       edit_commune_objet_recensement_path \
@@ -96,10 +128,6 @@ module RecensementWizard
     # dans le cas d'un retour en arrière dans le formulaire et du choix d'une autre option
     # Redefine this method in step subclasses to reset data when the user steps back and changes the answers
     def reset_recensement_data_for_next_steps; end
-
-    def confirmation_modal_close_path
-      edit_commune_objet_recensement_path(commune, objet, recensement, step: step_number)
-    end
 
     private
 

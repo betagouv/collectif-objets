@@ -248,6 +248,8 @@ fr:
               blank: "La raison de sortie manuelle de la campagne doit être remplie"
       messages:
         record_invalid: 'La validation a échoué : %{errors}'
+    models:
+      recenseur_access: Accès
     attributes:
       recensement:
         localisation: Où se trouve l’objet ?
@@ -258,6 +260,26 @@ fr:
         notes: Commentaires
         analyse_fiches: Fiches à associer
         analyse_notes: Commentaires pour la mairie
+      recenseur:
+        count:
+          zero: aucun recenseur
+          one: 1 recenseur
+          other: "%{count} recenseurs"
+        email: Adresse mail
+        status: Statut
+        notes: Notes
+        notes_hint: Ces notes ne sont pas visibles par les recenseurs eux-mêmes.
+      recenseur/status:
+        pending: "En attente"
+        accepted: "Autorisé à recenser"
+        rejected: "Accès interdit"
+        optout: "Refuse d'être contacté"
+      recenseur_access:
+        commune_id: commune
+      recenseur_access/status:
+          granted: Autorisé
+          rejected: Refusé
+          pending: En attente de confirmation
       dossier:
         count:
           zero: aucun dossier
@@ -685,6 +707,22 @@ fr:
       cta: Ne plus recevoir ce type de messages
     layout:
       unsubscribe: Je ne souhaite plus recevoir ces emails
+  recenseur_mailer:
+    layout:
+      optout: Je ne souhaite plus recevoir ces emails
+    shared:
+      bonjour: Bonjour %{nom},
+      howto: Pour plus d'information sur le recensement sur Collectif Objets,
+    session_code:
+      lien: "Voici votre lien de connexion à Collectif Objets :"
+      cta: Connexion
+      valid_until: "Ce code est valide jusqu'à <b>%{date}</b>."
+      nouveau_code: Passé ce délai, vous pouvez
+    access_granted:
+      communes: "Nous vous invitons à participer au recensement des objets classés au titre des Monuments Historiques de <b>%{communes}</b>. En contribuant à ce programme, vous vous inscrivez dans une approche collaborative de la préservation du patrimoine et nous vous en remercions par avance."
+    access_revoked:
+      info: Votre accès à Collectif Objets a été supprimé. Il sera réouvert si une commune a besoin de vous à nouveau.
+      thank_you: Merci pour votre contribution au recensement.
   user_mailer:
     shared:
       bonjour: Madame, Monsieur le Maire,

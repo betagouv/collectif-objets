@@ -15,8 +15,7 @@ module RecensementWizard
               },
               if: -> { localisation.present? }
 
-    def initialize(recensement)
-      super
+    def setup_step
       self.confirmation_introuvable = recensement.absent? ? "true" : "false"
     end
 
