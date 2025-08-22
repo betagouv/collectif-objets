@@ -2,11 +2,13 @@
 
 module Conservateurs
   class RecenseurPolicy < BasePolicy
+    alias recenseur record
+
     def new? = true
     def create? = true
 
     def show?
-      record.departements.none? || record.departements.intersect?(user.departements)
+      return recenseur.accesses.none? || recenseur.departements.intersect?(conservateur.departements)
     end
     alias edit? show?
     alias update? show?
