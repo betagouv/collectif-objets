@@ -129,6 +129,10 @@ module RecensementWizard
     # Redefine this method in step subclasses to reset data when the user steps back and changes the answers
     def reset_recensement_data_for_next_steps; end
 
+    def confirmation_modal_close_path
+      step_path(edit: true)
+    end
+
     private
 
     def parse_params(params)
