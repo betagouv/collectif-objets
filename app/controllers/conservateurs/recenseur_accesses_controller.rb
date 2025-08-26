@@ -21,8 +21,10 @@ module Conservateurs
     # POST /conservateurs/recenseurs/1/accesses
     def create
       @access = @recenseur.accesses.build(commune_id: params[:commune_id], granted: true)
+      authorize(@access)
       if @access.save
         @commune = @access.commune
+        @recenseur.accesses.reload
         @accesses = @recenseur.accesses.sorted.includes(:commune, :departement)
           .where(commune_id: current_conservateur.commune_ids)
         respond_to do |format|
