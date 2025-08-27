@@ -3,12 +3,12 @@
 module Communes
   class RecenseurPolicy < BasePolicy
     def show?
-      record.communes.include? user.commune
+      record.accesses.exists?(commune: user.commune)
     end
 
     class Scope < Scope
       def resolve
-        scope.joins(:communes).where(communes: user.commune)
+        scope.joins(:accesses).where(recenseur_accesses: { commune: user.commune })
       end
     end
   end
