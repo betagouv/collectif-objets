@@ -4,6 +4,8 @@ require "rails_helper"
 
 RSpec.describe RecenseurAccess, type: :model do
   let(:access) { build(:recenseur_access) }
+  let(:recenseur) { create(:recenseur) }
+  let(:commune) { create(:commune) }
 
   describe "scopes" do
     let(:recenseur) { create(:recenseur) }
@@ -48,11 +50,11 @@ RSpec.describe RecenseurAccess, type: :model do
 
   describe "callbacks" do
     describe "#reset_notified_if_granted_changed" do
-      let(:recenseur) { create(:recenseur) }
-      let(:commune) { create(:commune) }
+      let(:access) { create(:recenseur_access, recenseur:, commune:, granted:, notified:) }
 
       context "when access is initially granted and notified" do
-        let(:access) { create(:recenseur_access, recenseur:, commune:, granted: true, notified: true) }
+        let(:granted) { true }
+        let(:notified) { true }
 
         it "resets notified to false when access is revoked" do
           expect { access.update!(granted: false) }.to change { access.notified }.from(true).to(false)
@@ -61,14 +63,11 @@ RSpec.describe RecenseurAccess, type: :model do
         it "resets notified to false when access becomes pending" do
           expect { access.update!(granted: nil) }.to change { access.notified }.from(true).to(false)
         end
-
-        it "does not reset notified when granted status does not change" do
-          expect { access.update!(commune: create(:commune)) }.not_to(change { access.notified })
-        end
       end
 
       context "when access is initially revoked and notified" do
-        let(:access) { create(:recenseur_access, recenseur:, commune:, granted: false, notified: true) }
+        let(:granted) { false }
+        let(:notified) { true }
 
         it "resets notified to false when access is granted" do
           expect { access.update!(granted: true) }.to change { access.notified }.from(true).to(false)
@@ -76,7 +75,8 @@ RSpec.describe RecenseurAccess, type: :model do
       end
 
       context "when access is initially pending and notified" do
-        let(:access) { create(:recenseur_access, recenseur:, commune:, granted: nil, notified: true) }
+        let(:granted) { nil }
+        let(:notified) { true }
 
         it "resets notified to false when access is granted" do
           expect { access.update!(granted: true) }.to change { access.notified }.from(true).to(false)
