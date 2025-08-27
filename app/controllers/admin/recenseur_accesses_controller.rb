@@ -36,10 +36,13 @@ module Admin
     # PATCH/PUT /admin/recenseurs/1/accesses/1
     def update
       @access = @recenseur.accesses.find(params[:id])
+
       if @access.update(granted: access_params[:granted])
+        notice = @access.granted? ? "Accès accordé." : "Accès révoqué."
+
         respond_to do |format|
           format.turbo_stream { render "shared/recenseur_accesses/update" }
-          format.html { redirect_to [namespace, @recenseur], notice: "Accès modifié.", status: :see_other }
+          format.html { redirect_to [namespace, @recenseur], notice:, status: :see_other }
         end
       else
         head :unprocessable_entity

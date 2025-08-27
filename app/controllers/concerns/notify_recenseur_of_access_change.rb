@@ -4,21 +4,18 @@ module NotifyRecenseurOfAccessChange
   extend ActiveSupport::Concern
 
   included do
-    after_action :notify_access_granted, only: [:create, :update]
-    after_action :notify_access_revoked, only: :destroy
+    after_action :notify_access_change, only: [:create, :update, :destroy]
   end
 
   private
 
-  def notify_access_granted
-    return unless @recenseur.notify_access_granted?
-
-    RecenseurMailer.with(recenseur: @recenseur).access_granted.deliver_later(wait: 5.minutes)
-  end
-
-  def notify_access_revoked
-    return unless @recenseur.destroyed? # Ne rien envoyer tant que le recenseur n'est pas supprimé
-
-    RecenseurMailer.with(email: @recenseur.email, nom: @recenseur.email).access_revoked.deliver_later
+  def notify_access_change
+    if @recenseur.destroyed?
+      RecenseurMailer.with(email: @recenseur.email, nom: @recenseur.email).access_revoked.deliver_later
+    elsif @recenseur.notify_access_revoked?
+      RecenseurMailer.with(recenseur: @recenseur).access_revoked.deliver_later(wait: 5.minutes)
+    elsif @recenseur.notify_access_granted?
+      RecenseurMailer.with(recenseur: @recenseur).access_granted.deliver_later(wait: 5.minutes)
+    end
   end
 end

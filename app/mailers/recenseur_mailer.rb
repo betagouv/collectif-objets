@@ -29,8 +29,15 @@ class RecenseurMailer < ApplicationMailer
     @recenseur.new_accesses.update_all(notified: true) unless preview
   end
 
-  def access_revoked
-    @recenseur = Recenseur.new(**params)
+  def access_revoked(preview: false)
+    @recenseur = params[:recenseur] || Recenseur.new(**params)
+
+    # On n'envoie l'email que si le recenseur est supprimé ou qu'il a des accès révoqués
+    return false unless preview || params[:email] || @recenseur.notify_access_revoked?
+
+    # Mark revoked accesses as notified (only if this is a real recenseur, not preview)
+    @recenseur.revoked_accesses.update_all(notified: true) if params[:recenseur] && !preview
+
     mail subject: "Votre accès à Collectif Objets a été supprimé"
   end
 
