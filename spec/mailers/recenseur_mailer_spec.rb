@@ -41,18 +41,61 @@ RSpec.describe RecenseurMailer, type: :mailer do
   end
 
   describe "access_revoked" do
-    let(:recenseur) { build(:recenseur, status: :accepted) }
-    let(:mail) { RecenseurMailer.with(email: recenseur.email, nom: recenseur.nom).access_revoked }
+    context "when called with email and nom parameters (recenseur destroyed)" do
+      let(:recenseur) { build(:recenseur, status: :accepted) }
+      let(:mail) { RecenseurMailer.with(email: recenseur.email, nom: recenseur.nom).access_revoked }
 
-    include_examples(
-      "both parts contain",
-      "Votre accès à Collectif Objets a été supprimé"
-    )
+      include_examples(
+        "both parts contain",
+        "Votre accès à Collectif Objets a été supprimé"
+      )
 
-    it "behaves as expected" do
-      expect(mail.subject).to include "Votre accès à Collectif Objets a été supprimé"
-      expect(mail.to).to eq([recenseur.email])
-      expect(mail.from).to eq([CONTACT_EMAIL])
+      it "behaves as expected" do
+        expect(mail.subject).to include "Votre accès à Collectif Objets a été supprimé"
+        expect(mail.to).to eq([recenseur.email])
+        expect(mail.from).to eq([CONTACT_EMAIL])
+      end
+    end
+
+    context "when called with recenseur parameter (individual access revoked)" do
+      let(:revoked_access) { create(:recenseur_access, :newly_revoked) }
+      let(:recenseur) { create(:recenseur, status: :accepted, accesses: [revoked_access]) }
+      let(:mail) { RecenseurMailer.with(recenseur:).access_revoked }
+
+      include_examples(
+        "both parts contain",
+        "Votre accès à Collectif Objets a été supprimé"
+      )
+
+      it "behaves as expected" do
+        expect(mail.subject).to include "Votre accès à Collectif Objets a été supprimé"
+        expect(mail.to).to eq([recenseur.email])
+        expect(mail.from).to eq([CONTACT_EMAIL])
+      end
+
+      it "marks revoked accesses as notified" do
+        expect { mail.body }.to change { revoked_access.reload.notified }.from(false).to(true)
+      end
+
+      context "in preview mode" do
+        let(:mail) { RecenseurMailer.with(recenseur:).access_revoked(preview: true) }
+
+        it "does not mark revoked accesses as notified" do
+          expect { mail.body }.not_to(change { revoked_access.reload.notified })
+        end
+      end
+    end
+
+    context "when recenseur has no revoked accesses to notify" do
+      let(:recenseur) { create(:recenseur, status: :accepted) }
+
+      it "does not deliver email when no revoked accesses exist" do
+        expect(recenseur.notify_access_revoked?).to be false
+
+        expect do
+          RecenseurMailer.with(recenseur:).access_revoked.deliver_now
+        end.not_to(change { ActionMailer::Base.deliveries.count })
+      end
     end
   end
 end
