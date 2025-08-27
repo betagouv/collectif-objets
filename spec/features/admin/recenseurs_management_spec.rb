@@ -69,10 +69,13 @@ RSpec.feature "Admin - Gestion des recenseurs", type: :feature, js: true do
 
     visit admin_recenseur_path(recenseur)
     expect(page).to have_text("Albon")
-    uncheck "Albon (Drôme)"
 
-    expect(page).not_to have_text("Albon")
-    expect(RecenseurAccess.exists?(access.id)).to be_falsey
+    within "#accesses" do
+      find("label", text: "Albon (Drôme)").click
+    end
+
+    sleep 1
+    expect(access.reload.granted?).to be_falsey
 
     perform_enqueued_jobs
     email = ActionMailer::Base.deliveries.last
