@@ -9,5 +9,10 @@ FactoryBot.define do
       granted { true }
       notified { false }
     end
+
+    trait :newly_revoked do
+      granted { false }
+      notified { false }
+    end
   end
 end
