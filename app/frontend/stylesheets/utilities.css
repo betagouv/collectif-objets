@@ -335,6 +335,10 @@ form.button_to {
   display: contents;
 }
 
+.fr-btn[aria-disabled] {
+  cursor: not-allowed;
+}
+
 /* Stats */
 .co-tile {
   padding: 1rem 1rem 2rem 1rem;
