@@ -49,6 +49,29 @@ RSpec.describe RecenseurAccess, type: :model do
   end
 
   describe "callbacks" do
+    describe "edifice_ids filtering" do
+      let!(:edifice1) { create(:edifice, commune:) }
+      let!(:edifice2) { create(:edifice, commune:) }
+      let(:other_edifice) { create(:edifice) }
+
+      it "keeps valid edifice_ids when they belong to the commune" do
+        access = build(:recenseur_access, recenseur:, commune:, edifice_ids: [edifice1.id, edifice2.id])
+        access.valid?
+        expect(access.edifice_ids).to contain_exactly(edifice1.id, edifice2.id)
+      end
+
+      it "filters out invalid edifice_ids that don't belong to the commune" do
+        access = build(:recenseur_access, recenseur:, commune:, edifice_ids: [edifice1.id, other_edifice.id])
+        access.valid?
+        expect(access.edifice_ids).to contain_exactly(edifice1.id)
+      end
+
+      it "is valid when edifice_ids is empty" do
+        access = build(:recenseur_access, recenseur:, commune:, all_edifices: true, edifice_ids: [])
+        expect(access).to be_valid
+      end
+    end
+
     describe "#reset_notified_if_granted_changed" do
       let(:access) { create(:recenseur_access, recenseur:, commune:, granted:, notified:) }
 
@@ -131,24 +154,6 @@ RSpec.describe RecenseurAccess, type: :model do
 
       it "is valid when all_edifices is false and edifice_ids contains valid ids" do
         access = build(:recenseur_access, recenseur:, commune:, all_edifices: false, edifice_ids: [edifice1.id])
-        expect(access).to be_valid
-      end
-    end
-
-    describe "edifice_ids belong to commune" do
-      it "is valid when edifice_ids contain only edifices from the commune" do
-        access = build(:recenseur_access, recenseur:, commune:, edifice_ids: [edifice1.id, edifice2.id])
-        expect(access).to be_valid
-      end
-
-      it "is invalid when edifice_ids contain edifices from other communes" do
-        access = build(:recenseur_access, recenseur:, commune:, edifice_ids: [edifice1.id, other_edifice.id])
-        expect(access).not_to be_valid
-        expect(access.errors[:edifice_ids]).to include("contient des édifices non valides")
-      end
-
-      it "is valid when edifice_ids is empty" do
-        access = build(:recenseur_access, recenseur:, commune:, all_edifices: true, edifice_ids: [])
         expect(access).to be_valid
       end
     end
