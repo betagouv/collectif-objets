@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_15_162402) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_27_145049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -439,6 +439,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_15_162402) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "notified", default: false, null: false
+    t.integer "edifice_ids", default: [], null: false, array: true
+    t.boolean "all_edifices", default: true, null: false
     t.index ["commune_id"], name: "index_recenseur_accesses_on_commune_id"
     t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true
     t.index ["recenseur_id"], name: "index_recenseur_accesses_on_recenseur_id"
