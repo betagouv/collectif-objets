@@ -5,6 +5,12 @@ module Admin
     include NotifyRecenseurOfAccessChange
 
     before_action :set_recenseur
+    before_action :set_access, only: [:show, :update]
+
+    # GET /admin/recenseurs/1/accesses/1
+    def show
+      redirect_to [namespace, @recenseur]
+    end
 
     # GET /admin/recenseurs/1/accesses/new
     def new
@@ -35,8 +41,6 @@ module Admin
 
     # PATCH/PUT /admin/recenseurs/1/accesses/1
     def update
-      @access = @recenseur.accesses.find(params[:id])
-
       if @access.update(granted: access_params[:granted])
         notice = @access.granted? ? "Accès accordé." : "Accès révoqué."
 
@@ -57,6 +61,10 @@ module Admin
 
     def set_recenseur
       @recenseur = Recenseur.find(params[:recenseur_id])
+    end
+
+    def set_access
+      @access = @recenseur.accesses.find(params[:id])
     end
   end
 end
