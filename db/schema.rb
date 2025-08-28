@@ -439,6 +439,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_18_171733) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "notified", default: false, null: false
+    t.integer "edifice_ids", default: [], null: false, array: true
+    t.boolean "all_edifices", default: true, null: false
     t.index ["commune_id"], name: "index_recenseur_accesses_on_commune_id"
     t.index ["recenseur_id", "commune_id"], name: "index_recenseur_accesses_on_recenseur_id_and_commune_id", unique: true
     t.index ["recenseur_id"], name: "index_recenseur_accesses_on_recenseur_id"
