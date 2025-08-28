@@ -15,7 +15,7 @@ class RecenseurAccess < ApplicationRecord
 
   validates :commune, uniqueness: { scope: :recenseur_id }, if: :commune_id_changed?
   validates :edifice_ids, presence: true, unless: :all_edifices?
-  validate :edifice_ids_belong_to_commune
+  before_validation :filter_invalid_edifice_ids
 
   before_update :reset_notified_if_granted_changed
   before_update :grant_all_edifices_if_all_edifices_selected
@@ -53,11 +53,10 @@ class RecenseurAccess < ApplicationRecord
     self.notified = false if granted_changed?
   end
 
-  def edifice_ids_belong_to_commune
+  def filter_invalid_edifice_ids
     return unless commune && edifice_ids.any?
 
-    invalid_ids = edifice_ids - commune.edifice_ids
-    errors.add(:edifice_ids, :invalid) if invalid_ids.any?
+    self.edifice_ids = edifice_ids.select { |id| commune.edifice_ids.include?(id) }
   end
 
   def grant_all_edifices_if_all_edifices_selected
