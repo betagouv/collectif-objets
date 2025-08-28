@@ -334,3 +334,7 @@ tr.co-vertical-align-top td {
 form.button_to {
   display: contents;
 }
+
+.fr-btn[aria-disabled] {
+  cursor: not-allowed;
+}

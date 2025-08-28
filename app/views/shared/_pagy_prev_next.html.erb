@@ -1,0 +1,14 @@
+<% link = pagy_link_proc(pagy) -%>
+<div class="co-flex co-flex--space-between co-flex--align-items-center co-flex--wrap co-flex--gap-05rem">
+  <% if pagy.page == 1 %>
+    <span role="button" aria-disabled="true" class="fr-btn fr-btn--tertiary-no-outline">Résultats précédents</span>
+  <% else %>
+    <%== link.call(pagy.prev, "Résultats précédents", 'class="fr-btn fr-btn--tertiary"') %>
+  <% end %>
+
+  <% if !pagy.next %>
+    <span role="button" aria-disabled="true" class="fr-btn fr-btn--tertiary-no-outline">Résultats suivants</span>
+  <% else %>
+    <%== link.call(pagy.next, "Résultats suivants", 'class="fr-btn fr-btn--tertiary"') %>
+  <% end %>
+</div>
