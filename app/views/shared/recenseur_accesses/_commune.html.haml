@@ -1,6 +1,7 @@
 %li{ id: dom_id(commune) }
   .co-flex.co-flex--space-between.co-flex--align-items-center
-    = "#{commune.nom} (#{commune.departement})"
+    = commune_with_departement(commune)
+
     - if recenseur.commune?(commune)
       %button.fr-btn.fr-btn-sm.fr-btn--secondary.fr-btn--icon-left.fr-icon-check-line{disabled: true} Accès ajouté
     - else
@@ -8,5 +9,5 @@
         [namespace, recenseur, :recenseur_access_index],
         class: "fr-btn fr-btn-sm fr-btn--secondary fr-btn--icon-left fr-icon-add-line",
         params: { commune_id: commune.id },
-        title: "Ajouter l'accès à #{commune.nom} (#{commune.departement.nom})",
+        title: "Ajouter l'accès à #{commune_with_departement(commune)}",
         data: { turbo_submits_with: "Ajout en cours…" })
