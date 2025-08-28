@@ -1,7 +1,7 @@
 %li{ id: dom_id(commune) }
   .co-flex.co-flex--space-between.co-flex--align-items-center
     = "#{commune.nom} (#{commune.departement})"
-    - if recenseur.accesses.any? { _1.commune == commune }
+    - if recenseur.commune?(commune)
       %button.fr-btn.fr-btn-sm.fr-btn--secondary.fr-btn--icon-left.fr-icon-check-line{disabled: true} Accès ajouté
     - else
       = button_to("Ajouter l'accès",
