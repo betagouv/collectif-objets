@@ -87,6 +87,7 @@ class Commune < ApplicationRecord
 
   has_many(
     :edifices,
+    -> { ordered_by_nom },
     foreign_key: :code_insee,
     primary_key: :code_insee,
     inverse_of: :commune,
