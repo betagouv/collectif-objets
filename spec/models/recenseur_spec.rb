@@ -133,6 +133,45 @@ RSpec.describe Recenseur, type: :model do
     end
   end
 
+  describe "#commune?" do
+    let(:recenseur) { create(:recenseur) }
+    let(:commune1) { create(:commune) }
+    let(:commune2) { create(:commune) }
+
+    context "when recenseur has access to the commune" do
+      before do
+        create(:recenseur_access, recenseur:, commune: commune1)
+      end
+
+      it "returns true" do
+        expect(recenseur.commune?(commune1)).to be true
+      end
+    end
+
+    context "when recenseur does not have access to the commune" do
+      it "returns false" do
+        expect(recenseur.commune?(commune2)).to be false
+      end
+    end
+
+    context "with different access statuses" do
+      it "returns true for granted access" do
+        create(:recenseur_access, recenseur:, commune: commune1, granted: true)
+        expect(recenseur.commune?(commune1)).to be true
+      end
+
+      it "returns true for pending access" do
+        create(:recenseur_access, recenseur:, commune: commune1, granted: nil)
+        expect(recenseur.commune?(commune1)).to be true
+      end
+
+      it "returns true for rejected access" do
+        create(:recenseur_access, recenseur:, commune: commune1, granted: false)
+        expect(recenseur.commune?(commune1)).to be true
+      end
+    end
+  end
+
   describe "integration: access change notifications" do
     let(:recenseur) { create(:recenseur, status: :accepted) }
     let(:commune) { create(:commune) }
