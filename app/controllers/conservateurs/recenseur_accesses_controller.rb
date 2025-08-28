@@ -9,11 +9,11 @@ module Conservateurs
     # GET /conservateurs/recenseurs/1/accesses/new
     def new
       @communes = Commune.none
-      @offset = Integer(params[:offset] || 0)
-      @limit = 10 # Pagination basique : si on récupère plus de 20 résultats, on affiche un lien pour charger la suite
+      @pagy = nil
       if params[:nom]
-        @communes = policy_scope(Commune).includes(:departement).offset(@offset).limit(@limit + 1)
-                           .ransack(nom_unaccented_cont: params[:nom], s: "departement_code asc, nom asc").result
+        communes_query = policy_scope(Commune).includes(:departement)
+                                .ransack(nom_unaccented_cont: params[:nom], s: "departement_code asc, nom asc").result
+        @pagy, @communes = pagy(communes_query, items: 10)
       end
       render "shared/recenseur_accesses/new"
     end
