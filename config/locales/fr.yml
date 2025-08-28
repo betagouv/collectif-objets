@@ -177,6 +177,10 @@ fr:
   activerecord:
     errors:
       models:
+        recenseur_access:
+          attributes:
+            edifice_ids:
+              invalid: "contient des édifices non valides"
         user:
           attributes:
             email:
@@ -276,6 +280,8 @@ fr:
         optout: "Refuse d'être contacté"
       recenseur_access:
         commune_id: commune
+        edifice_ids: Édifices
+        all_edifices: Tous les édifices
       recenseur_access/status:
           granted: Autorisé
           rejected: Refusé

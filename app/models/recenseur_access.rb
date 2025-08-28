@@ -14,8 +14,11 @@ class RecenseurAccess < ApplicationRecord
   delegate :human_attribute_name, to: :class
 
   validates :commune, uniqueness: { scope: :recenseur_id }, if: :commune_id_changed?
+  validates :edifice_ids, presence: true, unless: :all_edifices?
+  validate :edifice_ids_belong_to_commune
 
   before_update :reset_notified_if_granted_changed
+  before_update :grant_all_edifices_if_all_edifices_selected
 
   def pending? = granted.nil?
 
@@ -30,9 +33,34 @@ class RecenseurAccess < ApplicationRecord
     human_attribute_name("status.#{status}")
   end
 
+  def edifice?(edifice)
+    edifice_ids.include?(edifice.id)
+  end
+
+  def edifices
+    if all_edifices?
+      commune.edifices
+    elsif edifice_ids.empty?
+      Edifice.none
+    else
+      commune.edifices.where(id: edifice_ids)
+    end
+  end
+
   private
 
   def reset_notified_if_granted_changed
     self.notified = false if granted_changed?
+  end
+
+  def edifice_ids_belong_to_commune
+    return unless commune && edifice_ids.any?
+
+    invalid_ids = edifice_ids - commune.edifice_ids
+    errors.add(:edifice_ids, :invalid) if invalid_ids.any?
+  end
+
+  def grant_all_edifices_if_all_edifices_selected
+    self.all_edifices = all_edifices? || edifice_ids.to_set == commune.edifice_ids.to_set
   end
 end
