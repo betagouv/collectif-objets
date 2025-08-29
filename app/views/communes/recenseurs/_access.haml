@@ -1,0 +1,22 @@
+= turbo_frame_tag :access do
+  = form_for [access.commune, access.recenseur, access], builder: FormBuilderDsfr do |f|
+    - if access.granted?
+      - if access.commune.edifices.size < 2
+        = f.hidden_field :all_edifices, value: true, id: nil
+        .fr-toggle.fr-toggle--border-bottom
+          = f.check_box :all_edifices, class: "fr-toggle__input", name: nil, checked: true, disabled: true, id: dom_id(access, :all_edifices), data: { "fr-checked-label": "Tous", "fr-unchecked-label": "Sélection" }
+          = f.label :all_edifices, "Accès à tous les édifices", for: dom_id(access, :all_edifices), class: "fr-toggle__label"
+      - else
+        .fr-toggle.fr-toggle--border-bottom
+          = f.check_box :all_edifices, class: "fr-toggle__input", id: dom_id(access, :all_edifices), checked: access.all_edifices_selected?, data: { controller: "input-autosubmit", action: "input-autosubmit#submit", "fr-checked-label": "Tous", "fr-unchecked-label": "Sélection" }
+          = f.label :all_edifices, "Accès à tous les édifices", for: dom_id(access, :all_edifices), class: "fr-toggle__label"
+
+        %fieldset.fr-fieldset.fr-mt-2w
+          %legend.fr-fieldset__legend.fr-h5.fr-mb-0= "Édifices"
+          = f.fields_for :edifice_ids, access.commune.edifices.ordered_by_nom.with_objets_count, include_id: false do |ff|
+            - edifice = ff.object
+            - nb_objets = Objet.human_attribute_name(:count, count: edifice.objets_count)
+            .fr-fieldset__element
+              .fr-checkbox-group
+                = ff.check_box edifice.id, { checked: access.edifice?(edifice), data: { controller: "input-autosubmit", action: "input-autosubmit#submit" } }
+                = ff.label edifice.id, "#{edifice.nom} (#{nb_objets})"
