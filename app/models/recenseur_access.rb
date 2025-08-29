@@ -14,11 +14,10 @@ class RecenseurAccess < ApplicationRecord
   delegate :human_attribute_name, to: :class
 
   validates :commune, uniqueness: { scope: :recenseur_id }, if: :commune_id_changed?
-  validates :edifice_ids, presence: true, unless: :all_edifices?
-  before_validation :filter_invalid_edifice_ids
 
+  before_validation :filter_invalid_edifice_ids
+  before_save :ensure_consistency, if: :commune
   before_update :reset_notified_if_granted_changed
-  before_update :grant_all_edifices_if_all_edifices_selected
 
   def pending? = granted.nil?
 
@@ -37,6 +36,10 @@ class RecenseurAccess < ApplicationRecord
     edifice_ids.include?(edifice.id)
   end
 
+  def all_edifices_selected?
+    edifice_ids.sort == commune.edifice_ids.sort
+  end
+
   def edifices
     if all_edifices?
       commune.edifices
@@ -47,6 +50,15 @@ class RecenseurAccess < ApplicationRecord
     end
   end
 
+  def edifice_ids_attributes=(attributes)
+    selected_ids = []
+    attributes.each_value.each do |edifice_and_checked_hash|
+      edifice_id, checked = edifice_and_checked_hash.to_a.flatten
+      selected_ids << edifice_id.to_i if checked.to_i.positive?
+    end
+    self.edifice_ids = selected_ids
+  end
+
   private
 
   def reset_notified_if_granted_changed
@@ -54,12 +66,22 @@ class RecenseurAccess < ApplicationRecord
   end
 
   def filter_invalid_edifice_ids
-    return unless commune && edifice_ids.any?
-
-    self.edifice_ids = edifice_ids.select { |id| commune.edifice_ids.include?(id) }
+    self.edifice_ids = edifice_ids.select { |id| commune.edifice_ids.include?(id) } || [] if commune
   end
 
-  def grant_all_edifices_if_all_edifices_selected
-    self.all_edifices = all_edifices? || edifice_ids.to_set == commune.edifice_ids.to_set
+  # rubocop:disable Metrics/CyclomaticComplexity
+  def ensure_consistency
+    # Grant all_edifices when granted becomes true
+    if granted_changed? && granted? && (edifice_ids.empty? || all_edifices_selected?)
+      self.all_edifices = true
+      self.edifice_ids = commune.edifice_ids
+    end
+
+    # Toggle edifices when all_edifices changes
+    self.edifice_ids = all_edifices? ? commune.edifice_ids : [] if granted? && all_edifices_changed?
+
+    # Toggle all_edifices when edifice_ids changes
+    self.all_edifices = all_edifices_selected? if granted? && edifice_ids_changed?
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
