@@ -20,6 +20,19 @@ class Edifice < ApplicationRecord
   }
   scope :ordered_by_nom, -> { order(Arel.sql("LOWER(UNACCENT(edifices.nom))")) }
 
+  scope :with_objets_count, lambda {
+    joins(
+      %{
+        LEFT OUTER JOIN (
+          SELECT objets.edifice_id, COUNT(*) AS objets_count
+          FROM objets
+          WHERE objets.edifice_id IS NOT NULL
+          GROUP BY objets.edifice_id
+        ) objets_counts ON objets_counts.edifice_id = edifices.id
+      }
+    ).select("edifices.*, COALESCE(objets_counts.objets_count, 0) AS objets_count")
+  }
+
   scope :preloaded, lambda {
     joins(:objets)
       .group("edifices.id")
