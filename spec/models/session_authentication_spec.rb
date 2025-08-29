@@ -95,7 +95,7 @@ RSpec.describe SessionAuthentication do
     describe "#validate_resource_found" do
       context "when authenticatable is not persisted" do
         it "adds an error" do
-          allow(model).to receive(:find_by).with(email:).and_return(nil)
+          allow(authentication).to receive(:authenticatable).and_return(nil)
           authentication.valid?
           expect(authentication.errors[:email])
             .to include("Aucun compte trouvé pour cet email.")
