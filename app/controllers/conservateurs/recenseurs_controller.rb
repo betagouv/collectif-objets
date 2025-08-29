@@ -17,7 +17,8 @@ module Conservateurs
 
     # GET /conservateurs/recenseurs/1
     def show
-      @accesses = @recenseur.accesses.sorted.includes(:commune, :departement).where(commune: policy_scope(Commune))
+      @accesses = @recenseur.accesses.sorted.includes(:departement, :commune,
+                                                      commune: :edifices).where(commune: policy_scope(Commune))
       @other_accesses = @recenseur.accesses.size > @accesses.load.size
       render "shared/recenseurs/show"
     end
