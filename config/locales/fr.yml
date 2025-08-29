@@ -361,6 +361,10 @@ fr:
           one: 1 autre pièce jointe
           other: "%{count} autres pièces jointes"
       objet:
+        count:
+          zero: aucun objet
+          one: 1 objet
+          other: "%{count} objets"
         recensed_count:
           zero: aucun objet recensé
           one: 1 objet recensé
