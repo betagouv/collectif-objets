@@ -1,13 +1,13 @@
 raise if Rails.configuration.x.environment_specific_name == "production"
 
-run "bin/rails r scripts/create_postgres_sequences_memoire_photos_numbers.rb"
-
-return if Rails.env.test?
-
 def run(command)
   puts "> #{command}"
   `#{command}`
 end
+
+run "bin/rails r scripts/create_postgres_sequences_memoire_photos_numbers.rb"
+
+return if Rails.env.test?
 
 puts "downloading seeds file from ..."
 path = Rails.root.join("tmp/seeds.pgsql")
