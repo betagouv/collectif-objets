@@ -56,6 +56,10 @@ class Recenseur < ApplicationRecord
 
   def notify_access_revoked? = accepted? && revoked_accesses.any?
 
+  def access_for(commune)
+    accesses.find { |access| access.commune == commune }
+  end
+
   def commune?(commune)
     accesses.any? { |access| access.commune == commune }
   end
