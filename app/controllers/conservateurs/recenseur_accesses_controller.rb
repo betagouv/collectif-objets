@@ -5,6 +5,7 @@ module Conservateurs
     include NotifyRecenseurOfAccessChange
 
     before_action :set_recenseur
+    before_action :set_access, only: :update
 
     # GET /conservateurs/recenseurs/1/accesses/new
     def new
@@ -38,9 +39,7 @@ module Conservateurs
 
     # PATCH/PUT /conservateurs/recenseurs/1/accesses/1
     def update
-      @access = @recenseur.accesses.find(params[:id])
-
-      if @access.update(granted: access_params[:granted])
+      if @access.update(access_params)
         notice = @access.granted? ? "Accès accordé." : "Accès révoqué."
 
         respond_to do |format|
@@ -55,12 +54,17 @@ module Conservateurs
     private
 
     def access_params
-      params.require(:recenseur_access).permit(:commune_id, :granted)
+      params.require(:recenseur_access).permit(:commune_id, :granted, :all_edifices, edifice_ids_attributes: {})
     end
 
     def set_recenseur
       @recenseur = Recenseur.find(params[:recenseur_id])
       authorize(@recenseur)
+    end
+
+    def set_access
+      @access = @recenseur.accesses.find(params[:id])
+      authorize(@access)
     end
   end
 end

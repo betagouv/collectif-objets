@@ -17,7 +17,7 @@ module Admin
 
     # GET /admin/recenseurs/1
     def show
-      @accesses = @recenseur.accesses.sorted.includes(:commune, :departement)
+      @accesses = @recenseur.accesses.sorted.includes(:departement, :commune, commune: :edifices)
       render "shared/recenseurs/show"
     end
 

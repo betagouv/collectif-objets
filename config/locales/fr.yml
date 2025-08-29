@@ -286,6 +286,11 @@ fr:
           granted: Autorisé
           rejected: Refusé
           pending: En attente de confirmation
+      edifice:
+        count:
+          zero: aucun édifice
+          one: 1 édifice
+          other: "%{count} édifices"
       dossier:
         count:
           zero: aucun dossier
