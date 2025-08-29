@@ -22,9 +22,10 @@
 
       %fieldset.fr-fieldset.fr-mt-2w
         %legend.fr-fieldset__legend.fr-h5.fr-mb-0= "Édifices"
-        = f.fields_for :edifice_ids, access.commune.edifices.sort_by(&:nom), include_id: false do |ff|
+        = f.fields_for :edifice_ids, access.commune.edifices.ordered_by_nom.with_objets_count, include_id: false do |ff|
           - edifice = ff.object
+          - nb_objets = Objet.human_attribute_name(:count, count: edifice.objets_count)
           .fr-fieldset__element
             .fr-checkbox-group
               = ff.check_box edifice.id, { checked: access.edifice?(edifice), data: { controller: "input-autosubmit", action: "input-autosubmit#submit" } }
-              = ff.label edifice.id, edifice.nom
+              = ff.label edifice.id, "#{edifice.nom} (#{nb_objets})"
