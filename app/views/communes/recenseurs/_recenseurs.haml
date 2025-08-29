@@ -15,8 +15,8 @@
         %tbody
           - recenseurs.each do |recenseur|
             %tr
-              %td= recenseur.nom
+              %td= link_to recenseur.nom, [@commune, recenseur], "data-turbo-frame": :_top
               %td.co-word-break-all= link_to recenseur.email, "mailto:#{recenseur.email}", target: :_blank
               %td= recenseur.human_status
-              %td= button_to "Révoquer l'accès", commune_recenseur_path(@commune, recenseur), method: :delete, data: { turbo_confirm: "Êtes-vous sûr ?" }, class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-delete-line"
+              %td= button_to "Révoquer l'accès", [@commune, recenseur, recenseur.access_for(@commune)], method: :delete, data: { turbo_confirm: "Êtes-vous sûr ?" }, class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-delete-line"
 

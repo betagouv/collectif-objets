@@ -4,11 +4,17 @@ module Communes
   class RecenseursController < BaseController
     include NotifyRecenseurOfAccessChange
 
-    skip_after_action :verify_authorized, only: [:create, :destroy]
+    before_action :set_recenseur, only: :show
+    skip_after_action :verify_authorized
 
     # GET /communes/1/recenseurs
     def index
       @recenseurs = policy_scope(Recenseur).order(created_at: :desc)
+    end
+
+    # GET /communes/1/recenseurs/1
+    def show
+      @access = @recenseur.granted_accesses.find_by(commune: @commune)
     end
 
     # POST /communes/recenseurs
@@ -33,18 +39,14 @@ module Communes
       end
     end
 
-    # DELETE /communes/recenseurs/1
-    def destroy
-      @recenseur = @commune.recenseurs.find(params[:id])
-      @recenseur.accesses.find_by(commune: @commune).destroy!
-      @recenseur.destroy if @recenseur.accesses.none?
-      redirect_to commune_recenseurs_url, notice: "Accès supprimé.", status: :see_other
-    end
-
     private
 
     def recenseur_params
       params.require(:recenseur).permit(:email, :nom, :notes)
+    end
+
+    def set_recenseur
+      @recenseur = @commune.recenseurs.find(params[:id])
     end
 
     def active_nav_links = ["Recenseurs"]
