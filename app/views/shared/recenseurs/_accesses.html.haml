@@ -5,6 +5,4 @@
     - else
       %p Aucun accès.
   - else
-    %ul.fr-toggle__list
-      %li
-        = render partial: "shared/recenseur_accesses/toggle", collection: accesses, as: :access
+    = render partial: "shared/recenseur_accesses/toggle", collection: accesses, as: :access
