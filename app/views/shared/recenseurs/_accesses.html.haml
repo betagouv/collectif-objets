@@ -1,5 +1,5 @@
 = turbo_frame_tag :accesses do
-  - if accesses.empty?
+  - if accesses.load.empty?
     - if other_accesses
       %p Cette personne a accès à des communes d'autres départements.
     - else
