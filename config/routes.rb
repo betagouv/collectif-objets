@@ -103,7 +103,9 @@ Rails.application.routes.draw do
       resources :email_attachments, only: [:show]
     end
     resource :user, only: [:update]
-    resources :recenseurs, only: [:index, :create, :destroy]
+    resources :recenseurs, only: [:index, :create, :show] do
+      resources :access, only: [:update, :destroy], as: :recenseur_access, controller: :recenseur_accesses
+    end
   end
 
   ## --------
