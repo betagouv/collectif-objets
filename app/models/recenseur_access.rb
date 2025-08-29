@@ -33,8 +33,8 @@ class RecenseurAccess < ApplicationRecord
     human_attribute_name("status.#{status}")
   end
 
-  def edifice?(edifice_id)
-    all_edifices? || edifice_ids.include?(edifice_id.to_i)
+  def edifice?(edifice)
+    edifice_ids.include?(edifice.id)
   end
 
   def edifices

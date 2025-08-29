@@ -162,26 +162,14 @@ RSpec.describe RecenseurAccess, type: :model do
   describe "#edifice?" do
     let!(:edifice1) { create(:edifice, commune:) }
     let!(:edifice2) { create(:edifice, commune:) }
+    let(:access) { create(:recenseur_access, recenseur:, commune:, all_edifices: false, edifice_ids: [edifice1.id]) }
 
-    context "when all_edifices is true" do
-      let(:access) { create(:recenseur_access, recenseur:, commune:, all_edifices: true) }
-
-      it "returns true for any edifice in the commune" do
-        expect(access.edifice?(edifice1.id)).to be true
-        expect(access.edifice?(edifice2.id)).to be true
-      end
+    it "returns true for edifices in edifice_ids" do
+      expect(access.edifice?(edifice1)).to be true
     end
 
-    context "when all_edifices is false" do
-      let(:access) { create(:recenseur_access, recenseur:, commune:, all_edifices: false, edifice_ids: [edifice1.id]) }
-
-      it "returns true for edifices in edifice_ids" do
-        expect(access.edifice?(edifice1.id)).to be true
-      end
-
-      it "returns false for edifices not in edifice_ids" do
-        expect(access.edifice?(edifice2.id)).to be false
-      end
+    it "returns false for edifices not in edifice_ids" do
+      expect(access.edifice?(edifice2)).to be false
     end
   end
 
