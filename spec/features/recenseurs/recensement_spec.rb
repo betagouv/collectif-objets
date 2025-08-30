@@ -6,7 +6,7 @@ RSpec.feature "Recenseurs - Recensement", type: :feature, js: true do
   let(:drome) { create(:departement, code: "26", nom: "Drôme") }
   let(:albon) { create(:commune, nom: "Albon", code_insee: "26002", departement: drome) }
   let(:montelimar) { create(:commune, nom: "Montélimar", code_insee: "26198", departement: drome) }
-  let(:objet) do
+  let!(:objet) do
     create(:objet, palissy_TICO: "Bouquet d’Autel", palissy_EDIF: "Eglise st Jean", commune: albon, edifice:)
   end
   let!(:edifice) { create(:edifice, code_insee: albon.code_insee) }
@@ -38,6 +38,7 @@ RSpec.feature "Recenseurs - Recensement", type: :feature, js: true do
     expect(page).to be_axe_clean
     click_on "Recenser"
 
+    click_on "Objets de Albon"
     card_bouquet = find(".fr-card:not(.fr-card--horizontal)", text: "Bouquet d’Autel")
     expect(card_bouquet).to have_text(/Recensement à compléter/i)
   end
