@@ -11,7 +11,7 @@
     .fr-col-md-8.fr-col-offset-md-2
       .fr-px-2w.fr-px-md-0
         %h1 Recensement
-      .fr-mb-4w= render "communes/recensements/objet", objet: @wizard.objet
+      .fr-mb-4w= render "communes/recensements/objet", wizard: @wizard
 
       = turbo_frame_tag "recensement_form_step",
         data: { controller: "recensement-form-step",
