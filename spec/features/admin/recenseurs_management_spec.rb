@@ -38,7 +38,7 @@ RSpec.feature "Admin - Gestion des recenseurs", type: :feature, js: true do
     click_on "Rechercher"
     expect(page).to have_text("Albon (26 - Drôme)")
     within(dom_id(albon)) do
-      click_on "Ajouter l'accès à Albon (Drôme)"
+      click_on "Ajouter l'accès"
     end
 
     expect(page).to have_button("Accès ajouté", disabled: true)
@@ -50,7 +50,7 @@ RSpec.feature "Admin - Gestion des recenseurs", type: :feature, js: true do
     click_on "Rechercher"
     expect(page).to have_text("Lyon (69 - Rhône)")
     within(dom_id(lyon)) do
-      click_on "Ajouter l'accès à Lyon (Rhône)"
+      click_on "Ajouter l'accès"
     end
 
     expect(page).to have_button("Accès ajouté", disabled: true)
@@ -70,8 +70,8 @@ RSpec.feature "Admin - Gestion des recenseurs", type: :feature, js: true do
     visit admin_recenseur_path(recenseur)
     expect(page).to have_text("Albon")
 
-    within "#accesses" do
-      find("label", text: "Albon (Drôme)").click
+    within dom_id(access) do
+      find("label", text: "Autoriser le recensement").click
     end
 
     sleep 1
