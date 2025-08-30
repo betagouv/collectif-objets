@@ -51,12 +51,8 @@ RSpec.feature "Conservateurs - Gestion des recenseurs", type: :feature, js: true
       click_on "Ajouter l'accès"
     end
 
-    # First check if the access was created
-    access = RecenseurAccess.find_by(recenseur:, commune: montelimar)
-    expect(access).to be_present
-    expect(access.granted).to be_truthy
+    expect(RecenseurAccess.exists?(recenseur:, commune: montelimar, granted: true)).to eq(true)
 
-    # Then check if the button was updated
     expect(page).to have_button("Accès ajouté", disabled: true)
   end
 
