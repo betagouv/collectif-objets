@@ -8,7 +8,7 @@
 
   - if params[:nom]
     .co-flex.co-flex--space-between.co-flex--align-items-baseline
-      %h3.fr-h5= pluralize(pagy.count, "résultat", plural: "Résultats")
+      %h3.fr-h5.fr-mb-0= pluralize(pagy.count, "résultat", plural: "Résultats")
       - if pagy.pages > 1
         %span.fr-text--sm #{pagy.page}/#{pagy.pages}
     %ul
