@@ -38,6 +38,6 @@
     = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil
     .fr-mt-2w
       = link_to "Revenir à la fiche objet",
-        commune_objet_path(wizard.commune, wizard.objet),
+        wizard.objet_path,
         class: "fr-link fr-link--icon-left fr-icon-arrow-left-line",
         data: { turbo_frame: "_top" }
