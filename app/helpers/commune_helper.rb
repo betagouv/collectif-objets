@@ -55,6 +55,6 @@ module CommuneHelper
   end
 
   def commune_with_departement(commune)
-    "#{commune.nom} (#{commune.departement.nom})"
+    "#{commune.nom} (#{commune.departement.code} - #{commune.departement.nom})"
   end
 end
