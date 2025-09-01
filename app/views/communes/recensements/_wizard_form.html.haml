@@ -1,5 +1,5 @@
 = form_for wizard,
-  url: commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: wizard.step_number),
+  url: wizard.step_path(step: :current),
   builder: FormBuilderDsfr,
   as: :wizard,
   data: { turbo_action: "advance" } do |f|

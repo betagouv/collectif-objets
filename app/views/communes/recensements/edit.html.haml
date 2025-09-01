@@ -3,8 +3,8 @@
   .fr-px-2w.fr-px-md-0
     = render "shared/breadcrumbs",
       links: [["Accueil", root_path],
-        ["Objets de #{current_user.commune.nom}", commune_objets_path(current_user.commune)],
-        [@wizard.objet.nom, commune_objet_path(@wizard.commune, @wizard.objet)],
+        ["Objets de #{@wizard.commune.nom}", @wizard.commune_path],
+        [@wizard.objet.nom, @wizard.objet_path],
       ], current_page_label: "Recensement"
 
   .fr-grid-row
