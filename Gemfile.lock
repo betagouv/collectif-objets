@@ -298,7 +298,9 @@ GEM
       ast (~> 2.4.1)
       racc
     pdf-core (0.10.0)
-    pg (1.5.9)
+    pg (1.6.1)
+    pg (1.6.1-x86_64-darwin)
+    pg (1.6.1-x86_64-linux)
     pp (0.6.2)
       prettyprint
     prawn (2.5.0)
@@ -553,7 +555,7 @@ DEPENDENCIES
   matrix (~> 0.4)
   mjml-rails (~> 4.15)
   pagy (~> 6.5)
-  pg (~> 1.5)
+  pg (~> 1.6)
   prawn (~> 2.5)
   prawn-table (~> 0.2)
   progressbar (~> 1.0)
