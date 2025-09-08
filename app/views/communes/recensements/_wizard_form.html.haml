@@ -29,7 +29,7 @@
         - if !recensement.valid? || recensement.draft?
           = f.button "Valider le recensement de cet objet", type: :submit, name: nil, class: "fr-btn", data: { turbo: false }
         - else
-          = link_to "Valider le recensement de cet objet", commune_objets_path(recensement.commune, recensement_saved: true, objet_id: recensement.objet.id), class: "fr-btn", data: { turbo: false }
+          = link_to "Valider le recensement de cet objet", wizard.after_success_path, class: "fr-btn", data: { turbo: false }
       - else
         = f.button "Passer à l’étape suivante", type: :submit, name: nil, class: "fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
     %li
