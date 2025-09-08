@@ -15,11 +15,6 @@
 
 .co-tabs--no-padding .fr-tabs__panel { padding: 0; }
 
-.co-edit-button {
-  position: relative;
-  top: 2px;
-}
-
 .co-markdown-content img { max-width: 100%; }
 .co-markdown-content iframe { margin-bottom: 1rem; }
 
