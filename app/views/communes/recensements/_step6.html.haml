@@ -1,9 +1,5 @@
 -# locals: (wizard:)
 
-= render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
+= render "communes/recensements/wizard_form", wizard: do |form_builder|
 
   = render "communes/recensements/fields/notes", form_builder:
-
-  .co-text--right
-    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil
-    .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:
