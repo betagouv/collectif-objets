@@ -9,6 +9,7 @@ class RecenseurAccess < ApplicationRecord
   scope :pending, -> { where(granted: nil) }
   scope :newly_granted, -> { where(granted: true, notified: false) }
   scope :newly_revoked, -> { where(granted: false, notified: false) }
+  scope :with_edifices, -> { where(all_edifices: true).or(where.not(edifice_ids: [])) }
   scope :sorted, -> { joins(:commune).order("communes.departement_code, communes.nom") }
 
   delegate :human_attribute_name, to: :class
