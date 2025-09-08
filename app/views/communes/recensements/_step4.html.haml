@@ -22,15 +22,3 @@
         = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
       - m.with_button do
         = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
-
-  .co-text--right
-    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil, data: { recensement_form_step_target: "link" }
-
-.fr-mt-2w.co-text--right
-  = button_to "Revenir à l’étape précédente",
-    edit_commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement),
-    params: {step: wizard.previous_step_number},
-    class: "fr-link fr-link--icon-left fr-icon-arrow-left-line",
-    method: "get",
-    data: { turbo_action: "advance", recensement_form_step_target: "link" },
-    type: "button"
