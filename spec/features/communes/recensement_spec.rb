@@ -306,7 +306,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(card_bouquet).to have_text(/Recensé/i)
     card_bouquet.click
     step7_validate
-    find("section", text: "L’objet n’est pas recensable").find('button[title="Modifier la réponse"]').click
+    find("section", text: "L’objet n’est pas recensable").find('a[title="Modifier l\'état recensable"]').click
     step3_validate
     find("label", text: "L’objet est recensable").click
     click_on "Passer à l’étape suivante"
@@ -468,7 +468,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Oui, il a été déplacé temporairement")
     expect(page).not_to have_text("L’objet est-il recensable ?")
     find("section", text: "Oui, il a été déplacé temporairement")
-      .find('button[title="Modifier la localisation de l’objet"]').click
+      .find('a[title="Modifier la localisation de l’objet"]').click
 
     step1_validate
     expect(find(".fr-radio-group", text: "Oui, mais l’objet a été déplacé temporairement")
