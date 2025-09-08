@@ -96,18 +96,19 @@ module RecensementWizard
     def recenseur? = recenseur.present?
     def namespace = recenseur ? :recenseurs : nil
 
-    def commune_path
-      [namespace, commune].compact
+    def commune_path(*args)
+      [namespace, commune, *args].compact
     end
 
-    def step_path(step: nil, edit: false)
+    def step_path(step: nil, edit: false, **args)
+      edit = edit ? :edit : nil
       step = case step
              when :previous then previous_step_number
              when :next then next_step_number
              when :current, nil then step_number
              else step
              end
-      [edit ? :edit : nil, namespace, commune, objet, recensement, { step: }].compact
+      [edit, namespace, commune, objet, recensement, args.merge(step:)].compact
     end
 
     def objet_path(*args)
@@ -120,8 +121,7 @@ module RecensementWizard
 
     def after_success_path
       to_step = confirmation_modal? ? step_number : next_step_number
-      edit_commune_objet_recensement_path \
-        commune, objet, recensement, step: to_step, **confirmation_modal_path_params.to_h
+      step_path(step: to_step, edit: true, **confirmation_modal_path_params.to_h)
     end
 
     # Cette méthode est à re définir dans les sous-classes pour remettre à zéro les données de recensement
