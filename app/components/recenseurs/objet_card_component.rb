@@ -6,7 +6,7 @@ module Recenseurs
 
     def initialize(objet, commune: nil, recensement: nil)
       @objet = objet
-      @recensement = recensement
+      @recensement = recensement || objet.recensement
       @commune = commune || objet.commune
       super
     end
