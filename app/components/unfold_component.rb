@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UnfoldComponent < ViewComponent::Base
+class UnfoldComponent < ApplicationComponent
   include ApplicationHelper
 
   attr_reader :max_height_px, :button_text

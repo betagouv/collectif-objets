@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class RecensementAttributeBadgeComponent < ViewComponent::Base
+  class RecensementAttributeBadgeComponent < ApplicationComponent
     include ApplicationHelper
     include RecensementHelper
 

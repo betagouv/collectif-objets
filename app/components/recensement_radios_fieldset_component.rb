@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RecensementRadiosFieldsetComponent < ViewComponent::Base
+class RecensementRadiosFieldsetComponent < ApplicationComponent
   renders_one :legend
   renders_many :options, lambda { |value:, label:, **kwargs|
     form_builder.radio_button(field, value, **kwargs) +

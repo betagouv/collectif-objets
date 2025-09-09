@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PasswordInputComponent < ViewComponent::Base
+class PasswordInputComponent < ApplicationComponent
   attr_reader :name, :autocomplete, :autofocus, :label, :hint
 
   def initialize(name:, autocomplete: nil, autofocus: false, label: "Mot de passe", hint: true)

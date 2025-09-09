@@ -3,7 +3,7 @@
 module Galerie
   module Actions
     class Destroy
-      class ButtonComponent < ViewComponent::Base
+      class ButtonComponent < ApplicationComponent
         include ButtonConcern
 
         def initialize(responsive_variant: :desktop)

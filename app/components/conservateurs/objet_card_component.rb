@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class ObjetCardComponent < ViewComponent::Base
+  class ObjetCardComponent < ApplicationComponent
     def initialize(objet, commune: nil, recensement: nil, can_analyse: false)
       @objet = objet
       @recensement = recensement

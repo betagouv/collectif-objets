@@ -3,7 +3,7 @@
 module Galerie
   module Actions
     class Rotate
-      class ButtonComponent < ViewComponent::Base
+      class ButtonComponent < ApplicationComponent
         include ButtonConcern
 
         attr_reader :attachment_path, :redirect_path

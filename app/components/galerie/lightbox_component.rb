@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Galerie
-  class LightboxComponent < ViewComponent::Base
+  class LightboxComponent < ApplicationComponent
     include ApplicationHelper
 
     delegate(

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class MailIframeComponent < ViewComponent::Base
+  class MailIframeComponent < ApplicationComponent
     attr_reader :mail, :display_headers, :fit, :redirect_path
 
     IFRAME_CSS = <<-HTML

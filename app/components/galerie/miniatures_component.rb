@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Galerie
-  class MiniaturesComponent < ViewComponent::Base
+  class MiniaturesComponent < ApplicationComponent
     include ApplicationHelper
 
     delegate :photos, :title, :count, :actions, to: :@galerie

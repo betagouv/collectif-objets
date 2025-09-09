@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Galerie
-  class FrameComponent < ViewComponent::Base
+  class FrameComponent < ApplicationComponent
     include Turbo::FramesHelper
 
     attr_reader(

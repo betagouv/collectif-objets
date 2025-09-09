@@ -3,7 +3,7 @@
 module Galerie
   module Actions
     class Destroy
-      class ConfirmationComponent < ViewComponent::Base
+      class ConfirmationComponent < ApplicationComponent
         attr_reader :attachment_path, :redirect_path
 
         def initialize(attachment_path:, redirect_path:)
