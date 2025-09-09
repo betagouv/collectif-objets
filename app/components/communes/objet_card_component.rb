@@ -19,7 +19,7 @@ module Communes
     def btn_text
       if readonly? # La commune a déjà recensé l'objet
         "Afficher"
-      elsif recensement&.status == "draft" # Si la commune a commencé à recenser l'objet
+      elsif recensement&.draft? # Si la commune a commencé à recenser l'objet
         "Compléter"
       elsif recensement # La commune a déjà recensé l'objet
         "Modifier"
@@ -47,7 +47,7 @@ module Communes
     end
 
     def readonly?
-      commune&.status == "completed"
+      commune&.completed?
     end
 
     def header_badges
