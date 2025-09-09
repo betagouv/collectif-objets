@@ -1,6 +1,9 @@
-.fr-mb-4w{"data-controller" => "unfold-component"}
-  .co-overflow--hidden.co-position-relative{"data-max-height": max_height_px, "data-unfold-component-target": "content"}
-    = content
-  .co-text--center
-    %button.fr-link.hide.fr-mt-1w.fr-p-1w{"data-action": "unfold-component#displayAll", "data-unfold-component-target": "button"}
-      = button_text
+- if folded
+  .fr-mb-4w{"data-controller" => "unfold-component"}
+    .co-overflow--hidden.co-position-relative{"data-max-height": max_height_px, "data-unfold-component-target": "content"}
+      = content
+    .co-text--center
+      %button.fr-link.hide.fr-mt-1w.fr-p-1w{"data-action": "unfold-component#displayAll", "data-unfold-component-target": "button"}
+        = button_text
+- else
+  = content
