@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Recenseurs
-  class ObjetCardComponent < ViewComponent::Base
+  class ObjetCardComponent < ApplicationComponent
     include ObjetHelper
 
     def initialize(objet, commune: nil, recensement: nil)
