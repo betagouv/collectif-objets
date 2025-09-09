@@ -12,7 +12,7 @@ module Communes
     end
 
     def call
-      render ::ObjetCardComponent.new(objet, commune:, header_badges:, btn_text:, btn_class:, btn_path:,
+      render ::ObjetCardComponent.new(objet, commune:, header_badges:, btn_text:, btn_class:,
                                              path:, main_photo_origin: :recensement_or_memoire)
     end
 
@@ -32,12 +32,6 @@ module Communes
       "fr-btn fr-btn--sm fr-btn--icon-right fr-icon-arrow-right-line fr-enlarge-link fr-btn--secondary"
     end
 
-    def btn_path
-      return if readonly? || recensement.nil?
-
-      edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id)
-    end
-
     private
 
     attr_reader :objet, :recensement, :commune
@@ -45,7 +39,11 @@ module Communes
     delegate :dossier, to: :recensement, allow_nil: true
 
     def path
-      [commune, objet]
+      if readonly? || recensement.nil?
+        [commune, objet]
+      else
+        [:edit, commune, objet, recensement]
+      end
     end
 
     def readonly?
