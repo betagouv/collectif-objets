@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Conservateurs
-  class AnalyseOverrideComponent < ViewComponent::Base
+  class AnalyseOverrideComponent < ApplicationComponent
     include ApplicationHelper
     include RecensementHelper
 

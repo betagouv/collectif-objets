@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PhotoUploadComponent < ViewComponent::Base
+class PhotoUploadComponent < ApplicationComponent
   include ApplicationHelper
 
   def initialize(url:)

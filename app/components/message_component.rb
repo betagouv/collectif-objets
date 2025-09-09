@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MessageComponent < ViewComponent::Base
+class MessageComponent < ApplicationComponent
   include ApplicationHelper
 
   with_collection_parameter :message

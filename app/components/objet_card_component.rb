@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ObjetCardComponent < ViewComponent::Base
+class ObjetCardComponent < ApplicationComponent
   using HTMLAttributesUtils
 
   with_collection_parameter :objet

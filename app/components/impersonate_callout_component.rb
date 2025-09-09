@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ImpersonateCalloutComponent < ViewComponent::Base
+class ImpersonateCalloutComponent < ApplicationComponent
   include ApplicationHelper
 
   def initialize(mode:, name:, toggle_path:)

@@ -3,7 +3,7 @@
 module Galerie
   module Actions
     class Download
-      class ButtonComponent < ViewComponent::Base
+      class ButtonComponent < ApplicationComponent
         include ButtonConcern
 
         attr_reader :url

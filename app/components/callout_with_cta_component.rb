@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CalloutWithCtaComponent < ViewComponent::Base
+class CalloutWithCtaComponent < ApplicationComponent
   renders_one :text
   renders_one :cta
 
