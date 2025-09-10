@@ -54,6 +54,8 @@ RSpec.describe RecenseurAccess, type: :model do
       let(:other_edifice) { create(:edifice) }
 
       it "removes edifice ids that don't belong to the commune" do
+        # Force reload to ensure association is fresh after edifice creation
+        commune.reload
         access = build(:recenseur_access, recenseur:, commune:, edifice_ids: [edifice.id, other_edifice.id])
         access.valid?
         expect(access.edifice_ids).to contain_exactly(edifice.id)
@@ -121,7 +123,10 @@ RSpec.describe RecenseurAccess, type: :model do
 
         context "becomes []" do
           let(:all_edifices) { true }
-          let(:edifice_ids) { commune.edifice_ids }
+          let(:edifice_ids) do
+            commune.reload
+            commune.edifice_ids
+          end
 
           it "sets all_edifices = false" do
             access.update!(edifice_ids: [])
@@ -201,7 +206,10 @@ RSpec.describe RecenseurAccess, type: :model do
   describe "#edifice?" do
     let!(:edifice1) { create(:edifice, commune:) }
     let!(:edifice2) { create(:edifice, commune:) }
-    let(:access) { create(:recenseur_access, recenseur:, commune:, all_edifices: false, edifice_ids: [edifice1.id]) }
+    let(:access) do
+      commune.reload
+      create(:recenseur_access, recenseur:, commune:, all_edifices: false, edifice_ids: [edifice1.id])
+    end
 
     it "returns true for edifices in edifice_ids" do
       expect(access.edifice?(edifice1)).to be true
@@ -217,7 +225,10 @@ RSpec.describe RecenseurAccess, type: :model do
     let!(:edifice2) { create(:edifice, commune:) }
 
     context "when all_edifices is true" do
-      let(:access) { create(:recenseur_access, recenseur:, commune:, all_edifices: true) }
+      let(:access) do
+        commune.reload
+        create(:recenseur_access, recenseur:, commune:, all_edifices: true)
+      end
 
       it "returns all edifices from the commune" do
         expect(access.edifices).to contain_exactly(edifice1, edifice2)
@@ -225,7 +236,10 @@ RSpec.describe RecenseurAccess, type: :model do
     end
 
     context "when all_edifices is false and edifice_ids contains specific ids" do
-      let(:access) { create(:recenseur_access, recenseur:, commune:, all_edifices: false, edifice_ids: [edifice1.id]) }
+      let(:access) do
+        commune.reload
+        create(:recenseur_access, recenseur:, commune:, all_edifices: false, edifice_ids: [edifice1.id])
+      end
 
       it "returns only the specified edifices" do
         expect(access.edifices).to contain_exactly(edifice1)
