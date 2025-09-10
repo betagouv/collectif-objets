@@ -67,7 +67,9 @@ class RecenseurAccess < ApplicationRecord
   end
 
   def filter_invalid_edifice_ids
-    self.edifice_ids = edifice_ids.select { |id| commune.edifice_ids.include?(id) } || [] if commune
+    return unless commune
+
+    self.edifice_ids = (edifice_ids || []).select { |id| commune.edifice_ids.include?(id) }
   end
 
   # rubocop:disable Metrics/CyclomaticComplexity
@@ -82,7 +84,13 @@ class RecenseurAccess < ApplicationRecord
     self.edifice_ids = all_edifices? ? commune.edifice_ids : [] if granted? && all_edifices_changed?
 
     # Toggle all_edifices when edifice_ids changes
-    self.all_edifices = all_edifices_selected? if granted? && edifice_ids_changed?
+    return unless granted? && edifice_ids_changed?
+
+    self.all_edifices = if edifice_ids.empty?
+                          false
+                        else
+                          all_edifices_selected?
+                        end
   end
   # rubocop:enable Metrics/CyclomaticComplexity
 end
