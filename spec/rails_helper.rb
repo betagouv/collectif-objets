@@ -10,6 +10,7 @@ require "rspec/rails"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require "axe-rspec"
+require "database_cleaner/active_record"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
@@ -36,6 +37,22 @@ RSpec.configure do |config|
 
   config.include Warden::Test::Helpers
   config.before(:suite) { require Rails.root.join("scripts/create_postgres_sequences_memoire_photos_numbers.rb") }
+
+  # Use DatabaseCleaner to avoid Active Storage issues - only necessary for feature tests
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(type: :feature, js: true) do |example|
+    # Disable transactional fixtures and use truncation for JS tests only
+    self.use_transactional_tests = false
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+    self.use_transactional_tests = true
+  end
+
   config.include CapybaraDomId, type: :feature
 
   require "webmock/rspec"

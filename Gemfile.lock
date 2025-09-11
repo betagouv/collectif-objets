@@ -157,6 +157,10 @@ GEM
       rexml
     crass (1.0.6)
     csv (3.3.0)
+    database_cleaner-active_record (2.2.2)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0)
+    database_cleaner-core (2.0.1)
     date (3.4.1)
     debug (1.11.0)
       irb (~> 1.10)
@@ -538,6 +542,7 @@ DEPENDENCIES
   bootsnap (~> 1.18)
   capybara (~> 3.39)
   csv (~> 3.3)
+  database_cleaner-active_record (~> 2.1)
   debug (>= 1.0)
   devise (~> 4.9)
   dsfr-view-components (~> 1.5)
