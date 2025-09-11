@@ -22,12 +22,6 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-module CapybaraDomId
-  def dom_id(element)
-    "#" + ActionView::RecordIdentifier.dom_id(element)
-  end
-end
-
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
