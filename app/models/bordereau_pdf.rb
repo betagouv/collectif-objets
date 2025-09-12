@@ -4,6 +4,13 @@ class BordereauPdf
   include Prawn::View # Permet d'utiliser directement les méthodes de Prawn::Document
   attr_reader :bordereau
 
+  # Replace unicode characters missing in Marianne font with visual equivalents
+  TEXT_REPLACEMENTS = {
+    "\u2019" => "\u2018", # Right single quote → left single quote
+    "\u201D" => "\u201C", # Right double quote → left double quote
+    "\u2012" => "\u2013"  # Figure dash → en dash
+  }.freeze
+
   delegate :commune, :dossier, :edifice, to: :bordereau
 
   def initialize(bordereau)
@@ -58,7 +65,9 @@ class BordereauPdf
       "<b>Observations</b>",
       "<b>Photographie</b>"
     ]]
-    lines = bordereau.bordereau_recensements.map(&:to_pdf_cells)
+    lines = bordereau.bordereau_recensements.collect do |br|
+      br.to_pdf_cells.map { |cell| normalize_text(cell) }
+    end
     options = {
       header: true,
       column_widths: [75, 110, 75, 75, 350, 75],
@@ -84,11 +93,11 @@ class BordereauPdf
       move_down 10
       text "Bordereau de récolement des objets mobiliers".upcase, align: :center, style: :bold, size: 14
       move_down 10
-      text "Département : #{dossier.departement}", align: :center
+      text "Département : #{normalize_text(dossier.departement)}", align: :center
       move_down 5
-      text "Commune de : #{commune.nom}", align: :center
+      text "Commune de : #{normalize_text(commune.nom)}", align: :center
       move_down 5
-      text "Édifice : #{edifice.nom.upcase_first}", align: :center
+      text "Édifice : #{normalize_text(edifice.nom.upcase_first)}", align: :center
       # TODO: Ajouter l'adresse récupérée lors de l'import depuis Palissy
     end
   end
@@ -99,7 +108,7 @@ class BordereauPdf
     text "Participants au récolement :", style: :bold
     move_down 20
     text <<~TEXT, inline_format: true
-      Les soussignés certifient que les objets mobiliers ou immeubles par destination portés au present état figurent dans l’édifice «#{edifice.nom}», #{commune}, lors du récolement en date du #{ellipsis}
+      Les soussignés certifient que les objets mobiliers ou immeubles par destination portés au present état figurent dans l'édifice «#{normalize_text(edifice.nom)}», #{normalize_text(commune.to_s)}, lors du récolement en date du #{ellipsis}
     TEXT
     move_down 40
     text "Fait à #{ellipsis}, le #{ellipsis}", align: :right
@@ -178,6 +187,14 @@ class BordereauPdf
         bold: Rails.root.join("prawn_assets/Marianne-Bold.ttf")
       }
     font "Marianne"
+  end
+
+  # Replace Unicode characters that don't render properly in PDFs
+  def normalize_text(text)
+    return text unless text.is_a?(String)
+
+    text.gsub(/[#{TEXT_REPLACEMENTS.keys.join}]/, TEXT_REPLACEMENTS)
+      .encode("UTF-8", invalid: :replace, undef: :replace, replace: "?")
   end
 
   def ellipsis
