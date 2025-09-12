@@ -1,3 +1,5 @@
+- objet = wizard.objet
+
 .co-flex.co-box-shadow.co-recensement-objet-summary.fr-px-2w.fr-px-md-0
   .co-recensement-objet-summary__photo
     - if objet.palissy_photos_presenters.any?
@@ -16,5 +18,5 @@
       .co-position-absolute.co-bottom-0.co-width--100.co-flex.co-flex--justify-content-end.co-background--white.fr-pt-1w
         %div
           = link_to "revenir à la fiche objet",
-            commune_objet_path(objet.commune, objet),
+            wizard.objet_path,
             class: "fr-link fr-link--sm fr-link--icon-left fr-icon-arrow-go-back-line"

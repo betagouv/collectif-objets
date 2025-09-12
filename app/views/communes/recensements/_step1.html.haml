@@ -1,6 +1,6 @@
 -# locals: (wizard:)
 
-= render "communes/recensements/wizard_form", wizard: wizard do |form_builder|
+= render "communes/recensements/wizard_form", wizard: do |form_builder|
 
   = render RecensementRadiosFieldsetComponent.new(form_builder:, field: :localisation) do |c|
     - c.with_legend do
@@ -33,11 +33,3 @@
         = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
       - m.with_button do
         = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
-
-  .co-text--right
-    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil
-    .fr-mt-2w
-      = link_to "Revenir à la fiche objet",
-        commune_objet_path(wizard.commune, wizard.objet),
-        class: "fr-link fr-link--icon-left fr-icon-arrow-left-line",
-        data: { turbo_frame: "_top" }

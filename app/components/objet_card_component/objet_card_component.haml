@@ -2,7 +2,7 @@
   .fr-card__body
     .fr-card__content
       %h2.fr-card__title
-        = link_to truncated_nom, btn_path || path, **link_html_attributes
+        = link_to truncated_nom, path, **link_html_attributes
       %p.fr-card__desc
         = commune.nom
         %br/
@@ -21,7 +21,7 @@
       - if btn_text
         .fr-card__end
           .fr-btns-group.fr-btns-group--icon-left
-            = link_to btn_text, btn_path, class: btn_class
+            = link_to btn_text, path, class: btn_class
   .fr-card__header
     = render("shared/card_photo", photo: main_photo)
     - if header_badges

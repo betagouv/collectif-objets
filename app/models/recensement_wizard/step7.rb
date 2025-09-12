@@ -11,7 +11,11 @@ module RecensementWizard
     end
 
     def after_success_path
-      commune_objets_path(commune, recensement_saved: true, objet_id: objet.id)
+      if recenseur?
+        commune_path(recensement_saved: true)
+      else
+        commune_objets_path(commune, recensement_saved: true, objet_id: objet.id)
+      end
     end
   end
 end

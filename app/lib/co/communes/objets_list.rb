@@ -20,7 +20,6 @@ module Co
           .edifices
           .with_objets
           .includes(objets: { recensement: %i[photos_attachments photos_blobs] })
-          .ordered_by_nom
       end
 
       def objets
