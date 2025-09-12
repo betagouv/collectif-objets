@@ -82,7 +82,7 @@ class BordereauPdf
       text "Conservation des antiquités et objets d’art".upcase, align: :center, style: :bold, size: 10
       stroke_horizontal_rule
       move_down 10
-      text "Bordereau de récolement des objets mobilier".upcase, align: :center, style: :bold, size: 14
+      text "Bordereau de récolement des objets mobiliers".upcase, align: :center, style: :bold, size: 14
       move_down 10
       text "Département : #{dossier.departement}", align: :center
       move_down 5
