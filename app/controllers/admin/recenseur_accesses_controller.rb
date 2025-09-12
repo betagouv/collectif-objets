@@ -54,7 +54,7 @@ module Admin
     private
 
     def access_params
-      params.require(:recenseur_access).permit(:commune_id, :granted, :all_edifices, edifice_ids_attributes: {})
+      params.require(:recenseur_access).permit(:commune_id, :granted, :all_edifices, edifice_ids: [])
     end
 
     def set_recenseur
