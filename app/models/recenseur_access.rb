@@ -51,15 +51,6 @@ class RecenseurAccess < ApplicationRecord
     end
   end
 
-  def edifice_ids_attributes=(attributes)
-    selected_ids = []
-    attributes.each_value.each do |edifice_and_checked_hash|
-      edifice_id, checked = edifice_and_checked_hash.to_a.flatten
-      selected_ids << edifice_id.to_i if checked.to_i.positive?
-    end
-    self.edifice_ids = selected_ids
-  end
-
   private
 
   def reset_notified_if_granted_changed
