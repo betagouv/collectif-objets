@@ -23,10 +23,10 @@
       %fieldset.fr-fieldset.fr-mt-2w
         %legend.fr-fieldset__legend.fr-h5.fr-mb-0= "Édifices"
         = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher tous les édifices de #{access.commune.nom}…", folded: access.updated_at.before?(1.minute.ago)) do
-          = f.fields_for :edifice_ids, access.commune.edifices.ordered_by_nom.with_objets_count, include_id: false do |ff|
-            - edifice = ff.object
+          - access.commune.edifices.ordered_by_nom.with_objets_count.each do |edifice|
             - nb_objets = Objet.human_attribute_name(:count, count: edifice.objets_count)
             .fr-fieldset__element
               .fr-checkbox-group
-                = ff.check_box edifice.id, { checked: access.edifice?(edifice), data: { controller: "input-autosubmit", action: "input-autosubmit#submit" } }
-                = ff.label edifice.id, "#{edifice.nom} (#{nb_objets})"
+                - field_id = "recenseur_access_edifice_ids_#{edifice.id}"
+                = f.check_box :edifice_ids, { multiple: true, checked: access.edifice?(edifice), data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }, id: field_id }, edifice.id.to_s, ""
+                = f.label "edifice_ids", "#{edifice.nom} (#{nb_objets})", for: field_id

@@ -26,7 +26,7 @@ module Communes
     private
 
     def access_params
-      params.require(:recenseur_access).permit(:all_edifices, edifice_ids_attributes: {})
+      params.require(:recenseur_access).permit(:all_edifices, edifice_ids: [])
     end
 
     def set_access
