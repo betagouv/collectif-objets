@@ -11,9 +11,12 @@ class JsonLogFormatter < ActiveSupport::Logger::SimpleFormatter
     log_entry = {
       time: time.iso8601,
       level: severity,
-      message: message
+      message: message.to_s
     }
-    JSON.generate("#{log_entry}\n")
+    "#{JSON.generate(log_entry)}\n"
+  rescue JSON::GeneratorError
+    # Fallback to simple format if JSON generation fails
+    "#{time.iso8601} [#{severity}] #{message}\n"
   end
 end
 
