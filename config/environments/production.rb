@@ -94,7 +94,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
@@ -118,7 +118,8 @@ Rails.application.configure do
     config.logger    = logger
   end
 
-  config.x.environment_specific_name = ENV.fetch("RAILS_SPECIFIC_ENV", ENV["HOST"] =~ /staging/ ? "staging" : "production")
+  config.x.environment_specific_name = ENV.fetch("RAILS_SPECIFIC_ENV",
+                                                 ENV.fetch("HOST", nil) =~ /staging/ ? "staging" : "production")
 
   case config.x.environment_specific_name
   when "production", "mc_prd"
