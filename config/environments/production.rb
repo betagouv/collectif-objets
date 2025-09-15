@@ -53,7 +53,14 @@ Rails.application.configure do
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :info
+  valid_log_levels = [:debug, :info, :warn, :error, :fatal, :unknown]
+  requested_level = ENV["RAILS_LOG_LEVEL"].to_s.downcase.to_sym.presence_in(valid_log_levels)
+  if ENV["RAILS_LOG_LEVEL"].present? && requested_level.nil?
+    raise ArgumentError,
+          "Invalid RAILS_LOG_LEVEL '#{ENV.fetch('RAILS_LOG_LEVEL')}'. " \
+          "Valid levels are: #{valid_log_levels.join(', ')}"
+  end
+  config.log_level = requested_level || :info
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
