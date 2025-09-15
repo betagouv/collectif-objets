@@ -150,7 +150,4 @@ Rails.application.configure do
     config.active_storage.service = :scaleway_staging
   end
   config.sandbox_by_default = true # for the console
-
-  puts "environment: production"
-  puts "specific environment: #{config.x.environment_specific_name}"
 end
