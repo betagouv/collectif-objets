@@ -108,14 +108,15 @@ Rails.application.configure do
   config.x.inbound_emails_domain = ENV.fetch("INBOUND_EMAILS_DOMAIN", "reponse.collectifobjets.org")
   config.x.inbound_allowed_ips = ENV.fetch("INBOUND_ALLOWED_IPS", "185.107.232.|1.179.112.").split("|")
 
-  logger = ActiveSupport::Logger.new($stdout)
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
-  end
-  if ENV["RAILS_SPECIFIC_ENV"].present?
-    logger.formatter = JsonLogFormatter.new
-    config.logger    = logger
+    logger = ActiveSupport::Logger.new($stdout)
+    if ENV["RAILS_SPECIFIC_ENV"].present?
+      logger.formatter = JsonLogFormatter.new
+      config.logger    = logger
+    else
+      logger.formatter = config.log_formatter
+      config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    end
   end
 
   config.x.environment_specific_name = ENV.fetch("RAILS_SPECIFIC_ENV",
