@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ruby:3.4.2-slim
+FROM ruby:3.4.4-slim
 
 EXPOSE 3000
 
