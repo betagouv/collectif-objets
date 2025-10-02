@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "open-uri"
+
 class BordereauRecensement < ApplicationRecord
   belongs_to :bordereau, inverse_of: :bordereau_recensements
   belongs_to :recensement, inverse_of: :bordereau_recensements
@@ -35,14 +37,16 @@ class BordereauRecensement < ApplicationRecord
     end
   end
 
+  def recensement_photo
+    recensement.photos&.first&.variant(:small)
+  end
+
+  def palissy_photo
+    objet.palissy_photos.first["url"]&.sub(MEMOIRE_PHOTOS_AWS_BASE_URL, MEMOIRE_PHOTOS_BASE_URL)
+  end
+
   def photo
-    if (variant = recensement.photos&.first&.variant(:small))
-      variant.url
-    elsif objet.palissy_photos.present?
-      objet.palissy_photos.first["url"].sub(MEMOIRE_PHOTOS_AWS_BASE_URL, MEMOIRE_PHOTOS_BASE_URL)
-    else
-      "images/illustrations/photo-manquante-pop.png"
-    end
+    recensement_photo&.url || palissy_photo
   end
 
   def notes_commune
@@ -82,9 +86,16 @@ class BordereauRecensement < ApplicationRecord
   end
 
   def pdf_photo
-    blob = recensement.photos.first&.variant(:small)
-    return unless blob
+    data = if (blob = recensement_photo)
+             blob.processed.download
+           elsif (url = palissy_photo)
+             raise ArgumentError, "Only https urls are allowed" unless url.start_with?("https://")
 
-    { image: StringIO.new(blob.processed.download), fit: [65, 65] }
+             URI.open(url, "rb", &:read) # rubocop:disable Security/Open
+           end
+
+    { image: StringIO.new(data), fit: [65, 65] } if data
+  rescue ActiveStorage::FileNotFoundError
+    nil
   end
 end
