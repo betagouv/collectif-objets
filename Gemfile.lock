@@ -132,7 +132,7 @@ GEM
     base64 (0.3.0)
     bcrypt (3.1.20)
     benchmark (0.4.1)
-    bigdecimal (3.2.2)
+    bigdecimal (3.2.3)
     bindex (0.8.1)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
@@ -455,10 +455,10 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.26.0)
+    sentry-rails (5.28.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.26.0)
-    sentry-ruby (5.26.0)
+      sentry-ruby (~> 5.28.0)
+    sentry-ruby (5.28.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
     sexp_processor (4.16.1)
@@ -601,7 +601,7 @@ DEPENDENCIES
   rubyzip (~> 2.3)
   selenium-webdriver (~> 4.33)
   sentry-rails (~> 5.26)
-  sentry-ruby (~> 5.26)
+  sentry-ruby (~> 5.28)
   solargraph (~> 0.50)
   turbo-rails (~> 2.0)
   typhoeus (~> 1.4)
@@ -616,7 +616,7 @@ DEPENDENCIES
   yabeda-rails (~> 0.9.0)
 
 RUBY VERSION
-   ruby 3.4.2p28
+   ruby 3.4.5p51
 
 BUNDLED WITH
-   2.6.3
+   2.7.2

@@ -58,6 +58,10 @@
                     État de conservation
                   = ff.select :etat_sanitaire, BordereauRecensement.etats_sanitaires, include_blank: ""
                 .fr-input-group
+                  = ff.label :etat_sanitaire do
+                    État de conservation
+                  = ff.select :etat_sanitaire, BordereauRecensement.etats_sanitaires, include_blank: ""
+                .fr-input-group
                   = ff.label :notes_commune do
                     Notes commune
                   = ff.text_area :notes_commune, data: { controller: "autogrow", action: "autogrow#resize" }
