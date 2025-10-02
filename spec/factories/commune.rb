@@ -2,12 +2,19 @@
 
 FactoryBot.define do
   factory :commune do
+    transient do
+      edifices_count { 0 }
+    end
     nom { "Châlons-en-Champagne" }
     sequence(:code_insee) { |n| (n + 51_108).to_s }
     # status { "inactive" }
-    association :departement
+    departement { Departement.first || create(:departement) }
     phone_number { "01 01 01 01 01" }
     inbound_email_token { "12345678901234567890" }
+
+    after(:build) do |commune, evaluator|
+      commune.edifices = build_list(:edifice, evaluator.edifices_count, commune:)
+    end
 
     trait :with_user do
       users { [association(:user, commune: instance)] }
@@ -20,6 +27,10 @@ FactoryBot.define do
     trait :recensable do
       with_user
       with_objets
+    end
+
+    trait :with_edifices do
+      edifices_count { 2 }
     end
 
     trait :en_cours_de_recensement do
