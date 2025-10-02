@@ -1,102 +1,84 @@
--# locals: (wizard:)
-
 - recensement = wizard.recensement
 
-- if recensement.errors.any?
-  %section.fr-mb-4w
-    .fr-alert.fr-alert--error
-      .fr-alert__content
-        - if recensement.errors.count == 1
-          = recensement.errors.first.message
-        - else
-          %ul
-            - recensement.errors.each do |error|
-              %li= error.full_message
+= render "communes/recensements/wizard_form", wizard: do
+  - if recensement.errors.any?
+    %section.fr-mb-4w
+      .fr-alert.fr-alert--error
+        .fr-alert__content
+          - if recensement.errors.count == 1
+            = recensement.errors.first.message
+          - else
+            %ul
+              - recensement.errors.each do |error|
+                %li= error.full_message
 
-- if recensement.analyse_notes.present?
-  %section.fr-mb-4w
-    %h3.fr-text--lg.fr-mb-1v
-      Commentaires du conservateur
-    .co-blockquote= recensement.analyse_notes
-
-%section.fr-mb-4w
-  %h3.fr-text--lg.fr-mb-1v
-    Avez-vous trouvé l’objet ?
-    = edit_recensement_step_link recensement, 1, title: "Modifier la localisation de l’objet"
-  %div
-    = t "recensement.localisation.answers.#{recensement.localisation}_html",
-      nom_edifice: recensement_nom_edifice(recensement), nom_commune_localisation_objet: nom_commune_localisation_objet(recensement)
-
--# Il serait certainement plus cohérent d'avoir recensable == false dans le cas où l'objet rentre dans les critères suivants
-- unless recensement.absent? || recensement.deplacement_temporaire? || recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
-  %section.fr-mb-4w
-    %h3.fr-text--lg.fr-mb-1v
-      L’objet est-il recensable ?
-      = edit_recensement_step_link recensement, 3, title: "Modifier la réponse"
-    %div= t "recensement.recensable_choices.#{recensement.recensable.to_s}"
-
-- if recensement.recensable?
-  %section.fr-mb-4w
-    %h3.fr-text--lg.fr-mb-1v
-      Photos
-      = edit_recensement_step_link recensement, 4, title: "Modifier les photos"
-    - if recensement.photos.any?
-      .co-flex.co-flex--gap-1rem.co-flex--wrap
-        - recensement.photos.each do |photo|
-          = render "communes/recensements/photo", photo:, recensement:
-    - else
-      %div
-        %span.fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
+  - if recensement.analyse_notes.present?
+    %section.fr-mb-4w
+      %h3.fr-text--lg.fr-mb-1v
+        Commentaires du conservateur
+      .co-blockquote= recensement.analyse_notes
 
   %section.fr-mb-4w
     %h3.fr-text--lg.fr-mb-1v
-      Quel est l’état de l’objet ?
-      - unless recensement.analyse_etat_sanitaire.present?
-        = edit_recensement_step_link recensement, 5, title: "Modifier l’état de l’objet"
+      Avez-vous trouvé l’objet ?
+      = edit_wizard_step_link wizard, 1, title: "Modifier la localisation de l’objet"
     %div
-      - if recensement.analyse_etat_sanitaire.present?
-        %div.co-text--strikethrough.co-semi-transparent.fr-mr-1w
+      = t "recensement.localisation.answers.#{recensement.localisation}_html",
+        nom_edifice: recensement_nom_edifice(recensement), nom_commune_localisation_objet: nom_commune_localisation_objet(recensement)
+
+  -# Il serait certainement plus cohérent d'avoir recensable == false dans le cas où l'objet rentre dans les critères suivants
+  - unless recensement.absent? || recensement.deplacement_temporaire? || recensement.localisation == Recensement::LOCALISATION_DEPLACEMENT_AUTRE_COMMUNE
+    %section.fr-mb-4w
+      %h3.fr-text--lg.fr-mb-1v
+        L’objet est-il recensable ?
+        = edit_wizard_step_link wizard, 3, title: "Modifier l'état recensable"
+      %div= t "recensement.recensable_choices.#{recensement.recensable.to_s}"
+
+  - if recensement.recensable?
+    %section.fr-mb-4w
+      %h3.fr-text--lg.fr-mb-1v
+        Photos
+        = edit_wizard_step_link wizard, 4, title: "Modifier les photos"
+      - if recensement.photos.any?
+        .co-flex.co-flex--gap-1rem.co-flex--wrap
+          - recensement.photos.each do |photo|
+            = render "communes/recensements/photo", photo:, recensement:
+      - else
+        %div
+          %span.fr-badge.fr-badge--sm.fr-badge--warning photos manquantes
+
+    %section.fr-mb-4w
+      %h3.fr-text--lg.fr-mb-1v
+        Quel est l’état de l’objet ?
+        - unless recensement.analyse_etat_sanitaire.present?
+          = edit_wizard_step_link wizard, 5, title: "Modifier l’état de l’objet"
+      %div
+        - if recensement.analyse_etat_sanitaire.present?
+          %div.co-text--strikethrough.co-semi-transparent.fr-mr-1w
+            = t "recensement.etat_sanitaire_choices.#{recensement.etat_sanitaire}"
+          %div= t "recensement.etat_sanitaire_choices.#{recensement.analyse_etat_sanitaire}"
+          .fr-mt-1w.co-text--italic Cette évaluation a été modifiée par le conservateur, vous ne pouvez pas la modifier
+        - else
           = t "recensement.etat_sanitaire_choices.#{recensement.etat_sanitaire}"
-        %div= t "recensement.etat_sanitaire_choices.#{recensement.analyse_etat_sanitaire}"
+
+    %section.fr-mb-4w
+      %h3.fr-text--lg.fr-mb-1v
+        L’objet est-il en sécurité ?
+        - unless recensement.analyse_securisation.present?
+          = edit_wizard_step_link wizard, 5, title: "Modifier la sécurisation"
+      - if recensement.analyse_securisation.present?
+        %div.co-text--strikethrough.co-semi-transparent.fr-mr-1w
+          = t "recensement.securisation_choices.#{recensement.securisation}"
+        %div= t "recensement.securisation_choices.#{recensement.analyse_securisation}"
         .fr-mt-1w.co-text--italic Cette évaluation a été modifiée par le conservateur, vous ne pouvez pas la modifier
       - else
-        = t "recensement.etat_sanitaire_choices.#{recensement.etat_sanitaire}"
+        = t "recensement.securisation_choices.#{recensement.securisation}"
 
   %section.fr-mb-4w
     %h3.fr-text--lg.fr-mb-1v
-      L’objet est-il en sécurité ?
-      - unless recensement.analyse_securisation.present?
-        = edit_recensement_step_link recensement, 5, title: "Modifier la réponse"
-    - if recensement.analyse_securisation.present?
-      %div.co-text--strikethrough.co-semi-transparent.fr-mr-1w
-        = t "recensement.securisation_choices.#{recensement.securisation}"
-      %div= t "recensement.securisation_choices.#{recensement.analyse_securisation}"
-      .fr-mt-1w.co-text--italic Cette évaluation a été modifiée par le conservateur, vous ne pouvez pas la modifier
+      Vos commentaires
+      = edit_wizard_step_link wizard, 6, title: "Modifier les commentaires"
+    - if recensement.notes.present?
+      .co-blockquote= recensement.notes
     - else
-      = t "recensement.securisation_choices.#{recensement.securisation}"
-
-%section.fr-mb-4w
-  %h3.fr-text--lg.fr-mb-1v
-    Vos commentaires
-    = edit_recensement_step_link recensement, 6, title: "Modifier les commentaires"
-  - if recensement.notes.present?
-    .co-blockquote= recensement.notes
-  - else
-    .co-text--italic Aucun commentaire
-
-- if !recensement.valid? || recensement.draft?
-  = form_for wizard,
-    url: commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: wizard.step_number),
-    builder: FormBuilderDsfr,
-    as: :wizard,
-    data: { turbo: "false" } do |f|
-    .co-text--right
-      %div= f.submit "Valider le recensement de cet objet", class: "fr-btn"
-      .fr-mt-1w.co-text--italic Vous pourrez modifier le recensement même après l’avoir validé
-      .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:
-- else
-  .co-text--right
-    %div
-      = link_to "Valider le recensement de cet objet", commune_objets_path(recensement.commune, recensement_saved: true, objet_id: recensement.objet.id), class: "fr-btn", data: { turbo: false }
-    .fr-mt-1w.co-text--italic Vous pourrez modifier le recensement même après l’avoir validé
-    .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:
+      .co-text--italic Aucun commentaire
