@@ -47,5 +47,7 @@ module CollectifObjets
     config.action_controller.raise_on_missing_callback_actions = false
 
     config.i18n.raise_on_missing_translations = true
+
+    config.x.waf_protection_active = ENV["WAF_PROTECTION_ACTIVE"].present?
   end
 end
