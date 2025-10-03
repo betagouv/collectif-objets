@@ -308,6 +308,13 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  # ==> Configuration for :two_factor_authenticatable
+  # Encryption key for OTP secrets
+  config.otp_secret_encryption_key = Rails.application.credentials.otp_secret_encryption_key
+
+  # Time drift allowed for OTP validation (in seconds)
+  config.otp_allowed_drift = 60
 end
 
 Warden::Manager.after_set_user except: :fetch do |record, warden, options|
