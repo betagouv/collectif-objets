@@ -3,7 +3,7 @@
 require "rails_helper"
 
 feature "Admin", js: true do
-  let!(:admin) { create(:admin_user) }
+  let!(:admin) { create(:admin_user, otp_required_for_login: true) }
   shared_examples "an accessible page" do |excludes|
     it "should be accessible" do
       login_as admin, scope: :admin_user
