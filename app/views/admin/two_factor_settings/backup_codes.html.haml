@@ -8,11 +8,11 @@
 
   .fr-grid-row
     .fr-col-md-8
-      .fr-alert.fr-alert--success.fr-mb-4w
+      .fr-alert.fr-alert--success.fr-mb-4w.co-print-hide
         %p.fr-alert__title 2FA activé avec succès
         %p Votre compte est maintenant protégé par l'authentification à deux facteurs.
 
-      .fr-alert.fr-alert--warning.fr-mb-4w
+      .fr-alert.fr-alert--warning.fr-mb-4w.co-print-hide
         %p.fr-alert__title
           %strong Important : Sauvegardez ces codes de secours
         %p
@@ -24,7 +24,7 @@
         %h2.fr-h5 Vos codes de secours
         %textarea.fr-input{ readonly: true, rows: 20, data: { download_text_target: "content" } }= download_content
 
-      .fr-btns-group.fr-btns-group--inline-md.fr-btns-group--icon-left
+      .fr-btns-group.fr-btns-group--inline-md.fr-btns-group--icon-left.co-print-hide
         %button.fr-btn.fr-btn--secondary.fr-icon-file-download-line{ type: :button, data: { action: "download-text#download" } }
           Télécharger
         %button.fr-btn.fr-btn--secondary.fr-icon-printer-line{ type: :button, data: { controller: "print", action: "print#print" } }
