@@ -86,10 +86,10 @@ RSpec.describe Admin::AdminUsersController, type: :request do
 
       before { login_as(admin_with_secret, scope: :admin_user) }
 
-      it "shows 2FA setup page for own account" do
+      it "shows QR code for own account" do
         get admin_admin_user_two_factor_settings_path(admin_with_secret)
         expect(response).to have_http_status(:success)
-        expect(response.body).to include("Clé secrète")
+        expect(response.body).to include("<svg")
         expect(admin_with_secret.reload.otp_secret).to be_present
       end
 
