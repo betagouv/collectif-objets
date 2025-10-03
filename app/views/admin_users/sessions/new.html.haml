@@ -16,8 +16,10 @@
           .fr-mt-1w
             = link_to "Mot de passe oublié ?", new_admin_user_password_path, class: "fr-link"
         .fr-input-group
-          = f.label :otp_attempt, "Code 2FA (si activé)"
-          = f.text_field :otp_attempt, autocomplete: "one-time-code", placeholder: "123456"
+          = f.label :otp_attempt do
+            Code 2FA ou code de secours (si activé)
+            %span.fr-hint-text Vous pouvez utiliser un code de secours si vous n'avez pas accès à votre application d'authentification.
+          = f.text_field :otp_attempt, autocomplete: "one-time-code", placeholder: "123456 ou XXXX-XXXX-XXXX"
         .co-flex.co-flex--space-between.fr-my-4w
           %div
             .fr-checkbox-group
