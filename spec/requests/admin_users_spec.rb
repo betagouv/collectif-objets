@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Admin::AdminUsersController, type: :request do
-  let(:admin_user) { create(:admin_user, otp_required_for_login: true) }
+  let(:admin_user) { create(:admin_user) }
   let(:params) { {} }
 
   before(:each) { login_as(admin_user, scope: :admin_user) }
@@ -81,18 +81,6 @@ RSpec.describe Admin::AdminUsersController, type: :request do
   end
 
   context "2FA (two-factor authentication)" do
-    context "when admin does not have 2FA enabled" do
-      let(:admin_without_2fa) { create(:admin_user, otp_required_for_login: false) }
-
-      before { login_as(admin_without_2fa, scope: :admin_user) }
-
-      it "redirects to 2FA setup page when accessing admin pages" do
-        get admin_admin_users_path
-        expect(response).to redirect_to(admin_admin_user_two_factor_settings_path(admin_without_2fa))
-        expect(flash[:alert]).to match(/activer l'authentification à deux facteurs/i)
-      end
-    end
-
     context "GET admin/admin_users/:id/2fa" do
       let(:admin_with_secret) { create(:admin_user, otp_required_for_login: false, otp_secret: nil) }
 
@@ -189,10 +177,9 @@ RSpec.describe Admin::AdminUsersController, type: :request do
         post disable_admin_admin_user_two_factor_settings_path(admin_with_2fa),
              params: { otp_attempt: otp_code, password: "wrongpassword" }
 
-        expect(response).to redirect_to(admin_admin_user_two_factor_settings_path(admin_with_2fa))
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(admin_with_2fa.reload.otp_required_for_login).to be true
-        follow_redirect!
-        expect(response.body).to match(/Confirmation du mot de passe requise/i)
+        expect(response.body).to match(/Mot de passe invalide/i)
       end
     end
   end

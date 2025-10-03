@@ -5,11 +5,16 @@ module Admin
     skip_before_action :require_two_factor_authentication
     before_action :set_admin_user
     before_action :ensure_own_account
-    before_action :ensure_otp_secret, only: [:show]
+    before_action :ensure_otp_secret, only: [:show, :confirm]
+    before_action :set_qr_code, only: [:show, :confirm]
     before_action :require_password_confirmation, only: [:disable, :confirm]
 
     def show
-      @qr_code = generate_qr_code if @admin_user.otp_secret.present? && !@admin_user.otp_required_for_login?
+      if @admin_user.otp_required_for_login?
+        render :disable
+      else
+        render :enable
+      end
     end
 
     def confirm
@@ -17,16 +22,15 @@ module Admin
         @admin_user.update!(otp_required_for_login: true)
         redirect_to admin_admin_user_two_factor_settings_path(@admin_user), notice: "2FA activé avec succès"
       else
-        @qr_code = generate_qr_code
         flash.now[:alert] = "Code invalide"
-        render :show, status: :unprocessable_entity
+        render :enable, status: :unprocessable_entity
       end
     end
 
     def disable
       unless @admin_user.validate_and_consume_otp!(params[:otp_attempt])
         flash.now[:alert] = "Code 2FA invalide"
-        render :show, status: :unprocessable_entity
+        render :disable, status: :unprocessable_entity
         return
       end
 
@@ -53,6 +57,12 @@ module Admin
       @admin_user.save!
     end
 
+    def set_qr_code
+      return if @admin_user.otp_required_for_login?
+
+      @qr_code = generate_qr_code
+    end
+
     def generate_qr_code
       require "rqrcode"
       env_suffix = if Rails.application.staging?
@@ -72,13 +82,11 @@ module Admin
     def require_password_confirmation
       return if params[:password].present? && current_admin_user.valid_password?(params[:password])
 
+      flash.now[:alert] = "Mot de passe invalide"
       if action_name == "confirm"
-        @qr_code = generate_qr_code
-        flash.now[:alert] = "Mot de passe invalide"
-        render :show, status: :unprocessable_entity
+        render :enable, status: :unprocessable_entity
       else
-        redirect_to admin_admin_user_two_factor_settings_path(@admin_user),
-                    alert: "Confirmation du mot de passe requise"
+        render :disable, status: :unprocessable_entity
       end
     end
   end

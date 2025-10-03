@@ -1,0 +1,27 @@
+- content_for(:head_title) { "Gérer l'authentification 2FA" }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render("shared/breadcrumbs", links: [["Administration", admin_path], ["Admins", admin_admin_users_path], [current_admin_user.to_s, admin_admin_user_path(current_admin_user)]], current_page_label: "Gérer la 2FA")
+
+  %h1 Authentification à deux facteurs
+
+  .fr-grid-row
+    .fr-col-md-8
+      .fr-alert.fr-alert--success.fr-mb-4w
+        %p.fr-alert__title Authentification 2FA activée
+        %p Votre compte est protégé par l'authentification à deux facteurs.
+
+      %h2.fr-h5.fr-mt-4w Désactiver l'authentification à 2 facteurs
+
+      = form_with url: disable_admin_admin_user_two_factor_settings_path(@admin_user), method: :post do |f|
+        .fr-input-group
+          = f.label :otp_attempt, "Code 2FA"
+          = f.text_field :otp_attempt, class: "fr-input", required: true, autocomplete: "one-time-code", placeholder: "123456"
+        .fr-input-group{ "data-controller": "password-visibility" }
+          = f.label :password, class: "co-flex co-flex--space-between" do
+            Mot de passe
+            %button.fr-btn.fr-btn--tertiary.fr-btn--icon-left.fr-fi-eye-line{ type: :button, data: { action: "password-visibility#toggle", "password-visibility-target": :button } }
+              Afficher
+          = f.password_field :password, class: "fr-input", required: true, autocomplete: "current-password", "data-password-visibility-target": :input
+        .fr-mt-2w
+          = f.submit "Désactiver 2FA", class: "fr-btn", data: { confirm: "Êtes-vous sûr de vouloir désactiver l'authentification 2FA ?" }
