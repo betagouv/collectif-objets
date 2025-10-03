@@ -7,13 +7,16 @@ module Admin
     before_action :ensure_otp_secret, only: [:show]
     before_action :require_password_confirmation, only: [:disable, :confirm]
 
-    def show; end
+    def show
+      @qr_code = generate_qr_code if @admin_user.otp_secret.present? && !@admin_user.otp_required_for_login?
+    end
 
     def confirm
       if @admin_user.validate_and_consume_otp!(params[:otp_attempt])
         @admin_user.update!(otp_required_for_login: true)
         redirect_to admin_admin_user_two_factor_settings_path(@admin_user), notice: "2FA activé avec succès"
       else
+        @qr_code = generate_qr_code
         flash.now[:alert] = "Code invalide"
         render :show, status: :unprocessable_entity
       end
@@ -49,10 +52,27 @@ module Admin
       @admin_user.save!
     end
 
+    def generate_qr_code
+      require "rqrcode"
+      env_suffix = if Rails.application.staging?
+                     " (staging)"
+                   elsif !Rails.env.production?
+                     " (#{Rails.env})"
+                   else
+                     ""
+                   end
+      issuer = "Collectif Objets#{env_suffix}"
+      label = "#{issuer}:#{@admin_user.email}"
+      otp_uri = @admin_user.otp_provisioning_uri(label, issuer:)
+      qr = RQRCode::QRCode.new(otp_uri)
+      qr.as_svg(module_size: 4, color: "000", fill: "fff")
+    end
+
     def require_password_confirmation
       return if params[:password].present? && current_admin_user.valid_password?(params[:password])
 
       if action_name == "confirm"
+        @qr_code = generate_qr_code
         flash.now[:alert] = "Mot de passe invalide"
         render :show, status: :unprocessable_entity
       else
