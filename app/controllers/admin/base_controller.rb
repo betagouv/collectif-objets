@@ -11,7 +11,7 @@ module Admin
     def restrict_access
       return true if current_admin_user.present?
 
-      redirect_to root_path, alert: "Vous n'êtes pas connecté en tant qu'admin"
+      redirect_to new_admin_user_session_path, alert: "Vous n'êtes pas connecté en tant qu'admin"
     end
 
     def disconnect_impersonating_user
