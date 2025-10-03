@@ -20,11 +20,20 @@ module Admin
     def confirm
       if @admin_user.validate_and_consume_otp!(params[:otp_attempt])
         @admin_user.update!(otp_required_for_login: true)
-        redirect_to admin_admin_user_two_factor_settings_path(@admin_user), notice: "2FA activé avec succès"
+        backup_codes = @admin_user.generate_otp_backup_codes!
+        session[:backup_codes] = backup_codes
+        redirect_to backup_codes_admin_admin_user_two_factor_settings_path(@admin_user),
+                    notice: "Authentification 2FA activée avec succès"
       else
         flash.now[:alert] = "Code invalide"
         render :enable, status: :unprocessable_entity
       end
+    end
+
+    def backup_codes
+      return if (@backup_codes = session.delete(:backup_codes))
+
+      redirect_to admin_admin_user_two_factor_settings_path(@admin_user)
     end
 
     def disable
@@ -34,8 +43,8 @@ module Admin
         return
       end
 
-      @admin_user.update!(otp_required_for_login: false, otp_secret: nil)
-      redirect_to admin_admin_user_two_factor_settings_path(@admin_user), notice: "2FA désactivé"
+      @admin_user.update!(otp_required_for_login: false, otp_secret: nil, otp_backup_codes: [])
+      redirect_to admin_admin_user_two_factor_settings_path(@admin_user), notice: "Authentification 2FA désactivée"
     end
 
     private
