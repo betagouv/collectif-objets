@@ -53,7 +53,6 @@ Rails.application.routes.draw do
     get "comment-ca-marche", action: :aide, as: :aide
     get "guide-de-recensement", action: :guide, as: :guide
     get :pdf, to: redirect("guide-de-recensement")
-    get :admin
     get :plan
     get :declaration_accessibilite
     get :schema_pluriannuel_accessibilite
@@ -140,6 +139,8 @@ Rails.application.routes.draw do
   ## -----
   ## ADMIN
   ## -----
+
+  get "/admin", to: "admin/dashboard#index", as: :admin
 
   namespace :admin do
     resources :communes, only: %i[index show] do
