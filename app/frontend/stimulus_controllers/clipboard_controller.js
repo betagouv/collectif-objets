@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static value = { content: String }
+  static values = { content: String }
 
   copy(e) {
     e.preventDefault()
