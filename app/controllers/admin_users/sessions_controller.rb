@@ -22,15 +22,45 @@ module AdminUsers
       user = find_user
       return unless user&.otp_required_for_login?
 
-      if user.validate_and_consume_otp!(params[:admin_user][:otp_attempt])
-        sign_in(user)
-        set_flash_message!(:notice, :signed_in)
-        redirect_to after_sign_in_path_for(user)
+      otp_code = params.require(:admin_user).permit(:otp_attempt)[:otp_attempt]
+
+      if authenticate_with_otp(user, otp_code)
+        sign_in_and_redirect(user, notice: "Connexion réussie")
+      elsif authenticate_with_backup_code(user, otp_code)
+        sign_in_and_redirect(user, warning: backup_code_warning_message(user))
       else
-        self.resource = user
-        flash.now[:alert] = "Code 2FA #{otp.blank? ? 'requis' : 'invalide'}"
-        render :new, status: :unprocessable_entity
+        handle_failed_authentication(user, otp_code)
       end
+    end
+
+    def authenticate_with_otp(user, otp_code)
+      user.validate_and_consume_otp!(otp_code)
+    end
+
+    def authenticate_with_backup_code(user, otp_code)
+      user.invalidate_otp_backup_code!(otp_code)
+    end
+
+    def sign_in_and_redirect(user, notice: nil, warning: nil)
+      sign_in(user)
+      set_flash_message!(:notice, :signed_in) if notice
+      flash[:alert] = warning if warning
+      redirect_to after_sign_in_path_for(user)
+    end
+
+    def backup_code_warning_message(user)
+      remaining = user.otp_backup_codes_remaining
+      if remaining.zero?
+        "Connecté avec un code de secours. C'était votre dernier code ! Générez-en de nouveaux."
+      else
+        "Connecté avec un code de secours. Il vous reste #{pluralize(remaining, 'code')}."
+      end
+    end
+
+    def handle_failed_authentication(user, otp_code)
+      self.resource = user
+      flash.now[:alert] = "Code 2FA #{otp_code.blank? ? 'requis' : 'invalide'}"
+      render :new, status: :unprocessable_entity
     end
 
     def find_user

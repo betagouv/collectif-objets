@@ -198,6 +198,7 @@ Rails.application.routes.draw do
       resource :two_factor_settings, only: [:show], path: "2fa" do
         post :confirm
         post :disable
+        get :backup_codes
       end
     end
   end
