@@ -1,0 +1,32 @@
+- content_for(:head_title) { "Codes de secours 2FA" }
+- download_content = "Codes de secours 2FA - Collectif Objets\nCompte: #{@admin_user.email}\nGénérés le: #{Time.current.strftime('%d/%m/%Y à %H:%M')}\n\n#{@backup_codes.join("\n")}\n\nChaque code ne peut être utilisé qu'une seule fois.\nConservez-les en lieu sûr."
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w{ data: { controller: "download-text", download_text_filename_value: "collectif-objets-backup-codes.txt" } }
+  = render("shared/breadcrumbs", links: [["Administration", admin_path], ["Admins", admin_admin_users_path], [current_admin_user.to_s, admin_admin_user_path(current_admin_user)], ["Configuration 2FA", admin_admin_user_two_factor_settings_path(current_admin_user)]], current_page_label: "Codes 2FA de secours")
+
+  %h1 Codes de secours générés
+
+  .fr-grid-row
+    .fr-col-md-8
+      .fr-alert.fr-alert--success.fr-mb-4w
+        %p.fr-alert__title 2FA activé avec succès
+        %p Votre compte est maintenant protégé par l'authentification à deux facteurs.
+
+      .fr-alert.fr-alert--warning.fr-mb-4w
+        %p.fr-alert__title
+          %strong Important : Sauvegardez ces codes de secours
+        %p
+          Chaque code ne peut être utilisé qu'une seule fois. Conservez-les en lieu sûr.
+          %br
+          %strong Ces codes ne seront plus jamais affichés après avoir quitté cette page.
+
+      .fr-mb-4w
+        %h2.fr-h5 Vos codes de secours
+        %textarea.fr-input{ readonly: true, rows: 20, data: { download_text_target: "content" } }= download_content
+
+      .fr-btns-group.fr-btns-group--inline-md.fr-btns-group--icon-left
+        %button.fr-btn.fr-btn--secondary.fr-icon-file-download-line{ type: :button, data: { action: "download-text#download" } }
+          Télécharger
+        %button.fr-btn.fr-btn--secondary.fr-icon-printer-line{ type: :button, data: { controller: "print", action: "print#print" } }
+          Imprimer
+        = link_to "Continuer", admin_admin_user_two_factor_settings_path(@admin_user), class: "fr-btn"
