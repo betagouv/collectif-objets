@@ -79,4 +79,109 @@ RSpec.describe Admin::AdminUsersController, type: :request do
       expect { perform_request }.to change(AdminUser, :count).by(-1)
     end
   end
+
+  context "2FA (two-factor authentication)" do
+    context "GET admin/admin_users/:id/2fa" do
+      let(:admin_with_secret) { create(:admin_user, otp_required_for_login: false, otp_secret: nil) }
+
+      before { login_as(admin_with_secret, scope: :admin_user) }
+
+      it "shows 2FA setup page for own account" do
+        get admin_admin_user_two_factor_settings_path(admin_with_secret)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("Clé secrète")
+        expect(admin_with_secret.reload.otp_secret).to be_present
+      end
+
+      it "prevents configuring 2FA for other accounts" do
+        other_admin = create(:admin_user, otp_required_for_login: false)
+        get admin_admin_user_two_factor_settings_path(other_admin)
+        expect(response).to redirect_to(admin_admin_users_path)
+        expect(flash[:alert]).to match(/ne pouvez configurer que votre propre 2FA/i)
+      end
+    end
+
+    context "POST admin/admin_users/:id/2fa/confirm" do
+      let(:admin_with_secret) { create(:admin_user, otp_required_for_login: false) }
+
+      before do
+        admin_with_secret.otp_secret = AdminUser.generate_otp_secret
+        admin_with_secret.save!
+        login_as(admin_with_secret, scope: :admin_user)
+      end
+
+      it "enables 2FA with valid OTP and password" do
+        otp_code = admin_with_secret.current_otp
+        post confirm_admin_admin_user_two_factor_settings_path(admin_with_secret),
+             params: { otp_attempt: otp_code, password: admin_with_secret.password }
+
+        expect(response).to redirect_to(admin_admin_user_two_factor_settings_path(admin_with_secret))
+        expect(admin_with_secret.reload.otp_required_for_login).to be true
+        follow_redirect!
+        expect(response.body).to match(/2FA activé avec succès/i)
+      end
+
+      it "fails with invalid OTP code" do
+        post confirm_admin_admin_user_two_factor_settings_path(admin_with_secret),
+             params: { otp_attempt: "000000", password: admin_with_secret.password }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(admin_with_secret.reload.otp_required_for_login).to be false
+        expect(response.body).to match(/Code invalide/i)
+      end
+
+      it "fails with invalid password" do
+        otp_code = admin_with_secret.current_otp
+        post confirm_admin_admin_user_two_factor_settings_path(admin_with_secret),
+             params: { otp_attempt: otp_code, password: "wrongpassword" }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(admin_with_secret.reload.otp_required_for_login).to be false
+        expect(response.body).to match(/Mot de passe invalide/i)
+      end
+    end
+
+    context "POST admin/admin_users/:id/2fa/disable" do
+      let(:admin_with_2fa) { create(:admin_user, otp_required_for_login: true) }
+
+      before do
+        admin_with_2fa.otp_secret = AdminUser.generate_otp_secret
+        admin_with_2fa.save!
+        login_as(admin_with_2fa, scope: :admin_user)
+      end
+
+      it "disables 2FA with valid OTP and password" do
+        otp_code = admin_with_2fa.current_otp
+        post disable_admin_admin_user_two_factor_settings_path(admin_with_2fa),
+             params: { otp_attempt: otp_code, password: admin_with_2fa.password }
+
+        expect(response).to redirect_to(admin_admin_user_two_factor_settings_path(admin_with_2fa))
+        admin_with_2fa.reload
+        expect(admin_with_2fa.otp_required_for_login).to be false
+        expect(admin_with_2fa.otp_secret).to be_nil
+        follow_redirect!
+        expect(response.body).to match(/2FA désactivé/i)
+      end
+
+      it "fails with invalid OTP code" do
+        post disable_admin_admin_user_two_factor_settings_path(admin_with_2fa),
+             params: { otp_attempt: "000000", password: admin_with_2fa.password }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(admin_with_2fa.reload.otp_required_for_login).to be true
+        expect(response.body).to match(/Code 2FA invalide/i)
+      end
+
+      it "fails with invalid password" do
+        otp_code = admin_with_2fa.current_otp
+        post disable_admin_admin_user_two_factor_settings_path(admin_with_2fa),
+             params: { otp_attempt: otp_code, password: "wrongpassword" }
+
+        expect(response).to redirect_to(admin_admin_user_two_factor_settings_path(admin_with_2fa))
+        expect(admin_with_2fa.reload.otp_required_for_login).to be true
+        follow_redirect!
+        expect(response.body).to match(/Confirmation du mot de passe requise/i)
+      end
+    end
+  end
 end

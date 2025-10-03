@@ -7,7 +7,7 @@
 
   .fr-grid-row
     .fr-col-md-6
-      = form_for(resource, as: resource_name, url: session_path(resource_name), builder: FormBuilderDsfr, data: { turbo: false }) do |f|
+      = form_for(resource, as: resource_name, url: session_path(resource_name), method: :post, builder: FormBuilderDsfr, data: { turbo: false }) do |f|
         .fr-input-group
           = f.label :email
           = f.email_field :email, autofocus: true, autocomplete: "email", required: true
@@ -15,6 +15,9 @@
           = render PasswordInputComponent.new(name: "admin_user[password]" )
           .fr-mt-1w
             = link_to "Mot de passe oublié ?", new_admin_user_password_path, class: "fr-link"
+        .fr-input-group
+          = f.label :otp_attempt, "Code 2FA (si activé)"
+          = f.text_field :otp_attempt, autocomplete: "one-time-code", placeholder: "123456"
         .co-flex.co-flex--space-between.fr-my-4w
           %div
             .fr-checkbox-group
