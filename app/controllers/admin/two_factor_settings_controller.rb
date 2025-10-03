@@ -2,6 +2,7 @@
 
 module Admin
   class TwoFactorSettingsController < BaseController
+    skip_before_action :require_two_factor_authentication
     before_action :set_admin_user
     before_action :ensure_own_account
     before_action :ensure_otp_secret, only: [:show]
