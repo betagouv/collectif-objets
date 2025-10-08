@@ -1,0 +1,18 @@
+= turbo_frame_tag :new_access do
+  = form_with url: [:new, namespace, recenseur, :recenseur_access], method: :get, builder: FormBuilderDsfr do |f|
+    .fr-search-bar.fr-mb-4w
+      = f.label :nom, "Rechercher une commune", class: "fr-label"
+      .fr-input-wrap.co-header-search-input-wrap
+        = f.text_field :nom, autocomplete: :off, required: true, placeholder: "Commune", class: "fr-input", value: params[:nom]
+      = f.button value: "Rechercher", name: nil, type: :submit, class: "fr-btn"
+
+  - if params[:nom]
+    .co-flex.co-flex--space-between.co-flex--align-items-baseline
+      %h3.fr-h5.fr-mb-0= pluralize(pagy.count, "résultat", plural: "Résultats")
+      - if pagy.pages > 1
+        %span.fr-text--sm #{pagy.page}/#{pagy.pages}
+    %ul
+      = render partial: "shared/recenseur_accesses/commune", collection: communes, locals: { recenseur: recenseur }
+
+    - if pagy.pages > 1
+      = render "shared/pagy_prev_next", pagy:

@@ -18,7 +18,6 @@ class ObjetCardComponent < ApplicationComponent
     @recensement = kwargs[:recensement] || @objet.recensement
     @size = kwargs[:size] || :md
     @btn_text = kwargs[:btn_text]
-    @btn_path = kwargs[:btn_path]
     @btn_class = kwargs[:btn_class]
     super
   end
