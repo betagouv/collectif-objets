@@ -201,14 +201,5 @@ Rails.application.routes.draw do
       resources :inbound_emails, only: [:create]
     end
   end
-
-  # --------------
-  # HEALTH & DEBUG
-  # --------------
-
-  get "health/raise_on_purpose", to: "health#raise_on_purpose"
-  get "health/js_error", to: "health#js_error"
-  get "health/slow_image", to: "health#slow_image" if Rails.env.development?
 end
-
 # rubocop:enable Metrics/BlockLength

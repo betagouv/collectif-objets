@@ -1,9 +1,19 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
-  s3_buckets = %w[development2 staging2 production public].map { "collectif-objets-#{_1}" }
-  s3_uris1 = s3_buckets.map { "https://s3.fr-par.scw.cloud/#{_1}/" }
-  s3_uris2 = s3_buckets.map { "https://#{_1}.s3.fr-par.scw.cloud/" }
+  # Domaines autorisés (upload, images, et stats)
+  domains = [
+    # OVH
+    "https://*.s3.gra.io.cloud.ovh.net",
+    # SCALEWAY
+    "https://*.s3.fr-par.scw.cloud",
+    "https://s3.fr-par.scw.cloud",
+    # Culture
+    "https://*.culture.gouv.fr",
+    "https://*.cloud.culture.fr",
+    # stats
+    "https://stats.beta.gouv.fr",
+  ]
 
   config.content_security_policy do |policy|
     if Rails.configuration.x.environment_specific_name == "production"
@@ -16,19 +26,16 @@ Rails.application.configure do
       :self,
       :data,
       :blob, # cf https://maplibre.org/maplibre-gl-js-docs/api/#csp-directives
-      *s3_uris1,
-      *s3_uris2,
+      *domains,
       "https://s3.eu-west-3.amazonaws.com/pop-phototeque/",
       "https://pop-perf-assets.s3.gra.io.cloud.ovh.net/",
-      "https://collectif-objets.beta.gouv.fr/", # for mail previews
-      "https://stats.beta.gouv.fr"
+      "https://collectif-objets.beta.gouv.fr/" # for mail previews
 
     policy.connect_src \
       :self,
-      "https://stats.beta.gouv.fr",
       "https://openmaptiles.geo.data.gouv.fr",
       "https://openmaptiles.data.gouv.fr",
-      *s3_uris2,
+      *domains,
       *(Rails.env.development? ? ["ws://#{ViteRuby.config.host_with_port}", "ws://127.0.0.1:#{ViteRuby.config.port}"] : [])
 
     policy.object_src :self # for the PDFs served by the rails server
