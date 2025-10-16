@@ -315,6 +315,11 @@ Devise.setup do |config|
 
   # Time drift allowed for OTP validation (in seconds)
   config.otp_allowed_drift = 60
+
+  # Setup two_factor_backupable in Warden
+  config.warden do |manager|
+    manager.default_strategies(scope: :admin_user).unshift :two_factor_backupable
+  end
 end
 
 Warden::Manager.after_set_user except: :fetch do |record, warden, options|
