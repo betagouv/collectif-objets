@@ -16,7 +16,6 @@ module Admin
     end
 
     def require_two_factor_authentication
-      return if current_admin_user.blank?
       return if current_admin_user.otp_required_for_login?
 
       redirect_to admin_admin_user_two_factor_settings_path(current_admin_user),
