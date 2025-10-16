@@ -11,7 +11,7 @@ module AdminUsers
     end
 
     def after_sign_in_path_for(resource)
-      return admin_admin_user_two_factor_settings_path(resource) unless resource.otp_required_for_login?
+      return admin_two_factor_settings_path unless resource.otp_required_for_login?
 
       super
     end
@@ -49,11 +49,11 @@ module AdminUsers
     end
 
     def backup_code_warning_message(user)
-      remaining = user.otp_backup_codes_remaining
+      remaining = user.remaining_otp_backup_codes
       if remaining.zero?
         "Connecté avec un code de secours. C'était votre dernier code ! Générez-en de nouveaux."
       else
-        "Connecté avec un code de secours. Il vous reste #{pluralize(remaining, 'code')}."
+        "Connecté avec un code de secours. Il vous reste #{remaining} code#{'s' if remaining > 1}."
       end
     end
 

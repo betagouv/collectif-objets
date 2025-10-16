@@ -194,13 +194,14 @@ Rails.application.routes.draw do
     resources :mail_previews, only: [:index] do
       get "/:mailer/:email", on: :collection, action: :show, as: :preview
     end
-    resources :admin_users do
-      resource :two_factor_settings, only: [:show], path: "2fa" do
-        post :confirm
-        post :disable
-        get :backup_codes
-      end
+    resource :two_factor_settings, only: [:show], path: "admin_users/2fa" do
+      post :enable
+      post :disable
+      post :regenerate_backup_codes
+      get :backup_codes
     end
+    # If defined before :two_factor_settings, 2fa is interpreted as an admin id
+    resources :admin_users
   end
 
   # -----

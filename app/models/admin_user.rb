@@ -9,47 +9,29 @@ class AdminUser < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
+  delegate :generate_otp_secret, to: :class
+
   def to_s = [first_name, last_name].join(" ")
 
-  # Generate backup codes and return them in plain text (only time they're visible)
-  def generate_otp_backup_codes!(count: 10)
-    codes = count.times.map { generate_backup_code }
-    self.otp_backup_codes = codes.map do |code|
-      { code: BCrypt::Password.create(normalize_backup_code(code)), used_at: nil }
-    end
-    save!
-    codes
+  def find_or_generate_otp_secret
+    update(otp_secret: generate_otp_secret) unless otp_secret
+    otp_secret
   end
 
-  # Validate and consume a backup code
-  def invalidate_otp_backup_code!(code)
-    return false if otp_backup_codes.blank?
+  def enable_2fa!
+    return if otp_required_for_login?
 
-    otp_backup_codes.each_with_index do |backup_code, index|
-      next if backup_code["used_at"].present?
-
-      next unless BCrypt::Password.new(backup_code["code"]) == normalize_backup_code(code)
-
-      otp_backup_codes[index]["used_at"] = Time.current.iso8601
-      save!
-      return true
-    end
-
-    false
+    backup_codes = generate_otp_backup_codes!
+    otp_secret = find_or_generate_otp_secret
+    update!(otp_required_for_login: true, otp_secret:)
+    backup_codes
   end
 
-  def otp_backup_codes_remaining
-    otp_backup_codes.count { |code| code["used_at"].nil? }
+  def disable_2fa!
+    update!(otp_required_for_login: false, otp_secret: nil, otp_backup_codes: nil)
   end
 
-  private
-
-  def generate_backup_code
-    # Generates: XXXX-XXXX-XXXX
-    3.times.collect { SecureRandom.alphanumeric(4) }.join("-").upcase
-  end
-
-  def normalize_backup_code(code)
-    code.to_s.gsub(/[^A-Z0-9]/i, "").upcase
+  def remaining_otp_backup_codes
+    (otp_backup_codes || []).size
   end
 end

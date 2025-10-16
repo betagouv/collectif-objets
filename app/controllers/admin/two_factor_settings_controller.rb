@@ -3,77 +3,46 @@
 module Admin
   class TwoFactorSettingsController < BaseController
     skip_before_action :require_two_factor_authentication
-    before_action :set_admin_user
-    before_action :ensure_own_account
-    before_action :ensure_otp_secret, only: [:show, :confirm]
-    before_action :require_password_confirmation, only: [:disable, :confirm]
+    before_action :require_2fa_confirmation, only: [:enable, :disable, :regenerate_backup_codes]
 
     def show
-      if @admin_user.otp_required_for_login?
-        render :disable
-      else
-        render :enable
-      end
+      current_admin_user.find_or_generate_otp_secret
     end
 
-    def confirm
-      if @admin_user.validate_and_consume_otp!(params[:otp_attempt])
-        @admin_user.update!(otp_required_for_login: true)
-        backup_codes = @admin_user.generate_otp_backup_codes!
-        session[:backup_codes] = backup_codes
-        redirect_to backup_codes_admin_admin_user_two_factor_settings_path(@admin_user),
-                    notice: "Authentification 2FA activée avec succès"
-      else
-        flash.now[:alert] = "Code invalide"
-        render :enable, status: :unprocessable_entity
-      end
+    def enable
+      session[:backup_codes] = current_admin_user.enable_2fa!
+      redirect_to backup_codes_admin_two_factor_settings_path,
+                  notice: "Authentification à deux facteurs activée avec succès"
     end
 
     def backup_codes
-      return if (@backup_codes = session.delete(:backup_codes))
+      @backup_codes = session.delete(:backup_codes)
+      redirect_to admin_two_factor_settings_path if @backup_codes.nil?
+    end
 
-      redirect_to admin_admin_user_two_factor_settings_path(@admin_user)
+    def regenerate_backup_codes
+      session[:backup_codes] = current_admin_user.generate_otp_backup_codes!
+      current_admin_user.save!
+      redirect_to backup_codes_admin_two_factor_settings_path,
+                  notice: "Nouveaux codes de secours générés"
     end
 
     def disable
-      unless @admin_user.validate_and_consume_otp!(params[:otp_attempt])
-        flash.now[:alert] = "Code 2FA invalide"
-        render :disable, status: :unprocessable_entity
-        return
-      end
-
-      @admin_user.update!(otp_required_for_login: false, otp_secret: nil, otp_backup_codes: [])
-      redirect_to admin_admin_user_two_factor_settings_path(@admin_user), notice: "Authentification 2FA désactivée"
+      current_admin_user.disable_2fa!
+      redirect_to admin_two_factor_settings_path,
+                  notice: "Authentification à deux facteurs désactivée"
     end
 
     private
 
-    def set_admin_user
-      @admin_user = AdminUser.find(params[:admin_user_id])
+    def require_2fa_confirmation
+      return if current_admin_user.valid_password?(params[:password]) \
+             && current_admin_user.validate_and_consume_otp!(params[:otp_attempt])
+
+      flash.now[:alert] = "Code ou mot de passe invalide"
+      render :show, status: :unprocessable_entity
     end
 
-    def ensure_own_account
-      return if @admin_user == current_admin_user
-
-      redirect_to admin_admin_users_path, alert: "Vous ne pouvez configurer que votre propre 2FA"
-    end
-
-    def ensure_otp_secret
-      return if @admin_user.otp_secret.present?
-
-      @admin_user.otp_secret = AdminUser.generate_otp_secret
-      @admin_user.save!
-    end
-
-    def require_password_confirmation
-      return if params[:password].present? && current_admin_user.valid_password?(params[:password])
-
-      flash.now[:alert] = "Mot de passe invalide"
-      if action_name == "confirm"
-        render :enable, status: :unprocessable_entity
-      else
-        render :disable, status: :unprocessable_entity
-      end
-    end
+    def active_nav_links = %w[Administration]
   end
 end

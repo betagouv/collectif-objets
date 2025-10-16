@@ -25,5 +25,5 @@
   .fr-btns-group.fr-btns-group--inline-md.fr-btns-group--icon-left
     = link_to "Modifier", edit_admin_admin_user_path, class: "fr-btn fr-icon-pencil-line"
     - if @admin_user == current_admin_user
-      = link_to "Gérer l'authentification à 2 facteurs", admin_admin_user_two_factor_settings_path(@admin_user), class: "fr-btn fr-btn--secondary fr-icon-lock-fill"
+      = link_to "Gérer l'authentification à deux facteurs", admin_two_factor_settings_path, class: "fr-btn fr-btn--secondary fr-icon-lock-fill"
     = button_to "Supprimer", admin_admin_user_path, class: "fr-btn fr-btn--tertiary fr-icon-delete-line", method: :delete, data: { turbo_confirm: "Êtes-vous sûr ?" }
