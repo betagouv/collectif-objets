@@ -2,7 +2,8 @@
 
 class AdminUser < ApplicationRecord
   devise :two_factor_authenticatable, :lockable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :two_factor_backupable, otp_number_of_backup_codes: 10
 
   has_many :admin_comments, as: :author, dependent: :nullify
 
