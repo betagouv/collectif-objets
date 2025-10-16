@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AdminUser < ApplicationRecord
-  devise :two_factor_authenticatable,
+  devise :two_factor_authenticatable, :lockable,
          :recoverable, :rememberable, :validatable
 
   has_many :admin_comments, as: :author, dependent: :nullify
