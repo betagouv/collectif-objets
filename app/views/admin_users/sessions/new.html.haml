@@ -19,7 +19,7 @@
           = f.label :otp_attempt do
             Code d'authentification à deux facteurs (si activé)
             %span.fr-hint-text Vous pouvez utiliser un code de secours si vous n'avez pas accès à votre application d'authentification.
-          = f.text_field :otp_attempt, autocomplete: "one-time-code", placeholder: "123456 ou XXXX-XXXX-XXXX"
+          = f.text_field :otp_attempt, autocomplete: "one-time-code", placeholder: "123456"
         .co-flex.co-flex--space-between.fr-my-4w
           %div
             .fr-checkbox-group

@@ -18,8 +18,8 @@ module Admin
     def require_two_factor_authentication
       return if current_admin_user.otp_required_for_login?
 
-      redirect_to admin_admin_user_two_factor_settings_path(current_admin_user),
-                  alert: "Vous devez activer l'authentification à deux facteurs"
+      redirect_to admin_two_factor_settings_path,
+                  alert: "Vous devez activer l’authentification à deux facteurs"
     end
 
     def disconnect_impersonating_user

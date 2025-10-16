@@ -1,0 +1,30 @@
+%p
+  Configurez votre application d'authentification (Google Authenticator, Authy, 1Password, etc.)
+  en scannant le QR code ou en saisissant manuellement la clé secrète.
+
+  = dsfr_accordion(html_attributes: { class: "fr-mb-4w" }) do |accordion|
+    = accordion.with_section(title: "Scannez ce QR code avec votre application d'authentification", expanded: true) do
+      .fr-mb-2w.co-text--center
+        = otp_qrcode(current_admin_user)
+    = accordion.with_section(title: "Je ne peux pas scanner le QR code") do
+      %p.fr-text--sm.fr-mb-2w
+        Saisissez cette clé manuellement dans votre application d'authentification.
+        %br
+        Type de compte : TOTP (basé sur le temps)
+      .fr-input-group
+        %label.fr-label{ for: "otp-secret-input" } Clé secrète
+        .fr-input-wrap.fr-input-wrap--addon
+          %input.fr-input{ type: :text, value: current_admin_user.otp_secret, readonly: true }
+          %button.fr-btn.fr-btn--icon-left.fr-icon-todo-line{ type: :button, data: { controller: :clipboard, action: "clipboard#copy", "clipboard-content-value": current_admin_user.otp_secret } }
+            Copier
+
+%p Ensuite, saisissez ci-dessous votre mot de passe et le code à 6 chiffres affiché dans l'application.
+
+= form_with url: enable_admin_two_factor_settings_path, method: :post do |f|
+  .fr-input-group
+    = render PasswordInputComponent.new(name: "password", autocomplete: "current-password", hint: false)
+  .fr-input-group
+    = f.label :otp_attempt, "Code de vérification", class: "fr-label"
+    = f.text_field :otp_attempt, class: "fr-input", required: true, autocomplete: "one-time-code", placeholder: "123456"
+  .fr-mt-2w
+    = f.button "Activer l'authentification à deux facteurs", type: :submit, class: "fr-btn fr-btn fr-btn--icon-left fr-icon-lock-line", name: nil
