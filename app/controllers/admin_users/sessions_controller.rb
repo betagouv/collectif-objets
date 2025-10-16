@@ -59,7 +59,7 @@ module AdminUsers
 
     def handle_failed_authentication(user, otp_code)
       self.resource = user
-      flash.now[:alert] = "Code 2FA #{otp_code.blank? ? 'requis' : 'invalide'}"
+      flash.now[:alert] = "Code d'authentification à deux facteurs #{otp_code.blank? ? 'requis' : 'invalide'}"
       render :new, status: :unprocessable_entity
     end
 

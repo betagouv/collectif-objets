@@ -19,7 +19,7 @@
     %strong Email :
     = mail_to @admin_user.email, @admin_user.email, class: "fr-btn fr-btn--sm fr-btn--secondary"
   %p
-    %strong Authentification à 2 facteurs :
+    %strong Authentification à deux facteurs :
     = @admin_user.otp_required_for_login? ? "Activée" : "Désactivée"
 
   .fr-btns-group.fr-btns-group--inline-md.fr-btns-group--icon-left

@@ -1,5 +1,5 @@
-- content_for(:head_title) { "Codes de secours 2FA" }
 - download_content = "Codes de secours 2FA - Collectif Objets\nCompte: #{@admin_user.email}\nGénérés le: #{Time.current.strftime('%d/%m/%Y à %H:%M')}\n\n#{@backup_codes.join("\n")}\n\nChaque code ne peut être utilisé qu'une seule fois.\nConservez-les en lieu sûr."
+- content_for(:head_title) { "Codes de secours d'authentification à deux facteurs" }
 
 %main#contenu.fr-container.fr-pt-2w.fr-pb-4w{ data: { controller: "download-text", download_text_filename_value: "collectif-objets-backup-codes.txt" } }
   = render("shared/breadcrumbs", links: [["Administration", admin_path], ["Admins", admin_admin_users_path], [current_admin_user.to_s, admin_admin_user_path(current_admin_user)], ["Configuration 2FA", admin_admin_user_two_factor_settings_path(current_admin_user)]], current_page_label: "Codes 2FA de secours")
