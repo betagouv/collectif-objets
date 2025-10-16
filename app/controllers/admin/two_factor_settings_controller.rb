@@ -6,7 +6,6 @@ module Admin
     before_action :set_admin_user
     before_action :ensure_own_account
     before_action :ensure_otp_secret, only: [:show, :confirm]
-    before_action :set_qr_code, only: [:show, :confirm]
     before_action :require_password_confirmation, only: [:disable, :confirm]
 
     def show
@@ -64,28 +63,6 @@ module Admin
 
       @admin_user.otp_secret = AdminUser.generate_otp_secret
       @admin_user.save!
-    end
-
-    def set_qr_code
-      return if @admin_user.otp_required_for_login?
-
-      @qr_code = generate_qr_code
-    end
-
-    def generate_qr_code
-      require "rqrcode"
-      env_suffix = if Rails.application.staging?
-                     " (staging)"
-                   elsif !Rails.env.production?
-                     " (#{Rails.env})"
-                   else
-                     ""
-                   end
-      issuer = "Collectif Objets#{env_suffix}"
-      label = "#{issuer}:#{@admin_user.email}"
-      otp_uri = @admin_user.otp_provisioning_uri(label, issuer:)
-      qr = RQRCode::QRCode.new(otp_uri)
-      qr.as_svg(module_size: 4, color: "000", fill: "fff")
     end
 
     def require_password_confirmation
