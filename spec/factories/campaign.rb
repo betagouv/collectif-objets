@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :campaign do
     status { :ongoing }
-    association :departement
+    departement { Departement.find_or_create_by!(code: "51") { |d| d.assign_attributes(nom: "Marne", dans_nom: "dans la Marne", region: "Grand Est") } }
     sequence(:date_lancement) do |offset|
       initial_date = Date.new(2030, 1, 7) # monday
       w, d = offset.divmod(5) # offset until fridays only

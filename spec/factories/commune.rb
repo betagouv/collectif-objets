@@ -3,9 +3,9 @@
 FactoryBot.define do
   factory :commune do
     nom { "Châlons-en-Champagne" }
-    sequence(:code_insee) { |n| (n + 51_108).to_s }
+    sequence(:code_insee) { |n| "99#{format('%03d', n)}" } # Use code 99xxx for test data
     # status { "inactive" }
-    association :departement
+    departement { Departement.find_or_create_by!(code: "51") { |d| d.assign_attributes(nom: "Marne", dans_nom: "dans la Marne", region: "Grand Est") } }
     phone_number { "01 01 01 01 01" }
     inbound_email_token { "12345678901234567890" }
 
