@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   ## DEVISE
   ## -----
 
-  devise_for :admin_users, skip: [:registrations]
+  devise_for :admin_users, skip: [:registrations], controllers: {
+    sessions: "admin_users/sessions"
+  }
   authenticate :admin_user do
     mount GoodJob::Engine => "/good_job"
   end
@@ -53,7 +55,6 @@ Rails.application.routes.draw do
     get "comment-ca-marche", action: :aide, as: :aide
     get "guide-de-recensement", action: :guide, as: :guide
     get :pdf, to: redirect("guide-de-recensement")
-    get :admin
     get :plan
     get :declaration_accessibilite
     get :schema_pluriannuel_accessibilite
@@ -141,6 +142,8 @@ Rails.application.routes.draw do
   ## ADMIN
   ## -----
 
+  get "/admin", to: "admin/dashboard#index", as: :admin
+
   namespace :admin do
     resources :communes, only: %i[index show] do
       post :session_code, on: :member
@@ -189,7 +192,13 @@ Rails.application.routes.draw do
     resources :mail_previews, only: [:index] do
       get "/:mailer/:email", on: :collection, action: :show, as: :preview
     end
-    resources :admin_users
+    resources :admin_users do
+      resource :two_factor_settings, only: [:show], path: "2fa" do
+        post :confirm
+        post :disable
+        get :backup_codes
+      end
+    end
   end
 
   # -----

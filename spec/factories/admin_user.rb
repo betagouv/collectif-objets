@@ -6,5 +6,7 @@ FactoryBot.define do
     first_name { "Jeanne" }
     last_name { "Turbo" }
     password { "password" }
+    otp_required_for_login { true }
+    otp_secret { AdminUser.generate_otp_secret }
   end
 end

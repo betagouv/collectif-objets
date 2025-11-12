@@ -1,10 +1,10 @@
-- if banners.any?
+- if banners&.any?
   .co-background-color-inherit.co-position-sticky.co-top-0.co-z-index-600.co-print-hide.fr-text--sm{role: "alert",
     data: { controller: :visibility }}
     .fr-container--fluid.co-flex.co-flex--space-between.co-flex--align-items-center.co-flex--wrap.co-flex--gap-05rem.fr-mb-1w
       .co-flex--grow
         - if banners.include?(:environment)
-          %div{class: "fr-alert fr-alert--sm fr-alert--#{Rails.configuration.x.environment_specific_name == "staging" ? "warning" : "error"} fr-icon-alarm-warning-line co-white-space-nowrap"}
+          %div{class: "fr-alert fr-alert--sm fr-alert--#{Rails.application.staging? ? "warning" : "error"} fr-icon-alarm-warning-line co-white-space-nowrap"}
             .co-environment-banner.co-flex.co-flex--space-between
               Env #{Rails.configuration.x.environment_specific_name}
               - if Rails.env.development?
