@@ -1,0 +1,6 @@
+= turbo_stream.replace :accesses,
+  partial: "shared/recenseurs/accesses",
+  locals: { accesses: @accesses }
+= turbo_stream.replace dom_id(@commune),
+  partial: "shared/recenseurs_accesses/commune",
+  locals: { recenseur: @recenseur, commune: @commune }

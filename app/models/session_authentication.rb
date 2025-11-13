@@ -30,7 +30,7 @@ class SessionAuthentication
       session_code.mark_used!
       authenticatable
     else
-      [nil, errors.full_messages.to_sentence]
+      [nil, errors]
     end
   end
 
@@ -43,12 +43,11 @@ class SessionAuthentication
   attr_reader :email, :code
 
   def validate_resource_found
-    return if authenticatable.persisted?
+    return if authenticatable
 
     errors.add(
       :email,
-      :not_found,
-      message: "inconnu : aucun compte n'est associé à cet email."
+      message: "Aucun compte trouvé pour cet email."
     )
   end
 
