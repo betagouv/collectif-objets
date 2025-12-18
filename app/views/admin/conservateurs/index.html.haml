@@ -42,11 +42,13 @@
                   %td.co-white-space-nowrap
                     %div
                       = button_to impersonate_admin_conservateur_path(conservateur),
-                      class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-eye-line w-100" do
+                      class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-eye-line w-100",
+                      title: "Incarner #{conservateur.full_name}" do
                         Incarner
                     .fr-mt-1w
                       = link_to edit_admin_conservateur_path(conservateur),
-                        class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-pencil-line w-100" do
+                        class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-pencil-line w-100",
+                        title: "Modifier #{conservateur.full_name}" do
                         Modifier
 
         - if @pagy.pages > 1
