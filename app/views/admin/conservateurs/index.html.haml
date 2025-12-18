@@ -37,16 +37,16 @@
                     %div
                       = conservateur.full_name
                       .co-word-break-all= link_to conservateur.email, "mailto:#{conservateur.email}", target: "_blank"
-                  %td= conservateur.departements.sorted.map { _1.to_s }.to_sentence
+                  %td= conservateur.departements.sort_by(&:code).map { _1.to_s }.to_sentence
                   %td.co-white-space-nowrap= conservateur.phone_number
                   %td.co-white-space-nowrap
                     %div
-                      = link_to impersonate_admin_conservateur_path(conservateur) do
-                        = icon_span("eye")
+                      = link_to impersonate_admin_conservateur_path(conservateur),
+                      class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-eye-line w-100" do
                         Incarner
                     .fr-mt-1w
-                      = link_to edit_admin_conservateur_path(conservateur) do
-                        = icon_span("pencil")
+                      = link_to edit_admin_conservateur_path(conservateur),
+                        class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-pencil-line w-100" do
                         Modifier
 
         - if @pagy.pages > 1
