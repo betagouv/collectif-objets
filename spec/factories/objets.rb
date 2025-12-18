@@ -58,7 +58,7 @@ FactoryBot.define do
       palissy_photos do
         [
           {
-            "url" => "/demo/objets/objet#{palissy_photo_number}.jpg",
+            "url" => "https://example.com/demo/objets/objet#{palissy_photo_number}.jpg",
             "credit" => "© Médiathèque Paris",
             "name" => "Vase bleu"
           }
@@ -70,7 +70,7 @@ FactoryBot.define do
       palissy_photos do
         (1..3).map do |i|
           {
-            "url" => "/demo/objets/objet#{i}.jpg",
+            "url" => "https://example.com/demo/objets/objet#{i}.jpg",
             "credit" => "© Médiathèque Paris",
             "name" => "Vase bleu"
           }
