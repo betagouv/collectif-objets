@@ -15,6 +15,14 @@ FactoryBot.define do
 
     association :commune
 
+    trait :classé do
+      palissy_PROT { "classé au titre objet" }
+    end
+
+    trait :inscrit do
+      palissy_PROT { "inscrit au titre objet" }
+    end
+
     trait :without_image do
       # do nothing
     end
