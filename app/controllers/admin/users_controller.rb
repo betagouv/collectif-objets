@@ -2,12 +2,19 @@
 
 module Admin
   class UsersController < BaseController
-    skip_before_action :disconnect_impersonating_user, only: [:toggle_impersonate_mode]
+    before_action :set_user, only: [:impersonate, :stop_impersonating]
+    skip_before_action :disconnect_impersonating_user, only: [:toggle_impersonate_mode, :stop_impersonating]
 
     def impersonate
-      @user = User.find(params[:id])
       impersonate_user(@user)
       redirect_to commune_objets_path(@user.commune)
+    end
+
+    def stop_impersonating
+      commune = current_user&.commune
+      session.delete(:user_impersonate_write)
+      stop_impersonating_user
+      redirect_to admin_commune_path(commune), notice: "Vous n'incarnez plus d'usager"
     end
 
     def toggle_impersonate_mode
@@ -20,6 +27,10 @@ module Admin
     end
 
     private
+
+    def set_user
+      @user = User.find(params[:id])
+    end
 
     def active_nav_links = %w[Communes]
   end

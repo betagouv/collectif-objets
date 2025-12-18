@@ -146,12 +146,14 @@ Rails.application.routes.draw do
       post :session_code, on: :member
     end
     resources :conservateurs, except: [:destroy] do
-      get :impersonate, on: :member
+      post :impersonate, on: :member
+      delete :stop_impersonating, on: :member
       post :toggle_impersonate_mode, on: :collection
     end
     resources :dossiers, only: [:show]
     resources :users, only: %i[] do
-      get :impersonate, on: :member
+      post :impersonate, on: :member
+      delete :stop_impersonating, on: :member
       post :toggle_impersonate_mode, on: :collection
     end
     get "/session_codes(/:offset)", to: "session_codes#index", as: :session_codes
