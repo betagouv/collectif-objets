@@ -3,11 +3,16 @@
 module Conservateurs
   class BordereauxController < BaseController
     before_action :set_commune, :set_dossier
-    before_action :set_bordereau, only: :create
+    before_action :set_bordereau, only: [:create, :show]
     skip_after_action :verify_policy_scoped, only: :index
 
     def index
       @bordereaux = Bordereau.for(@commune) if @dossier
+    end
+
+    def show
+      @bordereau.generate_pdf unless @bordereau.generated?
+      redirect_to rails_blob_path(@bordereau.file, disposition: "attachment")
     end
 
     def create
@@ -28,7 +33,12 @@ module Conservateurs
     end
 
     def set_bordereau
-      @bordereau = Bordereau.find_or_initialize_by(dossier: @dossier, edifice_id: params[:edifice_id])
+      if (id = params[:id].presence)
+        @bordereau = @dossier.bordereaux.find(id)
+      else
+        edifice_id = params[:edifice_id]
+        @bordereau = @dossier.bordereaux.find_or_initialize_by(dossier: @dossier, edifice_id:)
+      end
     end
 
     def bordereau_params

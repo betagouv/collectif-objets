@@ -17,11 +17,11 @@
       = "#{bordereau.nom_edifice} · #{objets_count}"
   .fr-collapse{ id: "#{id}-panel" }
     - if generated
-      - size = number_to_human_size(bordereau.file.byte_size)
-      = link_to "Télécharger le bordereau (PDF de #{size})",
-        rails_blob_path(bordereau.file, disposition: "attachment"),
+      - size_text = bordereau.file.blob.byte_size.present? ? " (PDF de #{number_to_human_size(bordereau.file.byte_size)})" : ""
+      = link_to "Télécharger le bordereau#{size_text}",
+        conservateurs_commune_bordereau_path(commune, bordereau, edifice_id: bordereau.edifice_id),
         class: "fr-btn fr-btn--sm fr-btn--primary fr-btn--icon-left fr-icon-download-line fr-mb-2w",
-        title: "Bordereau de récolement · #{bordereau.nom_edifice} #{commune.nom} (PDF de #{size})"
+        title: "Bordereau de récolement · #{bordereau.nom_edifice} #{commune.nom}#{size_text}"
     - else
       = button_to "Générer le bordereau",
         conservateurs_commune_bordereaux_path(commune, edifice_id: bordereau.edifice_id),
