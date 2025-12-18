@@ -4,6 +4,7 @@ version: 2
 updates:
   - package-ecosystem: "bundler"
     directory: "/"
+    default-days: 7
     schedule:
       interval: "monthly"
     ignore:
@@ -13,6 +14,11 @@ updates:
         versions: ["5.x"]
       - dependency-name: "sentry-sidekiq"
         versions: ["5.x"]
+  - package-ecosystem: "npm"
+    directory: "/"
+    default-days: 10
+    schedule:
+      interval: "monthly"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
