@@ -19,9 +19,10 @@ class Edifice < ApplicationRecord
   scope :ordered_by_nom, -> { order(Arel.sql("LOWER(UNACCENT(edifices.nom))")) }
 
   scope :preloaded, lambda {
-    with_objets.ordered_by_nom.includes(
-      objets: [:commune, { recensement: [:photos_attachments, :photos_blobs] }]
-    )
+    joins(:objets)
+      .group("edifices.id")
+      .ordered_by_nom
+      .includes(objets: [:commune, { recensement: [:dossier, { photos_attachments: :blob }] }])
   }
 
   delegate :normalize_nom, to: :class

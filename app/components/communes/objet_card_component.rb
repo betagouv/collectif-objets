@@ -49,7 +49,7 @@ module Communes
     end
 
     def readonly?
-      objet.commune && commune&.status == "completed"
+      commune&.status == "completed"
     end
 
     def header_badges

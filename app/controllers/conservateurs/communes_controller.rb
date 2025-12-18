@@ -23,19 +23,20 @@ module Conservateurs
     def show_analyse_saved
       @objets = @commune
         .objets
-        .includes(:edifice, recensement: %i[photos_attachments photos_blobs])
+        .includes(:edifice, recensement: { photos_attachments: :blob })
         .a_examiner
         .order_by_recensement_priorite
       render "show_analyse_saved"
     end
 
     def set_commune
-      @commune = Commune.find(params[:id])
+      @commune = Commune.includes(:departement).find(params[:id])
       authorize(@commune)
     end
 
     def set_dossier
       @dossier = @commune.dossier
+      @dossier&.recensements&.load
     end
 
     def set_departement

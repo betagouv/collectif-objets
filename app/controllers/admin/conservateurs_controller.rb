@@ -2,11 +2,11 @@
 
 module Admin
   class ConservateursController < BaseController
-    before_action :set_conservateur, only: [:edit, :update, :impersonate]
-    skip_before_action :disconnect_impersonating_conservateur, only: [:toggle_impersonate_mode]
+    before_action :set_conservateur, only: [:edit, :update, :impersonate, :destroy, :stop_impersonating]
+    skip_before_action :disconnect_impersonating_conservateur, only: [:toggle_impersonate_mode, :stop_impersonating]
 
     def index
-      @ransack = Conservateur.order(:last_name).includes(:departements).ransack(params[:q])
+      @ransack = Conservateur.order(:last_name).includes(:departements).with_dossiers_count.ransack(params[:q])
       @query_present = params[:q].present?
       @pagy, @conservateurs = pagy(@ransack.result, items: 20)
     end
@@ -35,9 +35,25 @@ module Admin
       end
     end
 
+    def destroy
+      if @conservateur.dossiers.exists?
+        redirect_to admin_conservateurs_path,
+                    alert: "Impossible de supprimer ce conservateur car il a des dossiers associés."
+      else
+        @conservateur.destroy!
+        redirect_to admin_conservateurs_path, notice: "Conservateur supprimé !"
+      end
+    end
+
     def impersonate
       impersonate_conservateur(@conservateur)
       redirect_to after_sign_in_path_for_conservateur(@conservateur)
+    end
+
+    def stop_impersonating
+      session.delete(:conservateur_impersonate_write)
+      stop_impersonating_conservateur
+      redirect_to admin_conservateurs_path, notice: "Vous n'incarnez plus de conservateur"
     end
 
     def toggle_impersonate_mode

@@ -159,6 +159,17 @@ class Recensement < ApplicationRecord
     end
   end
 
+  def absent? = localisation == LOCALISATION_ABSENT
+
+  def en_peril?
+    (etat_sanitaire == ETAT_PERIL && analyse_etat_sanitaire.nil?) ||
+      analyse_etat_sanitaire == ETAT_PERIL
+  end
+
+  def prioritaire?
+    absent? || en_peril?
+  end
+
   def nom_commune_localisation_objet
     nouvelle_commune || commune
   end
