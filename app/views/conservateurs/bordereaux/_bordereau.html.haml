@@ -1,6 +1,6 @@
 -# locals: bordereau:, commune:
 
-- generated = bordereau.file.attached?
+- generated = bordereau.generated?
 - icon = generated ? "fr-icon-checkbox-fill" : "fr-icon-question-line"
 - state = generated ? "Généré" : "À examiner"
 - objets_count = Objet.human_attribute_name(:proteges_count, count: bordereau.bordereau_recensements.load.size)
