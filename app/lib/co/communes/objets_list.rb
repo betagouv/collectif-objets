@@ -19,7 +19,7 @@ module Co
         @edifices ||= commune
           .edifices
           .with_objets
-          .includes(objets: { recensement: %i[photos_attachments photos_blobs] })
+          .includes(objets: { recensement: [:dossier, { photos_attachments: :blob }] })
           .ordered_by_nom
       end
 
@@ -27,7 +27,7 @@ module Co
         @objets ||= begin
           objets = scoped_objets
             .where(commune: @commune)
-            .includes(:commune, recensement: %i[photos_attachments photos_blobs])
+            .includes(:commune, recensement: [:dossier, { photos_attachments: :blob }])
           objets = objets.without_completed_recensements if @exclude_recensed
           objets = objets.where.not(id: @exclude_ids) if @exclude_ids.any?
           objets = objets.where(edifice: @edifice) if @edifice.present?
