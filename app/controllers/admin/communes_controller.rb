@@ -3,7 +3,7 @@
 module Admin
   class CommunesController < BaseController
     def index
-      @ransack = Commune.include_statut_global.ransack(params[:q])
+      @ransack = Commune.preload(:users).include_statut_global.ransack(params[:q])
       @query_present = params[:q].present?
       @pagy, @communes = pagy(
         @ransack.result, items: 20
