@@ -11,8 +11,14 @@ module Admin
     end
 
     def show
-      @commune = Commune.find(params[:id])
-      @messages = Message.where(commune: @commune).order(created_at: :asc)
+      @commune = Commune.includes(
+        edifices: :objets,
+        archived_dossiers: { recensements: { objet: [], photos_attachments: :blob } }
+      ).find(params[:id])
+      @messages = Message
+        .includes(:author, :inbound_email, files_attachments: :blob)
+        .where(commune: @commune)
+        .order(created_at: :asc)
     end
 
     def session_code
