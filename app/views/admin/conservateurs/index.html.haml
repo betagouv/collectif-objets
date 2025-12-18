@@ -50,6 +50,13 @@
                         class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-pencil-line w-100",
                         title: "Modifier #{conservateur.full_name}" do
                         Modifier
+                    .fr-mt-1w
+                      = button_to admin_conservateur_path(conservateur), method: :delete,
+                      disabled: conservateur.has_dossiers,
+                      class: "fr-btn fr-btn--sm fr-btn--tertiary fr-btn--icon-left fr-icon-delete-line w-100",
+                      title: "Supprimer #{conservateur.full_name}",
+                      data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce conservateur ?" } do
+                        Supprimer
 
         - if @pagy.pages > 1
           = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}

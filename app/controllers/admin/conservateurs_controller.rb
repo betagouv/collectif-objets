@@ -2,11 +2,11 @@
 
 module Admin
   class ConservateursController < BaseController
-    before_action :set_conservateur, only: [:edit, :update, :impersonate, :stop_impersonating]
+    before_action :set_conservateur, only: [:edit, :update, :impersonate, :destroy, :stop_impersonating]
     skip_before_action :disconnect_impersonating_conservateur, only: [:toggle_impersonate_mode, :stop_impersonating]
 
     def index
-      @ransack = Conservateur.order(:last_name).includes(:departements).ransack(params[:q])
+      @ransack = Conservateur.order(:last_name).includes(:departements).with_dossiers_count.ransack(params[:q])
       @query_present = params[:q].present?
       @pagy, @conservateurs = pagy(@ransack.result, items: 20)
     end
@@ -32,6 +32,16 @@ module Admin
         redirect_to edit_admin_conservateur_path(@conservateur), notice: "Conservateur modifié !"
       else
         render :edit, status: :unprocessable_content
+      end
+    end
+
+    def destroy
+      if @conservateur.dossiers.exists?
+        redirect_to admin_conservateurs_path,
+                    alert: "Impossible de supprimer ce conservateur car il a des dossiers associés."
+      else
+        @conservateur.destroy!
+        redirect_to admin_conservateurs_path, notice: "Conservateur supprimé !"
       end
     end
 

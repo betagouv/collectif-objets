@@ -145,7 +145,7 @@ Rails.application.routes.draw do
     resources :communes, only: %i[index show] do
       post :session_code, on: :member
     end
-    resources :conservateurs, except: [:destroy] do
+    resources :conservateurs do
       post :impersonate, on: :member
       delete :stop_impersonating, on: :member
       post :toggle_impersonate_mode, on: :collection

@@ -9,6 +9,11 @@ class Conservateur < ApplicationRecord
 
   scope :send_recap, -> { where(send_recap: true) }
   scope :with_departement, ->(d) { where("departement_codes @> ARRAY[?]::varchar[]", d) }
+  scope :with_dossiers_count, lambda {
+    left_joins(:dossiers)
+      .select("conservateurs.*", "COUNT(dossiers.id) > 0 AS has_dossiers")
+      .group("conservateurs.id")
+  }
 
   attr_accessor :impersonating
 
