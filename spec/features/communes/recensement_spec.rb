@@ -235,13 +235,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(row_ciboire).to have_selector("img[src*='peinture1.jpg']")
     fill_in("Vos commentaires", with: "C’était fort sympathique")
     expect(page).to be_axe_clean
-    click_on "Je valide le recensement des objets de ma commune"
+    click_on "Je valide le recensement"
 
     expect(page).to have_text("Le recensement de vos objets est terminé, merci !")
     expect(page).to be_axe_clean
     click_on "Voir les données envoyées"
 
-    expect(page).to have_text("Recensements de Albon")
+    expect(page).to have_text("Recensement de Albon")
     expect(page).to have_text("Un conservateur a été prévenu et reviendra vers vous.")
     expect(page).to be_axe_clean
   end

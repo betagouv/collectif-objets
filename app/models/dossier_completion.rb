@@ -13,7 +13,9 @@ class DossierCompletion
     return false unless dossier.submit!(notes_commune:, recenseur:)
 
     SendMattermostNotificationJob.perform_later("commune_completed", { "commune_id" => commune.id })
-    UserMailer.with(user:, commune:).commune_completed_email.deliver_later
+    commune_user = commune.users.first
+    UserMailer.with(user: commune_user, commune:).commune_completed_email.deliver_later if commune_user
+
     true
   end
 end

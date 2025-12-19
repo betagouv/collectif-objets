@@ -5,6 +5,8 @@
 
   %h1= @commune.nom
 
+  = render "shared/completions/status", commune: @commune, dossier: @dossier, count: @objets_list.count
+
   = render "edifices/list", edifices: @commune.edifices
 
   = render partial: "edifices/edifice", collection: @commune.edifices.preloaded, as: :edifice
