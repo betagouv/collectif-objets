@@ -5,6 +5,8 @@ class Recensement < ApplicationRecord
   include Recensements::BooleansConcern
 
   belongs_to :objet, optional: true
+  has_one :commune, through: :objet
+  has_one :departement, through: :objet
   belongs_to :dossier
   belongs_to :pop_export_memoire, class_name: "PopExport", inverse_of: :recensements_memoire, optional: true
   belongs_to :pop_export_palissy, class_name: "PopExport", inverse_of: :recensements_palissy, optional: true
@@ -19,8 +21,6 @@ class Recensement < ApplicationRecord
 
   has_many :bordereau_recensements, dependent: :destroy, inverse_of: :recensement
 
-  delegate :commune, to: :objet, allow_nil: true
-  delegate :departement, to: :objet, allow_nil: true
   delegate :departement, to: :nouvelle_commune, allow_nil: true, prefix: :nouveau
 
   include AASM
