@@ -34,10 +34,12 @@
   - @edifices.each do |edifice|
     = render "edifices/title", edifice:
     = render layout: "shared/grid_layout" do
-      - reordered = @dossier ? edifice.objets.order_by_recensement_priorite : edifice.objets
-      - reordered.each do |objet|
+      - objets_to_display = @dossier ? Objet.sort_by_recensement_priorite(edifice.objets.to_a) : edifice.objets.to_a
+      - objets_to_display.each do |objet|
+        - recensement = objet.recensement
+        - can_analyse = recensement&.completed? && @commune.completed? && @dossier&.submitted? && current_conservateur.departements.include?(@commune.departement)
         .fr-col-md-4
-          = render Conservateurs::ObjetCardComponent.new objet, recensement: objet.recensement, can_analyse: objet.recensement&.completed? && conservateurs_policy(Analyse.new(recensement: objet.recensement)).edit?, commune: @commune
+          = render Conservateurs::ObjetCardComponent.new objet, recensement:, can_analyse:, commune: @commune
 
   - deleted_recensements = @dossier&.recensements&.only_deleted
   - if deleted_recensements&.any?

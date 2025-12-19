@@ -1,0 +1,97 @@
+name: "Security Scan"
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+  schedule:
+    # Run daily at 2am UTC to catch newly disclosed vulnerabilities
+    - cron: '0 2 * * *'
+
+jobs:
+  npm-security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 18
+
+      - name: Install dependencies (ignore scripts)
+        run: npm ci --ignore-scripts
+
+      - name: Run npm audit for known vulnerabilities
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: Check package integrity
+        run: |
+          echo "Verifying package integrity..."
+          npm ls --all 2>&1 | grep -i "invalid\|missing\|extraneous" || echo "✅ Package integrity verified"
+
+      - name: Find packages with install scripts
+        id: find-scripts
+        run: |
+          find node_modules -name "package.json" -type f \
+            -exec grep -l "\"preinstall\":\|\"install\":\|\"postinstall\":" {} \; \
+            > /tmp/all_scripts.txt || true
+
+          count=$(wc -l < /tmp/all_scripts.txt | tr -d ' ')
+          echo "Found $count packages with install scripts"
+
+          # Set output for next step
+          if [ "$count" -gt 0 ]; then
+            echo "has_scripts=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_scripts=false" >> $GITHUB_OUTPUT
+            echo "✅ No install scripts found in any packages"
+          fi
+
+      - name: Filter out allowed packages
+        id: filter-allowed
+        if: steps.find-scripts.outputs.has_scripts == 'true'
+        env:
+          ALLOWED_PACKAGES: |
+            esbuild
+        run: |
+          cp /tmp/all_scripts.txt /tmp/suspicious_scripts.txt
+
+          echo "$ALLOWED_PACKAGES" | while IFS= read -r package; do
+            [ -z "$package" ] && continue
+            grep -v "node_modules/$package/package.json" /tmp/suspicious_scripts.txt \
+              > /tmp/suspicious_scripts.tmp || true
+            mv /tmp/suspicious_scripts.tmp /tmp/suspicious_scripts.txt
+          done
+
+          echo "Allowed packages: $(echo "$ALLOWED_PACKAGES" | tr '\n' ' ')"
+
+          # Set output for next step
+          if [ -s /tmp/suspicious_scripts.txt ]; then
+            echo "has_suspicious=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_suspicious=false" >> $GITHUB_OUTPUT
+            echo "✅ No unexpected install scripts found"
+          fi
+
+      - name: Alert on suspicious install scripts
+        if: steps.find-scripts.outputs.has_scripts == 'true' && steps.filter-allowed.outputs.has_suspicious == 'true'
+        run: |
+          echo "🚨 ALERT: Unexpected packages with install scripts detected!"
+          echo ""
+          echo "The following packages have install scripts and are NOT on the allowlist:"
+          cat /tmp/suspicious_scripts.txt
+          echo ""
+          echo "Review these packages immediately for potential malicious code:"
+          echo ""
+
+          while IFS= read -r pkg; do
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "📦 Package: $pkg"
+            echo ""
+            grep -A 5 "\"scripts\":" "$pkg" || true
+            echo ""
+          done < /tmp/suspicious_scripts.txt
+
+          exit 1

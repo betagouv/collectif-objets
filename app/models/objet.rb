@@ -92,6 +92,17 @@ class Objet < ApplicationRecord
     !recensement.nil? && recensement.completed?
   end
 
+  def self.sort_by_recensement_priorite(objets)
+    objets.sort_by do |objet|
+      recensement = objet.recensement
+      [
+        (recensement&.en_peril? ? 0 : recensement&.absent? ? 1 : 2),
+        (recensement&.analysed_at ? 1 : 0),
+        recensement&.analysed_at || Time.at(0)
+      ]
+    end
+  end
+
   def self.select_best_objet_in_list(objets_arr)
     current_arr = objets_arr
     [

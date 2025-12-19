@@ -26,6 +26,7 @@
                 %th Objets
                 %th Statut
                 %th Envoi dossier
+                %th
             %tbody
               - @communes.each do |commune|
                 %tr
@@ -35,6 +36,11 @@
                   %td= commune.objets_count
                   %td= commune_statut_global_badge(commune, small: true)
                   %td= l(commune.completed_at.to_date) if commune.completed_at.present?
+                  %td.co-white-space-nowrap
+                    = button_to impersonate_admin_user_path(commune.users.first),
+                    class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-eye-line w-100",
+                    title: "Incarner #{commune.nom}" do
+                      Incarner
         - if @pagy.pages > 1
           = render partial: 'shared/pagy_nav', locals: {pagy: @pagy}
 

@@ -3,7 +3,7 @@
 module Admin
   class CommunesController < BaseController
     def index
-      @ransack = Commune.include_statut_global.ransack(params[:q])
+      @ransack = Commune.preload(:users).include_statut_global.ransack(params[:q])
       @query_present = params[:q].present?
       @pagy, @communes = pagy(
         @ransack.result, items: 20
@@ -11,8 +11,14 @@ module Admin
     end
 
     def show
-      @commune = Commune.find(params[:id])
-      @messages = Message.where(commune: @commune).order(created_at: :asc)
+      @commune = Commune.includes(
+        edifices: :objets,
+        archived_dossiers: { recensements: { objet: [], photos_attachments: :blob } }
+      ).find(params[:id])
+      @messages = Message
+        .includes(:author, :inbound_email, files_attachments: :blob)
+        .where(commune: @commune)
+        .order(created_at: :asc)
     end
 
     def session_code

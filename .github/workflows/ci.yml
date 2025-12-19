@@ -22,24 +22,24 @@ jobs:
     steps:
       - run: mkdir -p tmp/artifacts/capybara
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install libvips
         run: sudo apt-get update && sudo apt-get install -y libvips
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: 18
-      - run: npm ci
+      - run: npm ci --ignore-scripts
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Run tests
         run: bundle exec rspec
         env:
           RUBYOPT: -W0 # Disable Ruby warnings for libvips uninitialized constant cf https://github.com/customink/ruby-vips-lambda/issues/15
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: artifacts-capybara
           path: tmp/artifacts/capybara
@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:

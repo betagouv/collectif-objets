@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_27_145049) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_18_171733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -498,8 +498,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_27_145049) do
     t.index ["magic_token_deprecated"], name: "index_users_on_magic_token_deprecated", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", on_delete: :cascade
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", on_delete: :cascade
   add_foreign_key "bordereau_recensements", "bordereaux"
   add_foreign_key "bordereau_recensements", "recensements"
   add_foreign_key "bordereaux", "dossiers"
