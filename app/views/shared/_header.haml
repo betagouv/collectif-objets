@@ -49,11 +49,11 @@
       - commune = current_recenseur.communes.first
       - c.with_direct_link_simple title: commune, path: recenseurs_commune_path(commune), active: active_nav_link?("Communes")
       - c.with_direct_link_simple title: "Recensement", path: recenseurs_commune_objets_path(commune), active: active_nav_link?("Recensement")
-      - c.with_direct_link_simple title: "Examen du conservateur", path: recenseurs_commune_dossier_path(commune), active: active_nav_link?("Examen du conservateur")
+      - c.with_direct_link_simple title: "Examen du conservateur", path: recenseurs_commune_dossier_path(commune), active: active_nav_link?("Examen du conservateur") if policy(commune).dossier?
     - else
       - c.with_direct_link_simple title: "Communes", path: recenseurs_communes_path, active: active_nav_link?("Communes")
       - c.with_direct_link_simple title: "Recensement", path: recenseurs_commune_path(@commune), active: active_nav_link?("Recensement") if @commune
-      - c.with_direct_link_simple title: "Examen du conservateur", path: recenseurs_commune_dossier_path(@commune), active: active_nav_link?("Examen du conservateur") if @commune
+      - c.with_direct_link_simple title: "Examen du conservateur", path: recenseurs_commune_dossier_path(@commune), active: active_nav_link?("Examen du conservateur") if @commune && policy(@commune).dossier?
 
     - c.with_direct_link_simple title: "Comment ça marche ?", path: content_blob_path(:aide_en_ligne), active: active_nav_link?("Aide en ligne")
 
