@@ -10,7 +10,10 @@ module Recenseurs
     alias historique? show?
 
     def dossier?
-      recenseur.access_for(commune)&.all_edifices?
+      access = recenseur.access_for(commune)
+      return false unless access
+
+      access.granted? && access.all_edifices?
     end
 
     class Scope < Scope

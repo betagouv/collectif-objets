@@ -62,6 +62,49 @@ describe Recenseurs::CommunePolicy do
       it { should_not permit(recenseur, commune) }
     end
   end
+
+  permissions :dossier? do
+    context "commune with all edifices access" do
+      let!(:commune) { create(:commune, :with_edifices, departement:) }
+      let!(:recenseur) { create(:recenseur) }
+      let!(:access) { create(:recenseur_access, recenseur:, commune:, granted: true, all_edifices: true) }
+
+      it { should permit(recenseur, commune) }
+    end
+
+    context "commune with specific edifice access only" do
+      let!(:commune) { create(:commune, :with_edifices, departement:) }
+      let!(:recenseur) { create(:recenseur) }
+      let!(:access) do
+        commune.reload
+        some_edifice_id = commune.edifices.first.id
+        access = create(:recenseur_access, recenseur:, commune:, granted: false,
+                                           all_edifices: false, edifice_ids: [])
+        access.update_columns(granted: true, edifice_ids: [some_edifice_id])
+        access
+      end
+
+      it { should_not permit(recenseur, commune) }
+    end
+
+    context "commune with non-granted access" do
+      let!(:commune) { create(:commune, :with_edifices, departement:) }
+      let!(:recenseur) { create(:recenseur) }
+      let!(:access) do
+        create(:recenseur_access, recenseur:, commune:, granted: false,
+                                  all_edifices: true)
+      end
+
+      it { should_not permit(recenseur, commune) }
+    end
+
+    context "commune with no access at all" do
+      let!(:commune) { create(:commune, :with_edifices, departement:) }
+      let!(:recenseur) { create(:recenseur) }
+
+      it { should_not permit(recenseur, commune) }
+    end
+  end
 end
 
 describe Recenseurs::CommunePolicy::Scope do
