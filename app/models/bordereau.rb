@@ -35,6 +35,15 @@ class Bordereau < ApplicationRecord
   def nom_edifice = (edifice&.nom || edifice_nom)&.upcase_first
   def pdf = @pdf ||= BordereauPdf.new(self)
 
+  def generated?
+    return false unless file.attached?
+
+    # Check if blob exists and is accessible
+    file.blob.present?
+  rescue ::ActiveStorage::FileNotFoundError
+    false
+  end
+
   def persist(params)
     save && return if params.empty?
 

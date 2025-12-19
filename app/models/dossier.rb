@@ -6,6 +6,7 @@ class Dossier < ApplicationRecord
   has_many :recensements, dependent: :nullify
   has_many :objets, through: :recensements
   belongs_to :conservateur, optional: true
+  has_many :bordereaux, dependent: :destroy
 
   include AASM
   aasm column: :status, timestamps: true, whiny_persistence: true do

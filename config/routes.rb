@@ -151,7 +151,7 @@ Rails.application.routes.draw do
       end
       resource :dossier, only: :show
       get :historique, as: :historique, to: "dossiers#historique"
-      resources :bordereaux, only: %i[index create]
+      resources :bordereaux, only: %i[index create show]
       resource :deleted_recensements, only: [:show]
     end
     resources :objets, only: [] do
