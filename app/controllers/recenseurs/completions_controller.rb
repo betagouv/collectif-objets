@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-module Communes
+module Recenseurs
   class CompletionsController < BaseController
+    before_action :set_commune, :set_dossier
     before_action :set_dossier_completion_and_authorize
     before_action :set_objets
     before_action :set_missing_photos, only: %i[new create]
@@ -16,7 +17,7 @@ module Communes
 
     def create
       if @dossier_completion.create!(**dossier_completion_params)
-        redirect_to commune_objets_path(@commune), notice: "Le recensement de votre commune est terminé !"
+        redirect_to recenseurs_commune_objets_path(@commune), notice: "Le recensement de votre commune est terminé !"
       else
         render :new, status: :unprocessable_content
       end
@@ -40,7 +41,7 @@ module Communes
 
     def dossier_completion_params
       params.require(:dossier_completion).permit(:notes_commune, :recenseur).to_h.symbolize_keys
-        .merge(user: current_user)
+        .merge(user: current_recenseur)
     end
 
     def active_nav_links = %w[Recensement]

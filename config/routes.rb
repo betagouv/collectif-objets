@@ -118,6 +118,7 @@ Rails.application.routes.draw do
       put :premiere_visite, action: :after_premiere_visite, as: :after_premiere_visite
     end
     resources :communes, only: %i[index show] do
+      resource :completion, only: %i[new create show]
       resources :objets, only: %i[index show] do
         resources :recensements, only: %i[create edit update destroy] do
           resources :photos, only: %i[create destroy], controller: "recensement_photos"

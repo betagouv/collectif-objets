@@ -22,7 +22,8 @@
                 - else
                   = vite_image_tag "images/illustrations/photo-manquante.png", alt: "Photo manquante"
               %div
-                = link_to truncate(recensement.objet.nom, length: 30), commune_objet_path(objet.commune, recensement.objet)
+                - objet_path = current_recenseur ? recenseurs_commune_objet_path(objet.commune, objet) : commune_objet_path(objet.commune, objet)
+                = link_to truncate(recensement.objet.nom, length: 30), objet_path
           %td= presenter.localisation
           %td= presenter.recensable
           %td

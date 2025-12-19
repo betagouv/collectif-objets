@@ -1,7 +1,8 @@
 - content_for(:head_title) { "Finalisation du recensement de #{@commune.nom}" }
 %main#contenu.fr-container.fr-pb-8w
+  - objets_path = current_recenseur ? recenseurs_commune_objets_path(@commune) : commune_objets_path(@commune)
   = render"shared/breadcrumbs",
-    links: [["Accueil", root_path], ["Objets de #{@commune.nom}", commune_objets_path(@commune)]], current_page_label: "Finalisation"
+    links: [["Accueil", root_path], ["Objets de #{@commune.nom}", objets_path]], current_page_label: "Finalisation"
 
   - if @commune.errors.any?
     .fr-grid-row
@@ -19,24 +20,24 @@
     %p
       Veuillez vérifier la complétion et l'exactitude de vos recensements avant de les transmettre aux conservateurs de votre département.
 
-  = render "communes/completions/summary", objets: @objets
+  = render "shared/completions/summary", objets: @objets
 
+  - completion_path = current_recenseur ? recenseurs_commune_completion_path(@commune) : commune_completion_path(@commune)
   = form_for @dossier_completion,
     as: :dossier_completion,
-    url: commune_completion_path(@commune),
-    method: "POST",
+    url: completion_path,
+    method: :post,
     builder: FormBuilderDsfr,
     data: (@missing_photos ? { turbo_confirm: "Un recensement d'objet sans photo vous sera probablement renvoyé par les conservateurs. Êtes-vous sûr de vouloir valider votre recensement en l'état ?" } : {}) do |f|
     .fr-grid-row.fr-grid-row--gutters
-      .fr-col-md-6.fr-mb-2w
+      .fr-col-md-9.fr-mb-2w
         .fr-input-group
           = f.label :notes_commune, t("activerecord.attributes.dossier.interface_communes.notes_commune")
           = f.text_area :notes_commune
-      .fr-col-md-6.fr-mb-2w
         .fr-input-group
           = f.label :recenseur do
             = t("activerecord.attributes.dossier.recenseur")
             %span.fr-hint-text= t("activerecord.attributes.dossier.recenseur_hint_html", confidentialite_path:)
           = f.text_area :recenseur
     .actions
-      = f.submit "Je valide le recensement des objets de ma commune"
+      = f.submit "Je valide le recensement", name: nil
