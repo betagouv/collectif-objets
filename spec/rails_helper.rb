@@ -40,6 +40,11 @@ RSpec.configure do |config|
   end
 
   config.after(type: :feature) do |example_group|
+    # Clear sessions and Warden state after each feature spec to prevent leakage
+    Capybara.reset_sessions!
+    Warden.test_reset!
+
+    # Save screenshot only on failure
     next unless example_group.exception
 
     r = save_screenshot
