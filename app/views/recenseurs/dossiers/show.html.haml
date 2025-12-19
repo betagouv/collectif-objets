@@ -1,0 +1,33 @@
+- title = "Examen du conservateur"
+- content_for(:head_title) { title }
+
+.fr-container.fr-my-4w
+  = render "shared/breadcrumbs",
+    links: [["Accueil", recenseurs_communes_path],
+      ["Objets de #{@commune.nom}", recenseurs_commune_objets_path(@commune)]],
+    current_page_label: "Examen"
+
+  - if @dossier&.accepted?
+    = render "shared/dossier_rapport", rapport: RapportPresenter.new(@dossier)
+  - else
+    .fr-grid-row.co-flex--align-items-stretch.fr-mb-16w
+      .fr-col-md-8
+        %h1 L'examen n'est pas encore disponible
+        - if @dossier&.submitted?
+          :markdown
+            Le conservateur a reçu le recensement et doit l'examiner puis envoyer ses conclusions.
+
+            Vous serez averti par mail lorsque le conservateur aura produit l'examen.
+            Vous pouvez éventuellement relancer le conservateur dans la messagerie si vous le souhaitez.
+
+          = link_to "Contacter le conservateur", recenseurs_commune_messages_path(@commune), class: "fr-btn"
+        - else
+          :markdown
+            Le conservateur ne pourra produire cet examen que suite à l'envoi du recensement.
+
+            Envoyez le recensement pour obtenir les conseils du conservateur.
+            Suite à l'envoi du recensement, vous serez averti par mail lorsque le conservateur aura produit l'examen.
+
+          = link_to "Recenser les objets de la commune", recenseurs_commune_objets_path(@commune), class: "fr-btn"
+      .fr-col-md-4.fr-px-8w
+        = vite_image_tag "images/illustrations/technical-error.svg", alt: "Indisponible", class: "co-width co-height--100"
