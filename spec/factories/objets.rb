@@ -15,6 +15,14 @@ FactoryBot.define do
 
     association :commune
 
+    trait :classé do
+      palissy_PROT { "classé au titre objet" }
+    end
+
+    trait :inscrit do
+      palissy_PROT { "inscrit au titre objet" }
+    end
+
     trait :without_image do
       # do nothing
     end
@@ -50,7 +58,7 @@ FactoryBot.define do
       palissy_photos do
         [
           {
-            "url" => "/demo/objets/objet#{palissy_photo_number}.jpg",
+            "url" => "https://example.com/demo/objets/objet#{palissy_photo_number}.jpg",
             "credit" => "© Médiathèque Paris",
             "name" => "Vase bleu"
           }
@@ -62,7 +70,7 @@ FactoryBot.define do
       palissy_photos do
         (1..3).map do |i|
           {
-            "url" => "/demo/objets/objet#{i}.jpg",
+            "url" => "https://example.com/demo/objets/objet#{i}.jpg",
             "credit" => "© Médiathèque Paris",
             "name" => "Vase bleu"
           }
