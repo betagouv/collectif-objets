@@ -13,10 +13,9 @@
 
         %fieldset.fr-fieldset.fr-mt-2w
           %legend.fr-fieldset__legend.fr-h5.fr-mb-0= "Édifices"
-          = f.fields_for :edifice_ids, access.commune.edifices.ordered_by_nom.with_objets_count, include_id: false do |ff|
-            - edifice = ff.object
+          - access.commune.edifices.ordered_by_nom.with_objets_count.each do |edifice|
             - nb_objets = Objet.human_attribute_name(:count, count: edifice.objets_count)
             .fr-fieldset__element
               .fr-checkbox-group
-                = ff.check_box edifice.id, { checked: access.edifice?(edifice), data: { controller: "input-autosubmit", action: "input-autosubmit#submit" } }
-                = ff.label edifice.id, "#{edifice.nom} (#{nb_objets})"
+                = f.check_box "edifice_ids", { checked: access.edifice?(edifice), value: edifice.id, name: "recenseur_access[edifice_ids][]", id: "access_edifice_ids_#{edifice.id}", data: { controller: "input-autosubmit", action: "input-autosubmit#submit" } }, edifice.id, nil
+                = f.label "edifice_ids[]", "#{edifice.nom} (#{nb_objets})", for: "access_edifice_ids_#{edifice.id}"
