@@ -200,7 +200,8 @@ Rails.application.routes.draw do
       post :toggle_impersonate_mode, on: :collection
     end
     resources :recenseurs do
-      get :impersonate, on: :member
+      post :impersonate, on: :member
+      delete :stop_impersonating, on: :member
       post :toggle_impersonate_mode, on: :collection
       resources :accesses, only: [:show, :new, :create, :update], as: :recenseur_access, controller: :recenseur_accesses
     end

@@ -26,8 +26,8 @@
     .fr-col-12.fr-col-md-6
       %ul.fr-btns-group.fr-btns-group--inline-lg.fr-btns-group--icon-left.fr-mt-1w
         %li= link_to "Modifier", [:edit, namespace, @recenseur], class: "fr-btn fr-icon-pencil-line" unless current_conservateur && !policy(@recenseur).edit?
+        %li= button_to "Incarner", [:impersonate, namespace, @recenseur], method: :post, class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-eye-line w-100" unless current_conservateur
         %li= button_to "Supprimer", [namespace, @recenseur], class: "fr-btn fr-icon-delete-line fr-btn--secondary", method: :delete, data: { turbo_confirm: "Êtes-vous sûr ?" } unless current_conservateur && !policy(@recenseur).destroy?
-        %li= link_to "Incarner", [:impersonate, namespace, @recenseur], data: { turbo: false }, class: "fr-btn fr-btn--secondary fr-icon-eye-line" unless current_conservateur
 
   .fr-grid-row.fr-grid-row--gutters
     .fr-col-12.fr-col-lg-6
