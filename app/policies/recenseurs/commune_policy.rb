@@ -9,6 +9,10 @@ module Recenseurs
     end
     alias historique? show?
 
+    def dossier?
+      recenseur.access_for(commune)&.all_edifices?
+    end
+
     class Scope < Scope
       def resolve
         scope.where(id: recenseur.granted_accesses.with_edifices.select(:commune_id))
