@@ -27,7 +27,8 @@ module Communes
 
     private
 
-    delegate :objet, :commune, to: :record
+    delegate :objet, to: :record
+    delegate :commune, to: :objet
 
     def user_commune?
       user.commune == commune

@@ -8,6 +8,21 @@ module Communes
 
     protected
 
+    def set_dossier
+      @dossier = @commune.dossiers
+        .where.not(status: :archived)
+        .includes(
+          :conservateur,
+          :commune,
+          recensements: [
+            :objet,
+            :conservateur,
+            { photos_attachments: :blob }
+          ]
+        )
+        .first
+    end
+
     def authorize_dossier
       if @dossier
         authorize(@dossier)
