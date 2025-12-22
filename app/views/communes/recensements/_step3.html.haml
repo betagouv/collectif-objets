@@ -26,14 +26,10 @@
       %p Vous allez être redirigé directement vers l’étape des commentaires.
       %p
         Vous pouvez aussi contacter vos conservateurs via la
-        = link_to "messagerie", commune_messages_path(wizard.commune), "data-turbo-frame": "_top"
+        = link_to "messagerie", [wizard.namespace, wizard.commune, :messages].compact, "data-turbo-frame": "_top"
         pour lui demander de l’aide ou des conseils pour recenser l’objet.
 
       - m.with_button do
         = dsfr_button label: "Confirmer et continuer", html_attributes: { type: "submit" }
       - m.with_button do
         = link_to "Annuler", wizard.confirmation_modal_close_path, class: "fr-btn fr-btn--secondary"
-
-  .co-text--right
-    = form_builder.submit "Passer à l’étape suivante", class: "fr-btn", name: nil
-    .fr-mt-2w= render "communes/recensements/previous_step_link", wizard:

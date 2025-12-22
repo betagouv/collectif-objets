@@ -1,0 +1,11 @@
+- title = "Modifier #{@recenseur.nom}"
+- content_for(:head_title) { title }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render "shared/breadcrumbs", links: [["Recenseurs", [namespace, :recenseurs]]], current_page_label: "Modifier un recenseur"
+
+  %h1
+    = icon_span("account-pin-circle", fill: true)
+    = title
+
+  = render "shared/recenseurs/form", recenseur: @recenseur

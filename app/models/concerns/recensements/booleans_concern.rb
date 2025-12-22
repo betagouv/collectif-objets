@@ -32,7 +32,7 @@ module Recensements
     end
 
     def missing_photos?
-      recensable? && (edifice_initial? || deplacement_definitif?) && photos.empty?
+      recensable? && (edifice_initial? || deplacement_definitif?) && photos_count.zero?
     end
 
     def en_peril?

@@ -80,7 +80,7 @@ describe Departement, type: :model do
     let(:departement) { create(:departement) }
     let(:commune) { create(:commune, :with_user, departement:) }
     let(:commune2) { create(:commune, :with_user, departement:) }
-    let(:commune_autre_departement) { create(:commune, :with_user) }
+    let(:commune_autre_departement) { create(:commune, :with_user, departement: create(:departement)) }
     let(:date_range) { Time.zone.now.all_week }
     subject(:commune_messages_count) { departement.commune_messages_count(date_range) }
 
@@ -103,7 +103,7 @@ describe Departement, type: :model do
     let(:departement) { create(:departement) }
     let(:commune) { create(:commune, :with_user, departement:) }
     let(:commune2) { create(:commune, :with_user, departement:) }
-    let(:commune3) { create(:commune, :with_user) }
+    let(:commune3) { create(:commune, :with_user, departement: create(:departement)) }
     let(:date_range) { Time.zone.now.all_week }
     let(:dossier) { create(:dossier, :submitted, :with_recensement, commune:, submitted_at: date_range.first + 1.day) }
     subject(:commune_dossiers_transmis) { departement.commune_dossiers_transmis(date_range) }
@@ -113,7 +113,7 @@ describe Departement, type: :model do
         create(:dossier, :submitted, :with_recensement, commune:, submitted_at: date_range.first + 1.day)
         create(:dossier, :submitted, :with_recensement, commune: commune2, submitted_at: date_range.first - 1.day)
         create(:dossier, :submitted, :with_recensement, commune: commune3, submitted_at: date_range.first + 1.day)
-        expect(commune_dossiers_transmis).to eq [commune]
+        expect(commune_dossiers_transmis.to_a).to eq [commune]
       end
       context "avec des objets disparus" do
         it "indique le nombre d'objets disparus par commune" do

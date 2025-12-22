@@ -3,9 +3,10 @@
     <%= t(".hint", count: dossier.recensements.count) %>
   <% end %>
   <% c.with_cta do %>
+    <% completion_path = current_recenseur ? new_recenseurs_commune_completion_path(commune) : new_commune_completion_path(commune) %>
     <%= link_to(
       t(".cta", count: dossier.recensements.count),
-      new_commune_completion_path(commune),
+      completion_path,
       class: "fr-btn",
       tabindex: "0"
     ) %>

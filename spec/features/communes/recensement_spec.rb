@@ -235,13 +235,13 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(row_ciboire).to have_selector("img[src*='peinture1.jpg']")
     fill_in("Vos commentaires", with: "C’était fort sympathique")
     expect(page).to be_axe_clean
-    click_on "Je valide le recensement des objets de ma commune"
+    click_on "Je valide le recensement"
 
     expect(page).to have_text("Le recensement de vos objets est terminé, merci !")
     expect(page).to be_axe_clean
     click_on "Voir les données envoyées"
 
-    expect(page).to have_text("Recensements de Albon")
+    expect(page).to have_text("Recensement de Albon")
     expect(page).to have_text("Un conservateur a été prévenu et reviendra vers vous.")
     expect(page).to be_axe_clean
   end
@@ -306,7 +306,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(card_bouquet).to have_text(/Recensé/i)
     card_bouquet.click
     step7_validate
-    find("section", text: "L’objet n’est pas recensable").find('button[title="Modifier la réponse"]').click
+    find("section", text: "L’objet n’est pas recensable").find('a[title="Modifier l\'état recensable"]').click
     step3_validate
     find("label", text: "L’objet est recensable").click
     click_on "Passer à l’étape suivante"
@@ -468,7 +468,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Oui, il a été déplacé temporairement")
     expect(page).not_to have_text("L’objet est-il recensable ?")
     find("section", text: "Oui, il a été déplacé temporairement")
-      .find('button[title="Modifier la localisation de l’objet"]').click
+      .find('a[title="Modifier la localisation de l’objet"]').click
 
     step1_validate
     expect(find(".fr-radio-group", text: "Oui, mais l’objet a été déplacé temporairement")

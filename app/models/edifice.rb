@@ -5,6 +5,8 @@ class Edifice < ApplicationRecord
   has_many :objets, dependent: :nullify
   has_many :bordereaux, dependent: :nullify
 
+  has_many :recenseurs, through: :commune
+
   validates :code_insee, presence: true
   validates :merimee_REF, uniqueness: true, if: -> { merimee_REF.present? }
   validates :slug, uniqueness: { scope: :code_insee }, if: -> { code_insee.present? }
@@ -17,6 +19,19 @@ class Edifice < ApplicationRecord
     .group("edifices.id")
   }
   scope :ordered_by_nom, -> { order(Arel.sql("LOWER(UNACCENT(edifices.nom))")) }
+
+  scope :with_objets_count, lambda {
+    joins(
+      %{
+        LEFT OUTER JOIN (
+          SELECT objets.edifice_id, COUNT(*) AS objets_count
+          FROM objets
+          WHERE objets.edifice_id IS NOT NULL
+          GROUP BY objets.edifice_id
+        ) objets_counts ON objets_counts.edifice_id = edifices.id
+      }
+    ).select("edifices.*, COALESCE(objets_counts.objets_count, 0) AS objets_count")
+  }
 
   scope :preloaded, lambda {
     joins(:objets)

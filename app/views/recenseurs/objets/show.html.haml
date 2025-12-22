@@ -1,0 +1,31 @@
+- content_for(:head_title) { truncate(@objet.nom, length: 20) }
+%main#contenu.fr-container
+  = render "shared/breadcrumbs",
+    links: [["Accueil", root_path], ["Objets de #{@objet.commune.nom}", [namespace, @objet.commune]]],
+    current_page_label: @objet.nom
+
+  .co-flex.co-flex--align-items-center.co-flex--gap-1rem.co-flex--wrap.fr-mb-8w
+    %h1.fr-mb-0= @objet.nom
+    = objet_recensement_badge(@objet)
+
+  - if @commune.dossier&.accepted? && @objet.recensement&.analyse_notes.present?
+    .fr-mb-8w.co-break-inside-avoid
+      .co-text--bold Commentaires du conservateur
+      .co-blockquote= @objet.recensement.analyse_notes
+
+  .fr-grid-row.fr-pb-4w.fr-grid-row--gutters
+    .fr-col-md-6
+      - if @objet.recensement&.draft?
+        .fr-mb-4w
+          = link_to "Compléter", edit_recenseurs_commune_objet_recensement_path(@objet.commune, @objet, @objet.recensement, step: 1), class: "fr-btn"
+      - elsif @objet.recensement? && recenseurs_policy(@objet.recensement).edit?
+        .fr-mb-4w
+          = link_to "Modifier", edit_recenseurs_commune_objet_recensement_path(@objet.commune, @objet, @objet.recensement), class: "fr-btn fr-btn--secondary fr-icon-edit-line fr-btn--icon-right"
+      - elsif recenseurs_policy(Recensement.new(objet: @objet)).new?
+        .fr-mb-4w
+          = button_to "Recenser", recenseurs_commune_objet_recensements_path(@objet.commune, @objet), class: "fr-btn", method: :post
+
+      = render "shared/objet_attributes", objet: @objet
+
+    .fr-col-md-6.co-flex-md-reverse-order
+      = render galerie_objet(@objet)

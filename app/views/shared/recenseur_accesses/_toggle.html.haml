@@ -1,0 +1,32 @@
+= form_for [namespace, access.recenseur, access], builder: FormBuilderDsfr, html: { id: dom_id(access), class: "fr-mb-2w" } do |f|
+  %h4.fr-mb-0.co-flex.co-flex--space-between.co-flex--align-items-center
+    %span= commune_with_departement(access.commune)
+    %span.fr-text-sm= Edifice.human_attribute_name(:count, count: access.commune.edifices.size)
+
+  .fr-toggle.fr-toggle--border-bottom
+    = f.check_box :granted, value: access.granted?, id: dom_id(access, :granted), class: "fr-toggle__input", data: { controller: "input-autosubmit", action: "input-autosubmit#submit", "fr-checked-label": "Autorisé", "fr-unchecked-label": access.human_status }
+    = f.label :granted, "Autoriser le recensement", for: dom_id(access, :granted), class: "fr-toggle__label"
+    - if access.pending?
+      %p.fr-hint-text= RecenseurAccess.human_attribute_name("status.pending")
+
+  - if access.granted?
+    - if access.commune.edifices.size < 2
+      = f.hidden_field :all_edifices, value: true, id: nil
+      .fr-toggle.fr-toggle--border-bottom
+        = f.check_box :all_edifices, class: "fr-toggle__input", name: nil, checked: true, disabled: true, id: dom_id(access, :all_edifices), data: { "fr-checked-label": "Tous", "fr-unchecked-label": "Sélection" }
+        = f.label :all_edifices, "Accès à tous les édifices", for: dom_id(access, :all_edifices), class: "fr-toggle__label"
+    - else
+      .fr-toggle.fr-toggle--border-bottom
+        = f.check_box :all_edifices, class: "fr-toggle__input", id: dom_id(access, :all_edifices), checked: access.all_edifices_selected?, data: { controller: "input-autosubmit", action: "input-autosubmit#submit", "fr-checked-label": "Tous", "fr-unchecked-label": "Sélection" }
+        = f.label :all_edifices, "Accès à tous les édifices", for: dom_id(access, :all_edifices), class: "fr-toggle__label"
+
+      %fieldset.fr-fieldset.fr-mt-2w
+        %legend.fr-fieldset__legend.fr-h5.fr-mb-0= "Édifices"
+        = render UnfoldComponent.new(max_height_px: 200, button_text: "Afficher tous les édifices de #{access.commune.nom}…", folded: access.updated_at.before?(1.minute.ago)) do
+          - access.commune.edifices.ordered_by_nom.with_objets_count.each do |edifice|
+            - nb_objets = Objet.human_attribute_name(:count, count: edifice.objets_count)
+            .fr-fieldset__element
+              .fr-checkbox-group
+                - field_id = "recenseur_access_edifice_ids_#{edifice.id}"
+                = f.check_box :edifice_ids, { multiple: true, checked: access.edifice?(edifice), data: { controller: "input-autosubmit", action: "input-autosubmit#submit" }, id: field_id }, edifice.id.to_s, ""
+                = f.label "edifice_ids", "#{edifice.nom} (#{nb_objets})", for: field_id

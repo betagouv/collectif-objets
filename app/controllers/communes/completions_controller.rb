@@ -6,9 +6,13 @@ module Communes
     before_action :set_objets
     before_action :set_missing_photos, only: %i[new create]
 
-    def show; end
+    def show
+      render "shared/completions/show"
+    end
 
-    def new; end
+    def new
+      render "shared/completions/new"
+    end
 
     def create
       if @dossier_completion.create!(**dossier_completion_params)

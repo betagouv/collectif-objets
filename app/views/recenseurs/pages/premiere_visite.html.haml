@@ -1,0 +1,12 @@
+- content_for(:head_title) { "Recensez vos objets en 3 étapes" }
+
+%main#contenu.fr-pt-2w.fr-pb-4w
+  .fr-container.fr-pt-2w.fr-pb-8w
+    %h1 Recensez vos objets en 3 étapes
+    .fr-mt-8w= render "recensements/etapes_contenu"
+
+  .co-position-sticky.co-bottom-0.co-box-shadow-top.co-background--white
+    .fr-container.fr-py-4w.co-flex.co-flex--space-between
+      = link_to "En savoir plus", aide_path, class: "fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-question-line"
+      = button_to "Commencer le recensement", recenseurs_after_premiere_visite_path, method: :put,
+        class: "fr-btn fr-btn--icon-right fr-icon-arrow-right-line"

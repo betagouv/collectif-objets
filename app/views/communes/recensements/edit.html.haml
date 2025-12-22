@@ -3,15 +3,15 @@
   .fr-px-2w.fr-px-md-0
     = render "shared/breadcrumbs",
       links: [["Accueil", root_path],
-        ["Objets de #{current_user.commune.nom}", commune_objets_path(current_user.commune)],
-        [@wizard.objet.nom, commune_objet_path(@wizard.commune, @wizard.objet)],
+        ["Objets de #{@wizard.commune.nom}", @wizard.commune_path],
+        [@wizard.objet.nom, @wizard.objet_path],
       ], current_page_label: "Recensement"
 
   .fr-grid-row
-    .fr-col-md-8.fr-col-offset-md-2
+    .fr-col-md-8.fr-col-offset-md-2.co-flex--grow
       .fr-px-2w.fr-px-md-0
         %h1 Recensement
-      .fr-mb-4w= render "communes/recensements/objet", objet: @wizard.objet
+      .fr-mb-4w= render "communes/recensements/objet", wizard: @wizard
 
       = turbo_frame_tag "recensement_form_step",
         data: { controller: "recensement-form-step",

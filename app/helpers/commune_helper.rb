@@ -53,4 +53,8 @@ module CommuneHelper
     end
     data.join(", ")
   end
+
+  def commune_with_departement(commune)
+    "#{commune.nom} (#{commune.departement.code} - #{commune.departement.nom})"
+  end
 end

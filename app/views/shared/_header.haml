@@ -18,6 +18,8 @@
       - dropdown.with_link title: "Déplacements prévus", path: conservateurs_visits_path
       - dropdown.with_link title: "Fiches attribuées", path: conservateurs_fiches_path
 
+    - c.with_direct_link_simple title: "Recenseurs", path: conservateurs_recenseurs_path, active: active_nav_link?("Recenseurs")
+
     - c.with_direct_link_simple title: "Documentation", path: content_blob_path(:documentation_conservateur), active: active_nav_link?("Documentation")
 
     - c.with_search do
@@ -31,10 +33,31 @@
     - c.with_direct_link_simple title: "Recensement", path: commune_objets_path(current_user.commune), active: active_nav_link?("Recensement")
     - c.with_direct_link_simple title: commune_messagerie_title(current_user.commune), path: commune_messages_path(current_user.commune), active: active_nav_link?("Messagerie")
     - c.with_direct_link_simple title: "Examen du conservateur", path: commune_dossier_path(current_user.commune), active: active_nav_link?("Examen du conservateur")
+    - c.with_direct_link_simple title: "Recenseurs", path: commune_recenseurs_path(current_user.commune), active: active_nav_link?("Recenseurs")
     - c.with_direct_link_simple title: "Comment ça marche ?", path: aide_path, active: active_nav_link?("Comment ça marche ?")
 
     - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos", "Aide en ligne", "On parle de nous", "Statistiques") do |dropdown|
       - dropdown.with_link title: "Aide en ligne", path: content_blob_path(:aide_en_ligne), active: active_nav_link?("Aide en ligne")
+      - dropdown.with_link title: "On parle de nous", path: presse_path
+      - dropdown.with_link title: "Statistiques", path: stats_path
+
+  - elsif current_recenseur
+    - c.with_tool_link title: "Préférences", path: recenseur_registration_path, classes: ["fr-icon-settings-5-line"]
+    - c.with_tool_link title: "Déconnexion", path: recenseur_session_path, classes: ["fr-icon-logout-box-r-line"], html_attributes: { "data-turbo-method": :delete }
+
+    - if current_recenseur.communes.count == 1
+      - commune = current_recenseur.communes.first
+      - c.with_direct_link_simple title: commune, path: recenseurs_commune_path(commune), active: active_nav_link?("Communes")
+      - c.with_direct_link_simple title: "Recensement", path: recenseurs_commune_objets_path(commune), active: active_nav_link?("Recensement")
+      - c.with_direct_link_simple title: "Examen du conservateur", path: recenseurs_commune_dossier_path(commune), active: active_nav_link?("Examen du conservateur") if policy(commune).dossier?
+    - else
+      - c.with_direct_link_simple title: "Communes", path: recenseurs_communes_path, active: active_nav_link?("Communes")
+      - c.with_direct_link_simple title: "Recensement", path: recenseurs_commune_path(@commune), active: active_nav_link?("Recensement") if @commune
+      - c.with_direct_link_simple title: "Examen du conservateur", path: recenseurs_commune_dossier_path(@commune), active: active_nav_link?("Examen du conservateur") if @commune && policy(@commune).dossier?
+
+    - c.with_direct_link_simple title: "Comment ça marche ?", path: content_blob_path(:aide_en_ligne), active: active_nav_link?("Aide en ligne")
+
+    - c.with_direct_link_dropdown title: "À propos", active: active_nav_link?("À propos", "On parle de nous", "Statistiques") do |dropdown|
       - dropdown.with_link title: "On parle de nous", path: presse_path
       - dropdown.with_link title: "Statistiques", path: stats_path
 
@@ -44,6 +67,7 @@
     - c.with_direct_link_simple title: "Administration", path: admin_path, active: active_nav_link?("Administration")
     - c.with_direct_link_simple title: "Communes", path: admin_communes_path, active: active_nav_link?("Communes")
     - c.with_direct_link_simple title: "Conservateurs", path: admin_conservateurs_path, active: active_nav_link?("Conservateurs")
+    - c.with_direct_link_simple title: "Recenseurs", path: admin_recenseurs_path, active: active_nav_link?("Recenseurs")
     - c.with_direct_link_simple title: "Campagnes", path: admin_campaigns_path, active: active_nav_link?("Campagnes")
     - c.with_direct_link_simple title: "CMS", path: "https://collectif-objets-cms.netlify.app/", html_attributes: { target: "_blank", rel: "noopener" }
 
