@@ -1,0 +1,8 @@
+= form_with url: disable_admin_two_factor_settings_path, method: :post do |f|
+  .fr-input-group
+    = render PasswordInputComponent.new(name: "password", autocomplete: "current-password", hint: false)
+  .fr-input-group
+    = f.label :otp_attempt, "Code d'authentification à 2 facteurs"
+    = f.text_field :otp_attempt, class: "fr-input", required: true, autocomplete: "one-time-code", placeholder: "123456"
+  .fr-mt-2w
+    = f.button "Désactiver l'authentification à deux facteurs", type: :submit, class: "fr-btn fr-btn--icon-left fr-icon-lock-unlock-line", name: nil, data: { confirm: "Êtes-vous sûr de vouloir désactiver l'authentification à deux facteurs ? Tous vos codes de secours seront supprimés." }

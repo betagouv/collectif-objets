@@ -3,6 +3,7 @@
 module Admin
   class BaseController < ApplicationController
     before_action :restrict_access
+    before_action :require_two_factor_authentication
     before_action :disconnect_impersonating_user
     before_action :disconnect_impersonating_conservateur
 
@@ -11,7 +12,14 @@ module Admin
     def restrict_access
       return true if current_admin_user.present?
 
-      redirect_to root_path, alert: "Vous n'êtes pas connecté en tant qu'admin"
+      redirect_to new_admin_user_session_path, alert: "Vous n'êtes pas connecté en tant qu'admin"
+    end
+
+    def require_two_factor_authentication
+      return if current_admin_user.otp_required_for_login?
+
+      redirect_to admin_two_factor_settings_path,
+                  alert: "Vous devez activer l’authentification à deux facteurs"
     end
 
     def disconnect_impersonating_user

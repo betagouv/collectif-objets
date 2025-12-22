@@ -68,4 +68,9 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Enable ActiveRecord encryption (without credentials)
+  config.active_record.encryption.primary_key = "test_primary_key"
+  config.active_record.encryption.deterministic_key = "test_deterministic_key"
+  config.active_record.encryption.key_derivation_salt = "test_salt"
 end

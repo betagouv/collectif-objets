@@ -33,6 +33,7 @@ RSpec.configure do |config|
 
   config.include Warden::Test::Helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Rails.application.routes.url_helpers, type: :request
 
   # Add app-specific columns to ActiveStorage
   config.before(:suite) { require Rails.root.join("scripts/create_postgres_sequences_memoire_photos_numbers.rb") }
