@@ -4,9 +4,10 @@ version: 2
 updates:
   - package-ecosystem: "bundler"
     directory: "/"
-    default-days: 7
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     ignore:
       - dependency-name: "sentry-ruby"
         versions: ["5.x"]
@@ -16,9 +17,10 @@ updates:
         versions: ["5.x"]
   - package-ecosystem: "npm"
     directory: "/"
-    default-days: 10
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 10
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
