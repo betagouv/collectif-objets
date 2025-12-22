@@ -10,7 +10,7 @@ gem "actionmailer-html2text", "~> 0.2.0"
 gem "active_model_validates_intersection_of", "~> 3.0"
 gem "active_storage_validations", "~> 3.0"
 gem "after_commit_everywhere", "~> 1.5"
-gem "aws-sdk-s3", "~> 1.143", require: false
+gem "aws-sdk-s3", "~> 1.208", require: false
 gem "bootsnap", "~> 1.18", require: false
 gem "csv", "~> 3.3"
 gem "devise", "~> 4.9"
