@@ -2,8 +2,23 @@
 
 require "active_support/core_ext/integer/time"
 
-host = ENV["HOST"].sub("https://", "")
+host = ENV["HOST"].to_s.sub("https://", "")
 Rails.application.default_url_options = { host: }
+
+class JsonLogFormatter < ActiveSupport::Logger::SimpleFormatter
+  def call(severity, time, _progname, message)
+    # %Q{ { 'time': "#{time.iso8601}", "level": "#{severity}", "message": "#{message}"} \n }
+    log_entry = {
+      time: time.iso8601,
+      level: severity,
+      message: message.to_s
+    }
+    "#{JSON.generate(log_entry)}\n"
+  rescue JSON::GeneratorError
+    # Fallback to simple format if JSON generation fails
+    "#{time.iso8601} [#{severity}] #{message}\n"
+  end
+end
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -38,7 +53,14 @@ Rails.application.configure do
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :info
+  valid_log_levels = [:debug, :info, :warn, :error, :fatal, :unknown]
+  requested_level = ENV["RAILS_LOG_LEVEL"].to_s.downcase.to_sym.presence_in(valid_log_levels)
+  if ENV["RAILS_LOG_LEVEL"].present? && requested_level.nil?
+    raise ArgumentError,
+          "Invalid RAILS_LOG_LEVEL '#{ENV.fetch('RAILS_LOG_LEVEL')}'. " \
+          "Valid levels are: #{valid_log_levels.join(', ')}"
+  end
+  config.log_level = requested_level || :info
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
@@ -63,10 +85,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     authentication: :login,
-    address: ENV["SMTP_ADDRESS"],
-    user_name: ENV["SMTP_USERNAME"],
-    password: ENV["SMTP_PASSWORD"],
-    port: ENV["SMTP_PORT"],
+    address: ENV.fetch("SMTP_ADDRESS", nil),
+    user_name: ENV.fetch("SMTP_USERNAME", nil),
+    password: ENV.fetch("SMTP_PASSWORD", nil),
+    port: ENV.fetch("SMTP_PORT", nil),
     enable_starttls_auto: true,
     return_response: true
   }
@@ -79,32 +101,53 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
-
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new($stdout)
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
-  end
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
   config.force_ssl = true
   config.ssl_options = { hsts: { preload: true } }
-  config.x.environment_specific_name = ENV["HOST"] =~ /staging/ ? "staging" : "production"
   config.x.inbound_emails_domain = ENV.fetch("INBOUND_EMAILS_DOMAIN", "reponse.collectifobjets.org")
+  config.x.inbound_allowed_ips = ENV.fetch("INBOUND_ALLOWED_IPS", "185.107.232.|1.179.112.").split("|")
 
-  if config.x.environment_specific_name == "staging"
-    config.action_mailer.show_previews = true
-    config.active_storage.service = :scaleway_staging
-  else
-    config.active_storage.service = :scaleway
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger = ActiveSupport::Logger.new($stdout)
+    if ENV["RAILS_SPECIFIC_ENV"].present?
+      logger.formatter = JsonLogFormatter.new
+      config.logger    = logger
+    else
+      logger.formatter = config.log_formatter
+      config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    end
   end
 
+  config.x.environment_specific_name = ENV.fetch("RAILS_SPECIFIC_ENV",
+                                                 ENV.fetch("HOST", nil) =~ /staging/ ? "staging" : "production")
+
+  case config.x.environment_specific_name
+  when "production", "mc_prd"
+    config.active_storage.service = :mc_ovh_prod
+    # config.s3_endpoint = ""
+  when "mc_stg"
+    config.action_mailer.show_previews = true
+    # we need to keep scaleway_staging name for db consistency (see storage.yml)
+    # even if this points to ovh bucket TODO: replace in DB ?
+    config.active_storage.service = :mc_ovh_staging
+
+    config.action_mailer.smtp_settings = {
+      address: ENV.fetch("MAILHOG_HOST", "127.0.0.1"),
+      port: 1025
+    }
+    config.action_mailer.raise_delivery_errors = false
+    config.action_mailer.perform_caching = false
+  else # staging scalingo+scaleway
+    config.action_mailer.show_previews = true
+    config.active_storage.service = :scaleway_staging
+  end
   config.sandbox_by_default = true # for the console
 end

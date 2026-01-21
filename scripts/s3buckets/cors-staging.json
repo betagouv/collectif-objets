@@ -2,9 +2,10 @@
   "CORSRules": [
     {
       "AllowedOrigins": [
+        "https://collectif-objets-staging.osc-fr1.scalingo.io",
         "https://staging.collectif-objets.incubateur.net",
         "https://staging.collectifobjets.org",
-        "https://collectif-objets-staging.osc-fr1.scalingo.io"
+        "https://collectif-objets.stg.cloud.culture.fr"
       ],
       "AllowedHeaders": [
         "*"

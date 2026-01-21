@@ -21,6 +21,7 @@ gem "haml-rails", "~> 2.1"
 gem "icalendar", "~> 2.10"
 gem "image_processing", "~> 1.12"
 gem "kramdown", "~> 2.5"
+gem "kubernetes-health", "~> 3.14"
 gem "matrix", "~> 0.4"
 gem "mjml-rails", "~> 4.15"
 gem "pagy", "~> 6.5"
@@ -40,6 +41,10 @@ gem "typhoeus", "~> 1.4"
 gem "tzinfo-data", "~> 1.0", platforms: %i[windows jruby]
 gem "view_component", "~> 2.83"
 gem "vite_rails", "~> 3.0"
+gem "yabeda", "~> 0.13.1"
+gem "yabeda-prometheus", "~> 0.9.1"
+gem "yabeda-puma-plugin", "~> 0.7.1"
+gem "yabeda-rails", "~> 0.9.0"
 
 group :development, :test do
   gem "debug", ">= 1.0", require: !ENV.key?("CI")
