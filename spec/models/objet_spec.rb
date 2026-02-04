@@ -121,6 +121,36 @@ RSpec.describe Objet, type: :model do
     expect(Objet.without_completed_recensements.count).to eq 2
   end
 
+  describe ".recensés" do
+    let(:commune) { create(:commune, :en_cours_de_recensement) }
+    let(:dossier) { commune.dossier }
+
+    it "returns objets with active recensements" do
+      objet_with_recensement = create(:objet, commune:)
+      create(:recensement, objet: objet_with_recensement, dossier:)
+      objet_without_recensement = create(:objet, commune:)
+
+      expect(Objet.recensés).to include(objet_with_recensement)
+      expect(Objet.recensés).not_to include(objet_without_recensement)
+    end
+
+    it "excludes objets with only soft-deleted recensements" do
+      objet_with_deleted_recensement = create(:objet, commune:)
+      create(:recensement, :supprimé, objet: objet_with_deleted_recensement, dossier:)
+
+      expect(Objet.recensés).not_to include(objet_with_deleted_recensement)
+    end
+
+    it "includes objets when they have both active and deleted recensements from different dossiers" do
+      objet_with_mixed_recensements = create(:objet, commune:)
+      create(:recensement, objet: objet_with_mixed_recensements, dossier:)
+      archived_dossier = create(:dossier, :archived, commune:)
+      create(:recensement, :supprimé, objet: objet_with_mixed_recensements, dossier: archived_dossier)
+
+      expect(Objet.recensés).to include(objet_with_mixed_recensements)
+    end
+  end
+
   describe "#destroy_and_soft_delete_recensement!" do
     let!(:objet) { create(:objet) }
     let(:reason) { "objet-devenu-hors-scope" }

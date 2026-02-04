@@ -46,6 +46,7 @@ class Dossier < ApplicationRecord
   scope :to_visit, -> { where.not(visit: nil) }
   scope :current, -> { where.not(status: "archived") }
   scope :submitted_in, ->(date_range) { where(submitted_at: date_range) if date_range }
+  scope :accepted, -> { where(status: "accepted") }
 
   before_create :set_campaign
 

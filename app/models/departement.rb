@@ -45,6 +45,7 @@ class Departement < ApplicationRecord
                                                  foreign_key: :departement_code, inverse_of: :departement
 
   scope :sorted, -> { order(:code) }
+  scope :active, -> { joins(:campaigns).where(campaigns: { status: [:ongoing, :finished] }) }
 
   def self.include_objets_count
     joins(

@@ -289,6 +289,23 @@ RSpec.describe Recensement, type: :model do
     end
   end
 
+  describe ".préoccupants" do
+    subject { Recensement.préoccupants.count }
+
+    before do
+      create(:recensement, :bon_etat)
+      create(:recensement, :etat_moyen)
+      create(:recensement, :mauvais_etat)
+      create(:recensement, :en_peril)
+      create(:recensement, :bon_etat, analyse_etat_sanitaire: Recensement::ETAT_MAUVAIS)
+      create(:recensement, :etat_moyen, analyse_etat_sanitaire: Recensement::ETAT_PERIL)
+    end
+
+    it "returns recensements with mauvais or peril état sanitaire or analyse" do
+      expect(subject).to eq(4)
+    end
+  end
+
   describe "#destroy_or_soft_delete" do
     let(:commune) { create(:commune, code_insee: "01002") }
     let(:objet) do

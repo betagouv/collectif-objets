@@ -103,6 +103,14 @@ class Recensement < ApplicationRecord
                    }
   scope :en_peril, -> { where(RECENSEMENT_EN_PERIL_SQL) }
   scope :prioritaires, -> { where(RECENSEMENT_PRIORITAIRE_SQL) }
+  scope :préoccupants, lambda {
+    where(
+      "etat_sanitaire IN (:mauvais, :peril) " \
+      "OR analyse_etat_sanitaire IN (:mauvais, :peril)",
+      mauvais: ETAT_MAUVAIS,
+      peril: ETAT_PERIL
+    )
+  }
   scope :recensable, -> { where(recensable: true) }
   scope :not_recensable, -> { where.not(recensable: true) }
   scope :in_departement, lambda { |departement|

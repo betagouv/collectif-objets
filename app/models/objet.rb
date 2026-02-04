@@ -36,6 +36,7 @@ class Objet < ApplicationRecord
     .where(recensements: { id: nil })
   }
 
+  scope :recensés, -> { joins(:recensements).where(recensements: { deleted_at: nil }) }
   scope :a_examiner, lambda {
                        joins(:recensements)
                        .where(recensements: { analysed_at: nil })
