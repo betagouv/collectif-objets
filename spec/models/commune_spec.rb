@@ -207,8 +207,7 @@ RSpec.describe Commune, type: :model do
 
         context "recensement avec des objets en peril" do
           let!(:recensement) do
-            create(:recensement,
-                   etat_sanitaire: Recensement::ETAT_PERIL, dossier: commune.dossier, objet:, conservateur:)
+            create(:recensement, :en_peril, dossier: commune.dossier, objet:, conservateur:)
           end
 
           it "a un statut global sur le recensement et l'examen à Examen prioritaire" do
