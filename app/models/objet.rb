@@ -36,13 +36,12 @@ class Objet < ApplicationRecord
     .where(recensements: { id: nil })
   }
 
-  scope :recensés, -> { joins(:recensements).where(recensements: { deleted_at: nil }) }
-  scope :a_examiner, lambda {
-                       joins(:recensements)
-                       .where(recensements: { analysed_at: nil })
-                       .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
-                     }
+  scope :recensés, -> { joins(:recensements).merge(Recensement.not_deleted) }
+  scope :prioritaires, -> { joins(:recensements).merge(Recensement.prioritaires) }
+  scope :analysés, -> { joins(:recensements).merge(Recensement.analysés) }
+  scope :a_examiner, -> { joins(:recensements).merge(Recensement.prioritaires.not_analysed) }
   scope :examinés, -> { joins(recensement: :dossier).merge(Dossier.accepted) }
+  scope :dans_départements_actifs, lambda { joins(commune: :departement).merge(Departement.active) }
 
   MIS_DE_COTE_SQL = %("palissy_PROT" IN ('déclassé au titre objet', 'désinscrit', 'sans protection')
                        OR "palissy_PROT" LIKE '%non protégé%').squish

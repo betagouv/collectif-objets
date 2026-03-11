@@ -306,6 +306,23 @@ RSpec.describe Recensement, type: :model do
     end
   end
 
+  describe ".acceptés" do
+    it "returns recensements in accepted dossiers only" do
+      dossier_accepted = create(:dossier, :accepted)
+      dossier_submitted = create(:dossier, :submitted)
+      dossier_construction = create(:dossier, :construction)
+
+      recensement_accepted = create(:recensement, dossier: dossier_accepted)
+      recensement_submitted = create(:recensement, dossier: dossier_submitted)
+      recensement_construction = create(:recensement, dossier: dossier_construction)
+
+      result = Recensement.acceptés
+      expect(result).to include(recensement_accepted)
+      expect(result).not_to include(recensement_submitted, recensement_construction)
+      expect(result.count).to eq(1)
+    end
+  end
+
   describe "#destroy_or_soft_delete" do
     let(:commune) { create(:commune, code_insee: "01002") }
     let(:objet) do

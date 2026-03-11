@@ -59,6 +59,19 @@ class Departement < ApplicationRecord
     ).select("departements.*, COALESCE(b.objets_count, 0) AS objets_count")
   end
 
+  def self.include_active_campaigns_count
+    joins(
+      %{
+        LEFT OUTER JOIN (
+          SELECT campaigns.departement_code, COUNT(*) AS campaigns_count
+          FROM campaigns
+          WHERE campaigns.status IN ('ongoing', 'finished')
+          GROUP BY campaigns.departement_code
+        ) c ON c."departement_code" = departements.code
+      }
+    ).select("departements.*, COALESCE(c.campaigns_count, 0) AS campaigns_count")
+  end
+
   def self.parse_from_code_insee(code_insee)
     if code_insee&.length != 5
       Rails.logger.warn "le code INSEE '#{code_insee}' ne fait pas 5 caractères"
