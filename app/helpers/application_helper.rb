@@ -20,6 +20,22 @@ module ApplicationHelper
     end
   end
 
+  def co_tile(title, subtitle = nil, &)
+    tag.div(class: "co-tile") do
+      safe_join(
+        [
+          tag.h3(class: "fr-h6") do
+            safe_join([
+              title,
+              subtitle ? [tag.br, subtitle] : nil,
+            ].flatten.compact)
+          end,
+          tag.div(class: "co-tile__content") { yield },
+        ]
+      )
+    end
+  end
+
   def blockquote(content, html_options = {})
     html_options = html_options.with_indifferent_access
     html_options[:class] ||= ""
