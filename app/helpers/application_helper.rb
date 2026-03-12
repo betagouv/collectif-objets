@@ -27,10 +27,10 @@ module ApplicationHelper
           tag.h3(class: "fr-h6") do
             safe_join([
               title,
-              subtitle ? [tag.br, subtitle] : nil,
+              subtitle ? [tag.br, subtitle] : nil
             ].flatten.compact)
           end,
-          tag.div(class: "co-tile__content") { yield },
+          tag.div(class: "co-tile__content", &)
         ]
       )
     end
