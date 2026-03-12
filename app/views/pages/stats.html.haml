@@ -47,6 +47,50 @@
     %h3
       Nombre de campagnes par département
 
+    = vite_stylesheet_tag "stats_map"
+    = vite_javascript_tag "stats_map"
+
+    .stats-map-legend.fr-mb-2w
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--none
+        %span Aucune campagne
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--one
+        %span 1 campagne
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--two
+        %span 2 campagnes
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--three
+        %span 3-4 campagnes
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--five
+        %span 5+ campagnes
+
+    - departements_json = @stats.total_campagnes_par_département.map { |d| { code: d.code, nom: d.nom, campaigns_count: d.campaigns_count, campaigns_label: Campaign.model_name.human(count: d.campaigns_count) } }.to_json
+    .stats-map-wrapper.fr-mb-4w{"data-controller" => "stats-map", "data-stats-map-departements-value" => departements_json}
+      .stats-map-container{"data-stats-map-target" => "container"}
+      .stats-map-inset.stats-map-inset-guadeloupe{"data-stats-map-target" => "insetGuadeloupe"}
+        .stats-map-inset-label Guadeloupe
+      .stats-map-inset.stats-map-inset-martinique{"data-stats-map-target" => "insetMartinique"}
+        .stats-map-inset-label Martinique
+      .stats-map-inset.stats-map-inset-guyane{"data-stats-map-target" => "insetGuyane"}
+        .stats-map-inset-label Guyane
+      .stats-map-inset.stats-map-inset-reunion{"data-stats-map-target" => "insetReunion"}
+        .stats-map-inset-label La Réunion
+      .stats-map-inset.stats-map-inset-mayotte{"data-stats-map-target" => "insetMayotte"}
+        .stats-map-inset-label Mayotte
+      .stats-map-tooltip{"data-stats-map-target" => "tooltip"}
+
+    %details.fr-mb-4w
+      %summary Liste détaillée des départements
+      %ul.co-list-unstyled.co-columns-auto.co-columns-sm-2.co-columns-lg-3
+        - @stats.total_campagnes_par_département.each do |departement|
+          %li
+            %strong= departement
+            = departement.campaigns_count
+            = Campaign.model_name.human(count: departement.campaigns_count)
+
     .fr-grid-row.fr-grid-row--gutters
       .fr-col-12.fr-col-md-6.fr-col-lg-4
         = co_tile("Départements avec campagnes") do
