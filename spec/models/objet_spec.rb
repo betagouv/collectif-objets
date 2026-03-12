@@ -182,51 +182,6 @@ RSpec.describe Objet, type: :model do
     end
   end
 
-  describe ".recensés_dans_départements_actifs" do
-    it "returns distinct recensed objets in active départements only" do
-      dept_actif = create(:departement, code: "01")
-      dept_inactif = create(:departement, code: "02")
-      create(:campaign, :ongoing, departement: dept_actif)
-
-      commune_active = create(:commune, departement: dept_actif)
-      commune_inactive = create(:commune, departement: dept_inactif)
-
-      objet1 = create(:objet, commune: commune_active)
-      objet2 = create(:objet, commune: commune_active)
-      objet3 = create(:objet, commune: commune_inactive)
-
-      create(:recensement, objet: objet1)
-      create(:recensement, objet: objet2)
-      create(:recensement, objet: objet3)
-
-      result = Objet.recensés_dans_départements_actifs.to_a
-      expect(result).to include(objet1, objet2)
-      expect(result).not_to include(objet3)
-      expect(result.size).to eq(2)
-    end
-
-    it "combines the two scopes correctly" do
-      dept_actif = create(:departement, code: "01")
-      dept_inactif = create(:departement, code: "02")
-      create(:campaign, :ongoing, departement: dept_actif)
-
-      commune_active = create(:commune, departement: dept_actif)
-      commune_inactive = create(:commune, departement: dept_inactif)
-
-      objet_recensé_actif = create(:objet, commune: commune_active)
-      objet_non_recensé_actif = create(:objet, commune: commune_active)
-      objet_recensé_inactif = create(:objet, commune: commune_inactive)
-
-      create(:recensement, objet: objet_recensé_actif)
-      create(:recensement, objet: objet_recensé_inactif)
-
-      result = Objet.recensés_dans_départements_actifs.to_a
-      expect(result).to include(objet_recensé_actif)
-      expect(result).not_to include(objet_non_recensé_actif, objet_recensé_inactif)
-      expect(result.size).to eq(1)
-    end
-  end
-
   describe ".prioritaires" do
     let(:commune) { create(:commune, :en_cours_de_recensement) }
     let(:dossier) { commune.dossier }

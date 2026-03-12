@@ -175,8 +175,8 @@ RSpec.describe Stats, type: :model do
     end
   end
 
-  describe "#list_campagnes_par_département" do
-    subject { stats.list_campagnes_par_département }
+  describe "#total_campagnes_par_département" do
+    subject { stats.total_campagnes_par_département }
 
     before do
       dept1 = create(:departement, code: "01")
@@ -188,8 +188,13 @@ RSpec.describe Stats, type: :model do
       create(:campaign, :draft, departement: dept2)
     end
 
-    it "returns hash of active campaigns count per département" do
-      expect(subject).to eq({ "01" => 2, "02" => 1 })
+    it "returns départements with active campaigns count" do
+      result = subject.to_a
+      expect(result.size).to eq(2)
+      expect(result[0].code).to eq("01")
+      expect(result[0].campaigns_count).to eq(2)
+      expect(result[1].code).to eq("02")
+      expect(result[1].campaigns_count).to eq(1)
     end
   end
 

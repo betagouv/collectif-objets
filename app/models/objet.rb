@@ -36,9 +36,9 @@ class Objet < ApplicationRecord
     .where(recensements: { id: nil })
   }
 
-  scope :recensés, -> { joins(:recensements).merge(Recensement.not_deleted) }
-  scope :prioritaires, -> { joins(:recensements).merge(Recensement.prioritaires) }
-  scope :analysés, -> { joins(:recensements).merge(Recensement.analysés) }
+  scope :recensés, -> { joins(:recensements).merge(Recensement.not_deleted).group("objets.id") }
+  scope :prioritaires, -> { joins(:recensements).merge(Recensement.prioritaires).group("objets.id") }
+  scope :analysés, -> { joins(:recensements).merge(Recensement.analysés).group("objets.id") }
   scope :a_examiner, -> { joins(:recensements).merge(Recensement.prioritaires.not_analysed) }
   scope :examinés, -> { joins(recensement: :dossier).merge(Dossier.accepted) }
   scope :dans_départements_actifs, lambda { joins(commune: :departement).merge(Departement.active) }
