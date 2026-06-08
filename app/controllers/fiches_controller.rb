@@ -14,6 +14,7 @@ class FichesController < ApplicationController
 
   private
 
+  # rubocop:disable Style/SafeNavigationChainLength
   def objets
     return nil unless current_user&.commune&.dossier&.accepted?
 
@@ -21,6 +22,7 @@ class FichesController < ApplicationController
       .joins(:recensements).includes(:recensements)
       .where("'#{@fiche.id}' = ANY(recensements.analyse_fiches)")
   end
+  # rubocop:enable Style/SafeNavigationChainLength
 
   def titre_objets_concernes
     if @objets.present? && @objets.many?
