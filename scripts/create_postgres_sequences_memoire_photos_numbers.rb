@@ -4,5 +4,5 @@
 # We could use SQL schema file for a proper fix but we’d loose readability
 
 ActiveRecord::Base.connection.execute(
-  Departement::CODES.map { "CREATE SEQUENCE IF NOT EXISTS memoire_photos_number_#{_1}; " }.join
+  Departement::CODES.map { "CREATE SEQUENCE IF NOT EXISTS memoire_photos_number_#{it}; " }.join
 )

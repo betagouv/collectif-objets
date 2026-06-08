@@ -26,7 +26,7 @@ module Synchronizer
       before do
         expect(ApiClientAnnuaireAdministration).to receive(:new).and_return(api_client)
         expect(api_client).to receive(:each) do |&block|
-          csv_rows.each { block.call(_1) }
+          csv_rows.each { block.call(it) }
         end
         expect(api_client).to receive(:each_slice).at_least(:once).and_yield(csv_rows)
         expect(api_client).to receive(:remove_temp_file!).once

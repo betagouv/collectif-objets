@@ -42,7 +42,7 @@ class Edifice < ApplicationRecord
     return "" if nom_edifice.blank?
 
     s = nom_edifice.parameterize
-    %w[le la l de d du paroissiale et].each { s = s.gsub("-#{_1}-", "-") }
+    %w[le la l de d du paroissiale et].each { s = s.gsub("-#{it}-", "-") }
     s = s.sub("-paroissiale-", "")
     s.sub(/-paroissiale$/, "")
     s

@@ -57,7 +57,7 @@ module Synchronizer
       end
 
       def commune
-        @commune ||= (persisted_commune || Commune.new).tap { _1.assign_attributes(all_attributes) }
+        @commune ||= (persisted_commune || Commune.new).tap { it.assign_attributes(all_attributes) }
       end
 
       def commune_attributes = commune_and_user_attributes[:commune]

@@ -20,7 +20,7 @@ class RapportPresenter
   def each_fiche_item
     fiches.each_with_index do |fiche, index|
       yield fiche:,
-            recensements: ordered_recensements.select { _1.analyse_fiches.include?(fiche.id) },
+            recensements: ordered_recensements.select { it.analyse_fiches.include?(fiche.id) },
             index: index + 1
     end
   end
@@ -28,7 +28,7 @@ class RapportPresenter
   attr_reader :dossier
 
   def fiches
-    @fiches ||= fiche_ids.map { Fiche.find(_1) }
+    @fiches ||= fiche_ids.map { Fiche.find(it) }
   end
 
   private

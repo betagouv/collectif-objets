@@ -36,7 +36,7 @@ module Conservateurs
     end
 
     def id
-      @id ||= @mail.object_id || "mail_#{SecureRandom.hex(4)}"
+      @id ||= @mail.object_id
     end
 
     private

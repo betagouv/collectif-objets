@@ -2,6 +2,7 @@
 
 module EmailAttachmentsControllerConcern
   extend ActiveSupport::Concern
+
   included do
     before_action :set_message, :authorize_message, :set_email_attachment
   end

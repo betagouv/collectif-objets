@@ -139,7 +139,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:recipient) do
         build(:campaign_recipient, campaign:, commune:, current_step: "lancement")
-          .tap { _1.save(validate: false) }
+          .tap { it.save(validate: false) }
       end
       let(:should_skip_mail) { false }
 

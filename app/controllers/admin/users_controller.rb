@@ -23,7 +23,7 @@ module Admin
       else
         session[:user_impersonate_write] = "1"
       end
-      redirect_back fallback_location: commune_objets_path(current_user.commune), status: :see_other
+      redirect_back_or_to(commune_objets_path(current_user.commune), status: :see_other)
     end
 
     private

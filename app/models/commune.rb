@@ -6,6 +6,7 @@ class Commune < ApplicationRecord
   include Communes::IncludeStatutGlobalConcern
 
   include AASM
+
   aasm column: :status, timestamps: true, whiny_persistence: true do
     state :inactive, initial: true, display: "Commune inactive"
     state :started, display: "Recensement démarré"
@@ -166,7 +167,7 @@ class Commune < ApplicationRecord
   def self.status_value_counts
     group(:status)
       .select("status, count(id) as communes_count")
-      .to_h { [_1.status, _1.communes_count] }
+      .to_h { [it.status, it.communes_count] }
   end
 
   def active?

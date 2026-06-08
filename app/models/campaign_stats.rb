@@ -43,11 +43,11 @@ class CampaignStats
   end
 
   def steps_stats
-    Campaign::STEPS.to_h { [_1, stats_for_step(_1)] }
+    Campaign::STEPS.index_with { stats_for_step(it) }
   end
 
   def stats_for_step(step)
-    StatsForEmailsGroup.new(all_emails.select { _1["step"].to_s == step.to_s }).stats
+    StatsForEmailsGroup.new(all_emails.select { it["step"].to_s == step.to_s }).stats
   end
 end
 
@@ -65,7 +65,7 @@ class StatsForEmailsGroup
 
   def valid?
     @stats[:count] == %i[pending error sent delivered opened clicked]
-      .map { @stats[_1][:count_exclusive] }.sum
+      .map { @stats[it][:count_exclusive] }.sum
   end
 
   private
@@ -86,12 +86,12 @@ class StatsForEmailsGroup
 
   def base_stats
     @base_stats ||= { count: emails.count }.merge(
-      CampaignStats::ATTRIBUTES.to_h { [_1, base_stats_for_attribute(_1)] }
+      CampaignStats::ATTRIBUTES.index_with { base_stats_for_attribute(it) }
     )
   end
 
   def base_stats_for_attribute(attribute)
-    count = emails.count { _1[attribute.to_s].present? && (attribute == :error || !_1["error"]) }
+    count = emails.count { it[attribute.to_s].present? && (attribute == :error || !it["error"]) }
     ratio = (count.to_f / emails.count).round(4)
     { count:, ratio: }
   end

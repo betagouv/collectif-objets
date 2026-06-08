@@ -18,7 +18,7 @@ module Co
 
       def create_events
         campaigns.each do |campaign|
-          Campaign::STEPS.each { add_event(campaign, _1) }
+          Campaign::STEPS.each { add_event(campaign, it) }
         end
       end
 

@@ -18,11 +18,11 @@ module Co
 
     def get_transaction_email_events(message_id)
       get_api_request("/v3/smtp/statistics/events", limit: 20, messageId: message_id).fetch("events", [])
-        .map { _1.transform_keys(&:underscore).with_indifferent_access }
-        .select { _1[:message_id] == message_id }
-        .reject { EMAIL_EVENTS[:ignored].include?(_1[:event]) }
-        .map { parse_email_event(_1) }
-        .sort_by { _1[:date] }
+        .map { it.transform_keys(&:underscore).with_indifferent_access }
+        .select { it[:message_id] == message_id }
+        .reject { EMAIL_EVENTS[:ignored].include?(it[:event]) }
+        .map { parse_email_event(it) }
+        .sort_by { it[:date] }
     end
 
     def get_transactional_emails(email: nil, message_id: nil)

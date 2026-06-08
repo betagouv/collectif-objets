@@ -16,12 +16,12 @@ module Synchronizer
         def revisions
           @revisions ||=
             csv_rows
-              .map { Row.new(_1) }
+              .map { Row.new(it) }
               .select(&:in_scope?)
-              .map { parse_row_to_commune_and_user_attributes(_1) }
-              .map { { attributes: _1, **eager_loaded_records_for_row(_1) } }
-              .select { _1[:objets_count].positive? }
-              .map { Revision.new(_1[:attributes], persisted_commune: _1[:commune], logger:) }
+              .map { parse_row_to_commune_and_user_attributes(it) }
+              .map { { attributes: it, **eager_loaded_records_for_row(it) } }
+              .select { it[:objets_count].positive? }
+              .map { Revision.new(it[:attributes], persisted_commune: it[:commune], logger:) }
         end
 
         def synchronize(if_block: nil)

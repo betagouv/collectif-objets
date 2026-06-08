@@ -8,6 +8,7 @@ module RecensementWizard
   class Base
     include Rails.application.routes.url_helpers
     include ActiveModel::Model
+
     attr_reader :recensement
 
     delegate \

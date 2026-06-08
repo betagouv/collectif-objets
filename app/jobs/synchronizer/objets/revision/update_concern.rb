@@ -7,7 +7,7 @@ module Synchronizer
         extend ActiveSupport::Concern
 
         def objet
-          @objet ||= persisted_objet.tap { _1.assign_attributes(all_attributes) }
+          @objet ||= persisted_objet.tap { it.assign_attributes(all_attributes) }
         end
 
         def synchronize

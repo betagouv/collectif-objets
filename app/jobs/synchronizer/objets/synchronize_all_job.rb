@@ -7,7 +7,7 @@ module Synchronizer
 
       def perform
         @progressbar = ProgressBar.create(total: client.count_all, format: "%t: |%B| %p%% %e %c/%u")
-        client.each_slice(BATCH_SIZE) { synchronize_batch(_1) }
+        client.each_slice(BATCH_SIZE) { synchronize_batch(it) }
         logger.close
         client.remove_temp_file!
       end

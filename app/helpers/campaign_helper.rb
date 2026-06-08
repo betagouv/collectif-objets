@@ -13,7 +13,7 @@ module CampaignHelper
   end
 
   def campaigns_statuses_options
-    Campaign::STATUSES.map { [t("activerecord.attributes.campaign.statuses.#{_1}"), _1] }
+    Campaign::STATUSES.map { [t("activerecord.attributes.campaign.statuses.#{it}"), it] }
   end
 
   def campaign_title(campaign)

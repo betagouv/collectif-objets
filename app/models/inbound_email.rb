@@ -19,7 +19,7 @@ class InboundEmail < ApplicationRecord
 
   def self.from_raw(raw)
     to_emails = (raw.fetch("To", []) + raw.fetch("Cc", [])).pluck("Address")
-    to_email = to_emails.find { _1.match(SUPPORT_EMAIL_REGEX) } || to_emails.first
+    to_email = to_emails.find { it.match(SUPPORT_EMAIL_REGEX) } || to_emails.first
     new \
       id: raw["MessageId"],
       body_html: raw["RawHtmlBody"],
@@ -68,7 +68,7 @@ class InboundEmail < ApplicationRecord
   def enqueue_download_attachments
     attachments
       .select(&:should_download?)
-      .each { DownloadInboundEmailAttachmentJob.perform_later(_1.raw, id) }
+      .each { DownloadInboundEmailAttachmentJob.perform_later(it.raw, id) }
   end
 
   private

@@ -103,8 +103,7 @@ module CampaignsControllerConcern
   end
 
   def campaign_params_sanitized
-    campaign_params.merge \
-      %i[sender_name signature nom_drac].index_with { sanitize(campaign_params[_1]) }
+    campaign_params.merge(%i[sender_name signature nom_drac].index_with { sanitize(campaign_params[it]) })
   end
 
   def redirect_planned_campaign

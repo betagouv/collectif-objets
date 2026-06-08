@@ -23,7 +23,7 @@ class FichesController < ApplicationController
   end
 
   def titre_objets_concernes
-    if @objets.present? && @objets.count > 1
+    if @objets.present? && @objets.many?
       "Objets concernés par cette fiche"
     else
       "Objet concerné par cette fiche"

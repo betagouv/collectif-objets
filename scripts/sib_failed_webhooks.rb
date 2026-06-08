@@ -3,7 +3,7 @@
 client = Co::SendInBlueClient.instance
 
 client.list_inbound_events
-  .select { _1["recipient"].ends_with?("reponse.collectifobjets.org") }
-  .map { client.get_inbound_event(_1["uuid"]) }
-  .select { _1["logs"].last["type"] == "webhookFailed" }
-  .each { puts _1 }
+  .select { it["recipient"].ends_with?("reponse.collectifobjets.org") }
+  .map { client.get_inbound_event(it["uuid"]) }
+  .select { it["logs"].last["type"] == "webhookFailed" }
+  .each { puts it }

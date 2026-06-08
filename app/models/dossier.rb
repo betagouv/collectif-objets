@@ -9,6 +9,7 @@ class Dossier < ApplicationRecord
   has_many :bordereaux, dependent: :destroy
 
   include AASM
+
   aasm column: :status, timestamps: true, whiny_persistence: true do
     state :construction, initial: true, display: I18n.t("dossier.status_badge.construction")
     state :submitted, display: I18n.t("dossier.status_badge.submitted")
@@ -51,7 +52,7 @@ class Dossier < ApplicationRecord
   def self.auto_submittable_ids
     construction.includes(:recensements, commune: [:objets])
       .to_a
-      .select { |dossier| dossier.recensements.all? { _1.created_at < 1.month.ago } }
+      .select { |dossier| dossier.recensements.all? { it.created_at < 1.month.ago } }
       .select { |dossier| dossier.recensements.length == dossier.commune.objets.length }
       .map(&:id)
   end
@@ -84,7 +85,7 @@ class Dossier < ApplicationRecord
   end
 
   def a_des_objets_prioritaires?
-    recensements.prioritaires.count.positive?
+    recensements.prioritaires.any?
   end
 
   def replied_automatically?

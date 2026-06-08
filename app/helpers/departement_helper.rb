@@ -2,7 +2,7 @@
 
 module DepartementHelper
   def departements_options
-    Departement.order(:code).map { [_1, _1.code] }
+    Departement.order(:code).map { [it, it.code] }
   end
 
   def departement_etat_objets_line_chart_data(stats)

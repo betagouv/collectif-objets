@@ -9,7 +9,7 @@ class DownloadInboundEmailAttachmentJob < ApplicationJob
 
     return GoodJob.logger.info("skipping already downloaded #{attachment_raw}") if already_downloaded?
 
-    Co::SendInBlueClient.instance.download_inbound_attachment(download_token) { download_callback(_1) }
+    Co::SendInBlueClient.instance.download_inbound_attachment(download_token) { download_callback(it) }
   end
 
   private

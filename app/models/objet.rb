@@ -117,7 +117,7 @@ class Objet < ApplicationRecord
       ->(obj) { obj.edifice_nom&.match?(/[A-Z]/) },
       ->(obj) { obj.emplacement.blank? }
     ].each do |filter_fun|
-      filtered_arr = current_arr.filter { filter_fun.call(_1) }
+      filtered_arr = current_arr.filter { filter_fun.call(it) }
       current_arr = filtered_arr if filtered_arr.any?
     end
     current_arr.first
@@ -133,9 +133,9 @@ class Objet < ApplicationRecord
   def déplacé? = palissy_WEB.present? && palissy_DEPL.present?
   def code_insee_a_changé? = palissy_WEB.present? && palissy_DEPL.blank?
 
-  def destroy_and_soft_delete_recensement!(**kwargs)
+  def destroy_and_soft_delete_recensement!(**)
     transaction do
-      recensements.each { _1.destroy_or_soft_delete!(**kwargs) }
+      recensements.each { it.destroy_or_soft_delete!(**) }
       recensements.reload # necessary here, objet.recensements must be empty before destroy
       destroy!
     end

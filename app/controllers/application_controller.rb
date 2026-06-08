@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Pagy::Backend
+
   impersonates :user
   impersonates :conservateur
 
@@ -72,7 +73,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for_conservateur(conservateur)
-    return conservateurs_departement_path(conservateur.departements.first) if conservateur.departements.count == 1
+    return conservateurs_departement_path(conservateur.departements.first) if conservateur.departements.one?
 
     conservateurs_departements_path
   end
@@ -85,7 +86,7 @@ class ApplicationController < ActionController::Base
     message = "Vous n'avez pas le droit de faire cette action"
     message += " : #{exception.message}" if Rails.env.development?
     flash[:alert] = message
-    redirect_back(fallback_location: root_path)
+    redirect_back_or_to(root_path)
   end
 
   def page_not_found

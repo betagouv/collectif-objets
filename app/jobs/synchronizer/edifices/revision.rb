@@ -39,13 +39,19 @@ module Synchronizer
       end
 
       def existing_edifice_by_ref
-        @existing_edifice_by_ref ||= Edifice.find_by(edifice_attributes.slice(:merimee_REF))
+        return @existing_edifice_by_ref if defined?(@existing_edifice_by_ref)
+
+        @existing_edifice_by_ref = Edifice.find_by(edifice_attributes.slice(:merimee_REF))
       end
 
       def existing_edifice_by_slug
         return nil if edifice_attributes[:slug].blank? || edifice_attributes[:code_insee].blank?
 
-        @existing_edifice_by_slug ||= Edifice.find_by(**edifice_attributes.slice(:slug, :code_insee), merimee_REF: nil)
+        if defined?(@existing_edifice_by_slug)
+          @existing_edifice_by_slug
+        else
+          @existing_edifice_by_slug = Edifice.find_by(**edifice_attributes.slice(:slug, :code_insee), merimee_REF: nil)
+        end
       end
 
       def existing_edifice

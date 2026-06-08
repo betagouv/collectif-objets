@@ -13,7 +13,7 @@ module DossierHelper
     content_tag(
       "p",
       t("dossier.status_badge.#{status}"),
-      class: "fr-badge fr-badge--#{color} #{small ? 'fr-badge--sm' : ''}"
+      class: "fr-badge fr-badge--#{color} #{'fr-badge--sm' if small}"
     )
   end
   # rubocop:enable Metrics/MethodLength
