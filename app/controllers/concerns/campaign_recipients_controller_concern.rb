@@ -4,7 +4,7 @@ module CampaignRecipientsControllerConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_instance_vars, :authorize_recipient
+    before_action :set_instance_vars, :authorize_recipient!
     before_action :validate_mail_preview_params, only: [:mail_preview]
   end
 

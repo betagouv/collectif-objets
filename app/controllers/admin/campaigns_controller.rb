@@ -58,7 +58,7 @@ module Admin
       @campaign.update_columns dates_attributes
     end
 
-    def authorize_campaign = true
+    def authorize_campaign! = nil
     def routes_prefix = :admin
     def after_destroy_path = admin_campaigns_path
     def active_nav_links = %w[Campagnes]

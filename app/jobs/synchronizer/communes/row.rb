@@ -26,9 +26,9 @@ module Synchronizer
       validates :code_insee, presence: true
       validates :type_service_local, inclusion: { in: ["mairie"] }
 
-      validate :validate_mairie_principale
+      validate :mairie_principale?
 
-      def validate_mairie_principale
+      def mairie_principale?
         return true if
           !nom.match(/Mairi(e|é) (déléguée|annexe)/i) &&
           !nom.match(/ - (annexe|antenne) /i) &&

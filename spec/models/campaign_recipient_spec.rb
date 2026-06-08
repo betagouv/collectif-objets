@@ -56,8 +56,8 @@ RSpec.describe CampaignRecipient, type: :model do
     end
   end
 
-  describe "should_skip_mail_for_step" do
-    subject { recipient.should_skip_mail_for_step(step) }
+  describe "should_skip_mail_for_step?" do
+    subject { recipient.should_skip_mail_for_step?(step) }
 
     context "première relance pour une commune ayant démarré le recensement" do
       let(:step) { "relance1" }

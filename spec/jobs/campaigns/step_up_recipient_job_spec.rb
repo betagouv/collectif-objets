@@ -23,7 +23,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         .with(any_args)
         .with(recipient.id)
         .and_return(recipient)
-      allow(recipient).to receive(:should_skip_mail_for_step)
+      allow(recipient).to receive(:should_skip_mail_for_step?)
         .with(to_step).and_return(should_skip_mail)
       allow(Co::Campaigns::Mail).to receive(:new).and_return(campaign_mail_double)
     end

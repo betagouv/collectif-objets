@@ -8,7 +8,7 @@ module Conservateurs
 
     def routes_prefix = :conservateurs
 
-    def authorize_recipient
+    def authorize_recipient!
       authorize @recipient
     end
 

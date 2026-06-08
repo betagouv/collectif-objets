@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationComponent < ViewComponent::Base
-  private
-
   # Forward namespace logic from ApplicationController
   # Only return valid routing namespaces that match controller namespaces
   VALID_NAMESPACES = [:admin, :communes, :conservateurs, :recenseurs].freeze
+
+  private
 
   def namespaced? = self.class.name.include?("::")
 

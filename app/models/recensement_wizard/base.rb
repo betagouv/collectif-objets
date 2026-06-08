@@ -20,8 +20,6 @@ module RecensementWizard
       :etat_sanitaire=, :securisation=, :notes=, :attachment_changes,
       to: :recensement
 
-    delegate :step_number, to: :class
-
     delegate :title, :step_number, to: :class
 
     def self.title = self::TITLE

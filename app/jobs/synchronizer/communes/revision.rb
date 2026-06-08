@@ -14,7 +14,7 @@ module Synchronizer
       end
 
       def synchronize
-        return false unless check_valid
+        return false unless valid?
 
         log_changes
         commune.save!
@@ -78,7 +78,7 @@ module Synchronizer
           end
       end
 
-      def check_valid
+      def valid?
         return true if commune.valid?
 
         log "error | commune synchro rejected : #{commune_attributes[:code_insee]} #{commune_attributes[:nom]} : " \

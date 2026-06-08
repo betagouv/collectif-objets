@@ -55,7 +55,7 @@ module Campaigns
     end
 
     def should_skip_mail?
-      @should_skip_mail = recipient.should_skip_mail_for_step(to_step) if @should_skip_mail.nil?
+      @should_skip_mail = recipient.should_skip_mail_for_step?(to_step) if @should_skip_mail.nil?
       @should_skip_mail
     end
 

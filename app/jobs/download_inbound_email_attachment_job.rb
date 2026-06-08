@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class DownloadError < StandardError; end
-
 class DownloadInboundEmailAttachmentJob < ApplicationJob
+  class DownloadError < StandardError; end
+
   def perform(attachment_raw, inbound_email_id)
     @email_attachment = EmailAttachment.new(attachment_raw, inbound_email_id)
     return GoodJob.logger.info("skipping download #{attachment_raw}") if skip_download?
