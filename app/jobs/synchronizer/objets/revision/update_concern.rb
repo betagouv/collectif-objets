@@ -10,6 +10,7 @@ module Synchronizer
           @objet ||= persisted_objet.tap { it.assign_attributes(all_attributes) }
         end
 
+        # rubocop:disable Naming/PredicateMethod
         def synchronize
           return false if row.out_of_scope? || !objet_valid?
 
@@ -23,6 +24,7 @@ module Synchronizer
           end
           true
         end
+        # rubocop:enable Naming/PredicateMethod
 
         private
 

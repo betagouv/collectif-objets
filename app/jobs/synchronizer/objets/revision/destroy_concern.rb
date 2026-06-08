@@ -6,6 +6,7 @@ module Synchronizer
       module DestroyConcern
         extend ActiveSupport::Concern
 
+        # rubocop:disable Naming/PredicateMethod
         def synchronize
           log log_message, counter: action
           persisted_objet.destroy_and_soft_delete_recensement!(
@@ -15,6 +16,7 @@ module Synchronizer
           )
           true
         end
+        # rubocop:enable Naming/PredicateMethod
 
         # TODO: Revision#new_edifice? should default to false, this is a code smell
         def new_edifice? = false
