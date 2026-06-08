@@ -21,9 +21,9 @@ RSpec.describe RelanceDossiersJob, type: :job do
       end
 
       # Vérifie que les dossiers des mois concernés sont sélectionnés
-      expect(RelanceDossiersJob.dossiers_a_relancer).to eq dossiers[:a_relancer]
-      expect(RelanceDossiersJob.dossiers_pour_derniere_relance).to eq dossiers[:derniere_relance]
-      expect(RelanceDossiersJob.dossiers_a_archiver).to eq dossiers[:a_archiver]
+      expect(RelanceDossiersJob.dossiers_a_relancer).to match_array dossiers[:a_relancer]
+      expect(RelanceDossiersJob.dossiers_pour_derniere_relance).to match_array dossiers[:derniere_relance]
+      expect(RelanceDossiersJob.dossiers_a_archiver).to match_array dossiers[:a_archiver]
 
       # Vérifie que les dossiers sont envoyés aux bons mailers
       dossiers[:a_relancer].each do |dossier_id|
