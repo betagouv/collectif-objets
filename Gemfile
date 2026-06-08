@@ -47,8 +47,8 @@ group :development, :test do
   gem "launchy", "~> 3.1", require: !ENV.key?("CI")
   gem "pry", "~> 0.15", require: !ENV.key?("CI")
   gem "rspec-rails", "~> 8.0"
-  gem "rubocop", "~> 1.63", require: false
-  gem "rubocop-rails", "~> 2.24", require: false
+  gem "rubocop", "~> 1.85", require: false
+  gem "rubocop-rails", "~> 2.35", require: false
 end
 
 group :development do
