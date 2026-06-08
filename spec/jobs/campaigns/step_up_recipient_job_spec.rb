@@ -45,7 +45,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
         expect(recipient.current_step).to eq("lancement") # should not change
-        expect(res).to eq false
+        expect(res).to eq nil
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
         expect(recipient.current_step).to eq("lancement") # should not change
-        expect(res).to eq false
+        expect(res).to eq nil
       end
     end
 
@@ -79,7 +79,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
         expect(recipient.current_step).to eq("relance1") # should not change
-        expect(res).to eq false
+        expect(res).to eq nil
       end
     end
 

@@ -14,7 +14,7 @@ module Campaigns
 
       raise "Missing user with email for #{commune}" if user.nil?
 
-      return false unless should_step_up?
+      return unless should_step_up?
 
       send_mail! unless should_skip_mail?
       recipient.update!(current_step: to_step)
