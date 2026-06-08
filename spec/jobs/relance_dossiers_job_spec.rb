@@ -9,11 +9,12 @@ RSpec.describe RelanceDossiersJob, type: :job do
     let(:departement) { create(:departement) } # Reuse departement to avoid extra CREATE queries
     it "relance les dossiers" do
       dossiers = {}
+      times_of_month = [:beginning_of_month, :end_of_month]
       { a_relancer: RelanceDossiersJob::MOIS_RELANCE,
         derniere_relance: RelanceDossiersJob::MOIS_DERNIERE_RELANCE,
         a_archiver: RelanceDossiersJob::MOIS_ARCHIVE }.each do |kind, i|
         dossiers[kind] ||= []
-        [:beginning_of_month, :end_of_month].each do |time_of_month|
+        times_of_month.each do |time_of_month|
           commune = create(:commune, :with_user, departement:)
           created_at = i.months.ago.send(time_of_month)
           dossiers[kind] << create(:dossier, commune:, created_at:, status: :construction).id

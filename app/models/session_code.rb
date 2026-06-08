@@ -22,7 +22,7 @@ class SessionCode < ApplicationRecord
   end
 
   def self.valid_format?(code)
-    /^\d{#{LENGTH}}$/.match? code.to_s.strip
+    /^\d{#{LENGTH}}$/o.match? code.to_s.strip
   end
 
   def expired?

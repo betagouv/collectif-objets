@@ -81,7 +81,7 @@ class Dossier < ApplicationRecord
   end
 
   def analyse_overrides_count
-    recensements.filter(&:analyse_overrides?).count
+    recensements.count(&:analyse_overrides?)
   end
 
   def a_des_objets_prioritaires?

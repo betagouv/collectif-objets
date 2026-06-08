@@ -94,7 +94,7 @@ module Co
 
       response.body
     rescue SibServerError => e
-      raise e if !e.message.match(/error 500/) || current_retry > 4
+      raise e if e.message.exclude?("error 500") || current_retry > 4
 
       Rails.logger.info "Retrying request after SibServerError"
       sleep 1

@@ -62,7 +62,7 @@ module Communes
 
     def permitted_params
       c = params.require(:recensement).permit(photos: [])
-      c[:photos] = c[:photos].map(&:presence).compact if c[:photos].any?
+      c[:photos] = c[:photos].filter_map(&:presence) if c[:photos].any?
       c
     end
   end

@@ -51,7 +51,7 @@ class MemoireExportPhoto
   end
 
   def memoire_REFIMG
-    "#{memoire_REF}.#{attachment.send('file_extension')}"
+    "#{memoire_REF}.#{attachment.send(:file_extension)}"
   end
 
   def memoire_DATPV
