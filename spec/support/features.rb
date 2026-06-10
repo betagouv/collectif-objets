@@ -33,6 +33,11 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
 
+      # Save screenshot only on failure, before the session is reset
+      if example.exception
+        puts "saved screenshot to #{save_screenshot}" # rubocop:disable Lint/Debugger
+      end
+
       # Reset Capybara sessions and wait for server to finish processing requests
       # BEFORE database cleanup to prevent race conditions with ActiveStorage variant creation
       Capybara.reset_sessions!
@@ -43,11 +48,6 @@ RSpec.configure do |config|
 
     # Clear Warden state to prevent leakage
     Warden.test_reset!
-
-    # Save screenshot only on failure
-    if example.exception
-      puts "saved screenshot to #{save_screenshot}" # rubocop:disable Lint/Debugger
-    end
 
     self.use_transactional_tests = true
   end
