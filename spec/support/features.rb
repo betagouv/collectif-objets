@@ -47,40 +47,25 @@ RSpec.configure do |config|
   config.include TurboHelpers, type: :feature
   config.include CapybaraDomId, type: :feature
 
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-  end
+  # Rails shares the database connection between the test thread and the
+  # Capybara server thread, so feature specs run inside the default
+  # transaction and need no truncation.
 
-  config.around(type: :feature, js: true) do |example|
-    # Feature specs require special database handling due to running in separate threads
-    self.use_transactional_tests = false
-    DatabaseCleaner.strategy = :truncation
-
+  config.before(type: :feature, js: true) do
     # Stub external services
     stub_request(:any, /tube.numerique.gouv.fr/).to_return(status: 200, body: "", headers: {})
     # Silence upstream deprecation warning. See https://github.com/teamcapybara/capybara/issues/2779
     Selenium::WebDriver.logger.ignore(:clear_local_storage, :clear_session_storage)
+  end
 
-    DatabaseCleaner.cleaning do
-      example.run
-
-      # Save screenshot only on failure, before the session is reset
-      if example.exception
-        puts "saved screenshot to #{save_screenshot}" # rubocop:disable Lint/Debugger
-      end
-
-      # Reset Capybara sessions and wait for server to finish processing requests
-      # BEFORE database cleanup to prevent race conditions with ActiveStorage variant creation
-      Capybara.reset_sessions!
-      # Wait for all in-flight HTTP requests (especially variant image requests) to complete
-      # before truncating the database
-      sleep 0.5
+  config.after(type: :feature, js: true) do |example|
+    # Save screenshot only on failure, before Capybara resets the session
+    if example.exception
+      puts "saved screenshot to #{save_screenshot}" # rubocop:disable Lint/Debugger
     end
 
     # Clear Warden state to prevent leakage
     Warden.test_reset!
-
-    self.use_transactional_tests = true
   end
 end
 
