@@ -74,6 +74,21 @@ RSpec.configure do |config|
       puts "saved screenshot to #{save_screenshot}" # rubocop:disable Lint/Debugger
     end
 
+    # Reset the session now (rather than in capybara/rspec's own hook) so the
+    # browser stops issuing requests, then let the server drain before the
+    # wrapping transaction rolls back. A request can slip in between the
+    # browser navigating away and Capybara's pending-requests check, and an
+    # ActiveStorage variant request served after rollback raises
+    # ForeignKeyViolation on the vanished blob, failing the next example.
+    Capybara.reset_sessions!
+    server = Capybara.current_session.server
+    if server
+      2.times do
+        server.wait_for_pending_requests
+        sleep 0.05
+      end
+    end
+
     # Clear Warden state to prevent leakage
     Warden.test_reset!
   end
