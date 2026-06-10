@@ -3,6 +3,36 @@
 # Feature specs configuration
 # All feature specs use js: true because Axe needs JS to run
 
+module TurboHelpers
+  def wait_for_turbo
+    return unless page.driver.respond_to?(:evaluate_script)
+
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      turbo_idle = "typeof Turbo === 'undefined' || " \
+                   "(!Turbo.navigator.currentVisit || Turbo.navigator.currentVisit.state !== 'started') && " \
+                   "!document.documentElement.hasAttribute('data-turbo-preview')"
+      sleep 0.05 until page.evaluate_script(turbo_idle)
+    end
+  rescue Timeout::Error
+    nil
+  end
+
+  def click_on(...)
+    super
+    wait_for_turbo
+  end
+
+  def click_button(...)
+    super
+    wait_for_turbo
+  end
+
+  def click_link(...)
+    super
+    wait_for_turbo
+  end
+end
+
 module CapybaraDomId
   def dom_id(element)
     "##{action_view_dom_id(element)}"
@@ -14,6 +44,7 @@ module CapybaraDomId
 end
 
 RSpec.configure do |config|
+  config.include TurboHelpers, type: :feature
   config.include CapybaraDomId, type: :feature
 
   config.before(:suite) do
