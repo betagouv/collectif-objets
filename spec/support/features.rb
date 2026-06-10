@@ -50,6 +50,13 @@ RSpec.configure do |config|
   config.include TurboHelpers, type: :feature
   config.include CapybaraDomId, type: :feature
 
+  # Build assets once instead of letting vite's autoBuild re-hash all watched
+  # files on every request, which slowed renders enough to exceed Capybara's
+  # wait time under load
+  config.before(:suite) do
+    ViteRuby.commands.build
+  end
+
   # Rails shares the database connection between the test thread and the
   # Capybara server thread, so feature specs run inside the default
   # transaction and need no truncation.
