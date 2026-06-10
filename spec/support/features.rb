@@ -4,32 +4,35 @@
 # All feature specs use js: true because Axe needs JS to run
 
 module TurboHelpers
+  # Clicking before Turbo has loaded turns data-turbo-method links and form
+  # interceptions into plain GETs that silently do nothing
+  def wait_for_turbo_loaded
+    wait_until_js "document.readyState === 'complete' && typeof Turbo !== 'undefined'"
+  end
+
   def wait_for_turbo
+    wait_until_js "typeof Turbo === 'undefined' || " \
+                  "((!Turbo.navigator.currentVisit || Turbo.navigator.currentVisit.state !== 'started') && " \
+                  "!document.documentElement.hasAttribute('data-turbo-preview') && " \
+                  "!document.documentElement.hasAttribute('aria-busy'))"
+  end
+
+  def wait_until_js(condition)
     return unless page.driver.respond_to?(:evaluate_script)
 
     Timeout.timeout(Capybara.default_max_wait_time) do
-      turbo_idle = "typeof Turbo === 'undefined' || " \
-                   "(!Turbo.navigator.currentVisit || Turbo.navigator.currentVisit.state !== 'started') && " \
-                   "!document.documentElement.hasAttribute('data-turbo-preview')"
-      sleep 0.05 until page.evaluate_script(turbo_idle)
+      sleep 0.05 until page.evaluate_script(condition)
     end
   rescue Timeout::Error
     nil
   end
 
-  def click_on(...)
-    super
-    wait_for_turbo
-  end
-
-  def click_button(...)
-    super
-    wait_for_turbo
-  end
-
-  def click_link(...)
-    super
-    wait_for_turbo
+  %i[click_on click_button click_link].each do |method|
+    define_method(method) do |*args, **kwargs, &block|
+      wait_for_turbo_loaded
+      super(*args, **kwargs, &block)
+      wait_for_turbo
+    end
   end
 end
 
