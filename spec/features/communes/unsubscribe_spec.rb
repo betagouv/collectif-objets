@@ -14,10 +14,10 @@ feature "Communes unsubscribe from campaign", type: :feature, js: true do
     visit new_user_unsubscribe_path(token: "blah123")
     expect(page).to be_axe_clean
 
-    expect(page).to have_content("Désinscription")
-    expect(page).to have_content("Albon")
+    expect(page).to have_text("Désinscription")
+    expect(page).to have_text("Albon")
     click_on "Désinscription"
 
-    expect(page).to have_content("Albon a été désinscrite de la campagne de recensement")
+    expect(page).to have_text("Albon a été désinscrite de la campagne de recensement")
   end
 end

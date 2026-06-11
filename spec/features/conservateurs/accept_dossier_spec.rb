@@ -74,24 +74,24 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(current_img[:filename]).to eq "tableau2.jpg"
     # galerie - pivoter
     blob_id_before_rotate = find(".co-galerie .content .photo img")[:src].match(%r{blobs/proxy/(.*)/tableau2.jpg})[1]
-    find("button", text: /Pivoter/).click
+    click_button("Pivoter")
     sleep(1)
     blob_id_after_rotate = find(".co-galerie .content .photo img")[:src].match(%r{blobs/proxy/(.*)/tableau2.jpg})[1]
     expect(blob_id_before_rotate).not_to eq(blob_id_after_rotate)
     expect(current_img[:filename]).to eq "tableau2.jpg"
     # galerie - supprimer
-    find("button", text: /Supprimer/).click
+    click_button("Supprimer")
     expect(page).to have_text("Êtes-vous sûr de vouloir supprimer cette photo ?")
     find(".fr-modal__footer").click_on "Supprimer"
     expect(page).to have_text("Photo 2 / 2")
     expect(current_img[:filename]).to eq "tableau3.jpg" # 2 -> ø, 3 -> 2
     # galerie - ajout
-    find("button", text: /Ajouter/).click
+    click_button("Ajouter")
     # click_on "Ajouter une photo" # not necessary when using `make_visible: true`
     attach_file("new_blob_id", Rails.root.join("spec/fixture_files/tableau2.jpg"), make_visible: true)
     expect(page).to have_text("Photo 3 / 3")
     expect(current_img[:filename]).to eq "tableau2.jpg"
-    find("button", text: /Fermer/).click
+    click_button("Fermer")
 
     etat_sanitaire_group = find("h4", text: /État de l’objet/)
       .find(:xpath, "ancestor::div[contains(@class, 'attribute-group')]")
@@ -124,7 +124,7 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
     expect(bouquet_row.all("td")[1]).to have_text(/Bon/i)
     expect(bouquet_row.all("td")[1]).to have_text(/L’objet est en péril/i)
     ciboire_row = find_link("Ciboire des malades").find(:xpath, "ancestor::tr")
-    expect(ciboire_row).not_to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
+    expect(ciboire_row).to have_no_text(/Entretien de l’édifice et lutte contre les infestations/i)
     fill_in("dossier[notes_conservateur]", with: "Merci pour ce joli dossier")
     click_on "Finaliser et envoyer l'examen à la commune"
 
