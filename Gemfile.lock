@@ -436,6 +436,9 @@ GEM
     rubocop-ast (1.49.1)
       parser (>= 3.3.7.2)
       prism (~> 1.7)
+    rubocop-capybara (2.23.0)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.81)
     rubocop-factory_bot (2.28.0)
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
@@ -592,6 +595,7 @@ DEPENDENCIES
   rspec-rails (~> 8.0)
   rspec-sqlimit (~> 0.0.6)
   rubocop (~> 1.85)
+  rubocop-capybara
   rubocop-factory_bot
   rubocop-performance
   rubocop-rails (~> 2.35)
