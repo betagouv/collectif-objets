@@ -4,8 +4,8 @@ module Admin
   class RecenseursController < BaseController
     include NotifyRecenseurOfAccessChange
 
-    skip_before_action :disconnect_impersonating_recenseur, only: :toggle_impersonate_mode
-    before_action :set_recenseur, only: [:show, :edit, :update, :destroy, :impersonate]
+    skip_before_action :disconnect_impersonating_recenseur, only: [:toggle_impersonate_mode, :stop_impersonating]
+    before_action :set_recenseur, only: [:show, :edit, :update, :destroy, :impersonate, :stop_impersonating]
 
     # GET /admin/recenseurs
     def index
@@ -45,6 +45,12 @@ module Admin
         session[:recenseur_impersonate_write] = "1"
       end
       redirect_back fallback_location: recenseurs_communes_path, status: :see_other
+    end
+
+    def stop_impersonating
+      session.delete(:recenseur_impersonate_write)
+      stop_impersonating_recenseur
+      redirect_to admin_recenseurs_path, notice: "Vous n'incarnez plus de recenseur"
     end
 
     # POST /admin/recenseurs
