@@ -48,6 +48,7 @@ group :development, :test do
   gem "pry", "~> 0.15", require: !ENV.key?("CI")
   gem "rspec-rails", "~> 8.0"
   gem "rubocop", "~> 1.85", require: false
+  gem "rubocop-factory_bot", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", "~> 2.35", require: false
 end
