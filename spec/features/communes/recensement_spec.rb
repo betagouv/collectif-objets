@@ -153,6 +153,10 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau2.jpg"))
     tableau2 = find("img[src*='tableau2.jpg']")
     expect(tableau2).to be_present
+    # Wait for the preview variant request to finish before purging the blob,
+    # otherwise the variant record insert races the purge and raises a
+    # ForeignKeyViolation that Capybara re-raises at a later interaction
+    wait_until_js "document.querySelector(\"img[src*='tableau2.jpg']\")?.complete"
     tableau2.ancestor(".co-photo-preview").click_on "Supprimer"
     expect(page).not_to have_selector("img[src*='tableau2.jpg']")
     expect(page).to be_axe_clean
