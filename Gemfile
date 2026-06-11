@@ -13,7 +13,7 @@ gem "after_commit_everywhere", "~> 1.5"
 gem "aws-sdk-s3", "~> 1.143", require: false
 gem "bootsnap", "~> 1.18", require: false
 gem "csv", "~> 3.3"
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 gem "dsfr-view-components", "~> 1.5"
 gem "front_matter_parser", "~> 1.0"
 gem "good_job", "~> 4"
