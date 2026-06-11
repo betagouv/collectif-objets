@@ -4,7 +4,7 @@
 .fr-container.fr-my-4w
   = render "shared/breadcrumbs",
     links: [["Accueil", recenseurs_communes_path],
-      ["Objets de #{@commune.nom}", recenseurs_commune_objets_path(@commune)]],
+      ["Objets de #{@commune.nom}", recenseurs_commune_path(@commune)]],
     current_page_label: "Examen"
 
   - if @dossier&.accepted?
@@ -28,6 +28,6 @@
             Envoyez le recensement pour obtenir les conseils du conservateur.
             Suite à l'envoi du recensement, vous serez averti par mail lorsque le conservateur aura produit l'examen.
 
-          = link_to "Recenser les objets de la commune", recenseurs_commune_objets_path(@commune), class: "fr-btn"
+          = link_to "Recenser les objets de la commune", recenseurs_commune_path(@commune), class: "fr-btn"
       .fr-col-md-4.fr-px-8w
         = vite_image_tag "images/illustrations/technical-error.svg", alt: "Indisponible", class: "co-width co-height--100"
