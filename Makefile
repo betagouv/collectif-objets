@@ -1,8 +1,5 @@
 install:
 	bundle install
-	npm install --global husky
-	npm install
-	npx husky install
 	brew install mailhog libvips
 	brew services start postgresql
 	rails db:drop db:create db:schema:load

@@ -96,9 +96,13 @@ class Objet < ApplicationRecord
     objets.sort_by do |objet|
       recensement = objet.recensement
       [
-        (recensement&.en_peril? ? 0 : recensement&.absent? ? 1 : 2),
+        (if recensement&.en_peril?
+           0
+         else
+           recensement&.absent? ? 1 : 2
+         end),
         (recensement&.analysed_at ? 1 : 0),
-        recensement&.analysed_at || Time.at(0)
+        recensement&.analysed_at || Time.zone.at(0)
       ]
     end
   end
