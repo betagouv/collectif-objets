@@ -10,7 +10,6 @@ require "rspec/rails"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require "axe-rspec"
-require "database_cleaner/active_record"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 

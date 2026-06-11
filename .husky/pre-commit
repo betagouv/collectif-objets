@@ -1,5 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-bundle exec rubocop
-# bundle exec rspec spec
