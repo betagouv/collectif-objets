@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :dossier do
-    association :commune
+    commune
     status { :construction }
 
     trait :with_recensement do

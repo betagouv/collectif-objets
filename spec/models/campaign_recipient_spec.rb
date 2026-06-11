@@ -12,7 +12,7 @@ RSpec.describe CampaignRecipient, type: :model do
     end
 
     it "can build 2 recipients for the same campaign" do
-      campaign = FactoryBot.create(:campaign)
+      campaign = create(:campaign)
       recipient = build(:campaign_recipient, campaign:)
       res = recipient.valid?
       expect(recipient.errors).to be_empty

@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :campaign_recipient, aliases: [:recipient] do
     commune { association(:commune_with_user) }
-    association :campaign
+    campaign
     current_step { nil }
     sequence(:unsubscribe_token) { |n| 3_454_234 + n }
 

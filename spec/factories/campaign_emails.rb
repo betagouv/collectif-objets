@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :campaign_email do
-    association :recipient, factory: :campaign_recipient
+    recipient factory: %i[campaign_recipient]
     step { "lancement" }
     sib_message_id { "some-id" }
     sent { nil }

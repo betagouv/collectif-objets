@@ -13,7 +13,7 @@ FactoryBot.define do
     palissy_DPRO { "2007/01/29 : classé au titre objet" }
     palissy_PROT { "classé au titre objet" }
 
-    association :commune
+    commune
 
     trait :classé do
       palissy_PROT { "classé au titre objet" }

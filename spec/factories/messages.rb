@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :message do
-    association :commune
-    association :author, factory: :user
+    commune
+    author factory: %i[user]
     origin { "web" }
     text { "Comment s'appelle l'objet en question ?\nJe ne le trouve pas" }
     automated_mail_name { nil }
