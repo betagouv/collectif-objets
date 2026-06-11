@@ -12,7 +12,7 @@ RSpec.describe CampaignRecipient, type: :model do
     end
 
     it "can build 2 recipients for the same campaign" do
-      campaign = FactoryBot.create(:campaign)
+      campaign = create(:campaign)
       recipient = build(:campaign_recipient, campaign:)
       res = recipient.valid?
       expect(recipient.errors).to be_empty
@@ -56,8 +56,8 @@ RSpec.describe CampaignRecipient, type: :model do
     end
   end
 
-  describe "should_skip_mail_for_step" do
-    subject { recipient.should_skip_mail_for_step(step) }
+  describe "should_skip_mail_for_step?" do
+    subject { recipient.should_skip_mail_for_step?(step) }
 
     context "première relance pour une commune ayant démarré le recensement" do
       let(:step) { "relance1" }

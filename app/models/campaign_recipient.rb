@@ -42,7 +42,7 @@ class CampaignRecipient < ApplicationRecord
     email_for_step(current_step)
   end
 
-  def should_skip_mail_for_step(step)
+  def should_skip_mail_for_step?(step)
     return false if step == "fin"
     # le mail de fin doit toujours être envoyé
 

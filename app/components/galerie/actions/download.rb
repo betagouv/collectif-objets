@@ -4,6 +4,7 @@ module Galerie
   module Actions
     class Download
       include BaseConcern
+
       attr_reader :url
 
       def initialize(url:, responsive_variant: :desktop)

@@ -14,15 +14,15 @@ module Synchronizer
         end
 
         def all_rows
-          @all_rows ||= @csv_rows.map { Row.new(_1) }
+          @all_rows ||= @csv_rows.map { Row.new(it) }
         end
 
         def all_objets_attributes
-          @all_objets_attributes ||= @csv_rows.map { parse_row_to_objet_attributes(_1) }
+          @all_objets_attributes ||= @csv_rows.map { parse_row_to_objet_attributes(it) }
         end
 
         def all_eager_loaded_records
-          @all_eager_loaded_records ||= all_objets_attributes.map { EagerLoadedRecords.new(_1, @eager_load_store) }
+          @all_eager_loaded_records ||= all_objets_attributes.map { EagerLoadedRecords.new(it, @eager_load_store) }
         end
 
         def revisions

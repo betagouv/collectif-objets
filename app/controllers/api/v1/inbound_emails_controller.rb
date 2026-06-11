@@ -25,10 +25,10 @@ module Api
       PERMITTED_PARAMS = { "items" => PERMITTED_PARAMS_ROOT + PERMITTED_PARAMS_NESTED }.freeze
 
       def create
-        items.each { ReceiveInboundEmailJob.perform_later(_1) }
+        items.each { ReceiveInboundEmailJob.perform_later(it) }
         render json: { success: true }
       rescue ArgumentError => e
-        Sentry.configure_scope { _1.set_context(items:) }
+        Sentry.configure_scope { it.set_context(items:) }
         raise e
       end
 

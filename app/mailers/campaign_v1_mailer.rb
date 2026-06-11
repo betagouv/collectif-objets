@@ -24,7 +24,7 @@ class CampaignV1Mailer < ApplicationMailer
   end
 
   def ct(key, **)
-    I18n.t("campaign_v1_mailer.#{key}", **i18n_args.merge(**)).html_safe
+    I18n.t("campaign_v1_mailer.#{key}", **i18n_args, **).html_safe
   end
   helper_method :ct
 

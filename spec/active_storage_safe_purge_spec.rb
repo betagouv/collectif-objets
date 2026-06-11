@@ -14,6 +14,7 @@ RSpec.describe "Active Storage safe purge monkey patches" do
   before do
     class << local_blob
       include RSpec::Mocks::ExampleMethods
+
       def service
         @service ||= double("active_storage_service")
       end
@@ -31,7 +32,7 @@ RSpec.describe "Active Storage safe purge monkey patches" do
   end
 
   context "when using production service" do
-    let(:blob) { local_blob.tap { _1.update!(service_name: "scaleway_production") } }
+    let(:blob) { local_blob.tap { it.update!(service_name: "scaleway_production") } }
     before { stub_request(:any, /.*/).to_return(status: 200, body: "", headers: {}) }
     it "the blob is not deleted" do
       expect(blob.service).not_to receive(:delete)

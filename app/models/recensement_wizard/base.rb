@@ -8,6 +8,7 @@ module RecensementWizard
   class Base
     include Rails.application.routes.url_helpers
     include ActiveModel::Model
+
     attr_reader :recensement
 
     delegate \
@@ -18,8 +19,6 @@ module RecensementWizard
       :localisation=, :recensable=, :edifice_nom=, :autre_commune_code_insee=,
       :etat_sanitaire=, :securisation=, :notes=, :attachment_changes,
       to: :recensement
-
-    delegate :step_number, to: :class
 
     delegate :title, :step_number, to: :class
 

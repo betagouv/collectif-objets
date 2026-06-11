@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :bordereau do
-    dossier { build(:dossier, :examiné, :with_conservateur) }
-    edifice { build(:edifice, commune: dossier.commune, objets_count: 2) }
+    dossier { association(:dossier, :examiné, :with_conservateur) }
+    edifice { association(:edifice, commune: dossier.commune, objets_count: 2) }
 
     trait(:with_recensements) do
       after(:build) do |bordereau|

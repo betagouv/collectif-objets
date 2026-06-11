@@ -14,8 +14,8 @@ module Synchronizer
         def revisions
           @revisions ||=
             csv_rows
-              .map { parse_row_to_edifice_attributes(_1) }
-              .map { Revision.new(_1, logger:) }
+              .map { parse_row_to_edifice_attributes(it) }
+              .map { Revision.new(it, logger:) }
         end
 
         def synchronize

@@ -23,7 +23,7 @@ module RecensementHelper
   end
 
   def etat_sanitaire_options_for_select
-    etat_sanitaire_options.map { [_1.label, _1.value] }
+    etat_sanitaire_options.map { [it.label, it.value] }
   end
 
   def etat_sanitaire_badge(value, **html_opts)
@@ -50,14 +50,14 @@ module RecensementHelper
   end
 
   def securisation_badge(value, **html_opts)
-    opt = securisation_options.find { _1.value == value }
+    opt = securisation_options.find { it.value == value }
     badge(opt.badge_color, **html_opts) { opt.label }
   end
   alias securisation_edifice_badge securisation_badge
   alias analyse_securisation_badge securisation_badge
 
   def securisation_options_for_select
-    securisation_options.map { [_1.label, _1.value] }
+    securisation_options.map { [it.label, it.value] }
   end
 
   def recensable_options

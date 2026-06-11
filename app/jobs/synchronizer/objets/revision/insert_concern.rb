@@ -10,6 +10,7 @@ module Synchronizer
           @objet ||= Objet.new(all_attributes)
         end
 
+        # rubocop:disable Naming/PredicateMethod
         def synchronize
           return false if row.out_of_scope? || !objet_valid?
 
@@ -17,6 +18,7 @@ module Synchronizer
           objet.save!
           true
         end
+        # rubocop:enable Naming/PredicateMethod
 
         private
 

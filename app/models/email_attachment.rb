@@ -30,6 +30,6 @@ class EmailAttachment
   def skip_download? = !should_download?
 
   def already_downloaded?
-    message.files_blobs.any? { _1.filename == filename }
+    message.files_blobs.any? { it.filename == filename }
   end
 end

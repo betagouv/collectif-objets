@@ -29,7 +29,7 @@ module Galerie
       @turbo_frame = turbo_frame
       @current_photo_id = current_photo_id
       @path_without_query = path_without_query
-      @photos.each { augment_photo_presenter(_1) }
+      @photos.each { augment_photo_presenter(it) }
     end
 
     def augment_photo_presenter(photo_presenter)
@@ -43,7 +43,7 @@ module Galerie
     def current_index
       return nil if current_photo_id.nil?
 
-      photos.find_index { _1.id == current_photo_id.to_i }
+      photos.find_index { it.id == current_photo_id.to_i }
     end
 
     def current_photo

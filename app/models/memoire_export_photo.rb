@@ -21,7 +21,7 @@ class MemoireExportPhoto
     raise if (attachments.pluck(:record_type) - ["Recensement"]).any?
 
     map = Recensement.where(id: attachments.pluck(:record_id)).to_a.index_by(&:id)
-    attachments.map { new(attachment: _1, recensement: map.fetch(_1.record_id), annee_versement:) }
+    attachments.map { new(attachment: it, recensement: map.fetch(it.record_id), annee_versement:) }
   end
 
   def self.from_recensements(recensements_arel, annee_versement: nil)
@@ -35,7 +35,7 @@ class MemoireExportPhoto
   end
 
   def cols_values
-    COLS.map { send("memoire_#{_1}") }
+    COLS.map { send("memoire_#{it}") }
   end
 
   # rubocop:disable Naming/MethodName
@@ -51,7 +51,7 @@ class MemoireExportPhoto
   end
 
   def memoire_REFIMG
-    "#{memoire_REF}.#{attachment.send('file_extension')}"
+    "#{memoire_REF}.#{attachment.send(:file_extension)}"
   end
 
   def memoire_DATPV

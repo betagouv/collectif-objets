@@ -19,7 +19,7 @@ class ExportMemoireZipJob < ApplicationJob
   def download_and_zip_attachments
     @progressbar = ProgressBar.create(total: attachments.count, format: "%t: |%B| %p%% %e")
     @zip_output_stream = Zip::OutputStream.open(zip_file)
-    attachments.each { download_and_zip_attachment(_1) }
+    attachments.each { download_and_zip_attachment(it) }
     @zip_output_stream.close
     zip_file.rewind
   end

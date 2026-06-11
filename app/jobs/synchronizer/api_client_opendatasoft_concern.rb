@@ -8,7 +8,7 @@ module Synchronizer
 
     def lazy_iterator
       first_line = File.open(csv_path, &:gets)
-      headers = first_line.split(";").map(&:downcase).map(&:strip)
+      headers = first_line.split(";").map { |x| x.downcase.strip }
       CSV.foreach(csv_path, headers:, col_sep: ";").lazy.drop(1)
       # drop first line because we explicitly pass the headers
     end

@@ -8,7 +8,7 @@ feature "Admin", js: true do
     it "should be accessible" do
       login_as admin, scope: :admin_user
       visit path
-      expect(current_path).to eql(path)
+      expect(page).to have_current_path(path)
       expect(page.title).not_to eq("Collectif Objets") # Le titre par défaut
       expect(page).to be_axe_clean.excluding(*excludes)
     end

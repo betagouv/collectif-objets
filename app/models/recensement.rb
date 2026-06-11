@@ -24,6 +24,7 @@ class Recensement < ApplicationRecord
   delegate :departement, to: :nouvelle_commune, allow_nil: true, prefix: :nouveau
 
   include AASM
+
   aasm column: :status, whiny_persistence: true, timestamps: true do
     state :draft, initial: true, display: "Brouillon"
     state :completed, display: "Complet et validé"
@@ -148,7 +149,7 @@ class Recensement < ApplicationRecord
   def self.etats_sanitaires_value_counts
     group("etat_sanitaire")
       .select("etat_sanitaire, count(recensements.id) as recensements_count")
-      .to_h { [_1.etat_sanitaire, _1.recensements_count] }
+      .to_h { [it.etat_sanitaire, it.recensements_count] }
   end
 
   def self.possible_values_for(attribute_name)
@@ -181,7 +182,7 @@ class Recensement < ApplicationRecord
   def self.ransackable_scopes(_ = nil) = [:photos_presence_in]
 
   def photos_presenters
-    photos.order(:created_at).map { PhotoPresenter.from_attachment(_1) }
+    photos.order(:created_at).map { PhotoPresenter.from_attachment(it) }
   end
 
   def destroy_or_soft_delete!(**)

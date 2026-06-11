@@ -4,6 +4,7 @@ module Galerie
   module Actions
     class Rotate
       include BaseConcern
+
       attr_reader :attachment_path, :redirect_path
 
       def initialize(attachment_path:, redirect_path:, responsive_variant: :desktop)

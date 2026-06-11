@@ -14,9 +14,9 @@ module ApplicationHelper
     content_tag("p", yield, **html_opts)
   end
 
-  def link_to_button(content, path, **kwargs)
+  def link_to_button(content, path, **)
     content_tag("form", method: "GET", action: path) do
-      content_tag("button", **kwargs) { content }
+      content_tag("button", **) { content }
     end
   end
 
