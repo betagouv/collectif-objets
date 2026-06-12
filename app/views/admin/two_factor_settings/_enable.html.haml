@@ -5,7 +5,7 @@
   = dsfr_accordion(html_attributes: { class: "fr-mb-4w" }) do |accordion|
     = accordion.with_section(title: "Scannez ce QR code avec votre application d'authentification", expanded: true) do
       .fr-mb-2w.co-text--center
-        = otp_qrcode(current_admin_user)
+        = otp_qrcode(current_admin_user, class: "otp-qrcode")
     = accordion.with_section(title: "Je ne peux pas scanner le QR code") do
       %p.fr-text--sm.fr-mb-2w
         Saisissez cette clé manuellement dans votre application d'authentification.
