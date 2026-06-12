@@ -16,5 +16,7 @@ export default class extends Controller {
   render() {
     this.inputTarget.type = this.visible ? "input" : "password"
     this.buttonTarget.innerHTML = this.visible ? "Cacher" : "Afficher"
+    this.buttonTarget.classList.toggle("fr-fi-eye-line", !this.visible)
+    this.buttonTarget.classList.toggle("fr-icon-eye-off-line", this.visible)
   }
 }

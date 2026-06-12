@@ -67,8 +67,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_18_171733) do
     t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.string "otp_secret"
+    t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login", default: false, null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.string "otp_backup_codes", array: true
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_admin_users_on_unlock_token", unique: true
   end
 
   create_table "bordereau_recensements", force: :cascade do |t|

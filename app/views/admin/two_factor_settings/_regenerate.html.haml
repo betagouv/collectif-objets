@@ -1,0 +1,11 @@
+%p.fr-mb-2w
+  Si vous générez de nouveaux codes, les codes précédents ne fonctionneront plus.
+
+= form_with url: regenerate_backup_codes_admin_two_factor_settings_path, method: :post do |f|
+  .fr-input-group
+    = render PasswordInputComponent.new(name: "password", autocomplete: "current-password", hint: false)
+  .fr-input-group
+    = f.label :otp_attempt, "Code de vérification", class: "fr-label"
+    = f.text_field :otp_attempt, class: "fr-input", required: true, autocomplete: "one-time-code", placeholder: "123456"
+  .fr-mt-2w
+    = f.button "Générer de nouveaux codes", type: :submit, class: "fr-btn fr-btn--icon-left fr-icon-refresh-line", name: nil

@@ -6,7 +6,7 @@ FactoryBot.define do
       edifices_count { 0 }
     end
     nom { "Châlons-en-Champagne" }
-    sequence(:code_insee) { |n| (n + 51_108).to_s }
+    sequence(:code_insee) { |n| "99#{format('%03d', n)}" } # Use code 99xxx for test data
     # status { "inactive" }
     departement
     phone_number { "01 01 01 01 01" }

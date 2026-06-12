@@ -1,0 +1,16 @@
+
+- if remaining_otp_backup_codes.zero?
+  .fr-alert.fr-alert--warning.fr-mb-4w
+    %p.fr-alert__title Aucun code de secours disponible
+    %p
+      Vous n'avez plus de codes de secours.
+      Générez-en de nouveaux ci-dessous pour pouvoir vous connecter si vous n'avez pas accès à votre application d'authentification.
+- else
+  .fr-callout.fr-mb-4w
+    %h3.fr-callout__title Codes de secours
+    %p
+      Il vous reste
+      %strong
+        = pluralize(remaining_otp_backup_codes, "code")
+        de secours
+      pour vous connecter si vous n'avez pas accès à votre application d'authentification.

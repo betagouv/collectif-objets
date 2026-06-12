@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
 
   def init_banners
     @banners = []
-    @banners << :environment if %w[development staging].include?(Rails.configuration.x.environment_specific_name)
+    @banners << :environment if Rails.env.development? || Rails.application.staging?
     @banners << :user_impersonate if impersonating_user?
     @banners << :recenseur_impersonate if impersonating_recenseur?
     @banners << :conservateur_impersonate if impersonating_conservateur?
