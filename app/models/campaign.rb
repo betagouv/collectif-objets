@@ -30,6 +30,8 @@ class Campaign < ApplicationRecord
     event(:finish) { transitions from: :ongoing, to: :finished }
   end
 
+  scope :active, -> { where(status: [:ongoing, :finished]) }
+
   validates :date_lancement, :date_relance1, :date_relance2, :date_relance3, :date_fin, presence: true
   validates :sender_name, :signature, :nom_drac, presence: true, unless: :draft?
 

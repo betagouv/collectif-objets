@@ -6,7 +6,123 @@
 
   %h1= title
 
-  %iframe#metabase-iframe.co-width--100.co-height--100vh{src: "https://collectif-objets-metabase.osc-secnum-fr1.scalingo.io/public/dashboard/33cf5b50-b2e8-41c4-9bcd-ed7fe5b994d0",
-    frameborder: "0",
-    allowtransparency: true
-  }
+  Recenser notre patrimoine pour le protéger !
+
+  = cache @stats.cache_key do
+    %p
+      %strong
+        = number_with_delimiter @stats.total_objets_protégés
+        objets sont protégés au titre des monuments historiques en France.
+
+    .co-readable
+      %p
+        %strong 3 communes sur 4
+        abritent des objets monuments historiques, qui font l’histoire de nos territoires.
+
+      %p
+        Pour assurer la pérennité de ce patrimoine, Collectif Objets propose des campagnes de recensement participatif des objets monuments historiques.
+      %p
+        Ces campagnes sont menées de concert avec les conservateurs des antiquités et objets d'art et les conservateurs des monuments historiques de chaque département, afin de soutenir les communes dans la préservation et la valorisation de leur patrimoine mobilier.
+
+    %h2
+      I - Couverture du parc mobilier monuments historiques
+
+    %p
+      Notre objectif : que la totalité du parc mobilier <abbr title="Monuments Historiques">MH</abbr> soit recensé via Collectif Objets d'ici 2027.
+
+    .fr-grid-row.fr-grid-row--gutters
+      .fr-col-12.fr-col-md-4
+        = co_tile("Objets protégés", "dans tous les départements") do
+          = number_with_delimiter(@stats.total_objets_protégés)
+      .fr-col-12.fr-col-md-4
+        = co_tile("Objets protégés", "dans les départements engagés") do
+          = number_with_delimiter(@stats.total_objets_protégés_dans_départements_actifs)
+      .fr-col-12.fr-col-md-4
+        = co_tile("Taux de recensement du parc") do
+          = "#{@stats.ratio_objets_recensés}%"
+
+    %h2.fr-mt-3w
+      II - Déploiement de Collectif Objets
+
+    %h3
+      Nombre de campagnes par département
+
+    = vite_stylesheet_tag "stats_map"
+    = vite_javascript_tag "stats_map"
+
+    .stats-map-legend.fr-mb-2w
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--none
+        %span Aucune campagne
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--one
+        %span 1 campagne
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--two
+        %span 2 campagnes
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--three
+        %span 3-4 campagnes
+      .stats-map-legend-item
+        .stats-map-legend-color.stats-map-legend-color--five
+        %span 5+ campagnes
+
+    - departements_json = @stats.total_campagnes_par_département.map { |d| { code: d.code, nom: d.nom, campaigns_count: d.campaigns_count, campaigns_label: Campaign.model_name.human(count: d.campaigns_count) } }.to_json
+    .stats-map-wrapper.fr-mb-4w{"data-controller" => "stats-map", "data-stats-map-departements-value" => departements_json}
+      .stats-map-container{"data-stats-map-target" => "container"}
+      .stats-map-inset.stats-map-inset-guadeloupe{"data-stats-map-target" => "insetGuadeloupe"}
+        .stats-map-inset-label Guadeloupe
+      .stats-map-inset.stats-map-inset-martinique{"data-stats-map-target" => "insetMartinique"}
+        .stats-map-inset-label Martinique
+      .stats-map-inset.stats-map-inset-guyane{"data-stats-map-target" => "insetGuyane"}
+        .stats-map-inset-label Guyane
+      .stats-map-inset.stats-map-inset-reunion{"data-stats-map-target" => "insetReunion"}
+        .stats-map-inset-label La Réunion
+      .stats-map-inset.stats-map-inset-mayotte{"data-stats-map-target" => "insetMayotte"}
+        .stats-map-inset-label Mayotte
+      .stats-map-tooltip{"data-stats-map-target" => "tooltip"}
+
+    %details.fr-mb-4w
+      %summary Liste détaillée des départements
+      %ul.co-list-unstyled.co-columns-auto.co-columns-sm-2.co-columns-lg-3
+        - @stats.total_campagnes_par_département.each do |departement|
+          %li
+            %strong= departement
+            = departement.campaigns_count
+            = Campaign.model_name.human(count: departement.campaigns_count)
+
+    .fr-grid-row.fr-grid-row--gutters
+      .fr-col-12.fr-col-md-6.fr-col-lg-4
+        = co_tile("Départements avec campagnes") do
+          = number_with_delimiter(@stats.total_départements_actifs)
+      .fr-col-12.fr-col-md-6.fr-col-lg-4
+        = co_tile("Communes participantes") do
+          = number_with_delimiter(@stats.total_communes_participantes)
+      .fr-col-12.fr-col-md-6.fr-col-lg-4
+        = co_tile("Campagnes en cours ou planifiées") do
+          = number_with_delimiter(@stats.total_campagnes_actives)
+
+    .fr-grid-row.fr-grid-row--gutters
+      .fr-col-12.fr-col-md-6
+        = co_tile("Communes contactées", "dans les départements actifs") do
+          = "#{@stats.ratio_communes_contactées}%"
+      .fr-col-12.fr-col-md-6
+        = co_tile("Taux de fiabilité des données") do
+          = "#{@stats.ratio_recensements_fiables}%"
+
+    %h2.fr-mt-3w
+      III - Traitement des objets en situation préoccupante
+
+    %p
+      Notre objectif : à terme, que 100% des objets en péril ou signalés comme ayant disparu soient examinés en ligne par les conservateurs.
+
+    .fr-grid-row.fr-grid-row--gutters
+      .fr-col-12.fr-col-md-6.fr-col-lg-4
+        = co_tile("Objets recensés", "dans une situation préoccupante") do
+          = number_with_delimiter(@stats.total_recensements_préoccupants)
+      .fr-col-12.fr-col-md-6.fr-col-lg-4
+        = co_tile("Objets signalés péril et disparus pris en charge") do
+          = number_with_delimiter(@stats.total_objets_prioritaires_pris_en_charge)
+      .fr-col-12.fr-col-md-6.fr-col-lg-4
+        = co_tile("Objets préoccupants", "examinés par des conservateurs") do
+          - "#{@stats.ratio_objets_prioritaires_pris_en_charge}%"

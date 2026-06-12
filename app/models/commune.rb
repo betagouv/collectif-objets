@@ -74,6 +74,20 @@ class Commune < ApplicationRecord
     presence ? all : has_recensements_with_missing_photos
   }
   scope :completed, -> { where(status: STATE_COMPLETED) }
+  scope :participantes, lambda {
+    joins(:dossiers)
+      .where.not(dossiers: { submitted_at: nil })
+      .distinct
+  }
+  scope :contactées, lambda {
+    joins(:campaigns)
+      .merge(Campaign.active)
+      .distinct
+  }
+  scope :dans_départements_actifs, lambda {
+    joins(:departement)
+      .merge(Departement.active)
+  }
   scope :in_departement, ->(code) { where(departement_code: code) if code }
 
   scope :sort_by_nom, -> { order("communes.nom ASC") }

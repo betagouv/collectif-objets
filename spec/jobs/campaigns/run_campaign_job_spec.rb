@@ -4,7 +4,8 @@ require "rails_helper"
 
 RSpec.describe Campaigns::RunCampaignJob, type: :job do
   describe "#perform" do
-    let!(:campaign) { create(:campaign, status: "ongoing") }
+    let(:departement) { create(:departement, code: "51") }
+    let!(:campaign) { create(:campaign, status: "ongoing", departement:) }
 
     let!(:recipient1) do
       create(:campaign_recipient, campaign:, commune: build(:commune_with_user, status: "inactive"),

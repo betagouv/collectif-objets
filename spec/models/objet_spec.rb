@@ -121,6 +121,176 @@ RSpec.describe Objet, type: :model do
     expect(Objet.without_completed_recensements.count).to eq 2
   end
 
+  describe ".recensés" do
+    let(:commune) { create(:commune, :en_cours_de_recensement) }
+    let(:dossier) { commune.dossier }
+
+    it "returns objets with active recensements" do
+      objet_with_recensement = create(:objet, commune:)
+      create(:recensement, objet: objet_with_recensement, dossier:)
+      objet_without_recensement = create(:objet, commune:)
+
+      result = Objet.recensés.to_a
+      expect(result).to include(objet_with_recensement)
+      expect(result).not_to include(objet_without_recensement)
+    end
+
+    it "excludes objets with only soft-deleted recensements" do
+      objet_with_deleted_recensement = create(:objet, commune:)
+      create(:recensement, :supprimé, objet: objet_with_deleted_recensement, dossier:)
+
+      result = Objet.recensés.to_a
+      expect(result).not_to include(objet_with_deleted_recensement)
+    end
+
+    it "includes objets when they have both active and deleted recensements from different dossiers" do
+      objet_with_mixed_recensements = create(:objet, commune:)
+      create(:recensement, objet: objet_with_mixed_recensements, dossier:)
+      archived_dossier = create(:dossier, :archived, commune:)
+      create(:recensement, :supprimé, objet: objet_with_mixed_recensements, dossier: archived_dossier)
+
+      result = Objet.recensés.to_a
+      expect(result).to include(objet_with_mixed_recensements)
+    end
+
+    it "returns distinct objets even with multiple recensements" do
+      objet = create(:objet, commune:)
+      create(:recensement, objet:, dossier:)
+      archived_dossier = create(:dossier, :archived, commune:)
+      create(:recensement, objet:, dossier: archived_dossier)
+
+      result = Objet.recensés.to_a
+      expect(result.count { |o| o.id == objet.id }).to eq(1)
+    end
+  end
+
+  describe ".dans_départements_actifs" do
+    it "returns objets in active départements only" do
+      dept_actif = create(:departement, code: "01")
+      dept_inactif = create(:departement, code: "02")
+      create(:campaign, :ongoing, departement: dept_actif)
+
+      commune_active = create(:commune, departement: dept_actif)
+      commune_inactive = create(:commune, departement: dept_inactif)
+
+      objet_active = create(:objet, commune: commune_active)
+      objet_inactive = create(:objet, commune: commune_inactive)
+
+      result = Objet.dans_départements_actifs.to_a
+      expect(result).to include(objet_active)
+      expect(result).not_to include(objet_inactive)
+    end
+  end
+
+  describe ".prioritaires" do
+    let(:commune) { create(:commune, :en_cours_de_recensement) }
+    let(:dossier) { commune.dossier }
+
+    it "returns objets with recensements en peril" do
+      objet_en_peril = create(:objet, commune:)
+      objet_normal = create(:objet, commune:)
+
+      create(:recensement, :en_peril, objet: objet_en_peril, dossier:)
+      create(:recensement, :bon_etat, objet: objet_normal, dossier:)
+
+      result = Objet.prioritaires.to_a
+      expect(result).to include(objet_en_peril)
+      expect(result).not_to include(objet_normal)
+    end
+
+    it "returns objets with recensements disparus" do
+      objet_disparu = create(:objet, commune:)
+      objet_normal = create(:objet, commune:)
+
+      create(:recensement, :disparu, objet: objet_disparu, dossier:)
+      create(:recensement, :bon_etat, objet: objet_normal, dossier:)
+
+      result = Objet.prioritaires.to_a
+      expect(result).to include(objet_disparu)
+      expect(result).not_to include(objet_normal)
+    end
+
+    it "returns distinct objets even with multiple prioritaire recensements" do
+      objet = create(:objet, commune:)
+      create(:recensement, :en_peril, objet:, dossier:)
+      archived_dossier = create(:dossier, :archived, commune:)
+      create(:recensement, :disparu, objet:, dossier: archived_dossier)
+
+      result = Objet.prioritaires.to_a
+      expect(result.count { |o| o.id == objet.id }).to eq(1)
+    end
+  end
+
+  describe ".analysés" do
+    let(:commune) { create(:commune, :en_cours_de_recensement) }
+    let(:dossier) { commune.dossier }
+    let(:conservateur) { create(:conservateur) }
+
+    it "returns objets with analysed recensements" do
+      objet_analysé = create(:objet, commune:)
+      objet_non_analysé = create(:objet, commune:)
+
+      recensement_analysé = create(:recensement, objet: objet_analysé, dossier:)
+      recensement_analysé.update!(analysed_at: Time.current, conservateur:)
+      create(:recensement, objet: objet_non_analysé, dossier:)
+
+      result = Objet.analysés.to_a
+      expect(result).to include(objet_analysé)
+      expect(result).not_to include(objet_non_analysé)
+    end
+
+    it "returns distinct objets even with multiple analysed recensements" do
+      objet = create(:objet, commune:)
+      recensement1 = create(:recensement, objet:, dossier:)
+      recensement1.update!(analysed_at: Time.current, conservateur:)
+
+      archived_dossier = create(:dossier, :archived, commune:)
+      recensement2 = create(:recensement, objet:, dossier: archived_dossier)
+      recensement2.update!(analysed_at: Time.current, conservateur:)
+
+      result = Objet.analysés.to_a
+      expect(result.count { |o| o.id == objet.id }).to eq(1)
+    end
+  end
+
+  describe ".prioritaires.analysés.dans_départements_actifs" do
+    it "combines all three scopes correctly" do
+      dept_actif = create(:departement, code: "01")
+      dept_inactif = create(:departement, code: "02")
+      create(:campaign, :ongoing, departement: dept_actif)
+
+      commune_active = create(:commune, departement: dept_actif)
+      commune_inactive = create(:commune, departement: dept_inactif)
+      dossier_actif = create(:dossier, :construction, commune: commune_active)
+      dossier_inactif = create(:dossier, :construction, commune: commune_inactive)
+      conservateur = create(:conservateur)
+
+      # Objet prioritaire, analysé, département actif - INCLUDED
+      objet_complet = create(:objet, commune: commune_active)
+      rec1 = create(:recensement, :en_peril, objet: objet_complet, dossier: dossier_actif)
+      rec1.update!(analysed_at: Time.current, conservateur:)
+
+      # Objet prioritaire, non analysé, département actif - EXCLUDED
+      objet_non_analysé = create(:objet, commune: commune_active)
+      create(:recensement, :en_peril, objet: objet_non_analysé, dossier: dossier_actif)
+
+      # Objet non prioritaire, analysé, département actif - EXCLUDED
+      objet_non_prioritaire = create(:objet, commune: commune_active)
+      rec3 = create(:recensement, :bon_etat, objet: objet_non_prioritaire, dossier: dossier_actif)
+      rec3.update!(analysed_at: Time.current, conservateur:)
+
+      # Objet prioritaire, analysé, département inactif - EXCLUDED
+      objet_dept_inactif = create(:objet, commune: commune_inactive)
+      rec4 = create(:recensement, :disparu, objet: objet_dept_inactif, dossier: dossier_inactif)
+      rec4.update!(analysed_at: Time.current, conservateur:)
+
+      result = Objet.prioritaires.analysés.dans_départements_actifs.to_a
+      expect(result).to include(objet_complet)
+      expect(result).not_to include(objet_non_analysé, objet_non_prioritaire, objet_dept_inactif)
+      expect(result.size).to eq(1)
+    end
+  end
+
   describe "#destroy_and_soft_delete_recensement!" do
     let!(:objet) { create(:objet) }
     let(:reason) { "objet-devenu-hors-scope" }

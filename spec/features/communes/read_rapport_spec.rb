@@ -24,9 +24,9 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
   let!(:recensement_bouquet) do
     create(
       :recensement,
+      :bon_etat,
       objet: objet_bouquet,
       dossier:,
-      etat_sanitaire: Recensement::ETAT_BON,
       analyse_etat_sanitaire: Recensement::ETAT_PERIL,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: "objet très doux",
@@ -39,9 +39,9 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
   let!(:recensement_ciboire) do
     create(
       :recensement,
+      :bon_etat,
       objet: objet_ciboire,
       dossier:,
-      etat_sanitaire: Recensement::ETAT_BON,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil,
       analysed_at: 2.days.ago,

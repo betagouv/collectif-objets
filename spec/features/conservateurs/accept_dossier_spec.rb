@@ -16,11 +16,11 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
   let!(:recensement_bouquet) do
     create(
       :recensement,
+      :bon_etat,
       :with_photos,
       photos_count: 3,
       objet: objet_bouquet,
       dossier:,
-      etat_sanitaire: Recensement::ETAT_BON,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: "objet très doux"
     )
@@ -29,9 +29,9 @@ RSpec.feature "Conservateurs - Accept Dossier", type: :feature, js: true do
   let!(:recensement_ciboire) do
     create(
       :recensement,
+      :en_peril,
       objet: objet_ciboire,
       dossier:,
-      etat_sanitaire: Recensement::ETAT_PERIL,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil
     )

@@ -3,10 +3,25 @@
 require "rails_helper"
 
 RSpec.describe Dossier, type: :model do
+  describe ".accepted" do
+    subject { described_class.accepted.count }
+
+    before do
+      create(:dossier, status: :construction)
+      create(:dossier, :submitted)
+      create(:dossier, :accepted)
+      create(:dossier, :accepted)
+    end
+
+    it "returns only accepted dossiers" do
+      expect(subject).to eq(2)
+    end
+  end
+
   context "nouveau dossier" do
     let(:commune) { build(:commune) }
     it "est en construction" do
-      dossier = Dossier.create!(commune:)
+      dossier = described_class.create!(commune:)
       expect(dossier.reload.status).to eq("construction")
       expect(dossier.reload.submitted_at).to be_nil
     end
