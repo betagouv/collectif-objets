@@ -6,10 +6,6 @@ module AdminUsers
 
     protected
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_in, keys: [:otp_attempt])
-    end
-
     def after_sign_in_path_for(resource)
       return admin_two_factor_settings_path unless resource.otp_required_for_login?
 
@@ -68,7 +64,5 @@ module AdminUsers
 
       AdminUser.find_by(email:)
     end
-
-    def otp = params.dig(:admin_user, :otp_attempt)
   end
 end
