@@ -31,7 +31,21 @@ module TurboHelpers
     define_method(method) do |*args, **kwargs, &block|
       wait_for_turbo_loaded
       super(*args, **kwargs, &block)
+      wait_for_turbo unless @inside_modal
+    end
+  end
+
+  # Polling JS while a native confirm/alert is open raises
+  # UnexpectedAlertOpenError and dismisses the dialog
+  %i[accept_confirm dismiss_confirm accept_alert dismiss_alert accept_prompt dismiss_prompt].each do |method|
+    define_method(method) do |*args, **kwargs, &block|
+      @inside_modal = true
+      result = super(*args, **kwargs, &block)
+      @inside_modal = false
       wait_for_turbo
+      result
+    ensure
+      @inside_modal = false
     end
   end
 end
