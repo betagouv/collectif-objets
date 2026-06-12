@@ -3,20 +3,10 @@
 # Feature specs configuration
 # All feature specs use js: true because Axe needs JS to run
 
-module TurboHelpers
-  # Clicking before Turbo has loaded turns data-turbo-method links and form
-  # interceptions into plain GETs that silently do nothing
-  def wait_for_turbo_loaded
-    wait_until_js "document.readyState === 'complete' && typeof Turbo !== 'undefined'"
-  end
+# Synchronization between Capybara commands and Turbo/fetch/script work in the
+# browser is handled by capybara-lockstep (snippet in the application layout)
 
-  def wait_for_turbo
-    wait_until_js "typeof Turbo === 'undefined' || " \
-                  "((!Turbo.navigator.currentVisit || Turbo.navigator.currentVisit.state !== 'started') && " \
-                  "!document.documentElement.hasAttribute('data-turbo-preview') && " \
-                  "!document.documentElement.hasAttribute('aria-busy'))"
-  end
-
+module JsHelpers
   def wait_until_js(condition)
     return unless page.driver.respond_to?(:evaluate_script)
 
@@ -25,14 +15,6 @@ module TurboHelpers
     end
   rescue Timeout::Error
     nil
-  end
-
-  %i[click_on click_button click_link].each do |method|
-    define_method(method) do |*args, **kwargs, &block|
-      wait_for_turbo_loaded
-      super(*args, **kwargs, &block)
-      wait_for_turbo
-    end
   end
 end
 
@@ -47,7 +29,7 @@ module CapybaraDomId
 end
 
 RSpec.configure do |config|
-  config.include TurboHelpers, type: :feature
+  config.include JsHelpers, type: :feature
   config.include CapybaraDomId, type: :feature
 
   # Build assets once instead of letting vite's autoBuild re-hash all watched
@@ -97,16 +79,21 @@ end
 Capybara.register_driver :headless_firefox do |app|
   options = Selenium::WebDriver::Firefox::Options.new
   options.add_argument "-headless"
+  # Keep confirm/alert dialogs open instead of auto-dismissing them, so
+  # capybara-lockstep's synchronization scripts can't close them by accident
+  options.unhandled_prompt_behavior = :ignore
   Capybara::Selenium::Driver.new app, browser: :firefox, options:
 end
 
 Capybara.register_driver :firefox do |app|
   options = Selenium::WebDriver::Firefox::Options.new
+  options.unhandled_prompt_behavior = :ignore
   Capybara::Selenium::Driver.new app, browser: :firefox, options:
 end
 
 Capybara.register_driver :chrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new
+  options.unhandled_prompt_behavior = :ignore
   Capybara::Selenium::Driver.new app, browser: :chrome, options:
 end
 
