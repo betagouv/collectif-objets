@@ -6,7 +6,7 @@ module Pretender
 
   module Methods
     def impersonates(scope = :user)
-      current_scope =:"current_#{scope}"
+      current_scope = :"current_#{scope}"
       impersonate_with = proc { |id| scope.to_s.classify.constantize.find(id) }
       true_method = :"true_#{scope}"
       session_key = :"impersonated_#{scope}_id"
@@ -26,7 +26,7 @@ module Pretender
                   "#{current_scope} must be defined before the impersonates method"
           end
 
-          sc.instance_method(current_scope).bind(self).call
+          sc.instance_method(current_scope).bind_call(self)
         end
       end
       helper_method(true_method) if respond_to?(:helper_method)
@@ -55,12 +55,17 @@ module Pretender
 
       define_method :"impersonate_#{scope}" do |resource, readonly: true|
         raise ArgumentError, "No resource to impersonate" unless resource
+
         # raise Pretender::Error, "Must be logged in to impersonate" unless send(true_method)
 
         instance_variable_set(impersonated_var, resource)
         request.session[session_key] = resource.id
-        # Set write permission based on readonly parameter
-        request.session[readonly_session_key] = readonly ? "0" : "1"
+        # the key is only present in write mode, the rest of the app checks it with present?/blank?
+        if readonly
+          request.session.delete(readonly_session_key)
+        else
+          request.session[readonly_session_key] = "1"
+        end
       end
 
       define_method :"impersonating_#{scope}_readonly?" do
