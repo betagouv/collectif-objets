@@ -40,7 +40,7 @@ module Admin
              && current_admin_user.validate_and_consume_otp!(params[:otp_attempt])
 
       flash.now[:alert] = "Code ou mot de passe invalide"
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
 
     def active_nav_links = %w[Administration]
