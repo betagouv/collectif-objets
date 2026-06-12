@@ -44,7 +44,7 @@ module AdminUsers
     def sign_in_and_redirect(user, notice: nil, warning: nil)
       sign_in(user)
       set_flash_message!(:notice, :signed_in) if notice
-      flash[:alert] = warning if warning
+      flash[:warning] = warning if warning
       redirect_to after_sign_in_path_for(user)
     end
 
@@ -53,7 +53,7 @@ module AdminUsers
       if remaining.zero?
         "Connecté avec un code de secours. C'était votre dernier code ! Générez-en de nouveaux."
       else
-        "Connecté avec un code de secours. Il vous reste #{remaining} code#{'s' if remaining > 1}."
+        "Connecté avec un code de secours. Il vous reste #{helpers.pluralize(remaining, 'code')}."
       end
     end
 
