@@ -83,7 +83,7 @@ RSpec.feature "Conservateurs - Gestion des recenseurs", type: :feature, js: true
 
     click_on "Recenseurs"
     expect(page).to have_text(recenseur_visible.email)
-    expect(page).not_to have_text(recenseur_hors_departement.email)
+    expect(page).to have_no_text(recenseur_hors_departement.email)
 
     visit conservateurs_recenseur_path(recenseur_visible)
     within("#new_access") do
@@ -93,6 +93,6 @@ RSpec.feature "Conservateurs - Gestion des recenseurs", type: :feature, js: true
 
     # Seules les communes du département sont affichées
     expect(page).to have_text("Albon (26 - Drôme)")
-    expect(page).not_to have_text("Lyon (69 - Rhône)")
+    expect(page).to have_no_text("Lyon (69 - Rhône)")
   end
 end

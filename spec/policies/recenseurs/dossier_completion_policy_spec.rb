@@ -13,7 +13,10 @@ describe Recenseurs::DossierCompletionPolicy do
       let(:recenseur) { build(:recenseur) }
       let(:dossier_completion) { DossierCompletion.new(dossier:) }
       before do
-        allow(recenseur).to receive_message_chain(:granted_accesses, :where).with(commune:, all_edifices: true).and_return(double(exists?: true))
+        allow(recenseur)
+          .to receive_message_chain(:granted_accesses, :where)
+          .with(commune:, all_edifices: true)
+          .and_return(double(exists?: true))
       end
       it { should permit(recenseur, dossier_completion) }
     end
@@ -25,7 +28,10 @@ describe Recenseurs::DossierCompletionPolicy do
       let(:recenseur) { build(:recenseur) }
       let(:dossier_completion) { DossierCompletion.new(dossier:) }
       before do
-        allow(recenseur).to receive_message_chain(:granted_accesses, :where).with(commune:, all_edifices: true).and_return(double(exists?: true))
+        allow(recenseur)
+          .to receive_message_chain(:granted_accesses, :where)
+          .with(commune:, all_edifices: true)
+          .and_return(double(exists?: true))
       end
       it { should_not permit(recenseur, dossier_completion) }
     end
@@ -37,7 +43,10 @@ describe Recenseurs::DossierCompletionPolicy do
       let(:recenseur) { build(:recenseur) }
       let(:dossier_completion) { DossierCompletion.new(dossier:) }
       before do
-        allow(recenseur).to receive_message_chain(:granted_accesses, :where).with(commune:, all_edifices: true).and_return(double(exists?: false))
+        allow(recenseur)
+          .to receive_message_chain(:granted_accesses, :where)
+          .with(commune:, all_edifices: true)
+          .and_return(double(exists?: false))
       end
       it { should_not permit(recenseur, dossier_completion) }
     end
@@ -50,7 +59,10 @@ describe Recenseurs::DossierCompletionPolicy do
       let(:recenseur) { build(:recenseur) }
       let(:dossier_completion) { DossierCompletion.new(dossier: dossier1) }
       before do
-        allow(recenseur).to receive_message_chain(:granted_accesses, :where).with(commune: commune1, all_edifices: true).and_return(double(exists?: false))
+        allow(recenseur)
+          .to receive_message_chain(:granted_accesses, :where)
+          .with(commune: commune1, all_edifices: true)
+          .and_return(double(exists?: false))
       end
       it { should_not permit(recenseur, dossier_completion) }
     end
@@ -63,7 +75,10 @@ describe Recenseurs::DossierCompletionPolicy do
       let(:recenseur) { build(:recenseur) }
       let(:dossier_completion) { DossierCompletion.new(dossier:) }
       before do
-        allow(recenseur).to receive_message_chain(:granted_accesses, :where).with(commune:, all_edifices: true).and_return(double(exists?: true))
+        allow(recenseur)
+          .to receive_message_chain(:granted_accesses, :where)
+          .with(commune:, all_edifices: true)
+          .and_return(double(exists?: true))
       end
       it { should permit(recenseur, dossier_completion) }
     end
@@ -75,7 +90,10 @@ describe Recenseurs::DossierCompletionPolicy do
       let(:recenseur) { build(:recenseur) }
       let(:dossier_completion) { DossierCompletion.new(dossier:) }
       before do
-        allow(recenseur).to receive_message_chain(:granted_accesses, :where).with(commune:, all_edifices: true).and_return(double(exists?: true))
+        allow(recenseur)
+          .to receive_message_chain(:granted_accesses, :where)
+          .with(commune:, all_edifices: true)
+          .and_return(double(exists?: true))
       end
       it { should_not permit(recenseur, dossier_completion) }
     end
@@ -86,7 +104,10 @@ describe Recenseurs::DossierCompletionPolicy do
       let(:recenseur) { build(:recenseur) }
       let(:dossier_completion) { DossierCompletion.new(dossier:) }
       before do
-        allow(recenseur).to receive_message_chain(:granted_accesses, :where).with(commune:, all_edifices: true).and_return(double(exists?: false))
+        allow(recenseur)
+          .to receive_message_chain(:granted_accesses, :where)
+          .with(commune:, all_edifices: true)
+          .and_return(double(exists?: false))
       end
       it { should_not permit(recenseur, dossier_completion) }
     end
@@ -99,7 +120,10 @@ describe Recenseurs::DossierCompletionPolicy do
       let(:recenseur) { build(:recenseur) }
       let(:dossier_completion) { DossierCompletion.new(dossier: dossier1) }
       before do
-        allow(recenseur).to receive_message_chain(:granted_accesses, :where).with(commune: commune1, all_edifices: true).and_return(double(exists?: false))
+        allow(recenseur)
+          .to receive_message_chain(:granted_accesses, :where)
+          .with(commune: commune1, all_edifices: true)
+          .and_return(double(exists?: false))
       end
       it { should_not permit(recenseur, dossier_completion) }
     end

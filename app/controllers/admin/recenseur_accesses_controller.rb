@@ -35,7 +35,7 @@ module Admin
           format.html { redirect_to [namespace, @recenseur], notice: "Accès ajouté." }
         end
       else
-        head :unprocessable_entity
+        head :unprocessable_content
       end
     end
 
@@ -47,7 +47,7 @@ module Admin
           format.html { redirect_to [namespace, @recenseur], status: :see_other }
         end
       else
-        head :unprocessable_entity
+        head :unprocessable_content
       end
     end
 
