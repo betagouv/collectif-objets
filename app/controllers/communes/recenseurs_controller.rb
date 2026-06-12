@@ -34,7 +34,7 @@ module Communes
       else
         respond_to do |format|
           format.turbo_stream { render "communes/recenseurs/form", recenseur: @recenseur }
-          format.html { render :index, status: :unprocessable_entity }
+          format.html { render :index, status: :unprocessable_content }
         end
       end
     end

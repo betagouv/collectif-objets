@@ -23,7 +23,7 @@ RSpec.feature "Recenseurs - Recensement", type: :feature, js: true do
 
     expect(page).to have_text("Communes")
     expect(page).to have_text("Albon")
-    expect(page).not_to have_text("Montélimar")
+    expect(page).to have_no_text("Montélimar")
     expect(page).to be_axe_clean
   end
 

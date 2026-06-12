@@ -15,7 +15,7 @@ module Recenseurs
       if @recenseur.save
         redirect_to recenseurs_communes_path, notice: "Préférences modifiées.", status: :see_other
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :unprocessable_content
       end
     end
 

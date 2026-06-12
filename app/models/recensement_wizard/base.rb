@@ -9,6 +9,7 @@ module RecensementWizard
     include Rails.application.routes.url_helpers
     include ActiveModel::Model
     extend ActiveModel::Callbacks
+
     define_model_callbacks :initialize, only: :after
 
     attr_reader :recensement, :recenseur

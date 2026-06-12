@@ -72,7 +72,7 @@ class Recenseur < ApplicationRecord
   def self.ransackable_associations(_ = nil) = []
   ransacker(:nom, type: :string) { Arel.sql("unaccent(recenseurs.nom)") }
   ransacker(:notes, type: :string) { Arel.sql("unaccent(recenseurs.notes)") }
-  ransacker(:status) { _1.table[:status] }
+  ransacker(:status) { it.table[:status] }
 
   private
 

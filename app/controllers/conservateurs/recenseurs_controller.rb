@@ -49,7 +49,7 @@ module Conservateurs
         @accesses = @recenseur.accesses.sorted.includes(:commune, :departement).where(commune: policy_scope(Commune))
         redirect_to [namespace, @recenseur], notice: "Recenseur créé avec succès."
       else
-        render "shared/recenseurs/new", status: :unprocessable_entity
+        render "shared/recenseurs/new", status: :unprocessable_content
       end
     end
 
@@ -58,7 +58,7 @@ module Conservateurs
       if @recenseur.update(recenseur_params)
         redirect_to [namespace, @recenseur], notice: "Recenseur modifié.", status: :see_other
       else
-        render "shared/recenseurs/show", status: :unprocessable_entity
+        render "shared/recenseurs/show", status: :unprocessable_content
       end
     end
 

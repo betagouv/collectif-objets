@@ -12,7 +12,7 @@ module Communes
       if @access.update(access_params)
         redirect_to [@commune, @recenseur], status: :see_other
       else
-        head :unprocessable_entity
+        head :unprocessable_content
       end
     end
 

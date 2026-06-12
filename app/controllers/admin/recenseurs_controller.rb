@@ -44,7 +44,7 @@ module Admin
       else
         session[:recenseur_impersonate_write] = "1"
       end
-      redirect_back fallback_location: recenseurs_communes_path, status: :see_other
+      redirect_back_or_to(recenseurs_communes_path, status: :see_other)
     end
 
     # POST /admin/recenseurs
@@ -54,7 +54,7 @@ module Admin
       if @recenseur.save
         redirect_to [namespace, @recenseur], notice: "Recenseur créé avec succès."
       else
-        render render "shared/recenseurs/new", status: :unprocessable_entity
+        render render "shared/recenseurs/new", status: :unprocessable_content
       end
     end
 
@@ -63,7 +63,7 @@ module Admin
       if @recenseur.update(recenseur_params)
         redirect_to [namespace, @recenseur], notice: "Recenseur modifié.", status: :see_other
       else
-        render render "shared/recenseurs/edit", status: :unprocessable_entity
+        render render "shared/recenseurs/edit", status: :unprocessable_content
       end
     end
 
