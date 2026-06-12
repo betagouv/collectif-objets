@@ -16,7 +16,8 @@ class Stats
   def ratio_objets_recensés = percent(total_objets_recensés, of: total_objets_protégés_dans_départements_actifs)
 
   def ratio_objets_prioritaires_pris_en_charge
-    percent(total_objets_prioritaires_pris_en_charge, of: Objet.prioritaires.count)
+    total_objets_prioritaires = Objet.prioritaires.count.values.sum
+    percent(total_objets_prioritaires_pris_en_charge, of: total_objets_prioritaires)
   end
 
   # Communes
