@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/dsfr/utility/utility.min.css">
     <%= vite_stylesheet_tag 'all' %>
     <meta name="environment-specific-name" content="<%= Rails.configuration.x.environment_specific_name %>">
+    <%= capybara_lockstep if defined?(Capybara::Lockstep) %>
   </head>
   <body>
     <%= render "shared/skiplinks" %>
