@@ -74,7 +74,7 @@ RSpec.feature "Admin - Gestion des recenseurs", type: :feature, js: true do
       find("label", text: "Autoriser le recensement").click
     end
 
-    sleep 1
+    expect(page).to have_no_text("Accès à tous les édifices")
     expect(access.reload.granted?).to be_falsey
 
     perform_enqueued_jobs

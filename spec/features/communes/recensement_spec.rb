@@ -3,8 +3,8 @@
 require "rails_helper"
 
 RSpec.feature "Communes - Recensement", type: :feature, js: true do
-  # NOTE: for some reason these E2E specs are extremely flaky. It all comes from turbo drive and capybara failing
-  # to correctly wait. I abandoned finding the proper solution and instead added sleep statements to make it work :(
+  # NOTE: capybara-lockstep handles waiting for turbo drive. The remaining `sleep 1` calls are
+  # deliberate: they assert that the confirmation modal stays open instead of autoclosing.
 
   let!(:departement) { create(:departement, code: "26", nom: "Drôme") }
   let!(:commune) { create(:commune, nom: "Albon", code_insee: "26002", departement:) }
