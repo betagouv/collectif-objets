@@ -17,8 +17,9 @@ module AdminUsers
     def authenticate_with_otp_two_factor
       user = find_user
       return unless user&.otp_required_for_login?
+      return unless user.valid_password?(params.dig(:admin_user, :password))
 
-      otp_code = params.require(:admin_user).permit(:otp_attempt)[:otp_attempt]
+      otp_code = params.dig(:admin_user, :otp_attempt)
 
       if authenticate_with_otp(user, otp_code)
         sign_in_and_redirect(user, notice: "Connexion réussie")
