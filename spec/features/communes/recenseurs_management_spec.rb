@@ -25,8 +25,10 @@ RSpec.feature "Communes - Gestion des recenseurs", type: :feature, js: true do
 
     # Vérification que la demande a été enregistrée
     expect(page).to have_text("nouveau-recenseur@test.fr")
+    find("a[href='mailto:nouveau-recenseur@test.fr']")
     expect(page).to have_text("En attente")
     expect(page).to have_button("Révoquer l'accès")
+    expect(page).to be_axe_clean
 
     # Vérification en base de données
     access = RecenseurAccess.last
@@ -50,6 +52,7 @@ RSpec.feature "Communes - Gestion des recenseurs", type: :feature, js: true do
       click_button "Révoquer l'accès"
     end
     expect(page).to have_text("aucun recenseur")
+    expect(page).to be_axe_clean
     expect(RecenseurAccess.exists?(id: access.id)).to be_falsey # L'accès a été supprimé
   end
 
