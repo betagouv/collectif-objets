@@ -39,7 +39,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   def step1_choose_objet_dans_edifice_initial_and_continue
-    scroll_to(find("#recensement_form_step"))
+    scroll_to(find_by_id("recensement_form_step"))
     find("label", text: "Oui, l’objet se trouve dans l’édifice indiqué initialement").click
     click_on "Passer à l’étape suivante"
   end
@@ -64,7 +64,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   def step3_chose_recensable_and_continue
-    scroll_to(find("#recensement_form_step"))
+    scroll_to(find_by_id("recensement_form_step"))
     find("label", text: "L’objet est recensable").click
     click_on "Passer à l’étape suivante"
   end
@@ -77,7 +77,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
   def step4_upload_photo_and_continue
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/peinture1.jpg"))
-    expect(page).to have_selector("img[src*='peinture1.jpg']")
+    expect(page).to have_css("img[src*='peinture1.jpg']")
     click_on "Passer à l’étape suivante"
   end
 
@@ -90,7 +90,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   def step5_choose_etat_et_volable_and_continue
-    scroll_to(find("#recensement_form_step"))
+    scroll_to(find_by_id("recensement_form_step"))
     find("label", text: "L’objet est en état moyen").click
     find("label", text: "L’objet est difficile à voler").click
     click_on "Passer à l’étape suivante"
@@ -104,7 +104,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   end
 
   def step6_comment_and_continue
-    scroll_to(find("#recensement_form_step"))
+    scroll_to(find_by_id("recensement_form_step"))
     fill_in "Avez-vous des commentaires ?", with: "Cette peinture est magnifique"
     click_on "Passer à l’étape suivante"
   end
@@ -112,7 +112,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
   def step7_validate
     expect(page).to have_text("Étape 7 sur 7")
     expect(page).to have_text("Récapitulatif")
-    expect(page).not_to have_text("Étape suivante")
+    expect(page).to have_no_text("Étape suivante")
   end
 
   scenario "recensement of 2 objects + completion" do
@@ -149,12 +149,16 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     step4_validate
     expect(page).to be_axe_clean
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau1.jpg"))
-    expect(page).to have_selector("img[src*='tableau1.jpg']")
+    expect(page).to have_css("img[src*='tableau1.jpg']")
     attach_file("recensement_photos", Rails.root.join("spec/fixture_files/tableau2.jpg"))
     tableau2 = find("img[src*='tableau2.jpg']")
     expect(tableau2).to be_present
+    # Wait for the preview variant request to finish before purging the blob,
+    # otherwise the variant record insert races the purge and raises a
+    # ForeignKeyViolation that Capybara re-raises at a later interaction
+    wait_until_js "document.querySelector(\"img[src*='tableau2.jpg']\")?.complete"
     tableau2.ancestor(".co-photo-preview").click_on "Supprimer"
-    expect(page).not_to have_selector("img[src*='tableau2.jpg']")
+    expect(page).to have_no_css("img[src*='tableau2.jpg']")
     expect(page).to be_axe_clean
     click_on "Passer à l’étape suivante"
 
@@ -173,7 +177,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to be_axe_clean
     expect(page).to have_text("Oui, l’objet se trouve dans l’édifice indiqué initialement")
     expect(page).to have_text("L’objet est recensable")
-    expect(page).to have_selector("img[src*='tableau1.jpg']")
+    expect(page).to have_css("img[src*='tableau1.jpg']")
     expect(page).to have_text("L’objet est en état moyen")
     expect(page).to have_text("L’objet est difficile à voler")
     expect(page).to have_text("Cette peinture est magnifique")
@@ -183,7 +187,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(page).to have_text("Votre recensement a bien été enregistré")
     expect(page).to have_text("Ciboire des malades")
     expect(page).to be_axe_clean
-    find("a", text: "Revenir à la liste d’objets de ma commune", match: :first).click
+    first("a", text: "Revenir à la liste d’objets de ma commune").click
 
     # Objets index
     expect(page).to have_text("Il reste un objet protégé à recenser")
@@ -227,12 +231,12 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     expect(row_bouquet).to have_text(/Recensable/i)
     expect(row_bouquet).to have_text(/L’objet est en état moyen/i)
     expect(row_bouquet).to have_text(/Difficile à voler/i)
-    expect(row_bouquet).to have_selector("img[src*='tableau1.jpg']")
+    expect(row_bouquet).to have_css("img[src*='tableau1.jpg']")
     row_ciboire = find("a", text: "Ciboire des malades").ancestor("tr")
     expect(row_ciboire).to have_text(/Recensable/i)
     expect(row_ciboire).to have_text(/L’objet est en bon état/i)
     expect(row_ciboire).to have_text(/Difficile à voler/i)
-    expect(row_ciboire).to have_selector("img[src*='peinture1.jpg']")
+    expect(row_ciboire).to have_css("img[src*='peinture1.jpg']")
     fill_in("Vos commentaires", with: "C’était fort sympathique")
     expect(page).to be_axe_clean
     click_on "Je valide le recensement des objets de ma commune"
@@ -298,7 +302,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     click_on "Passer à l’étape suivante"
     step7_validate
     expect(page).to have_text("L’objet n’est pas recensable")
-    expect(page).not_to have_text(/Photos/i)
+    expect(page).to have_no_text(/Photos/i)
     click_on "Valider le recensement de cet objet"
 
     find_all("a", text: "Revenir à la liste d’objets de ma commune").first.click
@@ -350,7 +354,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
     navigate_to_first_objet
     step1_validate
     click_on "Passer à l’étape suivante"
-    scroll_to(find("#recensement_form_step"))
+    scroll_to(find_by_id("recensement_form_step"))
     step1_validate
     expect(page).to have_text("Veuillez préciser où se trouve l’objet")
   end
@@ -466,7 +470,7 @@ RSpec.feature "Communes - Recensement", type: :feature, js: true do
 
     step7_validate
     expect(page).to have_text("Oui, il a été déplacé temporairement")
-    expect(page).not_to have_text("L’objet est-il recensable ?")
+    expect(page).to have_no_text("L’objet est-il recensable ?")
     find("section", text: "Oui, il a été déplacé temporairement")
       .find('a[title="Modifier la localisation de l’objet"]').click
 

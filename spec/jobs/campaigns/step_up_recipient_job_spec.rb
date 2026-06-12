@@ -23,7 +23,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         .with(any_args)
         .with(recipient.id)
         .and_return(recipient)
-      allow(recipient).to receive(:should_skip_mail_for_step)
+      allow(recipient).to receive(:should_skip_mail_for_step?)
         .with(to_step).and_return(should_skip_mail)
       allow(Co::Campaigns::Mail).to receive(:new).and_return(campaign_mail_double)
     end
@@ -45,7 +45,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
         expect(recipient.current_step).to eq("lancement") # should not change
-        expect(res).to eq false
+        expect(res).to eq nil
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
         expect(recipient.current_step).to eq("lancement") # should not change
-        expect(res).to eq false
+        expect(res).to eq nil
       end
     end
 
@@ -79,7 +79,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
         expect(campaign_mail_double).not_to receive(:deliver_now!)
         res = subject
         expect(recipient.current_step).to eq("relance1") # should not change
-        expect(res).to eq false
+        expect(res).to eq nil
       end
     end
 
@@ -139,7 +139,7 @@ RSpec.describe Campaigns::StepUpRecipientJob, type: :job do
       let!(:commune) { create(:commune, status: "inactive") }
       let!(:recipient) do
         build(:campaign_recipient, campaign:, commune:, current_step: "lancement")
-          .tap { _1.save(validate: false) }
+          .tap { it.save(validate: false) }
       end
       let(:should_skip_mail) { false }
 

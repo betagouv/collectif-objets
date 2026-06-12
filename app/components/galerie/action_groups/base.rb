@@ -16,7 +16,7 @@ module Galerie
       end
 
       def confirmations(responsive_variant: :desktop)
-        all(responsive_variant:).map(&:confirmation_component).compact
+        all(responsive_variant:).filter_map(&:confirmation_component)
       end
 
       def download(responsive_variant:)

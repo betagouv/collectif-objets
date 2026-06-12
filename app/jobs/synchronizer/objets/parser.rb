@@ -25,7 +25,7 @@ module Synchronizer
           palissy_MOSA: row["edifice_actuel"].presence
         }
         parsed.merge!(lieu_actuel_attributes(**parsed))
-        parsed.merge!(lieu_actuel_departement_code: Departement.parse_from_code_insee(parsed[:lieu_actuel_code_insee]))
+        parsed[:lieu_actuel_departement_code] = Departement.parse_from_code_insee(parsed[:lieu_actuel_code_insee])
         parsed
       end
 
@@ -47,7 +47,7 @@ module Synchronizer
           }
         else
           # WEB rempli & DEPL rempli = objet déplacé dans une autre commune
-          mosa_splitted = (palissy_MOSA || "").split(";").map(&:strip).map(&:presence)
+          mosa_splitted = (palissy_MOSA || "").split(";").map { |x| x.strip.presence }
           {
             lieu_actuel_code_insee: palissy_WEB,
             lieu_actuel_edifice_nom: mosa_splitted[0],

@@ -338,3 +338,28 @@ form.button_to {
 .fr-btn[aria-disabled] {
   cursor: not-allowed;
 }
+
+/* Stats */
+.co-tile {
+  padding: 1rem 1rem 2rem 1rem;
+  border: 1px solid var(--border-default-grey);
+  border-bottom: 4px solid var(--border-plain-grey);
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.fr-grid-row .co-tile {
+  height: 100%;
+}
+
+.co-tile__content {
+  flex-grow: 1;
+  font-size: 200%;
+  font-weight: bold;
+  text-align: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

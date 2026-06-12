@@ -43,7 +43,7 @@ module Co
       end
 
       def body_quoted
-        body.lines.map { "> #{_1}" }.join("\n")
+        body.lines.map { "> #{it}" }.join("\n")
       end
     end
   end

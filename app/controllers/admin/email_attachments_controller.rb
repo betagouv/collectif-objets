@@ -4,6 +4,6 @@ module Admin
   class EmailAttachmentsController < BaseController
     include EmailAttachmentsControllerConcern
 
-    def authorize_message = true
+    def authorize_message! = nil
   end
 end

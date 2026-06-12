@@ -1,0 +1,207 @@
+.stats-map-wrapper {
+  position: relative;
+}
+
+.stats-map-container {
+  position: relative;
+  height: 500px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--background-default-grey);
+}
+
+.stats-map-container .maplibregl-canvas {
+  background: var(--background-default-grey) !important;
+}
+
+.stats-map-container .maplibregl-control-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.stats-map-container .maplibregl-ctrl-top-left {
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+}
+
+.stats-map-container .maplibregl-ctrl-group {
+  background-color: var(--background-default-grey) !important;
+  border: 2px solid #666 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 4px !important;
+}
+
+.stats-map-container .maplibregl-ctrl-group button {
+  width: 32px !important;
+  height: 32px !important;
+  display: block !important;
+  border: none !important;
+}
+
+.stats-map-container .maplibregl-ctrl-group button + button {
+  border-top: 1px solid #ddd !important;
+}
+
+.stats-map-container .maplibregl-ctrl-group button:hover {
+  background-color: var(--background-alt-grey) !important;
+}
+
+html[data-fr-theme="dark"] .stats-map-container .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+
+.stats-map-container .maplibregl-ctrl-attrib,
+.stats-map-inset .maplibregl-ctrl-attrib {
+  display: none;
+}
+
+.stats-map-inset {
+  position: absolute !important;
+  background: var(--background-default-grey);
+  border: 2px solid #666;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+  width: 100px !important;
+  height: 80px !important;
+}
+
+.stats-map-inset .maplibregl-canvas {
+  background: var(--background-default-grey) !important;
+}
+
+.stats-map-inset .maplibregl-control-container {
+  display: none !important;
+}
+
+.stats-map-inset-guadeloupe {
+  top: 10px;
+  right: 10px;
+}
+
+.stats-map-inset-martinique {
+  top: 100px;
+  right: 10px;
+}
+
+.stats-map-inset-guyane {
+  top: 190px;
+  right: 10px;
+}
+
+.stats-map-inset-reunion {
+  bottom: 10px;
+  left: 10px;
+}
+
+.stats-map-inset-mayotte {
+  bottom: 100px;
+  left: 10px;
+}
+
+@media (min-width: 768px) {
+  .stats-map-inset {
+    width: 120px;
+    height: 100px;
+  }
+
+  .stats-map-inset-guadeloupe {
+    top: auto;
+    bottom: 240px;
+    right: 20px;
+  }
+
+  .stats-map-inset-martinique {
+    top: auto;
+    bottom: 130px;
+    right: 20px;
+  }
+
+  .stats-map-inset-guyane {
+    top: auto;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .stats-map-inset-reunion {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .stats-map-inset-mayotte {
+    bottom: 130px;
+    left: 20px;
+  }
+}
+
+.stats-map-inset-label {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: var(--background-default-grey);
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: bold;
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.stats-map-tooltip {
+  position: absolute;
+  display: none;
+  background: var(--background-default-grey);
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 1001;
+  transform: translate(-50%, -100%);
+  margin-top: -8px;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.stats-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 12px 0;
+  font-size: 14px;
+}
+
+.stats-map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stats-map-legend-color {
+  width: 24px;
+  height: 16px;
+  border-radius: 2px;
+  border: 1px solid #666;
+}
+
+.stats-map-legend-color--none {
+  background-color: #e5e5e5;
+}
+
+.stats-map-legend-color--one {
+  background-color: #c6c6ff;
+}
+
+.stats-map-legend-color--two {
+  background-color: #9a9aff;
+}
+
+.stats-map-legend-color--three {
+  background-color: #6a6af4;
+}
+
+.stats-map-legend-color--five {
+  background-color: #000091;
+}

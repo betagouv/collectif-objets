@@ -32,7 +32,7 @@ module Co
       end
 
       def headers
-        message.header.to_h { [_1.name, _1.value] }
+        message.header.to_h { [it.name, it.value] }
       end
 
       def raw_html
@@ -58,7 +58,7 @@ module Co
       def self.possible_variants_for(step, commune)
         return %w[inactive] if %w[lancement relance1].include?(step)
 
-        return %w[inactive to_complete] if commune.objets.count == 1
+        return %w[inactive to_complete] if commune.objets.one?
 
         VARIANTS
       end

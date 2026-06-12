@@ -12,6 +12,26 @@ RSpec.describe Campaign, type: :model do
     end
   end
 
+  describe ".active" do
+    subject { Campaign.active.count }
+
+    before do
+      dept1 = create(:departement, code: "01")
+      dept2 = create(:departement, code: "02")
+      dept3 = create(:departement, code: "03")
+      dept4 = create(:departement, code: "04")
+
+      create(:campaign, :draft, departement: dept1)
+      create(:campaign, :planned, departement: dept2)
+      create(:campaign, :ongoing, departement: dept3)
+      create(:campaign, :finished, departement: dept4)
+    end
+
+    it "returns only ongoing and finished campaigns" do
+      expect(subject).to eq(2)
+    end
+  end
+
   describe "#step_for_date" do
     let(:campaign) do
       build(

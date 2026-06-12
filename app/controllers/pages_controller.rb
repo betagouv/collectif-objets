@@ -52,6 +52,7 @@ class PagesController < ApplicationController
 
   def stats
     @active_nav_links = ["À propos", "Statistiques"]
+    @stats = Stats.new
   end
 
   def accueil_conservateurs

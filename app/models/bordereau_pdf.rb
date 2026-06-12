@@ -2,6 +2,7 @@
 
 class BordereauPdf
   include Prawn::View # Permet d'utiliser directement les méthodes de Prawn::Document
+
   attr_reader :bordereau
 
   # Replace unicode characters missing in Marianne font with visual equivalents

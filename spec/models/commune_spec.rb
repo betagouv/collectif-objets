@@ -207,8 +207,7 @@ RSpec.describe Commune, type: :model do
 
         context "recensement avec des objets en peril" do
           let!(:recensement) do
-            create(:recensement,
-                   etat_sanitaire: Recensement::ETAT_PERIL, dossier: commune.dossier, objet:, conservateur:)
+            create(:recensement, :en_peril, dossier: commune.dossier, objet:, conservateur:)
           end
 
           it "a un statut global sur le recensement et l'examen à Examen prioritaire" do
@@ -319,6 +318,62 @@ RSpec.describe Commune, type: :model do
     context "examinée" do
       let(:commune) { build(:commune_examinée) }
       it { should be_truthy }
+    end
+  end
+
+  describe ".participantes" do
+    it "returns communes with submitted dossiers" do
+      commune1 = create(:commune)
+      commune2 = create(:commune)
+      commune3 = create(:commune)
+
+      create(:dossier, :submitted, commune: commune1)
+      create(:dossier, :accepted, commune: commune2)
+      create(:dossier, :construction, commune: commune3)
+
+      result = Commune.participantes
+      expect(result).to include(commune1, commune2)
+      expect(result).not_to include(commune3)
+      expect(result.count).to eq(2)
+    end
+  end
+
+  describe ".contactées" do
+    it "returns distinct communes in active campaigns" do
+      dept = create(:departement)
+      dept2 = create(:departement, code: "99")
+      campaign1 = create(:campaign, :ongoing, departement: dept)
+      campaign2 = create(:campaign, :draft, departement: dept2)
+
+      commune1 = create(:commune, :with_user, departement: dept)
+      commune2 = create(:commune, :with_user, departement: dept)
+      commune3 = create(:commune, :with_user, departement: dept2)
+
+      campaign1.recipients.create!(commune: commune1, unsubscribe_token: "token1")
+      campaign1.recipients.create!(commune: commune2, unsubscribe_token: "token2")
+      campaign2.recipients.create!(commune: commune3, unsubscribe_token: "token3")
+
+      result = Commune.contactées
+      expect(result).to include(commune1, commune2)
+      expect(result).not_to include(commune3)
+      expect(result.count).to eq(2)
+    end
+  end
+
+  describe ".dans_départements_actifs" do
+    it "returns communes in active départements" do
+      dept_actif = create(:departement, code: "01")
+      dept_inactif = create(:departement, code: "02")
+      create(:campaign, :ongoing, departement: dept_actif)
+
+      commune_active1 = create(:commune, departement: dept_actif)
+      commune_active2 = create(:commune, departement: dept_actif)
+      commune_inactive = create(:commune, departement: dept_inactif)
+
+      result = Commune.dans_départements_actifs
+      expect(result).to include(commune_active1, commune_active2)
+      expect(result).not_to include(commune_inactive)
+      expect(result.count).to eq(2)
     end
   end
 end

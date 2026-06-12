@@ -1,4 +1,7 @@
-require:
+plugins:
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-performance
   - rubocop-rails
 
 inherit_mode:

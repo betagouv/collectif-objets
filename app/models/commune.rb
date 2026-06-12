@@ -6,6 +6,7 @@ class Commune < ApplicationRecord
   include Communes::IncludeStatutGlobalConcern
 
   include AASM
+
   aasm column: :status, timestamps: true, whiny_persistence: true do
     state :inactive, initial: true, display: "Commune inactive"
     state :started, display: "Recensement démarré"
@@ -75,6 +76,20 @@ class Commune < ApplicationRecord
     presence ? all : has_recensements_with_missing_photos
   }
   scope :completed, -> { where(status: STATE_COMPLETED) }
+  scope :participantes, lambda {
+    joins(:dossiers)
+      .where.not(dossiers: { submitted_at: nil })
+      .distinct
+  }
+  scope :contactées, lambda {
+    joins(:campaigns)
+      .merge(Campaign.active)
+      .distinct
+  }
+  scope :dans_départements_actifs, lambda {
+    joins(:departement)
+      .merge(Departement.active)
+  }
   scope :in_departement, ->(code) { where(departement_code: code) if code }
 
   scope :sort_by_nom, -> { order("communes.nom ASC") }
@@ -134,7 +149,7 @@ class Commune < ApplicationRecord
     STATUT_GLOBAUX[statut_global]
   end
 
-  # rubocop:disable Metrics/CyclomaticComplexity Épargnons l'âme sensible de Rubocop
+  # rubocop:disable Metrics/CyclomaticComplexity -- Épargnons l'âme sensible de Rubocop
   def statut_global
     # Dans le cas où on appelle include_statut_global, le champ existe déjà
     if has_attribute?(:statut_global)
@@ -169,7 +184,7 @@ class Commune < ApplicationRecord
   def self.status_value_counts
     group(:status)
       .select("status, count(id) as communes_count")
-      .to_h { [_1.status, _1.communes_count] }
+      .to_h { [it.status, it.communes_count] }
   end
 
   def active?

@@ -6,7 +6,7 @@ module Conservateurs
 
     # rubocop:disable Rails/LexicallyScopedActionFilter
     # Certaines actions sont définies dans le concern partagés par admins et conservateurs
-    before_action :authorize_campaign, except: %i[new create]
+    before_action :authorize_campaign!, except: %i[new create]
     after_action :enqueue_admin_mail, only: %i[update_status]
     # rubocop:enable Rails/LexicallyScopedActionFilter
 
@@ -39,7 +39,7 @@ module Conservateurs
 
     def routes_prefix = :conservateurs
     def after_destroy_path = conservateurs_departement_path @campaign.departement
-    def authorize_campaign = authorize @campaign
+    def authorize_campaign! = authorize @campaign
     def active_nav_links = ["Mes départements", @departement.to_s]
   end
 end

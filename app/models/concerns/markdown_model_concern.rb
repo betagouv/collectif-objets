@@ -5,7 +5,7 @@ module MarkdownModelConcern
 
   class_methods do
     def all
-      ids.map { find(_1) }
+      ids.map { find(it) }
     end
 
     def directory_path
@@ -20,7 +20,7 @@ module MarkdownModelConcern
       Rails.root.join(directory_path)
         .glob("*.md")
         .reverse
-        .map { File.basename(_1, ".md") }
+        .map { File.basename(it, ".md") }
     end
 
     def find(id)
@@ -34,8 +34,8 @@ module MarkdownModelConcern
       end
     end
 
-    def find_each(&block)
-      all.each(&block)
+    def find_each(&)
+      all.each(&)
     end
   end
 

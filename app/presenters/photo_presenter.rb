@@ -35,5 +35,5 @@ class PhotoPresenter
     )
   end
 
-  def alt = [description, credit].map(&:presence).compact.join(" - ")
+  def alt = [description, credit].filter_map(&:presence).join(" - ")
 end

@@ -389,6 +389,11 @@ fr:
           moyen: État moyen
           mauvais: Mauvais état
           peril: En péril
+    models:
+      campaign:
+        zero: campagne
+        one: campagne
+        other: campagnes
   date:
     abbr_day_names:
       - dim

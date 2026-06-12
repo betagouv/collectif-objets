@@ -23,7 +23,7 @@ module Synchronizer
         while @stack.count >= 1 && @stack.first["REF_PALISSY"] != @stack.last["REF_PALISSY"]
           update_objet(
             @stack.shift(
-              @stack.index { _1["REF_PALISSY"] != @stack.first["REF_PALISSY"] }
+              @stack.index { it["REF_PALISSY"] != @stack.first["REF_PALISSY"] }
             )
           )
         end
@@ -31,9 +31,9 @@ module Synchronizer
 
       def update_objet(rows)
         palissy_refs = rows.pluck("REF_PALISSY").to_set
-        raise unless palissy_refs.count == 1
+        raise unless palissy_refs.one?
 
-        palissy_photos = rows.map { format_row(_1) }
+        palissy_photos = rows.map { format_row(it) }
         Objet.where(palissy_REF: palissy_refs.first).limit(1).update_all(palissy_photos:)
       end
 

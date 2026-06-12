@@ -289,6 +289,40 @@ RSpec.describe Recensement, type: :model do
     end
   end
 
+  describe ".préoccupants" do
+    subject { Recensement.préoccupants.count }
+
+    before do
+      create(:recensement, :bon_etat)
+      create(:recensement, :etat_moyen)
+      create(:recensement, :mauvais_etat)
+      create(:recensement, :en_peril)
+      create(:recensement, :bon_etat, analyse_etat_sanitaire: Recensement::ETAT_MAUVAIS)
+      create(:recensement, :etat_moyen, analyse_etat_sanitaire: Recensement::ETAT_PERIL)
+    end
+
+    it "returns recensements with mauvais or peril état sanitaire or analyse" do
+      expect(subject).to eq(4)
+    end
+  end
+
+  describe ".acceptés" do
+    it "returns recensements in accepted dossiers only" do
+      dossier_accepted = create(:dossier, :accepted)
+      dossier_submitted = create(:dossier, :submitted)
+      dossier_construction = create(:dossier, :construction)
+
+      recensement_accepted = create(:recensement, dossier: dossier_accepted)
+      recensement_submitted = create(:recensement, dossier: dossier_submitted)
+      recensement_construction = create(:recensement, dossier: dossier_construction)
+
+      result = Recensement.acceptés
+      expect(result).to include(recensement_accepted)
+      expect(result).not_to include(recensement_submitted, recensement_construction)
+      expect(result.count).to eq(1)
+    end
+  end
+
   describe "#destroy_or_soft_delete" do
     let(:commune) { create(:commune, code_insee: "01002") }
     let(:objet) do

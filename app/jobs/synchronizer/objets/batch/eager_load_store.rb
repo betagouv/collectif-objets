@@ -45,7 +45,7 @@ module Synchronizer
         def edifices_by_ref
           @edifices_by_ref ||=
             Edifice
-              .where(merimee_REF: @batch.all_objets_attributes.pluck(:lieu_actuel_edifice_ref).map(&:presence).compact)
+              .where(merimee_REF: @batch.all_objets_attributes.pluck(:lieu_actuel_edifice_ref).filter_map(&:presence))
               .to_a
               .index_by(&:merimee_REF)
         end

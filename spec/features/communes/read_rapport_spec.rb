@@ -24,9 +24,9 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
   let!(:recensement_bouquet) do
     create(
       :recensement,
+      :bon_etat,
       objet: objet_bouquet,
       dossier:,
-      etat_sanitaire: Recensement::ETAT_BON,
       analyse_etat_sanitaire: Recensement::ETAT_PERIL,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: "objet très doux",
@@ -39,9 +39,9 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
   let!(:recensement_ciboire) do
     create(
       :recensement,
+      :bon_etat,
       objet: objet_ciboire,
       dossier:,
-      etat_sanitaire: Recensement::ETAT_BON,
       securisation: Recensement::SECURISATION_CORRECTE,
       notes: nil,
       analysed_at: 2.days.ago,
@@ -60,17 +60,17 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
     expect(page).to have_text(/Les photos sont superbes/i)
 
     expect(page).to have_text(/Fiche 1 · Entretien de l’édifice et lutte contre les infestations/i)
-    within(find("#fiche-entretien_edifices")) do
+    within("#fiche-entretien_edifices") do
       expect(page).to have_text(/Bouquet d'autel/i)
-      expect(page).not_to have_text(/Ciboire des malades/i)
+      expect(page).to have_no_text(/Ciboire des malades/i)
     end
     expect(page).to have_text(/Fiche 2 · Sécuriser vos objets/i)
-    within(find("#fiche-securisation")) do
+    within("#fiche-securisation") do
       expect(page).to have_text(/Bouquet d'autel/i)
-      expect(page).not_to have_text(/Ciboire des malades/i)
+      expect(page).to have_no_text(/Ciboire des malades/i)
     end
 
-    within(find("#PM51001253")) do
+    within("#PM51001253") do
       expect(page).to have_text(/Bouquet d'autel/i)
       expect(page).to have_text(/objet très doux/i)
       expect(page).to have_text(/ce bouquet va fâner/i)
@@ -80,13 +80,13 @@ RSpec.feature "Communes - Read rapport", type: :feature, js: true do
       expect(page).to have_text(/Entretien de l’édifice et lutte contre les infestations/i)
       expect(page).to have_text(/Sécuriser vos objets/i)
     end
-    within(find("#PM51001254")) do
+    within("#PM51001254") do
       expect(page).to have_text(/Ciboire des malades/i)
-      expect(page).not_to have_text(/Bouquet d'autel/i)
+      expect(page).to have_no_text(/Bouquet d'autel/i)
       expect(page).to have_text(/Aucune photo de recensement/i)
       expect(page).to have_text(/Musée/i)
-      expect(page).not_to have_text(/L’objet est en péril/i)
-      expect(page).not_to have_text(/Sécuriser vos objets/i)
+      expect(page).to have_no_text(/L’objet est en péril/i)
+      expect(page).to have_no_text(/Sécuriser vos objets/i)
       expect(page).to have_text(/L’objet est en bon état/i)
       expect(page).to have_text(/Aucun commentaire/i)
     end

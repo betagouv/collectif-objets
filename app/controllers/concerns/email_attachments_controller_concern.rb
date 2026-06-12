@@ -2,8 +2,9 @@
 
 module EmailAttachmentsControllerConcern
   extend ActiveSupport::Concern
+
   included do
-    before_action :set_message, :authorize_message, :set_email_attachment
+    before_action :set_message, :authorize_message!, :set_email_attachment
   end
 
   def show
@@ -18,7 +19,7 @@ module EmailAttachmentsControllerConcern
     @message = Message.find params[:message_id]
   end
 
-  def authorize_message = authorize(@message)
+  def authorize_message! = authorize(@message)
 
   def set_email_attachment
     @email_attachment = @message.attachments[params[:id].to_i]

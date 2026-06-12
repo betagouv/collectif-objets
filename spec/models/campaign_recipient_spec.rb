@@ -12,7 +12,7 @@ RSpec.describe CampaignRecipient, type: :model do
     end
 
     it "can build 2 recipients for the same campaign" do
-      campaign = FactoryBot.create(:campaign)
+      campaign = create(:campaign)
       recipient = build(:campaign_recipient, campaign:)
       res = recipient.valid?
       expect(recipient.errors).to be_empty
@@ -56,8 +56,8 @@ RSpec.describe CampaignRecipient, type: :model do
     end
   end
 
-  describe "should_skip_mail_for_step" do
-    subject { recipient.should_skip_mail_for_step(step) }
+  describe "should_skip_mail_for_step?" do
+    subject { recipient.should_skip_mail_for_step?(step) }
 
     context "première relance pour une commune ayant démarré le recensement" do
       let(:step) { "relance1" }
@@ -79,8 +79,9 @@ RSpec.describe CampaignRecipient, type: :model do
 
     context "seconde relance pour une commune ayant recensé juste avant" do
       let(:step) { "relance2" }
+      let(:departement) { create(:departement, code: "51") }
       let!(:commune) { create(:commune_en_cours_de_recensement) }
-      let!(:campaign) { create(:campaign) }
+      let!(:campaign) { create(:campaign, departement:) }
       let!(:objet) { create(:objet, commune:) }
       let!(:recensement) do
         create(:recensement, objet:, dossier: commune.dossier, updated_at: campaign.date_relance2 - 1.day)

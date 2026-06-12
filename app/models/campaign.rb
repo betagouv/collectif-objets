@@ -4,7 +4,7 @@ class Campaign < ApplicationRecord
   STATUSES = %i[draft planned ongoing finished].freeze
   TRANSITIONS = %i[plan return_to_draft start finish].freeze
   STEPS = %w[lancement relance1 relance2 relance3 fin].freeze
-  DATE_FIELDS = STEPS.map { "date_#{_1}" }.freeze
+  DATE_FIELDS = STEPS.map { "date_#{it}" }.freeze
 
   belongs_to :departement, foreign_key: :departement_code, inverse_of: :campaigns
   has_many :recipients, class_name: "CampaignRecipient", dependent: :destroy
@@ -17,6 +17,7 @@ class Campaign < ApplicationRecord
   accepts_nested_attributes_for :recipients, allow_destroy: true
 
   include AASM
+
   aasm(column: :status, timestamps: true) do
     state :draft, initial: true, display: "En configuration"
     state :planned, display: "Planifié"
@@ -29,6 +30,8 @@ class Campaign < ApplicationRecord
     event(:finish) { transitions from: :ongoing, to: :finished }
   end
 
+  scope :active, -> { where(status: [:ongoing, :finished]) }
+
   validates :date_lancement, :date_relance1, :date_relance2, :date_relance3, :date_fin, presence: true
   validates :sender_name, :signature, :nom_drac, presence: true, unless: :draft?
 
@@ -40,7 +43,7 @@ class Campaign < ApplicationRecord
   def step_for_date(date)
     return nil if date < date_lancement
 
-    STEPS.reverse.find { date >= send("date_#{_1}") }
+    STEPS.reverse.find { date >= send("date_#{it}") }
   end
 
   def current_step = step_for_date(Time.zone.today)
@@ -81,10 +84,10 @@ class Campaign < ApplicationRecord
 
   def validate_successive_dates
     DATE_FIELDS.each_cons(2) do |field1, field2|
-      date1, date2 = [field1, field2].map { send(_1) }
+      date1, date2 = [field1, field2].map { send(it) }
       next if date2 > date1 || date1 < Time.zone.today # no need to validate past dates
 
-      t1, t2 = [field1, field2].map { I18n.t("activerecord.attributes.campaign.#{_1}").downcase }
+      t1, t2 = [field1, field2].map { I18n.t("activerecord.attributes.campaign.#{it}").downcase }
       return errors.add(field2, "La #{t2} doit être postérieure à la #{t1}")
     end
   end
@@ -108,7 +111,7 @@ class Campaign < ApplicationRecord
     overlapping_campaign = Campaign
       .where(status: %i[ongoing planned])
       .where(departement:)
-      .first { date_range.overlaps?(_1.date_range) }
+      .first { date_range.overlaps?(it.date_range) }
 
     return if overlapping_campaign.nil?
 
@@ -120,7 +123,7 @@ class Campaign < ApplicationRecord
   end
 
   def past_steps
-    index = DATE_FIELDS.rindex { send(_1) <= Time.zone.today }
+    index = DATE_FIELDS.rindex { send(it) <= Time.zone.today }
     return [] if index.blank?
 
     STEPS[0..index]
@@ -139,7 +142,7 @@ class Campaign < ApplicationRecord
       .or(Commune.distinct.where(dossiers: { id: nil }))
   end
 
-  def dates_are_present? = DATE_FIELDS.map { send(_1) }.all?(&:present?)
+  def dates_are_present? = DATE_FIELDS.map { send(it) }.all?(&:present?)
   def draft_or_planned? = draft? || planned?
   def stats = super&.with_indifferent_access
 

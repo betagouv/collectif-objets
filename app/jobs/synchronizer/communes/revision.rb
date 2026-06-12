@@ -14,7 +14,7 @@ module Synchronizer
       end
 
       def synchronize
-        return false unless check_valid
+        return false unless valid?
 
         log_changes
         commune.save!
@@ -57,7 +57,7 @@ module Synchronizer
       end
 
       def commune
-        @commune ||= (persisted_commune || Commune.new).tap { _1.assign_attributes(all_attributes) }
+        @commune ||= (persisted_commune || Commune.new).tap { it.assign_attributes(all_attributes) }
       end
 
       def commune_attributes = commune_and_user_attributes[:commune]
@@ -78,7 +78,7 @@ module Synchronizer
           end
       end
 
-      def check_valid
+      def valid?
         return true if commune.valid?
 
         log "error | commune synchro rejected : #{commune_attributes[:code_insee]} #{commune_attributes[:nom]} : " \

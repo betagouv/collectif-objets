@@ -15,7 +15,7 @@ module Synchronizer
 
       def iterate_batches
         @request_number = 1
-        api_query(@initial_url) { yield _1 }
+        api_query(@initial_url) { yield it }
       end
 
       private
@@ -25,7 +25,7 @@ module Synchronizer
         create_progress_bar(parsed["filtered_table_rows_count"]) if @request_number == 1
         yield parsed["rows"]
         parsed["rows"].count.times { @progressbar.increment }
-        trigger_next_query(parsed) { yield _1 }
+        trigger_next_query(parsed) { yield it }
       end
 
       def create_progress_bar(total)
@@ -49,7 +49,7 @@ module Synchronizer
 
         sleep(0.5)
         @request_number += 1
-        api_query(parsed["next_url"]) { yield _1 }
+        api_query(parsed["next_url"]) { yield it }
       end
 
       def limit_reached?

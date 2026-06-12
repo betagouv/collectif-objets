@@ -4,7 +4,7 @@ module Communes
   class MessagePolicy < BasePolicy
     alias message record
 
-    def show
+    def show?
       message.commune == user.commune
     end
 

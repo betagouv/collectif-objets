@@ -13,6 +13,6 @@ class ScheduleRemovePersonalInformationJob < ApplicationJob
   delegate :dossiers, to: :class
 
   def perform
-    dossiers.pluck(:id).each { RemovePersonalInformationJob.perform_later(_1) }
+    dossiers.pluck(:id).each { RemovePersonalInformationJob.perform_later(it) }
   end
 end

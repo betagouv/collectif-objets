@@ -43,7 +43,7 @@ module Recensements
     end
 
     def analyse_overrides?
-      %i[analyse_etat_sanitaire analyse_securisation].any? { send(_1).present? }
+      %i[analyse_etat_sanitaire analyse_securisation].any? { send(it).present? }
     end
 
     def analysable?
@@ -61,7 +61,7 @@ module Recensements
     end
 
     def analyse_fiches_objects
-      analyse_fiches.map { Fiche.find(_1) }
+      analyse_fiches.map { Fiche.find(it) }
     end
   end
 end

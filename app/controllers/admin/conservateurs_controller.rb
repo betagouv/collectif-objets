@@ -62,7 +62,7 @@ module Admin
       else
         session[:conservateur_impersonate_write] = "1"
       end
-      redirect_back fallback_location: conservateurs_departements_path, status: :see_other
+      redirect_back_or_to(conservateurs_departements_path, status: :see_other)
     end
 
     private

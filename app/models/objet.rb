@@ -36,12 +36,12 @@ class Objet < ApplicationRecord
     .where(recensements: { id: nil })
   }
 
-  scope :a_examiner, lambda {
-                       joins(:recensements)
-                       .where(recensements: { analysed_at: nil })
-                       .where(Recensement::RECENSEMENT_PRIORITAIRE_SQL)
-                     }
+  scope :recensés, -> { joins(:recensements).merge(Recensement.not_deleted).group("objets.id") }
+  scope :prioritaires, -> { joins(:recensements).merge(Recensement.prioritaires).group("objets.id") }
+  scope :analysés, -> { joins(:recensements).merge(Recensement.analysés).group("objets.id") }
+  scope :a_examiner, -> { joins(:recensements).merge(Recensement.prioritaires.not_analysed) }
   scope :examinés, -> { joins(recensement: :dossier).merge(Dossier.accepted) }
+  scope :dans_départements_actifs, lambda { joins(commune: :departement).merge(Departement.active) }
 
   MIS_DE_COTE_SQL = %("palissy_PROT" IN ('déclassé au titre objet', 'désinscrit', 'sans protection')
                        OR "palissy_PROT" LIKE '%non protégé%').squish
@@ -117,7 +117,7 @@ class Objet < ApplicationRecord
       ->(obj) { obj.edifice_nom&.match?(/[A-Z]/) },
       ->(obj) { obj.emplacement.blank? }
     ].each do |filter_fun|
-      filtered_arr = current_arr.filter { filter_fun.call(_1) }
+      filtered_arr = current_arr.filter { filter_fun.call(it) }
       current_arr = filtered_arr if filtered_arr.any?
     end
     current_arr.first
@@ -133,9 +133,9 @@ class Objet < ApplicationRecord
   def déplacé? = palissy_WEB.present? && palissy_DEPL.present?
   def code_insee_a_changé? = palissy_WEB.present? && palissy_DEPL.blank?
 
-  def destroy_and_soft_delete_recensement!(**kwargs)
+  def destroy_and_soft_delete_recensement!(**)
     transaction do
-      recensements.each { _1.destroy_or_soft_delete!(**kwargs) }
+      recensements.each { it.destroy_or_soft_delete!(**) }
       recensements.reload # necessary here, objet.recensements must be empty before destroy
       destroy!
     end

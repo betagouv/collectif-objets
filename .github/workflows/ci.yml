@@ -2,6 +2,8 @@ name: "CI"
 
 on:
   push:
+    branches:
+      - staging
   pull_request:
 jobs:
   test:
@@ -65,7 +67,7 @@ jobs:
     name: Déploiement sur Scalingo
     runs-on: ubuntu-latest
     needs: [test, lint]
-    if: ${{ (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging') && !contains(github.event.head_commit.message, '[skip-deploy]') }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/staging' && !contains(github.event.head_commit.message, '[skip-deploy]') }}
     steps:
       - name: Install Scalingo CLI
         run: curl -O https://cli-dl.scalingo.com/install && bash install
@@ -73,6 +75,3 @@ jobs:
       - name: Déploiement sur staging
         if: ${{ github.ref == 'refs/heads/staging' }}
         run: scalingo --app collectif-objets-staging integration-link-manual-deploy staging
-      - name: Déploiement en production
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: scalingo --app collectif-objets-prod --region osc-secnum-fr1 integration-link-manual-deploy main

@@ -22,7 +22,7 @@ RSpec.describe Bordereau, type: :model do
         bordereau_recensement = bordereau.populate_recensements
 
         expect(bordereau_recensement.size).to eq bordereau.edifice.objets.size
-        expect(bordereau_recensement.select(&:persisted?).size).to eq 1
+        expect(bordereau_recensement.count(&:persisted?)).to eq 1
       end
     end
   end

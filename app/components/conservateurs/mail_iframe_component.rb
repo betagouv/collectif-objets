@@ -36,21 +36,21 @@ module Conservateurs
     end
 
     def id
-      @id ||= @mail.object_id || "mail_#{SecureRandom.hex(4)}"
+      @id ||= @mail.object_id
     end
 
     private
 
     def mail_body
-      mail.respond_to?("body") && mail.body.to_s.presence
+      mail.respond_to?(:body) && mail.body.to_s.presence
     end
 
     def mail_html_part_body
-      mail.respond_to?("html_part") && mail.html_part.body.to_s.presence
+      mail.respond_to?(:html_part) && mail.html_part.body.to_s.presence
     end
 
     def mail_text
-      mail.respond_to?("text_part") && mail.text_part.decoded
+      mail.respond_to?(:text_part) && mail.text_part.decoded
     end
 
     def redirect_body

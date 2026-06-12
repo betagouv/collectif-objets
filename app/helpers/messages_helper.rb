@@ -5,7 +5,7 @@ module MessagesHelper
   def message_content_html(message)
     return message.text if message.web?
 
-    body_md, signature_md, body_text = %i[body_md signature_md body_text].map { message.inbound_email.send _1 }
+    body_md, signature_md, body_text = %i[body_md signature_md body_text].map { message.inbound_email.send it }
     if body_md.present?
       [md_to_html(body_md), md_to_html(signature_md)].join("\n").html_safe
     elsif body_text.present?

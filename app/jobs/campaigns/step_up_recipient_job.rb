@@ -14,7 +14,7 @@ module Campaigns
 
       raise "Missing user with email for #{commune}" if user.nil?
 
-      return false unless should_step_up?
+      return unless should_step_up?
 
       send_mail! unless should_skip_mail?
       recipient.update!(current_step: to_step)
@@ -55,14 +55,14 @@ module Campaigns
     end
 
     def should_skip_mail?
-      @should_skip_mail = recipient.should_skip_mail_for_step(to_step) if @should_skip_mail.nil?
+      @should_skip_mail = recipient.should_skip_mail_for_step?(to_step) if @should_skip_mail.nil?
       @should_skip_mail
     end
 
     def send_mail!
       smtp_response = campaign_mail.deliver_now!
 
-      match_data = smtp_response.respond_to?("string") && smtp_response.string.match(/250 .* (<.*>)/)
+      match_data = smtp_response.respond_to?(:string) && smtp_response.string.match(/250 .* (<.*>)/)
       return if match_data.blank?
 
       @sib_message_id = match_data[1]
@@ -71,7 +71,7 @@ module Campaigns
     def store_recipient_email!
       recipient.emails.create!(
         %i[step email_name subject headers]
-          .to_h { [_1, campaign_mail.send(_1)] }
+          .index_with { campaign_mail.send(it) }
           .merge(sib_message_id: @sib_message_id)
       )
     end

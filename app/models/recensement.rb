@@ -24,6 +24,7 @@ class Recensement < ApplicationRecord
   delegate :departement, to: :nouvelle_commune, allow_nil: true, prefix: :nouveau
 
   include AASM
+
   aasm column: :status, whiny_persistence: true, timestamps: true do
     state :draft, initial: true, display: "Brouillon"
     state :completed, display: "Complet et validé"
@@ -102,17 +103,29 @@ class Recensement < ApplicationRecord
                    }
   scope :en_peril, -> { where(RECENSEMENT_EN_PERIL_SQL) }
   scope :prioritaires, -> { where(RECENSEMENT_PRIORITAIRE_SQL) }
+  scope :préoccupants, lambda {
+    where(
+      "etat_sanitaire IN (:mauvais, :peril) " \
+      "OR analyse_etat_sanitaire IN (:mauvais, :peril)",
+      mauvais: ETAT_MAUVAIS,
+      peril: ETAT_PERIL
+    )
+  }
   scope :recensable, -> { where(recensable: true) }
   scope :not_recensable, -> { where.not(recensable: true) }
+  scope :acceptés, -> { joins(:dossier).merge(Dossier.accepted) }
   scope :in_departement, lambda { |departement|
     joins(objet: [:commune]).where(communes: { departement: })
   }
   scope :in_commune, ->(commune) { joins(:objet).where(objets: { commune: }) }
-  scope :not_analysed, -> { where(analysed_at: nil) }
   scope :completed, -> { where(status: "completed") }
+  scope :not_analysed, -> { where(analysed_at: nil) }
+  scope :analysés, -> { where.not(analysed_at: nil) }
+  scope :sans_changement, -> { where(analyse_etat_sanitaire: nil, analyse_securisation: nil) }
 
   # from https://medium.com/@cathmgarcia/soft-deletion-in-ruby-on-rails-a1d65d0172ab
   default_scope { where(deleted_at: nil) } # DANGER: default scopes are INVISIBLE and can lead to unexpected results
+  scope :not_deleted, -> { where(deleted_at: nil) }
   scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
   scope :with_deleted, -> { unscope(where: :deleted_at) }
 
@@ -148,7 +161,7 @@ class Recensement < ApplicationRecord
   def self.etats_sanitaires_value_counts
     group("etat_sanitaire")
       .select("etat_sanitaire, count(recensements.id) as recensements_count")
-      .to_h { [_1.etat_sanitaire, _1.recensements_count] }
+      .to_h { [it.etat_sanitaire, it.recensements_count] }
   end
 
   def self.possible_values_for(attribute_name)
@@ -181,7 +194,7 @@ class Recensement < ApplicationRecord
   def self.ransackable_scopes(_ = nil) = [:photos_presence_in]
 
   def photos_presenters
-    photos.order(:created_at).map { PhotoPresenter.from_attachment(_1) }
+    photos.order(:created_at).map { PhotoPresenter.from_attachment(it) }
   end
 
   def destroy_or_soft_delete!(**)

@@ -9,6 +9,7 @@ class Dossier < ApplicationRecord
   has_many :bordereaux, dependent: :destroy
 
   include AASM
+
   aasm column: :status, timestamps: true, whiny_persistence: true do
     state :construction, initial: true, display: I18n.t("dossier.status_badge.construction")
     state :submitted, display: I18n.t("dossier.status_badge.submitted")
@@ -45,13 +46,14 @@ class Dossier < ApplicationRecord
   scope :to_visit, -> { where.not(visit: nil) }
   scope :current, -> { where.not(status: "archived") }
   scope :submitted_in, ->(date_range) { where(submitted_at: date_range) if date_range }
+  scope :accepted, -> { where(status: "accepted") }
 
   before_create :set_campaign
 
   def self.auto_submittable_ids
     construction.includes(:recensements, commune: [:objets])
       .to_a
-      .select { |dossier| dossier.recensements.all? { _1.created_at < 1.month.ago } }
+      .select { |dossier| dossier.recensements.all? { it.created_at < 1.month.ago } }
       .select { |dossier| dossier.recensements.length == dossier.commune.objets.length }
       .map(&:id)
   end
@@ -80,11 +82,11 @@ class Dossier < ApplicationRecord
   end
 
   def analyse_overrides_count
-    recensements.filter(&:analyse_overrides?).count
+    recensements.count(&:analyse_overrides?)
   end
 
   def a_des_objets_prioritaires?
-    recensements.prioritaires.count.positive?
+    recensements.prioritaires.any?
   end
 
   def replied_automatically?

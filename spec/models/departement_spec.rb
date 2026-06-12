@@ -3,6 +3,26 @@
 require "rails_helper"
 
 describe Departement, type: :model do
+  describe ".active" do
+    subject { described_class.active.pluck(:code) }
+
+    before do
+      dept1 = create(:departement, code: "01")
+      dept2 = create(:departement, code: "02")
+      dept3 = create(:departement, code: "03")
+      dept4 = create(:departement, code: "04")
+
+      create(:campaign, :draft, departement: dept1)
+      create(:campaign, :planned, departement: dept2)
+      create(:campaign, :ongoing, departement: dept3)
+      create(:campaign, :finished, departement: dept4)
+    end
+
+    it "returns départements with ongoing or finished campaigns" do
+      expect(subject).to match_array(%w[03 04])
+    end
+  end
+
   describe "#parse_from_code_insee" do
     subject { Departement.parse_from_code_insee(code_insee) }
     context "Paris" do

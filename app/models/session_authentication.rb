@@ -35,7 +35,9 @@ class SessionAuthentication
   end
 
   def authenticatable
-    @authenticatable ||= @model.find_by(email:)
+    return @authenticatable if defined?(@authenticatable)
+
+    @authenticatable = @model.find_by(email:)
   end
 
   private

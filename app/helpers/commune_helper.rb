@@ -9,7 +9,7 @@ module CommuneHelper
   end
 
   def commune_messagerie_title(commune)
-    if commune.messages.count.positive?
+    if commune.messages.any?
       "Messagerie (#{commune.messages.count})"
     else
       "Messagerie"
@@ -17,7 +17,7 @@ module CommuneHelper
   end
 
   def commune_recenser_objets_text(commune)
-    text = commune.objets.count > 1 ? "Recenser les objets" : "Recenser l’objet"
+    text = commune.objets.many? ? "Recenser les objets" : "Recenser l’objet"
     text + " de #{commune.nom}"
   end
 

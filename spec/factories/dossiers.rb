@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :dossier do
-    association :commune
+    commune
     status { :construction }
 
     trait :with_recensement do
@@ -17,6 +17,10 @@ FactoryBot.define do
       conservateur
     end
 
+    trait :construction do
+      status { :construction }
+    end
+
     trait :submitted do
       status { :submitted }
       notes_commune { "Voici les recensements demandés" }
@@ -26,6 +30,7 @@ FactoryBot.define do
     trait :accepted do
       conservateur
       status { :accepted }
+      submitted_at { 3.days.ago }
       accepted_at { 2.days.ago }
       notes_conservateur { "Quels beaux tableaux" }
     end

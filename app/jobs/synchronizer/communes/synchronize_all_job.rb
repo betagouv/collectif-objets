@@ -42,7 +42,7 @@ module Synchronizer
           csv_rows.count.times { @progressbar&.increment }
         end
         Commune.where(last_in_scope_at: nil)
-          .or(Commune.where("last_in_scope_at < ?", now - 1.minute))
+          .or(Commune.where(last_in_scope_at: ...(now - 1.minute)))
           .find_each do |commune|
             delete_commune_with(
               commune,
@@ -73,17 +73,17 @@ module Synchronizer
       def cycle_3_destroy_users_with_disappeared_email
         # supprimer les Users dont l’email a disparu dans le CSV
         # extraire ce cycle du 3ème permet de libérer les emails qui peuvent être réutilisés
-        client.each_slice(BATCH_SIZE) { synchronize_batch(_1, if_block: ->(revision) { revision.destroy_user? }) }
+        client.each_slice(BATCH_SIZE) { synchronize_batch(it, if_block: ->(revision) { revision.destroy_user? }) }
       end
 
       def cycle_4_upsert_all
         # upsert toutes les communes et Users
-        client.each_slice(BATCH_SIZE) { synchronize_batch(_1) }
+        client.each_slice(BATCH_SIZE) { synchronize_batch(it) }
       end
 
       def synchronize_batch(csv_rows, if_block: nil)
         excluded, included = csv_rows
-          .partition { @code_insees_with_multiple_mairies.include?(_1["code_insee_commune"]) }
+          .partition { @code_insees_with_multiple_mairies.include?(it["code_insee_commune"]) }
 
         batch = Batch::Base.new(included, logger:)
         batch.synchronize(if_block:) { @progressbar&.increment }

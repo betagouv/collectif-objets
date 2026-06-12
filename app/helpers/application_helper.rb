@@ -14,9 +14,25 @@ module ApplicationHelper
     content_tag("p", yield, **html_opts)
   end
 
-  def link_to_button(content, path, **kwargs)
+  def link_to_button(content, path, **)
     content_tag("form", method: "GET", action: path) do
-      content_tag("button", **kwargs) { content }
+      content_tag("button", **) { content }
+    end
+  end
+
+  def co_tile(title, subtitle = nil, &)
+    tag.div(class: "co-tile") do
+      safe_join(
+        [
+          tag.h3(class: "fr-h6") do
+            safe_join([
+              title,
+              subtitle ? [tag.br, subtitle] : nil
+            ].flatten.compact)
+          end,
+          tag.div(class: "co-tile__content", &)
+        ]
+      )
     end
   end
 

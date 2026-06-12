@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :recensement do
-    association :dossier
+    dossier
     objet { association :objet, commune: dossier.commune }
     localisation { Recensement::LOCALISATION_EDIFICE_INITIAL }
     recensable { true }
@@ -80,12 +80,24 @@ FactoryBot.define do
       edifice_nom { "Autre édifice" }
     end
 
+    trait :bon_etat do
+      etat_sanitaire { Recensement::ETAT_BON }
+    end
+
+    trait :etat_moyen do
+      etat_sanitaire { Recensement::ETAT_MOYEN }
+    end
+
     trait :en_peril do
       etat_sanitaire { Recensement::ETAT_PERIL }
     end
 
+    trait :mauvais_etat do
+      etat_sanitaire { Recensement::ETAT_MAUVAIS }
+    end
+
     trait :examiné do
-      association :dossier, :examiné
+      dossier factory: %i[dossier examiné]
       analysed_at { 1.minute.ago }
       conservateur
     end
