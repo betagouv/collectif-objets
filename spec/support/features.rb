@@ -50,6 +50,11 @@ RSpec.configure do |config|
     Selenium::WebDriver.logger.ignore(:clear_local_storage, :clear_session_storage)
   end
 
+  # Debug a feature spec visually/stop with pry by adding :debug
+  config.before(type: :feature, debug: true) do
+    Capybara.current_driver = :firefox
+  end
+
   config.after(type: :feature, js: true) do |example|
     # Save screenshot only on failure, before Capybara resets the session
     if example.exception
