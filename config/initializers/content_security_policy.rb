@@ -30,7 +30,12 @@ Rails.application.configure do
       "https://openmaptiles.geo.data.gouv.fr",
       "https://openmaptiles.data.gouv.fr",
       *s3_uris2,
-      *(Rails.env.development? ? ["ws://#{ViteRuby.config.host_with_port}", "ws://127.0.0.1:#{ViteRuby.config.port}"] : [])
+      *(Rails.env.development? ? [
+        "ws://#{ViteRuby.config.host_with_port}",
+        "http://#{ViteRuby.config.host_with_port}",
+        "http://localhost:#{ViteRuby.config.port}",
+        "http://127.0.0.1:#{ViteRuby.config.port}"
+      ] : [])
 
     policy.object_src :self # for the PDFs served by the rails server
     policy.font_src :self, :https, :data
@@ -47,6 +52,6 @@ Rails.application.configure do
   # Generate session nonces for permitted importmap and inline scripts
   config.content_security_policy_nonce_generator = ->(request) { SecureRandom.base64(16) }
 
-  nonce_directives = %w(script-src)
+  nonce_directives = %w(script-src style-src)
   config.content_security_policy_nonce_directives = nonce_directives
 end
