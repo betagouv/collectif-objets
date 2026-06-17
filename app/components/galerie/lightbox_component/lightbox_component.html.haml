@@ -24,21 +24,19 @@
   .content
     .arrow-link
       = button_to("",
-        path_without_query,
+        previous_photo&.lightbox_path,
         class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-left-s-line fr-btn--sm",
         title: "photo précédente",
         method: :get,
-        params: previous_photo&.lightbox_path_params,
         disabled: previous_photo.nil?)
     .photo
       = vite_or_raw_image_tag current_photo.url, alt: current_photo.alt
     .arrow-link
       = button_to("",
-        path_without_query,
+        next_photo&.lightbox_path,
         class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-right-s-line fr-btn--sm",
         title: "photo suivante",
         method: :get,
-        params: next_photo&.lightbox_path_params,
         disabled: next_photo.nil?)
     .credits
       = current_photo.credit || "Aucun crédit photo renseigné"
