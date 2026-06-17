@@ -41,7 +41,7 @@ module Users
     end
 
     def set_email_user_and_commune
-      @email = params[:email]
+      @email = params[:email].to_s
       return redirect_to new_user_session_code_path if @email.blank?
 
       @user = User.find_by(email: @email)
