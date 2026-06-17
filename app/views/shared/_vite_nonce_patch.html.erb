@@ -1,0 +1,14 @@
+<%# Fix Vite injecting styles without nonce in dev %>
+<script nonce="<%= content_security_policy_nonce %>">
+  (function() {
+    const nonce = '<%= content_security_policy_nonce %>';
+    const originalCreateElement = document.createElement;
+    document.createElement = function(tagName) {
+      const el = originalCreateElement.call(document, tagName);
+      if (tagName === 'style') {
+        el.setAttribute('nonce', nonce);
+      }
+      return el;
+    };
+  })();
+</script>
