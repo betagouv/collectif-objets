@@ -1,3 +1,7 @@
+body.co-lightbox-open {
+  overflow: hidden;
+}
+
 .co-galerie {
   height: 100vh;
   overflow: hidden;

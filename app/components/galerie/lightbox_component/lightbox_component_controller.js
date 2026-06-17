@@ -6,11 +6,11 @@ import "./lightbox_component.css"
 export default class extends Controller {
   connect() {
     // prevent body from being scrollable when modal is open
-    document.querySelector("body").style.overflow = "hidden"
+    document.querySelector("body").classList.add("co-lightbox-open")
   }
 
   disconnect() {
-    document.querySelector("body").style.overflow = "auto"
+    document.querySelector("body").classList.remove("co-lightbox-open")
   }
 
   close(_event) {
