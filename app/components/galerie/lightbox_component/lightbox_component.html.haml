@@ -23,21 +23,15 @@
 
   .content
     .arrow-link
-      = button_to("",
-        previous_photo&.lightbox_path,
-        class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-left-s-line fr-btn--sm",
+      %button.fr-btn.fr-btn--secondary.fr-btn--icon.fr-icon-arrow-left-s-line.fr-btn--sm{data: { action: "click->galerie--lightbox-component#previous" },
         title: "photo précédente",
-        method: :get,
-        disabled: previous_photo.nil?)
+        disabled: previous_photo.nil?}
     .photo
       = vite_or_raw_image_tag current_photo.url, alt: current_photo.alt
     .arrow-link
-      = button_to("",
-        next_photo&.lightbox_path,
-        class: "fr-btn fr-btn--secondary fr-btn--icon fr-icon-arrow-right-s-line fr-btn--sm",
+      %button.fr-btn.fr-btn--secondary.fr-btn--icon.fr-icon-arrow-right-s-line.fr-btn--sm{data: { action: "click->galerie--lightbox-component#next" },
         title: "photo suivante",
-        method: :get,
-        disabled: next_photo.nil?)
+        disabled: next_photo.nil?}
     .credits
       = current_photo.credit || "Aucun crédit photo renseigné"
       - if current_photo.description
