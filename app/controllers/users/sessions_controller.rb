@@ -2,7 +2,7 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    prepend_before_action :require_no_authentication, only: %i[new create redirect_from_magic_token]
+    prepend_before_action :require_no_authentication, only: %i[new create]
     before_action :redirect_with_devise_return_to, only: %i[new]
     before_action :set_email_user_and_commune, only: %i[new create]
 
@@ -14,18 +14,6 @@ module Users
         redirect_to after_sign_in_path_for(user), notice: "Vous êtes maintenant connecté(e)"
       else
         render :new, status: :unprocessable_content
-      end
-    end
-
-    def redirect_from_magic_token
-      user = User.find_by(magic_token_deprecated: params["magic-token"])
-      if user.present?
-        redirect_to(
-          new_user_session_code_path(code_insee: user.commune.code_insee),
-          alert: "ce lien de connexion n’est plus valide"
-        )
-      else
-        redirect_to new_user_session_code_path, alert: "ce lien de connexion n’est plus valide"
       end
     end
 

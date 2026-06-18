@@ -43,13 +43,10 @@ RSpec.feature "Communes sign-in", type: :feature, js: true do
   end
 
   context "with magic token (deprecated)" do
-    let!(:user) { create(:user, email: "mairie-albon@test.fr", commune:, magic_token_deprecated: "blah123") }
     it "should redirect to connection page with commune preselected" do
       visit "/magic-authentication?magic-token=blah123"
-      expect(page).to have_text("Connexion")
-      expect(page).to have_text("ce lien de connexion n’est plus valide")
-      expect(page).to have_text("Albon")
-      expect(page).to have_text("mairie-albon@test.fr")
+      expect(page).to have_text("Connexion à Collectif Objets")
+      expect(page).to have_text("Ce lien de connexion n’est plus valide.")
     end
   end
 end
