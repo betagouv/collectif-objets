@@ -3,17 +3,12 @@
 module Users
   class SessionCodesController < ApplicationController
     before_action :require_no_authentication
+    before_action :set_commune_and_departement
     before_action :redirect_mismatching_departement, only: :new
 
     def new
-      if params[:code_insee].present?
-        @commune = Commune.find_by(code_insee: params[:code_insee])
-        @commune_user = @commune&.users&.first
-        @no_user = !@commune_user
-        @departement = @commune.departement
-      elsif params[:departement].present?
-        @departement = Departement.find(params[:departement])
-      end
+      @commune_user = @commune&.users&.first
+      @no_user = @commune && !@commune_user
     end
 
     def create
@@ -31,12 +26,19 @@ module Users
 
     protected
 
-    def redirect_mismatching_departement
-      return if params[:code_insee].blank? ||
-                params[:departement].blank? ||
-                params[:code_insee].start_with?(params[:departement])
+    def set_commune_and_departement
+      code = params[:departement].to_s
+      code_insee = params[:code_insee].to_s
 
-      redirect_to new_user_session_code_path(departement: params[:departement])
+      @departement = Departement.find_by(code:) if code.present?
+      @commune = Commune.find_by(code_insee:) if code_insee.present?
+    end
+
+    def redirect_mismatching_departement
+      return unless @commune && @departement
+      return if @commune.code_insee.start_with?(@departement.code)
+
+      redirect_to new_user_session_code_path(departement: @departement.code)
     end
   end
 end

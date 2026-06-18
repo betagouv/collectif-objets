@@ -17,6 +17,8 @@
           method: :get,
           builder: FormBuilderDsfr,
           data: {turbo_action: "advance"}) do |f|
+          - if @departement
+            = f.hidden_field :departement, value: @departement.code
           .fr-input-group
             .co-flex.fr-mb-1w
               = f.label :departement, "Département"
