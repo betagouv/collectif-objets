@@ -6,20 +6,20 @@ module Communes
 
     def initialize(objet, commune: nil, recensement: nil)
       @objet = objet
-      @recensement = recensement
+      @recensement = recensement || objet.recensement
       @commune = commune || objet.commune
       super
     end
 
     def call
-      render ::ObjetCardComponent.new(objet, commune:, header_badges:, btn_text:, btn_class:, btn_path:,
+      render ::ObjetCardComponent.new(objet, commune:, header_badges:, btn_text:, btn_class:,
                                              path:, main_photo_origin: :recensement_or_memoire)
     end
 
     def btn_text
       if readonly? # La commune a déjà recensé l'objet
         "Afficher"
-      elsif recensement&.status == "draft" # Si la commune a commencé à recenser l'objet
+      elsif recensement&.draft? # Si la commune a commencé à recenser l'objet
         "Compléter"
       elsif recensement # La commune a déjà recensé l'objet
         "Modifier"
@@ -32,12 +32,6 @@ module Communes
       "fr-btn fr-btn--sm fr-btn--icon-right fr-icon-arrow-right-line fr-enlarge-link fr-btn--secondary"
     end
 
-    def btn_path
-      return if readonly? || recensement.nil?
-
-      edit_commune_objet_recensement_path(commune_id: commune.id, objet_id: objet.id, id: recensement.id)
-    end
-
     private
 
     attr_reader :objet, :recensement, :commune
@@ -45,11 +39,15 @@ module Communes
     delegate :dossier, to: :recensement, allow_nil: true
 
     def path
-      [commune, objet]
+      if readonly? || recensement.nil?
+        [commune, objet]
+      else
+        [:edit, commune, objet, recensement]
+      end
     end
 
     def readonly?
-      commune&.status == "completed"
+      commune&.completed?
     end
 
     def header_badges

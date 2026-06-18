@@ -131,4 +131,20 @@ feature "Conservateurs", js: true do
     let(:path) { edit_conservateurs_objet_recensement_analyse_path(objet, recensement) }
     it_behaves_like "an accessible page"
   end
+
+  describe "recenseurs" do
+    let(:path) { conservateurs_recenseurs_path }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "recenseurs/new" do
+    let(:path) { new_conservateurs_recenseur_path }
+    it_behaves_like "an accessible page"
+  end
+
+  describe "recenseurs/1" do
+    let(:recenseur) { create(:recenseur) }
+    let(:path) { conservateurs_recenseur_path(recenseur) }
+    it_behaves_like "an accessible page"
+  end
 end

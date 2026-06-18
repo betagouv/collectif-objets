@@ -32,6 +32,20 @@ Rails.application.routes.draw do
     get "conservateurs/edit" => "devise/registrations#edit", :as => "edit_conservateur_registration"
   end
 
+  devise_for :recenseurs, only: %i[sessions], controllers: {
+    sessions: "recenseurs/sessions"
+  }
+  devise_scope :recenseur do
+    namespace :recenseurs, as: :recenseur do
+      resource :session, only: %i[new create destroy]
+      resources :session_codes, only: %i[new create]
+      resource  :optout, only: :destroy do
+        get "(:token)", action: :new, as: :new
+      end
+      resource :registration, only: [:show, :edit, :update, :destroy]
+    end
+  end
+
   direct :annuaire_service_public do |commune|
     if commune.is_a? Commune
       "https://www.service-public.fr/particuliers/recherche?keyword=mairie+#{commune.nom}+#{commune.departement.nom}"
@@ -89,6 +103,33 @@ Rails.application.routes.draw do
       resources :email_attachments, only: [:show]
     end
     resource :user, only: [:update]
+    resources :recenseurs, only: [:index, :create, :show] do
+      resources :access, only: [:update, :destroy], as: :recenseur_access, controller: :recenseur_accesses
+    end
+  end
+
+  ## --------
+  ## RECENSEURS
+  ## --------
+
+  namespace :recenseurs do
+    controller :pages do
+      get :premiere_visite
+      put :premiere_visite, action: :after_premiere_visite, as: :after_premiere_visite
+    end
+    resources :communes, only: %i[index show] do
+      resource :completion, only: %i[new create show]
+      resources :objets, only: %i[index show] do
+        resources :recensements, only: %i[create edit update destroy] do
+          resources :photos, only: %i[create destroy], controller: "recensement_photos"
+        end
+      end
+      resource :dossier, only: [:show]
+      # resources :campaign_recipients, only: [:update]
+      resources :messages, only: %i[index new create] do
+        resources :email_attachments, only: [:show]
+      end
+    end
   end
 
   ## -------------
@@ -131,6 +172,9 @@ Rails.application.routes.draw do
         get :mail_preview
       end
     end
+    resources :recenseurs do
+      resources :accesses, only: [:new, :create, :update], as: :recenseur_access, controller: :recenseur_accesses
+    end
     resource :conservateur, only: [:update]
     resources :visits, only: [:index]
     resources :fiches, only: :index
@@ -155,6 +199,12 @@ Rails.application.routes.draw do
       post :impersonate, on: :member
       delete :stop_impersonating, on: :member
       post :toggle_impersonate_mode, on: :collection
+    end
+    resources :recenseurs do
+      post :impersonate, on: :member
+      delete :stop_impersonating, on: :member
+      post :toggle_impersonate_mode, on: :collection
+      resources :accesses, only: [:show, :new, :create, :update], as: :recenseur_access, controller: :recenseur_accesses
     end
     get "/session_codes(/:offset)", to: "session_codes#index", as: :session_codes
     resources :campaigns do

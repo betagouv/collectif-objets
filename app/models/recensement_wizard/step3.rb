@@ -15,8 +15,7 @@ module RecensementWizard
         message: "Veuillez renseigner si l’objet est recensable ou non"
       }
 
-    def initialize(recensement)
-      super
+    def setup_step
       self.confirmation_not_recensable = recensement.recensable_was == false ? "true" : "false"
     end
 

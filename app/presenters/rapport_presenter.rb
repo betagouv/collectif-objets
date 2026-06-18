@@ -11,7 +11,7 @@ class RapportPresenter
     ordered_recensements.each_with_index do |recensement, index|
       yield recensement:,
             objet: recensement.objet,
-            commune: recensement.commune,
+            commune: commune,
             presenter: RecensementPresenter.new(recensement),
             index: index + 1
     end
@@ -36,8 +36,7 @@ class RapportPresenter
   def ordered_recensements
     @ordered_recensements ||= @dossier
       .recensements
-      .includes(:objet)
-      .order('objets."palissy_EDIF" ASC, objets."palissy_REF"')
+      .sort_by { |r| [r.objet.palissy_EDIF, r.objet.palissy_REF] }
   end
 
   def fiche_ids

@@ -1,0 +1,32 @@
+= turbo_frame_tag :recenseurs do
+  - if recenseurs.load.none?
+    %p.empty Il n'y a aucun recenseur à afficher.
+  - else
+    %p= Recenseur.human_attribute_name(:count, count: recenseurs.size)
+    .fr-table
+      %table.w-100
+        %thead
+          %tr
+            %th{ scope: :col } Nom
+            %th{ scope: :col } Email
+            %th{ scope: :col } Notes
+            %th{ scope: :col } Statut
+            %th{ scope: :col } Actions
+        %tbody
+          - recenseurs.each do |recenseur|
+            %tr{ id: dom_id(recenseur) }
+              %td= link_to highlight(recenseur.nom, query), [namespace, recenseur], data: { turbo: false }
+              %td.co-word-break-all= link_to highlight(recenseur.email, query), "mailto:#{recenseur.email}", target: :_blank
+              %td{title: recenseur.notes.size > 25 ? recenseur.notes : nil}= highlight(recenseur.notes.truncate(25), query)
+              %td= recenseur.human_status
+              %td.co-white-space-nowrap
+                - if current_person == current_admin_user
+                  .fr-mb-1w
+                    = button_to impersonate_admin_recenseur_path(recenseur),
+                    class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-eye-line w-100",
+                    title: "Incarner #{recenseur.nom}", data: { turbo: false } do
+                      Incarner
+                = link_to [:edit, namespace, recenseur], data: { turbo: false }, class: "fr-btn fr-btn--sm fr-btn--secondary fr-btn--icon-left fr-icon-pencil-line w-100" do
+                  Modifier
+
+    = render partial: "shared/pagy_nav", locals: { pagy: } if pagy.pages > 1

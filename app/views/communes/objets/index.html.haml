@@ -2,22 +2,6 @@
 %main#contenu.fr-container.fr-pb-4w
   = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Objets de #{@commune.nom}"
   %h1= @commune.nom
-  - if @commune.inactive?
-    %h2.co-text--blue
-      = t(".n_objets_a_recenser", count: @objets_list.count)
-    = render "recensements/etapes"
-  - elsif @commune.can_complete?
-    %h2.co-text--blue
-      = t(".tous_les_objets_recenses")
-    = render "communes/objets/complete_callout", dossier: @dossier, commune: @commune
-  - elsif @commune.started?
-    %h2.co-text--blue
-      = t(".n_objets_restants_a_recenser", count: @commune.objets.without_completed_recensements.count)
-    = render "recensements/etapes"
-  - elsif @commune.completed? && @dossier.submitted?
-    - if @commune.messages.from_conservateur.blank?
-      = render "communes/objets/submitted_callout", commune: @commune
-  - elsif @commune.completed? && @dossier.accepted?
-    = render "communes/objets/accepted_callout", dossier: @dossier
-  
+
+  = render "shared/completions/status", commune: @commune, dossier: @dossier, count: @objets_list.count
   = render "communes/objets/list", objets_list: @objets_list, commune: @commune

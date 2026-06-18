@@ -1,0 +1,20 @@
+- content_for(:head_title) { "Communes" }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render "shared/breadcrumbs", links: [["Accueil", root_path]], current_page_label: "Communes"
+
+  %h1 Communes
+
+  .fr-table
+    %table.w-100
+      %thead
+        %tr
+          %th{ scope: :col } Département
+          %th{ scope: :col } Commune
+          %th{ scope: :col } Statut
+      %tbody
+        - @communes.each do |commune|
+          %tr
+            %td= commune.departement
+            %td= link_to commune.nom, [namespace, commune]
+            %td= commune_statut_global_badge(commune, small: true)

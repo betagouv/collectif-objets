@@ -14,8 +14,7 @@ module RecensementWizard
       size: { less_than: 20.megabytes }
     )
 
-    def initialize(recensement)
-      super
+    def setup_step
       self.confirmation_no_photos = "false"
     end
 

@@ -4,6 +4,7 @@ module Admin
   class BaseController < ApplicationController
     before_action :restrict_access
     before_action :disconnect_impersonating_user
+    before_action :disconnect_impersonating_recenseur
     before_action :disconnect_impersonating_conservateur
 
     protected
@@ -21,6 +22,14 @@ module Admin
       session.delete(:user_impersonate_write)
       stop_impersonating_user
       redirect_to admin_commune_path(commune), notice: "Vous n’incarnez plus d’usager"
+    end
+
+    def disconnect_impersonating_recenseur
+      return if current_recenseur.blank?
+
+      session.delete(:recenseur_impersonate_write)
+      stop_impersonating_recenseur
+      redirect_to admin_recenseurs_path, notice: "Vous n’incarnez plus de recenseur"
     end
 
     def disconnect_impersonating_conservateur

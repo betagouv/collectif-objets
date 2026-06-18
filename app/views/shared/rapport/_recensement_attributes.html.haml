@@ -4,9 +4,9 @@
   - if recensement.missing_photos?
     %span.fr-badge.fr-badge--sm.fr-badge--warning
       = t("recensement.photos.taken_count", count: 0)
-  - elsif recensement.photos.count.positive?
-    .co-text--bold= t("recensement.photos.taken_count", count: recensement.photos.count)
-- if recensement.photos.count.positive?
+  - elsif recensement.photos_count.positive?
+    .co-text--bold= t("recensement.photos.taken_count", count: recensement.photos_count)
+- if recensement.photos_count.positive?
   .fr-grid-row
     - recensement.photos.each_with_index do |photo, index|
       .fr-col-md-3.co-rapport-photo

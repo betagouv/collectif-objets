@@ -45,7 +45,7 @@ RSpec.feature "Communes sign-in", type: :feature, js: true do
   context "with magic token (deprecated)" do
     it "should redirect to connection page with commune preselected" do
       visit "/magic-authentication?magic-token=blah123"
-      expect(page).to have_text("Connexion à Collectif Objets")
+      expect(page).to have_text("Connexion commune")
       expect(page).to have_text("Ce lien de connexion n’est plus valide.")
     end
   end

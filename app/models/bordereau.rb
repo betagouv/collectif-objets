@@ -17,7 +17,7 @@ class Bordereau < ApplicationRecord
       dossier = commune.dossier
       bordereaux = []
       # Précharge les données des bordereaux, qu'ils soient enregistrés ou à construire, et les recensements
-      edifices = commune.edifices.with_objets_classés_ou_inscrits.ordered_by_nom
+      edifices = commune.edifices.with_objets_classés_ou_inscrits
         .left_joins(:bordereaux)
         .includes(:bordereaux, bordereaux: [:file_attachment, :bordereau_recensements])
         .where("bordereaux.dossier_id = :dossier_id OR bordereaux.id IS NULL", dossier_id: dossier.id)

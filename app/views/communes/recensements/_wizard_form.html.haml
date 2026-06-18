@@ -1,8 +1,10 @@
+-# locals: (wizard:)
+- step = wizard.step_number
+
 = form_for wizard,
-  url: commune_objet_recensement_path(wizard.commune, wizard.objet, wizard.recensement, step: wizard.step_number),
+  url: wizard.step_path(step: :current),
   builder: FormBuilderDsfr,
-  as: :wizard,
-  data: { turbo_action: "advance" } do |f|
+  as: :wizard do |f|
 
   = yield f
 
@@ -16,3 +18,27 @@
                 %li= error_message
           - else
             Veuillez corriger le formulaire ci-dessus
+
+  - if step == 7
+    %p.co-text--italic Vous pourrez modifier le recensement même après l’avoir validé
+
+  %ul.fr-btns-group.fr-btns-group--icon-left.fr-btns-group--inline-sm.fr-btns-group--right.co-flex--column.fr-mt-1w
+    %li
+      - if step == 7
+        - recensement = wizard.recensement
+        - if !recensement.valid? || recensement.draft?
+          = f.button "Valider le recensement de cet objet", type: :submit, name: nil, class: "fr-btn", data: { turbo: false }
+        - else
+          = link_to "Valider le recensement de cet objet", wizard.after_success_path, class: "fr-btn", data: { turbo: false }
+      - else
+        = f.button "Passer à l’étape suivante", type: :submit, name: nil, class: "fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
+    %li
+      - if step == 1
+        = link_to "Revenir à la fiche objet",
+          wizard.objet_path,
+          class: "fr-btn fr-btn--tertiary-no-outline fr-icon-arrow-left-line",
+          data: { turbo_frame: "_top" }
+      - else
+        = link_to "Revenir à l’étape précédente",
+            wizard.step_path(step: :previous, edit: true),
+            class: "fr-btn fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-mr-0"
