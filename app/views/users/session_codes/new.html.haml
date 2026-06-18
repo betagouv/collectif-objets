@@ -12,6 +12,10 @@
       .fr-col-md-5
         %h1.fr-h2 Connexion commune
 
+        - if @magic_link
+          = dsfr_alert(type: :warning, size: :sm, html_attributes: { class: "fr-mb-2w" }) do
+            Ce lien de connexion n’est plus valide.
+
         %h2.fr-h3 Recevoir un code de connexion
         = form_with(url: new_user_session_code_path,
           method: :get,

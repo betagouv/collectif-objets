@@ -9,6 +9,7 @@ module Users
     def new
       @commune_user = @commune&.users&.first
       @no_user = @commune && !@commune_user
+      @magic_link = request.path == "/magic-authentication"
     end
 
     def create

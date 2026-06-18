@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     get "users/edit" => "devise/registrations#edit", :as => "edit_user_registration"
     put "users" => "devise/registrations#update", :as => "user_registration"
 
-    get "magic-authentication", to: "users/sessions#redirect_from_magic_token"
+    get "magic-authentication", to: "users/session_codes#new"
     namespace :users, as: :user do
       resource :session, only: %i[new create destroy]
       resources :session_codes, only: %i[new create]
