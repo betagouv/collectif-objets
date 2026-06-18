@@ -1,0 +1,21 @@
+- content_for(:head_title) { "Authentification à deux facteurs" }
+
+%main#contenu.fr-container.fr-pt-2w.fr-pb-4w
+  = render("shared/breadcrumbs", links: [["Administration", admin_path], ["Admins", admin_admin_users_path], [current_admin_user.to_s, admin_admin_user_path(current_admin_user)]], current_page_label: "Authentification à deux facteurs")
+
+  %h1 Authentification à deux facteurs
+
+  .fr-grid-row
+    .fr-col-md-8
+      - if current_admin_user.otp_required_for_login?
+        %p
+          %strong Votre compte est protégé par l'authentification à deux facteurs.
+        = render "remaining_codes", remaining_otp_backup_codes: current_admin_user.remaining_otp_backup_codes
+
+        = dsfr_accordion(html_attributes: { class: "fr-mt-4w" }) do |accordion|
+          = accordion.with_section(title: "Générer de nouveaux codes de secours") do
+            = render "regenerate"
+          = accordion.with_section(title: "Désactiver l'authentification à 2 facteurs") do
+            = render "disable"
+      - else
+        = render "enable"

@@ -50,7 +50,7 @@
     %h2.fr-mt-4w Calendrier des campagnes
     %p
       = link_to campaigns_ics_url, campaigns_ics_path
-      = button_tag("Copier", type: :button, class: "fr-btn fr-btn-sm fr-btn--secondary fr-btn--icon-left fr-icon-todo-line fr-ml-1w", data: { controller: :clipboard, action: "clipboard#copy", "clipboard-value": campaigns_ics_url })
+      = button_tag("Copier", type: :button, class: "fr-btn fr-btn-sm fr-btn--secondary fr-btn--icon-left fr-icon-todo-line fr-ml-1w", data: { controller: :clipboard, action: "clipboard#copy", "clipboard-content-value": campaigns_ics_url })
 
     %p
       :markdown
