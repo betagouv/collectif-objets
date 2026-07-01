@@ -25,7 +25,7 @@ jobs:
     steps:
       - run: mkdir -p tmp/artifacts/capybara
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install libvips
         run: sudo apt-get update && sudo apt-get install -y libvips
       - name: Install Ruby and gems
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
