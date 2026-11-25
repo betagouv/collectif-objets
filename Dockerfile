@@ -1,5 +1,4 @@
-# syntax=docker/dockerfile:1
-FROM ruby:3.4.5-slim
+FROM ruby:3.4.13-slim
 
 EXPOSE 3000
 
@@ -7,7 +6,7 @@ RUN apt-get update -qq && apt-get install --no-install-recommends -y build-essen
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock .
+COPY .ruby-version Gemfile Gemfile.lock .
 RUN bundle install
 
 WORKDIR /app
