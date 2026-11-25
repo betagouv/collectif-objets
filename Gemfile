@@ -42,10 +42,8 @@ gem "view_component", "~> 2.83"
 gem "vite_rails", "~> 3.0"
 
 group :development, :test do
-  gem "debug", ">= 1.0", require: !ENV.key?("CI")
+  gem "debug"
   gem "factory_bot_rails", "~> 6.5"
-  gem "launchy", "~> 3.1", require: !ENV.key?("CI")
-  gem "pry", "~> 0.15", require: !ENV.key?("CI")
   gem "rspec-rails", "~> 8.0"
   gem "rubocop", "~> 1.85", require: false
   gem "rubocop-capybara", require: false
